@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Manba: ish maydonining imzolangan jurnali.",
+  "The signed workspace journal contains only local operational records.": "Ish maydonining imzolangan jurnalida faqat mahalliy amallarning yozuvlari bor.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "Ish maydonining imzolangan jurnalida Telegram mijozi (MTProto) qayd etgan kuzatuvlar bor.",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Ko‘rsatilgan oshkor qilish qoidalari asosida ish maydonining imzolangan jurnalidan olingan ko‘chirma.",
   "What the record includes": "Yozuv nimalarni o'z ichiga oladi",
   "Each sender by the Telegram ID and name delivered with the message.": "Har bir yuboruvchi xabar bilan kelgan Telegram ID va ismi bilan.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Kuzatuv davrlari va kuzatuvdagi bo'shliqlar ({n}) Coverage bo'limida ro'yxatga olingan.",

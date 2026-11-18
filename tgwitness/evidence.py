@@ -234,7 +234,9 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             def measured(events):
                 for event in events:
                     observed.add(event)
-                    if not compact:
+                    if compact:
+                        digest.observe_source(event)
+                    else:
                         digest.add(event)
                     journal_bytes.update(canonical(event) + b"\n")
                     yield event

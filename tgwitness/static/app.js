@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout16').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -100,7 +100,6 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout16').then(({creat
       const choice=$('time-zone');if(choice){if(![...choice.options].some(o=>o.value===p.timezone))choice.add(new Option(p.timezone,p.timezone));choice.value=p.timezone;}
       window.tgwApplyTheme?.(p.theme);
     }});
-  window.tgwSaveLanguage=async language=>{if(state.token)await settingsHub.refreshPreferences({language});};
   document.addEventListener('tgwitness:theme',event=>{if(state.token)settingsHub.refreshPreferences({theme:event.detail}).catch(e=>toast(e.message,true));});
   catalog();
 });
@@ -610,6 +609,7 @@ function eventSource(e){
 let toastTimer;
 let networkLoadedFor=null;
 let qrPending=null,importExpectedId=null,importClientProfile=null,importFormats=[],importTwoFactor="",accountImportRevision=0,authMethod="phone";
+const authChoiceStorage='tgwitness-language-auth-choice';
 let accessStarted=false;
 class StaleView extends Error {constructor(){super("");this.name="StaleView";}}
 class Cancelled extends Error {constructor(){super("");this.name="Cancelled";}}
@@ -733,6 +733,7 @@ async function busy(button, work) {
     if(button.id==="chat-send"||button.id==="chat-preview-button"||button.matches(".msg-button button"))renderComposer();} }
 }
 function lock() {
+  sessionStorage.removeItem(authChoiceStorage);
   settingsHub?.reset();
   state.workflow=null;state.exportTask='journal';
   window.TgWitnessRouter?.invalidate();
@@ -781,8 +782,12 @@ function bootData(workspace,token){
   return json("bootstrap?"+new URLSearchParams({workspace:workspace||"default"}),undefined,{root:true,token})
     .catch(error=>{if([403,404,405].includes(error.status))return null;throw error;});
 }
-async function unlock(prefetched=null) {
+async function unlock(prefetched=null,languageChoice=null) {
   accessStarted=true;
+  const owner=actionOwner();
+  const restoreLanguageChoice=()=>{
+    if(languageChoice&&owner.token===state.token&&owner.revision===state.workspaceRevision)restoreAuthLanguageChoice(languageChoice);
+  };
   await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady,accountStateReady,disclosurePreviewReady,workspaceSafetyReady]);
   const router=await ensureRouter(),requested=router.parse();
   const boot=await (prefetched||bootData(requested.workspace,state.token));
@@ -817,8 +822,10 @@ async function unlock(prefetched=null) {
   try{
     await navigate(state.view,{history:false,...(requested.explicit&&!requested.error?{load:async()=>{}}:{})});
     renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
+    if(requested.view==='connection')restoreLanguageChoice();
     loadNotifications().catch(()=>{});
     await router.start();
+    if(requested.view!=='connection')restoreLanguageChoice();
     await bootstrapSettings({openFirstRun:!requested.explicit});
   }finally{bootstrapProfiles=null;}
 }
@@ -4773,6 +4780,44 @@ $("verify-journal").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   state.verification={...r,profile};renderVerification();
   toast(tr("Journal integrity check passed."));
 }));
+window.tgwSaveLanguage=async(language,{userInitiated}={})=>{
+  const owner=actionOwner(),form=$('credentials-form');
+  const screen=userInitiated&&language!==LANG&&authChoiceScreen(form);
+  if(state.token&&settingsHub)await settingsHub.refreshPreferences({language});
+  if(screen&&owner.current()&&screen===authChoiceScreen(form)){
+    const intent=accountSignedIn()?window.TgWitnessAccountImport?.editIntent():null;
+    if(accountSignedIn()&&!intent)return;
+    const choice={language,profile:owner.profile,screen,intent,method:authMethod,
+      independent:(authMethod==='files'||authMethod==='key')&&$('import-new-session').checked};
+    sessionStorage.setItem(authChoiceStorage,JSON.stringify(choice));
+  }
+};
+function authChoiceScreen(panel){
+  // The navigation drawer containing the language picker temporarily makes main inert.
+  const inactive=$('workspace').classList.contains('navigation-open')?'[hidden],[inert]:not(main)':'[hidden],[inert]';
+  if(!state.me||!state.token||state.status?.demo||state.authorizing||
+      !panel.isConnected||panel.closest(inactive)||panel.querySelector('[aria-busy="true"]'))return null;
+  if(state.view==='connection'&&panel.closest('#view-connection'))return 'connection';
+  if(state.view==='first-run'&&settingsHub?.step===5&&panel.closest('#view-first-run'))return 'first-run';
+  if(state.view==='settings'&&settingsHub?.section==='telegram'&&panel.closest('dialog[open]'))return 'settings';
+  return null;
+}
+function restoreAuthLanguageChoice(raw){
+  let choice;
+  try{choice=JSON.parse(raw);}catch{return;}
+  const signedIn=accountSignedIn(),form=$('credentials-form');
+  if(!choice||choice.language!==LANG||choice.profile!==state.profile||!choice.screen||
+      choice.screen!==authChoiceScreen(signedIn?$('authorized-state'):form)||!['phone','qr','files','key'].includes(choice.method))return;
+  if(signedIn){
+    if(!window.TgWitnessAccountImport||!['add','renew'].includes(choice.intent)||
+        (choice.intent==='add'&&!state.me.admin)||(choice.intent==='renew'&&state.status.collector.running))return;
+    window.TgWitnessAccountImport.edit(choice.intent);
+  }else if(choice.intent)return;
+  form.reset();
+  $('import-new-session').checked=(choice.method==='files'||choice.method==='key')&&choice.independent===true;
+  setAuthMethod(choice.method);
+  if(signedIn)setAuthStep('credentials');
+}
 function setAuthStep(step){
   const demo=!!state.status?.demo;
   if(step==="credentials"&&state.status&&accountSignedIn()&&!window.TgWitnessAccountImport?.isEditing())step="authorized";
@@ -7348,12 +7393,14 @@ async function pollWorkspace(){
 }
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
+  const languageChoice=sessionStorage.getItem(authChoiceStorage);
+  sessionStorage.removeItem(authChoiceStorage);
   await Promise.all([timeReady,shellReady,viewReady,chatListReady]);
   const router=await ensureRouter();
   const revision=state.workspaceRevision;
   if(state.token){
     const early=bootData(router.parse().workspace,state.token);early.catch(()=>{});
-    await unlock(early).catch(unlockFailed);return;
+    await unlock(early,languageChoice).catch(unlockFailed);return;
   }
   try{
     const response=await fetch("/api/demo-access",{cache:"no-store",credentials:"omit"});

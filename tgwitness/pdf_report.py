@@ -887,7 +887,9 @@ class EvidencePDF:
         try:
             self.lay = Layout(pdf, say)
             label = say("Handover extract") if self.handover else say("Evidence report")
-            title = self.case.get("title") or (say("Handover extract") if self.handover else say("Telegram observation journal"))
+            journal_title = (say("Telegram observation journal") if (self.context.get("digest") or {}).get("telegram_observations")
+                             else say("Signed journal"))
+            title = self.case.get("title") or (say("Handover extract") if self.handover else journal_title)
             if self.context.get("encrypted_only") and not self.case.get("title"):
                 title = report_secret.title_of(say, self.data.get("encrypted_chats") or [])
             pdf.set_title(title)
@@ -924,8 +926,10 @@ class EvidencePDF:
             self.acquisition = self.data["custody"]["acquisition"]
             self.account = self.acquisition.get("account") or {}
             self.account_text = report.account_label(self.account)
+            shown_digest = self.context.get("report_digest") or self.context.get("digest") or {}
             self.digest = {"categories": cats, "chats": [None] * summary["chats"], "media": [None] * summary["files"],
-                      "first": summary["first_record_at"], "last": summary["last_record_at"]}
+                           "telegram_observations": shown_digest.get("telegram_observations"),
+                           "first": summary["first_record_at"], "last": summary["last_record_at"]}
             self.titles = {str(c["chat_id"]): c["title"] for c in self.data["chats"] if c.get("title")}
 
             self.actions = self.data["actions"]
@@ -1176,8 +1180,7 @@ class EvidencePDF:
             self.lay.gap(0.8)
         self.lay.kv([(say("Acquisition tool"), "TgWitness " + str((self.data.get("producer") or {}).get("version"))),
                 (say("Program build"), Mono(report.build_text(say, self.data.get("producer") or {}))),
-                (say("Acquisition method"), say("Telegram client observing the account; records chained by SHA-256 and "
-                                                "signed with Ed25519 as they are written.")),
+                (say("Acquisition method"), say(self.acquisition["method"])),
                 (say("Telegram client"), "; ".join(report.client_text(say, c["client"])
                                                     for c in self.acquisition.get("clients") or []) or say("Not recorded in this journal")),
                 (say("Connection route"), "; ".join(report.route_text(say, r["route"])
@@ -1533,8 +1536,7 @@ class ChatPDF:
             self.lay.gap(0.8)
         self.lay.kv([(say("Acquisition tool"), "TgWitness " + str(self.context["producer"].get("version"))),
                 (say("Program build"), Mono(report.build_text(say, self.context["producer"]))),
-                (say("Acquisition method"), say("Full visible history read through the Telegram API; a current snapshot, "
-                                                "not a reconstruction of deleted or earlier edited messages.")),
+                (say("Acquisition method"), say(report.case_assessment.acquisition_method("chat", {}))),
                 (say("Telegram client"), report.client_text(say, self.meta["client"]) if isinstance(self.meta.get("client"), dict)
                  else say("Not recorded in this export")),
                 (say("Connection route"), report.route_text(say, self.meta["route"]) if isinstance(self.meta.get("route"), dict)

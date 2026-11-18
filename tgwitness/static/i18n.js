@@ -60,9 +60,9 @@ function translatePage(){
   const title=DICT[normal(document.title)];if(typeof title==="string")document.title=title;
   walkPage(item=>{const text=DICT[item.key];if(typeof text!=="string")return false;item.apply(text);return true;});
 }
-async function setLanguage(lang){
+async function setLanguage(lang,{userInitiated=false}={}){
   if(!Object.hasOwn(LANGUAGES,lang))return;
-  try{await window.tgwSaveLanguage?.(lang);}catch(error){window.alert(error.message);return;}
+  try{await window.tgwSaveLanguage?.(lang,{userInitiated});}catch(error){window.alert(error.message);return;}
   document.cookie="tgwitness-lang="+encodeURIComponent(lang)+"; path=/; max-age=31536000; SameSite=Strict";
   const guideRoot=document.body.dataset.guideRoot;
   const url=guideRoot?new URL(lang==="am"?"demo/dedicated-account.html":(lang==="en"?"":lang+"/")+"docs/dedicated-account/",new URL(guideRoot,location.href)):new URL(location.href);
@@ -90,5 +90,5 @@ if(window.TGW_SCOPE==="guide")document.querySelectorAll('a[href]:not([href^="#"]
 });
 document.querySelectorAll("select.language-select").forEach(select=>{
   for(const [code,name] of Object.entries(LANGUAGES)){const o=new Option(name,code);o.lang=code;select.append(o);}
-  select.value=LANG;select.addEventListener("change",()=>setLanguage(select.value));
+  select.value=LANG;select.addEventListener("change",()=>setLanguage(select.value,{userInitiated:true}));
 });

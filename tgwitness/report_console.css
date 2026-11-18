@@ -230,7 +230,7 @@ code{direction:ltr;unicode-bidi:isolate}
 }
 .msg:focus-within .pick,.rec2:focus-within .pick{opacity:1}
 @media (hover:none){.msg .pick,.rec2 .pick{opacity:1}}
-@media print{.view{display:none!important}#view-report{display:block!important}.tabs,.toc,.prefs,.records-pointer .v-btn,.v-selbar{display:none!important}
+@media print{.view{display:none!important}body:not(.printing-selection) #view-report{display:block!important}.tabs,.toc,.prefs,.records-pointer .v-btn,.v-selbar{display:none!important}
   body.printing-selection>*{display:none!important}body.printing-selection #print-sheet{display:block!important}
   #print-sheet h1{margin:0 0 6px;font:600 20px Georgia,serif}#print-sheet .p-item{padding:8px 0;border-top:1px solid #999;break-inside:avoid}
   #print-sheet .p-head{color:#444;font-size:11px}#print-sheet .p-text{margin-top:3px;font-size:12.5px;white-space:pre-wrap}

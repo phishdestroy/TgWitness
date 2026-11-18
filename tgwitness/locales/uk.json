@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Джерело — підписаний журнал робочого простору.",
+  "The signed workspace journal contains only local operational records.": "Підписаний журнал робочого простору містить лише локальні службові записи.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "Підписаний журнал робочого простору містить спостереження, які зафіксував клієнт Telegram (MTProto).",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Витяг із підписаного журналу робочого простору за зазначеними правилами розкриття даних.",
   "What the record includes": "Що містить запис",
   "Each sender by the Telegram ID and name delivered with the message.": "Кожен відправник — з Telegram ID та ім’ям, що надійшли разом із повідомленням.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Періоди спостереження та прогалини в ньому ({n}) перелічено в розділі «Покриття».",

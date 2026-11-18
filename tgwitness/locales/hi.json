@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "स्रोत: कार्यक्षेत्र की हस्ताक्षरित जर्नल।",
+  "The signed workspace journal contains only local operational records.": "कार्यक्षेत्र की हस्ताक्षरित जर्नल में केवल स्थानीय संचालन के रिकॉर्ड हैं।",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "कार्यक्षेत्र की हस्ताक्षरित जर्नल में Telegram क्लाइंट (MTProto) द्वारा दर्ज अवलोकन शामिल हैं।",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "बताए गए प्रकटीकरण नियमों के अनुसार कार्यक्षेत्र की हस्ताक्षरित जर्नल से लिया गया अंश।",
   "What the record includes": "रिकॉर्ड में क्या शामिल है",
   "Each sender by the Telegram ID and name delivered with the message.": "प्रत्येक प्रेषक, संदेश के साथ आए Telegram ID और नाम सहित।",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "अवलोकन अवधियाँ और अवलोकन में अंतराल ({n}), कवरेज के अंतर्गत सूचीबद्ध।",

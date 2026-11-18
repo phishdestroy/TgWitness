@@ -162,7 +162,24 @@ def evidence_conditions(kind, context, count=0, latest=None, signals=None):
             "command": command}
 
 
-def common(kind, reference, fingerprint, rows, operator_fields=0, *, archive=False, conditions=None):
+ACQUISITION_METHODS = {
+    "journal": "Source: signed workspace journal.",
+    "local": "The signed workspace journal contains only local operational records.",
+    "telegram": "The signed workspace journal includes observations recorded by the Telegram client (MTProto).",
+    "handover": "Extract from the signed workspace journal under the stated disclosure rules.",
+    "chat": "History read through the Telegram API",
+}
+
+
+def acquisition_method(kind, digest):
+    if kind in ("handover", "chat"):
+        return ACQUISITION_METHODS[kind]
+    if digest.get("telegram_observations"):
+        return ACQUISITION_METHODS["telegram"]
+    return ACQUISITION_METHODS["local" if digest.get("local_records_only") else "journal"]
+
+
+def common(kind, reference, fingerprint, rows, operator_fields=0, *, archive=False, conditions=None, method=None):
     rows.extend([
         row("custody", "recorded" if operator_fields else "incomplete", "Operator and custody",
             "Case details and handover notes are statements supplied by the operator; their inclusion in a signed report preserves those statements.",
@@ -170,7 +187,9 @@ def common(kind, reference, fingerprint, rows, operator_fields=0, *, archive=Fal
             "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.",
             {"operator_fields": operator_fields}, ("manifest.json",)),
         row("meaning", "not_checked", "Source and acquisition record",
-            "The collector records data visible to a Telegram account. The report identifies observations and their selected scope.",
+            method or "The collector records data visible to a Telegram account. The report identifies observations and their selected scope.",
+            ("A valid signature shows that these bytes were signed with the workspace key. It does not identify the author "
+             "of a message and does not show that the content of a message is true.") if method else
             "The records show what this Telegram account received and when it was observed; signatures, retained checkpoints, witness records and attested collection bind them to the collector and to outside parties.",
             "Cite the archive, file and record reference for each claim; an export of the same chat from a second account corroborates disputed content."),
     ])
@@ -229,7 +248,7 @@ def journal(context, coverage):
     options = context.get("options") or {}
     return jurisdiction_guidance.attach(common("handover" if handover else "evidence", context.get("report_id"), context.get("fingerprint"), rows,
                   sum(bool(options.get(k)) for k in ("case_title", "case_id", "examiner", "organization", "notes")),
-                  archive=context.get("archive") is True,
+                  archive=context.get("archive") is True, method=acquisition_method("handover" if handover else "evidence", digest),
                   conditions=evidence_conditions("handover" if handover else "evidence", context, count, latest, signals)), options)
 
 
@@ -365,7 +384,7 @@ def text_keys():
         evidence_conditions("evidence", {"journal_verified": True, "anchors": [{}]}, 2, {"event_count": 1}, {"tdx": 1}),
         evidence_conditions("evidence", {"anchors": [{}]}, 2, {"event_count": 2}),
         evidence_conditions("evidence", {"anchors": [{}]}, 2)]
-    return list(dict.fromkeys([TITLE, INTRO, OVERVIEW, "Scope of this conclusion", "Independent review", "Evidence references", "Not recorded",
+    return list(dict.fromkeys([TITLE, INTRO, OVERVIEW, *ACQUISITION_METHODS.values(), "Scope of this conclusion", "Independent review", "Evidence references", "Not recorded",
                               CONDITIONS_TITLE, CONDITIONS_INTRO, "Condition", "What it establishes", "In this archive",
                               "How the recipient checks it", *(text for pair in CONDITIONS.values() for text in pair), *ROLES.values(),
                               *(c[k] for c in conditions for k in ("minimum", "outcome")),

@@ -210,6 +210,8 @@ CATEGORIES = {"message.new": "message", "message.snapshot": "message", "message.
               "media.saved": "media", "media.hashed": "media", "secret_chat.message": "message", "secret_chat.file": "media"}
 TITLE_KINDS = ("target.changed", "source.discovered", "target.removed")
 VERSION_KINDS = ("message.new", "message.snapshot", "message.recovered", "message.edited")
+LOCAL_RECORD_KINDS = frozenset(("process.started", "process.stopped", "secret_chat.settings",
+                                "monitoring.changed", "capture.changed", "scope.changed", "recheck.changed"))
 CHANGE_KINDS = ("message.edited", "message.deleted", "message.missing_on_recheck")
 HISTORY_LIMIT = 1000
 ACTION_LIMIT = 500
@@ -243,6 +245,8 @@ class Digest:
         self.categories = dict.fromkeys(CATEGORY_ORDER, 0)
         self.chats, self.titles, self.media, self.senders = {}, {}, {}, set()
         self.first = self.last = self.first_hash = None
+        self.telegram_observations = False
+        self.local_records_only = None
         self.clients, self.routes, self.direct = {}, {}, {"count": 0, "first": None, "last": None}
         self.clocks = []
         self.indicators = ioc.Indicators()
@@ -262,7 +266,31 @@ class Digest:
         entry = table.setdefault(key, {"value": value, "first": at, "last": at, "count": 0})
         entry["last"], entry["count"] = at, entry["count"] + 1
 
+    def observe_source(self, event):
+        if event["kind"] in LOCAL_RECORD_KINDS:
+            if self.local_records_only is None:
+                self.local_records_only = True
+            return
+        self.local_records_only = False
+        if self.telegram_observations:
+            return
+        payload = event["payload"]
+        if not isinstance(payload, dict) or payload.get("synthetic") or payload.get("source") == "synthetic_demo":
+            return
+        raw = payload.get("raw")
+        update = payload.get("transport_update")
+        for item in (raw, update):
+            if isinstance(item, dict) and isinstance(item.get("_"), str) and item["_"].startswith("Update"):
+                self.telegram_observations = True
+                return
+        if event["kind"] in VERSION_KINDS and isinstance(raw, dict) and raw.get("_") in ("Message", "MessageService"):
+            self.telegram_observations = type(event.get("message_id")) is int and raw.get("id") == event["message_id"]
+        elif event["kind"] == "secret_chat.message":
+            self.telegram_observations = (payload.get("direction") == "in" and type(payload.get("secret_chat_id")) is int
+                                          and type(payload.get("random_id")) is int)
+
     def add(self, event):
+        self.observe_source(event)
         self.analytics.add(event)
         self.media_repeats.add(event)
         self.forward_sources.add(event)
@@ -364,6 +392,8 @@ class Digest:
                 "senders": len(self.senders), "first": self.first, "last": self.last, "first_hash": self.first_hash,
                 "clients": list(self.clients.values()), "routes": list(self.routes.values()), "clocks": self.clocks,
                 "indicators": self.indicators.result(), "trust_signals": dict(self.trust_signals),
+                "telegram_observations": self.telegram_observations,
+                "local_records_only": self.local_records_only is True,
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
                 "own_messages": self.own_messages, "own_total": self.own_total, "own_scope": sorted(self.own_scope),
@@ -513,9 +543,7 @@ def custody(context):
         "case": case_of(options),
         "acquisition": {
             "tool": context["producer"],
-            "method": ("Telegram client (MTProto) observing the account below; each record is chained by SHA-256 "
-                       "and signed with Ed25519 when it is written" if kind == "evidence" else
-                       "Full visible history read through the Telegram API by the account below; a current snapshot"),
+            "method": case_assessment.acquisition_method(kind, context.get("digest") or {}),
             "account": context.get("account"),
         },
         "export": {"created_at": context["created_at"], "by": options.get("examiner") or None,
@@ -1106,7 +1134,7 @@ def page_footer(say, meta):
     return "@page{@bottom-left{content:" + css_text(" · ".join(parts)) + "}}" if parts else ""
 
 
-def bar(say, label, links, viewer_kind=None):
+def bar(say, label, links, viewer_kind=None, *, sealed):
     sections = "".join('<a href="#' + a + '">' + icon(SECTION_ICONS.get(a, ("info", ""))[0]) + e(t) + "</a>"
                        for a, t in links)
     if not viewer_kind:
@@ -1121,10 +1149,12 @@ def bar(say, label, links, viewer_kind=None):
             + "<span>" + e(text) + "</span>" + ("" if key in ("report", "check") else "<b></b>") + "</a>"
             for key, text, glyph in tabs) + "</nav>")
         opening = '<div class="view" id="view-report"><main>'
+    badge_target = '#seal' if sealed else '#verify'
+    badge_view = ' data-view="check"' if viewer_kind else ''
     return ('<header class="bar"><a class="brand" href="#summary">' + MARK + '<span>TgWitness</span><span class="version">'
             + e(__version__) + '</span></a><span class="doc-kind">' + e(label) + "</span>" + nav
-            + '<div class="prefs no-print"><a class="sig-badge" id="sig-badge" href="#check" data-view="check">' + icon("shield")
-            + "<span>" + e(say("Checking…")) + '</span></a><span class="sig-badge net-badge" id="net-badge" hidden>' + icon("check")
+            + '<div class="prefs no-print"><a class="sig-badge" id="sig-badge" href="' + badge_target + '"' + badge_view + '>' + icon("shield")
+            + "<span>" + e(say("Checking…" if sealed else "How to verify")) + '</span></a><span class="sig-badge net-badge" id="net-badge" hidden>' + icon("check")
             + '<span></span></span><span class="lang-pill" title="' + e(say("Report language")) + '">'
             + icon("globe") + '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span></span>"
             '<div class="theme-pick" role="group" aria-label="' + e(say("Theme")) + '">'
@@ -1203,16 +1233,18 @@ def counted(say, key, n):
 
 def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
     cats, latest = digest["categories"], latest_stamp(anchors)
-    summary = (say("{account} observed {chats} from {first} to {last}.", account=account_text or say("The observing account"),
-                   chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
-                   last=utc_text(digest["last"]))
-               + " " + say("The journal holds {records}: {messages}, {edits}, {deletions} and {files}.",
-                           records=counted(say, "{n} records", count), messages=counted(say, "{n} messages", cats["message"]),
-                           edits=counted(say, "{n} edits", cats["edited"]), deletions=counted(say, "{n} deletions", cats["deleted"]),
-                           files=counted(say, "{n} saved files", len(digest["media"]))))
+    summary = say("The journal holds {records}: {messages}, {edits}, {deletions} and {files}.",
+                  records=counted(say, "{n} records", count), messages=counted(say, "{n} messages", cats["message"]),
+                  edits=counted(say, "{n} edits", cats["edited"]), deletions=counted(say, "{n} deletions", cats["deleted"]),
+                  files=counted(say, "{n} saved files", len(digest["media"])))
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
+    elif digest.get("telegram_observations") and digest["chats"] and account_text:
+        period = say("{account} observed {chats} from {first} to {last}.", account=account_text,
+                     chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
+                     last=utc_text(digest["last"]))
+        summary = period + " " + summary
     if cats.get("missing"):
         summary += " " + say("Missing on recheck") + ": " + str(cats["missing"]) + "."
     if handover:
@@ -1220,16 +1252,18 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
                       "journal were left out.", a=handover["counts"]["unchanged"], b=handover["counts"]["minimised"],
                       c=handover["counts"]["left_out"]) + " " + summary
     shows = [say("Each record is unchanged since the collector signed it, provided the key fingerprint matches one kept "
-                 "apart from the collector (verify.py checks this)."),
-             say("What the observing account received from Telegram, and when the collector recorded it.")]
+                 "apart from the collector (verify.py checks this).")]
+    if digest.get("telegram_observations"):
+        shows.append(say(case_assessment.ACQUISITION_METHODS["telegram"]))
     if latest:
         shows.append(say("That the journal up to record #{n} existed by {time}: an independent timestamp by {service}.",
                          n=latest.get("event_count"), time=utc_text(latest.get("time")), service=latest.get("service")))
     gaps = len((coverage or {}).get("gaps") or [])
-    includes = [say("Each sender by the Telegram ID and name delivered with the message."),
-                say("Observed periods and gaps in observation ({n}), listed under Coverage.", n=gaps)
+    includes = [say("Observed periods and gaps in observation ({n}), listed under Coverage.", n=gaps)
                 if gaps else say("Observed periods, listed under Coverage.")]
-    if not handover:
+    if digest.get("telegram_observations") and cats["message"]:
+        includes.insert(0, say("Each sender by the Telegram ID and name delivered with the message."))
+    if not handover and (cats["edited"] or cats["deleted"]):
         includes.append(say("Each saved version of an edited message, and the text kept after a deletion notice."))
     return summary, shows, includes
 
@@ -2502,10 +2536,11 @@ class EvidenceHTML:
         self.fp, self.report_id = self.context.get("fingerprint") or "", self.context.get("report_id") or "unsealed"
         self.created, self.count, self.head_hash = self.context.get("created_at") or utcnow(), self.context.get("event_count"), self.context.get("head_hash")
         self.case, self.archive_name = case_of(self.options), "tgwitness-evidence.zip"
-        self.title = self.options.get("case_title") or say("Telegram observation journal")
+        self.title = self.options.get("case_title") or (
+            say("Telegram observation journal") if self.source_digest.get("telegram_observations") else say("Signed journal"))
         if self.context.get("encrypted_only"):
             self.title = self.options.get("case_title") or report_secret.title_of(say, self.context["encrypted_chats"])
-        self.description = say("Signed record of Telegram observations made by TgWitness, with integrity and custody details.")
+        self.description = say(case_assessment.acquisition_method("evidence", self.source_digest))
         self.sign = self.context.get("sign")
         self.handover = self.context.get("handover")
         self.material = with_observed(report_material(self.context), self.coverage)
@@ -2579,7 +2614,7 @@ class EvidenceHTML:
             links.append(("records", say("Records")))
         yield (head(say, title=self.title + " · TgWitness", description=self.description, meta=meta, linked=linked,
                     theme=self.options.get("theme", "auto"), template=self.options.get("template", "dossier"), design=self.options.get("design"))
-               + bar(say, self.label, links, "journal" if self.data_kind else None)).encode("utf-8")
+               + bar(say, self.label, links, self.data_kind, sealed=self.sign is not None)).encode("utf-8")
         facts = [(say("Case ID"), e(self.options.get("case_id"))), (say("Examiner"), e(self.options.get("examiner"))),
                  (say("Organization"), e(self.options.get("organization"))), (say("Created"), when(self.created)),
                  (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
@@ -2719,8 +2754,8 @@ class EvidenceHTML:
         yield custody_section(say, next(self.numbers), steps, [
             (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
             (say("Program build"), build_html(say, self.producer)),
-            (say("Acquisition method"), e(say("Telegram client observing the account; records chained by SHA-256 and "
-                                              "signed with Ed25519 as they are written."))),
+            (say("Acquisition method"), e(say(case_assessment.acquisition_method(
+                "handover" if self.handover else "evidence", self.source_digest)))),
             (say("Observing account"), e(self.account_text)),
             (say("Telegram client"), seen_list(say, self.source_digest.get("clients"), client_text)),
             (say("Connection route"), seen_list(say, self.source_digest.get("routes"), route_text)
@@ -2998,7 +3033,7 @@ class ChatHTML:
                     theme=self.options.get("theme", "auto"), design=self.options.get("design"))
                + bar(say, say("Chat export"), [("summary", say("Summary")), ("people", say("Participants")),
                                                ("messages", say("Messages")), ("integrity", say("Integrity")),
-                                               ("verify", say("Verify"))], "chat")).encode("utf-8")
+                                               ("verify", say("Verify"))], "chat", sealed=self.sign is not None)).encode("utf-8")
         facts = [(say("Chat"), e(self.chat_title)), (say("Case ID"), e(self.options.get("case_id"))),
                  (say("Examiner"), e(self.options.get("examiner"))), (say("Organization"), e(self.options.get("organization"))),
                  (say("Created"), when(self.created)), (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
@@ -3105,8 +3140,7 @@ class ChatHTML:
         yield custody_section(say, next(self.numbers), steps, [
             (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
             (say("Program build"), build_html(say, self.producer)),
-            (say("Acquisition method"), e(say("Full visible history read through the Telegram API; a current snapshot, "
-                                              "not a reconstruction of deleted or earlier edited messages."))),
+            (say("Acquisition method"), e(say(case_assessment.acquisition_method("chat", {})))),
             (say("Exporting account"), e(self.account_text)),
             (say("Telegram client"), e(client_text(say, self.meta["client"])) if isinstance(self.meta.get("client"), dict)
              else e(say("Not recorded in this export"))),

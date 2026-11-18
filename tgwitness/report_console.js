@@ -37,7 +37,13 @@ async function startViewer(meta){
   }).observe(bar);
   const show=name=>{for(const v of views)v.hidden=v.id!=="view-"+name;for(const t of tabs)t.setAttribute("aria-current",String(t.dataset.view===name));
     history.replaceState(null,"",name==="report"?location.pathname+location.search:"#"+name);window.scrollTo(0,0);};
-  for(const t of $$("[data-view]"))t.addEventListener("click",e=>{e.preventDefault();show(t.dataset.view);});
+  for(const t of $$("[data-view]"))t.addEventListener("click",e=>{
+    if(t===badge&&!$("#view-check")?.firstElementChild){
+      show("report");
+      return;
+    }
+    e.preventDefault();show(t.dataset.view);
+  });
   document.addEventListener("click",e=>{const a=e.target.closest("a[data-goto]");if(!a)return;e.preventDefault();show("data");goto(a.dataset.goto);});
   for(const a of $$(".toc a,.brand,#seal-hint"))a.addEventListener("click",()=>show("report"));
   const start=(location.hash||"").slice(1);if(["data","people","iocs","check"].includes(start))show(start);

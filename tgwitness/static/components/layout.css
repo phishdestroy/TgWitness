@@ -263,7 +263,6 @@
   .workspace .chat-tools-menu .chat-toolbar { padding: 0; }
   .journal-more-filters > summary { font-size: 12px; }
   .journal .card-heading .live-controls { width: auto; margin-inline-start: auto; }
-  .journal .card-heading .live-toggle { display: none; }
   .workflow-intro h1 { font-size: 24px; }
   .workflow-card { padding: 20px; }
   .workflow-status { padding: 18px; }
