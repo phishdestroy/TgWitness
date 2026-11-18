@@ -516,8 +516,8 @@ class Disclosures:
                 counts.update(chats=len(chats), media=len(media))
                 report_context = {'report_language': policy.report_language, 'policy': shared_policy, 'archive': True,
                     'presentation': policy.report_presentation.model_dump(), 'analytics': account_report.snapshot_analytics.project(analytics.result(), policy.report_presentation.model_dump()),
-                    'archive_reference': identity, 'archive_name': account_report.disclosure_file(identity),
-                    'source_archive_name': account_report.archive_file(ticket['job_id']), 'created_at': created,
+                    'archive_reference': identity, 'archive_name': account_report.delivered_file(identity, sharing=True),
+                    'source_archive_name': account_report.delivered_file(ticket['job_id']), 'created_at': created,
                     'counts': counts, 'fingerprint': fingerprint(self.vault.public_key),
                     'source_archive_sha256': digest, 'limitations': WARNINGS}
                 write('index.html', account_report.sharing_report(report_context, rows()))
