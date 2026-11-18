@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "リンクを選択してコピーしてください。",
   "Global search": "グローバル検索",
   "Checkpoint not timestamped": "チェックポイントにタイムスタンプなし",
-  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち"
+  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "後の変更が同じ設定に影響しています。この変更を元に戻すのではなく、設定を直接変更してください。",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "セットアップは既に完了しているため、新たに開始されたものはありません。チャットの選択の変更は「チャットの選択を保存」でのみ保存されます。"
 }

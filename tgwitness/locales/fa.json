@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "پیوند را انتخاب و کپی کنید.",
   "Global search": "جستجوی سراسری",
   "Checkpoint not timestamped": "نقطه بازبینی مهر زمانی نگرفت",
-  "Checkpoint timestamp pending": "مهر زمانی نقطه بازبینی در انتظار تأیید"
+  "Checkpoint timestamp pending": "مهر زمانی نقطه بازبینی در انتظار تأیید",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "یک تغییر بعدی روی همین تنظیمات اثر می‌گذارد. به‌جای بازگرداندن این تغییر، آن‌ها را مستقیماً تغییر دهید.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "راه‌اندازی قبلاً کامل شده بود، بنابراین چیز تازه‌ای شروع نشد. تغییرات انتخاب گفتگوها فقط با «ذخیره انتخاب گفتگوها» ذخیره می‌شوند."
 }

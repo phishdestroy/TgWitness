@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
   "Global search": "Genel arama",
   "Checkpoint not timestamped": "Kontrol noktası zaman damgası almadı",
-  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede"
+  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Daha sonraki bir değişiklik aynı ayarları etkiliyor. Bu değişikliği geri almak yerine ayarları doğrudan değiştirin.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Kurulum zaten tamamlanmıştı, bu yüzden yeni bir şey başlatılmadı. Sohbet seçimindeki değişiklikler yalnızca \"Sohbet seçimini kaydet\" ile kaydedilir."
 }

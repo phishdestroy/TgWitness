@@ -10465,5 +10465,7 @@
   "Select and copy the link.": "حدد الرابط وانسخه.",
   "Global search": "البحث العام",
   "Checkpoint not timestamped": "لم تُختم نقطة التحقق بالوقت",
-  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار"
+  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "تغيير لاحق يمسّ الإعدادات نفسها. غيّرها مباشرة بدلاً من التراجع عن هذا التغيير.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "اكتمل الإعداد من قبل، لذلك لم يبدأ أي شيء جديد. لا تُحفظ تغييرات اختيار المحادثات إلا بزر «حفظ اختيار المحادثات»."
 }

@@ -17,7 +17,7 @@ export function createSettingsHub(ctx) {
   let autoTried=false, routeDirty=false, checkFailure=null;
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
   let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false;
-  let groupScope=null, scopeDirty=false, history=null, historyLoading=null, undo=null, undoTimer=null;
+  let groupScope=null, scopeDirty=false, history=null, historyFor=null, historyLoading=null, undo=null, undoTimer=null, proxyField=null;
   let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null, historyFocus=false;
   const formSection=id=>id==='evidence-form'?'protection':'notifications';
   const tools=[['sources','sources:green','Recording rules'],['parameters','settings:slate','Parameters'],['access','users:blue','Access'],
@@ -216,7 +216,8 @@ export function createSettingsHub(ctx) {
     const keys=Object.keys(data.values).filter(k=>JSON.stringify(data.values[k])!==JSON.stringify(before[k]));
     const parts=[...(goalBefore!==data.goal?[fieldLabel('goal')+': '+label(data.goal)]:[]),...keys.map(k=>fieldLabel(k)+': '+describe(data.values[k]))];
     if(!parts.length)return;
-    showUndo(tr('Saved')+' · '+parts.slice(0,2).join(' · ')+(parts.length>2?' · +'+(parts.length-2):''),restoreLatest);
+    const who=owner();
+    showUndo(tr('Saved')+' · '+parts.slice(0,2).join(' · ')+(parts.length>2?' · +'+(parts.length-2):''),()=>restoreLatest(who));
   }
   function showUndo(text,action){
     undo={text,action};paintUndo();clearTimeout(undoTimer);
@@ -233,17 +234,19 @@ export function createSettingsHub(ctx) {
     bar.replaceChildren(node('span','hub-undo-text',undo.text),act,close);
   }
   async function loadHistory(who=owner()){
-    if(history)return history;
-    if(!historyLoading)historyLoading=request(who,'settings/history').then(result=>{history=result.changes;return history;}).finally(()=>{historyLoading=null;});
+    if(history&&historyFor===data?.revision)return history;
+    if(!historyLoading){const revision=data?.revision,loading=request(who,'settings/history').then(result=>{if(historyLoading===loading){history=result.changes;historyFor=revision;}return result.changes;})
+      .finally(()=>{if(historyLoading===loading)historyLoading=null;});historyLoading=loading;}
     return historyLoading;
   }
-  async function restoreChange(seq,who=owner()){
-    data=await request(who,'settings/restore',{seq,revision:data.revision});draft={...data.wizard};editing=false;history=null;
+  async function restoreChange(row,who=owner()){
+    requireOwner(who);
+    data=await request(who,'settings/restore',{seq:row.seq,hash:row.hash,revision:data.revision});draft={...data.wizard};editing=false;history=null;
     await refresh(who);if(current(who)&&state.view==='settings')render();toast(tr('Change undone.'));
   }
-  async function restoreLatest(){
-    const who=owner(),rows=await loadHistory(who);
-    if(rows?.length)await restoreChange(rows[0].seq,who);
+  async function restoreLatest(who=owner()){
+    const rows=await loadHistory(who);
+    if(rows?.length)await restoreChange(rows[0],who);
   }
   function changeText(row){
     const parts=row.changes.map(c=>fieldLabel(c.key)+': '+describe(c.before)+' → '+describe(c.after));
@@ -251,8 +254,8 @@ export function createSettingsHub(ctx) {
     return parts.join(' · ');
   }
   function historyCard(box){
-    const card=node('section','hub-history');card.hidden=true;box.append(card);
-    loadHistory().then(rows=>{
+    const card=node('section','hub-history'),who=owner();card.hidden=true;box.append(card);
+    loadHistory(who).then(rows=>{
       if(!card.isConnected||!rows?.length)return;
       card.hidden=false;card.replaceChildren(node('h2','',tr('Recent changes')));
       const list=node('ol','hub-history-list');
@@ -260,7 +263,7 @@ export function createSettingsHub(ctx) {
         const item=node('li','hub-history-row'),time=node('time','hint',new Date(row.at).toLocaleString(prefs.language,{timeZone:prefs.timezone,dateStyle:'medium',timeStyle:'short'}));
         time.dateTime=row.at;
         item.append(node('span','hub-history-text',(row.restored?tr('Undo of an earlier change')+' · ':'')+changeText(row)),time,
-          button('Undo',()=>{historyFocus=true;return restoreChange(row.seq);},'text-link'));
+          button('Undo',()=>{historyFocus=true;return restoreChange(row,who);},'text-link'));
         list.append(item);
       }
       card.append(list);
@@ -577,11 +580,13 @@ export function createSettingsHub(ctx) {
   }
   function connectionForm(box, first){
     const routeDraft=first?draft:(editing?draft:{...data.wizard,route:data.connection.strategy?.mode|| (data.connection.managed?'warp':data.connection.mode==='direct'?'direct':data.connection.mode==='mtproxy_auto'?'auto':'proxy'),allow_direct:data.connection.strategy?.allow_direct??data.connection.policy.exposure!=='hide'});
-    if(!first){draft=routeDraft;editing=true;}
+    if(!first){if(!editing)proxyField=null;draft=routeDraft;editing=true;}
     const options=first?node('details','wizard-options'):null, routeBox=node('div'), extraBox=first?null:node('div');
     if(options){options.append(node('summary','',tr('Connection settings')),routeBox);options.open=prefs.level==='expert'||draft.route!=='auto'||!!draft.unchecked||!!checkFailure;}
     else box.append(routeBox);
-    function updateRoutes(){routeBox.replaceChildren();cards(routeBox,routes,draft.route,async mode=>{
+    let exposure=null;
+    function updateRoutes(){const focused=document.activeElement,again=focused&&(focused===proxyField||focused===exposure)?focused:null;
+      routeBox.replaceChildren();cards(routeBox,routes,draft.route,async mode=>{
       const who=owner();
       if(connectionBusy)return;
       draft.route=mode;draft.unchecked=false;routeDirty=true;checkFailure=null;
@@ -594,7 +599,7 @@ export function createSettingsHub(ctx) {
       const protection=select('Can Telegram see this server’s address?',[['hide','No, hide it'],['allow','Only if nothing else works']],draft.allow_direct?'allow':'hide',async v=>{
         draft.allow_direct=v==='allow';draft.unchecked=false;routeDirty=true;if(!draft.allow_direct&&draft.route==='direct')draft.route='auto';
         if(first)await saveDraft({step:4});updateRoutes();updateNext();
-      });extra.append(protection);
+      });extra.append(protection);exposure=protection.querySelector('select');
       if(!first&&data.fields.find(f=>f.key==='ip')?.modified){
         extra.append(message('Changed by you','modified-tag'),button('Restore goal value',async()=>{
           const who=owner(),plan=await request(who,'settings/goal/preview',{goal:data.goal});editing=false;await edit('ip',plan.values.ip,who);
@@ -602,12 +607,16 @@ export function createSettingsHub(ctx) {
       }
       if(!first){for(const f of data.fields.filter(f=>f.section==='connection'&&f.key!=='ip'))extra.append(fieldRow(f));}
       if(draft.route==='proxy'){
-        const input=node('input');input.type='password';input.id='hub-proxy';input.autocomplete='off';input.placeholder='tg://proxy, socks5://, http(s)://';input.setAttribute('aria-label',tr('Proxy address'));routeBox.append(input);
-        input.oninput=()=>{routeDirty=true;updateNext();};
+        // Kept in memory only, so a redraw of the form does not erase an address that is not checked yet.
+        if(!proxyField){const input=node('input');input.type='password';input.id='hub-proxy';input.autocomplete='off';input.placeholder='tg://proxy, socks5://, http(s)://';input.setAttribute('aria-label',tr('Proxy address'));
+          input.oninput=()=>{routeDirty=true;updateNext();};proxyField=input;}
+        routeBox.append(proxyField);
       }
       if(['auto','warp'].includes(draft.route))routeBox.append(message('Auto and WARP can download verified helpers and register this server with Cloudflare.'));
       routeBox.append(button(draft.route==='warp'?'Enable WARP':'Check connection',()=>checkConnection(draft.route==='warp')));
       if(!first)extraBox.replaceChildren(extra);
+      if(again===proxyField&&proxyField?.isConnected)proxyField.focus({preventScroll:true});
+      else if(again&&again!==proxyField)exposure.focus({preventScroll:true});
     }
     updateRoutes();
     const status=node('div','connection-result');status.id='hub-connection-result';status.setAttribute('role','status');box.append(status);
@@ -822,6 +831,10 @@ export function createSettingsHub(ctx) {
       if(draft.step===7){
         const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);
         if(result.action==='export'){await navigate('evidence');return;}
+        if(result.action==='existing'){
+          toast(tr('Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.'));
+          if(state.view==='first-run')await navigate(draft.goal==='copy'?'evidence':'start');return;
+        }
         if(state.view!=='first-run')return;
         live={started:Date.now(),done:false};await renderWizard(action);watchLive(action);void run(()=>checkServices(action));return;
       }
@@ -1012,14 +1025,14 @@ export function createSettingsHub(ctx) {
     async openGroup(id){if(!data)data=await request(owner(),'settings');await openGroup(id);},
     get step(){return draft&&!live?draft.step:null;},
     get section(){return state.view==='settings'&&!groupScope?section:null;},
-    leave(){section=null;shownForm=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
+    leave(){section=null;shownForm=null;proxyField=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
     status(){
       updateNext();if(data)updateIndicator(data.connection);
       const session=signedIn();
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue.close(ctx.staleView());draftQueue.close(ctx.staleView());preferencesQueue=createSaveQueue();draftQueue=createSaveQueue();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);clearTimeout(undoTimer);history=historyFor=historyLoading=undo=proxyField=null;paintUndo();section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue.close(ctx.staleView());draftQueue.close(ctx.staleView());preferencesQueue=createSaveQueue();draftQueue=createSaveQueue();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }

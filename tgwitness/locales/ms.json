@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "Pilih dan salin pautan.",
   "Global search": "Carian global",
   "Checkpoint not timestamped": "Titik semak tidak dicap masa",
-  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan"
+  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Perubahan yang lebih baharu menjejaskan tetapan yang sama. Ubah tetapan itu secara terus dan bukannya membatalkan perubahan ini.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Persediaan telah pun selesai, jadi tiada apa-apa yang baharu dimulakan. Perubahan pilihan sembang hanya disimpan dengan \"Simpan pilihan sembang\"."
 }

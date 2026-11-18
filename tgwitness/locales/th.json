@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
   "Global search": "ค้นหาทั่วโลก",
   "Checkpoint not timestamped": "จุดตรวจสอบไม่ได้รับการประทับเวลา",
-  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน"
+  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "การเปลี่ยนแปลงในภายหลังมีผลกับการตั้งค่าเดียวกัน ให้เปลี่ยนการตั้งค่าเหล่านั้นโดยตรงแทนการย้อนกลับการเปลี่ยนแปลงนี้",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "การตั้งค่าเสร็จสมบูรณ์ไปแล้ว จึงไม่มีการเริ่มสิ่งใหม่ การเปลี่ยนแปลงการเลือกแชทจะถูกบันทึกด้วย “บันทึกการเลือกแชท” เท่านั้น"
 }

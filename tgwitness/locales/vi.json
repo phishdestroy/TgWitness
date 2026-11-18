@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "Chọn và sao chép liên kết.",
   "Global search": "Tìm kiếm toàn cầu",
   "Checkpoint not timestamped": "Điểm kiểm tra chưa được đóng dấu thời gian",
-  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận"
+  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Một thay đổi sau đó ảnh hưởng đến cùng các cài đặt này. Hãy thay đổi trực tiếp thay vì hoàn tác thay đổi này.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Thiết lập đã hoàn tất trước đó nên không có gì mới được bắt đầu. Thay đổi lựa chọn cuộc trò chuyện chỉ được lưu bằng “Lưu lựa chọn cuộc trò chuyện”."
 }

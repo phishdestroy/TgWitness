@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "লিংকটি নির্বাচন করে কপি করুন।",
   "Global search": "বিশ্বব্যাপী অনুসন্ধান",
   "Checkpoint not timestamped": "চেকপয়েন্টে টাইমস্ট্যাম্প পাওয়া যায়নি",
-  "Checkpoint timestamp pending": "চেকপয়েন্টের টাইমস্ট্যাম্প অপেক্ষমাণ"
+  "Checkpoint timestamp pending": "চেকপয়েন্টের টাইমস্ট্যাম্প অপেক্ষমাণ",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "পরবর্তী একটি পরিবর্তন একই সেটিংসকে প্রভাবিত করে। এই পরিবর্তনটি বাতিল না করে সেগুলি সরাসরি পরিবর্তন করুন।",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "সেটআপ আগেই সম্পন্ন হয়েছে, তাই নতুন কিছু শুরু হয়নি। চ্যাট বাছাইয়ের পরিবর্তন কেবল \"চ্যাট বাছাই সংরক্ষণ করুন\" দিয়ে সংরক্ষিত হয়।"
 }

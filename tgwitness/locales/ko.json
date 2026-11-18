@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "링크를 선택해 복사하세요.",
   "Global search": "전체 검색",
   "Checkpoint not timestamped": "체크포인트에 타임스탬프 없음",
-  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중"
+  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "이후의 변경이 같은 설정에 영향을 줍니다. 이 변경을 되돌리는 대신 설정을 직접 변경하세요.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "설정이 이미 완료되어 새로 시작된 것은 없습니다. 채팅 선택 변경 사항은 “채팅 선택 저장”으로만 저장됩니다."
 }

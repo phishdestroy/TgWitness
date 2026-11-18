@@ -10271,5 +10271,7 @@
   "Select and copy the link.": "Sélectionnez et copiez le lien.",
   "Global search": "Recherche globale",
   "Checkpoint not timestamped": "Point de contrôle non horodaté",
-  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente"
+  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Une modification ultérieure touche les mêmes paramètres. Modifiez-les directement au lieu d’annuler celle-ci.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "La configuration était déjà terminée, donc rien de nouveau n’a été lancé. Les modifications de la sélection de discussions ne sont enregistrées qu’avec « Enregistrer la sélection de discussions »."
 }

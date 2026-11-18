@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "लिंक चुनें और कॉपी करें।",
   "Global search": "वैश्विक खोज",
   "Checkpoint not timestamped": "चेकपॉइंट पर टाइमस्टैम्प नहीं मिला",
-  "Checkpoint timestamp pending": "चेकपॉइंट का टाइमस्टैम्प लंबित"
+  "Checkpoint timestamp pending": "चेकपॉइंट का टाइमस्टैम्प लंबित",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "बाद के एक बदलाव ने इन्हीं सेटिंग्स को प्रभावित किया है। इस बदलाव को वापस लेने के बजाय उन्हें सीधे बदलें।",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "सेटअप पहले ही पूरा हो चुका था, इसलिए कुछ भी नया शुरू नहीं हुआ। चैट चयन में बदलाव केवल \"चैट चयन सहेजें\" से सहेजे जाते हैं।"
 }

@@ -10271,5 +10271,7 @@
   "Select and copy the link.": "Selecione e copie o link.",
   "Global search": "Pesquisa global",
   "Checkpoint not timestamped": "Ponto de verificação sem carimbo de tempo",
-  "Checkpoint timestamp pending": "Carimbo de tempo do ponto de verificação pendente"
+  "Checkpoint timestamp pending": "Carimbo de tempo do ponto de verificação pendente",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Uma alteração posterior afeta as mesmas configurações. Altere-as diretamente em vez de desfazer esta.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "A configuração já estava concluída, então nada de novo foi iniciado. As alterações na seleção de chats só são salvas com “Salvar a seleção de chats”."
 }

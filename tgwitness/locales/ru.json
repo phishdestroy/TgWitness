@@ -10333,5 +10333,7 @@
   "Select and copy the link.": "Выделите и скопируйте ссылку.",
   "Global search": "Глобальный поиск",
   "Checkpoint not timestamped": "Контрольная точка без метки времени",
-  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения"
+  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Более позднее изменение затрагивает те же настройки. Измените их напрямую, а не отменяйте это изменение.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Настройка уже была завершена, поэтому ничего нового не запущено. Изменения выбора чатов сохраняются только кнопкой «Сохранить выбор чатов»."
 }

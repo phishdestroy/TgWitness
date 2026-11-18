@@ -10312,5 +10312,7 @@
   "Select and copy the link.": "סמנו והעתיקו את הקישור.",
   "Global search": "חיפוש גלובלי",
   "Checkpoint not timestamped": "נקודת הביקורת לא קיבלה חותמת זמן",
-  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה"
+  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "שינוי מאוחר יותר משפיע על אותן הגדרות. שנו אותן ישירות במקום לבטל את השינוי הזה.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "ההגדרה הראשונית כבר הושלמה, ולכן לא הופעל שום דבר חדש. שינויים בבחירת הצ'אטים נשמרים רק באמצעות \"שמירת בחירת הצ'אטים\"."
 }

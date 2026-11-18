@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
   "Global search": "عالمی تلاش",
   "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
-  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "بعد کی ایک تبدیلی انہی ترتیبات کو متاثر کرتی ہے۔ اس تبدیلی کو واپس لینے کے بجائے انہیں براہ راست تبدیل کریں۔",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "سیٹ اپ پہلے ہی مکمل ہو چکا تھا، اس لیے کچھ نیا شروع نہیں ہوا۔ چیٹس کے انتخاب میں تبدیلیاں صرف \"چیٹس کا انتخاب محفوظ کریں\" سے محفوظ ہوتی ہیں۔"
 }

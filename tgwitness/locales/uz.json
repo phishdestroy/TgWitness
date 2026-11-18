@@ -10261,5 +10261,7 @@
   "Select and copy the link.": "Havolani belgilang va nusxalang.",
   "Global search": "Global qidiruv",
   "Checkpoint not timestamped": "Nazorat nuqtasiga vaqt belgisi qo‘yilmadi",
-  "Checkpoint timestamp pending": "Nazorat nuqtasining vaqt belgisi tasdiq kutmoqda"
+  "Checkpoint timestamp pending": "Nazorat nuqtasining vaqt belgisi tasdiq kutmoqda",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Keyingi o'zgartirish xuddi shu sozlamalarga ta'sir qiladi. Bu o'zgartirishni bekor qilish o'rniga ularni bevosita o'zgartiring.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Sozlash allaqachon yakunlangan, shuning uchun yangi hech narsa boshlanmadi. Chatlar tanlovidagi o'zgarishlar faqat \"Chatlar tanlovini saqlash\" orqali saqlanadi."
 }

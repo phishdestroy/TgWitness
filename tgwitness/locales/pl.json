@@ -10363,5 +10363,7 @@
   "Select and copy the link.": "Zaznacz i skopiuj link.",
   "Global search": "Wyszukiwanie globalne",
   "Checkpoint not timestamped": "Punkt kontrolny bez znacznika czasu",
-  "Checkpoint timestamp pending": "Znacznik czasu punktu kontrolnego oczekuje"
+  "Checkpoint timestamp pending": "Znacznik czasu punktu kontrolnego oczekuje",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "Późniejsza zmiana dotyczy tych samych ustawień. Zmień je bezpośrednio zamiast cofać tę zmianę.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "Konfiguracja była już ukończona, więc nic nowego nie zostało uruchomione. Zmiany wyboru czatów zapisuje się tylko przyciskiem „Zapisz wybór czatów”."
 }

@@ -10210,5 +10210,7 @@
   "Select and copy the link.": "請選取並複製連結。",
   "Global search": "全域搜尋",
   "Checkpoint not timestamped": "檢查點未取得時間戳記",
-  "Checkpoint timestamp pending": "檢查點時間戳記待確認"
+  "Checkpoint timestamp pending": "檢查點時間戳記待確認",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "之後的變更影響了相同的設定。請直接修改這些設定，而不是撤銷此變更。",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "設定已完成，因此沒有啟動任何新項目。聊天選擇的變更只有透過「儲存聊天選擇」才會儲存。"
 }
