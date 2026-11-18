@@ -148,7 +148,8 @@
     }finally{authProgress("");}
   }
   function clear(){inspectionSerial++;inspection=null;pending=null;editing=false;intent='auto';render({state:"empty",can_connect:false});}
-  function beginAdd(){editing=true;intent='add';setAuthStep("credentials");setAuthMethod("files");renderAccount();$("session-file").focus();}
+  function edit(kind='renew'){editing=true;intent=kind;}
+  function beginAdd(){edit('add');setAuthStep("credentials");setAuthMethod("files");renderAccount();$("session-file").focus();}
   async function removeWorkspace(){
     const profile=state.profile,revision=state.workspaceRevision,p=state.profiles.find(entry=>entry.id===profile);
     if(!p||profile==="default")return;
@@ -193,7 +194,7 @@
   $("import-new-session").addEventListener("change",()=>{if(authMethod==="files"&&inspection&&current(inspection.owner))render(inspection.result);});
   window.TgWitnessAccountImport={inspect,read,connectNew,occupied,adding,clear,renderAccount,beginAdd,
     deviceSeed:()=>inspection&&current(inspection.owner)?inspection.result.device_seed||null:null,
-    syncControls:controls,edit(){editing=true;intent='renew';},isEditing:()=>editing,methodChanged(){
+    syncControls:controls,edit,isEditing:()=>editing,editIntent:()=>editing?intent:null,methodChanged(){
       if(authMethod==="files")inspect();
       else{inspectionSerial++;inspection=null;pending=null;render({state:"empty",can_connect:false});$("auth-continue").disabled=false;}
       renderAccount();

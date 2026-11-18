@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- Five fixes from the external review of 0.9.3, checked on RunPod before and after:
+  printing a selection of records prints only the selection sheet, not the full dossier with its cover and the hashes
+  of unselected records; the signed acquisition method, report title and summary follow what the journal holds — a
+  journal of local service records is no longer described as Telegram observations of an account, and old records
+  without enough detail get a neutral journal description; the signature badge in the brief and activity documents
+  opens their existing **Seal** section instead of a missing `#check`; changing the panel language on the sign-in
+  choice keeps **Files**, **Key** or **QR** and the independent-authorization choice instead of falling back to
+  **Phone**; the journal keeps its pause and resume control for live updates at 320 and 390 px.
 - **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
   preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
   open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.

@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Nguồn: nhật ký đã ký của không gian làm việc.",
+  "The signed workspace journal contains only local operational records.": "Nhật ký đã ký của không gian làm việc chỉ chứa các bản ghi hoạt động cục bộ.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "Nhật ký đã ký của không gian làm việc có các quan sát do ứng dụng khách Telegram (MTProto) ghi lại.",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Trích từ nhật ký đã ký của không gian làm việc theo các quy tắc tiết lộ thông tin đã nêu.",
   "What the record includes": "Bản ghi bao gồm những gì",
   "Each sender by the Telegram ID and name delivered with the message.": "Mỗi người gửi kèm Telegram ID và tên được gửi cùng tin nhắn.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Các giai đoạn quan sát và khoảng trống trong quan sát ({n}) được liệt kê trong phần Phạm vi bao phủ.",

@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "المصدر: سجل مساحة العمل الموقّع.",
+  "The signed workspace journal contains only local operational records.": "لا يحتوي سجل مساحة العمل الموقّع إلا على سجلات تشغيل محلية.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "يتضمن سجل مساحة العمل الموقّع مشاهدات سجلها عميل Telegram ‏(MTProto).",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "مقتطف من سجل مساحة العمل الموقّع وفق قواعد الإفصاح المذكورة.",
   "What the record includes": "ما يتضمنه السجل",
   "Each sender by the Telegram ID and name delivered with the message.": "كل مرسل بمعرّف Telegram والاسم اللذين وصلا مع الرسالة.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "فترات المراقبة والفجوات فيها ({n})، مدرجة تحت بند «التغطية».",

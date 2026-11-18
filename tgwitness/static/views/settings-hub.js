@@ -288,7 +288,7 @@ export function createSettingsHub(ctx) {
     }finally{if(current(who)&&state.view==='settings')render();}
   }
   function preferencesForm(box,{language=true}={}){
-    if(language){const row=select('Language',Object.entries(ctx.languages),prefs.language,async value=>{const who=owner();await savePreferences({language:value},who);requireOwner(who);await ctx.changeLanguage(value);});
+    if(language){const row=select('Language',Object.entries(ctx.languages),prefs.language,async value=>{const who=owner();await savePreferences({language:value},who);requireOwner(who);await ctx.changeLanguage(value,{userInitiated:true});});
       row.dataset.setting='language';box.append(row);}
     const remember=(patch,text)=>{const before=Object.fromEntries(Object.keys(patch).map(k=>[k,prefs[k]]));
       return savePreferences(patch).then(()=>{if(state.view==='settings')showUndo(tr('Saved')+' · '+text,async()=>{await savePreferences(before);if(state.view==='settings')render();});});};
@@ -746,7 +746,7 @@ export function createSettingsHub(ctx) {
     brand.append(mark,node('span','',tr('First setup')));
     for(const [key,name] of Object.entries(ctx.languages))language.append(new Option(name,key));
     language.value=prefs.language;language.setAttribute('aria-label',tr('Language'));
-    language.onchange=()=>run(async()=>{const who=owner();await savePreferences({language:language.value},who);requireOwner(who);await ctx.changeLanguage(language.value);},language);
+    language.onchange=()=>run(async()=>{const who=owner();await savePreferences({language:language.value},who);requireOwner(who);await ctx.changeLanguage(language.value,{userInitiated:true});},language);
     top.append(brand,language);
     if(draft?.completed){const close=button('✕',async()=>{await navigate('settings');},'icon-btn wizard-close');close.setAttribute('aria-label',tr('Close'));close.title=tr('Close');top.append(close);}
     page.append(top);

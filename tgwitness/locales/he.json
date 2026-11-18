@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "מקור: היומן החתום של סביבת העבודה.",
+  "The signed workspace journal contains only local operational records.": "היומן החתום של סביבת העבודה מכיל רשומות תפעול מקומיות בלבד.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "היומן החתום של סביבת העבודה כולל תצפיות שתיעד לקוח Telegram ‏(MTProto).",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "תמצית מהיומן החתום של סביבת העבודה לפי כללי מסירת המידע שצוינו.",
   "What the record includes": "מה כולל התיעוד",
   "Each sender by the Telegram ID and name delivered with the message.": "כל שולח לפי מזהה Telegram והשם שנמסרו עם ההודעה.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "תקופות המעקב והפערים במעקב ({n}), מפורטים תחת הכותרת \"כיסוי\".",

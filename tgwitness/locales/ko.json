@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "출처: 작업 공간의 서명된 저널.",
+  "The signed workspace journal contains only local operational records.": "작업 공간의 서명된 저널에는 로컬 작업 기록만 있습니다.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "작업 공간의 서명된 저널에는 Telegram 클라이언트(MTProto)가 기록한 관찰 내용이 포함되어 있습니다.",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "명시된 공개 규칙에 따라 작업 공간의 서명된 저널에서 발췌했습니다.",
   "What the record includes": "기록에 포함된 내용",
   "Each sender by the Telegram ID and name delivered with the message.": "각 발신자를 메시지와 함께 전달된 Telegram ID와 이름으로 표시합니다.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "관측 기간과 관측 누락({n})은 ‘커버리지(Coverage)’ 항목에 나열되어 있습니다.",

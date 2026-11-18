@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "منبع: دفتر ثبت امضاشدهٔ فضای کار.",
+  "The signed workspace journal contains only local operational records.": "دفتر ثبت امضاشدهٔ فضای کار فقط شامل سوابق عملیات محلی است.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "دفتر ثبت امضاشدهٔ فضای کار شامل مشاهدات ثبت‌شده توسط کلاینت تلگرام (MTProto) است.",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "گزیده‌ای از دفتر ثبت امضاشدهٔ فضای کار مطابق قواعد اعلام‌شده برای افشای اطلاعات.",
   "What the record includes": "آنچه سوابق در بر دارد",
   "Each sender by the Telegram ID and name delivered with the message.": "هر فرستنده با شناسه Telegram و نامی که همراه پیام رسیده است.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "دوره‌های مشاهده و شکاف‌های مشاهده ({n})، فهرست‌شده تحت پوشش.",

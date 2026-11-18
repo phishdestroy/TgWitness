@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "来源：工作区已签名的日志。",
+  "The signed workspace journal contains only local operational records.": "工作区已签名的日志仅包含本地操作记录。",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "工作区已签名的日志包含 Telegram 客户端（MTProto）记录的观测结果。",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "按照所述披露规则，从工作区已签名的日志中摘录。",
   "What the record includes": "记录包含的内容",
   "Each sender by the Telegram ID and name delivered with the message.": "每位发送者均附有随消息送达的 Telegram ID 和名称。",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "观测时段和观测缺口（{n}）列于“覆盖范围”部分。",

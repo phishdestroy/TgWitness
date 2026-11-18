@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Fonte: diário assinado do espaço de trabalho.",
+  "The signed workspace journal contains only local operational records.": "O diário assinado do espaço de trabalho contém apenas registros de operações locais.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "O diário assinado do espaço de trabalho inclui observações registradas pelo cliente do Telegram (MTProto).",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Extrato do diário assinado do espaço de trabalho segundo as regras de divulgação indicadas.",
   "What the record includes": "O que o registro inclui",
   "Each sender by the Telegram ID and name delivered with the message.": "Cada remetente com o ID do Telegram e o nome entregues com a mensagem.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Períodos observados e lacunas na observação ({n}), listados na seção Cobertura.",

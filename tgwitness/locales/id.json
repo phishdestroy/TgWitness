@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Sumber: jurnal ruang kerja yang ditandatangani.",
+  "The signed workspace journal contains only local operational records.": "Jurnal ruang kerja yang ditandatangani hanya berisi catatan operasi lokal.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "Jurnal ruang kerja yang ditandatangani mencakup pengamatan yang dicatat oleh klien Telegram (MTProto).",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Petikan dari jurnal ruang kerja yang ditandatangani sesuai dengan aturan pengungkapan yang disebutkan.",
   "What the record includes": "Isi catatan",
   "Each sender by the Telegram ID and name delivered with the message.": "Setiap pengirim dengan ID Telegram dan nama yang dikirim bersama pesan.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Periode pengamatan dan celah dalam pengamatan ({n}), tercantum di bawah bagian Cakupan.",

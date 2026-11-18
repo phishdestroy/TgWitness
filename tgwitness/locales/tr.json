@@ -1,4 +1,8 @@
 {
+  "Source: signed workspace journal.": "Kaynak: çalışma alanının imzalı günlüğü.",
+  "The signed workspace journal contains only local operational records.": "Çalışma alanının imzalı günlüğü yalnızca yerel işlem kayıtlarını içerir.",
+  "The signed workspace journal includes observations recorded by the Telegram client (MTProto).": "Çalışma alanının imzalı günlüğü, Telegram istemcisinin (MTProto) kaydettiği gözlemleri içerir.",
+  "Extract from the signed workspace journal under the stated disclosure rules.": "Belirtilen açıklama kurallarına göre çalışma alanının imzalı günlüğünden alınan kesit.",
   "What the record includes": "Kaydın içerdikleri",
   "Each sender by the Telegram ID and name delivered with the message.": "Her gönderen, mesajla birlikte iletilen Telegram kimliği ve adıyla.",
   "Observed periods and gaps in observation ({n}), listed under Coverage.": "Gözlem dönemleri ve gözlemdeki boşluklar ({n}), \"Kapsam\" başlığı altında listelenmiştir.",
