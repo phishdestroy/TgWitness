@@ -234,7 +234,8 @@ def kind_label(say, kind):
             "message.deleted": say("Deletion notice"), "message.missing_on_recheck": say("Missing on recheck"),
             "media.saved": say("Saved file"), "media.hashed": say("File hashes; content not downloaded"),
             "secret_chat.message": say("Pseudo-secret message"), "secret_chat.file": say("Pseudo-secret file preserved"),
-            "secret_chat.action": say("Pseudo-secret notice")}.get(kind, kind)
+            "secret_chat.action": say("Pseudo-secret notice"), "webapp.launch_requested": say("Mini application opened"),
+            "webapp.captured": say("Mini application recorded"), "webapp.file": say("Mini application file preserved")}.get(kind, kind)
 
 
 class Digest:
@@ -313,6 +314,10 @@ class Digest:
             note_indicators(self.indicators, payload["addresses"], "mini app",
                             {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
                             event["observed_at"])
+        if kind == "webapp.captured":
+            from .webapp import note_capture
+            note_capture(self.indicators, payload, {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
+                         event["observed_at"])
         digest = payload.get("media_sha256") if kind in ("media.saved", "secret_chat.file") else None
         if isinstance(digest, str):
             self.media[digest] = {"mime_type": payload.get("mime_type"), "size": payload.get("size"),

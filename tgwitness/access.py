@@ -45,6 +45,7 @@ POLICY = {
     "GET /api/capture/{kind}/object/{sha256}": ("settings", None),
     "GET /api/extensions": ("view", "filter"),
     "GET /api/webapp": ("view", "filter"),
+    "GET /api/webapp/captures/{seq}": ("view", "filter"),
     "POST /api/search/record": ("view", "body"),
     "POST /api/subjects/{chat_id}/snapshot": ("collect", "path"),
     "GET /api/continuity": ("view", "filter"),

@@ -247,9 +247,10 @@ stays visible, and clicking again retrieves it. Callback and join RPCs have one 
 attempt; retryable reads keep their configured retry policy. Switching chats immediately
 clears the draft and reply target and disables sending until the new conversation loads.
 
-This mini-client handles text and callback buttons. Web apps, login/phone/location requests,
-payments, inline queries and attachments still require a Telegram client; their saved button
-metadata remains visible. The new controls use English text.
+This mini-client handles text and callback buttons. Mini application buttons get **Open mini app**,
+which records the application in an isolated browser ([Mini applications](MINI-APPS.md)). Login,
+phone and location requests, payments, inline queries and attachments still require a Telegram
+client; their saved button metadata remains visible. The new controls use English text.
 
 ## Recheck tiers
 

@@ -1,0 +1,55 @@
+.mini-apps, .mini-detail { display: grid; gap: 14px; min-width: 0; padding: 14px 16px 24px; }
+.mini-apps > .hint, .mini-meaning { margin: 0; font-size: 12.5px; line-height: 1.5; }
+.mini-note { margin: 0; padding: 9px 12px; font-size: 12.5px; line-height: 1.45; }
+.mini-section { display: grid; gap: 8px; min-width: 0; }
+.mini-section h4 { margin: 0; color: var(--text); font-size: 13px; font-weight: 650; }
+.mini-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; min-width: 0; }
+.mini-list > li { display: grid; gap: 3px; min-width: 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); }
+.mini-list > li small { color: var(--muted); font-size: 11.5px; overflow-wrap: anywhere; }
+.mini-list .mini-list > li { padding: 5px 8px; background: var(--surface-2); }
+.mini-code { display: block; min-width: 0; padding: 0; background: none; color: var(--text-2); font: 11.5px/1.45 var(--mono);
+  overflow-wrap: anywhere; white-space: pre-wrap; max-height: 9.5em; overflow: auto; }
+.mini-entry { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 10px; }
+.mini-entry-main { display: grid; gap: 2px; min-width: 0; }
+.mini-entry-main strong { overflow-wrap: anywhere; font-size: 13px; }
+.mini-captures { display: grid; gap: 8px; }
+.mini-capture { display: grid; gap: 8px; width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); text-align: start; cursor: pointer; }
+.mini-capture:hover { border-color: var(--accent-border, var(--accent)); background: var(--accent-soft); }
+.mini-capture-head { display: grid; gap: 2px; min-width: 0; }
+.mini-capture-head strong { font-size: 13px; overflow-wrap: anywhere; }
+.mini-capture-head small { color: var(--muted); font-size: 11.5px; }
+.mini-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.mini-chip { display: inline-flex; align-items: baseline; gap: 4px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface-2); color: var(--text-2); font-size: 11.5px; white-space: nowrap; }
+.mini-chip b { color: var(--text); font-weight: 650; }
+.mini-chip.warn { border-color: var(--warning-border, var(--border)); background: var(--warning-soft, var(--surface-2)); }
+.mini-chip.danger { border-color: var(--danger-border, var(--border)); background: var(--danger-soft, var(--surface-2)); }
+.mini-detail > h3 { margin: 0; font-size: 15px; overflow-wrap: anywhere; }
+.mini-detail > .quiet.small { justify-self: start; }
+.mini-detail > .text-link { justify-self: start; }
+.mini-facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 10px; margin: 0; font-size: 12.5px; }
+.mini-facts dt { color: var(--muted); }
+.mini-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.mini-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.mini-shot { display: grid; gap: 4px; margin: 0; min-width: 0; }
+.mini-shot img { display: block; width: 100%; height: auto; max-height: 260px; object-fit: cover; object-position: top;
+  border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.mini-shot figcaption { color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.mini-shot-wait { aspect-ratio: 9 / 19; border-radius: 8px; background: var(--surface-2); }
+.mini-asks { margin: 0; padding: 7px 10px; border-radius: var(--radius); background: var(--warning-soft, var(--surface-2));
+  color: var(--text); font-size: 12.5px; font-weight: 600; }
+.mini-fold { min-width: 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.mini-fold > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; cursor: pointer;
+  font-size: 13px; font-weight: 600; }
+.mini-fold[open] > summary { border-bottom: 1px solid var(--border); }
+.mini-fold > .mini-list { padding: 8px; max-height: 420px; overflow: auto; }
+.mini-count { min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--surface-3); color: var(--text-2);
+  font-size: 11px; text-align: center; }
+.mini-request.failed small { color: var(--danger); }
+.mini-frame { grid-template-columns: auto minmax(0, 1fr); column-gap: 6px; align-items: start; }
+.mini-frame.sent small { color: var(--accent-text); }
+.mini-label { display: block; }
+.mini-list > li.mini-call { padding: 5px 10px; background: var(--surface-2); }
+.msg-button .secondary.small + .secondary.small { margin-top: 4px; }

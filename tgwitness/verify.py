@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 7ca8bef4b7f1266be3096a3b18d33cc56527ba51233a04fe8c376ef2195cbab2
+# TgWitness verifier sources SHA-256: e4619cf165b0f97552529d8ca81d20923622db967eecdd5586e4d4436cb3485d
 """Standalone verifier"""
 import argparse
 import base64
@@ -4163,7 +4163,7 @@ def verify_event_lines(lines, public_key, take=None, remember=None):
 
 
 def media_reference(event):
-    if event["kind"] not in ("media.saved", "actor.avatar_saved", "secret_chat.file"):
+    if event["kind"] not in ("media.saved", "actor.avatar_saved", "secret_chat.file", "webapp.file"):
         return None
     payload = event["payload"]
     digest, size = payload.get("media_sha256"), payload.get("size")
@@ -5853,7 +5853,7 @@ def verify_handover(path, expected_fingerprint=None, chosen=None):
                 key.verify(base64.b64decode(record["signature"], validate=True), bytes.fromhex(record["hash"]))
                 if seq == count and record["hash"] != head:
                     raise ValueError("The last record differs from the journal head")
-                if record["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file"):
+                if record["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file", "webapp.file"):
                     digest = (record["payload"] or {}).get("media_sha256")
                     if "media/" + str(digest) in files:
                         referenced.add("media/" + digest)

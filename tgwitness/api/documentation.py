@@ -402,16 +402,24 @@ class DocumentationOperations:
     async def recorder_files(self, steps, limit=30, budget=48 * 1024 * 1024):
         capture = getattr(self.app.state, "capture", None)
         wanted = [
-            item["sha256"]
+            (item["sha256"], step.get("source"))
             for step in steps
             if step.get("type") == "visual" and (not step.get("hidden"))
             for item in step.get("files") or []
             if item.get("mime_type") == "image/png"
         ]
-        found = {}
-        for sha256 in list(dict.fromkeys(wanted))[:limit] if capture else []:
+        found, media = {}, self.app.state.store.root / "media"
+        for sha256, source in list(dict.fromkeys(wanted))[:limit]:
             try:
-                data = await asyncio.to_thread(capture.object, "browser", sha256)
+                if source == "webapp":
+                    path = media / sha256
+                    if len(sha256) != 64 or set(sha256) - set("0123456789abcdef") or path.is_symlink() or not path.is_file():
+                        continue
+                    data = await asyncio.to_thread(path.read_bytes)
+                elif capture:
+                    data = await asyncio.to_thread(capture.object, "browser", sha256)
+                else:
+                    continue
             except Exception:
                 continue
             if data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) <= budget:

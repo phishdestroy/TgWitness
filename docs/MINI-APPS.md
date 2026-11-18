@@ -4,50 +4,120 @@
 
 # Mini applications
 
-A Telegram mini application opens a web page inside the client. The button that
-opens it carries an address, and the page itself references further addresses.
-TgWitness lists the buttons it has already recorded and, on request, fetches one
-page and reports the addresses written into it.
+A Telegram mini application is a web page a bot opens inside the client: a shop, a
+"bonus" claim, a wallet connection. Scam bots use them to collect phone numbers,
+seed phrases and payments away from the chat. TgWitness opens one the way a
+Telegram client does, loads it once in an isolated headless Chromium and records
+what it does.
 
-## List the buttons in a chat
+## In the panel
+
+Under a message, a mini application button has **Open mini app**. In a chat,
+**Info → Mini apps** lists where the chat opens mini applications:
+
+- buttons under messages and reply-keyboard buttons;
+- `t.me/<bot>/<app>` and `t.me/<bot>?startapp` links in messages, entities and link
+  buttons;
+- in a bot chat, the bot's menu button and its main app.
+
+**Open** asks for confirmation, then:
+
+1. asks Telegram for the launch address as this account, which is an account
+   action: the bot learns that this account opened it and sees its name and ID.
+   For a button under a message, the bot can post one message to the chat on the
+   account's behalf while the application is open;
+2. loads the address once in Chromium with a phone screen, through the
+   workspace's route for requests outside Telegram;
+3. records the result in the signed journal and shows it under **Recorded
+   openings**.
+
+Only the main administrator can open a mini application.
+
+## What is recorded
+
+- every request with method, type, status, MIME type and size, and the TLS
+  certificate subject and issuer; hosts other than the application's own are
+  listed separately;
+- WebSocket addresses and up to 30 frames each;
+- every call the page makes to the Telegram WebApp API, for example a request for
+  the phone number, a payment, opening a link or sending data to the bot; requests
+  that ask something of the user are flagged;
+- dialogs it showed (they are dismissed), windows it opened, downloads it
+  started, forms and input fields;
+- screenshots 2, 8 and 16 seconds after loading and of the whole page, the page as
+  it was after loading and up to 25 of its scripts;
+- links, domains, wallets, Telegram accounts, e-mail addresses and phone numbers
+  found in the page, its traffic and Telegram calls; wallets in scripts only when
+  their checksum is valid.
+
+The launch address carries signed launch data (`tgWebAppData`) that works as a
+login to the application for a while. It is removed from everything that is
+recorded: the address keeps no fragment, and the data, its hash and its query ID
+are replaced with `[removed]` in requests, frames, calls and saved files.
+
+Journal records:
+
+| Record | Meaning |
+|---|---|
+| `webapp.launch_requested` | Telegram returned the launch address; account action |
+| `webapp.launch_failed` | Telegram refused to open it, with its answer |
+| `webapp.file` | one preserved file (`media_sha256`, size, role), bound to the archive like saved media |
+| `webapp.captured` | everything listed above, with the counts of items dropped at the caps |
+| `webapp.capture_failed` | the application could not be loaded |
+
+Screenshots appear in the investigation timeline and its documents, indicators
+appear in reports under the source **mini app**, and evidence archives carry the
+files under `media/`, checked by `verify.py`.
+
+## Browser
+
+TgWitness drives Chromium over `--remote-debugging-pipe`; no extra Python package
+is needed. It looks for `chromium`, `chromium-browser`, `google-chrome` and a
+Playwright Chromium; set `TGWITNESS_CHROMIUM` to a path to choose one.
+
+Every connection the browser makes, WebSockets included, goes through a loopback
+gate that opens it over the workspace route like any other request outside
+Telegram. When that route is turned off, or Hide IP mode is on without a proxy,
+the application is not opened. Addresses inside the local network are refused, and
+WebRTC cannot send UDP outside the route.
+
+Chromium runs with its sandbox. When TgWitness runs as root, Chromium cannot use
+it, so opening is refused unless `TGWITNESS_BROWSER_NO_SANDBOX=1` is set; do that
+only on a machine used for this work.
+
+Without a browser, or on Windows, **Open** still asks Telegram for the address and
+then fetches the page and up to 12 of its own scripts, parsing them for addresses
+and WebSocket endpoints.
+
+## API
 
 ```sh
 curl -sS "http://127.0.0.1:8000/api/webapp?chat_id=-1001234567890&limit=200" \
   -H "Authorization: Bearer $TGWITNESS_TOKEN"
 ```
 
-This reads saved journal records only; it contacts nobody. Accesses limited to
-chosen chats see their own chats.
-
-## Fetch one page
+Reads saved records only and contacts nobody: `entries` lists buttons and links,
+`captures` the recorded openings, `browser` whether a browser can be used. Accesses
+limited to chosen chats see their own chats; `GET /api/webapp/captures/{seq}?chat_id=…`
+returns one recorded opening.
 
 ```sh
-curl -sS -X POST http://127.0.0.1:8000/api/webapp/inspect \
-  -H "Authorization: Bearer $TGWITNESS_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://app.example/start"}'
+curl -sS -X POST http://127.0.0.1:8000/api/webapp/open \
+  -H "Authorization: Bearer $TGWITNESS_TOKEN" -H "Content-Type: application/json" \
+  -d '{"chat_id": 5104055776, "entry": {"type": "button", "seq": 1522, "row": 0, "column": 0}}'
 ```
 
-Only the main administrator can fetch, and only through the workspace route for
-requests outside Telegram. When that route is turned off, or when Hide IP mode is
-on without a proxy, the request is refused instead of falling back to a direct
-connection. Addresses that resolve inside the local network are refused.
+`entry.type` is `button` (with the keyboard record `seq`, `row` and `column`),
+`link` (with `url`), `menu` or `main`.
 
-The response lists each referenced address with its host, path, scheme, whether
-it shares the page's origin and where it was written: an HTML attribute, a CSS
-`url()`, a dynamic `import()`, a `fetch`/`axios`/`WebSocket` call or a plain
-string literal. `third_party_hosts` separates hosts other than the page's own,
-and `sockets` lists `ws://` and `wss://` addresses. Reading stops after 4 MiB or
-500 addresses, and `truncated` says when that happened.
+`POST /api/webapp/inspect` with `{"url": "https://app.example/start", "scripts": 12}`
+fetches a page you already know without asking Telegram, follows up to `scripts`
+of its own scripts and records `webapp.inspected`.
 
-Addresses found this way become URL and domain indicators in reports, listed
-under the source **mini app**.
+## Limits
 
-## What this records
-
-One response, fetched at one moment, from this workspace's address. A mini
-application can serve different addresses later, to another visitor, or after
-its operator changes it. A referenced address is not confirmed to exist and was
-not contacted. Asking Telegram for the launch address is an account action and is
-recorded as `webapp.launch_requested`; each fetch is recorded as
-`webapp.inspected` together with the addresses it found.
+One loading, at one moment, from this workspace's address. Another visitor, time or
+address can be served something else, and an application can check where it is
+opened. Requests are capped at 400, Telegram calls at 200 and the whole opening at
+about 75 seconds; the counts of dropped items are recorded. TgWitness does not
+click inside the application or fill its forms.
