@@ -187,12 +187,33 @@ def span_text(say, first, last):
         seconds = (datetime.fromisoformat(last) - datetime.fromisoformat(first)).total_seconds()
     except (TypeError, ValueError):
         return "—"
+    return duration_text(say, seconds)
+
+
+def duration_text(say, seconds):
     days, rest = divmod(int(seconds), 86400)
     if days:
         return say("{n} d", n=days) + " " + say("{n} h", n=rest // 3600)
     if rest >= 3600:
         return say("{n} h", n=rest // 3600) + " " + say("{n} min", n=rest % 3600 // 60)
     return say("{n} min", n=rest // 60)
+
+
+def observed_text(say, coverage, window=None):
+    periods = (coverage or {}).get("continuous")
+    if periods is None:
+        return "—"
+    if window is None:
+        seconds = [p.get("seconds") or 0 for p in periods]
+    else:
+        try:
+            low, high = (datetime.fromisoformat(value) for value in window)
+            seconds = [(min(datetime.fromisoformat(p["to"]), high) - max(datetime.fromisoformat(p["from"]), low)).total_seconds()
+                       for p in periods]
+        except (KeyError, TypeError, ValueError):
+            return "—"
+        seconds = [s for s in seconds if s >= 0]
+    return duration_text(say, sum(seconds)) if seconds else say("Not recorded")
 
 
 def size_text(value):
@@ -2631,7 +2652,8 @@ class EvidenceHTML:
                         (say("Files"), num(len(self.digest["media"])), "violet", "file"),
                         (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
                          if self.anchors or self.archive else "—", "ok", "seal"),
-                        (say("Observation period"), e(span_text(say, self.digest["first"], self.digest["last"])), "pink", "eye")])
+                        (say("Observation period"), e(observed_text(say, self.coverage, (self.digest["first"], self.digest["last"])
+                                                                    if self.filtered else None)), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
     def render_summary(self):
@@ -2740,7 +2762,7 @@ class EvidenceHTML:
             yield continuity_section(say, next(self.numbers), continuity,
                                      (self.context.get("digest") or {}).get("titles")).encode("utf-8")
         latest = latest_stamp(self.anchors)
-        steps = [(say("Observed and recorded"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
+        steps = [(say("Recorded in the journal"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
                  (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=self.count)))]
         if self.handover:
             steps.append((say("Extract prepared and minimised"), when(self.created) + " · " + e(say(
@@ -2763,7 +2785,7 @@ class EvidenceHTML:
             (say("Collector clock against Telegram"), clocks_html(say, self.source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        own = self.context.get("report_file") or "report.html"
+        own = self.context.get("report_file") or ("report.html" if self.archive else "tgwitness-evidence.html")
         yield verify_section(say, next(self.numbers), self.archive_name, own, self.archive,
                              "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
         if self.archive and self.files:
@@ -2903,7 +2925,7 @@ def name_note(say, record):
     return " · ".join(notes)
 
 
-def chat_rows(records, say, preview=False, base="", numbered=False, after=None, metadata=False):
+def chat_rows(records, say, preview=False, base="", numbered=False, after=None, metadata=False, chat_id=None):
     quotes, previous_day, previous_sender, previous_id = {}, None, object(), after
     for record in records:
         date, sender = record.get("date") or "", record.get("from_id")
@@ -2948,7 +2970,11 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
                                                           if record.get("from_username") else "")
                         + (' <span class="uname">' + e(note) + "</span>" if note else "") + "</div>")
         reply = record.get("reply_to_message_id")
-        if reply:
+        peer = (record.get("reply_to") or {}).get("reply_to_peer_id") if isinstance(record.get("reply_to"), dict) else None
+        peer = peer if type(peer) is int else message_details.peer_id(peer)
+        if reply and peer is not None and peer != chat_id:
+            body.append('<div class="quote">' + e(say("Reply to #{id} in another chat", id=reply)) + "</div>")
+        elif reply:
             quoted = quotes.get(reply)
             body.append('<a class="quote" href="#m' + e(reply) + '"><b>' + e(quoted[0] if quoted else "#" + str(reply))
                         + "</b>" + e(quoted[1] if quoted else say("Earlier message")) + "</a>")

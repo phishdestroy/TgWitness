@@ -111,6 +111,24 @@
   connection use the latest choice; before, a file chosen earlier replaced the pasted session when connecting.
   **Auth key** with **Create an independent authorization** now reaches the independent login on an attested
   deployment instead of being refused there as a reused key.
+- Reports: the **Observation period** figure of HTML and PDF evidence reports and handover extracts adds up the
+  continuous observation periods listed under Coverage and reads "Not recorded" when there are none, and the first
+  custody step is named "Recorded in the journal". In a report limited to selected records, the figure counts
+  observation between the first and the last selected record; a handover extract adds up the periods of its
+  Coverage section, which are not cut to the extract's period. Before, the figure showed the time from the first to
+  the last record of any kind, or of the selected records: a journal of local service records showed "10 min", and a
+  three-day pause between two runs counted as observation. The Traditional Chinese "Not recorded" uses traditional
+  characters. `verify.py --plain` and the Verifier summary of HTML and PDF reports say "No observation period
+  recorded." whenever there is none; before, a session-key, gap or record-source line hid it. In a chat
+  export page of the reading designs, a reply to a message in another chat says so instead of quoting the message
+  with the same number in this chat. The status words and labels of the evidence conditions table use the colours of
+  the report theme, at least 4.5:1, instead of fixed greys and green of 2.8–4.2:1. Verification commands name the
+  file they are in: `report.en.pdf` and `chat.en.pdf` instead of `report.pdf` and `chat.pdf`, a PDF saved on its own
+  `tgwitness-report.pdf` and an HTML report saved on its own `tgwitness-evidence.html`, as the panel names them on
+  the first download; a copy downloaded again from the export history is still named
+  `tgwitness-<profile>-<export>.pdf` or `.html`. A password-protected PDF or JSON report holds the file under the
+  same name, `tgwitness-report.pdf` or `tgwitness-report.json`, instead of `tgwitness-evidence.pdf` or `.json`. The
+  case assessment of a chat export points to `../tgwitness-chat-export.zip`, like its Verify section.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
