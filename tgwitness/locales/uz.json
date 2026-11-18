@@ -4152,7 +4152,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "Yozuv raqamlari messages.jsonl qator tartibiga muvofiq keladi. Ular ushbu nusxadagi yozuvlarni aniqlaydi, asl Telegram xabar IDlarini emas.",
   "Record reference": "Yozuvga havola",
   "Regular Telegram API": "Oddiy Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "Misol uchun ZIP fayl nomini olgan faylingiz bilan, TRUSTED_SHA256 ni esa alohida tasdiqlangan barmoq izi bilan almashtiring. Tekshiruv natijasini ko'rib chiqish eslatmalaringiz bilan birga saqlang.",
   "Report labels may include English fallbacks. Original messages are not translated.": "Hisobot yorliqlari inglizcha zaxira matnlarini o'z ichiga olishi mumkin. Asl xabarlar tarjima qilinmaydi.",
   "Report labels use this language. Original messages stay unchanged.": "Hisobot yorliqlari ushbu tilni ishlatadi. Asl xabarlar o'zgarmasligicha qoladi.",
   "Report language: {language}.": "Hisobot tili: {language}.",

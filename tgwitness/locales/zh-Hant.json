@@ -4125,7 +4125,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "記錄編號遵循 messages.jsonl 的行序。這些編號用於識別此副本中的記錄，而非原始 Telegram 訊息 ID。",
   "Record reference": "记录参考",
   "Regular Telegram API": "常规 Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "請將範例檔案名稱 ZIP 替換為您收到的檔案名稱，並將 TRUSTED_SHA256 替換為另行確認的指紋。請將驗證結果與您的審閱筆記一併保存。",
   "Report labels may include English fallbacks. Original messages are not translated.": "報告標籤可能包含英文備用文字。原始訊息不會被翻譯。",
   "Report labels use this language. Original messages stay unchanged.": "報告標籤採用此種表述方式。原始訊息保持不變。",
   "Report language: {language}.": "報告語言：{language}。",

@@ -9,6 +9,8 @@ from ..access import POLICY
 from ..access import Refused
 from ..access import check as access_check
 from ..account_export import AccountExportOptions
+from ..account_report import archive_file
+from ..account_report import disclosure_file
 from ..app import ChatExport
 from ..app import ExportPassword
 from ..app import HandoverRequest
@@ -942,9 +944,10 @@ class ExportOperations:
                 return RetainedDownload(
                     path,
                     release=release,
-                    filename="tgwitness-minimized-disclosure.zip"
+                    # The same names the panel saves these files under and their verify commands point at.
+                    filename=disclosure_file(disclosure_id)
                     if disclosure_id
-                    else "tgwitness-account-export.zip",
+                    else archive_file(export_id),
                     media_type="application/zip",
                     headers=headers,
                 )

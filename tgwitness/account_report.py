@@ -7,10 +7,30 @@ from datetime import datetime
 
 from . import activity_maps, case_assessment, i18n, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, Words, file_purpose, utc_text
+from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
+
+
+def archive_file(job_id):
+    """The name the panel and the download address deliver an account export under; its verify commands point at it."""
+    return 'tgwitness-account-export-' + re.sub(r'[^A-Za-z0-9_-]', '', str(job_id or '')) + '.zip'
+
+
+def disclosure_file(disclosure_id):
+    """The name the panel and the download address deliver a sharing copy under."""
+    return 'tgwitness-disclosure-' + re.sub(r'[^A-Za-z0-9_-]', '', str(disclosure_id or '')) + '.zip'
+
+
+def received_file(context, sharing=False):
+    return context.get('archive_name') or (disclosure_file if sharing else archive_file)(context.get('archive_reference'))
+
+
+def source_file(context):
+    return context.get('source_archive_name') or 'tgwitness-account-export.zip'
+
+
 COUNT_LABELS = {'messages': 'Messages', 'chats': 'Chats', 'media': 'Media files included',
                 'media_saved': 'Media files included', 'media_skipped': 'Files skipped or unavailable',
                 'media_hashed': 'Files with server hashes',
@@ -239,12 +259,13 @@ def verification(context, say, sharing=False):
              '<p>' + e(say('This HTML is protected by the archive manifest. Verify the ZIP; this page alone has no standalone signature.')) + '</p>',
              '<p>' + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + '</p>',
              '<h3>' + e(say('Signing key fingerprint (SHA-256)')) + '</h3><p><code dir="ltr">' + e(context.get('fingerprint')) + '</code></p>',
-             '<p>' + e(say('Run the verifier from an independently trusted installation.')) + '</p><code class="command">python verify.py ' +
-             ('disclosure.zip' if sharing else 'account-export.zip') + ' --fingerprint TRUSTED_SHA256</code>']
-    parts.append('<p>' + e(say('Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.')) + '</p>')
+             '<p>' + e(say('Run the verifier from an independently trusted installation.')) + ' ' +
+             e(say(RECEIVED_WHERE, name=received_file(context, sharing))) + ' ' + e(say(RECEIVED_RENAMED)) + '</p>' +
+             '<code class="command">python verify.py ../' + e(received_file(context, sharing)) + ' --fingerprint TRUSTED_SHA256</code>']
     if sharing:
         parts += ['<p>' + e(say('Optional source comparison checks the archive reference, not the correctness of filtering or redaction.')) + '</p>',
-                  '<code class="command">python verify.py disclosure.zip --fingerprint TRUSTED_SHA256 --evidence original.zip</code>',
+                  '<code class="command">python verify.py ../' + e(received_file(context, sharing)) +
+                  ' --fingerprint TRUSTED_SHA256 --evidence ../' + e(source_file(context)) + '</code>',
                   '<p>' + e(say('Source archive SHA-256')) + ': <code dir="ltr">' + e(context.get('source_archive_sha256')) + '</code></p>']
     parts.append('</section><section><h2>' + e(say('Reading this record')) + '</h2><ul>')
     for limitation in context.get('limitations', ()):
@@ -687,7 +708,8 @@ def readme(context, files):
               '', say('How to verify'), rule, say('To check the archive, follow START_HERE.txt.'),
               say("Get the signer's key fingerprint from a trusted channel, not from this archive."),
               say('Use a verifier from a trusted checkout. The bundled copy is provided for convenience.'),
-              '  python verify.py ORIGINAL.zip --fingerprint TRUSTED_SHA256',
+              say(RECEIVED_WHERE, name=received_file(context)), say(RECEIVED_RENAMED),
+              '  python verify.py ../' + received_file(context) + ' --fingerprint TRUSTED_SHA256',
               '', say('What is in this archive'), rule]
     folders = [name for name in ARCHIVE_FILES if name.endswith('/')]
     shown = sorted(name for name in files if '/' not in name)

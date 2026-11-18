@@ -2060,7 +2060,6 @@
   "Replace a lost or exposed panel token. All current browser sessions end; issued access tokens remain valid.",
   "Replace investigator names with R01, R02…",
   "Replace the administrator key and end all current browser sessions? Save the new key after this step.",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.",
   "Replace with pseudonyms (P01, P02…)",
   "Replied to by {name}: {n}",
   "Replies to {name}: {n}",
