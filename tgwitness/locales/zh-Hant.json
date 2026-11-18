@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "已建立展示頁存取。你可以隨時撤銷。",
   "Showcase link copied.": "已複製展示頁連結。",
   "Select and copy the link.": "請選取並複製連結。",
-  "Global search": "全域搜尋"
+  "Global search": "全域搜尋",
+  "Checkpoint not timestamped": "檢查點未取得時間戳記",
+  "Checkpoint timestamp pending": "檢查點時間戳記待確認"
 }

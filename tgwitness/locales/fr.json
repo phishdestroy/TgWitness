@@ -10269,5 +10269,7 @@
   "Showcase access created. You can revoke it at any time.": "Accès à la vitrine créé. Vous pouvez le révoquer à tout moment.",
   "Showcase link copied.": "Lien de la vitrine copié.",
   "Select and copy the link.": "Sélectionnez et copiez le lien.",
-  "Global search": "Recherche globale"
+  "Global search": "Recherche globale",
+  "Checkpoint not timestamped": "Point de contrôle non horodaté",
+  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente"
 }

@@ -10331,5 +10331,7 @@
   "Showcase access created. You can revoke it at any time.": "Доступ к витрине создан. Его можно отозвать в любое время.",
   "Showcase link copied.": "Ссылка на витрину скопирована.",
   "Select and copy the link.": "Выделите и скопируйте ссылку.",
-  "Global search": "Глобальный поиск"
+  "Global search": "Глобальный поиск",
+  "Checkpoint not timestamped": "Контрольная точка без метки времени",
+  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения"
 }

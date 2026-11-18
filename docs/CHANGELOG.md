@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
+  the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
+  OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
+  time-stamping authority answer. When every service failed for the same reason, the description names it — for
+  example that requests outside Telegram are turned off. Before, a pass where 0 of 7 services answered was titled
+  **Checkpoint timestamped**. The signed records are unchanged.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
