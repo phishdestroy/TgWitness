@@ -108,7 +108,7 @@ export function createVisibility(deps) {
     const base = secret ? 'secret-chats/' : 'chats/';
     const menu = node('details', 'action-menu vis-menu'), summary = node('summary'), panel = node('div', 'action-menu-panel vis-chat');
     const line = node('p', 'vis-typing'), opening = node('span', 'visually-hidden');
-    summary.append(icon('eye'), opening); menu.append(summary, panel);
+    summary.append(icon('eye'), opening); menu.append(summary, panel); menu.hidden = true;
     line.setAttribute('aria-live', 'polite'); line.hidden = true;
     let chatId = null, data = null, sent = 0, reading = null, loading = 0, typed = 0;
     const path = suffix => base + encodeURIComponent(chatId) + '/' + suffix;
@@ -125,7 +125,7 @@ export function createVisibility(deps) {
       menu.dataset.state = !fields ? 'unknown' : open ? 'visible' : 'invisible';
       const text = !fields ? tr('What the other side sees') : openingText(fields);
       summary.title = text; opening.textContent = text;
-      summary.setAttribute('aria-label', tr('What the other side sees') + ': ' + text);
+      summary.setAttribute('aria-label', fields ? tr('What the other side sees') + ': ' + text : text);
     }
 
     function draw() {
@@ -236,7 +236,7 @@ export function createVisibility(deps) {
       get chatId() {return chatId;},
       async set(id) {
         if (id === chatId) return;
-        chatId = id; data = null; menu.open = false; draw();
+        chatId = id; data = null; menu.open = false; menu.hidden = id === null; draw();
         if (id === null) return;
         try {if (await load()) await seen();} catch {}
       },

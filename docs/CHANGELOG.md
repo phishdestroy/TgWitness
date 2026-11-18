@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The chat header no longer shows the **What the other side sees** button where it has no chat to load, such as in
+  the demo: there it was an unnamed eye icon that opened an empty menu. Before its settings load, the button is named
+  **What the other side sees** once instead of twice.
 - Masking of possible secrets now also hides a Telegram bot token written right after `bot`, as in Bot API addresses
   (`https://api.telegram.org/bot<token>/sendMessage`). Before, only a token standing on its own was masked, so the
   token in such an address stayed readable wherever the panel masks secrets: chat list, messages and journal records.
