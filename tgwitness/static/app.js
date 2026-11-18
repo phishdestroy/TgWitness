@@ -1321,6 +1321,12 @@ quickDialog.addEventListener("click",event=>{
 document.addEventListener("keydown",event=>{
   if(event.key.toLowerCase()==="k"&&(event.ctrlKey||event.metaKey)&&!event.altKey&&!event.shiftKey&&!event.isComposing
       &&!$("workspace").hidden&&!$("workspace").inert){event.preventDefault();if(!event.repeat)toggleQuick();}
+  const find=$("chat-message-search");
+  if(event.key.toLowerCase()==="f"&&(event.ctrlKey||event.metaKey)&&!event.altKey&&!event.shiftKey&&!event.isComposing
+      &&state.view==="chats"&&state.chat!==null&&find&&find.offsetParent!==null&&document.activeElement!==find
+      &&!$("workspace").hidden&&!$("workspace").inert&&!document.querySelector("dialog[open]")){
+    event.preventDefault();find.focus();find.select();
+  }
 });
 let goPrefix=0;
 const goTargets={h:"start",c:"chats",j:"observations",e:"evidence",a:"accounts",w:"swarm",s:"settings"};
@@ -1337,7 +1343,7 @@ document.addEventListener("keydown",event=>{
   if(key==="g"&&!event.shiftKey){goPrefix=Date.now();return;}
   if(key==="?"){event.preventDefault();toast(tr("Keys: g then h Home, c Chats, j Journal, e Exports, a Accounts, w Swarm, s Settings · j / k next or previous chat · Ctrl+K go to"));return;}
   if((key==="j"||key==="k")&&!event.shiftKey&&state.view==="chats"){
-    const items=[...document.querySelectorAll("#chats-list .chat-choice")];
+    const items=[...document.querySelectorAll("#chats-list .chat-item:not(.chat-item-new) .chat-choice")];
     const index=items.findIndex(item=>item.getAttribute("aria-pressed")==="true");
     const next=items[index<0?0:Math.max(0,Math.min(items.length-1,index+(key==="j"?1:-1)))];
     if(next&&next!==items[index]){event.preventDefault();next.focus();next.click();}
@@ -5674,7 +5680,7 @@ async function openSecretChat(id,start=false){
   if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
   if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
 }
-const chatListReady=import('./views/chat-list.js?v=telegram5').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=telegram6').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
     adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),
