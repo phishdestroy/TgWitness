@@ -8,6 +8,7 @@ import re
 import shutil
 import stat
 import tempfile
+import threading
 import uuid
 import zipfile
 from datetime import datetime, timedelta, timezone
@@ -25,6 +26,7 @@ from .store import ZERO, canonical, utcnow
 from .verify import Coverage, fingerprint, verify_events, verify_checkpoint
 from .security import private_write
 
+CHECKPOINT_LOCKS, CHECKPOINT_GUARD = {}, threading.Lock()
 LIMITS = [
     "Each record is an observation by this workspace's Telegram client, signed with the collector key in the manifest.",
     "observed_at is the collector clock and source_at is the date Telegram supplied; retained checkpoints, witness "
@@ -96,15 +98,27 @@ def checkpoint(store, vault):
             "fingerprint": fingerprint(vault.public_key)}
 
 
+def checkpoint_lock(directory):
+    with CHECKPOINT_GUARD:
+        return CHECKPOINT_LOCKS.setdefault(str(Path(directory).resolve()), threading.Lock())
+
+
 def retain_checkpoint(store, vault):
-    value = checkpoint(store, vault)
     directory = store.root / "checkpoints"
     directory.mkdir(exist_ok=True, mode=0o700)
-    data = canonical(value)
-    numbered = directory / ("checkpoint-" + str(value["statement"]["event_count"]).zfill(12) + ".json")
-    if not numbered.exists():
-        private_write(numbered, data)
-    private_write(directory / "latest.json", data)
+    with checkpoint_lock(directory):
+        value = checkpoint(store, vault)
+        data = canonical(value)
+        numbered = directory / ("checkpoint-" + str(value["statement"]["event_count"]).zfill(12) + ".json")
+        if not numbered.exists():
+            private_write(numbered, data)
+        latest = directory / "latest.json"
+        try:
+            published = json.loads(latest.read_bytes())["statement"]["event_count"]
+        except (OSError, ValueError, KeyError, TypeError):
+            published = None
+        if type(published) is not int or value["statement"]["event_count"] >= published:
+            private_write(latest, data)
     from . import rollback
     rollback.remember(store, vault.public_key)
     return value

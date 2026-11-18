@@ -33,6 +33,10 @@
   and the notes that existed when it was sealed; before, the board named the newest record of the workspace and the
   verifier refused the archive with "Case Board journal boundary mismatch". Notes added after the seal go into the
   next export.
+- Checkpoints retained at the same time by an export and the periodic task no longer fail or publish an older head:
+  saving a checkpoint is serialized per workspace and `checkpoints/latest.json` never moves back to a smaller record
+  number. Private files are written through a unique temporary file instead of a shared `NAME.tmp`, so two writers
+  of one file no longer truncate or remove each other's temporary copy.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
