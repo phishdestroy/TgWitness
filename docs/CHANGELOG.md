@@ -52,6 +52,10 @@
   saves nothing. Before, pressing it in the palette saved the changed report settings behind it.
 - The command palette lists **Investigation** by name and opens its panel. Before, it showed an unnamed entry whose
   selection raised a JavaScript error; entries now open only sections that exist.
+- Report Studio explains verification per format: the HTML seal covers every byte and is checked in the report or
+  with verify.py; the JSON seal covers the report's canonical content, not its formatting; the PDF also carries a PDF
+  signature; the exact bytes of a delivered file are compared by SHA-256 with the receipt or signed manifest. Before,
+  one sentence said every report's seal covers all of its bytes and can be checked by dropping it onto the report.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
