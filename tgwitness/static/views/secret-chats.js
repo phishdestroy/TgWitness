@@ -1,7 +1,9 @@
 import {createVisibility} from "./visibility.js?v=2";
 
 export function createSecretChats(context) {
-  const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, isAdmin, humanSize, actionText} = context;
+  const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, isAdmin, humanSize, actionText,
+    preview = null} = context;
+  const previews = new Map();
   const find = id => root.querySelector("#" + id);
   const sight = createVisibility({json, tr, node, icon, toast, may, busy}).control(true);
   let view = null, selected = null, timer = null, active = false, session = getSession(), request = 0;
@@ -219,13 +221,39 @@ export function createSecretChats(context) {
     }
   }
 
+  function attachment(media) {
+    const type = String(media._ || "").replace(/^decryptedMessageMedia/i, ""), mime = String(media.mime_type || "");
+    const attributes = Array.isArray(media.attributes) ? media.attributes : [];
+    const name = attributes.find(a => /filename/i.test(a?._ || ""))?.file_name;
+    const voice = attributes.some(a => /audio/i.test(a?._ || "") && a.voice);
+    let label = {Photo: tr("Photo"), Video: tr("Video"), Audio: tr("Audio"), GeoPoint: tr("Location"), Contact: tr("Contact"),
+      Venue: tr("Place"), WebPage: tr("Link preview"), ExternalDocument: tr("Sticker")}[type];
+    if (!label && type === "Document") label = voice ? tr("Voice message") : mime.startsWith("image/") ? tr("Photo") :
+      mime.startsWith("video/") ? tr("Video") : mime.startsWith("audio/") ? tr("Audio") : tr("File");
+    return {text: [label || tr("Attachment"), name || (type === "Document" ? mime : "")].filter(Boolean).join(" · "),
+      image: type === "Photo" || mime.startsWith("image/"), name};
+  }
+
+  function picture(file, name) {
+    const image = node("img", "secret-image");
+    image.alt = name || tr("Photo"); image.loading = "lazy"; image.decoding = "async";
+    if (!previews.has(file.media_sha256)) {
+      if (previews.size >= 64) { const [oldest, url] = previews.entries().next().value; previews.delete(oldest); url.then(u => u && URL.revokeObjectURL(u)); }
+      previews.set(file.media_sha256, preview("media/" + file.media_sha256).catch(() => null));
+    }
+    previews.get(file.media_sha256).then(url => { if (url) image.src = url; else image.remove(); });
+    return image;
+  }
+
   function message(record, item) {
     const p = record.payload, out = p.direction === "out";
     const row = node("div", "secret-message " + (out ? "out" : "in") + (item.deleted.has(p.random_id) ? " deleted" : ""));
     row.dataset.recordSeq = String(record.seq);
     if (p.text) row.append(node("p", "secret-text", p.text));
-    if (p.media) row.append(node("p", "hint", tr("Attachment") + " · " + String(p.media._ || "").replace("DecryptedMessageMedia", "")));
+    const media = p.media ? attachment(p.media) : null;
+    if (media) row.append(node("p", "hint", media.text));
     const file = item.files.get("e" + record.seq) || item.files.get("r" + p.random_id);
+    if (file && media?.image && preview && file.size <= 20 * 1024 * 1024) row.append(picture(file, media.name));
     if (file) {
       const save = node("button", "text-link", tr("Save file") + " · " + humanSize(file.size));
       save.type = "button"; save.dataset.focusKey = "file:" + record.seq;

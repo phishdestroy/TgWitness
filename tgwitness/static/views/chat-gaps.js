@@ -56,7 +56,7 @@ export function intervals(events, chat) {
 }
 
 export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal, fmtDay = null, dayKey = null}) {
-  let numbers = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
+  let numbers = new Map(), offlineWindows = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
   const cache = new Map(), answers = new Map();
 
   function coverage(chatKey, chat, range, dataKey) {
@@ -111,8 +111,14 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     if (to === from || clock(to) === clock(from) && dayKey(new Date(to).toISOString()) === dayKey(new Date(from).toISOString())) return start;
     return start + "–" + (dayKey(new Date(to).toISOString()) === dayKey(new Date(from).toISOString()) ? "" : fmtDay(new Date(to).toISOString()) + ", ") + clock(to);
   }
+  function stopped(list) {
+    const low = Math.min(...list.map(item => item.from)) - 1000;
+    const high = list.some(item => item.to === null) ? Infinity : Math.max(...list.map(item => item.to)) + 1000;
+    return [...offlineWindows.values()].filter(stop => stop.from >= low && stop.from <= high);
+  }
   function periodMarker(list) {
-    return marker("coverage", list.map(item => item.from + "-" + item.to).join(","), box => {
+    const windows = stopped(list), unattributed = windows.reduce((sum, stop) => sum + stop.deletions, 0);
+    return marker("coverage", list.map(item => item.from + "-" + item.to).join(",") + "|" + windows.length + ":" + unattributed, box => {
       const ongoing = list.some(item => item.to === null);
       const seconds = list.reduce((sum, item) => sum + (item.to === null ? 0 : (item.to - item.from) / 1000), 0);
       const reasons = [...new Set(list.flatMap(item => item.reasons))].map(reason => tr(reason));
@@ -122,6 +128,9 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
       const lines = node("span", "chat-gap-lines"), head = node("span", "chat-gap-summary");
       head.append(node("strong", "", tr("Coverage gap")), node("span", "", summary));
       lines.append(head);
+      if (windows.length) lines.append(node("span", "chat-gap-offline", [tr("TgWitness was not running: messages sent and deleted in this time could not be recorded."),
+        unattributed ? tr("Deletions reported afterwards without a chat: {n}. Messages of this chat may be among them.",
+          {n: unattributed.toLocaleString(document.documentElement.lang || undefined)}) : ""].filter(Boolean).join(" ")));
       const details = node("details", "chat-gap-details"), all = node("span", "chat-gap-all");
       details.append(node("summary", "", tr("Details")), all);
       for (const item of list) {
@@ -173,5 +182,14 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     }).catch(() => {if (pendingKey === key) {loadedKey = key; pendingKey = "";}});
   }
 
-  return {reset: () => {numbers = new Map();}, add: list => {for (const gap of list || []) numbers.set(gap.low, gap);}, between, after, load};
+  function offline(list) {
+    for (const stop of list || []) {
+      const from = Date.parse(stop.from), to = Date.parse(stop.to);
+      if (Number.isFinite(from) && Number.isFinite(to))
+        offlineWindows.set(from, {from, to, deletions: Number.isSafeInteger(stop.unattributed_deletions) ? stop.unattributed_deletions : 0});
+    }
+  }
+
+  return {reset: () => {numbers = new Map(); offlineWindows = new Map();}, add: list => {for (const gap of list || []) numbers.set(gap.low, gap);},
+    offline, between, after, load};
 }

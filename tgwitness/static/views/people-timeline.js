@@ -17,7 +17,7 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
     if(single){const head=node('div','','person-card-head'),close=button('Close',()=>onClose?.(),'quiet');head.append(node('h3',tr('Profile')),close);box.append(head);
       collection.mount(box);box.append(node('p','','hint people-timeline-status'),node('div','','people-timeline-content'));root.append(box);return;}
     box.append(node('h3',tr('People')));
-    collection.mount(box);
+    const gather=node('details','','people-collect');gather.append(node('summary',tr('People profiles')));collection.mount(gather);box.append(gather);
     const filter=node('select');filter.setAttribute('aria-label',tr('Filter participants'));filter.id='people-timeline-filter';
     for(const [key,text] of [['all','All observed users'],['quiet','No recent messages observed'],['departed','Left, removed or banned'],['deleted','Account marked deleted'],['never_posted','No saved messages']])filter.append(new Option(tr(text),key));
     filter.value=mode;filter.addEventListener('change',()=>{mode=filter.value;offset=0;person=null;load(true);});
@@ -46,13 +46,14 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
   function list(content,data){
     content.append(node('p',tr('Observed users: {count}').replace('{count}',data.total),'hint'));
     const table=node('table','','people-table'),head=node('tr');
-    for(const title of ['Person','Messages','Last message','Observed status','Membership'])head.append(node('th',tr(title)));
+    const seen=key=>data.people.some(item=>(item[key]?.state||'unknown')!=='unknown'),status=seen('status'),membership=seen('membership');
+    for(const title of ['Person','Messages','Last message',...(status?['Observed status']:[]),...(membership?['Membership']:[])])head.append(node('th',tr(title)));
     const thead=node('thead');thead.append(head);table.append(thead);const body=node('tbody');
     for(const item of data.people){const row=node('tr'),who=node('td'),name=item.profile.display_name||`ID ${item.user_id}`;
       const open=button(name,()=>{person=item.user_id;load(true);},'text-link');open.dataset.personId=String(item.user_id);who.append(open,node('small',` ID ${item.user_id}`));
       if(item.profile.flags?.deleted)who.append(node('p',tr('Account marked deleted'),'bad'));
-      row.append(who,node('td',String(item.messages)),node('td',item.last_message_at?formatTime(item.last_message_at):'—'),
-        node('td',label(item.status.state)),node('td',label(item.membership.state)));
+      row.append(who,node('td',String(item.messages)),node('td',item.last_message_at?formatTime(item.last_message_at):'—'));
+      if(status)row.append(node('td',label(item.status.state)));if(membership)row.append(node('td',label(item.membership.state)));
       if(item.activity==='quiet')row.children[2].append(node('p',label('quiet'),'hint'));body.append(row);
     }
     table.append(body);const scroll=node('div','','people-timeline-table');scroll.append(table);content.append(scroll);
@@ -67,7 +68,7 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
     collection.profile(content,p,()=>current(key,ticket));
     if(p.profile.flags?.deleted)content.append(node('p',tr('Telegram marked this account deleted. The cause and exact deletion time are unknown.'),'hint'));
     content.append(node('p',`${label(p.activity)} · ${tr('Last message')}: ${p.last_message_at?formatTime(p.last_message_at):'—'}`,'hint'));
-    if(data.last_message_gap_days!=null)content.append(node('p',tr('Gap between the two latest saved message times: {days} days. Historical imports do not mean a return today.').replace('{days}',data.last_message_gap_days.toFixed(1)),'hint'));
+    if(data.last_message_gap_days!=null&&data.last_message_gap_days>=1)content.append(node('p',tr('Gap between the two latest saved message times: {days} days. Historical imports do not mean a return today.').replace('{days}',data.last_message_gap_days.toFixed(1)),'hint'));
     const rhythm=node('details','','person-rhythm');rhythm.append(node('summary',tr('Rhythm')));content.append(rhythm);
     rhythm.addEventListener('toggle',guard(async()=>{
       if(!rhythm.open||rhythm.dataset.loaded)return;rhythm.dataset.loaded='1';

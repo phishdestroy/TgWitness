@@ -1,3 +1,5 @@
+const RAIL = [["chats", "message"], ["secret-chats", "lock"], ["evidence", "export"], ["accounts", "users"], ["settings", "settings"]];
+
 export function createResponsiveShell({node, icon, tr}) {
   const workspace = document.getElementById("workspace"), sidebar = workspace.querySelector(".sidebar");
   const main = workspace.querySelector("main"), header = main.querySelector(".topbar");
@@ -13,6 +15,33 @@ export function createResponsiveShell({node, icon, tr}) {
   close.append(icon("x")); sidebar.prepend(close);
   const scrim = node("div", "sidebar-scrim"); scrim.hidden = true;
   workspace.append(scrim);
+  const rail = node("nav", "rail"), railMenu = node("button", "rail-item rail-menu");
+  rail.setAttribute("aria-label", tr("Main navigation"));
+  railMenu.type = "button"; railMenu.title = tr("Main navigation"); railMenu.setAttribute("aria-label", tr("Main navigation"));
+  railMenu.setAttribute("aria-controls", sidebar.id); railMenu.setAttribute("aria-expanded", "false"); railMenu.append(icon("menu"));
+  rail.append(railMenu);
+  const railItems = RAIL.map(([view, glyph]) => {
+    const item = node("button", "rail-item");
+    item.type = "button"; item.dataset.railView = view;
+    item.append(icon(glyph), node("span", "rail-label"));
+    item.addEventListener("click", () => sidebar.querySelector('.nav[data-view="' + view + '"]')?.click());
+    rail.append(item);
+    return item;
+  });
+  workspace.prepend(rail);
+  function syncRail(current = null) {
+    for (const item of railItems) {
+      const source = sidebar.querySelector('.nav[data-view="' + item.dataset.railView + '"]');
+      item.hidden = !source || source.hidden;
+      if (!source) continue;
+      const label = [...source.childNodes].filter(child => child.nodeType === Node.TEXT_NODE).map(child => child.textContent).join("").trim();
+      item.lastElementChild.textContent = label; item.title = label;
+      const active = current ? current === item.dataset.railView : source.classList.contains("active");
+      if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
+    }
+  }
+  new MutationObserver(() => syncRail()).observe(sidebar.querySelector("nav"), {attributes: true, subtree: true, childList: true, characterData: true, attributeFilter: ["class", "hidden"]});
+  syncRail();
   let opened = false, previousFocus = null, openMenu = null;
   const closeMenus = (except = null) => {
     if (openMenu && openMenu !== except) {openMenu.open = false; openMenu = null;}
@@ -31,31 +60,33 @@ export function createResponsiveShell({node, icon, tr}) {
   });
 
   function setOpen(value, restore = true) {
-    opened = Boolean(value && mobile.matches);
+    opened = Boolean(value);
     if (opened) previousFocus = document.activeElement;
     workspace.classList.toggle("navigation-open", opened);
-    toggle.setAttribute("aria-expanded", String(opened)); scrim.hidden = !opened;
-    main.inert = opened; sidebar.inert = mobile.matches && !opened;
+    toggle.setAttribute("aria-expanded", String(opened)); railMenu.setAttribute("aria-expanded", String(opened)); scrim.hidden = !opened;
+    main.inert = opened; rail.inert = opened; sidebar.inert = !opened;
     if (opened) {
       sidebar.setAttribute("role", "dialog"); sidebar.setAttribute("aria-modal", "true");
       sidebar.setAttribute("aria-label", tr("Main navigation")); close.focus();
     } else {
       sidebar.removeAttribute("role"); sidebar.removeAttribute("aria-modal");
       if (restore && previousFocus?.isConnected && !previousFocus.closest("[inert]")) previousFocus.focus();
-      else if (mobile.matches && sidebar.contains(document.activeElement)) toggle.focus({preventScroll: true});
+      else if (sidebar.contains(document.activeElement)) (mobile.matches ? toggle : railMenu).focus({preventScroll: true});
       previousFocus = null;
     }
   }
   function resize() {
-    if (!mobile.matches || !opened) setOpen(false, false);
+    setOpen(false, false);
     closeMenus();
   }
   toggle.addEventListener("click", () => setOpen(!opened));
+  railMenu.addEventListener("click", () => setOpen(!opened));
   close.addEventListener("click", () => setOpen(false)); scrim.addEventListener("click", () => setOpen(false));
   sidebar.addEventListener("click", event => {
     if (event.target.closest("[data-view], #lock-panel, #mode-switch, .doc-toggle")) setOpen(false, false);
   });
   window.addEventListener("tgwitness:route", event => {
+    syncRail(event.detail?.view || null);
     closeMenus();
     if (event.detail?.reason !== "initial") setOpen(false, false);
   });

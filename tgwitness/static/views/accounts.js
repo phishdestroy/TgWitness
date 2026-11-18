@@ -10,7 +10,8 @@ export function createAccounts(context) {
   const allowed=()=>!!getState().me?.admin&&!getState().status?.demo;
   const empty=p=>accountState(p).kind==='empty';
   const issues=p=>['connection','intake','sources','media'].filter(key=>['failed','degraded','unknown'].includes(p.health?.[key]?.state));
-  const problem=p=>!!p.error_type||accountState(p).needsSignIn||issues(p).length>0;
+  const warnings=p=>[p.collector?.journal_rollback?'rollback':'',p.collector?.takeover_risk?.risks?.length?'takeover':''].filter(Boolean);
+  const problem=p=>!!p.error_type||accountState(p).needsSignIn||issues(p).length>0||warnings(p).length>0;
   const collecting=p=>accountState(p).kind==='collecting';
   const eligible=(p,action)=>!p.error_type&&!!p.collector&&(action==='stop'?p.collector.running:
     accountState(p).canStart);
@@ -48,7 +49,7 @@ export function createAccounts(context) {
     if(!getState().me?.admin)return;
     if(getState().profile!==id)await switchProfile(id);
     if(getState().profile!==id||!getState().token)return;
-    if(target==='connection')await navigate('connection');else diagnose(target);
+    if(target==='connection'||target==='start')await navigate(target);else diagnose(target);
   }
   function decorate(card){
     const id=card.dataset.profile;
@@ -66,7 +67,7 @@ export function createAccounts(context) {
       toggle.hidden=account.needsSignIn||account.kind==='empty';}
     let attention=card.querySelector('.account-problems');
     if(!attention){attention=make('div','account-problems');card.append(attention);}
-    const found=issues(p), prior=new Map([...attention.children].map(n=>[n.dataset.part,n]));
+    const found=issues(p), prior=new Map([...attention.children].filter(n=>n.dataset.part).map(n=>[n.dataset.part,n]));
     if(account.needsSignIn&&!found.includes('connection'))found.unshift('connection');
     const names={connection:tr('Connection'),intake:tr('Event intake'),sources:tr('Sources'),media:tr('Media queue')};
     for(const part of found){let button=prior.get(part);if(!button){button=make('button','text-link',names[part]);button.type='button';button.dataset.part=part;
@@ -75,7 +76,15 @@ export function createAccounts(context) {
       button.hidden=part==='connection'&&account.needsSignIn&&!!connection;
       button.title=tr(part==='connection'&&account.needsSignIn?'Sign in to this account again':'Open {part} diagnostics',{part:names[part]});}
     for(const [part,button] of prior)if(!found.includes(part))button.remove();
-    attention.hidden=!found.length;
+    const flagged=warnings(p),warningNames={rollback:tr('Journal restored from an older copy'),takeover:tr('Takeover risk')};
+    for(const kind of ['rollback','takeover']){
+      let button=attention.querySelector('[data-warning="'+kind+'"]');
+      if(!flagged.includes(kind)){button?.remove();continue;}
+      if(!button){button=make('button','text-link account-warning',warningNames[kind]);button.type='button';button.dataset.warning=kind;button.dataset.tone=kind==='rollback'?'danger':'warning';
+        button.title=tr('Open this workspace to see the warning');
+        on(button,'click',()=>openWorkspace(id,'start').catch(error=>toast(error.message,true)));attention.prepend(button);}
+    }
+    attention.hidden=!found.length&&!flagged.length;
   }
   function controls(){
     const chosen=profiles().filter(p=>selected.has(p.id)), count=selected.size;
