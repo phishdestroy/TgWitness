@@ -25,11 +25,18 @@
 
 ## Unreleased
 
+- The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
+  correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
+  rating. These pages stay out of `contacts.list`.
 - A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
   the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
   whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;
   exclusions and the automatic adding and pausing of other chats work as before. Chats paused before this version
   cannot be told apart from chats paused by the scope and keep the earlier behaviour until they are paused again.
+- **Network topology** keeps the names **Traffic**, **Ports**, **Threats** and **Addresses** for screen readers at
+  700 px and narrower, where only their icons show. Closing a node card with its button or Escape returns the focus to
+  the node that opened it, or to the first node if that one is gone. The light-theme status badge is darker:
+  **Live** went from about 3.3:1 to 4.7:1 and the stale or demo state from 4.4:1 to 6.2:1.
 - **Home** keeps the keyboard focus on the same button, for example **Add account**, when it refreshes itself every few
   seconds. Before, the refresh rebuilt the page and dropped the focus to the document after about five seconds.
   Focus that the user moved elsewhere in the meantime stays where it is.
