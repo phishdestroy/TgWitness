@@ -792,6 +792,7 @@ class Collector:
         return {
             "network": self.route_status(),
             "phase": self.phase, "running": self.running,
+            "operator_paused": not self.running and bool(self.store.get_setting("operator_paused", False)),
             "account_task": ("history" if self.history.busy else
                              "profile_image" if (self.export_claim or "").startswith("avatar:") else
                              "export" if self.export_claim else
@@ -3553,6 +3554,7 @@ class Collector:
         self.dispatch_closing = False
         self.running, self.phase, self.last_error = True, "observing", None
         self.store.set_setting("resume", True)
+        self.store.set_setting("operator_paused", False)
         self.store.append("observation.started", {
             "run_id": self.run_id, "monotonic_ns": time.monotonic_ns(),
             "account": self.store.get_setting("account", None),
@@ -3657,6 +3659,10 @@ class Collector:
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
+
+    async def pause(self):
+        await self.stop()
+        self.store.set_setting("operator_paused", True)
 
     async def stop(self, shutdown=False):
         self.observation_stopping += 1

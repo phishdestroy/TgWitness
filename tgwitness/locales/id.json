@@ -523,6 +523,8 @@
   "Waiting for QR": "Menunggu QR",
   "Account not connected": "Akun belum terhubung",
   "Telegram is not connected": "Telegram tidak terhubung",
+  "Status updated {time}": "Status diperbarui {time}",
+  "Status not updated since {time}": "Status tidak diperbarui sejak {time}",
   "Pause observation": "Jeda pengamatan",
   "Demo uses fictional observations": "Demo ini menggunakan pengamatan fiktif",
   "Connect an account first": "Hubungkan akun terlebih dahulu",

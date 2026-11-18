@@ -139,6 +139,8 @@
   "Account formats": "계정 형식",
   "Account not connected": "계정이 연결되어 있지 않습니다",
   "Telegram is not connected": "Telegram이 연결되지 않음",
+  "Status updated {time}": "상태 업데이트됨 {time}",
+  "Status not updated since {time}": "{time} 이후 상태가 업데이트되지 않음",
   "Account self-destruct": "계정 자동 삭제",
   "Account settings": "계정 설정",
   "Accounts": "계정",

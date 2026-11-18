@@ -523,6 +523,8 @@
   "Waiting for QR": "در انتظار QR",
   "Account not connected": "حساب متصل نیست",
   "Telegram is not connected": "تلگرام وصل نیست",
+  "Status updated {time}": "وضعیت به‌روز شد {time}",
+  "Status not updated since {time}": "وضعیت از {time} به‌روز نشده است",
   "Pause observation": "موقف کردن مشاهده",
   "Demo uses fictional observations": "دمو از مشاهدات خیالی استفاده می‌کند",
   "Connect an account first": "ابتدا یک حساب کاربری را متصل کنید",
