@@ -29,6 +29,9 @@
   take turns every 10 minutes instead of the same channels staying out, and Collector health → Sources names the
   channels outside short polling. Higher priority classes and the probe channel stay in. An access limited to some
   chats does not get these totals or names: they describe the whole workspace.
+- The collection guide states which rule wins in folder mode: chats added by hand stay recorded outside the folder
+  until they are excluded, removed or paused; chats the scope added are paused at the next recompute once they leave
+  the folder.
 - **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
   connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
 - Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
