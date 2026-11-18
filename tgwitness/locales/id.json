@@ -10213,5 +10213,6 @@
   "Select and copy the link.": "Pilih dan salin tautan.",
   "Global search": "Pencarian global",
   "Checkpoint not timestamped": "Titik periksa tidak diberi stempel waktu",
-  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda"
+  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram menyimpan obrolan ini hanya di satu perangkat. TgWitness berpartisipasi dengan otorisasi akun ini sendiri dan mencatat setiap pesan, timer, dan pemberitahuan penghapusan dalam jurnal yang ditandatangani, bahkan setelah pihak lain menghapusnya. Aplikasi ini mengirimkan tanda terima telah dibaca dan status sedang mengetik hanya sesuai pilihan di bawah \"Apa yang dilihat oleh pihak lain\", dan tidak pernah mengirimkan pemberitahuan tangkapan layar. File disimpan saat unduhan lampiran aktif dan ukurannya serta ruang disk kosong memungkinkan; sampai saat itu file tetap dalam antrean, dan setiap unduhan yang ditunda atau gagal dicatat."
 }

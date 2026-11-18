@@ -10264,5 +10264,6 @@
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
   "Global search": "Genel arama",
   "Checkpoint not timestamped": "Kontrol noktası zaman damgası almadı",
-  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede"
+  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram, bu sohbetleri yalnızca tek bir cihazda saklar. TgWitness, bu hesabın kendi yetkilendirmesiyle devreye girer ve her mesajı, zamanlayıcıyı ve silme bildirimini, karşı taraf bunları sildikten sonra bile imzalı günlüğe kaydeder. Okundu bildirimlerini ve yazma durumunu yalnızca \"Karşı tarafın gördükleri\" altında seçilen şekilde gönderir ve asla ekran görüntüsü bildirimleri göndermez. Bir dosya, ek indirmeleri açıkken ve boyutu ile boş disk alanı izin verdiğinde kaydedilir; o zamana kadar kuyrukta bekler ve ertelenen veya başarısız olan her indirme kaydedilir."
 }

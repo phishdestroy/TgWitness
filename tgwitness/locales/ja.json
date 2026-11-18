@@ -10213,5 +10213,6 @@
   "Select and copy the link.": "リンクを選択してコピーしてください。",
   "Global search": "グローバル検索",
   "Checkpoint not timestamped": "チェックポイントにタイムスタンプなし",
-  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち"
+  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegramはこれらのチャットを1台のデバイスにのみ保存します。TgWitnessはこのアカウント自身の認証に基づいて動作し、相手側が削除した後であっても、すべてのメッセージ、タイマー、削除通知を署名付きジャーナルに記録します。既読通知や入力中のステータスは「相手側に表示される内容」で選択された設定に従ってのみ送信され、スクリーンショットの通知は一切送信しません。ファイルは、添付ファイルのダウンロードが有効で、サイズとディスクの空き容量が許す場合に保存されます。それまではキューに残り、延期または失敗したダウンロードはそれぞれ記録されます。"
 }

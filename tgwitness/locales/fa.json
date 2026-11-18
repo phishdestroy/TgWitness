@@ -10264,5 +10264,6 @@
   "Select and copy the link.": "پیوند را انتخاب و کپی کنید.",
   "Global search": "جستجوی سراسری",
   "Checkpoint not timestamped": "نقطه بازبینی مهر زمانی نگرفت",
-  "Checkpoint timestamp pending": "مهر زمانی نقطه بازبینی در انتظار تأیید"
+  "Checkpoint timestamp pending": "مهر زمانی نقطه بازبینی در انتظار تأیید",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram این چت‌ها را فقط روی یک دستگاه نگه می‌دارد. TgWitness با مجوز خودِ این حساب کاربری شرکت می‌کند و هر پیام، تایمر و اعلان حذف را در دفترچه یادداشت امضا شده ثبت می‌کند، حتی پس از اینکه طرف مقابل آن‌ها را حذف کند. این برنامه فقط در صورتی که در بخش «آنچه طرف مقابل می‌بیند» انتخاب شده باشد، رسیدهای خوانده شدن و وضعیت تایپ را ارسال می‌کند و هرگز اعلان‌های اسکرین‌شات را ارسال نمی‌کند. فایل زمانی ذخیره می‌شود که دانلود پیوست‌ها روشن باشد و اندازه آن و فضای خالی دیسک اجازه دهد؛ تا آن زمان در صف می‌ماند و هر دانلود به‌تعویق‌افتاده یا ناموفق ثبت می‌شود."
 }

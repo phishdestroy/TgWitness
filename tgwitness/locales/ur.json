@@ -10264,5 +10264,6 @@
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
   "Global search": "عالمی تلاش",
   "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
-  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram ان چیٹس کو صرف ایک ڈیوائس پر محفوظ رکھتا ہے۔ TgWitness اس اکاؤنٹ کی اپنی اجازت کے ساتھ حصہ لیتا ہے اور ہر پیغام، ٹائمر اور حذف کرنے کے نوٹس کو دستخط شدہ جرنل میں ریکارڈ کرتا ہے، چاہے دوسری جانب انہیں حذف ہی کیوں نہ کر دے۔ یہ ریڈ ریسیٹ اور ٹائپنگ اسٹیٹس صرف \"دوسری جانب کیا دیکھتی ہے\" کے تحت منتخب کردہ صورت میں بھیجتا ہے، اور کبھی بھی اسکرین شاٹ کے نوٹس نہیں بھیجتا۔ فائل اس وقت محفوظ ہوتی ہے جب منسلکات کی ڈاؤن لوڈنگ آن ہو اور اس کا سائز اور ڈسک کی خالی جگہ اجازت دیں؛ تب تک وہ قطار میں رہتی ہے، اور ہر مؤخر یا ناکام ڈاؤن لوڈ ریکارڈ کیا جاتا ہے۔"
 }

@@ -10213,5 +10213,6 @@
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
   "Global search": "ค้นหาทั่วโลก",
   "Checkpoint not timestamped": "จุดตรวจสอบไม่ได้รับการประทับเวลา",
-  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน"
+  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram เก็บการสนทนาเหล่านี้ไว้บนอุปกรณ์เดียวเท่านั้น TgWitness ทำงานด้วยสิทธิ์การอนุญาตของบัญชีนี้เอง และบันทึกทุกข้อความ ตัวจับเวลา และแจ้งเตือนการลบลงในบันทึกที่ลงนามแล้ว แม้หลังจากที่ฝ่ายตรงข้ามได้ลบพวกมันไปแล้ว มันจะส่งการยืนยันการอ่านและสถานะการพิมพ์เฉพาะตามที่เลือกไว้ภายใต้ \"สิ่งที่ฝ่ายตรงข้ามเห็น\" เท่านั้น และไม่ส่งแจ้งเตือนภาพหน้าจอเลย ไฟล์จะถูกบันทึกเมื่อเปิดการดาวน์โหลดไฟล์แนบและขนาดไฟล์กับพื้นที่ว่างในดิสก์เอื้ออำนวย ระหว่างนั้นไฟล์จะรออยู่ในคิว และการดาวน์โหลดที่ถูกเลื่อนหรือล้มเหลวแต่ละครั้งจะถูกบันทึกไว้"
 }

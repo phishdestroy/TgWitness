@@ -10366,5 +10366,6 @@
   "Select and copy the link.": "Виділіть і скопіюйте посилання.",
   "Global search": "Глобальний пошук",
   "Checkpoint not timestamped": "Контрольна точка без мітки часу",
-  "Checkpoint timestamp pending": "Мітка часу контрольної точки очікує підтвердження"
+  "Checkpoint timestamp pending": "Мітка часу контрольної точки очікує підтвердження",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram зберігає ці чати лише на одному пристрої. TgWitness бере участь із власною авторизацією цього облікового запису та фіксує кожне повідомлення, таймер і повідомлення про видалення у підписаному журналі, навіть після того, як інша сторона їх видалить. Він надсилає підтвердження прочитання та статус набору тексту лише відповідно до налаштувань у «Що бачить інша сторона» і ніколи не надсилає повідомлень про знімки екрана. Файл зберігається, коли завантаження вкладень увімкнено і це дозволяють його розмір та вільне місце на диску; доти він лишається в черзі, а кожне відкладене чи невдале завантаження записується."
 }

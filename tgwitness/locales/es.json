@@ -10274,5 +10274,6 @@
   "Select and copy the link.": "Seleccione y copie el enlace.",
   "Global search": "Búsqueda global",
   "Checkpoint not timestamped": "Punto de control sin sello de tiempo",
-  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente"
+  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram guarda estos chats únicamente en un dispositivo. TgWitness interviene con la autorización propia de esta cuenta y registra cada mensaje, temporizador y aviso de eliminación en el diario firmado, incluso después de que la otra parte los haya eliminado. Envía confirmaciones de lectura y el estado de escritura solo según lo seleccionado en «Lo que ve la otra parte», y nunca envía avisos de captura de pantalla. Un archivo se guarda cuando las descargas de adjuntos están activadas y su tamaño y el espacio libre en disco lo permiten; hasta entonces queda en cola, y cada descarga aplazada o fallida se registra."
 }

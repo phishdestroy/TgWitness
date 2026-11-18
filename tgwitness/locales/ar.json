@@ -10468,5 +10468,6 @@
   "Select and copy the link.": "حدد الرابط وانسخه.",
   "Global search": "البحث العام",
   "Checkpoint not timestamped": "لم تُختم نقطة التحقق بالوقت",
-  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار"
+  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "يحتفظ Telegram بهذه المحادثات على جهاز واحد فقط. يشارك TgWitness، بتفويض من هذا الحساب نفسه، ويسجل كل رسالة ومؤقت وإشعار حذف في السجل الموقّع، حتى بعد أن يحذفها الطرف الآخر. ويرسل إشعارات القراءة وحالة الكتابة فقط وفقًا لما تم اختياره تحت «ما يراه الطرف الآخر»، ولا يرسل أبدًا إشعارات لقطات الشاشة. يُحفظ الملف عندما تكون تنزيلات المرفقات مفعّلة ويسمح حجمه والمساحة الحرة على القرص بذلك؛ وحتى ذلك الحين يبقى في قائمة الانتظار، ويُسجَّل كل تنزيل مؤجل أو فاشل."
 }

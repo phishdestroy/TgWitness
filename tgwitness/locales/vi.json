@@ -10213,5 +10213,6 @@
   "Select and copy the link.": "Chọn và sao chép liên kết.",
   "Global search": "Tìm kiếm toàn cầu",
   "Checkpoint not timestamped": "Điểm kiểm tra chưa được đóng dấu thời gian",
-  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận"
+  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram chỉ lưu trữ các cuộc trò chuyện này trên một thiết bị duy nhất. TgWitness tham gia với quyền truy cập riêng của tài khoản này và ghi lại mọi tin nhắn, bộ đếm thời gian và thông báo xóa vào nhật ký đã ký, ngay cả sau khi bên kia đã xóa chúng. Ứng dụng này chỉ gửi xác nhận đã đọc và trạng thái đang gõ theo lựa chọn trong mục \"Những gì phía bên kia nhìn thấy\", và không bao giờ gửi thông báo chụp màn hình. Tệp được lưu khi tính năng tải tệp đính kèm đang bật và kích thước tệp cùng dung lượng đĩa trống cho phép; cho đến lúc đó tệp vẫn nằm trong hàng đợi, và mỗi lần tải bị hoãn hoặc thất bại đều được ghi lại."
 }
