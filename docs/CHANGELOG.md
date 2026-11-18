@@ -173,6 +173,11 @@
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
   downloaded.
+- The link preview of a public channel or group by username says whether the account is already a member, from
+  Telegram's `left` flag, and offers **Join / open** instead of **Send join request** to a member of a group that
+  approves new members. The result of **Join / open** records `already_member` when the account was already in the
+  chat, and the panel says so. Before, `already_member` was empty for usernames and a successful receipt did not tell
+  a new join from an existing membership.
 - Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
   app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
   taken from an invite join now comes from Telegram's answer, without another invite check.

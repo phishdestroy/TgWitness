@@ -6658,6 +6658,7 @@ function actionResult(result){
     unknown:tr("The result is unknown. Check the chat before attempting a new action."),
     queued:result.run_at?tr("Queued to keep a safe pace. Runs at {time}.",{time:fmtTime(new Date(result.run_at*1000).toISOString())}):""};
   box.append(node("strong","",labels[result.status]||result.status));
+  if(result.already_member)box.append(node("p","",tr("This account is already a member of the chat.")));
   if(result.status==="succeeded"&&result.forwarded!=null)box.append(node("p","",tr("Forwarded {n} messages to {chat}.",{n:result.forwarded,chat:result.destination_title||result.destination})));
   if(result.error)box.append(node("p","",tr(result.error)));
   else if(result.error_type==="ChatForwardsRestrictedError")box.append(node("p","",tr("Forwarding is restricted in this chat.")));
@@ -6731,6 +6732,7 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
     preview.history_visible===false?tr("New members do not see earlier messages"):""].filter(Boolean);
   if(facts.length)box.append(node("p","hint",facts.join(" · ")));
   if(request)box.append(node("p","hint",tr("Joining needs administrator approval: Telegram sends a join request.")));
+  if(preview.already_member)box.append(node("p","hint",tr("This account is already a member of the chat.")));
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
