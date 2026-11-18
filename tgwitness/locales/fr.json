@@ -10321,5 +10321,7 @@
   "Keep the encryption key apart from this computer.": "Conservez la clé de chiffrement à l'écart de cet ordinateur.",
   "Step 3 shows how to start your witness.": "L'étape 3 indique comment démarrer votre témoin.",
   "Choose a chat type or account data to export.": "Choisissez un type de discussion ou des données du compte à exporter.",
-  "{data} · no chats or attachments": "{data} · sans discussions ni pièces jointes"
+  "{data} · no chats or attachments": "{data} · sans discussions ni pièces jointes",
+  "No observation period recorded": "Aucune période d'observation enregistrée",
+  "0 records selected": "0 enregistrement sélectionné"
 }

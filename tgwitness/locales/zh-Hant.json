@@ -10260,5 +10260,7 @@
   "Keep the encryption key apart from this computer.": "請將加密金鑰與這台電腦分開保存。",
   "Step 3 shows how to start your witness.": "第 3 步說明如何啟動見證端。",
   "Choose a chat type or account data to export.": "請選擇要匯出的聊天類型或帳號資料。",
-  "{data} · no chats or attachments": "{data} · 不含聊天與附件"
+  "{data} · no chats or attachments": "{data} · 不含聊天與附件",
+  "No observation period recorded": "未記錄觀察期間",
+  "0 records selected": "已選取 0 筆記錄"
 }

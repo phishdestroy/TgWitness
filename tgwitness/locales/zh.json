@@ -10260,5 +10260,7 @@
   "Keep the encryption key apart from this computer.": "请将加密密钥与这台电脑分开保存。",
   "Step 3 shows how to start your witness.": "第 3 步说明如何启动见证端。",
   "Choose a chat type or account data to export.": "请选择要导出的聊天类型或账号数据。",
-  "{data} · no chats or attachments": "{data} · 不含聊天和附件"
+  "{data} · no chats or attachments": "{data} · 不含聊天和附件",
+  "No observation period recorded": "未记录观察期间",
+  "0 records selected": "已选择 0 条记录"
 }

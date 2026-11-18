@@ -10311,5 +10311,7 @@
   "Keep the encryption key apart from this computer.": "Şifreleme anahtarını bu bilgisayardan ayrı saklayın.",
   "Step 3 shows how to start your witness.": "Adım 3, tanığınızı nasıl başlatacağınızı gösterir.",
   "Choose a chat type or account data to export.": "Dışa aktarmak için bir sohbet türü veya hesap verisi seçin.",
-  "{data} · no chats or attachments": "{data} · sohbet ve ek yok"
+  "{data} · no chats or attachments": "{data} · sohbet ve ek yok",
+  "No observation period recorded": "Kaydedilmiş gözlem dönemi yok",
+  "0 records selected": "0 kayıt seçildi"
 }

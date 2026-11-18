@@ -10260,5 +10260,7 @@
   "Keep the encryption key apart from this computer.": "암호화 키는 이 컴퓨터와 분리해서 보관하세요.",
   "Step 3 shows how to start your witness.": "3단계에서 증인을 시작하는 방법을 안내합니다.",
   "Choose a chat type or account data to export.": "내보낼 채팅 유형이나 계정 데이터를 선택하세요.",
-  "{data} · no chats or attachments": "{data} · 채팅 및 첨부 파일 없음"
+  "{data} · no chats or attachments": "{data} · 채팅 및 첨부 파일 없음",
+  "No observation period recorded": "기록된 관찰 기간 없음",
+  "0 records selected": "선택한 기록 0개"
 }

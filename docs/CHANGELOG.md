@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- The **Observation period** on HTML and PDF report covers tells the cases apart: **No observation period recorded**
+  when the journal has no continuous period, **0 records selected** when a selection matched no record (with both
+  when both are true), and a duration only for actual periods. Before, a selection without records showed "—"
+  and a journal without periods "Not recorded"; a selection never borrows the journal's duration.
 - The account export form accepts account data without chats, for example only **Account profile**: it sends no
   chat types and no media types, and the summary reads **Account profile · no chats or attachments**. Before, it
   refused with "Choose at least one chat type." although the server builds and signs such an archive. A form with

@@ -200,9 +200,15 @@ def duration_text(say, seconds):
 
 
 def observed_text(say, coverage, window=None):
+    """Observation period on a cover. Missing coverage data stays "—"; a known empty list of periods is said as such;
+    a selection without records gets no duration of its own, even when the journal has observation periods."""
     periods = (coverage or {}).get("continuous")
     if periods is None:
         return "—"
+    if window is not None and not all(window):
+        return say("0 records selected") + ("" if periods else " · " + say("No observation period recorded"))
+    if not periods:
+        return say("No observation period recorded")
     if window is None:
         seconds = [p.get("seconds") or 0 for p in periods]
     else:

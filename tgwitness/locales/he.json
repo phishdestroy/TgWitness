@@ -10362,5 +10362,7 @@
   "Keep the encryption key apart from this computer.": "שמרו את מפתח ההצפנה בנפרד ממחשב זה.",
   "Step 3 shows how to start your witness.": "שלב 3 מראה איך להפעיל את העד.",
   "Choose a chat type or account data to export.": "בחרו סוג צ'אט או נתוני חשבון לייצוא.",
-  "{data} · no chats or attachments": "{data} · ללא צ'אטים וקבצים מצורפים"
+  "{data} · no chats or attachments": "{data} · ללא צ'אטים וקבצים מצורפים",
+  "No observation period recorded": "לא נרשמה תקופת תצפית",
+  "0 records selected": "נבחרו 0 רשומות"
 }
