@@ -10200,5 +10200,6 @@
   "Telegram asked to wait before the next account action.": "Telegram bir sonraki hesap eyleminden önce beklemeyi istedi.",
   "{n} s after loading": "yüklemeden {n} sn sonra",
   "Whole page": "Tüm sayfa",
-  "Page after loading": "Yüklemeden sonra sayfa"
+  "Page after loading": "Yüklemeden sonra sayfa",
+  "Global search": "Genel arama"
 }

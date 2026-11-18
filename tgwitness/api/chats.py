@@ -525,6 +525,12 @@ async def interaction_preview(
     return await ctx.operation(interactions.preview, ctx.app.state.collector, body)
 
 
+async def telegram_search(request: Request, q: str = "", *, ctx=Depends(current_context)):
+    if ctx.visible_chats(request) is not None:
+        raise HTTPException(403, "This access opens only chosen chats; this part of the workspace is closed to it.")
+    return await ctx.operation(interactions.search_telegram, ctx.app.state.collector, q[:64])
+
+
 async def interaction_action(
     request: Request, body: interactions.Action, *, ctx=Depends(current_context)
 ):

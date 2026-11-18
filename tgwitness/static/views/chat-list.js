@@ -129,6 +129,41 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     add.addEventListener('click', () => watch(dialog, add));
     row.append(open, add); return row;
   }
+  let globalFor = '', globalResults = [], globalLoading = false, globalError = '', globalTimer = null, globalRequest = 0;
+  const globalSection = node('p', 'chat-list-section', tr('Global search')), globalRows = new Map();
+  function ensureGlobal(query) {
+    const text = query.replace(/^@/, '').trim(), key = getSession() + '\n' + text;
+    if (!adds.searchTelegram || text.length < 2) {clearTimeout(globalTimer); globalRequest++; globalFor = ''; globalResults = []; globalLoading = false; globalError = ''; return;}
+    if (globalFor === key) return;
+    clearTimeout(globalTimer);
+    const request = ++globalRequest, current = getSession();
+    globalFor = key; globalResults = []; globalError = ''; globalLoading = true;
+    globalTimer = setTimeout(() => {
+      adds.searchTelegram(text).then(result => {if (request === globalRequest && current === getSession()) globalResults = result.results || [];})
+        .catch(error => {if (request === globalRequest && current === getSession() && error.name !== 'StaleView') globalError = error.message;})
+        .finally(() => {if (request === globalRequest && current === getSession()) {globalLoading = false; render();}});
+    }, 400);
+  }
+  function globalRow(result) {
+    const row = node('div', 'chat-item chat-item-new'), open = node('button', 'chat-choice');
+    const title = result.title || (result.username ? '@' + result.username : tr('Chat {id}', {id: result.chat_id}));
+    const join = !result.member && result.username;
+    const add = node('button', 'primary small chat-watch', tr(join ? 'Join / open' : 'Add'));
+    open.type = add.type = 'button'; row.dataset.dialog = String(result.chat_id);
+    const body = node('span', 'chat-item-body'), top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
+    top.append(node('span', 'chat-item-title', title));
+    if (result.verified) top.append(icon('check'));
+    const facts = [tr(kindWords[result.kind] || 'Channel'), result.username ? '@' + result.username : '',
+      result.participants_count != null ? tr('Members') + ': ' + Number(result.participants_count).toLocaleString() : '',
+      result.scam ? 'SCAM' : result.fake ? 'FAKE' : ''].filter(Boolean);
+    bottom.append(node('span', 'chat-item-preview', facts.join(' · ')));
+    body.append(top, bottom); open.append(avatarNode(result.chat_id, title), body);
+    add.setAttribute('aria-label', add.textContent + ': ' + title);
+    const choose = () => join ? openLink('@' + result.username, true) : watch(result, add);
+    if (!result.member && !result.username) add.disabled = true;
+    else {open.addEventListener('click', choose); add.addEventListener('click', choose);}
+    row.append(open, add); return row;
+  }
   function searchExtras(terms, query) {
     const extras = [];
     if (adds.canWatch?.()) {
@@ -142,6 +177,18 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       extras.push(...found.map(dialog => {
         if (!dialogRows.has(dialog.chat_id)) dialogRows.set(dialog.chat_id, dialogRow(dialog));
         return dialogRows.get(dialog.chat_id);
+      }));
+      ensureGlobal(query);
+      const listed = new Set(found.map(dialog => dialog.chat_id));
+      const global = globalResults.filter(result => !saved.has(result.chat_id) && !listed.has(result.chat_id)
+        && (!kind.value || types[result.kind] === kind.value));
+      if (global.length || globalLoading || globalError) extras.push(globalSection);
+      if (globalLoading && !global.length) extras.push(node('p', 'hint chat-list-searching', tr('Loading…')));
+      else if (globalError && !global.length) extras.push(node('p', 'hint chat-list-searching', globalError));
+      extras.push(...global.map(result => {
+        const key = JSON.stringify(result);
+        if (globalRows.get(result.chat_id)?.key !== key) globalRows.set(result.chat_id, {key, row: globalRow(result)});
+        return globalRows.get(result.chat_id).row;
       }));
     }
     if (linkLike(query) && adds.canOpenLink?.()) {
@@ -416,6 +463,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     activeFilters.replaceChildren(); activeFilters.hidden = true; resultCount.textContent = ''; results.hidden = true;
     secretItems = []; secretAt = 0; secretBusy = false; closeAdd(false); linkBox.open = false;
     dialogRows.clear(); linkRow = null; dialogsError = ''; dialogsLoading = false; dialogsFor = null;
+    clearTimeout(globalTimer); globalRequest++; globalRows.clear(); globalFor = ''; globalResults = []; globalLoading = false; globalError = '';
   }
   function snapshot() {return {chatFilter:status.value, chatSort:sort.value, chatKind:kind.value, chatQuery:search.value};}
   function restore(route) {

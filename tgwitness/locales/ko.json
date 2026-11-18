@@ -10149,5 +10149,6 @@
   "Telegram asked to wait before the next account action.": "Telegram이 다음 계정 작업 전에 기다리라고 요청했습니다.",
   "{n} s after loading": "로드 {n}초 후",
   "Whole page": "전체 페이지",
-  "Page after loading": "로드 후 페이지"
+  "Page after loading": "로드 후 페이지",
+  "Global search": "전체 검색"
 }
