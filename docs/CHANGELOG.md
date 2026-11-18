@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- A reply whose original is outside the loaded messages offers **show the original**: the panel loads the saved
+  messages around it, highlights it and shows **Back to reply**, which returns to the reply. If the original is not
+  saved in the workspace, the panel says so and suggests loading older history from Telegram. A chat reopened in the
+  same session returns to where it was read, kept per workspace and chat and forgotten when the panel locks.
 - In the self-contained report a message card with an attachment says **File saved** when the file is in the
   archive and otherwise why it is not, in words instead of a code: **Larger than the size limit**, **This file type
   was not collected**, **File not in this archive** and the other recorded reasons. The message time names the sent

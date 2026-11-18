@@ -223,3 +223,5 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .people-collect > summary { min-height: 40px; padding: 10px 14px; font-weight: 600; cursor: pointer; }
 .people-collect[open] > summary { border-bottom: 1px solid var(--border); }
 .people-collect > :not(summary) { margin: 12px; }
+.chat-back-reply { align-self: center; margin: 6px auto; }
+.reply-outside span { color: var(--accent-text); }

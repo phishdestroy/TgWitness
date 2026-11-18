@@ -5809,6 +5809,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
   $("chat-feed").scrollTop=0;
 })));
 function beginChat(id){
+  replyReturn=null;show("chat-back-reply",false);
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
   messageImage?.close();historyForward?.close();closePersonCard();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
@@ -5836,19 +5837,66 @@ async function openChat(id,options={}){
   if(focused&&focused!==document.body&&focused.checkVisibility?.()===false&&$("chat-back").checkVisibility?.())$("chat-back").focus({preventScroll:true});
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
+  const place=chatPositions.get(state.profile+":"+id);
+  if(loaded&&place&&state.chat===id&&options.position!==false)await showChatMessage(place.id,{offset:place.offset,flash:false}).catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
   if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&may("sources")&&!chatAutoLoaded.has(key)){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
 }
+const chatPositions=new Map();let replyReturn=null,chatPositionFrame=0;
+async function showChatMessage(id,{offset=null,flash=true}={}){
+  const chat=state.chat,profile=state.profile,generation=chatGeneration;
+  let el=$("msg-"+id);
+  if(!el){
+    if(state.chatFilter!=="all"||state.chatAuthor!==null||state.chatSearch){
+      clearTimeout(chatSearchTimer);state.chatFilter="all";state.chatAuthor=null;state.chatSearch="";$("chat-message-search").value="";state.chatView="messages";renderChatStatus();
+    }
+    if(!await loadChatMessages("around",id))return false;
+    if(chat!==state.chat||profile!==state.profile||generation!==chatGeneration)return false;
+    el=$("msg-"+id);
+  }
+  if(!el)return false;
+  const feed=$("chat-feed");
+  if(offset===null)el.scrollIntoView({block:"center"});
+  else feed.scrollTop+=el.getBoundingClientRect().top-feed.getBoundingClientRect().top-offset;
+  if(flash){el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);}
+  return true;
+}
+async function jumpToReply(m){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(m.reply_to)){
+    if(chat!==state.chat||profile!==state.profile)return;
+    replyReturn={chat,profile,message:m.message_id};show("chat-back-reply",true);
+    $("msg-"+m.reply_to)?.querySelector(".bubble")?.setAttribute("tabindex","-1");$("msg-"+m.reply_to)?.querySelector(".bubble")?.focus({preventScroll:true});
+    return;
+  }
+  if(chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:m.reply_to}),true);
+}
+$("chat-back-reply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const back=replyReturn;replyReturn=null;show("chat-back-reply",false);
+  if(!back||back.chat!==state.chat||back.profile!==state.profile)return;
+  if(await showChatMessage(back.message)){const bubble=$("msg-"+back.message)?.querySelector(".bubble");bubble?.setAttribute("tabindex","-1");bubble?.focus({preventScroll:true});}
+}));
+$("chat-feed").addEventListener("scroll",()=>{
+  cancelAnimationFrame(chatPositionFrame);
+  chatPositionFrame=requestAnimationFrame(()=>{
+    if(state.view!=="chats"||state.chat===null||!chatReady||state.chatView!=="messages"||state.chatFilter!=="all"||state.chatSearch||state.chatAuthor!==null)return;
+    const feed=$("chat-feed"),key=state.profile+":"+state.chat;
+    if(state.chatNextAfter===null&&feed.scrollHeight-feed.scrollTop-feed.clientHeight<80){chatPositions.delete(key);return;}
+    const bounds=feed.getBoundingClientRect(),row=[...feed.querySelectorAll(".msg[id^='msg-']")].find(item=>item.getBoundingClientRect().bottom>bounds.top+1);
+    if(row)chatPositions.set(key,{id:Number(row.id.slice(4)),offset:row.getBoundingClientRect().top-bounds.top});
+  });
+},{passive:true});
+window.addEventListener("tgwitness:lock",()=>{chatPositions.clear();replyReturn=null;show("chat-back-reply",false);});
 function fmtDuration(seconds){
   if(seconds===null||seconds===undefined)return tr("unknown");
   if(seconds<60)return tr("under a minute");
   if(seconds<3600)return tr("~{n} min",{n:Math.round(seconds/60)});
   return tr("~{h} h {m} min",{h:Math.floor(seconds/3600),m:Math.round(seconds%3600/60)});
 }
-async function loadChatMessages(mode){
+async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
@@ -5859,6 +5907,7 @@ async function loadChatMessages(mode){
   if(state.chatAuthor!==null)params.set("author_id",String(state.chatAuthor));
   if(mode==="older")params.set("before_id",String(state.chatNextBefore));
   if(mode==="newer")params.set("after_id",String(state.chatNextAfter));
+  if(mode==="around")params.set("before_id",String(target+31));
   chatPagePending={request,generation};
   let result;
   try {result=await json("chats/"+encodeURIComponent(id)+"/messages?"+params,undefined,viewOptions('chats'));}
@@ -5875,7 +5924,7 @@ async function loadChatMessages(mode){
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const bounds=feed.getBoundingClientRect(),visible=[...feed.querySelectorAll('.msg,.chat-service[id]')].find(row=>{const r=row.getBoundingClientRect();return r.bottom>bounds.top&&r.top<bounds.bottom;});
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
-  const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
+  const reset=mode==='open'||mode==='latest'||mode==='around'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
   if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);chatGaps?.offline?.(result.offline);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
@@ -5892,6 +5941,7 @@ async function loadChatMessages(mode){
   if(mode==="open")replay(feed,"entering",900);
   else if(mode==="refresh")state.chatMessages.forEach(m=>{if(m.message_id>known)$("msg-"+m.message_id)?.classList.add("fresh");});
   if(mode==="open"||mode==='latest')feed.scrollTop=state.chatSearch?0:feed.scrollHeight;
+  else if(mode==="around")return true;
   else if(mode==="refresh"&&atBottom)feed.scrollTop=feed.scrollHeight;
   else{const kept=anchor&&feed.querySelector('#'+CSS.escape(anchor.id));
     if(kept)feed.scrollTop+=kept.getBoundingClientRect().top-feed.getBoundingClientRect().top-anchor.offset;else feed.scrollTop=top;}
@@ -6269,11 +6319,11 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
       report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
-    const target=m.reply_to_chat?null:byId.get(m.reply_to),quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
-    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));
-      quote.addEventListener('click',()=>{let el=$('msg-'+m.reply_to);if(!el){state.chatFilter='all';state.chatAuthor=null;renderChatStatus();renderChatFeed();el=$('msg-'+m.reply_to);}if(!el)return;
-        el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);});}
-    else quote.textContent=m.reply_to_chat?tr('Reply to #{id} in another chat',{id:m.reply_to}):tr('Reply to #{id} · outside this loaded window',{id:m.reply_to});
+    const target=m.reply_to_chat?null:byId.get(m.reply_to);let quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
+    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));}
+    else if(!m.reply_to_chat){quote=node('button','reply-quote reply-outside');quote.type='button';quote.append(node('span','',tr('Reply to #{id} · show the original',{id:m.reply_to})));}
+    else quote.textContent=tr('Reply to #{id} in another chat',{id:m.reply_to});
+    if(!m.reply_to_chat)quote.addEventListener('click',()=>busy(quote,()=>jumpToReply(m)));
     bubble.append(quote);
   }
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
