@@ -1619,9 +1619,9 @@ class Collector:
         mark = (id(getattr(client, "_message_box", None)), self.store.targets_revision)
         if mark != getattr(self, "polled_mark", None):
             self.polled_mark, self.polled_retry_at = mark, 0
-            targets = sorted(self.store.targets(True), key=lambda target: -(target.get("priority") or 1))
+            targets = sorted(self.store.targets(True), key=lambda target: -(target.get("priority") or 0))
             probe = probe_settings(self.store)["chat_id"]
-            ids = [target["chat_id"] for target in targets] + [probe]
+            ids = list(dict.fromkeys([probe] + [target["chat_id"] for target in targets]))
             client.poll_channels([-chat_id - 1000000000000 for chat_id in ids
                                   if type(chat_id) is int and chat_id < -1000000000000][:SHORT_POLL_LIMIT])
         missing = client.unseeded_channels()
