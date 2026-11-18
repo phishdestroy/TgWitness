@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- Reports in other languages translate the sender name notes (**name at export**, **from the account's contacts**,
+  **from the Telegram profile**) and the two auto-delete timer explanations, and **Investigation** translates step
+  delays and durations of a day or more. Before, these stayed in English. Hindi, Urdu, Bengali and Persian durations
+  in minutes and seconds now read as minutes (Hindi said "minimum"), and 15 Persian, Urdu and Bengali texts lost a
+  stray leading space.
 - The `search`, `context`, `messages`, `stats` and `export` commands refuse a chat, message, sender or sequence number
   that does not fit in a signed 64-bit integer with a usage error naming the argument. Before, such a number stopped
   the command with a Python traceback from the database.
