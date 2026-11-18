@@ -25,6 +25,16 @@
 
 ## Unreleased
 
+- **Save chat selection** in Settings and the end of first setup keep the source types, excluded chats, own actions
+  and new-chat settings of Sources → Scope, take a chosen chat off the excluded chats and keep it as a hand-picked
+  source. Before, they replaced the whole scope with defaults, so a previously excluded chat or private chats could
+  be added again and own messages recorded again, and a chosen chat that the scope had added was paused on the next
+  application. Saving chosen chats no longer rereads the account's chat list; a chat excluded in folder or
+  whole-account mode is paused before the list is read, so it stays paused when Telegram does not return the list.
+  While observing, saving the same scope again after a failed application applies it again instead of reporting
+  success without applying. On an account set up as the main one, the scope form, `POST /api/recording` and Investigation refuse a
+  folder or the whole account under the same rule as setup; before, they accepted it while recording and the next
+  start was refused.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is

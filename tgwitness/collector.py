@@ -1224,10 +1224,25 @@ class Collector:
             raise ValueError("Telegram did not return this chat. Load chats and try again.")
         return await self.capture_profile(chat_id, entity)
 
+    def pause_excluded(self, scope):
+        excluded, paused = set(scope["exclude"]), []
+        with self.store.transaction():
+            for target in self.store.targets(True):
+                if target["chat_id"] in excluded:
+                    self.store.set_target(target["chat_id"], target["title"], target["kind"], False)
+                    paused.append(target["chat_id"])
+            if paused:
+                self.store.append("scope.applied", {
+                    "mode": scope["mode"], "folder": (self.folder_for(scope) or {}).get("title"), "types": scope["types"],
+                    "own_actions": scope["own_actions"], "added": [], "paused": paused, "resumed": [],
+                    "excluded": sorted(excluded), "dialogs_inspected": 0,
+                    "coverage": "excluded chats paused before the dialog list is read"})
+
     async def apply_scope(self, refresh=True):
         scope = scope_settings(self.store)
         self.scope_rejected = set()
-        if refresh or (scope["mode"] != "selected" and not self.dialog_cache):
+        if scope["mode"] != "selected" and (refresh or not self.dialog_cache):
+            self.pause_excluded(scope)
             await self.dialogs()
         self.scope_refreshed_at = time.time()
         excluded, rule = set(scope["exclude"]), self.folder_for(scope)

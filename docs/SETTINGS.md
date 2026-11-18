@@ -38,7 +38,10 @@ values and **Undo last change**, and **Recent changes** lists the latest edits.
 A section opens in a window over the list and has its own address, such as
 `/settings/connection`. The back arrow, the close button, Escape, a click outside the
 window and the browser's Back button return to the list. **Which chats?** is kept with
-**Save chat selection**; closing with unsaved changes asks first. Every change shows
+**Save chat selection**; closing with unsaved changes asks first. Saving keeps the source
+types, excluded chats, own actions and new-chat settings of **More tools → Sources →
+Scope**; a chat chosen here is taken off the excluded chats and recorded as a hand-picked
+source. Every change shows
 **Undo** for 20 seconds, and each entry in **Recent changes** can be undone later. An
 undo is a new `settings.changed` record in the journal, and it also brings back custom
 file limits.
