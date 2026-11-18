@@ -178,7 +178,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     if (!data) return;
     const m = info(data.mode);
     switchDot.textContent = m ? m.emoji : '◌';
-    switchName.textContent = m ? tr(m.name) : tr('All sections');
+    switchName.textContent = m ? tr(m.name) : tr(gated() ? 'All sections' : 'Not chosen');
     switchLevel.textContent = data.active + '/' + data.total;
     const text = m ? tr('Protection mode: {mode}. {active} of {total} protection layers.', {mode: tr(m.name), active: data.active, total: data.total})
       : tr('No protection mode chosen yet. {active} of {total} protection layers.', {active: data.active, total: data.total});
@@ -205,7 +205,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     details.append(summary); layerList(details);
     details.open = wasOpen ?? data.mode === 'maximum';
     card.append(details);
-    if (!m) card.append(node('p', 'hint', tr('No mode is chosen yet, so every section is shown.')));
+    if (!m && gated()) card.append(node('p', 'hint', tr('No mode is chosen yet, so every section is shown.')));
   }
 
   function lockText(feature) {

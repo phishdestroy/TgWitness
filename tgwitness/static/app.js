@@ -5813,7 +5813,8 @@ async function loadChatMessages(mode){
 function renderChatEmpty(){
   renderChatInfo();
   const box=$("chat-empty"),s=state.status;
-  viewQuery("chats",".chats-shell").dataset.panel=state.chat===null&&s&&(s.demo||s.collector.has_session)&&(state.chats.length||viewAllowed("sources"))?"list":"chat";
+  viewQuery("chats",".chats-shell").dataset.panel=state.chat===null&&s&&(s.demo||s.collector.has_session)&&(state.chats.length||viewAllowed("sources")
+    ||!s.demo&&accountSignedIn()&&(!viewQuery("chats",".chat-open").hidden||viewAllowed("secret-chats")&&may("interact")))?"list":"chat";
   show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat)&&(state.chatsLoading||!state.chats.length)){box.append(viewState('loading',tr('Loading…')));return;}
