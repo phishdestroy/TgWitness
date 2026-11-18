@@ -572,12 +572,12 @@ def report_entry(context, options, file="report.html"):
 
 
 def encrypt_export(path, fmt, password, inner_name=None, mode="zip"):
+    inner_name = inner_name or ("tgwitness-report." if fmt in ("json", "pdf") else "tgwitness-evidence.") + fmt
     if mode == "tgwpw":
         from .verifier.password import encrypt_password_file
 
         try:
-            return encrypt_password_file(path, path.with_name(path.name + ".tgwpw"), password,
-                                         inner_name or "tgwitness-evidence." + fmt)
+            return encrypt_password_file(path, path.with_name(path.name + ".tgwpw"), password, inner_name)
         finally:
             path.unlink(missing_ok=True)
     if mode != "zip":
@@ -592,7 +592,7 @@ def encrypt_export(path, fmt, password, inner_name=None, mode="zip"):
                                      encryption=pyzipper.WZ_AES) as archive:
                 archive.setpassword(password.encode("utf-8"))
                 archive.setencryption(pyzipper.WZ_AES, nbits=256)
-                archive.write(path, inner_name or "tgwitness-evidence." + fmt)
+                archive.write(path, inner_name)
         return out
     except BaseException:
         if created:

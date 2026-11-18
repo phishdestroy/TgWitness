@@ -925,7 +925,8 @@ class EvidencePDF:
                          (say("Files"), summary["files"]),
                          (say("Timestamps"), summary["timestamps"] if summary["timestamps"] or self.context.get("archive")
                           else None),
-                         (say("Observation period"), report.observed_text(say, self.coverage))])
+                         (say("Observation period"), report.observed_text(say, self.coverage, (
+                             summary["first_record_at"], summary["last_record_at"]) if self.filtered else None))])
             data_name = "records.jsonl" if self.handover else "events.jsonl"
             self.lay.gap(5)
             self.lay.qr(paper_lines(self.report_id, self.fp, data_name, self.data["subject"].get("records_sha256" if self.handover else "events_sha256")))

@@ -199,11 +199,21 @@ def duration_text(say, seconds):
     return say("{n} min", n=rest // 60)
 
 
-def observed_text(say, coverage):
+def observed_text(say, coverage, window=None):
     periods = (coverage or {}).get("continuous")
     if periods is None:
         return "—"
-    return duration_text(say, sum(p.get("seconds") or 0 for p in periods)) if periods else say("Not recorded")
+    if window is None:
+        seconds = [p.get("seconds") or 0 for p in periods]
+    else:
+        try:
+            low, high = (datetime.fromisoformat(value) for value in window)
+            seconds = [(min(datetime.fromisoformat(p["to"]), high) - max(datetime.fromisoformat(p["from"]), low)).total_seconds()
+                       for p in periods]
+        except (KeyError, TypeError, ValueError):
+            return "—"
+        seconds = [s for s in seconds if s >= 0]
+    return duration_text(say, sum(seconds)) if seconds else say("Not recorded")
 
 
 def size_text(value):
@@ -2642,7 +2652,8 @@ class EvidenceHTML:
                         (say("Files"), num(len(self.digest["media"])), "violet", "file"),
                         (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
                          if self.anchors or self.archive else "—", "ok", "seal"),
-                        (say("Observation period"), e(observed_text(say, self.coverage)), "pink", "eye")])
+                        (say("Observation period"), e(observed_text(say, self.coverage, (self.digest["first"], self.digest["last"])
+                                                                    if self.filtered else None)), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
     def render_summary(self):
