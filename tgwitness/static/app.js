@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout18').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -1532,7 +1532,7 @@ function renderCollectorHealth(h){
 }
 
 let collectionUI=null;
-const collectionReady=import("./components/collection.js?v=2").then(({createCollectionControl})=>{
+const collectionReady=import("./components/collection.js?v=3").then(({createCollectionControl})=>{
   collectionUI=createCollectionControl({node,tr,status:()=>state.status,workspace:$("workspace")});collectionUI.update();return collectionUI;
 });
 collectionReady.catch(error=>toast(error.message,true));
@@ -1547,7 +1547,7 @@ const accountSwitchReady=import("./components/account-switch.js?v=3").then(({cre
 accountSwitchReady.catch(error=>toast(error.message,true));
 let modesUI=null;
 const modeSession=()=>state.workspaceRevision+":"+state.profile;
-const modesReady=import("./components/modes.js?v=3").then(({createModes})=>{
+const modesReady=import("./components/modes.js?v=4").then(({createModes})=>{
   modesUI=createModes({node,tr,json,may,status:()=>state.status,query:panelQueries,go:goPlace,toast});
   if(state.status&&!$("workspace").hidden)modesUI.sync(modeSession());
   return modesUI;
@@ -2257,7 +2257,7 @@ function safeExcerpt(e){
 let previouslyFocused;
 function eventRow(e) {
     const label=eventLabel(e);
-    const row=node("tr","event-row"); row.tabIndex=0; row.setAttribute("role","button"); row.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq}));
+    const row=node("tr","event-row"); row.tabIndex=0;
     const cell=node("td"), summary=node("div","event-summary"), text=node("div");
     const title=node("div","event-title",label[0]); title.append(node("span","",tr("Record #{n}",{n:e.seq})));
     const [sourceName,sourceId]=eventSource(e),mobileMeta=node("div","event-mobile-meta",sourceName+" · ");
@@ -2270,7 +2270,8 @@ function eventRow(e) {
     summary.append(mark,text); cell.append(summary);
     const source=node("td"); source.append(node("span","source-title",sourceName),node("span","source-id",sourceId));
     const time=node("td");time.append(timeNode(e.observed_at,"event-time"));
-    const open=node("td","event-open"); open.append(icon("chevron"));
+    const open=node("td","event-open"),details=node("button","event-details"); details.type="button";
+    details.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq})); details.append(icon("chevron")); open.append(details);
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
     row.addEventListener("keydown",event=>{ if(event.target===row&&(event.key==="Enter"||event.key===" ")){event.preventDefault();openDetail(e);} });
@@ -2335,7 +2336,7 @@ async function refreshRanked(request) {
   state.searchIndex=result.index;
   renderEvents();
 }
-const journalReady=import('./components/journal.js?v=layout6').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=layout7').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
     prepare:()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false,restoreFocus:false});},
@@ -5811,8 +5812,9 @@ async function loadChatMessages(mode){
 }
 function renderChatEmpty(){
   renderChatInfo();
-  viewQuery("chats",".chats-shell").dataset.panel="chat";
-  const box=$("chat-empty"),s=state.status;show("chat-main",false);show("chat-empty",true);box.replaceChildren();
+  const box=$("chat-empty"),s=state.status;
+  viewQuery("chats",".chats-shell").dataset.panel=state.chat===null&&s&&(s.demo||s.collector.has_session)&&(state.chats.length||viewAllowed("sources"))?"list":"chat";
+  show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat)&&(state.chatsLoading||!state.chats.length)){box.append(viewState('loading',tr('Loading…')));return;}
   if(!state.chats.length&&state.chatsLoading){box.append(viewState('loading',tr('Loading…')));return;}

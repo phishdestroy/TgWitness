@@ -10261,5 +10261,9 @@
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
   "Global search": "عالمی تلاش",
   "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
-  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "موڈ حفاظت کا ہدف طے کرتا ہے اور بتاتا ہے کہ ابھی کیا کمی ہے۔ پینل کون سے حصے دکھائے، یہ موڈ نہیں بلکہ انٹرفیس کی سطح طے کرتی ہے؛ ریکارڈنگ اور دستخط ہر موڈ میں ایک جیسے ہیں اور کچھ بھی حذف نہیں ہوتا۔",
+  "I understand: recording and signing stay the same and nothing is deleted.": "میں سمجھتا ہوں: ریکارڈنگ اور دستخط پہلے جیسے رہتے ہیں اور کچھ بھی حذف نہیں ہوتا۔",
+  "A mode sets the protection target. The status of each layer is below.": "موڈ حفاظت کا ہدف طے کرتا ہے۔ ہر پرت کی حالت نیچے ہے۔",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "کم موڈ کی تصدیق کریں: ریکارڈنگ اور دستخط پہلے جیسے رہتے ہیں اور کچھ بھی حذف نہیں ہوتا۔"
 }

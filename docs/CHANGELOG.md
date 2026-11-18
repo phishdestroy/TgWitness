@@ -25,6 +25,17 @@
 
 ## Unreleased
 
+- Panel states and keyboard use from the external review. **Settings → Which chats?** shows the scope in use, the
+  number of chats being recorded and whether they are observed, with a green dot only while they are; before, it
+  showed the first-setup draft, such as **Choose chats · 0**, always with a green dot. The protection mode dialog and
+  the **Protection level** card no longer promise to hide or show sections where the interface level decides what the
+  panel shows, which is every real workspace, and new `workspace.mode_changed` records no longer carry `shown` and
+  `hidden` lists of sections the panel did not actually hide; earlier records are unchanged. On a phone, an empty
+  Chats page keeps the chat list with its search and **Add** menu in view when the account is connected and the
+  access can choose chats, instead of covering it with a page that had no way back to the list. A journal row is no
+  longer a button with the bookmark button inside it: each row has its own open button next to the bookmark button,
+  and only the buttons of the selected row are in the Tab order, matching the arrow keys. The observation state in
+  the phone header is read as text instead of a label on a plain element.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a

@@ -10210,5 +10210,9 @@
   "Select and copy the link.": "Pilih dan salin pautan.",
   "Global search": "Carian global",
   "Checkpoint not timestamped": "Titik semak tidak dicap masa",
-  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan"
+  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Mod menetapkan sasaran perlindungan dan menunjukkan apa yang masih kurang. Tahap antara muka, bukan mod, yang menentukan bahagian yang dipaparkan oleh panel; rakaman dan tandatangan adalah sama dalam setiap mod dan tiada apa-apa yang dipadamkan.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "Saya faham: rakaman dan tandatangan kekal sama dan tiada apa-apa yang dipadamkan.",
+  "A mode sets the protection target. The status of each layer is below.": "Mod menetapkan sasaran perlindungan. Status setiap lapisan ada di bawah.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Sahkan mod yang lebih rendah: rakaman dan tandatangan kekal sama dan tiada apa-apa yang dipadamkan."
 }

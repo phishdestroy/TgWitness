@@ -10210,5 +10210,9 @@
   "Select and copy the link.": "Pilih dan salin tautan.",
   "Global search": "Pencarian global",
   "Checkpoint not timestamped": "Titik periksa tidak diberi stempel waktu",
-  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda"
+  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Mode menetapkan target perlindungan dan menunjukkan apa yang masih kurang. Tingkat antarmuka, bukan mode, yang menentukan bagian mana yang ditampilkan panel; perekaman dan penandatanganan sama di setiap mode dan tidak ada yang dihapus.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "Saya mengerti: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus.",
+  "A mode sets the protection target. The status of each layer is below.": "Mode menetapkan target perlindungan. Status setiap lapisan ada di bawah.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Konfirmasi mode yang lebih rendah: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus."
 }

@@ -10210,5 +10210,9 @@
   "Select and copy the link.": "請選取並複製連結。",
   "Global search": "全域搜尋",
   "Checkpoint not timestamped": "檢查點未取得時間戳記",
-  "Checkpoint timestamp pending": "檢查點時間戳記待確認"
+  "Checkpoint timestamp pending": "檢查點時間戳記待確認",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "模式設定保護目標，並列出仍缺少的項目。面板顯示哪些區段由介面層級決定，而不是由模式決定；錄製與簽署在每種模式下都相同，不會刪除任何內容。",
+  "I understand: recording and signing stay the same and nothing is deleted.": "我明白：錄製與簽署維持不變，不會刪除任何內容。",
+  "A mode sets the protection target. The status of each layer is below.": "模式設定保護目標。各層狀態見下方。",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "確認切換至較低模式：錄製與簽署維持不變，不會刪除任何內容。"
 }

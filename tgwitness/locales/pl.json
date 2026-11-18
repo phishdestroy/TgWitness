@@ -10363,5 +10363,9 @@
   "Select and copy the link.": "Zaznacz i skopiuj link.",
   "Global search": "Wyszukiwanie globalne",
   "Checkpoint not timestamped": "Punkt kontrolny bez znacznika czasu",
-  "Checkpoint timestamp pending": "Znacznik czasu punktu kontrolnego oczekuje"
+  "Checkpoint timestamp pending": "Znacznik czasu punktu kontrolnego oczekuje",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Tryb określa cel ochrony i pokazuje, czego jeszcze brakuje. To poziom interfejsu, a nie tryb, decyduje, które sekcje pokazuje panel; rejestrowanie i podpisywanie przebiegają tak samo w każdym trybie i nic nie jest usuwane.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "Rozumiem: rejestrowanie i podpisywanie pozostają bez zmian i nic nie jest usuwane.",
+  "A mode sets the protection target. The status of each layer is below.": "Tryb określa cel ochrony. Stan każdej warstwy znajduje się poniżej.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Potwierdź przejście na niższy tryb: rejestrowanie i podpisywanie pozostają bez zmian i nic nie zostanie usunięte."
 }

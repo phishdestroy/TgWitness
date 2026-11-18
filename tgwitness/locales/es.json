@@ -10271,5 +10271,9 @@
   "Select and copy the link.": "Seleccione y copie el enlace.",
   "Global search": "Búsqueda global",
   "Checkpoint not timestamped": "Punto de control sin sello de tiempo",
-  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente"
+  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Un modo fija el objetivo de protección y muestra lo que aún falta. El nivel de la interfaz, no el modo, decide qué secciones muestra el panel; la grabación y la firma son iguales en todos los modos y no se borra nada.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "Entiendo que la grabación y la firma no cambian y que no se borra nada.",
+  "A mode sets the protection target. The status of each layer is below.": "Un modo fija el objetivo de protección. El estado de cada capa aparece abajo.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Confirma el modo inferior: la grabación y la firma no cambian y no se borra nada."
 }

@@ -10210,5 +10210,9 @@
   "Select and copy the link.": "링크를 선택해 복사하세요.",
   "Global search": "전체 검색",
   "Checkpoint not timestamped": "체크포인트에 타임스탬프 없음",
-  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중"
+  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "모드는 보호 목표를 정하고 아직 부족한 것을 보여 줍니다. 패널에 어떤 섹션을 표시할지는 모드가 아니라 인터페이스 수준이 결정합니다. 기록과 서명은 모든 모드에서 같으며 아무것도 삭제되지 않습니다.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "알겠습니다: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
+  "A mode sets the protection target. The status of each layer is below.": "모드는 보호 목표를 정합니다. 각 계층의 상태는 아래에 있습니다.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "하위 모드 확인: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다."
 }

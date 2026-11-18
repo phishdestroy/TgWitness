@@ -10312,5 +10312,9 @@
   "Select and copy the link.": "סמנו והעתיקו את הקישור.",
   "Global search": "חיפוש גלובלי",
   "Checkpoint not timestamped": "נקודת הביקורת לא קיבלה חותמת זמן",
-  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה"
+  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "מצב קובע את יעד ההגנה ומציג מה עדיין חסר. רמת הממשק, ולא המצב, קובעת אילו חלקים יוצגו בלוח; ההקלטה והחתימה זהות בכל מצב ושום דבר לא נמחק.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "אני מבין: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק.",
+  "A mode sets the protection target. The status of each layer is below.": "מצב קובע את יעד ההגנה. המצב של כל שכבה מופיע למטה.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "אשר את המעבר למצב הנמוך יותר: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק."
 }
