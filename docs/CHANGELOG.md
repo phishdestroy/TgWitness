@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- A chat ID, record number or channel seed beyond SQLite's 64-bit integers is refused with a 422 answer by the
+  translation, QR code, mini application, channel graph, conversation plan and visibility requests. Before, such a
+  value reached the database and the request failed with an unexpected server error.
 - **Older records**, **Newer records** and **Latest** under the journal keep the keyboard focus after the next page
   loads, or pass it to the next pager button when there is no further page. Before, the pressed button was disabled
   while the page loaded and the focus fell to the page itself, so a screen reader lost its place. An error message

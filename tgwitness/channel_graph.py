@@ -1,6 +1,7 @@
 import asyncio
 import secrets
 import time
+from typing import Annotated
 
 from pydantic import BaseModel, Field, StrictBool, model_validator
 from telethon import utils
@@ -142,7 +143,7 @@ async def discover(collector, seeds, options=None, progress=None):
 
 
 class GraphRequest(GraphOptions):
-    seeds: list[int] = Field(..., min_length=1, max_length=50)
+    seeds: list[Annotated[int, Field(ge=-(2**63), le=2**63 - 1)]] = Field(..., min_length=1, max_length=50)
 
 
 def register(app, authenticate, require_live):

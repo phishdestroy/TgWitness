@@ -1,6 +1,6 @@
 import asyncio
 
-from fastapi import Depends, HTTPException, Request
+from fastapi import Depends, HTTPException, Query, Request
 
 from . import ai, translation
 from .translation import Generate, Request as TranslationRequest
@@ -22,13 +22,14 @@ def register(app, authenticate, require_live, visible_chats):
             raise HTTPException(409, str(exc)) from None
 
     @app.get("/api/translations", dependencies=[Depends(authenticate)])
-    async def translations(request: Request, chat_id: int, target: str | None = None):
+    async def translations(request: Request, chat_id: int = Query(ge=-(2**63), le=2**63 - 1),
+                           target: str | None = None):
         allowed(request, chat_id)
         found = await call(translation.latest, app.state.store, chat_id, target)
         return {"items": {str(seq): item for seq, item in found.items()}, "ai": ai.enabled(app.state)}
 
     @app.get("/api/translations/languages", dependencies=[Depends(authenticate)])
-    async def languages(request: Request, chat_id: int, target: str = "en"):
+    async def languages(request: Request, chat_id: int = Query(ge=-(2**63), le=2**63 - 1), target: str = "en"):
         allowed(request, chat_id)
         if translation.language_name(target.lower()) is None:
             raise HTTPException(422, "Choose a supported two-letter target language.")
