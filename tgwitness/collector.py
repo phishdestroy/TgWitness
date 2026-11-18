@@ -128,6 +128,8 @@ APPROVER_KEPT = ("Other sessions were ended. The session that approved this work
                  "ending it would also end this workspace's session.")
 APPROVER_KEPT_MEANING = ("The session that approved this workspace's sign-in was left signed in, because Telegram ends "
                          "a session approved by QR code when the approving session ends.")
+INTERRUPTED_MEANING = ("Sessions are ended one at a time here. Telegram refused or did not answer the next one "
+                       "(interrupted_by); sessions_ended counts those ended before it.")
 AUTO_ONLY_SESSION_AFTER = 24 * 3600
 TAKEOUT_FRESH_SECONDS = 24 * 3600
 TAKEOUT_SKIPPED_MEANING = {
@@ -3146,6 +3148,7 @@ class Collector:
         others_before = len((snapshot_before or {}).get("others", []))
         listed = await asyncio.wait_for(self.client(functions.account.GetAuthorizationsRequest()), 30)
         approver = self.approving_hash(listed.authorizations)
+        ended = 0
         try:
             if approver is None:
                 await asyncio.wait_for(self.client(functions.auth.ResetAuthorizationsRequest()), 30)
@@ -3153,14 +3156,22 @@ class Collector:
                 for entry in listed.authorizations:
                     if not entry.current and entry.hash != approver:
                         await asyncio.wait_for(self.client(functions.account.ResetAuthorizationRequest(hash=entry.hash)), 30)
-        except FreshResetAuthorisationForbiddenError:
-            raise ValueError("Telegram lets a session end other sessions only after it has been signed in for "
-                             "24 hours.") from None
+                        ended += 1
+        except (Exception, asyncio.CancelledError) as exc:
+            if ended:
+                self.store.append("account.all_other_sessions_terminated", {
+                    "sessions_before": others_before, "sessions_ended": ended, "initiated_by": "this workspace",
+                    "interrupted_by": type(exc).__name__, "kept_approving_session": True,
+                    "meaning": APPROVER_KEPT_MEANING + " " + INTERRUPTED_MEANING})
+            if isinstance(exc, FreshResetAuthorisationForbiddenError):
+                raise ValueError("Telegram lets a session end other sessions only after it has been signed in for "
+                                 "24 hours.") from None
+            raise
         snapshot_after = await self.check_sessions()
         others_after = len((snapshot_after or {}).get("others", []))
         self.store.append("account.all_other_sessions_terminated", {
             "sessions_before": others_before, "sessions_after": others_after,
-            "initiated_by": "this workspace",
+            "initiated_by": "this workspace", **({"sessions_ended": ended} if approver is not None else {}),
             **({"kept_approving_session": True, "meaning": APPROVER_KEPT_MEANING} if approver is not None else {})})
         return {"terminated": others_before - others_after, "remaining_others": others_after,
                 "kept_approving_session": approver is not None}

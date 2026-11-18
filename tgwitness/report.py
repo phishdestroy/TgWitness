@@ -1937,6 +1937,7 @@ def report_material(context):
                  ("activity_chart", "hourly_chart", "participant_chart", "chat_chart", "composition_chart")) else None
     if analytics:
         report_chat_timeline.titled(analytics.get("chat_timeline"), digest.get("titles"))
+        report_chat_timeline.titled(analytics.get("chats"), digest.get("titles"))
         analytics["participant_labels"] = options["participant_labels"]
         analytics["source"] = {"file": "events.jsonl", "sha256": context.get("events_sha256"),
                                "journal_head": context.get("head_hash"), "records": context.get("event_count")}
