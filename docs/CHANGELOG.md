@@ -47,6 +47,9 @@
   the download then broke off, and notes added after the export did not keep **Delete** unavailable. A completed
   download from **Prepared exports** or of a group export also counts. A workspace that already has notes needs one
   new complete export before it can be deleted.
+- `verify.py --interactive --require evidence|attested` applies the required profile and exits 2 when it is not
+  reached, as the direct command does; before, the interactive run dropped `--require` and could exit 0.
+  `--compare` refuses `--require` before reading the archives instead of ignoring it.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".

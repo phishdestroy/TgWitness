@@ -137,6 +137,9 @@ python -m tgwitness.verify first.zip --compare second.zip \
   --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
 ```
 
+`--require` and `--require-tier` are refused together with `--compare`; check the required
+profile of each archive with its own verification.
+
 When both archives record the same numeric account and chat IDs, records are paired
 by message ID. **Unchanged** means equality of the complete saved JSON record:
 full text, author, dates, reply target, nested metadata and unknown fields are all
