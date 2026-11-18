@@ -43,7 +43,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=2"></script>
-<script defer src="/app.js?v=0.9.3-join3"></script>
+<script defer src="/app.js?v=0.9.3-join4"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=17"></script>
@@ -941,7 +941,7 @@
     <p class="hint">Save your choices, then download HTML, PDF or the signed ZIP. A preview can become outdated as new records arrive.</p>
     </fieldset>
     <p class="hint" id="report-status" role="status"></p>
-    <p class="hint">Every report is sealed: a signature inside the file covers each of its bytes. Readers check it in the browser by dropping the file onto the report, or with <code>python verify.py report.html --fingerprint …</code>. The archive also carries <code>custody.json</code> and <code>SHA256SUMS</code>.</p>
+    <p class="hint">Each report is sealed with the workspace key. HTML: the seal covers every byte; drop the file onto its Report tab or run <code>python verify.py report.html --fingerprint TRUSTED_SHA256</code>. JSON: the seal covers the canonical content of the report, not its formatting; run the same command with <code>report.json</code>. PDF: it also carries a PDF signature over its signed byte range; check it with <code>verify.py</code> or a PDF reader. To prove the exact bytes of a delivered file, compare its SHA-256 with the receipt or the signed manifest. The archive also carries <code>custody.json</code> and <code>SHA256SUMS</code>.</p>
   </form>
   <details class="verification-details" data-mode-anchor data-mode-feature="verification" id="verification-details"><summary>Verification and evidence</summary>
     <p class="hint">Automatic timestamps and an encrypted off-site copy: <a data-go-extra="evidence" href="#">Extras → Evidence that holds up</a>.</p>

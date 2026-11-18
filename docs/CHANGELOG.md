@@ -36,6 +36,9 @@
   of the error type alone.
 - The interactive report names mini application and pseudo-secret records in the report language instead of showing
   the internal record type.
+- **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
+  preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
+  open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.
 - The chat search on **Chats** now searches Telegram itself, as the Telegram app does. Under the saved chats and the
   account's own chats it lists **Global search**: chats the account is in and public channels, groups, bots and people
   found by name or username through `contacts.search` (`GET /api/telegram-search`, permission `sources`). A chat the
@@ -63,6 +66,10 @@
   saves nothing. Before, pressing it in the palette saved the changed report settings behind it.
 - The command palette lists **Investigation** by name and opens its panel. Before, it showed an unnamed entry whose
   selection raised a JavaScript error; entries now open only sections that exist.
+- Report Studio explains verification per format: the HTML seal covers every byte and is checked in the report or
+  with verify.py; the JSON seal covers the report's canonical content, not its formatting; the PDF also carries a PDF
+  signature; the exact bytes of a delivered file are compared by SHA-256 with the receipt or signed manifest. Before,
+  one sentence said every report's seal covers all of its bytes and can be checked by dropping it onto the report.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
