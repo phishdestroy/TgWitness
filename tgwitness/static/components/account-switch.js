@@ -50,7 +50,7 @@ export function createAccountSwitch({node, icon, tr, avatar, profiles, current, 
     const item = entry(selected || {id: current(), label: tr("Main workspace")});
     const key = item.id + ":" + (item.account?.id || "") + ":" + item.problems;
     if (key !== faceKey) {faceKey = key; face.replaceChildren(picture(item, "sm"));}
-    name.textContent = item.title;
+    name.textContent = item.title; name.title = item.title;
     line.replaceChildren(chip(item));
     if (item.handle && item.handle !== item.title) line.append(node("span", "account-switch-handle", item.handle));
     button.setAttribute("aria-label", tr("Accounts") + ": " + describe(item));

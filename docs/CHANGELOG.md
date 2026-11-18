@@ -38,6 +38,8 @@
   Deletions are then matched to a session check only if one ran in the 10 minutes before. With an imported
   session key, chat and account exports use the regular session instead of Takeout until the session list is read,
   because the session's sign-in time is unknown (`session_age_unknown`).
+- The workspace menu shows each workspace's full name, wrapping a long one onto a second line instead of cutting
+  it with an ellipsis, and the name in the top bar carries the full name as its tooltip.
 - A reply whose original is outside the loaded messages offers **show the original**: the panel loads the saved
   messages around it, highlights it and shows **Back to reply**, which returns to the reply. If the original is not
   saved in the workspace, the panel says so and suggests loading older history from Telegram. A chat reopened in the
