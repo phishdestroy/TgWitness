@@ -97,6 +97,8 @@ def moment(value):
 
 def titled(chart, titles):
     for row in (chart or {}).get("rows") or []:
+        if "id" not in row:
+            continue
         title = (titles or {}).get(row["id"]) or (titles or {}).get(str(row["id"]))
         if title:
             row["title"] = str(title)
