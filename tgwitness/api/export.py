@@ -492,7 +492,8 @@ async def export(
         else "tgwitness-evidence." + fmt
     )
     return TemporaryDownload(
-        path, filename=name, media_type=MEDIA_TYPES[fmt], headers=headers
+        path, filename=name, media_type=MEDIA_TYPES[fmt], headers=headers,
+        delivered=ctx.export_delivered(headers),
     )
 
 
@@ -518,6 +519,7 @@ async def export_encrypted(
         media_type=("application/zip" if body.encryption == "zip" else "application/octet-stream")
         if encrypted else media_types[fmt],
         headers=headers,
+        delivered=ctx.export_delivered(headers),
     )
 
 
@@ -644,7 +646,7 @@ async def export_ticket(
 async def export_again(
     export_id: str, request: Request, *, ctx=Depends(current_context)
 ):
-    from ..export_history import download_copy, headers
+    from ..export_history import delivered, download_copy, headers
 
     credential = await ctx.authorize_download(request, export_id)
     receipt = {}
@@ -686,6 +688,7 @@ async def export_again(
             + extension,
             media_type="application/octet-stream",
             headers={**headers(receipt), "Cache-Control": "no-store"},
+            delivered=lambda: delivered(ctx.app.state.store, receipt),
         )
     except BaseException:
         path.unlink(missing_ok=True)
@@ -967,6 +970,7 @@ class ExportOperations:
                         workspace=self.profile_id,
                         required_permissions=permissions,
                         encryption=encryption,
+                        covers=covers,
                     )
                 )
                 return path
@@ -976,6 +980,12 @@ class ExportOperations:
 
         sealed = await self.seal_export() if fmt in SEALED_FORMATS else {}
         head = self.app.state.store.stats()["head"]["seq"]
+        covers = None
+        if fmt in ("zip", "asice"):
+            with self.app.state.store.reading() as db:
+                annotations = 0 if not include_board else (
+                    sealed["annotations"] if sealed.get("through") else export_history.annotations_head(db))
+            covers = {"seq": sealed.get("through") or head, "annotations": annotations}
         async with self.export_lock, self.app.state.storage.lock:
             if fmt in ("zip", "asice"):
                 try:
@@ -1006,8 +1016,6 @@ class ExportOperations:
         except BaseException:
             path.unlink(missing_ok=True)
             raise
-        if fmt in ("zip", "asice"):
-            export_history.evidence_exported(self.app.state.store, sealed.get("through") or head)
         headers = export_history.headers(receipt)
         headers["X-TgWitness-Sealed-Through"] = str(sealed["through"]) if sealed.get("through") else "none"
         if container is not None:
@@ -1039,7 +1047,10 @@ class ExportOperations:
         folder = store.root / "checkpoints" / "anchors"
         stamped = folder.is_dir() and any(proof.name.startswith(name + ".") and proof.suffix == ".tsr"
                                           for proof in folder.iterdir())
-        return {"through": through} if through and stamped else {"skipped": "no timestamp authority answered"}
+        noted = (checkpoint["statement"].get("annotations_head") or {"seq": 0})["seq"]
+        if through and stamped:
+            return {"through": through, "annotations": noted}
+        return {"skipped": "no timestamp authority answered"}
 
     def export_timestamp(self, loop):
         from ..anchoring import evidence_settings, post
@@ -1081,6 +1092,12 @@ class ExportOperations:
         await self.recheck_export_scope(request, [chat for chat in chats if chat is not None])
         if not self.export_visible(request, export_id):
             raise HTTPException(403, "This chat is not open to this access.")
+
+    def export_delivered(self, headers):
+        from ..export_history import delivered, metadata
+
+        store, ident = self.app.state.store, headers.get("X-TgWitness-Export-ID")
+        return lambda: delivered(store, metadata(store, ident))
 
     def require_prepared_access(self, request, entry):
         from ..export_history import permitted
