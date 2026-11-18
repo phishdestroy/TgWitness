@@ -129,6 +129,19 @@
   `tgwitness-<profile>-<export>.pdf` or `.html`. A password-protected PDF or JSON report holds the file under the
   same name, `tgwitness-report.pdf` or `tgwitness-report.json`, instead of `tgwitness-evidence.pdf` or `.json`. The
   case assessment of a chat export points to `../tgwitness-chat-export.zip`, like its Verify section.
+- The panel says that a chat export, handover, account archive, disclosure, group export or flight record was saved
+  only after it wrote the file through the browser's save picker. When it hands the file to the browser's downloads it
+  says that the download started, and the chat export keeps **Download signed bundle**. Before, it reported
+  "downloaded" or "saved" as soon as the browser took the file, also when its save dialog was then cancelled, and hid
+  the chat export's button. The Storage panel now lists the local files kept in `storage-conflicts/` because their
+  bytes differed from the signed journal hash, `python -m tgwitness.storage recover` prints each with both hashes and
+  its path, and a full evidence export asks to restore such a file first; before, the conflict was only a journal
+  record and the export failed with a general error. `python -m tgwitness.storage recover` runs again; since the
+  storage module became a package it stopped with "No module named tgwitness.storage.__main__". On Windows an
+  attachment, a decrypted secret-chat file and a file restored from storage are renamed into `media/` with
+  `MoveFileExW` write-through, which Windows documents as returning once the move is on disk; secret-chat and restored
+  files are now also flushed, with the folder entry on Linux and macOS, before they are recorded. Before, Windows
+  renamed them without a flush, and secret-chat and restored files were not flushed at all.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is

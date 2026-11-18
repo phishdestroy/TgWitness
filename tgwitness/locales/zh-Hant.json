@@ -10237,5 +10237,6 @@
   "Check files": "檢查檔案",
   "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "選擇檔案或貼上會話文字不會傳送任何內容。<strong>檢查檔案</strong>會將其傳送到執行此面板的 TgWitness 伺服器；伺服器在不登入 Telegram 的情況下讀取它們。",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram 僅將這些聊天記錄保留在單一裝置上。TgWitness 透過該帳號自身的授權參與其中，並將每則訊息、計時器及刪除通知記錄在簽署過的日誌中，即使對方已刪除這些內容亦然。它僅會根據「對方所見的內容」下的設定選擇性地傳送已讀回執和輸入狀態，且絕不會傳送螢幕截圖通知。當附件下載已開啟且檔案大小與磁碟可用空間允許時，檔案才會儲存；在此之前檔案會留在佇列中，每次延後或失敗的下載都會被記錄。",
-  "Recorded in the journal": "已記錄於日誌"
+  "Recorded in the journal": "已記錄於日誌",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} 個本機檔案與簽名日誌中的雜湊不符。其位元組已原封不動保存在此工作區的 storage-conflicts 資料夾中，名稱為 EXPECTED_SHA256.LOCAL_SHA256；每一筆都以 storage.local_conflict 記錄於日誌。"
 }

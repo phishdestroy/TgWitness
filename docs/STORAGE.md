@@ -133,7 +133,11 @@ a local file as present only when its size and SHA-256 match the receipt, so **R
 all files** also restores a local file whose bytes differ. Those bytes are not
 overwritten: once the verified copy is ready they are moved unchanged to
 `storage-conflicts/EXPECTED_SHA256.LOCAL_SHA256`, the journal records
-`storage.local_conflict`, and the restore result lists each conflict.
+`storage.local_conflict`, and the restore result lists each conflict. The Storage
+panel shows how many files `storage-conflicts/` holds and lists the first 20 with
+their size; the `recover` command prints each conflict with both hashes and its
+path. Until such a file is restored, a full evidence export asks you to restore all
+files first.
 
 ## Recover after losing the installation
 

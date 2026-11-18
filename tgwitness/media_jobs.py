@@ -248,6 +248,20 @@ def sync_directory(path):
             os.close(descriptor)
 
 
+def durable_replace(source, target):
+    if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+        replace_existing, write_through = 0x1, 0x8
+        move = ctypes.WinDLL("kernel32", use_last_error=True).MoveFileExW
+        move.argtypes, move.restype = (wintypes.LPCWSTR, wintypes.LPCWSTR, wintypes.DWORD), wintypes.BOOL
+        if not move(str(source), str(target), replace_existing | write_through):
+            raise ctypes.WinError(ctypes.get_last_error())
+    else:
+        os.replace(source, target)
+        sync_directory(Path(target).parent)
+
+
 def reuse_download(directory, saved, size):
     if saved is None or saved["bytes"] != size:
         return None
@@ -265,8 +279,7 @@ def reuse_download(directory, saved, size):
             if not intact(temporary, digest, size):
                 return None
             sync_file(temporary)
-            temporary.replace(target)
-            sync_directory(directory)
+            durable_replace(temporary, target)
         return {"sha256": digest, "source": saved["source"]}
     except OSError:
         return None

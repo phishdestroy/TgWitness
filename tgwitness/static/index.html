@@ -43,8 +43,8 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=2"></script>
-<script defer src="/app.js?v=0.9.3-anchor1"></script>
-<script defer src="/services.js?v=1"></script>
+<script defer src="/app.js?v=0.9.3-anchor1-m"></script>
+<script defer src="/services.js?v=1-m"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=17"></script>
 <script defer src="/account-import.js?v=6"></script>
@@ -1283,7 +1283,7 @@
       <p class="services-warning">A hash cannot restore a file. Keep the recovery file and access to your cloud. Restore offloaded files before a full evidence export; the original journal is never deleted or rewritten.</p>
       <div class="storage-actions"><button class="primary" type="submit">Save storage settings</button><button class="secondary" id="storage-test" type="button">Test upload &amp; download</button><button class="secondary" id="storage-copy" type="button">Copy now</button><button class="quiet" id="storage-restore" type="button">Restore all files</button><button class="quiet" id="storage-recovery" type="button">Save recovery file</button></div>
       <details><summary>Recover files from a saved recovery file</summary><label>Signed recovery file<input id="storage-recovery-import" type="file" accept=".json,application/json"></label><p class="hint">For recovery on a new machine, use the recovery command in the storage guide. Keep the recovery file private: it contains the file decryption key.</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STORAGE.md" target="_blank" rel="noopener noreferrer">Storage and recovery guide ↗</a></details>
-    </form><div class="storage-stats" id="storage-stats"></div><p class="hint" id="storage-disk-status" role="status"></p><p class="hint" id="storage-status" role="status"></p>
+    </form><div class="storage-stats" id="storage-stats"></div><p class="hint" id="storage-disk-status" role="status"></p><p class="hint" id="storage-status" role="status"></p><div class="hint" id="storage-conflicts" hidden></div>
   </div>
 
   <div class="extra-panel" id="extras-setup" hidden role="region" aria-labelledby="extras-setup-title">

@@ -96,7 +96,7 @@ export function createGroupView(ctx){
       const consent=owner(),label=data.group.label;
       if(!(await window.TgWitnessDialogs.confirm(tr('Export the records of every account in the group {name}?',{name:label}),{confirmText:tr('Prepare export')})))return;
       if(!consent.current())return;
-      if(await ctx.exportGroup(consent.id,label,consent)!==false&&consent.current())toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
+      if(await ctx.exportGroup(consent.id,label,consent)===true&&consent.current())toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
     });
     save.title=tr('Each account’s signed export in one ZIP, with a manifest signed by the main workspace.');
     for(const b of [route,goal,settings])b.disabled=working||!data.members.length;

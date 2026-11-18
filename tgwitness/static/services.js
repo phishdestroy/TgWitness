@@ -12,7 +12,7 @@
     else el.textContent=name.slice(0,1).toUpperCase();return el;
   }
   panelQueries('[data-service-icons]').forEach(row=>row.dataset.serviceIcons.split(',').forEach(name=>row.append(brand(name))));
-  function clear(){bound=null;storageDirty=botDirty=false;selected=null;loading=null;show('service-setup',false);$('service-setup').replaceChildren();$('storage-form').reset();$('operator-bot-form').reset();$('services-search').value='';}
+  function clear(){bound=null;storageDirty=botDirty=false;selected=null;loading=null;show('service-setup',false);$('service-setup').replaceChildren();show('storage-conflicts',false);$('storage-conflicts').replaceChildren();$('storage-form').reset();$('operator-bot-form').reset();$('services-search').value='';}
   function list(){
     if(!catalog)return;
     const query=$('services-search').value.toLowerCase().trim(),box=$('services-catalog');box.replaceChildren();
@@ -68,6 +68,9 @@
     $('storage-disk-status').textContent=tr(disk?.pressure_active?'Low-space offload is active. Eligible files are processed in batches; errors or no eligible files delay the next attempt by five minutes.':disk?.pressure_configured?'Low-space offload is armed. The signed journal stays local.':'Low-space offload is inactive. Enable automatic offloading and the low-space rule to use it.');
     $('storage-status').textContent=data.busy?tr('Storage operation in progress…'):data.last?.error?tr(data.last.error):data.last?.at?tr('Last pass: {time}',{time:fmtFull(data.last.at)}):tr('Ready to configure.');
     if(data.last?.skipped_space)$('storage-status').textContent+=' '+tr('{count} file(s) kept because packing needs more space. Smallest required free space, including reserve: {size}.',{count:data.last.skipped_space,size:humanSize(data.last.required_free_bytes)});
+    const kept=data.local_conflicts,conflicts=$('storage-conflicts');conflicts.replaceChildren();show('storage-conflicts',!!kept?.count);
+    if(kept?.count)conflicts.append(node('p','',tr('{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.',{count:kept.count})),
+      node('pre','',kept.files.map(file=>file.kept_as+' · '+humanSize(file.bytes)).join('\n')+(kept.count>kept.files.length?'\n…':'')));
     for(const id of ['storage-copy','storage-test','storage-restore','storage-install'])$(id).disabled=data.busy||!!state.status?.demo;
   }
   async function load(){
