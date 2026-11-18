@@ -62,7 +62,7 @@ RETRY = {"The provider returned an unsupported response.",
 
 class Create(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    chat_id: int
+    chat_id: int = Field(ge=-(2**63), le=2**63 - 1)
     title: str = Field(default="", max_length=160)
     template: Literal["payment", "infrastructure", "people", "custom"] = "custom"
 

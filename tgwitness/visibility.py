@@ -93,7 +93,7 @@ class Override(BaseModel):
 class Change(BaseModel):
     model_config = ConfigDict(extra="forbid")
     workspace: Fields | None = None
-    chat_id: int | None = None
+    chat_id: int | None = Field(None, ge=-(2**63), le=2**63 - 1)
     secret: StrictBool = False
     override: Override | None = None
 

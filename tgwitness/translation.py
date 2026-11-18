@@ -28,7 +28,7 @@ MEANING = "Machine translation suggested to the investigator. The original recor
 
 class Request(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    chat_id: int
+    chat_id: int = Field(ge=-(2**63), le=2**63 - 1)
     seqs: list[int] = Field(min_length=1, max_length=MAX_ITEMS)
     target: str = Field(default="en", min_length=2, max_length=2)
     include_target_language: StrictBool = False
@@ -36,7 +36,7 @@ class Request(BaseModel):
     @field_validator("seqs")
     @classmethod
     def records(cls, value):
-        if any(seq < 1 for seq in value):
+        if any(not 1 <= seq < 2**63 for seq in value):
             raise ValueError("Choose journal records to translate.")
         return list(dict.fromkeys(value))
 

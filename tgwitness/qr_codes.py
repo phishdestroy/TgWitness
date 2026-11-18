@@ -126,7 +126,7 @@ def listing(store, chat_id=None, limit=500):
 def register(app, authenticate, require_live, visible_chats, media_root):
     import asyncio
 
-    from fastapi import Depends, HTTPException, Request
+    from fastapi import Depends, HTTPException, Query, Request
 
     def allowed(request, chat_id):
         chats = visible_chats(request)
@@ -142,7 +142,7 @@ def register(app, authenticate, require_live, visible_chats, media_root):
             raise HTTPException(422, str(exc)) from None
 
     @app.get("/api/qr", dependencies=[Depends(authenticate)])
-    async def codes(request: Request, chat_id: int | None = None):
+    async def codes(request: Request, chat_id: int | None = Query(None, ge=-(2**63), le=2**63 - 1)):
         if chat_id is not None:
             allowed(request, chat_id)
         elif visible_chats(request) is not None:
@@ -151,7 +151,8 @@ def register(app, authenticate, require_live, visible_chats, media_root):
                 "codes": await call(listing, app.state.store, chat_id)}
 
     @app.post("/api/qr/scan", dependencies=[Depends(authenticate)])
-    async def scan_images(request: Request, chat_id: int | None = None, limit: int = MAX_SCAN):
+    async def scan_images(request: Request, chat_id: int | None = Query(None, ge=-(2**63), le=2**63 - 1),
+                          limit: int = MAX_SCAN):
         require_live()
         if chat_id is not None:
             allowed(request, chat_id)

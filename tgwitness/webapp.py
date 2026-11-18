@@ -457,7 +457,7 @@ async def open_app(collector, chat_id, entry):
 
 
 def register(app, authenticate, require_live, visible_chats):
-    from fastapi import Depends, HTTPException, Request
+    from fastapi import Depends, HTTPException, Path, Query, Request
     from pydantic import BaseModel, ConfigDict, Field
     from typing import Literal
 
@@ -484,7 +484,7 @@ def register(app, authenticate, require_live, visible_chats):
             raise HTTPException(403, "This chat is not open to this access.")
 
     @app.get("/api/webapp", dependencies=[Depends(authenticate)])
-    async def listing(request: Request, chat_id: int, limit: int = 200):
+    async def listing(request: Request, chat_id: int = Query(ge=-(2**63), le=2**63 - 1), limit: int = 200):
         visible(request, chat_id)
         if not 1 <= limit <= 1000:
             raise HTTPException(422, "Read between 1 and 1000 records at a time.")
@@ -498,7 +498,8 @@ def register(app, authenticate, require_live, visible_chats):
                                                                   if key != "path"}}
 
     @app.get("/api/webapp/captures/{seq}", dependencies=[Depends(authenticate)])
-    async def capture_record(request: Request, seq: int, chat_id: int):
+    async def capture_record(request: Request, seq: int = Path(ge=1, le=2**63 - 2),
+                             chat_id: int = Query(ge=-(2**63), le=2**63 - 1)):
         visible(request, chat_id)
         rows = app.state.store.events(chat_id=chat_id, kind="webapp.captured", before=seq + 1, limit=1)
         if not rows or rows[0]["seq"] != seq:
