@@ -423,7 +423,7 @@ async def open_app(collector, chat_id, entry):
     saved = keep(store, files, chat_id, message_id, launched["seq"])
     requests = facts.get("requests") or []
     hosts = sorted({(urlsplit(item.get("url") or "").hostname or "").lower()
-                    for item in requests + (facts.get("sockets") or []) + (facts.get("popups") or [])} - {""})
+                    for item in requests + (facts.get("sockets") or [])} - {""})
     origin = (urlsplit(facts.get("final_url") or address).hostname or "").lower()
     first = (urlsplit(webapp_browser.public_address(address)).hostname or "").lower()
     asks = asks_of(facts.get("telegram_events"))
@@ -436,6 +436,7 @@ async def open_app(collector, chat_id, entry):
         "route": route.kind, "duration_ms": facts.get("duration_ms"), "status": facts.get("status"),
         "hosts": hosts, "third_party_hosts": [host for host in hosts if host not in (origin, first)],
         "requests": requests, "sockets": facts.get("sockets") or [], "connections": facts.get("connections") or [],
+        "browser_connections": facts.get("browser_connections") or [],
         "blocked": facts.get("blocked") or [], "telegram_events": facts.get("telegram_events") or [], "asks": asks,
         "dialogs": facts.get("dialogs") or [], "popups": facts.get("popups") or [], "downloads": facts.get("downloads") or [],
         "console": [line for line in facts.get("console") or [] if line.get("level") in ("error", "warning")][:30],

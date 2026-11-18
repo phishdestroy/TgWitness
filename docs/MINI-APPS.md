@@ -42,8 +42,8 @@ Only the main administrator can open a mini application.
 - every call the page makes to the Telegram WebApp API, for example a request for
   the phone number, a payment, opening a link or sending data to the bot; requests
   that ask something of the user are flagged;
-- dialogs it showed (they are dismissed), windows it opened, downloads it
-  started, forms and input fields;
+- dialogs it showed (they are dismissed), windows it tried to open (with their
+  address; they are not loaded), downloads it started, forms and input fields;
 - screenshots 2, 8 and 16 seconds after loading and of the whole page, the page as
   it was after loading and up to 25 of its scripts;
 - links, domains, wallets, Telegram accounts, e-mail addresses and phone numbers
@@ -75,9 +75,13 @@ TgWitness drives Chromium over `--remote-debugging-pipe`; no extra Python packag
 is needed. It looks for `chromium`, `chromium-browser`, `google-chrome` and a
 Playwright Chromium; set `TGWITNESS_CHROMIUM` to a path to choose one.
 
-Every connection the browser makes, WebSockets included, goes through a loopback
-gate that opens it over the workspace route like any other request outside
-Telegram. When that route is turned off, or Hide IP mode is on without a proxy,
+The application runs in its own browser context. Every connection it makes,
+WebSockets included, goes through a loopback gate that opens it over the
+workspace route like any other request outside Telegram. Chromium's own
+background requests (sign-in, component updates) go to a second gate that refuses
+them; a Google host the browser contacts on its own, and the page never asked
+for, is listed under `browser_connections` instead of the application's
+connections. When that route is turned off, or Hide IP mode is on without a proxy,
 the application is not opened. Addresses inside the local network are refused, and
 WebRTC cannot send UDP outside the route.
 
