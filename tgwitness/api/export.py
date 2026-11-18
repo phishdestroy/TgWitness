@@ -1049,7 +1049,7 @@ class ExportOperations:
         from ..verify import ots_summary
 
         folder = store.root / "checkpoints" / "anchors"
-        proofs =[proof for proof in folder.iterdir() if proof.name.startswith(name + ".")] if folder.is_dir() else []
+        proofs = [proof for proof in folder.iterdir() if proof.name.startswith(name + ".")] if folder.is_dir() else []
         found = {"rfc3161"} if any(proof.suffix == ".tsr" for proof in proofs) else set()
         digest = hashlib.sha256((store.root / "checkpoints" / (name + ".json")).read_bytes()).digest()
         for proof in proofs:
