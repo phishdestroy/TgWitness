@@ -261,6 +261,14 @@ async def channel_facts(collector, chat):
                                           "about": full.about or None}.items() if value is not None}
 
 
+def invite_kind(invite):
+    if getattr(invite, "broadcast", False):
+        return "channel"
+    if getattr(invite, "megagroup", False) or getattr(invite, "channel", False):
+        return "supergroup"
+    return "group"
+
+
 async def preview(collector, body):
     check_pause(collector)
     target = parse_link(body.link)
@@ -269,7 +277,7 @@ async def preview(collector, body):
         entity = await collector.client(functions.messages.CheckChatInviteRequest(target["invite"]))
         chat = getattr(entity, "chat", None)
         title = getattr(entity, "title", None) or utils.get_display_name(chat)
-        kind = kind_of(chat) if chat else "group"
+        kind = kind_of(chat) if chat else invite_kind(entity)
         member = isinstance(entity, types.ChatInviteAlready)
     else:
         entity = chat = await collector.client.get_entity(target["username"])

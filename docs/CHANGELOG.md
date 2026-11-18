@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- Previewing an invite link records the chat as a channel or supergroup when the invite says so; before, every invite
+  to a chat the account had not joined was recorded as a group in `interaction.preview`.
 - A new workspace's connection screen no longer names two routes at once: until the account signs in, the route bar
   reads "Chosen at sign-in" and **What Telegram sees** follows the route picked in the sign-in form, instead of the
   public MTProxy default the form replaces. The route bar updates when the route changes, for example after signing
