@@ -83,6 +83,8 @@
   archive with its own key. Inside an archive they name the original ZIP as `../tgwitness-evidence.zip`, as README.txt
   does, and the HTML says to run them from the extracted folder; before, the HTML command failed there with
   FileNotFoundError.
+- **Choose the ZIP** and **Choose the folder** on a report's Check tab are buttons reachable with Tab and opened
+  with Enter or Space; before, they were labels around hidden file fields and the keyboard skipped them.
 
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
