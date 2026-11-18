@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "Vitrin erişimi oluşturuldu. İstediğiniz zaman iptal edebilirsiniz.",
   "Showcase link copied.": "Vitrin bağlantısı kopyalandı.",
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
-  "Global search": "Genel arama"
+  "Global search": "Genel arama",
+  "Checkpoint not timestamped": "Kontrol noktası zaman damgası almadı",
+  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede"
 }

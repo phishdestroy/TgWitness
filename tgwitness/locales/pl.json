@@ -10361,5 +10361,7 @@
   "Showcase access created. You can revoke it at any time.": "Dostęp do wizytówki utworzony. Możesz go odwołać w dowolnej chwili.",
   "Showcase link copied.": "Link do wizytówki skopiowany.",
   "Select and copy the link.": "Zaznacz i skopiuj link.",
-  "Global search": "Wyszukiwanie globalne"
+  "Global search": "Wyszukiwanie globalne",
+  "Checkpoint not timestamped": "Punkt kontrolny bez znacznika czasu",
+  "Checkpoint timestamp pending": "Znacznik czasu punktu kontrolnego oczekuje"
 }

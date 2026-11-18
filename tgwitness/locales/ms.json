@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "Akses pameran dicipta. Anda boleh membatalkannya pada bila-bila masa.",
   "Showcase link copied.": "Pautan pameran disalin.",
   "Select and copy the link.": "Pilih dan salin pautan.",
-  "Global search": "Carian global"
+  "Global search": "Carian global",
+  "Checkpoint not timestamped": "Titik semak tidak dicap masa",
+  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan"
 }

@@ -430,6 +430,13 @@ const labels = {
   "workspace.mode_changed": [tr("Protection mode changed"), "shield", "system"],
   "handover.exported": [tr("Handover extract prepared"), "export", "system"],
 };
+function eventLabel(e){
+  const label=labels[e.kind]||[e.kind,"activity","system"];
+  if(e.kind!=="anchor.completed")return label;
+  const p=e.payload||{},done=[...(Array.isArray(p.results)?p.results.filter(r=>r?.ok):[]),...(Array.isArray(p.covered)?p.covered:[])];
+  if(done.some(r=>r?.kind!=="opentimestamps"))return label;
+  return done.length?[tr("Checkpoint timestamp pending"),"clock","system"]:[tr("Checkpoint not timestamped"),"alert","coverage"];
+}
 function secretActionText(p){
   const d=p.details||{},n=(d.random_ids||[]).length;
   return {DeleteMessages:trn("The other side deleted {n} message; TgWitness keeps it.","The other side deleted {n} messages; TgWitness keeps them.",n),FlushHistory:tr("The other side cleared the history; TgWitness keeps it."),
@@ -2081,7 +2088,11 @@ function excerpt(e) {
   if (e.kind==="replica.completed") return p.error?tr("Stopped: {error}",{error:errorName(p.error)||p.error}):tr("{n} encrypted object(s), {size}",{n:p.objects,size:humanSize(p.bytes)});
   if (e.kind==="alerts.changed") return p.enabled?tr("On · {n} destination(s)",{n:p.destinations}):tr("Off");
   if (e.kind==="replica.changed") return p.enabled?tr("On · {bucket} · every {n} min",{bucket:p.bucket,n:p.interval_minutes}):tr("Off");
-  if (e.kind==="anchor.completed") return tr("{ok} of {total} services answered for the checkpoint of {n} records",{ok:p.results.filter(r=>r.ok).length,total:p.results.length,n:p.checkpoint.event_count});
+  if (e.kind==="anchor.completed"){
+    const failed=p.results.filter(r=>!r.ok),reasons=[...new Set(failed.map(r=>r.error).filter(Boolean))];
+    return tr("{ok} of {total} services answered for the checkpoint of {n} records",{ok:p.results.filter(r=>r.ok).length,total:p.results.length,n:p.checkpoint.event_count})
+      +(failed.length===p.results.length&&!(p.covered||[]).length&&reasons.length===1?" · "+(errorName(reasons[0])||tr(reasons[0])):"");
+  }
   if (e.kind==="source.checked") return (p.matches?tr("Matches"):tr("Differs"))+" · "+p.repository.replace("https://github.com/","")+" @ "+p.commit.slice(0,12);
   if (e.kind==="evidence.changed") return p.enabled?tr("On · every {n} min · {services} services",{n:p.interval_minutes,services:p.tsa_urls.length+p.ots_calendars.length}):tr("Off");
   if (e.kind==="workspace.mode_changed"){
@@ -2239,7 +2250,7 @@ function safeExcerpt(e){
 }
 let previouslyFocused;
 function eventRow(e) {
-    const label=labels[e.kind] || [e.kind,"activity","system"];
+    const label=eventLabel(e);
     const row=node("tr","event-row"); row.tabIndex=0; row.setAttribute("role","button"); row.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq}));
     const cell=node("td"), summary=node("div","event-summary"), text=node("div");
     const title=node("div","event-title",label[0]); title.append(node("span","",tr("Record #{n}",{n:e.seq})));
@@ -2394,7 +2405,7 @@ async function openDetail(e,options={}) {
   if($("detail-drawer").hidden)previouslyFocused=document.activeElement;
   state.drawerSeq=e.seq;
   if(options.history!==false)window.TgWitnessRouter?.record({view:"observations",seq:e.seq});
-  const label=labels[e.kind]?.[0]||e.kind;
+  const label=eventLabel(e)[0];
   const content=$("detail-content");content.replaceChildren();
   const h=node("h2","",label);h.id="detail-title";content.append(h);
   const meta=node("div","detail-meta");
@@ -2447,7 +2458,7 @@ async function openDetail(e,options={}) {
       }
       lineage.append(node("h3","",tr("Message observation history")));
       result.events.forEach(other=>{
-        const b=node("button","",(other.seq===e.seq ? "● " : "")+"#"+other.seq+" · "+(labels[other.kind]?.[0]||other.kind)+" · "+formatTime(other.observed_at));
+        const b=node("button","",(other.seq===e.seq ? "● " : "")+"#"+other.seq+" · "+eventLabel(other)[0]+" · "+formatTime(other.observed_at));
         b.addEventListener("click",()=>openDetail(other));lineage.append(b);
       });
       if(result.next_before)lineage.append(node("p","hint",tr("Showing the latest 500 observations for this message. The complete history is in the evidence export.")));
