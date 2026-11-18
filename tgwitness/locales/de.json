@@ -10134,7 +10134,7 @@
   "checksum valid": "Prüfsumme gültig",
   "Other hosts it contacted": "Andere Hosts, die sie kontaktiert hat",
   "Dialogs it showed": "Dialoge, die sie gezeigt hat",
-  "Windows it opened": "Fenster, die sie geöffnet hat",
+  "Windows it tried to open": "Fenster, die sie öffnen wollte",
   "Downloads it started": "Downloads, die sie gestartet hat",
   "Forms": "Formulare",
   "Input fields": "Eingabefelder",

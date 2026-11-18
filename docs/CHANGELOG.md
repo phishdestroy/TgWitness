@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- Chat search lists the account's Telegram chats again after the panel locks or switches workspace while that
+  list is loading. Before, it showed "Loading…" until the page was reloaded.
+- A mini application capture names the windows the page tried to open as such: they are recorded by address and
+  not loaded.
 - The verifier counts the checked GitHub attestation time of a sealed run as external time on the assurance ladder too.
   Before, the same output read "[met] External time" under `EVIDENCE` and `ASSURANCE: self_attested`, because only
   the evidence minimum counted that time.

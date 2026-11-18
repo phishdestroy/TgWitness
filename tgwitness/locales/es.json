@@ -10144,7 +10144,7 @@
   "checksum valid": "suma de verificación válida",
   "Other hosts it contacted": "Otros hosts que contactó",
   "Dialogs it showed": "Diálogos que mostró",
-  "Windows it opened": "Ventanas que abrió",
+  "Windows it tried to open": "Ventanas que intentó abrir",
   "Downloads it started": "Descargas que inició",
   "Forms": "Formularios",
   "Input fields": "Campos de entrada",

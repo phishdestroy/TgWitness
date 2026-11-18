@@ -10083,7 +10083,7 @@
   "checksum valid": "檢查碼有效",
   "Other hosts it contacted": "它聯絡的其他主機",
   "Dialogs it showed": "它顯示的對話框",
-  "Windows it opened": "它開啟的視窗",
+  "Windows it tried to open": "它嘗試開啟的視窗",
   "Downloads it started": "它開始的下載",
   "Forms": "表單",
   "Input fields": "輸入欄位",

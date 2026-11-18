@@ -10134,7 +10134,7 @@
   "checksum valid": "چیک سم درست",
   "Other hosts it contacted": "دیگر ہوسٹس جن سے اس نے رابطہ کیا",
   "Dialogs it showed": "اس نے جو ڈائیلاگ دکھائے",
-  "Windows it opened": "اس نے جو ونڈوز کھولیں",
+  "Windows it tried to open": "ونڈوز جو اس نے کھولنے کی کوشش کی",
   "Downloads it started": "اس نے جو ڈاؤن لوڈز شروع کیے",
   "Forms": "فارمز",
   "Input fields": "ان پٹ فیلڈز",

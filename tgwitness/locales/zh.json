@@ -10083,7 +10083,7 @@
   "checksum valid": "校验和有效",
   "Other hosts it contacted": "它联系的其他主机",
   "Dialogs it showed": "它显示的对话框",
-  "Windows it opened": "它打开的窗口",
+  "Windows it tried to open": "它尝试打开的窗口",
   "Downloads it started": "它开始的下载",
   "Forms": "表单",
   "Input fields": "输入框",

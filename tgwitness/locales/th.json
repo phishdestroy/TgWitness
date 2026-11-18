@@ -10083,7 +10083,7 @@
   "checksum valid": "checksum ถูกต้อง",
   "Other hosts it contacted": "โฮสต์อื่นที่แอปติดต่อ",
   "Dialogs it showed": "กล่องโต้ตอบที่แอปแสดง",
-  "Windows it opened": "หน้าต่างที่แอปเปิด",
+  "Windows it tried to open": "หน้าต่างที่แอปพยายามเปิด",
   "Downloads it started": "การดาวน์โหลดที่แอปเริ่ม",
   "Forms": "ฟอร์ม",
   "Input fields": "ช่องกรอกข้อมูล",

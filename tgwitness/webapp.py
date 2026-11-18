@@ -28,9 +28,10 @@ INSPECT_MEANING = ("One response fetched at this time, parsed for the addresses 
                    "load different addresses later, for another visitor or after its operator changes it. Referenced "
                    "addresses are not confirmed to exist or to have been contacted.")
 CAPTURE_MEANING = ("The mini application as a headless Chromium with a phone screen loaded it once, at this time: every "
-                   "request, WebSocket frame, Telegram call, dialog and window it opened, screenshots and the scripts it "
-                   "ran. Another visitor, time or address can be served differently. Requests, frames and calls are "
-                   "capped; the counts of dropped items are recorded.")
+                   "request, WebSocket frame, Telegram call and dialog, the address of each window it tried to open "
+                   "(windows are not loaded), screenshots and the scripts it ran. Another visitor, time or address "
+                   "can be served differently. Requests, frames and calls are capped; the counts of dropped items "
+                   "are recorded.")
 ROUTE_MEANING = ("Fetched through this workspace's route for requests outside Telegram. A direct route would show the "
                  "operator's address to the application's host.")
 ATTRIBUTES = re.compile(r"""(?i)\b(?:src|href|action|data-src|data-url|poster|formaction)\s*=\s*["']([^"'\s>]{1,2048})""")

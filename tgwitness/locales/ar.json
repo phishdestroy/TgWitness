@@ -10338,7 +10338,7 @@
   "checksum valid": "المجموع الاختباري صالح",
   "Other hosts it contacted": "مضيفون آخرون اتصل بهم",
   "Dialogs it showed": "مربعات الحوار التي عرضها",
-  "Windows it opened": "النوافذ التي فتحها",
+  "Windows it tried to open": "النوافذ التي حاول فتحها",
   "Downloads it started": "التنزيلات التي بدأها",
   "Forms": "النماذج",
   "Input fields": "حقول الإدخال",
