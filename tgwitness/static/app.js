@@ -110,7 +110,7 @@ const connectionViewReady=import('./views/connection.js?v=5').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=18'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=19'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,openJournal:kind=>openJournalFilter(kind),
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
@@ -1583,11 +1583,13 @@ function renderStatus() {
   $("workspace").dataset.onlineDemo=String(!!window.TGW_ONLINE_DEMO);
   show("demo-banner",s.demo);
   $("app-version").textContent=s.version?"TgWitness "+s.version:"";
-  $("status-chip").textContent=tr(s.demo ? "Demo workspace" : accountState(s).needsSignIn?'Sign in again':c.running ? (c.connected?"Observing":"Reconnecting") :
+  // Connected with chosen-chats scope and no enabled chat: nothing from chats is recorded, so not "Observing".
+  const unchosen=!s.demo&&c.running&&c.connected&&!s.chats_limited&&!hasSources(s);
+  $("status-chip").textContent=tr(s.demo ? "Demo workspace" : accountState(s).needsSignIn?'Sign in again':c.running ? (c.connected?(unchosen?"Connected · no chats chosen":"Observing"):"Reconnecting") :
     c.has_session ? "Observation off" : ({code_required:"Waiting for code",password_required:"Waiting for 2FA",qr_pending:"Waiting for QR"}[c.phase]||"Account not connected"));
-  $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
-  $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected));
-  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected?"live":c.running||accountState(s).needsSignIn?"warn":"off";
+  $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected && !unchosen);
+  $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected || unchosen));
+  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected&&!unchosen?"live":c.running||accountState(s).needsSignIn?"warn":"off";
   const alarm=!s.demo&&c.running&&c.connected&&VERDICT_ALARMS.includes(s.health?.verdict?.cause)?healthVerdict(s.health.verdict):null;
   $("status-chip").title=alarm?alarm.title+" · "+alarm.action:"";
   if(alarm){$("status-chip").textContent=alarm.title;$("status-chip").classList.remove("live");$("status-chip").classList.add("warn");$("workspace-status").dataset.state="warn";}

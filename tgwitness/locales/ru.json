@@ -10372,5 +10372,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Режим задаёт цель защиты и показывает, чего ещё не хватает. Какие разделы видны на панели, определяет уровень интерфейса, а не режим; запись и подписание одинаковы в любом режиме, и ничего не удаляется.",
   "I understand: recording and signing stay the same and nothing is deleted.": "Я понимаю: запись и подписание остаются прежними, и ничего не удаляется.",
   "A mode sets the protection target. The status of each layer is below.": "Режим задаёт цель защиты. Состояние каждого уровня — ниже.",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Подтвердите переход на более низкий режим: запись и подписание остаются прежними, и ничего не удаляется."
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Подтвердите переход на более низкий режим: запись и подписание остаются прежними, и ничего не удаляется.",
+  "Connected · no chats chosen": "Подключено · чаты не выбраны"
 }

@@ -10249,5 +10249,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "モードは保護の目標を決め、まだ足りないものを示します。パネルに表示されるセクションを決めるのはモードではなくインターフェイスのレベルです。記録と署名はどのモードでも同じで、何も削除されません。",
   "I understand: recording and signing stay the same and nothing is deleted.": "理解しました：記録と署名は変わらず、何も削除されません。",
   "A mode sets the protection target. The status of each layer is below.": "モードは保護の目標を決めます。各レイヤーの状態は下に表示されます。",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "低いモードへの切り替えを確認してください：記録と署名は変わらず、何も削除されません。"
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "低いモードへの切り替えを確認してください：記録と署名は変わらず、何も削除されません。",
+  "Connected · no chats chosen": "接続済み · チャットが選択されていません"
 }

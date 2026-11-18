@@ -10249,5 +10249,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Chế độ đặt mục tiêu bảo vệ và cho biết những gì còn thiếu. Mức giao diện, chứ không phải chế độ, quyết định bảng điều khiển hiển thị những phần nào; việc ghi và ký giống nhau ở mọi chế độ và không có gì bị xóa.",
   "I understand: recording and signing stay the same and nothing is deleted.": "Tôi hiểu: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
   "A mode sets the protection target. The status of each layer is below.": "Chế độ đặt mục tiêu bảo vệ. Trạng thái của từng lớp ở bên dưới.",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Xác nhận chế độ thấp hơn: việc ghi và ký vẫn như cũ và không có gì bị xóa."
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Xác nhận chế độ thấp hơn: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
+  "Connected · no chats chosen": "Đã kết nối · chưa chọn cuộc trò chuyện nào"
 }

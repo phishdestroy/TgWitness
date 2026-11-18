@@ -150,12 +150,24 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const collector = state.status?.collector || {}, observation = live?.observation || {};
     const running = !!collector.running, starting = collector.activity?.task === 'starting_observation';
     const none = !running && !starting && !collector.has_session && !state.status?.demo;
-    const box = node('section', 'home-hero ' + (running ? 'is-live' : starting ? 'is-starting' : none ? 'is-empty' : 'is-paused'));
+    // A running collector with chosen-chats scope and no enabled chat records no conversation: say so, not "Observing".
+    const s = state.status || {}, unchosen = running && collector.connected && !s.demo && !s.chats_limited
+      && (s.scope?.mode || 'selected') === 'selected' && !(s.targets || []).some(target => target.enabled);
+    const reconnecting = running && !collector.connected && !s.demo;
+    const box = node('section', 'home-hero ' + (running && !unchosen && !reconnecting ? 'is-live' : starting || reconnecting ? 'is-starting'
+      : none ? 'is-empty' : 'is-paused'));
     const head = node('div', 'home-hero-head'), title = node('h2', 'home-hero-title');
-    title.append(node('span', 'home-hero-dot'), document.createTextNode(running ? tr('Observing') : starting ? tr('Starting observation')
+    title.append(node('span', 'home-hero-dot'), document.createTextNode(unchosen ? tr('Connected · no chats chosen')
+      : reconnecting ? tr('Reconnecting') : running ? tr('Observing') : starting ? tr('Starting observation')
       : none ? tr('No Telegram account connected') : tr('Observation off')));
-    if (observation.since && !starting && !none) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
+    if (observation.since && !starting && !none && !unchosen) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
     head.append(title);
+    if (unchosen && (state.me?.admin || state.me?.permissions?.includes('sources'))) {
+      const choose = node('button', 'primary', tr('Choose chats'));
+      choose.type = 'button';
+      choose.addEventListener('click', () => navigate('sources'));
+      head.append(choose);
+    }
     const can = state.me?.admin || state.me?.permissions?.includes('collect');
     if (can && collector.has_session && !state.status?.demo && !starting) {
       const action = node('button', running ? 'secondary' : 'primary', running ? tr('Pause') : tr('Start observation'));

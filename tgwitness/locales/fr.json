@@ -10310,5 +10310,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "Un mode fixe l’objectif de protection et indique ce qui manque encore. C’est le niveau d’interface, et non le mode, qui détermine les sections affichées par le panneau ; l’enregistrement et la signature sont identiques dans tous les modes et rien n’est supprimé.",
   "I understand: recording and signing stay the same and nothing is deleted.": "Je comprends : l’enregistrement et la signature restent identiques et rien n’est supprimé.",
   "A mode sets the protection target. The status of each layer is below.": "Un mode fixe l’objectif de protection. L’état de chaque niveau figure ci-dessous.",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Confirmez le passage à un mode inférieur : l’enregistrement et la signature restent identiques et rien n’est supprimé."
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Confirmez le passage à un mode inférieur : l’enregistrement et la signature restent identiques et rien n’est supprimé.",
+  "Connected · no chats chosen": "Connecté · aucune discussion choisie"
 }
