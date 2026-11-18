@@ -35,6 +35,7 @@ from typing import Literal
 import asyncio
 import base64
 import binascii
+import hashlib
 import json
 import logging
 import secrets
@@ -1018,6 +1019,7 @@ class ExportOperations:
             raise
         headers = export_history.headers(receipt)
         headers["X-TgWitness-Sealed-Through"] = str(sealed["through"]) if sealed.get("through") else "none"
+        headers["X-TgWitness-Seal"] = ",".join(sealed["proofs"]) if sealed.get("through") else sealed.get("skipped", "none")
         if container is not None:
             headers["X-TgWitness-CAdES-Level"] = container["result"]["level"]
             if container.get("evidence_record"):
@@ -1044,13 +1046,24 @@ class ExportOperations:
                 await anchor_latest(store, network, settings)
         except Exception as exc:
             LOG.warning("Export seal for record %d failed: %s", through, type(exc).__name__)
+        from ..verify import ots_summary
+
         folder = store.root / "checkpoints" / "anchors"
-        stamped = folder.is_dir() and any(proof.name.startswith(name + ".") and proof.suffix == ".tsr"
-                                          for proof in folder.iterdir())
+        proofs =[proof for proof in folder.iterdir() if proof.name.startswith(name + ".")] if folder.is_dir() else []
+        found = {"rfc3161"} if any(proof.suffix == ".tsr" for proof in proofs) else set()
+        digest = hashlib.sha256((store.root / "checkpoints" / (name + ".json")).read_bytes()).digest()
+        for proof in proofs:
+            if proof.suffix == ".ots":
+                try:
+                    status = ots_summary(proof.read_bytes(), digest)["status"]
+                except (OSError, ValueError):
+                    continue
+                if status in ("pending", "bitcoin-unverified"):
+                    found.add("opentimestamps-" + status)
         noted = (checkpoint["statement"].get("annotations_head") or {"seq": 0})["seq"]
-        if through and stamped:
-            return {"through": through, "annotations": noted}
-        return {"skipped": "no timestamp authority answered"}
+        if through and found:
+            return {"through": through, "proofs": sorted(found), "annotations": noted}
+        return {"skipped": "no timestamp authority or calendar answered"}
 
     def export_timestamp(self, loop):
         from ..anchoring import evidence_settings, post
