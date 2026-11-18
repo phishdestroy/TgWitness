@@ -54,7 +54,7 @@ def media_of(media):
             "image": kind == "Photo" or mime.startswith("image/")}
 
 
-def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIMIT):
+def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIMIT, allowed=None):
     titles = titles or {}
     query = "SELECT seq, observed_at, kind, payload, hash FROM events WHERE kind >= 'secret_chat.' AND kind < 'secret_chat/'"
     values = []
@@ -62,6 +62,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         query += " AND seq<=?"
         values.append(through)
     found, wanted = {}, set(chats) if chats is not None else None
+    window, kinds, picked = getattr(allowed, "time", None), getattr(allowed, "kinds", None), set()
     for seq, at, kind, raw, digest in connection.execute(query + " ORDER BY seq", values):
         try:
             payload = json.loads(raw)
@@ -70,6 +71,19 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         chat_id = payload.get("secret_chat_id")
         if type(chat_id) is not int or wanted is not None and chat_id not in wanted:
             continue
+        shown = True
+        if allowed is not None:
+            record = {"seq": seq, "kind": kind, "observed_at": at, "payload": payload}
+            if kind == "secret_chat.file":
+                if (chat_id, str(payload.get("random_id"))) not in picked or kinds is not None and kind not in kinds:
+                    continue
+            elif kind in ("secret_chat.message", "secret_chat.action"):
+                if not allowed(record):
+                    continue
+                if kind == "secret_chat.message":
+                    picked.add((chat_id, str(payload.get("random_id"))))
+            else:
+                shown = window is None or window(record)
         chat = found.setdefault(chat_id, {"id": chat_id, "peer": {}, "items": [], "state": "pending", "started": None,
                                           "ended": None, "key": None, "truncated": False, "messages": {}, "shown": 0,
                                           "counts": {"received": 0, "sent": 0, "files": 0, "deleted": 0,
@@ -81,7 +95,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             if isinstance(payload.get(field), str) and payload[field]:
                 chat["peer"][target] = payload[field]
         name = kind[len("secret_chat."):]
-        event = lambda text, **extra: chat["items"].append({"type": "event", "seq": seq, "at": at, "text": text, **extra})
+        event = lambda text, **extra: shown and chat["items"].append({"type": "event", "seq": seq, "at": at, "text": text, **extra})
         if name == "requested":
             chat["started"] = {"at": at, "seq": seq, "direction": payload.get("direction")}
             event("Request from the other side" if payload.get("direction") == "in" else "Requested by this account")
@@ -141,7 +155,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             elif isinstance(action, str):
                 event(action)
         elif name == "peer_read":
-            chat["counts"]["read"] += 1
+            chat["counts"]["read"] += shown
             event("Read", until=payload.get("max_date_at"))
         elif name == "decrypt_failed":
             event("A message could not be decrypted and was refused.")

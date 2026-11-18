@@ -266,7 +266,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             if not compact and fmt in ("html", "json", "pdf", "zip") and (not selection.enabled or selection.secret_chats):
                 from . import report_secret
                 context["encrypted_chats"] = report_secret.collect(
-                    snapshot.connection, snapshot.through, selection.secret_chats if selection.enabled else None, summary["titles"])
+                    snapshot.connection, snapshot.through, selection.secret_chats if selection.enabled else None, summary["titles"],
+                    allowed=report.report_selection.compile_selection(selection) if selection.enabled else None)
                 context["media_root"] = str(store.root / "media")
                 context["encrypted_only"] = bool(selection.enabled and selection.secret_chats and not selection.chats
                                               and not selection.messages and context["encrypted_chats"])
