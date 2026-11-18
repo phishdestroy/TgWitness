@@ -10408,6 +10408,7 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Підтвердіть перехід на нижчий режим: запис і підписання залишаються незмінними, і нічого не видаляється.",
   "Connected · no chats chosen": "Підключено · чати не вибрано",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Виконуйте команди з розпакованої теки; отриманий файл {name} має бути на рівень вище.",
+  "If the file you received has another name, use that name in the commands, in double quotes.": "Якщо отриманий файл має іншу назву, підставте в команди його назву в подвійних лапках.",
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Якщо файл збережено під іншим ім'ям, наприклад браузером, підставте це ім'я в команди.",
   "Keep a copy of the checkpoint outside the collector.": "Зберігайте копію контрольної точки поза збирачем.",
   "Keep the encryption key apart from this computer.": "Зберігайте ключ шифрування окремо від цього комп'ютера.",

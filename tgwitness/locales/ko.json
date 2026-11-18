@@ -10255,6 +10255,7 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "하위 모드 확인: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
   "Connected · no chats chosen": "연결됨 · 선택한 채팅 없음",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "받은 파일 {name}을(를) 상위 폴더에 둔 채, 압축을 푼 폴더에서 이 명령을 실행하세요.",
+  "If the file you received has another name, use that name in the commands, in double quotes.": "받은 파일의 이름이 다르면 명령에 그 이름을 큰따옴표로 묶어 사용하세요.",
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "브라우저 등에 의해 파일이 다른 이름으로 저장되었다면 이 명령에 그 이름을 사용하세요.",
   "Keep a copy of the checkpoint outside the collector.": "체크포인트 사본을 수집기 밖에 보관하세요.",
   "Keep the encryption key apart from this computer.": "암호화 키는 이 컴퓨터와 분리해서 보관하세요.",

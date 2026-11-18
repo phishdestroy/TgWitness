@@ -32,6 +32,10 @@
 - The live journal stream of a workspace ends quietly when the workspace is deleted or the panel shuts down. Before,
   the open stream of a deleted workspace kept reading its closed database and wrote "Cannot operate on a closed
   database" errors to the server log after every deletion from the panel.
+- The note next to the verify commands tells the recipient to put a renamed file's name in double quotes, so a
+  browser copy such as `Telegram_Tips_2026-11-18_1 (1).zip` passes as one file name in Command Prompt, PowerShell
+  and POSIX shells. The compact evidence README names the delivered file, and the report's **Check** tab offers
+  `.asice` containers in its file picker.
 - The Network topology heading moves its live status under the title when the screen is narrow. Before, a long title
   such as the German "Netzwerktopologie" pushed the page 2 pixels wider than a 390-pixel phone screen.
 - Saving the signing checkpoint, the acquisition process receipt, the replica encryption key, the signed profiles
