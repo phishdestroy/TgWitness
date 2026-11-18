@@ -10003,6 +10003,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Результат створення невідомий. Перевірте Telegram перед новим перенесенням.",
   "Message outcome unknown. Review the destination before resuming.": "Результат надсилання невідомий. Перевірте місце призначення перед продовженням.",
   "Forwarding is restricted in this chat.": "У цьому чаті обмежено пересилання.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Цей чат приймає нових учасників після перевірки в міні-застосунку бота. TgWitness його не відкриває, тому акаунт не приєднався.",
   "Choose a channel or group where this account can post.": "Виберіть канал або групу, де цей обліковий запис може публікувати повідомлення.",
   "Enter a title for the new channel or group.": "Введіть назву нового каналу або групи.",
   "The history page is not in message order.": "Повідомлення на сторінці історії розташовані не за порядком.",

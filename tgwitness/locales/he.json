@@ -9952,6 +9952,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "תוצאת היצירה אינה ידועה. יש לבדוק ב־Telegram לפני התחלת העברה נוספת.",
   "Message outcome unknown. Review the destination before resuming.": "תוצאת השליחה אינה ידועה. יש לבדוק את היעד לפני המשך ההעברה.",
   "Forwarding is restricted in this chat.": "ההעברה מוגבלת בצ׳אט הזה.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "הצ׳אט הזה מקבל חברים חדשים אחרי בדיקה במיני-אפליקציה של בוט. TgWitness לא פותח אותה, ולכן החשבון לא הצטרף.",
   "Choose a channel or group where this account can post.": "יש לבחור ערוץ או קבוצה שבהם החשבון הזה יכול לפרסם.",
   "Enter a title for the new channel or group.": "יש להזין שם לערוץ או לקבוצה החדשים.",
   "The history page is not in message order.": "ההודעות בדף ההיסטוריה אינן לפי הסדר.",

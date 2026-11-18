@@ -9973,6 +9973,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Результат создания неизвестен. Проверьте Telegram перед новым переносом.",
   "Message outcome unknown. Review the destination before resuming.": "Результат отправки неизвестен. Проверьте сообщения в месте назначения перед продолжением.",
   "Forwarding is restricted in this chat.": "В этом чате ограничена пересылка.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Этот чат принимает новых участников после проверки в мини-приложении бота. TgWitness его не открывает, поэтому аккаунт не вступил.",
   "Choose a channel or group where this account can post.": "Выберите канал или группу, где этот аккаунт может публиковать сообщения.",
   "Enter a title for the new channel or group.": "Введите название нового канала или группы.",
   "The history page is not in message order.": "Сообщения на странице истории идут не по порядку.",

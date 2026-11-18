@@ -25,6 +25,17 @@
 
 ## Unreleased
 
+- Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
+  preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
+  differed. The expected size and the size estimates for exports and storage now come from the image that is
+  downloaded.
+- Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
+  app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
+  taken from an invite join now comes from Telegram's answer, without another invite check.
+- An action that stops after it was sent now shows its reason in the panel and keeps it in the result record, instead
+  of the error type alone.
+- The interactive report names mini application and pseudo-secret records in the report language instead of showing
+  the internal record type.
 - **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
   preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
   open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.

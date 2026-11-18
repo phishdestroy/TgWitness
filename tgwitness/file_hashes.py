@@ -37,6 +37,11 @@ def download_options(media):
     return {"thumb": info["variant"]} if info and info["kind"] == "photo" else {}
 
 
+def expected_bytes(message):
+    info = representation(getattr(message, "photo", None) or getattr(message, "document", None))
+    return info["bytes"] if info else getattr(getattr(message, "file", None), "size", None)
+
+
 async def collect(client, media, *, max_requests=4096):
     info = representation(media)
     result = {"format": FORMAT, "algorithm": "sha256", "representation": info,

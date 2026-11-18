@@ -9850,6 +9850,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "作成結果が不明です。別の転送を始める前にTelegramを確認してください。",
   "Message outcome unknown. Review the destination before resuming.": "送信結果が不明です。再開する前に転送先を確認してください。",
   "Forwarding is restricted in this chat.": "このチャットでは転送が制限されています。",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "このチャットは、ボットのミニアプリでの確認を経てから新しいメンバーを受け入れます。TgWitness はそれを開かないため、アカウントは参加していません。",
   "Choose a channel or group where this account can post.": "このアカウントが投稿できるチャンネルまたはグループを選択してください。",
   "Enter a title for the new channel or group.": "新しいチャンネルまたはグループの名前を入力してください。",
   "The history page is not in message order.": "履歴ページのメッセージが順番どおりではありません。",

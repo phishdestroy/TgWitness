@@ -10,7 +10,7 @@ from typing import Literal
 from fastapi import Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import alerts, anchoring, i18n, preferences, replica, tuning
+from . import alerts, anchoring, file_hashes, i18n, preferences, replica, tuning
 from .anchor import timestamp_request
 from .anchoring import evidence_settings, EvidenceMode
 from .tsa_roots import trusted_roots
@@ -557,9 +557,8 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                 counts.append(total)
                 for msg in batch:
                     size = len((getattr(msg, "message", "") or "").encode()) + 512
-                    file = getattr(msg, "file", None)
                     rule = capture["types"][media_kind(msg)]
-                    file_size = getattr(file, "size", None)
+                    file_size = file_hashes.expected_bytes(msg)
                     if capture["download_media"] and rule["enabled"] and duration_allowed(msg, rule) and file_size and file_size <= rule["max_mb"] * 1024**2:
                         size += file_size
                     sizes.append(size)

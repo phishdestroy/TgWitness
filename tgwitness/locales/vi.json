@@ -9850,6 +9850,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Chưa rõ kết quả tạo. Kiểm tra Telegram trước khi bắt đầu lần chuyển khác.",
   "Message outcome unknown. Review the destination before resuming.": "Chưa rõ kết quả gửi. Kiểm tra nơi nhận trước khi tiếp tục.",
   "Forwarding is restricted in this chat.": "Cuộc trò chuyện này hạn chế chuyển tiếp.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Cuộc trò chuyện này chỉ nhận thành viên mới sau khi kiểm tra trong ứng dụng mini của một bot. TgWitness không mở ứng dụng đó nên tài khoản chưa tham gia.",
   "Choose a channel or group where this account can post.": "Chọn kênh hoặc nhóm mà tài khoản này có thể đăng bài.",
   "Enter a title for the new channel or group.": "Nhập tên cho kênh hoặc nhóm mới.",
   "The history page is not in message order.": "Tin nhắn trên trang lịch sử không đúng thứ tự.",

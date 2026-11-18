@@ -9850,6 +9850,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Hasil penciptaan tidak diketahui. Semak Telegram sebelum memulakan pemindahan lain.",
   "Message outcome unknown. Review the destination before resuming.": "Hasil penghantaran tidak diketahui. Semak destinasi sebelum menyambung.",
   "Forwarding is restricted in this chat.": "Pemajuan disekat dalam perbualan ini.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Sembang ini menerima ahli baharu selepas semakan dalam aplikasi mini sebuah bot. TgWitness tidak membukanya, jadi akaun belum menyertai.",
   "Choose a channel or group where this account can post.": "Pilih saluran atau kumpulan yang membenarkan akaun ini menghantar mesej.",
   "Enter a title for the new channel or group.": "Masukkan nama saluran atau kumpulan baharu.",
   "The history page is not in message order.": "Mesej pada halaman sejarah tidak mengikut urutan.",

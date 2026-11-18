@@ -9911,6 +9911,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Se desconoce el resultado de la creación. Revisa Telegram antes de iniciar otra transferencia.",
   "Message outcome unknown. Review the destination before resuming.": "Se desconoce el resultado del envío. Revisa el destino antes de continuar.",
   "Forwarding is restricted in this chat.": "El reenvío está restringido en este chat.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Este chat admite nuevos miembros tras una verificación en la miniaplicación de un bot. TgWitness no la abre, así que la cuenta no se ha unido.",
   "Choose a channel or group where this account can post.": "Elige un canal o grupo donde esta cuenta pueda publicar.",
   "Enter a title for the new channel or group.": "Introduce un nombre para el nuevo canal o grupo.",
   "The history page is not in message order.": "Los mensajes de la página del historial no están en orden.",
