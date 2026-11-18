@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Distributed exports prepare all chosen accounts at once instead of one after another.
 - `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
   `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
 - `tgwitness backup` copies checkpoints before the journal, so a backup taken during collection starts after restore,
