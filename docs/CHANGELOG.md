@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The `search`, `context`, `messages`, `stats` and `export` commands refuse a chat, message, sender or sequence number
+  that does not fit in a signed 64-bit integer with a usage error naming the argument. Before, such a number stopped
+  the command with a Python traceback from the database.
 - A chat ID, message cursor, record number or channel seed beyond SQLite's 64-bit integers is refused with a 422
   answer by the translation, QR code, mini application, channel graph, conversation plan and visibility requests, by
   the chat message, author, coverage, profile, scale and dossier requests, by journal records filtered by chat or

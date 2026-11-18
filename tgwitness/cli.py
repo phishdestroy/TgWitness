@@ -628,34 +628,40 @@ def main(argv=None):
             return number
         return parse
 
+    def identifier(value):
+        number = int(value)
+        if not -(2**63) <= number < 2**63:
+            raise argparse.ArgumentTypeError("must fit in a signed 64-bit integer")
+        return number
+
     found = commands.add_parser("search", parents=[common, dates], help="Search saved messages; best matches first")
     found.add_argument("query", help='Words, "exact phrase", domain, @username, chat:ID, from:ID')
-    found.add_argument("--chat", type=int, help="Chat ID")
+    found.add_argument("--chat", type=identifier, help="Chat ID")
     found.add_argument("--any", action="store_true", help="Match any word instead of all")
     found.add_argument("--exact", action="store_true", help="Exact text, newest first, without the index")
     found.add_argument("--limit", type=bounded(1, 50), default=20)
     found.add_argument("--offset", type=bounded(0, 1000), default=0, help="Next page of ranked results")
-    found.add_argument("--before", type=int, help="Next page of --exact results (journal sequence)")
+    found.add_argument("--before", type=identifier, help="Next page of --exact results (journal sequence)")
     nearby = commands.add_parser("context", parents=[common], help="Saved messages within ten IDs of one message")
-    nearby.add_argument("chat_id", type=int)
-    nearby.add_argument("message_id", type=int)
+    nearby.add_argument("chat_id", type=identifier)
+    nearby.add_argument("message_id", type=identifier)
     nearby.add_argument("--limit", type=bounded(1, 50), default=20)
-    nearby.add_argument("--before", type=int, help="Next page (journal sequence)")
+    nearby.add_argument("--before", type=identifier, help="Next page (journal sequence)")
     listed = commands.add_parser("messages", parents=[common, dates],
                                  help="Saved messages of a chat, newest first; without a chat, the chats you can read")
-    listed.add_argument("chat_id", type=int, nargs="?")
-    listed.add_argument("--message", type=int, help="Every saved version and deletion record of one message")
+    listed.add_argument("chat_id", type=identifier, nargs="?")
+    listed.add_argument("--message", type=identifier, help="Every saved version and deletion record of one message")
     listed.add_argument("--workspaces", action="store_true", help="List the workspaces you can read")
     listed.add_argument("--limit", type=bounded(1, 50), default=20)
     listed.add_argument("--offset", type=bounded(0, 100000), default=0, help="Next page of chats or workspaces")
-    listed.add_argument("--before", type=int, help="Next page of messages (journal sequence)")
+    listed.add_argument("--before", type=identifier, help="Next page of messages (journal sequence)")
     counted = commands.add_parser("stats", parents=[common, dates], help="Activity by hour and weekday, edits, "
                                   "deletions, senders, domains and @handles")
-    counted.add_argument("--chat", type=int, help="Chat ID (default: every chat in scope)")
-    counted.add_argument("--sender", type=int, help="Sender ID")
+    counted.add_argument("--chat", type=identifier, help="Chat ID (default: every chat in scope)")
+    counted.add_argument("--sender", type=identifier, help="Sender ID")
     counted.add_argument("--top", type=bounded(1, 50), default=10, help="Senders, domains and @handles to list")
     dumped = commands.add_parser("export", parents=[common, dates], help="Saved observations as JSON Lines in journal order")
-    dumped.add_argument("--chat", type=int, help="Chat ID (default: every chat in scope)")
+    dumped.add_argument("--chat", type=identifier, help="Chat ID (default: every chat in scope)")
     dumped.add_argument("--output", help="Write to this new file instead of stdout")
     saved = commands.add_parser("backup", help="Copy the whole data directory while the panel keeps running")
     saved.add_argument("destination", type=Path, help="New or empty folder outside the data directory")
