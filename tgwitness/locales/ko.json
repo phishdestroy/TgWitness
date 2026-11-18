@@ -10235,6 +10235,8 @@
   "Copy description": "설명 복사",
   "No text to copy": "복사할 텍스트 없음",
   "ASiC-E container damaged: {reason}": "ASiC-E 컨테이너 손상: {reason}",
+  "{name} does not match the files it lists": "{name}이(가) 나열된 파일과 일치하지 않습니다",
+  "Other container entries not checked in this browser: {list}": "이 브라우저에서 확인하지 않은 컨테이너의 다른 항목: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E 컨테이너 인식됨: 매니페스트에 파일 {n}개가 있고 SHA-256이 일치합니다.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "컨테이너의 CAdES 서명(META-INF/signature.p7s)은 이 브라우저에서 확인하지 않았습니다.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml 또는 META-INF/signature.p7s가 없습니다",

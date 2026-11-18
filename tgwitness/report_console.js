@@ -486,7 +486,8 @@ async function startViewer(meta){
         +"<li>"+esc(same?say("Signed by the key of this report."):sayf("Signed by a different key: {fp}",{fp}))+"</li>"
         +(asic?"<li>"+esc(asic.problem?sayf("ASiC-E container damaged: {reason}",{reason:asic.problem})
           :sayf("ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.",{n:asic.references}))+"</li>"
-          +"<li>"+esc(say("The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser."))+"</li>":"")
+          +"<li>"+esc(say("The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser."))+"</li>"
+          +(asic.others.length?"<li>"+esc(sayf("Other container entries not checked in this browser: {list}",{list:asic.others.join(", ")}))+"</li>":""):"")
         +(wrong.length?"<li>"+esc(sayf("Changed: {list}",{list:wrong.slice(0,30).join(", ")}))+"</li>":"")
         +(absent.length?"<li>"+esc(sayf("Missing: {list}",{list:absent.slice(0,30).join(", ")}))+"</li>":"")
         +(extra.length?"<li>"+esc(sayf("Not in the manifest (not covered by the signature): {list}",{list:extra.slice(0,30).join(", ")}))+"</li>":"")
@@ -498,33 +499,46 @@ async function startViewer(meta){
     finally{V.checking=false;for(const input of $$("#c-zip,#c-dir")){input.disabled=false;input.value="";}}}
 
   // ASiC-E (ETSI EN 319 162): a stored "mimetype" entry with this exact text, META-INF/ASiCManifest.xml listing every
-  // data object with its SHA-256, and the CAdES signature over that manifest. Only these known entries are container
-  // objects; anything else under META-INF/ stays outside the signed manifest.
-  async function container(source,listed,hashes){
-    if(!listed.includes("mimetype"))return null;
-    const type=await source.text("mimetype");
-    if(type!=="application/vnd.etsi.asic-e+zip")return null;
-    const known=["mimetype","META-INF/ASiCManifest.xml","META-INF/signature.p7s","META-INF/evidencerecord.ers","META-INF/ASiCEvidenceRecordManifest.xml"];
-    const members=listed.filter(n=>known.includes(n)),result={members,references:0,problem:""};
-    const xml=await source.text("META-INF/ASiCManifest.xml");
-    if(!xml||!listed.includes("META-INF/signature.p7s")){result.problem=say("META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing");return result;}
-    const doc=new DOMParser().parseFromString(xml,"application/xml"),NS="http://uri.etsi.org/02918/v1.2.1#",DS="http://www.w3.org/2000/09/xmldsig#";
-    const refs=doc.getElementsByTagName("parsererror").length?[]:[...doc.getElementsByTagNameNS(NS,"DataObjectReference")];
+  // data object with its SHA-256, and the CAdES signature over that manifest. The ASiC manifests of external signatures
+  // and of the evidence record count only when they match the same files; anything else under META-INF/ stays outside.
+  async function asicManifest(source,hashes,xml,signature){
+    const doc=new DOMParser().parseFromString(xml||"","application/xml"),NS="http://uri.etsi.org/02918/v1.2.1#",DS="http://www.w3.org/2000/09/xmldsig#";
+    const refs=!xml||doc.getElementsByTagName("parsererror").length?[]:[...doc.getElementsByTagNameNS(NS,"DataObjectReference")];
     const sig=[...doc.getElementsByTagNameNS(NS,"SigReference")].map(r=>r.getAttribute("URI"));
-    if(!refs.length||sig.length!==1||sig[0]!=="META-INF/signature.p7s"){result.problem=say("its manifest cannot be read");return result;}
-    const objects=listed.filter(n=>n!=="mimetype"&&!n.startsWith("META-INF/")),seen=new Set(),changed=[];
+    if(!refs.length||sig.length!==1||sig[0]!==signature)return null;
+    const seen=new Set(),changed=[];
     for(const ref of refs){
       let uri;try{uri=decodeURIComponent(ref.getAttribute("URI")||"");}catch{uri="";}
       const method=ref.getElementsByTagNameNS(DS,"DigestMethod")[0]?.getAttribute("Algorithm"),value=ref.getElementsByTagNameNS(DS,"DigestValue")[0]?.textContent.trim();
-      if(!safeName(uri)||seen.has(uri)||method!=="http://www.w3.org/2001/04/xmlenc#sha256"||!value){result.problem=say("its manifest cannot be read");return result;}
+      if(!safeName(uri)||uri==="mimetype"||uri.startsWith("META-INF/")||seen.has(uri)||method!=="http://www.w3.org/2001/04/xmlenc#sha256"||!value)return null;
       seen.add(uri);const cached=hashes.get(uri),data=cached?null:await source.bytes(uri);
       let expected="";try{expected=[...atob(value)].map(c=>c.charCodeAt(0).toString(16).padStart(2,"0")).join("");}catch{}
       if((cached||(data&&await sha(data)))!==expected)changed.push(uri);
     }
-    const unlisted=objects.filter(n=>!seen.has(n));
+    return {seen,changed};
+  }
+  async function container(source,listed,hashes){
+    if(!listed.includes("mimetype"))return null;
+    const type=await source.text("mimetype");
+    if(type!=="application/vnd.etsi.asic-e+zip")return null;
+    const known=["mimetype","META-INF/ASiCManifest.xml","META-INF/signature.p7s"];
+    const members=listed.filter(n=>known.includes(n)),result={members,references:0,problem:"",others:[]};
+    const xml=await source.text("META-INF/ASiCManifest.xml");
+    if(!xml||!listed.includes("META-INF/signature.p7s")){result.problem=say("META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing");return result;}
+    const main=await asicManifest(source,hashes,xml,"META-INF/signature.p7s");
+    if(!main){result.problem=say("its manifest cannot be read");return result;}
+    const objects=listed.filter(n=>n!=="mimetype"&&!n.startsWith("META-INF/")),{seen,changed}=main;
+    const unlisted=objects.filter(n=>!seen.has(n)),problems=[];
     result.references=seen.size;
-    if(changed.length||unlisted.length)result.problem=[changed.length?sayf("Changed: {list}",{list:changed.slice(0,30).join(", ")}):"",
-      unlisted.length?sayf("Not in the manifest (not covered by the signature): {list}",{list:unlisted.slice(0,30).join(", ")}):""].filter(Boolean).join(" · ");
+    if(changed.length)problems.push(sayf("Changed: {list}",{list:changed.slice(0,30).join(", ")}));
+    if(unlisted.length)problems.push(sayf("Not in the manifest (not covered by the signature): {list}",{list:unlisted.slice(0,30).join(", ")}));
+    for(const name of listed.filter(n=>/^META-INF\/ASiCManifest[0-9]{3}\.xml$/.test(n)||n==="META-INF/ASiCEvidenceRecordManifest.xml")){
+      const target=name==="META-INF/ASiCEvidenceRecordManifest.xml"?"META-INF/evidencerecord.ers":"META-INF/signature"+name.slice(21,24)+".p7s";
+      const other=listed.includes(target)?await asicManifest(source,hashes,await source.text(name),target):null;
+      if(!other||other.changed.length||[...other.seen].some(n=>!objects.includes(n))){problems.push(sayf("{name} does not match the files it lists",{name}));continue;}
+      result.members.push(name,target);result.others.push(target);
+    }
+    result.problem=problems.join(" · ");
     return result;
   }
   const MAX_FILE=256*1024*1024,MAX_TOTAL=4*1024**3;

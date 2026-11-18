@@ -10286,6 +10286,8 @@
   "Copy description": "विवरण कॉपी करें",
   "No text to copy": "कॉपी करने के लिए कोई पाठ नहीं",
   "ASiC-E container damaged: {reason}": "ASiC-E कंटेनर क्षतिग्रस्त: {reason}",
+  "{name} does not match the files it lists": "{name} अपनी सूचीबद्ध फ़ाइलों से मेल नहीं खाता",
+  "Other container entries not checked in this browser: {list}": "कंटेनर की अन्य प्रविष्टियाँ जिनकी इस ब्राउज़र में जाँच नहीं की गई: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E कंटेनर पहचाना गया: इसके मैनिफेस्ट में {n} फ़ाइलें हैं और उनके SHA-256 मेल खाते हैं।",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "इस ब्राउज़र में कंटेनर के CAdES हस्ताक्षर (META-INF/signature.p7s) की जाँच नहीं की गई।",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml या META-INF/signature.p7s मौजूद नहीं है",

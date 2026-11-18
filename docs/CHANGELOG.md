@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to
+  it. Each `META-INF/ASiCManifestNNN.xml` and `META-INF/ASiCEvidenceRecordManifest.xml` is checked against the SHA-256
+  of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the
+  signed copy of an ASiC-E failed with its added signature listed as outside the manifest, and the evidence record
+  manifest was accepted without checking its hashes.
 - A connected account with **Chosen chats** and no chat enabled is shown as **Connected · no chats chosen** on Home
   and in the top bar, in amber, with **Choose chats** on Home. Before, both said a green **Observing** although no
   conversation was being recorded. Home also says **Reconnecting** while the connection is down, as the top bar did.

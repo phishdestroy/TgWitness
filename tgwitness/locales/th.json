@@ -10235,6 +10235,8 @@
   "Copy description": "คัดลอกคำอธิบาย",
   "No text to copy": "ไม่มีข้อความให้คัดลอก",
   "ASiC-E container damaged: {reason}": "คอนเทนเนอร์ ASiC-E เสียหาย: {reason}",
+  "{name} does not match the files it lists": "{name} ไม่ตรงกับไฟล์ที่ระบุไว้",
+  "Other container entries not checked in this browser: {list}": "รายการอื่นในคอนเทนเนอร์ที่ไม่ได้ตรวจสอบในเบราว์เซอร์นี้: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "รู้จำคอนเทนเนอร์ ASiC-E แล้ว: แมนิเฟสต์ระบุ {n} ไฟล์ และ SHA-256 ตรงกัน",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "ไม่ได้ตรวจสอบลายเซ็น CAdES ของคอนเทนเนอร์ (META-INF/signature.p7s) ในเบราว์เซอร์นี้",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "ไม่มี META-INF/ASiCManifest.xml หรือ META-INF/signature.p7s",

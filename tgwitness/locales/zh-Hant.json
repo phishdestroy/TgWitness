@@ -10235,6 +10235,8 @@
   "Copy description": "複製說明",
   "No text to copy": "沒有可複製的文字",
   "ASiC-E container damaged: {reason}": "ASiC-E 容器已損壞：{reason}",
+  "{name} does not match the files it lists": "{name} 與其列出的檔案不符",
+  "Other container entries not checked in this browser: {list}": "此瀏覽器未檢查的其他容器項目：{list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "已識別 ASiC-E 容器：其清單列出 {n} 個檔案，SHA-256 均相符。",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "此瀏覽器未檢查容器的 CAdES 簽章（META-INF/signature.p7s）。",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "缺少 META-INF/ASiCManifest.xml 或 META-INF/signature.p7s",
