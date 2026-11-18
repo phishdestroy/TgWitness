@@ -18,8 +18,9 @@
 #view-accounts .account-value[data-field=attention],#view-accounts .account-value[data-field=updated]{display:none}
 .account-problems{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;margin-top:6px}.account-problems button{font-size:12px}.account-select input{width:16px;height:16px;margin:0}
 @media(min-width:1200px){
- .accounts-columns,#view-accounts .account-card{display:grid;grid-template-columns:24px minmax(170px,1.8fr) minmax(105px,1fr) minmax(140px,1.3fr) 55px 75px 55px minmax(170px,1.4fr);column-gap:12px;align-items:center}
+ .accounts-columns,#view-accounts .account-card{display:grid;grid-template-columns:24px minmax(170px,1.8fr) minmax(105px,1fr) minmax(140px,1.3fr) 72px 80px 64px minmax(170px,1.4fr);column-gap:12px;align-items:center}
  .accounts-columns{padding:8px 14px;color:var(--muted);font-size:11px;border-bottom:1px solid var(--border)}
+ .accounts-columns span:nth-child(n+5):nth-child(-n+7){text-align:right}
  #view-accounts .account-card{padding:12px 14px;border-radius:0;border-width:0 0 1px;box-shadow:none;margin:0;row-gap:5px;background:var(--surface)}
  #view-accounts .account-card.current{border-left:2px solid var(--accent)}
  #view-accounts .account-head,#view-accounts .account-meta{display:contents}

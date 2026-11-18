@@ -105,7 +105,7 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout16').then(({creat
   catalog();
 });
 let connectionView;
-const connectionViewReady=import('./views/connection.js?v=3').then(({createConnectionView})=>{
+const connectionViewReady=import('./views/connection.js?v=4').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
@@ -4855,7 +4855,7 @@ function renderSigninRoute(){
   if(needed)$("signin-route-hint").textContent=hint?tr(hint):"";
 }
 function signinRoute(){return signinRouteNeeded()?$("signin-route-mode").value||"warp":null;}
-$("signin-route-mode").addEventListener("change",renderSigninRoute);
+$("signin-route-mode").addEventListener("change",()=>{renderSigninRoute();if(state.status)renderSeenBy();});
 async function applySigninRoute(mode,profile){
   authProgress(tr(mode==="warp"?"Setting up WARP for this account…":"Checking connection…"));
   try{
@@ -4916,6 +4916,7 @@ function routeFields(){
   window.TgWitnessProxies?.sync?.();
   if(kind==="mtproxy"&&$("network-details").open)loadProxyCatalog();
 }
+let renderedRouteKey=null;
 function renderConnection(){
   if(state.view!=='connection')return;
   renderApiState();
@@ -4927,6 +4928,8 @@ function renderConnection(){
   $("route-line-text").textContent=tr("Connection: {route}",{route:r.managed?[routeText(r),exitText(r.check)].filter(Boolean).join(" · "):
     r.kind==="direct"||(auto&&!now)?route:route+" · "+(now||r).host+":"+(now||r).port});
   show("route-line",!state.status.demo&&!signinRouteNeeded());show("network-running",!state.status.demo&&c.running);
+  const routeKey=[state.profile,r.kind,r.managed,r.chosen,!!c.account].join("|");
+  if(routeKey!==renderedRouteKey){const changed=renderedRouteKey!==null;renderedRouteKey=routeKey;if(changed)connectionView?.refresh();}
   renderSigninRoute();
   renderSeenBy();
   if(!$("network-pause-change")){const b=node("button","secondary small",tr("Pause observation and change the route"));b.type="button";b.id="network-pause-change";
@@ -4999,8 +5002,9 @@ function routeText(route){
 function countryName(code){try{return code?new Intl.DisplayNames([document.documentElement.lang||"en"],{type:"region"}).of(code):"";}catch{return code||"";}}
 function exitText(check){return check&&check.exit_ip?[check.exit_ip,countryName(check.country)].filter(Boolean).join(" · "):"";}
 function renderSeenBy(){
-  const c=state.status.collector,r=c.network||{},id=c.client||{},list=$("seen-by-list");
+  const c=state.status.collector,id=c.client||{},list=$("seen-by-list");
   show("seen-by",!state.status.demo);if(state.status.demo)return;
+  const chosen=signinRoute(),r=chosen==="warp"?{kind:"socks5",managed:"warp"}:chosen==="direct"?{kind:"direct"}:c.network||{};
   const direct=r.kind==="direct"||r.fallback_to_direct,now=r.kind==="mtproxy_auto"&&r.current,exit=exitText(r.check);
   const address=direct?tr("This server's own address")+(r.exposure==="tunnel"?" "+tr("(or that of the tunnel or VPN it uses)"):""):
     r.managed==="warp"?tr("Cloudflare WARP exit address")+(exit?": "+exit:""):
