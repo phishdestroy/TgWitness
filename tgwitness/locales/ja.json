@@ -139,6 +139,8 @@
   "Account formats": "アカウントの形式",
   "Account not connected": "アカウントが接続されていません",
   "Telegram is not connected": "Telegram は接続されていません",
+  "Status updated {time}": "状態を更新しました {time}",
+  "Status not updated since {time}": "{time} 以降、状態は更新されていません",
   "Account self-destruct": "アカウントの自動削除",
   "Account settings": "アカウント設定",
   "Accounts": "アカウント",

@@ -407,7 +407,7 @@ async def monitoring(body: Monitoring, *, ctx=Depends(current_context)):
 
 async def control(action: Literal["start", "stop"], *, ctx=Depends(current_context)):
     collector = ctx.app.state.collector
-    await ctx.operation(collector.start if action == "start" else collector.stop)
+    await ctx.operation(collector.start if action == "start" else collector.pause)
     return collector.status()
 
 

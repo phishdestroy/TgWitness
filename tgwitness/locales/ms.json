@@ -139,6 +139,8 @@
   "Account formats": "Format akaun",
   "Account not connected": "Akaun tidak disambungkan",
   "Telegram is not connected": "Telegram tidak disambungkan",
+  "Status updated {time}": "Status dikemas kini {time}",
+  "Status not updated since {time}": "Status tidak dikemas kini sejak {time}",
   "Account self-destruct": "Akaun bunuh diri",
   "Account settings": "Tetapan akaun",
   "Accounts": "Akaun",

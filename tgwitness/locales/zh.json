@@ -523,6 +523,8 @@
   "Waiting for QR": "正在等待二维码",
   "Account not connected": "账户未连接",
   "Telegram is not connected": "Telegram 未连接",
+  "Status updated {time}": "状态已更新 {time}",
+  "Status not updated since {time}": "自 {time} 起状态未更新",
   "Pause observation": "暂停观察",
   "Demo uses fictional observations": "演示中使用的观察记录均为虚构",
   "Connect an account first": "请先连接一个账户",

@@ -523,6 +523,8 @@
   "Waiting for QR": "QR kodu bekleniyor",
   "Account not connected": "Hesap bağlanmadı",
   "Telegram is not connected": "Telegram bağlı değil",
+  "Status updated {time}": "Durum güncellendi: {time}",
+  "Status not updated since {time}": "Durum şu zamandan beri güncellenmedi: {time}",
   "Pause observation": "Gözlemi duraklat",
   "Demo uses fictional observations": "Demo, kurgusal gözlemler kullanmaktadır",
   "Connect an account first": "Önce bir hesap bağlayın",
