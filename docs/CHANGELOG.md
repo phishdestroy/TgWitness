@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- The Network topology heading moves its live status under the title when the screen is narrow. Before, a long title
+  such as the German "Netzwerktopologie" pushed the page 2 pixels wider than a 390-pixel phone screen.
 - Saving the signing checkpoint, the acquisition process receipt, the replica encryption key, the signed profiles
   of a chat and the witness configuration says **Download started. Check your browser's downloads.** when the file
   was handed to the browser, and **File saved.** only after a write through the file picker succeeded; the advice to
