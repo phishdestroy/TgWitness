@@ -5926,9 +5926,10 @@ function renderChatFeed(){
   };
   if(!shown.length){
     const filtered=state.chatFilter!=="all"||!!state.chatSearch||state.chatAuthor!==null;
+    const exported=state.multi?.chat_id===state.chat&&state.multi?.phase==="done";
     const empty=filtered?viewState("filtered-empty",tr("No messages match these filters"),tr("Search and filters cover all saved messages in this chat, including earlier versions."),tr("Clear filters"),()=>setChatQuery({chatFilter:"all",chatAuthor:null,chatSearch:""})):
-      viewState("empty",tr("No messages saved for this chat yet"),tr(s.demo?"This demo chat has no messages.":"Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions."),tr("Load last 100 messages"),!s.demo&&s.collector.has_session&&info.enabled?()=>loadHistory(null,100):null);
-    empty.classList.add("chat-feed-empty");
+      viewState("empty",tr(exported?"No messages from this chat in the journal yet":"No messages saved for this chat yet"),tr(s.demo?"This demo chat has no messages.":exported?"The messages are in the archive (chat.json, chat.html, authors.csv). This chat view shows what observation and “Load history” saved in the journal.":"Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions."),tr("Load last 100 messages"),!s.demo&&s.collector.has_session&&info.enabled?()=>loadHistory(null,100):null);
+    empty.classList.add("chat-feed-empty");if(exported)empty.dataset.exported="1";
     next.push(empty);newer();placeChildren(feed,next);return;
   }
   const byId=new Map(state.chatMessages.map(m=>[m.message_id,m])),channel=['channel','broadcast'].includes(info?.kind);
@@ -6711,6 +6712,7 @@ function renderMulti(){
   if(state.chat!==null&&state.multiChecked!==state.chat)void resumeMulti();
   const x=state.multi,box=$("export-box"),known=x&&!["none","unknown"].includes(x.phase);
   const running=multiActive(x),mine=known&&x.chat_id===state.chat;
+  if(mine&&x.phase==="done"&&$("chat-feed")?.querySelector(".chat-feed-empty:not([data-exported])"))renderChatFeed();
   const percent=known?exportPercent(x,running):null;
   $("chat-export-label").textContent=running&&mine?tr("Exporting")+(percent!==null?" "+percent+"%":"…"):tr("Export chat");
   show("chat-export-get",!!(mine&&x.phase==="done"&&x.ready));

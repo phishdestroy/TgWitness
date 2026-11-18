@@ -919,6 +919,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "Более старые сообщения ещё не загружены — воспользуйтесь функцией «Показать более старые сообщения».",
   "Deletions and edits appear here while observation is on.": "Удаления и правки отображаются здесь, пока включён режим наблюдения.",
   "No messages saved for this chat yet": "Сообщений в этом чате пока не сохранено",
+  "No messages from this chat in the journal yet": "В журнале пока нет сообщений этого чата",
   "This demo chat has no messages.": "В этом демонстрационном чате нет сообщений.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "Загрузите последние сообщения из Telegram, чтобы просмотреть переписку. Оставьте наблюдение включённым, чтобы фиксировать новые сообщения, правки и удаления.",
   "Load last 100 messages": "Загрузить последние 100 сообщений",

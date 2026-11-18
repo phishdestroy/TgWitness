@@ -837,6 +837,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "较早的消息尚未加载——请使用“显示较早的消息”。",
   "Deletions and edits appear here while observation is on.": "在启用监控期间，删除和编辑操作会显示在此处。",
   "No messages saved for this chat yet": "此聊天尚未保存任何消息",
+  "No messages from this chat in the journal yet": "日志中还没有此聊天的消息",
   "This demo chat has no messages.": "此演示聊天中没有消息。",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "从 Telegram 加载最近的消息以查看对话内容。保持监控状态，以便捕捉新消息、编辑和删除操作。",
   "Load last 100 messages": "加载最近 100 条消息",

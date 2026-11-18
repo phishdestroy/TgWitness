@@ -841,6 +841,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "Eski mesajlar henüz yüklenmemiştir — “Eski mesajları göster” seçeneğini kullanın.",
   "Deletions and edits appear here while observation is on.": "Gözlem modu açıkken silme ve düzenleme işlemleri burada görüntülenir.",
   "No messages saved for this chat yet": "Bu sohbet için henüz kaydedilmiş mesaj yok",
+  "No messages from this chat in the journal yet": "Günlükte henüz bu sohbetten mesaj yok",
   "This demo chat has no messages.": "Bu demo sohbetinde herhangi bir mesaj bulunmamaktadır.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "Telegram'dan son mesajları yükleyerek sohbeti görüntüleyin. Yeni mesajları, düzenlemeleri ve silme işlemlerini yakalamak için gözlemi devam ettirin.",
   "Load last 100 messages": "Son 100 mesajı yükle",

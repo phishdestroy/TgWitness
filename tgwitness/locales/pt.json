@@ -841,6 +841,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "As mensagens mais antigas ainda não foram carregadas — utilize a opção “Mostrar mensagens mais antigas”.",
   "Deletions and edits appear here while observation is on.": "As exclusões e edições aparecem aqui enquanto a observação estiver ativa.",
   "No messages saved for this chat yet": "Ainda não há mensagens salvas para este chat",
+  "No messages from this chat in the journal yet": "Ainda não há mensagens deste chat no diário",
   "This demo chat has no messages.": "Este chat de demonstração não contém mensagens.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "Carregue as mensagens recentes do Telegram para visualizar a conversa. Mantenha a observação ativa para detectar novas mensagens, edições e exclusões.",
   "Load last 100 messages": "Carregar as últimas 100 mensagens",
