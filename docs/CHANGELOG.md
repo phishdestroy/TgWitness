@@ -44,6 +44,10 @@
   opens their existing **Seal** section instead of a missing `#check`; changing the panel language on the sign-in
   choice keeps **Files**, **Key** or **QR** and the independent-authorization choice instead of falling back to
   **Phone**; the journal keeps its pause and resume control for live updates at 320 and 390 px.
+- On a workspace set up for the main account, a folder or whole-account scope is refused when it is saved from
+  Sources or Investigation while observation runs or is set to resume, as it already was at start and in setup.
+  Before, it could be saved during recording and then made the next start fail.
+
 - **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
   preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
   open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.
