@@ -205,7 +205,12 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
         with store.snapshot(through=through) as snapshot:
             snapshot_at = utcnow()
             from . import board
-            board_export = board.export_state(snapshot.connection, vault) if include_board and board.head(snapshot.connection)["seq"] else None
+            noted = None
+            if snapshot.through is not None and retained:
+                noted = (retained["statement"].get("annotations_head") or {"seq": 0})["seq"]
+            board_seq = board.head(snapshot.connection)["seq"] if noted is None else noted
+            board_export = board.export_state(snapshot.connection, vault, snapshot.through, noted) \
+                if include_board and board_seq else None
             from .gap_analysis import settings as gap_settings
             from . import metrics
             metric_options = metrics.from_store(store)
@@ -237,7 +242,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                        "events_again": snapshot.events, "journal_verified": True}
             if board_export:
                 from . import board_report
-                context["case_board"] = board_report.material(snapshot.connection, board_export["statement"], options)
+                context["case_board"] = board_report.material(snapshot.connection, board_export["statement"], options,
+                                                              snapshot.through)
             selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
             report_events = snapshot.events
             if not compact and selection.enabled and fmt in ("html", "json", "pdf", "zip"):
@@ -325,9 +331,10 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                     write_member(name, chunks(format))
                 write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
                 if board_export:
-                    write_member("annotations.jsonl", (canonical(row) + b"\n" for row in board.records(snapshot.connection)))
+                    write_member("annotations.jsonl", (canonical(row) + b"\n" for row in board.records(snapshot.connection, noted)))
                     write_member("case-board.json", [canonical(board_export)])
-                    for identifier, item in board.export_slices(snapshot.connection, board_export["statement"]["state"]):
+                    for identifier, item in board.export_slices(snapshot.connection, board_export["statement"]["state"],
+                                                                snapshot.through):
                         write_member("board/slices/" + identifier + ".json", [canonical(item)])
                 if not compact:
                     if analytics := report.report_material(context).get("analytics"):

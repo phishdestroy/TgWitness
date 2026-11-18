@@ -28,6 +28,11 @@
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.
+- A timestamped evidence ZIP with Case Board notes passes `verify.py` when records or notes arrive while the export
+  waits for the time stamp. The board statement, its slices and the report's board section now use the sealed record
+  and the notes that existed when it was sealed; before, the board named the newest record of the workspace and the
+  verifier refused the archive with "Case Board journal boundary mismatch". Notes added after the seal go into the
+  next export.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
