@@ -68,7 +68,8 @@ from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
 from .export.live_export import NOT_READY as LIVE_NOT_READY, LiveExport
 from . import secret_chats
-from .scope import allowed, folder_rule, in_folder, kind_of, recheck_settings, restriction, scope_settings, visibility
+from .scope import (allowed, folder_rule, in_folder, kind_of, public_username, recheck_settings, restriction,
+                    scope_settings, visibility)
 from .verify import fingerprint
 
 LOG = logging.getLogger("tgwitness.collector")
@@ -3319,11 +3320,26 @@ class Collector:
             f, (types.DialogFilter, getattr(types, "DialogFilterChatlist", types.DialogFilter)))}
         self.store.set_setting("folders_seen", list(self.folders.values()))
 
+    def remember_public_chat(self, entity):
+        username = public_username(entity) if isinstance(entity, types.Channel) else None
+        if username:
+            key = str(utils.get_peer_id(entity))
+            saved = self.store.get_setting("public_chat_usernames", None) or {}
+            if saved.get(key) != username:
+                self.store.set_setting("public_chat_usernames", {**saved, key: username})
+        return entity
+
+    def saved_username(self, chat_id):
+        return (self.store.get_setting("public_chat_usernames", None) or {}).get(str(chat_id))
+
     async def resolve_target(self, chat_id):
         if chat_id in self.dialog_cache:
             return self.dialog_cache[chat_id]["entity"]
         if entity := await self.lookup_entity(chat_id):
-            return entity
+            return self.remember_public_chat(entity)
+        if (username := self.saved_username(chat_id)) and (entity := await self.lookup_entity(username)):
+            if utils.get_peer_id(entity) == chat_id:
+                return entity
         await self.dialogs()
         if chat_id not in self.dialog_cache:
             raise ValueError("Target is not among the dialogs this account read. Refresh the group list or raise "
@@ -5343,14 +5359,14 @@ class Collector:
     async def resolve_for_export(self, chat_id, username=None):
         await self.restore()
         try:
-            return await self.resolve_target(chat_id)
+            return self.remember_public_chat(await self.resolve_target(chat_id))
         except ValueError:
             if not username:
                 raise
             entity = await self.client.get_entity(username)
             if utils.get_peer_id(entity) != chat_id:
                 raise ValueError("The public username now points to a different chat.")
-            return entity
+            return self.remember_public_chat(entity)
 
     async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None, page_timeout=None, attempts=8,
                           client=None, wait_time=None, history_client=None):
