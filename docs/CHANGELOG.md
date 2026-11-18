@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- When more channels are observed than short polling covers, channels of the priority class that does not fit
+  take turns every 10 minutes instead of the same channels staying out, and Collector health → Sources names the
+  channels outside short polling. Higher priority classes and the probe channel stay in. An access limited to some
+  chats does not get these totals or names: they describe the whole workspace.
 - **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
   connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
 - Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
