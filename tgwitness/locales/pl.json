@@ -10411,5 +10411,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Jeśli plik zapisano pod inną nazwą, na przykład przez przeglądarkę, użyj tej nazwy w poleceniach.",
   "Keep a copy of the checkpoint outside the collector.": "Przechowuj kopię punktu kontrolnego poza kolektorem.",
   "Keep the encryption key apart from this computer.": "Przechowuj klucz szyfrowania z dala od tego komputera.",
-  "Step 3 shows how to start your witness.": "Krok 3 pokazuje, jak uruchomić świadka."
+  "Step 3 shows how to start your witness.": "Krok 3 pokazuje, jak uruchomić świadka.",
+  "Choose a chat type or account data to export.": "Wybierz typ czatu lub dane konta do eksportu.",
+  "{data} · no chats or attachments": "{data} · bez czatów i załączników"
 }

@@ -10309,5 +10309,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "ফাইলটি অন্য নামে সংরক্ষিত হলে, যেমন ব্রাউজার নাম বদলালে, এই কমান্ডগুলোতে সেই নামটি ব্যবহার করুন।",
   "Keep a copy of the checkpoint outside the collector.": "চেকপয়েন্টের একটি কপি কালেক্টরের বাইরে রাখুন।",
   "Keep the encryption key apart from this computer.": "এনক্রিপশন কী এই কম্পিউটার থেকে আলাদা জায়গায় রাখুন।",
-  "Step 3 shows how to start your witness.": "ধাপ ৩-এ আপনার সাক্ষী চালু করার উপায় দেখানো আছে।"
+  "Step 3 shows how to start your witness.": "ধাপ ৩-এ আপনার সাক্ষী চালু করার উপায় দেখানো আছে।",
+  "Choose a chat type or account data to export.": "এক্সপোর্টের জন্য একটি চ্যাটের ধরন বা অ্যাকাউন্টের ডেটা বেছে নিন।",
+  "{data} · no chats or attachments": "{data} · কোনো চ্যাট বা সংযুক্তি নেই"
 }

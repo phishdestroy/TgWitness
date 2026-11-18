@@ -10258,5 +10258,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "หากไฟล์ถูกบันทึกด้วยชื่ออื่น เช่น โดยเบราว์เซอร์ ให้ใช้ชื่อนั้นในคำสั่งเหล่านี้",
   "Keep a copy of the checkpoint outside the collector.": "เก็บสำเนาของจุดตรวจสอบไว้นอกตัวเก็บข้อมูล",
   "Keep the encryption key apart from this computer.": "เก็บกุญแจเข้ารหัสแยกจากคอมพิวเตอร์เครื่องนี้",
-  "Step 3 shows how to start your witness.": "ขั้นตอนที่ 3 อธิบายวิธีเริ่มพยานของคุณ"
+  "Step 3 shows how to start your witness.": "ขั้นตอนที่ 3 อธิบายวิธีเริ่มพยานของคุณ",
+  "Choose a chat type or account data to export.": "เลือกประเภทแชตหรือข้อมูลบัญชีที่จะส่งออก",
+  "{data} · no chats or attachments": "{data} · ไม่มีแชตหรือไฟล์แนบ"
 }

@@ -2875,10 +2875,13 @@ function accountExportDefaults(options){
   renderAccountExportPreview();
 }
 function invalidExportField(field,message){const error=new Error(message);error.field=field;return error;}
+const ACCOUNT_EXPORT_DATA=["profile","contacts","profile-photos","stories","session-metadata","other-data"];
 function accountExportOptions(){
   const purpose=$("account-export-purpose").value.trim();
   const kinds=[...$("account-export-kinds").querySelectorAll("input:checked")].map(n=>n.value);
-  if(!kinds.length)throw invalidExportField('account-export-kinds',tr("Choose at least one chat type."));
+  // Account data alone (profile, contacts, ...) is a valid export; only an empty selection is refused, as on the server.
+  const accountData=ACCOUNT_EXPORT_DATA.some(key=>$("account-export-"+key).checked);
+  if(!kinds.length&&!accountData)throw invalidExportField('account-export-kinds',tr("Choose a chat type or account data to export."));
   const ids=$("account-export-ids").value.trim().split(/[\s,;]+/).filter(Boolean);
   const chat_ids=[...new Set(ids.map(value=>{
     const id=Number(value);
@@ -2909,7 +2912,7 @@ function accountExportOptions(){
     budget_exhausted:$('account-export-budget-action').value,chat_kinds:kinds,from_utc,to_utc,chat_ids,sender_ids,text_contains,
     own_messages_only:$("account-export-own").checked,
     include_archived:$("account-export-archived").checked,
-    media_types:[...$("account-export-media").querySelectorAll("input:checked")].map(n=>n.value),
+    media_types:kinds.length?[...$("account-export-media").querySelectorAll("input:checked")].map(n=>n.value):[],
     media_action:$("account-export-media-action").value,oversized_media:$("account-export-oversized").value,
     media_actions:Object.fromEntries([...$('account-export-media-actions').querySelectorAll('select')].filter(select=>select.value).map(select=>[select.dataset.mediaKind,select.value])),
     max_media_file_mib,max_total_gib,include_profile:$("account-export-profile").checked,
@@ -2938,6 +2941,12 @@ function renderAccountExportPreview(){
     const other=extras.filter(([key])=>x[key]).map(([,label])=>label).join(', ')||tr('none');
     const transport=tr(x.transport==='regular'?'Regular session':x.transport==='auto'?'Automatic':'Telegram Takeout session');
     $('account-export-advanced-summary').textContent=other+' · '+transport;
+    if(!x.chat_kinds.length){
+      box.textContent=tr('{data} · no chats or attachments',{data:other})+
+        ' '+tr('Report language: {language}.',{language:PANEL_LANGUAGES[x.report_language]||x.report_language})+
+        (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):"");
+      return;
+    }
     box.textContent=tr(all?"All accessible chats of {n} selected types, including Saved Messages when private chats are selected.":
       "{n} selected chat IDs of the chosen types.",{n:all?x.chat_kinds.length:x.chat_ids.length})+" "+
       tr(x.from_utc||x.to_utc?"Selected UTC dates apply to each chat.":"Full visible history, without a date limit.")+" "+

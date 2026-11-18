@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- The account export form accepts account data without chats, for example only **Account profile**: it sends no
+  chat types and no media types, and the summary reads **Account profile · no chats or attachments**. Before, it
+  refused with "Choose at least one chat type." although the server builds and signs such an archive. A form with
+  neither chats nor account data says "Choose a chat type or account data to export." at the chat types.
 - The live journal stream of a workspace ends quietly when the workspace is deleted or the panel shuts down. Before,
   the open stream of a deleted workspace kept reading its closed database and wrote "Cannot operate on a closed
   database" errors to the server log after every deletion from the panel.

@@ -10258,5 +10258,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "ブラウザーなどによって別の名前で保存された場合は、これらのコマンドでその名前を使用してください。",
   "Keep a copy of the checkpoint outside the collector.": "チェックポイントのコピーをコレクターの外に保管してください。",
   "Keep the encryption key apart from this computer.": "暗号鍵はこのコンピューターとは別の場所に保管してください。",
-  "Step 3 shows how to start your witness.": "ステップ 3 でウィットネスの起動方法を説明しています。"
+  "Step 3 shows how to start your witness.": "ステップ 3 でウィットネスの起動方法を説明しています。",
+  "Choose a chat type or account data to export.": "エクスポートするチャットの種類またはアカウントデータを選択してください。",
+  "{data} · no chats or attachments": "{data} · チャットと添付ファイルなし"
 }
