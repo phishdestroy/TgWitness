@@ -1457,7 +1457,9 @@ def viewer_meta(say, kind, context, **extra):
         cats = {c: category_label(say, c) for c in CATEGORY_ORDER}
         hidden = ["system"]
     kinds = {k: kind_label(say, k) for k in ("message.new", "message.snapshot", "message.recovered", "message.edited",
-                                              "message.deleted", "message.missing_on_recheck", "media.saved", "media.hashed")}
+                                              "message.deleted", "message.missing_on_recheck", "media.saved", "media.hashed",
+                                              "secret_chat.message", "secret_chat.file", "secret_chat.action",
+                                              "webapp.launch_requested", "webapp.captured", "webapp.file")}
     return {"kind": kind, "cats": cats, "hidden": hidden, "kinds": kinds, "report_id": context.get("report_id"),
             "fingerprint": context.get("fingerprint"), "iocKinds": {k: say(v) for k, v in IOC_KINDS.items()},
             "iocLead": ioc_lead(say),

@@ -9843,6 +9843,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "생성 결과를 알 수 없습니다. 다른 전송을 시작하기 전에 Telegram을 확인하세요.",
   "Message outcome unknown. Review the destination before resuming.": "전송 결과를 알 수 없습니다. 재개하기 전에 대상을 확인하세요.",
   "Forwarding is restricted in this chat.": "이 대화에서는 전달이 제한됩니다.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "이 채팅은 봇의 미니 앱에서 확인을 거친 뒤 새 멤버를 받습니다. TgWitness는 이를 열지 않으므로 계정이 참여하지 않았습니다.",
   "Choose a channel or group where this account can post.": "이 계정이 게시할 수 있는 채널 또는 그룹을 선택하세요.",
   "Enter a title for the new channel or group.": "새 채널 또는 그룹의 이름을 입력하세요.",
   "The history page is not in message order.": "기록 페이지의 메시지 순서가 올바르지 않습니다.",

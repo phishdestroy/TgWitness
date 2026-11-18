@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
+  app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
+  taken from an invite join now comes from Telegram's answer, without another invite check.
+- An action that stops after it was sent now shows its reason in the panel and keeps it in the result record, instead
+  of the error type alone.
+- The interactive report names mini application and pseudo-secret records in the report language instead of showing
+  the internal record type.
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.

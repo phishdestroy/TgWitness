@@ -9843,6 +9843,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "Hasil pembuatan tidak diketahui. Periksa Telegram sebelum memulai pemindahan lain.",
   "Message outcome unknown. Review the destination before resuming.": "Hasil pengiriman tidak diketahui. Periksa tujuan sebelum melanjutkan.",
   "Forwarding is restricted in this chat.": "Penerusan dibatasi dalam percakapan ini.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "Obrolan ini menerima anggota baru setelah pemeriksaan di aplikasi mini sebuah bot. TgWitness tidak membukanya, jadi akun belum bergabung.",
   "Choose a channel or group where this account can post.": "Pilih kanal atau grup tempat akun ini dapat mengirim pesan.",
   "Enter a title for the new channel or group.": "Masukkan nama kanal atau grup baru.",
   "The history page is not in message order.": "Pesan pada halaman riwayat tidak berurutan.",

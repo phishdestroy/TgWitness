@@ -9894,6 +9894,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "बनाने का परिणाम अज्ञात है। दूसरा स्थानांतरण शुरू करने से पहले Telegram जाँचें।",
   "Message outcome unknown. Review the destination before resuming.": "भेजने का परिणाम अज्ञात है। फिर शुरू करने से पहले गंतव्य जाँचें।",
   "Forwarding is restricted in this chat.": "इस चैट में फ़ॉरवर्ड करने पर पाबंदी है।",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "यह चैट नए सदस्यों को किसी बॉट के मिनी ऐप में जाँच के बाद जोड़ती है। TgWitness उसे नहीं खोलता, इसलिए खाता शामिल नहीं हुआ।",
   "Choose a channel or group where this account can post.": "वह चैनल या समूह चुनें जहाँ यह खाता पोस्ट कर सकता है।",
   "Enter a title for the new channel or group.": "नए चैनल या समूह का नाम दर्ज करें।",
   "The history page is not in message order.": "इतिहास के पेज पर संदेश क्रम में नहीं हैं।",
