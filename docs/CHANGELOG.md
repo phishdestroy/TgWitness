@@ -59,6 +59,8 @@
   translation of the English original named next to it, with message texts as captured, and leaves the filing
   language and certified translation to the court's rules. Before, the Russian notice read as an obligation to file
   the English original.
+- Ctrl+S (Cmd+S) saves only a form inside the open dialog or panel; with the command palette or another modal open it
+  saves nothing. Before, pressing it in the palette saved the changed report settings behind it.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
