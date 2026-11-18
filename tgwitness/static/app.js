@@ -1941,10 +1941,11 @@ function renderAccounts(){
       const del=node("button","danger",tr("Delete"));del.dataset.action='delete';del.disabled=state.status.demo||!!p.deletion_blocked;
       if(p.deletion_blocked)del.title=tr(p.deletion_blocked);
       del.addEventListener("click",()=>busy(del,async()=>{
+        const kept=await confirmKeptCopy(p);if(kept===null)return;
         if(!(await askTyped(tr("Delete \"{name}\" permanently? This stops its collector and erases its journal, sources, signing key and the copy of its session kept here. The session stays active in Telegram: deleting does not sign it out. This cannot be undone.",{name:p.label}),p.label,{title:tr("Delete"),confirmText:tr("Delete")})))return;
         const revision=state.workspaceRevision;
         try{
-          await api("profiles/"+encodeURIComponent(p.id),undefined,{root:true,method:"DELETE"});
+          await api("profiles/"+encodeURIComponent(p.id)+(kept?"?kept_copy="+encodeURIComponent(kept):""),undefined,{root:true,method:"DELETE"});
         }catch(error){
           if(error instanceof StaleView||revision!==state.workspaceRevision)throw error;
           await loadProfiles().catch(()=>{});
@@ -2053,6 +2054,16 @@ $("account-add-form").addEventListener("submit",event=>{
   });
 });
 $("accounts-refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await loadProfiles();}));
+async function confirmKeptCopy(p){
+  const copy=p?.evidence_copy;
+  if(!copy)return "";
+  const facts=copy.sha256?tr("Last downloaded signed archive: {format}, {size}, prepared {time}. SHA-256: {sha256}",
+    {format:(copy.format||"zip").toUpperCase(),size:humanSize(copy.bytes||0),time:fmtFull(copy.created_at),sha256:copy.sha256}):
+    tr("The last signed archive was downloaded {time}; its SHA-256 was not recorded.",{time:fmtFull(copy.delivered_at)});
+  const ok=await askConfirm(facts+" "+tr("Deleting the workspace also deletes the copies kept in it. Continue only if this archive is saved outside this workspace."),
+    {title:tr("Copy outside this workspace"),confirmText:tr("The archive is saved elsewhere"),danger:true});
+  return ok?(copy.sha256||"confirmed"):null;
+}
 function accessName(p) {
   return p.access_id==="admin"||p.label==="Main administrator"?tr("Main administrator"):p.label||state.accessNames?.[p.access_id]||p.access_id||"";
 }

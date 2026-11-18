@@ -33,6 +33,9 @@
   says that the CAdES signature in `META-INF/signature.p7s` was not checked in the browser. Before, an intact ASiC-E
   got the red verdict **The archive does not match its signed manifest** because of its `mimetype` and `META-INF`
   entries. Any other entry under `META-INF/`, a file missing from either manifest or a changed file still fails.
+- Deleting a workspace first shows the format, size, preparation time and SHA-256 of its last downloaded signed
+  archive and asks to confirm that this archive is saved outside the workspace. The server refuses the deletion
+  without that confirmation.
 - The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
   correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
   rating. These pages stay out of `contacts.list`.
