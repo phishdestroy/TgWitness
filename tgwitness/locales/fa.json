@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "شمارش‌های روزانه یا فواصل زمانی یکسان.",
   "Data directory": "زیرپوشه داده‌ها",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "تاریخ‌ها از منطقه زمانی شما استفاده می‌کنند: {zone}. محدوده‌ها در شروع ثابت هستند.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "مرزهای UTC: {from} – {to} (پایان مستثنا است).",
   "Day-of-week × hour heatmap.": "نقشه حرارتی روز هفته × ساعت.",
   "Delete an old documentation draft first.": "ابتدا یک پیش‌نویس قدیمی مستندات را حذف کنید.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "فهرست {name} را حذف کنید؟ موارد تطابق ثبت‌شده در ژورنال باقی می‌مانند.",

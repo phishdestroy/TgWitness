@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "每日計數或等間隔日期。",
   "Data directory": "資料目錄",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "日期採用您的時區：{zone}。範圍以起始時間為固定點。",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC 範圍：{from} – {to}（不含結束時刻）。",
   "Day-of-week × hour heatmap.": "星期 × 小時熱力圖。",
   "Delete an old documentation draft first.": "請先刪除舊的文件草稿。",
   "Delete the list {name}? Matches already recorded stay in the journal.": "刪除清單中的 {name}？已記錄的匹配項目將保留在日誌中。",

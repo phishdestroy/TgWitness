@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "Jumlah harian atau interval tanggal yang sama.",
   "Data directory": "Direktori data",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Tanggal menggunakan zona waktu Anda: {zone}. Batas waktu ditetapkan pada awal.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Batas UTC: {from} – {to} (akhir tidak termasuk).",
   "Day-of-week × hour heatmap.": "Peta panas hari dalam seminggu × jam.",
   "Delete an old documentation draft first.": "Hapus draf dokumentasi lama terlebih dahulu.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Hapus daftar {name}? Kesesuaian yang sudah tercatat tetap ada di jurnal.",

@@ -7001,6 +7001,7 @@
   "Daily counts or equal date intervals.": "ספירות יומיות או מרווחי זמן שווים בין תאריכים.",
   "Data directory": "ספריית הנתונים",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "התאריכים משתמשים באזור הזמן שלכם: {zone}. הגבולות נקבעים בתחילת התהליך.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "גבולות UTC: {from} – {to} (הסוף אינו כלול).",
   "Day-of-week × hour heatmap.": "מפת חום של יום בשבוע × שעה.",
   "Delete an old documentation draft first.": "יש למחוק תחילה טיוטת תיעוד ישנה.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "האם למחוק את הרשימה {name}? התאמות שכבר תועדו יישארו ביומן.",

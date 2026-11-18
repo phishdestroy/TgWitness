@@ -6364,6 +6364,7 @@
   "One account runs one task. Monitoring accounts cannot join this export. Pause monitoring explicitly or select other idle accounts. Committed chunks are retained when an export is paused.": "Один аккаунт выполняет одну задачу. Аккаунты на мониторинге недоступны для выгрузки. Остановите мониторинг вручную или выберите свободные аккаунты. При паузе готовые части сохраняются.",
   "{n} idle accounts selected. Each account keeps its own connection and request limits.": "Выбрано свободных аккаунтов: {n}. У каждого своё соединение и лимиты запросов.",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Часовой пояс дат: {zone}. Границы фиксируются при запуске.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Границы в UTC: {from} – {to} (конец не включается).",
   "Select at least one idle account.": "Выберите хотя бы один свободный аккаунт.",
   "Export started with {n} accounts reserved exclusively for this task.": "Выгрузка запущена. Для неё занято аккаунтов: {n}.",
   "The period must end after it starts.": "Конец периода должен быть позже начала.",

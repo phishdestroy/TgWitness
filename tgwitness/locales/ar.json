@@ -7115,6 +7115,7 @@
   "Daily counts or equal date intervals.": "أعداد يومية أو فترات زمنية متساوية بين التواريخ.",
   "Data directory": "دليل البيانات",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "تستخدم التواريخ منطقتك الزمنية: {zone}. يتم تحديد الحدود عند البداية.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "حدود UTC: {from} – {to} (النهاية مستثناة).",
   "Day-of-week × hour heatmap.": "خريطة حرارية لليوم من الأسبوع × الساعة.",
   "Delete an old documentation draft first.": "احذف مسودة التوثيق القديمة أولاً.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "هل تريد حذف القائمة {name}؟ تظل التطابقات المسجلة بالفعل في السجل.",

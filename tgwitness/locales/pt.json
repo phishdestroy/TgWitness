@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "Contagens diárias ou intervalos de datas iguais.",
   "Data directory": "Diretório de dados",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "As datas utilizam seu fuso horário: {zone}. Os limites são fixados no início.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Limites em UTC: {from} – {to} (o fim é excluído).",
   "Day-of-week × hour heatmap.": "Mapa de calor por dia da semana × hora.",
   "Delete an old documentation draft first.": "Exclua primeiro um rascunho antigo da documentação.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Excluir a lista {name}? As correspondências já registradas permanecem no diário.",

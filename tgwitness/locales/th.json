@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "การนับรายวันหรือช่วงเวลาที่มีวันที่เท่ากัน",
   "Data directory": "ไดเรกทอรีข้อมูล",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "วันที่ใช้เขตเวลาของคุณ: {zone} ขอบเขตถูกกำหนดไว้ตั้งแต่เริ่มต้น",
+  "UTC bounds: {from} – {to} (the end is excluded).": "ขอบเขต UTC: {from} – {to} (ไม่รวมเวลาสิ้นสุด)",
   "Day-of-week × hour heatmap.": "แผนที่ความร้อน (heatmap) ตามวันในสัปดาห์ × ชั่วโมง",
   "Delete an old documentation draft first.": "ลบฉบับร่างเอกสารเก่าก่อน",
   "Delete the list {name}? Matches already recorded stay in the journal.": "จะลบรายการ{name}หรือไม่? รายการที่ตรงกันและได้บันทึกไว้แล้วจะยังคงอยู่ในบันทึก",

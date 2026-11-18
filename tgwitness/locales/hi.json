@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "दैनिक गणनाएँ या समान तिथि अंतराल।",
   "Data directory": "डेटा निर्देशिका",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "तिथियाँ आपके समय क्षेत्र का उपयोग करती हैं: {zone}. सीमाएँ शुरुआत में तय की जाती हैं।",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC सीमाएँ: {from} – {to} (अंत शामिल नहीं)।",
   "Day-of-week × hour heatmap.": "सप्ताह के दिन × घंटे का हीटमैप।",
   "Delete an old documentation draft first.": "पहले एक पुराना दस्तावेज़ीकरण मसौदा हटाएँ।",
   "Delete the list {name}? Matches already recorded stay in the journal.": "सूची {name}? मिटाएँ? पहले से दर्ज किए गए मिलान जर्नल में बने रहते हैं।",

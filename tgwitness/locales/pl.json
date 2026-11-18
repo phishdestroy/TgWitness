@@ -7040,6 +7040,7 @@
   "Daily counts or equal date intervals.": "Codzienne zliczenia lub równe odstępy czasowe.",
   "Data directory": "Katalog danych",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Daty są podawane zgodnie z Twoją strefą czasową: {zone}. Granice są ustalane na początku.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Granice UTC: {from} – {to} (koniec jest wyłączony).",
   "Day-of-week × hour heatmap.": "Mapa cieplna przedstawiająca dzień tygodnia × godzinę.",
   "Delete an old documentation draft first.": "Najpierw usuń starą wersję roboczą dokumentacji.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Usuń listę {name}? Dopasowania już zarejestrowane pozostają w dzienniku.",
