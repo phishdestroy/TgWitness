@@ -1554,7 +1554,7 @@ const collectionReady=import("./components/collection.js?v=3").then(({createColl
 });
 collectionReady.catch(error=>toast(error.message,true));
 let accountSwitch=null;
-const accountSwitchReady=import("./components/account-switch.js?v=3").then(({createAccountSwitch})=>{
+const accountSwitchReady=import("./components/account-switch.js?v=4").then(({createAccountSwitch})=>{
   accountSwitch=createAccountSwitch({node,icon,tr,avatar:avatarNode,profiles:()=>state.profiles,current:()=>state.profile,status:()=>state.status,
     choose:id=>{const select=$("profile-select");select.value=id;select.dispatchEvent(new Event("change"));},
     add:()=>$("manage-profiles").click(),canAdd:()=>!$("manage-profiles").hidden,
