@@ -27,7 +27,7 @@ def preview(store, options):
                 count += 1
         sampled = next(rows, None) is not None
         conversations = report_secret.collect(snapshot.connection, None, selection.secret_chats,
-                                              {t["chat_id"]: t["title"] for t in store.targets()})             if selection.enabled and selection.secret_chats else []
+                                              {t["chat_id"]: t["title"] for t in store.targets()}, allowed=includes)             if selection.enabled and selection.secret_chats else []
     material = report.report_material({"kind": "evidence", "options": options, "digest": {"analytics": analytics.result()}, "event_count": count})
     sections = [report.report_charts.examination_html(material.get("examination"), say),
                 report.report_charts.html(material.get("analytics"), say)]
