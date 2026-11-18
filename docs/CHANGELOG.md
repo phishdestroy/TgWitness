@@ -46,6 +46,10 @@
   moment it was chosen and whether it came from the snapshot or the sealed checkpoint); for older archives the
   sealed checkpoint of the last record is used when the archive carries it. A witness that saw more records before
   that moment, or a different hash for the same record, is still a conflict.
+- Importing a storage recovery file checks each local attachment by size and SHA-256 instead of by its name, and
+  **Restore all files** restores the verified copy over a local file with different bytes after moving those bytes
+  unchanged to `storage-conflicts/` (`storage.local_conflict`). Before, a damaged local file with the expected name
+  was treated as present and the restore reported 0 files.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
