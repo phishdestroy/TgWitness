@@ -30,6 +30,11 @@
   database" errors to the server log after every deletion from the panel.
 - The Network topology heading moves its live status under the title when the screen is narrow. Before, a long title
   such as the German "Netzwerktopologie" pushed the page 2 pixels wider than a 390-pixel phone screen.
+- Saving the signing checkpoint, the acquisition process receipt, the replica encryption key, the signed profiles
+  of a chat and the witness configuration says **Download started. Check your browser's downloads.** when the file
+  was handed to the browser, and **File saved.** only after a write through the file picker succeeded; the advice to
+  keep a copy apart follows as its own sentence. Before, these said "downloaded" or "saved" even when the browser
+  refused or cancelled the download.
 - The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to
   it. Each `META-INF/ASiCManifestNNN.xml` and `META-INF/ASiCEvidenceRecordManifest.xml` is checked against the SHA-256
   of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the

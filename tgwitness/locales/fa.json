@@ -10306,5 +10306,8 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "تأیید حالت پایین‌تر: ضبط و امضا تغییری نمی‌کند و هیچ‌چیز حذف نمی‌شود.",
   "Connected · no chats chosen": "متصل · هیچ گفتگویی انتخاب نشده است",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "این فرمان‌ها را در پوشهٔ استخراج‌شده اجرا کنید؛ فایل دریافتی {name} باید در پوشهٔ بالاتر آن باشد.",
-  "If the file was saved under another name, for example by the browser, use that name in these commands.": "اگر فایل با نام دیگری ذخیره شده است، مثلاً توسط مرورگر، همان نام را در این فرمان‌ها به کار ببرید."
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "اگر فایل با نام دیگری ذخیره شده است، مثلاً توسط مرورگر، همان نام را در این فرمان‌ها به کار ببرید.",
+  "Keep a copy of the checkpoint outside the collector.": "یک نسخه از نقطهٔ بازبینی را بیرون از گردآورنده نگه دارید.",
+  "Keep the encryption key apart from this computer.": "کلید رمزگذاری را جدا از این رایانه نگه دارید.",
+  "Step 3 shows how to start your witness.": "گام ۳ نشان می‌دهد شاهد را چگونه راه‌اندازی کنید."
 }

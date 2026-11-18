@@ -10306,5 +10306,8 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Pastki rejimni tasdiqlang: yozib olish va imzolash o'zgarmaydi va hech narsa o'chirilmaydi.",
   "Connected · no chats chosen": "Ulangan · chatlar tanlanmagan",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Bu buyruqlarni ochilgan jildda bajaring; olingan {name} fayli undan bir daraja yuqoridagi jildda turishi kerak.",
-  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Agar fayl boshqa nom bilan saqlangan bo'lsa, masalan brauzer tomonidan, bu buyruqlarda o'sha nomni ishlating."
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Agar fayl boshqa nom bilan saqlangan bo'lsa, masalan brauzer tomonidan, bu buyruqlarda o'sha nomni ishlating.",
+  "Keep a copy of the checkpoint outside the collector.": "Nazorat nuqtasining nusxasini yig'uvchidan tashqarida saqlang.",
+  "Keep the encryption key apart from this computer.": "Shifrlash kalitini bu kompyuterdan alohida saqlang.",
+  "Step 3 shows how to start your witness.": "3-qadam guvohingizni qanday ishga tushirishni ko'rsatadi."
 }

@@ -10306,5 +10306,8 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Bestätigen Sie den niedrigeren Modus: Aufzeichnung und Signierung bleiben gleich, und es wird nichts gelöscht.",
   "Connected · no chats chosen": "Verbunden · keine Chats ausgewählt",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Führen Sie diese Befehle im entpackten Ordner aus; die erhaltene Datei {name} muss im übergeordneten Ordner liegen.",
-  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Wurde die Datei unter einem anderen Namen gespeichert, etwa vom Browser, verwenden Sie diesen Namen in den Befehlen."
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Wurde die Datei unter einem anderen Namen gespeichert, etwa vom Browser, verwenden Sie diesen Namen in den Befehlen.",
+  "Keep a copy of the checkpoint outside the collector.": "Bewahren Sie eine Kopie des Prüfpunkts außerhalb des Collectors auf.",
+  "Keep the encryption key apart from this computer.": "Bewahren Sie den Verschlüsselungsschlüssel getrennt von diesem Computer auf.",
+  "Step 3 shows how to start your witness.": "Schritt 3 zeigt, wie Sie Ihren Zeugen starten."
 }
