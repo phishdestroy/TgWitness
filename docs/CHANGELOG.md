@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- **Older records**, **Newer records** and **Latest** under the journal keep the keyboard focus after the next page
+  loads, or pass it to the next pager button when there is no further page. Before, the pressed button was disabled
+  while the page loaded and the focus fell to the page itself, so a screen reader lost its place. An error message
+  no longer shows a line counting down: it stays until it is closed.
 - The verify commands of an account export and of its sharing copy now name the file as it is delivered,
   `tgwitness-account-export-<id>.zip` and `tgwitness-disclosure-<id>.zip`, run from the extracted folder with that
   file one level up, as chat and evidence archives already do. Before, README.txt said `ORIGINAL.zip`, the HTML report
