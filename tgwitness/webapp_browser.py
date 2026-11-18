@@ -1,8 +1,9 @@
 """Open a Telegram mini application in a headless Chromium and record what it loads.
 
-Chromium talks to TgWitness over --remote-debugging-pipe, so no extra Python package is needed. Every connection the
-browser makes, WebSockets included, goes through a loopback gate that opens it with netclient over the workspace's
-route for requests outside Telegram; addresses inside the local network are refused there, as for any other fetch.
+Chromium talks to TgWitness over --remote-debugging-pipe, so no extra Python package is needed. The application runs
+in its own browser context: every connection it makes, WebSockets included, goes through a loopback gate that opens it
+with netclient over the workspace's route for requests outside Telegram; addresses inside the local network are
+refused there, as for any other fetch. Chromium's own background requests go to a second gate that refuses them.
 """
 import asyncio
 import base64
@@ -41,6 +42,9 @@ MAX_PAGE_BYTES = 4 * 1024**2
 MAX_TEXT_CHARS = 200_000
 MAX_TRAFFIC = 256 * 1024**2
 REMOVED = "[removed]"
+BROWSER_HOSTS = frozenset({"www.google.com", "accounts.google.com", "clients2.google.com", "update.googleapis.com",
+                           "optimizationguide-pa.googleapis.com", "safebrowsing.googleapis.com",
+                           "content-autofill.googleapis.com"})
 ROOT = ("Chromium cannot use its sandbox when TgWitness runs as root. Run TgWitness as an ordinary user, or set "
         "TGWITNESS_BROWSER_NO_SANDBOX=1 to open mini applications without the sandbox on a machine used only for this.")
 MISSING = ("No Chromium was found for opening mini applications. Install the chromium package, or set "
@@ -135,8 +139,8 @@ def public_address(url):
 class Gate:
     """Loopback proxy for Chromium: each connection is opened by netclient over the workspace route."""
 
-    def __init__(self, route, timeout=20):
-        self.route, self.timeout = route, timeout
+    def __init__(self, route, timeout=20, refuse=False):
+        self.route, self.timeout, self.refuse = route, timeout, refuse
         self.server, self.tasks, self.traffic = None, set(), 0
         self.hosts, self.blocked = {}, []
 
@@ -172,6 +176,10 @@ class Gate:
         upstream = None
         try:
             head = await asyncio.wait_for(reader.readuntil(b"\r\n\r\n"), self.timeout)
+            if self.refuse:
+                writer.write(b"HTTP/1.1 403 Forbidden\r\nContent-Length: 0\r\nConnection: close\r\n\r\n")
+                await writer.drain()
+                return
             line, _, rest = head.partition(b"\r\n")
             method, target, version = line.decode("latin-1").split(" ", 2)
             if method == "CONNECT":
@@ -386,10 +394,11 @@ class Session:
                 self.main_frame, self.final_url = frame.get("id"), frame.get("url")
         elif method == "Page.loadEventFired":
             self.loaded.set()
-        elif method == "Target.targetCreated":
-            info = params.get("targetInfo") or {}
-            if info.get("type") == "page" and info.get("openerId") and len(self.popups) < 50:
-                self.popups.append({"url": self.clip(info.get("url", ""), 4096), "target": info.get("targetId")})
+        elif method == "Page.windowOpen":
+            if len(self.popups) < 50:
+                self.popups.append({"url": self.clip(params.get("url", ""), 4096),
+                                    "name": self.clip(params.get("windowName", ""), 200),
+                                    "user_gesture": bool(params.get("userGesture")), "opened": False})
         elif method in ("Page.downloadWillBegin", "Browser.downloadWillBegin"):
             if len(self.downloads) < 50:
                 self.downloads.append({"url": self.clip(params.get("url", ""), 4096),
@@ -402,13 +411,13 @@ async def capture(url, route, init_data=None, settle=SHOTS):
     if not state["browser"]:
         raise Unavailable(state["reason"])
     redact = Redactor(init_data)
-    gate = Gate(route)
+    gate, quiet = Gate(route), Gate(route, refuse=True)
     session_state = Session(redact)
     folder = tempfile.mkdtemp(prefix="tgwitness-webapp-")
     process = pipe = None
     files, errors, facts, version, started = [], [], {}, "", time.monotonic()
     try:
-        port = await gate.start()
+        port, idle = await gate.start(), await quiet.start()
         arguments = [state["path"], "--headless=new", "--remote-debugging-pipe", "--user-data-dir=" + folder,
                      "--no-first-run", "--no-default-browser-check", "--disable-extensions", "--disable-sync",
                      "--disable-background-networking", "--disable-component-update", "--disable-default-apps",
@@ -418,7 +427,7 @@ async def capture(url, route, init_data=None, settle=SHOTS):
                      "--deny-permission-prompts", "--password-store=basic", "--use-mock-keychain",
                      "--disable-client-side-phishing-detection", "--disable-domain-reliability", "--no-pings",
                      "--disable-breakpad", "--safebrowsing-disable-auto-update", "--disable-field-trial-config",
-                     f"--proxy-server=http://127.0.0.1:{port}", "--proxy-bypass-list=<-loopback>",
+                     f"--proxy-server=http://127.0.0.1:{idle}", "--proxy-bypass-list=<-loopback>",
                      "--force-webrtc-ip-handling-policy=disable_non_proxied_udp",
                      "--webrtc-ip-handling-policy=disable_non_proxied_udp",
                      f"--window-size={VIEWPORT['width']},{VIEWPORT['height']}", "about:blank"]
@@ -454,8 +463,9 @@ async def capture(url, route, init_data=None, settle=SHOTS):
         version = (await pipe.send("Browser.getVersion", timeout=30)).get("product", "")
         with contextlib.suppress(Exception):
             await pipe.send("Browser.setDownloadBehavior", {"behavior": "deny", "eventsEnabled": True})
-        await pipe.send("Target.setDiscoverTargets", {"discover": True})
-        target = (await pipe.send("Target.createTarget", {"url": "about:blank"}))["targetId"]
+        context = (await pipe.send("Target.createBrowserContext", {
+            "proxyServer": f"http://127.0.0.1:{port}", "proxyBypassList": "<-loopback>"}))["browserContextId"]
+        target = (await pipe.send("Target.createTarget", {"url": "about:blank", "browserContextId": context}))["targetId"]
         session = (await pipe.send("Target.attachToTarget", {"targetId": target, "flatten": True}))["sessionId"]
 
         async def call(method, params=None, timeout=20):
@@ -556,8 +566,13 @@ async def capture(url, route, init_data=None, settle=SHOTS):
             with contextlib.suppress(OSError):
                 os.close(pipe.write_fd)
         await gate.close()
+        await quiet.close()
         shutil.rmtree(folder, ignore_errors=True)
     requests = [session_state.requests[key] for key in session_state.order]
+    asked = {(urlsplit(item.get("url") or "").hostname or "").lower()
+             for item in requests + list(session_state.sockets.values())}
+    hosts = sorted(gate.hosts.values(), key=lambda item: item["host"])
+    own = [item for item in hosts if item["host"] in BROWSER_HOSTS and item["host"] not in asked]
     return {
         "browser": version, "sandbox": os.geteuid() != 0, "duration_ms": int((time.monotonic() - started) * 1000),
         "final_url": public_address(redact(facts.get("href") or session_state.final_url or "")),
@@ -567,5 +582,5 @@ async def capture(url, route, init_data=None, settle=SHOTS):
         "webapp": facts.get("webapp"), "requests": requests, "sockets": list(session_state.sockets.values()),
         "telegram_events": session_state.events, "console": session_state.console,
         "dialogs": session_state.dialogs, "popups": session_state.popups, "downloads": session_state.downloads,
-        "connections": sorted(gate.hosts.values(), key=lambda item: item["host"]), "blocked": gate.blocked,
+        "connections": [item for item in hosts if item not in own], "browser_connections": own, "blocked": gate.blocked,
         "dropped": session_state.dropped, "errors": errors}, files

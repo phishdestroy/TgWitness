@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- A mini application capture no longer lists Chromium's own sign-in and update traffic as the application's
+  connections: the application runs in its own browser context behind the recording gate, and the browser's
+  background requests go to a gate that refuses them. A Google host Chromium contacts on its own, and the page never
+  asked for, is kept apart as `browser_connections`. Windows the application tries to open are recorded with their
+  address from `Page.windowOpen`; before, the list stayed empty, because Chromium blocks such windows and the
+  address of a new window is not known yet when it is created.
 - The Investigation panel reads investigation mode each time it opens; before, it kept the state from its first
   opening and could offer to turn on a mode already turned on in Sources.
 - Opening a mini application while Telegram asks to wait returns the waiting time instead of a refusal; a frozen or
