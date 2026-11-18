@@ -4032,6 +4032,7 @@ class Collector:
                     batch = self.deletion_batch(event.chat_id, list(event.deleted_ids), raw, source)
                     for message_id in event.deleted_ids:
                         self.record_deletion(event.chat_id, message_id, raw, batch=batch, source=source)
+                    history_admin.link_logged(self.store, event.chat_id, event.deleted_ids)
                 deletions.unobserved_grew(self, event.chat_id, before)
         except Exception as exc:
             chat_id = getattr(event, "chat_id", None)

@@ -458,7 +458,9 @@ Multiple IDs resolved to the same chat from one notification are grouped as
 `deletion.batch`, regardless of their count, with the message IDs exactly as Telegram
 sent them and how many of them this account had sent. Telegram's notification lists
 the messages; the chat's admin log names the acting administrator where the account
-can read it.
+can read it. The link (`message.deletion_attributed`) is made whichever arrives first:
+a poll that saw the admin log entry before the deletion notice is matched when the notice
+is recorded.
 
 ## Coverage: continuity, gaps and unobserved IDs
 

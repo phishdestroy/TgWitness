@@ -29,6 +29,9 @@
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
   records written after the last export still do.
+- A deletion notice that arrives after the admin log poll which already returned the deletion is linked to that
+  admin log entry (`message.deletion_attributed`) when the notice is recorded. Before, the link was made only when
+  the notice came first; the poll cursor had moved on, so the acting account was never named for that message.
 - A sign-in by phone or QR that the workspace refuses after Telegram accepted it, for example because the account
   already belongs to another workspace, now signs out of the new session. Before, the session stayed in Telegram's
   device list with its key discarded. Imported sessions are not signed out.

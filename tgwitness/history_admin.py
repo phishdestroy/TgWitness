@@ -11,6 +11,7 @@ from .telegram_client import FLOOD_ERRORS
 
 RIGHTS_EVERY = 6 * 3600
 POLL_LIMIT = 100
+LINK_POLLS = 50
 POLL_TIMEOUT = 30
 POLL_FILTER = ["delete", "edit"]
 POLL_MEANING = ("Scheduled read of this chat's admin log, deletions and edits only. Telegram keeps about 48 hours of it "
@@ -138,19 +139,37 @@ async def refresh_rights(collector, chat_id, peer):
 def link_deletion(store, chat_id, event, poll, me):
     from .collector import date_string
     message_id = getattr(getattr(event.action, "message", None), "id", None)
+    return link(store, chat_id, message_id, event.id, event.user_id, date_string(event.date), poll, me)
+
+
+def link(store, chat_id, message_id, event_id, user_id, acted_at, poll, me):
     if type(message_id) is not int:
         return None
     deleted = store.events(chat_id=chat_id, message_id=message_id, kind="message.deleted", limit=1)
     if not deleted:
         return None
     known = store.events(chat_id=chat_id, message_id=message_id, kind="message.deletion_attributed", limit=50)
-    if any(record["payload"].get("admin_log_event_id") == event.id for record in known):
+    if any(record["payload"].get("admin_log_event_id") == event_id for record in known):
         return None
     return store.append("message.deletion_attributed", {
         "deletion_event": {"seq": deleted[0]["seq"], "hash": deleted[0]["hash"]},
-        "admin_log_poll": {"seq": poll["seq"], "hash": poll["hash"]}, "admin_log_event_id": event.id,
-        "actor_id": event.user_id, "actor_is_this_account": event.user_id == me, "acted_at": date_string(event.date),
-        "source": "admin_log", "meaning": LINK_MEANING}, chat_id, message_id, event.user_id, date_string(event.date))
+        "admin_log_poll": {"seq": poll["seq"], "hash": poll["hash"]}, "admin_log_event_id": event_id,
+        "actor_id": user_id, "actor_is_this_account": user_id == me, "acted_at": acted_at,
+        "source": "admin_log", "meaning": LINK_MEANING}, chat_id, message_id, user_id, acted_at)
+
+
+def link_logged(store, chat_id, message_ids):
+    wanted = {message_id for message_id in message_ids if type(message_id) is int}
+    if chat_id >= -1000000000000 or not wanted:
+        return []
+    me, linked = account_id(store), []
+    for poll in store.events(chat_id=chat_id, kind="admin_log.polled", limit=LINK_POLLS):
+        for item in poll["payload"].get("events") or []:
+            target = (item.get("message") or {}).get("id") if isinstance(item, dict) else None
+            if item.get("action") == "DeleteMessage" and target in wanted and type(item.get("id")) is int:
+                if record := link(store, chat_id, target, item["id"], item.get("user_id"), item.get("date"), poll, me):
+                    linked.append(record)
+    return linked
 
 
 async def poll_log(collector, chat_id, peer, rights):
