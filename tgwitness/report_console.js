@@ -283,7 +283,7 @@ async function startViewer(meta){
     if(e.target.closest("a[download]"))return;
     const row=e.target.closest("[data-key]");if(!row)return;const key=row.dataset.key;
     if(e.target.classList.contains("pick")){e.target.checked?V.selected.add(key):V.selected.delete(key);row.classList.toggle("picked",e.target.checked);
-      selectionChanged(true);return;}detail(key);});
+      selectionChanged(true);if(!e.target.checked&&V.filter.only.has("selected"))refilter(true);return;}detail(key);});
   $("#v-list").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.key)detail(e.target.dataset.key);});
   function focusRow(key,index){render(Math.max(0,index-3));for(const group of $$("#v-list .v-run")){
       if(Number(group.dataset.runStart)<=index&&index<Number(group.dataset.runEnd)){expandRun(group);group.open=true;}}
@@ -348,7 +348,8 @@ async function startViewer(meta){
     box.hidden=false;box.scrollTop=0;box.setAttribute("tabindex","-1");box.setAttribute("aria-label",say("Details"));box.focus({preventScroll:true});
     box.querySelector("[data-close]").onclick=()=>{box.hidden=true;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
     box.onkeydown=e=>{if(e.key==="Escape"){e.preventDefault();box.querySelector("[data-close]").click();}};
-    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();detail(key);};
+    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
+      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);detail(key);};
     box.querySelector("[data-copy]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(it.text||"");
     box.querySelector("[data-ref]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(reference(it));}
   function goto(key){if(!V.byKey.has(key))return;let i=V.results.findIndex(x=>x.key===key);
@@ -358,6 +359,8 @@ async function startViewer(meta){
   function selectionChanged(quiet){const n=V.selected.size;$("#v-selbar").hidden=!n;$("#v-selcount").textContent=sayf("{n} selected",{n:num(n)});
     $("#v-list").classList.toggle("selecting",n>0);
     if(!quiet)for(const c of $$("#v-list .pick")){const row=c.closest("[data-key]");c.checked=V.selected.has(row.dataset.key);row.classList.toggle("picked",c.checked);}}
+  function refilter(moveFocus){apply();if(!moveFocus)return;
+    const next=$("#v-list .pick")||$('#v-only input[value="selected"]');if(next)next.focus();}
   function picked(){return V.items.filter(it=>V.selected.has(it.key));}
   function selection(action){const items=picked();
     if(action==="clear"){V.selected.clear();selectionChanged();if(V.filter.only.has("selected"))apply();return;}
