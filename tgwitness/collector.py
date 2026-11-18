@@ -2454,7 +2454,7 @@ class Collector:
         candidate = self.login_client
         if not candidate:
             raise ValueError("Configure API credentials first.")
-        release = None
+        release, accepted = None, False
         try:
             me = await candidate.get_me()
             self.remember(me)
@@ -2467,6 +2467,7 @@ class Collector:
                 raise ValueError("This journal belongs to a different Telegram account. Create another account workspace.")
             if self.account_guard:
                 release = self.account_guard(me.id, self)
+            accepted = True
             credentials = dict(self.pending_credentials)
             credentials["session"] = candidate.session.save()
             await self.avatar_history.close()
@@ -2506,7 +2507,10 @@ class Collector:
             pending = self.vault.read("independent_login")
             if pending and session_key(pending.get("session")) == session_key(credentials["session"]):
                 self.vault.save("independent_login", {})
-        except BaseException:
+        except BaseException as exc:
+            if (isinstance(exc, Exception) and not accepted and self.pending_key_origin == "created"
+                    and candidate is not self.client):
+                await self.end_refused_sign_in(candidate)
             await self.cancel_login()
             self.phase = self.resting_phase()
             raise
@@ -2530,6 +2534,14 @@ class Collector:
         await self.check_client_connection(candidate)
         await self.check_frozen()
         await self.allow_sensitive()
+
+    @staticmethod
+    async def end_refused_sign_in(candidate):
+        try:
+            if await asyncio.wait_for(candidate.is_user_authorized(), 15):
+                await asyncio.wait_for(candidate.log_out(), 30)
+        except Exception:
+            LOG.warning("A refused sign-in could not be ended in Telegram; end it under Devices.")
 
     async def check_client_connection(self, client):
         if getattr(client, "tgwitness_connection_check", None) is None:

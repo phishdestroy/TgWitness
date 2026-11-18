@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- A sign-in by phone or QR that the workspace refuses after Telegram accepted it, for example because the account
+  already belongs to another workspace, now signs out of the new session. Before, the session stayed in Telegram's
+  device list with its key discarded. Imported sessions are not signed out.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".
