@@ -175,8 +175,7 @@ sources**. This applies to short polling; the number of selected groups is set s
 | Priority rechecks | Starred sources use their own configurable interval and take precedence in each bounded recheck pass | Implemented with history and message queries |
 
 The priority star controls these rechecks. Additional `updates.getChannelDifference`
-short polling is not exposed as a separate user mode. It covers up to 50 channels, the probe chat and priority
-sources first; the **Sources** part of collector health names the channels left out.
+short polling is not exposed as a separate user mode.
 
 Arbitrary high-frequency polling, ignoring FloodWait or assuming linear capacity
 from extra accounts is not a valid sizing model. Default limits are the

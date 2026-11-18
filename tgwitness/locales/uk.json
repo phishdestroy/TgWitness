@@ -3086,7 +3086,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Частину джерел не знайдено серед чатів акаунта; решта працюють далі.",
   "None of the sources was found among the account's chats.": "Жодного джерела не знайдено серед чатів акаунта.",
   "Sources are checked when observation starts.": "Джерела перевіряються під час запуску спостереження.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Додатково опитуються лише {limit} каналів, насамперед чат для перевірки та пріоритетні джерела. Не потрапили до цього короткого опитування ({n}): {names}. Оновлення, які доставляє Telegram, і надалі їх охоплюють, як і повторні перевірки там, де їх увімкнено.",
   "No source is selected.": "Не вибрано жодного джерела.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Видно: {visible} · додано автоматично: {added} · не знайдено: {unconfirmed}",
   "Attachments are being saved.": "Вкладення зберігаються.",

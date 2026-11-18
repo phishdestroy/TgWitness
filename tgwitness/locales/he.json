@@ -3070,7 +3070,6 @@
   "Some sources were not found among the account's chats; the others continue.": "חלק מהמקורות לא נמצאו בין הצ'אטים של החשבון; האחרים ממשיכים.",
   "None of the sources was found among the account's chats.": "אף אחד מהמקורות לא נמצא בין הצ'אטים של החשבון.",
   "Sources are checked when observation starts.": "המקורות נבדקים כשהתצפית מתחילה.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "רק {limit} ערוצים נדגמים בנוסף לאיתור עדכונים, קודם צ'אט הבדיקה והמקורות בעדיפות. מחוץ לדגימה הקצרה הזו ({n}): {names}. עדכונים ש-Telegram מעביר עדיין מכסים אותם, וכך גם בדיקות חוזרות היכן שהן מופעלות.",
   "No source is selected.": "לא נבחר אף מקור.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "גלויים: {visible} · נוספו אוטומטית: {added} · לא נמצאו: {unconfirmed}",
   "Attachments are being saved.": "הקבצים המצורפים נשמרים.",

@@ -3054,7 +3054,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Ba'zi manbalar hisob chatlari orasida topilmadi; qolganlari davom etmoqda.",
   "None of the sources was found among the account's chats.": "Manbalarning hech biri hisob chatlari orasida topilmadi.",
   "Sources are checked when observation starts.": "Manbalar kuzatuv boshlanganda tekshiriladi.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Yangilanishlar uchun qo'shimcha ravishda faqat {limit} ta kanal so'raladi, avval tekshiruv chati va ustuvor manbalar. Ushbu qisqa so'rovdan tashqarida qolganlar ({n}): {names}. Telegram yetkazadigan yangilanishlar ularni qamrab olishda davom etadi, qayta tekshiruvlar ham yoqilgan joyda qamrab oladi.",
   "No source is selected.": "Hech qanday manba tanlanmagan.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Ko'rinadigan: {visible} · avtomatik qo'shilgan: {added} · topilmagan: {unconfirmed}",
   "Attachments are being saved.": "Ilovalar saqlanmoqda.",

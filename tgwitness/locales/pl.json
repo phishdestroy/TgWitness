@@ -3086,7 +3086,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Niektórych źródeł nie znaleziono wśród czatów konta; pozostałe działają dalej.",
   "None of the sources was found among the account's chats.": "Żadnego źródła nie znaleziono wśród czatów konta.",
   "Sources are checked when observation starts.": "Źródła są sprawdzane przy starcie obserwacji.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Dodatkowo odpytywanych jest tylko {limit} kanałów, najpierw czat sondy i źródła priorytetowe. Poza tym krótkim odpytywaniem ({n}): {names}. Aktualizacje dostarczane przez Telegram nadal je obejmują, a tam, gdzie są włączone, także ponowne sprawdzenia.",
   "No source is selected.": "Nie wybrano żadnego źródła.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Widoczne: {visible} · dodane automatycznie: {added} · nie znaleziono: {unconfirmed}",
   "Attachments are being saved.": "Załączniki są zapisywane.",

@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "部分來源未在帳號的聊天中找到；其他來源繼續運作。",
   "None of the sources was found among the account's chats.": "未在帳號的聊天中找到任何來源。",
   "Sources are checked when observation starts.": "來源會在觀察開始時檢查。",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "僅額外輪詢 {limit} 個頻道的更新，優先探測對話與優先來源。未納入此短輪詢（{n}）：{names}。Telegram 傳送的更新仍涵蓋它們，已啟用的重新檢查也是。",
   "No source is selected.": "未選擇任何來源。",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "可見：{visible} · 自動加入：{added} · 未找到：{unconfirmed}",
   "Attachments are being saved.": "正在儲存附件。",

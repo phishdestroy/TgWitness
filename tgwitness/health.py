@@ -327,8 +327,6 @@ def verdict(parts, c, now, gap_at=None):
 def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None):
     parts = {"connection": connection(c, now), "intake": intake(c, heartbeat_seconds, now),
              "sources": sources(c, enabled_sources), "media": media(c, capture, now)}
-    if (c.get("short_poll") or {}).get("left_out"):
-        parts["sources"]["short_poll"] = c["short_poll"]
     return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"])),
             "verdict": verdict(parts, c, now, gap_at)}
 

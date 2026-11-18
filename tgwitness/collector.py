@@ -277,7 +277,6 @@ BUFFER_DRAIN_ROUNDS = 5
 DISPATCH_QUEUE_LIMIT = 5000
 DISPATCH_DRAIN_SECONDS = 30
 SHORT_POLL_LIMIT = 50
-SHORT_POLL_SHOWN = 10
 SHORT_POLL_SEED_RETRY = 60
 GAP_DETAIL_LIMIT = 1000
 SCOPE_RETRY_SECONDS = 300
@@ -690,7 +689,6 @@ class Collector:
         self.updates_seen = 0
         self.updates_probe = None
         self.updates_diverted = None
-        self.short_poll_left = []
         self.probe_worker = None
         self.probe_pending = None
         self.probe_missed = None
@@ -799,7 +797,6 @@ class Collector:
             "last_update_at": self.last_update_at,
             "updates_diverted": self.updates_diverted if self.running else None,
             "probe_missed": self.probe_missed if self.running else None,
-            "short_poll": self.short_poll_status(),
             "session_revoked": self.session_revoked if self.running else None,
             "max_handler_ms": round(self.max_handler_ms, 2),
             "rpc_backoff_until": backoff,
@@ -1640,11 +1637,8 @@ class Collector:
             targets = sorted(self.store.targets(True), key=lambda target: -(target.get("priority") or 0))
             probe = probe_settings(self.store)["chat_id"]
             ids = list(dict.fromkeys([probe] + [target["chat_id"] for target in targets]))
-            channels = [chat_id for chat_id in ids if type(chat_id) is int and chat_id < -1000000000000]
-            client.poll_channels([-chat_id - 1000000000000 for chat_id in channels[:SHORT_POLL_LIMIT]])
-            titles = {target["chat_id"]: target["title"] for target in targets}
-            self.short_poll_left = [{"chat_id": chat_id, "title": titles.get(chat_id)}
-                                    for chat_id in channels[SHORT_POLL_LIMIT:]]
+            client.poll_channels([-chat_id - 1000000000000 for chat_id in ids
+                                  if type(chat_id) is int and chat_id < -1000000000000][:SHORT_POLL_LIMIT])
         missing = client.unseeded_channels()
         if not missing or time.monotonic() < getattr(self, "polled_retry_at", 0):
             return 0
@@ -1665,12 +1659,6 @@ class Collector:
             client._mb_entity_cache.extend(answer.users, answer.chats)
         return sum(client.seed_channel(getattr(dialog.peer, "channel_id", None), getattr(dialog, "pts", None))
                    for dialog in answer.dialogs)
-
-    def short_poll_status(self, allowed=None):
-        left = [chat for chat in self.short_poll_left if allowed is None or chat["chat_id"] in allowed]
-        if not self.running or not left:
-            return None
-        return {"limit": SHORT_POLL_LIMIT, "left_out": len(left), "left_out_chats": left[:SHORT_POLL_SHOWN]}
 
     def prune_untracked(self):
         box = getattr(self.client, "_message_box", None)
@@ -3606,7 +3594,7 @@ class Collector:
         self.running = False
         if isinstance(self.client, WitnessClient):
             self.client.poll_channels([])
-        self.polled_mark, self.short_poll_left = None, []
+        self.polled_mark = None
         self.buffered, self.buffering = [], False
         await self.cancel_workers()
         async with self.capture_lock:

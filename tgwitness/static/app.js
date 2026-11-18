@@ -1449,16 +1449,12 @@ function collectorLines(name,p){
   }
   if(name==="sources"){
     const counts=c.checked?tr("Visible: {visible} · added automatically: {added} · not found: {unconfirmed}",c):"";
-    const poll=p.short_poll,shown=poll?.left_out_chats||[];
-    const left=poll?.left_out?tr("Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.",
-      {limit:poll.limit,n:poll.left_out,names:shown.map(x=>x.title||x.chat_id).join(", ")+(poll.left_out>shown.length?", +"+(poll.left_out-shown.length):"")}):"";
-    if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts,left];
-    if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts,left];
-    if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts,left];
-    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts,left];
-    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts,left];
-    if(p.reason==="not_checked")return [tr("Sources are checked when observation starts."),left];
-    if(left)return [counts,left];
+    if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
+    if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
+    if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts];
+    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts];
+    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
+    if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
     return [tr("No source is selected.")];
   }
   const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",c),

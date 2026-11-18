@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Beberapa sumber tidak ditemukan di antara obrolan akun; sisanya tetap berjalan.",
   "None of the sources was found among the account's chats.": "Tidak ada sumber yang ditemukan di antara obrolan akun.",
   "Sources are checked when observation starts.": "Sumber diperiksa saat pengamatan dimulai.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Hanya {limit} saluran yang juga dipoll untuk pembaruan, obrolan probe dan sumber prioritas lebih dulu. Tidak termasuk dalam poll singkat ini ({n}): {names}. Pembaruan yang dikirim Telegram tetap mencakupnya, begitu pula pemeriksaan ulang jika diaktifkan.",
   "No source is selected.": "Tidak ada sumber yang dipilih.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Terlihat: {visible} · ditambahkan otomatis: {added} · tidak ditemukan: {unconfirmed}",
   "Attachments are being saved.": "Lampiran sedang disimpan.",

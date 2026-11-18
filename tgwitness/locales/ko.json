@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "일부 소스를 계정의 채팅에서 찾지 못했습니다. 나머지는 계속 작동합니다.",
   "None of the sources was found among the account's chats.": "계정의 채팅에서 소스를 하나도 찾지 못했습니다.",
   "Sources are checked when observation starts.": "소스는 관찰을 시작할 때 확인됩니다.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "업데이트를 추가로 폴링하는 채널은 {limit}개뿐이며, 프로브 채팅과 우선 소스가 먼저입니다. 이 짧은 폴링에서 제외됨 ({n}): {names}. Telegram이 전달하는 업데이트는 계속 이 채널들을 다루며, 재확인이 켜져 있으면 재확인도 다룹니다.",
   "No source is selected.": "선택한 소스가 없습니다.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "표시됨: {visible} · 자동 추가됨: {added} · 찾지 못함: {unconfirmed}",
   "Attachments are being saved.": "첨부 파일을 저장하고 있습니다.",

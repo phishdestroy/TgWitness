@@ -3054,7 +3054,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Bazı kaynaklar hesabın sohbetleri arasında bulunamadı; diğerleri devam ediyor.",
   "None of the sources was found among the account's chats.": "Kaynakların hiçbiri hesabın sohbetleri arasında bulunamadı.",
   "Sources are checked when observation starts.": "Kaynaklar gözlem başladığında denetlenir.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Güncellemeler için ek olarak yalnızca {limit} kanal sorgulanır; önce yoklama sohbeti ve öncelikli kaynaklar. Bu kısa sorgulamanın dışında kalanlar ({n}): {names}. Telegram'ın ilettiği güncellemeler onları kapsamaya devam eder; açık oldukları yerde yeniden kontroller de kapsar.",
   "No source is selected.": "Hiçbir kaynak seçilmedi.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Görünen: {visible} · otomatik eklenen: {added} · bulunamayan: {unconfirmed}",
   "Attachments are being saved.": "Ekler kaydediliyor.",

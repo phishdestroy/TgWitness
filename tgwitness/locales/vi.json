@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "Một số nguồn không được tìm thấy trong các cuộc trò chuyện của tài khoản; các nguồn khác vẫn tiếp tục.",
   "None of the sources was found among the account's chats.": "Không tìm thấy nguồn nào trong các cuộc trò chuyện của tài khoản.",
   "Sources are checked when observation starts.": "Các nguồn được kiểm tra khi bắt đầu quan sát.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Chỉ {limit} kênh được thăm dò thêm để lấy cập nhật, trước hết là cuộc trò chuyện thăm dò và các nguồn ưu tiên. Nằm ngoài lần thăm dò ngắn này ({n}): {names}. Các cập nhật Telegram gửi đến vẫn bao quát chúng, và cả các lần kiểm tra lại ở nơi chúng được bật.",
   "No source is selected.": "Chưa chọn nguồn nào.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Hiển thị: {visible} · tự động thêm: {added} · không tìm thấy: {unconfirmed}",
   "Attachments are being saved.": "Tệp đính kèm đang được lưu.",

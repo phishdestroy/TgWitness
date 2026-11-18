@@ -3118,7 +3118,6 @@
   "Some sources were not found among the account's chats; the others continue.": "لم يُعثر على بعض المصادر بين دردشات الحساب؛ وتستمر المصادر الأخرى.",
   "None of the sources was found among the account's chats.": "لم يُعثر على أي مصدر بين دردشات الحساب.",
   "Sources are checked when observation starts.": "تُفحص المصادر عند بدء المراقبة.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "يُستطلع {limit} قناة فقط إضافيًا بحثًا عن التحديثات، وتأتي أولًا محادثة المسبار والمصادر ذات الأولوية. المستبعدة من هذا الاستطلاع القصير ({n}): {names}. لا تزال التحديثات التي يسلّمها Telegram تشملها، وكذلك إعادات الفحص حيث تكون مفعّلة.",
   "No source is selected.": "لم يُحدَّد أي مصدر.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "ظاهرة: {visible} · أضيفت تلقائيًا: {added} · غير موجودة: {unconfirmed}",
   "Attachments are being saved.": "يجري حفظ المرفقات.",

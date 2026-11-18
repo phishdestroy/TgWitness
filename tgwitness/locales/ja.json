@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "一部のソースがアカウントのチャットに見つかりません。他のソースは継続しています。",
   "None of the sources was found among the account's chats.": "アカウントのチャットにソースが1つも見つかりません。",
   "Sources are checked when observation starts.": "ソースは監視の開始時に確認されます。",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "更新の追加ポーリング対象は {limit} チャンネルまでで、プローブ用チャットと優先ソースが先です。この短いポーリングの対象外 ({n}): {names}。Telegram が配信する更新は引き続きこれらを対象にし、再確認も有効になっていれば対象にします。",
   "No source is selected.": "ソースが選択されていません。",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "表示: {visible} · 自動追加: {added} · 見つからない: {unconfirmed}",
   "Attachments are being saved.": "添付ファイルを保存しています。",

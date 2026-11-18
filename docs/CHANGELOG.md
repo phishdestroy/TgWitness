@@ -29,10 +29,6 @@
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
   downloaded.
-- With more than 50 channels to short-poll, the **Sources** part of collector health counts the channels left out of
-  the short poll and names up to ten of them (`short_poll` in `/api/status` for the main administrator and accesses
-  with `account` permission over the whole workspace; other accesses do not receive it). Before, nothing showed which
-  channels were not short-polled.
 - The link preview of a public channel or group by username says whether the account is already a member, from
   Telegram's `left` flag, and offers **Join / open** instead of **Send join request** to a member of a group that
   approves new members. The result of **Join / open** records `already_member` when the account was already in the

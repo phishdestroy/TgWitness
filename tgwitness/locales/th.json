@@ -3038,7 +3038,6 @@
   "Some sources were not found among the account's chats; the others continue.": "ไม่พบแหล่งข้อมูลบางรายการในแชตของบัญชี ส่วนที่เหลือยังทำงานต่อ",
   "None of the sources was found among the account's chats.": "ไม่พบแหล่งข้อมูลใดเลยในแชตของบัญชี",
   "Sources are checked when observation starts.": "แหล่งข้อมูลจะถูกตรวจสอบเมื่อเริ่มการสังเกต",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "มีเพียง {limit} ช่องที่ถูกสอบถามการอัปเดตเพิ่มเติม โดยเริ่มจากแชทสำหรับตรวจสอบและแหล่งที่มีลำดับความสำคัญ ไม่อยู่ในการสอบถามสั้นนี้ ({n}): {names} การอัปเดตที่ Telegram ส่งมายังคงครอบคลุมช่องเหล่านี้ รวมถึงการตรวจสอบซ้ำในกรณีที่เปิดใช้",
   "No source is selected.": "ยังไม่ได้เลือกแหล่งข้อมูล",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "มองเห็นได้: {visible} · เพิ่มอัตโนมัติ: {added} · ไม่พบ: {unconfirmed}",
   "Attachments are being saved.": "กำลังบันทึกไฟล์แนบ",

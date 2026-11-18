@@ -3054,7 +3054,6 @@
   "Some sources were not found among the account's chats; the others continue.": "کچھ ذرائع اکاؤنٹ کی چیٹس میں نہیں ملے؛ باقی جاری ہیں۔",
   "None of the sources was found among the account's chats.": "کوئی بھی ذریعہ اکاؤنٹ کی چیٹس میں نہیں ملا۔",
   "Sources are checked when observation starts.": "ذرائع مشاہدہ شروع ہونے پر جانچے جاتے ہیں۔",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "اپ ڈیٹس کے لیے اضافی طور پر صرف {limit} چینلز پول کیے جاتے ہیں، پہلے پروب چیٹ اور ترجیحی ذرائع۔ اس مختصر پول سے باہر ({n}): {names}۔ ٹیلیگرام کی پہنچائی گئی اپ ڈیٹس اب بھی انہیں شامل کرتی ہیں، اور جہاں دوبارہ جانچ فعال ہے وہاں دوبارہ جانچ بھی۔",
   "No source is selected.": "کوئی ذریعہ منتخب نہیں ہے۔",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "نظر آنے والے: {visible} · خودکار طور پر شامل: {added} · نہیں ملے: {unconfirmed}",
   "Attachments are being saved.": "منسلکات محفوظ کیے جا رہے ہیں۔",
