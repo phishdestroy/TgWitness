@@ -65,7 +65,11 @@ more than 50 chats; the size estimate remains a separate, sample-based operation
 | Whole account | Every chat the account sees | Every new chat, group, private chat or bot is added the moment its first update arrives |
 
 - **Source types** (channels, groups, private chats, bots) narrow the folder and
-  whole-account modes. Chosen chats can be of any type, including private chats and bots.
+  whole-account modes. Chosen chats can be of any type, including private chats and bots;
+  source types never stop a chat you added by hand. A type turned off, an exclusion or a
+  switch to chosen chats stops automatically added sources as soon as it is saved, before
+  the source list is recalculated and also when Telegram cannot be reached: their new
+  messages, history passes, new-chat history, peer settings and profile observations.
 - **Excluded chats** are never recorded, in any mode. In folder and whole-account modes,
   *Exclude* and *Remove* on a source put it on this list, so the scope does not add it again.
   Choosing the chat again by hand (in Sources or from Chats) takes it off the list. The list

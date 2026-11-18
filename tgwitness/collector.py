@@ -946,6 +946,22 @@ class Collector:
         self.refresh_targets()
         return chat_id in self.target_ids
 
+    def admitted(self, chat_id, scope=None):
+        """An enabled target is collected only while the saved scope still allows it: exclusions apply to every
+        target and the mode and chat types to automatically added ones from the moment they are saved, before
+        the target list is recalculated. Manual targets keep their contract in every mode."""
+        if chat_id is None or not self.selected(chat_id):
+            return False
+        scope = scope or scope_settings(self.store)
+        if chat_id in scope["exclude"]:
+            return False
+        if chat_id not in self.scope_ids:
+            return True
+        if scope["mode"] == "selected":
+            return False
+        kind = (self.dialog_cache.get(chat_id) or {}).get("kind") or self.scope_kinds.get(chat_id)
+        return kind is None or allowed(scope, kind)
+
     async def covers(self, chat_id, entity=None, *, message_ids=()):
         if chat_id is None:
             return False
@@ -953,12 +969,7 @@ class Collector:
         if chat_id in scope["exclude"]:
             return False
         if self.selected(chat_id):
-            if chat_id not in self.scope_ids:
-                return True
-            if scope["mode"] == "selected":
-                return False
-            kind = (self.dialog_cache.get(chat_id) or {}).get("kind") or self.scope_kinds.get(chat_id)
-            return kind is None or allowed(scope, kind)
+            return self.admitted(chat_id, scope)
         if scope["mode"] == "selected":
             return False
         if chat_id in self.known_ids or chat_id in self.scope_rejected:
@@ -969,6 +980,14 @@ class Collector:
         pending = self.scope_unresolved.get(chat_id)
         if entity is None and (pending is None or time.monotonic() >= pending["retry_at"]):
             entity = await self.lookup_entity(chat_id, failures)
+            # The scope or the target list may have changed while Telegram answered: decide on the current ones.
+            scope = scope_settings(self.store)
+            if chat_id in scope["exclude"]:
+                return False
+            if self.selected(chat_id):
+                return self.admitted(chat_id, scope)
+            if scope["mode"] == "selected" or chat_id in self.known_ids or chat_id in self.scope_rejected:
+                return False
         kind = entry.get("kind") or kind_of(entity)
         if kind is None:
             self.scope_undetermined(chat_id, message_ids, failures)
@@ -1095,7 +1114,7 @@ class Collector:
     async def take_baseline(self, chat_id):
         if chat_id not in self.store.get_setting("baseline_pending", []):
             return
-        if self.selected(chat_id):
+        if self.admitted(chat_id):
             await self.snapshot(chat_id, self.param("snapshot_max"), origin="baseline")
         self.store.set_setting("baseline_pending",
                                [c for c in self.store.get_setting("baseline_pending", []) if c != chat_id])
@@ -1160,7 +1179,7 @@ class Collector:
                 continue
             try:
                 await self.wait_intake()
-                if not self.selected(chat_id):
+                if not self.admitted(chat_id):
                     return []
                 operation = (self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
                              if stage == "history" else self.capture_profile(chat_id, entity))
@@ -1185,7 +1204,7 @@ class Collector:
             requeue = False
             try:
                 async with locks.setdefault(chat_id, asyncio.Lock()):
-                    if not self.selected(chat_id):
+                    if not self.admitted(chat_id):
                         self.intake_progress.clear(chat_id, baseline)
                         continue
                     await self.wait_intake()
@@ -1194,7 +1213,7 @@ class Collector:
                         errors = []
                         if baseline:
                             await asyncio.wait_for(self.take_baseline(chat_id), self.param("operation_timeout_seconds"))
-                        elif self.selected(chat_id):
+                        elif self.admitted(chat_id):
                             errors = await self.capture_intake(chat_id, entity)
                         if errors:
                             self.defer_intake(chat_id, baseline, errors[0][1], [stage for stage, _ in errors])
@@ -3978,7 +3997,7 @@ class Collector:
         return bool(getattr(message, "out", False)) and not scope_settings(self.store)["own_actions"]
 
     def profiles_observed(self, chat_id):
-        return self.running and self.selected(chat_id) and monitoring_settings(self.store)["profiles"]
+        return self.running and self.admitted(chat_id) and monitoring_settings(self.store)["profiles"]
 
     def sender_profile(self, sender, chat_id):
         if sender is None or not self.profiles_observed(chat_id):
@@ -4210,7 +4229,7 @@ class Collector:
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                     types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest))
                 if (not membership or settings["membership"]) and (
-                        removed or await self.covers(chat_id, message_ids=[update.message.id])):
+                        (removed and self.admitted(chat_id)) or await self.covers(chat_id, message_ids=[update.message.id])):
                     source = recovered_source(update)
                     if not (source and self.store.message_state(chat_id, update.message.id)["content"]):
                         await self.capture_message(update.message, recovered_kind(source), chat_id, update, source,
@@ -4249,7 +4268,7 @@ class Collector:
                                if getattr(update.settings, name, False) is True)
                 stated = {name: plain(getattr(update.settings, name, None)) for name in PEER_SETTING_FACTS
                           if getattr(update.settings, name, None) is not None}
-                if (flags or stated) and self.selected(chat_id):
+                if (flags or stated) and self.admitted(chat_id):
                     self.store.append("peer.settings_changed", {
                         "flags": flags, "stated": stated, "raw": plain(update),
                         "meaning": "Peer-setting flags and fields received from Telegram for this account and "
@@ -4761,7 +4780,7 @@ class Collector:
         return facts
 
     async def _snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
-        if not self.selected(chat_id):
+        if not self.admitted(chat_id):
             raise ValueError("Enable this target before taking a history snapshot.")
         await self.restore()
         entity = entity or await self.resolve_target(chat_id)
@@ -4775,7 +4794,7 @@ class Collector:
         try:
             previous = before_id or 2**63
             async for message in self.client.iter_messages(entity, limit=limit, max_id=before_id or 0):
-                if not self.selected(chat_id):
+                if not self.admitted(chat_id):
                     raise ValueError("History snapshot stopped because the source was disabled.")
                 if type(message.id) is not int or not 0 < message.id < previous:
                     raise ValueError("History reply does not advance the requested cursor.")
@@ -5555,7 +5574,7 @@ class Collector:
             self.people.pop(next(iter(self.people)))
         self.people[utils.get_peer_id(entity)] = entity
         if chat_id is not None:
-            if self.running and self.selected(chat_id) and monitoring_settings(self.store)["profiles"]:
+            if self.running and self.admitted(chat_id) and monitoring_settings(self.store)["profiles"]:
                 from .people import observe_entity
                 observe_entity(self.store, entity, chat_id)
             if capture_settings(self.store)["include_avatars"]:
