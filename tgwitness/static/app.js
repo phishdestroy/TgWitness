@@ -1824,7 +1824,7 @@ function renderAccounts(){
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
-  const publicRoutes=list.filter(p=>!p.error_type&&p.collector?.network?.kind==="mtproxy_auto").length,advice=$("accounts-route-advice");
+  const publicRoutes=list.filter(p=>!p.error_type&&p.collector?.has_session&&p.collector?.network?.kind==="mtproxy_auto").length,advice=$("accounts-route-advice");
   advice.hidden=!publicRoutes||s.demo||!state.me?.admin||!viewAllowed('connection');
   if(!advice.hidden){
     $("accounts-route-advice-copy").textContent=trn("{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.",
