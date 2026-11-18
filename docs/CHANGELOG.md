@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- **Filters** above an open chat stays open, with the focus where it was, when the panel refreshes the chat status
+  in the background. Before, it closed by itself within seconds. Choosing a filter, a view or another chat still
+  closes it.
+- A new investigation record asks **Which chats?** with **All chats** or **Chosen chats**; the chat list opens
+  only for chosen chats and refuses to start with none ticked. Before, an empty list under "Only these chats (none
+  selected: all chats)" silently meant every chat.
 - When more channels are observed than short polling covers, channels of the priority class that does not fit
   take turns every 10 minutes instead of the same channels staying out, and Collector health → Sources names the
   channels outside short polling. Higher priority classes and the probe channel stay in. An access limited to some
