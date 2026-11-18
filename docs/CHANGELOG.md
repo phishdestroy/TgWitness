@@ -25,6 +25,15 @@
 
 ## Unreleased
 
+- The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to
+  it. Each `META-INF/ASiCManifestNNN.xml` and `META-INF/ASiCEvidenceRecordManifest.xml` is checked against the SHA-256
+  of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the
+  signed copy of an ASiC-E failed with its added signature listed as outside the manifest, and the evidence record
+  manifest was accepted without checking its hashes.
+- **Export a chat by link** keeps a plan tied to the link it was made for. Editing, pasting or clearing the link
+  removes the plan and its **Start export** button and says the link changed; a plan answer that arrives after the
+  link was edited, another link was checked or the panel was locked is dropped. Before, the plan of the first chat
+  stayed under a new link and **Start export** exported the first chat.
 - The verify commands inside an export name the file it is delivered as: `tgwitness-evidence.asice` for an ASiC-E
   container, `tgwitness-evidence.zip` for the ZIP, and the chat's own archive name (for example
   `Telegram_Tips_2026-11-18_1.zip`) for a chat export, in README.txt, the HTML and PDF reports, the case assessment

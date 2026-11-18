@@ -7081,7 +7081,13 @@ function saveMulti(button){return busy(button,async()=>{
   if(saved===false)return;
   renderMulti();if(saved===true)toast(tr("Signed chat export saved."));
 });}
-let linkPlan=null,linkJob=null,linkPoll=null;
+let linkPlan=null,linkJob=null,linkPoll=null,linkRequest=0;
+const linkInput=()=>$("link-export-input").value.trim();
+function linkPlanCurrent(){return !!linkPlan&&linkPlan.link===linkInput()&&linkPlan.token===state.token&&linkPlan.request===linkRequest;}
+function staleLinkPlan(){
+  linkRequest++;linkPlan=null;
+  const box=$("link-export-plan");box.replaceChildren(node("p","notice",tr("The link changed. Plan the export for the new chat.")));show("link-export-plan",true);
+}
 const EXPORT_PHASES={preparing:tr("preparing"),running:tr("running"),selecting:tr("selecting"),packaging:tr("packaging"),done:tr("done"),
   paused:tr("paused"),failed:tr("failed"),cancelled:tr("cancelled"),waiting:tr("waiting")};
 const LINK_REASONS={unavailable:"workspace unavailable",no_session:"no Telegram account connected",signed_out:"signed out: sign in again",
@@ -7144,6 +7150,8 @@ function renderLinkPlan(){
   select.addEventListener("change",linkEstimate);linkEstimate();
 }
 async function startLinkExport(){
+  if(linkJob)return;
+  if(!linkPlanCurrent()){staleLinkPlan();$("link-export-input").focus();throw new Error(tr("The link changed. Plan the export for the new chat."));}
   const p=linkPlan,profiles=[...$("link-export-plan").querySelectorAll("input[name=link-account]:checked")].map(b=>b.value);
   if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const token=state.token,x=await json("multi-export/start",{chat_id:p.chat_id,lead:profiles.includes(p.reader)?p.reader:profiles[0],
@@ -7195,20 +7203,25 @@ async function pollLinkJob(id){
   }
 }
 function resetLinkExport(){
-  clearTimeout(linkPoll);linkPoll=null;linkPlan=linkJob=null;
+  clearTimeout(linkPoll);linkPoll=null;linkPlan=linkJob=null;linkRequest++;
   $("link-export-plan").replaceChildren();show("link-export-plan",false);$("link-export-input").value="";
 }
 $("link-export-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const link=$("link-export-input").value.trim();
+  const link=linkInput();
   if(!link)throw new Error(tr("Paste a chat link or @username."));
   clearTimeout(linkPoll);linkPoll=null;linkJob=linkPlan=null;show("link-export-plan",false);
-  const button=e.submitter,label=button?.textContent;if(button)button.textContent=tr("Checking {link}…",{link:link.length>40?link.slice(0,39)+"…":link});
+  const request=++linkRequest,button=e.submitter,label=button?.textContent;if(button)button.textContent=tr("Checking {link}…",{link:link.length>40?link.slice(0,39)+"…":link});
   try{
     const token=state.token,plan=await json("multi-export/plan",{link},{root:true});
-    if(state.token!==token)return;
-    linkPlan=plan;renderLinkPlan();
+    if(state.token!==token||request!==linkRequest||linkJob)return;
+    if(linkInput()!==link){staleLinkPlan();return;}
+    linkPlan={...plan,link,token,request};renderLinkPlan();
   }finally{if(button)button.textContent=label;}
 });});
+$("link-export-input").addEventListener("input",()=>{
+  if(linkJob)return;
+  if(linkPlan&&linkPlan.link!==linkInput())staleLinkPlan();
+});
 window.addEventListener("tgwitness:lock",resetLinkExport);
 $("chat-export-start").addEventListener("click",e=>busy(e.currentTarget,openExportDialog));
 $("chat-export-get").addEventListener("click",e=>saveMulti(e.currentTarget));
