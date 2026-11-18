@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "日次集計、または等間隔の日付。",
   "Data directory": "データディレクトリ",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "日付には、{zone} の形式でタイムゾーンを指定します。範囲は開始時点で固定されます。",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC の範囲: {from} – {to}（終了時刻は含みません）。",
   "Day-of-week × hour heatmap.": "曜日×時間のヒートマップ。",
   "Delete an old documentation draft first.": "まず、古いドキュメントの草案を削除してください。",
   "Delete the list {name}? Matches already recorded stay in the journal.": "リスト {name} を削除しますか？ すでに記録されている一致項目はジャーナルに残ります。",

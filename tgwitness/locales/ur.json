@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "روزانہ کی تعداد یا برابر تاریخ کے وقفے۔",
   "Data directory": "ڈیٹا ڈائریکٹری",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "تاریخیں آپ کے ٹائم زون کے مطابق ہیں: {zone}۔ حدود شروعات میں مقرر ہیں۔",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC حدود: {from} – {to} (اختتام شامل نہیں)۔",
   "Day-of-week × hour heatmap.": "ہفتے کے دن × گھنٹے کا ہیٹ میپ۔",
   "Delete an old documentation draft first.": "سب سے پہلے ایک پرانا دستاویزاتی مسودہ حذف کریں۔",
   "Delete the list {name}? Matches already recorded stay in the journal.": "{name} کی فہرست حذف کریں؟ پہلے سے ریکارڈ شدہ مماثلتیں جرنل میں رہیں گی۔",

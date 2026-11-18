@@ -7049,6 +7049,7 @@
   "Daily counts or equal date intervals.": "Щоденні підрахунки або рівні часові інтервали.",
   "Data directory": "Каталог даних",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Дати вказуються у вашому часовому поясі: {zone}. Межі встановлюються на початку.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Межі в UTC: {from} – {to} (кінець не включено).",
   "Day-of-week × hour heatmap.": "Теплова карта день тижня × година.",
   "Delete an old documentation draft first.": "Спочатку видаліть старий чернетку документації.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Видалити список {name}? Вже записані збіги залишаються в журналі.",

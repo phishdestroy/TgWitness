@@ -56,6 +56,10 @@
 - On screens up to 767 px, opening a chat from the keyboard moves the focus to **Chats** (back) in the open
   conversation, and going back returns it to that chat's row. Before, the focus stayed on the hidden list and
   going back focused the search field.
+- The multi-account export period uses the panel's time zone, the one the journal is shown in, for custom dates and
+  the previous calendar month, and the dialog shows the resulting UTC bounds with the end marked as excluded. Before,
+  the form converted through the device's time zone, so a time copied from the journal could select a different
+  range.
 
 - An evidence export downloaded in the panel counts for workspace deletion only after the panel has received and
   saved every byte and confirmed it with `POST /api/exports/{id}/received`. Before, the server counted the download

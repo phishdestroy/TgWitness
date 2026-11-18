@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "Günlük sayımlar veya eşit tarih aralıkları.",
   "Data directory": "Veri dizini",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Tarihlerde kendi saat diliminizi kullanın: {zone}. Sınırlar başlangıçta sabitlenir.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC sınırları: {from} – {to} (bitiş hariç).",
   "Day-of-week × hour heatmap.": "Hafta günü × saat ısı haritası.",
   "Delete an old documentation draft first.": "Önce eski bir belge taslağını silin.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "{name} listesini silmek mi istiyorsunuz? Zaten kaydedilmiş eşleşmeler günlüğünde kalır.",

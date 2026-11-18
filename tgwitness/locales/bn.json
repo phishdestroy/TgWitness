@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "দৈনিক গণনা বা সমান তারিখের ব্যবধান।",
   "Data directory": "ডেটা ডিরেক্টরি",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "তারিখগুলো আপনার টাইমজোন অনুযায়ী: {zone}। সীমাগুলো শুরুতেই স্থির করা হয়।",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC সীমা: {from} – {to} (শেষ সীমা বাদ)।",
   "Day-of-week × hour heatmap.": "সপ্তাহের দিন × ঘণ্টার হিটম্যাপ।",
   "Delete an old documentation draft first.": "প্রথমে একটি পুরনো ডকুমেন্টেশনের খসড়া মুছে ফেলুন।",
   "Delete the list {name}? Matches already recorded stay in the journal.": "{name} তালিকা মুছে ফেলুন? ইতিমধ্যে রেকর্ড করা মিলগুলো জার্নালে থাকবে।",

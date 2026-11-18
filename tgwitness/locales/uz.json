@@ -6962,6 +6962,7 @@
   "Daily counts or equal date intervals.": "Kundalik hisoblar yoki teng sana oralig'i.",
   "Data directory": "Ma'lumotlar katalogi",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Sanalar sizning vaqt zonasidan foydalanadi: {zone}. Chegaralar boshlanishda belgilangan.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC chegaralari: {from} – {to} (oxiri kirmaydi).",
   "Day-of-week × hour heatmap.": "Hafta kuni × soat issiqlik xaritasi.",
   "Delete an old documentation draft first.": "Avvalo eski hujjat loyihasini o'chiring.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "{name} ro'yxatini o'chirib tashlang? Allaqachon qayd etilgan mosliklar jurnalda qoladi.",

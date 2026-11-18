@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "Số liệu hàng ngày hoặc các khoảng thời gian có cùng ngày.",
   "Data directory": "Thư mục dữ liệu",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Ngày tháng sử dụng múi giờ của bạn: {zone}. Giới hạn được cố định tại thời điểm bắt đầu.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "Giới hạn UTC: {from} – {to} (không gồm thời điểm kết thúc).",
   "Day-of-week × hour heatmap.": "Bản đồ nhiệt theo ngày trong tuần × giờ.",
   "Delete an old documentation draft first.": "Hãy xóa bản nháp tài liệu cũ trước tiên.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Xóa danh sách {name}? Các kết quả khớp đã được ghi lại vẫn được lưu giữ trong nhật ký.",

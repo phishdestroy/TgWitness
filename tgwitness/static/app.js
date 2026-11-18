@@ -6833,7 +6833,7 @@ async function openExportDialog(){
   show("export-select-all",!basic&&state.profiles.length>1);
   $("export-select-all").onclick=()=>{list.querySelectorAll("input:not(:disabled)").forEach(b=>{b.checked=true;});estimate();};
   estimate();
-  $("export-timezone").textContent=tr("Dates use your time zone: {zone}. Bounds are fixed at start.",{zone:Intl.DateTimeFormat().resolvedOptions().timeZone});
+  showExportBounds();
   const dialog=$("export-dialog");
   const saved=await json("multi-export/jobs",undefined,{root:true});
   if(revision!==state.workspaceRevision||generation!==chatGeneration)return;
@@ -6867,18 +6867,47 @@ async function openExportDialog(){
   state.multi=x;state.multiHidden=null;renderMulti();pollMulti(x.id);
   toast(tr("Export started with {n} accounts reserved exclusively for this task.",{n:profiles.length}));
 }
+function exportZone(){
+  const zone=panelTime?.zone;
+  return !zone||zone==="local"?Intl.DateTimeFormat().resolvedOptions().timeZone:zone;
+}
+function zonedInstant(local,zone){
+  const [day,clock="00:00"]=local.split("T"),[year,month,date]=day.split("-").map(Number),[hour,minute]=clock.split(":").map(Number);
+  const wanted=Date.UTC(year,month-1,date,hour,minute);
+  const format=new Intl.DateTimeFormat("en-US",{timeZone:zone,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"});
+  let guess=wanted;
+  for(let round=0;round<2;round++){
+    const parts=Object.fromEntries(format.formatToParts(new Date(guess)).map(part=>[part.type,part.value]));
+    guess+=wanted-Date.UTC(Number(parts.year),Number(parts.month)-1,Number(parts.day),Number(parts.hour)%24,Number(parts.minute));
+  }
+  return new Date(guess);
+}
 function exportPeriod(){
-  const preset=$("export-period").value,now=new Date();
+  const preset=$("export-period").value,now=new Date(),zone=exportZone();
   let from=null,to=null;
   if(preset==="7"||preset==="30"){to=now;from=new Date(now.getTime()-Number(preset)*86400000);}
-  else if(preset==="month"){to=new Date(now.getFullYear(),now.getMonth(),1);from=new Date(now.getFullYear(),now.getMonth()-1,1);}
+  else if(preset==="month"){
+    const parts=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"numeric"}).formatToParts(now).map(part=>[part.type,part.value]));
+    const year=Number(parts.year),month=Number(parts.month),start=month===1?[year-1,12]:[year,month-1];
+    from=zonedInstant(start[0]+"-"+String(start[1]).padStart(2,"0")+"-01T00:00",zone);
+    to=zonedInstant(year+"-"+String(month).padStart(2,"0")+"-01T00:00",zone);
+  }
   else if(preset==="custom"){
-    from=$("export-from").value?new Date($("export-from").value):null;
-    to=$("export-to").value?new Date($("export-to").value):null;
+    from=$("export-from").value?zonedInstant($("export-from").value,zone):null;
+    to=$("export-to").value?zonedInstant($("export-to").value,zone):null;
   }
   if(from&&to&&from>=to)throw new Error(tr("The period must end after it starts."));
   return {from_utc:from?.toISOString()||null,to_utc:to?.toISOString()||null};
 }
+function showExportBounds(){
+  let text=tr("Dates use your time zone: {zone}. Bounds are fixed at start.",{zone:exportZone()});
+  try{
+    const period=exportPeriod(),utc=value=>value?value.replace(/\.\d+Z$/,"Z"):"…";
+    if(period.from_utc||period.to_utc)text+=" "+tr("UTC bounds: {from} – {to} (the end is excluded).",{from:utc(period.from_utc),to:utc(period.to_utc)});
+  }catch{}
+  $("export-timezone").textContent=text;
+}
+for(const id of ["export-period","export-from","export-to"])$(id).addEventListener("input",showExportBounds);
 $("export-period").addEventListener("change",()=>{
   const custom=$("export-period").value==="custom";
   $("export-from").disabled=$("export-to").disabled=!custom;

@@ -6976,6 +6976,7 @@
   "DNS via proxy": "DNS über Proxy",
   "Data directory": "Datenverzeichnis",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "Datumsangaben erfolgen in Ihrer Zeitzone: {zone}. Die Grenzen werden zu Beginn festgelegt.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC-Grenzen: {from} – {to} (das Ende ist ausgeschlossen).",
   "Delete an old documentation draft first.": "Löschen Sie zunächst einen alten Dokumentationsentwurf.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "Die Liste {name} löschen? Bereits aufgezeichnete Übereinstimmungen verbleiben im Journal.",
   "Delete this draft completely? Telegram observations stay unchanged.": "Diesen Entwurf vollständig löschen? Telegram-Beobachtungen bleiben unverändert.",

@@ -6923,6 +6923,7 @@
   "Daily counts or equal date intervals.": "일일 집계 또는 동일한 날짜 간격.",
   "Data directory": "데이터 디렉터리",
   "Dates use your time zone: {zone}. Bounds are fixed at start.": "날짜는 사용자의 시간대({zone})를 사용합니다. 범위는 시작 시점에 고정됩니다.",
+  "UTC bounds: {from} – {to} (the end is excluded).": "UTC 범위: {from} – {to} (끝은 제외).",
   "Day-of-week × hour heatmap.": "요일 × 시간별 히트맵.",
   "Delete an old documentation draft first.": "먼저 오래된 문서 초안을 삭제하십시오.",
   "Delete the list {name}? Matches already recorded stay in the journal.": "{name} 목록을 삭제하시겠습니까? 이미 기록된 일치 항목은 저널에 남아 있습니다.",
