@@ -39,6 +39,9 @@
   lists), from an account-wide `coverage.gap` for a full startup buffer (chat IDs and message ID ranges) and from
   `recheck.completed`; the totals of those records are recounted for the chats kept. Before, these records were
   passed whole or with their nested chat lists.
+- Downloading a finished or in-progress chat export checks the access again just before the file is sent, as the
+  full export already did: a token revoked, an export permission removed or the chat taken out of the access while
+  the archive was prepared stops the download and removes the temporary copy.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".

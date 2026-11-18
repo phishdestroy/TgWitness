@@ -388,6 +388,7 @@ async def chat_export_live(
     collector, store = ctx.app.state.collector, ctx.app.state.store
     if not ctx.export_visible(request, export_id):
         raise HTTPException(404, NOT_READY)
+    checked = (collector.export_state or {}).get("chat_id")
     try:
         path = await build_file(lambda: collector.live_snapshot(export_id))
     except (ValueError, OSError):
@@ -408,6 +409,7 @@ async def chat_export_live(
             required_permissions=["view", "export"],
             chat_ids=[state.get("chat_id")],
         )
+        await ctx.recheck_chat_download(request, export_id, checked, state.get("chat_id"))
     except BaseException:
         path.unlink(missing_ok=True)
         raise
@@ -433,6 +435,7 @@ async def chat_export_download(
     if not path:
         raise HTTPException(404, "No finished chat export is available to download.")
     filename = collector.export_state["filename"]
+    checked = collector.export_state.get("chat_id")
     entry = ctx.prepared_chat_exports.get(export_id)
     if entry is None:
         entry = await asyncio.to_thread(
@@ -455,12 +458,18 @@ async def chat_export_download(
         except ValueError:
             ctx.prepared_chat_exports.pop(export_id, None)
         else:
+            try:
+                await ctx.recheck_chat_download(request, export_id, checked)
+            except BaseException:
+                copy.unlink(missing_ok=True)
+                raise
             return TemporaryDownload(
                 copy,
                 filename=filename,
                 media_type="application/zip",
                 headers=export_history.headers(entry),
             )
+    await ctx.recheck_chat_download(request, export_id, checked)
     return FileResponse(
         path,
         filename=filename,
@@ -1066,6 +1075,11 @@ class ExportOperations:
         if current is not None and (
             original_chats is None or not set(original_chats) <= current
         ):
+            raise HTTPException(403, "This chat is not open to this access.")
+
+    async def recheck_chat_download(self, request, export_id, *chats):
+        await self.recheck_export_scope(request, [chat for chat in chats if chat is not None])
+        if not self.export_visible(request, export_id):
             raise HTTPException(403, "This chat is not open to this access.")
 
     def require_prepared_access(self, request, entry):
