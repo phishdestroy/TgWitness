@@ -56,6 +56,10 @@
 - The Telegram Desktop JSON of an account export lists only contacts in `contacts.list`. Before, each saved page of
   frequent correspondents (`top_peers`) added an empty contact entry. The top-peer pages stay in the export's signed
   data files.
+- An account export keeps the SHA-256 and size of the additional Takeout JSON as Telegram sent it
+  (`received_sha256`, `received_bytes`) next to those of the saved file, with the rule that removed secret fields
+  (`transformation`). Before, only the sanitized copy was described, so the receipt could not be compared with an
+  original obtained separately.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
