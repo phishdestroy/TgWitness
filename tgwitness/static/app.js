@@ -1214,22 +1214,27 @@ function selectQuick(index){
 function renderQuick(){
   quickResults.replaceChildren();
   const query=quickSearch.value.trim().toLocaleLowerCase();
-  for(const nav of document.querySelectorAll(".sidebar .nav")){
+  for(const [index,nav] of [...document.querySelectorAll(".sidebar .nav")].entries()){
     if(nav.hidden)continue;
     const rank={simple:0,standard:1,expert:2}, hiddenLevel=rank[nav.dataset.level]>rank[document.documentElement.dataset.uiLevel];
     if(!query&&hiddenLevel)continue;
-    const title=[...nav.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join("").trim();
-    const keywords=nav.dataset.view==="witness"?tr("bot Telegram proof GitHub witness"):
-      nav.dataset.view==="connection"?tr("proxy MTProxy SOCKS5 HTTP connection route"):"";
-    if(!(`${title} ${nav.dataset.view} ${keywords}`).toLocaleLowerCase().includes(query))continue;
+    const view=nav.dataset.view;
+    if(view&&!$("view-"+view))continue;
+    const title=view?[...nav.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join("").trim():nav.textContent.trim();
+    if(!title)continue;
+    const keywords=view==="witness"?tr("bot Telegram proof GitHub witness"):
+      view==="connection"?tr("proxy MTProxy SOCKS5 HTTP connection route"):"";
+    if(!(`${title} ${view||""} ${keywords}`).toLocaleLowerCase().includes(query))continue;
     const option=node("div","quick-option");
-    option.id="quick-option-"+nav.dataset.view;option.setAttribute("role","option");
-    option.dataset.destination=nav.dataset.view;
-    option.append(nav.querySelector("svg").cloneNode(true),node("span","quick-label",title));
+    option.id="quick-option-"+(view||"command-"+index);option.setAttribute("role","option");
+    if(view)option.dataset.destination=view;
+    const glyph=nav.querySelector("svg");
+    if(glyph)option.append(glyph.cloneNode(true));
+    option.append(node("span","quick-label",title));
     if(hiddenLevel)option.append(node('small','',tr('Show hidden setting')));
-    if(nav.dataset.view===state.view)option.append(node("small","",tr("Current section")));
+    if(view&&view===state.view)option.append(node("small","",tr("Current section")));
     option.append(icon("chevron"));
-    option.addEventListener("click",()=>openQuickDestination(nav.dataset.view));
+    option.addEventListener("click",()=>{if(view){openQuickDestination(view);return;}quickDialog.close();nav.click();});
     quickResults.append(option);
   }
   if(query){

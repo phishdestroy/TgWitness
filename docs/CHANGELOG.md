@@ -61,6 +61,8 @@
   the English original.
 - Ctrl+S (Cmd+S) saves only a form inside the open dialog or panel; with the command palette or another modal open it
   saves nothing. Before, pressing it in the palette saved the changed report settings behind it.
+- The command palette lists **Investigation** by name and opens its panel. Before, it showed an unnamed entry whose
+  selection raised a JavaScript error; entries now open only sections that exist.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
