@@ -10495,5 +10495,9 @@
   "Recorded in the journal": "سُجّل في السجل",
   "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} ملف (ملفات) محلي اختلف عن التجزئة المسجلة في السجل الموقّع. بايتاتها محفوظة دون تغيير في مجلد storage-conflicts الخاص بمساحة العمل هذه باسم EXPECTED_SHA256.LOCAL_SHA256؛ ويُسجَّل كل منها في السجل باسم storage.local_conflict.",
   "A later change affects the same settings. Change them directly instead of undoing this one.": "تغيير لاحق يمسّ الإعدادات نفسها. غيّرها مباشرة بدلاً من التراجع عن هذا التغيير.",
-  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "اكتمل الإعداد من قبل، لذلك لم يبدأ أي شيء جديد. لا تُحفظ تغييرات اختيار المحادثات إلا بزر «حفظ اختيار المحادثات»."
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "اكتمل الإعداد من قبل، لذلك لم يبدأ أي شيء جديد. لا تُحفظ تغييرات اختيار المحادثات إلا بزر «حفظ اختيار المحادثات».",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "يحدد الوضع هدف الحماية ويعرض ما لا يزال ناقصًا. مستوى الواجهة، لا الوضع، هو ما يحدد الأقسام التي تعرضها اللوحة؛ ويبقى التسجيل والتوقيع كما هما في كل وضع ولا يُحذف أي شيء.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "أفهم ما يلي: يبقى التسجيل والتوقيع كما هما ولا يُحذف أي شيء.",
+  "A mode sets the protection target. The status of each layer is below.": "يحدد الوضع هدف الحماية. حالة كل طبقة موضحة أدناه.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "تأكيد الوضع الأدنى: يبقى التسجيل والتوقيع كما هما ولا يُحذف أي شيء."
 }

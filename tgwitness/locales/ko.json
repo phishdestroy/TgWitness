@@ -10240,5 +10240,9 @@
   "Recorded in the journal": "저널에 기록",
   "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "로컬 파일 {count}개가 서명된 저널의 해시와 달랐습니다. 해당 바이트는 이 작업 공간의 storage-conflicts 폴더에 EXPECTED_SHA256.LOCAL_SHA256 이름으로 변경 없이 보관되며, 각 파일은 저널에 storage.local_conflict로 기록됩니다.",
   "A later change affects the same settings. Change them directly instead of undoing this one.": "이후의 변경이 같은 설정에 영향을 줍니다. 이 변경을 되돌리는 대신 설정을 직접 변경하세요.",
-  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "설정이 이미 완료되어 새로 시작된 것은 없습니다. 채팅 선택 변경 사항은 “채팅 선택 저장”으로만 저장됩니다."
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "설정이 이미 완료되어 새로 시작된 것은 없습니다. 채팅 선택 변경 사항은 “채팅 선택 저장”으로만 저장됩니다.",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "모드는 보호 목표를 정하고 아직 부족한 것을 보여 줍니다. 패널에 어떤 섹션을 표시할지는 모드가 아니라 인터페이스 수준이 결정합니다. 기록과 서명은 모든 모드에서 같으며 아무것도 삭제되지 않습니다.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "알겠습니다: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
+  "A mode sets the protection target. The status of each layer is below.": "모드는 보호 목표를 정합니다. 각 계층의 상태는 아래에 있습니다.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "하위 모드 확인: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다."
 }

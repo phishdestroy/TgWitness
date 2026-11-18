@@ -10240,5 +10240,9 @@
   "Recorded in the journal": "已記錄於日誌",
   "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} 個本機檔案與簽名日誌中的雜湊不符。其位元組已原封不動保存在此工作區的 storage-conflicts 資料夾中，名稱為 EXPECTED_SHA256.LOCAL_SHA256；每一筆都以 storage.local_conflict 記錄於日誌。",
   "A later change affects the same settings. Change them directly instead of undoing this one.": "之後的變更影響了相同的設定。請直接修改這些設定，而不是撤銷此變更。",
-  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "設定已完成，因此沒有啟動任何新項目。聊天選擇的變更只有透過「儲存聊天選擇」才會儲存。"
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "設定已完成，因此沒有啟動任何新項目。聊天選擇的變更只有透過「儲存聊天選擇」才會儲存。",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "模式設定保護目標，並列出仍缺少的項目。面板顯示哪些區段由介面層級決定，而不是由模式決定；錄製與簽署在每種模式下都相同，不會刪除任何內容。",
+  "I understand: recording and signing stay the same and nothing is deleted.": "我明白：錄製與簽署維持不變，不會刪除任何內容。",
+  "A mode sets the protection target. The status of each layer is below.": "模式設定保護目標。各層狀態見下方。",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "確認切換至較低模式：錄製與簽署維持不變，不會刪除任何內容。"
 }

@@ -10342,5 +10342,9 @@
   "Recorded in the journal": "נרשם ביומן",
   "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} קבצים מקומיים לא תאמו את הגיבוב ביומן החתום. הבייטים שלהם נשמרים ללא שינוי בתיקייה storage-conflicts של סביבת העבודה הזו בשם EXPECTED_SHA256.LOCAL_SHA256; כל אחד מהם נרשם ביומן כ-storage.local_conflict.",
   "A later change affects the same settings. Change them directly instead of undoing this one.": "שינוי מאוחר יותר משפיע על אותן הגדרות. שנו אותן ישירות במקום לבטל את השינוי הזה.",
-  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "ההגדרה הראשונית כבר הושלמה, ולכן לא הופעל שום דבר חדש. שינויים בבחירת הצ'אטים נשמרים רק באמצעות \"שמירת בחירת הצ'אטים\"."
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "ההגדרה הראשונית כבר הושלמה, ולכן לא הופעל שום דבר חדש. שינויים בבחירת הצ'אטים נשמרים רק באמצעות \"שמירת בחירת הצ'אטים\".",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "מצב קובע את יעד ההגנה ומציג מה עדיין חסר. רמת הממשק, ולא המצב, קובעת אילו חלקים יוצגו בלוח; ההקלטה והחתימה זהות בכל מצב ושום דבר לא נמחק.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "אני מבין: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק.",
+  "A mode sets the protection target. The status of each layer is below.": "מצב קובע את יעד ההגנה. המצב של כל שכבה מופיע למטה.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "אשר את המעבר למצב הנמוך יותר: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק."
 }

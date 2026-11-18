@@ -389,8 +389,11 @@ export function createSettingsHub(ctx) {
   }
   function summaryRows(){
     const inheritance=data.inheritance,connected=fresh(data.connection);
+    const scope=state.status?.scope?.mode||data.wizard.scope||'account',chats=(state.status?.targets||[]).filter(t=>t.enabled).length,collecting=accountState(state.status||{}).kind;
     const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','account:blue'],
-      ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','message:green'],
+      ['chats','Which chats?',label(scope)+' · '+ctx.trn('{n} chat','{n} chats',chats)+(chats?' · '+tr({collecting:'Observing',reconnecting:'Reconnecting',paused:'Paused',sign_in:'Sign-in required',
+        failed:'Needs attention',unavailable:'Unavailable',empty:'Offline'}[collecting]):''),
+        chats?collecting==='collecting'?'ok':['paused','empty','unavailable'].includes(collecting)?'off':'warn':scope==='selected'?'warn':'off','message:green'],
       ['connection','Connection',routeSummary(data.connection)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
       ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','sun:orange'],
       ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','star:pink'],
@@ -889,7 +892,7 @@ export function createSettingsHub(ctx) {
       if(dialogs.may_be_truncated)body.append(message('The chat list is limited. Increase the chat list limit in Settings.','notice warning'));
       const actions=node('div','hub-actions');body.append(actions);
       if(inSettings||draft.completed){
-        const save=button('Save chat selection',async()=>{const action=owner();data=await request(action,'settings/scope',draftBody());draft={...data.wizard};scopeDirty=false;
+        const save=button('Save chat selection',async()=>{const action=owner();data=await request(action,'settings/scope',draftBody());draft={...data.wizard};scopeDirty=false;await refresh(action);
           toast(tr('Settings saved.'));if(inSettings){render();return;}await navigate('settings');requireOwner(action);},'primary');
         save.dataset.scopeSave='';actions.append(save);
       }
@@ -1028,6 +1031,9 @@ export function createSettingsHub(ctx) {
     leave(){section=null;shownForm=null;proxyField=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
     status(){
       updateNext();if(data)updateIndicator(data.connection);
+      const chats=state.view==='settings'&&data&&prefs&&!groupScope&&root.querySelector('.hub-summary[data-section="chats"]');
+      if(chats){const [,,text,tone]=summaryRows().find(row=>row[0]==='chats'),value=chats.querySelector('.hub-summary-value');
+        chats.dataset.tone=tone;if(value&&value.lastChild.textContent!==text)value.lastChild.textContent=text;}
       const session=signedIn();
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;

@@ -86,6 +86,18 @@
   opens Exports or Home, instead of showing the recording check as done. The administrator key reissue confirmation is
   titled with the operation and announces its warning, and a cancelled confirmation returns focus to the button that
   opened it.
+- Panel states and keyboard use from the external review. **Settings → Which chats?** shows the scope in use, the
+  number of chats being recorded and whether they are observed, with a green dot only while they are, and follows a
+  saved chat selection and the recording state while Settings is open; before, it showed the first-setup draft, such
+  as **Choose chats · 0**, always with a green dot. The protection mode dialog and the **Protection level** card no
+  longer promise to hide or show sections where the interface level decides what the panel shows, which is every real
+  workspace, and with no mode chosen the switcher next to the version number reads **Not chosen** instead of **All
+  sections**; new `workspace.mode_changed` records no longer carry `shown` and `hidden` lists of sections the panel
+  did not actually hide; earlier records are unchanged. On a phone, an empty Chats page keeps the chat list with its
+  search and **Add** menu in view when the account is connected and the access can choose chats, open a Telegram link
+  or start a pseudo-secret chat, instead of covering it with a page that had no way back to the list. A journal row is
+  no longer a button with the bookmark button inside it: each row has its own open button of at least 24 × 24 px next
+  to the bookmark button, and only the buttons of the selected row are in the Tab order, matching the arrow keys.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
