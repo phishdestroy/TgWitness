@@ -153,12 +153,12 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const box = node('section', 'home-hero ' + (running ? 'is-live' : starting ? 'is-starting' : none ? 'is-empty' : 'is-paused'));
     const head = node('div', 'home-hero-head'), title = node('h2', 'home-hero-title');
     title.append(node('span', 'home-hero-dot'), document.createTextNode(running ? tr('Observing') : starting ? tr('Starting observation')
-      : none ? tr('No Telegram account connected') : tr('Observation paused')));
+      : none ? tr('No Telegram account connected') : tr('Observation off')));
     if (observation.since && !starting && !none) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
     head.append(title);
     const can = state.me?.admin || state.me?.permissions?.includes('collect');
     if (can && collector.has_session && !state.status?.demo && !starting) {
-      const action = node('button', running ? 'secondary' : 'primary', running ? tr('Pause') : tr('Resume now'));
+      const action = node('button', running ? 'secondary' : 'primary', running ? tr('Pause') : tr('Start observation'));
       action.type = 'button';
       action.addEventListener('click', () => busy(action, async () => {
         await json('collector/' + (running ? 'stop' : 'start'), {});

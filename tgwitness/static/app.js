@@ -111,7 +111,7 @@ const connectionViewReady=import('./views/connection.js?v=3').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=16'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=17'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,openJournal:kind=>openJournalFilter(kind),
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
