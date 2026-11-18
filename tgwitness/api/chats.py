@@ -40,8 +40,6 @@ from ..scope import WIDE_WARNING
 from ..scope import recheck_settings
 from ..scope import scope_settings
 from ..scope import unexclude
-from ..settings_hub import Draft
-from ..settings_hub import main_account_scope
 from ..store import canonical
 from ..workers import complete_in_thread
 from .access import bearer
@@ -313,8 +311,6 @@ async def set_recording(
     except Refused as exc:
         raise HTTPException(403, str(exc)) from None
     async with ctx.op_lock:
-        if body.scope is not None:
-            main_account_scope(ctx.app, Draft(scope=body.scope.mode))
         try:
             changed, saved = recording.save(ctx.app.state.store, body)
         except recording.Invalid as exc:
@@ -352,7 +348,6 @@ async def set_scope(body: ScopeUpdate, *, ctx=Depends(current_context)):
     ctx.require_live()
     store, collector = (ctx.app.state.store, ctx.app.state.collector)
     async with ctx.op_lock:
-        main_account_scope(ctx.app, Draft(scope=body.mode))
         try:
             recording.save(store, recording.RecordingUpdate(scope=body))
         except recording.Invalid as exc:

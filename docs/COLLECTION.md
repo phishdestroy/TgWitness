@@ -69,8 +69,8 @@ more than 50 chats; the size estimate remains a separate, sample-based operation
 - **Excluded chats** are never recorded, in any mode. In folder and whole-account modes,
   *Exclude* and *Remove* on a source put it on this list, so the scope does not add it again.
   Choosing the chat again by hand (in Sources, from Chats or under Settings → **Which chats?**)
-  takes it off the list. The list
-  holds up to 5,000 chats; past that, *Remove* is refused and the chat can be paused instead.
+  takes it off the list. The list holds up to 5,000 chats; past that, *Remove* is refused and
+  the chat can be paused instead.
 - **Own actions** (on by default): messages this account sends, its edits and its
   reply-keyboard button presses. Turned off, outgoing messages and edits are skipped.
 - Switching to a folder or the whole account asks for confirmation: these modes record
@@ -81,8 +81,8 @@ more than 50 chats; the size estimate remains a separate, sample-based operation
 - Chats added by the scope appear as sources marked *auto*, recorded as `scope.applied`
   (at start and hourly) or `source.discovered` (a new chat while observing). Switching back
   to chosen chats pauses every automatically added source at once, without reading the
-  account's chat list again. A chat excluded in folder or whole-account mode is paused before
-  the chat list is read, so it stays paused when Telegram does not return the list. While
+  account's chat list again. An excluded chat stops being recorded as soon as the scope is
+  saved, and its source is paused even when Telegram does not return the chat list. While
   observing, saving the scope applies it again, also when the values did not change.
 
 Scope of these modes:
