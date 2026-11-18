@@ -10302,5 +10302,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Ở chế độ các cuộc trò chuyện đã chọn nghiêm ngặt, danh sách phiên không được đọc, nên không biết phiên này đăng nhập khi nào; lần xuất này dùng phiên thường thay vì Takeout.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Tất cả {n} tệp đều khớp với bản kê khai đã ký, nhưng vùng chứa ASiC-E bị hỏng.",
   "Report: {scope}": "Báo cáo: {scope}",
-  "Case: {name}": "Vụ việc: {name}"
+  "Case: {name}": "Vụ việc: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại vẫn nhận cập nhật được gửi đến, nhưng kiểm tra lại chỉ bật cho {rechecked} kênh trong số đó.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại chỉ nhận cập nhật được gửi đến: kiểm tra lại đang tắt cho các kênh này."
 }

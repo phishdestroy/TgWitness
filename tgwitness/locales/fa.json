@@ -10353,5 +10353,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "در حالت گفت‌وگوهای انتخاب‌شده به‌صورت سخت‌گیرانه فهرست نشست‌ها خوانده نمی‌شود، پس معلوم نیست این نشست کی وارد شده است؛ این خروجی به‌جای Takeout از نشست معمولی استفاده کرد.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "همهٔ {n} فایل با مانیفست امضاشده مطابقت دارند، اما کانتینر ASiC-E آسیب دیده است.",
   "Report: {scope}": "گزارش: {scope}",
-  "Case: {name}": "پرونده: {name}"
+  "Case: {name}": "پرونده: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "نظرسنجی کوتاه {polled} کانال از {total} کانال را بررسی می‌کند؛ بقیه همچنان به‌روزرسانی‌های ارسالی را دریافت می‌کنند، اما بررسی دوباره فقط برای {rechecked} مورد از آن‌ها روشن است.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "نظرسنجی کوتاه {polled} کانال از {total} کانال را بررسی می‌کند؛ بقیه فقط به‌روزرسانی‌های ارسالی را دریافت می‌کنند: بررسی دوباره برای آن‌ها خاموش است."
 }

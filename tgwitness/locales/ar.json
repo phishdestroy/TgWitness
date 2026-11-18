@@ -10557,5 +10557,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "في وضع المحادثات المختارة الصارم لا تُقرأ قائمة الجلسات، لذا لا يُعرف متى سجّلت هذه الجلسة الدخول؛ استخدم هذا التصدير الجلسة العادية بدلًا من Takeout.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "تتطابق جميع الملفات ({n}) مع قائمة البيانات الموقعة، لكن حاوية ASiC-E تالفة.",
   "Report: {scope}": "التقرير: {scope}",
-  "Case: {name}": "القضية: {name}"
+  "Case: {name}": "القضية: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتواصل القنوات الأخرى تلقي التحديثات المرسلة، لكن إعادة الفحص مفعّلة لـ {rechecked} منها فقط.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتتلقى القنوات الأخرى التحديثات المرسلة فقط: إعادة الفحص متوقفة لها."
 }

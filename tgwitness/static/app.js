@@ -1471,7 +1471,10 @@ function collectorLines(name,p){
     const lines=sourceLines(p,c),waiting=c.short_poll_waiting||[];
     if(!waiting.length)return lines;
     const names=waiting.slice(0,10).join(", ")+(waiting.length>10?" "+tr("+{n} more",{n:waiting.length-10}):"");
-    return [...lines,tr("Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.",{polled:c.short_poll_polled,total:c.short_poll_channels}),
+    const rechecked=c.short_poll_rechecked??waiting.length,poll={polled:c.short_poll_polled,total:c.short_poll_channels,rechecked};
+    return [...lines,rechecked>=waiting.length?tr("Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.",poll)
+      :rechecked?tr("Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.",poll)
+      :tr("Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.",poll),
       c.short_poll_rotating&&tr("Channels of the same priority take turns every 10 minutes."),tr("Not short-polled now: {names}",{names})];
   }
   return mediaLines(p,c);

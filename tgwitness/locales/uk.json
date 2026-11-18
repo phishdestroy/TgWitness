@@ -10455,5 +10455,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "У суворому режимі вибраних чатів список сесій не читається, тому невідомо, коли ця сесія увійшла; експорт ішов через звичайну сесію, а не через Takeout.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Усі файли ({n}) відповідають підписаному маніфесту, але контейнер ASiC-E пошкоджено.",
   "Report: {scope}": "Звіт: {scope}",
-  "Case: {name}": "Справа: {name}"
+  "Case: {name}": "Справа: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Коротке опитування перевіряє {polled} з {total} каналів; решта, як і раніше, отримують надіслані оновлення, але повторні перевірки ввімкнено лише для {rechecked} з них.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Коротке опитування перевіряє {polled} з {total} каналів; решта отримують лише надіслані оновлення: повторні перевірки для них вимкнено."
 }

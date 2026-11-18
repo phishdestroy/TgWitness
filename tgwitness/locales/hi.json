@@ -10353,5 +10353,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "सख्त चुनी गई चैट्स में सत्र सूची नहीं पढ़ी जाती, इसलिए यह सत्र कब साइन इन हुआ यह पता नहीं है; इस निर्यात ने Takeout के बजाय सामान्य सत्र का उपयोग किया।",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "सभी {n} फ़ाइलें हस्ताक्षरित मैनिफ़ेस्ट से मेल खाती हैं, लेकिन ASiC-E कंटेनर क्षतिग्रस्त है।",
   "Report: {scope}": "रिपोर्ट: {scope}",
-  "Case: {name}": "मामला: {name}"
+  "Case: {name}": "मामला: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को भेजे गए अपडेट मिलते रहते हैं, लेकिन दोबारा जाँच उनमें से केवल {rechecked} के लिए चालू है।",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को केवल भेजे गए अपडेट मिलते हैं: उनके लिए दोबारा जाँच बंद है।"
 }

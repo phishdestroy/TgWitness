@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- **Sources** in the observation status no longer says that channels outside short polling always get rechecks. With
+  rechecks off for them (**Other chats, every … minutes** or **Priority chats, every … minutes** set to 0) it says
+  they get only pushed updates, and when rechecks are on for some of them it says for how many.
 - Each card in **Prepared exports** names what the file holds: **Signed archive** with *Complete journal* and its
   record count, **Report**, **Journal records** or **Handover extract** with its chat and record counts, the case
   title and ID, and the report selection the file was built with (chats, chosen messages, dates, or *All chats* and

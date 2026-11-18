@@ -1722,9 +1722,11 @@ class Collector:
                                                           SHORT_POLL_LIMIT, turn)
             client.poll_channels([-chat_id - 1000000000000 for chat_id in chosen])
             titles = {target["chat_id"]: target.get("title") for target in targets}
+            priority = {target["chat_id"]: bool(target.get("priority")) for target in targets}
             self.short_poll_state = {
                 "limit": SHORT_POLL_LIMIT, "channels": len(chosen) + len(waiting), "polled": len(chosen),
-                "waiting": [{"chat_id": chat_id, "title": titles.get(chat_id)} for chat_id in waiting],
+                "waiting": [{"chat_id": chat_id, "title": titles.get(chat_id), "priority": priority.get(chat_id, False)}
+                            for chat_id in waiting],
                 "rotating_priority": rotating, "turn_seconds": SHORT_POLL_TURN_SECONDS if rotating is not None else None}
         missing = client.unseeded_channels()
         if not missing or time.monotonic() < getattr(self, "polled_retry_at", 0):

@@ -10302,5 +10302,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "厳格な選択チャットではセッション一覧を読み取らないため、このセッションがいつサインインしたかは不明です。このエクスポートは Takeout ではなく通常のセッションを使いました。",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "{n} 件のファイルはすべて署名付きマニフェストと一致していますが、ASiC-E コンテナが損傷しています。",
   "Report: {scope}": "レポート：{scope}",
-  "Case: {name}": "事件：{name}"
+  "Case: {name}": "事件：{name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルにもプッシュ更新は引き続き届きますが、再確認がオンなのはそのうち{rechecked}件だけです。",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルに届くのはプッシュ更新だけです。これらの再確認はオフです。"
 }
