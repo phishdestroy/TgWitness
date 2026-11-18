@@ -28,8 +28,7 @@ ROLES = {"integrity": "Required conditions", "signer": "Required conditions", "e
          "head_binding": SUPPORTING, "checkpoint": SUPPORTING, "environment": SUPPORTING}
 MINIMUM = ("Minimum for evidence: integrity, the signer key, and external time from a third party covering the last record: "
            "a validated RFC 3161 timestamp, a Bitcoin proof, a witness post read from t.me or an attested collection run.")
-ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip", "chat": "tgwitness-chat-export.zip",
-            "account": "account-export.zip", "account_chat": "account-export.zip", "sharing": "disclosure.zip"}
+ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip", "chat": "tgwitness-chat-export.zip"}
 LABELS = {"records": "Records", "first": "First record", "last": "Last record", "fingerprint": "Signing key fingerprint (SHA-256)",
           "gaps": "Gaps", "notes": "Coverage notes", "periods": "Continuous observation periods", "unobserved": "Message numbers not observed",
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",

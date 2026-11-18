@@ -9,8 +9,7 @@ from ..access import POLICY
 from ..access import Refused
 from ..access import check as access_check
 from ..account_export import AccountExportOptions
-from ..account_report import archive_file
-from ..account_report import disclosure_file
+from ..account_report import delivered_file
 from ..app import ChatExport
 from ..app import ExportPassword
 from ..app import HandoverRequest
@@ -945,9 +944,9 @@ class ExportOperations:
                     path,
                     release=release,
                     # The same names the panel saves these files under and their verify commands point at.
-                    filename=disclosure_file(disclosure_id)
-                    if disclosure_id
-                    else archive_file(export_id),
+                    filename=delivered_file(
+                        disclosure_id or export_id, sharing=bool(disclosure_id)
+                    ),
                     media_type="application/zip",
                     headers=headers,
                 )
