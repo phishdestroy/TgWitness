@@ -54,20 +54,27 @@ def owner_only_state(root: Path):
 
 
 def private_write(path: Path, data: bytes):
-    temp = path.with_suffix(path.suffix + ".tmp")
-    fd = os.open(temp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-    with os.fdopen(fd, "wb") as stream:
-        stream.write(data)
-        stream.flush()
-        os.fsync(stream.fileno())
-    for attempt in range(6):
+    temp = path.with_name(path.name + "." + secrets.token_hex(6) + ".tmp")
+    fd = os.open(temp, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        for attempt in range(6):
+            try:
+                os.replace(temp, path)
+                break
+            except PermissionError as exc:
+                if getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == 5:
+                    raise
+                time.sleep(.01 * 2**attempt)
+    except BaseException:
         try:
-            os.replace(temp, path)
-            break
-        except PermissionError as exc:
-            if getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == 5:
-                raise
-            time.sleep(.01 * 2**attempt)
+            temp.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
 
 
 class Vault:
