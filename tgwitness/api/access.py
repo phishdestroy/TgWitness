@@ -290,6 +290,9 @@ class AccessOperations:
                 and current["chat_export"].get("chat_id") not in allowed
             ):
                 current["chat_export"] = None
+            # Short polling covers the whole workspace: its totals and the titles of channels left out
+            # describe chats outside this access, so it does not see them.
+            current["short_poll"] = None
             if current.get("scope"):
                 current["scope"] = {
                     **current["scope"],
