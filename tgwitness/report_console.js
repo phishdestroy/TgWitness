@@ -10,6 +10,14 @@ const sha=async data=>hex(await crypto.subtle.digest("SHA-256",typeof data==="st
 const fill=(text,values)=>text.replace(/\{(\w+)\}/g,(m,k)=>k in values?values[k]:m);
 const sayf=(key,values)=>fill(say(key),values||{});
 const human=k=>{const w=String(k||"").replace(/[._]+/g," ").trim();return w?w[0].toUpperCase()+w.slice(1):"";};
+const FILE_STATUS={above_limit:()=>say("Larger than the size limit"),duration_limit:()=>say("Longer than the duration limit"),
+  excluded_by_policy:()=>say("Not collected by the attachment settings"),hashes_only:()=>say("Only the file hashes were saved"),
+  hashes_unavailable:()=>say("Telegram did not provide file hashes"),rate_limited:()=>say("Telegram limited the download rate"),
+  message_changed_or_unavailable_at_media_read:()=>say("The message changed or was unavailable when the file was read"),
+  message_unavailable_at_file_read:()=>say("The message was unavailable when the file was read"),
+  skipped_by_export_option:()=>say("Files were turned off for this export"),type_not_collected:()=>say("This file type was not collected"),
+  unavailable:()=>say("Telegram did not provide the file")};
+const fileStatus=d=>d.file_status?(FILE_STATUS[d.file_status]?FILE_STATUS[d.file_status]():human(d.file_status)):say("File not in this archive");
 const span=s=>{s=Math.round(s||0);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
   return [d?sayf("{n} d",{n:num(d)}):"",h?sayf("{n} h",{n:num(h)}):"",m&&!d?sayf("{n} min",{n:num(m)}):""].filter(Boolean).join(" ")||sayf("{n} s",{n:num(s)});};
 const initials=s=>String(s||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";
@@ -284,12 +292,14 @@ async function startViewer(meta){
   function message(it,first,last){
     if(it.cat==="service")return '<div class="msg-service" data-key="'+it.key+'"><span>'+esc(it.who)+" · "+esc(it.service)+" · #"+it.n+" · "+esc(clock(it.at))+"</span></div>";
     const media=meta.media_previews!==false&&it.file&&isImage(it)?'<img class="msg-img" alt="" loading="lazy" src="'+esc(it.file.path)+'">':(it.file||it.d.media_type)?
-      '<div class="msg-media">'+ic("file")+"<span>"+esc(it.file&&it.file.name||(it.d.media_info||{}).file_name||say("Attachment"))+"</span></div>":"";
+      '<div class="msg-media'+(it.file?"":" missing")+'">'+ic("file")+"<span>"+esc(it.file&&it.file.name||(it.d.media_info||{}).file_name||say("Attachment"))+"</span>"
+      +"<small>"+esc(it.file?say("File saved"):fileStatus(it.d))+"</small></div>":"";
+    const times=[sayf("Sent: {time}",{time:it.sent||(it.chat==null?it.at:"")?when(it.sent||it.at):"—"}),...(it.chat!=null&&it.at?[sayf("Saved: {time}",{time:when(it.at)})]:[])].join(" · ");
     return '<article class="msg '+colour(it.uid??it.who)+(first?" first":"")+(last?" last":"")+(V.selected.has(it.key)?" picked":"")+'" data-key="'+it.key+'" role="listitem" tabindex="0">'
       +pickBox(it)+'<div class="msg-ava">'+(last?'<div class="ava">'+esc(initials(it.who))+"</div>":"")+'</div><div class="msg-bubble">'
       +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+media+hashNotice(it)
       +(it.text?'<div class="msg-text" dir="auto">'+hl(shortText(it.text))+"</div>":"")
-      +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
+      +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta" title="'+esc(times)+'">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
   function hashNotice(it){const h=it.fileHashes;if(!h||!/^[0-9a-f]{64}$/.test(h.sha))return "";
     return '<div class="rec-p">File content not downloaded. '+esc(h.name||"Attachment")+' · '+num(h.bytes)+' bytes · '+num(h.ranges)
       +' SHA-256 ranges · '+esc(h.variant||"")+(h.status&&h.status!=="complete"?' · Incomplete hash coverage':'')
@@ -341,7 +351,7 @@ async function startViewer(meta){
     if(d.protected)fact(say("Protected"),esc(say("saving and forwarding restricted")));if(it.withheld)fact(say("Minimised"),esc(it.withheld.join(", ")));
     if(it.file)fact(say("File"),esc(it.file.name||say("Saved file"))+(it.file.size?" · "+num(it.file.size)+" B":"")+'<br><small><code>'+esc(it.file.sha)+"</code></small>");
     if(it.fileHashes)fact("Server file hashes",hashNotice(it));
-    else if(d.media_type)fact(say("File"),esc(d.media_type)+(d.file_status?"<br><small>"+esc(d.file_status)+"</small>":""));
+    else if(d.media_type)fact(say("File"),esc(d.media_type)+"<br><small>"+esc(fileStatus(d))+"</small>");
     const links=[...(d.text_entities||[]),...(d.quote_entities||[])].filter(x=>x.href||x.user_id!=null).map(x=>"<li"+(x.deceptive?' class="warn"':"")+">“"+esc(x.text)+"” → <code>"
       +esc(x.href||"user ID "+x.user_id)+"</code>"+(x.deceptive?'<br><b>⚠ '+esc(say("the text shows a different address"))+"</b>":"")+"</li>").join("");
     const buttons=((d.buttons&&d.buttons.rows)||[]).flat().map(b=>"<span>"+esc(b.text)+(b.url||b.query||b.copy_text?"<code>"+esc(b.url||b.query||b.copy_text)+"</code>":"")+"</span>").join("");

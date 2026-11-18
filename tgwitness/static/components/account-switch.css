@@ -38,7 +38,7 @@
 .account-menu-item[aria-checked="true"] { background: var(--accent-soft); }
 .account-menu-item:disabled { opacity: .55; cursor: not-allowed; }
 .account-menu-body { display: grid; gap: 3px; flex: 1; min-width: 0; }
-.account-menu-name { overflow: hidden; font-size: 14px; font-weight: 600; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu-name { font-size: 14px; font-weight: 600; line-height: 18px; white-space: normal; overflow-wrap: anywhere; }
 .account-menu-sub { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--muted); font-size: 12px; line-height: 16px; }
 .account-menu-extra { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .account-menu-check { flex: none; width: 18px; height: 18px; color: var(--accent-text); }

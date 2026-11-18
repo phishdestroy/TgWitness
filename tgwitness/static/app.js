@@ -601,10 +601,16 @@ function timeNode(value,cls="",mode="relative"){
   }
   return result;
 }
+function messageTimes(item){
+  const sent=item.dataset.sent,saved=item.dataset.saved;
+  item.title=[tr("Sent: {time}",{time:sent?fmtTime(sent):tr("Not recorded")}),...(saved?[tr("Saved: {time}",{time:fmtTime(saved)})]:[])].join(" · ");
+  item.setAttribute("aria-label",item.title);
+}
 function updateTimes(){
   for(const item of document.querySelectorAll("[data-timestamp]")){
     const value=item.dateTime||item.dataset.timestamp;
     item.textContent=fmtTime(value,{mode:item.dataset.timeMode||"absolute"});item.title=fmtTime(value);
+    if(item.dataset.saved!==undefined)messageTimes(item);
   }
 }
 setInterval(()=>{if(!document.hidden)updateTimes();},30000);
@@ -881,7 +887,7 @@ function applyAccess(){
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
   if(state.view==="analysis"&&!viewAllowed("analysis")&&!$("workspace").hidden)navigate("chats");
-  panelQueries("[data-export], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
+  panelQueries("[data-export], [data-export-selection], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
   show("account-export-card",!!state.me?.admin&&viewAllowed("evidence"));
   renderWorkflowControls();
 
@@ -1548,7 +1554,7 @@ const collectionReady=import("./components/collection.js?v=3").then(({createColl
 });
 collectionReady.catch(error=>toast(error.message,true));
 let accountSwitch=null;
-const accountSwitchReady=import("./components/account-switch.js?v=3").then(({createAccountSwitch})=>{
+const accountSwitchReady=import("./components/account-switch.js?v=4").then(({createAccountSwitch})=>{
   accountSwitch=createAccountSwitch({node,icon,tr,avatar:avatarNode,profiles:()=>state.profiles,current:()=>state.profile,status:()=>state.status,
     choose:id=>{const select=$("profile-select");select.value=id;select.dispatchEvent(new Event("change"));},
     add:()=>$("manage-profiles").click(),canAdd:()=>!$("manage-profiles").hidden,
@@ -2394,7 +2400,7 @@ function evidenceWorkspace(){
   return state.status?.setup_goal==='evidence'||EVIDENCE_MODES.includes(modesUI?.mode());
 }
 async function confirmOtherSessions(){
-  if(state.status?.demo||!evidenceWorkspace())return true;
+  if(state.status?.demo||!evidenceWorkspace()||(state.status?.scope?.mode==="selected"&&state.status?.scope?.strict))return true;
   const owner=actionOwner();
   let others=0;
   try{
@@ -3496,6 +3502,11 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
   const encryption=$("export-encryption").value;
   const journalZip=(fmt==="zip"||fmt==="asice")&&!!b.closest(".evidence-hero");
+  if(b.id==="journal-download-all"){
+    workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision;
+    if(!await askConfirm(journalDownloadFacts(),{title:tr("Download entire journal (ZIP)"),confirmText:tr("Download entire journal (ZIP)")}))return;
+    workspaceSafety.assert();if(zipOwner!==state.profile||zipRevision!==state.workspaceRevision)throw new StaleView();
+  }
   if(journalZip){
     workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision,asice=fmt==="asice";
     if(!await askConfirm(tr(asice?"Download the signed ASiC-E container of the journal of {account}?":"Download the signed ZIP of the journal of {account}?",{account:workspaceSafety.name(zipOwner)}),
@@ -3601,6 +3612,30 @@ async function reportFor(chat,sender,messages=null){
   $("exports-tab-settings").click();
   $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
 }
+function journalDownloadFacts(){
+  const s=state.status,stats=s?.stats||{},head=stats.head,files=stats.counts?.["media.saved"];
+  const account=s?.collector?.account,who=account?[account.username?"@"+account.username:"",account.id?"ID "+account.id:""].filter(Boolean).join(" · "):"";
+  const filtered=!!(state.filter||state.source||state.search||state.eventSince||state.eventUntil);
+  return [tr("Account: {account}",{account:workspaceSafety.name(state.profile)+(who?" ("+who+")":"")}),
+    tr("Sources: every source of this workspace"),
+    head?tr("Period: every record up to #{n}, {time}",{n:Number(head.seq).toLocaleString(LANG),time:fmtTime(head.observed_at)}):tr("Period: every record"),
+    tr("Records: {n}",{n:Number(stats.total||0).toLocaleString(LANG)}),
+    ...(typeof files==="number"?[tr("Saved files: {n}",{n:files.toLocaleString(LANG)})]:[]),
+    ...(filtered?[tr("The filters and search of the list do not apply: records hidden in the list are included.")]:[])].join("\n\n");
+}
+$("journal-export-selection").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const chat=/^-?\d+$/.test(String(state.source||""))?Number(state.source):null;
+  if(chat!==null){await reportFor(chat);return;}
+  const revision=state.workspaceRevision,profile=state.profile;
+  await navigate('evidence');
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence')return;
+  selectExportTask('journal');await loadReportSettings();
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
+  reportSelection.load({...reportSelection.read(),enabled:true});
+  $("exports-tab-settings").click();
+  $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
+  $("report-data-title").focus();
+}));
 function reportControls(){
   $("report-fields").disabled=!reportReady||reportOwner!==reportKey()||reportSaving||!!window.TGW_ONLINE_DEMO;
   $("report-preview-refresh").disabled=reportPreviewBusy;
@@ -4093,7 +4128,8 @@ function scopeDraft(){
   const mode=viewQuery("sources","[name=scope-mode]:checked")?.value||"selected",folder=$("scope-folder").value;
   return {mode,folder_id:mode==="folder"&&folder!==""?Number(folder):null,
     types:Object.fromEntries(scopeTypes.map(k=>[k,$("scope-"+k).checked])),exclude:state.scopeExclude||[],own_actions:$("scope-own").checked,
-    new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))}};
+    new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))},
+    strict:mode==="selected"&&$("scope-strict").checked};
 }
 
 const investigationScope=saved=>({mode:"account",folder_id:null,types:Object.fromEntries(scopeTypes.map(k=>[k,true])),
@@ -4131,6 +4167,7 @@ function renderScope(){
     for(const k of scopeTypes)$("scope-"+k).checked=saved.types[k];
     $("scope-own").checked=saved.own_actions;state.scopeExclude=[...saved.exclude];
     $("scope-new-profile").checked=!!saved.new_chats?.profile;$("scope-new-history").value=String(saved.new_chats?.history??100);
+    $("scope-strict").checked=!!saved.strict;
   }
   const chosen=state.scopeDirty?select.value:String(saved.folder_id??"");
   select.replaceChildren(new Option(tr("Choose a folder"),""));
@@ -4141,6 +4178,7 @@ function renderScope(){
     "Press Refresh chat list above to list this account's folders.");
   const draft=scopeDraft();
   show("scope-folder-field",draft.mode==="folder");show("scope-types",draft.mode!=="selected");show("scope-new",draft.mode!=="selected");
+  show("scope-strict-field",draft.mode==="selected");
   const box=$("scope-exclude");box.replaceChildren();
   if(state.scopeExclude.length){
     box.append(node("strong","",tr("Excluded chats")));
@@ -5161,7 +5199,8 @@ function renderSeenBy(){
       layer_match:tr("API layer"),lang_pack:tr("Language pack"),app_update:tr("App update"),terms_of_service:tr("Terms of service")};
     const details={"Requests stopped after an error or while Telegram requires a wait.":tr("Requests stopped after an error or while Telegram requires a wait."),
       "Telegram did not identify a current authorization.":tr("Telegram did not identify a current authorization."),
-      "Telegram's official-app flag is not an account-safety assessment.":tr("Telegram's official-app flag is not an account-safety assessment.")};
+      "Telegram's official-app flag is not an account-safety assessment.":tr("Telegram's official-app flag is not an account-safety assessment."),
+      "Strict chosen chats: the account's session list is not read.":tr("Strict chosen chats: the account's session list is not read.")};
     for(const check of checked.checks||[])if(check.status!=="ok")rows.push([names[check.name]||check.name,
       check.name==="layer_match"&&check.actual!=null?tr("Layer {actual}; the reviewed baseline is {baseline}. The baseline is a reviewed snapshot, not Telegram's latest required layer.",{actual:check.actual,baseline:check.baseline}):
       check.error?tr("The request failed: {error}",{error:check.error}):details[check.detail]||check.detail||check.status]);
@@ -5774,6 +5813,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
   $("chat-feed").scrollTop=0;
 })));
 function beginChat(id){
+  replyReturn=null;show("chat-back-reply",false);
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
   messageImage?.close();historyForward?.close();closePersonCard();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
@@ -5801,19 +5841,66 @@ async function openChat(id,options={}){
   if(focused&&focused!==document.body&&focused.checkVisibility?.()===false&&$("chat-back").checkVisibility?.())$("chat-back").focus({preventScroll:true});
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
+  const place=chatPositions.get(state.profile+":"+id);
+  if(loaded&&place&&state.chat===id&&options.position!==false)await showChatMessage(place.id,{offset:place.offset,flash:false}).catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
-  if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&may("sources")&&!chatAutoLoaded.has(key)){
+  if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&!(s.scope?.mode==="selected"&&s.scope?.strict)&&may("sources")&&!chatAutoLoaded.has(key)){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
 }
+const chatPositions=new Map();let replyReturn=null,chatPositionFrame=0;
+async function showChatMessage(id,{offset=null,flash=true}={}){
+  const chat=state.chat,profile=state.profile,generation=chatGeneration;
+  let el=$("msg-"+id);
+  if(!el){
+    if(state.chatFilter!=="all"||state.chatAuthor!==null||state.chatSearch){
+      clearTimeout(chatSearchTimer);state.chatFilter="all";state.chatAuthor=null;state.chatSearch="";$("chat-message-search").value="";state.chatView="messages";renderChatStatus();
+    }
+    if(!await loadChatMessages("around",id))return false;
+    if(chat!==state.chat||profile!==state.profile||generation!==chatGeneration)return false;
+    el=$("msg-"+id);
+  }
+  if(!el)return false;
+  const feed=$("chat-feed");
+  if(offset===null)el.scrollIntoView({block:"center"});
+  else feed.scrollTop+=el.getBoundingClientRect().top-feed.getBoundingClientRect().top-offset;
+  if(flash){el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);}
+  return true;
+}
+async function jumpToReply(m){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(m.reply_to)){
+    if(chat!==state.chat||profile!==state.profile)return;
+    replyReturn={chat,profile,message:m.message_id};show("chat-back-reply",true);
+    $("msg-"+m.reply_to)?.querySelector(".bubble")?.setAttribute("tabindex","-1");$("msg-"+m.reply_to)?.querySelector(".bubble")?.focus({preventScroll:true});
+    return;
+  }
+  if(chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:m.reply_to}),true);
+}
+$("chat-back-reply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const back=replyReturn;replyReturn=null;show("chat-back-reply",false);
+  if(!back||back.chat!==state.chat||back.profile!==state.profile)return;
+  if(await showChatMessage(back.message)){const bubble=$("msg-"+back.message)?.querySelector(".bubble");bubble?.setAttribute("tabindex","-1");bubble?.focus({preventScroll:true});}
+}));
+$("chat-feed").addEventListener("scroll",()=>{
+  cancelAnimationFrame(chatPositionFrame);
+  chatPositionFrame=requestAnimationFrame(()=>{
+    if(state.view!=="chats"||state.chat===null||!chatReady||state.chatView!=="messages"||state.chatFilter!=="all"||state.chatSearch||state.chatAuthor!==null)return;
+    const feed=$("chat-feed"),key=state.profile+":"+state.chat;
+    if(state.chatNextAfter===null&&feed.scrollHeight-feed.scrollTop-feed.clientHeight<80){chatPositions.delete(key);return;}
+    const bounds=feed.getBoundingClientRect(),row=[...feed.querySelectorAll(".msg[id^='msg-']")].find(item=>item.getBoundingClientRect().bottom>bounds.top+1);
+    if(row)chatPositions.set(key,{id:Number(row.id.slice(4)),offset:row.getBoundingClientRect().top-bounds.top});
+  });
+},{passive:true});
+window.addEventListener("tgwitness:lock",()=>{chatPositions.clear();replyReturn=null;show("chat-back-reply",false);});
 function fmtDuration(seconds){
   if(seconds===null||seconds===undefined)return tr("unknown");
   if(seconds<60)return tr("under a minute");
   if(seconds<3600)return tr("~{n} min",{n:Math.round(seconds/60)});
   return tr("~{h} h {m} min",{h:Math.floor(seconds/3600),m:Math.round(seconds%3600/60)});
 }
-async function loadChatMessages(mode){
+async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
@@ -5824,6 +5911,7 @@ async function loadChatMessages(mode){
   if(state.chatAuthor!==null)params.set("author_id",String(state.chatAuthor));
   if(mode==="older")params.set("before_id",String(state.chatNextBefore));
   if(mode==="newer")params.set("after_id",String(state.chatNextAfter));
+  if(mode==="around")params.set("before_id",String(target+31));
   chatPagePending={request,generation};
   let result;
   try {result=await json("chats/"+encodeURIComponent(id)+"/messages?"+params,undefined,viewOptions('chats'));}
@@ -5840,7 +5928,7 @@ async function loadChatMessages(mode){
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const bounds=feed.getBoundingClientRect(),visible=[...feed.querySelectorAll('.msg,.chat-service[id]')].find(row=>{const r=row.getBoundingClientRect();return r.bottom>bounds.top&&r.top<bounds.bottom;});
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
-  const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
+  const reset=mode==='open'||mode==='latest'||mode==='around'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
   if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);chatGaps?.offline?.(result.offline);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
@@ -5857,6 +5945,7 @@ async function loadChatMessages(mode){
   if(mode==="open")replay(feed,"entering",900);
   else if(mode==="refresh")state.chatMessages.forEach(m=>{if(m.message_id>known)$("msg-"+m.message_id)?.classList.add("fresh");});
   if(mode==="open"||mode==='latest')feed.scrollTop=state.chatSearch?0:feed.scrollHeight;
+  else if(mode==="around")return true;
   else if(mode==="refresh"&&atBottom)feed.scrollTop=feed.scrollHeight;
   else{const kept=anchor&&feed.querySelector('#'+CSS.escape(anchor.id));
     if(kept)feed.scrollTop+=kept.getBoundingClientRect().top-feed.getBoundingClientRect().top-anchor.offset;else feed.scrollTop=top;}
@@ -6234,19 +6323,24 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
       report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
-    const target=m.reply_to_chat?null:byId.get(m.reply_to),quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
-    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));
-      quote.addEventListener('click',()=>{let el=$('msg-'+m.reply_to);if(!el){state.chatFilter='all';state.chatAuthor=null;renderChatStatus();renderChatFeed();el=$('msg-'+m.reply_to);}if(!el)return;
-        el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);});}
-    else quote.textContent=m.reply_to_chat?tr('Reply to #{id} in another chat',{id:m.reply_to}):tr('Reply to #{id} · outside this loaded window',{id:m.reply_to});
+    const target=m.reply_to_chat?null:byId.get(m.reply_to);let quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
+    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));}
+    else if(!m.reply_to_chat){quote=node('button','reply-quote reply-outside');quote.type='button';quote.append(node('span','',tr('Reply to #{id} · show the original',{id:m.reply_to})));}
+    else quote.textContent=tr('Reply to #{id} in another chat',{id:m.reply_to});
+    if(!m.reply_to_chat)quote.addEventListener('click',()=>busy(quote,()=>jumpToReply(m)));
     bubble.append(quote);
   }
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
-  if(m.has_media&&!m.media.length){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
+  const file=m.file?.state;
+  if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const meta=node("div","bubble-meta");
   const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
+  if(file==="saved")mark("span","pill-file","clip",tr("File saved"),tr("The attachment file is saved in this workspace."));
+  else if(file==="queued"||file==="retry")mark("span","pill-file pill-file-waiting","clock",tr("Queued"),tr("The attachment file is waiting to be downloaded."));
+  else if(file){const reason=excerpt({kind:m.file.kind,payload:{reason:m.file.reason,error_type:m.file.error_type}})||tr("Attachment file not saved");
+    mark("span","pill-file pill-file-missing","clip",reason,tr("Attachment file not saved")+": "+reason);}
   if(m.deleted&&m.auto_deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.missing&&m.auto_deleted)mark("button","pill-missing","question",tr("Not found at recheck"),tr("Telegram no longer returned this message at {time}; its auto-delete timer had expired before that check.",{time:fmtFull(m.missing_observed_at)}));
@@ -6261,7 +6355,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
   if(m.from_scheduled)mark("span","pill-scheduled","clock",tr("Sent as a scheduled message"),tr("Telegram marks this message as sent from a schedule (from_scheduled)."));
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
-  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock"));
+  const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
+  stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;

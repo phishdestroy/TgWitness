@@ -920,9 +920,12 @@ class AccountExport:
                     self.current.pop("discovery", None)
                     self.current["current_chat"] = None
                 if job["options"]["transport"] == "auto" and options["transport"] == "regular":
-                    fresh = self.vault.read("account-export-" + job["job_id"]).get("takeout_declined") == "fresh_session"
+                    declined = self.vault.read("account-export-" + job["job_id"]).get("takeout_declined")
                     gaps = ["This session signed in less than 24 hours ago, so this export used the regular session "
-                            "instead of Takeout." if fresh else
+                            "instead of Takeout." if declined == "fresh_session" else
+                            "With strict chosen chats the session list is not read, so when this session signed in "
+                            "is unknown; this export used the regular session instead of Takeout."
+                            if declined == "session_age_unknown" else
                             "Telegram asked to wait before a Takeout export; this export used the regular session."] + gaps
                 inventory = {"format": "tgwitness-account-export-inventory-v1", "public_key": self.vault.public_key,
                     "job_id": job["job_id"], "account_id": job["account_id"], "options_sha256": job["options_sha256"],

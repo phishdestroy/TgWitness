@@ -25,6 +25,38 @@
 
 ## Unreleased
 
+- **Sources → Scope → Chosen chats** has a new switch, **Strict: read only the chosen chats**, off by default. While
+  it is on, TgWitness does not read Telegram's service notifications (777000), the account's session list or its
+  two-step verification status (at start, including the panel's check for other sessions with the **Evidence for
+  a case** goal or an evidence protection mode, while observing, on connect or at stop), does not read earlier
+  messages of a chat being turned on (the `baseline` snapshot, the new-chat read of a chat joined from the panel
+  and the automatic last 100 messages of an empty chat opened in Chats), does not change the account's sensitive
+  content setting and does not record phone call updates. Before, a chosen-chats workspace always did all of this,
+  so reads could not be kept to the chosen chats. The chat list is still read at start to find them. Features you
+  turn on yourself keep their reads: while this is the only session, the session list is still read every two
+  minutes so that the end of that period is recorded, and **Telegram devices** reads it at each timestamp pass.
+  Deletions are then matched to a session check only if one ran in the 10 minutes before. With an imported
+  session key, chat and account exports use the regular session instead of Takeout until the session list is read,
+  because the session's sign-in time is unknown (`session_age_unknown`).
+- The workspace menu shows each workspace's full name, wrapping a long one onto a second line instead of cutting
+  it with an ellipsis, and the name in the top bar carries the full name as its tooltip.
+- A reply whose original is outside the loaded messages offers **show the original**: the panel loads the saved
+  messages around it, highlights it and shows **Back to reply**, which returns to the reply. If the original is not
+  saved in the workspace, the panel says so and suggests loading older history from Telegram. A chat reopened in the
+  same session returns to where it was read, kept per workspace and chat and forgotten when the panel locks.
+- In the self-contained report a message card with an attachment says **File saved** when the file is in the
+  archive and otherwise why it is not, in words instead of a code: **Larger than the size limit**, **This file type
+  was not collected**, **File not in this archive** and the other recorded reasons. The message time names the sent
+  time in UTC and, for journal records, the time the collector saved it.
+- A message with an attachment in an open chat says what happened to the file: **File saved**, **Queued** while the
+  download waits, or the recorded reason it was not saved, such as **Larger than the size limit** or **Telegram did
+  not provide the file**. A message whose file outcome is not recorded keeps the paper-clip mark. The time under a
+  message names both times with the display time zone: **Sent** by Telegram and **Saved** by the collector.
+- The journal's download button is named **Download entire journal (ZIP)** and asks first, naming the workspace
+  and account, every source, the period up to the latest record with its time zone, the number of records and of
+  saved files, and, when the list is filtered, that the filters and search do not apply. **Choose records to
+  export** next to it opens the export selection, with the journal's chosen source when there is one. The overview
+  moved below the list, so search and filters come right after the page title.
 - `verify.py` checks the ASiC-E layer of an evidence container the way the report's Check tab does.
   `META-INF/ASiCManifest.xml` must list every file of the archive with its SHA-256, an added
   `META-INF/ASiCManifestNNN.xml` or `META-INF/ASiCEvidenceRecordManifest.xml` must match the files it lists, and an
