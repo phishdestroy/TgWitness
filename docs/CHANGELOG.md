@@ -25,24 +25,19 @@
 
 ## Unreleased
 
-- A deletion notice no longer reads "Not deleted by this account" on the strength of an earlier check. The panel, the
-  HTML and PDF reports and alerts now say how many seconds before the notice the rights or session check was made,
-  and that the author, a chat administrator or Telegram removed the message only if that had not changed; Telegram's
-  notice does not say who. Before, a rights check up to 24 hours old or a session check up to 10 minutes old was
-  stated as certain. Batched deletion records now keep the age of the rights check (`rights_age_seconds`); older
-  batched records show `?` for it.
+- Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
+  preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
+  differed. The expected size and the size estimates for exports and storage now come from the image that is
+  downloaded.
 - With more than 50 channels to short-poll, the **Sources** part of collector health counts the channels left out of
-  the short poll and names up to ten of them (`short_poll` in `/api/status`, limited to the chats the access can
-  open). Before, nothing showed which channels were not short-polled.
+  the short poll and names up to ten of them (`short_poll` in `/api/status` for the main administrator and accesses
+  with `account` permission over the whole workspace; other accesses do not receive it). Before, nothing showed which
+  channels were not short-polled.
 - The link preview of a public channel or group by username says whether the account is already a member, from
   Telegram's `left` flag, and offers **Join / open** instead of **Send join request** to a member of a group that
   approves new members. The result of **Join / open** records `already_member` when the account was already in the
   chat, and the panel says so. Before, `already_member` was empty for usernames and a successful receipt did not tell
   a new join from an existing membership.
-- Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
-  preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
-  differed. The expected size and the size estimates for exports and storage now come from the image that is
-  downloaded.
 - Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
   app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
   taken from an invite join now comes from Telegram's answer, without another invite check.

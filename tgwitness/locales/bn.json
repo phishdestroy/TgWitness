@@ -3054,6 +3054,7 @@
   "Some sources were not found among the account's chats; the others continue.": "কিছু উৎস অ্যাকাউন্টের চ্যাটে পাওয়া যায়নি; বাকিগুলো চলছে।",
   "None of the sources was found among the account's chats.": "অ্যাকাউন্টের চ্যাটে কোনো উৎসই পাওয়া যায়নি।",
   "Sources are checked when observation starts.": "পর্যবেক্ষণ শুরু হলে উৎসগুলো যাচাই করা হয়।",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "আপডেটের জন্য অতিরিক্তভাবে কেবল {limit}টি চ্যানেল পোল করা হয়, প্রথমে প্রোব চ্যাট ও অগ্রাধিকারপ্রাপ্ত উৎস। এই সংক্ষিপ্ত পোলের বাইরে ({n}): {names}। টেলিগ্রাম যে আপডেট পৌঁছে দেয় তা এখনও এগুলিকে কভার করে, আর যেখানে পুনঃযাচাই চালু আছে সেখানে পুনঃযাচাইও।",
   "No source is selected.": "কোনো উৎস নির্বাচিত নেই।",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "দৃশ্যমান: {visible} · স্বয়ংক্রিয়ভাবে যোগ: {added} · পাওয়া যায়নি: {unconfirmed}",
   "Attachments are being saved.": "সংযুক্তিগুলো সংরক্ষণ করা হচ্ছে।",
@@ -10259,8 +10260,5 @@
   "Showcase access created. You can revoke it at any time.": "শোকেস অ্যাক্সেস তৈরি হয়েছে। যেকোনো সময় প্রত্যাহার করতে পারবেন।",
   "Showcase link copied.": "শোকেস লিংক কপি হয়েছে।",
   "Select and copy the link.": "লিংকটি নির্বাচন করে কপি করুন।",
-  "Global search": "বিশ্বব্যাপী অনুসন্ধান",
-  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "এই বিজ্ঞপ্তির {seconds} সেকেন্ড আগে অধিকার যাচাইয়ের সময় এই চ্যাটে এই বার্তাটি মুছে ফেলার অধিকার এই অ্যাকাউন্টের ছিল না। যদি তা না বদলে থাকে, তবে এর লেখক, একজন চ্যাট প্রশাসক বা টেলিগ্রাম এটি সরিয়েছে; কে সরিয়েছে, বিজ্ঞপ্তিতে তা বলা নেই।",
-  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "এই বিজ্ঞপ্তির {seconds} সেকেন্ড আগে সেশন যাচাইয়ের সময় এই অ্যাকাউন্টের অন্য কোনো সাইন-ইন করা সেশন ছিল না, এবং এই ওয়ার্কস্পেস বার্তা মুছে ফেলে না। যদি তারপর কোনো সেশন যোগ না হয়ে থাকে, তবে অন্য পক্ষ, একজন চ্যাট প্রশাসক বা টেলিগ্রাম এটি সরিয়েছে; কে সরিয়েছে, বিজ্ঞপ্তিতে তা বলা নেই।",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "আপডেটের জন্য অতিরিক্তভাবে কেবল {limit}টি চ্যানেল পোল করা হয়, প্রথমে প্রোব চ্যাট ও অগ্রাধিকারপ্রাপ্ত উৎস। এই সংক্ষিপ্ত পোলের বাইরে ({n}): {names}। টেলিগ্রাম যে আপডেট পৌঁছে দেয় এবং পুনঃযাচাই এখনও এগুলিকে কভার করে।"
+  "Global search": "বিশ্বব্যাপী অনুসন্ধান"
 }

@@ -3038,6 +3038,7 @@
   "Some sources were not found among the account's chats; the others continue.": "部分来源未在账户的聊天中找到；其他来源继续运行。",
   "None of the sources was found among the account's chats.": "未在账户的聊天中找到任何来源。",
   "Sources are checked when observation starts.": "来源在观察开始时检查。",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "仅额外轮询 {limit} 个频道的更新，优先探测聊天和优先来源。未纳入此短轮询（{n}）：{names}。Telegram 推送的更新仍覆盖它们，已启用的重新检查也是。",
   "No source is selected.": "未选择任何来源。",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "可见：{visible} · 自动添加：{added} · 未找到：{unconfirmed}",
   "Attachments are being saved.": "正在保存附件。",
@@ -10208,8 +10209,5 @@
   "Showcase access created. You can revoke it at any time.": "已创建展示页访问。你可以随时撤销。",
   "Showcase link copied.": "已复制展示页链接。",
   "Select and copy the link.": "请选择并复制链接。",
-  "Global search": "全局搜索",
-  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "在此通知前 {seconds} 秒的权限检查中，该账号无权在此聊天中删除这条消息。如果此后没有变化，则是其作者、聊天管理员或 Telegram 删除了它；通知未说明是谁。",
-  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "在此通知前 {seconds} 秒的会话检查中，该账号没有其他已登录会话，且此工作区不会删除消息。如果此后没有新增会话，则是对方、聊天管理员或 Telegram 删除了它；通知未说明是谁。",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "仅额外轮询 {limit} 个频道的更新，优先探测聊天和优先来源。未纳入此短轮询（{n}）：{names}。Telegram 推送的更新和重新检查仍覆盖它们。"
+  "Global search": "全局搜索"
 }

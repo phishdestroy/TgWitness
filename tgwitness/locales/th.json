@@ -3038,6 +3038,7 @@
   "Some sources were not found among the account's chats; the others continue.": "ไม่พบแหล่งข้อมูลบางรายการในแชตของบัญชี ส่วนที่เหลือยังทำงานต่อ",
   "None of the sources was found among the account's chats.": "ไม่พบแหล่งข้อมูลใดเลยในแชตของบัญชี",
   "Sources are checked when observation starts.": "แหล่งข้อมูลจะถูกตรวจสอบเมื่อเริ่มการสังเกต",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "มีเพียง {limit} ช่องที่ถูกสอบถามการอัปเดตเพิ่มเติม โดยเริ่มจากแชทสำหรับตรวจสอบและแหล่งที่มีลำดับความสำคัญ ไม่อยู่ในการสอบถามสั้นนี้ ({n}): {names} การอัปเดตที่ Telegram ส่งมายังคงครอบคลุมช่องเหล่านี้ รวมถึงการตรวจสอบซ้ำในกรณีที่เปิดใช้",
   "No source is selected.": "ยังไม่ได้เลือกแหล่งข้อมูล",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "มองเห็นได้: {visible} · เพิ่มอัตโนมัติ: {added} · ไม่พบ: {unconfirmed}",
   "Attachments are being saved.": "กำลังบันทึกไฟล์แนบ",
@@ -10208,8 +10209,5 @@
   "Showcase access created. You can revoke it at any time.": "สร้างการเข้าถึงหน้าแสดงผลแล้ว คุณเพิกถอนได้ทุกเมื่อ",
   "Showcase link copied.": "คัดลอกลิงก์หน้าแสดงผลแล้ว",
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
-  "Global search": "ค้นหาทั่วโลก",
-  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "ในการตรวจสอบสิทธิ์เมื่อ {seconds} วินาทีก่อนการแจ้งนี้ บัญชีนี้ไม่มีสิทธิ์ลบข้อความนี้ในแชทนี้ หากสิ่งนั้นไม่ได้เปลี่ยนแปลง ผู้เขียนข้อความ ผู้ดูแลแชท หรือ Telegram เป็นผู้ลบ การแจ้งไม่ได้ระบุว่าเป็นใคร",
-  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "ในการตรวจสอบเซสชันเมื่อ {seconds} วินาทีก่อนการแจ้งนี้ บัญชีนี้ไม่มีเซสชันที่เข้าสู่ระบบอื่น และพื้นที่ทำงานนี้ไม่ลบข้อความ หากไม่มีเซสชันเพิ่มขึ้นตั้งแต่นั้น อีกฝ่าย ผู้ดูแลแชท หรือ Telegram เป็นผู้ลบ การแจ้งไม่ได้ระบุว่าเป็นใคร",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "มีเพียง {limit} ช่องที่ถูกสอบถามการอัปเดตเพิ่มเติม โดยเริ่มจากแชทสำหรับตรวจสอบและแหล่งที่มีลำดับความสำคัญ ไม่อยู่ในการสอบถามสั้นนี้ ({n}): {names} การอัปเดตที่ Telegram ส่งมาและการตรวจสอบซ้ำยังคงครอบคลุมช่องเหล่านี้"
+  "Global search": "ค้นหาทั่วโลก"
 }

@@ -3054,6 +3054,7 @@
   "Some sources were not found among the account's chats; the others continue.": "Bazı kaynaklar hesabın sohbetleri arasında bulunamadı; diğerleri devam ediyor.",
   "None of the sources was found among the account's chats.": "Kaynakların hiçbiri hesabın sohbetleri arasında bulunamadı.",
   "Sources are checked when observation starts.": "Kaynaklar gözlem başladığında denetlenir.",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers still cover them, and so do rechecks where they are enabled.": "Güncellemeler için ek olarak yalnızca {limit} kanal sorgulanır; önce yoklama sohbeti ve öncelikli kaynaklar. Bu kısa sorgulamanın dışında kalanlar ({n}): {names}. Telegram'ın ilettiği güncellemeler onları kapsamaya devam eder; açık oldukları yerde yeniden kontroller de kapsar.",
   "No source is selected.": "Hiçbir kaynak seçilmedi.",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Görünen: {visible} · otomatik eklenen: {added} · bulunamayan: {unconfirmed}",
   "Attachments are being saved.": "Ekler kaydediliyor.",
@@ -10259,8 +10260,5 @@
   "Showcase access created. You can revoke it at any time.": "Vitrin erişimi oluşturuldu. İstediğiniz zaman iptal edebilirsiniz.",
   "Showcase link copied.": "Vitrin bağlantısı kopyalandı.",
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
-  "Global search": "Genel arama",
-  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "Bu bildirimden {seconds} saniye önceki yetki kontrolünde bu hesabın bu sohbette bu mesajı silme yetkisi yoktu. Bu durum değişmediyse mesajı yazarı, bir sohbet yöneticisi veya Telegram kaldırdı; bildirim kimin kaldırdığını söylemez.",
-  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "Bu bildirimden {seconds} saniye önceki oturum kontrolünde bu hesabın açık başka bir oturumu yoktu ve bu çalışma alanı mesaj silmez. O zamandan beri yeni bir oturum eklenmediyse mesajı karşı taraf, bir sohbet yöneticisi veya Telegram kaldırdı; bildirim kimin kaldırdığını söylemez.",
-  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "Güncellemeler için ek olarak yalnızca {limit} kanal sorgulanır; önce yoklama sohbeti ve öncelikli kaynaklar. Bu kısa sorgulamanın dışında kalanlar ({n}): {names}. Telegram'ın ilettiği güncellemeler ve yeniden kontroller onları kapsamaya devam eder."
+  "Global search": "Genel arama"
 }

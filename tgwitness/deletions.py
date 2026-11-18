@@ -13,10 +13,9 @@ CLEAR_MIN_IDS = 10
 ATTRIBUTIONS = ("own_action", "peer_or_admin", "unknown_other_session_present")
 ATTRIBUTION_MEANING = (
     "Who could have deleted the message, from the facts this collector held when the notice arrived; Telegram's "
-    "notice does not name who deleted. peer_or_admin: at the last rights or session check, whose age is recorded, no "
-    "session of this account could have deleted it; if that had not changed, the other side, a chat administrator or "
-    "Telegram removed it. unknown_other_session_present: this account itself, from another session or device, may "
-    "have deleted it. own_action: deleted from this workspace, which has no function "
+    "notice does not name who deleted. peer_or_admin: no session of this account could have deleted it, so the other "
+    "side, a chat administrator or Telegram removed it. unknown_other_session_present: this account itself, from "
+    "another session or device, may have deleted it. own_action: deleted from this workspace, which has no function "
     "that deletes messages. A notice recovered through getDifference arrived after the deletion, at an unknown "
     "later time, so the session check made when it arrived is not used for it.")
 CLEAR_MEANING = (
@@ -31,12 +30,11 @@ SHORTENED_MEANING = (
 RESTORED_MEANING = ("No deletion notice for a never-saved message arrived in this chat during one shortened recheck "
                     "interval. The configured interval applies again.")
 TEXTS = {
-    "account_cannot_delete_here": "At the rights check {seconds} s before this notice, this account had no right to "
-                                  "delete this message in this chat. If that had not changed, its author, a chat "
-                                  "administrator or Telegram removed it; the notice does not say who.",
-    "no_other_session": "At the session check {seconds} s before this notice, this account had no other signed-in "
-                        "session, and this workspace does not delete messages. If no session was added since, the "
-                        "other side, a chat administrator or Telegram removed it; the notice does not say who.",
+    "account_cannot_delete_here": "Not deleted by this account: it had no right to delete this message in this chat. "
+                                  "Its author, a chat administrator or Telegram removed it.",
+    "no_other_session": "Not deleted by this account: it had no other signed-in session at the session check {seconds} s "
+                        "earlier, and this workspace does not delete messages. The other side, a chat administrator "
+                        "or Telegram removed it.",
     "this_account_may_have_deleted": "Who deleted it is not known: this account itself, from another session or "
                                      "device, could also have deleted it.",
 }
@@ -124,8 +122,7 @@ def attribution(store, chat_id, content, batched=False, recovered=False):
         value, rule = "unknown_other_session_present", "this_account_may_have_deleted"
     facts = {"rule": rule, "message_author": author, "this_account_could_delete": can}
     if batched:
-        facts.update(context="deletion.batch", sessions_age_seconds=(sessions or {}).get("age_seconds"),
-                     rights_age_seconds=(rights or {}).get("age_seconds"))
+        facts.update(context="deletion.batch", sessions_age_seconds=(sessions or {}).get("age_seconds"))
         if recovered:
             facts["recovered_through_difference"] = True
     else:
@@ -142,11 +139,8 @@ def attribution_text(say, payload, link=None):
         return say(UNDETERMINED)
     if rule == "no_other_session":
         seconds = (facts.get("sessions_check") or {}).get("age_seconds", facts.get("sessions_age_seconds"))
-    elif rule == "account_cannot_delete_here":
-        seconds = (facts.get("rights") or {}).get("age_seconds", facts.get("rights_age_seconds"))
-    else:
-        return say(TEXTS[rule])
-    return say(TEXTS[rule], seconds=seconds if type(seconds) is int else "?")
+        return say(TEXTS[rule], seconds=seconds if type(seconds) is int else "?")
+    return say(TEXTS[rule])
 
 
 def clear_text(say, payload):
