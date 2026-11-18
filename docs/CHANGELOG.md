@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- A timestamped evidence export counts for workspace deletion only the Case Board notes it carries: both come from
+  the time-stamped `checkpoint-N.json` of the sealed record. Before, when that checkpoint had been saved earlier at the
+  same record, for example when observation stopped, notes added afterwards were left out of the archive but counted
+  as exported, so **Delete** became available without them; they now keep it unavailable until an export carries
+  them. The manifest's `boundary.chosen_at` is the moment this export fixed its last record instead of the time the
+  checkpoint was first saved, so `verify.py --witness` again reports a witness that saw more records in between as a
+  conflict. A sealed export whose checkpoint file is missing or names another record now fails instead of pairing
+  the sealed records with the newest notes.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
