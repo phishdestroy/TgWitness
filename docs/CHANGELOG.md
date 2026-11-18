@@ -27,6 +27,14 @@
 
 - **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
   connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
+- Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
+  automatically added group is no longer recorded after **Groups** is unchecked, even before the scope is recalculated
+  or while Telegram cannot be reached. Chats chosen by hand keep their own rules.
+- A `scope.applied` record says whether the dialog list was read in that pass. When it could not be read or was not
+  read, the record gives `dialog_list` (`unavailable` or `saved`), the size of the saved list as `saved_dialogs` and
+  the error, and its coverage text no longer claims that all accessible dialogs were inspected. Before, a failed read
+  was described as a full inspection and the size of the old list appeared as `dialogs_inspected`. Earlier records
+  are unchanged.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
