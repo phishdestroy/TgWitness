@@ -16,24 +16,28 @@ TUNNEL_IMAGE = "cloudflare/cloudflared@sha256:4955524aeaa379e154023d5a027c250f7b
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class Public(RuntimeError):
+    """A supervisor outcome described by fixed text without private data."""
+
+
 def command(args, timeout=120, check=True):
     result = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
     if check and result.returncode:
-        raise RuntimeError("Runner command failed: " + args[0])
+        raise Public("Runner command failed: " + args[0])
     return result.stdout.strip()
 
 
 def location():
     if sys.platform != "linux" or os.environ.get("RUNNER_ENVIRONMENT") != "github-hosted":
-        raise RuntimeError("This supervisor requires a GitHub-hosted Linux runner")
+        raise Public("This supervisor requires a GitHub-hosted Linux runner")
     run, attempt = os.environ.get("GITHUB_RUN_ID", ""), os.environ.get("GITHUB_RUN_ATTEMPT", "")
     if not re.fullmatch(r"[0-9]{1,24}", run) or not re.fullmatch(r"[0-9]{1,8}", attempt):
-        raise ValueError("Invalid GitHub run identity")
+        raise Public("Invalid GitHub run identity")
     parent = Path(os.environ["RUNNER_TEMP"]).resolve(strict=True)
     name = "tgwitness-sealed-" + run + "-" + attempt
     directory = parent / name
     if directory.is_symlink() or directory.resolve().parent != parent:
-        raise ValueError("Unexpected session directory")
+        raise Public("Unexpected session directory")
     return directory, name
 
 
@@ -61,24 +65,24 @@ def start_official(directory, name, config):
         command(["sudo", "sysctl", "-w", "kernel.apparmor_restrict_unprivileged_userns=0"])
     egress = os.environ.get("OFFICIAL_EGRESS", "proxy")
     if egress not in {"proxy", "direct"}:
-        raise ValueError("Official egress must be proxy or explicitly selected direct")
+        raise Public("Official egress must be proxy or explicitly selected direct")
     direct = egress == "direct"
     upstream = os.environ.get("OFFICIAL_PROXY_SERVER", "")
     parsed = urlsplit(upstream)
     if direct and upstream:
-        raise ValueError("Direct mode cannot include a proxy endpoint")
+        raise Public("Direct mode cannot include a proxy endpoint")
     if not direct and (parsed.scheme not in {"http", "socks5"} or not parsed.hostname or not parsed.port
             or parsed.username is not None or parsed.password is not None or parsed.path not in {"", "/"}
             or parsed.query or parsed.fragment or len(upstream) > 2048
             or any(ord(c) < 33 or c == "\\" for c in upstream)):
-        raise ValueError("Official client requires an explicit upstream proxy; credentials belong in secrets")
+        raise Public("Official client requires an explicit upstream proxy; credentials belong in secrets")
     expected = os.environ.get("OFFICIAL_EXPECTED_IP", "")
     if expected:
         expected = str(ipaddress.ip_address(expected))
     gateway = {"server": upstream, "username": os.environ.get("OFFICIAL_PROXY_USERNAME", ""),
                "password": os.environ.get("OFFICIAL_PROXY_PASSWORD", "")}
     if not direct and any(len(gateway[key].encode()) > 255 for key in ("username", "password")):
-        raise ValueError("Upstream credentials exceed their supported length")
+        raise Public("Upstream credentials exceed their supported length")
     if not direct:
         write(directory / "config" / "gateway.json", gateway)
     config.update({"client": "official_web", "egress": egress, "expected_ip": expected,
@@ -104,7 +108,7 @@ def start_official(directory, name, config):
         if match:
             break
         if time.monotonic() > deadline:
-            raise RuntimeError("Panel tunnel failed to start")
+            raise Public("Panel tunnel failed to start")
         time.sleep(1)
     config["public_origin"] = match.group()
     config["supervisor_deadline"] = time.monotonic() + config["seconds"] + 600
@@ -126,7 +130,7 @@ def start_official(directory, name, config):
             break
         except RuntimeError:
             if time.monotonic() > deadline:
-                raise RuntimeError("Official recorder failed to start") from None
+                raise Public("Official recorder failed to start") from None
             time.sleep(1)
     helper(directory, name, ["connection", "--config", "/config/session.json", "--url", match.group(),
                             "--out", "/output/connection.tgwsealed"])
@@ -138,16 +142,16 @@ def start():
     directory, name = location()
     minutes = os.environ.get("SESSION_MINUTES", "30")
     if not re.fullmatch(r"[0-9]{1,3}", minutes) or not 10 <= int(minutes) <= 120:
-        raise ValueError("Session duration must be 10..120 minutes")
+        raise Public("Session duration must be 10..120 minutes")
     recipient = os.environ.get("RECIPIENT", "")
     if not re.fullmatch(r"[A-Za-z0-9+/]{500,1500}={0,2}", recipient):
-        raise ValueError("Paste the public recipient from the setup helper")
+        raise Public("Paste the public recipient from the setup helper")
     directory.mkdir(mode=0o700)
     for part in ("config", "data", "out", "public"):
         (directory / part).mkdir(mode=0o700)
     commit = command(["git", "-C", str(ROOT), "rev-parse", "HEAD"])
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("Invalid trusted checkout")
+        raise Public("Invalid trusted checkout")
     config = {"token": secrets.token_urlsafe(32), "recipient": recipient, "seconds": int(minutes) * 60,
         "context": {"collector_sha": commit, "repository": os.environ["GITHUB_REPOSITORY"],
                     "run_id": os.environ["GITHUB_RUN_ID"], "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"]}}
@@ -155,7 +159,7 @@ def start():
     if client == "official_web":
         return start_official(directory, name, config)
     if client != "api":
-        raise ValueError("Unknown capture client")
+        raise Public("Unknown capture client")
     command(["docker", "build", "--no-cache", "--file", str(ROOT / "deploy" / "Dockerfile.sealed"),
              "--tag", name, str(ROOT)], timeout=900)
     config["supervisor_deadline"] = time.monotonic() + config["seconds"] + 600
@@ -174,7 +178,7 @@ def start():
             break
         except RuntimeError:
             if time.monotonic() > deadline:
-                raise RuntimeError("Collector failed to start") from None
+                raise Public("Collector failed to start") from None
             time.sleep(1)
     command(["docker", "run", "--detach", "--name", name + "-tunnel", "--network", name,
         "--read-only", "--cap-drop=ALL", "--security-opt=no-new-privileges", "--pids-limit=128", "--memory=256m",
@@ -187,7 +191,7 @@ def start():
         if match:
             break
         if time.monotonic() > deadline:
-            raise RuntimeError("Tunnel failed to start")
+            raise Public("Tunnel failed to start")
         time.sleep(1)
     helper(directory, name, ["connection", "--config", "/config/session.json", "--url", match.group(),
                             "--out", "/output/connection.tgwsealed"])
@@ -200,26 +204,30 @@ def wait():
     config = json.loads((directory / "config" / "session.json").read_bytes())
     deadline = config.get("supervisor_deadline", time.monotonic() + config["seconds"] + 600)
     if type(deadline) not in (int, float) or not math.isfinite(deadline) or deadline <= 0:
-        raise ValueError("Invalid capture deadline")
+        raise Public("Invalid capture deadline")
     result = directory / "out" / "result.json"
     while not result.exists():
         if time.monotonic() > deadline:
-            raise RuntimeError("Capture exceeded its deadline")
+            raise Public("Capture exceeded its deadline")
         if command(["docker", "inspect", "--format", "{{.State.Running}}", name]) != "true":
-            raise RuntimeError("Capture stopped before producing a result")
+            raise Public("Capture stopped before producing a result")
         time.sleep(2)
 
     command(["docker", "rm", "--force", name + "-tunnel"])
     command(["docker", "stop", "--time", "40", name], timeout=60)
     if command(["docker", "inspect", "--format", "{{.State.Running}}", name]) != "false":
-        raise RuntimeError("Collector shutdown was not confirmed; evidence cannot be attested")
+        raise Public("Collector shutdown was not confirmed; evidence cannot be attested")
     state = json.loads(result.read_bytes())
     multipart = state == {"phase": "sealed", "delivery": "parts", "subject": "evidence.parts.json"}
+    if state == {"phase": "cancelled"}:
+        print("::notice title=No archive::The capture was cancelled in the panel, or its time ran out before "
+              "collection started. No archive is produced.")
+        return
     if not multipart and state != {"phase": "sealed"}:
-        raise RuntimeError("Capture was cancelled or failed; no result will be uploaded")
+        raise Public("Collection or packaging failed inside the collector; no result will be uploaded")
     evidence = directory / "out" / ("evidence.parts.json" if multipart else "evidence.zip")
     if evidence.is_symlink() or not evidence.is_file():
-        raise RuntimeError("No regular evidence file")
+        raise Public("No regular evidence file")
     if os.environ.get("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
             output.write("subject=" + str(evidence) + "\n")
@@ -232,14 +240,14 @@ def pack():
     bundle = Path(os.environ["ATTESTATION_BUNDLE"]).resolve(strict=True)
     parent = Path(os.environ["RUNNER_TEMP"]).resolve(strict=True)
     if not bundle.is_relative_to(parent) or bundle.is_symlink() or bundle.stat().st_size > 16 * 1024**2:
-        raise ValueError("Unexpected attestation bundle")
+        raise Public("Unexpected attestation bundle")
     shutil.copyfile(bundle, directory / "out" / "attestation.jsonl")
     helper(directory, name, ["package", "--config", "/config/session.json", "--out", "/output",
                             "--attestation", "/output/attestation.jsonl"])
     shutil.move(str(directory / "out" / "delivery.tgwsealed"), directory / "public" / "delivery.tgwsealed")
     for part in sorted((directory / "out").glob("delivery-*.tgwsealed")):
         if part.is_symlink() or not re.fullmatch(r"delivery-[0-9]{6}\.tgwsealed", part.name):
-            raise ValueError("Unexpected encrypted part")
+            raise Public("Unexpected encrypted part")
         shutil.move(str(part), directory / "public" / part.name)
     print("Encrypted result is ready. No plaintext archive is uploaded.")
 
@@ -254,7 +262,7 @@ def cleanup():
     for part in ("data", "config", "out"):
         target = directory / part
         if target.is_symlink() or target.resolve().parent != directory.resolve():
-            raise ValueError("Refusing unexpected cleanup path")
+            raise Public("Refusing unexpected cleanup path")
         if target.exists():
             shutil.rmtree(target)
 
@@ -265,6 +273,8 @@ def main():
     args = parser.parse_args()
     try:
         {"start": start, "wait": wait, "pack": pack, "cleanup": cleanup}[args.command]()
+    except Public as exc:
+        parser.exit(1, "Sealed runner failed: " + str(exc) + ".\n")
     except Exception as exc:
         parser.exit(1, "Sealed runner failed: " + type(exc).__name__ + ". No private diagnostics published.\n")
 

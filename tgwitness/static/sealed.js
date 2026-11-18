@@ -1,6 +1,9 @@
 "use strict";
 const $ = id => document.getElementById(id);
-let lang = "en", qrId = null, ended = false;
+let lang = (navigator.languages?.length ? navigator.languages : [navigator.language || ""])
+  .map(code => String(code).toLowerCase().split("-")[0])
+  .find(code => code === "en" || window.TGW_SEALED_LOCALES?.[code]) || "en";
+let qrId = null, ended = false;
 let lastState = null, connectionFailed = false, statusError = "", actionError = "";
 const english = new WeakMap();
 const tr = (text, values = {}) => {
