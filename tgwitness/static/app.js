@@ -7336,7 +7336,7 @@ systemMapReady.catch(error=>toast(error.message,true));
 const accessReady=import("./views/access.js").then(({createAccessView})=>{
   accessView=createAccessView({root:$("view-access"),tr,navigate,localInput,getState:()=>state});return accessView;
 });
-const systemLogReady=import("./views/system-log.js?v=4").then(({createSystemLog})=>{
+const systemLogReady=import("./views/system-log.js?v=5").then(({createSystemLog})=>{
   systemLogView=createSystemLog({root:$("view-system-log"),tr,json,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
     options:()=>viewOptions('system-log'),formatTime:fmtTime,toast,download:(path,filename,stream,root)=>download(path,filename,stream,root)});return systemLogView;
 });

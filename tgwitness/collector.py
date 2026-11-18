@@ -5796,9 +5796,15 @@ class Collector:
                 raise ValueError("existing_content_addressed_file_is_corrupt")
             temp.unlink()
         else:
-            await complete_in_thread(durable_replace, temp, destination)
-            if self.media_library is not None:
-                await complete_in_thread(self.media_library.adopt, destination, digest)
+            try:
+                await complete_in_thread(durable_replace, temp, destination)
+            except OSError:
+                if not temp.is_file() or not destination.is_file() or await complete_in_thread(file_digest, destination) != digest:
+                    raise
+                temp.unlink()
+            else:
+                if self.media_library is not None:
+                    await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")
         attempt.finish(MediaOutcome("done", {
             "media_sha256": digest, "size": actual_size,

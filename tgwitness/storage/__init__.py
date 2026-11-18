@@ -29,6 +29,7 @@ from ..media_jobs import durable_replace, sync_file
 from ..security import private_write
 from ..store import canonical, utcnow
 from ..verify import fingerprint
+from ..workers import complete_in_thread
 
 VERSION = "1.75.2"
 HASHES = {
@@ -718,14 +719,14 @@ class Storage:
                         out.write(chunk)
                 if total != receipt["bytes"] or file_hash(restored) != digest:
                     raise ValueError("Recovered file does not match its signed journal hash.")
+                await complete_in_thread(sync_file, restored)
                 path.parent.mkdir(exist_ok=True, mode=0o700)
                 safe_file(self.store.root, digest)
                 if path.is_file():
                     kept = self.keep_conflict(path, digest)
                     if conflicts is not None:
                         conflicts.append(kept)
-                sync_file(restored)
-                durable_replace(restored, path)
+                await complete_in_thread(durable_replace, restored, path)
             receipts.evict(digest, False)
             self.save_refreshed(backend)
             self.store.append("storage.restored", {"sha256": digest, "bytes": receipt["bytes"]})
