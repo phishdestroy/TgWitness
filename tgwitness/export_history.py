@@ -18,7 +18,7 @@ SETUP_KINDS = ("process.*", "network.*", "connection.*", "account.authorized", "
                "export.failed", "settings.changed",
                "parameters.changed", "capture.changed", "monitoring.changed", "scope.changed", "recheck.changed",
                "alerts.changed", "workspace.mode_changed", "setup.applied", "group.settings_applied",
-               "group.settings_inherited")
+               "group.settings_inherited", "anchor.*", "evidence_record.*")
 
 
 def evidence_exported(store, seq):
