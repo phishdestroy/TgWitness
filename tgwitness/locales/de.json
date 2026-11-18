@@ -6242,7 +6242,7 @@
   "This reply answers a message included in this copy.": "Diese Antwort bezieht sich auf eine Nachricht, die in dieser Kopie enthalten ist.",
   "This reply answers a message withheld by the selection.": "Diese Antwort bezieht sich auf eine Nachricht, die durch die Auswahl ausgeblendet wurde.",
   "This reply answers a message that is not in the source export.": "Diese Antwort bezieht sich auf eine Nachricht, die nicht im Quell-Export enthalten ist.",
-  "<span></span><span>Workspace</span><span>Status</span><span>Route and exit address</span><span>Sources</span><span>Events</span><span>Queue</span><span>Actions</span>": "<span></span><span>Arbeitsbereich</span><span>Status</span><span>Route und Ausgangsadresse</span><span>Quellen</span><span>Ereignisse</span><span>Warteschlange</span><span>Aktionen</span>",
+  "<span></span><span>Workspace</span><span>Status</span><span>Route and exit address</span><span>Sources</span><span>Events</span><span>Queue</span><span>Actions</span>": "<span></span><span>Arbeitsbereich</span><span>Status</span><span>Route und Ausgangsadresse</span><span>Quellen</span><span>Ereignisse</span><span>Wartend</span><span>Aktionen</span>",
   "Delete workspace": "Arbeitsbereich löschen",
   "Account sessions recorded": "Aufgezeichnete Kontositzungen",
   "Account session ended": "Kontositzung beendet",
