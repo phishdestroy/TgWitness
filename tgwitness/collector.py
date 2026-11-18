@@ -70,7 +70,7 @@ from .export.batch_requests import MessageBatcher
 from .export.live_export import NOT_READY as LIVE_NOT_READY, LiveExport
 from . import secret_chats
 from .scope import (OPERATOR_PAUSED, allowed, folder_rule, in_folder, kind_of, operator_paused, public_username,
-                    recheck_settings, restriction, scope_settings, visibility)
+                    recheck_settings, restriction, scope_settings, strict_selected, visibility)
 from .verify import fingerprint
 
 LOG = logging.getLogger("tgwitness.collector")
@@ -136,6 +136,9 @@ TAKEOUT_FRESH_SECONDS = 24 * 3600
 TAKEOUT_SKIPPED_MEANING = {
     "fresh_session": "This session signed in less than 24 hours ago. Telegram answers a Takeout request from such a "
                      "session with a data export warning to the account, so history is read without Takeout.",
+    "session_age_unknown": "With strict chosen chats the session list is not read, so when this session signed in is "
+                           "unknown. History is read without Takeout, as for a session that signed in less than 24 "
+                           "hours ago.",
     "takeout_approval_wait": "Telegram asked to wait before the next Takeout request, so history is read without "
                              "Takeout until then."}
 AUTO_ONLY_SESSION_EVERY = 300
@@ -1102,6 +1105,8 @@ class Collector:
             self.queue_intake(chat_id, entity)
 
     def request_baseline(self, chat_ids):
+        if strict_selected(self.store):
+            return
         pending = self.store.get_setting("baseline_pending", [])
         added = [chat_id for chat_id in dict.fromkeys(chat_ids) if chat_id not in pending]
         if not added:
@@ -1114,7 +1119,7 @@ class Collector:
     async def take_baseline(self, chat_id):
         if chat_id not in self.store.get_setting("baseline_pending", []):
             return
-        if self.admitted(chat_id):
+        if self.admitted(chat_id) and not strict_selected(self.store):
             await self.snapshot(chat_id, self.param("snapshot_max"), origin="baseline")
         self.store.set_setting("baseline_pending",
                                [c for c in self.store.get_setting("baseline_pending", []) if c != chat_id])
@@ -1169,6 +1174,8 @@ class Collector:
 
     async def capture_intake(self, chat_id, entity):
         options, saved, errors = scope_settings(self.store)["new_chats"], self.intake_progress.get(chat_id, False), []
+        if strict_selected(self.store):
+            options = {**options, "history": 0}
         if not any(options[stage] and not saved.get(stage + "_done") for stage in ("history", "profile")):
             return []
         entity = entity or await self.lookup_entity(chat_id)
@@ -2643,7 +2650,7 @@ class Collector:
         if getattr(client, "tgwitness_connection_check", None) is None:
             from .client_checks import inspect_connection
             async def inspect():
-                result = await inspect_connection(client)
+                result = await inspect_connection(client, sessions=not strict_selected(self.store))
                 if client is self.client:
                     with self.store.transaction():
                         self.store.set_setting("client_checks", result)
@@ -2952,7 +2959,8 @@ class Collector:
             self.unlock_key(client)
         self.note("connection." + state, {"role": role, "route": self.route_receipt(),
                                           "dc_id": getattr(client.session, "dc_id", None)})
-        if state == "opened" and role == "current" and time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY:
+        if (state == "opened" and role == "current" and time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY
+                and (not strict_selected(self.store) or self.store.get_setting("only_session", None))):
             self.sessions_checked_at = time.monotonic()
             with suppress(RuntimeError):
                 asyncio.get_running_loop().create_task(self.check_sessions(client))
@@ -3051,6 +3059,8 @@ class Collector:
             self.store.set_setting("account", {**latest, "name": utils.get_display_name(me) or None})
 
     async def allow_sensitive(self):
+        if strict_selected(self.store):
+            return None
         try:
             answer = await asyncio.wait_for(self.client(functions.account.GetContentSettingsRequest()), 30)
         except Exception:
@@ -3144,9 +3154,9 @@ class Collector:
         client = self.client
         if not client or not client.is_connected():
             return
-        counted = None
+        counted, strict = None, strict_selected(self.store)
         try:
-            snapshot = await self.check_sessions(client)
+            snapshot = None if strict else await self.check_sessions(client)
             counted = len(snapshot["others"]) if snapshot else None
             account = self.store.get_setting("account", {}) or {}
             key_origin = account.get("key_origin", "unknown")
@@ -3186,6 +3196,8 @@ class Collector:
             raise
         except Exception:
             pass
+        if strict:
+            return
         try:
             if not await self.poll_security_log(trigger):
                 failed = self.security_log_error
@@ -3363,6 +3375,8 @@ class Collector:
         if time.time() < until:
             return "takeout_approval_wait"
         waited = self.session_age()
+        if waited is None and strict_selected(self.store):
+            return "session_age_unknown"
         return "fresh_session" if waited is None or waited < TAKEOUT_FRESH_SECONDS else None
 
     def takeout_wait(self, seconds):
@@ -3764,11 +3778,13 @@ class Collector:
                 if (time.monotonic() - self.sessions_checked_at >= SESSIONS_OBSERVING_EVERY and not self.sessions_checking
                         and time.time() >= self.store.get_setting("rpc_backoff_until", 0)):
                     self.sessions_checked_at = time.monotonic()
-                    await self.check_sessions()
+                    if not strict_selected(self.store) or self.store.get_setting("only_session", None):
+                        await self.check_sessions()
                     await self.check_frozen()
                 if now - self.security_log_checked_at >= SECURITY_LOG_EVERY:
                     self.security_log_checked_at = now
-                    await self.poll_security_log()
+                    if not strict_selected(self.store):
+                        await self.poll_security_log()
                 if (time.monotonic() - self.auto_only_checked_at >= AUTO_ONLY_SESSION_EVERY
                         and time.time() >= self.store.get_setting("rpc_backoff_until", 0)):
                     self.auto_only_checked_at = time.monotonic()
@@ -4284,6 +4300,8 @@ class Collector:
                         "visibility": "only participant updates delivered to this account",
                     }, chat_id, actor_id=update.actor_id, source_at=date_string(update.date))
             elif hasattr(types, "UpdatePhoneCall") and isinstance(update, types.UpdatePhoneCall):
+                if strict_selected(self.store):
+                    return
                 call = update.phone_call
                 self.store.append("account.phone_call", {
                     "call_type": type(call).__name__, "call_id": getattr(call, "id", None),

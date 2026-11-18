@@ -10346,5 +10346,9 @@
   "Choose a chat type or account data to export.": "Eksport uchun chat turini yoki akkaunt ma'lumotlarini tanlang.",
   "{data} · no chats or attachments": "{data} · chatlar va ilovalarsiz",
   "No observation period recorded": "Kuzatuv davri qayd etilmagan",
-  "0 records selected": "0 ta yozuv tanlandi"
+  "0 records selected": "0 ta yozuv tanlandi",
+  "Strict: read only the chosen chats": "Qat'iy: faqat tanlangan suhbatlarni o'qish",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness Telegram xizmat bildirishnomalarini (777000), hisobning seanslar ro'yxatini yoki ikki bosqichli tasdiqlash holatini o'qimaydi, suhbatni yoqqaningizda uning oldingi xabarlarini o'qimaydi, hisobning nozik kontent sozlamasini o'zgartirmaydi va telefon qo'ng'iroqlari yangilanishlarini yozib olmaydi. Seansni egallab olish tekshiruvlari o'chiq qoladi. Tanlangan suhbatlarni topish uchun boshlanishda suhbatlar ro'yxati baribir o'qiladi. Tizimga kirishdan oldin yoqing.",
+  "Strict chosen chats: the account's session list is not read.": "Qat'iy tanlangan suhbatlar: hisobning seanslar ro'yxati o'qilmaydi.",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Qat'iy tanlangan suhbatlarda seanslar ro'yxati o'qilmaydi, shuning uchun bu seans qachon kirgani noma'lum; eksport Takeout o‘rniga oddiy seansdan foydalandi."
 }

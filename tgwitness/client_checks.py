@@ -8,8 +8,10 @@ from . import client_identity, client_profiles
 from .store import utcnow
 from .telegram_client import FLOOD_ERRORS
 
+STRICT_SKIPPED = "Strict chosen chats: the account's session list is not read."
 
-async def inspect_connection(client):
+
+async def inspect_connection(client, sessions=True):
     profile = client.tgwitness_client_profile
     init = getattr(client, "_init_request", None)
     api_id = getattr(init, "api_id", None) or getattr(client, "api_id", None)
@@ -17,7 +19,7 @@ async def inspect_connection(client):
     report = {"checked_at": utcnow(), "source": "telegram_api", "official_app": None, "checks": []}
     requests = [("get_config", functions.help.GetConfigRequest()),
                 ("nearest_dc", functions.help.GetNearestDcRequest()),
-                ("current_session", functions.account.GetAuthorizationsRequest()),
+                ("current_session", functions.account.GetAuthorizationsRequest() if sessions else None),
                 ("layer_match", None),
                 ("lang_pack", functions.langpack.GetLanguagesRequest(lang_pack=profile["lang_pack"]) if profile["lang_pack"] else None),
                 ("app_update", functions.help.GetAppUpdateRequest(source="")),
@@ -29,6 +31,8 @@ async def inspect_connection(client):
             if name == "layer_match":
                 check.update(status="ok" if LAYER == baseline else "warning", actual=LAYER, baseline=baseline,
                              detail="The baseline is a reviewed snapshot, not Telegram's latest required layer.")
+            elif name == "current_session":
+                check.update(status="skipped", detail=STRICT_SKIPPED)
             else:
                 check.update(status="ok", detail="Empty language pack retained; no language-list request.")
         elif stopped or getattr(client, "rpc_backoff_getter", lambda: 0)() > time.time():

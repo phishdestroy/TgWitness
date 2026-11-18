@@ -10346,5 +10346,9 @@
   "Choose a chat type or account data to export.": "এক্সপোর্টের জন্য একটি চ্যাটের ধরন বা অ্যাকাউন্টের ডেটা বেছে নিন।",
   "{data} · no chats or attachments": "{data} · কোনো চ্যাট বা সংযুক্তি নেই",
   "No observation period recorded": "কোনো পর্যবেক্ষণকাল রেকর্ড হয়নি",
-  "0 records selected": "০টি রেকর্ড নির্বাচিত"
+  "0 records selected": "০টি রেকর্ড নির্বাচিত",
+  "Strict: read only the chosen chats": "কঠোর: শুধু নির্বাচিত চ্যাটসমূহ পড়ুন",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness Telegram-এর সার্ভিস বিজ্ঞপ্তি (777000), অ্যাকাউন্টের সেশন তালিকা বা এর দুই-ধাপের যাচাইয়ের অবস্থা পড়ে না, কোনো চ্যাট চালু করলে তার আগের বার্তাগুলো পড়ে না, অ্যাকাউন্টের সংবেদনশীল কনটেন্টের সেটিং বদলায় না এবং ফোন কলের আপডেট রেকর্ড করে না। সেশন দখলের পরীক্ষাগুলো বন্ধ থাকে। নির্বাচিত চ্যাটগুলো খুঁজে পেতে শুরুতে চ্যাট তালিকা তবুও পড়া হয়। সাইন ইন করার আগে এটি চালু করুন।",
+  "Strict chosen chats: the account's session list is not read.": "কঠোর নির্বাচিত চ্যাটসমূহ: অ্যাকাউন্টের সেশন তালিকা পড়া হয় না।",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "কঠোর নির্বাচিত চ্যাটসমূহে সেশন তালিকা পড়া হয় না, তাই এই সেশন কখন সাইন ইন করেছে তা জানা নেই; এই এক্সপোর্ট Takeout-এর বদলে সাধারণ সেশন ব্যবহার করেছে।"
 }

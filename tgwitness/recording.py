@@ -36,6 +36,10 @@ def settings(store):
 def scope_change(previous, body):
     current = body.model_dump(exclude={"acknowledged"})
     current["exclude"] = sorted(set(current["exclude"]))
+    if "strict" not in body.model_fields_set:
+        current["strict"] = previous["strict"]
+    if current["mode"] != "selected":
+        current["strict"] = False
     widening = current["mode"] != "selected" and (previous["mode"] != current["mode"]
                                                  or previous["folder_id"] != current["folder_id"])
     if widening and not body.acknowledged:

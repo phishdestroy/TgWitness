@@ -10356,5 +10356,9 @@
   "Choose a chat type or account data to export.": "Scegli un tipo di chat o i dati dell'account da esportare.",
   "{data} · no chats or attachments": "{data} · senza chat né allegati",
   "No observation period recorded": "Nessun periodo di osservazione registrato",
-  "0 records selected": "0 record selezionati"
+  "0 records selected": "0 record selezionati",
+  "Strict: read only the chosen chats": "Rigoroso: leggi solo le chat selezionate",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness non legge le notifiche di servizio di Telegram (777000), l’elenco delle sessioni dell’account né lo stato della verifica in due passaggi, non legge i messaggi precedenti di una chat quando la attivi, non modifica l’impostazione dei contenuti sensibili dell’account e non registra gli aggiornamenti delle chiamate. I controlli sul furto della sessione restano disattivati. L’elenco delle chat viene comunque letto all’avvio per trovare le chat selezionate. Attivalo prima di accedere.",
+  "Strict chosen chats: the account's session list is not read.": "Chat selezionate in modo rigoroso: l’elenco delle sessioni dell’account non viene letto.",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Con le chat selezionate in modo rigoroso l’elenco delle sessioni non viene letto, quindi non si sa quando questa sessione ha effettuato l’accesso; questa esportazione ha usato la sessione normale invece di Takeout."
 }
