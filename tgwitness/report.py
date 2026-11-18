@@ -2417,7 +2417,7 @@ def timestamp_summary(anchors, rows):
     return summary
 
 
-def timestamps_section(say, number, anchors, archive_name, fp, standalone=False):
+def timestamps_section(say, number, anchors, archive_name, standalone=False):
     out = section(number, "timestamps", say("Timestamps"),
                   say("A timestamp shows that a checkpoint, and every record before it, existed no later than the stamped "
                       "time. Records after the latest stamped checkpoint rely on the collector's clock."))
@@ -2449,7 +2449,8 @@ def timestamps_section(say, number, anchors, archive_name, fp, standalone=False)
         tsr = next((a for a in reversed(shown) if a.get("kind") == "rfc3161"), None)
         ots = next((a for a in reversed(shown) if a.get("kind") == "opentimestamps"), None)
         out += "<h3>" + e(say("How to check the timestamps")) + "</h3>"
-        out += command("python verify.py " + archive_name + " --fingerprint " + fp + " --tsa-ca tsa-root.pem")
+        out += command("python verify.py " + ("" if standalone else "../") + archive_name
+                       + " --fingerprint TRUSTED_SHA256 --tsa-ca tsa-root.pem")
         if tsr:
             out += command("openssl ts -verify -data anchors/" + tsr["checkpoint"] + " -in " + tsr["file"]
                            + " -CAfile tsa-root.pem")
@@ -2460,7 +2461,7 @@ def timestamps_section(say, number, anchors, archive_name, fp, standalone=False)
     return out + "</section>"
 
 
-def verify_section(say, number, archive_name, fp, report_name, archive, data_name=None):
+def verify_section(say, number, archive_name, report_name, archive, data_name=None):
     data_name = data_name or ("events.jsonl" if report_name.startswith("report.") else "chat.json")
     steps = ["<li>" + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + "</li>"]
     if archive:
@@ -2470,16 +2471,18 @@ def verify_section(say, number, archive_name, fp, report_name, archive, data_nam
                  if report_name.startswith("chat.") else
                  say("Check the whole archive: signatures, hashes, record chain and this report's seal."))
         steps.append("<li>" + e(whole)
-                     + command("python verify.py " + archive_name + " --fingerprint " + fp) + "</li>")
+                     + command("python verify.py ../" + archive_name + " --fingerprint TRUSTED_SHA256") + "</li>")
         steps.append("<li>" + e(say("Without Python, check the file hashes (not the signature):"))
                      + command("sha256sum -c SHA256SUMS") + command("shasum -a 256 -c SHA256SUMS")
                      + command("Get-FileHash -Algorithm SHA256 " + data_name) + "</li>")
     steps.append("<li>" + e(say("This report on its own:"))
-                 + command("python verify.py " + report_name + " --fingerprint " + fp
-                           + (" --evidence " + archive_name if archive else "")) + "</li>")
+                 + command("python verify.py " + report_name + " --fingerprint TRUSTED_SHA256"
+                           + (" --evidence ../" + archive_name if archive else "")) + "</li>")
+    where = ('<p class="lead">' + e(say("Run these commands in the extracted folder, with the original ZIP in its parent "
+                                       "folder.")) + "</p>") if archive else ""
     return (section(number, "verify", say("How to verify"),
                     say("Anyone can repeat these checks. They show whether the material changed after it was signed."))
-            + '<ol class="steps">' + "".join(steps) + "</ol></section>")
+            + where + '<ol class="steps">' + "".join(steps) + "</ol></section>")
 
 
 class EvidenceHTML:
@@ -2689,7 +2692,7 @@ class EvidenceHTML:
                       if self.context.get("events_sha256") else "")])
                + "</section>").encode("utf-8")
         if not self.handover:
-            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp,
+            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name,
                                      not self.archive).encode("utf-8")
 
     def render_custody(self):
@@ -2727,7 +2730,7 @@ class EvidenceHTML:
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
         own = self.context.get("report_file") or "report.html"
-        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, own, self.archive,
+        yield verify_section(say, next(self.numbers), self.archive_name, own, self.archive,
                              "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
         if self.archive and self.files:
             yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
@@ -3114,7 +3117,7 @@ class ChatHTML:
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
         own = self.context.get("report_file") or "chat.html"
-        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, own, True).encode("utf-8")
+        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", own, True).encode("utf-8")
         yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                         "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "chat").encode("utf-8")

@@ -36,6 +36,14 @@
   of the error type alone.
 - The interactive report names mini application and pseudo-secret records in the report language instead of showing
   the internal record type.
+- An evidence export downloaded in the panel counts for workspace deletion only after the panel has received and
+  saved every byte and confirmed it with `POST /api/exports/{id}/received`. Before, the server counted the download
+  when it had sent the last byte; Linux kept a whole 1.6 MB archive in its socket buffer, so a download broken off
+  after 7 KB was still counted and **Delete** became available. Downloads the browser makes on its own and other HTTP
+  clients still count when the server has sent the whole response; the operations guide says what that cannot see.
+- A minimised handover keeps only the selected chats in the observed-chat list of `process.started`. Before, every
+  start record carried the ID, title and type of each observed chat into the handover, so a handover of one chat
+  named all the others.
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.
@@ -83,6 +91,17 @@
   chat view reads the replied chat from the saved Telegram record and shows "Reply to #N in another chat". Messages
   saved earlier are read the same way. The Telegram Desktop JSON of an account export adds `reply_to_peer_id` for
   such replies.
+- An open panel follows changes to its access: `/api/status` carries the access's current permissions, and the panel
+  updates its views and actions when they change. Before, a granted or removed export permission showed only after
+  the page was reloaded; the server already checked each request against the current permissions.
+- Verification commands in HTML and PDF reports, their case assessment and the report viewer's Check tab use
+  `TRUSTED_SHA256` instead of the fingerprint carried by the report itself, so a copied command no longer compares the
+  archive with its own key. Inside an archive they name the original ZIP as `../tgwitness-evidence.zip`, as README.txt
+  does, and the HTML says to run them from the extracted folder; before, the HTML command failed there with
+  FileNotFoundError.
+- **Choose the ZIP** and **Choose the folder** on a report's Check tab are buttons reachable with Tab and opened
+  with Enter or Space; before, they were labels around hidden file fields and the keyboard skipped them.
+
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

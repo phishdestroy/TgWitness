@@ -639,7 +639,7 @@ async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
   const revision=state.workspaceRevision;
-  const {root=false,profile=state.profile,token=state.token,allowStale=false,...fetchOptions}=options;
+  const {root=false,profile=state.profile,token=state.token,allowStale=false,headers:extraHeaders={},...fetchOptions}=options;
   if(body?.enabled&&['evidence','replica','alerts'].includes(path)&&state.me?.admin){
     const current=await json('settings',undefined,{profile,token});
     if(!current.values.outside){
@@ -654,7 +654,7 @@ async function api(path, body, options={}) {
   const requestSignal=deadline?(fetchOptions.signal?AbortSignal.any([deadline,fetchOptions.signal]):deadline):fetchOptions.signal;
   let response;try{response = await fetch(prefix + path, {method: body === undefined ? "GET" : "POST",
     headers: {Authorization: "Bearer " + token, ...(body !== undefined ? {"Content-Type":"application/json"} : {}),
-      ...(path.startsWith("auth/")||path==="profiles/import"?{"X-TgWitness-System-Language":navigator.language}:{})},
+      ...(path.startsWith("auth/")||path==="profiles/import"?{"X-TgWitness-System-Language":navigator.language}:{}),...extraHeaders},
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
   }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
     if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
@@ -1690,6 +1690,7 @@ async function refreshStatus() {
   const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
   if(revision!==state.workspaceRevision||request!==statusRequest)return;
   workspaceSafety?.acceptStatus(result);
+  if(result.me&&JSON.stringify(result.me)!==JSON.stringify(state.me))state.me=result.me;
   state.status=result;applyAccess();renderStatus();workspaceSafety?.sync();
   settingsHub?.status();
   if(!viewAllowed(state.view))navigate("chats");
@@ -3338,7 +3339,8 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   if(handle){try{writer=await handle.createWritable();}catch{handle=null;}}
   progress({phase:'preparing'});
   let response;
-  try{current();response=await api(path,body,root?{root:true,token}:{profile,token});}
+  const delivery={'X-TgWitness-Delivery':'confirm'};
+  try{current();response=await api(path,body,root?{root:true,token,headers:delivery}:{profile,token,headers:delivery});}
   catch(error){await writer?.abort().catch(()=>{});throw error;}
   const expected=Number(response.headers.get("Content-Length")||0);
   const preparedId=response.headers.get('X-TgWitness-Export-ID');
@@ -3380,6 +3382,8 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     }
     current();if(writer){await writer.close();writer=null;}
     else saveBlob(new Blob(chunks,{type:response.headers.get("Content-Type")||"application/octet-stream"}),filename);
+    if(preparedId&&response.headers.get('X-TgWitness-Delivery')==='held')
+      await json('exports/'+encodeURIComponent(preparedId)+'/received',{bytes:total},root?{root:true,token}:{profile,token}).catch(()=>{});
     progress({phase:handle?'done':'browser',total,expected});
     if(stream)toast(tr(handle?'File saved.':'Download started. Check your browser’s downloads.'));
     return true;

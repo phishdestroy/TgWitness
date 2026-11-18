@@ -196,8 +196,6 @@ class Minimiser:
     def present(self, event):
         kind, chat = event["kind"], event["chat_id"]
         if chat is None:
-            if kind in GLOBAL_KEEP and not isinstance(event["payload"].get("chats"), list):
-                return self.keep(event)
             if kind in GLOBAL_KEEP or kind in ("observation.started", "scope.applied", "scope.changed", "recheck.completed"):
                 return self.other_chats_removed(event)
             if kind == "interaction.preview" and event["seq"] in self.previews:
@@ -281,8 +279,15 @@ class Minimiser:
     def other_chats_removed(self, event):
         payload, chats = event["payload"], self.chats
         shown = dict(payload)
+
+        def selected(items):
+            ids = (t.get("chat_id") if isinstance(t, dict) else t for t in items)
+            return [t for t, chat in zip(items, ids) if type(chat) is int and chat in chats]
+
         if isinstance(payload.get("targets"), list):
-            shown["targets"] = [t for t in payload["targets"] if t in chats]
+            shown["targets"] = selected(payload["targets"])
+        if isinstance(payload.get("run"), dict) and isinstance(payload["run"].get("targets"), list):
+            shown["run"] = {**payload["run"], "targets": selected(payload["run"]["targets"])}
         for field in ("scope", "before", "after"):
             if isinstance(payload.get(field), dict) and isinstance(payload[field].get("exclude"), list):
                 shown[field] = {**payload[field], "exclude": [t for t in payload[field]["exclude"] if t in chats]}
