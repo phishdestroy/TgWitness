@@ -1654,6 +1654,7 @@ function renderViewStatus(view){
     renderComposer();renderChatStatus();renderMulti();renderChatsList();
   }else if(view==='evidence'){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
+    show("export-browser-limit",typeof window.showSaveFilePicker!=="function");
     renderVerification();renderChatExportTools();
   }else if(view==='parameters'){
     parametersView?.updateStatus();
@@ -3373,8 +3374,9 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   catch(error){await writer?.abort().catch(()=>{});throw error;}
   const expected=Number(response.headers.get("Content-Length")||0);
   const preparedId=response.headers.get('X-TgWitness-Export-ID');
+  const kept=!preparedId||response.headers.get('X-TgWitness-Export-Kept')!=='no';
   const jobTicket=response.headers.get('X-TgWitness-Download-Ticket');
-  const ticketPath=preparedId?'exports/'+preparedId+'/ticket':jobTicket;
+  const ticketPath=preparedId?(kept?'exports/'+preparedId+'/ticket':null):jobTicket;
   const limit=(state.status?.parameters?.browser_buffer_mib||128)*1024*1024;
   let nativeAttempted=false;
   async function nativeDownload(){
@@ -3392,7 +3394,8 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     if(!writer&&expected>limit){
       await response.body?.cancel();
       if(ticketPath)return await nativeDownload();
-      const error=new Error(tr('This file is too large for this browser. Use a browser with file streaming or download from the local command line.'));
+      const error=new Error(tr(kept?'This file is too large for this browser. Use a browser with file streaming or download from the local command line.':
+        'This file is too large for this browser and is not kept for another download. Download it in Chrome or Edge, or with the command line under Large downloads & verification.'));
       error.downloadHint=true;throw error;
     }
     reader=response.body.getReader();
@@ -3423,7 +3426,8 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     if(error instanceof StaleView)throw error;
     if(nativeAttempted)throw error;
     if(error.downloadHint)throw error;
-    throw new Error(tr('The browser could not save the file. Open Prepared exports and choose Download again.'));
+    throw new Error(tr(kept?'The browser could not save the file. Open Prepared exports and choose Download again.':
+      'The browser could not save the file, and it is not kept for another download. Prepare the export again.'));
   }
 }
 function saveBlob(blob,filename){
