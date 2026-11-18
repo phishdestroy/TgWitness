@@ -5400,6 +5400,7 @@
   "Recording waits for a working connection": "Запис чекає на робоче підключення",
   "Chats to record chosen": "Обрано чати для запису",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "На основному обліковому записі можна записувати лише обрані чати. Оберіть чати або використайте окремий обліковий запис.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Ця робоча область уже записує не лише вибрані чати. Перш ніж позначити акаунт як основний, звузьте запис до вибраних чатів у розділі «Які чати?».",
   "Only on a separate account.": "Лише на окремому обліковому записі.",
   "Is this a separate account or your main one?": "Це окремий обліковий запис чи ваш основний?",
   "Setup is applied.": "Налаштування застосовано.",

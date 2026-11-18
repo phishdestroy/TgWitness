@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "Perekaman menunggu koneksi yang berfungsi",
   "Chats to record chosen": "Chat yang direkam dipilih",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Di akun utama Anda hanya chat terpilih yang bisa direkam. Pilih chat, atau gunakan akun terpisah.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Ruang kerja ini sudah merekam lebih dari chat yang dipilih. Batasi ke chat yang dipilih di “Chat mana?” sebelum menandai akun ini sebagai akun utama Anda.",
   "Only on a separate account.": "Hanya pada akun terpisah.",
   "Is this a separate account or your main one?": "Apakah ini akun terpisah atau akun utama Anda?",
   "Setup is applied.": "Penyiapan diterapkan.",

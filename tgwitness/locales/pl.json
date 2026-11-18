@@ -5400,6 +5400,7 @@
   "Recording waits for a working connection": "Zapis czeka na działające połączenie",
   "Chats to record chosen": "Wybrano czaty do zapisu",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Na Twoim koncie głównym można zapisywać tylko wybrane czaty. Wybierz czaty lub użyj osobnego konta.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Ten obszar roboczy już nagrywa więcej niż wybrane czaty. Zawęź go do wybranych czatów w sekcji „Które czaty?”, zanim oznaczysz to konto jako główne.",
   "Only on a separate account.": "Tylko na osobnym koncie.",
   "Is this a separate account or your main one?": "Czy to osobne konto, czy Twoje główne?",
   "Setup is applied.": "Konfiguracja zastosowana.",

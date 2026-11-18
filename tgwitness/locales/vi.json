@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "Việc ghi đang chờ kết nối hoạt động",
   "Chats to record chosen": "Đã chọn cuộc trò chuyện cần ghi",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Trên tài khoản chính của bạn chỉ ghi được các cuộc trò chuyện đã chọn. Hãy chọn cuộc trò chuyện hoặc dùng tài khoản riêng.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Không gian làm việc này đã ghi nhiều hơn các cuộc trò chuyện đã chọn. Hãy thu hẹp về các cuộc trò chuyện đã chọn trong “Những cuộc trò chuyện nào?” trước khi đánh dấu tài khoản này là tài khoản chính.",
   "Only on a separate account.": "Chỉ trên tài khoản riêng.",
   "Is this a separate account or your main one?": "Đây là tài khoản riêng hay tài khoản chính của bạn?",
   "Setup is applied.": "Đã áp dụng thiết lập.",

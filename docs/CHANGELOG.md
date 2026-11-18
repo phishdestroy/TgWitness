@@ -35,6 +35,9 @@
   take turns every 10 minutes instead of the same channels staying out, and Collector health → Sources names the
   channels outside short polling. Higher priority classes and the probe channel stay in. An access limited to some
   chats does not get these totals or names: they describe the whole workspace.
+- The collection guide states which rule wins in folder mode: chats added by hand stay recorded outside the folder
+  until they are excluded, removed or paused; chats the scope added are paused at the next recompute once they leave
+  the folder.
 - **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
   connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
 - Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
@@ -53,6 +56,9 @@
 - The journal's **Best match · word forms** search pages through more than 200 results: **Older records**, **Newer
   records** and **Latest** move between pages of 200 up to the search window of 1,000, and the footer names the
   results shown, such as “Results 201–400”. Before, only the first 200 results could be opened.
+- Settings → **Which chats?** and the setup steps of a finished setup show the scope that is saved now, not the one
+  chosen during setup. Marking the account as your main one in setup is refused while the workspace records more
+  than chosen chats, except for a one-time copy with recording stopped; the message says to narrow the scope first.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.

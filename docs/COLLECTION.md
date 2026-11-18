@@ -70,6 +70,9 @@ more than 50 chats; the size estimate remains a separate, sample-based operation
   switch to chosen chats stops automatically added sources as soon as it is saved, before
   the source list is recalculated and also when Telegram cannot be reached: their new
   messages, history passes, new-chat history, peer settings and profile observations.
+- **Chats you add by hand** stay recorded in folder and whole-account modes even when they
+  are outside the folder; only *Exclude*, *Remove* or a pause stops them. Chats the scope
+  added (*auto*) follow the folder: one that leaves it is paused at the next recompute.
 - **Excluded chats** are never recorded, in any mode. In folder and whole-account modes,
   *Exclude* and *Remove* on a source put it on this list, so the scope does not add it again.
   Choosing the chat again by hand (in Sources, from Chats or under Settings → **Which chats?**)
