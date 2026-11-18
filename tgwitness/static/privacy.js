@@ -22,7 +22,8 @@
     const patterns = [
       /-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----[\s\S]*?(?:-----END (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----|$)/g,
       /\b(?:sk-(?:proj-|ant-api\d+-|or-v\d+-)?[A-Za-z0-9_-]{12,4096}|AIza[A-Za-z0-9_-]{25,64}|gh[pousr]_[A-Za-z0-9]{20,255}|github_pat_[A-Za-z0-9_]{20,255})\b/g,
-      /\b\d{6,14}:[A-Za-z0-9_-]{25,128}\b/g,
+      // A bot token also stands right after "bot" in Bot API addresses: api.telegram.org/bot<token>/sendMessage.
+      /(?:\b|(?<=\b[Bb]ot))\d{6,14}:[A-Za-z0-9_-]{25,128}\b/g,
       /\beyJ[A-Za-z0-9_-]{5,4096}\.[A-Za-z0-9_-]{5,4096}\.[A-Za-z0-9_-]{10,4096}\b/g,
       /\b1[A-Za-z0-9_-]{300,500}={0,2}/g,
       /\b[A-Fa-f0-9]{256,4096}\b/g,

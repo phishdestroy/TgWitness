@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- Masking of possible secrets now also hides a Telegram bot token written right after `bot`, as in Bot API addresses
+  (`https://api.telegram.org/bot<token>/sendMessage`). Before, only a token standing on its own was masked, so the
+  token in such an address stayed readable wherever the panel masks secrets: chat list, messages and journal records.
 - In a chat, a message without a recorded Telegram send time shows **By observation time** next to its time: its time,
   day divider and place in the feed come from when TgWitness observed it. Web addresses in message text
   (`http://`, `https://`, `www.`, `t.me/`) get a **Copy URL** button that copies the address without opening it; an
