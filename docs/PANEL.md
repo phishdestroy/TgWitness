@@ -435,7 +435,10 @@ Progress survives a restart; attachments follow your media settings. See
 - While a chat export reads, **Download messages read so far** saves a ZIP whose pages are
   signed as they are written; the line under it counts the signed messages.
 - **Prepared exports** keeps up to 20 files within 2 GiB, plus the latest one, for
-  repeat downloads, each with its SHA-256 for the recipient to compare.
+  repeat downloads, each with its SHA-256 for the recipient to compare. Each card names what the file holds:
+  **Signed archive** (complete journal and its record count), **Report**, **Journal records** or **Handover
+  extract**, the case title and ID, and the report selection it was built with (chats, chosen messages, dates).
+  **Show** narrows the list to one kind when it holds more than one.
 - When the browser refuses its save dialog, the panel falls back to an ordinary download.
 - **Your signing identity** shows the key fingerprint. **Save checkpoint** and
   **Download signed run receipt** give you records to keep outside the collector.
