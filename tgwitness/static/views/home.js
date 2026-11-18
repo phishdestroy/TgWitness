@@ -150,12 +150,24 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const collector = state.status?.collector || {}, observation = live?.observation || {};
     const running = !!collector.running, starting = collector.activity?.task === 'starting_observation';
     const none = !running && !starting && !collector.has_session && !state.status?.demo;
-    const box = node('section', 'home-hero ' + (running ? 'is-live' : starting ? 'is-starting' : none ? 'is-empty' : 'is-paused'));
+    // A running collector with chosen-chats scope and no enabled chat records no conversation: say so, not "Observing".
+    const s = state.status || {}, unchosen = running && collector.connected && !s.demo && !s.chats_limited
+      && (s.scope?.mode || 'selected') === 'selected' && !(s.targets || []).some(target => target.enabled);
+    const reconnecting = running && !collector.connected && !s.demo;
+    const box = node('section', 'home-hero ' + (running && !unchosen && !reconnecting ? 'is-live' : starting || reconnecting ? 'is-starting'
+      : none ? 'is-empty' : 'is-paused'));
     const head = node('div', 'home-hero-head'), title = node('h2', 'home-hero-title');
-    title.append(node('span', 'home-hero-dot'), document.createTextNode(running ? tr('Observing') : starting ? tr('Starting observation')
+    title.append(node('span', 'home-hero-dot'), document.createTextNode(unchosen ? tr('Connected · no chats chosen')
+      : reconnecting ? tr('Reconnecting') : running ? tr('Observing') : starting ? tr('Starting observation')
       : none ? tr('No Telegram account connected') : tr('Observation off')));
-    if (observation.since && !starting && !none) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
+    if (observation.since && !starting && !none && !unchosen) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
     head.append(title);
+    if (unchosen && (state.me?.admin || state.me?.permissions?.includes('sources'))) {
+      const choose = node('button', 'primary', tr('Choose chats'));
+      choose.type = 'button';
+      choose.addEventListener('click', () => navigate('sources'));
+      head.append(choose);
+    }
     const can = state.me?.admin || state.me?.permissions?.includes('collect');
     if (can && collector.has_session && !state.status?.demo && !starting) {
       const action = node('button', running ? 'secondary' : 'primary', running ? tr('Pause') : tr('Start observation'));
@@ -501,6 +513,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       if (session !== next) resetSession(next);
       if (!state.status) {root.replaceChildren(); return;}
       const focused = root.contains(document.activeElement) ? document.activeElement.dataset.overviewRetry || document.activeElement.dataset.overviewFocus : null;
+      const control = !focused && root.contains(document.activeElement) && document.activeElement.matches('button, a[href], [tabindex]') ? focusMark(document.activeElement) : null;
       if (!document.hidden && state.view === 'start') loadResource('activity');
       if (!document.hidden && state.view === 'start') loadResource('live');
       if (!ticker) ticker = setInterval(tick, 1000);
@@ -532,7 +545,17 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
         const button = root.querySelector('[data-overview-retry="' + focused + '"]');
         const target = button && !button.disabled ? button : root.querySelector(focused === 'activity' ? '.home-chart h2' : '.home-hero h2');
         if (target) {target.dataset.overviewFocus = focused; target.tabIndex = target.tagName === 'BUTTON' ? 0 : -1; target.focus({preventScroll: true});}
+      } else if (control && document.activeElement === document.body) {
+        const same = [...root.querySelectorAll(control.selector)].filter(item => focusLabel(item) === control.label);
+        const target = same[control.index] || same[0];
+        if (target && !target.disabled) target.focus({preventScroll: true});
       }
+  }
+  function focusLabel(element) {return (element.getAttribute('aria-label') || element.textContent || '').trim().slice(0, 120);}
+  function focusMark(element) {
+    const selector = element.tagName.toLowerCase() + (element.className ? '.' + [...element.classList].map(name => CSS.escape(name)).join('.') : '');
+    const label = focusLabel(element);
+    return {selector, label, index: [...root.querySelectorAll(selector)].filter(item => focusLabel(item) === label).indexOf(element)};
   }
 
   return {render};

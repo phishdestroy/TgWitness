@@ -186,7 +186,8 @@ export function createJournal(context){
   const visibleRows=()=>[...$("events-body").querySelectorAll(".event-row")].filter(row=>!row.hidden);
   function selectRow(row,focus=false){
     selectedSeq=row?Number(row.dataset.seq):null;
-    for(const item of visibleRows()){const active=item===row;item.tabIndex=active?0:-1;item.classList.toggle("journal-selected",active);}
+    for(const item of visibleRows()){const active=item===row;item.tabIndex=active?0:-1;item.classList.toggle("journal-selected",active);
+      for(const control of item.querySelectorAll("button"))control.tabIndex=active?0:-1;}
     if(focus&&row){row.focus();row.scrollIntoView({block:"nearest"});}
   }
   function restoreSelection(){const rows=visibleRows();selectRow(rows.find(row=>Number(row.dataset.seq)===selectedSeq)||rows[0]||null);}
@@ -309,7 +310,9 @@ export function createJournal(context){
   function syncPage(){
     shown.textContent=Number.isFinite(state.eventMatched)?tr("{shown} of {total} matching records",{shown:state.events.length,total:state.eventMatched.toLocaleString()}):
       tr("{shown} records in this window",{shown:state.events.length});
-    range.textContent="";range.hidden=true;
+    const ranked=state.search&&state.searchMode==="relevance"&&!state.boardSlice&&state.events.length&&(state.eventBefore!==null||state.cursor!==null);
+    const first=ranked?(state.eventBefore||0)+1:0;
+    range.textContent=ranked?tr("Results {from}–{to}",{from:first.toLocaleString(),to:(first+state.events.length-1).toLocaleString()}):"";range.hidden=!ranked;
     shown.hidden=!state.events.length&&!Number.isFinite(state.eventMatched);
     older.disabled=pageBusy||state.cursor===null;newer.disabled=pageBusy||state.eventAfter===null;
     latest.disabled=pageBusy;latest.hidden=state.eventBefore===null;

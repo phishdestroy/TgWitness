@@ -96,7 +96,9 @@ download through a short-lived one-time cookie. Tokens never go into URLs.
 
 Prepared exports show size, SHA-256 and **Download again**. The cache keeps up to 20
 files within 2 GiB plus the latest one. "Sent to the browser" doesn't mean received,
-check your Downloads.
+check your Downloads. Chat exports, handovers, account archives, disclosures and group
+exports say "saved" only after the panel wrote the file through the browser's save picker.
+Otherwise the panel says the download started, and a chat export keeps its download button.
 
 Big account archives stream straight from the job. A job can't be removed while its
 archive is downloading.

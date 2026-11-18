@@ -31,7 +31,7 @@ JOURNAL_KIND_GROUPS = {"membership": ("membership.",), "media": ("media.",), "ac
     "messages": ("message.new", "message.snapshot", "message.recovered"),
     "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.", "snapshot.", "target.",
                  "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
-                 "media.retry", "media.recovered", "deletion.unscoped", "session.",)}
+                 "media.retry", "media.recovered", "media.missing_after_restart", "deletion.unscoped", "session.",)}
 RECEPTION = ContextVar("journal_reception", default=None)
 CHAT_SETTINGS = ("recheck_last", "recheck_floor", "recheck_walked", "recheck_cursor")
 
@@ -477,6 +477,13 @@ class Store:
                 "SELECT seq, hash, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
                 " ORDER BY seq", (chat_id, *ids, *CHAT_KINDS)).fetchall()
+            slots = ",".join("?" * len(ids))
+            outcomes = {r["message_id"]: (r["kind"], json.loads(r["payload"])) for r in db.execute(
+                "SELECT message_id, kind, payload FROM events WHERE chat_id=? AND message_id IN (" + slots + ")"
+                " AND kind IN ('media.skipped','media.failed','media.retry') ORDER BY seq", (chat_id, *ids))}
+            queued = {r[0] for r in db.execute(
+                "SELECT message_id FROM media_jobs WHERE chat_id=? AND message_id IN (" + slots + ")"
+                " AND state IN ('queued','retry')", (chat_id, *ids))}
         messages = {}
         for row in rows:
             payload = json.loads(row["payload"])
@@ -551,6 +558,11 @@ class Store:
             item["buttons"] = current["buttons"] if current else None
             item["missing"] = bool(states[item["message_id"]]["missing"])
             item["edited"] = bool(states[item["message_id"]]["edited"] or item["telegram_edited_at"])
+            outcome = outcomes.get(item["message_id"])
+            item["file"] = ({"state": "saved"} if item["media"] else {"state": "queued"} if item["message_id"] in queued
+                            else {"state": outcome[0].removeprefix("media."), "kind": outcome[0],
+                                  "reason": outcome[1].get("reason"), "error_type": outcome[1].get("error_type")}
+                            if outcome else None) if item["has_media"] or item["media"] else None
             result.append(item)
         return {"messages": result, "next_before": min(ids) if older else None,
                 "next_after": max(ids) if newer else None}
@@ -870,6 +882,56 @@ class Store:
                                 "last_error='interrupted' WHERE state='running'")
                 self.append("media.recovered", {"jobs": count, "reason": "previous attempt interrupted"})
             return count
+
+    def unclean_stop(self):
+        with self.reading() as db:
+            started = db.execute("SELECT max(seq) FROM events WHERE kind='process.started'").fetchone()[0]
+            stopped = db.execute("SELECT max(seq) FROM events WHERE kind='process.stopped'").fetchone()[0]
+        return started if started is not None and (stopped is None or stopped < started) else None
+
+    def reconcile_saved_media(self, after_seq, remote=frozenset()):
+        with self.reading() as db:
+            rows = db.execute(
+                "SELECT e.seq,e.chat_id,e.message_id,e.payload FROM events e JOIN media_jobs j "
+                "ON j.message_event=json_extract(e.payload,'$.message_event') "
+                "WHERE e.kind='media.saved' AND e.seq>? AND j.state='done' ORDER BY e.seq", (after_seq,)).fetchall()
+        media, damaged, checked, found = self.root / "media", self.root / "media-damaged", {}, []
+        for seq, chat_id, message_id, raw in rows:
+            payload = json.loads(raw)
+            digest, size = payload.get("media_sha256"), payload.get("size")
+            if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest) or digest in remote:
+                continue
+            if digest not in checked:
+                path = media / digest
+                if path.is_symlink() or not path.is_file():
+                    checked[digest] = ("absent", None)
+                elif path.stat().st_size != size:
+                    checked[digest] = ("different_size", path)
+                else:
+                    with path.open("rb") as stream:
+                        same = hashlib.file_digest(stream, "sha256").hexdigest() == digest
+                    checked[digest] = (None, None) if same else ("different_bytes", path)
+                problem, path = checked[digest]
+                if path is not None:
+                    damaged.mkdir(exist_ok=True)
+                    kept = damaged / (digest + "." + str(seq))
+                    path.replace(kept)
+                    checked[digest] = (problem, kept)
+            problem, kept = checked[digest]
+            if problem is None:
+                continue
+            with self.transaction():
+                self.db.execute("UPDATE media_jobs SET state='retry',next_attempt=0,last_error='missing_after_restart' "
+                                "WHERE message_event=? AND state='done'", (payload.get("message_event"),))
+                found.append(self.append("media.missing_after_restart", {
+                    "message_event": payload.get("message_event"), "media_event": seq, "media_sha256": digest,
+                    "size": size, "found": problem, "kept_as": kept.relative_to(self.root).as_posix() if kept else None,
+                    "action": "download_again",
+                    "meaning": "The previous collector process ended without an orderly stop. This attachment was "
+                               "recorded as saved, but its file is missing or its bytes do not match the recorded "
+                               "SHA-256. Its download is queued again; differing bytes are kept apart."},
+                    chat_id, message_id))
+        return found
 
     def ephemeral_outcome(self, message_event, status):
         from . import ephemeral

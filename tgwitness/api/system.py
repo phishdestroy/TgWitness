@@ -424,6 +424,7 @@ async def journal_stream(
                 board_authorize=board_authorize,
                 workspace=ctx.profile_id,
                 hide_admin=not request.state.principal.admin,
+                closed=lambda: bool(getattr(ctx.app.state, "closing", False)),
             ):
                 yield item
         except Refused:

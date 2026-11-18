@@ -37,7 +37,7 @@ const workspaceSafetyReady=import('./core/workspace-safety.js?v=3').then(({creat
 });
 let accountState,accountActivity;
 let boardView;
-const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
+const boardReady=import('./views/board.js?v=7').then(({createCaseBoard})=>{
   boardView=createCaseBoard({root:$('view-board'),state,json,tr,trn,node,toast,may,download,media:mediaNode,
     openEvidence:async(event,range)=>{
       const revision=state.workspaceRevision;
@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout19').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -104,13 +104,13 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({creat
   catalog();
 });
 let connectionView;
-const connectionViewReady=import('./views/connection.js?v=4').then(({createConnectionView})=>{
+const connectionViewReady=import('./views/connection.js?v=5').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=17'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=19'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,openJournal:kind=>openJournalFilter(kind),
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
@@ -344,6 +344,7 @@ const labels = {
   "collector.error": [tr("Collection error"), "alert", "coverage"], "demo.created": [tr("Synthetic demo created"), "sparkle", "system"],
   "media.retry": [tr("Attachment retry scheduled"), "refresh", "coverage"],
   "media.recovered": [tr("Interrupted media jobs recovered"), "refresh", "system"],
+  "media.missing_after_restart": [tr("Attachment missing after an unexpected stop"), "alert", "coverage"],
   "source.access_unconfirmed": [tr("Source access unconfirmed"), "question", "coverage"],
   "monitoring.changed": [tr("Monitoring settings changed"), "settings", "coverage"],
   "account.authorized": [tr("Account connected"), "account", "system"],
@@ -600,10 +601,16 @@ function timeNode(value,cls="",mode="relative"){
   }
   return result;
 }
+function messageTimes(item){
+  const sent=item.dataset.sent,saved=item.dataset.saved;
+  item.title=[tr("Sent: {time}",{time:sent?fmtTime(sent):tr("Not recorded")}),...(saved?[tr("Saved: {time}",{time:fmtTime(saved)})]:[])].join(" · ");
+  item.setAttribute("aria-label",item.title);
+}
 function updateTimes(){
   for(const item of document.querySelectorAll("[data-timestamp]")){
     const value=item.dateTime||item.dataset.timestamp;
     item.textContent=fmtTime(value,{mode:item.dataset.timeMode||"absolute"});item.title=fmtTime(value);
+    if(item.dataset.saved!==undefined)messageTimes(item);
   }
 }
 setInterval(()=>{if(!document.hidden)updateTimes();},30000);
@@ -880,7 +887,7 @@ function applyAccess(){
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
   if(state.view==="analysis"&&!viewAllowed("analysis")&&!$("workspace").hidden)navigate("chats");
-  panelQueries("[data-export], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
+  panelQueries("[data-export], [data-export-selection], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
   show("account-export-card",!!state.me?.admin&&viewAllowed("evidence"));
   renderWorkflowControls();
 
@@ -1321,6 +1328,12 @@ quickDialog.addEventListener("click",event=>{
 document.addEventListener("keydown",event=>{
   if(event.key.toLowerCase()==="k"&&(event.ctrlKey||event.metaKey)&&!event.altKey&&!event.shiftKey&&!event.isComposing
       &&!$("workspace").hidden&&!$("workspace").inert){event.preventDefault();if(!event.repeat)toggleQuick();}
+  const find=$("chat-message-search");
+  if(event.key.toLowerCase()==="f"&&(event.ctrlKey||event.metaKey)&&!event.altKey&&!event.shiftKey&&!event.isComposing
+      &&state.view==="chats"&&state.chat!==null&&find&&find.offsetParent!==null&&document.activeElement!==find
+      &&!$("workspace").hidden&&!$("workspace").inert&&!document.querySelector("dialog[open]")){
+    event.preventDefault();find.focus();find.select();
+  }
 });
 let goPrefix=0;
 const goTargets={h:"start",c:"chats",j:"observations",e:"evidence",a:"accounts",w:"swarm",s:"settings"};
@@ -1337,7 +1350,7 @@ document.addEventListener("keydown",event=>{
   if(key==="g"&&!event.shiftKey){goPrefix=Date.now();return;}
   if(key==="?"){event.preventDefault();toast(tr("Keys: g then h Home, c Chats, j Journal, e Exports, a Accounts, w Swarm, s Settings · j / k next or previous chat · Ctrl+K go to"));return;}
   if((key==="j"||key==="k")&&!event.shiftKey&&state.view==="chats"){
-    const items=[...document.querySelectorAll("#chats-list .chat-choice")];
+    const items=[...document.querySelectorAll("#chats-list .chat-item:not(.chat-item-new) .chat-choice")];
     const index=items.findIndex(item=>item.getAttribute("aria-pressed")==="true");
     const next=items[index<0?0:Math.max(0,Math.min(items.length-1,index+(key==="j"?1:-1)))];
     if(next&&next!==items[index]){event.preventDefault();next.focus();next.click();}
@@ -1455,6 +1468,15 @@ function collectorLines(name,p){
     return [tr("Observation is paused.")];
   }
   if(name==="sources"){
+    const lines=sourceLines(p,c),waiting=c.short_poll_waiting||[];
+    if(!waiting.length)return lines;
+    const names=waiting.slice(0,10).join(", ")+(waiting.length>10?" "+tr("+{n} more",{n:waiting.length-10}):"");
+    return [...lines,tr("Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.",{polled:c.short_poll_polled,total:c.short_poll_channels}),
+      c.short_poll_rotating&&tr("Channels of the same priority take turns every 10 minutes."),tr("Not short-polled now: {names}",{names})];
+  }
+  return mediaLines(p,c);
+}
+function sourceLines(p,c){
     const counts=c.checked?tr("Visible: {visible} · added automatically: {added} · not found: {unconfirmed}",c):"";
     if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
     if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
@@ -1463,7 +1485,8 @@ function collectorLines(name,p){
     if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
     if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
     return [tr("No source is selected.")];
-  }
+}
+function mediaLines(p,c){
   const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",c),
     p.oldest_pending_at&&tr("Oldest pending attachment")+": "+fmtFull(p.oldest_pending_at),
     p.disk_free_bytes!=null&&tr("Free disk")+": "+humanSize(p.disk_free_bytes)];
@@ -1526,7 +1549,7 @@ function renderCollectorHealth(h){
 }
 
 let collectionUI=null;
-const collectionReady=import("./components/collection.js?v=2").then(({createCollectionControl})=>{
+const collectionReady=import("./components/collection.js?v=3").then(({createCollectionControl})=>{
   collectionUI=createCollectionControl({node,tr,status:()=>state.status,workspace:$("workspace")});collectionUI.update();return collectionUI;
 });
 collectionReady.catch(error=>toast(error.message,true));
@@ -1541,7 +1564,7 @@ const accountSwitchReady=import("./components/account-switch.js?v=3").then(({cre
 accountSwitchReady.catch(error=>toast(error.message,true));
 let modesUI=null;
 const modeSession=()=>state.workspaceRevision+":"+state.profile;
-const modesReady=import("./components/modes.js?v=3").then(({createModes})=>{
+const modesReady=import("./components/modes.js?v=4").then(({createModes})=>{
   modesUI=createModes({node,tr,json,may,status:()=>state.status,query:panelQueries,go:goPlace,toast});
   if(state.status&&!$("workspace").hidden)modesUI.sync(modeSession());
   return modesUI;
@@ -1566,11 +1589,13 @@ function renderStatus() {
   $("workspace").dataset.onlineDemo=String(!!window.TGW_ONLINE_DEMO);
   show("demo-banner",s.demo);
   $("app-version").textContent=s.version?"TgWitness "+s.version:"";
-  $("status-chip").textContent=tr(s.demo ? "Demo workspace" : accountState(s).needsSignIn?'Sign in again':c.running ? (c.connected?"Observing":"Reconnecting") :
+  // Connected with chosen-chats scope and no enabled chat: nothing from chats is recorded, so not "Observing".
+  const unchosen=!s.demo&&c.running&&c.connected&&!s.chats_limited&&!hasSources(s);
+  $("status-chip").textContent=tr(s.demo ? "Demo workspace" : accountState(s).needsSignIn?'Sign in again':c.running ? (c.connected?(unchosen?"Connected · no chats chosen":"Observing"):"Reconnecting") :
     c.has_session ? "Observation off" : ({code_required:"Waiting for code",password_required:"Waiting for 2FA",qr_pending:"Waiting for QR"}[c.phase]||"Account not connected"));
-  $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
-  $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected));
-  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected?"live":c.running||accountState(s).needsSignIn?"warn":"off";
+  $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected && !unchosen);
+  $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected || unchosen));
+  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected&&!unchosen?"live":c.running||accountState(s).needsSignIn?"warn":"off";
   const alarm=!s.demo&&c.running&&c.connected&&VERDICT_ALARMS.includes(s.health?.verdict?.cause)?healthVerdict(s.health.verdict):null;
   $("status-chip").title=alarm?alarm.title+" · "+alarm.action:"";
   if(alarm){$("status-chip").textContent=alarm.title;$("status-chip").classList.remove("live");$("status-chip").classList.add("warn");$("workspace-status").dataset.state="warn";}
@@ -1648,6 +1673,7 @@ function renderViewStatus(view){
     renderComposer();renderChatStatus();renderMulti();renderChatsList();
   }else if(view==='evidence'){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
+    show("export-browser-limit",typeof window.showSaveFilePicker!=="function");
     renderVerification();renderChatExportTools();
   }else if(view==='parameters'){
     parametersView?.updateStatus();
@@ -1802,7 +1828,7 @@ import("./views/accounts.js?v=warnings1").then(({createAccounts})=>{
   return accountsView;
 }).catch(error=>toast(error.message,true));
 let groupView=null;
-const groupViewReady=import("./views/group.js?v=3").then(({createGroupView})=>{
+const groupViewReady=import("./views/group.js?v=4").then(({createGroupView})=>{
   groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
     accountState:p=>accountState(p),accountPhaseLabel,healthPartNames,collectorLines,needsLook,fmtTime,fmtDuration,may,
     switchProfile,navigate,loadProfiles,diagnose:openDiagnostics,openChat:openChatIn,exportTogether,
@@ -1933,10 +1959,11 @@ function renderAccounts(){
       const del=node("button","danger",tr("Delete"));del.dataset.action='delete';del.disabled=state.status.demo||!!p.deletion_blocked;
       if(p.deletion_blocked)del.title=tr(p.deletion_blocked);
       del.addEventListener("click",()=>busy(del,async()=>{
+        const kept=await confirmKeptCopy(p);if(kept===null)return;
         if(!(await askTyped(tr("Delete \"{name}\" permanently? This stops its collector and erases its journal, sources, signing key and the copy of its session kept here. The session stays active in Telegram: deleting does not sign it out. This cannot be undone.",{name:p.label}),p.label,{title:tr("Delete"),confirmText:tr("Delete")})))return;
         const revision=state.workspaceRevision;
         try{
-          await api("profiles/"+encodeURIComponent(p.id),undefined,{root:true,method:"DELETE"});
+          await api("profiles/"+encodeURIComponent(p.id)+(kept?"?kept_copy="+encodeURIComponent(kept):""),undefined,{root:true,method:"DELETE"});
         }catch(error){
           if(error instanceof StaleView||revision!==state.workspaceRevision)throw error;
           await loadProfiles().catch(()=>{});
@@ -2045,19 +2072,30 @@ $("account-add-form").addEventListener("submit",event=>{
   });
 });
 $("accounts-refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await loadProfiles();}));
+async function confirmKeptCopy(p){
+  const copy=p?.evidence_copy;
+  if(!copy)return "";
+  const facts=copy.sha256?tr("Last downloaded signed archive: {format}, {size}, prepared {time}. SHA-256: {sha256}",
+    {format:(copy.format||"zip").toUpperCase(),size:humanSize(copy.bytes||0),time:fmtFull(copy.created_at),sha256:copy.sha256}):
+    tr("The last signed archive was downloaded {time}; its SHA-256 was not recorded.",{time:fmtFull(copy.delivered_at)});
+  const ok=await askConfirm(facts+" "+tr("Deleting the workspace also deletes the copies kept in it. Continue only if this archive is saved outside this workspace."),
+    {title:tr("Copy outside this workspace"),confirmText:tr("The archive is saved elsewhere"),danger:true});
+  return ok?(copy.sha256||"confirmed"):null;
+}
 function accessName(p) {
   return p.access_id==="admin"||p.label==="Main administrator"?tr("Main administrator"):p.label||state.accessNames?.[p.access_id]||p.access_id||"";
 }
 const DELETION_ATTRIBUTION={
-  account_cannot_delete_here:()=>tr("Not deleted by this account: it had no right to delete this message in this chat. Its author, a chat administrator or Telegram removed it."),
-  no_other_session:seconds=>tr("Not deleted by this account: it had no other signed-in session at the session check {seconds} s earlier, and this workspace does not delete messages. The other side, a chat administrator or Telegram removed it.",{seconds}),
+  account_cannot_delete_here:(seconds,rights)=>Number.isInteger(rights)?tr("Who deleted it is not known: the deletion notice names no one. At the last rights check, {seconds} s earlier, this account had no right to delete this message in this chat.",{seconds:rights}):
+    tr("Who deleted it is not known: the deletion notice names no one. At the last rights check this account had no right to delete this message in this chat."),
+  no_other_session:seconds=>tr("Who deleted it is not known: the deletion notice names no one. At the last session check, {seconds} s earlier, this account had no other signed-in session, and this workspace does not delete messages.",{seconds}),
   this_account_may_have_deleted:()=>tr("Who deleted it is not known: this account itself, from another session or device, could also have deleted it.")};
 function deletionAttribution(p,link){
   if(link&&Number.isInteger(link.actor_id))return link.actor_is_this_account?tr("The chat's admin log names this account as the one that deleted it."):tr("The chat's admin log names user {id} as the account that deleted it.",{id:link.actor_id});
   const facts=p.attribution_facts||{},text=DELETION_ATTRIBUTION[facts.rule];
-  if(!["own_action","peer_or_admin","unknown_other_session_present"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
+  if(!["own_action","peer_or_admin","unknown_other_session_present","not_named"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
   const seconds=facts.sessions_check?.age_seconds??facts.sessions_age_seconds;
-  return text(Number.isInteger(seconds)?seconds:"?");
+  return text(Number.isInteger(seconds)?seconds:"?",facts.rights?.age_seconds??facts.rights_age_seconds);
 }
 function deletionExcerpt(e){
   const p=e.payload;
@@ -2251,7 +2289,7 @@ function safeExcerpt(e){
 let previouslyFocused;
 function eventRow(e) {
     const label=eventLabel(e);
-    const row=node("tr","event-row"); row.tabIndex=0; row.setAttribute("role","button"); row.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq}));
+    const row=node("tr","event-row"); row.tabIndex=0;
     const cell=node("td"), summary=node("div","event-summary"), text=node("div");
     const title=node("div","event-title",label[0]); title.append(node("span","",tr("Record #{n}",{n:e.seq})));
     const [sourceName,sourceId]=eventSource(e),mobileMeta=node("div","event-mobile-meta",sourceName+" · ");
@@ -2264,7 +2302,8 @@ function eventRow(e) {
     summary.append(mark,text); cell.append(summary);
     const source=node("td"); source.append(node("span","source-title",sourceName),node("span","source-id",sourceId));
     const time=node("td");time.append(timeNode(e.observed_at,"event-time"));
-    const open=node("td","event-open"); open.append(icon("chevron"));
+    const open=node("td","event-open"),details=node("button","event-details"); details.type="button";
+    details.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq})); details.append(icon("chevron")); open.append(details);
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
     row.addEventListener("keydown",event=>{ if(event.target===row&&(event.key==="Enter"||event.key===" ")){event.preventDefault();openDetail(e);} });
@@ -2294,7 +2333,7 @@ async function refreshEvents(direction=false) {
   if(state.view!=='observations')return;
   await journalReady;
   window.TgWitnessJournal.sync();
-  if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request);return;}
+  if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request,direction);return;}
   const request=++state.request,params=new URLSearchParams({limit:"200",include_count:"true"});
   const after=direction==="newer"?state.eventAfter:null;
   const before=direction==="latest"?null:direction===true||direction==="older"?state.cursor:state.eventBefore;
@@ -2315,8 +2354,10 @@ async function refreshEvents(direction=false) {
   renderEvents();
   if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
 }
-async function refreshRanked(request) {
-  const params=new URLSearchParams({q:state.search,limit:"200",source:state.searchSource||"messages"});
+async function refreshRanked(request,direction=false) {
+  const offset=direction===true||direction==="older"?state.cursor:direction==="newer"?state.eventAfter:direction==="latest"?0:state.eventBefore||0;
+  if(offset===null)return;
+  const params=new URLSearchParams({q:state.search,limit:"200",offset:String(offset),source:state.searchSource||"messages"});
   if(state.filter)params.set('kind',state.filter);
   if(state.source)params.set("chat_id",state.source);
   if(state.eventSince)params.set("since",state.eventSince);
@@ -2324,12 +2365,13 @@ async function refreshRanked(request) {
   const result=await json("search?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
   const counts=Object.values(result.matched||{});
-  state.events=result.events;state.cursor=state.eventAfter=state.eventBefore=null;
+  state.events=result.events;state.cursor=Number.isInteger(result.next_offset)?result.next_offset:null;
+  state.eventAfter=offset>0?Math.max(0,offset-200):null;state.eventBefore=offset>0?offset:null;
   state.eventMatched=counts.length&&counts.every(Number.isFinite)?counts.reduce((a,b)=>a+b,0):null;
   state.searchIndex=result.index;
   renderEvents();
 }
-const journalReady=import('./components/journal.js?v=layout6').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=layout7').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
     prepare:()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false,restoreFocus:false});},
@@ -2484,11 +2526,12 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=5").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=7").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
     renderScope,focusObservation:()=>$("collector-toggle").focus({preventScroll:true}),
+    needsSignIn:s=>!!accountState?.(s)?.needsSignIn,canConnect:()=>viewAllowed("connection"),connect:()=>navigate("connection"),
     confirm:(message,options)=>askConfirm(message,options),
     scopeExclusions:(ids,excluded)=>{if(state.scopeDirty)state.scopeExclude=excluded?
       [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},
@@ -2661,7 +2704,7 @@ $("handover-form").addEventListener("submit",event=>{event.preventDefault();busy
   const progress=(await exportsReady).begin({encrypted:encrypt,encryption});
   try{
     const saved=await download("handover",encrypt?"tgwitness-handover-encrypted."+encryption:"tgwitness-handover.zip",true,false,body,progress);
-    if(saved)toast(tr("Handover extract saved. Its purpose and rules are recorded in the journal."));
+    if(saved===true)toast(tr("Handover extract saved. Its purpose and rules are recorded in the journal."));
   }catch(error){progress({phase:"failed",error:error.message});throw error;}
 });});
 $("snapshot-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
@@ -2762,8 +2805,9 @@ $("chat-export-restart").addEventListener("click",e=>busy(e.currentTarget,()=>co
 function saveExport(button){return busy(button,async()=>{
   if(!state.exportId)throw new Error(tr("No finished export to download."));
   const revision=state.workspaceRevision;
-  if(await download("chat-export/"+encodeURIComponent(state.exportId)+"/download",state.exportName,true)===false)return;
-  if(revision!==state.workspaceRevision)return;
+  const saved=await download("chat-export/"+encodeURIComponent(state.exportId)+"/download",state.exportName,true);
+  if(saved===false||revision!==state.workspaceRevision)return;
+  if(saved!==true){$("chat-export-progress").textContent=tr("Download started. Check your browser’s downloads.");return;}
   toast(tr("Signed chat export downloaded."));
   show("chat-export-download",false);show("chat-export-partial-download",false);state.exportId=null;
   $("chat-export-progress").textContent=tr("Downloaded. Export another chat if needed.");
@@ -2771,7 +2815,7 @@ function saveExport(button){return busy(button,async()=>{
 $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget));
 $("chat-export-live").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const target=state.exportLive;if(!target)return;
-  if(await download("chat-export/"+encodeURIComponent(target.id)+"/live",target.name,true)===false)return;
+  if(await download("chat-export/"+encodeURIComponent(target.id)+"/live",target.name,true)!==true)return;
   toast(tr("Signed snapshot downloaded. verify.py inside checks it."));
 }));
 $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.currentTarget));
@@ -2838,10 +2882,13 @@ function accountExportDefaults(options){
   renderAccountExportPreview();
 }
 function invalidExportField(field,message){const error=new Error(message);error.field=field;return error;}
+const ACCOUNT_EXPORT_DATA=["profile","contacts","profile-photos","stories","session-metadata","other-data"];
 function accountExportOptions(){
   const purpose=$("account-export-purpose").value.trim();
   const kinds=[...$("account-export-kinds").querySelectorAll("input:checked")].map(n=>n.value);
-  if(!kinds.length)throw invalidExportField('account-export-kinds',tr("Choose at least one chat type."));
+  // Account data alone (profile, contacts, ...) is a valid export; only an empty selection is refused, as on the server.
+  const accountData=ACCOUNT_EXPORT_DATA.some(key=>$("account-export-"+key).checked);
+  if(!kinds.length&&!accountData)throw invalidExportField('account-export-kinds',tr("Choose a chat type or account data to export."));
   const ids=$("account-export-ids").value.trim().split(/[\s,;]+/).filter(Boolean);
   const chat_ids=[...new Set(ids.map(value=>{
     const id=Number(value);
@@ -2872,7 +2919,7 @@ function accountExportOptions(){
     budget_exhausted:$('account-export-budget-action').value,chat_kinds:kinds,from_utc,to_utc,chat_ids,sender_ids,text_contains,
     own_messages_only:$("account-export-own").checked,
     include_archived:$("account-export-archived").checked,
-    media_types:[...$("account-export-media").querySelectorAll("input:checked")].map(n=>n.value),
+    media_types:kinds.length?[...$("account-export-media").querySelectorAll("input:checked")].map(n=>n.value):[],
     media_action:$("account-export-media-action").value,oversized_media:$("account-export-oversized").value,
     media_actions:Object.fromEntries([...$('account-export-media-actions').querySelectorAll('select')].filter(select=>select.value).map(select=>[select.dataset.mediaKind,select.value])),
     max_media_file_mib,max_total_gib,include_profile:$("account-export-profile").checked,
@@ -2901,6 +2948,12 @@ function renderAccountExportPreview(){
     const other=extras.filter(([key])=>x[key]).map(([,label])=>label).join(', ')||tr('none');
     const transport=tr(x.transport==='regular'?'Regular session':x.transport==='auto'?'Automatic':'Telegram Takeout session');
     $('account-export-advanced-summary').textContent=other+' · '+transport;
+    if(!x.chat_kinds.length){
+      box.textContent=tr('{data} · no chats or attachments',{data:other})+
+        ' '+tr('Report language: {language}.',{language:PANEL_LANGUAGES[x.report_language]||x.report_language})+
+        (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):"");
+      return;
+    }
     box.textContent=tr(all?"All accessible chats of {n} selected types, including Saved Messages when private chats are selected.":
       "{n} selected chat IDs of the chosen types.",{n:all?x.chat_kinds.length:x.chat_ids.length})+" "+
       tr(x.from_utc||x.to_utc?"Selected UTC dates apply to each chat.":"Full visible history, without a date limit.")+" "+
@@ -3175,7 +3228,7 @@ async function accountExportAction(job,verb){
 async function accountExportDownload(job){
   if(!job.ready)throw new Error(tr("This account archive is not ready to download."));
   const name="tgwitness-account-export-"+String(job.id).replace(/[^a-zA-Z0-9_-]/g,"")+".zip";
-  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",name,true))
+  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",name,true)===true)
     toast(tr("Signed account archive saved. You can download it again from this job."));
 }
 async function accountExportDelete(job){
@@ -3320,7 +3373,7 @@ async function createAccountDisclosure(){
 async function accountDisclosureDownload(job,item){
   if(!item.ready)throw new Error(tr("This disclosure is still being prepared."));
   const path="account-export/"+encodeURIComponent(job.id)+"/disclosures/"+encodeURIComponent(item.id)+"/download";
-  if(await download(path,accountDisclosureFilename(item),true))
+  if(await download(path,accountDisclosureFilename(item),true)===true)
     toast(tr("Signed disclosure saved. Review it before sharing."));
 }
 $("account-disclosure-form").addEventListener("input",accountDisclosureInvalidate);
@@ -3367,8 +3420,9 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   catch(error){await writer?.abort().catch(()=>{});throw error;}
   const expected=Number(response.headers.get("Content-Length")||0);
   const preparedId=response.headers.get('X-TgWitness-Export-ID');
+  const kept=!preparedId||response.headers.get('X-TgWitness-Export-Kept')!=='no';
   const jobTicket=response.headers.get('X-TgWitness-Download-Ticket');
-  const ticketPath=preparedId?'exports/'+preparedId+'/ticket':jobTicket;
+  const ticketPath=preparedId?(kept?'exports/'+preparedId+'/ticket':null):jobTicket;
   const limit=(state.status?.parameters?.browser_buffer_mib||128)*1024*1024;
   let nativeAttempted=false;
   async function nativeDownload(){
@@ -3379,14 +3433,15 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     const link=node('a');link.href=target.href;link.download=filename;document.body.append(link);link.click();link.remove();
     progress({phase:'browser',total:expected,expected});void exportsView?.load();
     toast(tr(preparedId?'Download started. Check your browser’s downloads. The file is also in Prepared exports.':
-      'Download started. Check your browser’s downloads.'));return true;
+      'Download started. Check your browser’s downloads.'));return 'browser';
   }
   try{
     current();
     if(!writer&&expected>limit){
       await response.body?.cancel();
       if(ticketPath)return await nativeDownload();
-      const error=new Error(tr('This file is too large for this browser. Use a browser with file streaming or download from the local command line.'));
+      const error=new Error(tr(kept?'This file is too large for this browser. Use a browser with file streaming or download from the local command line.':
+        'This file is too large for this browser and is not kept for another download. Download it in Chrome or Edge, or with the command line under Large downloads & verification.'));
       error.downloadHint=true;throw error;
     }
     reader=response.body.getReader();
@@ -3409,7 +3464,7 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
       await json('exports/'+encodeURIComponent(preparedId)+'/received',{bytes:total},root?{root:true,token}:{profile,token}).catch(()=>{});
     progress({phase:handle?'done':'browser',total,expected});
     if(stream)toast(tr(handle?'File saved.':'Download started. Check your browser’s downloads.'));
-    return true;
+    return handle?true:'browser';
   }catch(error){
     if(reader)await reader.cancel().catch(()=>{});else await response.body?.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
@@ -3417,11 +3472,18 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     if(error instanceof StaleView)throw error;
     if(nativeAttempted)throw error;
     if(error.downloadHint)throw error;
-    throw new Error(tr('The browser could not save the file. Open Prepared exports and choose Download again.'));
+    throw new Error(tr(kept?'The browser could not save the file. Open Prepared exports and choose Download again.':
+      'The browser could not save the file, and it is not kept for another download. Prepare the export again.'));
   }
 }
 function saveBlob(blob,filename){
   const url=URL.createObjectURL(blob),a=node("a");a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  return 'browser';
+}
+// A file handed to the browser may still be refused or cancelled there: only a write through the file picker is "saved".
+function deliveredToast(saved,advice){
+  if(!saved)return;
+  toast(tr(saved===true?'File saved.':'Download started. Check your browser’s downloads.')+(advice?' '+advice:''));
 }
 panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   const fmt=b.dataset.export,password=$("export-password").value;
@@ -3440,6 +3502,11 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
   const encryption=$("export-encryption").value;
   const journalZip=(fmt==="zip"||fmt==="asice")&&!!b.closest(".evidence-hero");
+  if(b.id==="journal-download-all"){
+    workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision;
+    if(!await askConfirm(journalDownloadFacts(),{title:tr("Download entire journal (ZIP)"),confirmText:tr("Download entire journal (ZIP)")}))return;
+    workspaceSafety.assert();if(zipOwner!==state.profile||zipRevision!==state.workspaceRevision)throw new StaleView();
+  }
   if(journalZip){
     workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision,asice=fmt==="asice";
     if(!await askConfirm(tr(asice?"Download the signed ASiC-E container of the journal of {account}?":"Download the signed ZIP of the journal of {account}?",{account:workspaceSafety.name(zipOwner)}),
@@ -3545,6 +3612,30 @@ async function reportFor(chat,sender,messages=null){
   $("exports-tab-settings").click();
   $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
 }
+function journalDownloadFacts(){
+  const s=state.status,stats=s?.stats||{},head=stats.head,files=stats.counts?.["media.saved"];
+  const account=s?.collector?.account,who=account?[account.username?"@"+account.username:"",account.id?"ID "+account.id:""].filter(Boolean).join(" · "):"";
+  const filtered=!!(state.filter||state.source||state.search||state.eventSince||state.eventUntil);
+  return [tr("Account: {account}",{account:workspaceSafety.name(state.profile)+(who?" ("+who+")":"")}),
+    tr("Sources: every source of this workspace"),
+    head?tr("Period: every record up to #{n}, {time}",{n:Number(head.seq).toLocaleString(LANG),time:fmtTime(head.observed_at)}):tr("Period: every record"),
+    tr("Records: {n}",{n:Number(stats.total||0).toLocaleString(LANG)}),
+    ...(typeof files==="number"?[tr("Saved files: {n}",{n:files.toLocaleString(LANG)})]:[]),
+    ...(filtered?[tr("The filters and search of the list do not apply: records hidden in the list are included.")]:[])].join("\n\n");
+}
+$("journal-export-selection").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const chat=/^-?\d+$/.test(String(state.source||""))?Number(state.source):null;
+  if(chat!==null){await reportFor(chat);return;}
+  const revision=state.workspaceRevision,profile=state.profile;
+  await navigate('evidence');
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence')return;
+  selectExportTask('journal');await loadReportSettings();
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
+  reportSelection.load({...reportSelection.read(),enabled:true});
+  $("exports-tab-settings").click();
+  $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
+  $("report-data-title").focus();
+}));
 function reportControls(){
   $("report-fields").disabled=!reportReady||reportOwner!==reportKey()||reportSaving||!!window.TGW_ONLINE_DEMO;
   $("report-preview-refresh").disabled=reportPreviewBusy;
@@ -3721,12 +3812,13 @@ $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
 });
 $("save-checkpoint").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  const checkpoint=await json("checkpoint");saveBlob(new Blob([JSON.stringify(checkpoint,null,2)],{type:"application/json"}),"tgwitness-checkpoint.json");
-  toast(tr("Checkpoint downloaded. Retain it outside the collector."));
+  const checkpoint=await json("checkpoint");
+  deliveredToast(saveBlob(new Blob([JSON.stringify(checkpoint,null,2)],{type:"application/json"}),"tgwitness-checkpoint.json"),
+    tr("Keep a copy of the checkpoint outside the collector."));
 }));
 $("save-run-receipt").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  const receipt=await json("run-receipt");saveBlob(new Blob([JSON.stringify(receipt,null,2)],{type:"application/json"}),"tgwitness-run-receipt.json");
-  toast(tr("Signed acquisition process receipt downloaded."));
+  const receipt=await json("run-receipt");
+  deliveredToast(saveBlob(new Blob([JSON.stringify(receipt,null,2)],{type:"application/json"}),"tgwitness-run-receipt.json"));
 }));
 $("save-anchor-request").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   await download("anchor-request","tgwitness-timestamp-request.zip");
@@ -3917,7 +4009,7 @@ $("replica-sync").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   renderReplica(await json("replica/sync",{}));toast(tr("Copying now."));
 }));
 $("replica-key").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  if(await download("replica/key","tgwitness-replica-key.json"))toast(tr("Encryption key saved. Keep it apart from this computer."));
+  deliveredToast(await download("replica/key","tgwitness-replica-key.json"),tr("Keep the encryption key apart from this computer."));
 }));
 async function loadAlerts(){
   if(!state.status)return;
@@ -4684,7 +4776,7 @@ $("witness-setup-form").addEventListener("submit",e=>{e.preventDefault();busy(e.
   if(proxy)config.proxy=proxy;
   if(discord){delete config.bot_token_file;delete config.channel;delete config.bot_api;config.discord_webhook_file='discord-webhook.txt';}
   saveBlob(new Blob([JSON.stringify(config,null,2)+"\n"],{type:"application/json"}),"witness.json");
-  $("witness-setup-result").textContent=tr("Configuration saved. Step 3 shows how to start your witness.");
+  $("witness-setup-result").textContent=tr("Download started. Check your browser’s downloads.")+" "+tr("Step 3 shows how to start your witness.");
   $("witness-launch").open=true;
 });});
 
@@ -5294,7 +5386,7 @@ async function loadAuthKey(){
   const record={auth_key:key,dc_id:dc,...(user?{user_id:Number(user)}:{})};
   authProgress(tr("Reading your authorization key…"));
   try{
-    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}]},{profile});
+    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}],new_session:$("import-new-session").checked},{profile});
     if(revision!==state.workspaceRevision||selection!==accountImportRevision||!state.token)return;
     $("session-string").value=result.session||"";importExpectedId=result.expected_user_id||null;
     importClientProfile=result.client_profile||null;
@@ -5307,7 +5399,9 @@ for(const id of ["auth-key","auth-dc","auth-user-id"])$(id).addEventListener("in
   $("session-import-warning").open=!!$("auth-key").value.trim();
 });
 $("import-account").addEventListener("click",e=>busy(e.currentTarget,loadAccountFiles));
-$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";$("session-import-warning").open=!!$("session-string").value.trim();});
+$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";
+  if($("session-string").value.trim()&&$("session-file").files.length){$("session-file").value="";renderSelectedFiles();}
+  $("session-import-warning").open=!!$("session-string").value.trim();});
 $("import-new-session").addEventListener("change",()=>{importTwoFactor="";});
 $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(state.status.demo){toast(tr("Demo workspace. Connect accounts in your live installation."),true);return;}
@@ -5678,7 +5772,7 @@ async function openSecretChat(id,start=false){
   if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
   if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
 }
-const chatListReady=import('./views/chat-list.js?v=telegram5').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=telegram6').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
     adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),
@@ -5719,6 +5813,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
   $("chat-feed").scrollTop=0;
 })));
 function beginChat(id){
+  replyReturn=null;show("chat-back-reply",false);
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
   messageImage?.close();historyForward?.close();closePersonCard();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
@@ -5746,19 +5841,66 @@ async function openChat(id,options={}){
   if(focused&&focused!==document.body&&focused.checkVisibility?.()===false&&$("chat-back").checkVisibility?.())$("chat-back").focus({preventScroll:true});
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
+  const place=chatPositions.get(state.profile+":"+id);
+  if(loaded&&place&&state.chat===id&&options.position!==false)await showChatMessage(place.id,{offset:place.offset,flash:false}).catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
   if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&!(s.scope?.mode==="selected"&&s.scope?.strict)&&may("sources")&&!chatAutoLoaded.has(key)){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
 }
+const chatPositions=new Map();let replyReturn=null,chatPositionFrame=0;
+async function showChatMessage(id,{offset=null,flash=true}={}){
+  const chat=state.chat,profile=state.profile,generation=chatGeneration;
+  let el=$("msg-"+id);
+  if(!el){
+    if(state.chatFilter!=="all"||state.chatAuthor!==null||state.chatSearch){
+      clearTimeout(chatSearchTimer);state.chatFilter="all";state.chatAuthor=null;state.chatSearch="";$("chat-message-search").value="";state.chatView="messages";renderChatStatus();
+    }
+    if(!await loadChatMessages("around",id))return false;
+    if(chat!==state.chat||profile!==state.profile||generation!==chatGeneration)return false;
+    el=$("msg-"+id);
+  }
+  if(!el)return false;
+  const feed=$("chat-feed");
+  if(offset===null)el.scrollIntoView({block:"center"});
+  else feed.scrollTop+=el.getBoundingClientRect().top-feed.getBoundingClientRect().top-offset;
+  if(flash){el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);}
+  return true;
+}
+async function jumpToReply(m){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(m.reply_to)){
+    if(chat!==state.chat||profile!==state.profile)return;
+    replyReturn={chat,profile,message:m.message_id};show("chat-back-reply",true);
+    $("msg-"+m.reply_to)?.querySelector(".bubble")?.setAttribute("tabindex","-1");$("msg-"+m.reply_to)?.querySelector(".bubble")?.focus({preventScroll:true});
+    return;
+  }
+  if(chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:m.reply_to}),true);
+}
+$("chat-back-reply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const back=replyReturn;replyReturn=null;show("chat-back-reply",false);
+  if(!back||back.chat!==state.chat||back.profile!==state.profile)return;
+  if(await showChatMessage(back.message)){const bubble=$("msg-"+back.message)?.querySelector(".bubble");bubble?.setAttribute("tabindex","-1");bubble?.focus({preventScroll:true});}
+}));
+$("chat-feed").addEventListener("scroll",()=>{
+  cancelAnimationFrame(chatPositionFrame);
+  chatPositionFrame=requestAnimationFrame(()=>{
+    if(state.view!=="chats"||state.chat===null||!chatReady||state.chatView!=="messages"||state.chatFilter!=="all"||state.chatSearch||state.chatAuthor!==null)return;
+    const feed=$("chat-feed"),key=state.profile+":"+state.chat;
+    if(state.chatNextAfter===null&&feed.scrollHeight-feed.scrollTop-feed.clientHeight<80){chatPositions.delete(key);return;}
+    const bounds=feed.getBoundingClientRect(),row=[...feed.querySelectorAll(".msg[id^='msg-']")].find(item=>item.getBoundingClientRect().bottom>bounds.top+1);
+    if(row)chatPositions.set(key,{id:Number(row.id.slice(4)),offset:row.getBoundingClientRect().top-bounds.top});
+  });
+},{passive:true});
+window.addEventListener("tgwitness:lock",()=>{chatPositions.clear();replyReturn=null;show("chat-back-reply",false);});
 function fmtDuration(seconds){
   if(seconds===null||seconds===undefined)return tr("unknown");
   if(seconds<60)return tr("under a minute");
   if(seconds<3600)return tr("~{n} min",{n:Math.round(seconds/60)});
   return tr("~{h} h {m} min",{h:Math.floor(seconds/3600),m:Math.round(seconds%3600/60)});
 }
-async function loadChatMessages(mode){
+async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
@@ -5769,6 +5911,7 @@ async function loadChatMessages(mode){
   if(state.chatAuthor!==null)params.set("author_id",String(state.chatAuthor));
   if(mode==="older")params.set("before_id",String(state.chatNextBefore));
   if(mode==="newer")params.set("after_id",String(state.chatNextAfter));
+  if(mode==="around")params.set("before_id",String(target+31));
   chatPagePending={request,generation};
   let result;
   try {result=await json("chats/"+encodeURIComponent(id)+"/messages?"+params,undefined,viewOptions('chats'));}
@@ -5785,7 +5928,7 @@ async function loadChatMessages(mode){
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const bounds=feed.getBoundingClientRect(),visible=[...feed.querySelectorAll('.msg,.chat-service[id]')].find(row=>{const r=row.getBoundingClientRect();return r.bottom>bounds.top&&r.top<bounds.bottom;});
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
-  const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
+  const reset=mode==='open'||mode==='latest'||mode==='around'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
   if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);chatGaps?.offline?.(result.offline);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
@@ -5802,6 +5945,7 @@ async function loadChatMessages(mode){
   if(mode==="open")replay(feed,"entering",900);
   else if(mode==="refresh")state.chatMessages.forEach(m=>{if(m.message_id>known)$("msg-"+m.message_id)?.classList.add("fresh");});
   if(mode==="open"||mode==='latest')feed.scrollTop=state.chatSearch?0:feed.scrollHeight;
+  else if(mode==="around")return true;
   else if(mode==="refresh"&&atBottom)feed.scrollTop=feed.scrollHeight;
   else{const kept=anchor&&feed.querySelector('#'+CSS.escape(anchor.id));
     if(kept)feed.scrollTop+=kept.getBoundingClientRect().top-feed.getBoundingClientRect().top-anchor.offset;else feed.scrollTop=top;}
@@ -5809,8 +5953,10 @@ async function loadChatMessages(mode){
 }
 function renderChatEmpty(){
   renderChatInfo();
-  viewQuery("chats",".chats-shell").dataset.panel="chat";
-  const box=$("chat-empty"),s=state.status;show("chat-main",false);show("chat-empty",true);box.replaceChildren();
+  const box=$("chat-empty"),s=state.status;
+  viewQuery("chats",".chats-shell").dataset.panel=state.chat===null&&s&&(s.demo||s.collector.has_session)&&(state.chats.length||viewAllowed("sources")
+    ||!s.demo&&accountSignedIn()&&(!viewQuery("chats",".chat-open").hidden||viewAllowed("secret-chats")&&may("interact")))?"list":"chat";
+  show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat)&&(state.chatsLoading||!state.chats.length)){box.append(viewState('loading',tr('Loading…')));return;}
   if(!state.chats.length&&state.chatsLoading){box.append(viewState('loading',tr('Loading…')));return;}
@@ -5868,6 +6014,10 @@ function renderChatStatus(){
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
+  // A background refresh keeps the filter menu as it was left; choosing a filter, a view or another chat closes it.
+  const filterKey=[state.workspaceRevision,state.chat,state.chatFilter,state.chatView].join('|'),oldFilters=box.querySelector('details.chat-filter-row');
+  const filtersOpen=!!oldFilters?.open&&box.filterKey===filterKey,filtersSummary=!!oldFilters&&oldFilters.querySelector('summary')===document.activeElement;
+  box.filterKey=filterKey;
   const c=s.collector,silence=!s.demo&&c.running&&c.connected?chatSilence(s,state.chat):null;box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text,description=text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=description;state_.append(t);};
   state_.setAttribute('role','status');
@@ -5904,7 +6054,7 @@ function renderChatStatus(){
       state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
   const toolbar=node("details","action-menu chat-filter-row"),summary=node('summary'),filterPanel=node('div','action-menu-panel');
   summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
-  filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';
+  filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';toolbar.open=filtersOpen;
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
     if(!info.enabled||!c.has_session||c.running&&(c.storage_low||!c.connected)||silence)box.append(state_);
@@ -5967,7 +6117,8 @@ function renderChatStatus(){
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
   forwardButton.hidden = !state.me?.admin || s.demo;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
-  if(focusedFilter)summary.focus({preventScroll:true});
+  if(focusedFilter)(filtersOpen&&box.querySelector('[data-chat-filter="'+focusedFilter+'"]')||summary).focus({preventScroll:true});
+  else if(filtersSummary)summary.focus({preventScroll:true});
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
@@ -6172,19 +6323,24 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
       report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
-    const target=m.reply_to_chat?null:byId.get(m.reply_to),quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
-    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));
-      quote.addEventListener('click',()=>{let el=$('msg-'+m.reply_to);if(!el){state.chatFilter='all';state.chatAuthor=null;renderChatStatus();renderChatFeed();el=$('msg-'+m.reply_to);}if(!el)return;
-        el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);});}
-    else quote.textContent=m.reply_to_chat?tr('Reply to #{id} in another chat',{id:m.reply_to}):tr('Reply to #{id} · outside this loaded window',{id:m.reply_to});
+    const target=m.reply_to_chat?null:byId.get(m.reply_to);let quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
+    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));}
+    else if(!m.reply_to_chat){quote=node('button','reply-quote reply-outside');quote.type='button';quote.append(node('span','',tr('Reply to #{id} · show the original',{id:m.reply_to})));}
+    else quote.textContent=tr('Reply to #{id} in another chat',{id:m.reply_to});
+    if(!m.reply_to_chat)quote.addEventListener('click',()=>busy(quote,()=>jumpToReply(m)));
     bubble.append(quote);
   }
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
-  if(m.has_media&&!m.media.length){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
+  const file=m.file?.state;
+  if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const meta=node("div","bubble-meta");
   const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
+  if(file==="saved")mark("span","pill-file","clip",tr("File saved"),tr("The attachment file is saved in this workspace."));
+  else if(file==="queued"||file==="retry")mark("span","pill-file pill-file-waiting","clock",tr("Queued"),tr("The attachment file is waiting to be downloaded."));
+  else if(file){const reason=excerpt({kind:m.file.kind,payload:{reason:m.file.reason,error_type:m.file.error_type}})||tr("Attachment file not saved");
+    mark("span","pill-file pill-file-missing","clip",reason,tr("Attachment file not saved")+": "+reason);}
   if(m.deleted&&m.auto_deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.missing&&m.auto_deleted)mark("button","pill-missing","question",tr("Not found at recheck"),tr("Telegram no longer returned this message at {time}; its auto-delete timer had expired before that check.",{time:fmtFull(m.missing_observed_at)}));
@@ -6199,7 +6355,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
   if(m.from_scheduled)mark("span","pill-scheduled","clock",tr("Sent as a scheduled message"),tr("Telegram marks this message as sent from a schedule (from_scheduled)."));
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
-  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock"));
+  const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
+  stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
@@ -6302,7 +6459,7 @@ function dossierBar(chat,profiled){
   encryption.addEventListener("change",updateEncryptionHint);updateEncryptionHint();
   bar.append(node("p","",tr("Profiles are on. Click a person to open their profile. The export is a separate signed file; it is deleted with the chat.")),
     action("secondary",tr("Export profiles"),async()=>{
-      if(await download("chats/"+encodeURIComponent(chat)+"/dossier/export","tgwitness-dossier-"+chat+".json"))toast(tr("Signed profiles saved."));
+      deliveredToast(await download("chats/"+encodeURIComponent(chat)+"/dossier/export","tgwitness-dossier-"+chat+".json"));
     }),
     password,encryption,encryptionHint,
     action("quiet",tr("Export encrypted"),async()=>{
@@ -6633,6 +6790,7 @@ function actionResult(result){
     unknown:tr("The result is unknown. Check the chat before attempting a new action."),
     queued:result.run_at?tr("Queued to keep a safe pace. Runs at {time}.",{time:fmtTime(new Date(result.run_at*1000).toISOString())}):""};
   box.append(node("strong","",labels[result.status]||result.status));
+  if(result.already_member)box.append(node("p","",tr("This account is already a member of the chat.")));
   if(result.status==="succeeded"&&result.forwarded!=null)box.append(node("p","",tr("Forwarded {n} messages to {chat}.",{n:result.forwarded,chat:result.destination_title||result.destination})));
   if(result.error)box.append(node("p","",tr(result.error)));
   else if(result.error_type==="ChatForwardsRestrictedError")box.append(node("p","",tr("Forwarding is restricted in this chat.")));
@@ -6706,6 +6864,7 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
     preview.history_visible===false?tr("New members do not see earlier messages"):""].filter(Boolean);
   if(facts.length)box.append(node("p","hint",facts.join(" · ")));
   if(request)box.append(node("p","hint",tr("Joining needs administrator approval: Telegram sends a join request.")));
+  if(preview.already_member)box.append(node("p","hint",tr("This account is already a member of the chat.")));
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
@@ -7030,10 +7189,17 @@ async function resumeMulti(attempt=0){
 }
 function saveMulti(button){return busy(button,async()=>{
   const x=state.multi;if(!x?.ready)throw new Error(tr("No finished export to save."));
-  if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)===false)return;
-  renderMulti();toast(tr("Signed chat export saved."));
+  const saved=await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true);
+  if(saved===false)return;
+  renderMulti();if(saved===true)toast(tr("Signed chat export saved."));
 });}
-let linkPlan=null,linkJob=null,linkPoll=null;
+let linkPlan=null,linkJob=null,linkPoll=null,linkRequest=0;
+const linkInput=()=>$("link-export-input").value.trim();
+function linkPlanCurrent(){return !!linkPlan&&linkPlan.link===linkInput()&&linkPlan.token===state.token&&linkPlan.request===linkRequest;}
+function staleLinkPlan(){
+  linkRequest++;linkPlan=null;
+  const box=$("link-export-plan");box.replaceChildren(node("p","notice",tr("The link changed. Plan the export for the new chat.")));show("link-export-plan",true);
+}
 const EXPORT_PHASES={preparing:tr("preparing"),running:tr("running"),selecting:tr("selecting"),packaging:tr("packaging"),done:tr("done"),
   paused:tr("paused"),failed:tr("failed"),cancelled:tr("cancelled"),waiting:tr("waiting")};
 const LINK_REASONS={unavailable:"workspace unavailable",no_session:"no Telegram account connected",signed_out:"signed out: sign in again",
@@ -7096,6 +7262,8 @@ function renderLinkPlan(){
   select.addEventListener("change",linkEstimate);linkEstimate();
 }
 async function startLinkExport(){
+  if(linkJob)return;
+  if(!linkPlanCurrent()){staleLinkPlan();$("link-export-input").focus();throw new Error(tr("The link changed. Plan the export for the new chat."));}
   const p=linkPlan,profiles=[...$("link-export-plan").querySelectorAll("input[name=link-account]:checked")].map(b=>b.value);
   if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const token=state.token,x=await json("multi-export/start",{chat_id:p.chat_id,lead:profiles.includes(p.reader)?p.reader:profiles[0],
@@ -7127,7 +7295,7 @@ function renderLinkJob(){
   if(["paused","failed","cancelled"].includes(x.phase))action("primary",tr("Resume saved chunks"),async()=>{
     await json("multi-export/"+encodeURIComponent(x.id)+"/resume",{},{root:true});await pollLinkJob(x.id);});
   if(x.phase==="done"&&x.ready)action("primary",tr("Save signed export"),async()=>{
-    if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)===false)return;
+    if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)!==true)return;
     toast(tr("Signed chat export saved."));});
   if(!running)action("quiet",tr("Start over with another link"),async()=>{resetLinkExport();$("link-export-input").focus();});
   box.append(actions);
@@ -7147,20 +7315,25 @@ async function pollLinkJob(id){
   }
 }
 function resetLinkExport(){
-  clearTimeout(linkPoll);linkPoll=null;linkPlan=linkJob=null;
+  clearTimeout(linkPoll);linkPoll=null;linkPlan=linkJob=null;linkRequest++;
   $("link-export-plan").replaceChildren();show("link-export-plan",false);$("link-export-input").value="";
 }
 $("link-export-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const link=$("link-export-input").value.trim();
+  const link=linkInput();
   if(!link)throw new Error(tr("Paste a chat link or @username."));
   clearTimeout(linkPoll);linkPoll=null;linkJob=linkPlan=null;show("link-export-plan",false);
-  const button=e.submitter,label=button?.textContent;if(button)button.textContent=tr("Checking {link}…",{link:link.length>40?link.slice(0,39)+"…":link});
+  const request=++linkRequest,button=e.submitter,label=button?.textContent;if(button)button.textContent=tr("Checking {link}…",{link:link.length>40?link.slice(0,39)+"…":link});
   try{
     const token=state.token,plan=await json("multi-export/plan",{link},{root:true});
-    if(state.token!==token)return;
-    linkPlan=plan;renderLinkPlan();
+    if(state.token!==token||request!==linkRequest||linkJob)return;
+    if(linkInput()!==link){staleLinkPlan();return;}
+    linkPlan={...plan,link,token,request};renderLinkPlan();
   }finally{if(button)button.textContent=label;}
 });});
+$("link-export-input").addEventListener("input",()=>{
+  if(linkJob)return;
+  if(linkPlan&&linkPlan.link!==linkInput())staleLinkPlan();
+});
 window.addEventListener("tgwitness:lock",resetLinkExport);
 $("chat-export-start").addEventListener("click",e=>busy(e.currentTarget,openExportDialog));
 $("chat-export-get").addEventListener("click",e=>saveMulti(e.currentTarget));
@@ -7311,7 +7484,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=7').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
@@ -7321,7 +7494,7 @@ const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
 });
 topologyReady.catch(error=>toast(error.message,true));
 let swarmView=null;
-const swarmReady=Promise.all([import('./views/swarm.js?v=2'),homeReady]).then(([{createSwarm}])=>{
+const swarmReady=Promise.all([import('./views/swarm.js?v=3'),homeReady]).then(([{createSwarm}])=>{
   swarmView=createSwarm({root:$('view-swarm'),tr,trn,json,getState:()=>state,options:()=>viewOptions('swarm'),toast,
     download:(path,filename,stream,root)=>download(path,filename,stream,root),
     taskLabel:activity=>homeTask?.(activity),
@@ -7349,7 +7522,7 @@ systemMapReady.catch(error=>toast(error.message,true));
 const accessReady=import("./views/access.js").then(({createAccessView})=>{
   accessView=createAccessView({root:$("view-access"),tr,navigate,localInput,getState:()=>state});return accessView;
 });
-const systemLogReady=import("./views/system-log.js?v=4").then(({createSystemLog})=>{
+const systemLogReady=import("./views/system-log.js?v=5").then(({createSystemLog})=>{
   systemLogView=createSystemLog({root:$("view-system-log"),tr,json,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
     options:()=>viewOptions('system-log'),formatTime:fmtTime,toast,download:(path,filename,stream,root)=>download(path,filename,stream,root)});return systemLogView;
 });
@@ -7404,7 +7577,8 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
 });});
 $("panel-key-rotate").addEventListener("click",event=>busy(event.currentTarget,async()=>{
   let owner=actionOwner();
-  if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),{danger:true})))return;
+  if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),
+    {danger:true,title:tr("Reissue administrator key"),confirmText:tr("Reissue administrator key")})))return;
   if(!owner.current())return;
   const inert=$("workspace").inert;
   window.TgWitnessLive?.stop();state.workspaceRevision++;owner=actionOwner();$("workspace").inert=true;

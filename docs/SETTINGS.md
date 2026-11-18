@@ -38,10 +38,14 @@ values and **Undo last change**, and **Recent changes** lists the latest edits.
 A section opens in a window over the list and has its own address, such as
 `/settings/connection`. The back arrow, the close button, Escape, a click outside the
 window and the browser's Back button return to the list. **Which chats?** is kept with
-**Save chat selection**; closing with unsaved changes asks first. Every change shows
+**Save chat selection**; closing with unsaved changes asks first. Saving keeps the source
+types, excluded chats, own actions and new-chat settings of **More tools → Sources →
+Scope**; a chat chosen here is taken off the excluded chats and recorded as a hand-picked
+source. Every change shows
 **Undo** for 20 seconds, and each entry in **Recent changes** can be undone later. An
-undo is a new `settings.changed` record in the journal, and it also brings back custom
-file limits.
+undo brings back only the settings that entry changed, custom file limits included.
+When a later change touched the same settings, the undo is refused and nothing
+changes. An undo is a new `settings.changed` record in the journal.
 
 | Level | Fields | Sidebar |
 | --- | --- | --- |
@@ -128,7 +132,9 @@ several accounts see. See [account groups](ACCOUNTS.md#bulk-import-and-account-g
 
 A workspace with a session or an earlier completed setup does not get the wizard.
 Its values are not replaced by a goal when the page loads. Hiding a field does not
-turn the feature off or delete its value.
+turn the feature off or delete its value. **Open first setup** in Settings shows the
+same screens again; finishing them starts no new export or observation and says so,
+and a changed chat selection is kept only with **Save chat selection**.
 
 The size and time estimate reads up to three selected chats and up to 20 messages from
 each. It is an estimate: it does not predict Telegram limits, the speed of a given

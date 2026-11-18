@@ -222,7 +222,9 @@ be imported as JSON, see [Account JSON](#account-json).
 ## Account files
 
 Open **Add account → Files** and select up to **four files belonging to one account**,
-**8 MiB** in total, then press **Connect account**.
+**8 MiB** in total, press **Check files**, then **Connect account**. Choosing files or
+pasting session text sends nothing; **Check files** sends them to your TgWitness server,
+which reads them without signing in and shows the session it found.
 
 The **Files**, **Auth key** and bulk-import forms show the parallel-session warning
 before connecting. By default imported authorizations are reused. Keep the original
@@ -234,9 +236,8 @@ automatically when files or a key/session string are supplied. It can be collaps
 after reading, so the file picker and connection controls remain usable on a phone.
 
 An [attested deployment](HIGH-ASSURANCE.md) (Phala Cloud, Intel TDX) does not collect on
-an imported key. There, **Files** connects only with **Create an independent
-authorization** selected; bulk import and the **Auth key** tab are refused. Phone and QR
-login work as usual.
+an imported key. There, **Files** and **Auth key** connect only with **Create an independent
+authorization** selected; bulk import is refused. Phone and QR login work as usual.
 
 - Files are converted **in memory** on your TgWitness server. Uploads are not stored,
   ZIPs are not extracted to disk and no external service is contacted.
@@ -246,7 +247,9 @@ login work as usual.
   instead of picking one.
 - **Passcode or session text** holds the TData local passcode field, a box for pasting
   a StringSession and **Read files without signing in** (fills the form without
-  contacting Telegram).
+  contacting Telegram). Pasting a StringSession clears the selected files, and choosing
+  files clears the pasted text, so the check and the connection use the latest choice.
+  After a passcode change, press **Check files** again.
 
 ### Create an independent authorization
 

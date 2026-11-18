@@ -4,12 +4,12 @@
 #view-topology [hidden] { display: none !important; }
 #view-topology .tp { display: grid; gap: 14px; min-width: 0; }
 #view-topology .tp-head { display: flex; align-items: center; gap: 12px 16px; flex-wrap: wrap; }
-#view-topology .tp-title { display: flex; align-items: center; gap: 12px; margin-right: auto; min-width: 0; }
+#view-topology .tp-title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-right: auto; min-width: 0; }
 #view-topology .tp-title h1 { margin: 0; font: 650 24px/32px var(--font); letter-spacing: -.01em; }
-#view-topology .tp-live { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px; border-radius: 999px; background: rgba(52, 211, 153, .12); color: #059669; font: 600 11px/16px var(--mono); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+#view-topology .tp-live { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px; border-radius: 999px; background: rgba(52, 211, 153, .12); color: #047857; font: 600 11px/16px var(--mono); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
 [data-theme="dark"] #view-topology .tp-live { color: #34d399; }
 #view-topology .tp-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: tp-ping 1.8s ease-out infinite; }
-#view-topology.tp-stale .tp-live, #view-topology.tp-demo .tp-live { background: rgba(251, 191, 36, .14); color: #b45309; }
+#view-topology.tp-stale .tp-live, #view-topology.tp-demo .tp-live { background: rgba(251, 191, 36, .14); color: #92400e; }
 [data-theme="dark"] #view-topology.tp-stale .tp-live, [data-theme="dark"] #view-topology.tp-demo .tp-live { color: #fbbf24; }
 #view-topology.tp-stale .tp-live::before { animation: none; }
 #view-topology .tp-tools { display: flex; gap: 6px; flex-wrap: wrap; }

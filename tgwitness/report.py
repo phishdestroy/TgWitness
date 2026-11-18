@@ -138,7 +138,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", RECEIVED_WHERE, RECEIVED_RENAMED]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -187,12 +187,37 @@ def span_text(say, first, last):
         seconds = (datetime.fromisoformat(last) - datetime.fromisoformat(first)).total_seconds()
     except (TypeError, ValueError):
         return "—"
+    return duration_text(say, seconds)
+
+
+def duration_text(say, seconds):
     days, rest = divmod(int(seconds), 86400)
     if days:
         return say("{n} d", n=days) + " " + say("{n} h", n=rest // 3600)
     if rest >= 3600:
         return say("{n} h", n=rest // 3600) + " " + say("{n} min", n=rest % 3600 // 60)
     return say("{n} min", n=rest // 60)
+
+
+def observed_text(say, coverage, window=None):
+    periods = (coverage or {}).get("continuous")
+    if window is not None and not all(window):
+        return say("0 records selected") + (" · " + say("No observation period recorded") if periods == [] else "")
+    if periods is None:
+        return say("Not recorded in this export")
+    if not periods:
+        return say("No observation period recorded")
+    if window is None:
+        seconds = [p.get("seconds") or 0 for p in periods]
+    else:
+        try:
+            low, high = (datetime.fromisoformat(value) for value in window)
+            seconds = [(min(datetime.fromisoformat(p["to"]), high) - max(datetime.fromisoformat(p["from"]), low)).total_seconds()
+                       for p in periods]
+        except (KeyError, TypeError, ValueError):
+            return "—"
+        seconds = [s for s in seconds if s >= 0]
+    return duration_text(say, sum(seconds)) if seconds else say("Not recorded")
 
 
 def size_text(value):
@@ -677,7 +702,7 @@ def readme(context, files, english):
     say = Words(context["options"].get("language", "en"))
     options, fp = context["options"], fingerprint(context["public_key"])
     evidence, handover = context["kind"] == "evidence", context["kind"] == "handover"
-    archive = "tgwitness-evidence.zip" if evidence else "tgwitness-handover.zip" if handover else "tgwitness-chat-export.zip"
+    archive = received_archive(context)
     title = say("Evidence archive") if evidence else say("Handover extract") if handover else say("Chat export")
     lines = ["TgWitness · " + title, *([options["case_title"]] if options.get("case_title") else []), "=" * 64]
     if handover:
@@ -709,7 +734,7 @@ def readme(context, files, english):
                          + " (" + str(count) + ")")
     lines += ["", say("How to verify"), "-" * 64,
               *([say("To check the archive, follow START_HERE.txt.")] if "START_HERE.txt" in files else []),
-              say("Run these commands in the extracted folder, with the original ZIP in its parent folder."),
+              say(RECEIVED_WHERE, name=archive), say(RECEIVED_RENAMED),
               say("Use a verifier from a trusted checkout. The bundled copy is provided for convenience."),
               "1. " + say("Get the signer's key fingerprint from a trusted channel, not from this archive."),
               "   python verify.py ../" + archive + " --fingerprint TRUSTED_SHA256",
@@ -1240,6 +1265,8 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
+        if not count:
+            summary += " " + say("No record of the journal matches the selection.")
     elif digest.get("telegram_observations") and digest["chats"] and account_text:
         period = say("{account} observed {chats} from {first} to {last}.", account=account_text,
                      chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
@@ -1260,7 +1287,8 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
                          n=latest.get("event_count"), time=utc_text(latest.get("time")), service=latest.get("service")))
     gaps = len((coverage or {}).get("gaps") or [])
     includes = [say("Observed periods and gaps in observation ({n}), listed under Coverage.", n=gaps)
-                if gaps else say("Observed periods, listed under Coverage.")]
+                if gaps else say("No observation period recorded") if (coverage or {}).get("continuous") == []
+                else say("Observed periods, listed under Coverage.")]
     if digest.get("telegram_observations") and cats["message"]:
         includes.insert(0, say("Each sender by the Telegram ID and name delivered with the message."))
     if not handover and (cats["edited"] or cats["deleted"]):
@@ -2494,6 +2522,18 @@ def timestamps_section(say, number, anchors, archive_name, standalone=False):
     return out + "</section>"
 
 
+RECEIVED_ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip",
+                     "chat": "tgwitness-chat-export.zip"}
+RECEIVED_WHERE = "Run these commands in the extracted folder, with the received file {name} in its parent folder."
+RECEIVED_RENAMED = "If the file you received has another name, use that name in the commands, in double quotes."
+
+
+def received_archive(context, kind=None):
+    """The name the export is delivered under; the verify commands in README, HTML and PDF point at this file."""
+    context = context or {}
+    return context.get("archive_name") or RECEIVED_ARCHIVES.get(kind or context.get("kind"), RECEIVED_ARCHIVES["evidence"])
+
+
 def verify_section(say, number, archive_name, report_name, archive, data_name=None):
     data_name = data_name or ("events.jsonl" if report_name.startswith("report.") else "chat.json")
     steps = ["<li>" + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + "</li>"]
@@ -2511,8 +2551,8 @@ def verify_section(say, number, archive_name, report_name, archive, data_name=No
     steps.append("<li>" + e(say("This report on its own:"))
                  + command("python verify.py " + report_name + " --fingerprint TRUSTED_SHA256"
                            + (" --evidence ../" + archive_name if archive else "")) + "</li>")
-    where = ('<p class="lead">' + e(say("Run these commands in the extracted folder, with the original ZIP in its parent "
-                                       "folder.")) + "</p>") if archive else ""
+    where = ('<p class="lead">' + e(say(RECEIVED_WHERE, name=archive_name)) + " " + e(say(RECEIVED_RENAMED))
+             + "</p>") if archive else ""
     return (section(number, "verify", say("How to verify"),
                     say("Anyone can repeat these checks. They show whether the material changed after it was signed."))
             + where + '<ol class="steps">' + "".join(steps) + "</ol></section>")
@@ -2535,7 +2575,8 @@ class EvidenceHTML:
         self.anchors, self.files, self.archive = self.context.get("anchors", []), self.context.get("files", {}), self.context.get("archive", False)
         self.fp, self.report_id = self.context.get("fingerprint") or "", self.context.get("report_id") or "unsealed"
         self.created, self.count, self.head_hash = self.context.get("created_at") or utcnow(), self.context.get("event_count"), self.context.get("head_hash")
-        self.case, self.archive_name = case_of(self.options), "tgwitness-evidence.zip"
+        self.case = case_of(self.options)
+        self.archive_name = received_archive(self.context, "handover" if self.context.get("handover") else "evidence")
         self.title = self.options.get("case_title") or (
             say("Telegram observation journal") if self.source_digest.get("telegram_observations") else say("Signed journal"))
         if self.context.get("encrypted_only"):
@@ -2549,7 +2590,7 @@ class EvidenceHTML:
         if self.context.get("selection"):
             self.shown_count = self.context["selection"]["counts"]["selected_records"]
         if self.handover:
-            self.archive_name, self.label = "tgwitness-handover.zip", say("Handover extract")
+            self.label = say("Handover extract")
             self.title = self.options.get("case_title") or say("Handover extract")
             self.description = say("Part of a signed TgWitness journal prepared for handover, with other people's data minimised.")
             self.shown_count = self.handover["counts"]["unchanged"] + self.handover["counts"]["minimised"]
@@ -2631,7 +2672,8 @@ class EvidenceHTML:
                         (say("Files"), num(len(self.digest["media"])), "violet", "file"),
                         (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
                          if self.anchors or self.archive else "—", "ok", "seal"),
-                        (say("Observation period"), e(span_text(say, self.digest["first"], self.digest["last"])), "pink", "eye")])
+                        (say("Observation period"), e(observed_text(say, self.coverage, (self.digest["first"], self.digest["last"])
+                                                                    if self.filtered else None)), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
     def render_summary(self):
@@ -2740,7 +2782,7 @@ class EvidenceHTML:
             yield continuity_section(say, next(self.numbers), continuity,
                                      (self.context.get("digest") or {}).get("titles")).encode("utf-8")
         latest = latest_stamp(self.anchors)
-        steps = [(say("Observed and recorded"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
+        steps = [(say("Recorded in the journal"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
                  (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=self.count)))]
         if self.handover:
             steps.append((say("Extract prepared and minimised"), when(self.created) + " · " + e(say(
@@ -2763,7 +2805,7 @@ class EvidenceHTML:
             (say("Collector clock against Telegram"), clocks_html(say, self.source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        own = self.context.get("report_file") or "report.html"
+        own = self.context.get("report_file") or ("report.html" if self.archive else "tgwitness-evidence.html")
         yield verify_section(say, next(self.numbers), self.archive_name, own, self.archive,
                              "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
         if self.archive and self.files:
@@ -2797,7 +2839,7 @@ class EvidenceHTML:
             yield seal_section(say, next(self.numbers), self.report_id, self.created).encode("utf-8")
         yield ending(say, self.producer, viewer_meta(
             say, "journal", self.context, titles={str(k): v for k, v in self.digest["titles"].items()}, title=self.title,
-            archive="tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip", head_hash=self.head_hash,
+            archive=self.archive_name, head_hash=self.head_hash,
             event_count=self.count) if self.data_kind else None, data).encode("utf-8")
 
 
@@ -2903,7 +2945,7 @@ def name_note(say, record):
     return " · ".join(notes)
 
 
-def chat_rows(records, say, preview=False, base="", numbered=False, after=None, metadata=False):
+def chat_rows(records, say, preview=False, base="", numbered=False, after=None, metadata=False, chat_id=None):
     quotes, previous_day, previous_sender, previous_id = {}, None, object(), after
     for record in records:
         date, sender = record.get("date") or "", record.get("from_id")
@@ -2948,7 +2990,11 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
                                                           if record.get("from_username") else "")
                         + (' <span class="uname">' + e(note) + "</span>" if note else "") + "</div>")
         reply = record.get("reply_to_message_id")
-        if reply:
+        peer = (record.get("reply_to") or {}).get("reply_to_peer_id") if isinstance(record.get("reply_to"), dict) else None
+        peer = peer if type(peer) is int else message_details.peer_id(peer)
+        if reply and peer is not None and peer != chat_id:
+            body.append('<div class="quote">' + e(say("Reply to #{id} in another chat", id=reply)) + "</div>")
+        elif reply:
             quoted = quotes.get(reply)
             body.append('<a class="quote" href="#m' + e(reply) + '"><b>' + e(quoted[0] if quoted else "#" + str(reply))
                         + "</b>" + e(quoted[1] if quoted else say("Earlier message")) + "</a>")
@@ -3150,7 +3196,7 @@ class ChatHTML:
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
         own = self.context.get("report_file") or "chat.html"
-        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", own, True).encode("utf-8")
+        yield verify_section(say, next(self.numbers), received_archive(self.context, "chat"), own, True).encode("utf-8")
         yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                         "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "chat").encode("utf-8")
@@ -3158,7 +3204,7 @@ class ChatHTML:
         if self.sign is not None:
             yield seal_section(say, next(self.numbers), self.report_id, self.created).encode("utf-8")
         yield ending(say, self.producer, viewer_meta(
-            say, "chat", self.context, title=self.title, archive="tgwitness-chat-export.zip", chat_id=self.chat.get("id"),
+            say, "chat", self.context, title=self.title, archive=received_archive(self.context, "chat"), chat_id=self.chat.get("id"),
             chat_title=self.chat_title, numbered=bool(self.ids.get("numbered_per_chat") and not self.ids.get("selection_applied")),
             data_sha256=self.context.get("chat_json_sha256")), self.data).encode("utf-8")
 

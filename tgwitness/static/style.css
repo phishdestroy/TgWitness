@@ -944,6 +944,9 @@ form > .health-detail { margin-top: 14px; }
 .pill-deleted { background: var(--danger-soft); border-color: var(--danger-border); color: var(--danger); }
 .pill-edited { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent-text); }
 .pill-missing { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); }
+.pill-file { background: var(--success-soft); border-color: var(--success-border); color: var(--success); }
+.pill-file-waiting { background: var(--surface-3); border-color: var(--border-strong); color: var(--text-2); }
+.pill-file-missing { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); white-space: normal; }
 button.pill { cursor: pointer; font-family: inherit; }
 .chat-pane { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 #chat-main { display: flex; flex-direction: column; min-height: 0; height: 100%; }
@@ -1305,6 +1308,10 @@ button.pill { cursor: pointer; font-family: inherit; }
 .account-tools-row, .account-manage-row { display: flex; flex-wrap: wrap; gap: 8px; }
 #authorized-state .account-manage-row .quiet { margin: 0; }
 #authorized-state .account-manage .hint { margin: 10px 0 0; }
+.workspace-remove { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); }
+.workspace-remove h3 { margin: 0 0 10px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.workspace-remove .account-manage-row .quiet { margin: 0; }
+.workspace-remove .hint { margin: 10px 0 0; }
 #authorized-state .account-restriction { margin: 14px 0 0; padding: 10px 12px; border-radius: var(--radius); background: var(--danger-soft); color: var(--danger); font-size: 13.5px; }
 .account-sessions { display: grid; gap: 6px; margin-top: 12px; }
 #authorized-state .account-sessions > .hint { margin: 0 0 4px; }

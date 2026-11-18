@@ -10,6 +10,14 @@ const sha=async data=>hex(await crypto.subtle.digest("SHA-256",typeof data==="st
 const fill=(text,values)=>text.replace(/\{(\w+)\}/g,(m,k)=>k in values?values[k]:m);
 const sayf=(key,values)=>fill(say(key),values||{});
 const human=k=>{const w=String(k||"").replace(/[._]+/g," ").trim();return w?w[0].toUpperCase()+w.slice(1):"";};
+const FILE_STATUS={above_limit:()=>say("Larger than the size limit"),duration_limit:()=>say("Longer than the duration limit"),
+  excluded_by_policy:()=>say("Not collected by the attachment settings"),hashes_only:()=>say("Only the file hashes were saved"),
+  hashes_unavailable:()=>say("Telegram did not provide file hashes"),rate_limited:()=>say("Telegram limited the download rate"),
+  message_changed_or_unavailable_at_media_read:()=>say("The message changed or was unavailable when the file was read"),
+  message_unavailable_at_file_read:()=>say("The message was unavailable when the file was read"),
+  skipped_by_export_option:()=>say("Files were turned off for this export"),type_not_collected:()=>say("This file type was not collected"),
+  unavailable:()=>say("Telegram did not provide the file")};
+const fileStatus=d=>d.file_status?(FILE_STATUS[d.file_status]?FILE_STATUS[d.file_status]():human(d.file_status)):say("File not in this archive");
 const span=s=>{s=Math.round(s||0);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
   return [d?sayf("{n} d",{n:num(d)}):"",h?sayf("{n} h",{n:num(h)}):"",m&&!d?sayf("{n} min",{n:num(m)}):""].filter(Boolean).join(" ")||sayf("{n} s",{n:num(s)});};
 const initials=s=>String(s||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";
@@ -195,8 +203,14 @@ async function startViewer(meta){
       V.filter.from=V.filter.to="";V.filter.cats=new Set(Object.keys(meta.cats).filter(c=>!(meta.hidden||[]).includes(c)));
       $("#v-q").value=$("#v-from").value=$("#v-to").value=$("#v-people-q").value="";for(const c of $$("#v-only input,#v-chats input"))c.checked=false;
       for(const b of $$("#v-cats [data-cat]"))b.setAttribute("aria-pressed",String(V.filter.cats.has(b.dataset.cat)));V.drawPeople();apply();});
-    $("#v-jump").addEventListener("keydown",e=>{if(e.key!=="Enter"||!V.results.length)return;const want=parseInt(e.target.value.replace(/\D/g,""),10);if(isNaN(want))return;
-      const asc=V.filter.sort==="asc";let i=V.results.findIndex(it=>asc?it.n>=want:it.n<=want);if(i<0)i=V.results.length-1;focusRow(V.results[i].key,i);});
+    $("#v-jump").addEventListener("input",e=>e.target.setCustomValidity(""));
+    $("#v-jump").addEventListener("keydown",e=>{if(e.key!=="Enter")return;const raw=e.target.value.trim();if(!raw)return;e.preventDefault();
+      const want=/^[#№]?\s*\d+$/.test(raw)?parseInt(raw.replace(/\D/g,""),10):NaN;
+      const i=isNaN(want)?-1:V.results.findIndex(it=>it.n===want);
+      if(i>=0){e.target.setCustomValidity("");focusRow(V.results[i].key,i);return;}
+      const hidden=!isNaN(want)&&V.items.some(it=>it.n===want);
+      e.target.setCustomValidity(isNaN(want)?say("Enter a record number"):hidden?sayf("Record #{n} is hidden by the filters",{n:want}):sayf("Record #{n} not found",{n:want}));
+      e.target.reportValidity();});
     $("#v-pick-all").addEventListener("click",()=>{if(V.results.length>5000&&!confirm(sayf("Select all {n} shown items?",{n:num(V.results.length)})))return;
       for(const it of V.results)V.selected.add(it.key);selectionChanged();});
     $("#v-earlier").addEventListener("click",()=>render(Math.max(0,V.from-200)));
@@ -217,6 +231,9 @@ async function startViewer(meta){
       out.push(it);}
     V.off=off;
     if(f.sort==="desc")out.reverse();V.results=out;V.terms=want.filter(t=>t.text).map(t=>t.text);
+    const box=$("#v-detail");
+    if(box&&!box.hidden&&V.detailKey&&!out.some(it=>it.key===V.detailKey)){const inside=box.contains(document.activeElement);
+      box.hidden=true;V.detailKey=null;for(const r of $$("#v-list .open"))r.classList.remove("open");if(inside)$("#v-q").focus({preventScroll:true});}
     V.plain=f.sort==="asc"&&!f.q&&!f.people.size&&!f.keys&&!f.only.size&&!f.from&&!f.to
       &&Object.keys(meta.cats).every(c=>f.cats.has(c))&&!V.files.bad.length&&!V.files.missing.length;
     countBox.textContent=sayf("{a} of {b}",{a:num(out.length),b:num(V.items.length)});
@@ -275,12 +292,14 @@ async function startViewer(meta){
   function message(it,first,last){
     if(it.cat==="service")return '<div class="msg-service" data-key="'+it.key+'"><span>'+esc(it.who)+" · "+esc(it.service)+" · #"+it.n+" · "+esc(clock(it.at))+"</span></div>";
     const media=meta.media_previews!==false&&it.file&&isImage(it)?'<img class="msg-img" alt="" loading="lazy" src="'+esc(it.file.path)+'">':(it.file||it.d.media_type)?
-      '<div class="msg-media">'+ic("file")+"<span>"+esc(it.file&&it.file.name||(it.d.media_info||{}).file_name||say("Attachment"))+"</span></div>":"";
+      '<div class="msg-media'+(it.file?"":" missing")+'">'+ic("file")+"<span>"+esc(it.file&&it.file.name||(it.d.media_info||{}).file_name||say("Attachment"))+"</span>"
+      +"<small>"+esc(it.file?say("File saved"):fileStatus(it.d))+"</small></div>":"";
+    const times=[sayf("Sent: {time}",{time:it.sent||(it.chat==null?it.at:"")?when(it.sent||it.at):"—"}),...(it.chat!=null&&it.at?[sayf("Saved: {time}",{time:when(it.at)})]:[])].join(" · ");
     return '<article class="msg '+colour(it.uid??it.who)+(first?" first":"")+(last?" last":"")+(V.selected.has(it.key)?" picked":"")+'" data-key="'+it.key+'" role="listitem" tabindex="0">'
       +pickBox(it)+'<div class="msg-ava">'+(last?'<div class="ava">'+esc(initials(it.who))+"</div>":"")+'</div><div class="msg-bubble">'
       +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+media+hashNotice(it)
       +(it.text?'<div class="msg-text" dir="auto">'+hl(shortText(it.text))+"</div>":"")
-      +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
+      +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta" title="'+esc(times)+'">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
   function hashNotice(it){const h=it.fileHashes;if(!h||!/^[0-9a-f]{64}$/.test(h.sha))return "";
     return '<div class="rec-p">File content not downloaded. '+esc(h.name||"Attachment")+' · '+num(h.bytes)+' bytes · '+num(h.ranges)
       +' SHA-256 ranges · '+esc(h.variant||"")+(h.status&&h.status!=="complete"?' · Incomplete hash coverage':'')
@@ -332,7 +351,7 @@ async function startViewer(meta){
     if(d.protected)fact(say("Protected"),esc(say("saving and forwarding restricted")));if(it.withheld)fact(say("Minimised"),esc(it.withheld.join(", ")));
     if(it.file)fact(say("File"),esc(it.file.name||say("Saved file"))+(it.file.size?" · "+num(it.file.size)+" B":"")+'<br><small><code>'+esc(it.file.sha)+"</code></small>");
     if(it.fileHashes)fact("Server file hashes",hashNotice(it));
-    else if(d.media_type)fact(say("File"),esc(d.media_type)+(d.file_status?"<br><small>"+esc(d.file_status)+"</small>":""));
+    else if(d.media_type)fact(say("File"),esc(d.media_type)+"<br><small>"+esc(fileStatus(d))+"</small>");
     const links=[...(d.text_entities||[]),...(d.quote_entities||[])].filter(x=>x.href||x.user_id!=null).map(x=>"<li"+(x.deceptive?' class="warn"':"")+">“"+esc(x.text)+"” → <code>"
       +esc(x.href||"user ID "+x.user_id)+"</code>"+(x.deceptive?'<br><b>⚠ '+esc(say("the text shows a different address"))+"</b>":"")+"</li>").join("");
     const buttons=((d.buttons&&d.buttons.rows)||[]).flat().map(b=>"<span>"+esc(b.text)+(b.url||b.query||b.copy_text?"<code>"+esc(b.url||b.query||b.copy_text)+"</code>":"")+"</span>").join("");
@@ -343,7 +362,8 @@ async function startViewer(meta){
         +same.map(x=>'<li><a href="#" data-goto="'+x.key+'">#'+x.n+"</a> · "+esc(kindLabel(x))+" · "+esc(when(x.at))+(x.text?"<div>"+esc(x.text.slice(0,300))+"</div>":"")+"</li>").join("")+"</ul></div>";}
     const proof=chat?esc(sayf("Message #{n} of chat.json; the archive's manifest signs chat.json (SHA-256 {hash}).",{n:it.n,hash:String(meta.data_sha256||"").slice(0,16)+"…"}))
       :esc(say("Record hash"))+'<br><code>'+esc(it.hash)+"</code><br>"+esc(say("Each record is signed when it is captured; verify.py checks the record, its signature and its place in the chain."));
-    const [glyph,tone]=CAT[it.cat]||CAT.system;
+    const [glyph,tone]=CAT[it.cat]||CAT.system,visible=V.results.some(x=>x.key===key);
+    const copyable=it.textWithheld?"":it.text||it.service||it.p||"",copyLabel=it.text&&!it.textWithheld?say("Copy text"):copyable?say("Copy description"):say("No text to copy");
     const head=chat?'<div class="ava '+colour(it.uid??it.who)+'">'+esc(initials(it.who))+"</div><div><b>"+esc(it.who)+"</b><small>"+(it.user?"@"+esc(it.user)+" · ":"")
       +(it.uid!=null?"ID "+esc(it.uid):"")+"</small></div>":'<span class="rec-icon tone-'+tone+'">'+ic(glyph)+"</span><div><b>"+esc(kindLabel(it))+" · #"+it.n+"</b><small>"+esc(when(it.at))+"</small></div>";
     box.innerHTML='<div class="d-head">'+head+'<button type="button" class="d-close" data-close aria-label="'+esc(say("Close"))+'">'+ic("x")+'</button></div><div class="d-body">'
@@ -357,16 +377,19 @@ async function startViewer(meta){
       +'<div class="d-proof">'+ic("shield")+"<div>"+proof+"</div></div>"
       +(!chat&&meta.raw_records&&it.raw.r?'<details class="d-section d-raw"><summary>'+esc(say("Full record data"))
         +'</summary><pre><code>'+esc(JSON.stringify(it.raw.r,null,2))+'</code></pre></details>':"")
-      +'<div class="d-actions"><button type="button" class="v-btn" data-pick>'+esc(V.selected.has(key)?say("Unselect"):say("Select"))
-      +'</button><button type="button" class="v-btn ghost" data-copy>'+ic("copy")+esc(say("Copy text"))+'</button><button type="button" class="v-btn ghost" data-ref>'
+      +'<div class="d-actions"><button type="button" class="v-btn" data-pick'+(!visible&&!V.selected.has(key)?' disabled title="'+esc(say("Nothing matches these filters."))+'"':"")+">"
+      +esc(V.selected.has(key)?say("Unselect"):say("Select"))
+      +'</button><button type="button" class="v-btn ghost" data-copy'+(copyable?"":" disabled")+">"+ic("copy")+esc(copyLabel)+'</button><button type="button" class="v-btn ghost" data-ref>'
       +esc(say("Copy reference"))+"</button></div></div>";
+    V.detailKey=key;
     box.hidden=false;box.scrollTop=0;box.setAttribute("tabindex","-1");box.setAttribute("aria-label",say("Details"));box.focus({preventScroll:true});
-    box.querySelector("[data-close]").onclick=()=>{box.hidden=true;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
+    box.querySelector("[data-close]").onclick=()=>{box.hidden=true;V.detailKey=null;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
     box.onkeydown=e=>{if(e.key==="Escape"){e.preventDefault();box.querySelector("[data-close]").click();}};
-    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
-      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);detail(key);};
-    box.querySelector("[data-copy]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(it.text||"");
-    box.querySelector("[data-ref]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(reference(it));}
+    box.querySelector("[data-pick]").onclick=()=>{if(!V.selected.has(key)&&!V.results.some(x=>x.key===key))return;
+      V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
+      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);if(V.detailKey===key)detail(key);};
+    box.querySelector("[data-copy]").onclick=()=>{if(copyable&&navigator.clipboard)navigator.clipboard.writeText(copyable).catch(()=>{});};
+    box.querySelector("[data-ref]").onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(reference(it)).catch(()=>{});};}
   function goto(key){if(!V.byKey.has(key))return;let i=V.results.findIndex(x=>x.key===key);
     if(i<0){$("#v-reset").click();i=V.results.findIndex(x=>x.key===key);}if(i<0)return detail(key);focusRow(key,i);detail(key);}
   function reference(it){return (meta.report_id?"TgWitness "+meta.report_id+" · ":"")+(chat?(meta.chat_title||"")+" #"+it.n:"#"+it.n+" "+it.kind+(it.hash?" "+it.hash:""))+" · "+(it.at||"");}
@@ -439,7 +462,7 @@ async function startViewer(meta){
         :missing.length?sayf("{n} data files were not found next to this page",{n:missing.length}):!sealOk?say("The seal signature could not be checked in this browser"):sayf("{n} data files match the signed seal",{n:V.files.ok}))
       +card("","file","blue",say("This page"),say("A browser does not give a page its own bytes. Check the whole archive below, or drop report.html into the seal check of the Report tab."))
       +'</div><h3>'+esc(say("Check every file of the archive"))+'</h3><p class="lead">'+esc(say("Choose the archive as it was handed over (ZIP) or its unpacked folder. The manifest's signature and the SHA-256 of every file are checked here; nothing is uploaded."))
-      +'</p><div class="d-actions"><button type="button" class="v-btn" id="c-zip-pick">'+ic("zip")+esc(say("Choose the ZIP"))+'</button><input type="file" id="c-zip" accept=".zip,application/zip" hidden>'
+      +'</p><div class="d-actions"><button type="button" class="v-btn" id="c-zip-pick">'+ic("zip")+esc(say("Choose the ZIP"))+'</button><input type="file" id="c-zip" accept=".zip,.asice,application/zip,application/vnd.etsi.asic-e+zip" hidden>'
       +'<button type="button" class="v-btn ghost" id="c-dir-pick">'+ic("files")+esc(say("Choose the folder"))+'</button><input type="file" id="c-dir" webkitdirectory multiple hidden></div><div id="c-out">'+(V.checked||"")+"</div>"
       +'<h3>'+esc(say("With verify.py"))+'</h3><pre class="cmd"><code>python verify.py '+esc(meta.archive?"../"+meta.archive:"ARCHIVE.zip")+" --fingerprint TRUSTED_SHA256</code></pre></div>";
     $("#c-zip").addEventListener("change",e=>e.target.files[0]&&fullCheck(zipSource(e.target.files[0]),e.target.files[0].name));
@@ -458,17 +481,23 @@ async function startViewer(meta){
       const signed=await crypto.subtle.verify({name:"Ed25519"},key,bytes(sigText.trim()),manifestBytes);
       if(!signed)throw new Error(say("Manifest signature NOT valid."));
       const fp=await sha(bytes(manifest.public_key)),same=fp===meta.fingerprint;
-      const names=Object.keys(manifest.files||{}),wrong=[],absent=[];let done=0;
+      const names=Object.keys(manifest.files||{}),wrong=[],absent=[],hashes=new Map();let done=0;
       if(!names.length||names.some(n=>!safeName(n)||!/^([a-f0-9]{64})$/.test(manifest.files[n])))throw new Error(say("Invalid file inventory."));
       if(!same||!manifest.report||manifest.report.id!==meta.report_id)throw new Error(say("This archive belongs to a different report or signing key."));
       for(const file of names){const data=await source.bytes(file);done++;if(done%5===0||done===names.length)
         out.innerHTML='<div class="callout info">'+esc(sayf("Checking files: {a} of {b}",{a:done,b:names.length}))+"</div>";
-        if(!data){absent.push(file);continue;}if(await sha(data)!==manifest.files[file])wrong.push(file);}
-      const extra=(await source.list()).filter(n=>!names.includes(n)&&!["manifest.json","manifest.sig"].includes(n));
-      const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length;
+        if(!data){absent.push(file);continue;}const digest=await sha(data);hashes.set(file,digest);if(digest!==manifest.files[file])wrong.push(file);}
+      const listed=await source.list();
+      const asic=await container(source,listed,hashes);
+      const extra=listed.filter(n=>!names.includes(n)&&!["manifest.json","manifest.sig"].includes(n)&&!(asic&&asic.members.includes(n)));
+      const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length&&!(asic&&asic.problem);
       out.innerHTML='<div class="callout '+(good?"ok":"bad")+'"><b>'+esc(good?sayf("All {n} files match the signed manifest.",{n:names.length}):say("The archive does not match its signed manifest."))+"</b><ul>"
         +"<li>"+esc(signed?say("Manifest signature valid (Ed25519)."):say("Manifest signature NOT valid."))+"</li>"
         +"<li>"+esc(same?say("Signed by the key of this report."):sayf("Signed by a different key: {fp}",{fp}))+"</li>"
+        +(asic?"<li>"+esc(asic.problem?sayf("ASiC-E container damaged: {reason}",{reason:asic.problem})
+          :sayf("ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.",{n:asic.references}))+"</li>"
+          +"<li>"+esc(say("The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser."))+"</li>"
+          +(asic.others.length?"<li>"+esc(sayf("Other container entries not checked in this browser: {list}",{list:asic.others.join(", ")}))+"</li>":""):"")
         +(wrong.length?"<li>"+esc(sayf("Changed: {list}",{list:wrong.slice(0,30).join(", ")}))+"</li>":"")
         +(absent.length?"<li>"+esc(sayf("Missing: {list}",{list:absent.slice(0,30).join(", ")}))+"</li>":"")
         +(extra.length?"<li>"+esc(sayf("Not in the manifest (not covered by the signature): {list}",{list:extra.slice(0,30).join(", ")}))+"</li>":"")
@@ -479,6 +508,49 @@ async function startViewer(meta){
     catch(e){out.innerHTML='<div class="callout bad">'+esc(e&&e.message?e.message:String(e))+"</div>";V.checked=out.innerHTML;}
     finally{V.checking=false;for(const input of $$("#c-zip,#c-dir")){input.disabled=false;input.value="";}}}
 
+  // ASiC-E (ETSI EN 319 162): a stored "mimetype" entry with this exact text, META-INF/ASiCManifest.xml listing every
+  // data object with its SHA-256, and the CAdES signature over that manifest. The ASiC manifests of external signatures
+  // and of the evidence record count only when they match the same files; anything else under META-INF/ stays outside.
+  async function asicManifest(source,hashes,xml,signature){
+    const doc=new DOMParser().parseFromString(xml||"","application/xml"),NS="http://uri.etsi.org/02918/v1.2.1#",DS="http://www.w3.org/2000/09/xmldsig#";
+    const refs=!xml||doc.getElementsByTagName("parsererror").length?[]:[...doc.getElementsByTagNameNS(NS,"DataObjectReference")];
+    const sig=[...doc.getElementsByTagNameNS(NS,"SigReference")].map(r=>r.getAttribute("URI"));
+    if(!refs.length||sig.length!==1||sig[0]!==signature)return null;
+    const seen=new Set(),changed=[];
+    for(const ref of refs){
+      let uri;try{uri=decodeURIComponent(ref.getAttribute("URI")||"");}catch{uri="";}
+      const method=ref.getElementsByTagNameNS(DS,"DigestMethod")[0]?.getAttribute("Algorithm"),value=ref.getElementsByTagNameNS(DS,"DigestValue")[0]?.textContent.trim();
+      if(!safeName(uri)||uri==="mimetype"||uri.startsWith("META-INF/")||seen.has(uri)||method!=="http://www.w3.org/2001/04/xmlenc#sha256"||!value)return null;
+      seen.add(uri);const cached=hashes.get(uri),data=cached?null:await source.bytes(uri);
+      let expected="";try{expected=[...atob(value)].map(c=>c.charCodeAt(0).toString(16).padStart(2,"0")).join("");}catch{}
+      if((cached||(data&&await sha(data)))!==expected)changed.push(uri);
+    }
+    return {seen,changed};
+  }
+  async function container(source,listed,hashes){
+    if(!listed.includes("mimetype"))return null;
+    const type=await source.text("mimetype");
+    if(type!=="application/vnd.etsi.asic-e+zip")return null;
+    const known=["mimetype","META-INF/ASiCManifest.xml","META-INF/signature.p7s"];
+    const members=listed.filter(n=>known.includes(n)),result={members,references:0,problem:"",others:[]};
+    const xml=await source.text("META-INF/ASiCManifest.xml");
+    if(!xml||!listed.includes("META-INF/signature.p7s")){result.problem=say("META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing");return result;}
+    const main=await asicManifest(source,hashes,xml,"META-INF/signature.p7s");
+    if(!main){result.problem=say("its manifest cannot be read");return result;}
+    const objects=listed.filter(n=>n!=="mimetype"&&!n.startsWith("META-INF/")),{seen,changed}=main;
+    const unlisted=objects.filter(n=>!seen.has(n)),problems=[];
+    result.references=seen.size;
+    if(changed.length)problems.push(sayf("Changed: {list}",{list:changed.slice(0,30).join(", ")}));
+    if(unlisted.length)problems.push(sayf("Not in the manifest (not covered by the signature): {list}",{list:unlisted.slice(0,30).join(", ")}));
+    for(const name of listed.filter(n=>/^META-INF\/ASiCManifest[0-9]{3}\.xml$/.test(n)||n==="META-INF/ASiCEvidenceRecordManifest.xml")){
+      const target=name==="META-INF/ASiCEvidenceRecordManifest.xml"?"META-INF/evidencerecord.ers":"META-INF/signature"+name.slice(21,24)+".p7s";
+      const other=listed.includes(target)?await asicManifest(source,hashes,await source.text(name),target):null;
+      if(!other||other.changed.length||[...other.seen].some(n=>!objects.includes(n))){problems.push(sayf("{name} does not match the files it lists",{name}));continue;}
+      result.members.push(name,target);result.others.push(target);
+    }
+    result.problem=problems.join(" · ");
+    return result;
+  }
   const MAX_FILE=256*1024*1024,MAX_TOTAL=4*1024**3;
   function safeName(name){return typeof name==="string"&&name.length>0&&!/[\\\x00-\x1f\x7f:]/.test(name)
     &&!name.startsWith("/")&&name.split("/").every(p=>p&&p!=="."&&p!=="..");}

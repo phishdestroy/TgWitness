@@ -264,7 +264,8 @@ def chat_replacements(record_factory, context, meta, say, options):
             yield '<p><a href="chat.json">' + escape(say("Open the signed source records")) + '</a></p>'
         yield '<div class="chatwall">'
         yield from report.chat_rows(rows, say, bool(options.get("media_previews")),
-                                    numbered=bool((context.get("message_ids") or {}).get("numbered_per_chat")), metadata=True)
+                                    numbered=bool((context.get("message_ids") or {}).get("numbered_per_chat")), metadata=True,
+                                    chat_id=(meta.get("chat") or {}).get("id"))
         yield '</div></section>'
     return {"journal": journal}
 

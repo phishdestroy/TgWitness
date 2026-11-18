@@ -296,7 +296,8 @@ async def preview(collector, body):
         member = isinstance(entity, types.ChatInviteAlready)
     else:
         entity = chat = await collector.client.get_entity(target["username"])
-        title, kind, member = utils.get_display_name(entity), kind_of(entity), None
+        title, kind = utils.get_display_name(entity), kind_of(entity)
+        member = not entity.left if isinstance(entity, types.Channel) else None
         if target["start"] is not None and not getattr(entity, "bot", False):
             raise ValueError("The start parameter requires a bot.")
     facts = await channel_facts(collector, chat)
@@ -509,7 +510,7 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
             if "invite" in target:
                 checked = await collector.client(functions.messages.CheckChatInviteRequest(target["invite"]))
                 if isinstance(checked, types.ChatInviteAlready):
-                    entity = checked.chat
+                    entity, result["already_member"] = checked.chat, True
                 else:
                     dispatched = True
                     joined = admitted(await collector.client(functions.messages.ImportChatInviteRequest(target["invite"])))
@@ -527,11 +528,13 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
                 if entity.id != prepared["raw"]["id"]:
                     raise ValueError("The link destination changed. Preview it again.")
                 if isinstance(entity, types.Channel):
+                    if not entity.left:
+                        result["already_member"] = True
                     try:
                         dispatched = True
                         admitted(await collector.client(functions.channels.JoinChannelRequest(entity)))
                     except UserAlreadyParticipantError:
-                        pass
+                        result["already_member"] = True
             result["chat_id"] = observe(collector, entity, body.observe is not False)
             if getattr(entity, "bot", False):
                 dispatched = True

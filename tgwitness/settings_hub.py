@@ -42,6 +42,7 @@ FIELDS = [
     )
 ]
 KEYS = tuple(field["key"] for field in FIELDS)
+LATER_CHANGE = "A later change affects the same settings. Change them directly instead of undoing this one."
 
 
 class Draft(BaseModel):
@@ -67,6 +68,7 @@ class GoalChange(BaseModel):
 class Restore(BaseModel):
     model_config = ConfigDict(extra="forbid")
     seq: int = Field(ge=1)
+    hash: str | None = Field(default=None, max_length=128)
     revision: str
 
 
@@ -92,17 +94,21 @@ def file_policy(choice):
 
 
 def wizard_state(app):
+    from .scope import scope_settings
     s, c = app.state.store, app.state.collector
     saved = s.get_setting("first_run", None)
     if saved is None:
         existing = bool(s.get_setting("setup", None) or c.status()["has_session"] or s.targets())
         saved = {"completed": existing, "skipped": False}
-        if existing:
-            from .scope import scope_settings
-            scope = scope_settings(s)
-            saved.update(scope=scope["mode"], folder_id=scope["folder_id"],
-                         chat_ids=[t["chat_id"] for t in s.targets(True)])
+    if saved.get("completed"):
+        scope = scope_settings(s)
+        saved = {**saved, "scope": scope["mode"], "folder_id": scope["folder_id"],
+                 "chat_ids": [t["chat_id"] for t in s.targets(True)]}
     return {**Draft().model_dump(), **saved}
+
+
+WIDE_MAIN = ("This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? "
+             "before marking this account as your main one.")
 
 
 def values(app):
@@ -183,9 +189,13 @@ def edited(current, body):
     return desired
 
 
+def conflicts(desired):
+    return {k for k in ("timestamps", "notifications", "replica") if desired[k] and not desired["outside"]} | (
+        {"drand"} if desired["drand"] and not desired["timestamps"] else set())
+
+
 def coherent(desired):
-    return not (desired["drand"] and not desired["timestamps"]
-                or any(desired[k] for k in ("timestamps", "notifications", "replica")) and not desired["outside"])
+    return not conflicts(desired)
 
 
 def main_account_scope(app, body):
@@ -214,7 +224,7 @@ def changes(store, limit=20):
         goal = "goal_after" in payload and payload.get("goal_before") != payload["goal_after"]
         if not diff and not goal:
             continue
-        rows.append({"seq": event["seq"], "at": event["observed_at"], "changes": diff,
+        rows.append({"seq": event["seq"], "hash": event["hash"], "at": event["observed_at"], "changes": diff,
                      **({"goal_before": payload.get("goal_before"), "goal_after": payload["goal_after"]} if goal else {}),
                      **({"restored": payload["restored"]} if payload.get("restored") else {})})
         if len(rows) >= limit:
@@ -348,7 +358,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
     async def goal_preview(body: GoalChange):
         return preview(app, body)
 
-    async def apply_values(desired, note=None, capture=None):
+    async def apply_values(desired, note=None, capture=None, keep_conflicts=False, allowed=()):
         s, c = app.state.store, app.state.collector
         before, before_capture = values(app), capture_settings(app.state.store)
         if desired["continuous"]:
@@ -356,7 +366,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                 validate_collection_scope(s)
             except ValueError as exc:
                 raise HTTPException(409, str(exc)) from None
-        if not coherent(desired):
+        if conflicts(desired) - (conflicts(before) if keep_conflicts else set()) - set(allowed):
             raise HTTPException(409, "The preserved manual settings conflict with this goal. Review external requests and timestamps.")
         if desired["replica"]:
             destination = replica.replica_settings(s)
@@ -445,12 +455,19 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             if body.revision != revision(app):
                 raise HTTPException(409, "Settings changed. Review the differences again.")
             found = app.state.store.events_of(["settings.changed"], limit=1, after=body.seq - 1, before=body.seq + 1)
-            if not found:
+            if not found or body.hash is not None and found[0]["hash"] != body.hash:
                 raise HTTPException(404, "This change is not in the journal.")
             payload = found[0]["payload"]
-            current = values(app)
-            desired = {**current, **{key: value for key, value in (payload.get("before") or {}).items() if key in KEYS}}
-            capture = payload.get("capture_before") if desired["files"] == "custom" else None
+            before, after = payload.get("before") or {}, payload.get("after") or {}
+            keys = [key for key in KEYS if key in before and key in after and before[key] != after[key]]
+            current, s = values(app), app.state.store
+            seen = {**current, "continuous": current["continuous"]
+                    or bool(s.get_setting("collection_problem", None)) and s.get_setting("collection_intent", False)}
+            goal = (s.get_setting("goal_preset", None) or {}).get("goal")
+            if any(seen[key] != after[key] for key in keys) or "goal_after" in payload and goal != payload["goal_after"]:
+                raise HTTPException(409, LATER_CHANGE)
+            desired = {**current, **{key: before[key] for key in keys}}
+            capture = payload.get("capture_before") if "files" in keys and desired["files"] == "custom" else None
             if capture is not None:
                 try:
                     capture = Capture.model_validate(capture).model_dump()
@@ -458,11 +475,13 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                     capture = None
             if desired["files"] == "custom" and capture is None:
                 desired["files"] = current["files"]
-            goal = (app.state.store.get_setting("goal_preset", None) or {}).get("goal")
+            earlier = conflicts({**current, **{key: before[key] for key in KEYS if key in before}})
+            if conflicts(desired) - conflicts(current) - earlier:
+                raise HTTPException(409, LATER_CHANGE)
             note = {"restored": body.seq}
             if "goal_after" in payload:
                 note.update(goal_before=goal, goal_after=payload.get("goal_before"))
-            await apply_values(desired, note, capture)
+            await apply_values(desired, note, capture, keep_conflicts=True, allowed=earlier)
             if "goal_after" in payload:
                 if payload.get("goal_before") in PRESETS:
                     save_goal(app.state.store, payload["goal_before"])
@@ -478,7 +497,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         async with app.state.operation_lock:
             if body.revision != revision(app):
                 raise HTTPException(409, "Settings changed. Review the differences again.")
-            await apply_values(edited(values(app), body))
+            await apply_values(edited(values(app), body), keep_conflicts=True)
         return state(app)
 
     @app.post("/api/first-run", dependencies=deps)
@@ -490,6 +509,11 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         if body.step >= 6 and not app.state.collector.status()["has_session"]:
             raise HTTPException(409, "Connect Telegram first.")
         old = wizard_state(app)
+        if body.account_kind == "main" and old.get("account_kind") != "main":
+            from .scope import scope_settings
+            collecting = app.state.collector.running or app.state.store.get_setting("resume", False)
+            if (body.goal != "copy" or collecting) and scope_settings(app.state.store)["mode"] != "selected":
+                raise HTTPException(409, WIDE_MAIN)
         app.state.store.set_setting("first_run", {**old, **body.model_dump(), "at": utcnow()})
         return state(app)
 
@@ -509,18 +533,21 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
 
     async def save_scope(body):
         from . import recording
+        from .scope import scope_settings
         c, s = app.state.collector, app.state.store
         selected = await selected_chats(body)
         with s.transaction():
-            recording.save(s, recording.RecordingUpdate(scope=ScopeUpdate(mode=body.scope,
-                folder_id=body.folder_id, acknowledged=True)))
+            saved = scope_settings(s)
+            exclude = [cid for cid in saved["exclude"] if cid not in selected] if body.scope == "selected" else saved["exclude"]
+            recording.save(s, recording.RecordingUpdate(scope=ScopeUpdate(**{**saved, "mode": body.scope,
+                "folder_id": body.folder_id, "exclude": exclude}, acknowledged=True)))
             if body.scope == "selected":
                 enabled = {chat["chat_id"] for chat in s.targets(True)}
                 for chat in s.targets():
                     s.set_target(chat["chat_id"], chat["title"], chat["kind"], chat["chat_id"] in selected)
                 for cid in selected:
                     d = c.dialog_cache[cid]
-                    s.set_target(cid, d["title"], d["kind"], True)
+                    s.set_target(cid, d["title"], d["kind"], True, origin="manual")
                 s.append("sources.selected", {"chat_ids": sorted(selected)})
                 c.request_baseline(sorted(selected - enabled))
         return selected

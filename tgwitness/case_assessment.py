@@ -63,14 +63,14 @@ CSS = """
 .evidence-conditions{margin:18px 0;overflow-x:auto}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
 .evidence-conditions table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .evidence-conditions th,.evidence-conditions td{border-top:1px solid #8894a455;padding:8px;text-align:start;vertical-align:top;overflow-wrap:break-word}
-.evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#697d99;padding-top:12px}
-.evidence-conditions tr[data-status="checked_locally"] strong{color:#2e9d5b}.evidence-conditions tr[data-status="not_included"] strong{color:#8894a4}
+.evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding-top:12px}
+.evidence-conditions tr[data-status="checked_locally"] strong{color:var(--ok,#08734a)}.evidence-conditions tr[data-status="not_included"] strong{color:var(--muted)}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.evidence-conditions thead{display:none}
 .evidence-conditions tbody,.evidence-conditions tr,.evidence-conditions th,.evidence-conditions td{display:block}
 .evidence-conditions tr{border-top:1px solid #8894a455;padding:6px 0}.evidence-conditions th,.evidence-conditions td{border:0;padding:4px 0}
-.evidence-conditions td[data-label]::before{content:attr(data-label);display:block;font-size:11px;color:#697d99}}
+.evidence-conditions td[data-label]::before{content:attr(data-label);display:block;font-size:11px;color:var(--muted)}}
 @media print{.case-assessment .assessment-grid{display:block}.assessment-item{margin-bottom:10px}.evidence-conditions{overflow:visible}}
 """
 
@@ -111,7 +111,7 @@ def condition(key, status, detail, check, **values):
 
 
 def evidence_conditions(kind, context, count=0, latest=None, signals=None):
-    archive = ("../" if context.get("archive") else "") + ARCHIVES.get(kind, "archive.zip")
+    archive = ("../" if context.get("archive") or kind == "chat" else "") + (context.get("archive_name") or ARCHIVES.get(kind, "archive.zip"))
     fp = "TRUSTED_SHA256"
     journal = kind == "evidence"
     anchors, latest = ((context.get("anchors") or []), latest) if journal else ([], None)

@@ -388,13 +388,24 @@
       const box = node('input'); box.type = 'checkbox'; box.value = String(target.chat_id);
       return el('label', 'doc-chat-pick', box, node('span', '', target.title || String(target.chat_id)));
     });
-    const scope = el('fieldset', 'doc-scope', node('legend', '', tr('Only these chats (none selected: all chats)')),
-      el('div', 'doc-chat-picks', ...picks));
+    // All chats or chosen chats is an explicit choice: an empty selection no longer stands for the widest scope.
+    const choice = (value, label) => {
+      const box = node('input'); box.type = 'radio'; box.name = 'doc-scope-mode'; box.value = value; box.checked = value === 'all';
+      return el('label', 'doc-scope-choice', box, node('span', '', label));
+    };
+    const allChats = choice('all', tr('All chats')), someChats = choice('chosen', tr('Chosen chats'));
+    const pickList = el('div', 'doc-chat-picks', ...picks); pickList.hidden = true;
+    const chosen = () => someChats.querySelector('input').checked;
+    const boxes = () => picks.map(pick => pick.querySelector('input'));
+    const validate = () => boxes()[0]?.setCustomValidity(chosen() && !boxes().some(box => box.checked) ? tr('Choose at least one chat.') : '');
+    const scope = el('fieldset', 'doc-scope', node('legend', '', tr('Which chats?')),
+      el('div', 'doc-scope-choices', allChats, someChats), pickList);
+    scope.addEventListener('change', () => {pickList.hidden = !chosen(); validate();});
     form.append(title, purpose, ...(picks.length ? [scope] : []), start,
       node('p', 'hint', tr('A draft can be paused, restarted or deleted. Only a fixed document is signed.')));
     form.addEventListener('submit', event => {event.preventDefault(); busy(start, async () => {
       const session = await json('documentation', {title: title.value, purpose: purpose.value,
-        chat_ids: picks.map(pick => pick.querySelector('input')).filter(box => box.checked).map(box => Number(box.value))});
+        chat_ids: chosen() ? boxes().filter(box => box.checked).map(box => Number(box.value)) : []});
       current = session; sessionTab = 'timeline';
       for (const chat of session.chat_ids || []) await snapshot(chat, true).catch(error => toast(error.message, true));
       await refresh();

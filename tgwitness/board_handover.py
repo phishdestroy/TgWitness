@@ -10,10 +10,15 @@ from .store import canonical, utcnow
 from .verify import board_scope, board_slice_summary
 
 
-def prepare(snapshot, records_path, vault, options, minimiser):
+def prepare(snapshot, records_path, vault, options, minimiser, people=None):
     if options.case_board == "off" or not board.head(snapshot.connection)["seq"]:
         return None
     state = board.board_replay(board.records(snapshot.connection), vault.public_key)
+    known = {"admin": {"Main administrator"}}
+    for identifier, label in (people or {}).items():
+        known.setdefault(identifier, set()).add(label)
+    for record in board.records(snapshot.connection):
+        known.setdefault(record["access_id"], set()).add(record["access_label"])
     lookup = {item["id"]: item for item in state["items"]}
     chosen = set(options.chats)
     allowed = [item for item in state["items"] if (scope := board_scope(item, lookup)) is not None and scope <= chosen]
@@ -24,17 +29,22 @@ def prepare(snapshot, records_path, vault, options, minimiser):
             item["collection_id"] = None
     identities = {}
     for item in state["items"]:
-        identities[item["created_access_id"]] = item["created_access_label"]
-        identities[item["access_id"]] = item["access_label"]
+        identities.setdefault(item["created_access_id"], set()).add(item["created_access_label"])
+        identities.setdefault(item["access_id"], set()).add(item["access_label"])
+    for item in state["items"]:
+        for identifier in item.get("mentions", []):
+            identities.setdefault(identifier, set())
     authors = {identifier: "R%02d" % (i+1) for i, identifier in enumerate(identities)}
-    names = {label: authors[identifier] for identifier, label in identities.items()}
+    names = {label: authors[identifier] for identifier, labels in identities.items()
+             for label in labels | known.get(identifier, set())}
 
-    def clean(text):
+    def clean(text, whole=False):
         text = minimiser.clean(text)
         if options.board_pseudonyms:
             for name, alias in sorted(names.items(), key=lambda item: -len(item[0])):
                 if name:
-                    text = re.sub(re.escape(name), lambda match: alias, text, flags=re.IGNORECASE)
+                    pattern = r"(?<!\w)" + re.escape(name) + r"(?!\w)" if whole else re.escape(name)
+                    text = re.sub(pattern, lambda match: alias, text, flags=re.IGNORECASE)
         return text
 
     def author(item):
@@ -79,7 +89,7 @@ def prepare(snapshot, records_path, vault, options, minimiser):
                         if item["observation"].get("minimised") or options.text == "none":
                             item["range"] = {"quote": "[highlight withheld in minimised disclosure]", "field": item["range"]["field"], "offsets_withheld": True}
                         else:
-                            item["range"]["quote"] = clean(item["range"]["quote"])
+                            item["range"]["quote"] = clean(item["range"]["quote"], whole=True)
                 else:
                     item["current"] = board_slice_summary(db, item["query"])
                     if not item["current"]["record_count"]:
