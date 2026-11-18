@@ -72,9 +72,9 @@ async function startViewer(meta){
   const seal=node?JSON.parse(node.textContent):null,descriptor=seal&&seal.statement&&seal.statement.subject&&seal.statement.subject.viewer;
   let sealOk=false,sealInvalid=false;try{const r=await opened(node.textContent);sealOk=r.ok&&r.fp===(stamp&&stamp.dataset.fp);sealInvalid=!sealOk;}catch(e){sealOk=false;}
   if(sealInvalid){setStatus("bad",say("The seal signature is not valid."));countBox.textContent="0";return;}
-  if(!descriptor||!descriptor.files||!descriptor.files.length){setStatus("warn",descriptor&&descriptor.omitted?
+  if(!descriptor||!descriptor.files||!descriptor.files.length){V.omitted=!!(descriptor&&descriptor.omitted);setStatus("warn",V.omitted?
     say("This report was saved without its data. Open report.html inside the archive for the viewer."):say("No data in this report."));
-    countBox.textContent="0";return;}
+    countBox.textContent="0";buildCheck();return;}
   const fromScript=file=>new Promise(resolve=>{
     if(!/^viewer\/[a-z0-9-]+\.html$/.test(file)){resolve(null);return;}
     const frame=document.createElement("iframe");frame.hidden=true;frame.sandbox="allow-scripts";
@@ -283,7 +283,7 @@ async function startViewer(meta){
     if(e.target.closest("a[download]"))return;
     const row=e.target.closest("[data-key]");if(!row)return;const key=row.dataset.key;
     if(e.target.classList.contains("pick")){e.target.checked?V.selected.add(key):V.selected.delete(key);row.classList.toggle("picked",e.target.checked);
-      selectionChanged(true);return;}detail(key);});
+      selectionChanged(true);if(!e.target.checked&&V.filter.only.has("selected"))refilter(true);return;}detail(key);});
   $("#v-list").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.key)detail(e.target.dataset.key);});
   function focusRow(key,index){render(Math.max(0,index-3));for(const group of $$("#v-list .v-run")){
       if(Number(group.dataset.runStart)<=index&&index<Number(group.dataset.runEnd)){expandRun(group);group.open=true;}}
@@ -348,7 +348,8 @@ async function startViewer(meta){
     box.hidden=false;box.scrollTop=0;box.setAttribute("tabindex","-1");box.setAttribute("aria-label",say("Details"));box.focus({preventScroll:true});
     box.querySelector("[data-close]").onclick=()=>{box.hidden=true;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
     box.onkeydown=e=>{if(e.key==="Escape"){e.preventDefault();box.querySelector("[data-close]").click();}};
-    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();detail(key);};
+    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
+      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);detail(key);};
     box.querySelector("[data-copy]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(it.text||"");
     box.querySelector("[data-ref]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(reference(it));}
   function goto(key){if(!V.byKey.has(key))return;let i=V.results.findIndex(x=>x.key===key);
@@ -358,6 +359,8 @@ async function startViewer(meta){
   function selectionChanged(quiet){const n=V.selected.size;$("#v-selbar").hidden=!n;$("#v-selcount").textContent=sayf("{n} selected",{n:num(n)});
     $("#v-list").classList.toggle("selecting",n>0);
     if(!quiet)for(const c of $$("#v-list .pick")){const row=c.closest("[data-key]");c.checked=V.selected.has(row.dataset.key);row.classList.toggle("picked",c.checked);}}
+  function refilter(moveFocus){apply();if(!moveFocus)return;
+    const next=$("#v-list .pick")||$('#v-only input[value="selected"]');if(next)next.focus();}
   function picked(){return V.items.filter(it=>V.selected.has(it.key));}
   function selection(action){const items=picked();
     if(action==="clear"){V.selected.clear();selectionChanged();if(V.filter.only.has("selected"))apply();return;}
@@ -417,7 +420,7 @@ async function startViewer(meta){
   function buildCheck(){const box=$("#view-check");if(!box)return;const bad=V.files.bad,missing=V.files.missing;
     box.innerHTML='<div class="v-page"><div class="v-page-head"><h2>'+esc(say("Check"))+'</h2></div><div class="v-cards">'
       +card(sealOk?"ok":"warn","shield",sealOk?"green":"orange",say("Digital signature"),sealOk?say("The seal's Ed25519 signature is valid and names the key shown in the title."):say("The seal signature could not be checked in this browser"))
-      +card(bad.length?"bad":missing.length||!sealOk?"warn":"ok","layers",bad.length?"red":missing.length||!sealOk?"orange":"green",say("Data shown here"),bad.length?sayf("{n} data files do not match the seal and are not shown",{n:bad.length})+": "+bad.join(", ")
+      +card(bad.length?"bad":missing.length||!sealOk||V.omitted?"warn":"ok","layers",bad.length?"red":missing.length||!sealOk||V.omitted?"orange":"green",say("Data shown here"),V.omitted?say("This report was saved without its data. Open report.html inside the archive for the viewer."):bad.length?sayf("{n} data files do not match the seal and are not shown",{n:bad.length})+": "+bad.join(", ")
         :missing.length?sayf("{n} data files were not found next to this page",{n:missing.length}):!sealOk?say("The seal signature could not be checked in this browser"):sayf("{n} data files match the signed seal",{n:V.files.ok}))
       +card("","file","blue",say("This page"),say("A browser does not give a page its own bytes. Check the whole archive below, or drop report.html into the seal check of the Report tab."))
       +'</div><h3>'+esc(say("Check every file of the archive"))+'</h3><p class="lead">'+esc(say("Choose the archive as it was handed over (ZIP) or its unpacked folder. The manifest's signature and the SHA-256 of every file are checked here; nothing is uploaded."))
