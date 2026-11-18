@@ -70,12 +70,12 @@ gh attestation verify "TgWitness-${VERSION}.zip" \
 gh attestation verify evidence.zip --bundle attestation.jsonl \
   --repo OWNER/TgWitness \
   --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-  --signer-digest 615e96c927841399a4720bddfa8d08f76c9173ce \
+  --signer-digest 3aedb45ce0e682d1120555165b026fd2f3bdb685 \
   --deny-self-hosted-runners
 ```
 
-Просмотрите [закреплённый рабочий процесс коллектора](https://github.com/phishdestroy/TgWitness/blob/615e96c927841399a4720bddfa8d08f76c9173ce/.github/workflows/sealed-collector.yml):
-он загружает коммит коллектора `4d6270b89ba9071bbf8f19c563b297c929814d25`. Проверенные пары
+Просмотрите [закреплённый рабочий процесс коллектора](https://github.com/phishdestroy/TgWitness/blob/3aedb45ce0e682d1120555165b026fd2f3bdb685/.github/workflows/sealed-collector.yml):
+он загружает коммит коллектора `1d07ebb19f2e0163af5805a853b88bdfe9a4a1f2`. Проверенные пары
 рабочего процесса и коллектора перечислены в [`tgwitness/sealed_policy.json`](../../tgwitness/sealed_policy.json);
 используйте пару, закреплённую вызывающим рабочим процессом вашего форка.
 Для проверки журнала, вложений, политики и охвата также запустите верификатор из установки,

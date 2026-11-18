@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- GitHub Actions capture runs the current collector: the approved workflow `3aedb45c` checks out collector
+  `1d07ebb1` instead of the 0.9.3 build of 11 November, and the pair is the newest entry of the sealed release
+  policy. Archives from earlier approved pairs still verify.
 - A mini application capture no longer lists Chromium's own sign-in and update traffic as the application's
   connections: the application runs in its own browser context behind the recording gate, and the browser's
   background requests go to a gate that refuses them. A Google host Chromium contacts on its own, and the page never
