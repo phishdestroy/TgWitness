@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- **Home** keeps the keyboard focus on the same button, for example **Add account**, when it refreshes itself every few
+  seconds. Before, the refresh rebuilt the page and dropped the focus to the document after about five seconds.
+  Focus that the user moved elsewhere in the meantime stays where it is.
 - The record viewer of a report no longer adds a record that the filters hide. When new filters leave out the record
   whose card is open, the card closes; **Select** in a card works only for a shown record, while records chosen
   before the filters changed stay selected. **Go to #** opens exactly the number typed and otherwise says whether
