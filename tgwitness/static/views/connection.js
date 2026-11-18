@@ -1,7 +1,7 @@
 export function createConnectionView({root, tr, json, state, refreshStatus, askConfirm, formatTime}) {
   const get = id => root.querySelector('#' + id);
   const el = (tag, text, cls) => { const n = document.createElement(tag); if(text)n.textContent=text; if(cls)n.className=cls; return n; };
-  let generation=0, draftRevision=0, loads=0, timer=null, data=null, draft=null, plan=null, planRows=[], mode='warp', visible=false, pending=null, touched=false;
+  let generation=0, draftRevision=0, loads=0, timer=null, data=null, draft=null, plan=null, planRows=[], mode='warp', visible=false, pending=null, touched=false, outsideKept=null;
   const number=value=>Number(value).toLocaleString(document.documentElement.lang||undefined);
   const sameSelection=(a,b)=>JSON.stringify({...a,accept_setup:false})===JSON.stringify({...b,accept_setup:false});
   const single=()=>get('connect-scope').value==='account';
@@ -28,7 +28,9 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     get('connect-proxy-fields').hidden=mode!=='proxy';get('connect-vpn-fields').hidden=mode!=='vpn';
     get('connect-setup-fields').hidden=!['warp','vpn'].includes(mode);
     get('connect-warp-note').hidden=mode!=='warp';
-    get('connect-outside').disabled=mode==='mtproxy';
+    const outside=get('connect-outside');
+    if(mode==='mtproxy'){if(outsideKept===null)outsideKept=outside.checked;outside.checked=false;outside.disabled=true;}
+    else{if(outsideKept!==null){outside.checked=outsideKept;outsideKept=null;}outside.disabled=false;}
     get('connect-step').textContent=tr('1. Choose a route');
   }
   function readDraft(){
@@ -125,7 +127,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   }
   for(const b of root.querySelectorAll('[data-connect-mode]'))b.addEventListener('click',()=>{touched=true;choose(b.dataset.connectMode);});
   get('connect-fields').addEventListener('input',event=>{if(event.target.id!=='connect-consent')invalidate();});
-  get('connect-fields').addEventListener('change',event=>{if(event.target.id!=='connect-consent')invalidate();});
+  get('connect-fields').addEventListener('change',event=>{if(!['connect-consent','connect-proxy-url'].includes(event.target.id))invalidate();});
   get('connect-scope').addEventListener('change',()=>{
     get('connect-group-wrap').hidden=get('connect-scope').value!=='group';
     get('connect-keep-wrap').hidden=get('connect-scope').value==='account';
@@ -136,13 +138,15 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   });
   get('connect-proxy-url').addEventListener('change',()=>{
     try{
-      const u=new URL(get('connect-proxy-url').value),kind={ 'socks5:':'socks5','socks5h:':'socks5','http:':'http'}[u.protocol];
-      if(!kind||!u.hostname||!u.port||u.search||u.hash||(u.pathname&&u.pathname!=='/'))throw new Error(tr('Enter a SOCKS5 or HTTP proxy URL with a port.'));
-      get('connect-proxy-kind').value=kind;get('connect-host').value=u.hostname.replace(/^\[|\]$/g,'');get('connect-port').value=u.port;
+      const raw=get('connect-proxy-url').value.trim(),u=new URL(raw),kind={ 'socks5:':'socks5','socks5h:':'socks5','http:':'http'}[u.protocol];
+      // URL drops a scheme's default port (http://host:80 gives port ""), so read an explicit port from the text itself.
+      const port=u.port||(raw.match(/^[a-z0-9+.-]+:\/\/(?:[^@/?#]*@)?(?:\[[^\]]*\]|[^:/?#]*):(\d{1,5})(?:[/?#]|$)/i)||[])[1]||'';
+      if(!kind||!u.hostname||!port||Number(port)<1||Number(port)>65535||u.search||u.hash||(u.pathname&&u.pathname!=='/'))throw new Error(tr('Enter a SOCKS5 or HTTP proxy URL with a port.'));
+      get('connect-proxy-kind').value=kind;get('connect-host').value=u.hostname.replace(/^\[|\]$/g,'');get('connect-port').value=String(Number(port));
       get('connect-user').value=decodeURIComponent(u.username);get('connect-password').value=decodeURIComponent(u.password);
       get('connect-secret').value='';get('connect-secret-wrap').hidden=true;get('connect-login-fields').hidden=false;
       get('connect-proxy-url').value='';invalidate();
-    }catch{status(tr('Enter a SOCKS5 or HTTP proxy URL with a port.'),true);}
+    }catch{invalidate();status(tr('Enter a SOCKS5 or HTTP proxy URL with a port.'),true);}
   });
   get('connect-preview').addEventListener('click',e=>action(e.currentTarget,async stamp=>{
     const revision=draftRevision,body=readDraft(),preview=await json('connection/preview',body,{root:true});

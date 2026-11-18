@@ -171,7 +171,7 @@ def listing(store, *, principal=None, profile_id=None):
 
 def headers(entry):
     return {"X-TgWitness-Export-SHA256": entry["sha256"], "X-TgWitness-Export-Created": entry["created_at"],
-            "X-TgWitness-Export-ID": entry["id"]}
+            "X-TgWitness-Export-ID": entry["id"], "X-TgWitness-Export-Kept": "no" if entry.get("cache_warning") else "yes"}
 
 
 def valid_id(ident):
