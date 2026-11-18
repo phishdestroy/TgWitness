@@ -153,10 +153,11 @@
   async function removeWorkspace(){
     const profile=state.profile,revision=state.workspaceRevision,p=state.profiles.find(entry=>entry.id===profile);
     if(!p||profile==="default")return;
+    const kept=await confirmKeptCopy(p);if(kept===null)return;
     if(!(await askTyped(tr("Delete \"{name}\" permanently? This stops its collector and erases its journal, sources, signing key and the copy of its session kept here. The session stays active in Telegram: deleting does not sign it out. This cannot be undone.",{name:p.label}),p.label,
       {title:tr("Delete workspace"),confirmText:tr("Delete workspace")})))return;
     if(profile!==state.profile||revision!==state.workspaceRevision)throw new StaleView();
-    try{await api("profiles/"+encodeURIComponent(profile),undefined,{root:true,method:"DELETE"});}
+    try{await api("profiles/"+encodeURIComponent(profile)+(kept?"?kept_copy="+encodeURIComponent(kept):""),undefined,{root:true,method:"DELETE"});}
     catch(error){await loadProfiles().catch(()=>{});throw error;}
     await switchProfile("default");toast(tr("Workspace deleted."));
   }
