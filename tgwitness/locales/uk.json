@@ -10236,7 +10236,7 @@
   "checksum valid": "контрольна сума правильна",
   "Other hosts it contacted": "Інші хости, до яких він звертався",
   "Dialogs it showed": "Діалоги, які він показав",
-  "Windows it opened": "Вікна, які він відкрив",
+  "Windows it tried to open": "Вікна, які він намагався відкрити",
   "Downloads it started": "Завантаження, які він почав",
   "Forms": "Форми",
   "Input fields": "Поля введення",

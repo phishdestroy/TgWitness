@@ -10134,7 +10134,7 @@
   "checksum valid": "nazorat yig‘indisi to‘g‘ri",
   "Other hosts it contacted": "U bog‘langan boshqa xostlar",
   "Dialogs it showed": "U ko‘rsatgan dialoglar",
-  "Windows it opened": "U ochgan oynalar",
+  "Windows it tried to open": "U ochmoqchi bo‘lgan oynalar",
   "Downloads it started": "U boshlagan yuklab olishlar",
   "Forms": "Shakllar",
   "Input fields": "Kiritish maydonlari",

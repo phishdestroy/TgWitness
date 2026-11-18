@@ -5607,7 +5607,7 @@ async function openSecretChat(id,start=false){
   if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
   if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
 }
-const chatListReady=import('./views/chat-list.js?v=telegram2').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=telegram3').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
     adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),
@@ -5914,7 +5914,7 @@ personCardHost.addEventListener('keydown',event=>{if(event.key==='Escape'){event
 window.addEventListener('tgwitness:lock',closePersonCard);
 const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors'],['miniapps','Mini apps']];
 let miniAppsView=null;
-const miniAppsReady=()=>miniAppsView?Promise.resolve(miniAppsView):import("./views/mini-apps.js?v=1").then(({createMiniApps})=>miniAppsView=createMiniApps({
+const miniAppsReady=()=>miniAppsView?Promise.resolve(miniAppsView):import("./views/mini-apps.js?v=2").then(({createMiniApps})=>miniAppsView=createMiniApps({
   node,icon,tr,json,busy,confirm:(message,options)=>askConfirm(message,options),toast,fmtFull,isAdmin:()=>!!state.me?.admin,
   may:permission=>may(permission)&&!state.status?.demo&&!!state.status?.collector?.has_session,
   preview:path=>api(path).then(r=>r.ok?r.blob():null).then(b=>b&&URL.createObjectURL(b)),mask:value=>window.TgWitnessPrivacy.preview(value),

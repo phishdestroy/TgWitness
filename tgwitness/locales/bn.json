@@ -10134,7 +10134,7 @@
   "checksum valid": "চেকসাম বৈধ",
   "Other hosts it contacted": "অন্য যেসব হোস্টে এটি যোগাযোগ করেছে",
   "Dialogs it showed": "এটি যেসব ডায়ালগ দেখিয়েছে",
-  "Windows it opened": "এটি যেসব উইন্ডো খুলেছে",
+  "Windows it tried to open": "এটি যেসব উইন্ডো খুলতে চেয়েছে",
   "Downloads it started": "এটি যেসব ডাউনলোড শুরু করেছে",
   "Forms": "ফর্ম",
   "Input fields": "ইনপুট ফিল্ড",

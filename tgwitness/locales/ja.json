@@ -10083,7 +10083,7 @@
   "checksum valid": "チェックサム有効",
   "Other hosts it contacted": "接続した他のホスト",
   "Dialogs it showed": "表示したダイアログ",
-  "Windows it opened": "開いたウィンドウ",
+  "Windows it tried to open": "開こうとしたウィンドウ",
   "Downloads it started": "開始したダウンロード",
   "Forms": "フォーム",
   "Input fields": "入力欄",

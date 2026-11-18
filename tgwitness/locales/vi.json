@@ -10083,7 +10083,7 @@
   "checksum valid": "checksum hợp lệ",
   "Other hosts it contacted": "Máy chủ khác nó đã liên hệ",
   "Dialogs it showed": "Hộp thoại nó đã hiển thị",
-  "Windows it opened": "Cửa sổ nó đã mở",
+  "Windows it tried to open": "Cửa sổ nó đã cố mở",
   "Downloads it started": "Lượt tải xuống nó đã bắt đầu",
   "Forms": "Biểu mẫu",
   "Input fields": "Ô nhập liệu",

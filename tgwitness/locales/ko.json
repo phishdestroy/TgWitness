@@ -10083,7 +10083,7 @@
   "checksum valid": "체크섬 유효",
   "Other hosts it contacted": "연결한 다른 호스트",
   "Dialogs it showed": "표시한 대화 상자",
-  "Windows it opened": "연 창",
+  "Windows it tried to open": "열려고 한 창",
   "Downloads it started": "시작한 다운로드",
   "Forms": "양식",
   "Input fields": "입력란",
