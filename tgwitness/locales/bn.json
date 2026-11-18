@@ -10301,5 +10301,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "আমি বুঝি: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকে এবং কিছুই মুছে যায় না।",
   "A mode sets the protection target. The status of each layer is below.": "মোড সুরক্ষার লক্ষ্য ঠিক করে। প্রতিটি স্তরের অবস্থা নিচে দেখানো আছে।",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "নিম্ন মোড নিশ্চিত করুন: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকবে এবং কিছুই মুছে যাবে না।",
-  "Connected · no chats chosen": "সংযুক্ত · কোনো চ্যাট বেছে নেওয়া হয়নি"
+  "Connected · no chats chosen": "সংযুক্ত · কোনো চ্যাট বেছে নেওয়া হয়নি",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "এক্সট্র্যাক্ট করা ফোল্ডারে এই কমান্ডগুলো চালান; প্রাপ্ত ফাইল {name} যেন তার মূল ফোল্ডারে থাকে।",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "ফাইলটি অন্য নামে সংরক্ষিত হলে, যেমন ব্রাউজার নাম বদলালে, এই কমান্ডগুলোতে সেই নামটি ব্যবহার করুন।"
 }

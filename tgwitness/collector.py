@@ -5055,12 +5055,12 @@ class Collector:
                                     "clock_at_start": clock, "clock_at_end": await self.telegram_clock()}}
             meta["acquisition"]["sessions"] = partial.sessions(meta["acquisition"]["finished_at"])
             names = await complete_in_thread(chat_export.journal_names, self.store, chat_id, scratch)
+            filename = chat_export.archive_name(self.store, chat_id, info.get("title"))
             await complete_in_thread(chat_export.build_bundle, scratch, meta, self.vault, out_path,
-                                    self.param("export_max_gib") * 1024**3, report_options, media_dir, names)
+                                    self.param("export_max_gib") * 1024**3, report_options, media_dir, names, filename)
             replica.outbox(self.store, out_path)
             self.export_path = out_path
-            record.update(phase="done", captured=count, ready=True,
-                          filename=chat_export.archive_name(self.store, chat_id, info.get("title")))
+            record.update(phase="done", captured=count, ready=True, filename=filename)
             self.store.append("chat_export.completed", {"chat_id": chat_id, "message_count": count,
                 "fingerprint": fingerprint(self.vault.public_key),
                 "reconstructed_missed_events": False, "sessions": len(meta["acquisition"]["sessions"])}, chat_id)
@@ -5103,6 +5103,7 @@ class Collector:
                 try:
                     journal = await complete_in_thread(chat_export.journal_changes, self.store, chat_id,
                                                        partial.directory)
+                    filename = chat_export.archive_name(self.store, chat_id, info.get("title")).removesuffix(".zip") + "_partial.zip"
                     await complete_in_thread(partial.bundle, out_path, {
                         "chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind"),
                                  "visibility": info.get("visibility"), "profile": profile,
@@ -5112,11 +5113,10 @@ class Collector:
                         "route": self.route_receipt(),
                         "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),
                                         "files": record.get("files") or "workspace_settings", "clock_at_start": clock}},
-                        self.param("export_max_gib") * 1024**3, report_options)
+                        self.param("export_max_gib") * 1024**3, report_options, filename)
                     replica.outbox(self.store, out_path)
                     self.export_path = out_path
-                    record.update(ready=True, filename=chat_export.archive_name(
-                        self.store, chat_id, info.get("title")).removesuffix(".zip") + "_partial.zip")
+                    record.update(ready=True, filename=filename)
                 except Exception as error:
                     record["partial"]["archive_error"] = type(error).__name__
                     with suppress(OSError):

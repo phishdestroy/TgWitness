@@ -257,7 +257,9 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                        "head_hash": result["head_hash"], "events_sha256": journal_bytes.hexdigest(),
                        "digest": summary, "anchors": [], "files": {},
                        "account": store.get_setting("account", None), "archive": fmt == "zip", "sign": vault.sign,
-                       "events_again": snapshot.events, "journal_verified": True}
+                       "events_again": snapshot.events, "journal_verified": True,
+                       # The verify commands inside name the file as it is delivered: the ASiC-E container or the ZIP.
+                       "archive_name": "tgwitness-evidence.asice" if container is not None else "tgwitness-evidence.zip"}
             if board_export:
                 from . import board_report
                 context["case_board"] = board_report.material(snapshot.connection, board_export["statement"], options,

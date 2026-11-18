@@ -10403,5 +10403,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Я розумію: запис і підписання залишаються незмінними, і нічого не видаляється.",
   "A mode sets the protection target. The status of each layer is below.": "Режим задає мету захисту. Стан кожного рівня — нижче.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Підтвердіть перехід на нижчий режим: запис і підписання залишаються незмінними, і нічого не видаляється.",
-  "Connected · no chats chosen": "Підключено · чати не вибрано"
+  "Connected · no chats chosen": "Підключено · чати не вибрано",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Виконуйте команди з розпакованої теки; отриманий файл {name} має бути на рівень вище.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Якщо файл збережено під іншим ім'ям, наприклад браузером, підставте це ім'я в команди."
 }

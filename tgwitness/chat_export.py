@@ -154,7 +154,8 @@ def archive_name(store, chat_id, title):
     now = datetime.now(timezone.utc)
     number = store.count_events(chat_id=chat_id, kind="chat_export.completed",
                                 since=now.replace(hour=0, minute=0, second=0, microsecond=0)) + 1
-    name = "".join("_" if unicodedata.category(c)[0] in "CZ" or c in '<>:"/\\|?*' else c for c in title or "")
+    # Letters, digits and marks of any script plus . _ -: the name is safe to paste into a shell command unquoted.
+    name = "".join(c if unicodedata.category(c)[0] in "LNM" or c in "._-" else "_" for c in title or "")
     name = re.sub("_+", "_", name).encode()[:100].decode(errors="ignore").strip("._- ")
     return (name or "chat_" + str(chat_id)) + "_" + now.date().isoformat() + "_" + str(number) + ".zip"
 
@@ -358,7 +359,7 @@ def attachment_files(media_dir):
 
 
 def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES, options=None, media_dir=None,
-                 names=None):
+                 names=None, archive_name=None):
     options, names = options or report.resolved(), names or {}
     meta = {"format": "tgwitness-chat-export-v1", "exported_at": utcnow(),
             "public_key": vault.public_key, "fingerprint": fingerprint(vault.public_key),
@@ -468,7 +469,7 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
                        "stats": stats, "analytics": analytics, "chat_json_sha256": hashes["chat.json"], "message_ids": ids,
                        "account": meta.get("account"), "sign": vault.sign, "indicators": found,
                        "admin_events": admin_events, "journal_changes": journal_shown,
-                       "journal_knowledge": knowledge}
+                       "journal_knowledge": knowledge, **({"archive_name": archive_name} if archive_name else {})}
             write_indicators(write_member, found, context)
             write_member("custody.json", [json.dumps(report.custody(context), ensure_ascii=False,
                                                      indent=1).encode("utf-8")])
@@ -722,7 +723,7 @@ class PartialExport:
         forget_files(self.media)
         shutil.rmtree(self.directory, ignore_errors=True)
 
-    def bundle(self, out_path, meta, max_bytes=MAX_BUNDLE_BYTES, options=None):
+    def bundle(self, out_path, meta, max_bytes=MAX_BUNDLE_BYTES, options=None, archive_name=None):
         statement = self.statement
         path = self.directory / statement["file"]
         meta = {**meta, "message_count": statement["messages"],
@@ -731,4 +732,4 @@ class PartialExport:
                             "scope": PARTIAL_SCOPE.format(low=statement["low"], high=statement["high"])},
                 "acquisition": {**(meta.get("acquisition") or {}), "sessions": statement["sessions"]}}
         return build_bundle(path, meta, self.vault, out_path, max_bytes, options, self.media,
-                            journal_names(self.store, self.chat_id, path))
+                            journal_names(self.store, self.chat_id, path), archive_name)

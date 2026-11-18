@@ -10250,5 +10250,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "我明白了：录制和签名保持不变，不会删除任何内容。",
   "A mode sets the protection target. The status of each layer is below.": "模式设定保护目标。各层状态见下方。",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "确认切换至较低模式：录制和签名保持不变，不会删除任何内容。",
-  "Connected · no chats chosen": "已连接 · 尚未选择聊天"
+  "Connected · no chats chosen": "已连接 · 尚未选择聊天",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "请在解压后的文件夹中运行这些命令，并将收到的文件 {name} 保留在其上级文件夹中。",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "如果文件以其他名称保存（例如被浏览器重命名），请在这些命令中使用该名称。"
 }

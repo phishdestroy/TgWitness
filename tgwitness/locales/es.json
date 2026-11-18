@@ -10311,5 +10311,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Entiendo que la grabación y la firma no cambian y que no se borra nada.",
   "A mode sets the protection target. The status of each layer is below.": "Un modo fija el objetivo de protección. El estado de cada capa aparece abajo.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Confirma el modo inferior: la grabación y la firma no cambian y no se borra nada.",
-  "Connected · no chats chosen": "Conectado · no se eligió ningún chat"
+  "Connected · no chats chosen": "Conectado · no se eligió ningún chat",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Ejecuta estos comandos en la carpeta extraída, con el archivo recibido {name} en su carpeta superior.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Si el archivo se guardó con otro nombre, por ejemplo por el navegador, usa ese nombre en estos comandos."
 }
