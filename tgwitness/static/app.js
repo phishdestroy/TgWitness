@@ -4745,7 +4745,8 @@ function renderVerification(){
     [stamped,tr("2. Independent time"),tr("A third party confirms the records existed by a given time. Needed for others to accept the record."),
       (stamped==="ok"?tr("The latest timestamp receipt covers records 1–{n}.",{n:c.stamped_through})
         :stamped==="part"?tr("The latest timestamp receipt covers records 1–{n} of {total}; the next timestamped checkpoint covers the later ones.",{n:c.stamped_through,total:last})
-        :c.timestamps?tr("Evidence mode is on; the next checkpoint will be timestamped.")
+        :c.timestamps&&c.timestamp_state?.reason==="route"?tr("Timestamps are on, but requests outside Telegram are turned off, so no timestamp can be requested.")
+        :c.timestamps?tr("Timestamps are on; no receipt covers the records yet. Waiting for the timestamp service to answer.")
         :tr("Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date)."))+
       (c.witness_at?" "+tr("A witness fetched the signed journal head at {time}.",{time:fmtFull(c.witness_at)}):"")],
     ["step",tr("3. Attested collection"),tr("An attested server confirms the published code collected the records. For courts and disputes."),
@@ -4762,6 +4763,7 @@ function renderVerification(){
     ?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), a recipient can meet the minimum for evidence.")
     :stamped==="part"?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), the minimum covers records 1–{n}; later records need the next timestamp.",{n:c.stamped_through})
     :c.witness_at?tr("With the collector fingerprint, the witness journal export and its public channel (--channel https://t.me/s/…), a recipient can meet the minimum when Telegram dated a witness post at the export head.")
+    :c.timestamps?tr("Integrity only until a timestamp receipt covers the last record.")
     :tr("Integrity only: turn on Evidence mode or connect a witness bot that posts to a public channel.")));
 }
 $("verify-journal").addEventListener("click",e=>busy(e.currentTarget,async()=>{
