@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout18').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -2504,7 +2504,7 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=5").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=6").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
@@ -7427,7 +7427,8 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
 });});
 $("panel-key-rotate").addEventListener("click",event=>busy(event.currentTarget,async()=>{
   let owner=actionOwner();
-  if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),{danger:true})))return;
+  if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),
+    {danger:true,title:tr("Reissue administrator key"),confirmText:tr("Reissue administrator key")})))return;
   if(!owner.current())return;
   const inert=$("workspace").inert;
   window.TgWitnessLive?.stop();state.workspaceRevision++;owner=actionOwner();$("workspace").inert=true;

@@ -73,6 +73,19 @@
   is written and names the limit, instead of writing the whole archive and then reporting a failed verification. The
   pseudo-secret description no longer says that every file is saved: a file waits while downloads are off or its
   size or free disk space stops it, and each deferred or failed download is recorded.
+- Undoing an entry in **Recent changes** brings back only the settings that entry changed. Before, it brought back
+  every setting saved with the entry, so a later change of another setting was reverted as well, a custom file rule
+  made in Sources was replaced, and observation started from the main screen could stop. When a later change touched
+  the same settings, the undo is refused and nothing changes. An undo now names its journal record by number and hash,
+  and after a workspace switch Settings no longer lists or undoes the previous workspace's changes. A settings edit or
+  its undo is no longer refused because timestamps were on while requests outside Telegram were off, as in a new
+  workspace before a goal is chosen. The Sources recording form keeps a media type's own action, such as hashes only or
+  exclude, where any save used to drop it, and no longer shows unsaved changes right after loading. An unchecked proxy
+  address stays in the connection form when the server address question or another setting there changes, and focus
+  stays on that question. Finishing a first setup opened again from Settings says that nothing new was started and
+  opens Exports or Home, instead of showing the recording check as done. The administrator key reissue confirmation is
+  titled with the operation and announces its warning, and a cancelled confirmation returns focus to the button that
+  opened it.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a

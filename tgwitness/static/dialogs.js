@@ -1,10 +1,11 @@
 (() => {
   const t = (text, vars) => (typeof tr === "function" ? tr(text, vars) : text);
   const active = new Set();
+  let serial = 0;
 
   function open({title, message, danger, confirmText, field, expected, choices, choicesLabel, alternative}) {
     return new Promise(resolve => {
-      const dialog = document.createElement("dialog");
+      const dialog = document.createElement("dialog"), opener = document.activeElement, id = "panel-dialog-" + ++serial;
       dialog.className = "export-dialog panel-dialog";
       dialog.setAttribute("aria-labelledby", "panel-dialog-title");
       const form = document.createElement("form");
@@ -13,12 +14,16 @@
       heading.id = "panel-dialog-title";
       heading.textContent = title || t(danger ? "Please confirm" : "Confirm");
       form.append(heading);
+      const described = [];
       for (const part of String(message || "").split("\n\n").filter(Boolean)) {
         const paragraph = document.createElement("p");
         paragraph.className = "panel-dialog-text";
+        paragraph.id = id + "-text-" + described.length;
         paragraph.textContent = part;
         form.append(paragraph);
+        described.push(paragraph.id);
       }
+      if (described.length) dialog.setAttribute("aria-describedby", described.join(" "));
       let input = null;
       if (field) {
         const label = document.createElement("label");
@@ -95,6 +100,11 @@
         else if (expected !== undefined) resolve(result === expected);
         else if (choices) resolve(Array.isArray(result) ? result : null);
         else resolve(input ? result : result === true);
+        // A command that waits on the dialog is usually disabled meanwhile, so the browser cannot return focus to it.
+        setTimeout(() => {
+          if (opener && opener !== document.body && opener.isConnected && !opener.disabled &&
+              (!document.activeElement || document.activeElement === document.body)) opener.focus({preventScroll: true});
+        });
       });
       document.body.append(dialog);
       ready();
