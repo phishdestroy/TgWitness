@@ -36,6 +36,10 @@
   cannot be used now clears the prepared plan and keeps its error visible after the field loses focus. With
   **Public MTProto** the external-requests box shows what is sent — off — instead of a checked, disabled box, and the
   earlier choice comes back when another route is chosen.
+- A deletion notice no longer leads to the statement that this account did not delete the message. Telegram's
+  notice names no one, and the rights and session checks it was compared with can be up to 24 hours and 10 minutes
+  old. New records keep the deleting account unknown with the attribution `not_named` and state the last rights or
+  session check with its age; reports and the panel word older `peer_or_admin` records the same way.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
