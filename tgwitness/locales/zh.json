@@ -10210,5 +10210,8 @@
   "Select and copy the link.": "请选择并复制链接。",
   "Global search": "全局搜索",
   "Checkpoint not timestamped": "检查点未获得时间戳",
-  "Checkpoint timestamp pending": "检查点时间戳待确认"
+  "Checkpoint timestamp pending": "检查点时间戳待确认",
+  "Strict: read only the chosen chats": "严格：只读取选定的聊天",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness 不读取 Telegram 服务通知（777000）、账户的会话列表或其两步验证状态，开启聊天时不读取其先前的消息，不更改账户的敏感内容设置，也不记录通话更新。会话劫持检查保持关闭。开始时仍会读取聊天列表以找到选定的聊天。请在登录前开启。",
+  "Strict chosen chats: the account's session list is not read.": "严格的选定聊天：不读取账户的会话列表。"
 }

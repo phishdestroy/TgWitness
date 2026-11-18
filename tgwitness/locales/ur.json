@@ -10261,5 +10261,8 @@
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
   "Global search": "عالمی تلاش",
   "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
-  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا",
+  "Strict: read only the chosen chats": "سخت: صرف منتخب کی گئی چیٹس پڑھیں",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness، Telegram کی سروس اطلاعات (777000)، اکاؤنٹ کے سیشنز کی فہرست یا اس کی دو مرحلوں والی تصدیق کی حالت نہیں پڑھتا، کسی چیٹ کو آن کرنے پر اس کے پچھلے پیغامات نہیں پڑھتا، اکاؤنٹ کی حساس مواد کی ترتیب نہیں بدلتا اور فون کال کی اپ ڈیٹس ریکارڈ نہیں کرتا۔ سیشن پر قبضے کی جانچیں بند رہتی ہیں۔ منتخب کی گئی چیٹس تلاش کرنے کے لیے شروع میں چیٹ فہرست پھر بھی پڑھی جاتی ہے۔ سائن ان کرنے سے پہلے اسے آن کریں۔",
+  "Strict chosen chats: the account's session list is not read.": "سخت منتخب کی گئی چیٹس: اکاؤنٹ کے سیشنز کی فہرست نہیں پڑھی جاتی۔"
 }

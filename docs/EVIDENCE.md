@@ -489,7 +489,9 @@ Every signed ZIP carries `coverage.json`, the HTML report opens with the same su
   also reports where the Telegram session key came from, other sessions signed in when
   observation started, sessions added during observation, Telegram security notices
   (777000), other sessions ended from the workspace, only-session periods, witness probe
-  counts and phone call updates. See [accounts](ACCOUNTS.md#witness-probe).
+  counts and phone call updates. See [accounts](ACCOUNTS.md#witness-probe). While
+  [strict chosen chats](COLLECTION.md#strict-chosen-chats) is on (`scope.strict` in `observation.started`), the
+  session list, security notices and phone call updates are not collected, so their absence says nothing.
 
 ### Update sequence (`pts`)
 

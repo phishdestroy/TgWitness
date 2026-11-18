@@ -10210,5 +10210,8 @@
   "Select and copy the link.": "Chọn và sao chép liên kết.",
   "Global search": "Tìm kiếm toàn cầu",
   "Checkpoint not timestamped": "Điểm kiểm tra chưa được đóng dấu thời gian",
-  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận"
+  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận",
+  "Strict: read only the chosen chats": "Nghiêm ngặt: chỉ đọc các cuộc trò chuyện đã chọn",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness không đọc thông báo dịch vụ của Telegram (777000), danh sách phiên của tài khoản hay trạng thái xác minh hai bước, không đọc tin nhắn trước đó của một cuộc trò chuyện khi bạn bật nó, không thay đổi cài đặt nội dung nhạy cảm của tài khoản và không ghi lại cập nhật cuộc gọi điện thoại. Các kiểm tra chiếm đoạt phiên vẫn tắt. Danh sách cuộc trò chuyện vẫn được đọc khi bắt đầu để tìm các cuộc trò chuyện đã chọn. Hãy bật trước khi đăng nhập.",
+  "Strict chosen chats: the account's session list is not read.": "Các cuộc trò chuyện đã chọn ở chế độ nghiêm ngặt: không đọc danh sách phiên của tài khoản."
 }

@@ -115,6 +115,14 @@ before collection, and are shown under the connection details with their time.
 tokens or API hashes. They never accept terms or install updates. A request
 failure or FloodWait stops subsequent requests; a missing result stays unknown.
 Local checks can still report their results while network checks are skipped.
+With [strict chosen chats](COLLECTION.md#strict-chosen-chats) on, the current
+authorization is not requested and that check is shown as skipped.
+
+After sign-in and on each new connection, TgWitness reads the account's sensitive
+content setting. When it is off and Telegram allows the change, TgWitness turns it on
+so that content Telegram marks as sensitive (18+) is saved, and records
+`account.content_settings`. The setting belongs to the account and applies in every
+Telegram app. Strict chosen chats leaves it untouched; turn that on before signing in.
 
 Concurrent requests to restore one workspace's connection share its client and
 wait for its connection setup to finish. A failed or cancelled attempt releases

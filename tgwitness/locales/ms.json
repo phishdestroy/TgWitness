@@ -10210,5 +10210,8 @@
   "Select and copy the link.": "Pilih dan salin pautan.",
   "Global search": "Carian global",
   "Checkpoint not timestamped": "Titik semak tidak dicap masa",
-  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan"
+  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan",
+  "Strict: read only the chosen chats": "Ketat: baca perbualan terpilih sahaja",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness tidak membaca pemberitahuan perkhidmatan Telegram (777000), senarai sesi akaun atau status pengesahan dua langkahnya, tidak membaca mesej terdahulu sesuatu perbualan apabila anda menghidupkannya, tidak menukar tetapan kandungan sensitif akaun dan tidak merekod kemas kini panggilan telefon. Semakan pengambilalihan sesi kekal dimatikan. Senarai perbualan masih dibaca semasa mula untuk mencari perbualan terpilih. Hidupkannya sebelum log masuk.",
+  "Strict chosen chats: the account's session list is not read.": "Perbualan terpilih secara ketat: senarai sesi akaun tidak dibaca."
 }

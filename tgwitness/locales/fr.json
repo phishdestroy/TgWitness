@@ -10271,5 +10271,8 @@
   "Select and copy the link.": "Sélectionnez et copiez le lien.",
   "Global search": "Recherche globale",
   "Checkpoint not timestamped": "Point de contrôle non horodaté",
-  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente"
+  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente",
+  "Strict: read only the chosen chats": "Strict : lire uniquement les discussions sélectionnées",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness ne lit ni les notifications de service de Telegram (777000), ni la liste des sessions du compte, ni l’état de sa validation en deux étapes, ne lit pas les messages antérieurs d’une discussion quand vous l’activez, ne modifie pas le réglage de contenu sensible du compte et n’enregistre pas les mises à jour d’appels. Les contrôles de prise de contrôle de session restent désactivés. La liste des discussions est toujours lue au démarrage pour trouver les discussions sélectionnées. Activez-le avant de vous connecter.",
+  "Strict chosen chats: the account's session list is not read.": "Discussions sélectionnées en mode strict : la liste des sessions du compte n’est pas lue."
 }

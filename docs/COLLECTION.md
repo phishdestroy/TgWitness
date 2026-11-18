@@ -98,6 +98,43 @@ Scope of these modes:
 - More chats mean more requests. Telegram restricts accounts for volume it considers
   excessive, which is one more reason to use dedicated accounts.
 
+### Strict chosen chats
+
+**Strict: read only the chosen chats** appears under **Chosen chats** and is off by default. It is meant for
+a permission that covers the chosen chats only. While it is on:
+
+- Telegram's service notifications (777000) are not read: not when observation starts or stops and not every
+  minute while observing. No `session.security_baseline` or `account.security_event` records are written.
+- The account's session list is not read: not when observation starts or stops, not every two minutes while
+  observing, not when a connection opens, and not by the connection check, whose *Current authorization* entry
+  is shown as skipped. The two-step verification status used by the takeover check is not read either. So
+  `account.sessions`, `session.concurrent_at_start` and `session.takeover_risk` are not written, and a session
+  ended from another device is not reported as `session_revoked_externally`.
+- Turning a chat on does not read its earlier messages. Without the switch, each chat turned on (in Sources, in
+  Chats, by joining from the panel or in the setup wizard) gets one `baseline` snapshot of its latest messages,
+  up to **More tools → Parameters → Largest history snapshot** (500 by default), when observation next runs.
+  A waiting snapshot that comes due while the switch is on is dropped. A chat joined from the panel does not get
+  its latest messages read as a new chat either (the **When a new chat or bot appears** count, 100 by default),
+  and opening a chosen chat with no saved messages in Chats does not load its last 100 messages by itself.
+  **Load history** and snapshots you start yourself still read history.
+- The account's sensitive content setting is neither read nor changed. Without the switch, sign-in and each new
+  connection turn it on when it is off and Telegram allows the change (`account.content_settings`); the setting
+  belongs to the account and applies in every Telegram app. Content Telegram marks as sensitive may stay hidden.
+- Phone call updates are not recorded as `account.phone_call`.
+- Stopping observation writes only the session key fingerprint; it does not read the session list or 777000.
+
+It does not narrow what Telegram sends: updates of every chat still reach this session, and only the chosen
+chats are recorded. The account's chat list (up to **Chats read from the account's list**) and its folders are
+still read at start, and again when the scope is saved while observing, to find the chosen chats. Deletion
+notices without a chat (`deletion.unscoped`) are still recorded: they carry message IDs only and may belong to
+a chosen private chat or ordinary group. The frozen-account check (`help.getAppConfig`), the other connection
+checks, and features you turn on yourself (ending other sessions automatically, the witness probe,
+pseudo-secret chats, **Sessions of this account**) keep working.
+
+Turn it on before signing in; otherwise sign-in itself checks the current authorization and turns on sensitive
+content. Each change is a signed `scope.changed` record, and `observation.started` carries the value as
+`scope.strict`. Switching to a folder or the whole account turns it off.
+
 ## Scope and event selection
 
 Each workspace has its own sources. TgWitness does not join groups, accept
@@ -309,7 +346,8 @@ that notification; admin-log and interaction records retain their own attributio
 A snapshot requests the latest visible messages from an enabled source, up to
 500 per request. Results are labeled as history observations. Manual snapshots
 run alongside observation. Repeated observations
-are kept as separate records.
+are kept as separate records. Turning a source on also takes one `baseline` snapshot of it, unless
+[strict chosen chats](#strict-chosen-chats) is on.
 
 Snapshots stop if the source is disabled during the read. Replies must belong to the
 requested chat and contain strictly decreasing positive message IDs below the requested

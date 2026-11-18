@@ -10210,5 +10210,8 @@
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
   "Global search": "ค้นหาทั่วโลก",
   "Checkpoint not timestamped": "จุดตรวจสอบไม่ได้รับการประทับเวลา",
-  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน"
+  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน",
+  "Strict: read only the chosen chats": "เข้มงวด: อ่านเฉพาะการสนทนาที่เลือก",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness จะไม่อ่านการแจ้งเตือนบริการของ Telegram (777000) รายการเซสชันของบัญชี หรือสถานะการยืนยันสองขั้นตอน ไม่อ่านข้อความก่อนหน้าของการสนทนาเมื่อคุณเปิดใช้ ไม่เปลี่ยนการตั้งค่าเนื้อหาที่ละเอียดอ่อนของบัญชี และไม่บันทึกการอัปเดตการโทร การตรวจสอบการยึดเซสชันจะยังปิดอยู่ ระบบยังคงอ่านรายการการสนทนาตอนเริ่มเพื่อค้นหาการสนทนาที่เลือก เปิดใช้ก่อนลงชื่อเข้าใช้",
+  "Strict chosen chats: the account's session list is not read.": "การสนทนาที่เลือกแบบเข้มงวด: ไม่อ่านรายการเซสชันของบัญชี"
 }

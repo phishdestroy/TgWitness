@@ -4036,7 +4036,8 @@ function scopeDraft(){
   const mode=viewQuery("sources","[name=scope-mode]:checked")?.value||"selected",folder=$("scope-folder").value;
   return {mode,folder_id:mode==="folder"&&folder!==""?Number(folder):null,
     types:Object.fromEntries(scopeTypes.map(k=>[k,$("scope-"+k).checked])),exclude:state.scopeExclude||[],own_actions:$("scope-own").checked,
-    new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))}};
+    new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))},
+    strict:mode==="selected"&&$("scope-strict").checked};
 }
 
 const investigationScope=saved=>({mode:"account",folder_id:null,types:Object.fromEntries(scopeTypes.map(k=>[k,true])),
@@ -4074,6 +4075,7 @@ function renderScope(){
     for(const k of scopeTypes)$("scope-"+k).checked=saved.types[k];
     $("scope-own").checked=saved.own_actions;state.scopeExclude=[...saved.exclude];
     $("scope-new-profile").checked=!!saved.new_chats?.profile;$("scope-new-history").value=String(saved.new_chats?.history??100);
+    $("scope-strict").checked=!!saved.strict;
   }
   const chosen=state.scopeDirty?select.value:String(saved.folder_id??"");
   select.replaceChildren(new Option(tr("Choose a folder"),""));
@@ -4084,6 +4086,7 @@ function renderScope(){
     "Press Refresh chat list above to list this account's folders.");
   const draft=scopeDraft();
   show("scope-folder-field",draft.mode==="folder");show("scope-types",draft.mode!=="selected");show("scope-new",draft.mode!=="selected");
+  show("scope-strict-field",draft.mode==="selected");
   const box=$("scope-exclude");box.replaceChildren();
   if(state.scopeExclude.length){
     box.append(node("strong","",tr("Excluded chats")));
@@ -5104,7 +5107,8 @@ function renderSeenBy(){
       layer_match:tr("API layer"),lang_pack:tr("Language pack"),app_update:tr("App update"),terms_of_service:tr("Terms of service")};
     const details={"Requests stopped after an error or while Telegram requires a wait.":tr("Requests stopped after an error or while Telegram requires a wait."),
       "Telegram did not identify a current authorization.":tr("Telegram did not identify a current authorization."),
-      "Telegram's official-app flag is not an account-safety assessment.":tr("Telegram's official-app flag is not an account-safety assessment.")};
+      "Telegram's official-app flag is not an account-safety assessment.":tr("Telegram's official-app flag is not an account-safety assessment."),
+      "Strict chosen chats: the account's session list is not read.":tr("Strict chosen chats: the account's session list is not read.")};
     for(const check of checked.checks||[])if(check.status!=="ok")rows.push([names[check.name]||check.name,
       check.name==="layer_match"&&check.actual!=null?tr("Layer {actual}; the reviewed baseline is {baseline}. The baseline is a reviewed snapshot, not Telegram's latest required layer.",{actual:check.actual,baseline:check.baseline}):
       check.error?tr("The request failed: {error}",{error:check.error}):details[check.detail]||check.detail||check.status]);
@@ -5743,7 +5747,7 @@ async function openChat(id,options={}){
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
-  if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&may("sources")&&!chatAutoLoaded.has(key)){
+  if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&!(s.scope?.mode==="selected"&&s.scope?.strict)&&may("sources")&&!chatAutoLoaded.has(key)){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;

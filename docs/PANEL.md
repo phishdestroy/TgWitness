@@ -350,6 +350,10 @@ apply to future activity; saved records stay.
   chat's profile and earlier visible messages straight away. The
   [dedicated account guide](https://phishdestroy.github.io/TgWitness/docs/dedicated-account/)
   explains why never to use your main account.
+- **Strict: read only the chosen chats** (Chosen chats only, off by default) stops reads
+  of Telegram's service notifications, the session list and earlier messages of a chat
+  being turned on, leaves the sensitive content setting alone and skips phone call
+  updates. See [strict chosen chats](COLLECTION.md#strict-chosen-chats).
 - **Source types** limit folder and whole-account modes to channels, groups, private
   chats and bots. **Own actions** adds the account's own messages, edits and
   reply-keyboard presses.

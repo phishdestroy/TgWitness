@@ -34,6 +34,7 @@ class Scope(BaseModel):
     exclude: list[int] = Field(default_factory=list, max_length=EXCLUDE_LIMIT)
     own_actions: StrictBool = True
     new_chats: NewChats = Field(default_factory=NewChats)
+    strict: StrictBool = False
 
 
 class ScopeUpdate(Scope):
@@ -49,6 +50,11 @@ class Recheck(BaseModel):
 
 def scope_settings(store):
     return Scope.model_validate(store.get_setting("scope", {})).model_dump()
+
+
+def strict_selected(store):
+    scope = scope_settings(store)
+    return scope["mode"] == "selected" and scope["strict"]
 
 
 def unexclude(store, chat_id):

@@ -10333,5 +10333,8 @@
   "Select and copy the link.": "Выделите и скопируйте ссылку.",
   "Global search": "Глобальный поиск",
   "Checkpoint not timestamped": "Контрольная точка без метки времени",
-  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения"
+  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения",
+  "Strict: read only the chosen chats": "Строго: читать только выбранные чаты",
+  "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness не читает служебные уведомления Telegram (777000), список сеансов аккаунта и состояние двухэтапной проверки, не читает прежние сообщения чата при его включении, не меняет настройку чувствительного контента аккаунта и не записывает обновления о звонках. Проверки перехвата сеанса остаются выключенными. Список чатов при старте по-прежнему читается, чтобы найти выбранные чаты. Включите до входа в аккаунт.",
+  "Strict chosen chats: the account's session list is not read.": "Строгий режим выбранных чатов: список сеансов аккаунта не читается."
 }

@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- **Sources → Scope → Chosen chats** has a new switch, **Strict: read only the chosen chats**, off by default. While
+  it is on, TgWitness does not read Telegram's service notifications (777000), the account's session list or its
+  two-step verification status (at start, while observing, on connect or at stop), does not read earlier messages
+  of a chat being turned on (the `baseline` snapshot, the new-chat read of a chat joined from the panel and the
+  automatic last 100 messages of an empty chat opened in Chats), does not change the account's sensitive content
+  setting and does not record phone call updates. Before, a chosen-chats workspace always did all of this, so reads
+  could not be kept to the chosen chats. The chat list is still read at start to find them.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
