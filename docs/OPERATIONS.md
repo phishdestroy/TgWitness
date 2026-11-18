@@ -127,6 +127,11 @@ megabytes of a response, so for these downloads the server cannot see a break ne
 check the downloaded file before deleting. A group export counts for its accounts when it is
 downloaded right after it is prepared; downloading it again from **Prepared exports** does not.
 
+Before deleting, the panel shows the format, size, preparation time and SHA-256 of the last downloaded
+signed archive and asks to confirm that this archive is saved outside the workspace. The server refuses
+`DELETE /api/profiles/{id}` without `kept_copy` set to that SHA-256 (or to `confirmed` for an archive
+downloaded before the fingerprint was recorded).
+
 Deleting an additional workspace stops its collector and removes its local data. If a
 locked file or filesystem error interrupts removal, the panel reports the failure and
 keeps the workspace listed as unavailable (`DeletionPending`). Close programs holding its

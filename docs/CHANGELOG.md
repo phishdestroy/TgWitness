@@ -25,6 +25,92 @@
 
 ## Unreleased
 
+- After a collector process that ended without an orderly stop, the next start checks every attachment recorded
+  as saved during that run against its SHA-256. A missing or different file is recorded as
+  `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
+- The **Check** tab of a report accepts the ASiC-E container it was delivered in. It recognizes the container from the
+  exact `mimetype` text and `META-INF/ASiCManifest.xml`, checks the SHA-256 of every file that manifest lists, and
+  says that the CAdES signature in `META-INF/signature.p7s` was not checked in the browser. Before, an intact ASiC-E
+  got the red verdict **The archive does not match its signed manifest** because of its `mimetype` and `META-INF`
+  entries. Any other entry under `META-INF/`, a file missing from either manifest or a changed file still fails.
+- Deleting a workspace first shows the format, size, preparation time and SHA-256 of its last downloaded signed
+  archive and asks to confirm that this archive is saved outside the workspace. The server refuses the deletion
+  without that confirmation.
+- The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
+  correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
+  rating. These pages stay out of `contacts.list`.
+- The tab row of **Sources** scrolls inside itself when it does not fit, at any width. At 200% browser zoom it used to
+  push the page about 60 px wider than the window for a moment while the screen loaded.
+- A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
+  the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
+  whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;
+  exclusions and the automatic adding and pausing of other chats work as before. Chats paused before this version
+  cannot be told apart from chats paused by the scope and keep the earlier behaviour until they are paused again.
+- **Network topology** keeps the names **Traffic**, **Ports**, **Threats** and **Addresses** for screen readers at
+  700 px and narrower, where only their icons show. Closing a node card with its button or Escape returns the focus to
+  the node that opened it, or to the first node if that one is gone. The light-theme status badge is darker:
+  **Live** went from about 3.3:1 to 4.7:1 and the stale or demo state from 4.4:1 to 6.2:1.
+- **Home** keeps the keyboard focus on the same button, for example **Add account**, when it refreshes itself every few
+  seconds. Before, the refresh rebuilt the page and dropped the focus to the document after about five seconds.
+  Focus that the user moved elsewhere in the meantime stays where it is.
+- The record viewer of a report no longer adds a record that the filters hide. When new filters leave out the record
+  whose card is open, the card closes; **Select** in a card works only for a shown record, while records chosen
+  before the filters changed stay selected. **Go to #** opens exactly the number typed and otherwise says whether
+  that record is not in the report or hidden by the filters; before, typing #2 in a report with only #1 highlighted
+  #1. **Copy text** copies the message text, a system record offers **Copy description** for the description it
+  shows, and a record with neither says **No text to copy**; before, the button wrote an empty clipboard.
+- The connection form takes an explicit port 80 from a pasted HTTP proxy URL. The browser drops a default port, so
+  `http://host:80` used to leave the previous port, for example 8080, in the form with no message; an address that
+  cannot be used now clears the prepared plan and keeps its error visible after the field loses focus. With
+  **Public MTProto** the external-requests box shows what is sent — off — instead of a checked, disabled box, and the
+  earlier choice comes back when another route is chosen.
+- A deletion notice no longer leads to the statement that this account did not delete the message. Telegram's
+  notice names no one, and the rights and session checks it was compared with can be up to 24 hours and 10 minutes
+  old. New records keep the deleting account unknown with the attribution `not_named` and state the last rights or
+  session check with its age; reports and the panel word older `peer_or_admin` records the same way.
+- The public showcase manager follows the theme chosen in the panel; before, it followed only the system theme. A
+  capture export over its verifier's limits (512 MiB per file, 8 GiB in total, 100,000 entries) stops before the ZIP
+  is written and names the limit, instead of writing the whole archive and then reporting a failed verification. The
+  pseudo-secret description no longer says that every file is saved: a file waits while downloads are off or its
+  size or free disk space stops it, and each deferred or failed download is recorded.
+- A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
+  the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
+  OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
+  time-stamping authority answer. When every service failed for the same reason, the description names it — for
+  example that requests outside Telegram are turned off. Before, a pass where 0 of 7 services answered was titled
+  **Checkpoint timestamped**. The signed records are unchanged.
+- In the chat search, choosing a row no longer changes anything by itself. A chat of the account is added only with
+  **Observe**; a public chat found by **Global search** is joined only with **Join / open and observe**, which asks
+  for the usual confirmation; its name opens the link preview instead. `j` / `k` move through saved chats only, and
+  arrow keys from the search field reach each new row's own button. In an open chat, Ctrl+F (⌘F) puts the cursor in
+  **Search saved messages**; pressed there again it reaches the browser's page search. Before, clicking the name of a
+  search result added the chat to observation or started the join.
+- An export that is not kept for another download, such as a file over 2 GiB, no longer sends a browser without
+  file streaming to a repeat download that fails. The panel learns from the response that no saved copy exists and
+  names Chrome or Edge and the command-line download instead. In such a browser the signed archive card says so
+  before the download, and the Prepared exports note no longer promises to keep the latest file whatever its size.
+- A timestamped evidence export counts for workspace deletion only the Case Board notes it carries: both come from
+  the time-stamped `checkpoint-N.json` of the sealed record. Before, when that checkpoint had been saved earlier at the
+  same record, for example when observation stopped, notes added afterwards were left out of the archive but counted
+  as exported, so **Delete** became available without them; they now keep it unavailable until an export carries
+  them. The manifest's `boundary.chosen_at` is the moment this export fixed its last record instead of the time the
+  checkpoint was first saved, so `verify.py --witness` again reports a witness that saw more records in between as a
+  conflict. A sealed export whose checkpoint file is missing or names another record now fails instead of pairing
+  the sealed records with the newest notes.
+- A minimised handover keeps only the fields listed for each kind of account-wide service record. A
+  `coverage.gap` for a live probe acknowledged late no longer names the probe chat, its probe and acknowledgement
+  message numbers or the witness account when that chat is outside the selection; in a selected probe chat the
+  witness account is replaced by its pseudonym, as message senders are. A field these records do not normally carry
+  is withheld, and the record is marked minimised. Before, these records went into the handover whole unless they
+  held a known chat list.
+- Choosing account files or pasting session text under **Files** no longer sends them to the TgWitness server. The
+  form says where they go, and the server reads them only after **Check files** or **Read files without signing in**;
+  **Connect account** follows a successful check as before. Before, choosing files sent them at once and each
+  character typed into the TData passcode or session text, or a changed API pair, sent them again. The check also
+  shows the user ID the files state. Pasting session text now clears the selected files, so the check and the
+  connection use the latest choice; before, a file chosen earlier replaced the pasted session when connecting.
+  **Auth key** with **Create an independent authorization** now reaches the independent login on an attested
+  deployment instead of being refused there as a reused key.
 - Reports: the **Observation period** figure of HTML and PDF evidence reports and handover extracts adds up the
   continuous observation periods listed under Coverage and reads "Not recorded" when there are none, and the first
   custody step is named "Recorded in the journal". In a report limited to selected records, the figure counts
