@@ -4623,6 +4623,7 @@
   "Text unchanged": "Tekst bez zmian",
   "Changes": "Zmiany",
   "Not recorded in this export": "Nie uwzględniono w tym eksporcie",
+  "No record of the journal matches the selection.": "Żaden wpis dziennika nie pasuje do wyboru.",
   "saved in the archive": "zapisane w archiwum",
   "type not collected by the attachment settings": "typ nie jest rejestrowany przez ustawienia załączników",
   "larger than the attachment limit": "przekracza limit rozmiaru załącznika",

@@ -4542,6 +4542,7 @@
   "Text unchanged": "Nội dung văn bản không thay đổi",
   "Changes": "Thay đổi",
   "Not recorded in this export": "Không được ghi lại trong bản xuất này",
+  "No record of the journal matches the selection.": "Không có bản ghi nào trong nhật ký khớp với lựa chọn.",
   "saved in the archive": "được lưu trong kho lưu trữ",
   "type not collected by the attachment settings": "loại không được thu thập bởi cài đặt tệp đính kèm",
   "larger than the attachment limit": "lớn hơn giới hạn đính kèm",

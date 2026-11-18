@@ -4664,6 +4664,7 @@
   "Text unchanged": "Текст не изменён",
   "Changes": "Изменения",
   "Not recorded in this export": "В этой выгрузке не зафиксировано",
+  "No record of the journal matches the selection.": "Ни одна запись журнала не соответствует отбору.",
   "saved in the archive": "сохранено в архиве",
   "type not collected by the attachment settings": "сбор этого типа отключён в настройках вложений",
   "larger than the attachment limit": "размер превышает лимит вложений",

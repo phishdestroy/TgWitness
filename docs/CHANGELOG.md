@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- A report whose selection matched nothing says in its summary that no journal record matches the selection, and
+  the summary says **No observation period recorded** instead of listing observed periods that do not exist. The
+  cover says **Not recorded in this export** when the export carries no coverage data and keeps **0 records
+  selected** for an empty selection in that case too, without claiming an empty list of periods.
 - The **Observation period** on HTML and PDF report covers tells the cases apart: **No observation period recorded**
   when the journal has no continuous period, **0 records selected** when a selection matched no record (with both
   when both are true), and a duration only for actual periods. Before, a selection without records showed "—"

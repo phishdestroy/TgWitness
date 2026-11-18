@@ -4569,6 +4569,7 @@
   "Text unchanged": "Metin değiştirilmedi",
   "Changes": "Değişiklikler",
   "Not recorded in this export": "Bu dışa aktarımda kaydedilmemiştir",
+  "No record of the journal matches the selection.": "Günlükteki hiçbir kayıt seçime uymuyor.",
   "saved in the archive": "arşive kaydedildi",
   "type not collected by the attachment settings": "ek ayarlarında toplanmayan tür",
   "larger than the attachment limit": "ek sınırından daha büyük",

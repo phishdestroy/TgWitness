@@ -4569,6 +4569,7 @@
   "Text unchanged": "Text unverändert",
   "Changes": "Änderungen",
   "Not recorded in this export": "Nicht in diesem Export enthalten",
+  "No record of the journal matches the selection.": "Kein Eintrag des Journals entspricht der Auswahl.",
   "saved in the archive": "im Archiv gespeichert",
   "type not collected by the attachment settings": "Typ wird von den Anhangseinstellungen nicht erfasst",
   "larger than the attachment limit": "größer als das Anhangslimit",

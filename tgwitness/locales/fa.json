@@ -4569,6 +4569,7 @@
   "Text unchanged": "متن بدون تغییر",
   "Changes": "تغییرات",
   "Not recorded in this export": "در این خروجی ثبت نشده است",
+  "No record of the journal matches the selection.": "هیچ رکوردی از دفتر با انتخاب مطابقت ندارد.",
   "saved in the archive": "ذخیره شده در آرشیو",
   "type not collected by the attachment settings": "نوعی که توسط تنظیمات پیوست جمع‌آوری نشده است",
   "larger than the attachment limit": "بزرگ‌تر از حد مجاز پیوست",

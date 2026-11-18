@@ -4677,6 +4677,7 @@
   "Text unchanged": "النص دون تغيير",
   "Changes": "التغييرات",
   "Not recorded in this export": "لم يتم تضمينها في هذا التصدير",
+  "No record of the journal matches the selection.": "لا يطابق أي سجل في اليومية التحديد.",
   "saved in the archive": "محفوظة في الأرشيف",
   "type not collected by the attachment settings": "النوع غير مجمع وفقًا لإعدادات المرفقات",
   "larger than the attachment limit": "أكبر من الحد الأقصى المسموح به للمرفقات",

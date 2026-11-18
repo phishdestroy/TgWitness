@@ -4569,6 +4569,7 @@
   "Text unchanged": "Matn o'zgarmagan",
   "Changes": "O'zgarishlar",
   "Not recorded in this export": "Ushbu eksportda qayd etilmagan",
+  "No record of the journal matches the selection.": "Jurnaldagi hech bir yozuv tanlovga mos kelmaydi.",
   "saved in the archive": "arxivga saqlangan",
   "type not collected by the attachment settings": "Ilova sozlamalari tomonidan yig'ilmagan tur",
   "larger than the attachment limit": "Ilovaga qo'yish chegarasidan katta",
