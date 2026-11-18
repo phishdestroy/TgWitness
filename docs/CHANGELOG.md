@@ -47,6 +47,10 @@
 - **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
   preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
   open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.
+- An access without the account or sources permission no longer sees **Connect account** or **Choose chats** on an
+  empty chat list, which led back to Chats; it reads that the workspace administrator connects the account or
+  chooses the chats this access can read.
+
 - The chat search on **Chats** now searches Telegram itself, as the Telegram app does. Under the saved chats and the
   account's own chats it lists **Global search**: chats the account is in and public channels, groups, bots and people
   found by name or username through `contacts.search` (`GET /api/telegram-search`, permission `sources`). A chat the
