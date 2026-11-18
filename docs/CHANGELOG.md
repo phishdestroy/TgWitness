@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- In the self-contained report a message card with an attachment says **File saved** when the file is in the
+  archive and otherwise why it is not, in words instead of a code: **Larger than the size limit**, **This file type
+  was not collected**, **File not in this archive** and the other recorded reasons. The message time names the sent
+  time in UTC and, for journal records, the time the collector saved it.
 - A message with an attachment in an open chat says what happened to the file: **File saved**, **Queued** while the
   download waits, or the recorded reason it was not saved, such as **Larger than the size limit** or **Telegram did
   not provide the file**. A message whose file outcome is not recorded keeps the paper-clip mark. The time under a
