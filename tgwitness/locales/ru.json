@@ -5092,6 +5092,8 @@
   "Select all {n} shown items?": "Выбрать все найденные записи ({n})?",
   "{a} of {b}": "{a} из {b}",
   "Nothing matches these filters.": "По этим условиям ничего не найдено.",
+  "Show these categories": "Показать эти категории",
+  "{n} matching records are in hidden categories: {names}.": "Подходящие записи ({n}) находятся в скрытых категориях: {names}.",
   "deleted": "удалено",
   "found on recheck": "найдено при повторной проверке",
   "wallet": "кошелёк",

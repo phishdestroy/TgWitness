@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "Pilih semua item yang dipaparkan untuk {n}?",
   "{a} of {b}": "{a} daripada {b}",
   "Nothing matches these filters.": "Tiada apa yang sepadan dengan penapis ini.",
+  "Show these categories": "Tunjukkan kategori ini",
+  "{n} matching records are in hidden categories: {names}.": "{n} rekod yang sepadan berada dalam kategori tersembunyi: {names}.",
   "deleted": "dihapuskan",
   "found on recheck": "ditemui pada semakan semula",
   "wallet": "dompet",

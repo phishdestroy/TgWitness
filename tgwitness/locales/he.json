@@ -5024,6 +5024,8 @@
   "Select all {n} shown items?": "לבחור את כל הפריטים המוצגים תחת {n}?",
   "{a} of {b}": "{a} מתוך {b}",
   "Nothing matches these filters.": "אין תוצאות התואמות למסננים אלה.",
+  "Show these categories": "הצג קטגוריות אלה",
+  "{n} matching records are in hidden categories: {names}.": "{n} רשומות תואמות נמצאות בקטגוריות מוסתרות: {names}.",
   "deleted": "נמחק",
   "found on recheck": "נמצא ב-recheck",
   "wallet": "ארנק",
