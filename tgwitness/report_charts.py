@@ -72,6 +72,8 @@ def _count(value):
 
 
 def label(row, say):
+    if row.get("title"):
+        return row["title"] + " · " + str(row["id"])
     return say(row["label"], **row.get("label_values", {}))
 
 
