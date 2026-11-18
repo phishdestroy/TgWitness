@@ -65,13 +65,14 @@ async def export_members(app, request, members, group, language=None):
     registry, store = app.state.profiles, app.state.store
     if any(registry.entries[p].get("app") is None for p in members):
         raise HTTPException(409, "Every account of the group must be available to export it.")
-    parts = []
+    parts, marks = [], []
     try:
         for workspace_id in members:
             entry = registry.entries[workspace_id]
             member = entry["app"]
-            path, _ = await member.state.build_export("zip", request, language=language)
+            path, headers = await member.state.build_export("zip", request, language=language)
             parts.append((workspace_id, entry["label"], path, member.state.vault.public_key))
+            marks.append(member.state.export_delivered(headers))
         directory = store.root / "temporary-exports"
         directory.mkdir(mode=0o700, exist_ok=True)
         path, accounts = await asyncio.to_thread(bundle, directory, group, parts, app.state.vault)
@@ -87,7 +88,8 @@ async def export_members(app, request, members, group, language=None):
         path.unlink(missing_ok=True)
         raise
     return TemporaryDownload(path, filename="tgwitness-group-" + safe(group["label"]) + ".zip",
-                             media_type="application/zip", headers=export_history.headers(receipt))
+                             media_type="application/zip", headers=export_history.headers(receipt),
+                             delivered=lambda: [mark() for mark in marks])
 
 
 def register(app, authenticate):

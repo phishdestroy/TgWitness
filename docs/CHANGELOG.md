@@ -42,6 +42,11 @@
 - Downloading a finished or in-progress chat export checks the access again just before the file is sent, as the
   full export already did: a token revoked, an export permission removed or the chat taken out of the access while
   the archive was prepared stops the download and removes the temporary copy.
+- Deleting an additional workspace requires a signed ZIP or ASiC-E container that was downloaded in full and covers
+  both the journal and the Case Board notes. Before, the export was counted when the server had prepared it, even if
+  the download then broke off, and notes added after the export did not keep **Delete** unavailable. A completed
+  download from **Prepared exports** or of a group export also counts. A workspace that already has notes needs one
+  new complete export before it can be deleted.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".

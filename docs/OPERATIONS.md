@@ -113,6 +113,12 @@ with a newer edited version; outcomes are recorded separately.
 Closing a tab also leaves the process running. Stopping the Python process or service
 stops collection regardless of the browser state.
 
+An additional workspace can be deleted once a signed ZIP or ASiC-E container covering its
+journal and its Case Board notes has been downloaded in full. Preparing the archive is not
+enough: an interrupted download, a record outside setup events or a note added after the
+download keeps **Delete** unavailable. A download of the prepared copy from
+**Prepared exports** counts when it completes.
+
 Deleting an additional workspace stops its collector and removes its local data. If a
 locked file or filesystem error interrupts removal, the panel reports the failure and
 keeps the workspace listed as unavailable (`DeletionPending`). Close programs holding its

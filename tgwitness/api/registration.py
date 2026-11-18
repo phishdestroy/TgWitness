@@ -765,6 +765,7 @@ def register(app, ctx):
         routes_evidence.verify
     )
     app.state.build_export = ctx.build_export
+    app.state.export_delivered = ctx.export_delivered
     router.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])(
         routes_export.export
     )

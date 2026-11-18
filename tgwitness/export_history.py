@@ -3,6 +3,7 @@ import json
 import os
 import secrets
 import shutil
+import sqlite3
 import tempfile
 import zipfile
 from pathlib import Path
@@ -21,22 +22,39 @@ SETUP_KINDS = ("process.*", "network.*", "connection.*", "account.authorized", "
                "group.settings_inherited", "anchor.*", "evidence_record.*")
 
 
-def evidence_exported(store, seq):
+def evidence_exported(store, seq, annotations=0):
     with store.transaction():
-        previous = (store.get_setting(EVIDENCE_KEY, None) or {}).get("seq", 0)
-        store.set_setting(EVIDENCE_KEY, {"seq": max(seq, previous),
+        previous = store.get_setting(EVIDENCE_KEY, None) or {}
+        store.set_setting(EVIDENCE_KEY, {"seq": max(seq, previous.get("seq", 0)),
+                                         "annotations": max(annotations, previous.get("annotations", 0)),
                                          "at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+
+
+def delivered(store, entry):
+    covers = (entry or {}).get("covers")
+    if isinstance(covers, dict) and type(covers.get("seq")) is int:
+        evidence_exported(store, covers["seq"], covers.get("annotations") or 0)
+
+
+def annotations_head(db):
+    try:
+        row = db.execute("SELECT MAX(seq) FROM annotations").fetchone()
+    except sqlite3.OperationalError:
+        return 0
+    return row[0] or 0
 
 
 def unexported(db):
     row = db.execute("SELECT value FROM settings WHERE key=?", (EVIDENCE_KEY,)).fetchone()
-    exported = json.loads(row[0])["seq"] if row else 0
-    return db.execute("SELECT 1 FROM events WHERE seq>? AND " + " AND ".join("kind NOT GLOB ?" for _ in SETUP_KINDS)
-                      + " LIMIT 1", (exported, *SETUP_KINDS)).fetchone() is not None
+    saved = json.loads(row[0]) if row else {}
+    if db.execute("SELECT 1 FROM events WHERE seq>? AND " + " AND ".join("kind NOT GLOB ?" for _ in SETUP_KINDS)
+                  + " LIMIT 1", (saved.get("seq", 0), *SETUP_KINDS)).fetchone() is not None:
+        return True
+    return annotations_head(db) > saved.get("annotations", 0)
 
 
 def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, required_permissions=None, chat_ids=None,
-             encryption="zip"):
+             encryption="zip", covers=None):
     if encryption not in ("zip", "tgwpw"):
         raise ValueError("Unknown password-encryption format")
     with path.open("rb") as source:
@@ -55,6 +73,8 @@ def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, require
             entry["members"] = len(archive.infolist())
     if encrypted and encryption == "tgwpw":
         entry["encryption"] = encryption
+    if covers is not None:
+        entry["covers"] = covers
     if owner is not None and workspace is not None and required_permissions:
         entry.update(owner=owner, workspace=workspace, required_permissions=sorted(set(required_permissions)),
                      chat_ids=sorted(set(chat_ids)) if chat_ids is not None else None)
