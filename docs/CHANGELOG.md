@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
+  the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
+  whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;
+  exclusions and the automatic adding and pausing of other chats work as before. Chats paused before this version
+  cannot be told apart from chats paused by the scope and keep the earlier behaviour until they are paused again.
 - The record viewer of a report no longer adds a record that the filters hide. When new filters leave out the record
   whose card is open, the card closes; **Select** in a card works only for a shown record, while records chosen
   before the filters changed stay selected. **Go to #** opens exactly the number typed and otherwise says whether
