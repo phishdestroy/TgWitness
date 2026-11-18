@@ -243,7 +243,10 @@ prepared it and the file's SHA-256, not the contents.
 content against its hash, its Ed25519 signature and its link to an included predecessor. A
 minimised record keeps the original hash and signature, so the signature still verifies, but the
 withheld fields cannot be recomputed from it; the record names what was withheld and the report
-marks it. The manifest names the journal length and head with the collector's signature over that
+marks it. Account-wide service records (starts and stops, coverage gaps, connection, network and storage notices,
+scope and settings changes) keep only the fields listed for their kind: chat lists in them are cut to the chosen
+chats and their totals recounted, and a live-probe gap in a chat outside the selection loses that chat, its message
+numbers and the witness account. The manifest names the journal length and head with the collector's signature over that
 head, and counts the records left out; `coverage.json` describes the chosen chats. New extracts also
 carry `proofs.jsonl`: for every included record and for the journal head, the Merkle path from the
 record's original hash to the journal root named in the signed manifest. `verify.py` checks each

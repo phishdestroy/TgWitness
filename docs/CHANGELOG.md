@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- A minimised handover keeps only the fields listed for each kind of account-wide service record. A
+  `coverage.gap` for a live probe acknowledged late no longer names the probe chat, its probe and acknowledgement
+  message numbers or the witness account when that chat is outside the selection; in a selected probe chat the
+  witness account is replaced by its pseudonym, as message senders are. A startup-buffer gap that only counted some
+  chats (`chats_not_listed`) loses that count and has `updates_dropped` recounted for the chats kept. A field these
+  records do not normally carry is withheld, and the record is marked minimised. Before, these records went into the
+  handover whole unless they held a known chat list.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
