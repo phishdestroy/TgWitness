@@ -59,6 +59,10 @@
 - The setup goals describe timestamps as they work: each record is signed when it is saved, journal checkpoints are
   sent for independent timestamps at intervals, and an archive carries a timestamp only when a service answered.
   Before, **Evidence for a case** said it confirms each record as it is written with independent timestamps.
+- Narrowing the observation scope takes effect at once: an excluded chat, and a chat added by a wider scope after
+  switching to selected chats, are no longer recorded while the scope is being applied, and their sources are paused
+  even when Telegram's dialog list cannot be read; `scope.applied` then names the failed refresh. Before, a failed
+  dialog request left the old sources enabled and recording.
 
 - The chat search on **Chats** now searches Telegram itself, as the Telegram app does. Under the saved chats and the
   account's own chats it lists **Global search**: chats the account is in and public channels, groups, bots and people
