@@ -10531,7 +10531,6 @@
   "Ports and sockets table": "Bảng cổng và ổ cắm",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Thời gian dự kiến còn lại: {time}. Dựa trên {done} trong tổng số {total} nhiệm vụ đã hoàn thành; do các cuộc trò chuyện có độ dài khác nhau, nên con số này có thể thay đổi.",
   "chats left": "số tin nhắn còn lại",
-  "Forwarded from {name}": "Được chuyển tiếp từ {name}",
   "Forwarded message": "Tin nhắn được chuyển tiếp",
   "Original message sent {time}": "Tin nhắn gốc được gửi vào lúc {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Số liệu được ghi lại tại thời điểm tin nhắn này được lưu; Telegram sẽ cập nhật chúng sau đó.",

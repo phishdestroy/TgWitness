@@ -10684,7 +10684,6 @@
   "Ports and sockets table": "Таблиця портів і сокетів",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Орієнтовний час, що залишився: {time}. Розраховано на основі {done} із {total} виконаних завдань; обсяг чатів різниться, тому цей показник може змінюватися.",
   "chats left": "залишилося чатів",
-  "Forwarded from {name}": "Переслано від {name}",
   "Forwarded message": "Переслане повідомлення",
   "Original message sent {time}": "Оригінальне повідомлення надіслано о {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Ці дані відображаються станом на момент збереження цього повідомлення; Telegram оновлює їх пізніше.",

@@ -10582,7 +10582,6 @@
   "Ports and sockets table": "Portlar va soketlar jadvali",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Taxminiy qolgan vaqt: {time}. {total} ta tugallangan vazifadan {done} tasi asosida; suhbatlar hajm jihatidan farq qiladi, shuning uchun bu o'zgarishi mumkin.",
   "chats left": "Suhbatlar qoldi",
-  "Forwarded from {name}": "{name}dan jo'natildi",
   "Forwarded message": "Yuborilgan xabar",
   "Original message sent {time}": "{time}da yuborilgan asl xabar",
   "Counts as they were when this message was saved; Telegram updates them later.": "Ushbu xabar saqlangan paytdagi hisoblar; Telegram ularni keyin yangilaydi.",

@@ -10582,7 +10582,6 @@
   "Ports and sockets table": "पोर्ट्स और सॉकेट्स तालिका",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "अनुमानित शेष समय: {time}। {total} पूरे हुए कार्यों में से {done} के आधार पर; चैट का आकार भिन्न होता है, इसलिए यह बदल सकता है।",
   "chats left": "बातचीत बाकी",
-  "Forwarded from {name}": "{name} की ओर से अग्रेषित",
   "Forwarded message": "प्रेषित संदेश",
   "Original message sent {time}": "{time} को मूल संदेश भेजा गया",
   "Counts as they were when this message was saved; Telegram updates them later.": "यह गिनती उस समय की है जब यह संदेश सहेजा गया था; टेलीग्राम बाद में इन्हें अपडेट करेगा।",

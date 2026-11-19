@@ -10582,7 +10582,6 @@
   "Ports and sockets table": "পোর্ট এবং সকেট টেবিল",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "আনুমানিক বাকি সময়: {time}। {total}টি সম্পন্ন কাজের মধ্যে {done}টির ভিত্তিতে; চ্যাটের আকার ভিন্ন, তাই এটি পরিবর্তিত হতে পারে।",
   "chats left": "চ্যাট বামে",
-  "Forwarded from {name}": "{name} থেকে ফরওয়ার্ড করা হয়েছে",
   "Forwarded message": "ফরওয়ার্ড করা বার্তা",
   "Original message sent {time}": "{time} তারিখে মূল বার্তা পাঠানো হয়েছে",
   "Counts as they were when this message was saved; Telegram updates them later.": "এই বার্তাটি সংরক্ষণ করার সময় যে সংখ্যাগুলো ছিল সেগুলোই গণ্য করা হয়েছে; টেলিগ্রাম পরে সেগুলো আপডেট করবে।",

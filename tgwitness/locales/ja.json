@@ -10531,7 +10531,6 @@
   "Ports and sockets table": "ポートとソケットの一覧表",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "残り推定時間：{time}。完了したタスク{total}件のうち{done}件に基づく。チャットの長さはそれぞれ異なるため、この数値は変動する可能性があります。",
   "chats left": "残りのチャット数",
-  "Forwarded from {name}": "{name} から転送されました",
   "Forwarded message": "転送されたメッセージ",
   "Original message sent {time}": "{time}に送信された元のメッセージ",
   "Counts as they were when this message was saved; Telegram updates them later.": "このメッセージが保存された時点での数値です。Telegramによって後で更新されます。",
