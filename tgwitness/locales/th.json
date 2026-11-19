@@ -10512,5 +10512,6 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "ไม่ได้บันทึกเวลาส่งของ Telegram ข้อความนี้จึงลงวันที่และจัดลำดับตามเวลาที่ TgWitness สังเกตเห็น",
   "Copy URL": "คัดลอก URL",
   "The original source, identity map and private selection criteria are NOT included.": "ไม่รวมแหล่งข้อมูลต้นฉบับ ตารางจับคู่ตัวตน และเกณฑ์การคัดเลือกแบบส่วนตัว",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "สำหรับแพ็กเกจขนาดใหญ่ ให้เพิ่ม --max-gib พร้อมขนาดหลังแตกไฟล์ index.html ได้รับการปกป้องด้วยแมนิเฟสต์"
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "สำหรับแพ็กเกจขนาดใหญ่ ให้เพิ่ม --max-gib พร้อมขนาดหลังแตกไฟล์ index.html ได้รับการปกป้องด้วยแมนิเฟสต์",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "หากต้องการเก็บประวัติปัจจุบันของบัญชีไว้ในไฟล์เก็บถาวรแยกต่างหาก ให้ใช้ Exports → Telegram account ระบบจะค้นหาทุกการสนทนาที่สามารถเข้าถึงได้ก่อนที่กระบวนการนี้จะเริ่มขึ้น รวมถึงการสนทนาที่ถูกเก็บถาวรด้วย การสนทนาแต่ละครั้งจะมีเคอร์เซอร์ที่สามารถกลับมาต่อได้"
 }

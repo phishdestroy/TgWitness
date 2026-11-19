@@ -10563,5 +10563,6 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram gönderim zamanı kaydedilmedi; bu mesaj TgWitness'in onu gözlemlediği zamana göre tarihlenir ve sıralanır.",
   "Copy URL": "URL'yi kopyala",
   "The original source, identity map and private selection criteria are NOT included.": "Özgün kaynak, kimlik eşleme tablosu ve özel seçim ölçütleri dahil DEĞİLDİR.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Büyük paketlerde açılmış boyutla birlikte --max-gib ekleyin. index.html manifest ile korunur."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Büyük paketlerde açılmış boyutla birlikte --max-gib ekleyin. index.html manifest ile korunur.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Hesabın güncel geçmişinin ayrı bir arşivini oluşturmak için, “Dışa Aktar” → “Telegram hesabı” seçeneğini kullanın. Hesap genelinde yapılan tarama, bu işlemin başlamasından önce erişilebilir tüm sohbetleri (arşivlenmiş sohbetler dahil) tespit eder. Her sohbetin kendi devam ettirilebilir imleci vardır."
 }

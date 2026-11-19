@@ -10614,5 +10614,6 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "זמן השליחה של Telegram לא נרשם; ההודעה מתוארכת וממוקמת לפי הזמן שבו TgWitness צפה בה.",
   "Copy URL": "העתקת כתובת URL",
   "The original source, identity map and private selection criteria are NOT included.": "המקור המקורי, טבלת הזהויות וקריטריוני הבחירה הפרטיים אינם כלולים.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "כדי ליצור ארכיון נפרד של ההיסטוריה הנוכחית של החשבון, השתמש באפשרות 'ייצוא' → 'חשבון טלגרם'. טווח החשבון כולו מאתר את כל השיחות הנגישות לפני תחילת הפעולה, כולל שיחות שארכבו. לכל שיחה יש סמן משלה שניתן לחדש ממנו."
 }

@@ -10573,5 +10573,6 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "No se registró la hora de envío de Telegram; este mensaje se fecha y se ubica según cuándo lo observó TgWitness.",
   "Copy URL": "Copiar URL",
   "The original source, identity map and private selection criteria are NOT included.": "La fuente original, la tabla de identidades y los criterios privados de selección NO están incluidos.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Para paquetes grandes, añada --max-gib con el tamaño descomprimido. index.html está protegido por el manifiesto."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Para paquetes grandes, añada --max-gib con el tamaño descomprimido. index.html está protegido por el manifiesto.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Para obtener un archivo independiente del historial actual de la cuenta, utiliza «Exportaciones» → «Cuenta de Telegram». El ámbito de toda la cuenta detecta todos los diálogos accesibles antes de que comience esta ejecución, incluidos los chats archivados. Cada chat tiene su propio cursor reanudable."
 }
