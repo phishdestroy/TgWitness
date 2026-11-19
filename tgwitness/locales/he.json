@@ -10630,5 +10630,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "ניתן לעיין רק ב-1,000 התוצאות הראשונות. צמצמו את החיפוש לפי צ'אט, סוג או תאריכים.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "על הנמען לאשר גם את טביעת האצבע של מפתח החתימה שהתקבלה בנפרד, ולהריץ את הקובץ verify.py עם האופציה --tsa-ca ועם תעודת השורש של רשות חותמות הזמן.",
   "Observed requests table": "טבלת הבקשות שנצפו",
-  "Ports and sockets table": "טבלת יציאות ושקעים"
+  "Ports and sockets table": "טבלת יציאות ושקעים",
+  "Network topology diagram": "תרשים טופולוגיית הרשת",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "הזמן המשוער שנותר: {time}. על סמך {done} משימות שהושלמו מתוך {total}; גודל הצ'אטים משתנה, ולכן נתון זה עשוי להשתנות.",
+  "chats left": "שיחות שנותרו"
 }

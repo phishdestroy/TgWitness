@@ -48,13 +48,6 @@ LIMITATIONS = [
 
 TERMINAL_PHASES = ("done", "partial", "failed")
 
-def unique_items(items):
-    kept = []
-    for item in items:
-        if item not in kept:
-            kept.append(item)
-    return kept
-
 
 class AccountExportOptions(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -243,6 +236,23 @@ def attachment_policy(media, task, options):
         else:
             return excluded("per_file_limit")
     return info, action, limit
+
+
+
+def report_omissions(gaps, omissions, progress):
+    shown = []
+    for item in [*gaps, *omissions]:
+        if item not in shown:
+            shown.append(item)
+    for receipt in progress.values():
+        if receipt.get("outcome") == "failed" and receipt.get("error"):
+            label = str(receipt.get("category") or "task")
+            if receipt.get("chat_id") is not None:
+                label += " · chat " + str(receipt["chat_id"])
+            entry = {"section": label, "reason": str(receipt["error"])}
+            if entry not in shown:
+                shown.append(entry)
+    return shown
 
 
 class AccountExport:
@@ -1148,7 +1158,7 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
-                    "omissions": unique_items([*self.inventory.get("gaps", []), *self.current.get("omissions", [])]),
+                    "omissions": report_omissions(self.inventory.get("gaps", []), self.current.get("omissions", []), self.progress),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
                 analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:

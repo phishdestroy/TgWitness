@@ -10528,5 +10528,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Hanya 1,000 keputusan pertama boleh dilihat.  Sempitkan carian mengikut sembang, jenis atau tarikh.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Penerima juga mesti mengesahkan cap jari kunci tandatangan yang diterima secara berasingan dan menjalankan verify.py dengan --tsa-ca dan sijil akar pihak berkuasa cap masa.",
   "Observed requests table": "Jadual permintaan yang diperhatikan",
-  "Ports and sockets table": "Jadual port dan soket"
+  "Ports and sockets table": "Jadual port dan soket",
+  "Network topology diagram": "Diagram topologi rangkaian",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Anggaran masa tinggal: {time}. Berdasarkan {done} daripada {total} tugasan yang telah selesai; saiz sembang berbeza, jadi ini boleh berubah.",
+  "chats left": "perbualan tinggal"
 }

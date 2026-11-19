@@ -10528,5 +10528,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "สามารถดูได้เพียง 1,000 ผลลัพธ์แรกเท่านั้น กรองผลการค้นหาตามการสนทนา ประเภท หรือวันที่",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "ผู้รับต้องยืนยันลายนิ้วมือของกุญแจการลงนามที่ได้รับมาแยกต่างหาก และเรียกใช้ไฟล์ verify.py พร้อมตัวเลือก --tsa-ca และใบรับรองรากของหน่วยงานกำหนดเวลา",
   "Observed requests table": "ตารางคำขอที่บันทึกไว้",
-  "Ports and sockets table": "ตารางพอร์ตและซ็อกเก็ต"
+  "Ports and sockets table": "ตารางพอร์ตและซ็อกเก็ต",
+  "Network topology diagram": "แผนผังโครงสร้างเครือข่าย",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "เวลาที่เหลือประมาณ: {time}. คำนวณจาก {done} ในจำนวน {total} งานที่เสร็จสิ้นแล้ว; เนื่องจากขนาดของข้อความแชทแตกต่างกัน จึงอาจมีการเปลี่ยนแปลงได้",
+  "chats left": "จำนวนการสนทนาที่เหลือ"
 }
