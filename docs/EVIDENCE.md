@@ -521,6 +521,8 @@ from the records of an archive under **Sequence continuity**.
 
 ### Missing message numbers (`gap_summary`)
 
+For a reader's guide to this section and to observation periods and gaps, see [Coverage and missing material](COVERAGE.md).
+
 **Preview.** `coverage.json` → `gap_summary` measures the numbers Telegram assigned and this
 collector never saw. Telegram numbers messages once per channel or supergroup, and once per
 account across private chats, bots and ordinary groups. A number between two observed

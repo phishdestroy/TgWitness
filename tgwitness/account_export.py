@@ -237,6 +237,23 @@ def attachment_policy(media, task, options):
     return info, action, limit
 
 
+
+def report_omissions(gaps, omissions, progress):
+    shown = []
+    for item in [*gaps, *omissions]:
+        if item not in shown:
+            shown.append(item)
+    for receipt in progress.values():
+        if receipt.get("outcome") == "failed" and receipt.get("error"):
+            label = str(receipt.get("category") or "task")
+            if receipt.get("chat_id") is not None:
+                label += " · chat " + str(receipt["chat_id"])
+            entry = {"section": label, "reason": str(receipt["error"])}
+            if entry not in shown:
+                shown.append(entry)
+    return shown
+
+
 class AccountExport:
     def __init__(self, collector, store, vault):
         self.collector, self.store, self.vault = collector, store, vault
@@ -1140,7 +1157,7 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
-                    "omissions": [*self.inventory.get("gaps", []), *self.current.get("omissions", [])],
+                    "omissions": report_omissions(self.inventory.get("gaps", []), self.current.get("omissions", []), self.progress),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
                 analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:
