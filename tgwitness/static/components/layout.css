@@ -296,6 +296,7 @@
   .board-field input[type="checkbox"] { width: 24px; height: 24px; }
   .event-details { min-width: 32px; min-height: 32px; }
   .text-link, .quiet, .secondary.small, .format-help, footer a { display: inline-flex; align-items: center; min-height: 32px; }
+  .hint > a:only-child, .sidebar-help { display: inline-flex; align-items: center; min-height: 32px; }
 }
 .notice.demo { padding: 10px 12px 10px 18px; gap: 8px 20px; }
 .demo-intro { display: flex; align-items: baseline; gap: 10px; flex: 1 1 280px; min-width: 0; }
