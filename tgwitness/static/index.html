@@ -1651,8 +1651,9 @@
 <section class="view" hidden id="view-swarm" aria-label="Swarm"></section>
 <section class="view" hidden id="view-first-run"></section>
 <section class="view" hidden id="view-chats">
+  <h1 class="visually-hidden">Chats</h1>
   <div class="chats-shell" data-panel="chat">
-    <aside class="chats-sidebar card">
+    <div class="chats-sidebar card" role="region" aria-label="Chats">
       <div class="chats-sidebar-head"><h2>Chats</h2><button class="quiet" id="chats-manage" type="button" title="Add or remove chats to watch"><svg aria-hidden="true" class="icon"><use href="#i-plus"/></svg> Choose</button></div>
       <div class="chat-search"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg><input aria-label="Search chats" id="chat-search" placeholder="Search chats" type="search" autocomplete="off"></div>
       <details class="chat-open"><summary>Open Telegram link</summary>
@@ -1660,7 +1661,7 @@
         <div id="chat-link-preview" aria-live="polite"></div>
       </details>
       <div id="chats-list"></div>
-    </aside>
+    </div>
     <section class="chat-pane card">
       <div class="chat-empty" id="chat-empty"></div>
       <div hidden id="chat-main">
