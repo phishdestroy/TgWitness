@@ -10580,6 +10580,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "گیرنده همچنین باید اثر انگشت کلید امضایی را که به‌طور جداگانه دریافت کرده است تأیید کند و دستور verify.py را با گزینه --tsa-ca و گواهی ریشه مرجع زمان‌بندی اجرا نماید.",
   "Observed requests table": "جدول درخواست‌های مشاهده‌شده",
   "Ports and sockets table": "جدول پورت‌ها و سوکت‌ها",
+  "Network topology diagram": "نمودار توپولوژی شبکه",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "زمان باقی‌مانده تخمینی: {time}. بر اساس {done} از {total} وظایف انجام‌شده؛ چت‌ها از نظر اندازه متفاوت هستند، بنابراین این مقدار می‌تواند تغییر کند.",
   "chats left": "چت‌های باقی‌مانده"
 }
