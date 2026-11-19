@@ -30,7 +30,7 @@
   its root certificate; the note gives how many of the saved records that timestamp covers, and each export asks for a
   new one for its last record. Otherwise the line names what is missing: timestamps turned off, no authority set, no
   validated timestamp yet, or no recent answer from the authority. The line also says that the recipient must confirm
-  the signing key fingerprint received separately and run `verify.py`, which the panel cannot do for them. A Bitcoin
+  the signing key fingerprint received separately and run `verify.py` with `--tsa-ca` and the authority's root certificate, which the panel cannot do for them. A Bitcoin
   proof, a witness post and an attested collection run also satisfy the minimum in `verify.py`; the line does not
   count them. It is part of `GET /api/overview/live` as `court_readiness` and is translated into the 24 other
   languages.
