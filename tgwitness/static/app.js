@@ -6358,11 +6358,22 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     if(!m.reply_to_chat)quote.addEventListener('click',()=>busy(quote,()=>jumpToReply(m)));
     bubble.append(quote);
   }
+  const origin=m.details?.forwarded_from;
+  if(origin){const who=origin.from_name||(origin.from_id!==undefined?"ID "+origin.from_id:"");
+    const tag=node("div","fwd-origin");tag.append(icon("share"),node("span","",who?tr("Forwarded from {name}",{name:who}):tr("Forwarded message")));
+    if(origin.date)tag.title=tr("Original message sent {time}",{time:fmtFull(origin.date)});
+    bubble.insertBefore(tag,bubble.querySelector(".reply-quote")?.nextSibling||bubble.querySelector(".bubble-head")?.nextSibling||bubble.firstChild);}
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
   const file=m.file?.state;
   if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
+  const counts=m.details?.reactions||[];
+  if(counts.length||m.details?.views!==undefined){const bar=node("div","bubble-reactions");
+    bar.title=tr("Counts as they were when this message was saved; Telegram updates them later.");
+    for(const r of counts)bar.append(node("span","reaction-chip",(r.reaction.startsWith("custom:")?"★":r.reaction)+" "+r.count.toLocaleString(LANG)));
+    if(m.details?.views!==undefined)bar.append(node("span","views-count",tr("{n} views",{n:m.details.views.toLocaleString(LANG)})));
+    bubble.append(bar);}
   const meta=node("div","bubble-meta");
   const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
   if(file==="saved")mark("span","pill-file","clip",tr("File saved"),tr("The attachment file is saved in this workspace."));
