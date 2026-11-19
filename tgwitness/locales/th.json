@@ -10525,5 +10525,6 @@
   "Each export asks for a new timestamp of its last record.": "การส่งออกแต่ละครั้งจะขอเวลาประทับใหม่ของบันทึกสุดท้าย",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "ผู้รับต้องยืนยันลายนิ้วมือของกุญแจการลงนามที่ได้รับมาแยกต่างหาก และเรียกใช้ไฟล์ verify.py",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "หากต้องการเก็บประวัติปัจจุบันของบัญชีไว้ในไฟล์เก็บถาวรแยกต่างหาก ให้ใช้ Exports → Telegram account ระบบจะค้นหาทุกการสนทนาที่สามารถเข้าถึงได้ก่อนที่กระบวนการนี้จะเริ่มขึ้น รวมถึงการสนทนาที่ถูกเก็บถาวรด้วย การสนทนาแต่ละครั้งจะมีเคอร์เซอร์ที่สามารถกลับมาต่อได้",
-  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "สามารถดูได้เพียง 1,000 ผลลัพธ์แรกเท่านั้น กรองผลการค้นหาตามการสนทนา ประเภท หรือวันที่"
+  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "สามารถดูได้เพียง 1,000 ผลลัพธ์แรกเท่านั้น กรองผลการค้นหาตามการสนทนา ประเภท หรือวันที่",
+  "Network topology diagram": "แผนผังโครงสร้างเครือข่าย"
 }

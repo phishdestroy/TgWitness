@@ -10586,5 +10586,6 @@
   "Each export asks for a new timestamp of its last record.": "Cada exportação solicita um novo carimbo de data e hora para seu último registro.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "O destinatário também deve confirmar a impressão digital da chave de assinatura recebida separadamente e executar o script verify.py.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Para obter um arquivo separado do histórico atual da conta, use Exportações → Conta do Telegram. A opção “Toda a conta” identifica todas as conversas acessíveis antes do início desta execução, incluindo as conversas arquivadas. Cada conversa possui seu próprio cursor, que pode ser retomado.",
-  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "É possível visualizar apenas os primeiros 1.000 resultados. Refine a pesquisa por bate-papo, tipo ou datas."
+  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "É possível visualizar apenas os primeiros 1.000 resultados. Refine a pesquisa por bate-papo, tipo ou datas.",
+  "Network topology diagram": "Diagrama da topologia da rede"
 }

@@ -10525,5 +10525,6 @@
   "Each export asks for a new timestamp of its last record.": "每次导出都会请求其最后一条记录的新时间戳。",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "收件人还必须确认单独收到的签名密钥指纹，并运行 verify.py。",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "若要获取该账号当前历史记录的独立存档，请使用“导出”→“Telegram 账号”。全账号范围会在此运行开始前检测所有可访问的对话，包括已归档的聊天。每个聊天都有自己的可恢复光标。",
-  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "仅可浏览前1,000条结果。可通过聊天、类型或日期来缩小搜索范围。"
+  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "仅可浏览前1,000条结果。可通过聊天、类型或日期来缩小搜索范围。",
+  "Network topology diagram": "网络拓扑图"
 }
