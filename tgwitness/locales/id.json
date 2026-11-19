@@ -10529,6 +10529,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Penerima juga harus memverifikasi sidik jari kunci penandatanganan yang diterima secara terpisah dan menjalankan perintah `verify.py` dengan opsi `--tsa-ca` serta sertifikat akar dari otoritas cap waktu.",
   "Observed requests table": "Tabel permintaan yang teramati",
   "Ports and sockets table": "Tabel port dan soket",
+  "Network topology diagram": "Diagram topologi jaringan",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Perkiraan waktu yang tersisa: {time}. Berdasarkan {done} dari {total} tugas yang telah diselesaikan; ukuran obrolan bervariasi, sehingga angka ini dapat berubah.",
   "chats left": "obrolan yang tersisa",
   "Forwarded message": "Pesan yang diteruskan",

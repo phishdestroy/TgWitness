@@ -10529,6 +10529,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "收件人還必須確認另行收到的簽名金鑰指紋，並使用 --tsa-ca 參數及時間戳記授權機構的根憑證來執行 verify.py。",
   "Observed requests table": "已觀察到的請求表",
   "Ports and sockets table": "埠與連接埠對照表",
+  "Network topology diagram": "網路拓撲圖",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "預估剩餘時間：{time}。此數字是根據已完成 {total} 項任務中的 {done} 項計算得出；由於各則聊天內容長度不一，因此此數字可能會有所變動。",
   "chats left": "剩餘的聊天次數",
   "Forwarded message": "轉寄的訊息",
