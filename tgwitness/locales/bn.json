@@ -10577,5 +10577,6 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "প্রাপ্তকারীকে পৃথকভাবে প্রাপ্ত স্বাক্ষর কী ফিঙ্গারপ্রিন্টও নিশ্চিত করতে হবে এবং verify.py চালাতে হবে।",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "অ্যাকাউন্টের বর্তমান ইতিহাসের পৃথক সংরক্ষণের জন্য Exports → Telegram account ব্যবহার করুন।   পুরো-অ্যাকাউন্ট পরিসর এই রান শুরু হওয়ার আগে সমস্ত প্রবেশযোগ্য ডায়ালগ, সংরক্ষিত চ্যাটসহ, সনাক্ত করে।   প্রতিটি চ্যাটের নিজস্ব পুনরায় চালানোযোগ্য কার্সর রয়েছে।",
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "শুধুমাত্র প্রথম ১,০০০ ফলাফল ব্রাউজ করা যাবে। চ্যাট, ধরন বা তারিখ অনুযায়ী অনুসন্ধান সীমিত করুন।",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "প্রাপ্তকারীকে পৃথকভাবে প্রাপ্ত স্বাক্ষর কী ফিঙ্গারপ্রিন্টও নিশ্চিত করতে হবে এবং --tsa-ca ও টাইমস্ট্যাম্প কর্তৃপক্ষের রুট সার্টিফিকেট সহ verify.py চালিয়ে যেতে হবে।",
   "Network topology diagram": "নেটওয়ার্ক টপোলজি ডায়াগ্রাম"
 }
