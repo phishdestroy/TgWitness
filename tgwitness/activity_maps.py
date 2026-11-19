@@ -330,13 +330,8 @@ def lane_rows(groups, absent, origin, step, count, say):
                 for index, part in spread(amount, start, end, origin, step, count):
                     losses[index] += part
         lost = sum(losses)
-<<<<<<< HEAD
-        total = say("{n} msgs", n=len(times)) + (" · " + say("absent {n}", n=number(lost)) if lost >= 0.05 else "")
-        rows.append({"id": key, "label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
-=======
         total = say("{n} msgs", n=thousands(say, len(times))) + (" · " + say("absent {n}", n=number(lost, say)) if lost >= 0.05 else "")
-        rows.append({"label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
->>>>>>> origin/main
+        rows.append({"id": key, "label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
     return rows
 
 
@@ -404,13 +399,8 @@ def numbered_runs(gaps, titles, links, say):
         location = links.get(chat, {}).get((low, high))
         tag = 'a' if location else 'div'
         parts.append('<li><' + tag + ' class="map-run"' + (' href="' + e(location) + '"' if location else '') + '>'
-<<<<<<< HEAD
-                     + '<strong>' + e(numbers) + '</strong><span>' + str(count) + '</span><small dir="auto">'
-                     + e(chat_title(chat, titles, say)) + '</small><small class="map-id" dir="ltr">' + (e(say("ID {id}", id=chat)) if type(chat) is int else '') + '</small><small>'
-=======
                      + '<strong>' + e(numbers) + '</strong><span>' + str(thousands(say, count)) + '</span><small dir="auto">'
-                     + e(chat_title(chat, titles, say)) + '</small><small>'
->>>>>>> origin/main
+                     + e(chat_title(chat, titles, say)) + '</small><small class="map-id" dir="ltr">' + (e(say("ID {id}", id=chat)) if type(chat) is int else '') + '</small><small>'
                      + e(say("Between {start} and {end}.", start=time_text(start), end=time_text(end))) + '</small>'
                      + ('<small>' + e(say("Open")) + ' →</small>' if location else '') + '</' + tag + '></li>')
     parts.append('</ul>')
@@ -439,15 +429,9 @@ def gap_details(gaps, titles, say):
                          + '</th><th class="num">' + e(say("Proven absent")) + '</th><th class="num">' + e(say("Likely absent"))
                          + '</th><th class="num">' + e(say("Runs with high confidence")) + '</th></tr></thead><tbody>')
             for chat, messages, proven, expected, high in rows[:200]:
-<<<<<<< HEAD
                 link = (('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))) + chat_id_tag(chat, say)
-                parts.append('<tr><td>' + link + '</td><td class="num">' + str(messages) + '</td><td class="num">' + str(proven)
-                             + '</td><td class="num">' + number(expected) + '</td><td class="num">' + str(high) + '</td></tr>')
-=======
-                link = ('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))
                 parts.append('<tr><td>' + link + '</td><td class="num">' + str(thousands(say, messages)) + '</td><td class="num">' + str(thousands(say, proven))
                              + '</td><td class="num">' + number(expected, say) + '</td><td class="num">' + str(thousands(say, high)) + '</td></tr>')
->>>>>>> origin/main
             parts.append('</tbody></table></div>')
         if shared["gaps"]:
             ordered = sorted(shared["gaps"], key=lambda g: (-g["count"], g["from"]))[:GAPS_SHOWN]
@@ -482,13 +466,8 @@ def gap_details(gaps, titles, say):
                      + '</th><th class="num">' + e(say("Runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
-<<<<<<< HEAD
-                         + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(item["present"])
-                         + '</td><td class="num">' + str(item["absent"]) + '</td><td class="num">' + str(len(item["ranges"])) + '</td></tr>')
-=======
-                         + '</a></td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
+                         + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
                          + '</td><td class="num">' + str(thousands(say, item["absent"])) + '</td><td class="num">' + str(thousands(say, len(item["ranges"]))) + '</td></tr>')
->>>>>>> origin/main
         parts.append('</tbody></table></div></div>')
     parts.append('<p class="map-note">' + e(say("Method: kernel bandwidth {minutes} minutes, up to {n} neighbouring messages on each side; message-gaps.json holds every run and verify.py recomputes it from the signed pages.",
                                                 minutes=gaps["method"]["bandwidth_seconds"] // 60, n=gaps["method"]["neighbors"])) + '</p>')
