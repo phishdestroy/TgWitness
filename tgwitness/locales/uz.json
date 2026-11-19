@@ -10582,5 +10582,7 @@
   "Ports and sockets table": "Portlar va soketlar jadvali",
   "Network topology diagram": "Tarmoq topologiyasi diagrammasi",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Taxminiy qolgan vaqt: {time}. {total} ta tugallangan vazifadan {done} tasi asosida; suhbatlar hajm jihatidan farq qiladi, shuning uchun bu o'zgarishi mumkin.",
-  "chats left": "Suhbatlar qoldi"
+  "chats left": "Suhbatlar qoldi",
+  "Search or jump to #number": "Qidirish yoki #raqamga sakrash",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Qidiruv va filtrlar ushbu suhbatdagi barcha saqlangan xabarlarni, shu jumladan avvalgi versiyalarni ham qamrab oladi. # belgisini va xabar raqamini tering, shu xabarga o'tish uchun."
 }

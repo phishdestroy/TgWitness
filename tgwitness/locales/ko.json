@@ -10531,5 +10531,7 @@
   "Ports and sockets table": "포트 및 소켓 표",
   "Network topology diagram": "네트워크 토폴로지 다이어그램",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "예상 남은 시간: {time}. 완료된 작업 {total}개 중 {done}개를 기준으로 산출된 수치이며, 채팅의 분량이 제각각이므로 이 수치는 변동될 수 있습니다.",
-  "chats left": "남은 채팅"
+  "chats left": "남은 채팅",
+  "Search or jump to #number": "검색하거나 #번호로 이동",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "검색 및 필터 기능은 이전 버전을 포함하여 이 채팅에 저장된 모든 메시지를 대상으로 합니다. # 기호와 메시지 번호를 입력하면 해당 메시지로 바로 이동할 수 있습니다."
 }

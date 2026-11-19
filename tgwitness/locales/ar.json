@@ -10786,5 +10786,7 @@
   "Ports and sockets table": "جدول المنافذ والمآخذ",
   "Network topology diagram": "مخطط هيكل الشبكة",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "الوقت المتبقي المقدر: {time}. استنادًا إلى إنجاز {done} مهمة من أصل {total}؛ وتختلف المحادثات في الحجم، لذا قد يتغير هذا الرقم.",
-  "chats left": "المحادثات المتبقية"
+  "chats left": "المحادثات المتبقية",
+  "Search or jump to #number": "ابحث أو انتقل إلى #رقم",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "تغطي ميزة البحث والمرشحات جميع الرسائل المحفوظة في هذه المحادثة، بما في ذلك الإصدارات السابقة. اكتب # ورقم الرسالة للانتقال إلى تلك الرسالة."
 }

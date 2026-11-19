@@ -10531,5 +10531,7 @@
   "Ports and sockets table": "端口和套接字表",
   "Network topology diagram": "网络拓扑图",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "预计剩余时间：{time}。基于已完成任务 {total} 项中的 {done} 项；由于聊天记录的长度各不相同，因此该数值可能会发生变化。",
-  "chats left": "剩余聊天次数"
+  "chats left": "剩余聊天次数",
+  "Search or jump to #number": "搜索或跳转至 #编号",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "搜索和筛选功能涵盖了该聊天中所有已保存的消息，包括早期版本。输入 # 加上消息编号，即可跳转到该消息。"
 }

@@ -10531,5 +10531,7 @@
   "Ports and sockets table": "Bảng cổng và ổ cắm",
   "Network topology diagram": "Sơ đồ cấu trúc mạng",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Thời gian dự kiến còn lại: {time}. Dựa trên {done} trong tổng số {total} nhiệm vụ đã hoàn thành; do các cuộc trò chuyện có độ dài khác nhau, nên con số này có thể thay đổi.",
-  "chats left": "số tin nhắn còn lại"
+  "chats left": "số tin nhắn còn lại",
+  "Search or jump to #number": "Tìm kiếm hoặc chuyển đến #số",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Tính năng tìm kiếm và lọc áp dụng cho tất cả các tin nhắn đã lưu trong cuộc trò chuyện này, bao gồm cả các phiên bản trước đó. Nhập ký hiệu # cùng số tin nhắn để chuyển đến tin nhắn đó."
 }

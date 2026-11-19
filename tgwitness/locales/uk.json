@@ -10684,5 +10684,7 @@
   "Ports and sockets table": "Таблиця портів і сокетів",
   "Network topology diagram": "Схема топології мережі",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Орієнтовний час, що залишився: {time}. Розраховано на основі {done} із {total} виконаних завдань; обсяг чатів різниться, тому цей показник може змінюватися.",
-  "chats left": "залишилося чатів"
+  "chats left": "залишилося чатів",
+  "Search or jump to #number": "Шукати або перейти до #номер",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Пошук і фільтри охоплюють усі збережені повідомлення в цьому чаті, включаючи попередні версії. Введіть символ # та номер повідомлення, щоб перейти до нього."
 }

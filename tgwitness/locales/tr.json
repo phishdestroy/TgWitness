@@ -10582,5 +10582,7 @@
   "Ports and sockets table": "Bağlantı noktaları ve soketler tablosu",
   "Network topology diagram": "Ağ topolojisi şeması",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tahmini kalan süre: {time}. {total} görevden {done}'i tamamlandı; sohbetlerin boyutu farklılık gösterdiğinden bu süre değişebilir.",
-  "chats left": "kalan sohbetler"
+  "chats left": "kalan sohbetler",
+  "Search or jump to #number": "Arama yapın veya #numaraya atlayın",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Arama ve filtreler, önceki sürümler de dahil olmak üzere bu sohbetteki tüm kaydedilmiş mesajları kapsar. # işaretini ve bir mesaj numarasını yazarak o mesaja atlayabilirsiniz."
 }

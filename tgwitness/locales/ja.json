@@ -10531,5 +10531,7 @@
   "Ports and sockets table": "ポートとソケットの一覧表",
   "Network topology diagram": "ネットワークトポロジー図",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "残り推定時間：{time}。完了したタスク{total}件のうち{done}件に基づく。チャットの長さはそれぞれ異なるため、この数値は変動する可能性があります。",
-  "chats left": "残りのチャット数"
+  "chats left": "残りのチャット数",
+  "Search or jump to #number": "検索、または#番号へ移動",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "検索とフィルタ機能は、このチャットに保存されているすべてのメッセージ（過去のバージョンを含む）を対象としています。「#」とメッセージ番号を入力すると、そのメッセージにジャンプできます。"
 }

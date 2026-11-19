@@ -5853,9 +5853,26 @@ function setChatQuery(changes){
   renderChatStatus();renderChatFeed();renderComposer();
   return loadChatMessages("open");
 }
-$("chat-search-form").addEventListener("submit",event=>{event.preventDefault();setChatQuery({});});
+const messageJump=/^#\s*(\d{1,12})$/;
+async function jumpToMessageNumber(id){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(id)){
+    const bubble=$("msg-"+id)?.querySelector(".bubble");
+    if(bubble){bubble.setAttribute("tabindex","-1");bubble.focus({preventScroll:true});}
+    return;
+  }
+  if(chat===state.chat&&profile===state.profile)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id}),true);
+}
+$("chat-search-form").addEventListener("submit",event=>{
+  event.preventDefault();
+  const jump=messageJump.exec($("chat-message-search").value.trim());
+  if(jump){clearTimeout(chatSearchTimer);return jumpToMessageNumber(Number(jump[1]));}
+  setChatQuery({});
+});
 $("chat-message-search").addEventListener("input",()=>{
-  clearTimeout(chatSearchTimer);chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
+  clearTimeout(chatSearchTimer);
+  if(messageJump.test($("chat-message-search").value.trim()))return;
+  chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
 });
 $("chat-search-clear").addEventListener("click",()=>{setChatQuery({chatSearch:""});$("chat-message-search").focus();});
 async function openChat(id,options={}){

@@ -10582,5 +10582,7 @@
   "Ports and sockets table": "पोर्ट्स और सॉकेट्स तालिका",
   "Network topology diagram": "नेटवर्क टोपोलॉजी आरेख",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "अनुमानित शेष समय: {time}। {total} पूरे हुए कार्यों में से {done} के आधार पर; चैट का आकार भिन्न होता है, इसलिए यह बदल सकता है।",
-  "chats left": "बातचीत बाकी"
+  "chats left": "बातचीत बाकी",
+  "Search or jump to #number": "खोजें या #संख्या पर जाएँ",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "खोज और फ़िल्टर इस चैट में सहेजे गए सभी संदेशों को कवर करते हैं, जिसमें पहले के संस्करण भी शामिल हैं। उस संदेश पर जाने के लिए # और संदेश संख्या टाइप करें।"
 }

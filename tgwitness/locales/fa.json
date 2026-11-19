@@ -10582,5 +10582,7 @@
   "Ports and sockets table": "جدول پورت‌ها و سوکت‌ها",
   "Network topology diagram": "نمودار توپولوژی شبکه",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "زمان باقی‌مانده تخمینی: {time}. بر اساس {done} از {total} وظایف انجام‌شده؛ چت‌ها از نظر اندازه متفاوت هستند، بنابراین این مقدار می‌تواند تغییر کند.",
-  "chats left": "چت‌های باقی‌مانده"
+  "chats left": "چت‌های باقی‌مانده",
+  "Search or jump to #number": "جستجو یا پرش به #شماره",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "جستجو و فیلترها تمام پیام‌های ذخیره‌شده در این چت، از جمله نسخه‌های قبلی را پوشش می‌دهند. برای رفتن به آن پیام، # و شماره پیام را تایپ کنید."
 }

@@ -10582,5 +10582,7 @@
   "Ports and sockets table": "Tabelle der Ports und Sockets",
   "Network topology diagram": "Netzwerktopologie-Diagramm",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Geschätzte verbleibende Zeit: {time}. Basierend auf {done} von {total} abgeschlossenen Aufgaben; da Chats unterschiedlich groß sind, kann sich dieser Wert ändern.",
-  "chats left": "verbleibende Chats"
+  "chats left": "verbleibende Chats",
+  "Search or jump to #number": "Suchen oder zu #Nummer springen",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Die Such- und Filterfunktionen umfassen alle gespeicherten Nachrichten in diesem Chat, einschließlich früherer Versionen. Gib „#“ und eine Nachrichtennummer ein, um zu dieser Nachricht zu springen."
 }

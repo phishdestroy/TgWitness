@@ -10633,5 +10633,7 @@
   "Ports and sockets table": "טבלת יציאות ושקעים",
   "Network topology diagram": "תרשים טופולוגיית הרשת",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "הזמן המשוער שנותר: {time}. על סמך {done} משימות שהושלמו מתוך {total}; גודל הצ'אטים משתנה, ולכן נתון זה עשוי להשתנות.",
-  "chats left": "שיחות שנותרו"
+  "chats left": "שיחות שנותרו",
+  "Search or jump to #number": "חפש או עבור ל-#מספר",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "החיפוש והמסננים חלים על כל ההודעות שנשמרו בצ'אט זה, כולל הגרסאות הקודמות. הקלד # ומספר ההודעה כדי לעבור להודעה זו."
 }

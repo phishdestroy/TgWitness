@@ -10531,5 +10531,7 @@
   "Ports and sockets table": "Jadual port dan soket",
   "Network topology diagram": "Diagram topologi rangkaian",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Anggaran masa tinggal: {time}. Berdasarkan {done} daripada {total} tugasan yang telah selesai; saiz sembang berbeza, jadi ini boleh berubah.",
-  "chats left": "perbualan tinggal"
+  "chats left": "perbualan tinggal",
+  "Search or jump to #number": "Cari atau lompat ke #nombor",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Carian dan penapis merangkumi semua mesej yang disimpan dalam sembang ini, termasuk versi terdahulu. Taip # dan nombor mesej untuk melangkau ke mesej tersebut."
 }
