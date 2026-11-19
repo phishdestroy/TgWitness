@@ -919,10 +919,12 @@ class EvidencePDF:
             self.directory_index = None
             if report_composition_pdf.active(self.lay):
                 self.events, self.directory_index = report_composition_pdf.indexed_events(self.events, self.records_total or 0)
-            self.lay.figures([(say("Records"), self.records_total), (say("Chats"), summary["chats"]), (say("Messages"), cats["message"]),
-                         (say("Edits"), cats["edited"]), (say("Deletions"), cats["deleted"]),
-                         *([(say("Missing on recheck"), cats["missing"])] if cats.get("missing") else []),
-                         (say("Files"), summary["files"]),
+            grouped_figure = lambda value: report.group_number(say, value)
+            self.lay.figures([(say("Records"), grouped_figure(self.records_total)), (say("Chats"), grouped_figure(summary["chats"])),
+                         (say("Messages"), grouped_figure(cats["message"])),
+                         (say("Edits"), grouped_figure(cats["edited"])), (say("Deletions"), grouped_figure(cats["deleted"])),
+                         *([(say("Missing on recheck"), grouped_figure(cats["missing"]))] if cats.get("missing") else []),
+                         (say("Files"), grouped_figure(summary["files"])),
                          (say("Timestamps"), summary["timestamps"] if summary["timestamps"] or self.context.get("archive")
                           else None),
                          (say("Observation period"), report.observed_text(say, self.coverage, (

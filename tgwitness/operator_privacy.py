@@ -6,7 +6,7 @@ IPV4 = re.compile(r"(?<![\w.])(?:\d{1,3}\.){3}\d{1,3}(?![\w.])")
 IPV6 = re.compile(r"(?<![\w:])(?:[0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F:.]{0,45}(?:%[A-Za-z0-9_.-]{1,64})?(?![\w:])")
 
 
-URL_LOGIN = re.compile(r"(\b[a-z][a-z0-9+.-]*://)[^/\s@]+@", re.I)
+URL_LOGIN = re.compile(r"(\b[a-z][a-z0-9+.-]{0,31}://)[^/\s@]+@", re.I)
 BEARER = re.compile(r"(\bBearer\s+)[^\s,;\"']+", re.I)
 CREDENTIAL = re.compile(
     r'''(?i)(\b(?:api[_-]?(?:key|hash)|access[_-]?token|auth[_-]?key|token|secret|password|phone_code|login_code)["']?\s*[:=]\s*)(["']?)([^\s&<>"',;}]+)(\2)''')
