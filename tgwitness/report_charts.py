@@ -157,6 +157,11 @@ def heat_svg(chart, say):
     return ''.join(parts)
 
 
+def _grouped(say, value):
+    from .report import group_number
+    return group_number(say, value)
+
+
 def bars_html(chart, say):
     if error := _unavailable(chart, say):
         return error
@@ -164,7 +169,7 @@ def bars_html(chart, say):
     maximum = max((r["total"] for r in rows), default=0) or 1
     parts = ['<div class="rank-chart">']
     for row in rows:
-        parts.append('<div class="rank-row"><span class="rank-label">'+_e(label(row, say))+'</span><strong>'+str(row["total"])
+        parts.append('<div class="rank-row"><span class="rank-label">'+_e(label(row, say))+'</span><strong>'+str(_grouped(say, row["total"]))
                      +'</strong><svg aria-hidden="true" viewBox="0 0 800 10" preserveAspectRatio="none">'
                      +'<rect class="chart-track" width="800" height="10" rx="3"/><rect class="chart-bar" width="'
                      +str(800*row["total"]/maximum)+'" height="10" rx="3"/></svg></div>')
