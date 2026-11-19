@@ -140,6 +140,11 @@ python -m tgwitness.cloud check-report --report certificate.pdf --verifier-finge
 downloading them from Intel. Gateway DNS is not available here: Phala has no provider firewall
 for outgoing traffic.
 
+`verify --source` builds the reference installer from your checkout, which runs that
+checkout's code on this computer. For a deployment made from a repository other than the
+official one, `verify` refuses unless you also pass `--trust-source`; do so only for a
+checkout you have read.
+
 ### Offline check with verify.py
 
 A recipient without a Phala account checks the quotes with the standalone verifier, offline:
@@ -471,6 +476,9 @@ Logpush, which would keep Cloudflare's own copy in R2, is an Enterprise feature:
 plan Cloudflare answers `logpush is not enabled for this account`. Its Gateway log lasts 24
 hours there, so evidence mode copies it into the signed journal (**Cloudflare Gateway's log of
 this server's DNS queries**, a read-only token with Account Analytics Read).
+
+`--gateway-location ID` (with `--gateway-dns`) uses an existing Gateway DNS location, given by its
+32-character ID, instead of creating one; `destroy` leaves it in place.
 
 Without a Zero Trust plan an account has one DNS location. When Cloudflare refuses another,
 the server shares the existing one and its queries are told apart by its address; that filter
