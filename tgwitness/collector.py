@@ -3066,9 +3066,9 @@ class Collector:
             return None
         try:
             answer = await asyncio.wait_for(self.client(functions.account.GetContentSettingsRequest()), 30)
+            before, can = bool(answer.sensitive_enabled), bool(answer.sensitive_can_change)
         except Exception:
             return None
-        before, can = bool(answer.sensitive_enabled), bool(answer.sensitive_can_change)
         enabled, error = before, None
         if not before and can:
             try:
