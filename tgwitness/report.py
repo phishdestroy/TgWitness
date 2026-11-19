@@ -1253,7 +1253,13 @@ def counted(say, key, n):
     text = say(key, n=n)
     if type(n) is not int or abs(n) < 1000:
         return text
-    return text.replace(str(n), format(n, ",").replace(",", "," if getattr(say, "language", "en") == "en" else "\u202f"), 1)
+    return text.replace(str(n), group_number(say, n), 1)
+
+
+def group_number(say, n):
+    if type(n) is not int or abs(n) < 1000:
+        return n
+    return format(n, ",").replace(",", "," if getattr(say, "language", "en") == "en" else "\u202f")
 
 
 def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
