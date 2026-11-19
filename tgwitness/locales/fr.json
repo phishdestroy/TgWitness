@@ -10584,5 +10584,6 @@
   "Can be handed to a court: no · missing: {items}": "Peut être transmis à un tribunal : non · manquant : {items}",
   "A validated timestamp covers {through} of {total} records.": "Un horodatage validé couvre {through} des {total} enregistrements.",
   "Each export asks for a new timestamp of its last record.": "Chaque exportation demande un nouvel horodatage pour son dernier enregistrement.",
-  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Le destinataire doit également confirmer l'empreinte digitale de la clé de signature reçue séparément et exécuter le script verify.py."
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Le destinataire doit également confirmer l'empreinte digitale de la clé de signature reçue séparément et exécuter le script verify.py.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Pour obtenir une archive distincte de l'historique actuel du compte, utilisez « Exportations → Compte Telegram ». La portée « Tout le compte » détecte toutes les conversations accessibles avant le début de cette opération, y compris les discussions archivées. Chaque discussion dispose de son propre curseur permettant de reprendre la lecture."
 }

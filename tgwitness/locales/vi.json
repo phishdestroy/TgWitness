@@ -10523,5 +10523,6 @@
   "Can be handed to a court: no · missing: {items}": "Có thể được chuyển cho tòa án: không · thiếu: {items}",
   "A validated timestamp covers {through} of {total} records.": "Dấu thời gian đã được xác thực bao gồm {through} trong tổng số {total} bản ghi.",
   "Each export asks for a new timestamp of its last record.": "Mỗi lần xuất dữ liệu đều yêu cầu một dấu thời gian mới cho bản ghi cuối cùng của nó.",
-  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Người nhận cũng phải xác nhận dấu vân tay của khóa ký đã nhận được riêng biệt và chạy lệnh `verify.py`."
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Người nhận cũng phải xác nhận dấu vân tay của khóa ký đã nhận được riêng biệt và chạy lệnh `verify.py`.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Để tạo bản lưu trữ riêng biệt về lịch sử hiện tại của tài khoản, hãy sử dụng mục Xuất → Tài khoản Telegram. Phạm vi toàn bộ tài khoản sẽ phát hiện tất cả các cuộc trò chuyện có thể truy cập trước khi quá trình này bắt đầu, bao gồm cả các cuộc trò chuyện đã được lưu trữ. Mỗi cuộc trò chuyện đều có con trỏ riêng có thể tiếp tục từ điểm dừng."
 }

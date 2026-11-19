@@ -131,7 +131,7 @@ erişimi olmalıdır.
 Mevcut hesaplar için [hesaplar ve oturum biçimleri](../ACCOUNTS.md) kılavuzuna bakın: panel
 Telethon StringSession, Telethon/Pyrogram SQLite, tek hesaplı TData ZIP ve desteklenen hesap
 JSON dosyalarını kabul eder. Oturumu ve ona eşlik eden JSON dosyasını birlikte seçip
-**Hesap bağla** düğmesine basın. Aynı isteğe bağlı API ayarlarıyla QR koduyla giriş de
+**Dosyaları kontrol et**, ardından **Hesap bağla** düğmesine basın. Aynı isteğe bağlı API ayarlarıyla QR koduyla giriş de
 kullanılabilir. TDLib, bot oturumları ve CSV/JSON hesap envanterleri desteklenmez.
 
 Birden fazla hesap için **Hesaplar → Hesapları içe aktar** seçeneğini kullanın ve desteklenen

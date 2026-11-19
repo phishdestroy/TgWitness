@@ -301,6 +301,8 @@ ZIP separately with a trusted fingerprint/checkpoint.
    a history snapshot adds the state after it.
 
 Evidence ZIPs exclude sessions/private keys and are not full service backups.
+`tgwitness backup FOLDER` makes the same copy while the panel keeps running and leaves out the
+search index, which rebuilds itself; see [Updates and backups](DEPLOYMENT.md#updates-and-backups).
 Four things are protected differently:
 
 | What | Protection |
