@@ -53,7 +53,7 @@ CSS = """
 .map-run-list li{min-width:0}.map-run{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px 14px;border:1px solid var(--line);border-inline-start:3px solid var(--map-loss);border-radius:6px;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
 a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
 @media(max-width:720px){.map-run-list{grid-template-columns:1fr}.activity-map .map-card{padding:16px}}
-@media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}}
+@media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}.map-lanes thead th[scope=colgroup]{writing-mode:vertical-rl;transform:rotate(180deg);height:80px;padding:0 0 4px!important;text-align:end;white-space:nowrap;overflow:visible}}
 @media print{.map-grid td,.map-grid td::after,.map-legend i{print-color-adjust:exact;-webkit-print-color-adjust:exact}.map-scroll{overflow:visible}}
 """
 
