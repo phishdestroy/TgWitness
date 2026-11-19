@@ -89,7 +89,7 @@ Depois da configuração, **Conversas → Escolha** altera os chats selecionados
 
 As credenciais da API identificam seu aplicativo; por si sós, elas não autorizam uma conta. Grupos privados não precisam de nome de usuário público, mas sua conta precisa ter acesso.
 
-Para contas existentes, consulte [contas e formatos de sessão](../ACCOUNTS.md): o painel aceita Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP de conta única e JSON de conta compatível. Selecione juntos uma sessão e o JSON que a acompanha e pressione **Conectar conta**. O login por QR também está disponível com as mesmas configurações opcionais de API. TDLib, sessões de bot e inventários de contas em CSV/JSON não são suportados.
+Para contas existentes, consulte [contas e formatos de sessão](../ACCOUNTS.md): o painel aceita Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP de conta única e JSON de conta compatível. Selecione juntos uma sessão e o JSON que a acompanha e pressione **Verificar arquivos**, e depois **Conectar conta**. O login por QR também está disponível com as mesmas configurações opcionais de API. TDLib, sessões de bot e inventários de contas em CSV/JSON não são suportados.
 
 Para várias contas, use **Contas → Importar contas** e selecione os arquivos de sessão compatíveis. Os arquivos JSON que os acompanham são pareados pelo nome base; cada conta importada recebe seu próprio espaço de trabalho. Veja [importação em massa e grupos de contas](../ACCOUNTS.md#bulk-import-and-account-groups).
 

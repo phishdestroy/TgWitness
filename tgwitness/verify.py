@@ -1,7 +1,7 @@
-# TgWitness verifier sources SHA-256: 6d9346e87c88bb1b702f21dca92f080f440602c1749fa0a56cf7e1dbf993961d
+# TgWitness verifier sources SHA-256: 0e91a40f3fe2b15766419530999cf96550a5e1c96806ad7cc677cac5553dba53
 """Standalone verifier"""
 import argparse
-import base64
+import base64 as _base64
 import bisect
 import hashlib
 import heapq
@@ -29,6 +29,21 @@ from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from cryptography.x509 import ocsp
+
+class StrictBase64:
+    def b64decode(self, value, altchars=None, validate=False):
+        data = _base64.b64decode(value, altchars, validate)
+        if validate:
+            raw = value.encode("ascii") if isinstance(value, str) else bytes(value)
+            if _base64.b64encode(data, altchars) != raw:
+                raise ValueError("Non-canonical base64 encoding")
+        return data
+
+    def __getattr__(self, name):
+        return getattr(_base64, name)
+
+
+base64 = StrictBase64()
 
 FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
           "actor_id", "payload", "previous_hash")
@@ -239,6 +254,14 @@ def read_json_file(path):
     if path.stat().st_size > MAX_JSON_BYTES:
         raise ValueError(path.name + " exceeds the verifier's size limit")
     return strict_json(path.read_text(encoding="utf-8"))
+
+
+
+def fingerprint_argument(value):
+    text = re.sub(r"[\s:]", "", value).lower()
+    if not re.fullmatch(r"[a-f0-9]{64}", text):
+        raise argparse.ArgumentTypeError("expected a SHA-256 fingerprint of 64 hexadecimal digits; upper case, spaces and colons are accepted")
+    return text
 
 
 import getpass
@@ -4092,7 +4115,7 @@ class EventChain:
         count = self.count + 1
         if set(event) != set(FIELDS) | {"hash", "signature"}:
             raise ValueError("Unexpected or missing fields at event " + str(count))
-        if event["seq"] != count or event["previous_hash"] != self.previous:
+        if type(event["seq"]) is not int or event["seq"] != count or event["previous_hash"] != self.previous:
             raise ValueError("Broken sequence or hash chain at event " + str(count))
 
     def content(self, event):
@@ -4453,7 +4476,7 @@ def verify_selection(path, expected_fingerprint=None, evidence=None):
         def records():
             with archive.open(member) as stream:
                 for line in bounded_lines(stream):
-                    yield json.loads(line)
+                    yield strict_json(line)
 
         for record in chat_messages(archive) if kind == "chat" else records():
             number = record.get(identity)
@@ -4553,7 +4576,7 @@ def image_command(argv):
     parser = argparse.ArgumentParser(prog="verify.py IMAGE.png [IMAGE.png ...] IMAGES.sig.json",
                                      description="Check TgWitness chat images against their signature file.")
     parser.add_argument("files", nargs="+", type=Path)
-    parser.add_argument("--fingerprint", help="Collector key fingerprint retained independently")
+    parser.add_argument("--fingerprint", type=fingerprint_argument, help="Collector key fingerprint retained independently")
     parser.add_argument("--evidence", type=Path, help="Evidence ZIP that must contain every signed record of the images")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
@@ -7315,7 +7338,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             for line in bounded_lines(stream):
                 if not line.strip():
                     continue
-                event = json.loads(line)
+                event = strict_json(line)
                 yield event
                 payload, kind = event["payload"], event["kind"]
                 if kind == "witness.daily":
@@ -7895,7 +7918,7 @@ def check_channel(witness, source):
             try:
                 raw = unb64url(body)
                 key.verify(unb64url(signature), raw)
-                statement = json.loads(raw)
+                statement = strict_json(raw)
             except Exception:
                 invalid.append(message_id)
                 continue
@@ -8047,7 +8070,7 @@ def verify_history_report(path, expected_fingerprint=None, bundle=None):
         cursors, cursor_format = {}, None
         with open_archive(bundle) as archive, archive.open("events.jsonl") as stream:
             for line in bounded_lines(stream):
-                event = json.loads(line)
+                event = strict_json(line)
                 if event["seq"] > boundary:
                     break
                 payload = event["payload"]
@@ -11066,13 +11089,13 @@ def verification_parser():
         "For a .tgwpw export: verify.py unseal-password SOURCE --out DESTINATION")
     parser.add_argument("bundle", nargs="?",
                         help="Evidence/chat/account/disclosure/witness ZIP, report JSON/HTML, or a stopped distributed acquisition directory")
-    parser.add_argument("--fingerprint", help="Public key fingerprint retained independently")
+    parser.add_argument("--fingerprint", type=fingerprint_argument, help="Public key fingerprint retained independently")
     parser.add_argument("--checkpoint", type=Path, help="Previously retained signed checkpoint JSON")
     parser.add_argument("--tsa-ca", type=Path, action="append",
                         help="Root certificate(s) of a timestamp authority (PEM); repeat for several authorities. "
                              "Tokens from an authority without a root here are reported as not checked")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
-    parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
+    parser.add_argument("--witness-fingerprint", type=fingerprint_argument, help="Witness key fingerprint retained independently")
     parser.add_argument("--require-witness", action="store_true",
                         help="Require a pinned witness checkpoint matching the full evidence ZIP's final record")
     parser.add_argument("--channel", help="Witness channel posts: Telegram Desktop result.json, saved page or t.me/s URL; post dates count as external time only from a live https://t.me/s/ page")
@@ -11096,7 +11119,7 @@ def verification_parser():
     parser.add_argument("--board", action="store_true", help="Print Case Board collections, dangling references and slice changes")
     parser.add_argument("--compare", type=Path, metavar="SECOND_ZIP",
                         help="Compare two chat exports: messages present in only one of them and changed messages")
-    parser.add_argument("--compare-fingerprint", help="Trusted fingerprint of the second archive's signer")
+    parser.add_argument("--compare-fingerprint", type=fingerprint_argument, help="Trusted fingerprint of the second archive's signer")
     parser.add_argument("--max-gib", type=int, default=MAX_UNCOMPRESSED_GIB,
                         help="Largest uncompressed archive to read, in GiB (default 4)")
     output = parser.add_mutually_exclusive_group()

@@ -1,4 +1,5 @@
 from .common import (
+    fingerprint_argument,
     MAX_MANIFEST_BYTES,
     MAX_UNCOMPRESSED_GIB,
     Path,
@@ -214,13 +215,13 @@ def verification_parser():
         "For a .tgwpw export: verify.py unseal-password SOURCE --out DESTINATION")
     parser.add_argument("bundle", nargs="?",
                         help="Evidence/chat/account/disclosure/witness ZIP, report JSON/HTML, or a stopped distributed acquisition directory")
-    parser.add_argument("--fingerprint", help="Public key fingerprint retained independently")
+    parser.add_argument("--fingerprint", type=fingerprint_argument, help="Public key fingerprint retained independently")
     parser.add_argument("--checkpoint", type=Path, help="Previously retained signed checkpoint JSON")
     parser.add_argument("--tsa-ca", type=Path, action="append",
                         help="Root certificate(s) of a timestamp authority (PEM); repeat for several authorities. "
                              "Tokens from an authority without a root here are reported as not checked")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
-    parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
+    parser.add_argument("--witness-fingerprint", type=fingerprint_argument, help="Witness key fingerprint retained independently")
     parser.add_argument("--require-witness", action="store_true",
                         help="Require a pinned witness checkpoint matching the full evidence ZIP's final record")
     parser.add_argument("--channel", help="Witness channel posts: Telegram Desktop result.json, saved page or t.me/s URL; post dates count as external time only from a live https://t.me/s/ page")
@@ -244,7 +245,7 @@ def verification_parser():
     parser.add_argument("--board", action="store_true", help="Print Case Board collections, dangling references and slice changes")
     parser.add_argument("--compare", type=Path, metavar="SECOND_ZIP",
                         help="Compare two chat exports: messages present in only one of them and changed messages")
-    parser.add_argument("--compare-fingerprint", help="Trusted fingerprint of the second archive's signer")
+    parser.add_argument("--compare-fingerprint", type=fingerprint_argument, help="Trusted fingerprint of the second archive's signer")
     parser.add_argument("--max-gib", type=int, default=MAX_UNCOMPRESSED_GIB,
                         help="Largest uncompressed archive to read, in GiB (default 4)")
     output = parser.add_mutually_exclusive_group()

@@ -40,6 +40,7 @@
 .export-task-choices button { text-align: start; display: grid; gap: 6px; padding: 18px 20px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: var(--radius-panel); white-space: normal; }
 .export-task-choices button span { font-weight: 400; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .export-task-choices button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.export-task-choices button[aria-pressed="true"] span { color: var(--text-2); }
 .export-task-choices button:hover { border-color: var(--accent); }
 .export-task-choices:has(button[hidden]) { grid-template-columns: 1fr; }
 .export-options { margin: 20px 0; border: 1px solid var(--border); border-radius: var(--radius-panel); background: var(--surface); }
@@ -215,3 +216,9 @@ button.home-summary-item:focus-visible { outline: 2px solid var(--focus); outlin
 .home-summary-item[data-tone=warn] .home-summary-dot { background: var(--warning); }
 .home-summary-item[data-tone=bad] { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
 .home-summary-item[data-tone=bad] .home-summary-dot { background: var(--danger); }
+.home-court { display: none; margin: 0 0 14px; padding: 10px 14px; border: 1px solid var(--border); border-inline-start-width: 4px; border-radius: 10px; background: var(--surface); }
+html[data-ui-level=simple] .home-court { display: grid; gap: 4px; }
+.home-court[data-ready=true] { border-color: var(--success); }
+.home-court[data-ready=false] { border-color: var(--warning-border); background: var(--warning-soft); }
+.home-court strong { font-size: 14.5px; overflow-wrap: anywhere; }
+.home-court small { overflow-wrap: anywhere; }

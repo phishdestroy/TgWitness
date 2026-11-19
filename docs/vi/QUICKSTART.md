@@ -88,7 +88,7 @@ Sau khi thiết lập, **Cuộc trò chuyện → Chọn** dùng để thay đ�
 
 Thông tin xác thực API dùng để định danh ứng dụng của bạn; bản thân chúng không ủy quyền cho tài khoản. Nhóm riêng tư không cần tên người dùng công khai, nhưng tài khoản của bạn phải có quyền truy cập.
 
-Với tài khoản có sẵn, xem [định dạng tài khoản và phiên](../ACCOUNTS.md): bảng điều khiển chấp nhận Telethon StringSession, Telethon/Pyrogram SQLite, tệp ZIP TData của một tài khoản và JSON tài khoản được hỗ trợ. Chọn cùng lúc tệp phiên và tệp JSON đi kèm, rồi nhấn **Kết nối tài khoản**. Đăng nhập bằng mã QR cũng khả dụng với cùng các cài đặt API tùy chọn. TDLib, phiên bot và danh sách tài khoản dạng CSV/JSON không được hỗ trợ.
+Với tài khoản có sẵn, xem [định dạng tài khoản và phiên](../ACCOUNTS.md): bảng điều khiển chấp nhận Telethon StringSession, Telethon/Pyrogram SQLite, tệp ZIP TData của một tài khoản và JSON tài khoản được hỗ trợ. Chọn cùng lúc tệp phiên và tệp JSON đi kèm, rồi nhấn **Kiểm tra tệp**, sau đó **Kết nối tài khoản**. Đăng nhập bằng mã QR cũng khả dụng với cùng các cài đặt API tùy chọn. TDLib, phiên bot và danh sách tài khoản dạng CSV/JSON không được hỗ trợ.
 
 Với nhiều tài khoản, dùng **Tài khoản → Nhập các tài khoản** và chọn các tệp phiên được hỗ trợ của chúng. Các tệp JSON đi kèm được ghép cặp theo tên tệp (basename); mỗi tài khoản được nhập sẽ có không gian làm việc riêng. Xem [nhập hàng loạt và nhóm tài khoản](../ACCOUNTS.md#bulk-import-and-account-groups).
 

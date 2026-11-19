@@ -10665,5 +10665,17 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Час надсилання з Telegram не записано; повідомлення датовано й розміщено за часом, коли його зафіксував TgWitness.",
   "Copy URL": "Скопіювати URL",
   "The original source, identity map and private selection criteria are NOT included.": "Вихідний архів, таблицю відповідності особистостей і закриті критерії відбору НЕ включено.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Для великих пакетів додайте --max-gib із розміром після розпакування. index.html захищений маніфестом."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Для великих пакетів додайте --max-gib із розміром після розпакування. index.html захищений маніфестом.",
+  "independent timestamps are turned off": "незалежні мітки часу вимкнені",
+  "no timestamp authority is set": "не встановлено джерело часу",
+  "a validated timestamp from a third party": "перевірена мітка часу від стороннього джерела",
+  "a recent answer from the timestamp authority": "недавня відповідь від органу, що відповідає за фіксацію часу",
+  "saved records": "збережені записи",
+  "Readiness for court": "Готовність до судового розгляду",
+  "Can be handed to a court: yes": "Може бути передано до суду: так",
+  "Can be handed to a court: no · missing: {items}": "Може бути передано до суду: ні · відсутнє: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Перевірена мітка часу охоплює {through} із {total} записів.",
+  "Each export asks for a new timestamp of its last record.": "Під час кожного експорту запитується новий часовий штамп останнього запису.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Одержувач також повинен підтвердити відбиток ключа підпису, отриманий окремо, та запустити скрипт verify.py.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Щоб створити окремий архів поточної історії облікового запису, скористайтеся меню «Експорт» → «Обліковий запис Telegram». При виборі опції «Весь обліковий запис» перед початком процесу виявляються всі доступні діалоги, включаючи заархівовані чати. Кожен чат має власний курсор, за допомогою якого можна відновити роботу."
 }

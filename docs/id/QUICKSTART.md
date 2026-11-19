@@ -126,7 +126,7 @@ Grup privat tidak memerlukan nama pengguna publik, tetapi akun Anda harus memili
 
 Untuk akun yang sudah ada, lihat [akun dan format sesi](../ACCOUNTS.md): panel menerima Telethon
 StringSession, Telethon/Pyrogram SQLite, TData ZIP satu akun, dan JSON akun yang didukung. Pilih
-sesi beserta JSON pendampingnya sekaligus, lalu tekan **Hubungkan akun**. Login QR juga tersedia
+sesi beserta JSON pendampingnya sekaligus, lalu tekan **Periksa berkas**, kemudian **Hubungkan akun**. Login QR juga tersedia
 dengan pengaturan API opsional yang sama. TDLib, sesi bot, dan daftar akun CSV/JSON tidak didukung.
 
 Untuk beberapa akun, gunakan **Akun → Impor akun** dan pilih berkas sesi yang didukung.

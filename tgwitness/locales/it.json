@@ -10573,5 +10573,17 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "L’ora di invio di Telegram non è stata registrata; questo messaggio è datato e collocato in base a quando TgWitness lo ha osservato.",
   "Copy URL": "Copia URL",
   "The original source, identity map and private selection criteria are NOT included.": "La fonte originale, la mappa delle identità e i criteri di selezione privati NON sono inclusi.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Per i pacchetti grandi aggiungere --max-gib con la dimensione estratta. index.html è protetto dal manifest."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Per i pacchetti grandi aggiungere --max-gib con la dimensione estratta. index.html è protetto dal manifest.",
+  "independent timestamps are turned off": "I timestamp indipendenti sono disattivati",
+  "no timestamp authority is set": "Non è stata impostata alcuna autorità per i timestamp",
+  "a validated timestamp from a third party": "un timestamp convalidato da una terza parte",
+  "a recent answer from the timestamp authority": "una risposta recente da parte dell'autorità di certificazione temporale",
+  "saved records": "record salvati",
+  "Readiness for court": "Preparazione per l'udienza",
+  "Can be handed to a court: yes": "Può essere presentato in tribunale: sì",
+  "Can be handed to a court: no · missing: {items}": "Può essere presentato in tribunale: no · mancante: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Un timestamp convalidato copre {through} dei {total} record.",
+  "Each export asks for a new timestamp of its last record.": "Ogni operazione di esportazione richiede un nuovo timestamp relativo al suo ultimo record.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Il destinatario deve inoltre confermare l'impronta digitale della chiave di firma ricevuta separatamente ed eseguire il comando verify.py.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Per creare un archivio separato della cronologia attuale dell'account, seleziona Esportazioni → Account Telegram. L'opzione \"Intero account\" individua tutte le conversazioni accessibili prima dell'avvio di questa operazione, comprese le chat archiviate. Ogni chat dispone di un proprio cursore riprendibile."
 }

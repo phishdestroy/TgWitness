@@ -8,7 +8,9 @@
 
 **Preview.** `tgwitness search`, `context`, `messages`, `stats` and `export` read
 saved observations for scripts and AI agents. They cannot send anything to
-Telegram, change settings or modify the signed journal.
+Telegram, change settings or modify the signed journal. `tgwitness index` and
+`tgwitness backup` ([below](#index-and-backup)) work on a local data directory and
+need no token.
 
 With `--json`, stdout carries exactly one JSON document (`export` writes JSON Lines).
 Progress, hints and errors go to stderr. Exit codes are stable:
@@ -55,9 +57,9 @@ code `3`; read through the panel instead. Without `--data-dir`, `TGWITNESS_DATA`
 | --- | --- |
 | `tgwitness search QUERY [--chat ID] [--since] [--until] [--any] [--limit N] [--offset N]` | Best matches first, with word forms, exact phrases in quotes, domains and `@username` ([syntax](SEARCH.md#search-syntax)) |
 | `tgwitness search QUERY --exact [--before SEQ]` | Exact text, newest first, without the index |
-| `tgwitness context CHAT_ID MESSAGE_ID` | Saved messages within ten message IDs on either side |
-| `tgwitness messages` | Chats you can read |
-| `tgwitness messages CHAT_ID [--since] [--until] [--before SEQ]` | Saved messages of the chat, newest first |
+| `tgwitness context CHAT_ID MESSAGE_ID [--limit N] [--before SEQ]` | Saved messages within ten message IDs on either side |
+| `tgwitness messages [--limit N] [--offset N]` | Chats you can read |
+| `tgwitness messages CHAT_ID [--since] [--until] [--limit N] [--before SEQ]` | Saved messages of the chat, newest first |
 | `tgwitness messages CHAT_ID --message ID` | Every saved version and deletion record of one message |
 | `tgwitness stats [--chat ID] [--sender ID] [--since] [--until] [--top N]` | Activity statistics, below |
 | `tgwitness export [--chat ID] [--since] [--until] [--output FILE]` | Saved observations as JSON Lines in journal order |
@@ -113,6 +115,22 @@ checks.
 The panel rechecks access before emitting each record, including the completion
 record. Revoked or expired access leaves an incomplete export. Lazy page reads
 share the archive worker limit with other queries and have a bounded wait.
+
+### Index and backup
+
+These two commands read the data directory directly and take no token or `--url`.
+
+| Command | Result |
+| --- | --- |
+| `tgwitness index status [--workspace ID] [--data-dir DIR] [--json]` | Search index state of one workspace or, by default, every workspace: mode, `ready`, `building` or `not built`, indexed and journal head sequence. Works while the panel runs |
+| `tgwitness index rebuild [--workspace ID] [--data-dir DIR] [--json]` | Rebuilds the index from the first journal record. Rewrites only the derived index, never the signed journal. Exits with code `3` while the panel has the workspace open. Nothing is built when the workspace keeps its index in memory or has search off |
+| `tgwitness backup FOLDER [--data-dir DIR] [--json]` | Copies the whole data directory into a new or empty folder outside it while the panel keeps running, and writes `backup-manifest.json` with every file's SHA-256 and the journal heads |
+
+`index` accepts `--workspace default` or a workspace ID; the default is `all`. The
+backup skips temporary exports, SQLite sidecar files and lock files. The folder
+holds the Telegram session and signing keys, so keep it as private as the data
+directory. [Backup, restore, and capacity](DEPLOYMENT.md#backup-restore-and-capacity)
+describes restoring and what the next start records.
 
 ## Agent skill
 

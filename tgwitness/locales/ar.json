@@ -10767,5 +10767,17 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "لم يُسجَّل وقت الإرسال من Telegram؛ لذلك تُؤرَّخ هذه الرسالة وتُرتَّب حسب وقت رصد TgWitness لها.",
   "Copy URL": "نسخ عنوان URL",
   "The original source, identity map and private selection criteria are NOT included.": "المصدر الأصلي وجدول مطابقة الهويات ومعايير الاختيار الخاصة غير مضمّنة.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "للحزم الكبيرة أضف --max-gib مع الحجم بعد فك الضغط. ملف index.html محمي ببيان الأرشيف."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "للحزم الكبيرة أضف --max-gib مع الحجم بعد فك الضغط. ملف index.html محمي ببيان الأرشيف.",
+  "independent timestamps are turned off": "تم تعطيل الطوابع الزمنية المستقلة",
+  "no timestamp authority is set": "لم يتم تعيين أي سلطة للطابع الزمني",
+  "a validated timestamp from a third party": "طابع زمني مُصدق من جهة خارجية",
+  "a recent answer from the timestamp authority": "إجابة حديثة من هيئة الطوابع الزمنية",
+  "saved records": "السجلات المحفوظة",
+  "Readiness for court": "الاستعداد للمثول أمام المحكمة",
+  "Can be handed to a court: yes": "يمكن إحالتها إلى المحكمة: نعم",
+  "Can be handed to a court: no · missing: {items}": "يمكن تقديمه إلى المحكمة: لا · غير موجود: {items}",
+  "A validated timestamp covers {through} of {total} records.": "يغطي الطابع الزمني الذي تم التحقق من صحته {through} سجلًا من أصل {total} سجلًا.",
+  "Each export asks for a new timestamp of its last record.": "تطلب كل عملية تصدير طابعًا زمنيًا جديدًا لآخر سجل فيها.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "يجب على المستلم أيضًا تأكيد بصمة مفتاح التوقيع التي تلقاها بشكل منفصل وتشغيل ملف verify.py.",
+  "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "للحصول على أرشيف منفصل لسجل الحساب الحالي، استخدم «التصدير» → «حساب Telegram». ويشمل نطاق الحساب بأكمله جميع المحادثات التي يمكن الوصول إليها قبل بدء هذه العملية، بما في ذلك المحادثات المؤرشفة. وتحتوي كل محادثة على مؤشر خاص بها يمكن استئناف العمل منه."
 }

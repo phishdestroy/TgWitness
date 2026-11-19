@@ -1,6 +1,6 @@
 """Standalone verifier"""
 import argparse
-import base64
+import base64 as _base64
 import bisect
 import hashlib
 import heapq
@@ -28,6 +28,21 @@ from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from cryptography.x509 import ocsp
+
+class StrictBase64:
+    def b64decode(self, value, altchars=None, validate=False):
+        data = _base64.b64decode(value, altchars, validate)
+        if validate:
+            raw = value.encode("ascii") if isinstance(value, str) else bytes(value)
+            if _base64.b64encode(data, altchars) != raw:
+                raise ValueError("Non-canonical base64 encoding")
+        return data
+
+    def __getattr__(self, name):
+        return getattr(_base64, name)
+
+
+base64 = StrictBase64()
 
 FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
           "actor_id", "payload", "previous_hash")
@@ -242,4 +257,12 @@ def read_json_file(path):
     return strict_json(path.read_text(encoding="utf-8"))
 
 
-__all__ = ['CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'struct', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile', 'zlib']
+
+def fingerprint_argument(value):
+    text = re.sub(r"[\s:]", "", value).lower()
+    if not re.fullmatch(r"[a-f0-9]{64}", text):
+        raise argparse.ArgumentTypeError("expected a SHA-256 fingerprint of 64 hexadecimal digits; upper case, spaces and colons are accepted")
+    return text
+
+
+__all__ = ['fingerprint_argument', 'CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'struct', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile', 'zlib']

@@ -99,6 +99,7 @@ OBSERVATION_KINDS = ("observation.started", "observation.stopped", "process.star
 
 async def overview_live(*, ctx=Depends(current_context)):
     from datetime import timedelta
+    from .. import court_readiness
     from ..anchoring import evidence_settings
 
     store, collector = ctx.app.state.store, ctx.app.state.collector
@@ -135,6 +136,7 @@ async def overview_live(*, ctx=Depends(current_context)):
 
     last_change, messages, media, waited, latest, active, quiet, anchor = await complete_in_thread(read)
     status = collector.status()
+    court = await complete_in_thread(lambda: court_readiness.assess(store, evidence_settings(store)))
     witnesses = None
     if anchor:
         payload = json.loads(anchor[2]) if isinstance(anchor[2], str) else {}
@@ -152,6 +154,7 @@ async def overview_live(*, ctx=Depends(current_context)):
         "last_record_at": latest[0] if latest else None,
         "active_chats": [{"chat_id": row[0], "events": row[1], "title": row[2]} for row in active],
         "quiet_chats": [{"chat_id": row[0], "title": row[1], "last_at": row[2]} for row in quiet],
+        "court_readiness": court,
         "witnesses": witnesses, "evidence_enabled": bool(evidence_settings(store)["enabled"]),
         "generated_at": stamp(now),
     }
