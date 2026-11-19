@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 9a102e8123be61e2fc179e6f85b2be469202a8359dc667008ce9bb2f1e0d64a7
+# TgWitness verifier sources SHA-256: 1273176dd0d473bbc9524952e654f4d4949d6708e11b1f117a89140691cb26a1
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -4107,7 +4107,7 @@ class EventChain:
         count = self.count + 1
         if set(event) != set(FIELDS) | {"hash", "signature"}:
             raise ValueError("Unexpected or missing fields at event " + str(count))
-        if event["seq"] != count or event["previous_hash"] != self.previous:
+        if type(event["seq"]) is not int or event["seq"] != count or event["previous_hash"] != self.previous:
             raise ValueError("Broken sequence or hash chain at event " + str(count))
 
     def content(self, event):
