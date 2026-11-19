@@ -1,6 +1,6 @@
 """Standalone verifier"""
 import argparse
-import base64
+import base64 as _base64
 import bisect
 import hashlib
 import heapq
@@ -28,6 +28,21 @@ from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from cryptography.x509 import ocsp
+
+class StrictBase64:
+    def b64decode(self, value, altchars=None, validate=False):
+        data = _base64.b64decode(value, altchars, validate)
+        if validate:
+            raw = value.encode("ascii") if isinstance(value, str) else bytes(value)
+            if _base64.b64encode(data, altchars) != raw:
+                raise ValueError("Non-canonical base64 encoding")
+        return data
+
+    def __getattr__(self, name):
+        return getattr(_base64, name)
+
+
+base64 = StrictBase64()
 
 FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
           "actor_id", "payload", "previous_hash")
