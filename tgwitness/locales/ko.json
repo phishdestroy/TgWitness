@@ -10512,5 +10512,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram 전송 시각이 기록되지 않았습니다. 이 메시지의 날짜와 위치는 TgWitness가 관찰한 시각을 기준으로 합니다.",
   "Copy URL": "URL 복사",
   "The original source, identity map and private selection criteria are NOT included.": "원본 소스, 신원 대응표, 비공개 선택 기준은 포함되지 않습니다.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "큰 패키지는 압축을 푼 크기와 함께 --max-gib를 추가하세요. index.html은 매니페스트로 보호됩니다."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "큰 패키지는 압축을 푼 크기와 함께 --max-gib를 추가하세요. index.html은 매니페스트로 보호됩니다.",
+  "independent timestamps are turned off": "독립적인 타임스탬프 기능이 비활성화되었습니다.",
+  "no timestamp authority is set": "타임스탬프 권한이 설정되어 있지 않습니다.",
+  "a validated timestamp from a third party": "제3자로부터 제공된 검증된 타임스탬프",
+  "a recent answer from the timestamp authority": "타임스탬프 기관의 최근 답변",
+  "saved records": "저장된 기록",
+  "Readiness for court": "재판 준비",
+  "Can be handed to a court: yes": "법원에 제출할 수 있음: 예",
+  "Can be handed to a court: no · missing: {items}": "법원에 제출 가능: 아니요 · 누락: {items}",
+  "A validated timestamp covers {through} of {total} records.": "검증된 타임스탬프는 {total}개 레코드 중 {through}개를 포함합니다.",
+  "Each export asks for a new timestamp of its last record.": "각 내보내기 작업마다 마지막 레코드의 새로운 타임스탬프를 요청합니다.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "수신자는 별도로 수신한 서명 키 지문을 확인하고 verify.py를 실행해야 합니다."
 }

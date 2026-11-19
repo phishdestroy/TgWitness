@@ -10563,5 +10563,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Die Sendezeit von Telegram wurde nicht erfasst; diese Nachricht wird nach dem Zeitpunkt datiert und eingeordnet, zu dem TgWitness sie beobachtet hat.",
   "Copy URL": "URL kopieren",
   "The original source, identity map and private selection criteria are NOT included.": "Die ursprüngliche Quelle, die Identitätszuordnung und die privaten Auswahlkriterien sind NICHT enthalten.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Für große Pakete --max-gib mit der entpackten Größe angeben. index.html ist durch das Manifest geschützt."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Für große Pakete --max-gib mit der entpackten Größe angeben. index.html ist durch das Manifest geschützt.",
+  "independent timestamps are turned off": "Unabhängige Zeitstempel sind deaktiviert",
+  "no timestamp authority is set": "Es ist keine Zeitstempel-Behörde festgelegt.",
+  "a validated timestamp from a third party": "ein validierter Zeitstempel eines Drittanbieters",
+  "a recent answer from the timestamp authority": "eine aktuelle Antwort der Zeitstempel-Behörde",
+  "saved records": "gespeicherte Datensätze",
+  "Readiness for court": "Verhandlungsbereitschaft",
+  "Can be handed to a court: yes": "Kann einem Gericht vorgelegt werden: ja",
+  "Can be handed to a court: no · missing: {items}": "Kann einem Gericht vorgelegt werden: nein · fehlt: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Ein validierter Zeitstempel deckt {through} von {total} Datensätzen ab.",
+  "Each export asks for a new timestamp of its last record.": "Bei jedem Export wird ein neuer Zeitstempel für den letzten Datensatz abgefragt.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Der Empfänger muss außerdem den separat erhaltenen Fingerabdruck des Signaturschlüssels bestätigen und das Skript „verify.py“ ausführen."
 }

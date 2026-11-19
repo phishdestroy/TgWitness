@@ -10563,5 +10563,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram کا بھیجنے کا وقت درج نہیں ہوا؛ اس پیغام کی تاریخ اور جگہ اس وقت کے مطابق ہے جب TgWitness نے اسے دیکھا۔",
   "Copy URL": "URL کاپی کریں",
   "The original source, identity map and private selection criteria are NOT included.": "اصل ماخذ، شناختوں کا نقشہ اور نجی انتخاب کے معیار اس میں شامل نہیں ہیں۔",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "بڑے پیکجوں کے لیے کھولنے کے بعد کے سائز کے ساتھ --max-gib شامل کریں۔ index.html مینی فیسٹ سے محفوظ ہے۔"
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "بڑے پیکجوں کے لیے کھولنے کے بعد کے سائز کے ساتھ --max-gib شامل کریں۔ index.html مینی فیسٹ سے محفوظ ہے۔",
+  "independent timestamps are turned off": "آزاد ٹائم اسٹیمپ بند ہیں۔",
+  "no timestamp authority is set": "کوئی ٹائم اسٹیمپ اتھارٹی مقرر نہیں ہے",
+  "a validated timestamp from a third party": "تیسرے فریق کی جانب سے تصدیق شدہ ٹائم اسٹیمپ",
+  "a recent answer from the timestamp authority": "ٹائم اسٹیمپ اتھارٹی کا ایک حالیہ جواب",
+  "saved records": "محفوظ شدہ ریکارڈز",
+  "Readiness for court": "عدالت کے لیے تیاری",
+  "Can be handed to a court: yes": "عدالت کو پیش کیا جا سکتا ہے: جی ہاں",
+  "Can be handed to a court: no · missing: {items}": "عدالت کو سونپا جا سکتا ہے: نہیں · غائب: {items}",
+  "A validated timestamp covers {through} of {total} records.": "ایک تصدیق شدہ ٹائم اسٹیمپ {total} میں سے {through} ریکارڈز کا احاطہ کرتا ہے۔",
+  "Each export asks for a new timestamp of its last record.": "ہر ایکسپورٹ اپنے آخری ریکارڈ کے لیے ایک نیا ٹائم اسٹیمپ مانگتا ہے۔",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "موصول کنندہ کو یہ بھی تصدیق کرنا چاہیے کہ دستخطی کلید کا فنگر پرنٹ الگ سے موصول ہوا ہے اور verify.py چلانا چاہیے۔"
 }

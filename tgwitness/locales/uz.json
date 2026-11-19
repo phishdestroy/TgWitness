@@ -10563,5 +10563,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram yuborish vaqti yozib olinmagan; bu xabar TgWitness uni kuzatgan vaqt bo'yicha sanalanadi va joylashtiriladi.",
   "Copy URL": "URL'ni nusxalash",
   "The original source, identity map and private selection criteria are NOT included.": "Asl manba, shaxslar moslik jadvali va yopiq tanlov mezonlari kiritilmagan.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Katta paketlar uchun ochilgan hajm bilan --max-gib qo'shing. index.html manifest bilan himoyalangan."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Katta paketlar uchun ochilgan hajm bilan --max-gib qo'shing. index.html manifest bilan himoyalangan.",
+  "independent timestamps are turned off": "Mustaqil vaqt tamg'alari o'chirilgan",
+  "no timestamp authority is set": "Vaqt tamgʻasi vakolati oʻrnatilmagan",
+  "a validated timestamp from a third party": "Uchinchi tomondan tasdiqlangan vaqt tamg'asi",
+  "a recent answer from the timestamp authority": "vaqt tamg'asi vakolatidan yaqinda berilgan javob",
+  "saved records": "Saqlangan yozuvlar",
+  "Readiness for court": "Sudga tayyorlik",
+  "Can be handed to a court: yes": "Sudga topshirilishi mumkin: ha",
+  "Can be handed to a court: no · missing: {items}": "Sudga topshirilishi mumkin: yo'q · yetishmayotgan: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Tasdiqlangan vaqt tamg'asi {total} ta yozuvdan {through} tasini qamrab oladi.",
+  "Each export asks for a new timestamp of its last record.": "Har bir eksport oxirgi yozuvining yangi timestampini so'raydi.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Qabul qiluvchi alohida olingan imzo kaliti barmoq izini ham tasdiqlashi va verify.py skriptini ishga tushirishi kerak."
 }

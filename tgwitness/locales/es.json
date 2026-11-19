@@ -10573,5 +10573,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "No se registró la hora de envío de Telegram; este mensaje se fecha y se ubica según cuándo lo observó TgWitness.",
   "Copy URL": "Copiar URL",
   "The original source, identity map and private selection criteria are NOT included.": "La fuente original, la tabla de identidades y los criterios privados de selección NO están incluidos.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Para paquetes grandes, añada --max-gib con el tamaño descomprimido. index.html está protegido por el manifiesto."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Para paquetes grandes, añada --max-gib con el tamaño descomprimido. index.html está protegido por el manifiesto.",
+  "independent timestamps are turned off": "Las marcas de tiempo independientes están desactivadas",
+  "no timestamp authority is set": "No se ha configurado ninguna autoridad de marca de tiempo",
+  "a validated timestamp from a third party": "una marca de tiempo validada por un tercero",
+  "a recent answer from the timestamp authority": "una respuesta reciente de la autoridad de sellado de tiempo",
+  "saved records": "registros guardados",
+  "Readiness for court": "Preparación para la vista judicial",
+  "Can be handed to a court: yes": "¿Se puede presentar ante un tribunal?: sí",
+  "Can be handed to a court: no · missing: {items}": "Se puede presentar ante un tribunal: no · falta: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Una marca de tiempo validada abarca {through} de los {total} registros.",
+  "Each export asks for a new timestamp of its last record.": "Cada exportación solicita una nueva marca de tiempo para su último registro.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "El destinatario también debe confirmar la huella digital de la clave de firma que ha recibido por separado y ejecutar el comando «verify.py»."
 }
