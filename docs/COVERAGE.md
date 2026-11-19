@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/COVERAGE.md)
+
 # What was collected and what was not
 
 A TgWitness archive says what it holds and, separately, what it does not. This page explains
