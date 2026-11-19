@@ -117,6 +117,12 @@ The **Retry** filter finds initial chat loads waiting after an error. Their badg
 the error type and, while collecting, the next attempt time. Home summarizes how many
 loads need another attempt. Paused collection retains the jobs until it resumes.
 
+In **Simple** mode Home also shows **Can be handed to a court: yes** or **no · missing: …**. Yes means timestamps
+are on with an RFC 3161 authority and that authority recently returned a timestamp that validated against its root
+certificate; each export asks for a new one for its last record. The line names the missing item otherwise. It does
+not check the signing key: the recipient confirms its fingerprint, received separately, and runs `verify.py`. A
+Bitcoin proof, a witness post or an attested collection run can also meet the minimum there but are not counted here.
+
 Preserved-attachment journal entries show the observed type, name and byte size.
 New download outcomes also retain the media kind and duration when Telegram provides
 them. Older signed records stay unchanged; absent metadata is not reconstructed.

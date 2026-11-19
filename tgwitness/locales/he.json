@@ -10614,5 +10614,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "זמן השליחה של Telegram לא נרשם; ההודעה מתוארכת וממוקמת לפי הזמן שבו TgWitness צפה בה.",
   "Copy URL": "העתקת כתובת URL",
   "The original source, identity map and private selection criteria are NOT included.": "המקור המקורי, טבלת הזהויות וקריטריוני הבחירה הפרטיים אינם כלולים.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט.",
+  "independent timestamps are turned off": "חותמות הזמן העצמאיות כבויות",
+  "no timestamp authority is set": "לא הוגדרה סמכות חותמת זמן",
+  "a validated timestamp from a third party": "חותמת זמן מאומתת מצד שלישי",
+  "a recent answer from the timestamp authority": "תשובה שניתנה לאחרונה על ידי הרשות האחראית על חותמות הזמן",
+  "saved records": "רשומות שנשמרו",
+  "Readiness for court": "מוכנות לדיון בבית המשפט",
+  "Can be handed to a court: yes": "ניתן להגיש לבית משפט: כן",
+  "Can be handed to a court: no · missing: {items}": "ניתן להגיש לבית משפט: לא · חסר: {items}",
+  "A validated timestamp covers {through} of {total} records.": "חותמת זמן מאומתת מכסה {through} מתוך {total} רשומות.",
+  "Each export asks for a new timestamp of its last record.": "כל ייצוא מבקש חותמת זמן חדשה עבור הרשומה האחרונה שלו.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "על הנמען לאשר גם את טביעת האצבע של מפתח החתימה שהתקבלה בנפרד ולהריץ את הקובץ verify.py."
 }

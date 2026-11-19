@@ -25,6 +25,15 @@
 
 ## Unreleased
 
+- In **Simple** mode Home shows one line, **Can be handed to a court: yes** or **no · missing: …**. Yes means
+  timestamps are on with an RFC 3161 authority and that authority recently returned a timestamp that validated against
+  its root certificate; the note gives how many of the saved records that timestamp covers, and each export asks for a
+  new one for its last record. Otherwise the line names what is missing: timestamps turned off, no authority set, no
+  validated timestamp yet, or no recent answer from the authority. The line also says that the recipient must confirm
+  the signing key fingerprint received separately and run `verify.py`, which the panel cannot do for them. A Bitcoin
+  proof, a witness post and an attested collection run also satisfy the minimum in `verify.py`; the line does not
+  count them. It is part of `GET /api/overview/live` as `court_readiness` and is translated into the 24 other
+  languages.
 - 48 panel error messages and two download parameter explanations are translated into the panel's 24 other
   languages, among them the Case Board, conversation plan, presence watch, storage, watchlist, translation and export
   errors. Before, the panel showed them in English whatever its language.
