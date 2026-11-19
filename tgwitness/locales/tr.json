@@ -10582,5 +10582,9 @@
   "Ports and sockets table": "Bağlantı noktaları ve soketler tablosu",
   "Network topology diagram": "Ağ topolojisi şeması",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tahmini kalan süre: {time}. {total} görevden {done}'i tamamlandı; sohbetlerin boyutu farklılık gösterdiğinden bu süre değişebilir.",
-  "chats left": "kalan sohbetler"
+  "chats left": "kalan sohbetler",
+  "Forwarded message": "Yönlendirilmiş mesaj",
+  "Original message sent {time}": "{time} tarihinde gönderilen orijinal mesaj",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Bu mesaj kaydedildiği andaki sayılar; Telegram bunları daha sonra günceller.",
+  "{n} views": "{n} görüntüleme"
 }

@@ -10531,5 +10531,9 @@
   "Ports and sockets table": "포트 및 소켓 표",
   "Network topology diagram": "네트워크 토폴로지 다이어그램",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "예상 남은 시간: {time}. 완료된 작업 {total}개 중 {done}개를 기준으로 산출된 수치이며, 채팅의 분량이 제각각이므로 이 수치는 변동될 수 있습니다.",
-  "chats left": "남은 채팅"
+  "chats left": "남은 채팅",
+  "Forwarded message": "전달된 메시지",
+  "Original message sent {time}": "{time}에 발송된 원본 메시지",
+  "Counts as they were when this message was saved; Telegram updates them later.": "이 메시지가 저장된 시점의 수치이며, 텔레그램에서 나중에 업데이트됩니다.",
+  "{n} views": "{n}회 조회"
 }

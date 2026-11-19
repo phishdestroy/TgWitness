@@ -10582,5 +10582,9 @@
   "Ports and sockets table": "جدول پورت‌ها و سوکت‌ها",
   "Network topology diagram": "نمودار توپولوژی شبکه",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "زمان باقی‌مانده تخمینی: {time}. بر اساس {done} از {total} وظایف انجام‌شده؛ چت‌ها از نظر اندازه متفاوت هستند، بنابراین این مقدار می‌تواند تغییر کند.",
-  "chats left": "چت‌های باقی‌مانده"
+  "chats left": "چت‌های باقی‌مانده",
+  "Forwarded message": "پیام منتقل‌شده",
+  "Original message sent {time}": "پیام اصلی ارسال شد در {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "اعداد همان‌طور که هنگام ذخیره این پیام بودند؛ تلگرام بعداً آن‌ها را به‌روز می‌کند.",
+  "{n} views": "{n}نقطه‌نظرها"
 }

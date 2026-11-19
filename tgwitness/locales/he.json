@@ -10633,5 +10633,9 @@
   "Ports and sockets table": "טבלת יציאות ושקעים",
   "Network topology diagram": "תרשים טופולוגיית הרשת",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "הזמן המשוער שנותר: {time}. על סמך {done} משימות שהושלמו מתוך {total}; גודל הצ'אטים משתנה, ולכן נתון זה עשוי להשתנות.",
-  "chats left": "שיחות שנותרו"
+  "chats left": "שיחות שנותרו",
+  "Forwarded message": "הודעה שהועברה",
+  "Original message sent {time}": "ההודעה המקורית נשלחה ב-{time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "הנתונים נכונים למועד שמירת הודעה זו; טלגרם מעדכנת אותם בהמשך.",
+  "{n} views": "{n} צפיות"
 }

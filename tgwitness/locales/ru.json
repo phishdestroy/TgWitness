@@ -10654,5 +10654,9 @@
   "Ports and sockets table": "Таблица портов и сокетов",
   "Network topology diagram": "Схема топологии сети",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Ожидаемое оставшееся время: {time}. Расчет основан на выполнении {done} из {total} задач; размеры чатов различаются, поэтому это значение может измениться.",
-  "chats left": "оставшиеся чаты"
+  "chats left": "оставшиеся чаты",
+  "Forwarded message": "Пересланное сообщение",
+  "Original message sent {time}": "Исходное сообщение отправлено {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Данные приведены на момент сохранения этого сообщения; Telegram обновляет их позже.",
+  "{n} views": "{n} просмотров"
 }

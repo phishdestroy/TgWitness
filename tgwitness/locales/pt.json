@@ -10592,5 +10592,9 @@
   "Ports and sockets table": "Tabela de portas e soquetes",
   "Network topology diagram": "Diagrama da topologia da rede",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tempo estimado restante: {time}. Com base em {done} de {total} tarefas concluídas; como os chats têm tamanhos diferentes, esse valor pode variar.",
-  "chats left": "conversas restantes"
+  "chats left": "conversas restantes",
+  "Forwarded message": "Mensagem reencaminhada",
+  "Original message sent {time}": "Mensagem original enviada às {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Os números correspondem aos valores registados no momento em que esta mensagem foi guardada; o Telegram atualiza-os posteriormente.",
+  "{n} views": "{n} visualizações"
 }

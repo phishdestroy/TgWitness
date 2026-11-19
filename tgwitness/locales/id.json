@@ -10531,5 +10531,9 @@
   "Ports and sockets table": "Tabel port dan soket",
   "Network topology diagram": "Diagram topologi jaringan",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Perkiraan waktu yang tersisa: {time}. Berdasarkan {done} dari {total} tugas yang telah diselesaikan; ukuran obrolan bervariasi, sehingga angka ini dapat berubah.",
-  "chats left": "obrolan yang tersisa"
+  "chats left": "obrolan yang tersisa",
+  "Forwarded message": "Pesan yang diteruskan",
+  "Original message sent {time}": "Pesan asli dikirim pada pukul {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Angka-angka tersebut adalah angka pada saat pesan ini disimpan; Telegram akan memperbaruinya nanti.",
+  "{n} views": "{n} kali ditonton"
 }
