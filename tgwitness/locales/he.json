@@ -10632,5 +10632,10 @@
   "Observed requests table": "טבלת הבקשות שנצפו",
   "Ports and sockets table": "טבלת יציאות ושקעים",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "הזמן המשוער שנותר: {time}. על סמך {done} משימות שהושלמו מתוך {total}; גודל הצ'אטים משתנה, ולכן נתון זה עשוי להשתנות.",
-  "chats left": "שיחות שנותרו"
+  "chats left": "שיחות שנותרו",
+  "Forwarded from {name}": "הועבר מ-{name}",
+  "Forwarded message": "הודעה שהועברה",
+  "Original message sent {time}": "ההודעה המקורית נשלחה ב-{time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "הנתונים נכונים למועד שמירת הודעה זו; טלגרם מעדכנת אותם בהמשך.",
+  "{n} views": "{n} צפיות"
 }

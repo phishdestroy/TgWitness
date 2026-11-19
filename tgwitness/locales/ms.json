@@ -10530,5 +10530,10 @@
   "Observed requests table": "Jadual permintaan yang diperhatikan",
   "Ports and sockets table": "Jadual port dan soket",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Anggaran masa tinggal: {time}. Berdasarkan {done} daripada {total} tugasan yang telah selesai; saiz sembang berbeza, jadi ini boleh berubah.",
-  "chats left": "perbualan tinggal"
+  "chats left": "perbualan tinggal",
+  "Forwarded from {name}": "Dihantar semula oleh {name}",
+  "Forwarded message": "Mesej yang diteruskan",
+  "Original message sent {time}": "Mesej asal dihantar pada {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Bilangan adalah seperti ketika mesej ini disimpan; Telegram akan mengemas kini kemudian.",
+  "{n} views": "{n} pandangan"
 }

@@ -10785,5 +10785,10 @@
   "Observed requests table": "جدول الطلبات المسجلة",
   "Ports and sockets table": "جدول المنافذ والمآخذ",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "الوقت المتبقي المقدر: {time}. استنادًا إلى إنجاز {done} مهمة من أصل {total}؛ وتختلف المحادثات في الحجم، لذا قد يتغير هذا الرقم.",
-  "chats left": "المحادثات المتبقية"
+  "chats left": "المحادثات المتبقية",
+  "Forwarded from {name}": "تم إعادة توجيهها من {name}",
+  "Forwarded message": "رسالة مُعادة إرسالها",
+  "Original message sent {time}": "الرسالة الأصلية أُرسلت في {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "الأرقام كما كانت عند حفظ هذه الرسالة؛ ويقوم Telegram بتحديثها لاحقًا.",
+  "{n} views": "{n} مشاهدة"
 }

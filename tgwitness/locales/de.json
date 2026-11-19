@@ -10581,5 +10581,10 @@
   "Observed requests table": "Tabelle der beobachteten Anfragen",
   "Ports and sockets table": "Tabelle der Ports und Sockets",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Geschätzte verbleibende Zeit: {time}. Basierend auf {done} von {total} abgeschlossenen Aufgaben; da Chats unterschiedlich groß sind, kann sich dieser Wert ändern.",
-  "chats left": "verbleibende Chats"
+  "chats left": "verbleibende Chats",
+  "Forwarded from {name}": "Weitergeleitet von {name}",
+  "Forwarded message": "Weitergeleitete Nachricht",
+  "Original message sent {time}": "Ursprüngliche Nachricht gesendet um {time}",
+  "Counts as they were when this message was saved; Telegram updates them later.": "Die Zahlen entsprechen dem Stand zum Zeitpunkt der Speicherung dieser Nachricht; Telegram aktualisiert sie später.",
+  "{n} views": "{n} Aufrufe"
 }
