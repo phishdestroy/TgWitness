@@ -316,6 +316,8 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
   .first-run-shell{--wizard-pad:16px;margin:0 0 24px;padding-top:18px;border-radius:18px}
   .wizard-top{margin-bottom:20px}
   .wizard-language{max-width:140px}
+  .wizard-top{flex-wrap:wrap;row-gap:10px}
+  .wizard-brand{flex:1 1 200px}
   .wizard-stepper{margin-bottom:24px}
   .wizard-stepper::before,.wizard-stepper::after{top:13px}
   .wizard-dot{width:28px;height:28px;font-size:12px}
