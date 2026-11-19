@@ -174,7 +174,7 @@
 .home-hero .home-note { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
 .home-chat-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .home-chat-column h3 { margin: 0 0 8px; color: var(--muted); font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: .04em; }
-.home-chat-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.home-chat-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
 .home-chat-open { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 7px 10px; border: 0; border-radius: var(--radius-control); background: transparent; color: inherit; font: inherit; font-size: 13px; text-align: start; cursor: pointer; }
 .home-chat-open:hover, .home-chat-open:focus-visible { background: var(--row-hover); }
 .home-chat-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
