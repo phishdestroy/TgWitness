@@ -10577,5 +10577,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "موصول کنندہ کو یہ بھی تصدیق کرنا چاہیے کہ دستخطی کلید کا فنگر پرنٹ الگ سے موصول ہوا ہے اور verify.py چلانا چاہیے۔",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "اکاؤنٹ کی موجودہ تاریخ کے الگ آرکائیو کے لیے، Exports → Telegram account استعمال کریں۔ پورے اکاؤنٹ کے دائرہ کار میں اس رن کے شروع ہونے سے پہلے تمام دستیاب ڈائیلاگز دریافت کیے جاتے ہیں، بشمول محفوظ شدہ چیٹس۔ ہر چیٹ کا اپنا دوبارہ قابلِ استعمال کرسر ہوتا ہے۔",
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "صرف پہلے 1,000 نتائج دیکھے جا سکتے ہیں۔ تلاش کو چیٹ، قسم یا تاریخوں کے لحاظ سے محدود کریں۔",
-  "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "موصول کنندہ کو یہ بھی کرنا چاہیے کہ الگ سے موصول ہونے والی دستخطی کلید کے فنگر پرنٹ کی تصدیق کرے اور --tsa-ca اور ٹائم اسٹیمپ اتھارٹی کے روٹ سرٹیفیکیٹ کے ساتھ verify.py چلائے۔"
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "موصول کنندہ کو یہ بھی کرنا چاہیے کہ الگ سے موصول ہونے والی دستخطی کلید کے فنگر پرنٹ کی تصدیق کرے اور --tsa-ca اور ٹائم اسٹیمپ اتھارٹی کے روٹ سرٹیفیکیٹ کے ساتھ verify.py چلائے۔",
+  "Observed requests table": "مشاہدہ شدہ درخواستوں کی جدول",
+  "Ports and sockets table": "پورٹس اور ساکٹس کی جدول"
 }
