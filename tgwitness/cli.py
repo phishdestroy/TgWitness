@@ -351,6 +351,8 @@ def print_items(result, empty="No saved observations match."):
         print(empty)
     if result.get("next_offset") is not None and result.get("ranked"):
         print("More results: add --offset " + str(result["next_offset"]))
+    elif result.get("truncated"):
+        print("Only the first 1,000 results are shown; more observations match. Narrow the query, chat or period.")
     elif result.get("next_before") is not None:
         print("Older records: add --before " + str(result["next_before"]))
 

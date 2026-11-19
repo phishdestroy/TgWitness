@@ -311,12 +311,14 @@ export function createJournal(context){
     }
     restoreSelection();
   }
+  const RANKED_REACH=1000;
   function syncPage(){
     shown.textContent=Number.isFinite(state.eventMatched)?tr("{shown} of {total} matching records",{shown:state.events.length,total:state.eventMatched.toLocaleString()}):
       tr("{shown} records in this window",{shown:state.events.length});
     const ranked=state.search&&state.searchMode==="relevance"&&!state.boardSlice&&state.events.length&&(state.eventBefore!==null||state.cursor!==null);
     const first=ranked?(state.eventBefore||0)+1:0;
-    range.textContent=ranked?tr("Results {from}–{to}",{from:first.toLocaleString(),to:(first+state.events.length-1).toLocaleString()}):"";range.hidden=!ranked;
+    range.textContent=ranked?tr("Results {from}–{to}",{from:first.toLocaleString(),to:(first+state.events.length-1).toLocaleString()})
+      +(state.eventMatched>RANKED_REACH?" · "+tr("Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates."):""):"";range.hidden=!ranked;
     shown.hidden=!state.events.length&&!Number.isFinite(state.eventMatched);
     older.disabled=pageBusy||state.cursor===null;newer.disabled=pageBusy||state.eventAfter===null;
     latest.disabled=pageBusy;latest.hidden=state.eventBefore===null;
