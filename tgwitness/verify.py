@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 405cdc7c78bb16bde18d4de89a67c14030cd7c5801cb6d598bc27502e80a2f72
+# TgWitness verifier sources SHA-256: 9a102e8123be61e2fc179e6f85b2be469202a8359dc667008ce9bb2f1e0d64a7
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -4468,7 +4468,7 @@ def verify_selection(path, expected_fingerprint=None, evidence=None):
         def records():
             with archive.open(member) as stream:
                 for line in bounded_lines(stream):
-                    yield json.loads(line)
+                    yield strict_json(line)
 
         for record in chat_messages(archive) if kind == "chat" else records():
             number = record.get(identity)
@@ -7330,7 +7330,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             for line in bounded_lines(stream):
                 if not line.strip():
                     continue
-                event = json.loads(line)
+                event = strict_json(line)
                 yield event
                 payload, kind = event["payload"], event["kind"]
                 if kind == "witness.daily":
@@ -7910,7 +7910,7 @@ def check_channel(witness, source):
             try:
                 raw = unb64url(body)
                 key.verify(unb64url(signature), raw)
-                statement = json.loads(raw)
+                statement = strict_json(raw)
             except Exception:
                 invalid.append(message_id)
                 continue
@@ -8062,7 +8062,7 @@ def verify_history_report(path, expected_fingerprint=None, bundle=None):
         cursors, cursor_format = {}, None
         with open_archive(bundle) as archive, archive.open("events.jsonl") as stream:
             for line in bounded_lines(stream):
-                event = json.loads(line)
+                event = strict_json(line)
                 if event["seq"] > boundary:
                     break
                 payload = event["payload"]
