@@ -3036,6 +3036,15 @@ function accountDisclosureRecipientNote(item){
     tr('Keep the ZIP unchanged. Follow README.txt to check its integrity using a signing-key fingerprint obtained independently from the sender.'),
     tr('TgWitness signs these files with the collector key; any change to a file breaks the signature.')].join('\n\n');
 }
+function accountExportTimeLeft(job){
+  const coverage=job.coverage||{};
+  if(job.phase!=="running"||job.active===false||job.wait_until||job.delay_seconds)return null;
+  const done=coverage.tasks_done,total=coverage.tasks_total,started=Date.parse(job.created_at);
+  if(!Number.isFinite(done)||!Number.isFinite(total)||!Number.isFinite(started)||done<3||total<=done)return null;
+  const elapsed=(Date.now()-started)/1000;
+  if(elapsed<30)return null;
+  return {seconds:Math.round(elapsed/done*(total-done)),done,total};
+}
 function renderAccountExportJobs(){
   const box=$("account-export-jobs"),focused=document.activeElement,
     action=focused?.dataset?.accountExportAction,jobId=focused?.dataset?.jobId,disclosureId=focused?.dataset?.disclosureId;
@@ -3087,11 +3096,16 @@ function renderAccountExportJobs(){
         checking:"Checking each chat before reading it: {done} of {total}."}[found.stage];
       if(stage)card.append(node("p","account-export-job-note",tr(stage,{n:shown(found.done),done:shown(found.done),total:shown(found.total)})));
     }
+    const left=accountExportTimeLeft(job);
+    if(left)card.append(node("p","account-export-job-note",tr("Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.",
+      {time:fmtDuration(left.seconds),done:left.done.toLocaleString(LANG),total:left.total.toLocaleString(LANG)})));
     const facts=node("div","account-export-metrics");
     const metric=(label,value)=>{if(Number.isFinite(value)){const item=node("span");item.append(label+": ",node("b","",value.toLocaleString(LANG)));facts.append(item);}};
     metric(tr("chats discovered"),counts.chats_discovered);
     metric(tr("chats selected"),counts.chats_selected);
     metric(tr("chats finished"),counts.chats_done);
+    if(Number.isFinite(counts.chats_selected)&&Number.isFinite(counts.chats_done)&&counts.chats_selected>counts.chats_done&&["preparing","running","waiting","paused"].includes(phase))
+      metric(tr("chats left"),counts.chats_selected-counts.chats_done);
     metric(tr("messages saved"),Math.max(counts.messages_exported||0,job.acquisition?.messages_preserved||0));
     metric(tr("media saved"),counts.media_saved);
     metric(tr("files with hashes"),counts.media_hashed);

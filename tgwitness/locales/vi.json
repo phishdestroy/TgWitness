@@ -10529,5 +10529,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Người nhận cũng phải xác nhận dấu vân tay khóa ký đã nhận được riêng biệt và chạy lệnh `verify.py` với tùy chọn `--tsa-ca` cùng với chứng chỉ gốc của cơ quan cấp dấu thời gian.",
   "Observed requests table": "Bảng các yêu cầu đã quan sát được",
   "Ports and sockets table": "Bảng cổng và ổ cắm",
-  "Network topology diagram": "Sơ đồ cấu trúc mạng"
+  "Network topology diagram": "Sơ đồ cấu trúc mạng",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Thời gian dự kiến còn lại: {time}. Dựa trên {done} trong tổng số {total} nhiệm vụ đã hoàn thành; do các cuộc trò chuyện có độ dài khác nhau, nên con số này có thể thay đổi.",
+  "chats left": "số tin nhắn còn lại"
 }

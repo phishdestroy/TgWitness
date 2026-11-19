@@ -10590,5 +10590,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Le destinataire doit également confirmer l'empreinte digitale de la clé de signature reçue séparément et exécuter verify.py avec l'option --tsa-ca et le certificat racine de l'autorité de horodatage.",
   "Observed requests table": "Tableau des requêtes observées",
   "Ports and sockets table": "Tableau des ports et des sockets",
-  "Network topology diagram": "Schéma de topologie du réseau"
+  "Network topology diagram": "Schéma de topologie du réseau",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Temps restant estimé : {time}. Ce chiffre est calculé sur la base de {done} tâches terminées sur {total} ; la taille des discussions pouvant varier, ce chiffre est susceptible de changer.",
+  "chats left": "nombre de discussions restantes"
 }
