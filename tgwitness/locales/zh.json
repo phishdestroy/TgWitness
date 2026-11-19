@@ -10512,5 +10512,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "未记录 Telegram 的发送时间；此消息按 TgWitness 观察到它的时间标注日期并排序。",
   "Copy URL": "复制 URL",
   "The original source, identity map and private selection criteria are NOT included.": "不包含原始来源、身份对照表和私有筛选条件。",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "对于大型包，请用 --max-gib 指定解压后的大小。index.html 受清单保护。"
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "对于大型包，请用 --max-gib 指定解压后的大小。index.html 受清单保护。",
+  "independent timestamps are turned off": "已关闭独立时间戳功能",
+  "no timestamp authority is set": "未设置时间戳授权",
+  "a validated timestamp from a third party": "来自第三方的一个经过验证的时间戳",
+  "a recent answer from the timestamp authority": "来自时间戳权威机构的最新答复",
+  "saved records": "已保存的记录",
+  "Readiness for court": "出庭准备",
+  "Can be handed to a court: yes": "可提交法院：是",
+  "Can be handed to a court: no · missing: {items}": "可提交给法院：否 · 缺失：{items}",
+  "A validated timestamp covers {through} of {total} records.": "经过验证的时间戳涵盖了{total}条记录中的{through}条。",
+  "Each export asks for a new timestamp of its last record.": "每次导出都会请求其最后一条记录的新时间戳。",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "收件人还必须确认单独收到的签名密钥指纹，并运行 verify.py。"
 }

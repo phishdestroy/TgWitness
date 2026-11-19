@@ -10512,5 +10512,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "ไม่ได้บันทึกเวลาส่งของ Telegram ข้อความนี้จึงลงวันที่และจัดลำดับตามเวลาที่ TgWitness สังเกตเห็น",
   "Copy URL": "คัดลอก URL",
   "The original source, identity map and private selection criteria are NOT included.": "ไม่รวมแหล่งข้อมูลต้นฉบับ ตารางจับคู่ตัวตน และเกณฑ์การคัดเลือกแบบส่วนตัว",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "สำหรับแพ็กเกจขนาดใหญ่ ให้เพิ่ม --max-gib พร้อมขนาดหลังแตกไฟล์ index.html ได้รับการปกป้องด้วยแมนิเฟสต์"
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "สำหรับแพ็กเกจขนาดใหญ่ ให้เพิ่ม --max-gib พร้อมขนาดหลังแตกไฟล์ index.html ได้รับการปกป้องด้วยแมนิเฟสต์",
+  "independent timestamps are turned off": "การบันทึกเวลาแบบอิสระถูกปิดแล้ว",
+  "no timestamp authority is set": "ไม่มีการตั้งค่าหน่วยงานที่รับผิดชอบการกำหนดเวลา",
+  "a validated timestamp from a third party": "เวลาที่ได้รับการยืนยันจากฝ่ายที่สาม",
+  "a recent answer from the timestamp authority": "คำตอบล่าสุดจากหน่วยงานที่รับผิดชอบเรื่องเวลา",
+  "saved records": "ข้อมูลที่บันทึกไว้",
+  "Readiness for court": "ความพร้อมสำหรับการขึ้นศาล",
+  "Can be handed to a court: yes": "สามารถส่งให้ศาลพิจารณาได้: ใช่",
+  "Can be handed to a court: no · missing: {items}": "สามารถส่งให้ศาลได้: ไม่ · ขาด: {items}",
+  "A validated timestamp covers {through} of {total} records.": "เวลาที่ได้รับการยืนยันครอบคลุม {through} จาก {total} รายการ",
+  "Each export asks for a new timestamp of its last record.": "การส่งออกแต่ละครั้งจะขอเวลาประทับใหม่ของบันทึกสุดท้าย",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "ผู้รับต้องยืนยันลายนิ้วมือของกุญแจการลงนามที่ได้รับมาแยกต่างหาก และเรียกใช้ไฟล์ verify.py"
 }
