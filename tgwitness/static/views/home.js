@@ -165,7 +165,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const note = node('small', 'home-note');
     if (c.stamped_through) note.append(tr('A validated timestamp covers {through} of {total} records.', {through: number(c.stamped_through), total: number(c.records)}) + ' ');
     if (c.ready) note.append(tr('Each export asks for a new timestamp of its last record.') + ' ');
-    note.append(tr('The recipient must also confirm the signing key fingerprint received separately and run verify.py.'));
+    note.append(tr('The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.'));
     box.append(note);
     return box;
   }
