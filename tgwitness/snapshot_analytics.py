@@ -287,6 +287,11 @@ def habits_html(data, say, top_n):
                       for row in rows) + '</tbody></table></div></article>')
 
 
+def grouped(say, value):
+    from .report import group_number
+    return group_number(say, value)
+
+
 def html_section(data, options, say):
     if not data or not selected(options):
         return ""
@@ -296,7 +301,7 @@ def html_section(data, options, say):
              + '</span></div><p class="analytics-method">' + e(say(data["method"])) + '</p><div class="analytics-kpis">']
     for value, title in ((data["records"], "Records analysed"), (data["messages"], "Message observations" if data["basis"] == "journal" else "Message rows"),
                          (data.get("sender_groups", len(data.get("participants", []))), "Listed sender identifiers"), (data["undated"], "Without a usable timestamp")):
-        parts.append('<div><strong>' + str(value) + '</strong><span>' + e(say(title)) + '</span></div>')
+        parts.append('<div><strong>' + str(grouped(say, value)) + '</strong><span>' + e(say(title)) + '</span></div>')
     parts.append('</div><div class="analytics-grid">')
     for key, title in selected(options):
         parts.append('<article class="chart-card chart-' + key + '"><h3>' + e(say(title)) + '</h3>')
@@ -336,8 +341,8 @@ def _pdf_section(lay, data, options):
     if pdf.get_y() > 45 and not getattr(lay, "composition_chapter", False):
         pdf.add_page()
     lay.section(say("Activity & participants"), say(data["method"]))
-    lay.figures([(say("Records analysed"), data["records"]), (say("Message observations" if data["basis"] == "journal" else "Message rows"), data["messages"]),
-                 (say("Without a usable timestamp"), data["undated"])])
+    lay.figures([(say("Records analysed"), grouped(say, data["records"])), (say("Message observations" if data["basis"] == "journal" else "Message rows"), grouped(say, data["messages"])),
+                 (say("Without a usable timestamp"), grouped(say, data["undated"]))])
     for key, title in selected(options):
         if key in ("participants", "chats", "composition"):
             count = len(ranking(data, key, options.get("chart_limit", 10))) if key != "composition" else len(data[key])
