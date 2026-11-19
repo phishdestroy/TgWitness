@@ -10512,5 +10512,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Masa hantar Telegram tidak direkodkan; mesej ini diberi tarikh dan disusun mengikut masa TgWitness memantaunya.",
   "Copy URL": "Salin URL",
   "The original source, identity map and private selection criteria are NOT included.": "Sumber asal, peta identiti dan kriteria pemilihan peribadi TIDAK disertakan.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Untuk pakej besar, tambah --max-gib dengan saiz selepas diekstrak. index.html dilindungi oleh manifest."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Untuk pakej besar, tambah --max-gib dengan saiz selepas diekstrak. index.html dilindungi oleh manifest.",
+  "independent timestamps are turned off": "Cap masa bebas telah dilumpuhkan",
+  "no timestamp authority is set": "tiada keabsahan cap masa ditetapkan",
+  "a validated timestamp from a third party": "cap masa yang disahkan daripada pihak ketiga",
+  "a recent answer from the timestamp authority": "jawapan terkini daripada pihak berkuasa cap masa",
+  "saved records": "rekod yang disimpan",
+  "Readiness for court": "Kesiapan untuk mahkamah",
+  "Can be handed to a court: yes": "Boleh diserahkan kepada mahkamah: ya",
+  "Can be handed to a court: no · missing: {items}": "Boleh diserahkan kepada mahkamah: tidak · hilang: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Cap masa yang disahkan merangkumi {through} daripada {total} rekod.",
+  "Each export asks for a new timestamp of its last record.": "Setiap eksport meminta cap masa baru bagi rekod terakhirnya.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Penerima juga mesti mengesahkan cap jari kunci tandatangan yang diterima secara berasingan dan menjalankan verify.py."
 }

@@ -10563,5 +10563,16 @@
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram-এর পাঠানোর সময় রেকর্ড হয়নি; তাই এই বার্তার তারিখ ও অবস্থান TgWitness কখন এটি পর্যবেক্ষণ করেছে তা অনুযায়ী।",
   "Copy URL": "URL কপি করুন",
   "The original source, identity map and private selection criteria are NOT included.": "মূল উৎস, পরিচয় মানচিত্র এবং ব্যক্তিগত নির্বাচনের মানদণ্ড এতে অন্তর্ভুক্ত নয়।",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "বড় প্যাকেজের জন্য খোলার পরের আকারসহ --max-gib যোগ করুন। index.html ম্যানিফেস্ট দ্বারা সুরক্ষিত।"
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "বড় প্যাকেজের জন্য খোলার পরের আকারসহ --max-gib যোগ করুন। index.html ম্যানিফেস্ট দ্বারা সুরক্ষিত।",
+  "independent timestamps are turned off": "স্বতন্ত্র টাইমস্ট্যাম্প বন্ধ আছে",
+  "no timestamp authority is set": "কোনো টাইমস্ট্যাম্প কর্তৃপক্ষ সেট করা হয়নি",
+  "a validated timestamp from a third party": "তৃতীয় পক্ষের একটি যাচাইকৃত টাইমস্ট্যাম্প",
+  "a recent answer from the timestamp authority": "টাইমস্ট্যাম্প কর্তৃপক্ষের সাম্প্রতিক একটি উত্তর",
+  "saved records": "সংরক্ষিত রেকর্ডসমূহ",
+  "Readiness for court": "আদালতের জন্য প্রস্তুতি",
+  "Can be handed to a court: yes": "আদালতে জমা দেওয়া যেতে পারে: হ্যাঁ",
+  "Can be handed to a court: no · missing: {items}": "আদালতে হস্তান্তর করা যেতে পারে: না · অনুপস্থিত: {items}",
+  "A validated timestamp covers {through} of {total} records.": "একটি যাচাইকৃত টাইমস্ট্যাম্প {total} রেকর্ডের মধ্যে {through} রেকর্ডকে আচ্ছাদন করে।",
+  "Each export asks for a new timestamp of its last record.": "প্রতিটি এক্সপোর্ট তার শেষ রেকর্ডের নতুন টাইমস্ট্যাম্প চায়।",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "প্রাপ্তকারীকে পৃথকভাবে প্রাপ্ত স্বাক্ষর কী ফিঙ্গারপ্রিন্টও নিশ্চিত করতে হবে এবং verify.py চালাতে হবে।"
 }

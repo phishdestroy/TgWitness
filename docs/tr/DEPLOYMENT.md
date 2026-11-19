@@ -179,7 +179,7 @@ deploy/constraints.txt dosyasını kullanır. Docker ve yüksek güvenceli sunuc
 deploy/requirements.lock ve deploy/build.lock dosyalarından pip --require-hashes ile kurulum yapar:
 her paket dosyası commit'te kayıtlı bir SHA-256 değeriyle eşleşmelidir, bu nedenle PyPI'da veya
 bir yansıda değiştirilmiş bir dosya reddedilir. Python temel imajı ve işletim sistemi paketleri ise
-hâlâ sürüm için bağımsız yeterlilik doğrulaması gerektirir.
+hâlâ sürüm için bağımsız yeterlilik doğrulaması gerektirir. Yalnızca kaynak kod içeren paketler (jieba, pyaes), başlatıcı, Windows taşınabilir derleyici ve Dockerfile tarafından deploy/build.lock dosyasında (`--no-build-isolation`) sabitlenen setuptools ile derlenir; bu nedenle pip, ayrı ve sabitlenmemiş bir derleme ortamını çözümlemez.
 
 Günlüğü ve anahtarları yok etmek istemiyorsanız docker compose down -v kullanmayın. Konteyner
 sağlık durumu Telegram'dan başarılı yakalamayı değil, web sunucusunun erişilebilirliğini bildirir.
@@ -364,6 +364,8 @@ yeniden başlatmadan sonra da sürer. Medya kurtarma Telegram güncelleme kurtar
 kaybolmuş dosyaları yeniden oluşturamaz.
 
 ## Yedekleme, geri yükleme ve kapasite
+
+`tgwitness backup FOLDER`, panel çalışmaya devam ederken veri dizinini kopyalar: önce kontrol noktaları, ardından çevrimiçi yedekleme API’si aracılığıyla SQLite dosyaları, sonra da anahtarlar, medya ve profiller; böylece kopyalanan hiçbir kontrol noktası, kopyalanan günlükten daha yeni olmaz. `backup-manifest.json`, her dosyanın SHA-256 değerini ve günlük başlıklarını listeler. Geri yüklemek için TgWitness'i durdurun ve tüm veri dizinini o klasörle değiştirin. Bir sonraki başlatma, günlüğün daha eski bir kopyadan geri yüklendiğini kaydeder. Bu kayıt, günlüğü veri dizini dışındaki bir klasörde (`TGWITNESS_STATE_DIR`) tutulan başlıkla karşılaştırır: Compose'daki `tgwitness-state` birimi, systemd birimlerinde `/var/lib/tgwitness-state` ve diğer durumlarda kullanıcının yerel durum klasörü. Yazılabilir bir durum klasörü olmadan geri yükleme algılanmaz ve günlüğe bu durum bir kez kaydedilir.
 
 vault.key, signing.enc, credentials.enc, SQLite veritabanı/WAL dosyaları, medya, jeton, kontrol
 noktaları ve tüm profiles/ alt dizinleri dahil **veri dizininin tamamını** kopyalamadan önce işlemi
