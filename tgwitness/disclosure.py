@@ -239,6 +239,13 @@ def entries(source, policy, projection, withholding):
         yield projection.marker(*run)
 
 
+DOT = r'(?:\.|\[\.\]|\(\.\))'
+TLD = r'(?-i:com|net|org|io|ru|ua|info|biz|app|dev|xyz|online|site|top|cc|tv|gg|ly|su|kz|uk|eu|fr|cn|pro|club|shop|store|link|live|page|cloud)'
+EMAIL = re.compile(r'(?<![\w.+%-])[\w.%+-]+(?:@|\[at\]|\(at\))[\w-]+(?:' + DOT + r'[\w-]+)*' + DOT + r'\w{2,}(?!\w)', re.IGNORECASE)
+LINK = re.compile(r'(?:(?:https?|hxxps?|ftp|tg)://|www\.)\S+|@\w+|(?<![\w@.-])(?:[\w-]+' + DOT + r')+[^\W\d_]{2,}(?::\d+)?/\S*|(?<![\w@.-])(?:[\w-]+' + DOT + r')+' + TLD + r'(?![\w@-])', re.IGNORECASE)
+NUMBER = re.compile(r'(?<!\w)[+\uff0b]?\d[\d ()\-.]{6,}\d(?!\w)')
+
+
 class Projection:
     def __init__(self, policy, seed, source):
         self.policy, self.seed = policy, seed
@@ -290,9 +297,9 @@ class Projection:
 
     def mask_text(self, text):
         if self.policy.identity_mode != 'keep':
-            text = re.sub(r'(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', '[email withheld]', text)
-            text = re.sub(r'(?i)(?:https?://|tg://|www\.)\S+|@[\w]+', '[link or handle withheld]', text)
-            text = re.sub(r'(?<!\w)\+?\d[\d ()-]{6,}\d(?!\w)', '[number withheld]', text)
+            text = EMAIL.sub('[email withheld]', text)
+            text = LINK.sub('[link or handle withheld]', text)
+            text = NUMBER.sub('[number withheld]', text)
         return self.mask_known(text)
 
     def alias(self, category, value):
