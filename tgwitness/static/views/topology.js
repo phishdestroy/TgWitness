@@ -68,7 +68,7 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
     <div class="tp-modes" data-tp="modes" role="list" aria-label="${t('Placement')}"></div>
     <div class="tp-kpis" data-tp="kpis"></div>
     <div class="tp-error" data-tp="error" role="status" hidden></div>
-    <section class="tp-stage" data-tp="stage" aria-label="${t('Network topology')}">
+    <section class="tp-stage" data-tp="stage" aria-label="${t('Network topology diagram')}">
       <svg class="tp-wires" data-tp="wires" aria-hidden="true"></svg>
       <div class="tp-grid">
         <div class="tp-left">

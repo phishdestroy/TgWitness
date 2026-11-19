@@ -10783,5 +10783,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "يمكن تصفح أول 1,000 نتيجة فقط. قم بتضييق نطاق البحث حسب الدردشة أو النوع أو التواريخ.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "يجب على المستلم أيضًا تأكيد بصمة مفتاح التوقيع التي تلقاها بشكل منفصل، وتشغيل برنامج verify.py مع الخيار --tsa-ca والشهادة الجذرية لسلطة الطابع الزمني.",
   "Observed requests table": "جدول الطلبات المسجلة",
-  "Ports and sockets table": "جدول المنافذ والمآخذ"
+  "Ports and sockets table": "جدول المنافذ والمآخذ",
+  "Network topology diagram": "مخطط هيكل الشبكة",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "الوقت المتبقي المقدر: {time}. استنادًا إلى إنجاز {done} مهمة من أصل {total}؛ وتختلف المحادثات في الحجم، لذا قد يتغير هذا الرقم.",
+  "chats left": "المحادثات المتبقية"
 }

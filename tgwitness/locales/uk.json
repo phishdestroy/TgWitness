@@ -10681,5 +10681,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Можна переглянути лише перші 1 000 результатів. Звузьте пошук за чатом, типом або датами.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Одержувач також повинен підтвердити відбиток ключа підпису, отриманий окремо, та запустити програму verify.py з параметром --tsa-ca та кореневим сертифікатом органу, що видає мітки часу.",
   "Observed requests table": "Таблиця зареєстрованих запитів",
-  "Ports and sockets table": "Таблиця портів і сокетів"
+  "Ports and sockets table": "Таблиця портів і сокетів",
+  "Network topology diagram": "Схема топології мережі",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Орієнтовний час, що залишився: {time}. Розраховано на основі {done} із {total} виконаних завдань; обсяг чатів різниться, тому цей показник може змінюватися.",
+  "chats left": "залишилося чатів"
 }

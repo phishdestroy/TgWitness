@@ -37,7 +37,7 @@ CSS = """
 .map-grid td[data-a="4"]{background:var(--map-accent)}
 .map-grid td[data-l]::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%);border-radius:50%;background:var(--map-loss);box-shadow:0 0 0 1.5px var(--map-paper)}
 .map-grid td[data-l="1"]::after{width:4px;height:4px}.map-grid td[data-l="3"]::after{width:8px;height:8px}.map-grid td[data-l="4"]::after{width:10px;height:10px}
-.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:156px}.map-lanes td{width:auto;min-width:0;height:16px}
+.map-id{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:156px}.map-lanes td{width:auto;min-width:0;height:16px}
 .map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 10px/1.2 ui-monospace,monospace;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-lanes tr.outside th.lane{color:var(--map-loss);font-style:italic}.map-week{width:100%;table-layout:fixed}.map-week td{width:auto;min-width:0;height:20px}.map-week th[scope=row]{width:42px;overflow:visible}
 .map-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:11px;color:var(--muted);margin-top:12px}
@@ -53,7 +53,7 @@ CSS = """
 .map-run-list li{min-width:0}.map-run{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px 14px;border:1px solid var(--line);border-inline-start:3px solid var(--map-loss);border-radius:6px;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
 a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
 @media(max-width:720px){.map-run-list{grid-template-columns:1fr}.activity-map .map-card{padding:16px}}
-@media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}}
+@media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}.map-lanes thead th[scope=colgroup]{writing-mode:vertical-rl;transform:rotate(180deg);height:80px;padding:0 0 4px!important;text-align:end;white-space:nowrap;overflow:visible}}
 @media print{.map-grid td,.map-grid td::after,.map-legend i{print-color-adjust:exact;-webkit-print-color-adjust:exact}.map-scroll{overflow:visible}}
 """
 
@@ -285,7 +285,7 @@ def lanes(rows, origin, step, count, say, title, note):
         min(segment, count - index), e(bin_label(origin, step, index)[:10])) for index in range(0, count, segment)) + '<th></th></tr>'
     body = []
     for row in rows:
-        cells = ['<th scope="row" class="lane" dir="auto" title="' + e(row["label"]) + '">'
+        cells = ['<th scope="row" class="lane" dir="auto" title="' + e(row["label"]) + (' · ' + e(say("ID {id}", id=row["id"])) if type(row.get("id")) is int else '') + '">'
                  + (('<a href="' + e(row["link"]) + '">' + e(row["label"]) + '</a>') if row.get("link") else e(row["label"])) + '</th>']
         for index in range(count):
             value, lost = row["counts"][index], row["losses"][index]
@@ -331,7 +331,7 @@ def lane_rows(groups, absent, origin, step, count, say):
                     losses[index] += part
         lost = sum(losses)
         total = say("{n} msgs", n=thousands(say, len(times))) + (" · " + say("absent {n}", n=number(lost, say)) if lost >= 0.05 else "")
-        rows.append({"label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
+        rows.append({"id": key, "label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
     return rows
 
 
@@ -383,6 +383,10 @@ def chat_title(chat, titles, say):
     return titles.get(chat) or say("Chat {id} (not in this export)", id=chat)
 
 
+def chat_id_tag(chat, say):
+    return '' if type(chat) is not int else ' <small class="map-id" dir="ltr">' + e(say("ID {id}", id=chat)) + '</small>'
+
+
 def numbered_runs(gaps, titles, links, say):
     runs = [(high - low + 1, item["chat"], low, high, start, end)
             for item in (gaps or {}).get("chats", []) for low, high, start, end in item["ranges"]]
@@ -396,7 +400,7 @@ def numbered_runs(gaps, titles, links, say):
         tag = 'a' if location else 'div'
         parts.append('<li><' + tag + ' class="map-run"' + (' href="' + e(location) + '"' if location else '') + '>'
                      + '<strong>' + e(numbers) + '</strong><span>' + str(thousands(say, count)) + '</span><small dir="auto">'
-                     + e(chat_title(chat, titles, say)) + '</small><small>'
+                     + e(chat_title(chat, titles, say)) + '</small><small class="map-id" dir="ltr">' + (e(say("ID {id}", id=chat)) if type(chat) is int else '') + '</small><small>'
                      + e(say("Between {start} and {end}.", start=time_text(start), end=time_text(end))) + '</small>'
                      + ('<small>' + e(say("Open")) + ' →</small>' if location else '') + '</' + tag + '></li>')
     parts.append('</ul>')
@@ -425,7 +429,7 @@ def gap_details(gaps, titles, say):
                          + '</th><th class="num">' + e(say("Proven absent")) + '</th><th class="num">' + e(say("Likely absent"))
                          + '</th><th class="num">' + e(say("Runs with high confidence")) + '</th></tr></thead><tbody>')
             for chat, messages, proven, expected, high in rows[:200]:
-                link = ('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))
+                link = (('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))) + chat_id_tag(chat, say)
                 parts.append('<tr><td>' + link + '</td><td class="num">' + str(thousands(say, messages)) + '</td><td class="num">' + str(thousands(say, proven))
                              + '</td><td class="num">' + number(expected, say) + '</td><td class="num">' + str(thousands(say, high)) + '</td></tr>')
             parts.append('</tbody></table></div>')
@@ -462,7 +466,7 @@ def gap_details(gaps, titles, say):
                      + '</th><th class="num">' + e(say("Runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
-                         + '</a></td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
+                         + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
                          + '</td><td class="num">' + str(thousands(say, item["absent"])) + '</td><td class="num">' + str(thousands(say, len(item["ranges"]))) + '</td></tr>')
         parts.append('</tbody></table></div></div>')
     parts.append('<p class="map-note">' + e(say("Method: kernel bandwidth {minutes} minutes, up to {n} neighbouring messages on each side; message-gaps.json holds every run and verify.py recomputes it from the signed pages.",

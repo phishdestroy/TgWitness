@@ -70,6 +70,7 @@ First time? Do it in this order:
 | Understand Secret Chat support and try its interface | [Secret Chat installation and recording](PSEUDO-SECRET.md) |
 | Load older messages | [Source history](HISTORY.md) |
 | Export an account | [Account export](ACCOUNT-EXPORT.md) |
+| See what was collected and what was not | [Coverage and missing material](COVERAGE.md) |
 | Ask questions, write a report | [Archive analysis](ANALYSIS.md) |
 | Find messages by word forms, domains or @usernames | [Full-text search](SEARCH.md) (preview) |
 | Keep team notes on a case | [Case Board](CASE-BOARD.md) |

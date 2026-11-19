@@ -10528,5 +10528,8 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "최초 1,000개의 결과만 확인할 수 있습니다. 채팅, 유형 또는 날짜별로 검색 범위를 좁혀보세요.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "또한 수신자는 별도로 수신한 서명 키 지문을 확인하고, --tsa-ca 옵션과 타임스탬프 인증 기관의 루트 인증서를 지정하여 verify.py를 실행해야 합니다.",
   "Observed requests table": "관측된 요청 테이블",
-  "Ports and sockets table": "포트 및 소켓 표"
+  "Ports and sockets table": "포트 및 소켓 표",
+  "Network topology diagram": "네트워크 토폴로지 다이어그램",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "예상 남은 시간: {time}. 완료된 작업 {total}개 중 {done}개를 기준으로 산출된 수치이며, 채팅의 분량이 제각각이므로 이 수치는 변동될 수 있습니다.",
+  "chats left": "남은 채팅"
 }
