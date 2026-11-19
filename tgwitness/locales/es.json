@@ -10589,5 +10589,7 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Solo se pueden consultar los primeros 1.000 resultados. Limita la búsqueda por chat, tipo o fechas.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "El destinatario también debe confirmar la huella digital de la clave de firma recibida por separado y ejecutar verify.py con el parámetro --tsa-ca y el certificado raíz de la autoridad de sellado de tiempo.",
   "Observed requests table": "Tabla de solicitudes observadas",
-  "Ports and sockets table": "Tabla de puertos y sockets"
+  "Ports and sockets table": "Tabla de puertos y sockets",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tiempo estimado restante: {time}. Basado en {done} de {total} tareas completadas; el tamaño de los chats varía, por lo que esta cifra puede cambiar.",
+  "chats left": "chats restantes"
 }

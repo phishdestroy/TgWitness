@@ -10579,5 +10579,7 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "صرف پہلے 1,000 نتائج دیکھے جا سکتے ہیں۔ تلاش کو چیٹ، قسم یا تاریخوں کے لحاظ سے محدود کریں۔",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "موصول کنندہ کو یہ بھی کرنا چاہیے کہ الگ سے موصول ہونے والی دستخطی کلید کے فنگر پرنٹ کی تصدیق کرے اور --tsa-ca اور ٹائم اسٹیمپ اتھارٹی کے روٹ سرٹیفیکیٹ کے ساتھ verify.py چلائے۔",
   "Observed requests table": "مشاہدہ شدہ درخواستوں کی جدول",
-  "Ports and sockets table": "پورٹس اور ساکٹس کی جدول"
+  "Ports and sockets table": "پورٹس اور ساکٹس کی جدول",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "متوقع باقی ماندہ وقت: {time}۔ {total} مکمل شدہ کاموں میں سے {done} کی بنیاد پر؛ چیٹس کے سائز مختلف ہوتے ہیں، لہٰذا یہ تبدیل ہو سکتا ہے۔",
+  "chats left": "چٹس باقی"
 }

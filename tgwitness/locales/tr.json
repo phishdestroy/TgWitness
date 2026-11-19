@@ -10579,5 +10579,7 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Yalnızca ilk 1.000 sonuç görüntülenebilir. Aramayı sohbet, tür veya tarihlere göre daraltın.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Alıcı, ayrıca ayrı olarak aldığı imza anahtarı parmak izini doğrulamalı ve --tsa-ca seçeneği ile zaman damgası yetkilisinin kök sertifikasını kullanarak verify.py komutunu çalıştırmalıdır.",
   "Observed requests table": "Gözlemlenen istekler tablosu",
-  "Ports and sockets table": "Bağlantı noktaları ve soketler tablosu"
+  "Ports and sockets table": "Bağlantı noktaları ve soketler tablosu",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tahmini kalan süre: {time}. {total} görevden {done}'i tamamlandı; sohbetlerin boyutu farklılık gösterdiğinden bu süre değişebilir.",
+  "chats left": "kalan sohbetler"
 }
