@@ -10574,5 +10574,16 @@
   "Copy URL": "Copier l’URL",
   "The original source, identity map and private selection criteria are NOT included.": "La source originale, la table des identités et les critères de sélection privés ne sont PAS inclus.",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Pour les paquets volumineux, ajoutez --max-gib avec la taille décompressée. index.html est protégé par le manifeste.",
+  "independent timestamps are turned off": "Les horodatages indépendants sont désactivés",
+  "no timestamp authority is set": "aucune autorité de horodatage n'est définie",
+  "a validated timestamp from a third party": "un horodatage validé par un tiers",
+  "a recent answer from the timestamp authority": "une réponse récente de l'autorité chargée de l'horodatage",
+  "saved records": "enregistrements sauvegardés",
+  "Readiness for court": "Préparation à l'audience",
+  "Can be handed to a court: yes": "Peut être soumis à un tribunal : oui",
+  "Can be handed to a court: no · missing: {items}": "Peut être transmis à un tribunal : non · manquant : {items}",
+  "A validated timestamp covers {through} of {total} records.": "Un horodatage validé couvre {through} des {total} enregistrements.",
+  "Each export asks for a new timestamp of its last record.": "Chaque exportation demande un nouvel horodatage pour son dernier enregistrement.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Le destinataire doit également confirmer l'empreinte digitale de la clé de signature reçue séparément et exécuter le script verify.py.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Pour obtenir une archive distincte de l'historique actuel du compte, utilisez « Exportations → Compte Telegram ». La portée « Tout le compte » détecte toutes les conversations accessibles avant le début de cette opération, y compris les discussions archivées. Chaque discussion dispose de son propre curseur permettant de reprendre la lecture."
 }

@@ -10615,5 +10615,16 @@
   "Copy URL": "העתקת כתובת URL",
   "The original source, identity map and private selection criteria are NOT included.": "המקור המקורי, טבלת הזהויות וקריטריוני הבחירה הפרטיים אינם כלולים.",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט.",
+  "independent timestamps are turned off": "חותמות הזמן העצמאיות כבויות",
+  "no timestamp authority is set": "לא הוגדרה סמכות חותמת זמן",
+  "a validated timestamp from a third party": "חותמת זמן מאומתת מצד שלישי",
+  "a recent answer from the timestamp authority": "תשובה שניתנה לאחרונה על ידי הרשות האחראית על חותמות הזמן",
+  "saved records": "רשומות שנשמרו",
+  "Readiness for court": "מוכנות לדיון בבית המשפט",
+  "Can be handed to a court: yes": "ניתן להגיש לבית משפט: כן",
+  "Can be handed to a court: no · missing: {items}": "ניתן להגיש לבית משפט: לא · חסר: {items}",
+  "A validated timestamp covers {through} of {total} records.": "חותמת זמן מאומתת מכסה {through} מתוך {total} רשומות.",
+  "Each export asks for a new timestamp of its last record.": "כל ייצוא מבקש חותמת זמן חדשה עבור הרשומה האחרונה שלו.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "על הנמען לאשר גם את טביעת האצבע של מפתח החתימה שהתקבלה בנפרד ולהריץ את הקובץ verify.py.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "כדי ליצור ארכיון נפרד של ההיסטוריה הנוכחית של החשבון, השתמש באפשרות 'ייצוא' → 'חשבון טלגרם'. טווח החשבון כולו מאתר את כל השיחות הנגישות לפני תחילת הפעולה, כולל שיחות שארכבו. לכל שיחה יש סמן משלה שניתן לחדש ממנו."
 }

@@ -10513,5 +10513,16 @@
   "Copy URL": "複製 URL",
   "The original source, identity map and private selection criteria are NOT included.": "不包含原始來源、身分對照表和私人篩選條件。",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "對於大型套件，請用 --max-gib 指定解壓後的大小。index.html 受清單保護。",
+  "independent timestamps are turned off": "已關閉獨立時間戳記",
+  "no timestamp authority is set": "未設定時間戳記權限",
+  "a validated timestamp from a third party": "來自第三方且經驗證的時間戳記",
+  "a recent answer from the timestamp authority": "來自時間戳權威機構的一則最新回覆",
+  "saved records": "已儲存的記錄",
+  "Readiness for court": "出庭準備",
+  "Can be handed to a court: yes": "可提交法院：是",
+  "Can be handed to a court: no · missing: {items}": "可提交法院：否 · 缺失：{items}",
+  "A validated timestamp covers {through} of {total} records.": "經過驗證的時間戳記涵蓋了 {total} 筆記錄中的 {through} 筆。",
+  "Each export asks for a new timestamp of its last record.": "每次匯出都會要求為其最後一筆記錄生成新的時間戳記。",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "收件者還必須確認另行收到的簽名金鑰指紋，並執行 verify.py。",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "若要取得該帳號當前歷史紀錄的獨立存檔，請使用「匯出」→「Telegram 帳號」。全帳號範圍會於本次執行開始前偵測所有可存取的對話，包括已歸檔的聊天室。每個聊天室都有其專屬的可續傳游標。"
 }

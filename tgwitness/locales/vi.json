@@ -10513,5 +10513,16 @@
   "Copy URL": "Sao chép URL",
   "The original source, identity map and private selection criteria are NOT included.": "Nguồn gốc, bảng đối chiếu danh tính và tiêu chí chọn riêng tư KHÔNG được kèm theo.",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Với gói lớn, hãy thêm --max-gib cùng kích thước sau khi giải nén. index.html được bảo vệ bởi manifest.",
+  "independent timestamps are turned off": "Chức năng đóng dấu thời gian độc lập đã bị tắt",
+  "no timestamp authority is set": "Chưa thiết lập cơ quan quản lý dấu thời gian",
+  "a validated timestamp from a third party": "dấu thời gian đã được xác thực từ một bên thứ ba",
+  "a recent answer from the timestamp authority": "một câu trả lời gần đây từ cơ quan quản lý dấu thời gian",
+  "saved records": "các bản ghi đã lưu",
+  "Readiness for court": "Sự chuẩn bị cho phiên tòa",
+  "Can be handed to a court: yes": "Có thể được chuyển cho tòa án: có",
+  "Can be handed to a court: no · missing: {items}": "Có thể được chuyển cho tòa án: không · thiếu: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Dấu thời gian đã được xác thực bao gồm {through} trong tổng số {total} bản ghi.",
+  "Each export asks for a new timestamp of its last record.": "Mỗi lần xuất dữ liệu đều yêu cầu một dấu thời gian mới cho bản ghi cuối cùng của nó.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "Người nhận cũng phải xác nhận dấu vân tay của khóa ký đã nhận được riêng biệt và chạy lệnh `verify.py`.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Để tạo bản lưu trữ riêng biệt về lịch sử hiện tại của tài khoản, hãy sử dụng mục Xuất → Tài khoản Telegram. Phạm vi toàn bộ tài khoản sẽ phát hiện tất cả các cuộc trò chuyện có thể truy cập trước khi quá trình này bắt đầu, bao gồm cả các cuộc trò chuyện đã được lưu trữ. Mỗi cuộc trò chuyện đều có con trỏ riêng có thể tiếp tục từ điểm dừng."
 }

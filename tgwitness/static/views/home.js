@@ -145,6 +145,31 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     return box;
   }
 
+  const COURT_MISSING = {
+    disabled: () => tr('independent timestamps are turned off'),
+    no_authority: () => tr('no timestamp authority is set'),
+    none: () => tr('a validated timestamp from a third party'),
+    stale: () => tr('a recent answer from the timestamp authority'),
+    empty: () => tr('saved records'),
+  };
+
+  function courtLine() {
+    const c = resources.live.value?.court_readiness;
+    if (!c) return null;
+    const number = value => value.toLocaleString(document.documentElement.lang || undefined);
+    const box = node('section', 'home-court');
+    box.dataset.ready = String(!!c.ready);
+    box.setAttribute('aria-label', tr('Readiness for court'));
+    const items = (c.missing || []).map(key => (COURT_MISSING[key] || (() => key))(c)).join('; ');
+    box.append(node('strong', '', c.ready ? tr('Can be handed to a court: yes') : tr('Can be handed to a court: no · missing: {items}', {items})));
+    const note = node('small', 'home-note');
+    if (c.stamped_through) note.append(tr('A validated timestamp covers {through} of {total} records.', {through: number(c.stamped_through), total: number(c.records)}) + ' ');
+    if (c.ready) note.append(tr('Each export asks for a new timestamp of its last record.') + ' ');
+    note.append(tr('The recipient must also confirm the signing key fingerprint received separately and run verify.py.'));
+    box.append(note);
+    return box;
+  }
+
   function hero(state) {
     const live = resources.live.value;
     const collector = state.status?.collector || {}, observation = live?.observation || {};
@@ -540,7 +565,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       more.type = 'button'; more.setAttribute('aria-expanded', String(expanded));
       more.addEventListener('click', () => {expanded = true; root.classList.add('home-expanded'); more.setAttribute('aria-expanded', 'true');});
       root.classList.toggle('home-expanded', expanded);
-      root.replaceChildren(summary(state), hero(state), layout, more);
+      root.replaceChildren(...[summary(state), courtLine(), hero(state), layout, more].filter(Boolean));
       if (focused) {
         const button = root.querySelector('[data-overview-retry="' + focused + '"]');
         const target = button && !button.disabled ? button : root.querySelector(focused === 'activity' ? '.home-chart h2' : '.home-hero h2');

@@ -10564,5 +10564,16 @@
   "Copy URL": "کپی URL",
   "The original source, identity map and private selection criteria are NOT included.": "منبع اصلی، جدول تطبیق هویت‌ها و معیارهای خصوصی انتخاب در این بسته نیستند.",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "برای بسته‌های بزرگ --max-gib را با اندازهٔ بازشده اضافه کنید. index.html با مانیفست محافظت می‌شود.",
+  "independent timestamps are turned off": "تایم‌استمپ‌های مستقل غیرفعال هستند",
+  "no timestamp authority is set": "هیچ مرجع مهر زمانی تنظیم نشده است",
+  "a validated timestamp from a third party": "یک مهر زمانی معتبر از یک شخص ثالث",
+  "a recent answer from the timestamp authority": "یک پاسخ اخیر از مرجع تاریخ‌مهر",
+  "saved records": "سوابق ذخیره شده",
+  "Readiness for court": "آمادگی برای دادگاه",
+  "Can be handed to a court: yes": "قابل ارائه به دادگاه است: بله",
+  "Can be handed to a court: no · missing: {items}": "می‌توان به دادگاه ارجاع داده شود: خیر · مفقود: {items}",
+  "A validated timestamp covers {through} of {total} records.": "یک مهر زمانی معتبر، {through} از {total} رکورد را پوشش می‌دهد.",
+  "Each export asks for a new timestamp of its last record.": "هر خروجی یک مهر زمانی جدید برای آخرین رکورد خود درخواست می‌کند.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "دریافت‌کننده همچنین باید اثر انگشت کلید امضایی را که به‌طور جداگانه دریافت کرده است تأیید کند و دستور verify.py را اجرا نماید.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "برای آرشیو جداگانهٔ تاریخچهٔ فعلی حساب، از «صادرات → حساب تلگرام» استفاده کنید.  دامنهٔ کل حساب تمام دیالوگ‌های قابل دسترسی را پیش از شروع اجرای این برنامه، از جمله چت‌های آرشیو شده، کشف می‌کند.  هر چت دارای نشانگر قابل ازسرگیری خود است."
 }

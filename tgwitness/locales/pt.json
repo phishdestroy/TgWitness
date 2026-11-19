@@ -10574,5 +10574,16 @@
   "Copy URL": "Copiar URL",
   "The original source, identity map and private selection criteria are NOT included.": "A fonte original, o mapa de identidades e os critérios privados de seleção NÃO estão incluídos.",
   "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Para pacotes grandes, adicione --max-gib com o tamanho descompactado. index.html é protegido pelo manifesto.",
+  "independent timestamps are turned off": "os carimbos de data/hora independentes estão desativados",
+  "no timestamp authority is set": "Nenhuma autoridade de carimbo de data e hora está definida",
+  "a validated timestamp from a third party": "um carimbo de data e hora validado por um terceiro",
+  "a recent answer from the timestamp authority": "uma resposta recente da autoridade de carimbo de data e hora",
+  "saved records": "registros salvos",
+  "Readiness for court": "Preparação para o julgamento",
+  "Can be handed to a court: yes": "Pode ser encaminhado a um tribunal: sim",
+  "Can be handed to a court: no · missing: {items}": "Pode ser apresentado a um tribunal: não · ausente: {items}",
+  "A validated timestamp covers {through} of {total} records.": "Um carimbo de data e hora validado abrange {through} dos {total} registros.",
+  "Each export asks for a new timestamp of its last record.": "Cada exportação solicita um novo carimbo de data e hora para seu último registro.",
+  "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "O destinatário também deve confirmar a impressão digital da chave de assinatura recebida separadamente e executar o script verify.py.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Para obter um arquivo separado do histórico atual da conta, use Exportações → Conta do Telegram. A opção “Toda a conta” identifica todas as conversas acessíveis antes do início desta execução, incluindo as conversas arquivadas. Cada conversa possui seu próprio cursor, que pode ser retomado."
 }
