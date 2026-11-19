@@ -1,4 +1,5 @@
 from .common import (
+    fingerprint_argument,
     Ed25519PublicKey,
     MAX_JSON_BYTES,
     MAX_MANIFEST_BYTES,
@@ -378,7 +379,7 @@ def image_command(argv):
     parser = argparse.ArgumentParser(prog="verify.py IMAGE.png [IMAGE.png ...] IMAGES.sig.json",
                                      description="Check TgWitness chat images against their signature file.")
     parser.add_argument("files", nargs="+", type=Path)
-    parser.add_argument("--fingerprint", help="Collector key fingerprint retained independently")
+    parser.add_argument("--fingerprint", type=fingerprint_argument, help="Collector key fingerprint retained independently")
     parser.add_argument("--evidence", type=Path, help="Evidence ZIP that must contain every signed record of the images")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
