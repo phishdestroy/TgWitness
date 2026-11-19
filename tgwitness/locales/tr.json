@@ -10584,5 +10584,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tahmini kalan süre: {time}. {total} görevden {done}'i tamamlandı; sohbetlerin boyutu farklılık gösterdiğinden bu süre değişebilir.",
   "chats left": "kalan sohbetler",
   "Search or jump to #number": "Arama yapın veya #numaraya atlayın",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Arama ve filtreler, önceki sürümler de dahil olmak üzere bu sohbetteki tüm kaydedilmiş mesajları kapsar. # işaretini ve bir mesaj numarasını yazarak o mesaja atlayabilirsiniz."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Arama ve filtreler, önceki sürümler de dahil olmak üzere bu sohbetteki tüm kaydedilmiş mesajları kapsar. # işaretini ve bir mesaj numarasını yazarak o mesaja atlayabilirsiniz.",
+  "Pinned messages ({n})": "Sabitlenmiş mesajlar ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Sohbet en son kontrol edildiğinde Telegram tarafından {time} olarak gösterildi. Bu, bir mesajın ne zaman sabitlendiğini göstermez.",
+  "The list was not refreshed at that check; this is the last list received.": "Bu kontrol sırasında liste güncellenmedi; bu, alınan son listedir.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram, {total} sabitlenmiş mesaj olduğunu bildirmişti; ancak listede sadece {listed} tanesi yer alıyor.",
+  "Not saved in this workspace": "Bu çalışma alanında kaydedilmedi",
+  "Show in chat": "Sohbette göster",
+  "Go to message #{id}": "{id} numaralı mesaja git"
 }

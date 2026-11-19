@@ -10533,5 +10533,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "เวลาที่เหลือประมาณ: {time}. คำนวณจาก {done} ในจำนวน {total} งานที่เสร็จสิ้นแล้ว; เนื่องจากขนาดของข้อความแชทแตกต่างกัน จึงอาจมีการเปลี่ยนแปลงได้",
   "chats left": "จำนวนการสนทนาที่เหลือ",
   "Search or jump to #number": "ค้นหาหรือไปยัง #หมายเลข",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "ฟังก์ชันการค้นหาและตัวกรองครอบคลุมข้อความทั้งหมดที่บันทึกไว้ในแชทนี้ รวมถึงเวอร์ชันเก่าด้วย เพียงพิมพ์ # ตามด้วยหมายเลขข้อความ เพื่อกระโดดไปยังข้อความนั้น"
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "ฟังก์ชันการค้นหาและตัวกรองครอบคลุมข้อความทั้งหมดที่บันทึกไว้ในแชทนี้ รวมถึงเวอร์ชันเก่าด้วย เพียงพิมพ์ # ตามด้วยหมายเลขข้อความ เพื่อกระโดดไปยังข้อความนั้น",
+  "Pinned messages ({n})": "ข้อความที่ถูกปักหมุด ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Telegram แสดงว่า {time} เมื่อตรวจสอบการสนทนาครั้งล่าสุด ซึ่งข้อมูลนี้ไม่ปรากฏเมื่อข้อความถูกปักหมุด",
+  "The list was not refreshed at that check; this is the last list received.": "รายชื่อดังกล่าวไม่ได้ถูกอัปเดตในการตรวจสอบครั้งนั้น; นี่คือรายชื่อล่าสุดที่ได้รับ",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram รายงานว่ามีข้อความที่ถูกปักหมุด {total} ข้อความ แต่มีเพียง {listed} ข้อความที่แสดงอยู่ในรายการ",
+  "Not saved in this workspace": "ยังไม่ถูกบันทึกในพื้นที่ทำงานนี้",
+  "Show in chat": "แสดงในแชท",
+  "Go to message #{id}": "ไปที่ข้อความหมายเลข {id}"
 }

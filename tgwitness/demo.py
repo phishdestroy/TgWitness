@@ -65,6 +65,9 @@ def seed_demo(store):
         if i in (5, 9, 16):
             store.append("reaction.snapshot", {"counts": {"👍": 3, "🔍": 1},
                                                "complete_actor_list": False, "synthetic": True}, cid, 401 + i)
+    from .chat_state import record as record_chat_state
+    record_chat_state(store, groups[0][0], {"pinned": [389, 404, 413], "pinned_total": 3,
+                                            "parts_complete": {"pinned": True}}, {})
     store.append("membership.service", {"action": {"_": "MessageActionChatAddUser", "users": [70009]},
                                         "synthetic": True}, groups[0][0], 430, 70001)
     store.append("coverage.gap", {"reason": "Synthetic transport interruption",

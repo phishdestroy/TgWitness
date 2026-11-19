@@ -10584,5 +10584,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "زمان باقی‌مانده تخمینی: {time}. بر اساس {done} از {total} وظایف انجام‌شده؛ چت‌ها از نظر اندازه متفاوت هستند، بنابراین این مقدار می‌تواند تغییر کند.",
   "chats left": "چت‌های باقی‌مانده",
   "Search or jump to #number": "جستجو یا پرش به #شماره",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "جستجو و فیلترها تمام پیام‌های ذخیره‌شده در این چت، از جمله نسخه‌های قبلی را پوشش می‌دهند. برای رفتن به آن پیام، # و شماره پیام را تایپ کنید."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "جستجو و فیلترها تمام پیام‌های ذخیره‌شده در این چت، از جمله نسخه‌های قبلی را پوشش می‌دهند. برای رفتن به آن پیام، # و شماره پیام را تایپ کنید.",
+  "Pinned messages ({n})": "پیام‌های سنجاق‌شده ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "زمانی که چت آخرین بار بررسی شد، {time} در تلگرام فهرست شده بود. این نشان نمی‌دهد که یک پیام پین شده باشد.",
+  "The list was not refreshed at that check; this is the last list received.": "این فهرست در آن بررسی به‌روزرسانی نشد؛ این آخرین فهرست دریافت‌شده است.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "تلگرام گزارش داد که پیام‌های سنجاق‌شده {total} هستند؛ تنها {listed} فهرست شده‌اند.",
+  "Not saved in this workspace": "در این فضای کاری ذخیره نشده است",
+  "Show in chat": "در چت نمایش دهید",
+  "Go to message #{id}": "به پیام شمارهٔ {id} بروید."
 }

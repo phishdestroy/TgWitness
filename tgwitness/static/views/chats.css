@@ -230,3 +230,11 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .people-collect > :not(summary) { margin: 12px; }
 .chat-back-reply { align-self: center; margin: 6px auto; }
 .reply-outside span { color: var(--accent-text); }
+
+.workspace[data-current-view="chats"] .chat-pinned { margin: 0 12px 8px; border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; flex: none; max-height: 40vh; overflow-y: auto; }
+.workspace[data-current-view="chats"] .chat-pinned summary { cursor: pointer; font-weight: 600; min-height: 28px; display: flex; align-items: center; }
+.workspace[data-current-view="chats"] .chat-pinned-list { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; }
+.workspace[data-current-view="chats"] .chat-pinned-item { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; min-width: 0; }
+.workspace[data-current-view="chats"] .chat-pinned-label { min-width: 0; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .chat-pinned-text { display: block; opacity: .85; }
+.workspace[data-current-view="chats"] .chat-pinned-item .small { flex: none; min-height: 32px; }

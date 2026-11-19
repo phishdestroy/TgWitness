@@ -10594,5 +10594,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Tempo estimado restante: {time}. Com base em {done} de {total} tarefas concluídas; como os chats têm tamanhos diferentes, esse valor pode variar.",
   "chats left": "conversas restantes",
   "Search or jump to #number": "Pesquisar ou ir para o #número",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "A pesquisa e os filtros abrangem todas as mensagens salvas neste chat, incluindo versões anteriores. Digite # seguido do número da mensagem para ir diretamente para ela."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "A pesquisa e os filtros abrangem todas as mensagens salvas neste chat, incluindo versões anteriores. Digite # seguido do número da mensagem para ir diretamente para ela.",
+  "Pinned messages ({n})": "Mensagens fixadas ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Exibido pelo Telegram na última vez em que o chat foi verificado: {time}. Isso não indica quando uma mensagem foi fixada.",
+  "The list was not refreshed at that check; this is the last list received.": "A lista não foi atualizada nessa verificação; esta é a última lista recebida.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "O Telegram informou que havia {total} mensagens fixadas; no entanto, apenas {listed} estão listadas.",
+  "Not saved in this workspace": "Não foi salvo neste espaço de trabalho",
+  "Show in chat": "Mostrar no chat",
+  "Go to message #{id}": "Ir para a mensagem nº {id}"
 }

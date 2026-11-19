@@ -10533,5 +10533,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Perkiraan waktu yang tersisa: {time}. Berdasarkan {done} dari {total} tugas yang telah diselesaikan; ukuran obrolan bervariasi, sehingga angka ini dapat berubah.",
   "chats left": "obrolan yang tersisa",
   "Search or jump to #number": "Cari atau langsung ke #nomor",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Fitur pencarian dan penyaringan mencakup semua pesan yang tersimpan dalam obrolan ini, termasuk versi-versi sebelumnya. Ketik # diikuti nomor pesan untuk langsung membuka pesan tersebut."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Fitur pencarian dan penyaringan mencakup semua pesan yang tersimpan dalam obrolan ini, termasuk versi-versi sebelumnya. Ketik # diikuti nomor pesan untuk langsung membuka pesan tersebut.",
+  "Pinned messages ({n})": "Pesan yang disematkan ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Tercantum di Telegram saat obrolan terakhir kali diperiksa, {time}. Informasi ini tidak ditampilkan saat sebuah pesan disematkan.",
+  "The list was not refreshed at that check; this is the last list received.": "Daftar tersebut tidak diperbarui pada pemeriksaan tersebut; ini adalah daftar terakhir yang diterima.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram melaporkan ada {total} pesan yang disematkan; namun, hanya {listed} yang tercantum.",
+  "Not saved in this workspace": "Belum disimpan di ruang kerja ini",
+  "Show in chat": "Tampilkan di obrolan",
+  "Go to message #{id}": "Buka pesan nomor {id}"
 }

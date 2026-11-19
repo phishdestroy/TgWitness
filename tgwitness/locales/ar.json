@@ -10788,5 +10788,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "الوقت المتبقي المقدر: {time}. استنادًا إلى إنجاز {done} مهمة من أصل {total}؛ وتختلف المحادثات في الحجم، لذا قد يتغير هذا الرقم.",
   "chats left": "المحادثات المتبقية",
   "Search or jump to #number": "ابحث أو انتقل إلى #رقم",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "تغطي ميزة البحث والمرشحات جميع الرسائل المحفوظة في هذه المحادثة، بما في ذلك الإصدارات السابقة. اكتب # ورقم الرسالة للانتقال إلى تلك الرسالة."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "تغطي ميزة البحث والمرشحات جميع الرسائل المحفوظة في هذه المحادثة، بما في ذلك الإصدارات السابقة. اكتب # ورقم الرسالة للانتقال إلى تلك الرسالة.",
+  "Pinned messages ({n})": "الرسائل المثبتة ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "أظهرت Telegram عند آخر مرة تم فيها التحقق من الدردشة الرقم {time}. ولا يظهر هذا الرقم عندما تكون الرسالة مثبتة.",
+  "The list was not refreshed at that check; this is the last list received.": "لم يتم تحديث القائمة خلال عملية الفحص تلك؛ وهذه هي آخر قائمة تم استلامها.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "أفاد تطبيق Telegram بوجود {total} رسالة مثبتة؛ لكن لم يُدرج سوى {listed} منها.",
+  "Not saved in this workspace": "لم يتم حفظه في مساحة العمل هذه",
+  "Show in chat": "إظهار في الدردشة",
+  "Go to message #{id}": "انتقل إلى الرسالة رقم {id}"
 }

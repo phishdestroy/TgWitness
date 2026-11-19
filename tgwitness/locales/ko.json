@@ -10533,5 +10533,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "예상 남은 시간: {time}. 완료된 작업 {total}개 중 {done}개를 기준으로 산출된 수치이며, 채팅의 분량이 제각각이므로 이 수치는 변동될 수 있습니다.",
   "chats left": "남은 채팅",
   "Search or jump to #number": "검색하거나 #번호로 이동",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "검색 및 필터 기능은 이전 버전을 포함하여 이 채팅에 저장된 모든 메시지를 대상으로 합니다. # 기호와 메시지 번호를 입력하면 해당 메시지로 바로 이동할 수 있습니다."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "검색 및 필터 기능은 이전 버전을 포함하여 이 채팅에 저장된 모든 메시지를 대상으로 합니다. # 기호와 메시지 번호를 입력하면 해당 메시지로 바로 이동할 수 있습니다.",
+  "Pinned messages ({n})": "고정된 게시물 ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "채팅을 마지막으로 확인했을 때 텔레그램에 표시된 내용은 {time}였습니다. 메시지가 고정된 경우에는 이 내용이 표시되지 않습니다.",
+  "The list was not refreshed at that check; this is the last list received.": "해당 확인 시점에 목록이 갱신되지 않았으며, 이것이 가장 최근에 수신된 목록입니다.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "텔레그램은 고정된 메시지가 {total}건이라고 보고했으나, 목록에는 {listed}건만 표시되어 있습니다.",
+  "Not saved in this workspace": "이 작업 공간에 저장되지 않았습니다",
+  "Show in chat": "채팅에 표시",
+  "Go to message #{id}": "{id}번 메시지로 이동"
 }

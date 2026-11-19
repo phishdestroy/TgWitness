@@ -10533,5 +10533,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "残り推定時間：{time}。完了したタスク{total}件のうち{done}件に基づく。チャットの長さはそれぞれ異なるため、この数値は変動する可能性があります。",
   "chats left": "残りのチャット数",
   "Search or jump to #number": "検索、または#番号へ移動",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "検索とフィルタ機能は、このチャットに保存されているすべてのメッセージ（過去のバージョンを含む）を対象としています。「#」とメッセージ番号を入力すると、そのメッセージにジャンプできます。"
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "検索とフィルタ機能は、このチャットに保存されているすべてのメッセージ（過去のバージョンを含む）を対象としています。「#」とメッセージ番号を入力すると、そのメッセージにジャンプできます。",
+  "Pinned messages ({n})": "固定されたメッセージ ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "チャットを最後に確認した時点で、Telegramには「{time}」と表示されていました。メッセージがピン留めされている場合は、この表示はされません。",
+  "The list was not refreshed at that check; this is the last list received.": "その確認時点ではリストは更新されていませんでした。これが最後に受け取ったリストです。",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegramでは{total}件の固定メッセージが報告されていますが、一覧には{listed}件しか表示されていません。",
+  "Not saved in this workspace": "このワークスペースには保存されていません",
+  "Show in chat": "チャットに表示",
+  "Go to message #{id}": "メッセージ #{id} へ移動"
 }

@@ -10686,5 +10686,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Szacowany pozostały czas: {time}. Na podstawie {done} z {total} ukończonych zadań; czaty mają różną wielkość, więc wartość ta może ulec zmianie.",
   "chats left": "pozostałe rozmowy",
   "Search or jump to #number": "Wyszukaj lub przejdź do #numer",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Wyszukiwanie i filtry obejmują wszystkie zapisane wiadomości w tej rozmowie, w tym wcześniejsze wersje. Wpisz znak # i numer wiadomości, aby przejść do tej wiadomości."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Wyszukiwanie i filtry obejmują wszystkie zapisane wiadomości w tej rozmowie, w tym wcześniejsze wersje. Wpisz znak # i numer wiadomości, aby przejść do tej wiadomości.",
+  "Pinned messages ({n})": "Wpis przypięty ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "W serwisie Telegram, w momencie ostatniego sprawdzenia czatu, wyświetlał się kod błędu {time}. Nie pokazuje to, kiedy wiadomość została przypięta.",
+  "The list was not refreshed at that check; this is the last list received.": "Lista nie została zaktualizowana podczas tej kontroli; jest to ostatnia otrzymana lista.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram zgłosił {total} przypięte wiadomości; na liście widnieje tylko {listed}.",
+  "Not saved in this workspace": "Nie zapisano w tym obszarze roboczym",
+  "Show in chat": "Pokaż na czacie",
+  "Go to message #{id}": "Przejdź do wiadomości nr {id}"
 }

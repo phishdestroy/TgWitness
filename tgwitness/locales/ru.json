@@ -10656,5 +10656,12 @@
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Ожидаемое оставшееся время: {time}. Расчет основан на выполнении {done} из {total} задач; размеры чатов различаются, поэтому это значение может измениться.",
   "chats left": "оставшиеся чаты",
   "Search or jump to #number": "Поиск или переход к #номер",
-  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Поиск и фильтры охватывают все сохраненные сообщения в этом чате, включая более ранние версии. Введите символ # и номер сообщения, чтобы перейти к нему."
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Поиск и фильтры охватывают все сохраненные сообщения в этом чате, включая более ранние версии. Введите символ # и номер сообщения, чтобы перейти к нему.",
+  "Pinned messages ({n})": "Закрепленные сообщения ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Согласно данным Telegram на момент последней проверки чата — {time}. Здесь не отображается, когда сообщение было закреплено.",
+  "The list was not refreshed at that check; this is the last list received.": "Список не был обновлен во время этой проверки; это последний полученный список.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram сообщил о {total} закрепленных сообщениях; в списке указано лишь {listed}.",
+  "Not saved in this workspace": "Не сохранено в этой рабочей области",
+  "Show in chat": "Показать в чате",
+  "Go to message #{id}": "Перейти к сообщению № {id}"
 }
