@@ -10580,6 +10580,7 @@
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Qabul qiluvchi shuningdek alohida olingan imzolash kalitining barmoq izini tasdiqlashi va --tsa-ca hamda vaqt shtampi vakolatining ildiz sertifikati bilan verify.py skriptini ishga tushirishi kerak.",
   "Observed requests table": "Kuzatilgan so'rovlar jadvali",
   "Ports and sockets table": "Portlar va soketlar jadvali",
+  "Network topology diagram": "Tarmoq topologiyasi diagrammasi",
   "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "Taxminiy qolgan vaqt: {time}. {total} ta tugallangan vazifadan {done} tasi asosida; suhbatlar hajm jihatidan farq qiladi, shuning uchun bu o'zgarishi mumkin.",
   "chats left": "Suhbatlar qoldi"
 }
