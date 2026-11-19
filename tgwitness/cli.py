@@ -12,7 +12,7 @@ from types import SimpleNamespace
 COMMANDS = ("index", "search", "context", "messages", "stats", "export", "backup")
 SQLITE_HEADER = b"SQLite format 3\x00"
 BACKUP_SKIP_SUFFIXES = ("-wal", "-shm", "-journal", ".tmp", ".pid")
-BACKUP_SKIP_NAMES = (".instance.lock",)
+BACKUP_SKIP_NAMES = (".instance.lock", "fulltext.sqlite3")
 BACKUP_SKIP_DIRS = ("temporary-exports",)
 EXIT_FAILURE, EXIT_USAGE, EXIT_BUSY, EXIT_REFUSED = 1, 2, 3, 4
 HTTP_EXITS = {401: EXIT_REFUSED, 403: EXIT_REFUSED, 404: EXIT_USAGE, 422: EXIT_USAGE, 429: EXIT_BUSY, 503: EXIT_BUSY}
