@@ -241,7 +241,13 @@ Messages are laid out like a Telegram chat, but every mark states what the journ
   load a preview when they scroll into view, and pressing one zooms it; audio and video play
   in place. A mark shows **File saved**, **Queued**, or the reason the file was not saved.
   A message with an attachment whose file was never recorded shows a paperclip only.
-- Reactions are not drawn on messages. Observed reaction counts appear in the
+- A forwarded message starts with **Forwarded from NAME**; when only an ID was saved it shows
+  **ID N**, and **Forwarded message** when the source is hidden. Hovering shows when the
+  original was sent, if Telegram gave that time.
+- Under the text, reaction chips show the emoji and its count (a custom emoji is shown as a
+  star), and **N views** shows the view counter. These are the counts at the moment the message
+  was saved; Telegram changes them later, and the hint on the chips says so. A message with
+  no saved reactions or views has no such line. Later changes to the counts appear in the
   [Journal](#journal) as **Reactions observed** records. The panel has no separate list of
   pinned messages; a pin is shown as a service line when Telegram sent one.
 
