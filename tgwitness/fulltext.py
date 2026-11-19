@@ -789,7 +789,7 @@ class FullText:
         merged = found[0] if len(found) == 1 else fused(found, order)
         more = len(merged) > end and end < 1000
         return {"hits": merged[offset:end], "next_offset": end if more else None,
-                "matched": matched, "query": query.explain(), "index": self.status(public=public), "order": order}
+                "truncated": len(merged) > end and end >= 1000, "matched": matched, "query": query.explain(), "index": self.status(public=public), "order": order}
 
     def ready(self):
         db = self.connection()
