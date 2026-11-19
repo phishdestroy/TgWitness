@@ -48,6 +48,14 @@ LIMITATIONS = [
 
 TERMINAL_PHASES = ("done", "partial", "failed")
 
+def unique_items(items):
+    kept = []
+    for item in items:
+        if item not in kept:
+            kept.append(item)
+    return kept
+
+
 class AccountExportOptions(BaseModel):
     model_config = ConfigDict(extra="forbid")
     transport: Literal["auto", "takeout", "regular"] = "auto"
@@ -1140,7 +1148,7 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
-                    "omissions": [*self.inventory.get("gaps", []), *self.current.get("omissions", [])],
+                    "omissions": unique_items([*self.inventory.get("gaps", []), *self.current.get("omissions", [])]),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
                 analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:
