@@ -1,7 +1,7 @@
-# TgWitness verifier sources SHA-256: 6d9346e87c88bb1b702f21dca92f080f440602c1749fa0a56cf7e1dbf993961d
+# TgWitness verifier sources SHA-256: 9a102e8123be61e2fc179e6f85b2be469202a8359dc667008ce9bb2f1e0d64a7
 """Standalone verifier"""
 import argparse
-import base64
+import base64 as _base64
 import bisect
 import hashlib
 import heapq
@@ -29,6 +29,21 @@ from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from cryptography.x509 import ocsp
+
+class StrictBase64:
+    def b64decode(self, value, altchars=None, validate=False):
+        data = _base64.b64decode(value, altchars, validate)
+        if validate:
+            raw = value.encode("ascii") if isinstance(value, str) else bytes(value)
+            if _base64.b64encode(data, altchars) != raw:
+                raise ValueError("Non-canonical base64 encoding")
+        return data
+
+    def __getattr__(self, name):
+        return getattr(_base64, name)
+
+
+base64 = StrictBase64()
 
 FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
           "actor_id", "payload", "previous_hash")
@@ -4453,7 +4468,7 @@ def verify_selection(path, expected_fingerprint=None, evidence=None):
         def records():
             with archive.open(member) as stream:
                 for line in bounded_lines(stream):
-                    yield json.loads(line)
+                    yield strict_json(line)
 
         for record in chat_messages(archive) if kind == "chat" else records():
             number = record.get(identity)
@@ -7315,7 +7330,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             for line in bounded_lines(stream):
                 if not line.strip():
                     continue
-                event = json.loads(line)
+                event = strict_json(line)
                 yield event
                 payload, kind = event["payload"], event["kind"]
                 if kind == "witness.daily":
@@ -7895,7 +7910,7 @@ def check_channel(witness, source):
             try:
                 raw = unb64url(body)
                 key.verify(unb64url(signature), raw)
-                statement = json.loads(raw)
+                statement = strict_json(raw)
             except Exception:
                 invalid.append(message_id)
                 continue
@@ -8047,7 +8062,7 @@ def verify_history_report(path, expected_fingerprint=None, bundle=None):
         cursors, cursor_format = {}, None
         with open_archive(bundle) as archive, archive.open("events.jsonl") as stream:
             for line in bounded_lines(stream):
-                event = json.loads(line)
+                event = strict_json(line)
                 if event["seq"] > boundary:
                     break
                 payload = event["payload"]

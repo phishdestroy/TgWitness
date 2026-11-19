@@ -277,7 +277,7 @@ def verify_selection(path, expected_fingerprint=None, evidence=None):
         def records():
             with archive.open(member) as stream:
                 for line in bounded_lines(stream):
-                    yield json.loads(line)
+                    yield strict_json(line)
 
         for record in chat_messages(archive) if kind == "chat" else records():
             number = record.get(identity)

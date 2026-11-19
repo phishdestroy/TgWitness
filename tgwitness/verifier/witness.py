@@ -17,6 +17,7 @@ from .common import (
     read_json_file,
     read_manifest,
     read_member,
+    strict_json,
     timedelta,
     timezone,
 )
@@ -160,7 +161,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             for line in bounded_lines(stream):
                 if not line.strip():
                     continue
-                event = json.loads(line)
+                event = strict_json(line)
                 yield event
                 payload, kind = event["payload"], event["kind"]
                 if kind == "witness.daily":
@@ -744,7 +745,7 @@ def check_channel(witness, source):
             try:
                 raw = unb64url(body)
                 key.verify(unb64url(signature), raw)
-                statement = json.loads(raw)
+                statement = strict_json(raw)
             except Exception:
                 invalid.append(message_id)
                 continue
@@ -905,7 +906,7 @@ def verify_history_report(path, expected_fingerprint=None, bundle=None):
         cursors, cursor_format = {}, None
         with open_archive(bundle) as archive, archive.open("events.jsonl") as stream:
             for line in bounded_lines(stream):
-                event = json.loads(line)
+                event = strict_json(line)
                 if event["seq"] > boundary:
                     break
                 payload = event["payload"]
