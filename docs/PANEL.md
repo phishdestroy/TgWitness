@@ -219,6 +219,32 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
 - **Save profile now** records a snapshot of the chat or bot profile: description,
   members, invite link, bot commands.
 
+### Reading a conversation
+
+Messages are laid out like a Telegram chat, but every mark states what the journal holds:
+
+- A date chip starts each day. Messages from the same sender on the same day, less than five
+  minutes apart, form a run: the name is shown on the first message and the avatar on the last.
+  Channel posts have no avatar. A service message such as "pinned a message" is a centred
+  line. Pressing a sender's name opens the person card; **Author details** show the username
+  and ID the journal has for them.
+- A reply shows a quote with the sender and the start of the original. Pressing it jumps to
+  the original; if the original is not loaded, **Reply to #N · show the original** loads the
+  messages around it. A reply to a message in another chat is shown as text only.
+- A message sent from a schedule is marked **Sent as a scheduled message**. **from history**
+  means the message was loaded from history and not seen live. **By observation time** means
+  Telegram's send time was not recorded, and the message is dated by when TgWitness saw it.
+- Marks under a message: **Edited · N versions** opens every saved version; **Edited** alone
+  means Telegram flagged an edit but the earlier text was not saved. **Deleted** and **Not found
+  at recheck** open a note with the time and what was observed.
+- An attachment has **Preview** and **↓ Download preserved attachment**. Images up to 8 MiB
+  load a preview when they scroll into view, and pressing one zooms it; audio and video play
+  in place. A mark shows **File saved**, **Queued**, or the reason the file was not saved.
+  A message with an attachment whose file was never recorded shows a paperclip only.
+- Reactions are not drawn on messages. Observed reaction counts appear in the
+  [Journal](#journal) as **Reactions observed** records. The panel has no separate list of
+  pinned messages; a pin is shown as a service line when Telegram sent one.
+
 ### Read-only, sending and secrets
 
 Two switches above the messages protect the account and the reader:
