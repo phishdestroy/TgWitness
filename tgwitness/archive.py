@@ -335,7 +335,7 @@ class ArchiveReader:
         index = {key: result["index"][key] for key in ("complete", "indexed_seq", "indexed_hash") if key in result["index"]}
         return {"items": items, "next_before": None, "ranked": True, "index": index,
                 "next_offset": result["next_offset"] if complete else query.offset + len(items),
-                "query": result["query"], "untrusted_content": True,
+                "truncated": result["truncated"] and complete, "query": result["query"], "untrusted_content": True,
                 "coverage": "Ranked over indexed saved observations; edits and deletion notices are separate records."}
 
     def events(self, store, query, allowed, kind=None):

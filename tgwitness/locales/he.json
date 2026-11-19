@@ -10627,5 +10627,6 @@
   "Each export asks for a new timestamp of its last record.": "כל ייצוא מבקש חותמת זמן חדשה עבור הרשומה האחרונה שלו.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py.": "על הנמען לאשר גם את טביעת האצבע של מפתח החתימה שהתקבלה בנפרד ולהריץ את הקובץ verify.py.",
   "For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "כדי ליצור ארכיון נפרד של ההיסטוריה הנוכחית של החשבון, השתמש באפשרות 'ייצוא' → 'חשבון טלגרם'. טווח החשבון כולו מאתר את כל השיחות הנגישות לפני תחילת הפעולה, כולל שיחות שארכבו. לכל שיחה יש סמן משלה שניתן לחדש ממנו.",
+  "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "ניתן לעיין רק ב-1,000 התוצאות הראשונות. צמצמו את החיפוש לפי צ'אט, סוג או תאריכים.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "על הנמען לאשר גם את טביעת האצבע של מפתח החתימה שהתקבלה בנפרד, ולהריץ את הקובץ verify.py עם האופציה --tsa-ca ועם תעודת השורש של רשות חותמות הזמן."
 }
