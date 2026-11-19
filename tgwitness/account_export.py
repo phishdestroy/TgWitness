@@ -48,7 +48,6 @@ LIMITATIONS = [
 
 TERMINAL_PHASES = ("done", "partial", "failed")
 
-
 class AccountExportOptions(BaseModel):
     model_config = ConfigDict(extra="forbid")
     transport: Literal["auto", "takeout", "regular"] = "auto"
