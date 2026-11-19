@@ -4092,7 +4092,7 @@ class EventChain:
         count = self.count + 1
         if set(event) != set(FIELDS) | {"hash", "signature"}:
             raise ValueError("Unexpected or missing fields at event " + str(count))
-        if event["seq"] != count or event["previous_hash"] != self.previous:
+        if type(event["seq"]) is not int or event["seq"] != count or event["previous_hash"] != self.previous:
             raise ValueError("Broken sequence or hash chain at event " + str(count))
 
     def content(self, event):
