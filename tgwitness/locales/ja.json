@@ -10528,5 +10528,7 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "最初の1,000件の結果のみ閲覧可能です。チャット、種類、または日付で検索結果を絞り込んでください。",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "また、受信者は、別途受け取った署名鍵のフィンガープリントを確認し、--tsa-ca オプションとタイムスタンプ認証機関のルート証明書を指定して verify.py を実行する必要があります。",
   "Observed requests table": "観測されたリクエストのテーブル",
-  "Ports and sockets table": "ポートとソケットの一覧表"
+  "Ports and sockets table": "ポートとソケットの一覧表",
+  "Estimated time left: {time}. Based on {done} of {total} finished tasks; chats differ in size, so this can change.": "残り推定時間：{time}。完了したタスク{total}件のうち{done}件に基づく。チャットの長さはそれぞれ異なるため、この数値は変動する可能性があります。",
+  "chats left": "残りのチャット数"
 }
