@@ -241,8 +241,8 @@ def entries(source, policy, projection, withholding):
 
 DOT = r'(?:\.|\[\.\]|\(\.\))'
 TLD = r'(?-i:com|net|org|io|ru|ua|info|biz|app|dev|xyz|online|site|top|cc|tv|gg|ly|su|kz|uk|eu|fr|cn|pro|club|shop|store|link|live|page|cloud)'
-EMAIL = re.compile(r'(?<![\w.+%-])[\w.%+-]+(?:@|\[at\]|\(at\))[\w-]+(?:' + DOT + r'[\w-]+)*' + DOT + r'\w{2,}(?!\w)', re.IGNORECASE)
-LINK = re.compile(r'(?:(?:https?|hxxps?|ftp|tg)://|www\.)\S+|@\w+|(?<![\w@.-])(?:[\w-]+' + DOT + r')+[^\W\d_]{2,}(?::\d+)?/\S*|(?<![\w@.-])(?:[\w-]+' + DOT + r')+' + TLD + r'(?![\w@-])', re.IGNORECASE)
+EMAIL = re.compile(r'(?<![\w.+%-])[\w.%+-]+(?:@|\[at\]|\(at\))[\w-]{1,63}(?:' + DOT + r'[\w-]{1,63}){0,8}' + DOT + r'\w{2,24}(?!\w)', re.IGNORECASE)
+LINK = re.compile(r'(?:(?:https?|hxxps?|ftp|tg)://|www\.)\S+|@\w+|(?<![\w@.-])(?:[\w-]{1,63}' + DOT + r'){1,8}[^\W\d_]{2,24}(?::\d+)?/\S*|(?<![\w@.-])(?:[\w-]{1,63}' + DOT + r'){1,8}' + TLD + r'(?![\w@-])', re.IGNORECASE)
 NUMBER = re.compile(r'(?<!\w)[+\uff0b]?\d[\d ()\-.]{6,}\d(?!\w)')
 
 
