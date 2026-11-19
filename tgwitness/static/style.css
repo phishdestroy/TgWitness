@@ -2539,3 +2539,5 @@ button.primary[aria-busy=true]::after { color: #fff; }
 .forward-details dt { color: var(--muted); }.forward-details dd { margin: 0; overflow-wrap: anywhere; }
 .forward-summary p { overflow-wrap: anywhere; }.history-forward-dialog > .notice:empty { display: none; }
 @media (max-width: 480px) { .history-forward-dialog { padding: 14px; }.forward-details { grid-template-columns: 1fr; gap: 4px; }.forward-details dd { margin-bottom: 8px; } }
+.people-table th:first-child, .people-table td:first-child { min-width: 11rem; }
+.people-table .person b { overflow-wrap: break-word; }
