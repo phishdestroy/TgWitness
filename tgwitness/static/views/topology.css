@@ -273,7 +273,7 @@
 #view-topology .tp-l-bad::before { background: var(--tp-bad); box-shadow: 0 0 6px var(--tp-bad); }
 #view-topology .tp-line > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 #view-topology .tp-line:hover { background: rgba(120, 160, 230, .06); }
-#view-topology .tp-line time { color: #5f7396; }
+#view-topology .tp-line time { color: var(--tp-mute); }
 #view-topology .tp-l-who { color: #a5b4fc; }
 #view-topology .tp-l-dst { color: #e2e8f0; }
 #view-topology .tp-l-why { color: #c4b5fd; }
