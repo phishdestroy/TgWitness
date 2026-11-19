@@ -79,7 +79,7 @@ h2{font-size:20px;line-height:1.4;margin:28px 0 12px}h3{font-size:16px;margin:0}
 .panel,.message{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px;margin:14px 0}.panel>h2:first-child{margin-top:0}.notice{background:var(--warn);border-inline-start:3px solid #d7a33e;padding:14px 18px;margin:18px 0}
 .recipient-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 30px;padding-inline-start:22px;margin-bottom:0}.recipient-steps li{padding-inline-start:3px;margin:0}.recipient-steps p{font-size:13px;margin:4px 0 0}
 .facts{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,3fr);gap:8px 18px;margin:0}.facts dt{color:var(--muted)}.facts dd{margin:0;min-width:0}
-.chat-list{list-style:none;padding:0}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.chat-list{list-style:none;padding:0}.chat-list li[data-state]{border-inline-start:3px solid transparent;padding-inline-start:12px}.chat-list li[data-state=complete]{border-inline-start-color:#2f7d4f}.chat-list li[data-state=partial]{border-inline-start-color:#b7791f}.chat-list li[data-state=missing]{border-inline-start-color:#c0392b}.chat-title{display:grid;gap:2px;min-width:0}.chat-id{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
 .message-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 20px;flex-wrap:wrap}.record-link{font-size:12px;white-space:nowrap}.message-meta,.record-citation{font-size:12px;color:var(--muted);margin:8px 0}.message-meta span{display:inline-block;margin-inline-end:16px}.record-citation{border-top:1px solid var(--line);padding-top:8px}.record-citation code{color:var(--ink)}.message:target{outline:2px solid var(--accent);outline-offset:3px}
 .message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
 a{color:var(--accent);text-underline-offset:3px}a,code,pre,dd{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;margin:12px 0 0}
@@ -357,8 +357,10 @@ def chats_section(chats, say):
     for chat in chats:
         if type(chat.get('id')) is not int:
             continue
-        yield encoded('<li><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
-                      e(text(chat.get('title')) or str(chat['id'])) + '</a><span>' + e(chat_note(chat, say)) + '</span></li>')
+        state = chat.get('export_state') if chat.get('export_state') in ('complete', 'partial', 'missing') else 'unknown'
+        yield encoded('<li data-state="' + state + '"><span class="chat-title"><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
+                      e(text(chat.get('title')) or str(chat['id'])) + '</a><small class="chat-id" dir="ltr">' + e(say('ID {id}', id=chat['id']))
+                      + '</small></span><span>' + e(chat_note(chat, say)) + '</span></li>')
     yield encoded('</ul></section>')
 
 
@@ -667,12 +669,20 @@ def reason_text(value, say):
     return say(REASONS[value]) if value in REASONS else text(value)
 
 
+def group_number(say, value):
+    from .report import group_number as grouped
+    return grouped(say, value)
+
+
 def chat_note(chat, say):
     state = chat.get('export_state')
     if state == 'missing':
         return say('Not exported')
-    shown = say('Messages') + ': ' + str(chat.get('message_count', '—'))
-    return shown + ' · ' + say('Exported in part') if state == 'partial' else shown
+    count = chat.get('message_count', '—')
+    shown = say('Messages') + ': ' + str(group_number(say, count) if type(count) is int else count)
+    if state == 'partial':
+        return shown + ' · ' + say('Exported in part')
+    return shown + ' · ' + say('Exported completely') if state == 'complete' else shown
 
 
 def state_note(chat, say):

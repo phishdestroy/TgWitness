@@ -10528,5 +10528,6 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "僅能瀏覽前 1,000 筆結果。可透過聊天、類型或日期來縮小搜尋範圍。",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "收件人還必須確認另行收到的簽名金鑰指紋，並使用 --tsa-ca 參數及時間戳記授權機構的根憑證來執行 verify.py。",
   "Observed requests table": "已觀察到的請求表",
-  "Ports and sockets table": "埠與連接埠對照表"
+  "Ports and sockets table": "埠與連接埠對照表",
+  "Exported completely": "已完全匯出"
 }

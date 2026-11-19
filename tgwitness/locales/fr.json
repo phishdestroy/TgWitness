@@ -10589,5 +10589,6 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Seuls les 1 000 premiers résultats peuvent être consultés. Affinez votre recherche par discussion, type ou dates.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Le destinataire doit également confirmer l'empreinte digitale de la clé de signature reçue séparément et exécuter verify.py avec l'option --tsa-ca et le certificat racine de l'autorité de horodatage.",
   "Observed requests table": "Tableau des requêtes observées",
-  "Ports and sockets table": "Tableau des ports et des sockets"
+  "Ports and sockets table": "Tableau des ports et des sockets",
+  "Exported completely": "Exporté dans son intégralité"
 }

@@ -10579,5 +10579,6 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "فقط ۱۰۰۰ نتیجهٔ اول قابل مرور هستند. جستجوی خود را بر اساس چت، نوع یا تاریخ محدود کنید.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "گیرنده همچنین باید اثر انگشت کلید امضایی را که به‌طور جداگانه دریافت کرده است تأیید کند و دستور verify.py را با گزینه --tsa-ca و گواهی ریشه مرجع زمان‌بندی اجرا نماید.",
   "Observed requests table": "جدول درخواست‌های مشاهده‌شده",
-  "Ports and sockets table": "جدول پورت‌ها و سوکت‌ها"
+  "Ports and sockets table": "جدول پورت‌ها و سوکت‌ها",
+  "Exported completely": "کاملاً صادر شد"
 }

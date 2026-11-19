@@ -10528,5 +10528,6 @@
   "Only the first 1,000 results can be browsed. Narrow the search by chat, type or dates.": "Chỉ có thể xem 1.000 kết quả đầu tiên. Hãy thu hẹp phạm vi tìm kiếm theo cuộc trò chuyện, loại hoặc ngày tháng.",
   "The recipient must also confirm the signing key fingerprint received separately and run verify.py with --tsa-ca and the timestamp authority’s root certificate.": "Người nhận cũng phải xác nhận dấu vân tay khóa ký đã nhận được riêng biệt và chạy lệnh `verify.py` với tùy chọn `--tsa-ca` cùng với chứng chỉ gốc của cơ quan cấp dấu thời gian.",
   "Observed requests table": "Bảng các yêu cầu đã quan sát được",
-  "Ports and sockets table": "Bảng cổng và ổ cắm"
+  "Ports and sockets table": "Bảng cổng và ổ cắm",
+  "Exported completely": "Đã xuất hoàn toàn"
 }
