@@ -864,8 +864,8 @@ class Storage:
 
 
 async def recover_directory(value, trusted_fingerprint, credentials, output, install_helper=True):
-    from .network import NetworkConfig
-    from .security import owner_only
+    from ..network import NetworkConfig
+    from ..security import owner_only
     validate_recovery(value, trusted_fingerprint)
     retained = output / "storage-recovery.json"
     if output.exists() or replica.filesystem_link(output):
