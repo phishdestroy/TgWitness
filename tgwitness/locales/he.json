@@ -6410,7 +6410,6 @@
   "The most recent rows are listed; totals cover every row.": "השורות האחרונות מופיעות ברשימה; הסכומים כוללים את כל השורות.",
   "rows": "שורות",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "מחושב מתוך הקובץ events.jsonl על ידי המעבדים המפורטים. הם מצביעים על מה יש לבדוק, ולא על מה שקרה.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "מסומן: לפחות 5 משתתפים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, עם הודעות הנמוכות מפי 1.5 מהחציון שלהם. 7 הימים הראשונים של צ'אט אינם מסומנים.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "מספרי הודעות שנשמרו בנפרד לכל צ'אט, והנתח של הודעות השירות.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "שינויים בחברות שדווחו על ידי Telegram, פעם אחת לכל אדם, צ'אט, שינוי ויום.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "הודעות שירות מוצמדות, הודעות על הסרת הצמדה והודעות מוצמדות שנוספו או הוסרו בין תמונות מצב של הצ'אט.",
@@ -10666,5 +10665,8 @@
   "Enter a whole number.": "הזן מספר שלם.",
   "Enter a number.": "הזן מספר.",
   "changed the chat name to “{title}”": "שינה את שם הצ'אט ל-\"{title}\"",
-  "pinned a message, number {n}": "הצמיד הודעה, מספר {n}"
+  "pinned a message, number {n}": "הצמיד הודעה, מספר {n}",
+  "Messages found: {n}": "הודעות שנמצאו: {n}",
+  "Messages found: {n}+": "הודעות שנמצאו: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "מסומן: לפחות 5 משתמשים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, כאשר אורך ההודעות אינו עולה על פי 1.5 מהחציון. שבעת הימים הראשונים של צ'אט אינם מסומנים. אדם שמפרסם לראשונה בכמה צ'אטים נספר פעם אחת בכל אחד מהם."
 }

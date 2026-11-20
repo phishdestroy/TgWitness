@@ -409,3 +409,7 @@ button.tip-toggle { width: 20px !important; height: 20px !important; min-height:
 [dir="rtl"] .hscroll-more-end { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
 [dir="rtl"] .hscroll-more-start { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
 [dir="rtl"] .hscroll-more-start.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
+.chat-search-count { align-self: center; flex: none; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chat-search-count:empty { display: none; }
+.chat-feed mark { background: color-mix(in srgb, var(--warning) 32%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+
