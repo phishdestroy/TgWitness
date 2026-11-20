@@ -26,6 +26,7 @@
 ## Unreleased
 
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.
+- The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
 - In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Messages with a link preview show its site, title and host under the text in the chat view.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.

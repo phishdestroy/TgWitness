@@ -26,7 +26,7 @@ HEADLINE = "Live chat export"
 EXPLAINED = ("Messages read so far by an export that is still running. Each page is signed with the workspace key as "
              "soon as it is written. The finished export adds attachments, the full report and its own signature.")
 CHECK = "Check this archive with verify.py: python verify.py ARCHIVE.zip --fingerprint {fp}. START_HERE.txt explains each step."
-MEDIA = {"MessageMediaPhoto": "Photo", "MessageMediaGeo": "Location", "MessageMediaGeoLive": "Location",
+MEDIA = {"MessageMediaDice": "Dice", "MessageMediaPhoto": "Photo", "MessageMediaGeo": "Location", "MessageMediaGeoLive": "Location",
          "MessageMediaVenue": "Location", "MessageMediaContact": "Contact", "MessageMediaPoll": "Poll",
          "MessageMediaWebPage": "Link preview"}
 STICKERS = ("application/x-tgsticker", "image/webp")
@@ -58,7 +58,8 @@ def media_label(say, record):
         return None
     info = record.get("media_info") if isinstance(record.get("media_info"), dict) else {}
     if kind != "MessageMediaDocument":
-        return say(MEDIA.get(kind, "Attachment"))
+        shared = report.content_text(say, info)
+        return say(MEDIA.get(kind, "Attachment")) + (" · " + shared if shared else "")
     mime = str(info.get("mime_type") or "")
     label = say("Sticker" if mime in STICKERS else "Video" if mime.startswith("video/")
                 else "Audio" if mime.startswith("audio/") else "Attachment")
