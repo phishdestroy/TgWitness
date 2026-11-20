@@ -10772,6 +10772,7 @@
   "created the topic “{title}”": "विषय \"{title}\" बनाया",
   "Link text “{shown}” opens {url}": "लिंक टेक्स्ट \"{shown}\" {url} खोलता है।",
   "The visible web address is not where the link goes.": "दिखाई देने वाला वेब पता वह जगह नहीं है जहाँ लिंक जाता है।",
+  "Copy the Telegram link to this message": "इस संदेश का टेलीग्राम लिंक कॉपी करें",
   "Account export completed": "खाता निर्यात पूरा हो गया",
   "Account export started": "खाता निर्यात शुरू हो गया",
   "Account group changed": "खाता समूह बदला गया",

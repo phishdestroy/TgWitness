@@ -10721,6 +10721,7 @@
   "created the topic “{title}”": "“{title}”이라는 주제를 생성했습니다.",
   "Link text “{shown}” opens {url}": "“{shown}”이라는 링크 텍스트를 클릭하면 {url}로 이동합니다.",
   "The visible web address is not where the link goes.": "표시된 웹 주소는 링크가 연결되는 곳이 아닙니다.",
+  "Copy the Telegram link to this message": "이 메시지의 텔레그램 링크를 복사하세요",
   "Account export completed": "계정 내보내기가 완료되었습니다.",
   "Account export started": "계정 내보내기가 시작되었습니다",
   "Account group changed": "계정 그룹이 변경되었습니다.",

@@ -6510,6 +6510,10 @@ function sharedContentNode(info){
   if(info.dice){label(tr("Dice"));box.append(node("div","shared-title",[info.dice.emoji,info.dice.value].filter(x=>x!==undefined).join(" ")));return box;}
   return null;
 }
+function telegramLink(chatId,messageId){
+  const id=String(chatId);
+  return /^-100\d+$/.test(id)&&Number.isInteger(messageId)&&messageId>0?"https://t.me/c/"+id.slice(4)+"/"+messageId:null;
+}
 function onlyEmoji(text){
   const value=String(text||"").trim();
   if(!value||value.length>40||typeof Intl==="undefined"||!Intl.Segmenter)return false;
@@ -6616,7 +6620,12 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(!m.sent_at&&(m.versions[0]?.observed_at||m.deleted_observed_at)){const o=node("span","origin origin-observed",tr("By observation time"));
     o.title=tr("Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.");meta.append(o);}
   const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
-  const number=node("span","msg-number","#"+m.message_id);number.title=tr("Message ID");meta.append(number);
+  const link=telegramLink(state.chat,m.message_id);
+  const number=node(link?"button":"span","msg-number"+(link?" msg-number-copy":""),"#"+m.message_id);
+  if(link){number.type="button";number.title=tr("Copy the Telegram link to this message");number.setAttribute("aria-label",tr("Copy the Telegram link to this message")+": #"+m.message_id);
+    number.addEventListener("click",()=>busy(number,async()=>{await navigator.clipboard.writeText(link);toast(tr("Copied"));}));}
+  else number.title=tr("Message ID");
+  meta.append(number);
   stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;

@@ -10772,6 +10772,7 @@
   "created the topic “{title}”": "\"{title}\" mavzusini yaratdi",
   "Link text “{shown}” opens {url}": "\"{shown}\" matni {url} manzilini ochadi.",
   "The visible web address is not where the link goes.": "Ko'rinib turgan veb-manzil havola olib boradigan joy emas.",
+  "Copy the Telegram link to this message": "Ushbu xabardagi Telegram havolasini nusxalang",
   "Account export completed": "Hisob eksporti yakunlandi",
   "Account export started": "Hisob eksporti boshlandi",
   "Account group changed": "Hisob guruhi o'zgartirildi",

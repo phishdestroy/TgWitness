@@ -10976,6 +10976,7 @@
   "created the topic “{title}”": "أنشأ موضوعًا بعنوان «{title}»",
   "Link text “{shown}” opens {url}": "نص الرابط «{shown}» يفتح الرابط {url}",
   "The visible web address is not where the link goes.": "عنوان الويب الظاهر ليس هو المكان الذي يؤدي إليه الرابط.",
+  "Copy the Telegram link to this message": "انسخ رابط Telegram الخاص بهذه الرسالة",
   "Account export completed": "اكتمل تصدير الحساب",
   "Account export started": "بدأ تصدير الحساب",
   "Account group changed": "تم تغيير مجموعة الحسابات",

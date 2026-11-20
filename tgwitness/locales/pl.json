@@ -10874,6 +10874,7 @@
   "created the topic “{title}”": "utworzył wątek „{title}”",
   "Link text “{shown}” opens {url}": "Tekst linku „{shown}” otwiera stronę {url}",
   "The visible web address is not where the link goes.": "Widoczny adres internetowy nie jest adresem, do którego prowadzi link.",
+  "Copy the Telegram link to this message": "Skopiuj link do tej wiadomości w Telegramie",
   "Account export completed": "Eksport konta zakończono",
   "Account export started": "Rozpoczęto eksport konta",
   "Account group changed": "Zmieniono grupę kont",

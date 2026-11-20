@@ -10874,6 +10874,7 @@
   "created the topic “{title}”": "створив тему «{title}»",
   "Link text “{shown}” opens {url}": "Текст посилання «{shown}» відкриває {url}",
   "The visible web address is not where the link goes.": "Видима веб-адреса не збігається з тією, куди веде посилання.",
+  "Copy the Telegram link to this message": "Скопіюйте посилання на це повідомлення в Telegram",
   "Account export completed": "Експорт облікового запису завершено",
   "Account export started": "Розпочато експорт облікового запису",
   "Account group changed": "Змінено групу облікових записів",

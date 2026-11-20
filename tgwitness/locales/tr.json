@@ -10772,6 +10772,7 @@
   "created the topic “{title}”": "“{title}” başlıklı konuyu oluşturdu",
   "Link text “{shown}” opens {url}": "“{shown}” bağlantısı, {url} adresini açar",
   "The visible web address is not where the link goes.": "Görünen web adresi, bağlantının yönlendirdiği adres değildir.",
+  "Copy the Telegram link to this message": "Telegram bağlantısını bu mesaja kopyala",
   "Account export completed": "Hesap dışa aktarımı tamamlandı",
   "Account export started": "Hesap dışa aktarma işlemi başlatıldı",
   "Account group changed": "Hesap grubu değiştirildi",

@@ -10772,6 +10772,7 @@
   "created the topic “{title}”": "\"{title}\" শীর্ষক বিষয় তৈরি করা হয়েছে",
   "Link text “{shown}” opens {url}": "লিঙ্ক টেক্সট \"{shown}\" {url} খুলে।",
   "The visible web address is not where the link goes.": "দেখা যাচ্ছে এমন ওয়েব ঠিকানাটি লিঙ্ক যাওয়ার স্থান নয়।",
+  "Copy the Telegram link to this message": "এই বার্তার টেলিগ্রাম লিঙ্কটি অনুলিপি করুন",
   "Account export completed": "অ্যাকাউন্ট রপ্তানি সম্পন্ন হয়েছে",
   "Account export started": "অ্যাকাউন্ট রপ্তানি শুরু হয়েছে",
   "Account group changed": "অ্যাকাউন্ট গ্রুপ পরিবর্তিত হয়েছে",

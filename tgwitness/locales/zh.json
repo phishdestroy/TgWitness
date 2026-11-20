@@ -10721,6 +10721,7 @@
   "created the topic “{title}”": "创建了主题“{title}”",
   "Link text “{shown}” opens {url}": "链接文本“{shown}”将打开 {url}",
   "The visible web address is not where the link goes.": "链接显示的网址并非该链接的实际跳转地址。",
+  "Copy the Telegram link to this message": "复制此消息的Telegram链接",
   "Account export completed": "账户导出已完成",
   "Account export started": "已开始导出账户",
   "Account group changed": "账户组已更改",

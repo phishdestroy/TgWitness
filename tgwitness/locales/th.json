@@ -10721,6 +10721,7 @@
   "created the topic “{title}”": "สร้างหัวข้อ “{title}”",
   "Link text “{shown}” opens {url}": "ข้อความลิงก์ “{shown}” จะเปิด {url}",
   "The visible web address is not where the link goes.": "ที่อยู่เว็บที่แสดงอยู่นั้นไม่ใช่จุดหมายปลายทางของลิงก์",
+  "Copy the Telegram link to this message": "คัดลอกลิงก์ Telegram ของข้อความนี้",
   "Account export completed": "การส่งออกบัญชีเสร็จสิ้นแล้ว",
   "Account export started": "การส่งออกบัญชีได้เริ่มแล้ว",
   "Account group changed": "กลุ่มบัญชีได้เปลี่ยนแปลงแล้ว",

@@ -10782,6 +10782,7 @@
   "created the topic “{title}”": "ha creato l'argomento “{title}”",
   "Link text “{shown}” opens {url}": "Il testo del link “{shown}” apre {url}",
   "The visible web address is not where the link goes.": "L'indirizzo web visibile non corrisponde alla destinazione del link.",
+  "Copy the Telegram link to this message": "Copia il link Telegram di questo messaggio",
   "Account export completed": "Esportazione dell'account completata",
   "Account export started": "Avvio dell'esportazione dell'account",
   "Account group changed": "Gruppo di account modificato",

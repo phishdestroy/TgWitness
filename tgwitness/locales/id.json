@@ -10721,6 +10721,7 @@
   "created the topic “{title}”": "membuat topik “{title}”",
   "Link text “{shown}” opens {url}": "Teks tautan “{shown}” membuka {url}",
   "The visible web address is not where the link goes.": "Alamat web yang terlihat bukanlah tujuan tautan tersebut.",
+  "Copy the Telegram link to this message": "Salin tautan Telegram dari pesan ini",
   "Account export completed": "Ekspor akun telah selesai",
   "Account export started": "Ekspor akun telah dimulai",
   "Account group changed": "Kelompok akun telah diubah",
