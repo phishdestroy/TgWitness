@@ -10540,5 +10540,6 @@
   "No saved files in this chat": "このチャットには保存されたファイルがありません",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "コレクターがファイルをダウンロードすると、ここにファイルが表示されます。「ソース」の下にあるファイルの制限を確認してください。",
   "Open message #{id} in chat": "チャットでメッセージ #{id} を開く",
-  "Report on this person": "このユーザーを報告する"
+  "Report on this person": "このユーザーを報告する",
+  "Sticker {emoji}": "ステッカー {emoji}"
 }

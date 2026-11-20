@@ -10540,5 +10540,6 @@
   "No saved files in this chat": "此聊天记录中没有保存的文件",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "收集器下载文件后，这些文件会显示在此处。请在“来源”下查看文件限制。",
   "Open message #{id} in chat": "在聊天中打开消息 #{id}",
-  "Report on this person": "举报此人"
+  "Report on this person": "举报此人",
+  "Sticker {emoji}": "贴纸 {emoji}"
 }

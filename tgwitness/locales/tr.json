@@ -10591,5 +10591,6 @@
   "No saved files in this chat": "Bu sohbette kaydedilmiş dosya yok",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Dosyalar, toplayıcı tarafından indirildikten sonra burada görünür. “Kaynaklar” bölümünden dosya sınırlarını kontrol edin.",
   "Open message #{id} in chat": "Sohbetteki #{id} numaralı mesajı aç",
-  "Report on this person": "Bu kişi hakkında bildirimde bulun"
+  "Report on this person": "Bu kişi hakkında bildirimde bulun",
+  "Sticker {emoji}": "Çıkartma {emoji}"
 }

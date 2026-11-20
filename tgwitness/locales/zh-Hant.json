@@ -10540,5 +10540,6 @@
   "No saved files in this chat": "此聊天室中沒有儲存的檔案",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "當收集器下載完畢後，檔案便會顯示於此處。請在「來源」下查看檔案限制。",
   "Open message #{id} in chat": "在聊天室中開啟訊息 #{id}",
-  "Report on this person": "檢舉此人"
+  "Report on this person": "檢舉此人",
+  "Sticker {emoji}": "貼圖 {emoji}"
 }

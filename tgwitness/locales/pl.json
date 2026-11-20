@@ -10693,5 +10693,6 @@
   "No saved files in this chat": "W tej rozmowie nie ma żadnych zapisanych plików",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Pliki pojawiają się tutaj po ich pobraniu przez moduł pobierający. Sprawdź limity dotyczące plików w sekcji „Źródła”.",
   "Open message #{id} in chat": "Otwórz wiadomość nr {id} na czacie",
-  "Report on this person": "Zgłoś tę osobę"
+  "Report on this person": "Zgłoś tę osobę",
+  "Sticker {emoji}": "Naklejka {emoji}"
 }

@@ -10601,5 +10601,6 @@
   "No saved files in this chat": "No hay archivos guardados en este chat",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Los archivos aparecen aquí una vez que el recopilador los ha descargado. Consulta los límites de archivos en la sección «Fuentes».",
   "Open message #{id} in chat": "Abrir el mensaje n.º {id} en el chat",
-  "Report on this person": "Denunciar a esta persona"
+  "Report on this person": "Denunciar a esta persona",
+  "Sticker {emoji}": "Pegatina {emoji}"
 }

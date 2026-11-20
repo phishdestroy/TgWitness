@@ -6410,6 +6410,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     bubble.insertBefore(tag,bubble.querySelector(".reply-quote")?.nextSibling||bubble.querySelector(".bubble-head")?.nextSibling||bubble.firstChild);}
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
+  const sticker=m.details?.media_info?.sticker_emoji;
+  if(sticker)bubble.append(node("div","sticker-label",tr("Sticker {emoji}",{emoji:sticker})));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
   const file=m.file?.state;
   if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}

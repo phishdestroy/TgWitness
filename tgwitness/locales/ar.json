@@ -10795,5 +10795,6 @@
   "No saved files in this chat": "لا توجد ملفات محفوظة في هذه المحادثة",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "تظهر الملفات هنا بمجرد أن يقوم المجمع بتنزيلها. تحقق من حدود حجم الملفات في قسم «المصادر».",
   "Open message #{id} in chat": "افتح الرسالة رقم {id} في الدردشة",
-  "Report on this person": "الإبلاغ عن هذا الشخص"
+  "Report on this person": "الإبلاغ عن هذا الشخص",
+  "Sticker {emoji}": "ملصق {emoji}"
 }

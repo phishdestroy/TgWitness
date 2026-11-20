@@ -10540,5 +10540,6 @@
   "No saved files in this chat": "Không có tệp nào được lưu trong cuộc trò chuyện này",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Các tệp sẽ xuất hiện tại đây sau khi trình thu thập đã tải chúng xuống. Vui lòng kiểm tra giới hạn tệp trong phần Nguồn.",
   "Open message #{id} in chat": "Mở tin nhắn số {id} trong cuộc trò chuyện",
-  "Report on this person": "Báo cáo về người này"
+  "Report on this person": "Báo cáo về người này",
+  "Sticker {emoji}": "Hình dán {emoji}"
 }

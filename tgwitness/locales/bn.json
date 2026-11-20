@@ -10591,5 +10591,6 @@
   "No saved files in this chat": "এই চ্যাটে কোনো সংরক্ষিত ফাইল নেই",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "সংগ্রাহক ফাইলগুলো ডাউনলোড করার পর এগুলো এখানে প্রদর্শিত হবে।  উৎসগুলির অধীনে ফাইলের সীমাগুলো পরীক্ষা করুন।",
   "Open message #{id} in chat": "চ্যাটে বার্তা #{id} খুলুন",
-  "Report on this person": "এই ব্যক্তির প্রতিবেদন"
+  "Report on this person": "এই ব্যক্তির প্রতিবেদন",
+  "Sticker {emoji}": "স্টিকার {emoji}"
 }
