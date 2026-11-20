@@ -357,11 +357,15 @@ def print_items(result, empty="No saved observations match."):
         print("Older records: add --before " + str(result["next_before"]))
 
 
+def count_text(count, noun):
+    return str(count) + " " + noun + ("" if count == 1 else "s")
+
+
 def print_stats(result):
     scope = "chat " + str(result["chat_id"]) if result.get("chat_id") is not None else "all chats in scope"
     if result.get("sender_id") is not None:
         scope += ", sender " + str(result["sender_id"])
-    print(scope + ": " + str(result["messages"]) + " messages from " + str(result["senders"]) + " senders"
+    print(scope + ": " + count_text(result["messages"], "message") + " from " + count_text(result["senders"], "sender")
           + ("" if result["complete"] else " (partial: time limit reached)"))
     if result.get("first_message_at"):
         print("Message times: " + when(result["first_message_at"]) + " to " + when(result["last_message_at"]))
@@ -378,9 +382,11 @@ def print_stats(result):
         print("Senders:")
         for person in result["participants"]:
             name = " ".join(filter(None, (person.get("name"), "@" + person["username"] if person.get("username") else None)))
+            span = (", from " + when(person["first_message_at"]) + " to " + when(person["last_message_at"])
+                    if person.get("first_message_at") and person.get("last_message_at") else "")
             print("  " + str(person["sender_id"] if person["sender_id"] is not None else "unknown") + "  "
-                  + (compact(name) or "(no name observed)") + " — " + str(person["messages"]) + " messages, "
-                  + str(person["edited"]) + " edited, " + str(person["deleted"]) + " deleted")
+                  + (compact(name) or "(no name observed)") + " — " + count_text(person["messages"], "message") + ", "
+                  + str(person["edited"]) + " edited, " + str(person["deleted"]) + " deleted" + span)
     for key, label in (("domains", "Domains"), ("handles", "@handles")):
         if result[key]:
             print(label + ": " + ", ".join(compact(entry[key[:-1]]) + " (" + str(entry["messages"]) + ")"
@@ -390,7 +396,7 @@ def print_stats(result):
     liveness = coverage.get("collector_liveness")
     if liveness:
         print("Time without confirmed collection: " + str(round(liveness["unconfirmed_seconds"] / 3600, 1)) + " h in "
-              + str(liveness["intervals"]) + " intervals")
+              + count_text(liveness["intervals"], "interval"))
     elif coverage.get("note"):
         print(coverage["note"])
 
