@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 0106cbf5186cb17138392426aa462499af2facbb850ed9f9196562a99511b1a9
+# TgWitness verifier sources SHA-256: 0d92c1173cd3e91c5fb9488cd3d414abfb6618850047dcf92a20df6a22a0e6b2
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -92,6 +92,13 @@ def safe_text(value):
     text = re.sub(r"[\x00-\x08\x0b-\x1f\x7f-\x9f]", "", text)
     return re.sub("[\u061c\u200e\u200f\u2028\u2029\u202a-\u202e\u2066-\u2069]",
                   lambda match: "\\u%04x" % ord(match.group()), text)
+
+
+def failure_detail(exc):
+    text = safe_text(exc)
+    if not text and isinstance(exc, InvalidSignature):
+        return "the signature does not match the signed content: the file was changed, or it was signed by another key"
+    return text
 
 
 def authenticate_statement(value, key_field="public_key"):
@@ -10466,7 +10473,7 @@ class Console:
 
     def failure(self, path, exc):
         self.field("File", safe_text(path))
-        message = safe_text(exc)
+        message = failure_detail(exc)
         label = ("Key mismatch" if "fingerprint" in message.lower() else
                  "File changed" if "File hash mismatch" in message or "ZIP changed during" in message else
                  "Signature mismatch" if isinstance(exc, InvalidSignature) else None)
@@ -11224,10 +11231,10 @@ def verification_comparison(args, parser, mode):
     except Exception as exc:
         code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1
         if mode == "json":
-            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
             raise SystemExit(code)
         verification_print("ASSURANCE: fail")
-        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
     pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
     compared['assurance'] = assurance(compared)
     compared['assurance']['scope'] = 'two authenticated chat exports; the comparison covers their contents'
@@ -11535,10 +11542,10 @@ def verification_failure(args, parser, mode, console, exc):
         console.failure(args.bundle, exc)
         raise SystemExit(code)
     if mode == "json":
-        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
         raise SystemExit(code)
     verification_print("ASSURANCE: fail")
-    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
 
 
 def verification_output(args, checked, console, mode):

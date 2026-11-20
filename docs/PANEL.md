@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
 
+**English** · [Русский](ru/PANEL.md)
+
 ![Getting started](assets/presentation/chapter-start.svg)
 
 # Panel guide
