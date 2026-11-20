@@ -10625,5 +10625,7 @@
   "Enter a whole number.": "Entrez un nombre entier.",
   "Enter a number.": "Entrez un nombre.",
   "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
-  "pinned a message, number {n}": "a épinglé un message, le numéro {n}"
+  "pinned a message, number {n}": "a épinglé un message, le numéro {n}",
+  "Messages found: {n}": "Messages trouvés : {n}",
+  "Messages found: {n}+": "Messages trouvés : {n}+"
 }

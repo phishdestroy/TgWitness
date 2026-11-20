@@ -10564,5 +10564,7 @@
   "Enter a whole number.": "請輸入一個整數。",
   "Enter a number.": "請輸入一個數字。",
   "changed the chat name to “{title}”": "將聊天名稱更改為「{title}」",
-  "pinned a message, number {n}": "將第 {n} 則訊息設為置頂"
+  "pinned a message, number {n}": "將第 {n} 則訊息設為置頂",
+  "Messages found: {n}": "找到的訊息：{n} 則",
+  "Messages found: {n}+": "找到的訊息：{n}+則"
 }
