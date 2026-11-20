@@ -26,6 +26,7 @@
 ## Unreleased
 
 - In the account export pages on a phone, the weekday and hour labels of the weekly activity map are no longer cut off by the cells.
+- In the account export chat pages on a phone, the Rhythm table keeps readable columns and scrolls sideways with a faded edge instead of looking cut off.
 - When the viewer of an evidence report has no records to list, its list says why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
 - When the viewer of an evidence report has no records to list, its list, senders and indicators tabs say why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
 - In the Telegram account settings on a phone, the Profile button, the account picture and the account ID no longer touch the controls next to them.
