@@ -233,6 +233,9 @@ code{direction:ltr;unicode-bidi:isolate}
   .v-selbar .v-btn{white-space:normal;font-size:12px;padding:8px 10px}.v-cards{grid-template-columns:1fr}
   .v-feed.chat{padding:10px 4px}.msg{padding-inline-start:24px;gap:6px}.msg .pick{left:1px}
   .msg-ava,.msg-ava .ava{width:30px;height:30px;flex-basis:30px;font-size:12px}.msg-name span{display:block;margin:0}
+  .v-table{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}
+  [dir=rtl] .v-table{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent)}
+  .v-table table{margin-inline-end:24px}
 }
 .msg:focus-within .pick,.rec2:focus-within .pick{opacity:1}
 @media (hover:none){.msg .pick,.rec2 .pick{opacity:1}}
