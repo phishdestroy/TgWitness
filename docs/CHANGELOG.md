@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- The selected tab in a person's card is readable in the dark theme (it used the darker accent blue with a contrast of 3.3 to 1).
 - The message number in a chat bubble is dark enough to pass the contrast check in the light and dark themes.
 - The in-app guide header and the example tag of the GitHub Actions form and the example image tag in deploy/env.example show the 1.0.0 release instead of 0.9.3.
 - `verify.py` also explains in plain words a signature that does not match ("the signature does not match the signed content: the file was changed, or it was signed by another key"), a signature or key field that is not valid base64, and a file that is not valid text, instead of an exception name and its raw message.
