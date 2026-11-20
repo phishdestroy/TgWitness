@@ -7144,7 +7144,8 @@
   "fab8c49c3a1031a930bc7424d27579b156edf2a788f860d2637bad8c673ab421": "Zaszyfrowane dla klucza w Twojej przeglądarce",
   "c22c4501ab2b8880f85297e25e107de7ca17c38c5348fa9b9e3d8dd0cb055ba1": "Zweryfikowane archiwum",
   "a06d5ff18872d976b444a19e148eab5f887e9af774ec4136a4271039d8b4c329": "Zmieniony bajt nie przejdzie weryfikacji",
-  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Co otrzymasz i jak to sprawdzić"
+  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Co otrzymasz i jak to sprawdzić",
+  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Otwarcie adresu, który nie należy do panelu, powoduje teraz wyświetlenie krótkiej strony z linkami do najbliższych stron panelu zamiast surowego kodu JSON."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",

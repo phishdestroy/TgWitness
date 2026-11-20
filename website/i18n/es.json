@@ -7196,7 +7196,8 @@
   "fab8c49c3a1031a930bc7424d27579b156edf2a788f860d2637bad8c673ab421": "Cifrada para la clave de tu navegador",
   "c22c4501ab2b8880f85297e25e107de7ca17c38c5348fa9b9e3d8dd0cb055ba1": "Archivo verificado",
   "a06d5ff18872d976b444a19e148eab5f887e9af774ec4136a4271039d8b4c329": "Un byte modificado no supera la verificación",
-  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Lo que recibirás y cómo comprobarlo"
+  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Lo que recibirás y cómo comprobarlo",
+  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Al abrir una dirección que no forma parte del panel, ahora aparece una página breve con enlaces a las páginas del panel más cercanas, en lugar del código JSON sin procesar."
  },
  "modes": {
   "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",
