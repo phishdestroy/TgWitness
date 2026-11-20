@@ -10717,5 +10717,6 @@
   "The image is too large to scan.": "這張圖片太大，無法掃描。",
   "Save a valid bot token from BotFather.": "從 BotFather 儲存一個有效的機器人代幣。",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram 拒絕了該機器人的申請。請檢查其代幣和權限。",
-  "Telegram has not ended this account's session; there is no loss to report.": "Telegram 尚未結束此帳號的連線；目前並無任何損失。"
+  "Telegram has not ended this account's session; there is no loss to report.": "Telegram 尚未結束此帳號的連線；目前並無任何損失。",
+  "created the topic “{title}”": "建立了主題「{title}」"
 }
