@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- A card of the account export report names where a forwarded message came from ("Forwarded from …", with the channel post number, post author and date when Telegram gave them, or "Sender not available") and lists its reactions ("reactions: 👍 3").
+- A card of the account export report shows where a text link really goes ("Link text “…” opens https://…") with a warning when the visible web address is not the target, and names the message a reply answers ("Reply to message #7"). Replies to another chat and forum topic roots are not named.
 - The journal timeline names 40 more events in words, such as Chat details read, History reading started and Watchlist match, and any event without a name shows a readable title instead of its dotted code.
 - In a channel or supergroup, clicking the message number in a chat bubble copies the Telegram link to that message (`https://t.me/c/<channel>/<message>`), which opens it for an account that is a member.
 - A message made of one to three emoji is shown in a large size in the chat view, as in Telegram.
