@@ -1491,7 +1491,7 @@
   "Enter a name for this witness.": "इस गवाह के लिए एक नाम दर्ज करें।",
   "Telegram did not return this chat. Load chats and try again.": "टेलीग्राम ने यह चैट वापस नहीं की। चैट्स लोड करें और फिर से प्रयास करें।",
   "The chosen Telegram folder was not found. Choose a folder again.": "चुना गया टेलीग्राम फ़ोल्डर नहीं मिला। फिर से एक फ़ोल्डर चुनें।",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "लक्ष्य उन डायलॉग्स में शामिल नहीं है जिन्हें इस खाते ने पढ़ा है। समूह सूची को रिफ्रेश करें या पैरामीटर्स में चैट सूची सीमा बढ़ाएँ।",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "लक्ष्य उन डायलॉग्स में शामिल नहीं है जिन्हें इस खाते ने पढ़ा है। समूह सूची को रिफ्रेश करें या पैरामीटर्स में चैट सूची सीमा बढ़ाएँ। निजी चैट के लिए, पहले इसके निमंत्रण लिंक से जुड़ें।",
   "New chat under observation: {chat}": "निगरानी के अंतर्गत नया चैट: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · नहीं मिला #{id}: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "संदेश #{id} पुनः जाँच पर {chat} में नहीं मिला",
@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "इस वर्कस्पेस में सहेजा नहीं गया",
   "Show in chat": "चैट में दिखाएँ",
   "Show in chat: message #{id}": "चैट में दिखाएँ: संदेश #{id}",
-  "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}"
+  "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}",
+  "Sticker {emoji}": "स्टिकर {emoji}"
 }

@@ -1492,7 +1492,7 @@
   "Enter a name for this witness.": "Insira um nome para esta testemunha.",
   "Telegram did not return this chat. Load chats and try again.": "O Telegram não respondeu a este chat. Carregue os chats e tente novamente.",
   "The chosen Telegram folder was not found. Choose a folder again.": "A pasta do Telegram selecionada não foi encontrada. Escolha uma pasta novamente.",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "O “Target” não consta entre as caixas de diálogo que esta conta leu. Atualize a lista de grupos ou aumente o limite da lista de bate-papos em “Parâmetros”.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "O “Target” não consta entre as caixas de diálogo que esta conta leu. Atualize a lista de grupos ou aumente o limite da lista de bate-papos em “Parâmetros”. Para participar numa conversa privada, entre primeiro na conversa através do link de convite.",
   "New chat under observation: {chat}": "Novo chat sob observação: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · não encontrado #{id}: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "A mensagem nº {id} não foi encontrada na nova verificação no {chat}",
@@ -10611,5 +10611,6 @@
   "Not saved in this workspace": "Não foi salvo neste espaço de trabalho",
   "Show in chat": "Mostrar no chat",
   "Show in chat: message #{id}": "Mostrar no chat: mensagem nº {id}",
-  "Open in chat: message #{id}": "Abrir no chat: mensagem nº {id}"
+  "Open in chat: message #{id}": "Abrir no chat: mensagem nº {id}",
+  "Sticker {emoji}": "Adesivo {emoji}"
 }

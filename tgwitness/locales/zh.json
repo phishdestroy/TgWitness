@@ -1481,7 +1481,7 @@
   "Enter a name for this witness.": "请为该见证人输入一个名称。",
   "Telegram did not return this chat. Load chats and try again.": "Telegram 未返回此聊天记录。请加载聊天记录并重试。",
   "The chosen Telegram folder was not found. Choose a folder again.": "未找到所选的 Telegram 文件夹。请重新选择一个文件夹。",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目标未出现在该账号阅读的对话中。请刷新群组列表，或在“参数”中提高聊天列表限制。",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "目标未出现在该账号阅读的对话中。请刷新群组列表，或在“参数”中提高聊天列表限制。若要参与私人聊天，请先通过邀请链接加入。",
   "New chat under observation: {chat}": "正在监控的新聊天：{chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · 未找到 #{id}：{excerpt}",
   "Message #{id} not found at recheck in {chat}": "在 {chat} 中重新检查时未找到消息 #{id}",
@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "未保存在此工作区中",
   "Show in chat": "在聊天中显示",
   "Show in chat: message #{id}": "在聊天中显示：第 {id} 条消息",
-  "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息"
+  "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息",
+  "Sticker {emoji}": "贴纸 {emoji}"
 }

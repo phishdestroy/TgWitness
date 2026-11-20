@@ -158,6 +158,8 @@ def media_info(media, unread=None):
                     info.update(width=attribute.get("w"), height=attribute.get("h"))
             elif name == "DocumentAttributeImageSize":
                 info.update(width=attribute.get("w"), height=attribute.get("h"))
+            elif name == "DocumentAttributeSticker" and isinstance(attribute.get("alt"), str):
+                info["sticker_emoji"] = attribute["alt"][:16]
     photo = media.get("photo") if isinstance(media.get("photo"), dict) else None
     if photo:
         sizes = [s for s in photo.get("sizes") or [] if isinstance(s, dict) and s.get("w")]

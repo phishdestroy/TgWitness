@@ -515,8 +515,10 @@ class Store:
                 item["telegram_edited_at"] = payload.get("edited_at") or item["telegram_edited_at"]
                 item["from_scheduled"] = item["from_scheduled"] or bool((payload.get("raw") or {}).get("from_scheduled"))
                 shown = message_details.details(payload.get("raw"))
-                item["details"] = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown} \
-                    or item["details"]
+                picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown}
+                if "sticker_emoji" in shown.get("media_info", {}):
+                    picked["media_info"] = {"sticker_emoji": shown["media_info"]["sticker_emoji"]}
+                item["details"] = picked or item["details"]
                 origin = {"message.new": "live", "message.snapshot": "history", "message.edited": "edit",
                           "message.recovered": "recheck"}[kind]
                 if origin not in item["origins"]:

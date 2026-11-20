@@ -1546,7 +1546,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData-তে এর প্রধান DC-এর জন্য ঠিক একটি অনুমোদন থাকতে হবে।",
   "TELEGRAM BOT": "টেলিগ্রাম বট",
   "Tag, branch or commit": "ট্যাগ, ব্রাঞ্চ বা কমিট",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target এই অ্যাকাউন্ট দ্বারা পড়া ডায়ালগগুলির মধ্যে নেই। গ্রুপ তালিকা রিফ্রেশ করুন অথবা প্যারামিটারে চ্যাট তালিকা সীমা বাড়ান।",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Target এই অ্যাকাউন্ট দ্বারা পড়া ডায়ালগগুলির মধ্যে নেই। গ্রুপ তালিকা রিফ্রেশ করুন অথবা প্যারামিটারে চ্যাট তালিকা সীমা বাড়ান। ব্যক্তিগত চ্যাটের জন্য প্রথমে এর আমন্ত্রণ লিঙ্কে ক্লিক করে যোগ দিন।",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "টার্গেট এই অ্যাকাউন্টের প্রথম ১,০০০টি ডায়ালগে নেই। গ্রুপ তালিকা রিফ্রেশ করুন।",
   "Team chat": "টিম চ্যাট",
   "Telegram": "টেলিগ্রাম",
@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "এই ওয়ার্কস্পেসে সংরক্ষিত হয়নি",
   "Show in chat": "চ্যাটে দেখান",
   "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
-  "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}"
+  "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}",
+  "Sticker {emoji}": "স্টিকার {emoji}"
 }

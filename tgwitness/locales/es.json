@@ -1492,7 +1492,7 @@
   "Enter a name for this witness.": "Introduzca un nombre para este testigo.",
   "Telegram did not return this chat. Load chats and try again.": "Telegram no ha devuelto este chat. Cargue los chats e inténtelo de nuevo.",
   "The chosen Telegram folder was not found. Choose a folder again.": "No se ha encontrado la carpeta de Telegram seleccionada. Seleccione otra carpeta.",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» no figura entre los diálogos que ha leído esta cuenta. Actualice la lista de grupos o aumente el límite de la lista de chats en «Parámetros».",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "«Target» no figura entre los diálogos que ha leído esta cuenta. Actualice la lista de grupos o aumente el límite de la lista de chats en «Parámetros». Para participar en un chat privado, acceda primero a él mediante el enlace de invitación.",
   "New chat under observation: {chat}": "Nuevo chat bajo observación: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · no encontrado #{id}: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "No se ha encontrado el mensaje n.º {id} al volver a comprobar el {chat}",
@@ -10611,5 +10611,6 @@
   "Not saved in this workspace": "No se ha guardado en este espacio de trabajo",
   "Show in chat": "Mostrar en el chat",
   "Show in chat: message #{id}": "Mostrar en el chat: mensaje n.º {id}",
-  "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}"
+  "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}",
+  "Sticker {emoji}": "Pegatina {emoji}"
 }

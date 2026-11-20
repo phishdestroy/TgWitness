@@ -1544,7 +1544,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData는 메인 DC에 대한 인증 정보를 정확히 하나만 포함해야 합니다.",
   "TELEGRAM BOT": "텔레그램 봇",
   "Tag, branch or commit": "태그, 브랜치 또는 커밋",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "'Target'은 이 계정이 읽은 대화 목록에 포함되어 있지 않습니다. 그룹 목록을 새로 고치거나 'Parameters'에서 채팅 목록 제한을 늘리십시오.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "'Target'은 이 계정이 읽은 대화 목록에 포함되어 있지 않습니다. 그룹 목록을 새로 고치거나 'Parameters'에서 채팅 목록 제한을 늘리십시오. 비공개 채팅에 참여하려면 먼저 초대 링크를 통해 채팅방에 들어오세요.",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "대상 사용자가 이 계정의 첫 1,000개 대화 목록에 없습니다. 그룹 목록을 새로 고침하세요.",
   "Team chat": "팀 채팅",
   "Telegram": "텔레그램",
@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "이 작업 공간에 저장되지 않았습니다",
   "Show in chat": "채팅에 표시",
   "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}",
-  "Open in chat: message #{id}": "채팅에서 열기: 메시지 #{id}"
+  "Open in chat: message #{id}": "채팅에서 열기: 메시지 #{id}",
+  "Sticker {emoji}": "스티커 {emoji}"
 }
