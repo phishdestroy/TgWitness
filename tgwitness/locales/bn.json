@@ -6371,7 +6371,6 @@
   "rows": "সারি",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "তালিকাভুক্ত প্রসেসরগুলো events.jsonl থেকে এটি গণনা করে। এগুলো নির্দেশ করে কী পরীক্ষা করতে হবে, কী ঘটেছে তা নয়।",
   "Showing the latest {shown} of {total} rows.": "{total}টি থেকে সর্বশেষ {shown}টি দেখানো হচ্ছে।",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "ফ্ল্যাগ করা হয়েছে: প্রথমবার পোস্ট করা কমপক্ষে ৫ জন এবং তাদের ১৪-দিনের গড়ের ৩ গুণ, যেখানে বার্তাগুলো তাদের গড়ের ১.৫ গুণের নিচে। একটি চ্যাটের প্রথম ৭ দিন ফ্ল্যাগ করা হয় না।",
   "Distinct saved message numbers per chat and the share taken by service messages.": "প্রতি চ্যাটে সংরক্ষিত পৃথক বার্তা নম্বর এবং সার্ভিস বার্তাগুলির অংশ।",
   "Membership changes Telegram reported, once per person, chat, change and day.": "সদস্যপদ পরিবর্তন Telegram রিপোর্ট করে, একবার প্রতি ব্যক্তি, চ্যাট, পরিবর্তন এবং দিনে।",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "চ্যাট-স্টেট স্ন্যাপশটগুলির মধ্যে যোগ বা অপসারণ করা পিনকৃত পরিষেবা বার্তা, আনপিন বিজ্ঞপ্তি এবং পিনকৃত বার্তা পিন করুন।",

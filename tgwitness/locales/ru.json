@@ -6714,7 +6714,6 @@
   "Showing the latest {shown} of {total} rows.": "Показаны последние {shown} из {total} строк.",
   "Chat {id}, {day}: {found} first-time posters (median {base}), {messages} messages (median {base_messages})": "Чат {id}, {day}: впервые написавших — {found} (медиана {base}), сообщений — {messages} (медиана {base_messages})",
   "First-time posters per day": "Впервые написавшие по дням",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Отмечается день, где впервые написавших не меньше 5 и втрое больше их медианы за 14 дней, а сообщений меньше 1,5 медианы. Первые 7 дней чата не отмечаются.",
   "Day (UTC)": "День (UTC)",
   "First-time posters": "Впервые написавшие",
   "Service messages among message numbers": "Служебные сообщения среди номеров",

@@ -6425,7 +6425,6 @@
   "Showing the latest {shown} of {total} rows.": "Показано останні {shown} з {total} рядків.",
   "Chat {id}, {day}: {found} first-time posters (median {base}), {messages} messages (median {base_messages})": "Чат {id}, {day}: уперше написали — {found} (медіана {base}), повідомлень — {messages} (медіана {base_messages})",
   "First-time posters per day": "Уперше написали за днями",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Позначається день, де вперше написали щонайменше 5 і втричі більше за їхню медіану за 14 днів, а повідомлень менше ніж 1,5 медіани. Перші 7 днів чату не позначаються.",
   "Day (UTC)": "День (UTC)",
   "First-time posters": "Уперше написали",
   "Service messages among message numbers": "Службові повідомлення серед номерів",
