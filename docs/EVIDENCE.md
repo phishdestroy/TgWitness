@@ -254,7 +254,9 @@ record's original hash to the journal root named in the signed manifest. `verify
 path, so every record is shown to belong to the same journal of that length and head, without the
 full journal; an extract of 100 messages checks in about a second whatever the journal size.
 `--range=CHAT:FROM-TO` additionally confirms that messages FROM to TO of a chat are in the extract
-and reports how many records it checked for them. Names inside file
+and reports how many records it checked for them. When some numbers of the range have no record in
+the extract, it also says how many: they were left out by the extract's rules, deleted or never used,
+and the extract alone does not tell which. Names inside file
 names are not detected. Review the final files before sharing: free text, file names and selected
 attachments can still identify people. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
 
@@ -377,8 +379,16 @@ and `indicators.misp.json` (MISP event), what an abuse desk can act on in the re
 links and domains (also hidden behind text, in buttons and in link previews), cryptocurrency
 addresses, Telegram usernames and invite links, phone numbers, e-mail addresses and saved pictures.
 Bitcoin, Litecoin, Dogecoin and TRON addresses are listed only when their base58 checksum holds,
-segwit addresses when their bech32 or bech32m checksum holds and TON addresses when their CRC
-holds; EVM and Solana addresses are marked as not checked. Pictures carry SHA-256 and a perceptual
+segwit addresses when their bech32 or bech32m checksum holds, TON addresses when their CRC
+holds and XRP Ledger addresses when their checksum holds; EVM and Solana addresses are marked
+as not checked. Transaction hashes are listed as well: a 32-byte hash with `0x` always, and a
+bare 64-character hexadecimal string only when the same text names a transaction (for example
+`tx`, `hash`, `transaction`, an explorer name). A bare hash states no chain, because Bitcoin,
+TRON, TON and others share its shape; the entry says so and the chain has to be resolved against
+an explorer. Payment links (`bitcoin:`, `ethereum:`, `solana:`, `tron:`, `litecoin:`, `dogecoin:`,
+`ton:`) are listed with their chain, address, amount, token contract and label when the link
+carries them, and an address of 20 characters or more in the link is also listed as a wallet marked as taken
+from a payment link. Pictures carry SHA-256 and a perceptual
 hash (dHash, 64 bits) that recompressed or resized copies keep nearly unchanged. Reports write
 indicators so that they do not open by accident (`hxxps[://]example[.]com`); the files keep the
 values as they were. Every indicator is marked unknown and not for automatic detection (STIX

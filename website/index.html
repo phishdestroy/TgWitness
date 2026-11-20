@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1120">
+  <meta name="theme-color" content="#f4f5f7">
   <title>@@TITLE@@</title>
   <meta name="description" content="@@DESCRIPTION@@">
   <link rel="canonical" href="@@CANONICAL@@">
@@ -20,247 +20,704 @@
   <meta property="og:image:alt" content="@@OG_IMAGE_ALT@@">
   <meta name="twitter:card" content="summary_large_image">
   <script>@@THEME_SCRIPT@@</script>
+  <script>try{if(localStorage.getItem('tgwitness-motion')==='always')document.documentElement.dataset.motion='always'}catch(e){}</script>
   <link rel="icon" href="@@ROOT@@assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="@@ROOT@@style.css">
+  <link rel="stylesheet" href="@@ROOT@@home.css">
   <script src="@@ROOT@@site.js" defer></script>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="header wrap">
-    <a class="brand" href="#" aria-label="TgWitness home"><img src="@@ROOT@@assets/mark.svg" width="34" height="34" alt="">TgWitness</a>
-    <nav aria-label="Main navigation">
-      <a href="guides/modes.html">Capabilities</a><a href="#workspace">Workspace</a><a href="#start">Install</a><a href="docs/">Docs</a>
-      <a class="nav-live" href="https://tgwitness-demo.destroy.tools/">Live demo <span aria-hidden="true">↗</span></a><a class="nav-source" href="@@REPO_URL@@">GitHub <span aria-hidden="true">↗</span></a>
+<body lang="@@HOME_LANG@@" dir="@@HOME_DIR@@">
+  <a class="skip-link" href="#main">{{home.skip}}</a>
+  <div class="tw-progress" aria-hidden="true"><span></span></div>
+  <svg class="tw-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="tw-rg-truth"><stop offset="0" stop-color="#2563eb" stop-opacity=".16"/><stop offset="1" stop-color="#2563eb" stop-opacity="0"/></radialGradient>
+      <radialGradient id="tw-rg-time"><stop offset="0" stop-color="#f59e0b" stop-opacity=".22"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="tw-rg-field" gradientUnits="userSpaceOnUse" cx="300" cy="300" r="320"><stop offset="0" stop-color="#64748b" stop-opacity=".22"/><stop offset=".7" stop-color="#64748b" stop-opacity=".08"/><stop offset="1" stop-color="#64748b" stop-opacity="0"/></radialGradient>
+      <filter id="tw-glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+  </svg>
+
+  <header class="tw-topbar">
+    <a class="tw-brand" href="#top" aria-label="{{home.brand}}"><img src="@@ROOT@@assets/mark.svg" width="28" height="28" alt=""><span translate="no">TgWitness</span></a>
+    <nav class="tw-top-nav" aria-label="{{home.nav.main}}">
+      <a href="docs/">{{home.nav.docs}}</a>
+      <a href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@">{{home.nav.setup}}</a>
+      <a class="tw-top-button" href="https://tgwitness-demo.destroy.tools/"><span class="tw-live-dot" aria-hidden="true"></span>{{home.nav.live}}</a>
+      <a class="tw-top-icon" href="@@REPO_URL@@" aria-label="{{home.nav.github}}"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M12 1.6a10.4 10.4 0 0 0-3.3 20.3c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.3-.3-4.8-1.2-4.8-5.1 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.5 4.8-4.8 5.1.4.3.7 1 .7 1.9v2.9c0 .3.2.6.7.5A10.4 10.4 0 0 0 12 1.6Z"/></svg></a>
     </nav>
-    <div class="header-tools">@@LANGUAGE_MENU@@@@THEME_TOGGLE@@</div>
-  </div></header>
-  <main id="main">
-    <div class="hero-shell">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <a class="release-label" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/CHANGELOG.md"><span class="status-dot"></span> Open source <span class="label-divider">/</span> v@@VERSION@@ <span aria-hidden="true">→</span></a>
-        <h1 id="hero-title">Messages change,<br><span>keep what<br>you saw.</span></h1>
-        <p class="hero-description">Export Telegram chats, preserve their history, and share a signed archive others can verify.</p>
-        <div class="actions"><a class="button primary" data-home-action="live" href="https://tgwitness-demo.destroy.tools/">Watch live demo <span aria-hidden="true">↗</span></a><a class="button secondary" data-home-action="demo" href="@@ROOT@@demo/?lang=@@LANG_CODE@@">Open demo <span aria-hidden="true">→</span></a></div>
-        <p class="hero-footnote">Watch live capture or explore a fictional case. No Telegram login needed.</p>
-        <a class="hero-setup" data-home-action="setup" href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@">Setup guide <span aria-hidden="true">↗</span></a>
+    <div class="tw-prefs"><button type="button" class="tw-motion" data-motion-toggle aria-pressed="false" aria-label="{{home.ui.motion}}" title="{{home.ui.motion}}"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>@@LANGUAGE_MENU@@@@THEME_TOGGLE@@</div>
+  </header>
+
+  <main id="main" class="tw-main">
+
+    <section class="tw-hero" id="top" aria-labelledby="hero-title">
+      <div class="tw-hero-grid">
+        <div class="tw-hero-copy">
+          <a class="tw-badge-link" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/CHANGELOG.md"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{home.hero.pill}} <span class="tw-badge-sep" aria-hidden="true">·</span> <span translate="no">v@@VERSION@@</span></a>
+          <h1 id="hero-title">{{home.hero.title1}} <span class="tw-accent">{{home.hero.title2}}</span></h1>
+          <p class="tw-lead">{{home.hero.lead}}</p>
+          <div class="tw-actions">
+            <a class="tw-btn tw-btn-primary" href="https://tgwitness-demo.destroy.tools/"><span class="tw-live-dot" aria-hidden="true"></span>{{home.hero.live}}<span aria-hidden="true">↗</span></a>
+            <a class="tw-btn tw-btn-secondary tw-btn-gh-soft" href="#github-capture"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 1.6a10.4 10.4 0 0 0-3.3 20.3c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.3-.3-4.8-1.2-4.8-5.1 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.5 4.8-4.8 5.1.4.3.7 1 .7 1.9v2.9c0 .3.2.6.7.5A10.4 10.4 0 0 0 12 1.6Z"/></svg>{{home.hero.gh}}</a>
+            <a class="tw-link-more" href="#install">{{home.hero.install}}<span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="tw-hero-note"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{home.hero.note}}</p>
+        </div>
+
+        <div class="tw-scene tw-stage tw-hero-scene" data-scene="hero" data-steps="800,1500,3000,4500,5500,6500,7500" data-idle="900">
+          <svg class="tw-svg h-svg" viewBox="0 0 600 580" aria-hidden="true" focusable="false">
+            <g class="h-field" data-field></g>
+            <ellipse class="h-glow" cx="300" cy="300" rx="190" ry="150" fill="url(#tw-rg-truth)"/>
+            <circle class="h-orbit" cx="300" cy="300" r="244"/>
+            <g class="h-lines">
+              <path class="h-line" style="--d:0s" pathLength="1" d="M300 86L300 170"/>
+              <path class="h-line" style="--d:.12s" pathLength="1" d="M503.5 233.9L426.3 259"/>
+              <path class="h-line" style="--d:.24s" pathLength="1" d="M425.8 473.1L383.6 415"/>
+              <path class="h-line" style="--d:.36s" pathLength="1" d="M174.2 473.1L216.4 415"/>
+              <path class="h-line" style="--d:.48s" pathLength="1" d="M96.5 233.9L173.7 259"/>
+            </g>
+            <g class="h-shield">
+              <polygon class="h-hex" pathLength="1" points="450,300 375,429.9 225,429.9 150,300 225,170.1 375,170.1"/>
+              <polygon class="h-hex2" points="438,300 369,419.5 231,419.5 162,300 231,180.5 369,180.5"/>
+            </g>
+            <g class="h-hits">
+              <circle cx="300" cy="170" r="9"/><circle cx="426.3" cy="259" r="9"/><circle cx="383.6" cy="415" r="9"/><circle cx="216.4" cy="415" r="9"/><circle cx="173.7" cy="259" r="9"/>
+            </g>
+            <g class="h-msg">
+              <g class="h-v1">
+                <rect x="180" y="246" width="240" height="108" rx="16"/>
+                <text class="h-small h-v1-tag" x="194" y="258">v1 · 14:00</text>
+              </g>
+              <g class="h-card">
+                <rect class="h-card-bg" x="180" y="246" width="240" height="108" rx="16"/>
+                <g class="h-card-body">
+                  <circle class="h-avatar" cx="205" cy="270" r="9"/>
+                  <text class="h-small" x="221" y="274">{{home.hero.source}}</text>
+                  <text class="h-small h-edited" x="404" y="333" text-anchor="end" data-fit="140">{{home.hero.edited}}</text>
+                  <text class="h-text" x="198" y="304" data-fit="204">{{home.hero.msg}}</text>
+                  <text class="h-time h-t14" x="198" y="336">14:00</text>
+                  <text class="h-time h-t15" x="198" y="336">15:00</text>
+                </g>
+                <text class="h-deleted" x="300" y="306" text-anchor="middle" data-fit="216">{{home.hero.deleted}}</text>
+              </g>
+            </g>
+            <g class="h-chain">
+              <path class="h-link" pathLength="1" d="M300 232V280"/>
+              <path class="h-link" pathLength="1" d="M300 320V368"/>
+              <text class="h-hash" x="312" y="260" data-hash="a3f9c2e1">a3f9c2e1</text>
+              <text class="h-hash" x="312" y="348" data-hash="7b04d95f">7b04d95f</text>
+              <g class="h-blk" style="--i:0"><rect x="220" y="192" width="160" height="40" rx="11"/><circle cx="240" cy="212" r="4"/><text x="252" y="216">v1 · 14:00</text></g>
+              <g class="h-blk" style="--i:1"><rect x="220" y="280" width="160" height="40" rx="11"/><circle cx="240" cy="300" r="4"/><text x="252" y="304">v2 · 15:00</text></g>
+              <g class="h-blk h-blk-del" style="--i:2"><rect x="220" y="368" width="160" height="40" rx="11"/><circle cx="240" cy="388" r="4"/><text x="252" y="392" data-fit="120">{{home.hero.chain.deleted}}</text></g>
+            </g>
+            <g class="h-badge">
+              <circle class="h-ring" cx="300" cy="464" r="24"/>
+              <rect x="212" y="446" width="176" height="36" rx="18"/>
+              <text x="300" y="469" text-anchor="middle" data-fit="160">Ed25519 ✓ {{home.hero.valid}}</text>
+            </g>
+            <g class="h-nodes">
+              <g class="h-node" style="--i:0" transform="translate(300 56)"><g class="h-node-in"><circle r="26"/><path d="M-10 0 10-8 5 10-1 3Zm9 3 9-11"/></g><text y="-36" data-fit="200">{{home.hero.node.telegram}}</text></g>
+              <g class="h-node" style="--i:1" transform="translate(532 225)"><g class="h-node-in"><circle r="26"/><circle r="10"/><path d="M-10 0h20M0-10c-5 5-5 15 0 20M0-10c5 5 5 15 0 20"/></g><text y="46" data-fit="128">{{home.hero.node.network}}</text></g>
+              <g class="h-node" style="--i:2" transform="translate(443 497)"><g class="h-node-in"><circle r="26"/><rect x="-10" y="-10" width="20" height="8" rx="2"/><rect x="-10" y="2" width="20" height="8" rx="2"/></g><text y="46" data-fit="180">{{home.hero.node.server}}</text></g>
+              <g class="h-node" style="--i:3" transform="translate(157 497)"><g class="h-node-in"><circle r="26"/><circle cy="-4" r="5"/><path d="M-9 10c2-5 5-7 9-7s7 2 9 7"/></g><text y="46" data-fit="180">{{home.hero.node.operator}}</text></g>
+              <g class="h-node" style="--i:4" transform="translate(68 225)"><g class="h-node-in"><circle r="26"/><circle r="10"/><path d="M0-6v6l4 3"/></g><text y="46" data-fit="128">{{home.hero.node.clock}}</text></g>
+            </g>
+          </svg>
+          <p class="sr-only">{{home.hero.scene}}</p>
+          <div class="tw-hits">
+            <button type="button" class="tw-hit" style="--x:50%;--y:9.66%" data-node="0" data-name="{{home.hero.node.telegram}}" data-text="{{home.hero.tip.telegram}}" aria-label="{{home.hero.node.telegram}}: {{home.hero.tip.telegram}}"></button>
+            <button type="button" class="tw-hit" style="--x:88.67%;--y:38.79%" data-node="1" data-name="{{home.hero.node.network}}" data-text="{{home.hero.tip.network}}" aria-label="{{home.hero.node.network}}: {{home.hero.tip.network}}"></button>
+            <button type="button" class="tw-hit" style="--x:73.83%;--y:85.69%" data-node="2" data-name="{{home.hero.node.server}}" data-text="{{home.hero.tip.server}}" aria-label="{{home.hero.node.server}}: {{home.hero.tip.server}}"></button>
+            <button type="button" class="tw-hit" style="--x:26.17%;--y:85.69%" data-node="3" data-name="{{home.hero.node.operator}}" data-text="{{home.hero.tip.operator}}" aria-label="{{home.hero.node.operator}}: {{home.hero.tip.operator}}"></button>
+            <button type="button" class="tw-hit" style="--x:11.33%;--y:38.79%" data-node="4" data-name="{{home.hero.node.clock}}" data-text="{{home.hero.tip.clock}}" aria-label="{{home.hero.node.clock}}: {{home.hero.tip.clock}}"></button>
+          </div>
+          <p class="tw-tip" aria-hidden="true" hidden><strong></strong><span></span></p>
+          <button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="tw-tag">{{home.ui.illustration}}</span>
+        </div>
       </div>
-      <div class="record" aria-label="Illustrated example of a message history, using fictional data">
-        <div class="record-heading"><span><span class="record-dot"></span> A MESSAGE, THROUGH TIME</span><span class="mono">#0042</span></div>
-        <div class="record-source"><span class="source-icon" aria-hidden="true">N</span><div>Northstar · Research<small>Fictional source / message 42</small></div></div>
-        <div class="record-progress" aria-hidden="true"><span></span><span></span><span></span></div>
-        <ol class="record-events">
-          <li><div class="event-line"><strong>Message observed</strong><time>09:41:02</time></div><p>The briefing starts at <span class="old-time">14:00</span>.</p></li>
-          <li><div class="event-line"><strong>Edit preserved</strong><time>09:43:18</time></div><p>The briefing starts at <span class="new-time">15:00</span>.</p><small>Previous version retained</small></li>
-          <li><div class="event-line"><strong>Deletion notice</strong><time>10:06:45</time></div><p class="deletion-text">Captured content stays in your journal.</p></li>
-        </ol>
-        <div class="record-footer"><span aria-hidden="true">⌁</span> Three observations, one recorded history.<span class="sample-label">EXAMPLE</span></div>
-        <div class="record-controls" hidden><div role="group" aria-label="Explore the fictional message history"><button type="button" data-record-step="0" aria-pressed="false">01 <span>Message</span></button><button type="button" data-record-step="1" aria-pressed="false">02 <span>Edit</span></button><button type="button" data-record-step="2" aria-pressed="true">03 <span>Deletion</span></button></div><button class="motion-toggle" type="button" aria-label="Pause example animation">Pause <span aria-hidden="true">Ⅱ</span></button></div>
-        <p class="record-caption" id="record-caption">When the message disappears, its captured history remains.</p>
+
+      <div class="tw-verdict-pair">
+        <div class="tw-vcard tw-vcard-bad">
+          <p class="tw-vhead"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>{{home.hero.bad.title}}</p>
+          <ul><li>{{home.hero.bad.1}}</li><li>{{home.hero.bad.2}}</li><li>{{home.hero.bad.3}}</li></ul>
+        </div>
+        <div class="tw-vcard tw-vcard-good">
+          <p class="tw-vhead"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>{{home.hero.good.title}}</p>
+          <ul><li>{{home.hero.good.1}}</li><li>{{home.hero.good.2}}</li><li>{{home.hero.good.3}}</li></ul>
+        </div>
       </div>
     </section>
 
-    <nav class="workflow wrap" aria-label="Choose your next step">
-      <p class="workflow-label">CHOOSE YOUR NEXT STEP</p>
-      <ol>
-        <li><a href="guides/modes.html"><span class="workflow-number" aria-hidden="true">01</span><div><strong>Explore capabilities</strong><small>Modes, events and limits</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="@@ROOT@@demo/?lang=@@LANG_CODE@@"><span class="workflow-number" aria-hidden="true">02</span><div><strong>Try the workspace</strong><small>Open the fictional case</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="#start"><span class="workflow-number" aria-hidden="true">03</span><div><strong>Set up locally</strong><small>Windows, macOS, Linux or Docker</small></div><span class="workflow-arrow" aria-hidden="true">↓</span></a></li>
-        <li><a href="docs/exports/"><span class="workflow-number" aria-hidden="true">04</span><div><strong>Verify an export</strong><small>Check a signed handoff</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
-      </ol>
-    </nav>
+    <div class="tw-ticker tw-marquee" data-marquee data-loop>
+      <ul class="tw-marquee-track" aria-label="{{home.ticker.label}}">
+        <li>{{home.ticker.1}}</li><li>{{home.ticker.2}}</li><li>{{home.ticker.3}}</li><li>{{home.ticker.4}}</li><li>{{home.ticker.5}}</li><li>{{home.ticker.6}}</li><li>{{home.ticker.7}}</li><li>{{home.ticker.8}}</li><li>{{home.ticker.9}}</li><li>{{home.ticker.10}}</li><li>{{home.ticker.11}}</li><li>{{home.ticker.12}}</li>
+      </ul>
     </div>
 
-    <section class="live-showcase wrap" id="live-demo" aria-labelledby="live-demo-title">
-      <div class="live-showcase-copy"><p class="eyebrow"><span class="live-indicator" aria-hidden="true"></span> LIVE DEMO</p><h2 id="live-demo-title">See the capture running live.</h2><p>Follow incoming messages, masked edits and deletion notices in the public read-only showcase.</p><a class="text-link" href="https://tgwitness-demo.destroy.tools/">Watch live demo <span aria-hidden="true">↗</span></a></div>
-      <div class="live-showcase-visual" aria-hidden="true"><svg viewBox="0 0 440 168" fill="none"><path class="live-wire" d="M80 84h280"/><path class="live-signal" d="M80 84h280"/><g class="live-node"><rect x="20" y="34" width="100" height="100" rx="24"/><path d="M49 65h42M49 77h32M49 89h38M49 101h22"/></g><g class="live-node"><rect x="170" y="34" width="100" height="100" rx="24"/><path d="m195 72 25-13 25 13-25 13-25-13Zm0 13 25 13 25-13m-50 13 25 13 25-13"/></g><g class="live-node live-node-verified"><rect x="320" y="34" width="100" height="100" rx="24"/><path d="M370 57 347 67v17c0 16 23 28 23 28s23-12 23-28V67l-23-10Z"/><path class="live-check" d="m359 84 8 8 15-18"/></g><circle class="live-junction" cx="145" cy="84" r="4"/><circle class="live-junction" cx="295" cy="84" r="4"/></svg></div>
-    </section>
+    <ul class="tw-stats will-reveal" data-stats>
+      <li><strong data-count-to="0">0</strong><span>{{home.stats.servers}}</span></li>
+      <li><strong data-count-to="3">3</strong><span>{{home.stats.time}}</span></li>
+      <li><strong data-count-to="6">6</strong><span>{{home.stats.levels}}</span></li>
+      <li><strong data-count-to="25">25</strong><span>{{home.stats.languages}}</span></li>
+    </ul>
 
-    <section class="archive-tools wrap" id="purpose" aria-labelledby="purpose-title">
-      <h2 id="purpose-title">Preserve the record, whoever it helps.</h2>
-      <p>Keep observed messages, context and changes so another person can check the material and reach their own conclusions.</p>
-      <div class="doc-links">
-        <a href="#start"><span>01</span><div><h3>Save a chat</h3><p>One command installs the app and Python. Connect an account, choose the scope and export.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="docs/capture/"><span>02</span><div><h3>Capture on GitHub</h3><p>Run the guided workflow on a temporary runner and download an encrypted archive with provenance.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="docs/cases/"><span>03</span><div><h3>Keep investigating</h3><p>Add observation, search, reports, reviewer access and independent checks as your task requires.</p></div><span aria-hidden="true">↗</span></a>
+    <nav class="tw-pills" aria-label="{{home.nav.label}}">
+      <a href="#github-capture">{{home.nav.gh}}</a><a href="#position">{{home.nav.position}}</a><a href="#story">{{home.nav.story}}</a><a href="#compare">{{home.nav.compare}}</a><a href="#zero-trust">{{home.nav.zero}}</a><a href="#time">{{home.nav.time}}</a><a href="#secret-chats">{{home.nav.secret}}</a><a href="#modes">{{home.nav.modes}}</a><a href="#levels">{{home.nav.levels}}</a><a href="#verify">{{home.nav.verify}}</a><a href="#install">{{home.nav.install}}</a>
+    </nav>
+
+    <section class="tw-panel tw-gh will-reveal" id="github-capture" aria-labelledby="gh-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-accent" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.6-.2.6-.5v-1.7c-2.6.6-3.2-1.2-3.2-1.2-.4-1.1-1-1.4-1-1.4-.9-.6 0-.6 0-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1 2.9.8.1-.6.3-1 .6-1.3-2.1-.2-4.3-1-4.3-4.6 0-1 .4-1.9 1-2.5-.1-.3-.4-1.2.1-2.6 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.4.2 2.3.1 2.6.6.6 1 1.5 1 2.5 0 3.6-2.2 4.4-4.3 4.6.3.3.6.8.6 1.6v2.4c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z"/></svg></span>
+        <div><p class="tw-kicker">01 · {{home.gh.eyebrow}}</p><h2 id="gh-title">{{home.gh.title1}} <span class="tw-accent">{{home.gh.title2}}</span></h2><p class="tw-section-lead">{{home.gh.lead}}</p></div>
       </div>
-      <p><a class="text-link" href="docs/reference/overview/">Start, scale and evidence →</a> · <a class="text-link" href="@@ROOT@@docs/validation/">Measured export performance →</a></p>
-    </section>
-
-    <section class="workspace wrap" id="workspace" aria-labelledby="workspace-title">
-      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> THE WORKSPACE</p><h2 id="workspace-title">Every captured change,<br>right where you need it.</h2></div><p>Explore the real interface using a fictional investigation.</p></div>
-      <div class="switcher" data-tabs aria-label="Workspace screenshots">
-        <div class="tab-buttons" data-tab-buttons>
-          <button type="button" id="tour-chats" aria-controls="panel-chats">01 <span>Saved chats</span></button>
-          <button type="button" id="tour-journal" aria-controls="panel-journal">02 <span>Journal</span></button>
-          <button type="button" id="tour-edits" aria-controls="panel-edits">03 <span>Edit history</span></button>
-          <button type="button" id="tour-exports" aria-controls="panel-exports">04 <span>Exports &amp; S3</span></button>
-        </div>
-        <figure id="panel-chats" aria-labelledby="tour-chats" data-tab-panel><div class="screen-frame screen-dark"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Saved chats</span><span class="screen-mode">YOUR OBSERVATION WORKSPACE</span></div><img src="@@ROOT@@assets/chats-dark.png" width="1440" height="900" alt="Saved Telegram conversations in the dark theme, with captured edits and deleted messages kept in context" loading="lazy"></div><figcaption><span>01 / Saved chats</span> Looks like a normal chat, with edits and deletions right next to the messages.</figcaption></figure>
-        <figure id="panel-journal" aria-labelledby="tour-journal" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Journal</span><span class="screen-mode">LOCAL WORKSPACE</span></div><img src="@@ROOT@@assets/workspace.png" width="1440" height="900" alt="Journal with observed messages, edits, deletion notices and coverage events" fetchpriority="high"></div><figcaption><span>02 / Journal</span> Everything your account saw, searchable, gaps included.</figcaption></figure>
-        <figure id="panel-edits" aria-labelledby="tour-edits" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Edit history</span><span class="screen-mode">LOCAL WORKSPACE</span></div><img src="@@ROOT@@assets/detail.png" width="1440" height="900" alt="Detail drawer comparing the captured previous and edited versions of a message" loading="lazy"></div><figcaption><span>03 / Edit history</span> Old and new versions side by side, nothing overwritten.</figcaption></figure>
-        <figure id="panel-exports" aria-labelledby="tour-exports" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Signed exports</span><span class="screen-mode">LOCAL WORKSPACE</span></div><img src="@@ROOT@@assets/exports.png" width="1440" height="900" alt="Export workspace offering a signed ZIP, JSONL, CSV and an offline HTML report" loading="lazy"></div><figcaption><span>04 / Signed exports</span> Take the journal with you, signed, with its own verifier.</figcaption></figure>
+      <div class="tw-scene tw-pipe-scene" data-scene="gh" data-steps="200,900,1600,2300,3000,3700" data-idle="300">
+        <ol class="tw-pipe">
+          <li><span class="tw-pipe-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5"/></svg></span><strong>{{home.gh.s1}}</strong><span>{{home.gh.s1.text}}</span></li>
+          <li><span class="tw-pipe-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5M15.5 15.5 18 18"/></svg></span><strong>{{home.gh.s2}}</strong><span>{{home.gh.s2.text}}</span></li>
+          <li><span class="tw-pipe-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></span><strong>{{home.gh.s3}}</strong><span>{{home.gh.s3.text}}</span></li>
+          <li><span class="tw-pipe-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></span><strong>{{home.gh.s4}}</strong><span>{{home.gh.s4.text}}</span></li>
+          <li class="tw-pipe-final"><span class="tw-pipe-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><strong>{{home.gh.s5}}</strong><span>{{home.gh.s5.text}}</span></li>
+        </ol>
+        <div class="tw-pipe-track" aria-hidden="true"><span class="tw-pipe-fill"></span><span class="tw-pipe-packet"></span></div>
+        <p class="sr-only">{{home.gh.scene}}</p>
+        <button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
-      <div class="section-actions"><p>Follow a saved record through <a href="@@GUIDE_CASE_BOARD@@">Case Board</a>, <a href="@@GUIDE_REPORTS@@">report design</a> and a <a href="@@GUIDE_HANDOVER@@">sharing copy</a>, or <a href="@@GUIDE_GROUPS@@">review account groups</a> together.</p></div>
-    </section>
-
-    <section class="modes wrap" id="modes" aria-labelledby="modes-title">
-      <div class="section-heading"><div><p class="eyebrow">WHAT YOU COLLECT</p><h2 id="modes-title">Pick the scope,<br>keep the proof.</h2></div><p>Four collection modes and eight evidence levels: choose how much to save and how strongly it verifies.</p></div>
-      <div class="doc-links">
-        <a href="guides/modes.html#scope"><span>01</span><div><h3>Chosen chats or a folder</h3><p>Follow a few conversations or a Telegram folder, each in its own workspace.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="guides/modes.html#scope"><span>02</span><div><h3>A whole account</h3><p>Capture everything the connected account can read, with its own session and signing key.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="guides/modes.html#events"><span>03</span><div><h3>History and live updates</h3><p>Load past messages, then keep edits, deletions and coverage gaps as they happen.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="docs/capture/"><span>04</span><div><h3>GitHub Actions capture</h3><p>Run a chat or account export on a temporary runner with provenance. (Preview)</p></div><span aria-hidden="true">↗</span></a>
+      <div class="tw-gh-facts">
+        <div class="tw-gh-fact"><p class="tw-gh-head"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>{{home.gh.f1}}</p><p>{{home.gh.f1.text}}</p></div>
+        <div class="tw-gh-fact"><p class="tw-gh-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>{{home.gh.f2}}</p><p>{{home.gh.f2.text}}</p></div>
+        <div class="tw-gh-fact"><p class="tw-gh-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>{{home.gh.f3}}</p><p>{{home.gh.f3.text}}</p></div>
       </div>
-      <a class="capability-link" href="guides/modes.html#levels"><svg viewBox="0 0 32 32" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 27h22M9 27V18m7 9V12m7 15V6" stroke-linecap="round"/></svg><div><h3>Eight evidence levels, one ladder</h3><p>From a local signed journal to an independent witness and Intel TDX attestation, see exactly what each level proves.</p></div><span aria-hidden="true">↗</span></a>
+      <div class="tw-gh-verify"><p class="tw-sources-label">{{home.gh.verifyLabel}}</p><pre><code translate="no">python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo OWNER/TgWitness</code></pre></div>
+      <p class="tw-callout tone-warning"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>{{home.gh.note}}</span></p>
+      <div class="tw-actions"><a class="tw-btn tw-btn-primary" href="docs/capture/">{{home.gh.open}}<span aria-hidden="true">→</span></a></div>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/capture/">{{home.gh.chip1}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/TRUST.md">{{home.gh.chip2}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
     </section>
 
-    <section class="principles wrap" aria-label="Designed around your observations">
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><path d="M69 29h62l32 27h66M69 83h62l32-27" stroke="#b5c7e5" stroke-width="2"/><rect x="19" y="11" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><rect x="19" y="65" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><path d="M33 24h24M33 32h16M33 78h24M33 86h16" stroke="#5b7fbe" stroke-width="2" stroke-linecap="round"/><rect x="173" y="22" width="105" height="68" rx="12" fill="#fff" stroke="#b5c7e5"/><circle cx="193" cy="45" r="5" fill="#2563eb"/><path d="M207 44h48M207 53h33M188 71h67" stroke="#adc0df" stroke-width="3" stroke-linecap="round"/><circle class="route-signal" cx="145" cy="41" r="4" fill="#2563eb"/></svg><span class="feature-number">01 / CAPTURE</span><h3>You choose the scope.</h3><p>Choose a few chats, a folder or the whole account, with a separate workspace for each account you connect.</p><a class="text-link" href="guides/modes.html#scope">Compare collection modes <span aria-hidden="true">→</span></a></article>
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="31" y="10" width="168" height="78" rx="10" fill="#eff2f7" stroke="#c8d3e3"/><path d="M47 28h89M47 41h124M47 54h76" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect class="version-layer" x="77" y="30" width="190" height="74" rx="10" fill="#fff" stroke="#adc3ea"/><path d="M94 48h103" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect x="94" y="60" width="63" height="12" rx="3" fill="#f6e9e8"/><path d="M100 66h51" stroke="#b97770"/><rect x="164" y="60" width="77" height="12" rx="3" fill="#dcefe5"/><path d="M170 66h65" stroke="#2c7c56"/><path d="M94 86h92" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/></svg><span class="feature-number">02 / PRESERVE</span><h3>Changes add to the story.</h3><p>Versions, deletions and gaps all stay in the journal.</p><a class="text-link" href="guides/modes.html#events">See the event matrix <span aria-hidden="true">→</span></a></article>
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="35" y="19" width="59" height="75" rx="8" fill="#fff" stroke="#c1cde0"/><path d="M49 36h30M49 46h23M49 56h30" stroke="#afbed5" stroke-width="3" stroke-linecap="round"/><path d="M106 57h60m-8-8 8 8-8 8" stroke="#7896c8" stroke-width="2" stroke-linecap="round"/><rect x="178" y="15" width="88" height="82" rx="12" fill="#edf3ff" stroke="#acc2ee"/><path d="M222 31v28m-7-5 7 7 7-7M206 72h32" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="259" cy="85" r="14" fill="#e0f1e8" stroke="#98c5ae"/><path class="verified-tick" d="m252 85 5 5 9-10" stroke="#23734b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-number">03 / HAND OVER</span><h3>A record that travels.</h3><p>Share a signed ZIP containing the files and an offline report, with an optional password for the archive.</p><a class="text-link" href="docs/exports/">Export and verify <span aria-hidden="true">→</span></a></article>
-    </section>
-
-    <section class="proof wrap" id="proof" aria-labelledby="proof-title">
-      <div class="section-heading"><div><p class="eyebrow">HOW THE RECORD HOLDS TOGETHER</p><h2 id="proof-title">Change one byte,<br>and verification tells you.</h2></div><p>Each event links to the previous hash and carries an Ed25519 signature.</p></div>
-      <div class="switcher" data-tabs aria-label="Evidence explanations">
-        <div class="tab-buttons" data-tab-buttons>
-          <button type="button" id="proof-chain" aria-controls="panel-chain">01 <span>Linked records</span></button>
-          <button type="button" id="proof-tamper" aria-controls="panel-tamper">02 <span>A changed record</span></button>
-          <button type="button" id="proof-checkpoint" aria-controls="panel-checkpoint">03 <span>A retained checkpoint</span></button>
-        </div>
-        <figure id="panel-chain" aria-labelledby="proof-chain" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="@@ROOT@@assets/evidence-chain-static.svg"><img src="@@ROOT@@assets/evidence-chain-animated.svg" width="1200" height="560" loading="lazy" alt="Captured events link to previous hashes, carry signatures and travel in a verifiable export."></picture></figure>
-        <figure id="panel-tamper" aria-labelledby="proof-tamper" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="@@ROOT@@assets/evidence-tamper-static.svg"><img src="@@ROOT@@assets/evidence-tamper-animated.svg" width="1200" height="560" loading="lazy" alt="Changing a captured record changes its hash and breaks verification of the linked record."></picture></figure>
-        <figure id="panel-checkpoint" aria-labelledby="proof-checkpoint" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="@@ROOT@@assets/evidence-checkpoint-static.svg"><img src="@@ROOT@@assets/evidence-checkpoint-animated.svg" width="1200" height="560" loading="lazy" alt="A separately retained checkpoint lets a recipient compare the exported journal with an earlier observation."></picture></figure>
-      </div>
-      <div class="section-actions"><p>Follow the checks from a file hash to a separately retained checkpoint.</p><a class="button outline" href="guides/modes.html#levels">Explore eight evidence levels <span aria-hidden="true">→</span></a></div>
-    </section>
-
-    <section class="speed wrap" id="speed" aria-labelledby="speed-title">
-      <div class="section-heading"><div><p class="eyebrow">MEASURED, NOT PROMISED</p><h2 id="speed-title">Fast enough for<br>real caseloads.</h2></div><p>Two signed runs on 6 November 2026: text and metadata over WARP, no attachments.</p></div>
-      <ul class="speed-stats">
-        <li><strong>56,329</strong><span>messages across two fresh runs</span></li>
-        <li><strong>142–160</strong><span>messages per second collected</span></li>
-        <li><strong>2 / 2</strong><span>signed archives verified</span></li>
-        <li><strong>51,285</strong><span>backup files checked · 0 failed</span></li>
-      </ul>
-      <div class="section-actions"><p>Both archives passed verification with pinned collector keys.</p><a class="button outline" href="@@VALIDATION_URL@@">See measurements, dates and method <span aria-hidden="true">→</span></a></div>
-    </section>
-
-    <section class="integrity" aria-labelledby="integrity-title"><div class="wrap integrity-layout">
-      <div><p class="eyebrow">BUILT FOR REVIEW</p><h2 id="integrity-title">Ready for<br>another pair<br><span>of eyes.</span></h2><p>Messages, files and an offline report in one signed bundle.</p><a class="text-link" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/EVIDENCE.md">Read the evidence model <span aria-hidden="true">↗</span></a></div>
-      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">SIGNED BUNDLE</span></div><ul><li><span>01</span><div>Original observations<small>JSONL records + CSV table</small></div></li><li><span>02</span><div>Readable context<small>Offline HTML report + preserved media</small></div></li><li><span>03</span><div>Independent verification<small>Signed manifest + standalone verifier</small></div></li></ul><p class="bundle-note">The recipient checks the signed records and files against your trusted key, then compares them with a checkpoint kept elsewhere to check for changes since that observation. <a href="docs/concepts/#layers">How the checks work.</a></p></div>
-    </div></section>
-
-    <section class="capture wrap" id="capture" aria-labelledby="capture-title">
-      <div class="section-heading"><div><p class="eyebrow">CAPTURE WITH PROVENANCE · PREVIEW</p><h2 id="capture-title">Collect on a fresh<br>GitHub runner.</h2></div><p>Run a chat or account export on a temporary GitHub-hosted runner with a pinned TgWitness and a fresh session, then download an encrypted archive with its attestation.</p></div>
-      <div class="doc-links">
-        <a href="docs/capture/"><span>01</span><div><h3>Approved hosted workflow</h3><p>A pinned collector version runs on a disposable runner, with no persisted credentials.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="docs/capture/"><span>02</span><div><h3>Encrypted, split delivery</h3><p>Partial results are recorded at the deadline; large archives are split and encrypted.</p></div><span aria-hidden="true">↗</span></a>
-        <a href="docs/capture/"><span>03</span><div><h3>Verified attestation</h3><p>The verifier checks the workflow, collector version, archive digest, journal and files.</p></div><span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="section-actions"><p>Also available under <strong>Exports</strong> in the panel.</p><a class="button outline" href="docs/capture/">Open the capture page <span aria-hidden="true">→</span></a></div>
-    </section>
-
-    <section class="retention wrap" id="retention" aria-labelledby="retention-title">
-      <div class="section-heading"><div><p class="eyebrow">STORAGE, CONTINUITY AND VERIFICATION</p><h2 id="retention-title">S3 copies<br>and external checks.</h2></div><p>Keep encrypted copies and add independent checks.</p></div>
-      <article class="s3-overview" id="s3" aria-labelledby="s3-title">
-        <div class="s3-overview-heading"><p class="eyebrow">EXPORTS → OFF-SITE COPY</p><span class="retention-badge">Off by default</span></div>
-        <h3 id="s3-title">Copy everything to S3-compatible storage</h3>
-        <div class="s3-layout">
-          <div class="s3-copy">
-            <p>Journal, files, checkpoints and chat exports, encrypted before they go to S3.</p>
-            <details class="presentation-details"><summary>Storage settings and recovery</summary>
-            <dl class="s3-features">
-              <div><dt>Client-side encryption</dt><dd>Encrypt with <code>AES-256-GCM</code> on your machine, so the provider receives only ciphertext.</dd></div>
-              <div><dt>Scheduled or manual copies</dt><dd>Start a copy now or schedule one every 1 to 1,440 minutes, with progress shown in the panel.</dd></div>
-              <div><dt>Object Lock</dt><dd>Choose the retention period and mode, then check in the panel that the storage provider applied them.</dd></div>
-              <div><dt>Verified recovery</dt><dd>Keep the key separately so you can restore on another machine, where files are released only after verification.</dd></div>
-            </dl>
-            </details>
+    <section class="tw-panel tw-position will-reveal" id="position" aria-labelledby="position-title">
+      <div class="tw-split">
+        <div>
+          <div class="tw-section-head">
+            <span class="tw-section-icon tone-accent" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 6a3 3 0 0 0 6 0Zm14 0-3 6a3 3 0 0 0 6 0Z"/></svg></span>
+            <div><p class="tw-kicker">02 · {{home.pos.eyebrow}}</p><h2 id="position-title">{{home.pos.l1a}} <span class="tw-accent">{{home.pos.l1b}}</span></h2></div>
           </div>
-          <figure class="s3-preview"><div class="screen-frame"><img src="@@ROOT@@assets/off-site-copy.png" width="1136" height="825" alt="Complete Off-site copy panel: endpoint, region, bucket, access keys, schedule, Object Lock and recovery key controls" loading="lazy"></div><figcaption>The complete panel shows the advanced options expanded, with no storage credentials on display.</figcaption></figure>
+          <blockquote class="tw-manifest"><p><strong>{{home.pos.manifest}}</strong></p><p>{{home.pos.manifest2}}</p></blockquote>
+          <ul class="tw-points">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>{{home.pos.l2}}</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/></svg><span>{{home.pos.l3}}</span></li>
+          </ul>
         </div>
-        <div class="replica-flow" aria-label="Data is encrypted before upload"><span>Journal and media</span><span aria-hidden="true">→</span><code translate="no">AES-256-GCM</code><span aria-hidden="true">→</span><span>S3-compatible storage</span></div>
-        <div class="s3-actions"><a class="button primary" href="docs/exports/#s3">Configure S3 and restore a copy <span aria-hidden="true">→</span></a><a class="text-link" href="docs/reference/evidence/#off-site-copy-and-restore-s3">Read the verification details <span aria-hidden="true">↗</span></a></div>
-        <p class="retention-limit"><strong>Recovery key</strong> Keep it separately, without it the copy is unreadable.</p>
-      </article>
-      <div class="retention-grid">
-        <article class="retention-card notification-overview" id="notifications" aria-labelledby="notifications-title">
-          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3 id="notifications-title">Notifications · Apprise</h3>
-          <p>Problems, chat changes and a daily summary to messengers, email or your own webhook.</p>
-          <p class="retention-limit"><strong>Choose what to share</strong> No message text unless you turn it on.</p>
-          <a class="text-link" href="docs/reference/operations/#notifications">Configure notification destinations <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="retention-card">
-          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3" stroke-linecap="round"/></svg></div>
-          <h3>External timestamps</h3>
-          <p>Timestamp checkpoint hashes with RFC 3161 and OpenTimestamps.</p>
-          <p class="retention-limit"><strong>Follow the result</strong> Check the TSA answer or upgrade the OpenTimestamps receipt to a Bitcoin proof.</p>
-          <a class="text-link" href="docs/reference/timestamp/">Check timestamp proofs <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="retention-card">
-          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3>Independent witness</h3>
-          <p>A separate host keeps signed observations and can publish <code>TGW1</code> checkpoints.</p>
-          <p class="retention-limit"><strong>Separate the reference</strong> Run it on another host, with its own key and journal.</p>
-          <a class="text-link" href="docs/witness/">Set up a witness <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="retention-card">
-          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h6m6 0h6M12 7v3m0 4v3" stroke-linecap="round"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
-          <h3>Recovery and visible gaps</h3>
-          <p>Resume collection after a restart, then use rechecks and <code>coverage.json</code> to review recovered messages and remaining gaps.</p>
-          <p class="retention-limit"><strong>Review the interval</strong> Recovered messages and recorded gaps side by side.</p>
-          <a class="text-link" href="guides/modes.html#continuity">Inspect continuity and gaps <span aria-hidden="true">→</span></a>
-        </article>
+        <div class="tw-scene tw-stage tw-scale-scene" data-loop>
+          <svg class="tw-svg" viewBox="0 0 640 300" aria-hidden="true" focusable="false">
+            <path class="sc-beam-glow" d="M320 30V272"/>
+            <path class="sc-post" d="M320 30V272"/>
+            <ellipse class="sc-base" cx="320" cy="274" rx="64" ry="7"/>
+            <text class="sc-record" x="320" y="296" text-anchor="middle" data-fit="300">{{home.pos.record}}</text>
+            <g class="sc-beam">
+              <path class="sc-bar" d="M110 70H530"/>
+              <circle class="sc-pivot" cx="320" cy="70" r="7"/>
+              <g class="sc-pan sc-pan-a">
+                <path class="sc-string" d="M110 70 66 168M110 70l44 98"/>
+                <path class="sc-dish" d="M54 168h112c-6 26-30 38-56 38s-50-12-56-38Z"/>
+                <text class="sc-side" x="110" y="194" text-anchor="middle" data-fit="200">{{home.pos.sideA}}</text>
+              </g>
+              <g class="sc-pan sc-pan-b">
+                <path class="sc-string" d="M530 70l-44 98M530 70l44 98"/>
+                <path class="sc-dish" d="M474 168h112c-6 26-30 38-56 38s-50-12-56-38Z"/>
+                <text class="sc-side" x="530" y="194" text-anchor="middle" data-fit="200">{{home.pos.sideB}}</text>
+              </g>
+            </g>
+          </svg>
+          <p class="sr-only">{{home.pos.scene}}</p>
+        </div>
       </div>
     </section>
 
-    <section class="start wrap" id="start" aria-labelledby="start-title">
-      <div class="section-heading"><div><p class="eyebrow">ON YOUR MACHINE</p><h2 id="start-title">Your first workspace starts here.</h2></div><div class="section-intro"><p>Try the demo first, then connect a spare account when you’re ready to run TgWitness on Windows, Linux, macOS or Docker.</p><a class="text-link" href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@">Read the setup guide <span aria-hidden="true">→</span></a></div></div>
-      <div class="start-layout" id="one-command">
-        <div class="start-intro"><h3>Install with one command.</h3><p>Python and dependencies are included. Open the panel, connect an account and select what to collect.</p><p><a class="text-link" href="docs/reference/installation/">Installation, signatures and updates →</a></p></div>
-        <div class="start-run"><h3>Linux / macOS</h3><div class="code-block"><pre><code id="installer-unix">curl -fsSL https://get.destroy.tools/install.sh | bash</code></pre><button class="copy-button" type="button" data-copy="installer-unix" hidden>Copy</button></div><h3>Windows · PowerShell / CMD</h3><div class="code-block"><pre><code id="installer-windows">powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"</code></pre><button class="copy-button" type="button" data-copy="installer-windows" hidden>Copy</button></div><p class="small-note">Ubuntu server: run as root. Desktop: run as your normal user.</p></div>
+    <section class="tw-panel tw-story will-reveal" id="story" aria-labelledby="story-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-violet" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3Z"/><path d="M5 17a3 3 0 0 1 3-3h11M9 8h6"/></svg></span>
+        <div><p class="tw-kicker">03 · {{home.story.eyebrow}}</p><h2 id="story-title">{{home.story.title1}} <span class="tw-accent-bad">{{home.story.title2}}</span></h2><p class="tw-section-lead">{{home.story.lead}}</p></div>
       </div>
-      <aside class="session-warning" id="session-warning" aria-labelledby="session-warning-title"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><div><strong id="session-warning-title">One imported session, one running client.</strong><p>Running the same imported TData or session in Telegram Desktop and TgWitness at once can cause Telegram to revoke both (AUTH_KEY_DUPLICATED), so use a separate phone or QR login in TgWitness if you need both clients.</p><a href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@#session-warning">Read the session import warning</a></div></aside>
-      <div class="demo-callout"><span class="demo-symbol" aria-hidden="true">↗</span><div><strong>Take a look before you connect.</strong><p>Try the fictional workspace without a Telegram account.</p><p><a class="demo-link" href="@@ROOT@@demo/?lang=@@LANG_CODE@@">Open the online demo →</a></p></div><div class="demo-commands"><span>Windows <code>scripts\Demo.cmd</code></span><span>Linux / macOS <code>sh start.sh --demo</code></span></div></div>
-      <details class="presentation-details installation-details"><summary>Local installation commands</summary>
-      <div class="start-layout">
-        <div class="start-intro"><span class="step-label">STEP 01</span><h3>Get the source.</h3><p><a class="download-link" href="@@REPO_URL@@/archive/refs/heads/@@BRANCH@@.zip">Download the source ZIP</a> and extract it, or clone the repository:</p><div class="code-block"><pre><code id="clone-command">git clone @@REPO_URL@@.git
-cd @@REPO_NAME@@</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>Copy</button></div><p class="small-note">You need Python 3.11+ to run TgWitness, and the Windows launcher can offer to install it for you.</p><a class="text-link" href="@@REPO_URL@@/releases">Browse releases <span aria-hidden="true">↗</span></a></div>
-        <div class="start-run"><span class="step-label">STEP 02</span><h3>Choose how to run.</h3><div data-tabs aria-label="Installation platform">
-          <div class="tab-buttons platform-tabs" data-tab-buttons><button type="button" id="tab-windows" aria-controls="setup-windows">Windows</button><button type="button" id="tab-unix" aria-controls="setup-unix">Linux / macOS</button><button type="button" id="tab-docker" aria-controls="setup-docker">Docker</button></div>
-          <div id="setup-windows" aria-labelledby="tab-windows" data-tab-panel><p>Double-click <code>Start.cmd</code>, or run in PowerShell:</p><div class="code-block"><pre><code id="windows-command">.\Start.cmd</code></pre><button class="copy-button" type="button" data-copy="windows-command" hidden>Copy</button></div><p>To explore without a Telegram login, double-click <code>scripts\Demo.cmd</code> and open the isolated demo.</p></div>
-          <div id="setup-unix" aria-labelledby="tab-unix" data-tab-panel><p>With Python 3.11+ and <code>venv</code> available:</p><div class="code-block"><pre><code id="unix-command">sh start.sh</code></pre><button class="copy-button" type="button" data-copy="unix-command" hidden>Copy</button></div><p>To open the fictional journal instead, run <code>sh start.sh --demo</code>.</p></div>
-          <div id="setup-docker" aria-labelledby="tab-docker" data-tab-panel><p>With Docker running and Compose 2.20+ installed:</p><div class="code-block"><pre><code id="docker-command">docker compose up -d --build --wait
-docker compose exec tgwitness cat /data/panel-token.txt</code></pre><button class="copy-button" type="button" data-copy="docker-command" hidden>Copy</button></div><p>The second command shows your private panel token, which you should keep on your own machine.</p></div>
-        </div><p class="panel-address">Open <a href="http://127.0.0.1:8787">127.0.0.1:8787 <span aria-hidden="true">↗</span></a> after launch.</p><p class="small-note">Source installs keep the token in <code>data/live/panel-token.txt</code>, and you can optionally use your own API pair from <a href="https://my.telegram.org">my.telegram.org</a>. <a href="@@REPO_URL@@/blob/@@BRANCH@@/docs/QUICKSTART.md">Full setup guide ↗</a></p></div>
+      <ol class="tw-timeline">
+        <li class="tw-tl tw-tl-bad"><span class="tw-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span><div><h3>{{home.story.c1.title}}</h3><p>{{home.story.c1.text}}</p></div></li>
+        <li class="tw-tl tw-tl-bad"><span class="tw-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span><div><h3>{{home.story.c2.title}}</h3><p>{{home.story.c2.text}}</p></div></li>
+        <li class="tw-tl tw-tl-bad"><span class="tw-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span><div><h3>{{home.story.c3.title}}</h3><p>{{home.story.c3.text}}</p></div></li>
+        <li class="tw-tl tw-tl-good"><span class="tw-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span><div><h3>{{home.story.c4.title}}</h3><p>{{home.story.c4.text}}</p></div></li>
+        <li class="tw-tl tw-tl-good"><span class="tw-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span><div><h3>{{home.story.c5.title}}</h3><p>{{home.story.c5.text}}</p></div></li>
+      </ol>
+      <div class="tw-not-grid">
+        <div class="tw-not-card"><p class="tw-not-head"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>{{home.story.not.title}}</p><p>{{home.story.not.text}}</p></div>
+        <div class="tw-not-card"><p class="tw-not-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6Z"/><path d="M9 12h6"/></svg>{{home.story.privacy.title}}</p><p>{{home.story.privacy.text}}</p></div>
       </div>
-      </details>
-      <p class="release-note"><strong>TgWitness @@VERSION@@</strong> <a href="@@REPO_URL@@/blob/@@BRANCH@@/docs/CHANGELOG.md">What’s new →</a> · <a href="@@REPO_URL@@/blob/@@BRANCH@@/docs/PRODUCT.md">Product and collection model →</a></p>
+      <p class="tw-callout tone-success"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>{{home.story.close}}</span></p>
+      <p class="tw-story-note">{{home.story.note}}</p>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/reference/security/">{{home.story.chip1}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="docs/reference/evidence/">{{home.verify.proves}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="docs/reference/account-export/">{{home.story.chip2}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="docs/signed-export/">{{home.story.chip3}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
     </section>
 
-    <section class="docs wrap" id="docs" aria-labelledby="docs-title"><div class="section-heading"><div><p class="eyebrow">ONE TASK AT A TIME</p><h2 id="docs-title">Clear instructions<br>for your next step.</h2></div><a class="text-link" href="docs/">Explore the guides ↗</a></div><a class="capability-link" href="guides/modes.html"><svg viewBox="0 0 32 32" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><path d="m19 25 4 4 7-10" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>Modes, scenarios and evidence levels</h3><p>Compare four collection modes and eight verification levels to find the workflow that fits your case.</p></div><span aria-hidden="true">↗</span></a><div class="doc-links"><a href="docs/accounts/"><span>01</span><div><h3>Connect an account</h3><p>Phone, QR, and supported session imports.</p></div><span aria-hidden="true">↗</span></a><a href="docs/proxies/"><span>02</span><div><h3>Choose a proxy</h3><p>Public MTProxy lists or your own route.</p></div><span aria-hidden="true">↗</span></a><a href="docs/witness/"><span>03</span><div><h3>Set up a witness bot</h3><p>Signed checkpoints in your Telegram channel.</p></div><span aria-hidden="true">↗</span></a><a href="docs/exports/"><span>04</span><div><h3>Export and verify</h3><p>Share captured history and check its integrity.</p></div><span aria-hidden="true">↗</span></a></div></section>
-
-    <section class="archive-tools wrap" aria-labelledby="archive-tools-title"><h2 id="archive-tools-title">Work the archive.</h2><p>Load older history, search saved messages, review AI with checkable sources, connect read-only MCP clients, run local OCR and transcription, and send signed webhooks.</p><p><a class="text-link" href="@@GUIDE_ARCHIVE@@">Explore the archive workflow <span aria-hidden="true">↗</span></a></p></section>
-
-    <section class="faq wrap" aria-labelledby="faq-title"><h2 id="faq-title">Before you start.</h2><div><details><summary>Does this page connect to Telegram?</summary><p>This static page uses fictional examples, while the application runs on your own machine, where you sign in to Telegram.</p></details><details><summary>Can it recover messages deleted before capture?</summary><p>It keeps what your account saw while collection was running, so a later snapshot cannot reconstruct edits or deleted messages that were missed.</p></details><details><summary>Is my whole journal encrypted?</summary><p>Sessions and keys are encrypted, while stored messages and files need disk encryption, and you can protect exported archives with an AES-256 password.</p></details><details><summary>Is this affiliated with Telegram?</summary><p>TgWitness is an independent project built on Telethon and released under the MIT license, with your own accounts used to connect to Telegram.</p></details></div></section>
-    <section class="operator-notice wrap" aria-labelledby="operator-notice-title">
-      <div class="operator-notice-copy">
-        <p class="operator-notice-label">PROJECT NOTICE / LICENCE</p>
-        <h2 id="operator-notice-title">Operator incompatibility.</h2>
-        <p><strong>Taylor Wessing PartG mbB, German core, Hamburg office.</strong></p>
-        <p>This statement from the authors of TgWitness adds no condition to the MIT License, and the complete notice includes its source record.</p>
+    <section class="tw-panel tw-compare will-reveal" id="compare" aria-labelledby="compare-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-accent" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M4 7h5M4 12h5M4 17h5M15 7h5M15 12h5M15 17h5"/></svg></span>
+        <div><p class="tw-kicker">04 · {{home.cmp.eyebrow}}</p><h2 id="compare-title">{{home.cmp.title1}} <span class="tw-accent">{{home.cmp.title2}}</span></h2><p class="tw-section-lead">{{home.cmp.lead}}</p></div>
       </div>
-      <div class="operator-notice-actions">
-        <a href="docs/reference/notice/">Read the complete notice <span aria-hidden="true">→</span></a>
-        <a href="@@ROOT@@NOTICE">Original text</a>
+      <div class="tw-cmp-wrap">
+        <table class="tw-cmp">
+          <thead><tr><th scope="col">{{home.cmp.need}}</th><th scope="col">{{home.cmp.tg}}</th><th scope="col" class="tw-cmp-us">TgWitness</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">{{home.cmp.r1.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r1.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r1.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r2.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r2.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r2.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r3.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r3.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r3.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r4.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r4.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r4.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r5.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r5.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r5.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r6.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r6.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r6.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r7.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r7.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r7.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r8.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r8.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r8.tw}}</td></tr>
+            <tr><th scope="row">{{home.cmp.r9.need}}</th><td class="tw-no" data-label="{{home.cmp.tg}}">{{home.cmp.r9.tg}}</td><td class="tw-yes" data-label="TgWitness">{{home.cmp.r9.tw}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tw-callout tone-warning"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><span>{{home.cmp.clinic}} <a href="docs/export-clinic/">{{home.cmp.clinicLink}}</a></span></p>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="guides/modes.html#compare">{{home.cmp.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="docs/reference/evidence/">{{home.verify.proves}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </section>
+
+    <section class="tw-panel tw-zero will-reveal" id="zero-trust" aria-labelledby="zero-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-danger" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m9.5 9.5 5 5m0-5-5 5"/></svg></span>
+        <div><p class="tw-kicker">05 · {{home.zt.eyebrow}}</p><h2 id="zero-title">{{home.zt.title1}} {{home.zt.title2}}</h2><p class="tw-section-lead">{{home.zt.lead}}</p></div>
+      </div>
+      <div class="tw-zt-grid">
+
+        <article class="tw-card tw-zt" data-scene="zt-tg" data-steps="150">
+          <div class="tw-zt-top"><span class="tw-zt-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 4 2-15Z"/><path d="m9 13 9-6"/></svg></span><h3>{{home.zt.tg.name}}</h3></div>
+          <div class="tw-zt-scene tw-stage"><svg class="tw-svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+            <path class="z-rail" d="M0 60H320"/>
+            <g class="z-tape">
+              <g class="z-tk"><rect x="15" y="40" width="40" height="40" rx="9"/><text x="35" y="65">41</text></g>
+              <g class="z-tk"><rect x="65" y="40" width="40" height="40" rx="9"/><text x="85" y="65">42</text></g>
+              <g class="z-tk"><rect x="115" y="40" width="40" height="40" rx="9"/><text x="135" y="65">43</text></g>
+              <g class="z-gap"><rect x="165" y="40" width="40" height="40" rx="9"/><text x="185" y="65">44</text></g>
+              <g class="z-tk"><rect x="215" y="40" width="40" height="40" rx="9"/><text x="235" y="65">45</text></g>
+              <g class="z-tk"><rect x="265" y="40" width="40" height="40" rx="9"/><text x="285" y="65">46</text></g>
+            </g>
+            <text class="z-gaplabel" x="185" y="104" text-anchor="middle" data-fit="260">{{home.zt.tg.gap}}</text>
+          </svg><button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          <p class="tw-zt-threat">{{home.zt.tg.threat}}</p>
+          <p class="tw-zt-defense"><strong>{{home.zt.defense}}</strong> {{home.zt.tg.defense}}</p>
+          <a class="tw-chip" href="docs/reference/evidence/">{{home.zt.tg.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </article>
+
+        <article class="tw-card tw-zt" data-scene="zt-op" data-steps="150">
+          <div class="tw-zt-top"><span class="tw-zt-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><h3>{{home.zt.op.name}}</h3></div>
+          <div class="tw-zt-scene tw-stage"><svg class="tw-svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+            <path class="z-chainlink" d="M74 51H90M152 51H168M230 51H246"/>
+            <g class="z-b z-b1"><rect x="12" y="30" width="62" height="42" rx="10"/><text x="43" y="56">a3f9</text></g>
+            <g class="z-b z-b2"><rect x="90" y="30" width="62" height="42" rx="10"/><text class="z-old" x="121" y="56">7b04</text><text class="z-new" x="121" y="56">7b0f</text></g>
+            <g class="z-b z-b3"><rect x="168" y="30" width="62" height="42" rx="10"/><text x="199" y="56">c2e1</text></g>
+            <g class="z-b z-b4"><rect x="246" y="30" width="62" height="42" rx="10"/><text x="277" y="56">d95f</text></g>
+            <path class="z-cursor" d="M128 60v20l5-5 4 9 4-2-4-9h7Z"/>
+            <text class="z-valid" x="160" y="104" text-anchor="middle" data-fit="160">{{home.hero.valid}}</text>
+            <text class="z-tampered" x="160" y="104" text-anchor="middle" data-fit="280">{{home.zt.op.tampered}}</text>
+          </svg><button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          <p class="tw-zt-threat">{{home.zt.op.threat}}</p>
+          <p class="tw-zt-defense"><strong>{{home.zt.defense}}</strong> {{home.zt.op.defense}}</p>
+          <a class="tw-chip" href="docs/reference/security/">{{home.zt.op.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </article>
+
+        <article class="tw-card tw-zt" data-scene="zt-srv" data-steps="150">
+          <div class="tw-zt-top"><span class="tw-zt-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="7" rx="2"/><rect x="4" y="14" width="16" height="7" rx="2"/><path d="M8 6.5h.01M8 17.5h.01"/></svg></span><h3>{{home.zt.srv.name}}</h3></div>
+          <div class="tw-zt-scene tw-stage"><svg class="tw-svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+            <g class="z-rack">
+              <rect x="96" y="8" width="104" height="104" rx="14"/>
+              <rect x="110" y="22" width="76" height="18" rx="5"/><rect x="110" y="51" width="76" height="18" rx="5"/><rect x="110" y="80" width="76" height="18" rx="5"/>
+              <circle cx="176" cy="31" r="3"/><circle cx="176" cy="60" r="3"/><circle cx="176" cy="89" r="3"/>
+            </g>
+            <g class="z-chip">
+              <path class="z-pins" d="M136 36v-8M148 36v-8M160 36v-8M136 92v-8M148 92v-8M160 92v-8M124 48h-8M124 60h-8M124 72h-8M172 48h8M172 60h8M172 72h8"/>
+              <rect x="124" y="36" width="48" height="48" rx="9"/>
+              <path class="z-scan" d="M128 44h40"/>
+              <path class="z-tick" d="m138 60 7 7 13-14"/>
+            </g>
+            <path class="z-lead" d="M206 60h22"/>
+            <text class="z-measured" x="234" y="64" data-fit="80">{{home.zt.srv.measured}}</text>
+          </svg><button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          <p class="tw-zt-threat">{{home.zt.srv.threat}}</p>
+          <p class="tw-zt-defense"><strong>{{home.zt.defense}}</strong> {{home.zt.srv.defense}}</p>
+          <a class="tw-chip" href="docs/reference/high-assurance/">{{home.zt.srv.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </article>
+
+        <article class="tw-card tw-zt" data-scene="zt-clk" data-steps="150">
+          <div class="tw-zt-top"><span class="tw-zt-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>{{home.zt.clk.name}}</h3></div>
+          <div class="tw-zt-scene tw-stage"><svg class="tw-svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+            <g class="z-clock"><rect x="12" y="36" width="132" height="48" rx="11"/><text x="78" y="68" data-clock>14:02</text></g>
+            <path class="z-strike" pathLength="1" d="M20 80 136 40"/>
+            <path class="z-ray" pathLength="1" d="M262 26 214 60"/>
+            <path class="z-ray" pathLength="1" d="M290 60H214"/>
+            <path class="z-ray" pathLength="1" d="M262 94 214 60"/>
+            <g class="z-anchor z-a1"><path d="M252 18l10-6 10 6v12l-10 6-10-6Zm0 0 10 6 10-6M262 24v12"/></g>
+            <g class="z-anchor z-a2"><circle cx="292" cy="60" r="13"/><circle cx="292" cy="60" r="7"/></g>
+            <g class="z-anchor z-a3"><circle cx="262" cy="94" r="5"/><circle cx="262" cy="94" r="11"/></g>
+            <circle class="z-point" cx="214" cy="60" r="6"/>
+            <text class="z-outside" x="214" y="117" text-anchor="middle" data-fit="200">{{home.zt.clk.outside}}</text>
+          </svg><button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          <p class="tw-zt-threat">{{home.zt.clk.threat}}</p>
+          <p class="tw-zt-defense"><strong>{{home.zt.defense}}</strong> {{home.zt.clk.defense}}</p>
+          <a class="tw-chip" href="docs/reference/timestamp/">{{home.zt.clk.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </article>
+
+        <article class="tw-card tw-zt" data-scene="zt-copy" data-steps="150">
+          <div class="tw-zt-top"><span class="tw-zt-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></span><h3>{{home.zt.copy.name}}</h3></div>
+          <div class="tw-zt-scene tw-stage"><svg class="tw-svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+            <path class="z-match" pathLength="1" d="M60 92H260"/>
+            <g class="z-c z-c1"><circle cx="60" cy="36" r="16"/><circle class="z-core" cx="60" cy="36" r="5"/><text x="60" y="76">eca5…3ea2</text></g>
+            <g class="z-c z-c2"><circle cx="160" cy="36" r="16"/><circle class="z-core" cx="160" cy="36" r="5"/><text x="160" y="76">eca5…3ea2</text></g>
+            <g class="z-c z-c3"><circle cx="260" cy="36" r="16"/><circle class="z-core" cx="260" cy="36" r="5"/><text x="260" y="76">eca5…3ea2</text></g>
+            <text class="z-matchlabel" x="160" y="113" text-anchor="middle" data-fit="280">✓ {{home.zt.copy.match}}</text>
+          </svg><button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          <p class="tw-zt-threat">{{home.zt.copy.threat}}</p>
+          <p class="tw-zt-defense"><strong>{{home.zt.defense}}</strong> {{home.zt.copy.defense}}</p>
+          <a class="tw-chip" href="docs/witness/">{{home.zt.copy.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </article>
+
+      </div>
+      <p class="tw-callout tone-success"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>{{home.zt.close}}</span></p>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/reference/security/">{{home.zt.more}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </section>
+
+    <section class="tw-panel tw-time will-reveal" id="time" aria-labelledby="time-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-warning" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><p class="tw-kicker">06 · {{home.time.eyebrow}}</p><h2 id="time-title">{{home.time.title1}} <span class="tw-accent-time">{{home.time.title2}}</span></h2><p class="tw-section-lead">{{home.time.lead}}</p></div>
+      </div>
+      <div class="tw-scene tw-time-scene" data-scene="time" data-steps="0,1000,2000,3000,3600,4200,5500" data-idle="600">
+        <div class="tw-stage tw-time-stage">
+          <svg class="tw-svg t-svg" viewBox="0 0 800 440" aria-hidden="true" focusable="false">
+            <ellipse cx="400" cy="232" rx="300" ry="190" fill="url(#tw-rg-time)" opacity=".6"/>
+            <text class="t-title" x="520" y="14" data-fit="260">{{home.time.bitcoin}}</text>
+            <path class="t-chainline" d="M570 62H590M640 62H660M710 62H730"/>
+            <g class="t-blk"><rect x="520" y="40" width="50" height="44" rx="9"/><text x="545" y="34">871,202</text></g>
+            <g class="t-blk"><rect x="590" y="40" width="50" height="44" rx="9"/><text x="615" y="34">871,203</text></g>
+            <g class="t-blk t-blk3"><rect x="660" y="40" width="50" height="44" rx="9"/><text x="685" y="34">871,204</text></g>
+            <g class="t-blk"><rect x="730" y="40" width="50" height="44" rx="9"/><text x="755" y="34">871,205</text></g>
+            <path class="t-tree" d="M670 168 655 140M700 168 715 140M730 168 715 140M715 140 685 112"/>
+            <g class="t-leaves"><circle cx="640" cy="168" r="4"/><circle cx="670" cy="168" r="4"/><circle cx="700" cy="168" r="4"/><circle cx="730" cy="168" r="4"/><circle cx="655" cy="140" r="3"/><circle cx="715" cy="140" r="3"/><circle cx="685" cy="112" r="4"/></g>
+            <path class="t-proof" pathLength="1" d="M640 168 655 140 685 112V84"/>
+            <text class="t-anchor-label" x="760" y="196" text-anchor="end">OpenTimestamps</text>
+
+            <g class="t-chip"><rect x="110" y="236" width="120" height="30" rx="9"/><text x="170" y="256" text-anchor="middle">9f2c…e07a</text></g>
+            <g class="t-impress"><circle cx="230" cy="236" r="11"/><path d="m225 236 4 4 7-8"/></g>
+            <g class="t-seal">
+              <circle cx="170" cy="150" r="46"/>
+              <circle class="t-seal-in" cx="170" cy="150" r="37"/>
+              <text x="170" y="146" text-anchor="middle">RFC 3161</text>
+              <text class="t-seal-sub" x="170" y="164" text-anchor="middle">TSA</text>
+            </g>
+
+            <g class="t-drand">
+              <circle class="t-wave" cx="400" cy="396" r="14"/>
+              <circle class="t-wave t-wave2" cx="400" cy="396" r="30"/>
+              <circle class="t-wave t-wave3" cx="400" cy="396" r="46"/>
+              <circle class="t-core" cx="400" cy="396" r="6"/>
+              <text x="460" y="400">drand · round 5,213,407</text>
+            </g>
+
+            <path class="t-conv" pathLength="1" d="M640 168C560 172 500 190 448 214"/>
+            <path class="t-conv" pathLength="1" d="M230 251C290 251 320 246 352 240"/>
+            <path class="t-conv t-conv-d" pathLength="1" d="M400 382V320"/>
+
+            <g class="t-archive">
+              <circle class="t-halo" cx="400" cy="232" r="70"/>
+              <rect x="352" y="196" width="96" height="72" rx="14"/>
+              <path d="M352 220h96M388 208h24"/>
+              <path class="t-lockline" d="M384 240h32M384 252h20"/>
+            </g>
+            <text class="t-label" x="400" y="292" text-anchor="middle" data-fit="260">{{home.time.checkpoint}}</text>
+            <text class="t-hash" x="400" y="314" text-anchor="middle" data-hash="sha256 9f2c41d0…e07a">sha256 9f2c41d0…e07a</text>
+            <circle class="t-dot" cx="400" cy="232" r="6"/>
+          </svg>
+          <p class="sr-only">{{home.time.scene}}</p>
+          <button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="tw-tag">{{home.ui.illustration}}</span>
+        </div>
+        <dl class="tw-readout">
+          <div class="tw-ro tw-ro-before"><dt>{{home.time.before}}</dt><dd><span translate="no">2026-11-06 14:01:30 UTC</span> <small>{{home.time.byDrand}}</small></dd></div>
+          <div class="tw-ro tw-ro-after"><dt>{{home.time.after}}</dt><dd><span translate="no">2026-11-06 14:02 UTC</span> <small>{{home.time.byTsa}}</small></dd></div>
+          <div class="tw-ro tw-ro-btc"><dt>{{home.time.anchored}}</dt><dd><span translate="no">871,204</span> <small>{{home.time.byBtc}}</small></dd></div>
+        </dl>
+      </div>
+      <p class="tw-logic">{{home.time.logic}}</p>
+      <p class="tw-callout tone-warning"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>{{home.time.note}}</span></p>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/reference/timestamp/">{{home.time.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </section>
+
+    <section class="tw-panel tw-secret will-reveal" id="secret-chats" aria-labelledby="secret-title">
+      <div class="tw-split">
+        <div>
+          <div class="tw-section-head">
+            <span class="tw-section-icon tone-success" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+            <div><p class="tw-kicker">07 · {{home.secret.eyebrow}}</p><h2 id="secret-title">{{home.secret.title1}} <span class="tw-accent-ok">{{home.secret.title2}}</span></h2></div>
+          </div>
+          <p class="tw-body">{{home.secret.lead}}</p>
+          <p class="tw-callout tone-warning"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>{{home.secret.note}}</span></p>
+          <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/reference/secret-chats/">{{home.secret.chip1}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/EPHEMERAL-MEDIA.md">{{home.secret.chip2}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        </div>
+        <div class="tw-scene tw-stage tw-secret-scene" data-scene="secret" data-steps="0,700,3700,4100,5200" data-idle="400">
+          <svg class="tw-svg s-svg" viewBox="0 0 640 420" aria-hidden="true" focusable="false">
+            <path class="s-trail" d="M214 190C300 120 360 120 410 170"/>
+            <g class="s-phone">
+              <rect class="s-body" x="20" y="10" width="200" height="400" rx="34"/>
+              <rect class="s-screen" x="32" y="22" width="176" height="376" rx="25"/>
+              <rect class="s-notch" x="96" y="30" width="48" height="8" rx="4"/>
+              <path class="s-lock" d="M54 60v-5a6 6 0 0 1 12 0v5M51 60h18v13H51Z"/>
+              <text class="s-head" x="78" y="71" data-fit="120">{{home.secret.chat}}</text>
+              <path class="s-divider" d="M32 88h176"/>
+              <rect class="s-out" x="108" y="102" width="88" height="26" rx="12"/>
+              <g class="s-bubble">
+                <rect x="44" y="146" width="156" height="74" rx="14"/>
+                <text class="s-msg" x="58" y="172" data-fit="136">{{home.secret.msg}}</text>
+                <text class="s-wallet" x="58" y="194">bc1q9h…7xk2</text>
+                <text class="s-timer" x="188" y="212" text-anchor="end">◷ <tspan data-timer>5</tspan></text>
+              </g>
+              <text class="s-gone" x="58" y="188" data-fit="136">{{home.secret.gone}}</text>
+              <rect class="s-in" x="44" y="240" width="110" height="26" rx="12"/>
+              <rect class="s-in" x="44" y="276" width="140" height="26" rx="12"/>
+            </g>
+            <g class="s-particles">
+              <circle style="--dx:-388;--dy:-12;--i:0" cx="450" cy="178" r="3"/>
+              <circle style="--dx:-360;--dy:-2;--i:1" cx="478" cy="178" r="3"/>
+              <circle style="--dx:-340;--dy:6;--i:2" cx="506" cy="178" r="2.5"/>
+              <circle style="--dx:-330;--dy:-8;--i:3" cx="534" cy="180" r="3"/>
+              <circle style="--dx:-318;--dy:4;--i:4" cx="562" cy="178" r="2.5"/>
+              <circle style="--dx:-404;--dy:-34;--i:5" cx="450" cy="218" r="3"/>
+              <circle style="--dx:-372;--dy:-22;--i:6" cx="482" cy="218" r="2.5"/>
+              <circle style="--dx:-350;--dy:-30;--i:7" cx="514" cy="218" r="3"/>
+              <circle style="--dx:-330;--dy:-18;--i:8" cx="546" cy="220" r="2.5"/>
+              <circle style="--dx:-400;--dy:-70;--i:9" cx="450" cy="258" r="3"/>
+              <circle style="--dx:-376;--dy:-56;--i:10" cx="480" cy="258" r="2.5"/>
+              <circle style="--dx:-352;--dy:-62;--i:11" cx="510" cy="258" r="3"/>
+              <circle style="--dx:-330;--dy:-50;--i:12" cx="540" cy="260" r="2.5"/>
+              <circle style="--dx:-310;--dy:-58;--i:13" cx="570" cy="258" r="3"/>
+            </g>
+            <g class="s-journal">
+              <rect class="s-card" x="410" y="118" width="210" height="184" rx="18"/>
+              <text class="s-jhead" x="430" y="146" data-fit="176">{{home.secret.journal}}</text>
+              <path class="s-jline" d="M410 160h210"/>
+              <g class="s-row" style="--i:0"><circle cx="438" cy="182" r="5"/><text x="452" y="186" data-fit="158">{{home.secret.received}} · 10:41:07</text></g>
+              <g class="s-row" style="--i:1"><circle cx="438" cy="222" r="5"/><text x="452" y="226" data-fit="158">{{home.secret.kept}}</text></g>
+              <g class="s-row" style="--i:2"><circle cx="438" cy="262" r="5"/><text x="452" y="266" data-fit="158">{{home.secret.signed}} ✓</text></g>
+            </g>
+          </svg>
+          <p class="sr-only">{{home.secret.scene}}</p>
+          <button class="tw-replay" type="button" hidden aria-label="{{home.ui.replay}}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="tw-tag">{{home.ui.illustration}}</span>
+        </div>
       </div>
     </section>
-    <section class="closing wrap" aria-labelledby="closing-title"><div><p class="eyebrow">YOUR NEXT STEP</p><h2 id="closing-title">Explore first,<br>set up when ready.</h2></div><div class="closing-actions"><a class="button primary" href="https://tgwitness-demo.destroy.tools/">Watch live demo <span aria-hidden="true">↗</span></a><a class="button outline" href="@@ROOT@@demo/?lang=@@LANG_CODE@@">Open demo <span aria-hidden="true">→</span></a><a class="text-link" href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@">Setup guide <span aria-hidden="true">↗</span></a></div></section>
+
+    <section class="tw-panel tw-modes will-reveal" id="modes" aria-labelledby="modes-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-accent" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span>
+        <div><p class="tw-kicker">08 · {{home.modes.eyebrow}}</p><h2 id="modes-title">{{home.modes.title1}} {{home.modes.title2}}</h2><p class="tw-section-lead">{{home.modes.lead}}</p></div>
+      </div>
+      <div class="tw-mode-grid" data-modes data-loop>
+
+        <div class="tw-card tw-mode">
+          <h3 class="tw-mode-h"><button class="tw-mode-head" type="button" id="mode-1" aria-expanded="true" aria-controls="mode-1-body"><span class="tw-mode-n">01</span><span class="tw-mode-title">{{home.modes.m1.title}}</span><span class="tw-mode-plus" aria-hidden="true"></span></button></h3>
+          <p class="tw-mode-text">{{home.modes.m1.text}}</p>
+          <div class="tw-mode-body" id="mode-1-body" role="region" aria-labelledby="mode-1"><div class="tw-mode-inner">
+            <svg class="tw-svg m-svg m-1 tw-stage" viewBox="0 0 280 140" aria-hidden="true" focusable="false">
+              <g class="m-rows"><g class="m-row"><circle cx="28" cy="16" r="6"/><rect x="42" y="12" width="110" height="8" rx="4"/></g><g class="m-row m-on" style="--i:0"><circle cx="28" cy="38" r="6"/><rect x="42" y="34" width="132" height="8" rx="4"/></g><g class="m-row m-on" style="--i:1"><circle cx="28" cy="60" r="6"/><rect x="42" y="56" width="96" height="8" rx="4"/></g><g class="m-row m-on" style="--i:2"><circle cx="28" cy="82" r="6"/><rect x="42" y="78" width="120" height="8" rx="4"/></g><g class="m-row"><circle cx="28" cy="104" r="6"/><rect x="42" y="100" width="88" height="8" rx="4"/></g><g class="m-row"><circle cx="28" cy="126" r="6"/><rect x="42" y="122" width="104" height="8" rx="4"/></g></g>
+              <rect class="m-frame" pathLength="1" x="12" y="27" width="178" height="66" rx="10"/>
+              <text class="m-label" x="200" y="64" data-fit="76" data-wrap="mid">{{home.modes.workspace}}</text>
+            </svg>
+          </div></div>
+        </div>
+
+        <div class="tw-card tw-mode">
+          <h3 class="tw-mode-h"><button class="tw-mode-head" type="button" id="mode-2" aria-expanded="true" aria-controls="mode-2-body"><span class="tw-mode-n">02</span><span class="tw-mode-title">{{home.modes.m2.title}}</span><span class="tw-mode-plus" aria-hidden="true"></span></button></h3>
+          <p class="tw-mode-text">{{home.modes.m2.text}}</p>
+          <div class="tw-mode-body" id="mode-2-body" role="region" aria-labelledby="mode-2"><div class="tw-mode-inner">
+            <svg class="tw-svg m-svg m-2 tw-stage" viewBox="0 0 280 140" aria-hidden="true" focusable="false">
+              <g class="m-rows"><g class="m-row m-on" style="--i:0"><circle cx="28" cy="16" r="6"/><rect x="42" y="12" width="110" height="8" rx="4"/></g><g class="m-row m-on" style="--i:1"><circle cx="28" cy="38" r="6"/><rect x="42" y="34" width="132" height="8" rx="4"/></g><g class="m-row m-on" style="--i:2"><circle cx="28" cy="60" r="6"/><rect x="42" y="56" width="96" height="8" rx="4"/></g><g class="m-row m-on" style="--i:3"><circle cx="28" cy="82" r="6"/><rect x="42" y="78" width="120" height="8" rx="4"/></g><g class="m-row m-on" style="--i:4"><circle cx="28" cy="104" r="6"/><rect x="42" y="100" width="88" height="8" rx="4"/></g><g class="m-row m-on" style="--i:5"><circle cx="28" cy="126" r="6"/><rect x="42" y="122" width="104" height="8" rx="4"/></g></g>
+              <rect class="m-frame" pathLength="1" x="12" y="4" width="178" height="132" rx="12"/>
+              <g class="m-key"><circle cx="234" cy="58" r="11"/><path d="M234 69v26M234 82h9M234 90h6"/></g>
+              <text class="m-label" x="234" y="122" text-anchor="middle" data-fit="88" data-wrap="up">{{home.modes.key}}</text>
+            </svg>
+          </div></div>
+        </div>
+
+        <div class="tw-card tw-mode">
+          <h3 class="tw-mode-h"><button class="tw-mode-head" type="button" id="mode-3" aria-expanded="true" aria-controls="mode-3-body"><span class="tw-mode-n">03</span><span class="tw-mode-title">{{home.modes.m3.title}}</span><span class="tw-mode-plus" aria-hidden="true"></span></button></h3>
+          <p class="tw-mode-text">{{home.modes.m3.text}}</p>
+          <div class="tw-mode-body" id="mode-3-body" role="region" aria-labelledby="mode-3"><div class="tw-mode-inner">
+            <svg class="tw-svg m-svg m-3 tw-stage" viewBox="0 0 280 140" aria-hidden="true" focusable="false">
+              <path class="m-axis" d="M14 74H266"/>
+              <path class="m-past" d="M14 74H180"/>
+              <path class="m-nowline" d="M180 46V96"/>
+              <text class="m-label" x="180" y="38" text-anchor="middle" data-fit="110">{{home.modes.now}}</text>
+              <text class="m-label m-dim" x="96" y="104" text-anchor="middle" data-fit="150">{{home.modes.history}}</text>
+              <g class="m-ev m-ev1"><circle cx="212" cy="74" r="6"/><text x="212" y="104" text-anchor="middle" data-fit="96">{{home.modes.edit}}</text></g>
+              <g class="m-ev m-ev2"><circle cx="246" cy="74" r="6"/><text x="246" y="124" text-anchor="middle" data-fit="64">{{home.modes.deleted}}</text></g>
+              <circle class="m-live" cx="180" cy="74" r="5"/>
+            </svg>
+          </div></div>
+        </div>
+
+        <div class="tw-card tw-mode">
+          <h3 class="tw-mode-h"><button class="tw-mode-head" type="button" id="mode-4" aria-expanded="true" aria-controls="mode-4-body"><span class="tw-mode-n">04</span><span class="tw-mode-title">{{home.modes.m4.title}} <span class="tw-tagpill">{{home.modes.preview}}</span></span><span class="tw-mode-plus" aria-hidden="true"></span></button></h3>
+          <p class="tw-mode-text">{{home.modes.m4.text}}</p>
+          <div class="tw-mode-body" id="mode-4-body" role="region" aria-labelledby="mode-4"><div class="tw-mode-inner">
+            <svg class="tw-svg m-svg m-4 tw-stage" viewBox="0 0 280 140" aria-hidden="true" focusable="false">
+              <g class="m-runner"><rect x="40" y="30" width="110" height="74" rx="12"/><path d="M40 50h110"/><circle cx="52" cy="40" r="3"/><circle cx="62" cy="40" r="3"/><rect class="m-bar" x="56" y="76" width="78" height="8" rx="4"/><rect class="m-fill" x="56" y="76" width="78" height="8" rx="4"/><text class="m-label" x="95" y="124" text-anchor="middle" data-fit="140" data-wrap="up">{{home.modes.runner}}</text></g>
+              <g class="m-zip"><rect x="196" y="44" width="48" height="56" rx="8"/><path d="M211 70v-6a9 9 0 0 1 18 0v6M207 70h26v18h-26Z"/><text class="m-label" x="220" y="124" text-anchor="middle" data-fit="112">{{home.modes.archive}}</text></g>
+            </svg>
+          </div></div>
+        </div>
+
+      </div>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="guides/modes.html#scope">{{home.modes.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </section>
+
+    <section class="tw-panel tw-levels will-reveal" id="levels" aria-labelledby="levels-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-violet" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4v-4h4v-4h4V8h4V4"/></svg></span>
+        <div><p class="tw-kicker">09 · {{home.levels.eyebrow}}</p><h2 id="levels-title">{{home.levels.title1}} {{home.levels.title2}}</h2><p class="tw-section-lead">{{home.levels.lead}}</p></div>
+      </div>
+      <div class="tw-levels-grid" data-levels>
+        <ol class="tw-stairs">
+          <li class="tw-step" style="--i:0"><span class="tw-step-n">1</span><strong>{{home.levels.s1}}</strong><span>{{home.levels.s1.text}}</span></li>
+          <li class="tw-step" style="--i:1"><span class="tw-step-n">2</span><strong>{{home.levels.s2}}</strong><span>{{home.levels.s2.text}}</span></li>
+          <li class="tw-step" style="--i:2"><span class="tw-step-n">3</span><strong>{{home.levels.s3}}</strong><span>{{home.levels.s3.text}}</span></li>
+          <li class="tw-step" style="--i:3"><span class="tw-step-n">4</span><strong>{{home.levels.s4}}</strong><span>{{home.levels.s4.text}}</span></li>
+          <li class="tw-step" style="--i:4"><span class="tw-step-n">5</span><strong>{{home.levels.s5}}</strong><span>{{home.levels.s5.text}}</span></li>
+          <li class="tw-step" style="--i:5"><span class="tw-step-n">6</span><strong>{{home.levels.s6}}</strong><span>{{home.levels.s6.text}}</span></li>
+        </ol>
+        <aside class="tw-meter" aria-labelledby="meter-title">
+          <p class="tw-meter-head" id="meter-title">{{home.levels.trust}}</p>
+          <p class="tw-meter-count"><span data-count>0</span><small>/ 6</small></p>
+          <ul class="tw-parties">
+            <li>{{home.levels.p1}}</li><li>{{home.levels.p2}}</li><li>{{home.levels.p3}}</li><li>{{home.levels.p4}}</li><li>{{home.levels.p5}}</li><li>{{home.levels.p6}}</li>
+          </ul>
+          <p class="tw-meter-remain">{{home.levels.remain}}</p>
+        </aside>
+      </div>
+      <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="guides/modes.html#levels">{{home.levels.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="@@REPO_URL@@/blob/@@BRANCH@@/docs/FOR-THE-RECORD.md">{{home.levels.chip2}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </section>
+
+    <section class="tw-panel tw-uses will-reveal" aria-labelledby="uses-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-teal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.3 2.4 3.8 5.5"/></svg></span>
+        <div><p class="tw-kicker">10 · {{home.uses.eyebrow}}</p><h2 id="uses-title">{{home.uses.title1}} {{home.uses.title2}}</h2></div>
+      </div>
+      <div class="tw-marquee tw-uses-marquee" data-marquee data-loop tabindex="0" aria-label="{{home.uses.label}}">
+      <ul class="tw-marquee-track tw-uses-track">
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h12v14H6a2 2 0 0 1-2-2Z"/><path d="M16 9h4v8a2 2 0 0 1-2 2h-2M8 9h4M8 13h4"/></svg></span><h3>{{home.uses.j.role}}</h3><p class="tw-use-sit">{{home.uses.j.sit}}</p><p class="tw-use-res">{{home.uses.j.res}}</p><a class="tw-chip" href="docs/reference/collection/">{{home.uses.j.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18Z"/><path d="M12 10v4M12 17h.01"/></svg></span><h3>{{home.uses.v.role}}</h3><p class="tw-use-sit">{{home.uses.v.sit}}</p><p class="tw-use-res">{{home.uses.v.res}}</p><a class="tw-chip" href="docs/exports/">{{home.uses.v.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M5 7l-3 7a3 3 0 0 0 6 0Zm14 0-3 7a3 3 0 0 0 6 0ZM8 21h8"/></svg></span><h3>{{home.uses.l.role}}</h3><p class="tw-use-sit">{{home.uses.l.sit}}</p><p class="tw-use-res">{{home.uses.l.res}}</p><a class="tw-chip" href="docs/reference/evidence/">{{home.uses.l.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 11h6M11 8v6"/></svg></span><h3>{{home.uses.c.role}}</h3><p class="tw-use-sit">{{home.uses.c.sit}}</p><p class="tw-use-res">{{home.uses.c.res}}</p><a class="tw-chip" href="docs/reference/features/">{{home.uses.c.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.3 2.4 3.8 5.5"/></svg></span><h3>{{home.uses.a.role}}</h3><p class="tw-use-sit">{{home.uses.a.sit}}</p><p class="tw-use-res">{{home.uses.a.res}}</p><a class="tw-chip" href="docs/reference/features/">{{home.uses.a.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li class="tw-card tw-use"><span class="tw-use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M7 9h10M7 13h6"/></svg></span><h3>{{home.uses.t.role}}</h3><p class="tw-use-sit">{{home.uses.t.sit}}</p><p class="tw-use-res">{{home.uses.t.res}}</p><a class="tw-chip" href="docs/reference/how-it-works/">{{home.uses.t.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+      </ul>
+      </div>
+    </section>
+
+    <section class="tw-panel tw-verify will-reveal" id="verify" aria-labelledby="verify-title">
+      <div class="tw-split tw-split-verify">
+        <div>
+          <div class="tw-section-head">
+            <span class="tw-section-icon tone-success" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+            <div><p class="tw-kicker">11 · {{home.verify.eyebrow}}</p><h2 id="verify-title">{{home.verify.title1}} <span class="tw-accent-ok">{{home.verify.title2}}</span></h2></div>
+          </div>
+          <p class="tw-body">{{home.verify.lead}}</p>
+          <a class="tw-file" href="@@ROOT@@demo/downloads/tgwitness-demo.zip" download draggable="true" data-demo-file>
+            <span class="tw-file-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4M10 7h1M10 10h1M10 13h1M9.5 16h2v3h-2Z"/></svg></span>
+            <span class="tw-file-text"><strong translate="no">tgwitness-demo.zip</strong><small>{{home.verify.file}}</small></span>
+            <span class="tw-file-dl">{{home.verify.download}} <span aria-hidden="true">↓</span></span>
+          </a>
+          <p class="tw-fp"><span>{{home.verify.fingerprint}}</span> <code translate="no">eca5654f58bffbbeed443ff65f4c903b8660c1d2a02f0b94d6e6c33bddcd3ea2</code></p>
+          <div class="tw-sources"><p class="tw-sources-label">{{home.ui.docs}}</p><a class="tw-chip" href="docs/reference/how-it-works/">{{home.verify.guide}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="tw-chip" href="docs/reference/evidence/">{{home.verify.proves}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        </div>
+        <div class="tw-console" data-console>
+          <div class="tw-console-bar"><span class="tw-console-dots" aria-hidden="true"><i></i><i></i><i></i></span><span translate="no">verify.py</span><span class="tw-sim">{{home.verify.simTag}}</span></div>
+          <pre class="tw-console-static" translate="no">$ python -m tgwitness.verify tgwitness-demo.zip --fingerprint eca5654f…3ea2 --plain
+ASSURANCE: self_attested · signatures, hashes and record chain
+  [met] Integrity (required): 37 records, 8 files
+  [met] Signer key (required): collector eca5654f58bffbbe… matches the fingerprint you supplied
+
+$ python -m tgwitness.verify tgwitness-demo-changed.zip --fingerprint eca5654f…3ea2 --plain
+VERIFICATION FAILED: ValueError: File hash mismatch: events.jsonl
+ASSURANCE: fail</pre>
+          <div class="tw-console-live" hidden>
+            <button type="button" class="tw-drop" data-drop><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{home.verify.drop}}</span><small>{{home.verify.dropHint}}</small></button>
+            <ol class="tw-out" data-out aria-live="polite"></ol>
+            <p class="tw-verdict" data-verdict aria-live="polite"></p>
+            <div class="tw-console-actions">
+              <button type="button" class="tw-cbtn tw-cbtn-run" data-run>{{home.verify.run}}</button>
+              <button type="button" class="tw-cbtn tw-cbtn-flip" data-flip disabled>{{home.verify.flip}}</button>
+              <button type="button" class="tw-cbtn tw-cbtn-reset" data-reset aria-label="{{home.verify.reset}}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <p class="tw-console-note">{{home.verify.sim}}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tw-panel tw-simple will-reveal" id="install" aria-labelledby="simple-title">
+      <div class="tw-section-head">
+        <span class="tw-section-icon tone-accent" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></span>
+        <div><p class="tw-kicker">12 · {{home.simple.eyebrow}}</p><h2 id="simple-title">{{home.simple.title1}} {{home.simple.title2}}</h2></div>
+      </div>
+      <ol class="tw-three">
+        <li><h3>{{home.simple.s1}}</h3><p>{{home.simple.s1.text}}</p></li>
+        <li><h3>{{home.simple.s2}}</h3><p>{{home.simple.s2.text}}</p><a class="tw-chip" href="docs/dedicated-account/">{{home.simple.s2.chip}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li><h3>{{home.simple.s3}}</h3><p>{{home.simple.s3.text}}</p></li>
+      </ol>
+      <p class="tw-callout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg><span><strong>{{home.simple.ghTitle}}</strong> {{home.simple.ghText}} <a href="#github-capture">{{home.simple.ghLink}}</a></span></p>
+      <div class="tw-install" data-tabs aria-label="{{home.simple.platform}}">
+        <div class="tw-tabs" data-tab-buttons>
+          <button type="button" id="tab-unix" aria-controls="pane-unix">{{home.simple.unix}}</button>
+          <button type="button" id="tab-windows" aria-controls="pane-windows">{{home.simple.windows}}</button>
+        </div>
+        <div id="pane-unix" aria-labelledby="tab-unix" data-tab-panel>
+          <div class="tw-code"><pre><code id="installer-unix">curl -fsSL https://get.destroy.tools/install.sh | bash</code></pre><button class="copy-button tw-copy" type="button" data-copy="installer-unix" hidden>{{home.simple.copy}}</button></div>
+          <p class="tw-install-note">{{home.simple.unixNote}}</p>
+        </div>
+        <div id="pane-windows" aria-labelledby="tab-windows" data-tab-panel>
+          <div class="tw-code"><pre><code id="installer-windows">powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"</code></pre><button class="copy-button tw-copy" type="button" data-copy="installer-windows" hidden>{{home.simple.copy}}</button></div>
+          <p class="tw-install-note">{{home.simple.windowsNote}}</p>
+        </div>
+      </div>
+      <p class="tw-verify-first"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>{{home.simple.verifyFirst}} <a href="docs/reference/installation/#verify-before-running">{{home.simple.verifyLink}}</a></span></p>
+      <p class="tw-install-links"><span>{{home.simple.panel}} <a href="http://127.0.0.1:8787" translate="no">127.0.0.1:8787</a></span><a href="docs/reference/installation/">{{home.simple.signatures}}</a><a href="docs/reference/quickstart/">{{home.simple.docker}}</a><a href="@@ROOT@@demo/?lang=@@LANG_CODE@@">{{home.simple.demo}}</a></p>
+      <aside class="tw-callout tone-warning" aria-labelledby="session-warning-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><span><strong id="session-warning-title">{{home.simple.warnTitle}}</strong> {{home.simple.warnText}} <a href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@#session-warning">{{home.simple.warnLink}}</a></span></aside>
+    </section>
+
+    <section class="tw-hero tw-finale will-reveal" aria-labelledby="finale-title">
+      <div class="tw-finale-grid">
+        <div class="tw-scene tw-stage tw-finale-scene is-calm" data-finale data-loop aria-hidden="true"></div>
+        <div class="tw-finale-copy">
+          <p class="tw-kicker">{{home.final.eyebrow}}</p>
+          <h2 id="finale-title">{{home.final.title1}} <span class="tw-accent">{{home.final.title2}}</span></h2>
+          <p class="tw-lead">{{home.final.lead}}</p>
+          <div class="tw-actions">
+            <a class="tw-btn tw-btn-primary" href="https://tgwitness-demo.destroy.tools/"><span class="tw-live-dot" aria-hidden="true"></span>{{home.hero.live}}<span aria-hidden="true">↗</span></a>
+            <a class="tw-btn tw-btn-secondary" href="#install">{{home.final.install}}<span aria-hidden="true">↑</span></a>
+            <a class="tw-btn tw-btn-secondary" href="@@REPO_URL@@"><span aria-hidden="true">★</span>{{home.final.github}}</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="footer wrap"><a class="brand" href="#"><img src="@@ROOT@@assets/mark.svg" width="26" height="26" alt="">TgWitness</a><span>A self-hosted observation journal.</span><nav aria-label="Footer navigation"><a href="@@REPO_URL@@">Source</a><a href="@@REPO_URL@@/blob/@@BRANCH@@/LICENSE">MIT license</a><a href="@@ROOT@@docs/reference/notice/">Operator notice</a><a href="@@REPO_URL@@/blob/@@BRANCH@@/.github/SECURITY.md">Security</a></nav></footer>
+
+  <footer class="tw-footer">
+    <div class="tw-footer-grid">
+      <div class="tw-footer-brand"><a class="tw-brand" href="#top"><img src="@@ROOT@@assets/mark.svg" width="26" height="26" alt=""><span translate="no">TgWitness</span></a><p>{{home.footer.tag}}</p></div>
+      <nav aria-label="{{home.footer.product}}"><p class="tw-footer-h">{{home.footer.product}}</p><a href="https://tgwitness-demo.destroy.tools/">{{home.footer.live}}</a><a href="@@ROOT@@demo/?lang=@@LANG_CODE@@">{{home.footer.demo}}</a><a href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@">{{home.footer.setup}}</a><a href="guides/modes.html">{{home.footer.capabilities}}</a><a href="docs/reference/features/">{{home.footer.strengths}}</a><a href="docs/">{{home.footer.docs}}</a></nav>
+      <nav aria-label="{{home.footer.evidence}}"><p class="tw-footer-h">{{home.footer.evidence}}</p><a href="docs/reference/security/">{{home.footer.threat}}</a><a href="docs/reference/how-it-works/">{{home.footer.verify}}</a><a href="docs/reference/evidence/">{{home.footer.proves}}</a><a href="docs/exports/">{{home.footer.exports}}</a></nav>
+      <nav aria-label="{{home.footer.operate}}"><p class="tw-footer-h">{{home.footer.operate}}</p><a href="docs/capture/">{{home.footer.capture}}</a><a href="docs/exports/#s3">{{home.footer.s3}}</a><a href="docs/reference/operations/#notifications">{{home.footer.notify}}</a><a href="@@VALIDATION_URL@@">{{home.footer.speed}}</a></nav>
+      <nav aria-label="{{home.footer.project}}"><p class="tw-footer-h">{{home.footer.project}}</p><a href="@@REPO_URL@@">{{home.footer.source}}</a><a href="@@REPO_URL@@/blob/@@BRANCH@@/LICENSE">{{home.footer.license}}</a><a href="docs/reference/notice/">{{home.footer.notice}}</a><a href="@@REPO_URL@@/blob/@@BRANCH@@/.github/SECURITY.md">{{home.footer.security}}</a><a href="@@REPO_URL@@/blob/@@BRANCH@@/docs/CHANGELOG.md">{{home.footer.changelog}}</a></nav>
+    </div>
+  </footer>
+  <button class="tw-top" type="button" hidden aria-label="{{home.ui.top}}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <div class="sr-only" id="copy-status" role="status" aria-live="polite"></div>
 <script id="site-dict" type="application/json">@@SITE_DICT@@</script>
 </body>
