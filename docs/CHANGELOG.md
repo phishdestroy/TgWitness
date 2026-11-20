@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- `verify.py` also explains in plain words a signature that does not match ("the signature does not match the signed content: the file was changed, or it was signed by another key"), a signature or key field that is not valid base64, and a file that is not valid text, instead of an exception name and its raw message.
 - The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
 
 ## 1.0.0 · 20 November 2026
