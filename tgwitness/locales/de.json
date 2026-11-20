@@ -10615,5 +10615,5 @@
   "Enter a number.": "Geben Sie eine Zahl ein.",
   "changed the chat name to “{title}”": "den Chat-Namen in „{title}“ geändert",
   "pinned a message, number {n}": "Eine Nachricht angeheftet, Nummer {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Markiert: mindestens 5 Erstposter und das 3-Fache ihres 14-Tage-Medianwerts, wobei die Nachrichten weniger als das 1,5-Fache ihres Medianwerts betragen. Die ersten 7 Tage eines Chats werden nicht markiert. Eine Person, die in mehreren Chats zum ersten Mal einen Beitrag verfasst, wird in jedem Chat nur einmal gezählt."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Markiert: mindestens 5 Erstposter und das 3-Fache ihres 14-Tage-Medianwerts, wobei die Beiträge höchstens das 1,5-Fache ihres Medianwerts betragen dürfen. Die ersten 7 Tage eines Chats werden nicht markiert. Eine Person, die in mehreren Chats zum ersten Mal einen Beitrag verfasst, wird in jedem Chat nur einmal gezählt."
 }

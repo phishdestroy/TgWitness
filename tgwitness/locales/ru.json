@@ -10687,5 +10687,5 @@
   "Enter a number.": "Введите число.",
   "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
   "pinned a message, number {n}": "закрепил сообщение № {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Показатель: не менее 5 пользователей, опубликовавших сообщения впервые, и количество сообщений, превышающее их 14-дневную медиану в 3 раза, при этом длина сообщений не превышает 1,5-кратной медианы. Первые 7 дней существования чата не учитываются. Пользователь, впервые опубликовавший сообщения в нескольких чатах, учитывается в каждом из них только один раз."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Показатель: не менее 5 пользователей, опубликовавших сообщения впервые, и количество сообщений, превышающее их 14-дневную медиану в 3 раза, при этом длина сообщений не должна превышать их медиану более чем в 1,5 раза. Первые 7 дней существования чата не учитываются. Пользователь, впервые опубликовавший сообщения в нескольких чатах, учитывается в каждом из них только один раз."
 }

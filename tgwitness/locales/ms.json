@@ -10564,5 +10564,5 @@
   "Enter a number.": "Masukkan nombor.",
   "changed the chat name to “{title}”": "Menukar nama sembang kepada \"{title}\"",
   "pinned a message, number {n}": "melekatkan mesej, nombor {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Ditandakan: sekurang-kurangnya 5 penulis pertama kali dan 3 kali ganda purata median 14 hari mereka, dengan mesej di bawah 1.5 kali ganda purata median mereka. 7 hari pertama dalam sembang tidak ditandakan. Seseorang yang pertama kali membuat kiriman dalam beberapa sembang akan dikira sekali dalam setiap sembang."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Ditandakan: sekurang-kurangnya 5 penulis pertama kali dan 3 kali ganda purata median 14 hari mereka, dengan mesej paling banyak 1.5 kali ganda purata median mereka. 7 hari pertama sesuatu sembang tidak ditandakan. Seseorang yang pertama kali membuat kiriman dalam beberapa sembang akan dikira sekali dalam setiap sembang."
 }

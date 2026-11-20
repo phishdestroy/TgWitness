@@ -10615,5 +10615,5 @@
   "Enter a number.": "एक संख्या दर्ज करें।",
   "changed the chat name to “{title}”": "चैट का नाम बदलकर \"{title}\" कर दिया।",
   "pinned a message, number {n}": "एक संदेश पिन किया, संख्या {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "फ़्लैग किया गया: कम से कम 5 पहली बार पोस्ट करने वाले उपयोगकर्ता और उनकी 14-दिवसीय औसत की 3 गुना संख्या, जिनके संदेश उनकी औसत का 1.5 गुना से कम हैं। एक चैट के पहले 7 दिनों को फ़्लैग नहीं किया जाता। जो व्यक्ति पहली बार कई चैट्स में पोस्ट करता है, उसे प्रत्येक चैट में एक बार ही गिना जाता है।"
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "फ़्लैग किया गया: कम से कम 5 पहली बार पोस्ट करने वाले उपयोगकर्ता और उनकी 14-दिवसीय औसत का 3 गुना, साथ ही संदेशों की संख्या उनकी औसत का अधिकतम 1.5 गुना। किसी चैट के पहले 7 दिनों को फ़्लैग नहीं किया जाता। जो व्यक्ति पहली बार कई चैट में पोस्ट करता है, उसे प्रत्येक चैट में केवल एक बार गिना जाता है।"
 }

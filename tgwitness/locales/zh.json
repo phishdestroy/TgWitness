@@ -10564,5 +10564,5 @@
   "Enter a number.": "请输入一个数字。",
   "changed the chat name to “{title}”": "将聊天昵称更改为“{title}”",
   "pinned a message, number {n}": "置顶了一条消息，编号{n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "被标记：至少有5名首次发帖者，且其发帖量达到14天中位数的3倍，而消息量未超过中位数的1.5倍。聊天群的前7天不会被标记。同一用户若在多个聊天群中首次发帖，则在每个群中仅计为一次。"
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "被标记：至少有5名首次发帖者，且其发帖量达到14天中位数的3倍，单条消息长度不超过中位数的1.5倍。聊天群的前7天不被标记。同一用户在多个聊天群中首次发帖时，每个群仅计一次。"
 }

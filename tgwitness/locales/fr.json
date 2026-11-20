@@ -10625,5 +10625,5 @@
   "Enter a number.": "Entrez un nombre.",
   "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
   "pinned a message, number {n}": "a épinglé un message, le numéro {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages ne dépassant pas 1,5 fois leur médiane. Les 7 premiers jours d'un salon de discussion ne sont pas pris en compte. Une personne qui publie pour la première fois dans plusieurs salons de discussion n'est comptée qu'une seule fois dans chacun d'entre eux."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages ne dépassant pas 1,5 fois leur médiane. Les 7 premiers jours d'un salon de discussion ne sont pas pris en compte. Une personne qui publie pour la première fois dans plusieurs salons de discussion n'est comptée qu'une seule fois dans chacun d'entre eux."
 }

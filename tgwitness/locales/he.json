@@ -10666,5 +10666,5 @@
   "Enter a number.": "הזן מספר.",
   "changed the chat name to “{title}”": "שינה את שם הצ'אט ל-\"{title}\"",
   "pinned a message, number {n}": "הצמיד הודעה, מספר {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "מסומן: לפחות 5 משתמשים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, כאשר מספר ההודעות נמוך מפי 1.5 מהחציון שלהם. שבעת הימים הראשונים של צ'אט אינם מסומנים. אדם שמפרסם לראשונה בכמה צ'אטים נספר פעם אחת בכל אחד מהם."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "מסומן: לפחות 5 משתמשים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, כאשר אורך ההודעות אינו עולה על פי 1.5 מהחציון. שבעת הימים הראשונים של צ'אט אינם מסומנים. אדם שמפרסם לראשונה בכמה צ'אטים נספר פעם אחת בכל אחד מהם."
 }

@@ -10564,5 +10564,5 @@
   "Enter a number.": "숫자를 입력하세요.",
   "changed the chat name to “{title}”": "채팅 이름을 “{title}”으로 변경했습니다.",
   "pinned a message, number {n}": "메시지 {n}번을 고정했습니다",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "신호 표시 기준: 첫 게시물을 올린 사용자가 최소 5명이며, 14일 동안의 중앙값의 3배 이상이고, 메시지 수는 중앙값의 1.5배 미만인 경우. 채팅 시작 후 첫 7일 동안은 신호가 표시되지 않습니다. 여러 채팅에 처음으로 게시물을 올린 사용자는 각 채팅에서 한 번씩만 집계됩니다."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "신호 표시 기준: 첫 게시물을 올린 사용자가 최소 5명이며, 14일간의 중앙값의 3배 이하이고, 메시지 수는 중앙값의 최대 1.5배 이하인 경우. 채팅 시작 후 첫 7일 동안은 신호가 표시되지 않습니다. 여러 채팅에 처음으로 게시물을 올린 사용자는 각 채팅에서 한 번씩만 집계됩니다."
 }

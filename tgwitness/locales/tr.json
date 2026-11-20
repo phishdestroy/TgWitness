@@ -10615,5 +10615,5 @@
   "Enter a number.": "Bir sayı girin.",
   "changed the chat name to “{title}”": "sohbet adını “{title}” olarak değiştirdi",
   "pinned a message, number {n}": "{n} numaralı mesajı sabitledi",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "İşaretlenenler: En az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerinin 3 katı kadar mesaj, ancak mesajların sayısı medyan değerinin 1,5 katından az. Bir sohbetin ilk 7 günü işaretlenmez. Birkaç sohbette ilk kez mesaj gönderen bir kullanıcı, her birinde bir kez sayılır."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "İşaretlenenler: En az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerinin 3 katı kadar mesaj, ancak mesajların uzunluğu medyan değerinin en fazla 1,5 katı kadar olabilir. Bir sohbetin ilk 7 günü işaretlenmez. Birkaç sohbette ilk kez mesaj gönderen bir kişi, her birinde yalnızca bir kez sayılır."
 }

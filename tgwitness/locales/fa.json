@@ -10615,5 +10615,5 @@
   "Enter a number.": "عددی را وارد کنید.",
   "changed the chat name to “{title}”": "نام چت را به «{title}» تغییر داد.",
   "pinned a message, number {n}": "پیامی سنجاق شد، شماره {n}",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "برچسب‌خورده: حداقل ۵ نفر که برای اولین بار پست گذاشته‌اند و ۳ برابر میانگین ۱۴ روزهٔ آن‌ها، به‌طوری‌که پیام‌هایشان کمتر از ۱.۵ برابر میانگینشان است. هفت روز اول یک چت برچسب‌خورده نمی‌شود. فردی که برای اولین بار در چندین چت پست می‌گذارد، در هر چت یک‌بار شمرده می‌شود."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "برچسب‌خورده: حداقل ۵ نفر که برای اولین بار پست می‌کنند و ۳ برابر میانگین ۱۴ روزهٔ آن‌ها، با پیام‌هایی که حداکثر ۱.۵ برابر میانگینشان هستند. هفت روز اول یک چت برچسب‌خورده نمی‌شوند. فردی که برای اولین بار در چندین چت پست می‌کند، در هر چت یک بار شمرده می‌شود."
 }
