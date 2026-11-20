@@ -7262,7 +7262,8 @@
   "5e2cf1be975520896701287b37a5e37c7c403dd103449e7cade91dab68295244": "Ishonchli mustaqil yozuvchi rejimi tanlanganda ko'rsatiladigan yordamchi matn endi har bir tilga tarjima qilingan.",
   "1445fec631dc2c0fb2412883b970587ed1829ed47aef33cb026fd3371175e6fc": "Ilovadagi qo'llanma sarlavhasi, GitHub Actions formasidagi misol teg va deploy/env.example dagi misol rasm teg 0.9.3 o'rniga 1.0.0 chiqarilishini ko'rsatadi.",
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "<code>verify.py</code>shuningdek, istisno nomi va uning xom xabariga o'rniga mos kelmaydigan imzo (\"imzo imzolangan kontentga mos kelmaydi: fayl o'zgartirilgan yoki u boshqa kalit bilan imzolangan\"), base64da haqiqiy bo'lmagan imzo yoki kalit maydoni va matn bo'lmagan faylni oddiy so'zlar bilan tushuntiradi.",
-  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Pseudo-yashirin sahifa o'zining karta uslubini saqlab qoladi: Manbalar uslublar jadvalidagi tasodifiy yopuvchi qavs brauzerga undan keyingi qoidani e'tiborsiz qoldirishga sabab bo'ldi."
+  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Pseudo-yashirin sahifa o'zining karta uslubini saqlab qoladi: Manbalar uslublar jadvalidagi tasodifiy yopuvchi qavs brauzerga undan keyingi qoidani e'tiborsiz qoldirishga sabab bo'ldi.",
+  "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Suhbat pufagidagi xabar raqami yorug' va qorong'i mavzularda kontrast tekshiruvidan o'tishi uchun yetarlicha qoraytirilgan."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

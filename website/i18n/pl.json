@@ -7262,7 +7262,8 @@
   "5e2cf1be975520896701287b37a5e37c7c403dd103449e7cade91dab68295244": "Wskazówka wyświetlana po wybraniu trybu zaufanego niezależnego rejestratora została teraz przetłumaczona na wszystkie języki.",
   "1445fec631dc2c0fb2412883b970587ed1829ed47aef33cb026fd3371175e6fc": "Nagłówek przewodnika w aplikacji, przykładowy tag formularza GitHub Actions oraz przykładowy tag obrazu w katalogu `deploy/env.example` wskazują wersję 1.0.0 zamiast 0.9.3.",
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "Plik <code>verify.py</code> wyjaśnia również prostym językiem, co oznacza niezgodność podpisu („podpis nie zgadza się z podpisanym treścią: plik został zmieniony lub został podpisany innym kluczem”), nieprawidłowy format base64 w polu podpisu lub klucza oraz plik, który nie jest prawidłowym tekstem — zamiast podawać nazwę wyjątku i jego surowy komunikat.",
-  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Strona „Pseudo-secret” zachowuje styl karty: pojedynczy zbędny nawias zamykający w arkuszu stylów „Sources” spowodował, że przeglądarka pominęła regułę, która następuje po nim."
+  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Strona „Pseudo-secret” zachowuje styl karty: pojedynczy zbędny nawias zamykający w arkuszu stylów „Sources” spowodował, że przeglądarka pominęła regułę, która następuje po nim.",
+  "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Numer wiadomości w dymku czatu jest na tyle ciemny, że spełnia wymagania dotyczące kontrastu zarówno w jasnym, jak i ciemnym motywie."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",
