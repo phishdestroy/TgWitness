@@ -10549,5 +10549,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram 顯示有 {total} 則釘選訊息；但清單中僅列出 {listed} 則。",
   "Not saved in this workspace": "未儲存於此工作區",
   "Show in chat": "在聊天室中顯示",
-  "Show in chat: message #{id}": "在聊天室中顯示：訊息 #{id}"
+  "Show in chat: message #{id}": "在聊天室中顯示：訊息 #{id}",
+  "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}"
 }

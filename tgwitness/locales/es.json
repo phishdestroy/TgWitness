@@ -10610,5 +10610,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram indicaba que había {total} mensajes fijados; sin embargo, solo aparecen {listed} en la lista.",
   "Not saved in this workspace": "No se ha guardado en este espacio de trabajo",
   "Show in chat": "Mostrar en el chat",
-  "Show in chat: message #{id}": "Mostrar en el chat: mensaje n.º {id}"
+  "Show in chat: message #{id}": "Mostrar en el chat: mensaje n.º {id}",
+  "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}"
 }

@@ -72,7 +72,9 @@ Telegram нумерует сообщения один раз на канал и�
 
 - `unobserved_ids[]` — по одной записи на чат с `observed_from`, `observed_to`, `observed`,
   `not_observed` и `ranges[]` из `low` и `high`.
-- `gap_summary` добавляет `numbering`, `status`, `density`, `gap_ranges`, `largest_gap` и `clusters[]`.
+- `gap_summary` содержит `chats[]` (каналы и супергруппы, у каждого своя нумерация) и `account`
+  (сквозная нумерация аккаунта). У каждой записи есть `numbering` и `status`; при `status` равном `applicable`
+  также `observed`, `missing`, `density`, `gap_ranges`, `largest_gap` и `clusters[]`.
   Каждый кластер содержит пропущенный диапазон и соседние наблюдённые сообщения как `after` и
   `before` с временем наблюдения. Подробности: [Missing message numbers](../EVIDENCE.md#missing-message-numbers-gap_summary).
 
