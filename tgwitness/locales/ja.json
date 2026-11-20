@@ -6332,7 +6332,6 @@
   "The most recent rows are listed; totals cover every row.": "最新の行が一覧表示されます。合計値はすべての行を対象としています。",
   "rows": "行",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "events.jsonl ファイルから、記載されたプロセッサによって計算されたものです。これらは、何が起きたかではなく、何をチェックすべきかを示しています。",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "フラグ設定条件：初回投稿者が5名以上おり、その14日間の中央値の3倍以上、かつメッセージ数が中央値の1.5倍未満の場合。チャットの最初の7日間はフラグ設定の対象外です。",
   "Distinct saved message numbers per chat and the share taken by service messages.": "チャットごとの保存済みメッセージ数の内訳と、サービスメッセージが占める割合。",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Telegramから報告されたメンバーシップの変更。1人、1チャット、1変更、1日につき1回まで。",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "チャット状態のスナップショット間で追加または削除された、サービスメッセージの固定、通知の固定解除、および固定されたメッセージ。",
@@ -10566,5 +10565,6 @@
   "changed the chat name to “{title}”": "チャット名を「{title}」に変更しました",
   "pinned a message, number {n}": "メッセージを固定しました（番号{n}）",
   "Messages found: {n}": "見つかったメッセージ：{n}件",
-  "Messages found: {n}+": "見つかったメッセージ：{n}件以上"
+  "Messages found: {n}+": "見つかったメッセージ：{n}件以上",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "フラグが立てられる条件：初回投稿者が5人以上おり、かつ14日間の中央値の3倍以上、メッセージ数が中央値の1.5倍以下であること。チャット開始から最初の7日間はフラグが立てられません。複数のチャットで初めて投稿したユーザーは、各チャットで1回ずつカウントされます。"
 }
