@@ -10590,5 +10590,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "فایل‌های ذخیره شده از این چت، جدیدترین‌ها اول.  فقط فایل‌هایی که گردآورنده واقعاً دانلود کرده است فهرست شده‌اند؛ پیامی که حاوی پیوست بوده اما ذخیره نشده است در اینجا نمایش داده نمی‌شود.",
   "No saved files in this chat": "در این گفتگو هیچ فایل ذخیره‌شده‌ای وجود ندارد.",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "فایل‌ها پس از دانلود توسط گردآورنده در اینجا ظاهر می‌شوند. محدودیت‌های فایل را در بخش منابع بررسی کنید.",
-  "Open message #{id} in chat": "پیام #{id} را در چت باز کنید"
+  "Open message #{id} in chat": "پیام #{id} را در چت باز کنید",
+  "Report on this person": "گزارش درباره این شخص"
 }

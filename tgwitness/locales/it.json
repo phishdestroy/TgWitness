@@ -10600,5 +10600,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "File salvati da questa chat, in ordine cronologico (dal più recente al più vecchio). Sono elencati solo i file effettivamente scaricati dal programma di raccolta; i messaggi con allegati che non sono stati salvati non vengono visualizzati qui.",
   "No saved files in this chat": "Non ci sono file salvati in questa chat",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "I file vengono visualizzati qui una volta che il collector li ha scaricati. Controlla i limiti relativi ai file nella sezione “Fonti”.",
-  "Open message #{id} in chat": "Apri il messaggio n. {id} nella chat"
+  "Open message #{id} in chat": "Apri il messaggio n. {id} nella chat",
+  "Report on this person": "Segnala questa persona"
 }

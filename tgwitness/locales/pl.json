@@ -10692,5 +10692,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Pliki zapisane z tej rozmowy, najnowsze na początku. Wyświetlane są wyłącznie pliki, które kolektor faktycznie pobrał; wiadomości z załącznikami, które nie zostały zapisane, nie są tutaj wyświetlane.",
   "No saved files in this chat": "W tej rozmowie nie ma żadnych zapisanych plików",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Pliki pojawiają się tutaj po ich pobraniu przez moduł pobierający. Sprawdź limity dotyczące plików w sekcji „Źródła”.",
-  "Open message #{id} in chat": "Otwórz wiadomość nr {id} na czacie"
+  "Open message #{id} in chat": "Otwórz wiadomość nr {id} na czacie",
+  "Report on this person": "Zgłoś tę osobę"
 }

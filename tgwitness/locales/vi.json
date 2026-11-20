@@ -10539,5 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Các tệp được lưu từ cuộc trò chuyện này, sắp xếp theo thứ tự từ mới nhất đến cũ nhất. Danh sách chỉ hiển thị các tệp mà trình thu thập dữ liệu đã thực sự tải xuống; các tin nhắn có tệp đính kèm nhưng chưa được lưu sẽ không hiển thị ở đây.",
   "No saved files in this chat": "Không có tệp nào được lưu trong cuộc trò chuyện này",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Các tệp sẽ xuất hiện tại đây sau khi trình thu thập đã tải chúng xuống. Vui lòng kiểm tra giới hạn tệp trong phần Nguồn.",
-  "Open message #{id} in chat": "Mở tin nhắn số {id} trong cuộc trò chuyện"
+  "Open message #{id} in chat": "Mở tin nhắn số {id} trong cuộc trò chuyện",
+  "Report on this person": "Báo cáo về người này"
 }
