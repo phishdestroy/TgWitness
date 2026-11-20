@@ -10600,5 +10600,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram meldete {total} angeheftete Nachrichten; es sind jedoch nur {listed} aufgeführt.",
   "Not saved in this workspace": "Nicht in diesem Arbeitsbereich gespeichert",
   "Show in chat": "Im Chat anzeigen",
-  "Show in chat: message #{id}": "Im Chat anzeigen: Nachricht Nr. {id}"
+  "Show in chat: message #{id}": "Im Chat anzeigen: Nachricht Nr. {id}",
+  "Open in chat: message #{id}": "Im Chat öffnen: Nachricht Nr. {id}"
 }

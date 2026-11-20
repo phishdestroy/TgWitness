@@ -10549,5 +10549,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram รายงานว่ามีข้อความที่ถูกปักหมุด {total} ข้อความ แต่มีเพียง {listed} ข้อความที่แสดงอยู่ในรายการ",
   "Not saved in this workspace": "ยังไม่ถูกบันทึกในพื้นที่ทำงานนี้",
   "Show in chat": "แสดงในแชท",
-  "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}"
+  "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
+  "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}"
 }

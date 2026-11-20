@@ -10600,5 +10600,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "টেলিগ্রাম রিপোর্ট করেছে {total} পিন করা বার্তাগুলো; শুধুমাত্র {listed} তালিকাভুক্ত করা হয়েছে।",
   "Not saved in this workspace": "এই ওয়ার্কস্পেসে সংরক্ষিত হয়নি",
   "Show in chat": "চ্যাটে দেখান",
-  "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}"
+  "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
+  "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}"
 }
