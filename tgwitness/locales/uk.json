@@ -10708,5 +10708,12 @@
   "Quiz": "Вікторина",
   "Live location": "Потокове визначення місцезнаходження",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» відсутній серед діалогів, які переглянув цей обліковий запис. Оновіть список груп або збільште обмеження на кількість чатів у розділі «Параметри».",
-  "Exported completely": "Повністю експортовано"
+  "Exported completely": "Повністю експортовано",
+  "This field is required.": "Це поле є обов’язковим для заповнення.",
+  "Enter at least {n} characters.": "Введіть щонайменше {n} символів.",
+  "Enter at most {n} characters.": "Введіть не більше {n} символів.",
+  "The value must be at least {n}.": "Значення має бути не менше {n}.",
+  "The value must be at most {n}.": "Значення не повинно перевищувати {n}.",
+  "Enter a whole number.": "Введіть ціле число.",
+  "Enter a number.": "Введіть число."
 }

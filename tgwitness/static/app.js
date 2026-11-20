@@ -649,6 +649,18 @@ new MutationObserver(records=>{
   if(!n||n.hidden||!n.showPopover||n.closest("dialog")||!records.some(record=>record.target.matches?.("dialog:modal")))return;
   try{n.hidePopover();n.showPopover();}catch{}
 }).observe(document.documentElement,{attributes:true,attributeFilter:["open"],subtree:true});
+function validationText(message){
+  const text=String(message||"");let match;
+  if(text==="Field required")return tr("This field is required.");
+  if(match=text.match(/^String should have at least (\d+) characters?/))return match[1]==="1"?tr("This field is required."):tr("Enter at least {n} characters.",{n:match[1]});
+  if(match=text.match(/^String should have at most (\d+) characters?/))return tr("Enter at most {n} characters.",{n:match[1]});
+  if(match=text.match(/^Input should be greater than or equal to (\S+)$/))return tr("The value must be at least {n}.",{n:match[1]});
+  if(match=text.match(/^Input should be less than or equal to (\S+)$/))return tr("The value must be at most {n}.",{n:match[1]});
+  if(/^Input should be a valid integer/.test(text))return tr("Enter a whole number.");
+  if(/^Input should be a valid number/.test(text))return tr("Enter a number.");
+  if(match=text.match(/^Value error, (.+)$/s))return tr(match[1]);
+  return text;
+}
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
@@ -684,7 +696,7 @@ async function api(path, body, options={}) {
       ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
     let detail = result?.detail || tr("Request failed")+" · HTTP "+response.status;const parameter=detail?.parameter;
     if (Array.isArray(detail)) detail = detail.map(x => [String(x?.field ?? (Array.isArray(x?.loc) ? x.loc.join(".") : "")).replace(/^(body|query|path)(\.|$)/,""),
-      x?.message ?? x?.msg ?? (typeof x === "string" ? x : "")].filter(Boolean).join(": ")).filter(Boolean).join("; ") || tr("Request failed")+" · HTTP "+response.status;
+      validationText(x?.message ?? x?.msg ?? (typeof x === "string" ? x : ""))].filter(Boolean).join(": ")).filter(Boolean).join("; ") || tr("Request failed")+" · HTTP "+response.status;
     if (typeof detail === "object") detail = tr(typeof detail.message === "string" && detail.message ? detail.message : "Request failed") + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();

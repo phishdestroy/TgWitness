@@ -10616,5 +10616,12 @@
   "Quiz": "Quiz",
   "Live location": "Localisation en temps réel",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "« Target » ne figure pas parmi les boîtes de dialogue consultées par ce compte. Veuillez actualiser la liste des groupes ou augmenter la limite de la liste des discussions dans les paramètres.",
-  "Exported completely": "Exporté dans son intégralité"
+  "Exported completely": "Exporté dans son intégralité",
+  "This field is required.": "Ce champ est obligatoire.",
+  "Enter at least {n} characters.": "Saisissez au moins {n} caractères.",
+  "Enter at most {n} characters.": "Saisissez au maximum {n} caractères.",
+  "The value must be at least {n}.": "La valeur doit être au moins égale à {n}.",
+  "The value must be at most {n}.": "La valeur doit être inférieure ou égale à {n}.",
+  "Enter a whole number.": "Entrez un nombre entier.",
+  "Enter a number.": "Entrez un nombre."
 }
