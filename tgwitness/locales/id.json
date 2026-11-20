@@ -10549,5 +10549,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram melaporkan ada {total} pesan yang disematkan; namun, hanya {listed} yang tercantum.",
   "Not saved in this workspace": "Belum disimpan di ruang kerja ini",
   "Show in chat": "Tampilkan di obrolan",
-  "Show in chat: message #{id}": "Tampilkan di obrolan: pesan #{id}"
+  "Show in chat: message #{id}": "Tampilkan di obrolan: pesan #{id}",
+  "Open in chat: message #{id}": "Buka di obrolan: pesan #{id}"
 }
