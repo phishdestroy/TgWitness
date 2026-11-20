@@ -10590,5 +10590,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Ushbu suhbatdan saqlangan fayllar, eng yangilari birinchi. Faqat yig'uvchi haqiqatan yuklab olgan fayllar ro'yxatda ko'rsatiladi; saqlanmagan ilovasi bo'lgan xabar bu yerda ko'rsatilmagan.",
   "No saved files in this chat": "Ushbu suhbatda saqlangan fayllar yo'q",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fayllar to'plovchi ularni yuklab olgach bu yerda paydo bo'ladi. Manbalar bo'limida fayl limitlarini tekshiring.",
-  "Open message #{id} in chat": "Suhbatda #{id}-xabarni oching"
+  "Open message #{id} in chat": "Suhbatda #{id}-xabarni oching",
+  "Report on this person": "Ushbu shaxs haqida xabar bering"
 }
