@@ -1,3 +1,86 @@
-<p>Choose Takeout, regular API export or a chat journal on a temporary GitHub runner.</p>
+<p class="guide-outcome">Capture one Telegram chat or a whole account without installing anything. A temporary GitHub machine does the collection, GitHub attests where it ran, and only the key created in your browser opens the result.</p>
+<div class="cp">
+<ul class="cp-badges">
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>No installation</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M3 3l18 18"/></svg>No server of your own</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>GitHub attestation</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Encrypted delivery</li>
+</ul>
+<p class="cp-actions"><a class="cp-btn cp-btn-primary" href="#start">Start a capture</a><a class="cp-btn" href="#verify">Check a result</a></p>
+
+<h2 id="why">Why this is the simplest strong option</h2>
+<div class="cp-grid">
+<div class="cp-card"><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg></span><h3>Nothing to set up</h3><p>The wizard is a web page and the collector runs on GitHub. There is no server, no local installation and no session file to hand over.</p></div>
+<div class="cp-card"><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5M15.5 15.5 18 18"/></svg></span><h3>The machine was never yours</h3><p>A fresh GitHub-hosted runner with clean storage signs in to Telegram with a new session. Nobody has to trust your computer.</p></div>
+<div class="cp-card"><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><h3>An origin anyone can check</h3><p>GitHub attests the archive. The verifier checks that attestation, the approved workflow and collector commits, and the signed journal and file hashes.</p></div>
+<div class="cp-card"><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><h3>Only you can open it</h3><p>The runner uploads only files encrypted for your public key. The private key is created and kept on your device.</p></div>
+</div>
+
+<h2 id="how">How a capture runs</h2>
+<p>Five stages inside one session of 30, 60 or 120 minutes. The wizard at the bottom of this page walks you through each of them.</p>
+<ol class="cp-pipe">
+<li><h3>Save your key</h3><p>The wizard creates <code>sealed-key.json</code> on your device. Only the public recipient value goes to GitHub.</p></li>
+<li><h3>Run the workflow</h3><p>In your fork, enable Actions and run Sealed chat capture with the recipient and the session length.</p></li>
+<li><h3>Sign in</h3><p>Open the encrypted connection with your key, then sign in to Telegram by QR code or phone. Session imports are not allowed.</p></li>
+<li><h3>Choose and collect</h3><p>Pick the mode, chats, dates and attachments. Settings are fixed once collection starts.</p></li>
+<li><h3>Decrypt and verify</h3><p>Download the encrypted result, open it here with the same key and run the verifier.</p></li>
+</ol>
+
+<h2 id="modes">Choose what to collect</h2>
+<div class="cp-grid cp-grid-3">
+<div class="cp-card cp-option"><p class="cp-tag">Default</p><h3>Telegram Takeout</h3><p>All accessible chats or a selection, with dates, account categories, media rules and JSON/HTML views.</p><p class="cp-note">Telegram's official export. Telegram may ask for approval in another session, and the wait counts against your session time.</p></div>
+<div class="cp-card cp-option"><h3>Regular Telegram API</h3><p>The same account scope without starting Takeout.</p><p class="cp-note">Cannot list channels you have left or fetch Takeout-only personal data. Telegram rate limits still apply.</p></div>
+<div class="cp-card cp-option"><h3>Chat event journal</h3><p>One chat: its history and the changes observed while the run is active.</p><p class="cp-note">Date filters, account categories and Desktop-style views do not apply.</p></div>
+</div>
+<p>All three modes receive the same GitHub attestation and encrypted delivery. Takeout is never silently replaced by the regular API.</p>
+
+<h2 id="need">What you need</h2>
+<div class="cp-split">
+<ul class="cp-checks">
+<li>A GitHub account and your own fork of TgWitness. The fork contains code, not chats.</li>
+<li>A Telegram account you can sign in to by QR code or phone. <a href="@@GUIDE_DEDICATED_ACCOUNT@@">A separate account</a> is safer.</li>
+<li>A modern browser on your computer. Keep the wizard tab open until the end.</li>
+<li>Enough time: one session lasts up to 120 minutes, including sign-in and any Takeout approval.</li>
+</ul>
+<div class="cp-card cp-danger"><h3>Never put these into GitHub</h3><p>Phone numbers, login codes, Telegram passwords, the private key or a session never go into workflow inputs, commits, issues or logs. The only value GitHub receives is the public recipient key.</p></div>
+</div>
+
+<h2 id="result">What you receive</h2>
+<div class="cp-split">
+<ul class="cp-tree">
+<li><code>sealed-result</code><p>The GitHub artifact with the encrypted delivery.</p></li>
+<li class="cp-tree-in"><code>delivery.zip</code><p>What the wizard saves after decryption.</p></li>
+<li class="cp-tree-in2"><code>evidence.zip</code><p>The signed journal, messages and files.</p></li>
+<li class="cp-tree-in2"><code>attestation.jsonl</code><p>GitHub provenance for the archive.</p></li>
+</ul>
+<div class="cp-facts">
+<p>Browser decryption handles up to 256 MiB. Larger results arrive in parts and use the local command from the reference below.</p>
+<p>GitHub keeps the encrypted artifacts for one day. Download them in time.</p>
+<p>The attestation records when the archive was committed. It does not certify the time of each message.</p>
+</div>
+</div>
+
+<h2 id="trust">Who still has to be trusted</h2>
+<div class="cp-split">
+<div class="cp-card cp-ok"><h3>Taken out of the circle</h3><ul><li>Your computer and its clock.</li><li>Your word about where the collection ran.</li><li>Anyone who edits the archive afterwards: a changed byte fails verification.</li></ul></div>
+<div class="cp-card cp-warn"><h3>Still trusted in this setup</h3><ul><li>GitHub and its hosted runner.</li><li>The pinned, open collector code and its dependencies.</li><li>The HTTPS tunnel and your browser.</li></ul></div>
+</div>
+<p>The temporary runner sees the Telegram session and messages in plain form while it works; everything it delivers is encrypted for you. <a href="@@REPO_URL@@/blob/@@BRANCH@@/docs/TRUST.md">The trust model</a> explains each part.</p>
+
+<h2 id="verify">Check a delivery</h2>
+<p>Unzip <code>delivery.zip</code> and run the verifier from a trusted TgWitness installation with GitHub CLI. Replace OWNER with the owner of the fork that ran the capture.</p>
+<pre><code translate="no">python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo OWNER/TgWitness</code></pre>
+<ul class="cp-verdict">
+<li>Archive hash matches</li>
+<li>Workflow approved</li>
+<li>Collector version approved</li>
+</ul>
+<p>To hold the run to settings agreed with a reviewer, save them before collection and add <code>--expected-selection sealed-export-settings.json --require-complete</code>.</p>
+
+<div class="cp-callout"><h3>This is a preview</h3><ul><li>Try a small chat you control first: collect it, decrypt it and run the verifier.</li><li>If Telegram still lists the temporary session, end it in Settings → Devices.</li><li>An unfinished capture cannot resume after its runner is gone; a new run starts a new capture.</li></ul></div>
+
+<h2 id="start">Start your capture</h2>
+<p>Keys and decryption stay in this browser tab. GitHub and the temporary Telegram panel open in separate tabs, and the wizard tells you when to come back.</p>
+</div>
 <div class="capture-widget" data-capture-wizard data-site-language="@@LANG_CODE@@" data-no-translate></div>
 <noscript><p>Enable JavaScript to generate a key and decrypt your archive.</p></noscript>

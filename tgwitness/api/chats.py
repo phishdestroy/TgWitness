@@ -649,6 +649,63 @@ def message_page(store, chat_id, before_id, limit, after_id, mode="all", search=
     return result
 
 
+PINNED_LIMIT = 20
+
+
+def pinned_page(store, chat_id):
+    from ..archive_views import latest_state
+
+    record, state = latest_state(store, chat_id)
+    if record is None or state is None or "pinned" not in state:
+        return {"snapshot": None, "items": []}
+    ids = [i for i in state["pinned"] if type(i) is int][:PINNED_LIMIT]
+    items = []
+    for message_id in ids:
+        found = store.chat_messages(chat_id, message_id + 1, 1)["messages"]
+        message = found[0] if found and found[0]["message_id"] == message_id else None
+        items.append({"message_id": message_id, "saved": message is not None,
+                      "text": (message["text"] or "")[:240] if message else None,
+                      "sender": message["sender"] if message else None,
+                      "sent_at": message["sent_at"] if message else None,
+                      "deleted": bool(message and message["deleted"])})
+    payload = record["payload"]
+    return {"snapshot": {"event_seq": record["seq"], "observed_at": record["observed_at"],
+                         "pinned_total": state.get("pinned_total"), "listed": len(ids),
+                         "complete": state.get("parts_complete", {}).get("pinned"),
+                         "carried_forward": "pinned" in payload.get("carried_forward", [])},
+            "items": items}
+
+
+async def chat_pinned(chat_id: ChatId, *, ctx=Depends(current_context)):
+    return await asyncio.to_thread(pinned_page, ctx.app.state.store, chat_id)
+
+
+def media_page(store, chat_id, before_seq, limit):
+    with store.reading() as db:
+        rows = db.execute(
+            "SELECT seq, message_id, observed_at, json_extract(payload,'$.media_sha256'), json_extract(payload,'$.mime_type'),"
+            " json_extract(payload,'$.original_name'), json_extract(payload,'$.size') FROM events"
+            " WHERE chat_id=? AND kind='media.saved' AND json_extract(payload,'$.media_sha256') IS NOT NULL"
+            + (" AND seq<?" if before_seq is not None else "") + " ORDER BY seq DESC LIMIT ?",
+            (chat_id, *(() if before_seq is None else (before_seq,)), limit + 1)).fetchall()
+    more = len(rows) > limit
+    items = [{"seq": r[0], "message_id": r[1], "observed_at": r[2], "sha256": r[3], "mime_type": r[4],
+              "name": r[5], "size": r[6]} for r in rows[:limit]]
+    return {"items": items, "next_before_seq": items[-1]["seq"] if more else None}
+
+
+async def chat_media(
+    chat_id: ChatId,
+    before_seq: MessageCursor = None,
+    limit: int = 24,
+    *,
+    ctx=Depends(current_context),
+):
+    if not 1 <= limit <= 100:
+        raise HTTPException(422, "Limit must be 1–100.")
+    return await asyncio.to_thread(media_page, ctx.app.state.store, chat_id, before_seq, limit)
+
+
 COVERAGE_KINDS = ("coverage.gap", "connection.restored", "process.started", "process.stopped",
                   "observation.started", "observation.stopped")
 

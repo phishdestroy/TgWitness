@@ -598,6 +598,12 @@ def register(app, ctx):
     router.get("/api/chats/{chat_id}/messages", dependencies=[Depends(authenticate)])(
         routes_chats.chat_messages
     )
+    router.get("/api/chats/{chat_id}/pinned", dependencies=[Depends(authenticate)])(
+        routes_chats.chat_pinned
+    )
+    router.get("/api/chats/{chat_id}/media-list", dependencies=[Depends(authenticate)])(
+        routes_chats.chat_media
+    )
     router.post("/api/chats/{chat_id}/image-attestation", dependencies=[Depends(authenticate)])(
         routes_chats.image_attestation
     )

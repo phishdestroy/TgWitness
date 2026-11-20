@@ -65,7 +65,7 @@ def entities(text, raw_entities):
 
 
 def host(value):
-    found = re.search(r"(?i)(?:[a-z][a-z0-9+.-]*://)?((?:[\w-]+\.)+[\w-]{2,})", value or "")
+    found = re.search(r"(?i)(?:[a-z][a-z0-9+.-]{0,31}://)?((?:[\w-]{1,63}\.){1,31}[\w-]{2,63})", value or "")
     name = found.group(1).lower().rstrip(".") if found else ""
     return name[4:] if name.startswith("www.") else name
 

@@ -3,6 +3,7 @@ import base64
 import errno
 import hashlib
 import json
+import logging
 import os
 import re
 import secrets
@@ -30,6 +31,8 @@ from .store import ZERO, canonical, utcnow
 from .verify import MessageGaps, fingerprint, gap_scope, validate_server_hashes
 from .workers import complete_in_thread
 from .telegram_client import FLOOD_ERRORS, in_lane
+
+LOG = logging.getLogger("tgwitness.export")
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
 FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_duplicated")
@@ -237,6 +240,23 @@ def attachment_policy(media, task, options):
     return info, action, limit
 
 
+
+def report_omissions(gaps, omissions, progress):
+    shown = []
+    for item in [*gaps, *omissions]:
+        if item not in shown:
+            shown.append(item)
+    for receipt in progress.values():
+        if receipt.get("outcome") == "failed" and receipt.get("error"):
+            label = str(receipt.get("category") or "task")
+            if receipt.get("chat_id") is not None:
+                label += " · chat " + str(receipt["chat_id"])
+            entry = {"section": label, "reason": str(receipt["error"])}
+            if entry not in shown:
+                shown.append(entry)
+    return shown
+
+
 class AccountExport:
     def __init__(self, collector, store, vault):
         self.collector, self.store, self.vault = collector, store, vault
@@ -401,6 +421,8 @@ class AccountExport:
         self.current = self.public(job_id)
         if self.current.get("ready"):
             return self.current
+        if self.current.get("error"):
+            self.current["stopped_by"] = self.current["error"]
         if not self.collector.reserve_export(job_id):
             raise ValueError("The account is busy. Pause its current task first.")
         self.current.update(phase="packaging", options=job["options"], account_id=job["account_id"], error=None)
@@ -419,6 +441,8 @@ class AccountExport:
                     self.persist()
                 raise
             except Exception as exc:
+                if not isinstance(exc, ValueError):
+                    LOG.error("Account export %s failed", self.current.get("id"), exc_info=exc)
                 self.current.update(phase="failed", error=str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
                 self.persist()
             finally:
@@ -438,6 +462,24 @@ class AccountExport:
         if not state.get("ready"):
             raise ValueError(state.get("error") or "The preserved export could not be finalized.")
         return state
+
+    def unread_omissions(self):
+        titles = {chat["id"]: chat.get("title") or str(chat["id"]) for chat in self.inventory.get("chats", [])}
+        found = []
+        for task in self.inventory.get("tasks", []):
+            if task.get("category") != "messages":
+                continue
+            receipt = self.progress.get(task["id"])
+            if receipt and receipt.get("terminal") and receipt.get("outcome") == "ok":
+                continue
+            reached = receipt["cursor_after"] if receipt else task.get("cursor_start")
+            reason = (self.current.get("stopped_by") or (receipt or {}).get("error") or self.current.get("error")
+                      or "the acquisition stopped before this chat was finished")
+            where = ("No message of this chat was read" if not receipt else
+                     "Message numbers below " + str(reached) + " were not read") if type(reached) is int else "The unread part of this chat is not recorded"
+            found.append({"section": str(titles.get(task["chat_id"], task["chat_id"])) + " · ID " + str(task["chat_id"]),
+                          "reason": where + ": " + str(reason)})
+        return found
 
     def complete(self):
         coverage = self.current.get("coverage", {})
@@ -1140,7 +1182,8 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
-                    "omissions": [*self.inventory.get("gaps", []), *self.current.get("omissions", [])],
+                    "omissions": report_omissions(self.inventory.get("gaps", []),
+                                                  [*self.current.get("omissions", []), *self.unread_omissions()], self.progress),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
                 analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:

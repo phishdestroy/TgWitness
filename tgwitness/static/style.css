@@ -1610,7 +1610,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .padded { padding: 18px 16px; }
   .monitoring-options { grid-template-columns: 1fr; }
   .monitoring-presets button { flex: 1 1 100%; }
-  .evidence-hero { padding: 20px 18px; }
+  .evidence-hero { padding: 20px 16px; }
   .card-heading.compact { flex-direction: column; }
   .target-row { flex-wrap: wrap; }
   .protection-summary > div { grid-template-columns: 1fr; }
@@ -2541,3 +2541,8 @@ button.primary[aria-busy=true]::after { color: #fff; }
 @media (max-width: 480px) { .history-forward-dialog { padding: 14px; }.forward-details { grid-template-columns: 1fr; gap: 4px; }.forward-details dd { margin-bottom: 8px; } }
 .people-table th:first-child, .people-table td:first-child { min-width: 11rem; }
 .people-table .person b { overflow-wrap: break-word; }
+.fwd-origin { display: flex; align-items: center; gap: 6px; margin: 2px 0 4px; color: var(--accent-text); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+.fwd-origin .icon { width: 14px; height: 14px; flex: none; }
+.bubble-reactions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; }
+.reaction-chip { padding: 1px 8px; border: 1px solid var(--accent-border); border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); font-size: 13px; }
+.views-count { margin-inline-start: auto; color: var(--text-2); font-size: 12px; }
