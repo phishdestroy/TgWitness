@@ -10535,5 +10535,9 @@
   "Forwarded message": "轉寄的訊息",
   "Original message sent {time}": "原始訊息發送時間：{time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "以儲存此訊息時的數值為準；Telegram 稍後會更新這些數值。",
-  "{n} views": "{n} 次瀏覽"
+  "{n} views": "{n} 次瀏覽",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "從此聊天室儲存的檔案，依最新至最舊的順序排列。此處僅列出收集器實際下載的檔案；若訊息附帶的附件未被儲存，則不會顯示於此。",
+  "No saved files in this chat": "此聊天室中沒有儲存的檔案",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "當收集器下載完畢後，檔案便會顯示於此處。請在「來源」下查看檔案限制。",
+  "Open message #{id} in chat": "在聊天室中開啟訊息 #{id}"
 }
