@@ -10618,7 +10618,6 @@
   "Messages found: {n}": "Topilgan xabarlar: {n}",
   "Messages found: {n}+": "Topilgan xabarlar: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Belgilangan: kamida 5 nafar birinchi marta post qilgan foydalanuvchi va ularning 14 kunlik medianining 3 barobari, xabarlar esa medianining ko'pi bilan 1,5 barobari. Chatning dastlabki 7 kuni belgilamaydi. Bir nechta chatda birinchi marta post qilgan kishi har bir chatda alohida hisobga olinadi.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Belgilangan: kamida 5 nafar birinchi marta post qilgan foydalanuvchi va ularning 14 kunlik median ko'rsatkichining 3 barobaridan ortiq, xabarlar esa median ko'rsatkichining 1,5 barobaridan kam. Suhbatning dastlabki 7 kuni belgilamaydi.",
   "Choose at least {n}.": "Kamida b{n} tanlang.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 kabi sanani yoki vaqt zonasini ko'rsatgan holda vaqtni kiriting.",
   "Choose one of the allowed values.": "Ruxsat etilgan qiymatlardan birini tanlang."

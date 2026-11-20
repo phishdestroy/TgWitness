@@ -10567,7 +10567,6 @@
   "Messages found: {n}": "Mesej yang ditemui: {n}",
   "Messages found: {n}+": "Mesej yang ditemui: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Ditandakan: sekurang-kurangnya 5 penulis pertama kali dan 3 kali ganda purata median 14 hari mereka, dengan mesej paling banyak 1.5 kali ganda purata median mereka. 7 hari pertama sesuatu sembang tidak ditandakan. Seseorang yang pertama kali membuat kiriman dalam beberapa sembang akan dikira sekali dalam setiap sembang.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Ditandakan: sekurang-kurangnya 5 penghantar pertama kali dan 3 kali ganda median 14 hari mereka, dengan mesej di bawah 1.5 kali ganda median mereka. 7 hari pertama sembang tidak ditandakan.",
   "Choose at least {n}.": "Pilih sekurang-kurangnya {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Masukkan tarikh seperti 2026-10-01 atau masa beserta zon waktu.",
   "Choose one of the allowed values.": "Pilih salah satu nilai yang dibenarkan."

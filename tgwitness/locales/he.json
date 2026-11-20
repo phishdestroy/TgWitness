@@ -10669,7 +10669,6 @@
   "Messages found: {n}": "הודעות שנמצאו: {n}",
   "Messages found: {n}+": "הודעות שנמצאו: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "מסומן: לפחות 5 משתמשים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, כאשר אורך ההודעות אינו עולה על פי 1.5 מהחציון. שבעת הימים הראשונים של צ'אט אינם מסומנים. אדם שמפרסם לראשונה בכמה צ'אטים נספר פעם אחת בכל אחד מהם.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "מסומן: לפחות 5 משתתפים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, עם הודעות הנמוכות מפי 1.5 מהחציון שלהם. 7 הימים הראשונים של צ'אט אינם מסומנים.",
   "Choose at least {n}.": "בחר לפחות {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "הזן תאריך, כגון 2026-10-01, או שעה עם אזור זמן.",
   "Choose one of the allowed values.": "בחר באחד מהערכים המותרים."
