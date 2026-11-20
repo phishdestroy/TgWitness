@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A message made of one to three emoji is shown in a large size in the chat view, as in Telegram.
 - A rejected form shows its messages in the panel's language and in plain words ("This field is required.", "Enter at least 3 characters.", "Enter a date such as 2026-10-01 or a time with a timezone.", "Choose one of the allowed values.") instead of the server's English wording.
 - `python -m tgwitness.download` says why a download failed: the panel refused the token, nothing answered at the address, the token file or output cannot be used, or the disk is full, instead of the exception name or "HTTP 401; redirects are not followed".
 - Command line results show two labelled times: `observed` (when the collector saw the record) and, when Telegram reported one, `sent` for a message or `edited` for an edited version. A deletion notice has only the observation time. Before, one unlabelled time was printed. `--json` is unchanged.

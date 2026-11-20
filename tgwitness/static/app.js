@@ -6470,6 +6470,12 @@ function sharedContentNode(info){
   if(info.dice){label(tr("Dice"));box.append(node("div","shared-title",[info.dice.emoji,info.dice.value].filter(x=>x!==undefined).join(" ")));return box;}
   return null;
 }
+function onlyEmoji(text){
+  const value=String(text||"").trim();
+  if(!value||value.length>40||typeof Intl==="undefined"||!Intl.Segmenter)return false;
+  const parts=[...new Intl.Segmenter(undefined,{granularity:"grapheme"}).segment(value)].map(part=>part.segment);
+  return parts.length>=1&&parts.length<=3&&parts.every(part=>/\p{Extended_Pictographic}/u.test(part));
+}
 function highlightMatches(root,query){
   const words=[...new Set(String(query||"").trim().split(/\s+/).filter(word=>word&&!/^#\d+$/.test(word)))];
   if(!words.length)return;
@@ -6533,7 +6539,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     const tag=node("div","fwd-origin");tag.append(icon("share"),node("span","",who?tr("Forwarded from {name}",{name:who}):tr("Forwarded message")));
     if(origin.date)tag.title=tr("Original message sent {time}",{time:fmtFull(origin.date)});
     bubble.insertBefore(tag,bubble.querySelector(".reply-quote")?.nextSibling||bubble.querySelector(".bubble-head")?.nextSibling||bubble.firstChild);}
-  if(m.captured){if(m.text){const body=messageText(m.text,m);highlightMatches(body,state.chatSearch);bubble.append(body);}if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
+  if(m.captured){if(m.text){const body=messageText(m.text,m);highlightMatches(body,state.chatSearch);if(onlyEmoji(m.text))body.classList.add("big-emoji");bubble.append(body);}if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   const sticker=m.details?.media_info?.sticker_emoji;
   if(sticker)bubble.append(node("div","sticker-label",tr("Sticker {emoji}",{emoji:sticker})));

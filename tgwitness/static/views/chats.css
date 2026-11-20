@@ -252,3 +252,4 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .shared-coordinates { color: var(--text-2); font-variant-numeric: tabular-nums; }
 .workspace[data-current-view="chats"] .shared-answers { margin: 4px 0 0; padding-inline-start: 22px; }
 .workspace[data-current-view="chats"] .bubble-via { margin: 2px 0 4px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .bubble-text.big-emoji { font-size: 40px; line-height: 1.25; padding-block: 2px; }
