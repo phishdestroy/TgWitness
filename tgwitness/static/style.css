@@ -2199,6 +2199,8 @@ button.primary[aria-busy=true]::after { color: #fff; }
 .review-link-change summary { font-weight:600;color:var(--warning);cursor:pointer; }
 .review-link-change .review-diff-text { margin-top:10px;font:12px/1.6 var(--mono);max-height:180px; }
 .review-media { margin:10px 0;max-width:100%;min-width:0; }
+.review-file { display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;margin-bottom:6px;font-size:13px;overflow-wrap:anywhere; }
+.review-file span { color:var(--muted);font-size:12px; }
 .review-preview img,.review-preview video { display:block;max-width:100%;max-height:360px;object-fit:contain;border-radius:8px; }
 .review-preview audio { width:100%;max-width:400px; }
 .review-image-button { display:block;padding:0;border:0;background:transparent;cursor:zoom-in; }

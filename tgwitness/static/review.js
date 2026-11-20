@@ -114,9 +114,20 @@
     close.addEventListener("click",()=>dialog.close());zoom.addEventListener("click",()=>dialog.classList.toggle("zoomed"));
     dialog.addEventListener("close",()=>dialog.remove());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close();});dialog.showModal();close.focus();
   }
+  function fileSize(value,tr){
+    if(typeof value!=="number"||!(value>=0))return "";
+    const shown=(divisor,digits)=>(value/divisor).toLocaleString(document.documentElement.lang||undefined,{minimumFractionDigits:digits,maximumFractionDigits:digits});
+    if(value<1024)return tr("{n} B",{n:shown(1,0)});
+    if(value<1048576)return tr("{n} KiB",{n:shown(1024,1)});
+    if(value<1073741824)return tr("{n} MiB",{n:shown(1048576,1)});
+    return tr("{n} GiB",{n:shown(1073741824,1)});
+  }
   function attachment(media,{api,download,busy,tr}){
     const digest=media.sha256||media.media_sha256,wrap=n("div","review-media"),area=n("div","review-preview"),actions=n("div","review-media-actions");
+    const facts=[media.mime_type,fileSize(media.size,tr)].filter(Boolean).join(" · ");
+    if(media.name||facts){const info=n("div","review-file");info.append(n("strong","",media.name||tr("File")));if(facts)info.append(n("span","",facts));wrap.append(info);}
     const preview=n("button","quiet small",tr("Preview")),save=n("button","quiet small",tr("↓ Download preserved attachment"));preview.type=save.type="button";
+    if(!/^(image|audio|video)\//.test(media.mime_type||""))preview.hidden=true;
     actions.append(preview,save);wrap.append(area,actions);const rev=generation;
     preview.addEventListener("click",()=>busy(preview,async()=>{
       const item=await load(digest,api,wrap);if(rev!==generation||!wrap.isConnected)return;
