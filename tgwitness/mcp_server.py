@@ -148,6 +148,8 @@ class ArchiveAPI:
                     path = "/api/archive/identity" if query is None else "/api/archive/query"
                     async with session.stream("GET" if query is None else "POST", self.url + path,
                                                headers={"Authorization": "Bearer " + token}, json=query) as response:
+                        if response.status_code == 401:
+                            raise ValueError("Archive request refused (401). The token may be revoked, expired or copied incompletely.")
                         if response.status_code != 200:
                             raise ValueError(f"Archive request refused ({response.status_code}).")
                         chunks, size = [], 0
@@ -397,8 +399,11 @@ def main(argv=None):
         return
     api = ArchiveAPI(args.api_url or "http://127.0.0.1:8787")
     if args.transport == "stdio":
-        token = read_token(args.token_file)
-        asyncio.run(api.request(token))
+        try:
+            token = read_token(args.token_file)
+            asyncio.run(api.request(token))
+        except (ValueError, OSError) as exc:
+            parser.exit(2, "TgWitness MCP: " + str(exc) + "\n")
         build_server(api, token).run("stdio")
     else:
         import uvicorn
