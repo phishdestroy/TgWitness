@@ -7275,7 +7275,8 @@
   "d730f137a919b8766c806f6a399ea9e7d883a1efdbd5ca4b29d6cb6d5a98f053": "Một bản ghi đã lưu có các phản ứng bị lỗi định dạng (thiếu số lượng, một mục không phải là phản ứng hoặc một giá trị không phải là danh sách) sẽ không còn ngăn cản việc tạo báo cáo nữa: báo cáo sẽ liệt kê các phản ứng có thể đọc được và bỏ qua phần còn lại.",
   "7d2efadac64ffe3f6fd2f69afb04b9ec7b3334e3d25f2b1c5802457301ffcb57": "Tập lệnh <code>verify.py</code> hiển thị thông báo \"tập tin lưu trữ không có tệp manifest.sig, do đó không thể kiểm tra chữ ký của nó\" đối với một tập tin lưu trữ thiếu tệp chữ ký, thay vì báo lỗi <code>KeyError</code>.",
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "Trên điện thoại, các nút lựa chọn trong các hộp thoại cài đặt có viền rõ ràng và chiều cao tối ưu cho thao tác chạm là 44 pixel, do đó chúng trông giống như các nút ngay cả khi chưa có nút nào được chọn.",
-  "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Trong phần Cài đặt, tính năng Bảo vệ bản ghi để lại khoảng trống giữa nút “Cài đặt bảo vệ nâng cao” và khối “Những gì phía bên kia nhìn thấy”."
+  "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Trong phần Cài đặt, tính năng Bảo vệ bản ghi để lại khoảng trống giữa nút “Cài đặt bảo vệ nâng cao” và khối “Những gì phía bên kia nhìn thấy”.",
+  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Trên điện thoại, nút “Time witnesses” trên màn hình Start, các thẻ nhận dạng ký tên trên màn hình Exports và nút “Create access” không còn chạm vào văn bản hoặc thẻ nằm phía trên chúng nữa."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",
