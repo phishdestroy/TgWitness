@@ -490,3 +490,4 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 [dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1) translateX(3px)}
 @media (prefers-reduced-motion:reduce){.hub-arrow{transition:none}.hub-summary:hover .hub-arrow{transform:none}[dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1)}}
 .hub-profile-link{margin-bottom:16px}
+.hub-actions + .hub-visibility{margin-top:24px}
