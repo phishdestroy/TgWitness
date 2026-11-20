@@ -7250,7 +7250,15 @@
   "2a99e52b555ef1ae7ae68eb437a7d8952397c052330d10be8ca720bf2a953722": "<strong>비밀 채팅, 자동 삭제 및 미디어 (C13).</strong> 제어된 계정을 통해 진정한 종단 간 비밀 채팅이\n    구축되었습니다. 수집자는 수신되는 메시지를 복호화하여\n    메시지를 추가 전용 저널에 기록했으며, 여기에는 타이머가 설정된 자동 삭제 메시지도 포함되었습니다.\n    또한 발신자 측에서 메시지가 만료되기 전에 캡처된, SHA-256으로 주소 지정된 미디어 콘텐츠를\n    다운로드하여 저장했습니다. 비밀 채팅 키는 암호화된 볼트에서\n    프로세스 재시작 후에도 유지되었습니다.",
   "d9bf6ba70c60fb4879dd9264354e78aca6f267c3692c6dffcc28b5772536b54b": "이번 실행에서는 <strong>프록시 및 MTProxy 경로</strong>, <strong>OpenTimestamps 증명의 비트코인 확인</strong>, 그리고\n    <strong>외부 키 백업 복원</strong> <strong>기능은</strong> 테스트되지 않았습니다.",
   "29b37ce3d9603d5677cb5b751189df2ea07520d875e87f4c6348aaeffaa141be": "11월 20일 법원 등급 승인을 통해 라이브 채널 ‘FloodWait’의 증인 계층이 종료되었으며,\n지속적인 마감 기한에 따른 자동 제한 기능이 적용되었고, 라이브 계정에서 자동 삭제 메시지와\n관련 미디어를 포함한 비밀 채팅 기능이 중단되었습니다. 라이브 내보내기 데이터에는 OpenTimestamps 증명이 포함되어 있었으나,\n이에 대한 비트코인 확인은 아직 완료되지 않았습니다.",
-  "065c4846e4c3a51f95c034c1fa347feaf9cb9b4900f7b8e94ebb74eab191f088": "<code>verify.py</code>는 예외 이름이 포함되지 않은 명확한 이유를 가진 거부 메시지를 출력합니다. 예를 들어, “VERIFICATION FAILED: ValueError: Duplicate ZIP members” 대신 “VERIFICATION FAILED: Duplicate ZIP members”와 같이 표시됩니다. 그 외의 오류는 해당 오류 유형의 이름을 그대로 유지합니다."
+  "065c4846e4c3a51f95c034c1fa347feaf9cb9b4900f7b8e94ebb74eab191f088": "<code>verify.py</code>는 예외 이름이 포함되지 않은 명확한 이유를 가진 거부 메시지를 출력합니다. 예를 들어, “VERIFICATION FAILED: ValueError: Duplicate ZIP members” 대신 “VERIFICATION FAILED: Duplicate ZIP members”와 같이 표시됩니다. 그 외의 오류는 해당 오류 유형의 이름을 그대로 유지합니다.",
+  "c473ffc3ecf7c4bfeac5bac968ac1dbad883e3b3e62a78d672b84442567e411e": "이 문서는 TgWitness 1.0.0의 동작 방식과 그 한계를 설명합니다. 인증,\n소스 액세스, 네트워크 연결 및 캡처 완료 여부는 각각 별개의 상태입니다.\n로그인 단계, 파일 형식 및 여러 계정에 대해서는\n<a href=\"ACCOUNTS.md\">‘계정 및 세션 형식’</a> 섹션부터 확인하십시오. 이벤트 정책 및 재시작\n동작에 대해서는 <a href=\"COLLECTION.md\">‘수집 작동 방식’을</a> 참조하십시오.",
+  "210707b8c71ad7fe90a253710862dba20b022d9da5bff1c467f532323788498a": "대규모 공개 단체 달리기 행사 · 11월 20일",
+  "dbca6626e747aace6555d8952c2a0d25ecaa6cf8f3d0313269b0fc72cb9ead7e": "두 계정을 통해 수집된 15,000건의 실제 공개 그룹 메시지를 서명된 저널에 수록함; 각 저널당 TSA 3개; 독립 검증자를 통한 무결성 확인 완료",
+  "af3030e1fe0af1fc3bd9a23e899c588ce4facba09a7b70e65481d5ba5e7a1b0b": "두 개의 대규모 공개 메가그룹; 증거 내보내기 + 오프라인 검증",
+  "ea8d0fbf886edf7ebabad8f662bcd126fbc3f19d333c2b9effece23563587b98": "<strong>대규모 공개 그룹 운영.</strong> 두 개의 계정이 두 개의 대규모 공개 메그룹에서 실제\n    공개 그룹 활동 기록 10,000건과 5,000건을 수집하여 서명되고 해시 체인이 연결된 저널로 변환했습니다. 각\n    내보내기 데이터에는 세 개의 독립적인 타임스탬핑 기관(Time Stamping Authorities)이 타임스탬프를 부여했으며, 독립형\n    검증기를 통과했습니다(<code>Integrity verified. SHA256SUMS matches the signed manifest</code>).",
+  "56df224eeaa05e0a9f8564acd725782e1544e11bbe89f3970cb1b28b9b5f29db": "<a href=\"#100--20-november-2026\">1.0.0 · 2026년 11월 20일</a>",
+  "17ea831d11e8e401b3a695d4ebcb7fd8ea3f80f17d2b6029dbd5a77a993520c2": "1.0.0 · 2026년 11월 20일",
+  "4946eee3ce83f55c5a7972ffccdf23eeb83a30dff6475bcea53e7bf253a896d1": "첫 번째 정식 릴리스. TgWitness 1.0.0은 0.9.x 프리뷰 버전을 통합하여 법정에서 사용할 수 있는 텔레그램 관찰 일지(hashed and chained journals, RFC 3161 및 OpenTimestamps 앵커, 독립적으로 운영되는 위트니스, 자동 삭제 메시지 및 관련 미디어를 포함한 비밀 채팅 수집 기능, 법정 제출용 패키지, 그리고 오프라인 검증기를 제공합니다. 증거 체인은 실제 계정과 외부 서비스를 통해 종단 간 테스트를 거쳤으며, <a href=\"VERIFICATION.md\">검증 </a>기록을 참조하십시오. 0.9.3 이후 사용자에게 보이는 변경 사항은 다음과 같습니다:"
  },
  "modes": {
   "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",
