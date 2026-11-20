@@ -6179,7 +6179,7 @@ function renderChatStatus(){
       if(owner.current())await refreshChats(true);
     }));viewBar.append(toggle);
   }
-  if(viewAllowed('evidence')){
+  if(viewAllowed('evidence')&&!chatPick){
     const report=node('button','quiet small',tr('Build report'));report.type='button';report.dataset.chatReport='';
     report.addEventListener('click',()=>busy(report,async()=>{const owner=actionOwner(),chat=state.chat;await navigate('evidence');if(!owner.current())return;
       (await exportsReady).select('settings');reportSelection?.selectChats([chat]);

@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- While messages are being selected in a chat, the chat-wide Build report button is hidden, so the selection bar has the only Build report button.
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
 - Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.
