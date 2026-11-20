@@ -2812,7 +2812,7 @@ function renderExportState(x){
   else if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
   else if(x.phase==="done")prog.textContent=tr("Done: {captured} messages. Download the signed bundle.",counts)+resumed;
-  else if(x.phase==="failed")prog.textContent=tr("Export failed")+(x.error?" ("+x.error+")":"")+". "+tr("Try again.");
+  else if(x.phase==="failed")prog.textContent=tr("Export failed")+(x.error?" ("+(x.message?tr(x.message):x.error)+")":"")+". "+tr("Try again.");
   else if(x.phase==="cancelled")prog.textContent=tr("Export cancelled.");
 }
 async function pollExport(id){
