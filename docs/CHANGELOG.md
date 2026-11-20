@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the report viewer on a phone, a table that scrolls sideways, such as Senders, fades at its right edge instead of looking cut off.
 - In the viewer of an evidence report the senders and indicators search fields have an accessible name (the same text as their placeholder), and the selection checkbox of a record shows a focus ring when it is reached with the keyboard.
 - If the first load of a chat fails, the chat view shows the chat header, the reason and a Retry button instead of a blank screen on a phone.
 - A very long author name in a reply quote and a very long new chat name in a service line wrap instead of running past the edge of the screen.
