@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
 
+**English** · [Русский](ru/SEARCH.md)
+
 ![Investigation](assets/presentation/chapter-investigate.svg)
 
 # Full-text search
