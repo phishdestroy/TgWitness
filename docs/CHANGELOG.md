@@ -26,6 +26,7 @@
 ## Unreleased
 
 - In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
+- A wordy figure in an HTML report tile, such as "No observation period recorded", is set in a small font instead of the large number size.
 - A saved attachment in the chat view shows its file name, type and size, and offers Preview only for images, audio and video.
 - 146 more error messages from the panel's server side are translated into its 24 other languages, among them handover extracts, chat exports, the Case Board, documentation, watchlists, settings, storage, search records and report profiles. Before, the panel showed them in English whatever its language.
 - On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
