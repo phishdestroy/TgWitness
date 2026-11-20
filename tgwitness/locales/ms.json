@@ -10720,5 +10720,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram belum menamatkan sesi akaun ini; tiada kerugian untuk dilaporkan.",
   "created the topic “{title}”": "mencipta topik \"{title}\"",
   "Link text “{shown}” opens {url}": "Teks pautan \"{shown}\" membuka {url}",
-  "The visible web address is not where the link goes.": "Alamat web yang kelihatan bukan tempat pautan itu menuju."
+  "The visible web address is not where the link goes.": "Alamat web yang kelihatan bukan tempat pautan itu menuju.",
+  "Copy the Telegram link to this message": "Salin pautan Telegram ke mesej ini"
 }

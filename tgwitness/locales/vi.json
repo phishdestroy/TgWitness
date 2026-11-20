@@ -10720,5 +10720,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram chưa kết thúc phiên làm việc của tài khoản này; không có thiệt hại nào cần báo cáo.",
   "created the topic “{title}”": "đã tạo chủ đề “{title}”",
   "Link text “{shown}” opens {url}": "Văn bản liên kết “{shown}” sẽ mở trang {url}",
-  "The visible web address is not where the link goes.": "Địa chỉ web hiển thị không phải là nơi mà liên kết dẫn đến."
+  "The visible web address is not where the link goes.": "Địa chỉ web hiển thị không phải là nơi mà liên kết dẫn đến.",
+  "Copy the Telegram link to this message": "Sao chép liên kết Telegram của tin nhắn này"
 }

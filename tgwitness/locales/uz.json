@@ -10771,5 +10771,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram ushbu hisobning sessiyasini tugatmagan; yo'qotish yo'q.",
   "created the topic “{title}”": "\"{title}\" mavzusini yaratdi",
   "Link text “{shown}” opens {url}": "\"{shown}\" matni {url} manzilini ochadi.",
-  "The visible web address is not where the link goes.": "Ko'rinib turgan veb-manzil havola olib boradigan joy emas."
+  "The visible web address is not where the link goes.": "Ko'rinib turgan veb-manzil havola olib boradigan joy emas.",
+  "Copy the Telegram link to this message": "Ushbu xabardagi Telegram havolasini nusxalang"
 }

@@ -10873,5 +10873,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram nie zakończył sesji tego konta; nie odnotowano żadnych strat.",
   "created the topic “{title}”": "utworzył wątek „{title}”",
   "Link text “{shown}” opens {url}": "Tekst linku „{shown}” otwiera stronę {url}",
-  "The visible web address is not where the link goes.": "Widoczny adres internetowy nie jest adresem, do którego prowadzi link."
+  "The visible web address is not where the link goes.": "Widoczny adres internetowy nie jest adresem, do którego prowadzi link.",
+  "Copy the Telegram link to this message": "Skopiuj link do tej wiadomości w Telegramie"
 }
