@@ -26,6 +26,7 @@
 ## Unreleased
 
 - In a channel or supergroup, clicking the message number in a chat bubble copies the Telegram link to that message (`https://t.me/c/<channel>/<message>`), which opens it for an account that is a member.
+- In the account export report a service message reads as a sentence on its card (for example "added a member", "changed the chat name to “…”", "pinned a message, number 42") instead of "No message text in this record." An action without a plain description shows "Service message" and its name.
 - Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
 - In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
