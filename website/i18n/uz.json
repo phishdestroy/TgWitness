@@ -7210,7 +7210,8 @@
   "2023bc4fbcf93832c5887dfeb7be2d162fb220559cd6067814d902600563a418": "HTML hisobot bo'limida, masalan \"Kuzatuv davri qayd etilmagan\" kabi so'zli ifoda katta raqam o'rniga kichik shriftda ko'rsatiladi.",
   "523a32b5c31ab1bc988bc11f615a65a459bcd75cb1d4ddf1cbb270fb9e0bff4b": "Suhbat ko'rinishida saqlangan ilova uning fayl nomini, turini va hajmini ko'rsatadi hamda faqat rasm, audio va video uchun oldindan ko'rishni taklif etadi.",
   "c891254618c8cca8e1bfb84ee511712e996ae417860193eb4a0bdd032e747d87": "Panelning server tomonidan keladigan yana 146 ta xato xabari uning 24 ta boshqa tiliga tarjima qilindi, ular orasida handover parchalar, chat eksportlari, Case Board, hujjatlar, kuzatuv ro'yxatlari, sozlamalar, saqlash, qidiruv yozuvlari va hisobot profillari mavjud. Avval panel ularni qaysi tilni tanlagan bo'lmasin, ingliz tilida ko'rsatgan.",
-  "0117165ddbeb4b360d076e6128f5bf36ca8d64b521fa21b277aa85a2a57d70bf": "Telefon yoki planshetda yon tomonga siljiydigan HTML hisobotidagi jadval o'ng chetida so'nib ketadi, kesilgan kabi ko'rinmaydi."
+  "0117165ddbeb4b360d076e6128f5bf36ca8d64b521fa21b277aa85a2a57d70bf": "Telefon yoki planshetda yon tomonga siljiydigan HTML hisobotidagi jadval o'ng chetida so'nib ketadi, kesilgan kabi ko'rinmaydi.",
+  "7fa184fc6d2113365e17a5000099ee507675624c93f0a02822e51ef3dd5f8969": "Hisob eksporti hisobotida xizmat xabari o'z kartasida gap shaklida ko'rsatiladi (masalan, \"a'zo qo'shildi\", \"suhbat nomini \"…\" ga o'zgartirdi\", \"xabarni, raqam 42, pin qildi\") \"Ushbu yozuvda xabar matni yo'q.\" o'rniga. Oddiy tavsifi bo'lmagan harakat \"Xizmat xabari\" va uning nomini ko'rsatadi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

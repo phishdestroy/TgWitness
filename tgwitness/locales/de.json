@@ -10769,5 +10769,7 @@
   "Save a valid bot token from BotFather.": "Speichere ein gültiges Bot-Token von BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram hat die Bot-Anfrage abgelehnt. Überprüfe das Token und die Berechtigungen.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram hat die Sitzung dieses Kontos nicht beendet; es sind keine Verluste zu verzeichnen.",
-  "created the topic “{title}”": "hat das Thema „{title}“ erstellt"
+  "created the topic “{title}”": "hat das Thema „{title}“ erstellt",
+  "Link text “{shown}” opens {url}": "Der Linktext „{shown}“ öffnet {url}",
+  "The visible web address is not where the link goes.": "Die angezeigte Webadresse entspricht nicht dem Ziel des Links."
 }

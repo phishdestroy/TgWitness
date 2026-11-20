@@ -10769,5 +10769,7 @@
   "Save a valid bot token from BotFather.": "BotFather'dan haqiqiy bot tokenini saqlang.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram bot so'rovini rad etdi. Uning tokeni va ruxsatlarini tekshiring.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram ushbu hisobning sessiyasini tugatmagan; yo'qotish yo'q.",
-  "created the topic “{title}”": "\"{title}\" mavzusini yaratdi"
+  "created the topic “{title}”": "\"{title}\" mavzusini yaratdi",
+  "Link text “{shown}” opens {url}": "\"{shown}\" matni {url} manzilini ochadi.",
+  "The visible web address is not where the link goes.": "Ko'rinib turgan veb-manzil havola olib boradigan joy emas."
 }
