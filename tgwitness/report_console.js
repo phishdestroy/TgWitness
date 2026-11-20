@@ -89,7 +89,7 @@ async function startViewer(meta){
   if(!descriptor||!descriptor.files||!descriptor.files.length){V.omitted=!!(descriptor&&descriptor.omitted);setStatus("warn",V.omitted?
     say("This report was saved without its data. Open report.html inside the archive for the viewer."):say("No data in this report."));
     const empty=V.omitted?say("This report was saved without its data. Open report.html inside the archive for the viewer."):say("No data in this report.");
-    $("#v-list").innerHTML='<div class="v-empty" role="status">'+esc(empty)+"</div>";
+    for(const id of ["v-list","view-people","view-indicators"]){const target=$("#"+id);if(target)target.innerHTML='<div class="v-empty" role="status">'+esc(empty)+"</div>";}
     countBox.textContent="0";buildCheck();return;}
   const fromScript=file=>new Promise(resolve=>{
     if(!/^viewer\/[a-z0-9-]+\.html$/.test(file)){resolve(null);return;}
