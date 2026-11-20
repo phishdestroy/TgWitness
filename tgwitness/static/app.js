@@ -6076,7 +6076,9 @@ function renderChatStatus(){
         if(revision===state.workspaceRevision)await window.TgWitnessAnalysis?.focusChat(chat);});return;}
       state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
   const toolbar=node("details","action-menu chat-filter-row"),summary=node('summary'),filterPanel=node('div','action-menu-panel');
-  summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
+  const filterLabel=tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters');
+  summary.setAttribute('aria-label',filterLabel);
+  summary.append(icon('settings'),node('span','',filterLabel));
   filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';toolbar.open=filtersOpen;
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
