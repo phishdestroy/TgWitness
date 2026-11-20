@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
 
+**English** · [Русский](ru/OPERATIONS.md)
+
 ![Deployment & recovery](assets/presentation/chapter-operate.svg)
 
 # Workflows and operations
