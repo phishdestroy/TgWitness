@@ -1032,7 +1032,21 @@ class EvidencePDF:
                     (say("Shown unchanged, verified in full"), counts["unchanged"]),
                     (say("Minimised, signature verified"), counts["minimised"]), (say("Left out"), counts["left_out"])])
             if isinstance(selection, dict):
-                self.lay.kv([(str(k), ", ".join(map(str, v)) if isinstance(v, list) else str(v)) for k, v in selection.items()])
+                since, until = selection.get("since"), selection.get("until")
+                others = say(report.OTHERS.get(selection.get("others"), str(selection.get("others"))))
+                if selection.get("others") == "pseudonymize":
+                    others += " · " + say("{n} pseudonyms", n=selection.get("pseudonyms", 0))
+                people = ", ".join(map(str, selection.get("subjects") or [])) or say("Everyone in these chats is treated as another person")
+                self.lay.kv([
+                    (say("Chats"), ", ".join(map(str, selection.get("chats") or [])) or "—"),
+                    (say("Period"), (report.utc_text(since) if since else say("from the first record")) + " — "
+                     + (report.utc_text(until) if until else say("to the last record"))),
+                    (say("Chosen people"), people), (say("Everyone else"), others),
+                    (say("Message text"), say(report.TEXTS.get(selection.get("text"), str(selection.get("text"))))),
+                    (say("Attachments"), say(report.FILES.get(selection.get("attachments"), str(selection.get("attachments"))))),
+                    (say("Profile photos"), say("included for the chosen people") if selection.get("avatars") else say("not included")),
+                    (say("Phone numbers and e-mail addresses in texts"),
+                     say("masked") if selection.get("mask_contacts") else say("shown"))])
 
     def render_histories(self):
         say = self.say
