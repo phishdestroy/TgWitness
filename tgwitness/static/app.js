@@ -683,7 +683,7 @@ async function api(path, body, options={}) {
     const result = await response.json().catch(() => ({detail: [502,503,504].includes(response.status)||response.status>=520&&response.status<=530
       ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
     let detail = result?.detail || tr("Request failed")+" · HTTP "+response.status;const parameter=detail?.parameter;
-    if (Array.isArray(detail)) detail = detail.map(x => [x?.field ?? (Array.isArray(x?.loc) ? x.loc.filter(part => part !== "body").join(".") : ""),
+    if (Array.isArray(detail)) detail = detail.map(x => [String(x?.field ?? (Array.isArray(x?.loc) ? x.loc.join(".") : "")).replace(/^(body|query|path)(\.|$)/,""),
       x?.message ?? x?.msg ?? (typeof x === "string" ? x : "")].filter(Boolean).join(": ")).filter(Boolean).join("; ") || tr("Request failed")+" · HTTP "+response.status;
     if (typeof detail === "object") detail = tr(typeof detail.message === "string" && detail.message ? detail.message : "Request failed") + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
