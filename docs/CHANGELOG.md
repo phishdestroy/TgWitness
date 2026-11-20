@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - On a desktop pointer the star that marks a chat as priority no longer covers the time of the last message in the chat list; the time moves aside while the row is hovered or focused.
 - Chat search accepts `#` and a message number to jump to that saved message. A **Pinned messages** list under the chat status shows what Telegram listed as pinned at the last chat-state check, with each saved message and a jump button, and says when a pinned number has no saved record. New route `GET /api/chats/{chat_id}/pinned`.
 - In a report with a selection, **Selected data** names the chosen chats and authors as saved in the journal (for example `Alex Quinn (70002)`) instead of listing bare numbers; a number with no saved name stays a number.
