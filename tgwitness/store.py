@@ -518,6 +518,9 @@ class Store:
                 picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown}
                 kept = {key: value for key, value in (shown.get("media_info") or {}).items()
                         if key in ("sticker_emoji", "poll", "location", "contact", "dice")}
+                media_info = shown.get("media_info") or {}
+                if media_info.get("kind") == "MessageMediaWebPage":
+                    kept.update({key: media_info[key] for key in ("url", "site_name", "title") if key in media_info})
                 if kept:
                     picked["media_info"] = kept
                 item["details"] = picked or item["details"]

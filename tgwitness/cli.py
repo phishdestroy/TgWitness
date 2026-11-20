@@ -624,14 +624,20 @@ def main(argv=None):
 
     def bounded(low, high):
         def parse(value):
-            number = int(value)
+            try:
+                number = int(value)
+            except ValueError:
+                raise argparse.ArgumentTypeError("enter a whole number from " + str(low) + " to " + str(high))
             if not low <= number <= high:
                 raise argparse.ArgumentTypeError("choose " + str(low) + " to " + str(high))
             return number
         return parse
 
     def identifier(value):
-        number = int(value)
+        try:
+            number = int(value)
+        except ValueError:
+            raise argparse.ArgumentTypeError("enter a whole number")
         if not -(2**63) <= number < 2**63:
             raise argparse.ArgumentTypeError("must fit in a signed 64-bit integer")
         return number

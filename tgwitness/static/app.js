@@ -6456,6 +6456,8 @@ function sharedContentNode(info){
     if(l.lat!==undefined&&l.lng!==undefined)box.append(node("div","shared-coordinates",l.lat+", "+l.lng));return box;}
   if(info.contact){label(tr("Contact"));box.append(node("div","shared-title",info.contact.name||""));
     if(info.contact.phone)box.append(node("div","shared-coordinates",info.contact.phone));return box;}
+  if(info.url&&info.title){label(info.site_name||tr("Link preview"));box.append(node("div","shared-title",info.title));
+    let host="";try{host=new URL(info.url).hostname;}catch{}if(host)box.append(node("div","shared-coordinates",host));return box;}
   if(info.dice){label(tr("Dice"));box.append(node("div","shared-title",[info.dice.emoji,info.dice.value].filter(x=>x!==undefined).join(" ")));return box;}
   return null;
 }
