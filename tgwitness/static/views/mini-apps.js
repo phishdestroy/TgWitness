@@ -20,7 +20,7 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
 
   function section(title, ...content) {
     const box = node("section", "mini-section");
-    box.append(node("h4", "", title), ...content.filter(Boolean));
+    box.append(node("h3", "", title), ...content.filter(Boolean));
     return box;
   }
 
