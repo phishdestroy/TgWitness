@@ -10842,6 +10842,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram отклонил запрос на создание бота. Проверьте его токен и разрешения.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram не завершил сеанс этого аккаунта; о каких-либо потерях не сообщается.",
   "created the topic “{title}”": "создал тему «{title}»",
+  "Link text “{shown}” opens {url}": "Текст ссылки «{shown}» открывает страницу {url}",
+  "The visible web address is not where the link goes.": "Видимый веб-адрес не соответствует тому, куда ведет ссылка.",
   "Account export completed": "Экспорт учетной записи завершен",
   "Account export started": "Начался экспорт учетной записи",
   "Account group changed": "Изменена группа счетов",

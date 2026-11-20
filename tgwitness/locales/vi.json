@@ -10719,6 +10719,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram đã từ chối yêu cầu tạo bot. Hãy kiểm tra mã thông báo và quyền truy cập của bot.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram chưa kết thúc phiên làm việc của tài khoản này; không có thiệt hại nào cần báo cáo.",
   "created the topic “{title}”": "đã tạo chủ đề “{title}”",
+  "Link text “{shown}” opens {url}": "Văn bản liên kết “{shown}” sẽ mở trang {url}",
+  "The visible web address is not where the link goes.": "Địa chỉ web hiển thị không phải là nơi mà liên kết dẫn đến.",
   "Account export completed": "Việc xuất tài khoản đã hoàn tất",
   "Account export started": "Quá trình xuất tài khoản đã bắt đầu",
   "Account group changed": "Nhóm tài khoản đã thay đổi",

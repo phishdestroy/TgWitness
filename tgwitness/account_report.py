@@ -453,6 +453,35 @@ def service_line(message, say):
     return say('Service message') + ': ' + re.sub(r'([a-z])([A-Z])', r'\1 \2', kind.removeprefix('MessageAction')).lower()
 
 
+def link_lines(message, body, say):
+    entities = message.get('entities')
+    if not isinstance(entities, list) or not body:
+        return []
+    units, lines = body.encode('utf-16-le'), []
+    for entity in entities[:50]:
+        if not isinstance(entity, dict) or entity.get('_') != 'MessageEntityTextUrl' or not isinstance(entity.get('url'), str):
+            continue
+        offset, length = entity.get('offset'), entity.get('length')
+        if type(offset) is not int or type(length) is not int or offset < 0 or length <= 0:
+            continue
+        shown = units[offset * 2:(offset + length) * 2].decode('utf-16-le', 'ignore')
+        line = say('Link text “{shown}” opens {url}', shown=shown[:80], url=entity['url'][:300])
+        if message_details.deceptive(shown, entity['url']):
+            line += ' · ' + say('The visible web address is not where the link goes.')
+        lines.append(line)
+    return lines
+
+
+def reply_line(message, say):
+    reply = message.get('reply_to')
+    if not isinstance(reply, dict) or reply.get('reply_to_peer_id') is not None or type(reply.get('reply_to_msg_id')) is not int:
+        return ''
+    number = reply['reply_to_msg_id']
+    if reply.get('forum_topic') is True and number == (reply.get('reply_to_top_id') or number):
+        return ''
+    return say('Reply to message #{id}', id=number)
+
+
 def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.html'):
     if sharing:
         row = shared_row(row)
@@ -487,6 +516,9 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         if info:
             shown = media_text(say, info)
             parts.append('<p class="muted" dir="auto">' + e(media_name(say, info)) + (': ' + e(shown) if shown else '') + '</p>')
+        for line in [reply_line(message, say), *link_lines(message, body, say)]:
+            if line:
+                parts.append('<p class="muted" dir="auto">' + e(line) + '</p>')
         reply = message.get('reply_to')
         topic = (reply.get('reply_to_top_id') or reply.get('reply_to_msg_id')) if isinstance(reply, dict) and reply.get('forum_topic') is True else None
         if type(topic) is int:

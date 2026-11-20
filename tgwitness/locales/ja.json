@@ -10719,6 +10719,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegramがボットの申請を拒否しました。トークンと権限を確認してください。",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegramはこのアカウントのセッションを終了させていません。報告すべき損失はありません。",
   "created the topic “{title}”": "「{title}」というトピックを作成しました",
+  "Link text “{shown}” opens {url}": "リンクテキスト「{shown}」をクリックすると、{url} が開きます",
+  "The visible web address is not where the link goes.": "表示されているウェブアドレスは、リンク先のURLとは異なります。",
   "Account export completed": "アカウントのエクスポートが完了しました",
   "Account export started": "アカウントのエクスポートが開始されました",
   "Account group changed": "アカウントグループが変更されました",

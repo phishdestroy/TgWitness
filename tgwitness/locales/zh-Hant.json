@@ -10719,6 +10719,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram 拒絕了該機器人的申請。請檢查其代幣和權限。",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram 尚未結束此帳號的連線；目前並無任何損失。",
   "created the topic “{title}”": "建立了主題「{title}」",
+  "Link text “{shown}” opens {url}": "連結文字「{shown}」會開啟 {url}",
+  "The visible web address is not where the link goes.": "顯示的網址並非連結的實際目的地。",
   "Account export completed": "帳戶匯出已完成",
   "Account export started": "已開始匯出帳戶資料",
   "Account group changed": "帳戶群組已變更",

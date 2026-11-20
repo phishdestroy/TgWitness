@@ -10780,6 +10780,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram ha rechazado la solicitud del bot. Comprueba su token y sus permisos.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram no ha cerrado la sesión de esta cuenta; no hay ninguna pérdida que señalar.",
   "created the topic “{title}”": "creó el tema «{title}»",
+  "Link text “{shown}” opens {url}": "El texto del enlace «{shown}» abre {url}",
+  "The visible web address is not where the link goes.": "La dirección web que se ve no es a donde lleva el enlace.",
   "Account export completed": "Exportación de la cuenta completada",
   "Account export started": "Se ha iniciado la exportación de la cuenta",
   "Account group changed": "Se ha modificado el grupo de cuentas",

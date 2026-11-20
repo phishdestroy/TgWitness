@@ -10821,6 +10821,8 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram דחה את בקשת הבוט. בדוק את האסימון וההרשאות שלו.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram לא סיים את הפעילות של החשבון הזה; אין כל אובדן לדווח עליו.",
   "created the topic “{title}”": "יצר את הנושא \"{title}\"",
+  "Link text “{shown}” opens {url}": "טקסט הקישור \"{shown}\" פותח את {url}",
+  "The visible web address is not where the link goes.": "כתובת האתר המוצגת אינה היעד שאליו מוביל הקישור.",
   "Account export completed": "ייצוא החשבון הושלם",
   "Account export started": "ייצוא החשבון החל",
   "Account group changed": "קבוצת החשבונות שונתה",
