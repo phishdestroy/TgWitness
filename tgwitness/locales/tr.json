@@ -10770,5 +10770,7 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram, bot talebini reddetti. Botun tokenını ve izinlerini kontrol edin.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram bu hesabın oturumunu sonlandırmadı; herhangi bir kayıp söz konusu değildir.",
   "created the topic “{title}”": "“{title}” başlıklı konuyu oluşturdu",
+  "Link text “{shown}” opens {url}": "“{shown}” bağlantısı, {url} adresini açar",
+  "The visible web address is not where the link goes.": "Görünen web adresi, bağlantının yönlendirdiği adres değildir.",
   "Copy the Telegram link to this message": "Telegram bağlantısını bu mesaja kopyala"
 }

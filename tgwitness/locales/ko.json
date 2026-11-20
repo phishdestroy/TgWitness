@@ -10719,5 +10719,7 @@
   "Telegram refused the bot request. Check its token and permissions.": "Telegram에서 봇 요청을 거부했습니다. 토큰과 권한을 확인해 보세요.",
   "Telegram has not ended this account's session; there is no loss to report.": "텔레그램은 이 계정의 세션을 종료하지 않았으므로, 보고할 손실은 없습니다.",
   "created the topic “{title}”": "“{title}”이라는 주제를 생성했습니다.",
+  "Link text “{shown}” opens {url}": "“{shown}”이라는 링크 텍스트를 클릭하면 {url}로 이동합니다.",
+  "The visible web address is not where the link goes.": "표시된 웹 주소는 링크가 연결되는 곳이 아닙니다.",
   "Copy the Telegram link to this message": "이 메시지의 텔레그램 링크를 복사하세요"
 }

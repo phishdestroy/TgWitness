@@ -10770,5 +10770,7 @@
   "Telegram refused the bot request. Check its token and permissions.": "تلگرام درخواست ربات را رد کرد. توکن و مجوزهای آن را بررسی کنید.",
   "Telegram has not ended this account's session; there is no loss to report.": "تلگرام جلسهٔ این حساب را پایان نداده است؛ هیچ ضرری برای گزارش وجود ندارد.",
   "created the topic “{title}”": "موضوع «{title}» ایجاد شد",
+  "Link text “{shown}” opens {url}": "متن لینک «{shown}» صفحهٔ {url} را باز می‌کند.",
+  "The visible web address is not where the link goes.": "آدرس وب قابل مشاهده، محل قرارگیری لینک نیست.",
   "Copy the Telegram link to this message": "لینک تلگرام این پیام را کپی کنید"
 }

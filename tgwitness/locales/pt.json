@@ -10780,5 +10780,7 @@
   "Telegram refused the bot request. Check its token and permissions.": "O Telegram recusou a solicitação do bot. Verifique o token e as permissões dele.",
   "Telegram has not ended this account's session; there is no loss to report.": "O Telegram não encerrou a sessão desta conta; não há nenhuma perda a ser relatada.",
   "created the topic “{title}”": "criou o tópico «{title}»",
+  "Link text “{shown}” opens {url}": "O texto do link «{shown}» abre {url}",
+  "The visible web address is not where the link goes.": "O endereço da Web visível não corresponde ao destino do link.",
   "Copy the Telegram link to this message": "Copie o link do Telegram desta mensagem"
 }
