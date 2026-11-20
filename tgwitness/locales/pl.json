@@ -10694,5 +10694,14 @@
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Pliki pojawiają się tutaj po ich pobraniu przez moduł pobierający. Sprawdź limity dotyczące plików w sekcji „Źródła”.",
   "Open message #{id} in chat": "Otwórz wiadomość nr {id} na czacie",
   "Report on this person": "Zgłoś tę osobę",
+  "Search or jump to #number": "Wyszukaj lub przejdź do #numer",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Wyszukiwanie i filtry obejmują wszystkie zapisane wiadomości w tej rozmowie, w tym wcześniejsze wersje. Wpisz znak # i numer wiadomości, aby przejść do tej wiadomości.",
+  "Pinned messages ({n})": "Wpis przypięty ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "W serwisie Telegram, w momencie ostatniego sprawdzenia czatu, wyświetlał się kod błędu {time}. Nie pokazuje to, kiedy wiadomość została przypięta.",
+  "The list was not refreshed at that check; this is the last list received.": "Lista nie została zaktualizowana podczas tej kontroli; jest to ostatnia otrzymana lista.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram zgłosił {total} przypięte wiadomości; na liście widnieje tylko {listed}.",
+  "Not saved in this workspace": "Nie zapisano w tym obszarze roboczym",
+  "Show in chat": "Pokaż na czacie",
+  "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}",
   "Sticker {emoji}": "Naklejka {emoji}"
 }
