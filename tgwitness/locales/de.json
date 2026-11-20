@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "Nicht in diesem Arbeitsbereich gespeichert",
   "Show in chat": "Im Chat anzeigen",
   "Show in chat: message #{id}": "Im Chat anzeigen: Nachricht Nr. {id}",
-  "Open in chat: message #{id}": "Im Chat öffnen: Nachricht Nr. {id}"
+  "Open in chat: message #{id}": "Im Chat öffnen: Nachricht Nr. {id}",
+  "Sticker {emoji}": "Sticker {emoji}"
 }

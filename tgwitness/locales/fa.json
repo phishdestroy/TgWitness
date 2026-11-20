@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "در این فضای کاری ذخیره نشده است",
   "Show in chat": "در چت نمایش دهید",
   "Show in chat: message #{id}": "نمایش در چت: پیام #{id}",
-  "Open in chat: message #{id}": "در چت باز کنید: پیام #{id}"
+  "Open in chat: message #{id}": "در چت باز کنید: پیام #{id}",
+  "Sticker {emoji}": "استیکر {emoji}"
 }

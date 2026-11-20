@@ -10703,5 +10703,6 @@
   "Not saved in this workspace": "Не збережено в цій робочій області",
   "Show in chat": "Показати в чаті",
   "Show in chat: message #{id}": "Показати в чаті: повідомлення № {id}",
-  "Open in chat: message #{id}": "Відкрити в чаті: повідомлення № {id}"
+  "Open in chat: message #{id}": "Відкрити в чаті: повідомлення № {id}",
+  "Sticker {emoji}": "Стікер {emoji}"
 }

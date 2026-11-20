@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "इस वर्कस्पेस में सहेजा नहीं गया",
   "Show in chat": "चैट में दिखाएँ",
   "Show in chat: message #{id}": "चैट में दिखाएँ: संदेश #{id}",
-  "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}"
+  "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}",
+  "Sticker {emoji}": "स्टिकर {emoji}"
 }
