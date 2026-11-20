@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the viewer of an evidence report the senders and indicators search fields have an accessible name (the same text as their placeholder), and the selection checkbox of a record shows a focus ring when it is reached with the keyboard.
 - If the first load of a chat fails, the chat view shows the chat header, the reason and a Retry button instead of a blank screen on a phone.
 - A very long author name in a reply quote and a very long new chat name in a service line wrap instead of running past the edge of the screen.
 - In the account export pages on a phone, the weekday and hour labels of the weekly activity map are no longer cut off by the cells.
