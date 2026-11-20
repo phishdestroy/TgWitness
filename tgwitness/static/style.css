@@ -1610,7 +1610,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .padded { padding: 18px 16px; }
   .monitoring-options { grid-template-columns: 1fr; }
   .monitoring-presets button { flex: 1 1 100%; }
-  .evidence-hero { padding: 20px 18px; }
+  .evidence-hero { padding: 20px 16px; }
   .card-heading.compact { flex-direction: column; }
   .target-row { flex-wrap: wrap; }
   .protection-summary > div { grid-template-columns: 1fr; }
