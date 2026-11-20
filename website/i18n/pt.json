@@ -7317,7 +7317,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "A página “Pseudo-secret” mantém seu estilo de cartão: uma chave de fechamento a mais na folha de estilos do Sources fez com que o navegador ignorasse a regra que vem logo em seguida.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "O número da mensagem no balão de bate-papo é escuro o suficiente para passar na verificação de contraste nos temas claro e escuro.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "A aba selecionada no cartão de uma pessoa fica legível no tema escuro (ela utilizava o azul de destaque mais escuro, com um contraste de 3,3 para 1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "A guia “Relatório de compilação” da seção “Exportar registros” mantém o título da página para leitores de tela; ele foi removido da página juntamente com o título visível."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "A guia “Relatório de compilação” da seção “Exportar registros” mantém o título da página para leitores de tela; ele foi removido da página juntamente com o título visível.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "A aba “Mini apps” do painel de bate-papo não pula mais um nível de título, de modo que os leitores de tela listam suas seções sob o nome do bate-papo."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",
