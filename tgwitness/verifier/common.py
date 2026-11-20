@@ -1,6 +1,7 @@
 """Standalone verifier"""
 import argparse
 import base64 as _base64
+import binascii
 import bisect
 import hashlib
 import heapq
@@ -114,6 +115,12 @@ def plain_failure(exc):
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
+    if isinstance(exc, InvalidSignature):
+        return detail
+    if isinstance(exc, UnicodeError):
+        return "a file in the archive is not valid text: the file is damaged or was not produced by TgWitness [" + type(exc).__name__ + "]"
+    if isinstance(exc, binascii.Error):
+        return "a signature or key field is not valid base64: the file is damaged or was altered [" + type(exc).__name__ + "]"
     if type(exc) is ValueError and detail:
         return detail
     return type(exc).__name__ + ": " + detail
