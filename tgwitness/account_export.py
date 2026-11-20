@@ -3,6 +3,7 @@ import base64
 import errno
 import hashlib
 import json
+import logging
 import os
 import re
 import secrets
@@ -30,6 +31,8 @@ from .store import ZERO, canonical, utcnow
 from .verify import MessageGaps, fingerprint, gap_scope, validate_server_hashes
 from .workers import complete_in_thread
 from .telegram_client import FLOOD_ERRORS, in_lane
+
+LOG = logging.getLogger("tgwitness.export")
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
 FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_duplicated")
@@ -438,6 +441,8 @@ class AccountExport:
                     self.persist()
                 raise
             except Exception as exc:
+                if not isinstance(exc, ValueError):
+                    LOG.error("Account export %s failed", self.current.get("id"), exc_info=exc)
                 self.current.update(phase="failed", error=str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
                 self.persist()
             finally:

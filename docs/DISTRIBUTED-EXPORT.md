@@ -31,9 +31,11 @@ and Telegram waits. Start the export explicitly.
 
 ## History acquisition
 
-With **Download media** off, distributed acquisition also skips downloading the
+The export dialog's **Download selected attachments using this account's capture limits** box starts
+checked when the workspace downloads media and unchecked when it does not; change it for one export
+as needed. With it unchecked, distributed acquisition also skips downloading the
 chat's profile photo. Its available photo ID and other profile metadata remain
-in the export. Photo retrieval requires both the export's media option and the
+in the export. Photo retrieval requires both that option and the
 workspace's media/avatar settings. Message-ID rechecks share account pacing with
 history reads; any server-requested wait still applies to every caller.
 

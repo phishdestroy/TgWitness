@@ -3,6 +3,7 @@ import base64
 import errno
 import hashlib
 import json
+import logging
 import os
 import re
 import secrets
@@ -39,6 +40,7 @@ from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 MEDIA_BATCH = 100
+LOG = logging.getLogger("tgwitness.export")
 CHUNK = 2000
 PAGE_TIMEOUT = 60
 OUTAGE_RETRIES = 4
@@ -953,6 +955,8 @@ class Run:
             self.state.update(phase="paused", ready=False,
                 error="Telegram ended the Takeout session. Resume validates a new session against the saved range.")
         except Exception as exc:
+            if not isinstance(exc, ValueError):
+                LOG.error("Distributed export %s failed", self.state.get("id"), exc_info=exc)
             self.state.update(phase="failed", ready=False,
                               error=str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
         finally:
