@@ -10603,6 +10603,15 @@
   "Show in chat: message #{id}": "चैट में दिखाएँ: संदेश #{id}",
   "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}",
   "Sticker {emoji}": "स्टिकर {emoji}",
+  "Quiz": "क्विज़",
+  "Live location": "सीधी लोकेशन",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "लक्ष्य उन डायलॉग्स में शामिल नहीं है जिन्हें इस खाते ने पढ़ा है। समूह सूची को रिफ्रेश करें या पैरामीटर्स में चैट सूची सीमा बढ़ाएँ।",
-  "Exported completely": "पूरी तरह से निर्यात किया गया"
+  "Exported completely": "पूरी तरह से निर्यात किया गया",
+  "This field is required.": "यह फ़ील्ड अनिवार्य है।",
+  "Enter at least {n} characters.": "कम से कम {n} वर्ण दर्ज करें।",
+  "Enter at most {n} characters.": "अधिकतम {n} वर्ण दर्ज करें।",
+  "The value must be at least {n}.": "मूल्य कम से कम {n} होना चाहिए।",
+  "The value must be at most {n}.": "मूल्य अधिकतम {n} हो सकता है।",
+  "Enter a whole number.": "एक पूर्णांक दर्ज करें।",
+  "Enter a number.": "एक संख्या दर्ज करें।"
 }
