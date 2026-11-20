@@ -109,6 +109,8 @@ def plain_failure(exc):
         return "cannot read " + (safe_text(name) if name else "the file") + ": it does not exist or is not a file [" + type(exc).__name__ + "]"
     if isinstance(exc, KeyError) and "manifest.json" in detail:
         return "the archive has no manifest.json, so it is not a signed TgWitness archive [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.sig" in detail:
+        return "the archive has no manifest.sig, so its signature cannot be checked [" + type(exc).__name__ + "]"
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
