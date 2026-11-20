@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 56fb921781c0e9d17200f0b54a22483fc730767df931904a893b0953c4a5ba05
+# TgWitness verifier sources SHA-256: 041b8a1e8a1366d4c3dec0d7227170637e0b13d3d5d5eea68a14027e4f7ee83e
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -115,6 +115,8 @@ def plain_failure(exc):
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
+    if type(exc) is ValueError and detail:
+        return detail
     return type(exc).__name__ + ": " + detail
 
 
