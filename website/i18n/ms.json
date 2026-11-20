@@ -7229,7 +7229,8 @@
   "e8e3cc775111d867f1c44f00c7c8b6ec7d202df9375b1facf5375493c21bd0ed": "Dalam tetapan akaun Telegram pada telefon, butang Profil, gambar akaun dan ID akaun tidak lagi menyentuh kawalan di sebelahnya.",
   "440afa5f63f4a05347d0cf9e3ab73ddf9acce607dce512d26bd030fa031b1a20": "Apabila pemapar laporan bukti tiada rekod untuk disenaraikan, senaraiannya akan menyatakan sebab: \"Laporan ini disimpan tanpa datanya. Buka report.html dalam arkib untuk pemapar.\" bagi laporan yang disimpan tanpa datanya, dan \"Tiada data dalam laporan ini.\" sebaliknya, bukannya ruang kosong.",
   "fc7b27c774fa8e333c5cb9ecc65cdfe4b210b3ef3381313b0939fd7c9fc71f09": "Apabila pemapar laporan bukti tiada rekod untuk disenaraikan, tab Senarai, Pengirim dan Penunjuk akan menerangkan sebabnya: \"Laporan ini disimpan tanpa datanya. Buka report.html dalam arkib untuk pemapar.\" bagi laporan yang disimpan tanpa datanya, dan \"Tiada data dalam laporan ini.\" sebaliknya, bukannya ruang kosong.",
-  "9fd2a76627319d6455db66ef96f6fb9fc96554a9a05dd7e9c9cc170cd45a2cd2": "Pada halaman sembang eksport akaun di telefon, jadual Rhythm mengekalkan lajur yang boleh dibaca dan menatal ke sisi dengan tepi pudar, bukannya kelihatan terputus."
+  "9fd2a76627319d6455db66ef96f6fb9fc96554a9a05dd7e9c9cc170cd45a2cd2": "Pada halaman sembang eksport akaun di telefon, jadual Rhythm mengekalkan lajur yang boleh dibaca dan menatal ke sisi dengan tepi pudar, bukannya kelihatan terputus.",
+  "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Nama penghantar yang sangat panjang tanpa ruang akan terbungkus dalam gelembung sembangnya, bukannya melebihi tepinya."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",
