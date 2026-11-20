@@ -6371,7 +6371,6 @@
   "The most recent rows are listed; totals cover every row.": "As linhas mais recentes são listadas; os totais abrangem todas as linhas.",
   "rows": "linhas",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Calculado a partir do arquivo events.jsonl pelos processadores listados. Eles indicam o que deve ser verificado, não o que aconteceu.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Sinalizado: pelo menos 5 usuários que postaram pela primeira vez e 3 vezes a mediana deles nos últimos 14 dias, com mensagens inferiores a 1,5 vez a mediana. Os primeiros 7 dias de um chat não são sinalizados.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Números distintos de mensagens salvas por chat e a proporção representada pelas mensagens de serviço.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Alterações na lista de membros relatadas pelo Telegram, uma vez por pessoa, chat, alteração e dia.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Fixar mensagens de serviço, desfixar avisos e mensagens fixadas adicionadas ou removidas entre instantâneos do estado do chat.",
@@ -10625,5 +10624,8 @@
   "Enter a whole number.": "Digite um número inteiro.",
   "Enter a number.": "Digite um número.",
   "changed the chat name to “{title}”": "alterei o nome do chat para “{title}”",
-  "pinned a message, number {n}": "fixou uma mensagem, a número {n}"
+  "pinned a message, number {n}": "fixou uma mensagem, a número {n}",
+  "Messages found: {n}": "Mensagens encontradas: {n}",
+  "Messages found: {n}+": "Mensagens encontradas: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Sinalizado: pelo menos 5 usuários que postaram pela primeira vez e 3 vezes a mediana de postagens nos últimos 14 dias, com mensagens que não ultrapassem 1,5 vez a mediana. Os primeiros 7 dias de um chat não são sinalizados. Uma pessoa que postar pela primeira vez em vários chats é contada uma vez em cada um deles."
 }
