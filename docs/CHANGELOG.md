@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Messages with a link preview show its site, title and host under the text in the chat view.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
 - The panel compresses its scripts, styles, pages and `locale.js` with gzip when the browser accepts it. A first load of the panel in Russian drops from about 4.7 MB to 1.3 MB; API responses are not compressed.
