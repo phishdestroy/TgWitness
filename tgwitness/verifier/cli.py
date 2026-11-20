@@ -454,7 +454,10 @@ def verification_archive(args):
         if result["range"]:
             notes.append("Range " + str(result["range"]["chat_id"]) + ":" + str(result["range"]["from"]) + "-"
                          + str(result["range"]["to"]) + ": " + str(result["range"]["records"]) + " record(s) for "
-                         + str(result["range"]["messages"]) + " message(s) in this extract, each checked.")
+                         + str(result["range"]["messages"]) + " message(s) in this extract, each checked."
+                         + (" " + str(result["range"]["absent"]) + " of the " + str(result["range"]["to"] - result["range"]["from"] + 1)
+                            + " numbers in the range have no record in this extract: left out by its rules, deleted or never used."
+                            if result["range"]["absent"] else ""))
     elif is_format(archive_format, "witness-v1"):
         shown = "witness"
         result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand, args.check_bitcoin)

@@ -365,6 +365,11 @@ def stix_pattern(item):
         return "[x-phone-number:value = '" + value + "']"
     if item["kind"] == "image":
         return "[file:hashes.'SHA-256' = '" + value + "']"
+    if item["kind"] == "transaction":
+        return "[x-cryptocurrency-transaction:hash = '" + value + "' AND x-cryptocurrency-transaction:chain = '" \
+            + stix_value(item.get("chain") or "") + "']"
+    if item["kind"] == "payment-uri":
+        return "[url:value = '" + value + "']"
     return "[x-cryptocurrency-wallet:address = '" + value + "' AND x-cryptocurrency-wallet:chain = '" \
         + stix_value(item.get("chain") or "") + "']"
 
@@ -414,7 +419,8 @@ def stix_bundle(items, context):
 MISP_TYPES = {"url": ("url", "Network activity"), "telegram-invite": ("url", "Social network"),
               "domain": ("domain", "Network activity"), "email": ("email", "Social network"),
               "phone": ("phone-number", "Person"), "telegram": ("text", "Social network"),
-              "image": ("sha256", "External analysis")}
+              "image": ("sha256", "External analysis"), "transaction": ("text", "Financial fraud"),
+              "payment-uri": ("text", "Financial fraud")}
 
 
 def misp_event(items, context):
@@ -428,6 +434,8 @@ def misp_event(items, context):
         value = item.get("punycode") or item["value"] if item["kind"] == "domain" else item["value"]
         attributes.append({"uuid": item_id(item), "type": kind, "category": category, "value": value, "to_ids": False,
                            "comment": ((item.get("chain") + " address; " if item["kind"] == "wallet" else "")
+                                       + ((item.get("chain") or "crypto") + " transaction hash; " if item["kind"] == "transaction" else "")
+                                       + ("payment link; " if item["kind"] == "payment-uri" else "")
                                        + ("Telegram username; " if item["kind"] == "telegram" else "")
                                        + ("image, dHash " + item["dhash"] + "; " if item.get("dhash") else "")
                                        + "seen " + str(item["count"]) + " time(s): " + ", ".join(item["sources"])),
