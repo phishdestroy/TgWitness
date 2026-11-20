@@ -26,6 +26,7 @@
 ## Unreleased
 
 - Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
+- In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Messages with a link preview show its site, title and host under the text in the chat view.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.

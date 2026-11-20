@@ -10664,5 +10664,7 @@
   "The value must be at least {n}.": "הערך חייב להיות לפחות {n}.",
   "The value must be at most {n}.": "הערך חייב להיות לכל היותר {n}.",
   "Enter a whole number.": "הזן מספר שלם.",
-  "Enter a number.": "הזן מספר."
+  "Enter a number.": "הזן מספר.",
+  "changed the chat name to “{title}”": "שינה את שם הצ'אט ל-\"{title}\"",
+  "pinned a message, number {n}": "הצמיד הודעה, מספר {n}"
 }

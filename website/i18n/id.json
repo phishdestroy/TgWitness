@@ -7196,7 +7196,8 @@
   "fab8c49c3a1031a930bc7424d27579b156edf2a788f860d2637bad8c673ab421": "Dienkripsi untuk kunci di browser Anda",
   "c22c4501ab2b8880f85297e25e107de7ca17c38c5348fa9b9e3d8dd0cb055ba1": "Arsip terverifikasi",
   "a06d5ff18872d976b444a19e148eab5f887e9af774ec4136a4271039d8b4c329": "Satu byte yang berubah gagal diperiksa",
-  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Apa yang Anda terima dan cara memeriksanya"
+  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Apa yang Anda terima dan cara memeriksanya",
+  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Saat membuka alamat yang tidak termasuk dalam panel, kini akan ditampilkan halaman singkat yang berisi tautan ke halaman panel terdekat, bukan JSON mentah."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",
