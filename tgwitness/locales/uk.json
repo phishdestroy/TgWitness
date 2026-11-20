@@ -10715,5 +10715,7 @@
   "The value must be at least {n}.": "Значення має бути не менше {n}.",
   "The value must be at most {n}.": "Значення не повинно перевищувати {n}.",
   "Enter a whole number.": "Введіть ціле число.",
-  "Enter a number.": "Введіть число."
+  "Enter a number.": "Введіть число.",
+  "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
+  "pinned a message, number {n}": "закріпив повідомлення № {n}"
 }

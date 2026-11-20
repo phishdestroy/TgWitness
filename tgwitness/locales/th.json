@@ -10562,5 +10562,7 @@
   "The value must be at least {n}.": "ค่าต้องไม่น้อยกว่า{n}",
   "The value must be at most {n}.": "ค่าต้องไม่เกิน{n}",
   "Enter a whole number.": "กรอกจำนวนเต็ม",
-  "Enter a number.": "กรอกตัวเลข"
+  "Enter a number.": "กรอกตัวเลข",
+  "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
+  "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}"
 }

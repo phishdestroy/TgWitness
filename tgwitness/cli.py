@@ -336,7 +336,9 @@ def item_line(item):
                                      (item.get("text_truncated"), "text truncated")) if flag]
     if item.get("media_sha256"):
         marks.append("media " + item["media_sha256"][:16])
-    line = ("#" + str(source["event_seq"]) + "  " + when(item.get("observed_at")) + "  chat " + str(source["chat_id"])
+    reported = {"message.new": "sent", "message.edited": "edited"}.get(item["kind"], "Telegram time")
+    stamp = "observed " + when(item.get("observed_at")) + (" · " + reported + " " + when(item["source_at"]) if item.get("source_at") else "")
+    line = ("#" + str(source["event_seq"]) + "  " + stamp + "  chat " + str(source["chat_id"])
             + " · message " + str(source["message_id"]) + " · " + compact(who))
     if marks:
         line += " [" + ", ".join(marks) + "]"
@@ -374,8 +376,10 @@ def print_stats(result):
         return str(part["messages"]) + (" (" + format(part["share"] * 100, ".1f") + "%)" if part["share"] is not None else "")
     print("Edited " + percent(result["edited"]) + " · deleted " + percent(result["deleted"])
           + " · missing on recheck " + percent(result["missing_on_recheck"]))
-    print("By hour (UTC): " + " ".join(format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"])))
-    print("By weekday (UTC): " + " ".join(day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"])))
+    hours = [format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"]) if count]
+    print("By hour (UTC): " + (" ".join(hours) + (" · other hours 0" if len(hours) < 24 else "") if hours else "no messages"))
+    days = [day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"]) if count]
+    print("By weekday (UTC): " + (" ".join(days) + (" · other days 0" if len(days) < 7 else "") if days else "no messages"))
     if result["peaks"]["days"]:
         print("Busiest days: " + ", ".join(p["date"] + " (" + str(p["messages"]) + ")" for p in result["peaks"]["days"]))
     if result["participants"]:

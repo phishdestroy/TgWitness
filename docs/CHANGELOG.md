@@ -26,6 +26,7 @@
 ## Unreleased
 
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
+- In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Messages with a link preview show its site, title and host under the text in the chat view.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
