@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the account export pages on a phone, the weekday and hour labels of the weekly activity map are no longer cut off by the cells.
 - On screens 1700 pixels wide and more, the messages of a chat form a centred column of about 960 pixels, as in Telegram Desktop, instead of clinging to the left edge.
 - On a phone, the Time witnesses button on Start, the signing identity cards on Exports and the Create access button no longer touch the text or card above them.
 - In Settings, Record protection leaves space between the Advanced protection settings button and the What the other side sees block.
