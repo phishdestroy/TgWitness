@@ -7157,6 +7157,7 @@ async function openExportDialog(){
   $("export-select-all").onclick=()=>{list.querySelectorAll("input:not(:disabled)").forEach(b=>{b.checked=true;});estimate();};
   estimate();
   showExportBounds();
+  $("export-media").checked=!!state.status?.capture?.download_media;
   const dialog=$("export-dialog");
   const saved=await json("multi-export/jobs",undefined,{root:true});
   if(revision!==state.workspaceRevision||generation!==chatGeneration)return;
