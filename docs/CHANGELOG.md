@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
 - In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Messages with a link preview show its site, title and host under the text in the chat view.
