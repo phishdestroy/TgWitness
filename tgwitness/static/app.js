@@ -6297,9 +6297,10 @@ async function renderChatGallery(body){
       cell.append(mediaNode({sha256:item.sha256,mime_type:item.mime_type,name:item.name,size:item.size}));
       caption.append(node("strong","",item.name||item.mime_type||tr("File")));
       if(item.size)caption.append(" · "+humanSize(item.size));
-      caption.append(node("br"),tr("Message #{id}",{id:item.message_id})+" · "+fmtTime(item.observed_at));
+      const hasMessage=item.message_id!==null&&item.message_id!==undefined;
+      caption.append(node("br"),(hasMessage?tr("Message #{id}",{id:item.message_id})+" · ":"")+fmtTime(item.observed_at));
       cell.append(caption);
-      if(item.message_id!==null&&item.message_id!==undefined){
+      if(hasMessage){
         const go=node("button","quiet small",tr("Open in chat"));go.type="button";
         go.setAttribute("aria-label",tr("Open message #{id} in chat",{id:item.message_id}));
         go.addEventListener("click",()=>busy(go,async()=>{
