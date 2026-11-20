@@ -10539,6 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "File yang disimpan dari obrolan ini, ditampilkan mulai dari yang terbaru. Hanya file yang benar-benar diunduh oleh pengumpul yang tercantum; pesan dengan lampiran yang tidak disimpan tidak ditampilkan di sini.",
   "No saved files in this chat": "Tidak ada file yang disimpan dalam obrolan ini",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "File-file akan muncul di sini setelah pengumpul mengunduhnya. Periksa batas jumlah file di bagian Sumber.",
-  "Open message #{id} in chat": "Buka pesan nomor {id} di obrolan",
-  "Report on this person": "Laporkan orang ini"
+  "Report on this person": "Laporkan orang ini",
+  "Open in chat: message #{id}": "Buka di obrolan: pesan #{id}"
 }

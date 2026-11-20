@@ -10539,6 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Fail yang disimpan daripada sembang ini, yang terbaru dahulu. Hanya fail yang sebenarnya dimuat turun oleh pengumpul disenaraikan; mesej dengan lampiran yang tidak disimpan tidak dipaparkan di sini.",
   "No saved files in this chat": "Tiada fail yang disimpan dalam sembang ini",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fail akan muncul di sini setelah pengumpul memuat turunnya. Semak had fail di bawah Sumber.",
-  "Open message #{id} in chat": "Buka mesej #{id} dalam sembang",
-  "Report on this person": "Laporan mengenai individu ini"
+  "Report on this person": "Laporan mengenai individu ini",
+  "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}"
 }

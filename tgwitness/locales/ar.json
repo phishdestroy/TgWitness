@@ -10794,6 +10794,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "الملفات المحفوظة من هذه المحادثة، الأحدث أولاً. لا تظهر في القائمة سوى الملفات التي قام «المجمع» بتنزيلها فعليًّا؛ أما الرسائل التي تحتوي على مرفقات لم يتم حفظها، فلا تظهر هنا.",
   "No saved files in this chat": "لا توجد ملفات محفوظة في هذه المحادثة",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "تظهر الملفات هنا بمجرد أن يقوم المجمع بتنزيلها. تحقق من حدود حجم الملفات في قسم «المصادر».",
-  "Open message #{id} in chat": "افتح الرسالة رقم {id} في الدردشة",
-  "Report on this person": "الإبلاغ عن هذا الشخص"
+  "Report on this person": "الإبلاغ عن هذا الشخص",
+  "Open in chat: message #{id}": "فتح في الدردشة: الرسالة رقم {id}"
 }

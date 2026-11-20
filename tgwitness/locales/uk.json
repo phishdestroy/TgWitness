@@ -10692,6 +10692,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Файли, збережені з цього чату, у порядку від найновіших до найстаріших. У списку відображаються лише ті файли, які користувач «Collector» фактично завантажив; повідомлення з вкладенням, яке не було збережено, тут не відображається.",
   "No saved files in this chat": "У цьому чаті немає збережених файлів",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Файли з’являються тут після того, як колектор їх завантажить. Перевірте обмеження щодо розміру файлів у розділі «Джерела».",
-  "Open message #{id} in chat": "Відкрити повідомлення № {id} у чаті",
-  "Report on this person": "Поскаржитися на цю особу"
+  "Report on this person": "Поскаржитися на цю особу",
+  "Open in chat: message #{id}": "Відкрити в чаті: повідомлення № {id}"
 }

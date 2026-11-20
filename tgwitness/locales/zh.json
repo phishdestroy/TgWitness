@@ -10539,6 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "从本次聊天中保存的文件，按时间倒序排列（最新在最前）。此处仅列出收集器实际下载的文件；未保存的带附件的消息不会显示在此处。",
   "No saved files in this chat": "此聊天记录中没有保存的文件",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "收集器下载文件后，这些文件会显示在此处。请在“来源”下查看文件限制。",
-  "Open message #{id} in chat": "在聊天中打开消息 #{id}",
-  "Report on this person": "举报此人"
+  "Report on this person": "举报此人",
+  "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息"
 }

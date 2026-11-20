@@ -10590,6 +10590,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "इस चैट से सहेजी गई फाइलें, सबसे नई पहले। केवल वे फाइलें सूचीबद्ध हैं जिन्हें कलेक्टर ने वास्तव में डाउनलोड किया है; संलग्नक के साथ ऐसा संदेश जिसे सहेजा नहीं गया था, यहां नहीं दिखाया गया है।",
   "No saved files in this chat": "इस चैट में कोई सहेजी गई फ़ाइलें नहीं हैं।",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "फाइलें यहां तब दिखाई देती हैं जब कलेक्टर ने उन्हें डाउनलोड कर लिया होता है। स्रोतों के अंतर्गत फ़ाइल सीमाएँ देखें।",
-  "Open message #{id} in chat": "चैट में संदेश #{id} खोलें",
-  "Report on this person": "इस व्यक्ति के बारे में रिपोर्ट"
+  "Report on this person": "इस व्यक्ति के बारे में रिपोर्ट",
+  "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}"
 }

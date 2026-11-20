@@ -10539,6 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "このチャットから保存されたファイル（新しい順）。実際にコレクターがダウンロードしたファイルのみが表示されます。保存されなかった添付ファイル付きのメッセージは、ここには表示されません。",
   "No saved files in this chat": "このチャットには保存されたファイルがありません",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "コレクターがファイルをダウンロードすると、ここにファイルが表示されます。「ソース」の下にあるファイルの制限を確認してください。",
-  "Open message #{id} in chat": "チャットでメッセージ #{id} を開く",
-  "Report on this person": "このユーザーを報告する"
+  "Report on this person": "このユーザーを報告する",
+  "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}"
 }

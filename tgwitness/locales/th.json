@@ -10539,6 +10539,6 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "ไฟล์ที่บันทึกจากการสนทนานี้ เรียงตามลำดับจากที่ใหม่ที่สุดก่อน ไฟล์ที่แสดงอยู่คือไฟล์ที่ผู้รวบรวมได้ดาวน์โหลดมาจริงเท่านั้น; ข้อความที่มีไฟล์แนบแต่ไม่ได้บันทึกจะไม่แสดงอยู่ที่นี่",
   "No saved files in this chat": "ไม่มีไฟล์ที่บันทึกไว้ในแชทนี้",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "ไฟล์จะปรากฏที่นี่หลังจากที่ระบบเก็บรวบรวมได้ดาวน์โหลดไฟล์เหล่านั้นแล้ว โปรดตรวจสอบขีดจำกัดจำนวนไฟล์ในส่วน \"แหล่งข้อมูล\"",
-  "Open message #{id} in chat": "เปิดข้อความหมายเลข #{id} ในแชท",
-  "Report on this person": "รายงานเกี่ยวกับบุคคลนี้"
+  "Report on this person": "รายงานเกี่ยวกับบุคคลนี้",
+  "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}"
 }
