@@ -656,6 +656,9 @@ function validationText(message){
   if(match=text.match(/^String should have at most (\d+) characters?/))return tr("Enter at most {n} characters.",{n:match[1]});
   if(match=text.match(/^Input should be greater than or equal to (\S+)$/))return tr("The value must be at least {n}.",{n:match[1]});
   if(match=text.match(/^Input should be less than or equal to (\S+)$/))return tr("The value must be at most {n}.",{n:match[1]});
+  if(match=text.match(/^List should have at least (\d+) items?/))return tr("Choose at least {n}.",{n:match[1]});
+  if(/^Input should be a valid (datetime|date)/.test(text))return tr("Enter a date such as 2026-10-01 or a time with a timezone.");
+  if(/^Input should be '/.test(text))return tr("Choose one of the allowed values.");
   if(/^Input should be a valid integer/.test(text))return tr("Enter a whole number.");
   if(/^Input should be a valid number/.test(text))return tr("Enter a number.");
   if(match=text.match(/^Value error, (.+)$/s))return tr(match[1]);
@@ -6515,6 +6518,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     if(m.sender?.id!==null&&m.sender?.id!==undefined&&viewAllowed('evidence')){const report=node("button","text-link sender-report",tr("Report on this person"));report.type="button";
       report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
+  const viaBot=m.details?.via_bot_id,postAuthor=m.details?.author;
+  if(viaBot!==undefined||postAuthor)bubble.append(node("div","bubble-via",[viaBot!==undefined&&tr("via bot ID {id}",{id:viaBot}),postAuthor&&tr("Post author: {name}",{name:postAuthor})].filter(Boolean).join(" · ")));
   if(m.reply_to){
     const target=m.reply_to_chat?null:byId.get(m.reply_to);let quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
     if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',window.TgWitnessPrivacy.preview(target.text||tr('[attachment]'))));}

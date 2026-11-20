@@ -10617,5 +10617,10 @@
   "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}",
   "Messages found: {n}": "پیغامات ملے: {n}",
   "Messages found: {n}+": "پیغامات ملے: {n}+",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "فلیگ کیا گیا: کم از کم پانچ پہلی بار پوسٹ کرنے والے صارفین اور ان کی 14 روزہ اوسط کے تین گنا، جبکہ پیغامات کی تعداد ان کی اوسط کے زیادہ سے زیادہ ڈیڑھ گنا۔ کسی چیٹ کے پہلے سات دن فلیگ نہیں کیے جاتے۔ جو شخص ایک سے زیادہ چیٹس میں پہلی بار پوسٹ کرتا ہے، اسے ہر چیٹ میں صرف ایک بار شمار کیا جاتا ہے۔"
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "فلیگ کیا گیا: کم از کم پانچ پہلی بار پوسٹ کرنے والے صارفین اور ان کی 14 روزہ اوسط کے تین گنا، جبکہ پیغامات کی تعداد ان کی اوسط کے زیادہ سے زیادہ ڈیڑھ گنا۔ کسی چیٹ کے پہلے سات دن فلیگ نہیں کیے جاتے۔ جو شخص ایک سے زیادہ چیٹس میں پہلی بار پوسٹ کرتا ہے، اسے ہر چیٹ میں صرف ایک بار شمار کیا جاتا ہے۔",
+  "Choose at least {n}.": "کم از کم ا{n} کا انتخاب کریں۔",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "ایک تاریخ درج کریں جیسے 2026-10-01 یا کسی ٹائم زون کے ساتھ وقت۔",
+  "Choose one of the allowed values.": "مجاز اقدار میں سے ایک منتخب کریں۔",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "فلیگ کیا گیا: کم از کم 5 پہلی بار پوسٹ کرنے والے صارفین اور ان کی 14 روزہ اوسط کے تین گنا، جبکہ پیغامات ان کی اوسط کے 1.5 گنا سے کم ہیں۔ چیٹ کے پہلے 7 دن فلیگ نہیں کیے جاتے۔",
+  "Post author: {name}": "پوسٹ کے مصنف: {name}"
 }

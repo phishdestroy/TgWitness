@@ -10617,5 +10617,10 @@
   "pinned a message, number {n}": "একটি বার্তা পিন করেছেন, নম্বর {n}",
   "Messages found: {n}": "বার্তাগুলি পাওয়া গেছে: {n}",
   "Messages found: {n}+": "বার্তাগুলি পাওয়া গেছে: {n}+",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "ফ্ল্যাগ করা হয়েছে: কমপক্ষে ৫ জন প্রথমবার পোস্টকারী এবং তাদের ১৪-দিনের গড়ের ৩ গুণ, যেখানে বার্তাগুলির সংখ্যা তাদের গড়ের সর্বোচ্চ ১.৫ গুণ। একটি চ্যাটের প্রথম ৭ দিন ফ্ল্যাগ করা হয় না। একই ব্যক্তি যদি একাধিক চ্যাটে প্রথমবার পোস্ট করেন, তবে প্রতিটি চ্যাটে তাকে একবারই গণ্য করা হয়।"
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "ফ্ল্যাগ করা হয়েছে: কমপক্ষে ৫ জন প্রথমবার পোস্টকারী এবং তাদের ১৪-দিনের গড়ের ৩ গুণ, যেখানে বার্তাগুলির সংখ্যা তাদের গড়ের সর্বোচ্চ ১.৫ গুণ। একটি চ্যাটের প্রথম ৭ দিন ফ্ল্যাগ করা হয় না। একই ব্যক্তি যদি একাধিক চ্যাটে প্রথমবার পোস্ট করেন, তবে প্রতিটি চ্যাটে তাকে একবারই গণ্য করা হয়।",
+  "Choose at least {n}.": "{n} বা তার বেশি নির্বাচন করুন।",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "তারিখ হিসেবে 2026-10-01 এর মতো একটি তারিখ বা সময়জোনসহ একটি সময় লিখুন।",
+  "Choose one of the allowed values.": "অনুমোদিত মানগুলির মধ্যে একটি নির্বাচন করুন।",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "ফ্ল্যাগ করা হয়েছে: প্রথমবার পোস্ট করা কমপক্ষে ৫ জন এবং তাদের ১৪-দিনের গড়ের ৩ গুণ, যেখানে বার্তাগুলো তাদের গড়ের ১.৫ গুণের নিচে। একটি চ্যাটের প্রথম ৭ দিন ফ্ল্যাগ করা হয় না।",
+  "Post author: {name}": "পোস্টের লেখক: {name}"
 }

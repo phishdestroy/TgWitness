@@ -10689,5 +10689,10 @@
   "pinned a message, number {n}": "закрепил сообщение № {n}",
   "Messages found: {n}": "Найденных сообщений: {n}",
   "Messages found: {n}+": "Найденных сообщений: {n}+",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Показатель: не менее 5 пользователей, опубликовавших сообщения впервые, и количество сообщений, превышающее их 14-дневную медиану в 3 раза, при этом длина сообщений не должна превышать их медиану более чем в 1,5 раза. Первые 7 дней существования чата не учитываются. Пользователь, впервые опубликовавший сообщения в нескольких чатах, учитывается в каждом из них только один раз."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Показатель: не менее 5 пользователей, опубликовавших сообщения впервые, и количество сообщений, превышающее их 14-дневную медиану в 3 раза, при этом длина сообщений не должна превышать их медиану более чем в 1,5 раза. Первые 7 дней существования чата не учитываются. Пользователь, впервые опубликовавший сообщения в нескольких чатах, учитывается в каждом из них только один раз.",
+  "Choose at least {n}.": "Выберите как минимум {n}.",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "Введите дату, например 2026-10-01, или время с указанием часового пояса.",
+  "Choose one of the allowed values.": "Выберите одно из допустимых значений.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Отмечается день, где впервые написавших не меньше 5 и втрое больше их медианы за 14 дней, а сообщений меньше 1,5 медианы. Первые 7 дней чата не отмечаются.",
+  "Post author: {name}": "Автор сообщения: {name}"
 }
