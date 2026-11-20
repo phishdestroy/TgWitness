@@ -10602,5 +10602,7 @@
   "Show in chat": "Suhbatda ko'rsating",
   "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
   "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}",
-  "Sticker {emoji}": "Stiker {emoji}"
+  "Sticker {emoji}": "Stiker {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Maqsad ushbu hisob o'qigan dialoglar orasida yo'q. Guruhlar ro'yxatini yangilang yoki Parametrlarda suhbatlar ro'yxati chegarasini oshiring.",
+  "Exported completely": "To'liq eksport qilindi"
 }

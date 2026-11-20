@@ -10602,5 +10602,7 @@
   "Show in chat": "चैट में दिखाएँ",
   "Show in chat: message #{id}": "चैट में दिखाएँ: संदेश #{id}",
   "Open in chat: message #{id}": "चैट में खोलें: संदेश #{id}",
-  "Sticker {emoji}": "स्टिकर {emoji}"
+  "Sticker {emoji}": "स्टिकर {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "लक्ष्य उन डायलॉग्स में शामिल नहीं है जिन्हें इस खाते ने पढ़ा है। समूह सूची को रिफ्रेश करें या पैरामीटर्स में चैट सूची सीमा बढ़ाएँ।",
+  "Exported completely": "पूरी तरह से निर्यात किया गया"
 }

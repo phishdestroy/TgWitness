@@ -10551,5 +10551,7 @@
   "Show in chat": "在聊天中显示",
   "Show in chat: message #{id}": "在聊天中显示：第 {id} 条消息",
   "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息",
-  "Sticker {emoji}": "贴纸 {emoji}"
+  "Sticker {emoji}": "贴纸 {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目标未出现在该账号阅读的对话中。请刷新群组列表，或在“参数”中提高聊天列表限制。",
+  "Exported completely": "已完全导出"
 }

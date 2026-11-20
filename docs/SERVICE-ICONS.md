@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Project reference](README.md)
 
+**English** · [Русский](ru/SERVICE-ICONS.md)
+
 ![Project reference](assets/presentation/chapter-project.svg)
 
 # Service icons

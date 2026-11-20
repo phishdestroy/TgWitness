@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/COLLECTION-MODES.md)
+
 ![Collection](assets/presentation/chapter-collect.svg)
 
 # Choose a collection method
