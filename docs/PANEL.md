@@ -175,11 +175,11 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   the next recorded resumption, with the reason when the journal has one. The markers
   appear with all messages shown and hide while a message filter is on.
 - **Build report** above the messages opens the report studio with this chat selected.
-  The same button in an author's person card selects the chat and that author.
+  **Report on this person** in an author's person card, and in a message's **Author details**, selects the chat and that author when the session may read evidence.
   Both change only the draft; save it before exporting.
 - Pressing an author's name opens a person card beside the messages: saved profile,
   bio, profile photos, gifts, links, message counts and the activity timeline with its
-  journal records, plus **Refresh profile** and **Build report**. **Close**, Esc or
+  journal records, plus **Refresh profile** and **Report on this person**. **Close**, Esc or
   another chat closes the card; the chat keeps its position. **Rhythm** in the card
   counts the author's saved messages in this chat in UTC: active days, starts after
   6 hours of silence, median time to reply to someone else within 24 hours, the
@@ -222,6 +222,38 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   journal records when each account joined and left.
 - **Save profile now** records a snapshot of the chat or bot profile: description,
   members, invite link, bot commands.
+
+### Reading a conversation
+
+Messages are laid out like a Telegram chat, but every mark states what the journal holds:
+
+- A date chip starts each day. Messages from the same sender on the same day, less than five
+  minutes apart, form a run: the name is shown on the first message and the avatar on the last.
+  Channel posts have no avatar. A service message such as "pinned a message" is a centred
+  line. Pressing a sender's name opens the person card; **Author details** show the username
+  and ID the journal has for them.
+- A reply shows a quote with the sender and the start of the original. Pressing it jumps to
+  the original; if the original is not loaded, **Reply to #N · show the original** loads the
+  messages around it. A reply to a message in another chat is shown as text only.
+- A message sent from a schedule is marked **Sent as a scheduled message**. **from history**
+  means the message was loaded from history and not seen live. **By observation time** means
+  Telegram's send time was not recorded, and the message is dated by when TgWitness saw it.
+- Marks under a message: **Edited · N versions** opens every saved version; **Edited** alone
+  means Telegram flagged an edit but the earlier text was not saved. **Deleted** and **Not found
+  at recheck** open a note with the time and what was observed.
+- An attachment has **Preview** and **↓ Download preserved attachment**. Images up to 8 MiB
+  load a preview when they scroll into view, and pressing one zooms it; audio and video play
+  in place. A mark shows **File saved**, **Queued**, or the reason the file was not saved.
+  A message with an attachment whose file was never recorded shows a paperclip only.
+- A forwarded message starts with **Forwarded from NAME**; when only an ID was saved it shows
+  **ID N**, and **Forwarded message** when the source is hidden. Hovering shows when the
+  original was sent, if Telegram gave that time.
+- Under the text, reaction chips show the emoji and its count (a custom emoji is shown as a
+  star), and **N views** shows the view counter. These are the counts at the moment the message
+  was saved; Telegram changes them later, and the hint on the chips says so. A message with
+  no saved reactions or views has no such line. Later changes to the counts appear in the
+  [Journal](#journal) as **Reactions observed** records. A pin is also shown as a service
+  line when Telegram sent one.
 
 ### Read-only, sending and secrets
 
