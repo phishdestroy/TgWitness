@@ -10613,5 +10613,7 @@
   "The value must be at least {n}.": "Değer en az {n} olmalıdır.",
   "The value must be at most {n}.": "Değer, en fazla {n} olmalıdır.",
   "Enter a whole number.": "Bir tam sayı girin.",
-  "Enter a number.": "Bir sayı girin."
+  "Enter a number.": "Bir sayı girin.",
+  "changed the chat name to “{title}”": "sohbet adını “{title}” olarak değiştirdi",
+  "pinned a message, number {n}": "{n} numaralı mesajı sabitledi"
 }

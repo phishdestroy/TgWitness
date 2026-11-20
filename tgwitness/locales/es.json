@@ -10623,5 +10623,7 @@
   "The value must be at least {n}.": "El valor debe ser, como mínimo, {n}.",
   "The value must be at most {n}.": "El valor debe ser como máximo {n}.",
   "Enter a whole number.": "Introduce un número entero.",
-  "Enter a number.": "Introduce un número."
+  "Enter a number.": "Introduce un número.",
+  "changed the chat name to “{title}”": "He cambiado el nombre del chat a «{title}»",
+  "pinned a message, number {n}": "ha destacado un mensaje, el número {n}"
 }

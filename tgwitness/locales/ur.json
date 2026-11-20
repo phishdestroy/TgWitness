@@ -10613,5 +10613,7 @@
   "The value must be at least {n}.": "قدر کم از کم {n} ہونی چاہیے۔",
   "The value must be at most {n}.": "قدر زیادہ سے زیادہ{n} ہونی چاہیے۔",
   "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
-  "Enter a number.": "ایک عدد درج کریں۔"
+  "Enter a number.": "ایک عدد درج کریں۔",
+  "changed the chat name to “{title}”": "چیٹ کا نام \"{title}\" میں تبدیل کیا۔",
+  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}"
 }
