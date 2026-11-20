@@ -10871,6 +10871,7 @@
   "Save a valid bot token from BotFather.": "Zapisz prawidłowy token bota z serwisu BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram odrzucił żądanie dotyczące bota. Sprawdź jego token i uprawnienia.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram nie zakończył sesji tego konta; nie odnotowano żadnych strat.",
+  "created the topic “{title}”": "utworzył wątek „{title}”",
   "Account export completed": "Eksport konta zakończono",
   "Account export started": "Rozpoczęto eksport konta",
   "Account group changed": "Zmieniono grupę kont",

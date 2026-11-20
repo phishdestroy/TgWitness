@@ -10769,6 +10769,7 @@
   "Save a valid bot token from BotFather.": "BotFather से एक वैध बॉट टोकन सहेजें।",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram ने बॉट अनुरोध अस्वीकार कर दिया। इसके टोकन और अनुमतियों की जाँच करें।",
   "Telegram has not ended this account's session; there is no loss to report.": "टेलीग्राम ने इस खाते का सत्र समाप्त नहीं किया है; रिपोर्ट करने के लिए कोई हानि नहीं है।",
+  "created the topic “{title}”": "विषय \"{title}\" बनाया",
   "Account export completed": "खाता निर्यात पूरा हो गया",
   "Account export started": "खाता निर्यात शुरू हो गया",
   "Account group changed": "खाता समूह बदला गया",

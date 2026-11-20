@@ -10718,6 +10718,7 @@
   "Save a valid bot token from BotFather.": "Simpan token bot sah daripada BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram menolak permintaan bot. Semak token dan kebenarannya.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram belum menamatkan sesi akaun ini; tiada kerugian untuk dilaporkan.",
+  "created the topic “{title}”": "mencipta topik \"{title}\"",
   "Account export completed": "Pengeksportan akaun telah selesai",
   "Account export started": "Pembuangan akaun bermula",
   "Account group changed": "Kumpulan akaun telah diubah",
