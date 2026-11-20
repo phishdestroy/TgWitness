@@ -100,6 +100,21 @@ def failure_detail(exc):
     return text
 
 
+def plain_failure(exc):
+    detail = failure_detail(exc)
+    if isinstance(exc, zipfile.BadZipFile):
+        return "this file is not a ZIP archive, or it is damaged [" + type(exc).__name__ + "]"
+    if isinstance(exc, (FileNotFoundError, NotADirectoryError, IsADirectoryError)):
+        name = getattr(exc, "filename", None)
+        return "cannot read " + (safe_text(name) if name else "the file") + ": it does not exist or is not a file [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.json" in detail:
+        return "the archive has no manifest.json, so it is not a signed TgWitness archive [" + type(exc).__name__ + "]"
+    if isinstance(exc, json.JSONDecodeError):
+        return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
+                + type(exc).__name__ + "]")
+    return type(exc).__name__ + ": " + detail
+
+
 def authenticate_statement(value, key_field="public_key"):
     from .chain import canonical
     statement = value["statement"]
@@ -272,4 +287,4 @@ def fingerprint_argument(value):
     return text
 
 
-__all__ = ['fingerprint_argument', 'CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'failure_detail', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'struct', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile', 'zlib']
+__all__ = ['fingerprint_argument', 'CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'failure_detail', 'plain_failure', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'struct', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile', 'zlib']
