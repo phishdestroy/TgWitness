@@ -6425,7 +6425,6 @@
   "Showing the latest {shown} of {total} rows.": "Показано останні {shown} з {total} рядків.",
   "Chat {id}, {day}: {found} first-time posters (median {base}), {messages} messages (median {base_messages})": "Чат {id}, {day}: уперше написали — {found} (медіана {base}), повідомлень — {messages} (медіана {base_messages})",
   "First-time posters per day": "Уперше написали за днями",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Позначається день, де вперше написали щонайменше 5 і втричі більше за їхню медіану за 14 днів, а повідомлень менше ніж 1,5 медіани. Перші 7 днів чату не позначаються.",
   "Day (UTC)": "День (UTC)",
   "First-time posters": "Уперше написали",
   "Service messages among message numbers": "Службові повідомлення серед номерів",
@@ -10717,5 +10716,6 @@
   "Enter a whole number.": "Введіть ціле число.",
   "Enter a number.": "Введіть число.",
   "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
-  "pinned a message, number {n}": "закріпив повідомлення № {n}"
+  "pinned a message, number {n}": "закріпив повідомлення № {n}",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Позначено: щонайменше 5 користувачів, які опублікували повідомлення вперше, та кількість повідомлень, що в 3 рази перевищує їхній медіанний показник за 14 днів, при цьому довжина повідомлень не перевищує 1,5-кратного медіанного значення. Перші 7 днів існування чату не враховуються. Користувач, який вперше опублікував повідомлення в декількох чатах, враховується лише один раз у кожному з них."
 }

@@ -6371,7 +6371,6 @@
   "The most recent rows are listed; totals cover every row.": "Les lignes les plus récentes sont répertoriées ; les totaux couvrent toutes les lignes.",
   "rows": "lignes",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Calculées à partir du fichier events.jsonl par les processeurs répertoriés. Elles indiquent ce qu'il faut vérifier, et non ce qui s'est produit.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages inférieurs à 1,5 fois leur médiane. Les 7 premiers jours d'une discussion ne sont pas signalés.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Nombre de messages enregistrés par conversation et part représentée par les messages de service.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Modifications apportées à la liste des membres signalées par Telegram, à raison d'une fois par personne, par discussion, par modification et par jour.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Mettre en avant les messages de service, supprimer la mise en avant des notifications et des messages mis en avant ajoutés ou supprimés entre deux instantanés de l'état de la conversation.",
@@ -10625,5 +10624,6 @@
   "Enter a whole number.": "Entrez un nombre entier.",
   "Enter a number.": "Entrez un nombre.",
   "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
-  "pinned a message, number {n}": "a épinglé un message, le numéro {n}"
+  "pinned a message, number {n}": "a épinglé un message, le numéro {n}",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages ne dépassant pas 1,5 fois leur médiane. Les 7 premiers jours d'un salon de discussion ne sont pas pris en compte. Une personne qui publie pour la première fois dans plusieurs salons de discussion n'est comptée qu'une seule fois dans chacun d'entre eux."
 }

@@ -6394,7 +6394,6 @@
   "The most recent rows are listed; totals cover every row.": "Es werden die neuesten Zeilen aufgelistet; die Summen beziehen sich auf alle Zeilen.",
   "rows": "Zeilen",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Berechnet aus der Datei „events.jsonl“ durch die aufgeführten Prozessoren. Sie geben an, was überprüft werden soll, nicht, was passiert ist.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Markiert: mindestens 5 Erstposter und das 3-Fache ihres 14-Tage-Medianwerts, wobei die Nachrichten weniger als das 1,5-Fache ihres Medianwerts betragen. Die ersten 7 Tage eines Chats werden nicht markiert.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Anzahl der gespeicherten Nachrichten pro Chat sowie der Anteil der Servicemeldungen.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Von Telegram gemeldete Änderungen der Mitgliederzahlen, einmal pro Person, Chat, Änderung und Tag.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Service-Nachrichten anheften, Heftungen aufheben sowie angeheftete Nachrichten, die zwischen den Momentaufnahmen des Chat-Status hinzugefügt oder entfernt wurden.",
@@ -10615,5 +10614,6 @@
   "Enter a whole number.": "Geben Sie eine ganze Zahl ein.",
   "Enter a number.": "Geben Sie eine Zahl ein.",
   "changed the chat name to “{title}”": "den Chat-Namen in „{title}“ geändert",
-  "pinned a message, number {n}": "Eine Nachricht angeheftet, Nummer {n}"
+  "pinned a message, number {n}": "Eine Nachricht angeheftet, Nummer {n}",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Markiert: mindestens 5 Erstposter und das 3-Fache ihres 14-Tage-Medianwerts, wobei die Nachrichten weniger als das 1,5-Fache ihres Medianwerts betragen. Die ersten 7 Tage eines Chats werden nicht markiert. Eine Person, die in mehreren Chats zum ersten Mal einen Beitrag verfasst, wird in jedem Chat nur einmal gezählt."
 }

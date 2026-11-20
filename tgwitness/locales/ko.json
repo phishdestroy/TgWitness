@@ -6332,7 +6332,6 @@
   "The most recent rows are listed; totals cover every row.": "가장 최근의 행들이 나열되며, 합계는 모든 행을 포함합니다.",
   "rows": "rows",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "나열된 프로세서에 의해 events.jsonl 파일을 기반으로 계산된 결과입니다. 이는 발생한 사건이 아니라, 무엇을 확인해야 하는지를 나타냅니다.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "플래그 지정 기준: 첫 게시자가 5명 이상이고, 14일 동안의 중앙값의 3배 이하이며, 메시지 수가 중앙값의 1.5배 미만인 경우. 채팅 시작 후 첫 7일 동안은 플래그가 지정되지 않습니다.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "채팅별 저장된 메시지 수와 서비스 메시지가 차지하는 비율.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "텔레그램에서 보고된 회원 정보 변경 사항(1인당, 채팅당, 변경 사항당, 일당 1회).",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "채팅 상태 스냅샷 사이에 추가되거나 제거된 고정된 서비스 메시지, 고정 해제 알림 및 고정된 메시지를 기록합니다.",
@@ -10564,5 +10563,6 @@
   "Enter a whole number.": "정수를 입력하세요.",
   "Enter a number.": "숫자를 입력하세요.",
   "changed the chat name to “{title}”": "채팅 이름을 “{title}”으로 변경했습니다.",
-  "pinned a message, number {n}": "메시지 {n}번을 고정했습니다"
+  "pinned a message, number {n}": "메시지 {n}번을 고정했습니다",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "신호 표시 기준: 첫 게시물을 올린 사용자가 최소 5명이며, 14일 동안의 중앙값의 3배 이상이고, 메시지 수는 중앙값의 1.5배 미만인 경우. 채팅 시작 후 첫 7일 동안은 신호가 표시되지 않습니다. 여러 채팅에 처음으로 게시물을 올린 사용자는 각 채팅에서 한 번씩만 집계됩니다."
 }
