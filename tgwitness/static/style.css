@@ -2327,7 +2327,9 @@ button.primary[aria-busy=true]::after { color: #fff; }
 .handover-period { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
 @media (max-width: 700px) { .handover-period { grid-template-columns: 1fr; } }
 .report-settings { --editor-height: clamp(440px, calc(100dvh - 390px), 720px); border-radius: 18px; box-shadow: 0 8px 32px rgb(15 23 40 / .035); scroll-margin-top: 88px; }
-#view-evidence:has(#report-form:not([hidden])) > .page-heading { display: none; }
+#view-evidence:has(#report-form:not([hidden])) > .page-heading { display: block; height: 0; margin: 0; padding: 0; }
+#view-evidence:has(#report-form:not([hidden])) > .page-heading > button, #view-evidence:has(#report-form:not([hidden])) > .page-heading p { display: none; }
+#view-evidence:has(#report-form:not([hidden])) > .page-heading h1 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .report-settings .studio-heading { position: relative; gap: 20px; padding-bottom: 20px; }
 .report-settings .studio-heading h2 { font-size: 28px; letter-spacing: -.045em; }
 .report-settings .studio-heading .eyebrow, .report-settings .studio-badge { display: none; }
