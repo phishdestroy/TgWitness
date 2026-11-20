@@ -7,7 +7,7 @@ from datetime import datetime
 
 from . import activity_maps, case_assessment, i18n, message_details, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, utc_text
+from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, reactions_text, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
@@ -472,7 +472,35 @@ def link_lines(message, body, say):
     return lines
 
 
+def forward_line(message, say):
+    origin = message.get('fwd_from')
+    if not isinstance(origin, dict):
+        return ''
+    source = text(origin.get('from_name'))
+    peer = origin.get('from_id')
+    if not source and isinstance(peer, dict):
+        for key in ('channel_id', 'user_id', 'chat_id'):
+            if type(peer.get(key)) is int:
+                source = say('ID {id}', id=peer[key])
+                break
+    source = source or say('Sender not available')
+    if type(origin.get('channel_post')) is int:
+        source += ' #' + str(origin['channel_post'])
+    if text(origin.get('post_author')):
+        source += ' · ' + text(origin['post_author'])
+    if text(origin.get('date')):
+        source += ' · ' + utc_text(origin['date'])
+    return say('Forwarded from {name}', name=source)
+
+
+def reaction_line(message, say):
+    found = message_details.reactions(message.get('reactions'))
+    return say('reactions: {list}', list=reactions_text(found)) if found else ''
+
+
 def reply_line(message, say):
+    if message.get('_') == 'MessageService':
+        return ''
     reply = message.get('reply_to')
     if not isinstance(reply, dict) or reply.get('reply_to_peer_id') is not None or type(reply.get('reply_to_msg_id')) is not int:
         return ''
@@ -516,7 +544,7 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         if info:
             shown = media_text(say, info)
             parts.append('<p class="muted" dir="auto">' + e(media_name(say, info)) + (': ' + e(shown) if shown else '') + '</p>')
-        for line in [reply_line(message, say), *link_lines(message, body, say)]:
+        for line in [forward_line(message, say), reply_line(message, say), reaction_line(message, say), *link_lines(message, body, say)]:
             if line:
                 parts.append('<p class="muted" dir="auto">' + e(line) + '</p>')
         reply = message.get('reply_to')
