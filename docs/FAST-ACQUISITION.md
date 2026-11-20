@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Collection](COLLECTION-MODES.md)
 
+**English** · [Русский](ru/FAST-ACQUISITION.md)
+
 ![Collection](assets/presentation/chapter-collect.svg)
 
 # Faster acquisition with the same evidence boundary

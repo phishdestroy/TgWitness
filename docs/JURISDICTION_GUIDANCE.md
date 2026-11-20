@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
 
+**English** · [Русский](ru/JURISDICTION_GUIDANCE.md)
+
 ![Investigation](assets/presentation/chapter-investigate.svg)
 
 # Jurisdiction guidance in Report Studio

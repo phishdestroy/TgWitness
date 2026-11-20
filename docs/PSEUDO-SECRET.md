@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/PSEUDO-SECRET.md)
+
 # Secret Chats: installation and recording
 
 The published application includes the Secret Chat backend, collector integration,

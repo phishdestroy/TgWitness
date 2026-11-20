@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Development](ARCHITECTURE.md)
 
+**English** · [Русский](ru/FRONTEND.md)
+
 ![Development](assets/presentation/chapter-develop.svg)
 
 # Panel development
