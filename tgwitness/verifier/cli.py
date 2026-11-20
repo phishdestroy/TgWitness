@@ -465,6 +465,15 @@ def verification_archive(args):
         if args.channel:
             result["channel_check"] = check_channel(result, args.channel)
         result.pop("statements")
+        flagged = {}
+        for anchor in result["anchors"]:
+            if anchor["status"] != "ok":
+                flagged.setdefault(anchor["status"], []).append(anchor)
+        for status, items in sorted(flagged.items()):
+            notes.append("The witness recorded " + str(len(items)) + " check(s) with status " + status.replace("_", " ")
+                         + ", the first at " + str(items[0].get("at")) + " (record " + str(items[0].get("event_count")) + ").")
+        if result.get("no_response"):
+            notes.append("The witness recorded " + str(len(result["no_response"])) + " check(s) the collector did not answer.")
     else:
         return verification_evidence(args)
     return CheckResult(shown, result, pinned, notes)
