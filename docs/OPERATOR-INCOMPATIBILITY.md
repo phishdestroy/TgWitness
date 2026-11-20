@@ -10,6 +10,8 @@
 
 ## ⚖️ Ethical Notice & Historical Continuity
 
+**English** · [Русский](ru/ETHICAL-NOTICE.md)
+
 We have learned that for certain law firms — specifically **Dr. Tobias Schelinski** and **Dr. Patrick Vincent Zurheide** — mathematics, technical integrity, and objective facts are irrelevant.
 
 Selling GDPR non-compliance to corporations while failing at basic data handling is not legal expertise. An elite signature on a falsified claim does not mask technical incompetence.
