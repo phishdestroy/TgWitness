@@ -10616,6 +10616,8 @@
   "Enter a number.": "Raqamni kiriting.",
   "changed the chat name to “{title}”": "Suhbat nomini \"{title}\" ga o'zgartirdi",
   "pinned a message, number {n}": "{n}-raqamli xabarni biriktirdi",
+  "Messages found: {n}": "Topilgan xabarlar: {n}",
+  "Messages found: {n}+": "Topilgan xabarlar: {n}+",
   "Choose at least {n}.": "Kamida b{n} tanlang.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 kabi sanani yoki vaqt zonasini ko'rsatgan holda vaqtni kiriting.",
   "Choose one of the allowed values.": "Ruxsat etilgan qiymatlardan birini tanlang."

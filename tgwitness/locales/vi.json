@@ -10565,6 +10565,8 @@
   "Enter a number.": "Hãy nhập một số.",
   "changed the chat name to “{title}”": "đã đổi tên trong phòng chat thành “{title}”",
   "pinned a message, number {n}": "đã ghim một tin nhắn, số {n}",
+  "Messages found: {n}": "Số tin nhắn tìm thấy: {n}",
+  "Messages found: {n}+": "Số tin nhắn tìm thấy: {n}+",
   "Choose at least {n}.": "Hãy chọn ít nhất {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Nhập ngày, ví dụ: 2026-10-01, hoặc thời gian kèm theo múi giờ.",
   "Choose one of the allowed values.": "Hãy chọn một trong các giá trị được phép."

@@ -10565,6 +10565,8 @@
   "Enter a number.": "Masukkan nombor.",
   "changed the chat name to “{title}”": "Menukar nama sembang kepada \"{title}\"",
   "pinned a message, number {n}": "melekatkan mesej, nombor {n}",
+  "Messages found: {n}": "Mesej yang ditemui: {n}",
+  "Messages found: {n}+": "Mesej yang ditemui: {n}+",
   "Choose at least {n}.": "Pilih sekurang-kurangnya {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Masukkan tarikh seperti 2026-10-01 atau masa beserta zon waktu.",
   "Choose one of the allowed values.": "Pilih salah satu nilai yang dibenarkan."

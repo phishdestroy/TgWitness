@@ -10688,6 +10688,8 @@
   "Enter a number.": "Введите число.",
   "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
   "pinned a message, number {n}": "закрепил сообщение № {n}",
+  "Messages found: {n}": "Найденных сообщений: {n}",
+  "Messages found: {n}+": "Найденных сообщений: {n}+",
   "Choose at least {n}.": "Выберите как минимум {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Введите дату, например 2026-10-01, или время с указанием часового пояса.",
   "Choose one of the allowed values.": "Выберите одно из допустимых значений."

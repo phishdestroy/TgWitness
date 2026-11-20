@@ -10718,6 +10718,8 @@
   "Enter a number.": "Wprowadź liczbę.",
   "changed the chat name to “{title}”": "zmieniłem nazwę użytkownika na czacie na „{title}”",
   "pinned a message, number {n}": "przypiął wiadomość nr {n}",
+  "Messages found: {n}": "Znaleziono {n} wiadomości",
+  "Messages found: {n}+": "Znaleziono wiadomości: {n}+",
   "Choose at least {n}.": "Wybierz co najmniej {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Wprowadź datę, np. 2026-10-01, lub godzinę wraz ze strefą czasową.",
   "Choose one of the allowed values.": "Wybierz jedną z dopuszczalnych wartości."

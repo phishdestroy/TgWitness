@@ -10667,6 +10667,8 @@
   "Enter a number.": "הזן מספר.",
   "changed the chat name to “{title}”": "שינה את שם הצ'אט ל-\"{title}\"",
   "pinned a message, number {n}": "הצמיד הודעה, מספר {n}",
+  "Messages found: {n}": "הודעות שנמצאו: {n}",
+  "Messages found: {n}+": "הודעות שנמצאו: {n}+",
   "Choose at least {n}.": "בחר לפחות {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "הזן תאריך, כגון 2026-10-01, או שעה עם אזור זמן.",
   "Choose one of the allowed values.": "בחר באחד מהערכים המותרים."

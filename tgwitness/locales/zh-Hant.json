@@ -10565,6 +10565,8 @@
   "Enter a number.": "請輸入一個數字。",
   "changed the chat name to “{title}”": "將聊天名稱更改為「{title}」",
   "pinned a message, number {n}": "將第 {n} 則訊息設為置頂",
+  "Messages found: {n}": "找到的訊息：{n} 則",
+  "Messages found: {n}+": "找到的訊息：{n}+則",
   "Choose at least {n}.": "請至少選擇一個 {n}。",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "請輸入日期（例如 2026-10-01）或包含時區的時刻。",
   "Choose one of the allowed values.": "請選擇其中一個允許的值。"

@@ -10718,6 +10718,8 @@
   "Enter a number.": "Введіть число.",
   "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
   "pinned a message, number {n}": "закріпив повідомлення № {n}",
+  "Messages found: {n}": "Знайдено повідомлень: {n}",
+  "Messages found: {n}+": "Знайдено повідомлень: {n}+",
   "Choose at least {n}.": "Виберіть хоча б {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Введіть дату, наприклад 2026-10-01, або час із зазначенням часового поясу.",
   "Choose one of the allowed values.": "Виберіть одне з допустимих значень."
