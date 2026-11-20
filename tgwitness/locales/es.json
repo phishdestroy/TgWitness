@@ -10612,5 +10612,7 @@
   "Show in chat": "Mostrar en el chat",
   "Show in chat: message #{id}": "Mostrar en el chat: mensaje n.º {id}",
   "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}",
-  "Sticker {emoji}": "Pegatina {emoji}"
+  "Sticker {emoji}": "Pegatina {emoji}",
+  "Quiz": "Cuestionario",
+  "Live location": "Ubicación en tiempo real"
 }

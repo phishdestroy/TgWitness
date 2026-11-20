@@ -10551,5 +10551,7 @@
   "Show in chat": "チャットに表示",
   "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
   "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}",
-  "Sticker {emoji}": "ステッカー {emoji}"
+  "Sticker {emoji}": "ステッカー {emoji}",
+  "Quiz": "クイズ",
+  "Live location": "現在地"
 }

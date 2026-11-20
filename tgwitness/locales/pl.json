@@ -10704,5 +10704,7 @@
   "Show in chat": "Pokaż na czacie",
   "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}",
   "Open in chat: message #{id}": "Otwórz w czacie: wiadomość nr {id}",
-  "Sticker {emoji}": "Naklejka {emoji}"
+  "Sticker {emoji}": "Naklejka {emoji}",
+  "Quiz": "Quiz",
+  "Live location": "Aktualna lokalizacja"
 }

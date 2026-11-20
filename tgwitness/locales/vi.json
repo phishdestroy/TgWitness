@@ -10551,5 +10551,7 @@
   "Show in chat": "Hiển thị trong cửa sổ trò chuyện",
   "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}",
   "Open in chat: message #{id}": "Mở trong cửa sổ trò chuyện: tin nhắn số {id}",
-  "Sticker {emoji}": "Hình dán {emoji}"
+  "Sticker {emoji}": "Hình dán {emoji}",
+  "Quiz": "Bài trắc nghiệm",
+  "Live location": "Vị trí thời gian thực"
 }

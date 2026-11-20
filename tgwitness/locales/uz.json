@@ -10602,5 +10602,7 @@
   "Show in chat": "Suhbatda ko'rsating",
   "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
   "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}",
-  "Sticker {emoji}": "Stiker {emoji}"
+  "Sticker {emoji}": "Stiker {emoji}",
+  "Quiz": "Test",
+  "Live location": "Jonli joylashuv"
 }

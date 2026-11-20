@@ -10551,5 +10551,7 @@
   "Show in chat": "Tunjukkan dalam sembang",
   "Show in chat: message #{id}": "Tunjukkan dalam sembang: mesej #{id}",
   "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}",
-  "Sticker {emoji}": "Stiker {emoji}"
+  "Sticker {emoji}": "Stiker {emoji}",
+  "Quiz": "Kuiz",
+  "Live location": "Lokasi langsung"
 }

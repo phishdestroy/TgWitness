@@ -1774,12 +1774,26 @@ def ref_link(parts, folder, key, anchor, prefix=""):
     return link
 
 
+def content_text(say, info):
+    poll, place, contact, dice = (info.get(key) or {} for key in ("poll", "location", "contact", "dice"))
+    if poll:
+        head = (say("Quiz") + ": " if poll.get("quiz") else "") + (poll.get("question") or "")
+        return head + (" [" + " / ".join(poll["answers"]) + "]" if poll.get("answers") else "")
+    if place:
+        coordinates = ", ".join(str(place[k]) for k in ("lat", "lng") if k in place)
+        return " · ".join(x for x in (say("Live location") if place.get("live_seconds") else "", place.get("title"),
+                                      place.get("address"), coordinates) if x)
+    if contact:
+        return " · ".join(x for x in (contact.get("name"), contact.get("phone")) if x)
+    return " ".join(str(dice[k]) for k in ("emoji", "value") if k in dice)
+
+
 def media_text(say, info):
     from . import ephemeral
     if not info:
         return ""
     size = " × ".join(str(info[k]) for k in ("width", "height") if info.get(k))
-    return " · ".join(x for x in (info.get("file_name"), info.get("mime_type"),
+    return " · ".join(x for x in (content_text(say, info), info.get("file_name"), info.get("mime_type"),
                                   size_text(info["size"]) if type(info.get("size")) is int else "", size,
                                   say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
                                   info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)

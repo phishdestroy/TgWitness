@@ -10612,5 +10612,7 @@
   "Show in chat": "Afficher dans le chat",
   "Show in chat: message #{id}": "Afficher dans le chat : message n° {id}",
   "Open in chat: message #{id}": "Ouvrir dans le chat : message n° {id}",
-  "Sticker {emoji}": "Autocollant {emoji}"
+  "Sticker {emoji}": "Autocollant {emoji}",
+  "Quiz": "Quiz",
+  "Live location": "Localisation en temps réel"
 }

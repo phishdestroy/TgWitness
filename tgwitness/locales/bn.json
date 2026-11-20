@@ -10602,5 +10602,7 @@
   "Show in chat": "চ্যাটে দেখান",
   "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
   "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}",
-  "Sticker {emoji}": "স্টিকার {emoji}"
+  "Sticker {emoji}": "স্টিকার {emoji}",
+  "Quiz": "কুইজ",
+  "Live location": "বাসস্থান"
 }

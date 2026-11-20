@@ -516,8 +516,10 @@ class Store:
                 item["from_scheduled"] = item["from_scheduled"] or bool((payload.get("raw") or {}).get("from_scheduled"))
                 shown = message_details.details(payload.get("raw"))
                 picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown}
-                if "sticker_emoji" in shown.get("media_info", {}):
-                    picked["media_info"] = {"sticker_emoji": shown["media_info"]["sticker_emoji"]}
+                kept = {key: value for key, value in (shown.get("media_info") or {}).items()
+                        if key in ("sticker_emoji", "poll", "location", "contact", "dice")}
+                if kept:
+                    picked["media_info"] = kept
                 item["details"] = picked or item["details"]
                 origin = {"message.new": "live", "message.snapshot": "history", "message.edited": "edit",
                           "message.recovered": "recheck"}[kind]

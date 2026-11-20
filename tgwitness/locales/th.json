@@ -10551,5 +10551,7 @@
   "Show in chat": "แสดงในแชท",
   "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
-  "Sticker {emoji}": "สติ๊กเกอร์ {emoji}"
+  "Sticker {emoji}": "สติ๊กเกอร์ {emoji}",
+  "Quiz": "แบบทดสอบ",
+  "Live location": "ตำแหน่งปัจจุบัน"
 }

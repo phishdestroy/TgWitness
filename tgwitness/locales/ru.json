@@ -10674,5 +10674,7 @@
   "Show in chat": "Показать в чате",
   "Show in chat: message #{id}": "Показать в чате: сообщение № {id}",
   "Open in chat: message #{id}": "Открыть в чате: сообщение № {id}",
-  "Sticker {emoji}": "Стикер {emoji}"
+  "Sticker {emoji}": "Стикер {emoji}",
+  "Quiz": "Викторина",
+  "Live location": "Текущее местоположение"
 }

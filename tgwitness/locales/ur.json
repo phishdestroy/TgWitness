@@ -10602,5 +10602,7 @@
   "Show in chat": "چیٹ میں دکھائیں",
   "Show in chat: message #{id}": "چیٹ میں دکھائیں: پیغام #{id}",
   "Open in chat: message #{id}": "چیٹ میں کھولیں: پیغام #{id}",
-  "Sticker {emoji}": "اسٹیکر {emoji}"
+  "Sticker {emoji}": "اسٹیکر {emoji}",
+  "Quiz": "کوئز",
+  "Live location": "براہِ راست مقام"
 }

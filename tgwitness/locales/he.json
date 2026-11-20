@@ -10653,5 +10653,7 @@
   "Show in chat": "הצג בצ'אט",
   "Show in chat: message #{id}": "הצג בצ'אט: הודעה מס' {id}",
   "Open in chat: message #{id}": "פתח בצ'אט: הודעה מס' {id}",
-  "Sticker {emoji}": "מדבקה {emoji}"
+  "Sticker {emoji}": "מדבקה {emoji}",
+  "Quiz": "חידון",
+  "Live location": "מיקום בזמן אמת"
 }

@@ -10806,5 +10806,7 @@
   "Show in chat": "إظهار في الدردشة",
   "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}",
   "Open in chat: message #{id}": "فتح في الدردشة: الرسالة رقم {id}",
-  "Sticker {emoji}": "ملصق {emoji}"
+  "Sticker {emoji}": "ملصق {emoji}",
+  "Quiz": "اختبار",
+  "Live location": "الموقع المباشر"
 }

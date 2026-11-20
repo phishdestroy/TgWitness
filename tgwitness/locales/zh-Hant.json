@@ -10551,5 +10551,7 @@
   "Show in chat": "在聊天室中顯示",
   "Show in chat: message #{id}": "在聊天室中顯示：訊息 #{id}",
   "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}",
-  "Sticker {emoji}": "貼圖 {emoji}"
+  "Sticker {emoji}": "貼圖 {emoji}",
+  "Quiz": "測驗",
+  "Live location": "即時位置"
 }
