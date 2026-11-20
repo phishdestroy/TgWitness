@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "未儲存於此工作區",
   "Show in chat": "在聊天室中顯示",
   "Show in chat: message #{id}": "在聊天室中顯示：訊息 #{id}",
+  "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}",
   "Exported completely": "已完全匯出"
 }

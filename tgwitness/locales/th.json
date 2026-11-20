@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "ยังไม่ถูกบันทึกในพื้นที่ทำงานนี้",
   "Show in chat": "แสดงในแชท",
   "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
+  "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
   "Exported completely": "ส่งออกเสร็จสิ้นแล้ว"
 }

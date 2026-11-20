@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "이 작업 공간에 저장되지 않았습니다",
   "Show in chat": "채팅에 표시",
   "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}",
+  "Open in chat: message #{id}": "채팅에서 열기: 메시지 #{id}",
   "Exported completely": "완전히 내보냄"
 }

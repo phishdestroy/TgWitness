@@ -4895,6 +4895,7 @@ function renderVerification(){
       row.append(node("strong","",({ok:"✓ ",off:"○ ",step:"→ ",part:"◐ "})[state]+name+": "),node("span","",text));
       return [row,node("div","hint",detail)];}),
     node("div","verification-line step",tr("For the recipient: the archive and your key fingerprint, sent separately."))];
+  box.dataset.level=stamped==="ok"?"ok":"basic";
   box.replaceChildren(...rows,node("div","hint",stamped==="ok"
     ?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), a recipient can meet the minimum for evidence.")
     :stamped==="part"?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), the minimum covers records 1–{n}; later records need the next timestamp.",{n:c.stamped_through})
@@ -5786,7 +5787,7 @@ async function refreshChats(refresh=false,wanted=null,messages=true){
   if(wanted!==null&&state.chat!==wanted&&state.chats.some(c=>c.chat_id===wanted)){beginChat(wanted);refresh=false;}
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat))beginChat(null);
   if(state.chat===null&&state.chats.length){beginChat((state.chats.find(c=>c.enabled)||state.chats[0]).chat_id);refresh=false;
-    if(matchMedia('(max-width: 767px)').matches)viewQuery("chats",".chats-shell").dataset.panel="list";}
+    viewQuery("chats",".chats-shell").dataset.panel=matchMedia('(max-width: 767px)').matches?"list":"chat";}
   renderChatsList();
   if(state.chat===null){renderChatEmpty();return;}
   if(!messages&&state.chat===previousChat){renderChat();return;}
@@ -6302,7 +6303,7 @@ async function renderChatGallery(body){
       cell.append(caption);
       if(hasMessage){
         const go=node("button","quiet small",tr("Open in chat"));go.type="button";
-        go.setAttribute("aria-label",tr("Open message #{id} in chat",{id:item.message_id}));
+        go.setAttribute("aria-label",tr("Open in chat: message #{id}",{id:item.message_id}));
         go.addEventListener("click",()=>busy(go,async()=>{
           if(matchMedia("(max-width: 767px)").matches){state.chatPanel=null;renderChatInfo();}
           if(!await showChatMessage(item.message_id)&&chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:item.message_id}),true);

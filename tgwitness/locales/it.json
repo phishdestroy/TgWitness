@@ -10611,5 +10611,6 @@
   "Not saved in this workspace": "Non salvato in questo spazio di lavoro",
   "Show in chat": "Mostra nella chat",
   "Show in chat: message #{id}": "Mostra nella chat: messaggio n. {id}",
+  "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}",
   "Exported completely": "Esportato integralmente"
 }

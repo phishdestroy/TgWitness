@@ -10805,5 +10805,6 @@
   "Not saved in this workspace": "لم يتم حفظه في مساحة العمل هذه",
   "Show in chat": "إظهار في الدردشة",
   "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}",
+  "Open in chat: message #{id}": "فتح في الدردشة: الرسالة رقم {id}",
   "Exported completely": "تم تصديرها بالكامل"
 }

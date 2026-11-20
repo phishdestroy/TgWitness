@@ -10673,5 +10673,6 @@
   "Not saved in this workspace": "Не сохранено в этой рабочей области",
   "Show in chat": "Показать в чате",
   "Show in chat: message #{id}": "Показать в чате: сообщение № {id}",
+  "Open in chat: message #{id}": "Открыть в чате: сообщение № {id}",
   "Exported completely": "Полностью экспортировано"
 }
