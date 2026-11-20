@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A very long sender name without spaces wraps inside its chat bubble instead of running past its edge.
 - When the viewer of an evidence report has no records to list, its list, senders and indicators tabs say why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
 - In the Telegram account settings on a phone, the Profile button, the account picture and the account ID no longer touch the controls next to them.
 - On screens 1700 pixels wide and more, the messages of a chat form a centred column of about 960 pixels, as in Telegram Desktop, instead of clinging to the left edge.
