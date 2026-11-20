@@ -10567,6 +10567,9 @@
   "Messages found: {n}": "找到的訊息：{n} 則",
   "Messages found: {n}+": "找到的訊息：{n}+則",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "標記條件：至少有 5 位首次發文者，且發文量達到其 14 天中位數的 3 倍，而單則訊息長度不得超過其中位數的 1.5 倍。聊天室開通後的前 7 天不會被標記。若同一人在多個聊天室中首次發文，則在每個聊天室中僅計入一次。",
+  "Choose at least {n}.": "請至少選擇一個 {n}。",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "請輸入日期（例如 2026-10-01）或包含時區的時刻。",
+  "Choose one of the allowed values.": "請選擇其中一個允許的值。",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "標記條件：至少有 5 位首次發文者，且發文量達到其 14 天中位數的 3 倍，而單則訊息長度不得超過其中位數的 1.5 倍。聊天室開通後的前 7 天不會被標記。",
   "Post author: {name}": "文章作者：{name}"
 }
