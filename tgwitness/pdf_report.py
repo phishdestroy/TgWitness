@@ -600,7 +600,7 @@ def details_lines(say, d, *, include_media=True):
     media = d.get("media_info")
     if include_media and isinstance(media, dict) and media:
         description = report.media_text(say, media)
-        lines.append(say(report.MEDIA_NAMES.get(media.get("kind"), "Media"))
+        lines.append(report.media_name(say, media)
                      + (" · " + description if description else ""))
         if isinstance(media.get("title"), str) and media["title"]:
             lines.append(say("Link preview") + ": " + media["title"]
