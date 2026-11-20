@@ -6163,7 +6163,7 @@ async function openPersonCard(userId){
     active:()=>state.view==='chats'&&state.chat!==null&&!personCardHost.hidden,
     record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode,
     single:true,onClose:closePersonCard,actions:uid=>{if(!viewAllowed('evidence'))return [];
-      const report=node('button','secondary small',tr('Build report'));report.type='button';report.addEventListener('click',()=>busy(report,()=>reportFor(state.chat,uid)));return [report];}});
+      const report=node('button','secondary small',tr('Report on this person'));report.type='button';report.addEventListener('click',()=>busy(report,()=>reportFor(state.chat,uid)));return [report];}});
   personCardHost.hidden=false;await personCard.openPerson(userId);
   personCardHost.querySelector('.person-card-head button')?.focus({preventScroll:true});
 }
@@ -6392,7 +6392,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     if(m.sender?.username)facts.append(node("span","","@"+m.sender.username));
     if(m.sender?.id!==null&&m.sender?.id!==undefined)facts.append(node("span","","ID "+m.sender.id));
     if(!facts.children.length)facts.append(node("span","",tr("No saved author details")));
-    if(m.sender?.id!==null&&m.sender?.id!==undefined&&viewAllowed('evidence')){const report=node("button","text-link sender-report",tr("Build report"));report.type="button";
+    if(m.sender?.id!==null&&m.sender?.id!==undefined&&viewAllowed('evidence')){const report=node("button","text-link sender-report",tr("Report on this person"));report.type="button";
       report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
