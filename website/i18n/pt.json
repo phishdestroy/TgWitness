@@ -7177,7 +7177,8 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Se o Telegram ainda mostrar a sessão temporária, encerre-a em Configurações → Dispositivos.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Uma captura inacabada não pode continuar depois que o runner some; uma nova execução começa uma nova captura.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Inicie sua captura",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "As chaves e a descriptografia ficam nesta aba do navegador. O GitHub e o painel temporário do Telegram abrem em abas separadas, e o assistente avisa quando voltar."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "As chaves e a descriptografia ficam nesta aba do navegador. O GitHub e o painel temporário do Telegram abrem em abas separadas, e o assistente avisa quando voltar.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "No mouse do computador, a estrela que marca um chat como prioritário não cobre mais a hora da última mensagem na lista de chats; a hora se desloca para o lado quando o cursor passa por cima da linha ou quando ela está em foco."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

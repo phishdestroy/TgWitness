@@ -7177,7 +7177,8 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Nếu Telegram vẫn hiển thị phiên tạm thời, hãy kết thúc nó trong Cài đặt → Thiết bị.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Lần thu thập dở dang không thể tiếp tục khi runner đã mất; lần chạy mới bắt đầu một lần thu thập mới.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Bắt đầu thu thập",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Khóa và việc giải mã ở lại trong tab trình duyệt này. GitHub và bảng điều khiển Telegram tạm thời mở trong các tab riêng, và trình hướng dẫn sẽ báo khi nào quay lại."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Khóa và việc giải mã ở lại trong tab trình duyệt này. GitHub và bảng điều khiển Telegram tạm thời mở trong các tab riêng, và trình hướng dẫn sẽ báo khi nào quay lại.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "Trên con trỏ chuột máy tính để bàn, biểu tượng ngôi sao dùng để đánh dấu một cuộc trò chuyện là ưu tiên sẽ không còn che khuất thời gian của tin nhắn cuối cùng trong danh sách trò chuyện nữa; thời gian này sẽ di chuyển sang một bên khi người dùng di chuột qua hoặc chọn dòng đó."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

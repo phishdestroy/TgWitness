@@ -7177,7 +7177,8 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Jika Telegram masih menampilkan sesi sementara, akhiri di Pengaturan → Perangkat.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Penangkapan yang belum selesai tidak bisa dilanjutkan setelah runner-nya hilang; eksekusi baru memulai penangkapan baru.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Mulai penangkapan Anda",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Kunci dan dekripsi tetap di tab peramban ini. GitHub dan panel Telegram sementara terbuka di tab terpisah, dan wizard memberi tahu kapan harus kembali."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Kunci dan dekripsi tetap di tab peramban ini. GitHub dan panel Telegram sementara terbuka di tab terpisah, dan wizard memberi tahu kapan harus kembali.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "Pada kursor desktop, tanda bintang yang menandai obrolan sebagai prioritas tidak lagi menutupi waktu pesan terakhir dalam daftar obrolan; waktu tersebut akan bergeser ke samping saat kursor diarahkan ke baris tersebut atau baris tersebut menjadi fokus."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",
