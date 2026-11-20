@@ -1179,9 +1179,10 @@ button.pill { cursor: pointer; font-family: inherit; }
 }
 .verification-details .padded > .hint { margin-top: 12px; }
 #verification-result {
-  margin-bottom: 18px; padding: 10px 12px; border: 1px solid var(--success-border); border-radius: var(--radius);
-  background: var(--success-soft); color: var(--success); font-size: 13.5px;
+  margin-bottom: 18px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface-2); color: var(--text-2); font-size: 13.5px;
 }
+#verification-result[data-level="ok"] { border-color: var(--success-border); background: var(--success-soft); color: var(--success); }
 #verification-result:empty { display: none; }
 #verification-result .verification-line { margin: 2px 0; color: var(--text); }
 #verification-result .verification-line.ok strong { color: var(--success); }

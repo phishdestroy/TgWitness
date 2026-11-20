@@ -4895,6 +4895,7 @@ function renderVerification(){
       row.append(node("strong","",({ok:"✓ ",off:"○ ",step:"→ ",part:"◐ "})[state]+name+": "),node("span","",text));
       return [row,node("div","hint",detail)];}),
     node("div","verification-line step",tr("For the recipient: the archive and your key fingerprint, sent separately."))];
+  box.dataset.level=stamped==="ok"?"ok":"basic";
   box.replaceChildren(...rows,node("div","hint",stamped==="ok"
     ?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), a recipient can meet the minimum for evidence.")
     :stamped==="part"?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), the minimum covers records 1–{n}; later records need the next timestamp.",{n:c.stamped_through})
