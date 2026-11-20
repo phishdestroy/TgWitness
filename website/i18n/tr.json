@@ -7283,7 +7283,8 @@
   "fc7b27c774fa8e333c5cb9ecc65cdfe4b210b3ef3381313b0939fd7c9fc71f09": "Bir kanıt raporunu görüntüleyen kişinin listeleyecek kaydı olmadığında, raporun “Liste”, “Gönderenler” ve “Göstergeler” sekmelerinde bunun nedeni belirtilir: Verileri olmadan kaydedilmiş bir rapor için “Bu rapor, verileri olmadan kaydedilmiştir. Görüntüleyici için arşiv içindeki report.html dosyasını açın.” mesajı, aksi takdirde ise boş alan yerine “Bu raporda veri yok.” mesajı görüntülenir.",
   "9fd2a76627319d6455db66ef96f6fb9fc96554a9a05dd7e9c9cc170cd45a2cd2": "Telefonlardaki hesap dışa aktarma sohbet sayfalarında, Rhythm tablosu sütunların okunabilirliğini korur ve kesik görünmek yerine soluk kenarlı bir şekilde yana doğru kaydırılır.",
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Boşluk içermeyen çok uzun bir gönderen adı, sohbet baloncuğunun kenarından taşmak yerine baloncuğun içinde sığar.",
-  "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Telefonlardaki hesap dışa aktarma sayfalarında, haftalık etkinlik haritasındaki gün ve saat etiketleri artık hücreler tarafından kesilmiyor."
+  "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Telefonlardaki hesap dışa aktarma sayfalarında, haftalık etkinlik haritasındaki gün ve saat etiketleri artık hücreler tarafından kesilmiyor.",
+  "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Bir yanıt alıntısındaki çok uzun yazar adı ve bir hizmet satırındaki çok uzun yeni sohbet adı, ekranın kenarından taşmak yerine satır sonuna sığacak şekilde düzenlenir."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",
