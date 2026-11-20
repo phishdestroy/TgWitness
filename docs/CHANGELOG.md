@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- The journal timeline names 40 more events in words, such as Chat details read, History reading started and Watchlist match, and any event without a name shows a readable title instead of its dotted code.
 - Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
 - In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
