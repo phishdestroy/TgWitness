@@ -10862,5 +10862,6 @@
   "Watchlist match": "התאמה ברשימת המעקב",
   "Workspace deleted": "סביבת העבודה נמחקה",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy ציבורי</strong><span>פחות יציב · מאגר אוטומטי</span>",
-  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "פתח את מסך המקליט כדי לבחור בין 'שולחן עבודה' ל'אינטרנט', בין ייצוא מקורי ללכידה חזותית, וכן את המחבר שהוקצה. מצב זה משתמש במושב נפרד של הלקוח הרשמי."
 }

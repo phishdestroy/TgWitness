@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
 - `verify.py` words a refusal that has a plain reason without the exception name: "VERIFICATION FAILED: Duplicate ZIP members" instead of "VERIFICATION FAILED: ValueError: Duplicate ZIP members". Other failures keep the name of their type.
 - In the report viewer on a phone, a table that scrolls sideways, such as Senders, fades at its right edge instead of looking cut off.
 - In the viewer of an evidence report the senders and indicators search fields have an accessible name (the same text as their placeholder), and the selection checkbox of a record shows a focus ring when it is reached with the keyboard.
