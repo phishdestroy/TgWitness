@@ -337,9 +337,14 @@ class Layout:
                 row = table.row()
                 mono = isinstance(value, Mono)
                 for text, style in self.mirror([(str(key), self.face(bold=True)),
-                                                (str(value), self.face(mono, 8 if mono else 8.8))]):
+                                                (self.fit(value, 1500), self.face(mono, 8 if mono else 8.8))]):
                     row.cell(text, style=style)
         self.gap(2)
+
+    @staticmethod
+    def fit(value, limit=600):
+        text = str(value)
+        return text if len(text) <= limit else text[:limit - 1] + "…"
 
     def grid(self, columns, rows, widths=None):
         if not rows:
@@ -358,7 +363,7 @@ class Layout:
                 row = table.row()
                 for value in self.mirror(values):
                     mono = isinstance(value, Mono)
-                    row.cell(str(value), style=self.face(mono, 7.4 if mono else 8.2))
+                    row.cell(self.fit(value), style=self.face(mono, 7.4 if mono else 8.2))
         self.gap(2)
 
     def bullets(self, items, size=8.8):
