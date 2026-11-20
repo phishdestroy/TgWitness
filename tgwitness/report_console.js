@@ -289,6 +289,12 @@ async function startViewer(meta){
     if(it.withheld)b.push('<span class="tag">'+esc(say("minimised"))+"</span>");return b.join("");}
   function pickBox(it){return '<input type="checkbox" class="pick"'+(V.selected.has(it.key)?" checked":"")+' aria-label="'+esc(say("Select"))+'">';}
   function shortText(t){return t.length>1200?t.slice(0,1200)+"…":t;}
+  function forwardLine(d){const f=d&&d.forwarded_from;if(!f||typeof f!=="object")return "";
+    const who=f.from_name||(f.from_id!=null?"ID "+f.from_id:say("a hidden sender"));
+    return '<div class="msg-fwd">↪ '+esc(say("Forwarded from"))+" "+esc(String(who))+(f.channel_post!=null?" #"+esc(String(f.channel_post)):"")+"</div>";}
+  function reactionLine(d){const r=d&&d.reactions;if(!Array.isArray(r)||!r.length)return "";
+    const chips=r.filter(x=>x&&x.reaction!=null).slice(0,12).map(x=>'<span class="msg-react">'+esc(String(x.reaction))+" "+esc(num(x.count))+"</span>").join("");
+    return chips?'<div class="msg-reacts">'+chips+"</div>":"";}
   function message(it,first,last){
     if(it.cat==="service")return '<div class="msg-service" data-key="'+it.key+'"><span>'+esc(it.who)+" · "+esc(it.service)+" · #"+it.n+" · "+esc(clock(it.at))+"</span></div>";
     const media=meta.media_previews!==false&&it.file&&isImage(it)?'<img class="msg-img" alt="" loading="lazy" src="'+esc(it.file.path)+'">':(it.file||it.d.media_type)?
@@ -297,8 +303,8 @@ async function startViewer(meta){
     const times=[sayf("Sent: {time}",{time:it.sent||(it.chat==null?it.at:"")?when(it.sent||it.at):"—"}),...(it.chat!=null&&it.at?[sayf("Saved: {time}",{time:when(it.at)})]:[])].join(" · ");
     return '<article class="msg '+colour(it.uid??it.who)+(first?" first":"")+(last?" last":"")+(V.selected.has(it.key)?" picked":"")+'" data-key="'+it.key+'" role="listitem" tabindex="0">'
       +pickBox(it)+'<div class="msg-ava">'+(last?'<div class="ava">'+esc(initials(it.who))+"</div>":"")+'</div><div class="msg-bubble">'
-      +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+media+hashNotice(it)
-      +(it.text?'<div class="msg-text" dir="auto">'+hl(shortText(it.text))+"</div>":"")
+      +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+forwardLine(it.d)+media+hashNotice(it)
+      +(it.text?'<div class="msg-text" dir="auto">'+hl(shortText(it.text))+"</div>":"")+reactionLine(it.d)
       +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta" title="'+esc(times)+'">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
   function hashNotice(it){const h=it.fileHashes;if(!h||!/^[0-9a-f]{64}$/.test(h.sha))return "";
     return '<div class="rec-p">File content not downloaded. '+esc(h.name||"Attachment")+' · '+num(h.bytes)+' bytes · '+num(h.ranges)
