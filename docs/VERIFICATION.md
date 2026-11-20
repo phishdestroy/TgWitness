@@ -634,6 +634,11 @@ self-throttling from a persisted deadline, and Secret Chats, including self-dest
 their media, on live accounts. The OpenTimestamps proofs were present in live exports; their
 Bitcoin confirmation remains open.
 
+Further controlled runs for role visibility, reaction actors, prolonged FloodWait,
+account bans, network and process interruption recovery, mobile QR confirmation,
+sustained high load and long-term archival follow the
+[live acceptance](internal/LIVE_ACCEPTANCE.md) matrix.
+
 The [public audit directory](../website/validation/audit/README.md) contains only
 the signed report and aggregate measurements. Detailed operational receipts,
 raw captures and account material remain private. Application screenshots in
