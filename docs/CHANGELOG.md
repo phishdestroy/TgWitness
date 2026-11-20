@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the Telegram account settings on a phone, the Profile button, the account picture and the account ID no longer touch the controls next to them.
 - A saved record whose reactions are malformed (a missing count, an entry that is not a reaction, or a value that is not a list) no longer stops a report from being built: the report lists the readable reactions and skips the rest.
 - `verify.py` says "the archive has no manifest.sig, so its signature cannot be checked" for an archive without its signature file, instead of a `KeyError`.
 - When a chat export stops because the free disk space is too low for its attachments, the panel gives the reason and the way out ("Not enough free disk space for the attachments of this export. Free space or turn attachment downloads off under Sources → Recording.") instead of "Export failed (ValueError)". The reason is in the export record as `message`.
