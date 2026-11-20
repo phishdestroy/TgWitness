@@ -10535,5 +10535,9 @@
   "Forwarded message": "Mesej yang diteruskan",
   "Original message sent {time}": "Mesej asal dihantar pada {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Bilangan adalah seperti ketika mesej ini disimpan; Telegram akan mengemas kini kemudian.",
-  "{n} views": "{n} pandangan"
+  "{n} views": "{n} pandangan",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Fail yang disimpan daripada sembang ini, yang terbaru dahulu. Hanya fail yang sebenarnya dimuat turun oleh pengumpul disenaraikan; mesej dengan lampiran yang tidak disimpan tidak dipaparkan di sini.",
+  "No saved files in this chat": "Tiada fail yang disimpan dalam sembang ini",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fail akan muncul di sini setelah pengumpul memuat turunnya. Semak had fail di bawah Sumber.",
+  "Open message #{id} in chat": "Buka mesej #{id} dalam sembang"
 }

@@ -10596,5 +10596,9 @@
   "Forwarded message": "Mensagem reencaminhada",
   "Original message sent {time}": "Mensagem original enviada às {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Os números correspondem aos valores registados no momento em que esta mensagem foi guardada; o Telegram atualiza-os posteriormente.",
-  "{n} views": "{n} visualizações"
+  "{n} views": "{n} visualizações",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Arquivos salvos deste bate-papo, com os mais recentes em primeiro lugar. Apenas os arquivos que o coletor realmente baixou são listados; uma mensagem com um anexo que não foi salva não é exibida aqui.",
+  "No saved files in this chat": "Não há arquivos salvos neste chat",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Os arquivos aparecem aqui assim que o coletor os baixar. Verifique os limites de arquivos na seção “Fontes”.",
+  "Open message #{id} in chat": "Abrir a mensagem nº {id} no chat"
 }
