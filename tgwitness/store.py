@@ -518,7 +518,7 @@ class Store:
                 item["telegram_edited_at"] = payload.get("edited_at") or item["telegram_edited_at"]
                 item["from_scheduled"] = item["from_scheduled"] or bool((payload.get("raw") or {}).get("from_scheduled"))
                 shown = message_details.details(payload.get("raw"))
-                picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown}
+                picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards", "via_bot_id", "author") if key in shown}
                 kept = {key: value for key, value in (shown.get("media_info") or {}).items()
                         if key in ("sticker_emoji", "poll", "location", "contact", "dice")}
                 media_info = shown.get("media_info") or {}
