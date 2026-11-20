@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A message made of one to three emoji is shown in a large size in the chat view, as in Telegram.
 - While messages are being selected in a chat, the chat-wide Build report button is hidden, so the selection bar has the only Build report button.
 - In the account export report a service message reads as a sentence on its card (for example "added a member", "changed the chat name to “…”", "pinned a message, number 42") instead of "No message text in this record." An action without a plain description shows "Service message" and its name.
 - Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
