@@ -10698,6 +10698,7 @@
   "No saved files in this chat": "У цьому чаті немає збережених файлів",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Файли з’являються тут після того, як колектор їх завантажить. Перевірте обмеження щодо розміру файлів у розділі «Джерела».",
   "Open message #{id} in chat": "Відкрити повідомлення № {id} у чаті",
+  "Report on this person": "Поскаржитися на цю особу",
   "Search or jump to #number": "Шукати або перейти до #номер",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Пошук і фільтри охоплюють усі збережені повідомлення в цьому чаті, включаючи попередні версії. Введіть символ # та номер повідомлення, щоб перейти до нього.",
   "Pinned messages ({n})": "Прикріплені повідомлення ({n})",

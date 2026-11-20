@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "このチャットには保存されたファイルがありません",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "コレクターがファイルをダウンロードすると、ここにファイルが表示されます。「ソース」の下にあるファイルの制限を確認してください。",
   "Open message #{id} in chat": "チャットでメッセージ #{id} を開く",
+  "Report on this person": "このユーザーを報告する",
   "Search or jump to #number": "検索、または#番号へ移動",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "検索とフィルタ機能は、このチャットに保存されているすべてのメッセージ（過去のバージョンを含む）を対象としています。「#」とメッセージ番号を入力すると、そのメッセージにジャンプできます。",
   "Pinned messages ({n})": "固定されたメッセージ ({n})",

@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "Không có tệp nào được lưu trong cuộc trò chuyện này",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Các tệp sẽ xuất hiện tại đây sau khi trình thu thập đã tải chúng xuống. Vui lòng kiểm tra giới hạn tệp trong phần Nguồn.",
   "Open message #{id} in chat": "Mở tin nhắn số {id} trong cuộc trò chuyện",
+  "Report on this person": "Báo cáo về người này",
   "Search or jump to #number": "Tìm kiếm hoặc chuyển đến #số",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Tính năng tìm kiếm và lọc áp dụng cho tất cả các tin nhắn đã lưu trong cuộc trò chuyện này, bao gồm cả các phiên bản trước đó. Nhập ký hiệu # cùng số tin nhắn để chuyển đến tin nhắn đó.",
   "Pinned messages ({n})": "Bài đăng được ghim ({n})",

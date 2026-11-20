@@ -10591,6 +10591,7 @@
   "No saved files in this chat": "Bu sohbette kaydedilmiş dosya yok",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Dosyalar, toplayıcı tarafından indirildikten sonra burada görünür. “Kaynaklar” bölümünden dosya sınırlarını kontrol edin.",
   "Open message #{id} in chat": "Sohbetteki #{id} numaralı mesajı aç",
+  "Report on this person": "Bu kişi hakkında bildirimde bulun",
   "Search or jump to #number": "Arama yapın veya #numaraya atlayın",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Arama ve filtreler, önceki sürümler de dahil olmak üzere bu sohbetteki tüm kaydedilmiş mesajları kapsar. # işaretini ve bir mesaj numarasını yazarak o mesaja atlayabilirsiniz.",
   "Pinned messages ({n})": "Sabitlenmiş mesajlar ({n})",

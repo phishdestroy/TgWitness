@@ -10604,6 +10604,7 @@
   "No saved files in this chat": "Aucun fichier enregistré dans cette conversation",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Les fichiers apparaissent ici une fois que le collecteur les a téléchargés. Vérifiez les limites de taille des fichiers dans la rubrique « Sources ».",
   "Open message #{id} in chat": "Ouvrir le message n° {id} dans le chat",
+  "Report on this person": "Signaler cette personne",
   "Search or jump to #number": "Rechercher ou aller à #numéro",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "La recherche et les filtres s'appliquent à tous les messages enregistrés dans cette conversation, y compris les versions antérieures. Tapez # suivi d'un numéro de message pour accéder directement à ce message.",
   "Pinned messages ({n})": "Messages épinglés ({n})",

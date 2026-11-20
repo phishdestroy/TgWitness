@@ -10802,6 +10802,7 @@
   "No saved files in this chat": "لا توجد ملفات محفوظة في هذه المحادثة",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "تظهر الملفات هنا بمجرد أن يقوم المجمع بتنزيلها. تحقق من حدود حجم الملفات في قسم «المصادر».",
   "Open message #{id} in chat": "افتح الرسالة رقم {id} في الدردشة",
+  "Report on this person": "الإبلاغ عن هذا الشخص",
   "Search or jump to #number": "ابحث أو انتقل إلى #رقم",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "تغطي ميزة البحث والمرشحات جميع الرسائل المحفوظة في هذه المحادثة، بما في ذلك الإصدارات السابقة. اكتب # ورقم الرسالة للانتقال إلى تلك الرسالة.",
   "Pinned messages ({n})": "الرسائل المثبتة ({n})",

@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "ไม่มีไฟล์ที่บันทึกไว้ในแชทนี้",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "ไฟล์จะปรากฏที่นี่หลังจากที่ระบบเก็บรวบรวมได้ดาวน์โหลดไฟล์เหล่านั้นแล้ว โปรดตรวจสอบขีดจำกัดจำนวนไฟล์ในส่วน \"แหล่งข้อมูล\"",
   "Open message #{id} in chat": "เปิดข้อความหมายเลข #{id} ในแชท",
+  "Report on this person": "รายงานเกี่ยวกับบุคคลนี้",
   "Search or jump to #number": "ค้นหาหรือไปยัง #หมายเลข",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "ฟังก์ชันการค้นหาและตัวกรองครอบคลุมข้อความทั้งหมดที่บันทึกไว้ในแชทนี้ รวมถึงเวอร์ชันเก่าด้วย เพียงพิมพ์ # ตามด้วยหมายเลขข้อความ เพื่อกระโดดไปยังข้อความนั้น",
   "Pinned messages ({n})": "ข้อความที่ถูกปักหมุด ({n})",

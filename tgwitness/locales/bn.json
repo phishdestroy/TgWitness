@@ -10594,6 +10594,7 @@
   "No saved files in this chat": "এই চ্যাটে কোনো সংরক্ষিত ফাইল নেই",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "সংগ্রাহক ফাইলগুলো ডাউনলোড করার পর এগুলো এখানে প্রদর্শিত হবে।  উৎসগুলির অধীনে ফাইলের সীমাগুলো পরীক্ষা করুন।",
   "Open message #{id} in chat": "চ্যাটে বার্তা #{id} খুলুন",
+  "Report on this person": "এই ব্যক্তির প্রতিবেদন",
   "Search or jump to #number": "#নম্বর অনুসন্ধান করুন বা সেখানে যান",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "অনুসন্ধান ও ফিল্টার এই চ্যাটের সমস্ত সংরক্ষিত বার্তা, পূর্ববর্তী সংস্করণসহ, অন্তর্ভুক্ত করে। # এবং একটি বার্তা নম্বর টাইপ করুন, সেই বার্তায় চলে যাবেন।",
   "Pinned messages ({n})": "পিন করা বার্তা ({n})",

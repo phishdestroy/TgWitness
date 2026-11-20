@@ -10594,6 +10594,7 @@
   "No saved files in this chat": "در این گفتگو هیچ فایل ذخیره‌شده‌ای وجود ندارد.",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "فایل‌ها پس از دانلود توسط گردآورنده در اینجا ظاهر می‌شوند. محدودیت‌های فایل را در بخش منابع بررسی کنید.",
   "Open message #{id} in chat": "پیام #{id} را در چت باز کنید",
+  "Report on this person": "گزارش درباره این شخص",
   "Search or jump to #number": "جستجو یا پرش به #شماره",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "جستجو و فیلترها تمام پیام‌های ذخیره‌شده در این چت، از جمله نسخه‌های قبلی را پوشش می‌دهند. برای رفتن به آن پیام، # و شماره پیام را تایپ کنید.",
   "Pinned messages ({n})": "پیام‌های سنجاق‌شده ({n})",

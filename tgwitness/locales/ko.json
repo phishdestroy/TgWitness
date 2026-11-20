@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "이 채팅에는 저장된 파일이 없습니다.",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "수집기가 파일을 다운로드하면 여기에 파일이 표시됩니다. ‘소스’에서 파일 제한 사항을 확인하세요.",
   "Open message #{id} in chat": "채팅에서 메시지 #{id} 열기",
+  "Report on this person": "이 사용자에 대해 신고하기",
   "Search or jump to #number": "검색하거나 #번호로 이동",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "검색 및 필터 기능은 이전 버전을 포함하여 이 채팅에 저장된 모든 메시지를 대상으로 합니다. # 기호와 메시지 번호를 입력하면 해당 메시지로 바로 이동할 수 있습니다.",
   "Pinned messages ({n})": "고정된 게시물 ({n})",

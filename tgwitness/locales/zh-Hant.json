@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "此聊天室中沒有儲存的檔案",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "當收集器下載完畢後，檔案便會顯示於此處。請在「來源」下查看檔案限制。",
   "Open message #{id} in chat": "在聊天室中開啟訊息 #{id}",
+  "Report on this person": "檢舉此人",
   "Search or jump to #number": "搜尋或跳至 #號碼",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "搜尋和篩選功能涵蓋此聊天室中所有已儲存的訊息，包括較早的版本。輸入 # 加上訊息編號，即可跳轉至該則訊息。",
   "Pinned messages ({n})": "釘選的貼文 ({n})",

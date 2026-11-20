@@ -10540,6 +10540,7 @@
   "No saved files in this chat": "Tiada fail yang disimpan dalam sembang ini",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fail akan muncul di sini setelah pengumpul memuat turunnya. Semak had fail di bawah Sumber.",
   "Open message #{id} in chat": "Buka mesej #{id} dalam sembang",
+  "Report on this person": "Laporan mengenai individu ini",
   "Search or jump to #number": "Cari atau lompat ke #nombor",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Carian dan penapis merangkumi semua mesej yang disimpan dalam sembang ini, termasuk versi terdahulu. Taip # dan nombor mesej untuk melangkau ke mesej tersebut.",
   "Pinned messages ({n})": "Mesej yang dipin ({n})",

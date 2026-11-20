@@ -10646,6 +10646,7 @@
   "No saved files in this chat": "אין קבצים שנשמרו בצ'אט זה",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "הקבצים מופיעים כאן לאחר שהאספן הוריד אותם. בדוק את מגבלות הקבצים תחת \"מקורות\".",
   "Open message #{id} in chat": "פתח את ההודעה מס' {id} בצ'אט",
+  "Report on this person": "דווח על אדם זה",
   "Search or jump to #number": "חפש או עבור ל-#מספר",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "החיפוש והמסננים חלים על כל ההודעות שנשמרו בצ'אט זה, כולל הגרסאות הקודמות. הקלד # ומספר ההודעה כדי לעבור להודעה זו.",
   "Pinned messages ({n})": "הודעות מוצמדות ({n})",

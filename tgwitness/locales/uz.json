@@ -10591,6 +10591,7 @@
   "No saved files in this chat": "Ushbu suhbatda saqlangan fayllar yo'q",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fayllar to'plovchi ularni yuklab olgach bu yerda paydo bo'ladi. Manbalar bo'limida fayl limitlarini tekshiring.",
   "Open message #{id} in chat": "Suhbatda #{id}-xabarni oching",
+  "Report on this person": "Ushbu shaxs haqida xabar bering",
   "Search or jump to #number": "Qidirish yoki #raqamga sakrash",
   "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Qidiruv va filtrlar ushbu suhbatdagi barcha saqlangan xabarlarni, shu jumladan avvalgi versiyalarni ham qamrab oladi. # belgisini va xabar raqamini tering, shu xabarga o'tish uchun.",
   "Pinned messages ({n})": "Biriktirilgan xabarlar ({n})",
