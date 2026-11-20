@@ -7226,7 +7226,8 @@
   "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Sozlamalarda, Yozuvni himoya qilish \"Kengaytirilgan himoya sozlamalari\" tugmasi bilan \"Boshqa tomon nimani ko'radi\" bloki orasida bo'sh joy qoldiradi.",
   "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Telefon ekranida Start tugmasidagi \"Vaqt guvohliklari\" tugmasi, Exports bo'limidagi imzo identifikatsiya kartochkalari va Create bo'limidagi \"Kirishni yaratish\" tugmasi endi ularning ustidagi matn yoki kartochkaga tegmaydi.",
   "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "1700 piksel va undan keng ekranlarda chat xabarlari chap chetga yopishmay, Telegram Desktop'dagi kabi taxminan 960 piksel kenglikdagi markaziy ustunda joylashadi.",
-  "e8e3cc775111d867f1c44f00c7c8b6ec7d202df9375b1facf5375493c21bd0ed": "Telefonidagi Telegram hisob sozlamalarida Profil tugmasi, hisob rasmi va hisob IDsi yonidagi boshqaruv elementlariga tegmayapti."
+  "e8e3cc775111d867f1c44f00c7c8b6ec7d202df9375b1facf5375493c21bd0ed": "Telefonidagi Telegram hisob sozlamalarida Profil tugmasi, hisob rasmi va hisob IDsi yonidagi boshqaruv elementlariga tegmayapti.",
+  "440afa5f63f4a05347d0cf9e3ab73ddf9acce607dce512d26bd030fa031b1a20": "Dalil hisobotini ko'rib chiquvchida ro'yxatga olinadigan yozuvlar bo'lmasa, uning ro'yxatida sababi ko'rsatiladi: ma'lumotsiz saqlangan hisobot uchun \"Ushbu hisobot ma'lumotsiz saqlangan. Ko'ruvchi uchun arxiv ichidagi report.html faylini oching.\", aks holda esa \"Ushbu hisobotda ma'lumot yo'q.\", bo'sh joy o'rniga."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",
