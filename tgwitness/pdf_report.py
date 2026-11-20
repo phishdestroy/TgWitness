@@ -314,8 +314,7 @@ class Layout:
         self.gap(2)
 
     def heading(self, title):
-        if report_composition_pdf.active(self) and title in (
-                self.say("Recorded activity over time"), self.say("Observation times by weekday and hour")):
+        if title in (self.say("Recorded activity over time"), self.say("Observation times by weekday and hour")):
             self.need(110)
         if self.pdf.get_y() > self.pdf.h - 45:
             self.pdf.add_page()
