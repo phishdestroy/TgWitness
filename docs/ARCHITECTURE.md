@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/ARCHITECTURE.md)
+
 ![Development](assets/presentation/chapter-develop.svg)
 
 # Architecture
