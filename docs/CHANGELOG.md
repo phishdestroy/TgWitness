@@ -26,6 +26,7 @@
 ## Unreleased
 
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
+- In the Meridian, Atlas, Ledger and Horizon report designs a long figure label such as "No observation period recorded" wraps inside its tile, so the report no longer scrolls sideways on a phone.
 - Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
 - In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
