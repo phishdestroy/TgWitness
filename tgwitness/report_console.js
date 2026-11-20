@@ -454,7 +454,7 @@ async function startViewer(meta){
       window.addEventListener("afterprint",done);print();}}
 
   function buildPeople(){const box=$("#view-people");if(!box)return;
-    box.innerHTML='<div class="v-page"><div class="v-page-head"><h2>'+esc(chat?say("Participants"):say("Senders"))+'</h2><input type="search" id="p-q" placeholder="'
+    box.innerHTML='<div class="v-page"><div class="v-page-head"><h2>'+esc(chat?say("Participants"):say("Senders"))+'</h2><input type="search" id="p-q" aria-label="'+esc(say("Name, @username or ID"))+'" placeholder="'
       +esc(say("Name, @username or ID"))+'"></div><div class="v-table"><table id="p-table"><thead><tr><th>'+esc(say("Person"))+"</th><th>ID</th><th>"
       +esc(say("Messages"))+"</th><th>"+esc(say("First message"))+"</th><th>"+esc(say("Last message"))+'</th><th></th></tr></thead><tbody></tbody></table></div><p class="v-muted" id="p-more"></p></div>';
     const draw=()=>{const q=$("#p-q").value.trim().toLowerCase();const list=V.people.filter(p=>!q||[p.name,p.username,p.user_id].join(" ").toLowerCase().includes(q));
@@ -468,7 +468,7 @@ async function startViewer(meta){
     for(const t of tabs)if(t.dataset.view==="people")t.querySelector("b").textContent=num(V.people.length);}
 
   function buildIocs(){const box=$("#view-iocs");if(!box)return;const kinds={};for(const x of V.iocs)kinds[x.kind]=(kinds[x.kind]||0)+1;const on=new Set(Object.keys(kinds));
-    box.innerHTML='<div class="v-page"><div class="v-page-head"><h2>'+esc(say("Indicators"))+'</h2><input type="search" id="i-q" placeholder="'+esc(say("Search indicators"))+'"></div>'
+    box.innerHTML='<div class="v-page"><div class="v-page-head"><h2>'+esc(say("Indicators"))+'</h2><input type="search" id="i-q" aria-label="'+esc(say("Search indicators"))+'" placeholder="'+esc(say("Search indicators"))+'"></div>'
       +'<p class="lead">'+esc(meta.iocLead||"")+'</p><div class="v-chips" id="i-kinds">'+Object.entries(kinds).map(([k,n])=>'<button type="button" class="v-chip" aria-pressed="true" data-kind="'+k+'">'
       +esc((meta.iocKinds||{})[k]||k)+" <b>"+num(n)+"</b></button>").join("")+'</div><div class="v-table"><table id="i-table"><thead><tr><th>'+esc(say("Type"))+"</th><th>"
       +esc(say("Value"))+"</th><th>"+esc(say("Seen"))+"</th><th>"+esc(say("Where in the message"))+"</th><th>"+esc(say("First seen"))+'</th><th></th></tr></thead><tbody></tbody></table></div><p class="v-muted" id="i-more"></p></div>';

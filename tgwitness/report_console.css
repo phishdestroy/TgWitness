@@ -92,6 +92,7 @@ code{direction:ltr;unicode-bidi:isolate}
 .msg.first{margin-top:10px}
 .msg .pick{position:absolute;left:8px;bottom:9px;opacity:0;transition:opacity .15s}
 .msg:hover .pick,.msg .pick:checked,.selecting .msg .pick{opacity:1}
+.pick:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .msg.picked{background:color-mix(in srgb,var(--accent) 13%,transparent)}
 .msg-ava{flex:0 0 38px;height:38px}
 .msg-ava .ava{width:38px;height:38px;font-size:14px}
