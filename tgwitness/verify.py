@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 5697f4b2b1b4a2cd3e973d5011f76eff60ee91359cf37f48769c668bbf9a868b
+# TgWitness verifier sources SHA-256: 6779df0a3561efdff99a9625f8f1a4efeafd3a4be7b40cda35df2a90e9669c4c
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -4213,7 +4213,11 @@ def media_reference(event):
 
 
 def verify_checkpoint(checkpoint, public_key, event_count, hash_at, check_drand=False):
-    statement = checkpoint["statement"]
+    statement = checkpoint.get("statement") if isinstance(checkpoint, dict) else None
+    if (not isinstance(statement, dict) or not isinstance(checkpoint.get("signature"), str)
+            or any(key not in statement for key in ("format", "public_key", "event_count", "head_hash"))):
+        raise ValueError("The --checkpoint file is not a signed TgWitness checkpoint: it needs a statement "
+                         "(format, public_key, event_count, head_hash) and a signature")
     if not is_format(statement["format"], "checkpoint-v1") or statement["public_key"] != public_key:
         raise ValueError("Checkpoint format or signing key mismatch")
     if type(statement["event_count"]) is not int or statement["event_count"] < 0:
