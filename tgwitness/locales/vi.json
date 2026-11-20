@@ -10553,5 +10553,12 @@
   "Open in chat: message #{id}": "Mở trong cửa sổ trò chuyện: tin nhắn số {id}",
   "Sticker {emoji}": "Hình dán {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target không nằm trong danh sách các cuộc trò chuyện mà tài khoản này đã đọc. Vui lòng làm mới danh sách nhóm hoặc tăng giới hạn danh sách trò chuyện trong phần Cài đặt.",
-  "Exported completely": "Đã xuất hoàn toàn"
+  "Exported completely": "Đã xuất hoàn toàn",
+  "This field is required.": "Trường này là trường bắt buộc.",
+  "Enter at least {n} characters.": "Vui lòng nhập ít nhất {n} ký tự.",
+  "Enter at most {n} characters.": "Nhập tối đa {n} ký tự.",
+  "The value must be at least {n}.": "Giá trị phải lớn hơn hoặc bằng {n}.",
+  "The value must be at most {n}.": "Giá trị này phải nhỏ hơn hoặc bằng {n}.",
+  "Enter a whole number.": "Hãy nhập một số nguyên.",
+  "Enter a number.": "Hãy nhập một số."
 }

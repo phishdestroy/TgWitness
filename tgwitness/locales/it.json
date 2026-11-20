@@ -10614,5 +10614,12 @@
   "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}",
   "Sticker {emoji}": "Adesivo {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "\"Target\" non figura tra le finestre di dialogo lette da questo account. Aggiorni l’elenco dei gruppi oppure aumenti il limite dell’elenco delle chat in \"Parametri\".",
-  "Exported completely": "Esportato integralmente"
+  "Exported completely": "Esportato integralmente",
+  "This field is required.": "Questo campo è obbligatorio.",
+  "Enter at least {n} characters.": "Inserisci almeno {n} caratteri.",
+  "Enter at most {n} characters.": "Inserisci al massimo {n} caratteri.",
+  "The value must be at least {n}.": "Il valore deve essere almeno {n}.",
+  "The value must be at most {n}.": "Il valore deve essere al massimo {n}.",
+  "Enter a whole number.": "Inserisci un numero intero.",
+  "Enter a number.": "Inserisci un numero."
 }

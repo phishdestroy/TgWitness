@@ -10553,5 +10553,12 @@
   "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}",
   "Sticker {emoji}": "Stiker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Sasaran tidak termasuk dalam dialog yang dibaca oleh akaun ini. Segarkan semula senarai kumpulan atau naikkan had senarai sembang dalam Parameter.",
-  "Exported completely": "Dieksport sepenuhnya"
+  "Exported completely": "Dieksport sepenuhnya",
+  "This field is required.": "Medan ini diperlukan.",
+  "Enter at least {n} characters.": "Masukkan sekurang-kurangnya {n} aksara.",
+  "Enter at most {n} characters.": "Masukkan paling banyak {n} aksara.",
+  "The value must be at least {n}.": "Nilai mesti sekurang-kurangnya {n}.",
+  "The value must be at most {n}.": "Nilai mestilah paling banyak {n}.",
+  "Enter a whole number.": "Masukkan nombor bulat.",
+  "Enter a number.": "Masukkan nombor."
 }
