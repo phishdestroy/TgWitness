@@ -7234,7 +7234,8 @@
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Pada halaman eksport akaun di telefon, label hari dalam minggu dan jam pada peta aktiviti mingguan tidak lagi terpotong oleh sel.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Nama pengarang yang sangat panjang dalam petikan balasan dan nama sembang baru yang sangat panjang dalam baris perkhidmatan, dibungkus semula bukannya melebihi tepi skrin.",
   "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Jika muatan pertama sembang gagal, paparan sembang akan memaparkan tajuk sembang, sebab dan butang Cuba Semula, bukannya skrin kosong pada telefon.",
-  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Dalam pemandang laporan bukti, medan carian penghantar dan penunjuk mempunyai nama yang boleh diakses (teks yang sama seperti tempat penanda mereka), dan kotak semak pilihan rekod memaparkan cincin tumpuan apabila ia dicapai dengan papan kekunci."
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Dalam pemandang laporan bukti, medan carian penghantar dan penunjuk mempunyai nama yang boleh diakses (teks yang sama seperti tempat penanda mereka), dan kotak semak pilihan rekod memaparkan cincin tumpuan apabila ia dicapai dengan papan kekunci.",
+  "435edfb33802d2636661c4e0fbaf960dc243ab81642d46ece2ad181d0f20337c": "Dalam pemapar laporan pada telefon, jadual yang menatal ke sisi, seperti Senders, akan memudar di tepi kanannya dan bukannya kelihatan terputus."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",
