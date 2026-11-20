@@ -10819,5 +10819,7 @@
   "Enter a whole number.": "أدخل عددًا صحيحًا.",
   "Enter a number.": "أدخل رقمًا.",
   "changed the chat name to “{title}”": "تم تغيير اسم الدردشة إلى «{title}»",
-  "pinned a message, number {n}": "تم تثبيت رسالة، رقم {n}"
+  "pinned a message, number {n}": "تم تثبيت رسالة، رقم {n}",
+  "Messages found: {n}": "عدد الرسائل التي تم العثور عليها: {n}",
+  "Messages found: {n}+": "عدد الرسائل التي تم العثور عليها: {n}+"
 }
