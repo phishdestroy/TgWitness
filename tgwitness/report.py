@@ -867,7 +867,7 @@ CSS = (
     "border-inline-start:1px solid var(--line)}"
     ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 96px;min-width:0;"
     "padding:8px 12px 9px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}.tile i{display:none}"
-    ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums}"
+    ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}"
     ".tile>span{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}"
     "section.card{margin:30px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}"
     ".brief-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}.brief-cols ul{margin:4px 0 0;padding-inline-start:18px}"
