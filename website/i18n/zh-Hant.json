@@ -7125,7 +7125,10 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "如果 Telegram 仍顯示這個臨時工作階段，請在「設定 → 裝置」中結束它。",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "執行器消失後，未完成的擷取無法繼續；新的執行會開始新的擷取。",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "開始你的擷取",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "金鑰與解密都留在這個瀏覽器分頁中。GitHub 和臨時 Telegram 面板會在獨立分頁開啟，精靈會提示你何時回來。"
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "金鑰與解密都留在這個瀏覽器分頁中。GitHub 和臨時 Telegram 面板會在獨立分頁開啟，精靈會提示你何時回來。",
+  "0894f36183b67c067cac7801afb4c30ccdc462bc4554a701710816bd498a28ca": "<code>--checkpoint</code> 檔案必須是經過簽名的檢查點：一個包含 <code>format</code>、<code>public_key</code>、\n   <code>event_count</code> 和 <code>head_hash</code>，並附有 <code>signature</code> 的 <code>statement</code>。任何其他檔案都會被拒絕，並顯示以下訊息：\n   <em>「--checkpoint 檔案並非經過簽名的 TgWitness 檢查點」</em>，隨後會列出該檔案所需的欄位。",
+  "f58bb6ce7ba7cf198f8890f65368faeea9250fccec1095dca08c749620fc51a6": "在手機上，「匯出記錄」中的「已簽署存檔卡」會採用與其下方卡片相同的側邊留白，以便標題和按鈕對齊。",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "在桌面版中，標記聊天室為優先級的星號不再遮蓋聊天室清單中最後一則訊息的時間；當游標懸停於該行或該行獲得焦點時，時間顯示會自動移開。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
