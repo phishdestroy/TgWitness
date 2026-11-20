@@ -26,6 +26,8 @@
 ## Unreleased
 
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
+- 146 more error messages from the panel's server side are translated into its 24 other languages, among them handover extracts, chat exports, the Case Board, documentation, watchlists, settings, storage, search records and report profiles. Before, the panel showed them in English whatever its language.
+- On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
 - A rejected form shows its messages in the panel's language and in plain words ("This field is required.", "Enter at least 3 characters.", "Enter a date such as 2026-10-01 or a time with a timezone.", "Choose one of the allowed values.") instead of the server's English wording.
 - `python -m tgwitness.download` says why a download failed: the panel refused the token, nothing answered at the address, the token file or output cannot be used, or the disk is full, instead of the exception name or "HTTP 401; redirects are not followed".
 - Command line results show two labelled times: `observed` (when the collector saw the record) and, when Telegram reported one, `sent` for a message or `edited` for an edited version. A deletion notice has only the observation time. Before, one unlabelled time was printed. `--json` is unchanged.
