@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.
 - In the Meridian, Atlas, Ledger and Horizon report designs a long figure label such as "No observation period recorded" wraps inside its tile, so the report no longer scrolls sideways on a phone.
 - Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
