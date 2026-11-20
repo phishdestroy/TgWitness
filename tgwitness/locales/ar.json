@@ -10820,6 +10820,8 @@
   "Enter a number.": "أدخل رقمًا.",
   "changed the chat name to “{title}”": "تم تغيير اسم الدردشة إلى «{title}»",
   "pinned a message, number {n}": "تم تثبيت رسالة، رقم {n}",
+  "Messages found: {n}": "عدد الرسائل التي تم العثور عليها: {n}",
+  "Messages found: {n}+": "عدد الرسائل التي تم العثور عليها: {n}+",
   "Choose at least {n}.": "اختر {n} على الأقل.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "أدخل تاريخًا مثل 2026-10-01 أو وقتًا مع المنطقة الزمنية.",
   "Choose one of the allowed values.": "اختر إحدى القيم المسموح بها.",

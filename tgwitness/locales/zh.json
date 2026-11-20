@@ -10565,6 +10565,8 @@
   "Enter a number.": "请输入一个数字。",
   "changed the chat name to “{title}”": "将聊天昵称更改为“{title}”",
   "pinned a message, number {n}": "置顶了一条消息，编号{n}",
+  "Messages found: {n}": "找到的消息：{n}条",
+  "Messages found: {n}+": "找到的消息：{n}+条",
   "Choose at least {n}.": "请至少选择一个{n}。",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "请输入日期（例如 2026-10-01）或带时区的具体时间。",
   "Choose one of the allowed values.": "请选择一个允许的值。",

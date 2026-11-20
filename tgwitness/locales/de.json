@@ -10616,6 +10616,8 @@
   "Enter a number.": "Geben Sie eine Zahl ein.",
   "changed the chat name to “{title}”": "den Chat-Namen in „{title}“ geändert",
   "pinned a message, number {n}": "Eine Nachricht angeheftet, Nummer {n}",
+  "Messages found: {n}": "Gefundene Beiträge: {n}",
+  "Messages found: {n}+": "Gefundene Beiträge: {n}+",
   "Choose at least {n}.": "Wählen Sie mindestens {n} aus.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Geben Sie ein Datum ein, z. B. 01.10.2026, oder eine Uhrzeit mit Zeitzone.",
   "Choose one of the allowed values.": "Wählen Sie einen der zulässigen Werte aus.",

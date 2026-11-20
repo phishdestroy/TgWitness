@@ -10565,6 +10565,8 @@
   "Enter a number.": "กรอกตัวเลข",
   "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
   "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}",
+  "Messages found: {n}": "พบข้อความ: {n}",
+  "Messages found: {n}+": "พบข้อความ: {n}+",
   "Choose at least {n}.": "เลือกอย่างน้อย{n}",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "ป้อนวันที่ เช่น 2026-10-01 หรือเวลาพร้อมเขตเวลา",
   "Choose one of the allowed values.": "เลือกค่าหนึ่งจากค่าที่อนุญาต",

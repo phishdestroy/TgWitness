@@ -10616,6 +10616,8 @@
   "Enter a number.": "एक संख्या दर्ज करें।",
   "changed the chat name to “{title}”": "चैट का नाम बदलकर \"{title}\" कर दिया।",
   "pinned a message, number {n}": "एक संदेश पिन किया, संख्या {n}",
+  "Messages found: {n}": "संदेश मिले: {n}",
+  "Messages found: {n}+": "मिले संदेश: {n}+",
   "Choose at least {n}.": "कम से कम एक चुनें{n}।",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 जैसी कोई तारीख या समय क्षेत्र के साथ कोई समय दर्ज करें।",
   "Choose one of the allowed values.": "अनुमत मानों में से एक चुनें।",
