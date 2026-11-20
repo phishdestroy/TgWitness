@@ -224,7 +224,7 @@ code{direction:ltr;unicode-bidi:isolate}
   .msg-bubble{max-width:calc(100% - 44px)}.v-top{top:calc(var(--bar-height,64px) + 6px)}
   .v-searchbar{flex-wrap:wrap;gap:6px;padding:8px 10px}.v-searchbar #v-q{flex-basis:calc(100% - 30px)}
   .v-searchbar .v-jump{flex:1;min-width:0}.v-searchbar select{flex:1;min-width:0}
-  .v-page{padding:20px 12px 100px}.v-page-head h2{font-size:24px}.v-table table{min-width:650px}
+  .v-page{padding:20px 12px 100px}.v-page-head h2{font-size:24px}.v-table table{min-width:650px}.v-table th,.v-table td{white-space:nowrap}.v-table td:has(code){white-space:normal;min-width:240px}
   .v-selbar{width:calc(100% - 24px);bottom:12px;flex-wrap:wrap;padding:10px;gap:6px}.v-selbar b{flex:1 0 100%}
   .v-selbar .v-btn{white-space:normal;font-size:12px;padding:8px 10px}.v-cards{grid-template-columns:1fr}
   .v-feed.chat{padding:10px 4px}.msg{padding-inline-start:24px;gap:6px}.msg .pick{left:1px}
