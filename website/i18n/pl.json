@@ -7224,7 +7224,8 @@
   "7d2efadac64ffe3f6fd2f69afb04b9ec7b3334e3d25f2b1c5802457301ffcb57": "W przypadku archiwum bez pliku podpisu program <code>verify.py</code> wyświetla komunikat „archiwum nie zawiera pliku manifest.sig, więc nie można sprawdzić jego podpisu” zamiast błędu <code>KeyError</code>.",
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "W telefonie przyciski wyboru w oknach dialogowych ustawień mają widoczną ramkę i wysokość dostosowaną do ekranu dotykowego wynoszącą 44 piksele, dzięki czemu wyglądają jak przyciski, nawet gdy żaden z nich nie jest zaznaczony.",
   "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "W sekcji „Ustawienia” opcja „Ochrona nagrań” pozostawia odstęp między przyciskiem „Zaawansowane ustawienia ochrony” a blokiem „To, co widzi druga strona”.",
-  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "W wersji mobilnej przycisk „Świadkowie czasu” w sekcji „Start”, karty tożsamości podpisujących w sekcji „Eksport” oraz przycisk „Utwórz dostęp” nie nakładają się już na tekst ani kartę znajdującą się nad nimi."
+  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "W wersji mobilnej przycisk „Świadkowie czasu” w sekcji „Start”, karty tożsamości podpisujących w sekcji „Eksport” oraz przycisk „Utwórz dostęp” nie nakładają się już na tekst ani kartę znajdującą się nad nimi.",
+  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "Na ekranach o szerokości 1700 pikseli i większej wiadomości na czacie tworzą wyśrodkowaną kolumnę o szerokości około 960 pikseli, tak jak w aplikacji Telegram Desktop, zamiast przylegać do lewej krawędzi."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",
