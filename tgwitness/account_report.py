@@ -428,6 +428,31 @@ def shared_row(row):
     return {'chat': safe_chat, 'message': safe_message}
 
 
+SERVICE_LABELS = {'MessageActionChatAddUser': 'added a member', 'MessageActionChatDeleteUser': 'removed a member or left',
+                  'MessageActionChatJoinedByLink': 'joined via invite link',
+                  'MessageActionChatJoinedByRequest': 'joined after a join request', 'MessageActionPinMessage': 'pinned a message',
+                  'MessageActionChatEditTitle': 'changed the chat name', 'MessageActionChatEditPhoto': 'changed the chat photo',
+                  'MessageActionChatCreate': 'created the group', 'MessageActionChannelCreate': 'created the channel'}
+
+
+def service_line(message, say):
+    action = message.get('action')
+    if message.get('_') != 'MessageService' or not isinstance(action, dict) or not isinstance(action.get('_'), str):
+        return ''
+    kind, title = action['_'], text(action.get('title'))
+    reply = message.get('reply_to')
+    pinned = reply.get('reply_to_msg_id') if isinstance(reply, dict) else None
+    if kind == 'MessageActionChatEditTitle' and title:
+        return say('changed the chat name to “{title}”', title=title)
+    if kind == 'MessageActionTopicCreate' and title:
+        return say('created the topic “{title}”', title=title)
+    if kind == 'MessageActionPinMessage' and type(pinned) is int:
+        return say('pinned a message, number {n}', n=pinned)
+    if kind in SERVICE_LABELS:
+        return say(SERVICE_LABELS[kind])
+    return say('Service message') + ': ' + re.sub(r'([a-z])([A-Z])', r'\1 \2', kind.removeprefix('MessageAction')).lower()
+
+
 def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.html'):
     if sharing:
         row = shared_row(row)
@@ -456,7 +481,7 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         parts.append('<p class="muted user" dir="auto">' + e(text(chat.get('title'))) + '</p>')
     if text(message.get('username')):
         parts.append('<p class="muted user" dir="auto">@' + e(message['username']) + '</p>')
-    parts.append('<p class="message-text" dir="auto">' + e(body or say('No message text in this record.')) + '</p>')
+    parts.append('<p class="message-text" dir="auto">' + e(body or (not sharing and service_line(message, say)) or say('No message text in this record.')) + '</p>')
     if not sharing:
         info = message_details.media_info(message.get('media'))
         if info:
