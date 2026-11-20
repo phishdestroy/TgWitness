@@ -10560,5 +10560,7 @@
   "The value must be at least {n}.": "Giá trị phải lớn hơn hoặc bằng {n}.",
   "The value must be at most {n}.": "Giá trị này phải nhỏ hơn hoặc bằng {n}.",
   "Enter a whole number.": "Hãy nhập một số nguyên.",
-  "Enter a number.": "Hãy nhập một số."
+  "Enter a number.": "Hãy nhập một số.",
+  "via bot ID {id}": "qua bot ID {id}",
+  "Post author: {name}": "Tác giả bài viết: {name}"
 }

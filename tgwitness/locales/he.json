@@ -10662,5 +10662,7 @@
   "The value must be at least {n}.": "הערך חייב להיות לפחות {n}.",
   "The value must be at most {n}.": "הערך חייב להיות לכל היותר {n}.",
   "Enter a whole number.": "הזן מספר שלם.",
-  "Enter a number.": "הזן מספר."
+  "Enter a number.": "הזן מספר.",
+  "via bot ID {id}": "באמצעות בוט מס' {id}",
+  "Post author: {name}": "מחבר הפוסט: {name}"
 }

@@ -10611,5 +10611,7 @@
   "The value must be at least {n}.": "Qiymat kamida {n} bo'lishi kerak.",
   "The value must be at most {n}.": "Qiymat eng ko'pi bilan {n} bo'lishi kerak.",
   "Enter a whole number.": "Butun son kiring.",
-  "Enter a number.": "Raqamni kiriting."
+  "Enter a number.": "Raqamni kiriting.",
+  "via bot ID {id}": "bot ID {id} orqali",
+  "Post author: {name}": "Post muallifi: {name}"
 }

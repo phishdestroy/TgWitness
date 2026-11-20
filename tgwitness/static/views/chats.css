@@ -246,3 +246,4 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .chat-gallery { padding: 8px 12px; }
 
 .workspace[data-current-view="chats"] .sticker-label { font-size: 13px; opacity: .85; margin: 4px 0; }
+.workspace[data-current-view="chats"] .bubble-via { margin: 2px 0 4px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }

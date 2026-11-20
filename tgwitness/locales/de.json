@@ -10611,5 +10611,7 @@
   "The value must be at least {n}.": "Der Wert muss mindestens {n} betragen.",
   "The value must be at most {n}.": "Der Wert darf höchstens {n} betragen.",
   "Enter a whole number.": "Geben Sie eine ganze Zahl ein.",
-  "Enter a number.": "Geben Sie eine Zahl ein."
+  "Enter a number.": "Geben Sie eine Zahl ein.",
+  "via bot ID {id}": "über Bot-ID {id}",
+  "Post author: {name}": "Autor des Beitrags: {name}"
 }

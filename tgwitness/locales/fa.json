@@ -10611,5 +10611,7 @@
   "The value must be at least {n}.": "مقدار باید حداقل {n} باشد.",
   "The value must be at most {n}.": "مقدار باید حداکثر {n} باشد.",
   "Enter a whole number.": "یک عدد صحیح وارد کنید.",
-  "Enter a number.": "عددی را وارد کنید."
+  "Enter a number.": "عددی را وارد کنید.",
+  "via bot ID {id}": "از طریق آی‌دی ربات {id}",
+  "Post author: {name}": "نویسندهٔ پست: {name}"
 }

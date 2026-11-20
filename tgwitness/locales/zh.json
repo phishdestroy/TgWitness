@@ -10560,5 +10560,7 @@
   "The value must be at least {n}.": "该值必须至少为 {n}。",
   "The value must be at most {n}.": "该值必须小于等于{n}。",
   "Enter a whole number.": "请输入一个整数。",
-  "Enter a number.": "请输入一个数字。"
+  "Enter a number.": "请输入一个数字。",
+  "via bot ID {id}": "通过机器人 ID {id}",
+  "Post author: {name}": "文章作者：{name}"
 }

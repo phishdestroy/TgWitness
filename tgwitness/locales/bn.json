@@ -10611,5 +10611,7 @@
   "The value must be at least {n}.": "মানটি কমপক্ষে {n} হতে হবে।",
   "The value must be at most {n}.": "মানটি সর্বোচ্চ {n} হতে হবে।",
   "Enter a whole number.": "একটি পূর্ণসংখ্যা লিখুন।",
-  "Enter a number.": "একটি সংখ্যা লিখুন।"
+  "Enter a number.": "একটি সংখ্যা লিখুন।",
+  "via bot ID {id}": "বট আইডি {id} এর মাধ্যমে",
+  "Post author: {name}": "পোস্টের লেখক: {name}"
 }

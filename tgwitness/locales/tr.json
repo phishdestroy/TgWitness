@@ -10611,5 +10611,7 @@
   "The value must be at least {n}.": "Değer en az {n} olmalıdır.",
   "The value must be at most {n}.": "Değer, en fazla {n} olmalıdır.",
   "Enter a whole number.": "Bir tam sayı girin.",
-  "Enter a number.": "Bir sayı girin."
+  "Enter a number.": "Bir sayı girin.",
+  "via bot ID {id}": "{id} numaralı bot aracılığıyla",
+  "Post author: {name}": "Yazının yazarı: {name}"
 }

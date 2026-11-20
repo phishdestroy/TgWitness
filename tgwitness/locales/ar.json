@@ -10815,5 +10815,7 @@
   "The value must be at least {n}.": "يجب ألا تقل القيمة عن {n}.",
   "The value must be at most {n}.": "يجب ألا تتجاوز القيمة {n}.",
   "Enter a whole number.": "أدخل عددًا صحيحًا.",
-  "Enter a number.": "أدخل رقمًا."
+  "Enter a number.": "أدخل رقمًا.",
+  "via bot ID {id}": "عبر البوت رقم {id}",
+  "Post author: {name}": "مؤلف المنشور: {name}"
 }

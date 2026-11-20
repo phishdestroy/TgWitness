@@ -10560,5 +10560,7 @@
   "The value must be at least {n}.": "値は少なくとも{n}以上でなければなりません。",
   "The value must be at most {n}.": "値は{n}以下でなければなりません。",
   "Enter a whole number.": "整数を入力してください。",
-  "Enter a number.": "数字を入力してください。"
+  "Enter a number.": "数字を入力してください。",
+  "via bot ID {id}": "ボットID {id}経由",
+  "Post author: {name}": "投稿者：{name}"
 }
