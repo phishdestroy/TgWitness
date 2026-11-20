@@ -5738,6 +5738,10 @@ const serviceLabels={MessageActionChatAddUser:tr("added a member"),MessageAction
   MessageActionPinMessage:tr("pinned a message"),MessageActionChatEditTitle:tr("changed the chat name"),
   MessageActionChatEditPhoto:tr("changed the chat photo"),MessageActionChatCreate:tr("created the group"),MessageActionChannelCreate:tr("created the channel")};
 function serviceText(action){return serviceLabels[action]||String(action||"service event").replace(/^MessageAction/,"").replace(/([a-z])([A-Z])/g,"$1 $2").toLowerCase();}
+function serviceActor(m){
+  const s=m.sender;
+  return s&&s.id!==null&&s.id!==undefined&&s.id!==state.chat&&!s.name&&!s.username?tr("ID {id}",{id:s.id}):senderName(m);
+}
 function senderName(m){
   const s=m.sender,title=state.chatInfo?.title;
   if(!s||s.id===state.chat)return title||tr("Channel");
@@ -5853,9 +5857,26 @@ function setChatQuery(changes){
   renderChatStatus();renderChatFeed();renderComposer();
   return loadChatMessages("open");
 }
-$("chat-search-form").addEventListener("submit",event=>{event.preventDefault();setChatQuery({});});
+const messageJump=/^#\s*(\d{1,12})$/;
+async function jumpToMessageNumber(id){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(id)){
+    const bubble=$("msg-"+id)?.querySelector(".bubble");
+    if(bubble){bubble.setAttribute("tabindex","-1");bubble.focus({preventScroll:true});}
+    return;
+  }
+  if(chat===state.chat&&profile===state.profile)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id}),true);
+}
+$("chat-search-form").addEventListener("submit",event=>{
+  event.preventDefault();
+  const jump=messageJump.exec($("chat-message-search").value.trim());
+  if(jump){clearTimeout(chatSearchTimer);return jumpToMessageNumber(Number(jump[1]));}
+  setChatQuery({});
+});
 $("chat-message-search").addEventListener("input",()=>{
-  clearTimeout(chatSearchTimer);chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
+  clearTimeout(chatSearchTimer);
+  if(messageJump.test($("chat-message-search").value.trim()))return;
+  chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
 });
 $("chat-search-clear").addEventListener("click",()=>{setChatQuery({chatSearch:""});$("chat-message-search").focus();});
 async function openChat(id,options={}){
@@ -5871,6 +5892,43 @@ async function openChat(id,options={}){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
+}
+let pinnedGeneration=-1;
+function renderChatPinned(data){
+  const box=$("chat-pinned"),items=data?.items||[],snap=data?.snapshot;
+  if(!snap||!items.length){box.hidden=true;return;}
+  const open=box.open;
+  $("chat-pinned-title").textContent=tr("Pinned messages ({n})",{n:(snap.pinned_total??items.length).toLocaleString(LANG)});
+  const body=$("chat-pinned-body"),notes=[tr("Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.",{time:fmtTime(snap.observed_at)})];
+  if(snap.carried_forward)notes.push(tr("The list was not refreshed at that check; this is the last list received."));
+  if(typeof snap.pinned_total==="number"&&snap.pinned_total!==snap.listed)notes.push(tr("Telegram reported {total} pinned messages; only {listed} are listed.",{total:(snap.pinned_total).toLocaleString(LANG),listed:(snap.listed).toLocaleString(LANG)}));
+  const list=node("ul","chat-pinned-list");
+  for(const item of items){
+    const row=node("li","chat-pinned-item"),label=node("span","chat-pinned-label");
+    const who=item.sender?(item.sender.name||(item.sender.username?"@"+item.sender.username:"")):"";
+    label.append(node("strong","",tr("Message #{id}",{id:item.message_id})));
+    if(item.saved){
+      if(who)label.append(" · "+who);
+      if(item.sent_at)label.append(" · "+fmtTime(item.sent_at));
+      if(item.deleted)label.append(" · "+tr("Deleted"));
+      if(item.text)label.append(node("span","chat-pinned-text",item.text));
+      const go=node("button","quiet small",tr("Show in chat"));go.type="button";
+      go.setAttribute("aria-label",tr("Show in chat: message #{id}",{id:item.message_id}));
+      go.addEventListener("click",()=>busy(go,()=>jumpToMessageNumber(item.message_id)));
+      row.append(label,go);
+    }else{label.append(node("span","chat-pinned-text",tr("Not saved in this workspace")));row.append(label);}
+    list.append(row);
+  }
+  body.replaceChildren(...notes.map(text=>node("p","hint",text)),list);
+  box.hidden=false;box.open=open;
+}
+async function loadChatPinned(){
+  const chat=state.chat,generation=chatGeneration;
+  renderChatPinned(null);
+  let data=null;
+  try{data=await json("chats/"+chat+"/pinned");}catch{return;}
+  if(chat!==state.chat||generation!==chatGeneration)return;
+  renderChatPinned(data);
 }
 const chatPositions=new Map();let replyReturn=null,chatPositionFrame=0;
 async function showChatMessage(id,{offset=null,flash=true}={}){
@@ -5925,6 +5983,7 @@ function fmtDuration(seconds){
 }
 async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
+  if(pinnedGeneration!==generation&&state.chatView==="messages"){pinnedGeneration=generation;loadChatPinned().catch(()=>{});}
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
   if((mode==='older'&&state.chatNextBefore===null)||(mode==='newer'&&state.chatNextAfter===null))return true;
@@ -6076,7 +6135,9 @@ function renderChatStatus(){
         if(revision===state.workspaceRevision)await window.TgWitnessAnalysis?.focusChat(chat);});return;}
       state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
   const toolbar=node("details","action-menu chat-filter-row"),summary=node('summary'),filterPanel=node('div','action-menu-panel');
-  summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
+  const filterLabel=tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters');
+  summary.setAttribute('aria-label',filterLabel);
+  summary.append(icon('settings'),node('span','',filterLabel));
   filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';toolbar.open=filtersOpen;
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
@@ -6236,9 +6297,10 @@ async function renderChatGallery(body){
       cell.append(mediaNode({sha256:item.sha256,mime_type:item.mime_type,name:item.name,size:item.size}));
       caption.append(node("strong","",item.name||item.mime_type||tr("File")));
       if(item.size)caption.append(" · "+humanSize(item.size));
-      caption.append(node("br"),tr("Message #{id}",{id:item.message_id})+" · "+fmtTime(item.observed_at));
+      const hasMessage=item.message_id!==null&&item.message_id!==undefined;
+      caption.append(node("br"),(hasMessage?tr("Message #{id}",{id:item.message_id})+" · ":"")+fmtTime(item.observed_at));
       cell.append(caption);
-      if(item.message_id!==null&&item.message_id!==undefined){
+      if(hasMessage){
         const go=node("button","quiet small",tr("Open in chat"));go.type="button";
         go.setAttribute("aria-label",tr("Open message #{id} in chat",{id:item.message_id}));
         go.addEventListener("click",()=>busy(go,async()=>{
@@ -6355,7 +6417,7 @@ function renderChatFeed(){
     const marks=marksBefore.get(m.message_id);if(marks)next.push(...marks);
     if(day!==lastDay){const chip=days.get(day)||node("div","chat-day"),label=fmtDay(when);chip.dataset.day=day;
       if(chip.textContent!==label)chip.textContent=label;chip.title=panelTime.fullDay(when);next.push(chip);lastDay=day;}
-    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
+    if(m.service_action){const service=node("div","chat-service",serviceActor(m)+" "+serviceText(m.service_action)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
       const ref=m.reference;if(ref)boardView?.attach(service,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id});next.push(service);return;}
     const grouped=!marks&&joins(shown[index-1],m),continued=!marksBefore.has(shown[index+1]?.message_id)&&joins(m,shown[index+1]),post=channel&&(!m.sender||m.sender.id===state.chat);
     const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,continued,post,m.reply_to&&!m.reply_to_chat&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key(),chatPick?chatPick.has(m.message_id):null]);
@@ -7096,6 +7158,7 @@ async function openExportDialog(){
   $("export-select-all").onclick=()=>{list.querySelectorAll("input:not(:disabled)").forEach(b=>{b.checked=true;});estimate();};
   estimate();
   showExportBounds();
+  $("export-media").checked=!!state.status?.capture?.download_media;
   const dialog=$("export-dialog");
   const saved=await json("multi-export/jobs",undefined,{root:true});
   if(revision!==state.workspaceRevision||generation!==chatGeneration)return;

@@ -649,6 +649,37 @@ def message_page(store, chat_id, before_id, limit, after_id, mode="all", search=
     return result
 
 
+PINNED_LIMIT = 20
+
+
+def pinned_page(store, chat_id):
+    from ..archive_views import latest_state
+
+    record, state = latest_state(store, chat_id)
+    if record is None or state is None or "pinned" not in state:
+        return {"snapshot": None, "items": []}
+    ids = [i for i in state["pinned"] if type(i) is int][:PINNED_LIMIT]
+    items = []
+    for message_id in ids:
+        found = store.chat_messages(chat_id, message_id + 1, 1)["messages"]
+        message = found[0] if found and found[0]["message_id"] == message_id else None
+        items.append({"message_id": message_id, "saved": message is not None,
+                      "text": (message["text"] or "")[:240] if message else None,
+                      "sender": message["sender"] if message else None,
+                      "sent_at": message["sent_at"] if message else None,
+                      "deleted": bool(message and message["deleted"])})
+    payload = record["payload"]
+    return {"snapshot": {"event_seq": record["seq"], "observed_at": record["observed_at"],
+                         "pinned_total": state.get("pinned_total"), "listed": len(ids),
+                         "complete": state.get("parts_complete", {}).get("pinned"),
+                         "carried_forward": "pinned" in payload.get("carried_forward", [])},
+            "items": items}
+
+
+async def chat_pinned(chat_id: ChatId, *, ctx=Depends(current_context)):
+    return await asyncio.to_thread(pinned_page, ctx.app.state.store, chat_id)
+
+
 def media_page(store, chat_id, before_seq, limit):
     with store.reading() as db:
         rows = db.execute(
