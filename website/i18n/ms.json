@@ -7233,7 +7233,8 @@
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Nama penghantar yang sangat panjang tanpa ruang akan terbungkus dalam gelembung sembangnya, bukannya melebihi tepinya.",
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Pada halaman eksport akaun di telefon, label hari dalam minggu dan jam pada peta aktiviti mingguan tidak lagi terpotong oleh sel.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Nama pengarang yang sangat panjang dalam petikan balasan dan nama sembang baru yang sangat panjang dalam baris perkhidmatan, dibungkus semula bukannya melebihi tepi skrin.",
-  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Jika muatan pertama sembang gagal, paparan sembang akan memaparkan tajuk sembang, sebab dan butang Cuba Semula, bukannya skrin kosong pada telefon."
+  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Jika muatan pertama sembang gagal, paparan sembang akan memaparkan tajuk sembang, sebab dan butang Cuba Semula, bukannya skrin kosong pada telefon.",
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Dalam pemandang laporan bukti, medan carian penghantar dan penunjuk mempunyai nama yang boleh diakses (teks yang sama seperti tempat penanda mereka), dan kotak semak pilihan rekod memaparkan cincin tumpuan apabila ia dicapai dengan papan kekunci."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

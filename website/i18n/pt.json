@@ -7285,7 +7285,8 @@
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Um nome de remetente muito longo, sem espaços, é quebrado dentro do balão de conversa, em vez de ultrapassar sua borda.",
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Nas páginas de exportação de contas no celular, os nomes dos dias da semana e das horas no mapa de atividades semanais não ficam mais cortados pelas células.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Um nome de autor muito longo em uma citação de resposta e um nome de novo participante muito longo em uma linha de atendimento que quebra em vez de ultrapassar a borda da tela.",
-  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Se o primeiro carregamento de um chat falhar, a tela do chat exibe o cabeçalho do chat, o motivo e um botão “Tentar novamente”, em vez de uma tela em branco no celular."
+  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Se o primeiro carregamento de um chat falhar, a tela do chat exibe o cabeçalho do chat, o motivo e um botão “Tentar novamente”, em vez de uma tela em branco no celular.",
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "No visualizador de um relatório de evidências, os campos de pesquisa “remetentes” e “indicadores” apresentam um nome acessível (o mesmo texto do seu marcador de posição), e a caixa de seleção de um registro exibe um anel de foco quando o cursor chega até ela pelo teclado."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",
