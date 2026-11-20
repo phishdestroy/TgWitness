@@ -407,8 +407,10 @@ def _metric_bars(rows, column):
     values = [row[column] if isinstance(row[column], (int, float)) else 0 for row in rows]
     top = max(values, default=0) or 1
     width = max(len(values), 1)
+    slot = 1000 / width
+    bar = min(max(slot - 2, 1), 60)
     bars = "".join('<rect x="%.3f" y="%.3f" width="%.3f" height="%.3f" class="metric-bar"/>'
-                   % (index * 1000 / width + 1, 100 - value * 96 / top, max(1000 / width - 2, 1), value * 96 / top)
+                   % (index * slot + (slot - bar) / 2, 100 - value * 96 / top, bar, value * 96 / top)
                    for index, value in enumerate(values))
     return ('<svg class="metric-chart" viewBox="0 0 1000 100" preserveAspectRatio="none" role="img" aria-hidden="true">'
             + bars + '</svg>')
