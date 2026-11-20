@@ -10615,5 +10615,7 @@
   "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
   "Enter a number.": "ایک عدد درج کریں۔",
   "changed the chat name to “{title}”": "چیٹ کا نام \"{title}\" میں تبدیل کیا۔",
-  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}"
+  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}",
+  "Messages found: {n}": "پیغامات ملے: {n}",
+  "Messages found: {n}+": "پیغامات ملے: {n}+"
 }

@@ -10717,5 +10717,7 @@
   "Enter a whole number.": "Введіть ціле число.",
   "Enter a number.": "Введіть число.",
   "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
-  "pinned a message, number {n}": "закріпив повідомлення № {n}"
+  "pinned a message, number {n}": "закріпив повідомлення № {n}",
+  "Messages found: {n}": "Знайдено повідомлень: {n}",
+  "Messages found: {n}+": "Знайдено повідомлень: {n}+"
 }
