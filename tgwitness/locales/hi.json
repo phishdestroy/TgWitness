@@ -10809,5 +10809,7 @@
   "Watchlist entries added": "वॉचलिस्ट में प्रविष्टियाँ जोड़ी गईं",
   "Watchlist entries removed": "वॉचलिस्ट प्रविष्टियाँ हटाई गईं",
   "Watchlist match": "वॉचलिस्ट मिलान",
-  "Workspace deleted": "वर्कस्पेस हटा दिया गया"
+  "Workspace deleted": "वर्कस्पेस हटा दिया गया",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>सार्वजनिक MTProxy</strong><span>कम स्थिर · स्वचालित पूल</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

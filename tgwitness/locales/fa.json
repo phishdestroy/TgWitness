@@ -10809,5 +10809,7 @@
   "Watchlist entries added": "موارد فهرست تماشا اضافه شدند",
   "Watchlist entries removed": "موارد فهرست تماشا حذف شدند",
   "Watchlist match": "مطابقت فهرست تماشا",
-  "Workspace deleted": "فضای کاری حذف شد"
+  "Workspace deleted": "فضای کاری حذف شد",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy عمومی</strong><span>کم‌ثبات‌تر · استخر خودکار</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

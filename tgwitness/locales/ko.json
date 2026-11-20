@@ -10758,5 +10758,7 @@
   "Watchlist entries added": "관심 목록 항목 추가됨",
   "Watchlist entries removed": "관심 목록 항목이 삭제되었습니다.",
   "Watchlist match": "관심 목록 일치",
-  "Workspace deleted": "작업 공간이 삭제되었습니다."
+  "Workspace deleted": "작업 공간이 삭제되었습니다.",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>공개 MTProxy</strong><span>덜 안정적 · 자동 풀</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

@@ -10758,5 +10758,7 @@
   "Watchlist entries added": "ウォッチリストに項目が追加されました",
   "Watchlist entries removed": "ウォッチリストのエントリが削除されました",
   "Watchlist match": "ウォッチリストの一致",
-  "Workspace deleted": "ワークスペースが削除されました"
+  "Workspace deleted": "ワークスペースが削除されました",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>パブリック MTProxy</strong><span>安定性が低い · 自動プール</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }
