@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 17a04fe1d1d7f019745bb14e309475e972760e30afc6ff06ac9ee5f1fc860813
+# TgWitness verifier sources SHA-256: 56fb921781c0e9d17200f0b54a22483fc730767df931904a893b0953c4a5ba05
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -110,6 +110,8 @@ def plain_failure(exc):
         return "cannot read " + (safe_text(name) if name else "the file") + ": it does not exist or is not a file [" + type(exc).__name__ + "]"
     if isinstance(exc, KeyError) and "manifest.json" in detail:
         return "the archive has no manifest.json, so it is not a signed TgWitness archive [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.sig" in detail:
+        return "the archive has no manifest.sig, so its signature cannot be checked [" + type(exc).__name__ + "]"
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
