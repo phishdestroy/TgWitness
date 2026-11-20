@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed.
 - After **Verify journal** the result box is green only when a timestamp receipt covers the last record; with only the signed journal checked it is neutral, so the unfinished layers are not shown in a success colour.
 - In the report preview, **Journal head** is a bordered row like the other sections instead of bare text pressed against them.
 - On a phone the Signed archive card on Export records uses the same side padding as the cards below it, so headings and buttons line up.
