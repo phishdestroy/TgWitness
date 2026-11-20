@@ -10873,5 +10873,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram не завершив сеанс цього облікового запису; про жодні втрати не повідомляється.",
   "created the topic “{title}”": "створив тему «{title}»",
   "Link text “{shown}” opens {url}": "Текст посилання «{shown}» відкриває {url}",
-  "The visible web address is not where the link goes.": "Видима веб-адреса не збігається з тією, куди веде посилання."
+  "The visible web address is not where the link goes.": "Видима веб-адреса не збігається з тією, куди веде посилання.",
+  "Copy the Telegram link to this message": "Скопіюйте посилання на це повідомлення в Telegram"
 }

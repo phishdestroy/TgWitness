@@ -10720,5 +10720,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram ยังไม่ได้ปิดเซสชันของบัญชีนี้; ไม่มีข้อมูลที่สูญหายให้รายงาน",
   "created the topic “{title}”": "สร้างหัวข้อ “{title}”",
   "Link text “{shown}” opens {url}": "ข้อความลิงก์ “{shown}” จะเปิด {url}",
-  "The visible web address is not where the link goes.": "ที่อยู่เว็บที่แสดงอยู่นั้นไม่ใช่จุดหมายปลายทางของลิงก์"
+  "The visible web address is not where the link goes.": "ที่อยู่เว็บที่แสดงอยู่นั้นไม่ใช่จุดหมายปลายทางของลิงก์",
+  "Copy the Telegram link to this message": "คัดลอกลิงก์ Telegram ของข้อความนี้"
 }

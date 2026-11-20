@@ -252,4 +252,7 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .shared-coordinates { color: var(--text-2); font-variant-numeric: tabular-nums; }
 .workspace[data-current-view="chats"] .shared-answers { margin: 4px 0 0; padding-inline-start: 22px; }
 .workspace[data-current-view="chats"] .bubble-via { margin: 2px 0 4px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .bubble-text.big-emoji { font-size: 40px; line-height: 1.25; padding-block: 2px; }
 .workspace[data-current-view="chats"] .msg-number { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; opacity: .8; }
+.workspace[data-current-view="chats"] button.msg-number-copy { min-height: 0; padding: 0 2px; border: 0; background: none; cursor: pointer; }
+.workspace[data-current-view="chats"] button.msg-number-copy:hover { color: var(--accent-text); text-decoration: underline; }

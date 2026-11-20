@@ -10843,5 +10843,6 @@
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram не завершил сеанс этого аккаунта; о каких-либо потерях не сообщается.",
   "created the topic “{title}”": "создал тему «{title}»",
   "Link text “{shown}” opens {url}": "Текст ссылки «{shown}» открывает страницу {url}",
-  "The visible web address is not where the link goes.": "Видимый веб-адрес не соответствует тому, куда ведет ссылка."
+  "The visible web address is not where the link goes.": "Видимый веб-адрес не соответствует тому, куда ведет ссылка.",
+  "Copy the Telegram link to this message": "Скопируйте ссылку на это сообщение в Telegram"
 }
