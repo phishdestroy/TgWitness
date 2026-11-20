@@ -379,13 +379,14 @@ def main(argv=None):
     parser.add_argument("--port", type=int, default=8766)
     parser.add_argument("--public-url", help="HTTPS address served by your reverse proxy, including /mcp")
     args = parser.parse_args(argv)
-    from .mcp_stdio import check_url, read_token, relay
+    from .mcp_stdio import check_url, preflight, read_token, relay
     if args.transport == "stdio" and (args.url or not args.api_url):
         try:
             url = check_url(args.url or os.environ.get("TGWITNESS_MCP_URL", "http://127.0.0.1:8787/mcp"))
             token = read_token(args.token_file)
             if not runtime_status()["available"]:
                 parser.exit(2, "Install tgwitness[mcp] in this Python environment.\n")
+            asyncio.run(preflight(url, token))
             asyncio.run(relay(url, token))
         except KeyboardInterrupt:
             pass
