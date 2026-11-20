@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Chat search accepts `#` and a message number to jump to that saved message. A **Pinned messages** list under the chat status shows what Telegram listed as pinned at the last chat-state check, with each saved message and a jump button, and says when a pinned number has no saved record. New route `GET /api/chats/{chat_id}/pinned`.
+- In a report with a selection, **Selected data** names the chosen chats and authors as saved in the journal (for example `Alex Quinn (70002)`) instead of listing bare numbers; a number with no saved name stays a number.
+- The chat panel has a **Media** tab with a gallery of the files saved from the chat, each linked to its message. Attachments that were not downloaded are not listed.
 - In **Simple** mode Home shows one line, **Can be handed to a court: yes** or **no · missing: …**. Yes means
   timestamps are on with an RFC 3161 authority and that authority recently returned a timestamp that validated against
   its root certificate; the note gives how many of the saved records that timestamp covers, and each export asks for a

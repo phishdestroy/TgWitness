@@ -288,7 +288,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 context["source_events"] = snapshot.events
             if not compact and (selection.enabled or selection.id_gaps) and fmt in ("html", "json", "pdf", "zip"):
                 selected = report.report_selection.analyze(snapshot, selection, preview_limit=0, scratch_root=directory)
-                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps", "messages_not_found")}
+                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps", "messages_not_found", "names")}
             if not compact and fmt in ("html", "json", "pdf", "zip") and (not selection.enabled or selection.secret_chats):
                 from . import report_secret
                 context["encrypted_chats"] = report_secret.collect(

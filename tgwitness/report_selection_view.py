@@ -45,17 +45,24 @@ def listed(items):
                      for chat, messages in sorted(chats.items()))
 
 
+def named(ids, names):
+    names = {str(key): value for key, value in names.items()}
+    return ", ".join((names[str(item)] + " (" + str(item) + ")") if names.get(str(item)) else str(item) for item in ids)
+
+
 def scope_rows(material, say):
+    names = material.get("names") or {}
+    chat_names, sender_names = names.get("chats") or {}, names.get("senders") or {}
     selection, counts, source = material["selection"], material["counts"], material["source"]
     picked = picked_messages(selection) if selection["enabled"] else ""
     absent = listed(material.get("messages_not_found") or []) if picked else ""
     return [(say("Selected records"), number_text(counts["selected_records"], say)),
             (say("Source journal records"), number_text(source["records"], say)),
-            (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))])
+            (say("Chats"), ", ".join(part for part in [named(selection["chats"], chat_names), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))] if part)
              or ("—" if picked else say("All chats"))),
             *([(say("Selected messages"), picked)] if picked else []),
             *([(say("Selected messages without a journal record"), absent)] if absent else []),
-            (say("Selected authors"), ", ".join(map(str, selection["senders"])) or say("All authors")),
+            (say("Selected authors"), named(selection["senders"], sender_names) or say("All authors")),
             (say("Observation dates (UTC)"), " — ".join((selection["date_from"] or "…", selection["date_to"] or "…"))
              if selection["date_from"] or selection["date_to"] else say("All dates")),
             (say("Event types"), ", ".join(say(KINDS[k]) for k in selection["kinds"]) if selection["enabled"] else say("All journal records"))]

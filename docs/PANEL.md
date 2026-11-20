@@ -157,6 +157,10 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   a note with the time and what was observed. The chat list and notifications use the same
   definitions. A deleted message is red and keeps its saved text; an edited message
   keeps every saved version.
+- The **Media** tab of the chat panel lists the files the collector saved from this chat, newest
+  first, with a preview for images, the file name and size, the message number and a button that
+  opens the message. A message whose attachment was not downloaded is not listed there; the chat
+  itself marks it as not saved. New route `GET /api/chats/{chat_id}/media-list`.
 - **Search saved messages** searches the complete retained chat, including earlier
   text versions. Deleted, edited, media and author filters also cover the complete
   retained chat. **Not found at recheck** is separate from received deletion notices.

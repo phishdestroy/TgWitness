@@ -238,3 +238,9 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .chat-pinned-label { min-width: 0; overflow-wrap: anywhere; }
 .workspace[data-current-view="chats"] .chat-pinned-text { display: block; opacity: .85; }
 .workspace[data-current-view="chats"] .chat-pinned-item .small { flex: none; min-height: 32px; }
+.workspace[data-current-view="chats"] .chat-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 10px 0; }
+.workspace[data-current-view="chats"] .chat-gallery-item { margin: 0; min-width: 0; display: grid; gap: 4px; align-content: start; border: 1px solid var(--border); border-radius: 8px; padding: 8px; background: var(--surface); }
+.workspace[data-current-view="chats"] .chat-gallery-item figcaption { overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .chat-gallery-item img, .workspace[data-current-view="chats"] .chat-gallery-item video { max-width: 100%; height: auto; }
+.workspace[data-current-view="chats"] .chat-gallery-item .small { min-height: 32px; justify-self: start; }
+.workspace[data-current-view="chats"] .chat-gallery { padding: 8px 12px; }
