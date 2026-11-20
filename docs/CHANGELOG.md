@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A very long author name in a reply quote and a very long new chat name in a service line wrap instead of running past the edge of the screen.
 - A very long sender name without spaces wraps inside its chat bubble instead of running past its edge.
 - In the account export chat pages on a phone, the Rhythm table keeps readable columns and scrolls sideways with a faded edge instead of looking cut off.
 - When the viewer of an evidence report has no records to list, its list says why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
