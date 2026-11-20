@@ -6371,7 +6371,6 @@
   "The most recent rows are listed; totals cover every row.": "सबसे हाल की पंक्तियाँ सूचीबद्ध हैं; कुल योग प्रत्येक पंक्ति को शामिल करते हैं।",
   "rows": "पंक्तियाँ",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "सूचीबद्ध प्रोसेसरों द्वारा events.jsonl से गणना किया गया। ये बताते हैं कि क्या जाँचना है, न कि क्या हुआ।",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "फ़्लैग किया गया: कम से कम 5 पहली बार पोस्ट करने वाले उपयोगकर्ता और उनके 14-दिवसीय औसत का 3 गुना, साथ ही संदेश उनके औसत का 1.5 गुना से कम। चैट के पहले 7 दिनों को फ़्लैग नहीं किया जाता।",
   "Distinct saved message numbers per chat and the share taken by service messages.": "प्रत्येक चैट में सहेजे गए संदेशों की संख्या और सेवा संदेशों द्वारा लिए गए हिस्से को अलग से दर्शाएँ।",
   "Membership changes Telegram reported, once per person, chat, change and day.": "सदस्यता में बदलाव: टेलीग्राम द्वारा रिपोर्ट किए गए, प्रति व्यक्ति, चैट, परिवर्तन और दिन में एक बार।",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "चैट-स्टेट स्नैपशॉट्स के बीच जोड़े या हटाए गए सेवा संदेशों, सूचनाओं और पिन किए गए संदेशों को पिन करें।",
@@ -10618,5 +10617,7 @@
   "pinned a message, number {n}": "एक संदेश पिन किया, संख्या {n}",
   "Messages found: {n}": "संदेश मिले: {n}",
   "Messages found: {n}+": "मिले संदेश: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "फ़्लैग किया गया: कम से कम 5 पहली बार पोस्ट करने वाले उपयोगकर्ता और उनकी 14-दिवसीय औसत का 3 गुना, साथ ही संदेशों की संख्या उनकी औसत का अधिकतम 1.5 गुना। किसी चैट के पहले 7 दिनों को फ़्लैग नहीं किया जाता। जो व्यक्ति पहली बार कई चैट में पोस्ट करता है, उसे प्रत्येक चैट में केवल एक बार गिना जाता है।",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "फ़्लैग किया गया: कम से कम 5 पहली बार पोस्ट करने वाले उपयोगकर्ता और उनके 14-दिवसीय औसत का 3 गुना, साथ ही संदेश उनके औसत का 1.5 गुना से कम। चैट के पहले 7 दिनों को फ़्लैग नहीं किया जाता।",
   "Post author: {name}": "लेखक: {name}"
 }

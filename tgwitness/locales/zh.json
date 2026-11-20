@@ -6332,7 +6332,6 @@
   "The most recent rows are listed; totals cover every row.": "此处列出了最新的一行数据；总计涵盖了每一行。",
   "rows": "行",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "由所列处理器根据 events.jsonl 文件计算得出。这些信息指向需要检查的内容，而非实际发生的情况。",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "被标记：至少有 5 名首次发帖者，且发帖量达到其 14 天中位数的 3 倍，而单条消息长度不超过其中位数的 1.5 倍。聊天群的前 7 天不会被标记。",
   "Distinct saved message numbers per chat and the share taken by service messages.": "每个聊天中已保存的消息数量及其与服务消息所占比例。",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Telegram 报告的成员变动情况，每人、每个聊天群、每次变动及每天仅报告一次。",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "在聊天状态快照之间，记录已固定服务消息、已取消固定的通知以及新增或移除的已固定消息。",
@@ -10567,5 +10566,7 @@
   "pinned a message, number {n}": "置顶了一条消息，编号{n}",
   "Messages found: {n}": "找到的消息：{n}条",
   "Messages found: {n}+": "找到的消息：{n}+条",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "被标记：至少有5名首次发帖者，且其发帖量达到14天中位数的3倍，单条消息长度不超过中位数的1.5倍。聊天群的前7天不被标记。同一用户在多个聊天群中首次发帖时，每个群仅计一次。",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "被标记：至少有 5 名首次发帖者，且发帖量达到其 14 天中位数的 3 倍，而单条消息长度不超过其中位数的 1.5 倍。聊天群的前 7 天不会被标记。",
   "Post author: {name}": "文章作者：{name}"
 }

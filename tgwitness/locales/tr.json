@@ -6371,7 +6371,6 @@
   "The most recent rows are listed; totals cover every row.": "En son satırlar listelenmiştir; toplamlar her satırı kapsamaktadır.",
   "rows": "satırlar",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Listelenen işlemciler tarafından events.jsonl dosyasından hesaplanmıştır. Bunlar, ne olduğunu değil, neyin kontrol edilmesi gerektiğini gösterir.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "İşaretlenenler: en az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerlerinin 3 katı, mesajların ise medyan değerlerinin 1,5 katından az olması. Bir sohbetin ilk 7 günü işaretlenmez.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Sohbet başına kaydedilen mesaj sayılarının ayrımı ve hizmet mesajlarının payı.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Telegram tarafından bildirilen üyelik değişiklikleri; kişi, sohbet, değişiklik ve gün başına bir kez.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Sohbet durumu anlık görüntüleri arasında eklenen veya kaldırılan sabitlenmiş hizmet mesajlarını, sabitleme kaldırma bildirimlerini ve sabitlenmiş mesajları kaydedin.",
@@ -10618,5 +10617,7 @@
   "pinned a message, number {n}": "{n} numaralı mesajı sabitledi",
   "Messages found: {n}": "Bulunan mesajlar: {n}",
   "Messages found: {n}+": "Bulunan mesajlar: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "İşaretlenenler: En az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerinin 3 katı kadar mesaj, ancak mesajların uzunluğu medyan değerinin en fazla 1,5 katı kadar olabilir. Bir sohbetin ilk 7 günü işaretlenmez. Birkaç sohbette ilk kez mesaj gönderen bir kişi, her birinde yalnızca bir kez sayılır.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "İşaretlenenler: en az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerlerinin 3 katı, mesajların ise medyan değerlerinin 1,5 katından az olması. Bir sohbetin ilk 7 günü işaretlenmez.",
   "Post author: {name}": "Yazının yazarı: {name}"
 }
