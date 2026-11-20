@@ -31,6 +31,7 @@ snapshots; current implementation and qualification are recorded separately.
 
 | Latest evidence | Result | Scope |
 | --- | --- | --- |
+| Large public-group scale run · 20 Nov | 15,000 real public-group messages collected by two accounts into signed journals; three TSAs each; standalone verifier integrity confirmed | Two large public megagroups; evidence export + offline verify |
 | Court-grade live acceptance · 20 Nov | RFC 3161, checkpoint/truncation, witness channel with external time, court package against three TSAs, OTS/Bitcoin anchors, FloodWait, secret-chat self-destruct and media; where an artifact can be altered, a tampered or truncated copy was rejected | Live accounts and a real channel; public TSAs and Telegram Bot API |
 | Account security and exports · 10 Nov | Witness probe caught a second client on the same key; killed chat exports resumed; TDX quote checked offline | RunPod pod, three test accounts; revisions `6c7171228` to `196a5bcd1` |
 | Phala / Intel TDX with live account · 9 Nov | All 6 TDX checks passed; live Telegram collection; export verified | CVM `cvm_mjbvBdjM`; commit `427621d4`; session imported; self-attested tier |
@@ -598,6 +599,10 @@ material remain private; the commands, external services and verdicts are record
   seeded: the collector raised its own FloodWaitError without contacting Telegram, recorded a
   backoff, and resumed from a past window; the journal chain stayed intact across ten events
   with no data loss. The wait was injected, not provoked on the account.
+- **Large public-group scale run.** Two accounts collected 10,000 and 5,000 messages of real
+  public-group history from two large public megagroups into signed, hash-chained journals; each
+  export was timestamped by three independent Time Stamping Authorities and passed the standalone
+  verifier (`Integrity verified. SHA256SUMS matches the signed manifest`).
 - **Secret chats, self-destruct and media (C13).** A real end-to-end secret chat was
   established with a controlled account. The collector decrypted and recorded incoming
   messages into the append-only journal, including self-destruct messages with their timer,

@@ -8,6 +8,7 @@
 <summary>On this page</summary>
 
 - [Unreleased](#unreleased)
+- [1.0.0 · 20 November 2026](#100--20-november-2026)
 - [0.9.3 preview · 11 November 2026](#093-preview--11-november-2026)
 - [0.9.2 preview · 10 November 2026](#092-preview--10-november-2026)
 - [0.9.1 preview · 5 November 2026](#091-preview--5-november-2026)
@@ -26,6 +27,11 @@
 ## Unreleased
 
 - The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
+
+## 1.0.0 · 20 November 2026
+
+First full release. TgWitness 1.0.0 consolidates the 0.9.x preview line into a court-ready Telegram observation journal: signed hash-chained journals, RFC 3161 and OpenTimestamps anchors, an independently operated witness, secret-chat collection including self-destruct messages and their media, court packages, and an offline verifier. The evidence chain was exercised end to end on live accounts and real external services; see the [verification record](VERIFICATION.md). The user-visible changes since 0.9.3:
+
 - `verify.py` words a refusal that has a plain reason without the exception name: "VERIFICATION FAILED: Duplicate ZIP members" instead of "VERIFICATION FAILED: ValueError: Duplicate ZIP members". Other failures keep the name of their type.
 - In the report viewer on a phone, a table that scrolls sideways, such as Senders, fades at its right edge instead of looking cut off.
 - In the viewer of an evidence report the senders and indicators search fields have an accessible name (the same text as their placeholder), and the selection checkbox of a record shows a focus ring when it is reached with the keyboard.

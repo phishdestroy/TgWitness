@@ -118,7 +118,7 @@ def check_sources(root):
 def check_version_labels(root):
     root = Path(root)
     version = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
-    label = f"v{version} · pre-release"
+    label = f"v{version}"
     findings = []
     package = (root / "tgwitness/__init__.py").read_text(encoding="utf-8")
     if not re.search(r'__version__\s*=\s*[\"\']' + re.escape(version) + r'[\"\']', package):
@@ -131,7 +131,7 @@ def check_version_labels(root):
     if title is None or title.text != label or not any(node.get("aria-label") == label for node in badge.iter()):
         findings.append("docs/assets/presentation/identity-meta-version.svg: regenerate the source-version badge")
     status = (root / "docs/STATUS.md").read_text(encoding="utf-8")
-    if not re.search(r"Source version[:：]\s*\*\*" + re.escape(version) + r" preview\*\*[.．]", status):
+    if not re.search(r"Source version[:：]\s*\*\*" + re.escape(version) + r"\*\*[.．]", status):
         findings.append("docs/STATUS.md: update the source version")
     return findings
 
