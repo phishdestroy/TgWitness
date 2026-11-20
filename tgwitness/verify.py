@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 0d92c1173cd3e91c5fb9488cd3d414abfb6618850047dcf92a20df6a22a0e6b2
+# TgWitness verifier sources SHA-256: 17a04fe1d1d7f019745bb14e309475e972760e30afc6ff06ac9ee5f1fc860813
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -99,6 +99,21 @@ def failure_detail(exc):
     if not text and isinstance(exc, InvalidSignature):
         return "the signature does not match the signed content: the file was changed, or it was signed by another key"
     return text
+
+
+def plain_failure(exc):
+    detail = failure_detail(exc)
+    if isinstance(exc, zipfile.BadZipFile):
+        return "this file is not a ZIP archive, or it is damaged [" + type(exc).__name__ + "]"
+    if isinstance(exc, (FileNotFoundError, NotADirectoryError, IsADirectoryError)):
+        name = getattr(exc, "filename", None)
+        return "cannot read " + (safe_text(name) if name else "the file") + ": it does not exist or is not a file [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.json" in detail:
+        return "the archive has no manifest.json, so it is not a signed TgWitness archive [" + type(exc).__name__ + "]"
+    if isinstance(exc, json.JSONDecodeError):
+        return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
+                + type(exc).__name__ + "]")
+    return type(exc).__name__ + ": " + detail
 
 
 def authenticate_statement(value, key_field="public_key"):
@@ -11234,7 +11249,7 @@ def verification_comparison(args, parser, mode):
             verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
             raise SystemExit(code)
         verification_print("ASSURANCE: fail")
-        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
     pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
     compared['assurance'] = assurance(compared)
     compared['assurance']['scope'] = 'two authenticated chat exports; the comparison covers their contents'
@@ -11545,7 +11560,7 @@ def verification_failure(args, parser, mode, console, exc):
         verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
         raise SystemExit(code)
     verification_print("ASSURANCE: fail")
-    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
+    parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
 
 
 def verification_output(args, checked, console, mode):

@@ -170,6 +170,9 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   A match in an earlier version opens the saved versions with their journal links.
   **Displayed version** identifies the record used for the message and its bookmark;
   a late history response cannot replace a newer live edit on screen.
+  While you search, the counter beside the box reads **Messages found: N** (with a plus sign, **N+**,
+  when more matches can be loaded) and the words you typed are highlighted in the message text, ignoring
+  case, wherever they appear inside a word.
   Typing `#` and a message number (for example `#4812`) and pressing Enter jumps to that
   saved message and clears any filter; a number with no saved record shows a notice and
   changes nothing.
