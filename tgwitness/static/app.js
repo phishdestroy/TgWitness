@@ -6062,6 +6062,7 @@ async function loadChatMessages(mode,target=null){
     if(error instanceof StaleView||error.name==='AbortError'||request!==chatPageRequest||state.view!=='chats'||revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
     feed.querySelector(".refresh-notice")?.remove();
     const notice=viewState("error",tr("Could not load data"),tr("Saved content remains available. Try loading again."),tr("Retry"),()=>loadChatMessages(mode));
+    if($("chat-main").hidden)renderChat();
     if(state.chatMessages.length){notice.classList.add("refresh-notice");feed.prepend(notice);}else feed.replaceChildren(notice);
     return false;
   }
