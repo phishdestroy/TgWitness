@@ -10566,5 +10566,8 @@
   "pinned a message, number {n}": "置顶了一条消息，编号{n}",
   "Messages found: {n}": "找到的消息：{n}条",
   "Messages found: {n}+": "找到的消息：{n}+条",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "被标记：至少有5名首次发帖者，且其发帖量达到14天中位数的3倍，单条消息长度不超过中位数的1.5倍。聊天群的前7天不被标记。同一用户在多个聊天群中首次发帖时，每个群仅计一次。"
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "被标记：至少有5名首次发帖者，且其发帖量达到14天中位数的3倍，单条消息长度不超过中位数的1.5倍。聊天群的前7天不被标记。同一用户在多个聊天群中首次发帖时，每个群仅计一次。",
+  "Choose at least {n}.": "请至少选择一个{n}。",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "请输入日期（例如 2026-10-01）或带时区的具体时间。",
+  "Choose one of the allowed values.": "请选择一个允许的值。"
 }
