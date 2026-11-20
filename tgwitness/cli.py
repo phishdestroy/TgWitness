@@ -370,8 +370,10 @@ def print_stats(result):
         return str(part["messages"]) + (" (" + format(part["share"] * 100, ".1f") + "%)" if part["share"] is not None else "")
     print("Edited " + percent(result["edited"]) + " · deleted " + percent(result["deleted"])
           + " · missing on recheck " + percent(result["missing_on_recheck"]))
-    print("By hour (UTC): " + " ".join(format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"])))
-    print("By weekday (UTC): " + " ".join(day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"])))
+    hours = [format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"]) if count]
+    print("By hour (UTC): " + (" ".join(hours) + (" · other hours 0" if len(hours) < 24 else "") if hours else "no messages"))
+    days = [day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"]) if count]
+    print("By weekday (UTC): " + (" ".join(days) + (" · other days 0" if len(days) < 7 else "") if days else "no messages"))
     if result["peaks"]["days"]:
         print("Busiest days: " + ", ".join(p["date"] + " (" + str(p["messages"]) + ")" for p in result["peaks"]["days"]))
     if result["participants"]:
