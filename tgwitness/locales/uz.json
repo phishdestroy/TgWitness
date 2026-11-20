@@ -10590,6 +10590,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Ushbu suhbatdan saqlangan fayllar, eng yangilari birinchi. Faqat yig'uvchi haqiqatan yuklab olgan fayllar ro'yxatda ko'rsatiladi; saqlanmagan ilovasi bo'lgan xabar bu yerda ko'rsatilmagan.",
   "No saved files in this chat": "Ushbu suhbatda saqlangan fayllar yo'q",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fayllar to'plovchi ularni yuklab olgach bu yerda paydo bo'ladi. Manbalar bo'limida fayl limitlarini tekshiring.",
+  "Open message #{id} in chat": "Suhbatda #{id}-xabarni oching",
   "Report on this person": "Ushbu shaxs haqida xabar bering",
+  "Search or jump to #number": "Qidirish yoki #raqamga sakrash",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Qidiruv va filtrlar ushbu suhbatdagi barcha saqlangan xabarlarni, shu jumladan avvalgi versiyalarni ham qamrab oladi. # belgisini va xabar raqamini tering, shu xabarga o'tish uchun.",
+  "Pinned messages ({n})": "Biriktirilgan xabarlar ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Telegramda chat oxirgi marta tekshirilganda ro'yxatda {time} bo'lgan. Bu xabar qachon biriktirilganini ko'rsatmaydi.",
+  "The list was not refreshed at that check; this is the last list received.": "Ro'yxat o'sha tekshiruvda yangilanmadi; bu olingan oxirgi ro'yxatdir.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram {total} ta belgilangan xabarni xabar qildi; faqat {listed} tasi ro'yxatda ko'rsatilgan.",
+  "Not saved in this workspace": "Ushbu ish maydonida saqlanmagan",
+  "Show in chat": "Suhbatda ko'rsating",
+  "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
   "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}"
 }

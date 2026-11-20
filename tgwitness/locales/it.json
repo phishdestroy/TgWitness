@@ -10600,6 +10600,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "File salvati da questa chat, in ordine cronologico (dal più recente al più vecchio). Sono elencati solo i file effettivamente scaricati dal programma di raccolta; i messaggi con allegati che non sono stati salvati non vengono visualizzati qui.",
   "No saved files in this chat": "Non ci sono file salvati in questa chat",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "I file vengono visualizzati qui una volta che il collector li ha scaricati. Controlla i limiti relativi ai file nella sezione “Fonti”.",
+  "Open message #{id} in chat": "Apri il messaggio n. {id} nella chat",
   "Report on this person": "Segnala questa persona",
+  "Search or jump to #number": "Cerca o vai al numero #",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "La ricerca e i filtri riguardano tutti i messaggi salvati in questa chat, comprese le versioni precedenti. Digita # seguito dal numero del messaggio per passare direttamente a quel messaggio.",
+  "Pinned messages ({n})": "Messaggi in evidenza ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Come indicato da Telegram all'ultimo controllo della chat, {time}. Questo non indica quando un messaggio è stato fissato in cima alla lista.",
+  "The list was not refreshed at that check; this is the last list received.": "L'elenco non è stato aggiornato in occasione di quella verifica; questo è l'ultimo elenco ricevuto.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram ha segnalato {total} messaggi in evidenza; ne sono elencati solo {listed}.",
+  "Not saved in this workspace": "Non salvato in questo spazio di lavoro",
+  "Show in chat": "Mostra nella chat",
+  "Show in chat: message #{id}": "Mostra nella chat: messaggio n. {id}",
   "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}"
 }

@@ -10539,6 +10539,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "このチャットから保存されたファイル（新しい順）。実際にコレクターがダウンロードしたファイルのみが表示されます。保存されなかった添付ファイル付きのメッセージは、ここには表示されません。",
   "No saved files in this chat": "このチャットには保存されたファイルがありません",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "コレクターがファイルをダウンロードすると、ここにファイルが表示されます。「ソース」の下にあるファイルの制限を確認してください。",
+  "Open message #{id} in chat": "チャットでメッセージ #{id} を開く",
   "Report on this person": "このユーザーを報告する",
+  "Search or jump to #number": "検索、または#番号へ移動",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "検索とフィルタ機能は、このチャットに保存されているすべてのメッセージ（過去のバージョンを含む）を対象としています。「#」とメッセージ番号を入力すると、そのメッセージにジャンプできます。",
+  "Pinned messages ({n})": "固定されたメッセージ ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "チャットを最後に確認した時点で、Telegramには「{time}」と表示されていました。メッセージがピン留めされている場合は、この表示はされません。",
+  "The list was not refreshed at that check; this is the last list received.": "その確認時点ではリストは更新されていませんでした。これが最後に受け取ったリストです。",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegramでは{total}件の固定メッセージが報告されていますが、一覧には{listed}件しか表示されていません。",
+  "Not saved in this workspace": "このワークスペースには保存されていません",
+  "Show in chat": "チャットに表示",
+  "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
   "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}"
 }

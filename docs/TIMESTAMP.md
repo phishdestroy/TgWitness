@@ -74,6 +74,10 @@ remains an independent second check for an expert who wants one.
 python tgwitness/verify.py evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
 
+   The `--checkpoint` file must be the signed checkpoint: a `statement` with `format`, `public_key`,
+   `event_count` and `head_hash`, and a `signature`. Any other file is refused with this message:
+   *The --checkpoint file is not a signed TgWitness checkpoint*, followed by the fields it needs.
+
    This shows that the export contains the timestamped prefix. `verify.py` reads
    timestamp receipts only from the ZIP, where evidence mode stores them; the manual
    reply is checked in step 5 and covers the records up to this checkpoint.

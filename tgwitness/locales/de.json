@@ -10590,6 +10590,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Aus diesem Chat gespeicherte Dateien, beginnend mit den neuesten. Es werden nur Dateien aufgelistet, die der Empfänger tatsächlich heruntergeladen hat; eine Nachricht mit einem Anhang, der nicht gespeichert wurde, wird hier nicht angezeigt.",
   "No saved files in this chat": "In diesem Chat sind keine Dateien gespeichert",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Die Dateien werden hier angezeigt, sobald der Collector sie heruntergeladen hat. Überprüfen Sie die Dateigrößenbeschränkungen unter „Quellen“.",
+  "Open message #{id} in chat": "Nachricht Nr. {id} im Chat öffnen",
   "Report on this person": "Diese Person melden",
+  "Search or jump to #number": "Suchen oder zu #Nummer springen",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Die Such- und Filterfunktionen umfassen alle gespeicherten Nachrichten in diesem Chat, einschließlich früherer Versionen. Gib „#“ und eine Nachrichtennummer ein, um zu dieser Nachricht zu springen.",
+  "Pinned messages ({n})": "Gefestigte Beiträge ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Laut Telegram-Angabe zum Zeitpunkt der letzten Überprüfung des Chats: {time}. Es wird nicht angezeigt, wann eine Nachricht angeheftet wurde.",
+  "The list was not refreshed at that check; this is the last list received.": "Die Liste wurde bei dieser Überprüfung nicht aktualisiert; dies ist die zuletzt erhaltene Liste.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram meldete {total} angeheftete Nachrichten; es sind jedoch nur {listed} aufgeführt.",
+  "Not saved in this workspace": "Nicht in diesem Arbeitsbereich gespeichert",
+  "Show in chat": "Im Chat anzeigen",
+  "Show in chat: message #{id}": "Im Chat anzeigen: Nachricht Nr. {id}",
   "Open in chat: message #{id}": "Im Chat öffnen: Nachricht Nr. {id}"
 }

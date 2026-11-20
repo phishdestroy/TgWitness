@@ -10539,6 +10539,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Fail yang disimpan daripada sembang ini, yang terbaru dahulu. Hanya fail yang sebenarnya dimuat turun oleh pengumpul disenaraikan; mesej dengan lampiran yang tidak disimpan tidak dipaparkan di sini.",
   "No saved files in this chat": "Tiada fail yang disimpan dalam sembang ini",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Fail akan muncul di sini setelah pengumpul memuat turunnya. Semak had fail di bawah Sumber.",
+  "Open message #{id} in chat": "Buka mesej #{id} dalam sembang",
   "Report on this person": "Laporan mengenai individu ini",
+  "Search or jump to #number": "Cari atau lompat ke #nombor",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Carian dan penapis merangkumi semua mesej yang disimpan dalam sembang ini, termasuk versi terdahulu. Taip # dan nombor mesej untuk melangkau ke mesej tersebut.",
+  "Pinned messages ({n})": "Mesej yang dipin ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Disenaraikan oleh Telegram apabila sembang terakhir diperiksa, {time}. Ini tidak menunjukkan bila mesej dipaku.",
+  "The list was not refreshed at that check; this is the last list received.": "Senarai itu tidak dikemas kini pada pemeriksaan tersebut; ini adalah senarai terakhir yang diterima.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram melaporkan {total} mesej yang dipin; hanya {listed} yang disenaraikan.",
+  "Not saved in this workspace": "Tidak disimpan di ruang kerja ini",
+  "Show in chat": "Tunjukkan dalam sembang",
+  "Show in chat: message #{id}": "Tunjukkan dalam sembang: mesej #{id}",
   "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}"
 }

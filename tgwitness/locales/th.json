@@ -10539,6 +10539,16 @@
   "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "ไฟล์ที่บันทึกจากการสนทนานี้ เรียงตามลำดับจากที่ใหม่ที่สุดก่อน ไฟล์ที่แสดงอยู่คือไฟล์ที่ผู้รวบรวมได้ดาวน์โหลดมาจริงเท่านั้น; ข้อความที่มีไฟล์แนบแต่ไม่ได้บันทึกจะไม่แสดงอยู่ที่นี่",
   "No saved files in this chat": "ไม่มีไฟล์ที่บันทึกไว้ในแชทนี้",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "ไฟล์จะปรากฏที่นี่หลังจากที่ระบบเก็บรวบรวมได้ดาวน์โหลดไฟล์เหล่านั้นแล้ว โปรดตรวจสอบขีดจำกัดจำนวนไฟล์ในส่วน \"แหล่งข้อมูล\"",
+  "Open message #{id} in chat": "เปิดข้อความหมายเลข #{id} ในแชท",
   "Report on this person": "รายงานเกี่ยวกับบุคคลนี้",
+  "Search or jump to #number": "ค้นหาหรือไปยัง #หมายเลข",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "ฟังก์ชันการค้นหาและตัวกรองครอบคลุมข้อความทั้งหมดที่บันทึกไว้ในแชทนี้ รวมถึงเวอร์ชันเก่าด้วย เพียงพิมพ์ # ตามด้วยหมายเลขข้อความ เพื่อกระโดดไปยังข้อความนั้น",
+  "Pinned messages ({n})": "ข้อความที่ถูกปักหมุด ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Telegram แสดงว่า {time} เมื่อตรวจสอบการสนทนาครั้งล่าสุด ซึ่งข้อมูลนี้ไม่ปรากฏเมื่อข้อความถูกปักหมุด",
+  "The list was not refreshed at that check; this is the last list received.": "รายชื่อดังกล่าวไม่ได้ถูกอัปเดตในการตรวจสอบครั้งนั้น; นี่คือรายชื่อล่าสุดที่ได้รับ",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram รายงานว่ามีข้อความที่ถูกปักหมุด {total} ข้อความ แต่มีเพียง {listed} ข้อความที่แสดงอยู่ในรายการ",
+  "Not saved in this workspace": "ยังไม่ถูกบันทึกในพื้นที่ทำงานนี้",
+  "Show in chat": "แสดงในแชท",
+  "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}"
 }
