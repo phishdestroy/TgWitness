@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/EVIDENCE.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Evidence format v1
