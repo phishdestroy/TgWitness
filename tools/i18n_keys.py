@@ -18,7 +18,8 @@ PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "session_import.
                  "cloud_wizard.py", "levels.py", "capture_api.py", "capture_connections.py", "fulltext.py", "search_api.py", "gap_analysis.py",
                  "chat_export.py", "board.py", "board_api.py", "handover.py", "documentation.py", "conversation.py", "watchlists.py",
                  "settings_hub.py", "profiling.py", "persona.py", "storage_api.py", "showcase.py", "visibility.py", "translation.py",
-                 "export_history.py", "group_settings.py", "guided_connection.py", "webapp.py", "presence_watch.py", "external_signature.py")
+                 "export_history.py", "group_settings.py", "guided_connection.py", "webapp.py", "presence_watch.py", "external_signature.py",
+                 "board_models.py", "export_plan.py", "continuity.py", "conversation_api.py", "archive_views.py", "report_profiles.py", "case_package.py", "people.py", "group_export.py", "channel_graph.py", "search_record.py", "request_security.py", "security.py", "recording.py", "translation_api.py", "qr_codes.py", "operator_bot.py", "dossier.py", "account_loss.py", "jurisdiction_guidance.py", "provenance.py")
 
 DYNAMIC_SCRIPT_KEYS = (
     "Telegram signed this account out", "Updates are going to another session", "Telegram paused this account's requests",
