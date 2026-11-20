@@ -10717,5 +10717,6 @@
   "The image is too large to scan.": "Imej ini terlalu besar untuk diimbas.",
   "Save a valid bot token from BotFather.": "Simpan token bot sah daripada BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram menolak permintaan bot. Semak token dan kebenarannya.",
-  "Telegram has not ended this account's session; there is no loss to report.": "Telegram belum menamatkan sesi akaun ini; tiada kerugian untuk dilaporkan."
+  "Telegram has not ended this account's session; there is no loss to report.": "Telegram belum menamatkan sesi akaun ini; tiada kerugian untuk dilaporkan.",
+  "created the topic “{title}”": "mencipta topik \"{title}\""
 }

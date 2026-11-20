@@ -10819,5 +10819,6 @@
   "The image is too large to scan.": "התמונה גדולה מדי לסריקה.",
   "Save a valid bot token from BotFather.": "שמור אסימון בוט תקף מ-BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram דחה את בקשת הבוט. בדוק את האסימון וההרשאות שלו.",
-  "Telegram has not ended this account's session; there is no loss to report.": "Telegram לא סיים את הפעילות של החשבון הזה; אין כל אובדן לדווח עליו."
+  "Telegram has not ended this account's session; there is no loss to report.": "Telegram לא סיים את הפעילות של החשבון הזה; אין כל אובדן לדווח עליו.",
+  "created the topic “{title}”": "יצר את הנושא \"{title}\""
 }
