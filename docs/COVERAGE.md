@@ -72,7 +72,9 @@ never seen belongs to a message this collector does not hold. `coverage.json` re
 
 - `unobserved_ids[]` has one entry per chat with `observed_from`, `observed_to`, `observed`,
   `not_observed` and `ranges[]` of `low` and `high`.
-- `gap_summary` adds `numbering`, `status`, `density`, `gap_ranges`, `largest_gap` and `clusters[]`.
+- `gap_summary` holds `chats[]` (channels and supergroups, each numbered on its own) and `account`
+  (the account-wide sequence). Each entry has `numbering` and `status`; when `status` is `applicable`
+  it also has `observed`, `missing`, `density`, `gap_ranges`, `largest_gap` and `clusters[]`.
   Each cluster gives the missing range and the neighbouring observed messages as `after` and
   `before`, with their observation times. Details: [Missing message numbers](EVIDENCE.md#missing-message-numbers-gap_summary).
 
