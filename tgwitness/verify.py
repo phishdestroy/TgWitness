@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6e11c406d26261c322ace93952a2f355577e58892126bd684dfd539a38b26741
+# TgWitness verifier sources SHA-256: 0d92c1173cd3e91c5fb9488cd3d414abfb6618850047dcf92a20df6a22a0e6b2
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -11299,6 +11299,12 @@ def verification_json(args):
         if not args.evidence:
             notes.append("History report signature only: pass --evidence to cross-check the journal and counts.")
     else:
+        if "statement" not in data:
+            if {"document", "signed"} <= set(data):
+                raise ValueError("This is a case documentation file, not an evidence archive. Check it with: "
+                                 "python -m tgwitness.documentation_verify FILE --fingerprint FINGERPRINT")
+            raise ValueError("Unrecognised JSON file: it is not a TgWitness signed report, proof, dossier, "
+                             "selection or board document.")
         shown = "dossier"
         result = verify_dossier(args.bundle, args.fingerprint, args.evidence)
         pinned = bool(args.fingerprint)
