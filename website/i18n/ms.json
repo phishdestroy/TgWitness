@@ -7262,7 +7262,8 @@
   "5e2cf1be975520896701287b37a5e37c7c403dd103449e7cade91dab68295244": "Petunjuk yang dipaparkan apabila mod perekod bebas yang dipercayai dipilih kini telah diterjemahkan ke dalam setiap bahasa.",
   "1445fec631dc2c0fb2412883b970587ed1829ed47aef33cb026fd3371175e6fc": "Header panduan dalam aplikasi dan tag contoh borang GitHub Actions serta tag imej contoh dalam deploy/env.example memaparkan keluaran 1.0.0 bukannya 0.9.3.",
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "<code>verify.py</code>juga menerangkan dengan kata-kata mudah tandatangan yang tidak sepadan (\"tandatangan tidak sepadan dengan kandungan yang ditandatangani: fail telah diubah, atau ia ditandatangani oleh kunci lain\"), medan tandatangan atau kunci yang bukan base64 sah, dan fail yang bukan teks sah, bukannya nama pengecualian dan mesej mentahnya.",
-  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman pseudo-rahsia mengekalkan gaya kartunya: tanda kurung penutup yang tersasar dalam helaian gaya Sumber menyebabkan pelayar mengabaikan peraturan yang mengikutinya."
+  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman pseudo-rahsia mengekalkan gaya kartunya: tanda kurung penutup yang tersasar dalam helaian gaya Sumber menyebabkan pelayar mengabaikan peraturan yang mengikutinya.",
+  "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Nombor mesej dalam gelembung sembang cukup gelap untuk lulus pemeriksaan kontras dalam tema cerah dan gelap."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

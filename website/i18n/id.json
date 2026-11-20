@@ -7314,7 +7314,8 @@
   "5e2cf1be975520896701287b37a5e37c7c403dd103449e7cade91dab68295244": "Petunjuk yang ditampilkan saat mode perekam independen tepercaya dipilih kini telah diterjemahkan ke dalam semua bahasa.",
   "1445fec631dc2c0fb2412883b970587ed1829ed47aef33cb026fd3371175e6fc": "Bagian header panduan dalam aplikasi, tag contoh pada formulir GitHub Actions, serta tag gambar contoh di folder `deploy/env.example` menampilkan rilis 1.0.0, bukan 0.9.3.",
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "<code>verify.py</code>juga menjelaskan dengan bahasa yang mudah dipahami mengenai tanda tangan yang tidak cocok (\"tanda tangan tidak cocok dengan konten yang ditandatangani: berkas tersebut telah diubah, atau ditandatangani menggunakan kunci lain\"), bidang tanda tangan atau kunci yang bukan format base64 yang valid, serta berkas yang bukan teks yang valid, alih-alih hanya menyebutkan nama pengecualian dan pesan mentahnya.",
-  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman \"Pseudo-secret\" tetap mempertahankan gaya kartunya: tanda kurung kurawal penutup yang terselip di lembar gaya Sources menyebabkan browser mengabaikan aturan yang ada setelahnya."
+  "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman \"Pseudo-secret\" tetap mempertahankan gaya kartunya: tanda kurung kurawal penutup yang terselip di lembar gaya Sources menyebabkan browser mengabaikan aturan yang ada setelahnya.",
+  "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Nomor pesan dalam gelembung obrolan cukup gelap sehingga lolos uji kontras pada tema terang maupun gelap."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",
