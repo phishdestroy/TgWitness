@@ -6302,7 +6302,7 @@ async function renderChatGallery(body){
       cell.append(caption);
       if(hasMessage){
         const go=node("button","quiet small",tr("Open in chat"));go.type="button";
-        go.setAttribute("aria-label",tr("Open message #{id} in chat",{id:item.message_id}));
+        go.setAttribute("aria-label",tr("Open in chat: message #{id}",{id:item.message_id}));
         go.addEventListener("click",()=>busy(go,async()=>{
           if(matchMedia("(max-width: 767px)").matches){state.chatPanel=null;renderChatInfo();}
           if(!await showChatMessage(item.message_id)&&chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:item.message_id}),true);
