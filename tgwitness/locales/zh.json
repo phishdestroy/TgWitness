@@ -10552,6 +10552,15 @@
   "Show in chat: message #{id}": "在聊天中显示：第 {id} 条消息",
   "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息",
   "Sticker {emoji}": "贴纸 {emoji}",
+  "Quiz": "测验",
+  "Live location": "实时位置",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目标未出现在该账号阅读的对话中。请刷新群组列表，或在“参数”中提高聊天列表限制。",
-  "Exported completely": "已完全导出"
+  "Exported completely": "已完全导出",
+  "This field is required.": "此字段为必填项。",
+  "Enter at least {n} characters.": "请输入至少{n}个字符。",
+  "Enter at most {n} characters.": "最多输入{n}个字符。",
+  "The value must be at least {n}.": "该值必须至少为 {n}。",
+  "The value must be at most {n}.": "该值必须小于等于{n}。",
+  "Enter a whole number.": "请输入一个整数。",
+  "Enter a number.": "请输入一个数字。"
 }
