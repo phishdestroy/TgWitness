@@ -10628,7 +10628,6 @@
   "Messages found: {n}": "Mensajes encontrados: {n}",
   "Messages found: {n}+": "Mensajes encontrados: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Se marca: al menos 5 usuarios que publican por primera vez y 3 veces su mediana de los últimos 14 días, con mensajes que no superen 1,5 veces su mediana. Los primeros 7 días de un chat no se marcan. Una persona que publique por primera vez en varios chats se cuenta una vez en cada uno de ellos.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Marcado: al menos 5 usuarios que publican por primera vez y 3 veces su mediana de los últimos 14 días, con mensajes inferiores a 1,5 veces su mediana. Los primeros 7 días de un chat no se marcan.",
   "Choose at least {n}.": "Elige al menos {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Introduce una fecha, por ejemplo, 01/10/2026, o una hora con zona horaria.",
   "Choose one of the allowed values.": "Elige uno de los valores permitidos.",

@@ -10720,7 +10720,6 @@
   "Messages found: {n}": "Знайдено повідомлень: {n}",
   "Messages found: {n}+": "Знайдено повідомлень: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Позначено: щонайменше 5 користувачів, які опублікували повідомлення вперше, та кількість повідомлень, що в 3 рази перевищує їхню медіану за 14 днів, причому довжина повідомлень не перевищує 1,4-кратної медіани. Перші 7 днів існування чату не враховуються. Користувач, який вперше опублікував повідомлення в декількох чатах, враховується лише один раз у кожному з них.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Позначається день, де вперше написали щонайменше 5 і втричі більше за їхню медіану за 14 днів, а повідомлень менше ніж 1,5 медіани. Перші 7 днів чату не позначаються.",
   "Choose at least {n}.": "Виберіть хоча б {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Введіть дату, наприклад 2026-10-01, або час із зазначенням часового поясу.",
   "Choose one of the allowed values.": "Виберіть одне з допустимих значень.",

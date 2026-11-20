@@ -10567,7 +10567,6 @@
   "Messages found: {n}": "見つかったメッセージ：{n}件",
   "Messages found: {n}+": "見つかったメッセージ：{n}件以上",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "フラグが立てられる条件：初回投稿者が5人以上おり、かつ14日間の中央値の3倍以上、メッセージ数が中央値の1.5倍以下であること。チャット開始から最初の7日間はフラグが立てられません。複数のチャットで初めて投稿したユーザーは、各チャットで1回ずつカウントされます。",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "フラグ設定条件：初回投稿者が5名以上おり、その14日間の中央値の3倍以上、かつメッセージ数が中央値の1.5倍未満の場合。チャットの最初の7日間はフラグ設定の対象外です。",
   "Choose at least {n}.": "{n}を少なくとも1つ選択してください。",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 のような日付、またはタイムゾーンを含む時刻を入力してください。",
   "Choose one of the allowed values.": "許可されている値の中から1つを選択してください。",
