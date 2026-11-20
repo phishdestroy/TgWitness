@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
 - Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
 - In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
