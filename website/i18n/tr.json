@@ -7316,7 +7316,8 @@
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "<code>verify.py</code>, istisna adı ve ham mesajı yerine, eşleşmeyen bir imzayı (“imza, imzalanmış içerikle eşleşmiyor: dosya değiştirildi ya da başka bir anahtarla imzalandı”), geçerli bir base64 formatında olmayan bir imza veya anahtar alanını ve geçerli bir metin olmayan bir dosyayı da sade bir dille açıklamaktadır.",
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "\"Pseudo-secret\" sayfası kart stilini koruyor: Sources stil sayfasında bulunan bir fazla kapanış parantezi, tarayıcının onu takip eden kuralı yok saymasına neden oldu.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Sohbet balonundaki mesaj numarası, hem açık hem de koyu temalarda kontrast kontrolünü geçecek kadar koyu renktedir.",
-  "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Bir kişinin kartındaki seçili sekme, karanlık temada okunabilir durumdadır (3,3’e 1 kontrast oranına sahip daha koyu vurgu mavisi kullanılmıştır)."
+  "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Bir kişinin kartındaki seçili sekme, karanlık temada okunabilir durumdadır (3,3’e 1 kontrast oranına sahip daha koyu vurgu mavisi kullanılmıştır).",
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "“Kayıtları Dışa Aktar” bölümündeki “Derleme raporu” sekmesi, ekran okuyucular için sayfa başlığını korur; bu başlık, görünür başlıkla birlikte sayfadan kaldırılmıştır."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",

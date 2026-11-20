@@ -7264,7 +7264,8 @@
   "f66e285390effa100eb512072ee38d343a817dbf6a0313d549d27c75e1916b4c": "<code>verify.py</code>juga menerangkan dengan kata-kata mudah tandatangan yang tidak sepadan (\"tandatangan tidak sepadan dengan kandungan yang ditandatangani: fail telah diubah, atau ia ditandatangani oleh kunci lain\"), medan tandatangan atau kunci yang bukan base64 sah, dan fail yang bukan teks sah, bukannya nama pengecualian dan mesej mentahnya.",
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman pseudo-rahsia mengekalkan gaya kartunya: tanda kurung penutup yang tersasar dalam helaian gaya Sumber menyebabkan pelayar mengabaikan peraturan yang mengikutinya.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Nombor mesej dalam gelembung sembang cukup gelap untuk lulus pemeriksaan kontras dalam tema cerah dan gelap.",
-  "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Tab yang dipilih pada kad seseorang boleh dibaca dalam tema gelap (ia menggunakan biru aksen yang lebih gelap dengan nisbah kontras 3.3:1)."
+  "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Tab yang dipilih pada kad seseorang boleh dibaca dalam tema gelap (ia menggunakan biru aksen yang lebih gelap dengan nisbah kontras 3.3:1).",
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Tab Laporan Pembinaan pada Eksport rekod mengekalkan tajuk halaman untuk pembaca skrin; ia telah dialihkan daripada halaman bersama tajuk yang dapat dilihat."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",
