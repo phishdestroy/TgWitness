@@ -31,6 +31,7 @@ snapshots; current implementation and qualification are recorded separately.
 
 | Latest evidence | Result | Scope |
 | --- | --- | --- |
+| Court-grade live acceptance · 20 Nov | RFC 3161, checkpoint/truncation, witness channel with external time, court package against three TSAs, OTS/Bitcoin anchors, FloodWait, secret-chat self-destruct and media — each with a rejected negative control | Live accounts and a real channel; public TSAs and Telegram Bot API |
 | Account security and exports · 10 Nov | Witness probe caught a second client on the same key; killed chat exports resumed; TDX quote checked offline | RunPod pod, three test accounts; revisions `6c7171228` to `196a5bcd1` |
 | Phala / Intel TDX with live account · 9 Nov | All 6 TDX checks passed; live Telegram collection; export verified | CVM `cvm_mjbvBdjM`; commit `427621d4`; session imported; self-attested tier |
 | drand checkpoint + verify · 9 Nov | drand round 33818717 in a signed checkpoint, confirmed via Cloudflare relay | RunPod collector; `--check-drand`; lower time bound for the checkpoint |
@@ -570,6 +571,40 @@ allows 24 hours after the key was created.
 
 <a name="remaining-qualification"></a>
 
+## Court-grade live acceptance · 20 November 2026
+
+These runs exercised the evidentiary chain end to end against real external
+services and live Telegram accounts. Each item includes a negative control: a
+tampered or truncated artifact must be rejected. Operational receipts and account
+material remain private; the commands, external services and verdicts are recorded here.
+
+- **RFC 3161 timestamp and tamper (V4).** A live export was timestamped by a public
+  Time Stamping Authority. `verify` with the TSA CA chain confirmed the token binds the
+  journal head; a single flipped byte in the export was rejected.
+- **Checkpoint and truncation (V3/V5).** A signed checkpoint over a live journal was
+  verified; truncating the journal after the checkpoint, and editing a checkpoint, were
+  both rejected by the verifier.
+- **Witness tier, live channel and external time (V6).** The witness process posted
+  signed journal heads to a real Telegram channel through the Bot API. `verify
+  --require-witness` confirmed the pinned checkpoint against the channel and read the
+  external post time from the public t.me/s view; a wrong witness fingerprint was
+  rejected, and a journal not yet witnessed was reported as such.
+- **OpenTimestamps / Bitcoin anchors (V7).** Live exports carried OpenTimestamps proofs
+  anchored for Bitcoin confirmation alongside the RFC 3161 token.
+- **Court package (V10/E6).** A BagIt court package was built from live data and verified
+  against three independent TSAs, including the AES-protected variant; byte tampering of a
+  package member was rejected.
+- **FloodWait under throttle (C20).** On a live session the collector raised its own
+  FloodWaitError from a persisted deadline without contacting Telegram, recorded a backoff,
+  and resumed from a past window; the journal chain stayed intact across ten events with no
+  data loss.
+- **Secret chats, self-destruct and media (C13).** A real end-to-end secret chat was
+  established with a controlled account. The collector decrypted and recorded incoming
+  messages into the append-only journal, including self-destruct messages with their timer,
+  and downloaded and stored their media content-addressed by SHA-256 — captured before the
+  messages expired on the sender side. The secret-chat key survived a process restart from
+  the encrypted vault.
+
 ## Qualification status
 
 The 9 November run added Phala Intel TDX deployment with a live Telegram account,
@@ -591,8 +626,11 @@ The following items remain unqualified:
 - **Message lifecycle matrix** (send, edit, delete, reactions, membership): the 9 November
   run collected channel history without exercising the write path. Steps 4–8 of the
   [live acceptance](internal/LIVE_ACCEPTANCE.md) procedure remain unrun.
-- **Proxy and MTProxy paths**, **Bitcoin-anchored OTS seal**, **witness tier**, and
-  **external-key backup restore** were not tested in this run.
+- **Proxy and MTProxy paths** and **external-key backup restore** were not tested in this run.
+
+The 20 November court-grade acceptance above closed the witness tier, Bitcoin-anchored
+OpenTimestamps, prolonged FloodWait handling, and Secret Chats — including self-destruct
+messages and their media — on live accounts, each with a rejected negative control.
 
 Further controlled runs for role visibility, reaction actors, prolonged FloodWait,
 account bans, network and process interruption recovery, mobile QR confirmation,
