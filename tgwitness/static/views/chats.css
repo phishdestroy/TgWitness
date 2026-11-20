@@ -251,3 +251,4 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .shared-title { font-weight: 600; }
 .workspace[data-current-view="chats"] .shared-coordinates { color: var(--text-2); font-variant-numeric: tabular-nums; }
 .workspace[data-current-view="chats"] .shared-answers { margin: 4px 0 0; padding-inline-start: 22px; }
+.workspace[data-current-view="chats"] .bubble-via { margin: 2px 0 4px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }

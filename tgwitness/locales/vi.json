@@ -10569,5 +10569,7 @@
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Bị gắn cờ: có ít nhất 5 người đăng bài lần đầu và số lượng tin nhắn gấp 3 lần giá trị trung vị trong 14 ngày của họ, với độ dài tin nhắn tối đa gấp 1,5 lần giá trị trung vị. 7 ngày đầu tiên của một phòng chat sẽ không bị gắn cờ. Một người đăng bài lần đầu trong nhiều phòng chat sẽ chỉ được tính một lần trong mỗi phòng.",
   "Choose at least {n}.": "Hãy chọn ít nhất {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Nhập ngày, ví dụ: 2026-10-01, hoặc thời gian kèm theo múi giờ.",
-  "Choose one of the allowed values.": "Hãy chọn một trong các giá trị được phép."
+  "Choose one of the allowed values.": "Hãy chọn một trong các giá trị được phép.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Được đánh dấu: ít nhất 5 người đăng bài lần đầu và số lượng tin nhắn gấp 3 lần giá trị trung vị trong 14 ngày của họ, với các tin nhắn có số lượng dưới 1,5 lần giá trị trung vị của họ. 7 ngày đầu tiên của một cuộc trò chuyện sẽ không bị đánh dấu.",
+  "Post author: {name}": "Tác giả bài viết: {name}"
 }
