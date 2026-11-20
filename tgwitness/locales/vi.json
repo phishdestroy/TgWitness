@@ -10718,5 +10718,6 @@
   "Save a valid bot token from BotFather.": "Lưu mã thông báo bot hợp lệ từ BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram đã từ chối yêu cầu tạo bot. Hãy kiểm tra mã thông báo và quyền truy cập của bot.",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram chưa kết thúc phiên làm việc của tài khoản này; không có thiệt hại nào cần báo cáo.",
+  "created the topic “{title}”": "đã tạo chủ đề “{title}”",
   "Copy the Telegram link to this message": "Sao chép liên kết Telegram của tin nhắn này"
 }

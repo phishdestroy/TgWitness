@@ -10718,5 +10718,6 @@
   "Save a valid bot token from BotFather.": "从 BotFather 保存一个有效的机器人令牌。",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram 拒绝了该机器人请求。请检查其令牌和权限。",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegram 尚未结束该账户的会话；没有损失需要报告。",
+  "created the topic “{title}”": "创建了主题“{title}”",
   "Copy the Telegram link to this message": "复制此消息的Telegram链接"
 }

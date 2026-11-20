@@ -10718,5 +10718,6 @@
   "Save a valid bot token from BotFather.": "BotFatherから有効なボットトークンを保存してください。",
   "Telegram refused the bot request. Check its token and permissions.": "Telegramがボットの申請を拒否しました。トークンと権限を確認してください。",
   "Telegram has not ended this account's session; there is no loss to report.": "Telegramはこのアカウントのセッションを終了させていません。報告すべき損失はありません。",
+  "created the topic “{title}”": "「{title}」というトピックを作成しました",
   "Copy the Telegram link to this message": "このメッセージのTelegramリンクをコピーしてください"
 }
