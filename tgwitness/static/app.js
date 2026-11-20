@@ -5880,7 +5880,7 @@ async function openChat(id,options={}){
   const focused=document.activeElement;
   if(focused&&focused!==document.body&&focused.checkVisibility?.()===false&&$("chat-back").checkVisibility?.())$("chat-back").focus({preventScroll:true});
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
-  if(loaded){loadChatProfile().catch(()=>{});loadChatPinned().catch(()=>{});}
+  if(loaded)loadChatProfile().catch(()=>{});
   const place=chatPositions.get(state.profile+":"+id);
   if(loaded&&place&&state.chat===id&&options.position!==false)await showChatMessage(place.id,{offset:place.offset,flash:false}).catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
@@ -5889,6 +5889,7 @@ async function openChat(id,options={}){
   }
   return loaded;
 }
+let pinnedGeneration=-1;
 function renderChatPinned(data){
   const box=$("chat-pinned"),items=data?.items||[],snap=data?.snapshot;
   if(!snap||!items.length){box.hidden=true;return;}
@@ -5978,6 +5979,7 @@ function fmtDuration(seconds){
 }
 async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
+  if(pinnedGeneration!==generation&&state.chatView==="messages"){pinnedGeneration=generation;loadChatPinned().catch(()=>{});}
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
   if((mode==='older'&&state.chatNextBefore===null)||(mode==='newer'&&state.chatNextAfter===null))return true;
