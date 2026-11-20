@@ -10554,6 +10554,13 @@
   "Sticker {emoji}": "Stiker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target tidak termasuk dalam dialog yang dibaca oleh akun ini. Segarkan daftar grup atau tingkatkan batas daftar obrolan di Parameter.",
   "Exported completely": "Diekspor sepenuhnya",
+  "This field is required.": "Kolom ini wajib diisi.",
+  "Enter at least {n} characters.": "Masukkan setidaknya {n} karakter.",
+  "Enter at most {n} characters.": "Masukkan paling banyak {n} karakter.",
+  "The value must be at least {n}.": "Nilainya harus setidaknya {n}.",
+  "The value must be at most {n}.": "Nilainya harus paling banyak {n}.",
+  "Enter a whole number.": "Masukkan bilangan bulat.",
+  "Enter a number.": "Masukkan sebuah angka.",
   "Quiz": "Kuis",
   "Live location": "Lokasi real-time"
 }

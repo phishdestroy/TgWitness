@@ -10809,6 +10809,13 @@
   "Sticker {emoji}": "ملصق {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "لا يظهر «Target» ضمن مربعات الحوار التي قرأها هذا الحساب. قم بتحديث قائمة المجموعات أو رفع الحد الأقصى لقائمة الدردشات في «المعلمات».",
   "Exported completely": "تم تصديرها بالكامل",
+  "This field is required.": "هذا الحقل إلزامي.",
+  "Enter at least {n} characters.": "أدخل ما لا يقل عن {n} حرفًا.",
+  "Enter at most {n} characters.": "أدخل {n} حرفًا كحد أقصى.",
+  "The value must be at least {n}.": "يجب ألا تقل القيمة عن {n}.",
+  "The value must be at most {n}.": "يجب ألا تتجاوز القيمة {n}.",
+  "Enter a whole number.": "أدخل عددًا صحيحًا.",
+  "Enter a number.": "أدخل رقمًا.",
   "Quiz": "اختبار",
   "Live location": "الموقع المباشر"
 }

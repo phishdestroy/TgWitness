@@ -10605,6 +10605,13 @@
   "Sticker {emoji}": "Sticker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "„Target“ ist nicht unter den Dialogen aufgeführt, die dieses Konto gelesen hat. Aktualisieren Sie die Gruppenliste oder erhöhen Sie das Limit für die Chat-Liste unter „Parameter“.",
   "Exported completely": "Vollständig exportiert",
+  "This field is required.": "Dieses Feld muss ausgefüllt werden.",
+  "Enter at least {n} characters.": "Geben Sie mindestens {n} Zeichen ein.",
+  "Enter at most {n} characters.": "Geben Sie höchstens {n} Zeichen ein.",
+  "The value must be at least {n}.": "Der Wert muss mindestens {n} betragen.",
+  "The value must be at most {n}.": "Der Wert darf höchstens {n} betragen.",
+  "Enter a whole number.": "Geben Sie eine ganze Zahl ein.",
+  "Enter a number.": "Geben Sie eine Zahl ein.",
   "Quiz": "Quiz",
   "Live location": "Aktueller Standort"
 }

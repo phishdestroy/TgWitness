@@ -10656,6 +10656,13 @@
   "Sticker {emoji}": "מדבקה {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target אינו מופיע בין הדיאלוגים שהחשבון הזה קרא. רענן את רשימת הקבוצות או הגדל את מגבלת רשימת הצ'אטים תחת \"פרמטרים\".",
   "Exported completely": "יוצא במלואו",
+  "This field is required.": "שדה זה הוא שדה חובה.",
+  "Enter at least {n} characters.": "הזן לפחות {n} תווים.",
+  "Enter at most {n} characters.": "הזן לכל היותר {n} תווים.",
+  "The value must be at least {n}.": "הערך חייב להיות לפחות {n}.",
+  "The value must be at most {n}.": "הערך חייב להיות לכל היותר {n}.",
+  "Enter a whole number.": "הזן מספר שלם.",
+  "Enter a number.": "הזן מספר.",
   "Quiz": "חידון",
   "Live location": "מיקום בזמן אמת"
 }

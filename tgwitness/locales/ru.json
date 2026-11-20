@@ -10677,6 +10677,13 @@
   "Sticker {emoji}": "Стикер {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Цели нет среди диалогов, прочитанных этим аккаунтом. Обновите список групп или увеличьте лимит списка чатов в «Параметрах».",
   "Exported completely": "Полностью экспортировано",
+  "This field is required.": "Это поле является обязательным для заполнения.",
+  "Enter at least {n} characters.": "Введите не менее {n} символов.",
+  "Enter at most {n} characters.": "Введите не более {n} символов.",
+  "The value must be at least {n}.": "Значение должно быть не меньше {n}.",
+  "The value must be at most {n}.": "Значение должно быть не больше {n}.",
+  "Enter a whole number.": "Введите целое число.",
+  "Enter a number.": "Введите число.",
   "Quiz": "Викторина",
   "Live location": "Текущее местоположение"
 }
