@@ -6332,6 +6332,7 @@
   "The most recent rows are listed; totals cover every row.": "แถวล่าสุดจะแสดงอยู่ด้านบน; ยอดรวมจะครอบคลุมทุกแถว",
   "rows": "แถว",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "คำนวณจากไฟล์ events.jsonl โดยตัวประมวลผลที่ระบุไว้ ตัวประมวลผลเหล่านี้ชี้ให้เห็นสิ่งที่ต้องตรวจสอบ ไม่ใช่สิ่งที่เกิดขึ้น",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "ถูกทำเครื่องหมาย: มีผู้โพสต์ครั้งแรกอย่างน้อย 5 คน และจำนวนข้อความมากกว่า 3 เท่าของค่ามัธยฐานในช่วง 14 วัน โดยข้อความแต่ละข้อความต้องน้อยกว่า 1.5 เท่าของค่ามัธยฐานนั้น 7 วันแรกของการสนทนาจะไม่ถูกทำเครื่องหมาย",
   "Distinct saved message numbers per chat and the share taken by service messages.": "หมายเลขข้อความที่เก็บไว้ที่แตกต่างกันสำหรับแต่ละการสนทนา และสัดส่วนที่ข้อความบริการ chiếm",
   "Membership changes Telegram reported, once per person, chat, change and day.": "การเปลี่ยนแปลงสมาชิกที่ Telegram รายงานมา โดยจำกัดการรายงานหนึ่งครั้งต่อคน ต่อห้องแชท ต่อการเปลี่ยนแปลง และต่อวัน",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "ตรึงข้อความบริการ ยกเลิกการตรึงการแจ้งเตือน และข้อความที่ตรึงไว้ ซึ่งถูกเพิ่มหรือลบไประหว่างการถ่ายภาพสถานะการสนทนา",
@@ -10564,5 +10565,7 @@
   "Enter a number.": "กรอกตัวเลข",
   "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
   "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}",
+  "Messages found: {n}": "พบข้อความ: {n}",
+  "Messages found: {n}+": "พบข้อความ: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "ถูกทำเครื่องหมาย: มีผู้โพสต์ครั้งแรกอย่างน้อย 5 คน และจำนวนข้อความมากกว่าค่ามัธยฐานในช่วง 14 วันของพวกเขา 3 เท่า โดยจำนวนข้อความสูงสุดไม่เกิน 1.5 เท่าของค่ามัธยฐานนั้น ห้องแชทในช่วง 7 วันแรกจะไม่ถูกทำเครื่องหมาย ผู้ที่โพสต์ครั้งแรกในหลายห้องแชทจะถูกนับเพียงครั้งเดียวในแต่ละห้อง"
 }

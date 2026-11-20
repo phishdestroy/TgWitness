@@ -6071,6 +6071,7 @@ function renderChatEmpty(){
 }
 function renderChat(){
   if(state.view!=='chats')return;
+  renderSearchCount();
   const info=state.chats.find(c=>c.chat_id===state.chat);state.chatInfo=info||null;
   if(!info){renderChatEmpty();return;}
   show("chat-empty",false);show("chat-main",true);
@@ -6438,7 +6439,7 @@ function renderChatFeed(){
     if(m.service_action){const service=node("div","chat-service",serviceActor(m)+" "+serviceDetail(m)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
       const ref=m.reference;if(ref)boardView?.attach(service,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id});next.push(service);return;}
     const grouped=!marks&&joins(shown[index-1],m),continued=!marksBefore.has(shown[index+1]?.message_id)&&joins(m,shown[index+1]),post=channel&&(!m.sender||m.sender.id===state.chat);
-    const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,continued,post,m.reply_to&&!m.reply_to_chat&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key(),chatPick?chatPick.has(m.message_id):null]);
+    const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,continued,post,m.reply_to&&!m.reply_to_chat&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key(),chatPick?chatPick.has(m.message_id):null,state.chatSearch]);
     if(old?.renderKey===key)next.push(old);else{const row=messageRow(m,grouped,byId,{continued,post});row.renderKey=key;next.push(row);replaced.add(row.id);}
   });
   if(marking&&state.chatNextAfter===null)next.push(...chatGaps.after(lastShown));
@@ -6465,6 +6466,30 @@ function sharedContentNode(info){
     let host="";try{host=new URL(info.url).hostname;}catch{}if(host)box.append(node("div","shared-coordinates",host));return box;}
   if(info.dice){label(tr("Dice"));box.append(node("div","shared-title",[info.dice.emoji,info.dice.value].filter(x=>x!==undefined).join(" ")));return box;}
   return null;
+}
+function highlightMatches(root,query){
+  const words=[...new Set(String(query||"").trim().split(/\s+/).filter(word=>word&&!/^#\d+$/.test(word)))];
+  if(!words.length)return;
+  const pattern=new RegExp(words.map(word=>word.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).sort((a,b)=>b.length-a.length).join("|"),"giu");
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),found=[];
+  while(walker.nextNode())found.push(walker.currentNode);
+  for(const text of found){
+    if(text.parentElement?.closest("button,mark"))continue;
+    const value=text.nodeValue;pattern.lastIndex=0;
+    if(!pattern.test(value))continue;
+    pattern.lastIndex=0;const parts=document.createDocumentFragment();let last=0,match;
+    while((match=pattern.exec(value))){
+      if(!match[0]){pattern.lastIndex++;continue;}
+      parts.append(value.slice(last,match.index),node("mark","",match[0]));last=match.index+match[0].length;
+    }
+    parts.append(value.slice(last));text.replaceWith(parts);
+  }
+}
+function renderSearchCount(){
+  const box=$("chat-search-count"),searching=state.chatView==="messages"&&state.chatSearch&&!/^#\d+$/.test(state.chatSearch.trim());
+  if(!searching){box.textContent="";return;}
+  const more=state.chatNextBefore!==null||state.chatNextAfter!==null;
+  box.textContent=tr(more?"Messages found: {n}+":"Messages found: {n}",{n:state.chatMessages.length});
 }
 function messageText(value,m,className="bubble-text"){
   const profile=state.profile,revision=state.workspaceRevision,chat=state.chat,generation=chatGeneration;
@@ -6503,7 +6528,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     const tag=node("div","fwd-origin");tag.append(icon("share"),node("span","",who?tr("Forwarded from {name}",{name:who}):tr("Forwarded message")));
     if(origin.date)tag.title=tr("Original message sent {time}",{time:fmtFull(origin.date)});
     bubble.insertBefore(tag,bubble.querySelector(".reply-quote")?.nextSibling||bubble.querySelector(".bubble-head")?.nextSibling||bubble.firstChild);}
-  if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
+  if(m.captured){if(m.text){const body=messageText(m.text,m);highlightMatches(body,state.chatSearch);bubble.append(body);}if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   const sticker=m.details?.media_info?.sticker_emoji;
   if(sticker)bubble.append(node("div","sticker-label",tr("Sticker {emoji}",{emoji:sticker})));

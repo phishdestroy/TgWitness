@@ -6332,6 +6332,7 @@
   "The most recent rows are listed; totals cover every row.": "Baris-baris terbaru tercantum; total mencakup setiap baris.",
   "rows": "baris",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Dihitung dari berkas events.jsonl oleh pemroses yang tercantum. Data ini menunjukkan apa yang perlu diperiksa, bukan apa yang terjadi.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Ditandai: setidaknya 5 pengguna yang baru pertama kali memposting dan 3 kali lipat dari median 14 hari mereka, dengan pesan di bawah 1,5 kali lipat dari median mereka. 7 hari pertama obrolan tidak ditandai.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Jumlah pesan yang disimpan yang berbeda-beda per obrolan dan porsi yang ditempati oleh pesan layanan.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Perubahan keanggotaan yang dilaporkan oleh Telegram, satu kali per orang, obrolan, perubahan, dan hari.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Sematkan pesan layanan, lepaskan pemberitahuan, serta pesan yang disematkan yang ditambahkan atau dihapus di antara snapshot status obrolan.",
@@ -10564,5 +10565,7 @@
   "Enter a number.": "Masukkan sebuah angka.",
   "changed the chat name to “{title}”": "mengubah nama obrolan menjadi “{title}”",
   "pinned a message, number {n}": "menandai pesan, nomor {n}",
+  "Messages found: {n}": "Pesan yang ditemukan: {n}",
+  "Messages found: {n}+": "Pesan yang ditemukan: {n}+",
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Ditandai: setidaknya 5 pengguna yang baru pertama kali mengirim pesan dan 3 kali lipat dari median 14 hari mereka, dengan jumlah pesan maksimal 1,5 kali lipat dari median tersebut. 7 hari pertama sebuah obrolan tidak ditandai. Seseorang yang pertama kali mengirim pesan di beberapa obrolan dihitung satu kali di masing-masing obrolan."
 }
