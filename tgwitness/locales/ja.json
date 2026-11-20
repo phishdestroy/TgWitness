@@ -10549,5 +10549,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegramでは{total}件の固定メッセージが報告されていますが、一覧には{listed}件しか表示されていません。",
   "Not saved in this workspace": "このワークスペースには保存されていません",
   "Show in chat": "チャットに表示",
-  "Go to message #{id}": "メッセージ #{id} へ移動"
+  "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}"
 }

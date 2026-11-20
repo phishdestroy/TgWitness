@@ -10603,5 +10603,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "تلگرام گزارش داد که پیام‌های سنجاق‌شده {total} هستند؛ تنها {listed} فهرست شده‌اند.",
   "Not saved in this workspace": "در این فضای کاری ذخیره نشده است",
   "Show in chat": "در چت نمایش دهید",
-  "Go to message #{id}": "به پیام شمارهٔ {id} بروید."
+  "Show in chat: message #{id}": "نمایش در چت: پیام #{id}"
 }

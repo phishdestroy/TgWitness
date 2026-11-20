@@ -5909,7 +5909,7 @@ function renderChatPinned(data){
       if(item.deleted)label.append(" · "+tr("Deleted"));
       if(item.text)label.append(node("span","chat-pinned-text",item.text));
       const go=node("button","quiet small",tr("Show in chat"));go.type="button";
-      go.setAttribute("aria-label",tr("Go to message #{id}",{id:item.message_id}));
+      go.setAttribute("aria-label",tr("Show in chat: message #{id}",{id:item.message_id}));
       go.addEventListener("click",()=>busy(go,()=>jumpToMessageNumber(item.message_id)));
       row.append(label,go);
     }else{label.append(node("span","chat-pinned-text",tr("Not saved in this workspace")));row.append(label);}

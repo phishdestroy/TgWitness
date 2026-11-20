@@ -10707,5 +10707,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram zgłosił {total} przypięte wiadomości; na liście widnieje tylko {listed}.",
   "Not saved in this workspace": "Nie zapisano w tym obszarze roboczym",
   "Show in chat": "Pokaż na czacie",
-  "Go to message #{id}": "Przejdź do wiadomości nr {id}"
+  "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}"
 }

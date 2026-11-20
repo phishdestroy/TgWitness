@@ -10603,5 +10603,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram نے {total} پن کیے گئے پیغامات رپورٹ کیے؛ صرف {listed} درج ہیں۔",
   "Not saved in this workspace": "اس ورک اسپیس میں محفوظ نہیں ہوا",
   "Show in chat": "چیٹ میں دکھائیں",
-  "Go to message #{id}": "پیغام نمبر {id} پر جائیں۔"
+  "Show in chat: message #{id}": "چیٹ میں دکھائیں: پیغام #{id}"
 }

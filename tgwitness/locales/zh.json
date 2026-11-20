@@ -10549,5 +10549,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram 报告称有 {total} 条置顶消息；但列表中仅显示了 {listed} 条。",
   "Not saved in this workspace": "未保存在此工作区中",
   "Show in chat": "在聊天中显示",
-  "Go to message #{id}": "转到第{id}条消息"
+  "Show in chat: message #{id}": "在聊天中显示：第 {id} 条消息"
 }

@@ -10613,5 +10613,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram indiquait {total} messages épinglés ; seuls {listed} sont répertoriés.",
   "Not saved in this workspace": "Non enregistré dans cet espace de travail",
   "Show in chat": "Afficher dans le chat",
-  "Go to message #{id}": "Aller au message n° {id}"
+  "Show in chat: message #{id}": "Afficher dans le chat : message n° {id}"
 }

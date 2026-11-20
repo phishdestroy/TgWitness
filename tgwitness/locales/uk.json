@@ -10707,5 +10707,5 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram повідомив про {total} закріплені повідомлення; у списку наведено лише {listed}.",
   "Not saved in this workspace": "Не збережено в цій робочій області",
   "Show in chat": "Показати в чаті",
-  "Go to message #{id}": "Перейти до повідомлення № {id}"
+  "Show in chat: message #{id}": "Показати в чаті: повідомлення № {id}"
 }
