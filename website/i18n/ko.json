@@ -7203,7 +7203,14 @@
   "8773c9e25484d2e963dcb2fb5687673f5db2e265c7767ab5ee4f480337de31e3": "<strong>905,672</strong><span>자가 사각형 아래에서 읽힘</span>",
   "55882a9c5fa5ea7c79772a7f3158fced069ea0725462a83b6522f7bc87dbc9f9": "<strong>PhishDestroy의 검토 내용입니다.</strong> 이 답변은 신참 직원이 쓴 것이 아닙니다. 독일에서 가장 인정받는 IT 변호사 중 한 명에게 신고 내용은 중요하지 않았고, 오직 건수만 중요했습니다. 이 페이지는 신고에 무엇이 적혀 있는지 읽고, 왜 그의 적격 서명조차 파일을 보증할 수 없는지 보여줍니다.",
   "518d1fe28c36566fae1e28aa031e22ea387b948fbbd0ca53f60749c8b6eaa4cb": "우리 소프트웨어가 독일에 곧 뿌리내릴지는 확신하지 못합니다. 암호학적 검증은 사유화된 사법, 그리고 강자의 법과 잘 어울리지 않습니다. 하지만 언젠가 그곳에서 법과 IT가 진실을 위해 만난다면, 우리는 그저 기쁠 것입니다.",
-  "ad4ba01f0288a3771d8db0f60f3a08ee566a466206b303fbe6cf6eaafddc8282": "수상 경력, 직책, 고객 평가는 <a href=\"https://www.taylorwessing.com/en/people/germany/hamburg/dr-tobias-schelinski\">taylorwessing.com의 그의 프로필</a> (<a class=\"dossier-arch\" href=\"https://web.archive.org/web/20261120110833/https://www.taylorwessing.com/en/people/germany/hamburg/dr-tobias-schelinski\">아카이브</a>)에서 가져왔습니다. 2026년판 발표일은 2025년 6월 12일 로펌들이 전한 출판사 발표를 근거로 합니다. 각 “아카이브” 링크는 Internet Archive에 저장된 사본을 엽니다."
+  "ad4ba01f0288a3771d8db0f60f3a08ee566a466206b303fbe6cf6eaafddc8282": "수상 경력, 직책, 고객 평가는 <a href=\"https://www.taylorwessing.com/en/people/germany/hamburg/dr-tobias-schelinski\">taylorwessing.com의 그의 프로필</a> (<a class=\"dossier-arch\" href=\"https://web.archive.org/web/20261120110833/https://www.taylorwessing.com/en/people/germany/hamburg/dr-tobias-schelinski\">아카이브</a>)에서 가져왔습니다. 2026년판 발표일은 2025년 6월 12일 로펌들이 전한 출판사 발표를 근거로 합니다. 각 “아카이브” 링크는 Internet Archive에 저장된 사본을 엽니다.",
+  "d78219a5257a35476fc6b4fd73ac8b16fe77c36ab479a4e9ab22c3da53f21e2c": "채팅 화면의 각 대화창에는 시간 옆에 텔레그램 메시지 번호가 표시되므로, 독자는 이를 번호 검색 결과 및 보고서에 나열된 누락된 항목과 대조할 수 있습니다.",
+  "7532d501149b921b3acf1984dd041744286512e824852d6f3ef8698852954478": "‘레저 및 여백’ PDF 디자인에서는 표가 장 제목이 표시된 여백 부분까지 확장되지 않고 본문 텍스트 부분에서 시작됩니다.",
+  "3a206d128944ffdc6ee135b1f6b7d260642886f14b826a78518e4074e9eeb6b0": "PDF 보고서에서 활동 차트의 제목은 모든 디자인에서 해당 차트와 항상 같은 페이지에 배치됩니다.",
+  "2023bc4fbcf93832c5887dfeb7be2d162fb220559cd6067814d902600563a418": "HTML 보고서 타일 내의 “관측 기간이 기록되지 않음”과 같은 긴 문구는 큰 숫자 크기 대신 작은 글꼴로 표시됩니다.",
+  "523a32b5c31ab1bc988bc11f615a65a459bcd75cb1d4ddf1cbb270fb9e0bff4b": "채팅 화면에서 저장된 첨부 파일은 파일 이름, 유형 및 크기가 표시되며, 이미지, 오디오 및 동영상에 대해서만 미리 보기가 제공됩니다.",
+  "c891254618c8cca8e1bfb84ee511712e996ae417860193eb4a0bdd032e747d87": "패널 서버 측의 오류 메시지 146개가 나머지 24개 언어로 번역되었으며, 여기에는 인계 내역, 채팅 내역 내보내기, 케이스 보드, 문서, 관심 목록, 설정, 저장소, 검색 기록 및 보고서 프로필 등이 포함됩니다. 이전에는 패널의 설정 언어와 관계없이 모든 오류 메시지가 영어로 표시되었습니다.",
+  "0117165ddbeb4b360d076e6128f5bf36ca8d64b521fa21b277aa85a2a57d70bf": "모바일 기기에서 HTML 보고서의 테이블이 가로로 스크롤될 때, 내용이 잘리는 것처럼 보이지 않고 오른쪽 가장자리에서 서서히 사라집니다."
  },
  "modes": {
   "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",
