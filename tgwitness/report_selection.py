@@ -1,4 +1,5 @@
 from datetime import date
+import json
 from pathlib import Path
 import sqlite3
 import tempfile
@@ -181,6 +182,7 @@ def _prepare(connection):
         CREATE TABLE catalog_chats (id INTEGER PRIMARY KEY, count INTEGER NOT NULL);
         CREATE TABLE catalog_secret_chats (id INTEGER PRIMARY KEY, count INTEGER NOT NULL, title TEXT NOT NULL);
         CREATE TABLE catalog_senders (id INTEGER PRIMARY KEY, count INTEGER NOT NULL);
+        CREATE TABLE sender_names (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
         CREATE TABLE selected_chats (id INTEGER PRIMARY KEY);
         CREATE TABLE selected_secret_chats (id INTEGER PRIMARY KEY);
         CREATE TABLE selected_senders (id INTEGER PRIMARY KEY);
@@ -322,6 +324,12 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                 picked = (chat, _message_id(event.get("message_id")))
                 if selection.enabled and secret is None and picked in predicate.messages:
                     connection.execute("INSERT OR IGNORE INTO picked_found VALUES (?,?)", picked)
+                if message_kind and sender is not None:
+                    observed = event.get("payload", {}).get("sender_observation") if isinstance(event.get("payload"), dict) else None
+                    name = observed.get("display_name") if isinstance(observed, dict) else None
+                    if isinstance(name, str) and name.strip():
+                        connection.execute("INSERT INTO sender_names VALUES (?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name",
+                                           (sender, _text(name, TITLE_CHARS)))
                 if message_kind:
                     if secret is not None:
                         peer = event.get("payload", {}).get("peer_user_id")
@@ -364,6 +372,12 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                       "participants": connection.execute("SELECT count(*) FROM selected_senders").fetchone()[0],
                       "chats": connection.execute("SELECT (SELECT count(*) FROM selected_chats) + (SELECT count(*) FROM selected_secret_chats)").fetchone()[0],
                       "invalid_time_excluded": invalid_time_excluded}
+            names = {"chats": {row[0]: row[1] for row in connection.execute(
+                         "SELECT id, title FROM titles WHERE title<>'' AND id IN (SELECT value FROM json_each(?))",
+                         (json.dumps(list(selection.chats)),))},
+                     "senders": {row[0]: row[1] for row in connection.execute(
+                         "SELECT id, name FROM sender_names WHERE id IN (SELECT value FROM json_each(?))",
+                         (json.dumps(list(selection.senders)),))}}
             gaps = _gaps(connection, predicate, selection.id_gaps)
             found = {tuple(row) for row in connection.execute("SELECT chat,message FROM picked_found")}
             missing = [{"chat": chat, "message": message} for chat, message in sorted(predicate.messages - found)] \
@@ -385,5 +399,5 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                         "senders": senders, "senders_total": senders_total, "senders_status": senders_status,
                         "unknown_sender_records": unknown_catalog_senders,
                         "sender_basis": "Message records in selected chats and UTC dates, before sender and event-kind filters"},
-            "messages": messages, "messages_not_found": missing, "id_gaps": gaps,
+            "messages": messages, "messages_not_found": missing, "id_gaps": gaps, "names": names,
             "changed_keys": changed_keys, "changed_total": changed_total}
