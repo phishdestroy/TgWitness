@@ -5786,7 +5786,7 @@ async function refreshChats(refresh=false,wanted=null,messages=true){
   if(wanted!==null&&state.chat!==wanted&&state.chats.some(c=>c.chat_id===wanted)){beginChat(wanted);refresh=false;}
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat))beginChat(null);
   if(state.chat===null&&state.chats.length){beginChat((state.chats.find(c=>c.enabled)||state.chats[0]).chat_id);refresh=false;
-    if(matchMedia('(max-width: 767px)').matches)viewQuery("chats",".chats-shell").dataset.panel="list";}
+    viewQuery("chats",".chats-shell").dataset.panel=matchMedia('(max-width: 767px)').matches?"list":"chat";}
   renderChatsList();
   if(state.chat===null){renderChatEmpty();return;}
   if(!messages&&state.chat===previousChat){renderChat();return;}
