@@ -26,6 +26,10 @@
 ## Unreleased
 
 - On a phone, the choice buttons in the settings dialogs have a visible border and a touch-sized height of 44 pixels, so they look like buttons even when none is selected.
+- A saved record whose reactions are malformed (a missing count, an entry that is not a reaction, or a value that is not a list) no longer stops a report from being built: the report lists the readable reactions and skips the rest.
+- `verify.py` says "the archive has no manifest.sig, so its signature cannot be checked" for an archive without its signature file, instead of a `KeyError`.
+- When a chat export stops because the free disk space is too low for its attachments, the panel gives the reason and the way out ("Not enough free disk space for the attachments of this export. Free space or turn attachment downloads off under Sources → Recording.") instead of "Export failed (ValueError)". The reason is in the export record as `message`.
+- A message bubble in the viewer of an evidence report shows where a forwarded message came from ("Forwarded from Alex #5", the ID when no name was saved, or "a hidden sender") and its reactions as small chips, up to twelve per message.
 - A card of the account export report names where a forwarded message came from ("Forwarded from …", with the channel post number, post author and date when Telegram gave them, or "Sender not available") and lists its reactions ("reactions: 👍 3").
 - A card of the account export report shows where a text link really goes ("Link text “…” opens https://…") with a warning when the visible web address is not the target, and names the message a reply answers ("Reply to message #7"). Replies to another chat and forum topic roots are not named.
 - The journal timeline names 40 more events in words, such as Chat details read, History reading started and Watchlist match, and any event without a name shows a readable title instead of its dotted code.

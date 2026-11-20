@@ -1721,7 +1721,10 @@ def timer_text(say, kind):
 
 
 def reactions_text(found):
-    return " ".join(str(x["reaction"]) + " " + str(x["count"]) for x in found[:20])
+    if not isinstance(found, (list, tuple)):
+        return ""
+    return " ".join(str(x["reaction"]) + " " + str(x.get("count", "")) for x in found[:20]
+                    if isinstance(x, dict) and x.get("reaction") is not None).strip()
 
 
 IOC_KINDS = {"url": "Link", "domain": "Domain", "wallet": "Wallet", "telegram": "Telegram username",
