@@ -131,9 +131,6 @@ html[data-ui-level=simple] #view-sources #sources-tab-secret { display: none; }
   #view-sources #target-select-matching { width: 100%; text-align: start; padding-inline: 0; }
   #view-sources .source-pagination > div { margin-inline-start: auto; }
 }
-  #view-sources #target-select-matching { width: 100%; text-align: start; padding-inline: 0; }
-  #view-sources .source-pagination > div { margin-inline-start: auto; }
-}
 
 #view-secret-chats .secret-chats { display: grid; gap: 0; padding: 0; overflow: hidden; }
 #view-secret-chats .secret-chats p { margin: 0; }
