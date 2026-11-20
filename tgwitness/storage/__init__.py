@@ -944,7 +944,15 @@ def main():
             for kept in result["conflicts"]:
                 print(f"  expected {kept['sha256']}, local {kept['local_sha256']}: {args.output / kept['kept_as']}")
     except (ValueError, OSError, TimeoutError) as exc:
-        parser.exit(1, "Recovery stopped: " + (str(exc) if isinstance(exc, ValueError) else type(exc).__name__) + "\n")
+        if isinstance(exc, ValueError):
+            reason = str(exc)
+        elif isinstance(exc, FileNotFoundError) and exc.filename:
+            reason = "cannot find " + str(exc.filename)
+        elif isinstance(exc, PermissionError) and exc.filename:
+            reason = "no permission for " + str(exc.filename)
+        else:
+            reason = type(exc).__name__
+        parser.exit(1, "Recovery stopped: " + reason + "\n")
 
 
 if __name__ == "__main__":
