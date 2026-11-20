@@ -59,8 +59,8 @@
           <p class="tw-lead">{{home.hero.lead}}</p>
           <div class="tw-actions">
             <a class="tw-btn tw-btn-primary" href="https://tgwitness-demo.destroy.tools/"><span class="tw-live-dot" aria-hidden="true"></span>{{home.hero.live}}<span aria-hidden="true">↗</span></a>
-            <a class="tw-btn tw-btn-gh" href="#github-capture"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 1.6a10.4 10.4 0 0 0-3.3 20.3c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.3-.3-4.8-1.2-4.8-5.1 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.5 4.8-4.8 5.1.4.3.7 1 .7 1.9v2.9c0 .3.2.6.7.5A10.4 10.4 0 0 0 12 1.6Z"/></svg>{{home.hero.gh}}</a>
-            <a class="tw-btn tw-btn-secondary" href="#install">{{home.hero.install}}<span aria-hidden="true">↓</span></a>
+            <a class="tw-btn tw-btn-secondary tw-btn-gh-soft" href="#github-capture"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 1.6a10.4 10.4 0 0 0-3.3 20.3c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.3-.3-4.8-1.2-4.8-5.1 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.5 4.8-4.8 5.1.4.3.7 1 .7 1.9v2.9c0 .3.2.6.7.5A10.4 10.4 0 0 0 12 1.6Z"/></svg>{{home.hero.gh}}</a>
+            <a class="tw-link-more" href="#install">{{home.hero.install}}<span aria-hidden="true">↓</span></a>
           </div>
           <p class="tw-hero-note"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{home.hero.note}}</p>
         </div>
@@ -157,11 +157,9 @@
     </div>
 
     <ul class="tw-stats will-reveal" data-stats>
-      <li><strong data-count-to="100">100</strong><span>{{home.stats.strengths}}</span></li>
-      <li><strong data-count-to="310">310</strong><span>{{home.stats.records}}</span></li>
+      <li><strong data-count-to="0">0</strong><span>{{home.stats.servers}}</span></li>
       <li><strong data-count-to="3">3</strong><span>{{home.stats.time}}</span></li>
-      <li><strong data-count-to="8">8</strong><span>{{home.stats.login}}</span></li>
-      <li><strong data-count-to="8">8</strong><span>{{home.stats.reports}}</span></li>
+      <li><strong data-count-to="6">6</strong><span>{{home.stats.levels}}</span></li>
       <li><strong data-count-to="25">25</strong><span>{{home.stats.languages}}</span></li>
     </ul>
 
@@ -688,6 +686,7 @@ ASSURANCE: fail</pre>
           <p class="tw-install-note">{{home.simple.windowsNote}}</p>
         </div>
       </div>
+      <p class="tw-verify-first"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>{{home.simple.verifyFirst}} <a href="docs/reference/installation/#verify-before-running">{{home.simple.verifyLink}}</a></span></p>
       <p class="tw-install-links"><span>{{home.simple.panel}} <a href="http://127.0.0.1:8787" translate="no">127.0.0.1:8787</a></span><a href="docs/reference/installation/">{{home.simple.signatures}}</a><a href="docs/reference/quickstart/">{{home.simple.docker}}</a><a href="@@ROOT@@demo/?lang=@@LANG_CODE@@">{{home.simple.demo}}</a></p>
       <aside class="tw-callout tone-warning" aria-labelledby="session-warning-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><span><strong id="session-warning-title">{{home.simple.warnTitle}}</strong> {{home.simple.warnText}} <a href="@@ROOT@@demo/guide.html?lang=@@LANG_CODE@@#session-warning">{{home.simple.warnLink}}</a></span></aside>
     </section>
