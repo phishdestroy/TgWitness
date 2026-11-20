@@ -16,6 +16,7 @@ from .system_map import system_map
 from . import witness as routes_witness
 from .. import cloud_wizard
 from .. import extensions
+from ..compression import Compression
 from ..report import InvalidSavedReportOptions
 from ..board_api import register as register_board
 from ..capture_api import register as register_capture
@@ -61,6 +62,7 @@ def register(app, ctx):
     app.include_router(router)
     router = APIRouter()
     app.add_middleware(RequestLimit, max_body=16384)
+    app.add_middleware(Compression)
     app.middleware("http")(ctx.headers)
     app.exception_handler(Exception)(ctx.unexpected_error)
     app.exception_handler(RequestValidationError)(ctx.validation_error)
