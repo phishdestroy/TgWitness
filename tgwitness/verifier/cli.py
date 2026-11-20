@@ -16,6 +16,7 @@ from .common import (
     read_json_file,
     read_member,
     failure_detail,
+    plain_failure,
     safe_text,
     sys,
     tempfile,
@@ -349,7 +350,7 @@ def verification_comparison(args, parser, mode):
             verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
             raise SystemExit(code)
         verification_print("ASSURANCE: fail")
-        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
     pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
     compared['assurance'] = assurance(compared)
     compared['assurance']['scope'] = 'two authenticated chat exports; the comparison covers their contents'
@@ -660,7 +661,7 @@ def verification_failure(args, parser, mode, console, exc):
         verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
         raise SystemExit(code)
     verification_print("ASSURANCE: fail")
-    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
+    parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
 
 
 def verification_output(args, checked, console, mode):

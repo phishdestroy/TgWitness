@@ -656,6 +656,9 @@ function validationText(message){
   if(match=text.match(/^String should have at most (\d+) characters?/))return tr("Enter at most {n} characters.",{n:match[1]});
   if(match=text.match(/^Input should be greater than or equal to (\S+)$/))return tr("The value must be at least {n}.",{n:match[1]});
   if(match=text.match(/^Input should be less than or equal to (\S+)$/))return tr("The value must be at most {n}.",{n:match[1]});
+  if(match=text.match(/^List should have at least (\d+) items?/))return tr("Choose at least {n}.",{n:match[1]});
+  if(/^Input should be a valid (datetime|date)/.test(text))return tr("Enter a date such as 2026-10-01 or a time with a timezone.");
+  if(/^Input should be '/.test(text))return tr("Choose one of the allowed values.");
   if(/^Input should be a valid integer/.test(text))return tr("Enter a whole number.");
   if(/^Input should be a valid number/.test(text))return tr("Enter a number.");
   if(match=text.match(/^Value error, (.+)$/s))return tr(match[1]);
