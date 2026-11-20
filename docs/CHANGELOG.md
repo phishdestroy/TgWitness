@@ -26,6 +26,17 @@
 ## Unreleased
 
 - While messages are being selected in a chat, the chat-wide Build report button is hidden, so the selection bar has the only Build report button.
+- A rejected form shows its messages in the panel's language and in plain words ("This field is required.", "Enter at least 3 characters.", "Enter a date such as 2026-10-01 or a time with a timezone.", "Choose one of the allowed values.") instead of the server's English wording.
+- `python -m tgwitness.download` says why a download failed: the panel refused the token, nothing answered at the address, the token file or output cannot be used, or the disk is full, instead of the exception name or "HTTP 401; redirects are not followed".
+- Command line results show two labelled times: `observed` (when the collector saw the record) and, when Telegram reported one, `sent` for a message or `edited` for an edited version. A deletion notice has only the observation time. Before, one unlabelled time was printed. `--json` is unchanged.
+- `tgwitness stats` lists only the hours and weekdays that have messages (`other hours 0`), says `no messages` for an empty selection, gives each sender's first and last message time, and uses the singular for one message or interval. A value that is not a whole number for `--chat`, `--limit`, `--message` and the like says so instead of `invalid identifier value`.
+- `python -m tgwitness.file_hashes` and `python -m tgwitness.storage recover` name a file they cannot find or read instead of printing a traceback or the exception type.
+- The MCP stdio bridge checks the token with the panel before it starts. A revoked, expired or wrong token, or an unreachable panel, ends it at once with a message that says why, where before the client saw only "Connection closed".
+- The PDF of a handover extract prints the minimisation settings in words (period, chosen people, everyone else, message text, attachments, profile photos, masked contacts) as the HTML report does, instead of option names and `None` or `False`.
+- The method text of **First-time posters per day** says that a person who first posts in several chats is counted once in each, so the daily figure can exceed the number of senders, and that the volume condition is "at most 1.5x" the median.
+- A file in the **Media** tab without a message number no longer says "Message #null".
+- A rejected form shows the field name without the request prefix (`purpose`, not `body.purpose`).
+- A message sent through an inline bot shows "via bot ID" and a channel post shows its signed author under the sender line in the chat view.
 - A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
 - Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.

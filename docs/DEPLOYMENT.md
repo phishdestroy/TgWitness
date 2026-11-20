@@ -381,7 +381,7 @@ metadata, media, temporary exports, and backups.
 Startup verification and export stream records instead of loading the whole journal.
 An export pins a read snapshot while new WAL writes can continue; long-running exports
 can retain WAL pages, so disk capacity still matters. ZIPs are capped at 4 GiB
-uncompressed to match the independent verifier's default; **More tools → Parameters → Largest signed ZIP**
+uncompressed to match the independent verifier's default; **More tools → Parameters → Largest signed ZIP, uncompressed**
 raises the cap, and such archives are verified with `verify.py --max-gib N`. Other formats have no event-count cap.
 Supported browsers stream response chunks to a user-selected file. Other browsers
 buffer at most 128 MiB and direct larger transfers to the authenticated CLI:
