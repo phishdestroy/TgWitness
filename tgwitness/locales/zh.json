@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "未保存在此工作区中",
   "Show in chat": "在聊天中显示",
   "Show in chat: message #{id}": "在聊天中显示：第 {id} 条消息",
+  "Open in chat: message #{id}": "在聊天中打开：第 {id} 条消息",
   "Sticker {emoji}": "贴纸 {emoji}"
 }

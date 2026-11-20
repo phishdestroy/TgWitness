@@ -10601,5 +10601,6 @@
   "Not saved in this workspace": "Ushbu ish maydonida saqlanmagan",
   "Show in chat": "Suhbatda ko'rsating",
   "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
+  "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}",
   "Sticker {emoji}": "Stiker {emoji}"
 }

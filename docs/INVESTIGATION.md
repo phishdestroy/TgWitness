@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/INVESTIGATION.md)
+
 ![Investigation](assets/presentation/chapter-investigate.svg)
 
 # An investigation across all account-visible chats
