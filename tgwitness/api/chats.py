@@ -649,6 +649,32 @@ def message_page(store, chat_id, before_id, limit, after_id, mode="all", search=
     return result
 
 
+def media_page(store, chat_id, before_seq, limit):
+    with store.reading() as db:
+        rows = db.execute(
+            "SELECT seq, message_id, observed_at, json_extract(payload,'$.media_sha256'), json_extract(payload,'$.mime_type'),"
+            " json_extract(payload,'$.original_name'), json_extract(payload,'$.size') FROM events"
+            " WHERE chat_id=? AND kind='media.saved' AND json_extract(payload,'$.media_sha256') IS NOT NULL"
+            + (" AND seq<?" if before_seq is not None else "") + " ORDER BY seq DESC LIMIT ?",
+            (chat_id, *(() if before_seq is None else (before_seq,)), limit + 1)).fetchall()
+    more = len(rows) > limit
+    items = [{"seq": r[0], "message_id": r[1], "observed_at": r[2], "sha256": r[3], "mime_type": r[4],
+              "name": r[5], "size": r[6]} for r in rows[:limit]]
+    return {"items": items, "next_before_seq": items[-1]["seq"] if more else None}
+
+
+async def chat_media(
+    chat_id: ChatId,
+    before_seq: MessageCursor = None,
+    limit: int = 24,
+    *,
+    ctx=Depends(current_context),
+):
+    if not 1 <= limit <= 100:
+        raise HTTPException(422, "Limit must be 1–100.")
+    return await asyncio.to_thread(media_page, ctx.app.state.store, chat_id, before_seq, limit)
+
+
 COVERAGE_KINDS = ("coverage.gap", "connection.restored", "process.started", "process.stopped",
                   "observation.started", "observation.stopped")
 

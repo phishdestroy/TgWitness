@@ -10535,5 +10535,9 @@
   "Forwarded message": "Pesan yang diteruskan",
   "Original message sent {time}": "Pesan asli dikirim pada pukul {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Angka-angka tersebut adalah angka pada saat pesan ini disimpan; Telegram akan memperbaruinya nanti.",
-  "{n} views": "{n} kali ditonton"
+  "{n} views": "{n} kali ditonton",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "File yang disimpan dari obrolan ini, ditampilkan mulai dari yang terbaru. Hanya file yang benar-benar diunduh oleh pengumpul yang tercantum; pesan dengan lampiran yang tidak disimpan tidak ditampilkan di sini.",
+  "No saved files in this chat": "Tidak ada file yang disimpan dalam obrolan ini",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "File-file akan muncul di sini setelah pengumpul mengunduhnya. Periksa batas jumlah file di bagian Sumber.",
+  "Open message #{id} in chat": "Buka pesan nomor {id} di obrolan"
 }

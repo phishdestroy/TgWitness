@@ -10637,5 +10637,9 @@
   "Forwarded message": "הודעה שהועברה",
   "Original message sent {time}": "ההודעה המקורית נשלחה ב-{time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "הנתונים נכונים למועד שמירת הודעה זו; טלגרם מעדכנת אותם בהמשך.",
-  "{n} views": "{n} צפיות"
+  "{n} views": "{n} צפיות",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "קבצים שנשמרו מהצ'אט הזה, מהחדש ביותר תחילה. ברשימה מופיעים רק הקבצים שהאספן הוריד בפועל; הודעה עם קובץ מצורף שלא נשמר אינה מוצגת כאן.",
+  "No saved files in this chat": "אין קבצים שנשמרו בצ'אט זה",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "הקבצים מופיעים כאן לאחר שהאספן הוריד אותם. בדוק את מגבלות הקבצים תחת \"מקורות\".",
+  "Open message #{id} in chat": "פתח את ההודעה מס' {id} בצ'אט"
 }
