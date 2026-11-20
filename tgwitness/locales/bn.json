@@ -10586,5 +10586,9 @@
   "Forwarded message": "ফরওয়ার্ড করা বার্তা",
   "Original message sent {time}": "{time} তারিখে মূল বার্তা পাঠানো হয়েছে",
   "Counts as they were when this message was saved; Telegram updates them later.": "এই বার্তাটি সংরক্ষণ করার সময় যে সংখ্যাগুলো ছিল সেগুলোই গণ্য করা হয়েছে; টেলিগ্রাম পরে সেগুলো আপডেট করবে।",
-  "{n} views": "{n}টি দৃশ্য"
+  "{n} views": "{n}টি দৃশ্য",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "এই চ্যাট থেকে সংরক্ষিত ফাইলগুলো, সর্বশেষটি প্রথমে। শুধুমাত্র সেই ফাইলগুলো তালিকাভুক্ত করা হয়েছে যা সংগ্রাহক প্রকৃতপক্ষে ডাউনলোড করেছেন; সংযুক্তি সহ এমন কোনো বার্তা যা সংরক্ষিত হয়নি তা এখানে দেখানো হয়নি।",
+  "No saved files in this chat": "এই চ্যাটে কোনো সংরক্ষিত ফাইল নেই",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "সংগ্রাহক ফাইলগুলো ডাউনলোড করার পর এগুলো এখানে প্রদর্শিত হবে।  উৎসগুলির অধীনে ফাইলের সীমাগুলো পরীক্ষা করুন।",
+  "Open message #{id} in chat": "চ্যাটে বার্তা #{id} খুলুন"
 }

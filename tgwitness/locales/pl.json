@@ -10688,5 +10688,9 @@
   "Forwarded message": "Przekazana wiadomość",
   "Original message sent {time}": "Oryginalna wiadomość wysłana o godz. {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "Liczby są takie, jakie były w momencie zapisania tej wiadomości; Telegram aktualizuje je później.",
-  "{n} views": "{n} wyświetleń"
+  "{n} views": "{n} wyświetleń",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Pliki zapisane z tej rozmowy, najnowsze na początku. Wyświetlane są wyłącznie pliki, które kolektor faktycznie pobrał; wiadomości z załącznikami, które nie zostały zapisane, nie są tutaj wyświetlane.",
+  "No saved files in this chat": "W tej rozmowie nie ma żadnych zapisanych plików",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Pliki pojawiają się tutaj po ich pobraniu przez moduł pobierający. Sprawdź limity dotyczące plików w sekcji „Źródła”.",
+  "Open message #{id} in chat": "Otwórz wiadomość nr {id} na czacie"
 }

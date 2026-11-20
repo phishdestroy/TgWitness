@@ -10586,5 +10586,9 @@
   "Forwarded message": "منتقل کردہ پیغام",
   "Original message sent {time}": "اصل پیغام بھیجا گیا {time}",
   "Counts as they were when this message was saved; Telegram updates them later.": "یہ اعداد و شمار اُس وقت کے مطابق ہیں جب یہ پیغام محفوظ کیا گیا تھا؛ ٹیلیگرام بعد میں انہیں اپ ڈیٹ کرے گا۔",
-  "{n} views": "{n}نظریات"
+  "{n} views": "{n}نظریات",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "اس چیٹ سے محفوظ کی گئی فائلیں، نئی ترین پہلے۔ صرف وہ فائلیں درج ہیں جو کلیکٹر نے حقیقتاً ڈاؤن لوڈ کیں؛ کوئی پیغام جس میں منسلک فائل محفوظ نہیں ہوئی، یہاں نہیں دکھائی گئی۔",
+  "No saved files in this chat": "اس چیٹ میں کوئی محفوظ شدہ فائلیں نہیں ہیں۔",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "جب کلیکٹر نے فائلیں ڈاؤن لوڈ کر لیں تو یہاں ظاہر ہوتی ہیں۔  ماخذوں کے تحت فائل کی حدیں چیک کریں۔",
+  "Open message #{id} in chat": "چیٹ میں پیغام نمبر {id} کھولیں"
 }
