@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}",
   "Open in chat: message #{id}": "채팅에서 열기: 메시지 #{id}",
   "Sticker {emoji}": "스티커 {emoji}",
+  "Quiz": "퀴즈",
+  "Live location": "실시간 위치",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "'Target'은 이 계정이 읽은 대화 목록에 포함되어 있지 않습니다. 그룹 목록을 새로 고치거나 'Parameters'에서 채팅 목록 제한을 늘리십시오.",
   "Exported completely": "완전히 내보냄",
   "This field is required.": "이 항목은 필수 입력 사항입니다.",
