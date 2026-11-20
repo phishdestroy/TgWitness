@@ -26,6 +26,7 @@
 ## Unreleased
 
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
+- A saved attachment in the chat view shows its file name, type and size, and offers Preview only for images, audio and video.
 - 146 more error messages from the panel's server side are translated into its 24 other languages, among them handover extracts, chat exports, the Case Board, documentation, watchlists, settings, storage, search records and report profiles. Before, the panel showed them in English whatever its language.
 - On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
 - A rejected form shows its messages in the panel's language and in plain words ("This field is required.", "Enter at least 3 characters.", "Enter a date such as 2026-10-01 or a time with a timezone.", "Choose one of the allowed values.") instead of the server's English wording.
