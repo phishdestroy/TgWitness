@@ -10565,5 +10565,7 @@
   "Enter a number.": "กรอกตัวเลข",
   "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
   "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}",
+  "Messages found: {n}": "พบข้อความ: {n}",
+  "Messages found: {n}+": "พบข้อความ: {n}+",
   "Post author: {name}": "ผู้เขียนบทความ: {name}"
 }

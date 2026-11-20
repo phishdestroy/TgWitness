@@ -10616,5 +10616,7 @@
   "Enter a number.": "Raqamni kiriting.",
   "changed the chat name to “{title}”": "Suhbat nomini \"{title}\" ga o'zgartirdi",
   "pinned a message, number {n}": "{n}-raqamli xabarni biriktirdi",
+  "Messages found: {n}": "Topilgan xabarlar: {n}",
+  "Messages found: {n}+": "Topilgan xabarlar: {n}+",
   "Post author: {name}": "Post muallifi: {name}"
 }

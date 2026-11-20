@@ -10565,5 +10565,7 @@
   "Enter a number.": "Masukkan nombor.",
   "changed the chat name to “{title}”": "Menukar nama sembang kepada \"{title}\"",
   "pinned a message, number {n}": "melekatkan mesej, nombor {n}",
+  "Messages found: {n}": "Mesej yang ditemui: {n}",
+  "Messages found: {n}+": "Mesej yang ditemui: {n}+",
   "Post author: {name}": "Penulis pos: {name}"
 }

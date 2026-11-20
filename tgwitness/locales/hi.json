@@ -10616,5 +10616,7 @@
   "Enter a number.": "एक संख्या दर्ज करें।",
   "changed the chat name to “{title}”": "चैट का नाम बदलकर \"{title}\" कर दिया।",
   "pinned a message, number {n}": "एक संदेश पिन किया, संख्या {n}",
+  "Messages found: {n}": "संदेश मिले: {n}",
+  "Messages found: {n}+": "मिले संदेश: {n}+",
   "Post author: {name}": "लेखक: {name}"
 }

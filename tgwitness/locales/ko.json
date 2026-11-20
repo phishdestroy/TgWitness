@@ -10565,5 +10565,7 @@
   "Enter a number.": "숫자를 입력하세요.",
   "changed the chat name to “{title}”": "채팅 이름을 “{title}”으로 변경했습니다.",
   "pinned a message, number {n}": "메시지 {n}번을 고정했습니다",
+  "Messages found: {n}": "찾은 게시물: {n}개",
+  "Messages found: {n}+": "찾은 메시지: {n}개 이상",
   "Post author: {name}": "글 작성자: {name}"
 }

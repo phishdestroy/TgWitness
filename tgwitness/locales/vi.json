@@ -10565,5 +10565,7 @@
   "Enter a number.": "Hãy nhập một số.",
   "changed the chat name to “{title}”": "đã đổi tên trong phòng chat thành “{title}”",
   "pinned a message, number {n}": "đã ghim một tin nhắn, số {n}",
+  "Messages found: {n}": "Số tin nhắn tìm thấy: {n}",
+  "Messages found: {n}+": "Số tin nhắn tìm thấy: {n}+",
   "Post author: {name}": "Tác giả bài viết: {name}"
 }

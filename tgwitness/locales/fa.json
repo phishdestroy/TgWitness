@@ -10616,5 +10616,7 @@
   "Enter a number.": "عددی را وارد کنید.",
   "changed the chat name to “{title}”": "نام چت را به «{title}» تغییر داد.",
   "pinned a message, number {n}": "پیامی سنجاق شد، شماره {n}",
+  "Messages found: {n}": "پیام‌های یافت‌شده: {n}",
+  "Messages found: {n}+": "پیام‌های یافت‌شده: {n}+",
   "Post author: {name}": "نویسندهٔ پست: {name}"
 }

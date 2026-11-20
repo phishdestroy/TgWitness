@@ -10626,5 +10626,7 @@
   "Enter a number.": "Digite um número.",
   "changed the chat name to “{title}”": "alterei o nome do chat para “{title}”",
   "pinned a message, number {n}": "fixou uma mensagem, a número {n}",
+  "Messages found: {n}": "Mensagens encontradas: {n}",
+  "Messages found: {n}+": "Mensagens encontradas: {n}+",
   "Post author: {name}": "Autor da postagem: {name}"
 }
