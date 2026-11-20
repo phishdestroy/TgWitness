@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/STATUS.md)
+
 ![Project reference](assets/presentation/chapter-project.svg)
 
 # Current capabilities
