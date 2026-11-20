@@ -7275,7 +7275,8 @@
   "d730f137a919b8766c806f6a399ea9e7d883a1efdbd5ca4b29d6cb6d5a98f053": "Tepkileri hatalı biçimlendirilmiş (sayının eksik olması, tepki olmayan bir giriş veya liste olmayan bir değer) kaydedilmiş bir kayıt, artık raporun oluşturulmasını engellemez: rapor, okunabilir tepkileri listeler ve geri kalanını atlar.",
   "7d2efadac64ffe3f6fd2f69afb04b9ec7b3334e3d25f2b1c5802457301ffcb57": "<code>verify.py</code>, imza dosyası bulunmayan bir arşiv için <code>KeyError</code> hatası yerine \"arşivde manifest.sig dosyası bulunmadığından imzası doğrulanamıyor\" mesajını veriyor.",
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "Bir telefonda, ayar pencerelerindeki seçim düğmeleri görünür bir kenarlığa sahiptir ve dokunma boyutuna göre yüksekliği 44 pikseldir; bu sayede, hiçbir düğme seçili olmasa bile düğme gibi görünürler.",
-  "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Ayarlar bölümünde, Kayıt koruması seçeneği, “Gelişmiş koruma ayarları” düğmesi ile “Karşı tarafın gördükleri” bloğu arasında bir boşluk bırakır."
+  "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Ayarlar bölümünde, Kayıt koruması seçeneği, “Gelişmiş koruma ayarları” düğmesi ile “Karşı tarafın gördükleri” bloğu arasında bir boşluk bırakır.",
+  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Telefonlarda, Başlangıç ekranındaki “Zaman Tanıkları” düğmesi, Dışa Aktar ekranındaki imza kimlik kartları ve “Erişim Oluştur” düğmesi artık üstlerindeki metne veya karta değmiyor."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",
