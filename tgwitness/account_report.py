@@ -5,9 +5,9 @@ from itertools import islice
 import re
 from datetime import datetime
 
-from . import activity_maps, case_assessment, i18n, report_layouts, snapshot_analytics
+from . import activity_maps, case_assessment, i18n, message_details, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, utc_text
+from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
@@ -457,6 +457,15 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
     if text(message.get('username')):
         parts.append('<p class="muted user" dir="auto">@' + e(message['username']) + '</p>')
     parts.append('<p class="message-text" dir="auto">' + e(body or say('No message text in this record.')) + '</p>')
+    if not sharing:
+        info = message_details.media_info(message.get('media'))
+        if info:
+            shown = media_text(say, info)
+            parts.append('<p class="muted" dir="auto">' + e(media_name(say, info)) + (': ' + e(shown) if shown else '') + '</p>')
+        reply = message.get('reply_to')
+        topic = (reply.get('reply_to_top_id') or reply.get('reply_to_msg_id')) if isinstance(reply, dict) and reply.get('forum_topic') is True else None
+        if type(topic) is int:
+            parts.append('<p class="muted">' + e(say('Forum topic')) + ' #' + str(topic) + '</p>')
     if sharing and isinstance(message.get('reply_to'), dict):
         parts.append('<p class="reply-state">' + e(say(REPLY_STATE_LABELS[message['reply_to']['state']])) + '</p>')
     for attachment in message.get('attachments', ()):
