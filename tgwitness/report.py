@@ -873,7 +873,7 @@ CSS = (
     ".brief-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}.brief-cols ul{margin:4px 0 0;padding-inline-start:18px}"
     ".brief-cols li{margin:3px 0}@media (max-width:760px){.brief-cols{grid-template-columns:1fr}}"
     "section.card>h2{display:flex;align-items:baseline;gap:9px;font-size:18px;line-height:1.3;margin:0 0 6px}"
-    "h2 .num{font-weight:700}h2 .num:after{content:'.'}"
+    "h2 .num{font-weight:700}h2 .num:after{content:'.'}h2 .num:empty{display:none!important}"
     "h3{font-size:14.5px;margin:20px 0 8px}.lead{color:var(--muted);margin:0 0 14px;max-width:80ch}"
     "table{width:100%;border-collapse:collapse}"
     ".kv th,.kv td,.grid th,.grid td{border:1px solid var(--line);vertical-align:top}"
@@ -1022,6 +1022,9 @@ SCRIPT = r"""
 const page=document.documentElement.outerHTML;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const words=JSON.parse(($("#report-words")||{}).textContent||"{}"),say=k=>words[k]||k,lang=document.documentElement.lang;
+let reopened=[];
+window.addEventListener("beforeprint",()=>{reopened=$$("details.analytics-table:not([open])");reopened.forEach(d=>{d.open=true;});});
+window.addEventListener("afterprint",()=>{reopened.forEach(d=>{d.open=false;});reopened=[];});
 const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
 const bytes=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const canon=v=>v===null||typeof v!=="object"?JSON.stringify(v):Array.isArray(v)?"["+v.map(canon).join(",")+"]":

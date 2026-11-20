@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
 - In a report with a selection, **Selected data** names the chosen chats and authors as saved in the journal (for example `Alex Quinn (70002)`) instead of listing bare numbers; a number with no saved name stays a number.
 - The chat panel has a **Media** tab with a gallery of the files saved from the chat, each linked to its message. Attachments that were not downloaded are not listed.
 - In **Simple** mode Home shows one line, **Can be handed to a court: yes** or **no · missing: …**. Yes means
