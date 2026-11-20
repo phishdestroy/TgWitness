@@ -195,7 +195,7 @@ docker compose logs witness                     # witness key fingerprint
 المستودع **بأحرف صغيرة**، مثلًا:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.3
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.0
 TGWITNESS_PORT=8787
 ```
 

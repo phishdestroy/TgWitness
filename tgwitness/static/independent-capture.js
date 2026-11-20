@@ -148,7 +148,7 @@
       if (connection.enabled) setup.open = false;
     });});
     if (kind === 'trusted') {
-      fieldset.append(node('p', 'hint', 'Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.'));
+      fieldset.append(node('p', 'hint', tr('Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.')));
     }
     cards.set(kind, card); return card;
   }

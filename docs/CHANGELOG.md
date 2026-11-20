@@ -27,6 +27,7 @@
 ## Unreleased
 
 - The in-app guide header and the example tag of the GitHub Actions form and the example image tag in deploy/env.example show the 1.0.0 release instead of 0.9.3.
+- The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
 
 ## 1.0.0 · 20 November 2026
 

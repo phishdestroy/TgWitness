@@ -10913,5 +10913,6 @@
   "Watchlist match": "Збіг зі списком для спостереження",
   "Workspace deleted": "Робоча область видалена",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Публічний MTProxy</strong><span>Менш стабільно · автоматичний пул</span>",
-  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Відкрийте екран запису, щоб вибрати «Робочий стіл» або «Веб», «Експорт у вихідному форматі» або «Візуальне захоплення», а також налаштований коннектор. У цьому режимі використовується окрема сесія офіційного клієнта."
 }

@@ -1,7 +1,8 @@
-# TgWitness verifier sources SHA-256: 041b8a1e8a1366d4c3dec0d7227170637e0b13d3d5d5eea68a14027e4f7ee83e
+# TgWitness verifier sources SHA-256: a344a9745fc4897ab64cb881801b7d1955b8aa25a49f92bc2c248e2022c82a2d
 """Standalone verifier"""
 import argparse
 import base64 as _base64
+import binascii
 import bisect
 import hashlib
 import heapq
@@ -115,6 +116,12 @@ def plain_failure(exc):
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
+    if isinstance(exc, InvalidSignature):
+        return detail
+    if isinstance(exc, UnicodeError):
+        return "a file in the archive is not valid text: the file is damaged or was not produced by TgWitness [" + type(exc).__name__ + "]"
+    if isinstance(exc, binascii.Error):
+        return "a signature or key field is not valid base64: the file is damaged or was altered [" + type(exc).__name__ + "]"
     if type(exc) is ValueError and detail:
         return detail
     return type(exc).__name__ + ": " + detail

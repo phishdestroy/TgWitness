@@ -10811,5 +10811,6 @@
   "Watchlist match": "Übereinstimmung mit der Beobachtungsliste",
   "Workspace deleted": "Arbeitsbereich gelöscht",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Öffentliches MTProxy</strong><span>Weniger stabil · automatischer Pool</span>",
-  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Öffnen Sie den Aufzeichnungsbildschirm, um zwischen „Desktop“ und „Web“, „Nativer Export“ und „Visuelle Erfassung“ sowie dem bereitgestellten Konnektor zu wählen. Dieser Modus nutzt eine separate offizielle Client-Sitzung."
 }
