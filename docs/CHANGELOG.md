@@ -27,6 +27,7 @@
 ## Unreleased
 
 - The in-app guide header and the example tag of the GitHub Actions form show the 1.0.0 release instead of 0.9.3.
+
 ## 1.0.0 · 20 November 2026
 
 First full release. TgWitness 1.0.0 consolidates the 0.9.x preview line into a court-ready Telegram observation journal: signed hash-chained journals, RFC 3161 and OpenTimestamps anchors, an independently operated witness, secret-chat collection including self-destruct messages and their media, court packages, and an offline verifier. The evidence chain was exercised end to end on live accounts and real external services; see the [verification record](VERIFICATION.md). The user-visible changes since 0.9.3:
