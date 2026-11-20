@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- A very long author name in a reply quote and a very long new chat name in a service line wrap instead of running past the edge of the screen.
 - In the account export pages on a phone, the weekday and hour labels of the weekly activity map are no longer cut off by the cells.
 - A very long sender name without spaces wraps inside its chat bubble instead of running past its edge.
 - In the account export chat pages on a phone, the Rhythm table keeps readable columns and scrolls sideways with a faded edge instead of looking cut off.
