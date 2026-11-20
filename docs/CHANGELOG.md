@@ -26,6 +26,7 @@
 ## Unreleased
 
 - On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
+- Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.
 - In the Meridian, Atlas, Ledger and Horizon report designs a long figure label such as "No observation period recorded" wraps inside its tile, so the report no longer scrolls sideways on a phone.
 - Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
