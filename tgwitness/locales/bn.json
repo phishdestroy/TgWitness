@@ -10591,5 +10591,14 @@
   "No saved files in this chat": "এই চ্যাটে কোনো সংরক্ষিত ফাইল নেই",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "সংগ্রাহক ফাইলগুলো ডাউনলোড করার পর এগুলো এখানে প্রদর্শিত হবে।  উৎসগুলির অধীনে ফাইলের সীমাগুলো পরীক্ষা করুন।",
   "Open message #{id} in chat": "চ্যাটে বার্তা #{id} খুলুন",
-  "Report on this person": "এই ব্যক্তির প্রতিবেদন"
+  "Report on this person": "এই ব্যক্তির প্রতিবেদন",
+  "Search or jump to #number": "#নম্বর অনুসন্ধান করুন বা সেখানে যান",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "অনুসন্ধান ও ফিল্টার এই চ্যাটের সমস্ত সংরক্ষিত বার্তা, পূর্ববর্তী সংস্করণসহ, অন্তর্ভুক্ত করে। # এবং একটি বার্তা নম্বর টাইপ করুন, সেই বার্তায় চলে যাবেন।",
+  "Pinned messages ({n})": "পিন করা বার্তা ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "চ্যাটটি শেষবার যাচাই করার সময় টেলিগ্রামে তালিকাভুক্ত ছিল {time}। এটি দেখায় না কখন একটি বার্তা পিন করা হয়েছিল।",
+  "The list was not refreshed at that check; this is the last list received.": "সেই চেক করার সময় তালিকাটি রিফ্রেশ করা হয়নি; এটিই সর্বশেষ প্রাপ্ত তালিকা।",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "টেলিগ্রাম রিপোর্ট করেছে {total} পিন করা বার্তাগুলো; শুধুমাত্র {listed} তালিকাভুক্ত করা হয়েছে।",
+  "Not saved in this workspace": "এই ওয়ার্কস্পেসে সংরক্ষিত হয়নি",
+  "Show in chat": "চ্যাটে দেখান",
+  "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}"
 }

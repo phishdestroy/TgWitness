@@ -10663,5 +10663,14 @@
   "No saved files in this chat": "В этом чате нет сохраненных файлов",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Файлы появляются здесь после того, как коллектор загрузит их. Проверьте ограничения на размер файлов в разделе «Источники».",
   "Open message #{id} in chat": "Открыть сообщение № {id} в чате",
-  "Report on this person": "Пожаловаться на этого человека"
+  "Report on this person": "Пожаловаться на этого человека",
+  "Search or jump to #number": "Поиск или переход к #номер",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Поиск и фильтры охватывают все сохраненные сообщения в этом чате, включая более ранние версии. Введите символ # и номер сообщения, чтобы перейти к нему.",
+  "Pinned messages ({n})": "Закрепленные сообщения ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Согласно данным Telegram на момент последней проверки чата — {time}. Здесь не отображается, когда сообщение было закреплено.",
+  "The list was not refreshed at that check; this is the last list received.": "Список не был обновлен во время этой проверки; это последний полученный список.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram сообщил о {total} закрепленных сообщениях; в списке указано лишь {listed}.",
+  "Not saved in this workspace": "Не сохранено в этой рабочей области",
+  "Show in chat": "Показать в чате",
+  "Show in chat: message #{id}": "Показать в чате: сообщение № {id}"
 }

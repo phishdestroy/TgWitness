@@ -10540,5 +10540,14 @@
   "No saved files in this chat": "Không có tệp nào được lưu trong cuộc trò chuyện này",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Các tệp sẽ xuất hiện tại đây sau khi trình thu thập đã tải chúng xuống. Vui lòng kiểm tra giới hạn tệp trong phần Nguồn.",
   "Open message #{id} in chat": "Mở tin nhắn số {id} trong cuộc trò chuyện",
-  "Report on this person": "Báo cáo về người này"
+  "Report on this person": "Báo cáo về người này",
+  "Search or jump to #number": "Tìm kiếm hoặc chuyển đến #số",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "Tính năng tìm kiếm và lọc áp dụng cho tất cả các tin nhắn đã lưu trong cuộc trò chuyện này, bao gồm cả các phiên bản trước đó. Nhập ký hiệu # cùng số tin nhắn để chuyển đến tin nhắn đó.",
+  "Pinned messages ({n})": "Bài đăng được ghim ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "Theo thông tin hiển thị trên Telegram tại thời điểm kiểm tra cuộc trò chuyện lần cuối, mã lỗi là {time}. Thông tin này không hiển thị khi tin nhắn đã được ghim.",
+  "The list was not refreshed at that check; this is the last list received.": "Danh sách này chưa được cập nhật tại thời điểm kiểm tra đó; đây là danh sách cuối cùng đã nhận được.",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram báo cáo có {total} tin nhắn được ghim; nhưng chỉ có {listed} tin nhắn được liệt kê.",
+  "Not saved in this workspace": "Chưa được lưu trong không gian làm việc này",
+  "Show in chat": "Hiển thị trong cửa sổ trò chuyện",
+  "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}"
 }
