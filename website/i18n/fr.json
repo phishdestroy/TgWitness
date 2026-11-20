@@ -7265,7 +7265,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "La page « Pseudo-secret » conserve son style de carte : une accolade fermante erronée dans la feuille de style Sources a conduit le navigateur à ignorer la règle qui la suit.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "La couleur du numéro de message dans une bulle de discussion est suffisamment foncée pour satisfaire aux critères de contraste dans les thèmes clair et foncé.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "L'onglet sélectionné dans la fiche d'une personne est lisible dans le thème sombre (il utilise le bleu d'accent plus foncé avec un contraste de 3,3 pour 1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "L'onglet « Rapport de compilation » de la section « Exporter les enregistrements » conserve son titre de page pour les lecteurs d'écran ; celui-ci a été supprimé de la page en même temps que le titre visible."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "L'onglet « Rapport de compilation » de la section « Exporter les enregistrements » conserve son titre de page pour les lecteurs d'écran ; celui-ci a été supprimé de la page en même temps que le titre visible.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "L'onglet « Mini-applications » du panneau de discussion ne saute plus un niveau de titre ; les lecteurs d'écran énumèrent donc ses sections sous le nom de la discussion."
  },
  "modes": {
   "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

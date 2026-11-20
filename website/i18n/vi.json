@@ -7317,7 +7317,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Trang “Pseudo-secret” vẫn giữ nguyên kiểu hiển thị dạng thẻ: một dấu ngoặc nhọn đóng thừa trong bảng kiểu Sources đã khiến trình duyệt bỏ qua quy tắc nằm ngay sau nó.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Số tin nhắn trong bong bóng trò chuyện có màu đủ tối để đáp ứng yêu cầu về độ tương phản trong cả chế độ giao diện sáng và tối.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Thẻ được chọn trong thẻ hồ sơ của một người vẫn hiển thị rõ ràng trong chế độ chủ đề tối (thẻ này sử dụng màu xanh dương đậm hơn làm màu nhấn với tỷ lệ tương phản là 3,3:1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Tab “Báo cáo xây dựng” trong phần “Xuất bản ghi” vẫn giữ nguyên tiêu đề trang dành cho trình đọc màn hình; tiêu đề này đã bị xóa khỏi trang cùng với tiêu đề hiển thị."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Tab “Báo cáo xây dựng” trong phần “Xuất bản ghi” vẫn giữ nguyên tiêu đề trang dành cho trình đọc màn hình; tiêu đề này đã bị xóa khỏi trang cùng với tiêu đề hiển thị.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "Tab “Ứng dụng nhỏ” trên bảng trò chuyện không còn bỏ qua một cấp độ tiêu đề nào nữa, do đó các trình đọc màn hình sẽ liệt kê các phần của tab này dưới tên cuộc trò chuyện."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

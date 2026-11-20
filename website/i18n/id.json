@@ -7317,7 +7317,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Halaman \"Pseudo-secret\" tetap mempertahankan gaya kartunya: tanda kurung kurawal penutup yang terselip di lembar gaya Sources menyebabkan browser mengabaikan aturan yang ada setelahnya.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Nomor pesan dalam gelembung obrolan cukup gelap sehingga lolos uji kontras pada tema terang maupun gelap.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Tab yang dipilih pada kartu pengguna dapat dibaca dalam tema gelap (tab tersebut menggunakan warna biru aksen yang lebih gelap dengan rasio kontras 3,3 banding 1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Tab \"Laporan Pembuatan\" pada fitur \"Ekspor Catatan\" tetap mempertahankan judul halamannya untuk pembaca layar; judul tersebut telah dihapus dari halaman bersamaan dengan judul yang terlihat."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Tab \"Laporan Pembuatan\" pada fitur \"Ekspor Catatan\" tetap mempertahankan judul halamannya untuk pembaca layar; judul tersebut telah dihapus dari halaman bersamaan dengan judul yang terlihat.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "Tab \"Mini apps\" pada panel obrolan kini tidak lagi melewatkan satu tingkat judul, sehingga pembaca layar mencantumkan bagian-bagiannya di bawah nama obrolan."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",

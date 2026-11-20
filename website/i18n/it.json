@@ -7265,7 +7265,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "La pagina \"Pseudo-secret\" mantiene lo stile delle schede: una parentesi graffa di chiusura in eccesso nel foglio di stile Sources ha fatto sì che il browser ignorasse la regola che la seguiva.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Il numero del messaggio all'interno di un fumetto è sufficientemente scuro da superare il controllo del contrasto sia nel tema chiaro che in quello scuro.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "La scheda selezionata nella scheda di una persona è leggibile nel tema scuro (utilizzava il blu di accento più scuro con un contrasto di 3,3 a 1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "La scheda \"Report di compilazione\" della sezione \"Esporta record\" mantiene l'intestazione della pagina per i lettori di schermo; questa è stata rimossa dalla pagina insieme all'intestazione visibile."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "La scheda \"Report di compilazione\" della sezione \"Esporta record\" mantiene l'intestazione della pagina per i lettori di schermo; questa è stata rimossa dalla pagina insieme all'intestazione visibile.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "La scheda \"Mini app\" del pannello della chat non salta più un livello di intestazione, quindi i lettori di schermo elencano le sue sezioni sotto il nome della chat."
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

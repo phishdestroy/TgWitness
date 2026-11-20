@@ -7265,7 +7265,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "Pseudo-yashirin sahifa o'zining karta uslubini saqlab qoladi: Manbalar uslublar jadvalidagi tasodifiy yopuvchi qavs brauzerga undan keyingi qoidani e'tiborsiz qoldirishga sabab bo'ldi.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "Suhbat pufagidagi xabar raqami yorug' va qorong'i mavzularda kontrast tekshiruvidan o'tishi uchun yetarlicha qoraytirilgan.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "Shaxs kartasidagi tanlangan yorliq qorong'i mavzuda o'qilishi mumkin (u 3.3:1 nisbatli kontrast bilan quyuqroq aksentli ko'k rangdan foydalangan).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Export yozuvlari bo'limidagi Build hisobot yorlig'i sahifa o'quvchilari uchun sahifa sarlavhasini saqlab qoladi; u ko'rinadigan sarlavha bilan birga sahifadan olib tashlangan."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "Export yozuvlari bo'limidagi Build hisobot yorlig'i sahifa o'quvchilari uchun sahifa sarlavhasini saqlab qoladi; u ko'rinadigan sarlavha bilan birga sahifadan olib tashlangan.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "Suhbat panelidagi Mini ilovalar yorlig'i endi sarlavha darajasini o'tkazib yubormaydi, shuning uchun ekran o'qiydigan dasturlar uning bo'limlarini suhbat nomidan keyin ro'yxatlaydi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

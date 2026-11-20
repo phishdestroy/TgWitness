@@ -7317,7 +7317,8 @@
   "ce3dbfd701b255c550b75a171300de9b7720d623bc97a9f4b86a0e1e76ad03e5": "La página «Pseudo-secret» conserva su estilo de tarjeta: un corchete de cierre sobrante en la hoja de estilos de Sources hizo que el navegador omitiera la regla que le seguía.",
   "46bb968b2203a5b9129b2b8375aa76f6c9f98dfa2dd0a8bf90b2b3eb6422b03c": "El número del mensaje que aparece en el globo de chat es lo suficientemente oscuro como para superar la comprobación de contraste tanto en el tema claro como en el oscuro.",
   "1128c544a02f024ae1c65593a7c9a194f53b3ad34d500f1c4879991853bc671a": "La pestaña seleccionada en la ficha de una persona se puede leer en el tema oscuro (utilizaba el azul de acento más oscuro con un contraste de 3,3 a 1).",
-  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "La pestaña «Informe de compilación» de «Exportar registros» conserva el encabezado de la página para los lectores de pantalla; se ha eliminado de la página junto con el encabezado visible."
+  "b42c8768eaf149f90f6aa89cfce4ea52c7cbd0a73b753a64bcd1543655f0535c": "La pestaña «Informe de compilación» de «Exportar registros» conserva el encabezado de la página para los lectores de pantalla; se ha eliminado de la página junto con el encabezado visible.",
+  "2586490ce5c62a17f40ce87df67ee54dafb8ff054bc6d68f5d33ec5951257e67": "La pestaña «Mini apps» del panel de chat ya no omite un nivel de encabezado, por lo que los lectores de pantalla enumeran sus secciones bajo el nombre del chat."
  },
  "modes": {
   "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",
