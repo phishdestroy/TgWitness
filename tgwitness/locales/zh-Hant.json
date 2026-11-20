@@ -6332,7 +6332,6 @@
   "The most recent rows are listed; totals cover every row.": "此處列出最新幾筆記錄；總計數涵蓋所有記錄。",
   "rows": "行",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "由列出的處理器根據 events.jsonl 檔案計算得出。這些處理器指向應檢查的內容，而非實際發生的事件。",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "標記條件：至少有 5 位首次發文者，且發文量達到其 14 天中位數的 3 倍，而單則訊息長度不得超過其中位數的 1.5 倍。聊天室開通後的前 7 天不會被標記。",
   "Distinct saved message numbers per chat and the share taken by service messages.": "各聊天室中已儲存訊息的數量，以及服務訊息所佔的比例。",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Telegram 通報的成員變動，每人、每個聊天室、每次變更及每日限通報一次。",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "將服務訊息設為置頂、取消置頂，以及在聊天狀態快照之間新增或移除的置頂訊息。",
@@ -10567,6 +10566,8 @@
   "pinned a message, number {n}": "將第 {n} 則訊息設為置頂",
   "Messages found: {n}": "找到的訊息：{n} 則",
   "Messages found: {n}+": "找到的訊息：{n}+則",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "標記條件：至少有 5 位首次發文者，且發文量達到其 14 天中位數的 3 倍，而單則訊息長度不得超過其中位數的 1.5 倍。聊天室開通後的前 7 天不會被標記。若同一人在多個聊天室中首次發文，則在每個聊天室中僅計入一次。",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "標記條件：至少有 5 位首次發文者，且發文量達到其 14 天中位數的 3 倍，而單則訊息長度不得超過其中位數的 1.5 倍。聊天室開通後的前 7 天不會被標記。",
   "Choose at least {n}.": "請至少選擇一個 {n}。",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "請輸入日期（例如 2026-10-01）或包含時區的時刻。",
   "Choose one of the allowed values.": "請選擇其中一個允許的值。"
