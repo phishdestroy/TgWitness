@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- The Mini apps tab of the chat panel no longer skips a heading level, so screen readers list its sections under the chat name.
 - The Build report tab of Export records keeps its page heading for screen readers; it was removed from the page together with the visible heading.
 - The selected tab in a person's card is readable in the dark theme (it used the darker accent blue with a contrast of 3.3 to 1).
 - The message number in a chat bubble is dark enough to pass the contrast check in the light and dark themes.
