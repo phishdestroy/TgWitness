@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Archive integrations](CLI.md)
 
+**English** · [Русский](ru/WEBHOOKS.md)
+
 ![Archive integrations](assets/presentation/chapter-integrations.svg)
 
 # Structured outgoing webhooks

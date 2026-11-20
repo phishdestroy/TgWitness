@@ -10806,5 +10806,7 @@
   "Show in chat": "إظهار في الدردشة",
   "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}",
   "Open in chat: message #{id}": "فتح في الدردشة: الرسالة رقم {id}",
-  "Sticker {emoji}": "ملصق {emoji}"
+  "Sticker {emoji}": "ملصق {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "لا يظهر «Target» ضمن مربعات الحوار التي قرأها هذا الحساب. قم بتحديث قائمة المجموعات أو رفع الحد الأقصى لقائمة الدردشات في «المعلمات».",
+  "Exported completely": "تم تصديرها بالكامل"
 }

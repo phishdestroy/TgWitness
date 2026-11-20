@@ -26,6 +26,7 @@
 ## Unreleased
 
 - Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
+- Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - The panel compresses its scripts, styles, pages and `locale.js` with gzip when the browser accepts it. A first load of the panel in Russian drops from about 4.7 MB to 1.3 MB; API responses are not compressed.
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed.
 - After **Verify journal** the result box is green only when a timestamp receipt covers the last record; with only the signed journal checked it is neutral, so the unfinished layers are not shown in a success colour.
