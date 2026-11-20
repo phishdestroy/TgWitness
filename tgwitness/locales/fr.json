@@ -10630,5 +10630,7 @@
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages ne dépassant pas 1,5 fois leur médiane. Les 7 premiers jours d'un salon de discussion ne sont pas pris en compte. Une personne qui publie pour la première fois dans plusieurs salons de discussion n'est comptée qu'une seule fois dans chacun d'entre eux.",
   "Choose at least {n}.": "Sélectionnez au moins {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Saisissez une date (par exemple : 01/10/2026) ou une heure avec un fuseau horaire.",
-  "Choose one of the allowed values.": "Choisissez l'une des valeurs autorisées."
+  "Choose one of the allowed values.": "Choisissez l'une des valeurs autorisées.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Signalé : au moins 5 nouveaux contributeurs et 3 fois leur médiane sur 14 jours, avec des messages inférieurs à 1,5 fois leur médiane. Les 7 premiers jours d'une discussion ne sont pas signalés.",
+  "Post author: {name}": "Auteur du message : {name}"
 }
