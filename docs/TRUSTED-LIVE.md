@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Independent capture](OPTIONAL-CAPTURE.md)
 
+**English** · [Русский](ru/TRUSTED-LIVE.md)
+
 ![Independent capture](assets/presentation/chapter-capture.svg)
 
 # Trusted Live (preview)
