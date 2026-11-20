@@ -868,6 +868,7 @@ CSS = (
     ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 96px;min-width:0;"
     "padding:8px 12px 9px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}.tile i{display:none}"
     ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}"
+    ".tiles .tile b.text{font:600 15px/1.35 system-ui,sans-serif!important;letter-spacing:0!important}"
     ".tile>span{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}"
     "section.card{margin:30px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}"
     ".brief-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}.brief-cols ul{margin:4px 0 0;padding-inline-start:18px}"
@@ -1211,8 +1212,10 @@ def tiles(items):
     for item in items:
         label, value, colour = item[:3]
         glyph = item[3] if len(item) > 3 else "info"
+        words = re.findall(r"[^\W\d_]{3,}", re.sub(r"<[^>]+>", "", value))
         out.append('<div class="tile tone-' + TILE_TONES.get(colour, "slate") + '" style="--c:var(--' + colour + ')"><i>'
-                   + icon(glyph) + "</i><b>" + value + "</b><span>" + e(label) + "</span></div>")
+                   + icon(glyph) + "</i><b" + (' class="text"' if len(words) > 1 else "") + ">" + value + "</b><span>"
+                   + e(label) + "</span></div>")
     return '<div class="tiles">' + "".join(out) + "</div>"
 
 
