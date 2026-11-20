@@ -10586,5 +10586,9 @@
   "Forwarded message": "Yönlendirilmiş mesaj",
   "Original message sent {time}": "{time} tarihinde gönderilen orijinal mesaj",
   "Counts as they were when this message was saved; Telegram updates them later.": "Bu mesaj kaydedildiği andaki sayılar; Telegram bunları daha sonra günceller.",
-  "{n} views": "{n} görüntüleme"
+  "{n} views": "{n} görüntüleme",
+  "Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.": "Bu sohbetten kaydedilen dosyalar, en yenisi önce. Yalnızca toplayıcı tarafından gerçekten indirilen dosyalar listelenir; eki olan ancak kaydedilmemiş bir mesaj burada gösterilmez.",
+  "No saved files in this chat": "Bu sohbette kaydedilmiş dosya yok",
+  "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Dosyalar, toplayıcı tarafından indirildikten sonra burada görünür. “Kaynaklar” bölümünden dosya sınırlarını kontrol edin.",
+  "Open message #{id} in chat": "Sohbetteki #{id} numaralı mesajı aç"
 }

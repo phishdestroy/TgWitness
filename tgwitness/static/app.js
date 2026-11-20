@@ -6169,7 +6169,7 @@ async function openPersonCard(userId){
 }
 personCardHost.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePersonCard();}});
 window.addEventListener('tgwitness:lock',closePersonCard);
-const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors'],['miniapps','Mini apps']];
+const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors'],['miniapps','Mini apps'],['media','Media']];
 let miniAppsView=null;
 const miniAppsReady=()=>miniAppsView?Promise.resolve(miniAppsView):import("./views/mini-apps.js?v=2").then(({createMiniApps})=>miniAppsView=createMiniApps({
   node,icon,tr,json,busy,confirm:(message,options)=>askConfirm(message,options),toast,fmtFull,isAdmin:()=>!!state.me?.admin,
@@ -6204,6 +6204,7 @@ function renderChatInfo(){
       body.replaceChildren(viewState("error",tr("Could not load data"),error.message||"",tr("Retry"),()=>{body.replaceChildren();renderChatInfo();}));
     });return;
   }
+  if(state.chatPanel==="media"){renderChatGallery(body);return;}
   if(state.chatPanel==="people"){
     const generation=chatGeneration;
     if(!body.querySelector(".people"))body.replaceChildren(viewState("loading",tr("Loading…")));
@@ -6217,6 +6218,50 @@ function renderChatInfo(){
   if(state.chatProfile?.chat!==state.chat)loadChatProfile().catch(()=>{});
   const info=state.chatInfo,key=JSON.stringify([state.chat,state.chatProfile,info,s.demo,s.collector.has_session,may('sources'),viewAllowed('evidence')]);
   if(body.firstElementChild?.profileKey!==key){const card=chatInfoCard(info);card.profileKey=key;body.replaceChildren(card,profileNode(true));}
+}
+async function renderChatGallery(body){
+  const chat=state.chat,generation=chatGeneration;
+  if(body.dataset.galleryChat===String(chat)&&body.querySelector(".chat-gallery"))return;
+  body.dataset.galleryChat=String(chat);
+  const wrap=node("section","chat-gallery"),grid=node("div","chat-gallery-grid"),more=node("button","secondary small",tr("Show more"));more.type="button";more.hidden=true;
+  wrap.append(node("p","hint",tr("Files saved from this chat, newest first. Only files the collector actually downloaded are listed; a message with an attachment that was not saved is not shown here.")),grid,more);
+  body.replaceChildren(viewState("loading",tr("Loading…")));
+  let cursor=null;
+  const current=()=>chat===state.chat&&generation===chatGeneration&&state.chatPanel==="media";
+  const page=async()=>{
+    const data=await json("chats/"+chat+"/media-list?limit=24"+(cursor===null?"":"&before_seq="+cursor));
+    if(!current())return false;
+    for(const item of data.items){
+      const cell=node("figure","chat-gallery-item"),caption=node("figcaption","hint");
+      cell.append(mediaNode({sha256:item.sha256,mime_type:item.mime_type,name:item.name,size:item.size}));
+      caption.append(node("strong","",item.name||item.mime_type||tr("File")));
+      if(item.size)caption.append(" · "+humanSize(item.size));
+      caption.append(node("br"),tr("Message #{id}",{id:item.message_id})+" · "+fmtTime(item.observed_at));
+      cell.append(caption);
+      if(item.message_id!==null&&item.message_id!==undefined){
+        const go=node("button","quiet small",tr("Open in chat"));go.type="button";
+        go.setAttribute("aria-label",tr("Open message #{id} in chat",{id:item.message_id}));
+        go.addEventListener("click",()=>busy(go,async()=>{
+          if(matchMedia("(max-width: 767px)").matches){state.chatPanel=null;renderChatInfo();}
+          if(!await showChatMessage(item.message_id)&&chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:item.message_id}),true);
+        }));
+        cell.append(go);
+      }
+      grid.append(cell);
+    }
+    cursor=data.next_before_seq;more.hidden=cursor===null;
+    return true;
+  };
+  more.addEventListener("click",()=>busy(more,async()=>{try{await page();}catch(error){if(current())toast(error.message,true);}}));
+  try{
+    if(!await page())return;
+    if(!grid.childElementCount)wrap.replaceChildren(viewState("empty",tr("No saved files in this chat"),tr("Files appear here once the collector has downloaded them. Check the file limits under Sources.")));
+    body.replaceChildren(wrap);
+  }catch(error){
+    if(!current()||error instanceof StaleView)return;
+    body.dataset.galleryChat="";
+    body.replaceChildren(viewState("error",tr("Could not load data"),error.message||"",tr("Retry"),()=>renderChatInfo()));
+  }
 }
 function chatInfoCard(info){
   const title=info.title||tr("Chat {id}",{id:info.chat_id}),card=node("section","chat-info-card"),head=node("div","chat-info-identity");
