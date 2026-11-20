@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
 
+**English** · [Русский](ru/ACCESS.md)
+
 ![Getting started](assets/presentation/chapter-start.svg)
 
 # Share a case. Keep control of the workspace.
