@@ -3479,7 +3479,7 @@ class Collector:
         await self.dialogs()
         if chat_id not in self.dialog_cache:
             raise ValueError("Target is not among the dialogs this account read. Refresh the group list or raise "
-                             "the chat list limit in Parameters.")
+                             "the chat list limit in Parameters. For a private chat, join it first with its invite link.")
         return self.dialog_cache[chat_id]["entity"]
 
     async def start(self):
