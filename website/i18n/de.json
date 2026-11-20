@@ -7232,7 +7232,8 @@
   "9fd2a76627319d6455db66ef96f6fb9fc96554a9a05dd7e9c9cc170cd45a2cd2": "Auf den Chat-Seiten zum Kontoexport auf einem Smartphone bleiben die Spalten der „Rhythm“-Tabelle lesbar und lassen sich seitlich scrollen, wobei der Rand ausgeblendet wird, anstatt abgeschnitten zu wirken.",
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Ein sehr langer Absendername ohne Leerzeichen wird innerhalb der Sprechblase umgebrochen, anstatt über deren Rand hinauszureichen.",
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Auf den Seiten zum Kontoexport auf einem Smartphone werden die Beschriftungen für Wochentage und Uhrzeiten in der wöchentlichen Aktivitätsübersicht nicht mehr von den Zellen abgeschnitten.",
-  "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Ein sehr langer Autorenname in einem Zitat und ein sehr langer neuer Chat-Name in einer Zeilenumbruchzeile, damit sie nicht über den Bildschirmrand hinausragen."
+  "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Ein sehr langer Autorenname in einem Zitat und ein sehr langer neuer Chat-Name in einer Zeilenumbruchzeile, damit sie nicht über den Bildschirmrand hinausragen.",
+  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Wenn das erste Laden eines Chats fehlschlägt, werden in der Chat-Ansicht auf einem Smartphone anstelle eines leeren Bildschirms die Chat-Kopfzeile, der Grund sowie eine Schaltfläche „Erneut versuchen“ angezeigt."
  },
  "modes": {
   "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",
