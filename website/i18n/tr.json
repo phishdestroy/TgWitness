@@ -7277,7 +7277,8 @@
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "Bir telefonda, ayar pencerelerindeki seçim düğmeleri görünür bir kenarlığa sahiptir ve dokunma boyutuna göre yüksekliği 44 pikseldir; bu sayede, hiçbir düğme seçili olmasa bile düğme gibi görünürler.",
   "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Ayarlar bölümünde, Kayıt koruması seçeneği, “Gelişmiş koruma ayarları” düğmesi ile “Karşı tarafın gördükleri” bloğu arasında bir boşluk bırakır.",
   "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Telefonlarda, Başlangıç ekranındaki “Zaman Tanıkları” düğmesi, Dışa Aktar ekranındaki imza kimlik kartları ve “Erişim Oluştur” düğmesi artık üstlerindeki metne veya karta değmiyor.",
-  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "Genişliği 1700 piksel ve üzeri olan ekranlarda, sohbet mesajları sol kenara yapışmak yerine, Telegram Desktop'ta olduğu gibi yaklaşık 960 piksel genişliğinde ortalanmış bir sütun oluşturur."
+  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "Genişliği 1700 piksel ve üzeri olan ekranlarda, sohbet mesajları sol kenara yapışmak yerine, Telegram Desktop'ta olduğu gibi yaklaşık 960 piksel genişliğinde ortalanmış bir sütun oluşturur.",
+  "e8e3cc775111d867f1c44f00c7c8b6ec7d202df9375b1facf5375493c21bd0ed": "Bir telefondaki Telegram hesap ayarlarında, Profil düğmesi, hesap resmi ve hesap kimliği artık yanlarındaki kontrol öğelerine değmiyor."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",

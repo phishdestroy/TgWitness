@@ -7277,7 +7277,8 @@
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "No celular, os botões de seleção nas caixas de diálogo de configurações têm uma borda visível e uma altura de 44 pixels, adequada para toque, de modo que parecem botões mesmo quando nenhum está selecionado.",
   "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Em “Configurações”, a opção “Proteção de gravação” deixa um espaço entre o botão “Configurações avançadas de proteção” e o bloco “O que o outro lado vê”.",
   "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "No celular, o botão “Testemunhas do Time” na tela “Início”, os cartões de identidade de assinatura na tela “Exportações” e o botão “Criar acesso” não se sobrepõem mais ao texto ou ao cartão acima deles.",
-  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "Em telas com 1.700 pixels de largura ou mais, as mensagens de um chat formam uma coluna centralizada de cerca de 960 pixels, como no Telegram Desktop, em vez de ficarem alinhadas à margem esquerda."
+  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "Em telas com 1.700 pixels de largura ou mais, as mensagens de um chat formam uma coluna centralizada de cerca de 960 pixels, como no Telegram Desktop, em vez de ficarem alinhadas à margem esquerda.",
+  "e8e3cc775111d867f1c44f00c7c8b6ec7d202df9375b1facf5375493c21bd0ed": "Nas configurações da conta do Telegram no celular, o botão “Perfil”, a foto de perfil e o ID da conta não se sobrepõem mais aos controles ao lado deles."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",
