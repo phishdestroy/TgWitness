@@ -40,7 +40,7 @@ def title_block(lay, eyebrow, title, facts, signed_note):
         lay.gap(7)
         pairs = [(str(label), str(value)) for label, value in facts if value not in (None, "")]
         with pdf.table(col_widths=(1, 1), first_row_as_headings=False, borders_layout="NONE",
-                       line_height=4.5, padding=(2, 3, 3, 0), text_align=lay.align) as table:
+                       line_height=4.5, padding=(2, 3, 3, 0), text_align=lay.align, align=lay.align) as table:
             for offset in range(0, len(pairs), 2):
                 row = table.row()
                 group = pairs[offset:offset + 2]
@@ -74,7 +74,7 @@ def figures(lay, items):
     if style.name == "reading_series":
         with pdf.table(col_widths=lay.mirror((60, 40)), first_row_as_headings=False,
                        borders_layout="HORIZONTAL_LINES", padding=1.5, line_height=4.4,
-                       text_align=lay.align) as table:
+                       text_align=lay.align, align=lay.align) as table:
             for label, value in rows:
                 row = table.row()
                 for text, face in lay.mirror([(label, lay.face(size=8.2, color=style.muted)),
@@ -83,7 +83,7 @@ def figures(lay, items):
     else:
         with pdf.table(col_widths=lay.mirror((42, 58)), first_row_as_headings=False,
                        borders_layout="ALL", padding=1.4, line_height=4.4,
-                       text_align=lay.align) as table:
+                       text_align=lay.align, align=lay.align) as table:
             for label, value in rows:
                 row = table.row()
                 for text in lay.mirror((label, value)):
@@ -302,7 +302,7 @@ def comparison(lay, old, new):
         if max(heights) < 70:
             lay.need(max(heights) + 21)
             with pdf.table(col_widths=(1, 1), first_row_as_headings=False, line_height=4.7,
-                           borders_layout="HORIZONTAL_LINES", padding=2.5, text_align=lay.align,
+                           borders_layout="HORIZONTAL_LINES", padding=2.5, text_align=lay.align, align=lay.align,
                            cell_fill_color=style.tint, cell_fill_mode="ALL") as table:
                 heading, row = table.row(), table.row()
                 for label in lay.mirror((say("Before"), say("After"))):
