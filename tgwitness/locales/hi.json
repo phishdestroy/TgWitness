@@ -10591,5 +10591,14 @@
   "No saved files in this chat": "इस चैट में कोई सहेजी गई फ़ाइलें नहीं हैं।",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "फाइलें यहां तब दिखाई देती हैं जब कलेक्टर ने उन्हें डाउनलोड कर लिया होता है। स्रोतों के अंतर्गत फ़ाइल सीमाएँ देखें।",
   "Open message #{id} in chat": "चैट में संदेश #{id} खोलें",
-  "Report on this person": "इस व्यक्ति के बारे में रिपोर्ट"
+  "Report on this person": "इस व्यक्ति के बारे में रिपोर्ट",
+  "Search or jump to #number": "खोजें या #संख्या पर जाएँ",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "खोज और फ़िल्टर इस चैट में सहेजे गए सभी संदेशों को कवर करते हैं, जिसमें पहले के संस्करण भी शामिल हैं। उस संदेश पर जाने के लिए # और संदेश संख्या टाइप करें।",
+  "Pinned messages ({n})": "पिन किए गए संदेश ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "जब चैट आखिरी बार जाँची गई थी, तब टेलीग्राम द्वारा सूचीबद्ध: {time}। यह नहीं दिखाता कि कोई संदेश कब पिन किया गया था।",
+  "The list was not refreshed at that check; this is the last list received.": "उस जाँच पर सूची अपडेट नहीं की गई थी; यह प्राप्त हुई अंतिम सूची है।",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "टेलीग्राम ने {total} पिन किए गए संदेशों की सूचना दी; केवल {listed} सूचीबद्ध हैं।",
+  "Not saved in this workspace": "इस वर्कस्पेस में सहेजा नहीं गया",
+  "Show in chat": "चैट में दिखाएँ",
+  "Show in chat: message #{id}": "चैट में दिखाएँ: संदेश #{id}"
 }

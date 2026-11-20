@@ -10591,5 +10591,14 @@
   "No saved files in this chat": "اس چیٹ میں کوئی محفوظ شدہ فائلیں نہیں ہیں۔",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "جب کلیکٹر نے فائلیں ڈاؤن لوڈ کر لیں تو یہاں ظاہر ہوتی ہیں۔  ماخذوں کے تحت فائل کی حدیں چیک کریں۔",
   "Open message #{id} in chat": "چیٹ میں پیغام نمبر {id} کھولیں",
-  "Report on this person": "اس شخص کے بارے میں رپورٹ"
+  "Report on this person": "اس شخص کے بارے میں رپورٹ",
+  "Search or jump to #number": "#نمبر تلاش کریں یا اس پر جائیں",
+  "Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.": "سرچ اور فلٹرز اس چیٹ میں محفوظ تمام پیغامات، بشمول پہلے کے ورژنز، کو شامل کرتے ہیں۔ # اور پیغام کا نمبر ٹائپ کریں تاکہ آپ اس پیغام پر پہنچ سکیں۔",
+  "Pinned messages ({n})": "پن کیے گئے پیغامات ({n})",
+  "Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.": "جب چیٹ آخری بار چیک کی گئی تھی، ٹیلیگرام نے اسے {time} کے طور پر درج کیا تھا۔ یہ نہیں بتاتا کہ کوئی پیغام کب پن کیا گیا تھا۔",
+  "The list was not refreshed at that check; this is the last list received.": "اس چیک پر فہرست تازہ نہیں کی گئی تھی؛ یہ موصول ہونے والی آخری فہرست ہے۔",
+  "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram نے {total} پن کیے گئے پیغامات رپورٹ کیے؛ صرف {listed} درج ہیں۔",
+  "Not saved in this workspace": "اس ورک اسپیس میں محفوظ نہیں ہوا",
+  "Show in chat": "چیٹ میں دکھائیں",
+  "Show in chat: message #{id}": "چیٹ میں دکھائیں: پیغام #{id}"
 }

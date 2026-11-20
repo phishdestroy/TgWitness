@@ -168,6 +168,16 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   A match in an earlier version opens the saved versions with their journal links.
   **Displayed version** identifies the record used for the message and its bookmark;
   a late history response cannot replace a newer live edit on screen.
+  Typing `#` and a message number (for example `#4812`) and pressing Enter jumps to that
+  saved message and clears any filter; a number with no saved record shows a notice and
+  changes nothing.
+- **Pinned messages** appears under the chat status when the chat-state snapshot recorded
+  a pinned list. It shows the list as Telegram returned it at the time of the last check,
+  with the saved text, author and time of each message and a **Show in chat** button.
+  A pinned number with no saved record is listed as not saved. The list does not say when a
+  message was pinned or by whom; it notes when Telegram reported more pinned messages than
+  it listed or when the last check could not refresh the list. Nothing is shown for chats
+  without a snapshot.
 - Between messages the chat shows two kinds of gap markers. **Message numbers not
   observed** lists numbers the journal has no record for, in channels and supergroups
   only: other chats share one account-wide numbering, so a jump there says nothing

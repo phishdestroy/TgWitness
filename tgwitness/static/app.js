@@ -5853,9 +5853,26 @@ function setChatQuery(changes){
   renderChatStatus();renderChatFeed();renderComposer();
   return loadChatMessages("open");
 }
-$("chat-search-form").addEventListener("submit",event=>{event.preventDefault();setChatQuery({});});
+const messageJump=/^#\s*(\d{1,12})$/;
+async function jumpToMessageNumber(id){
+  const chat=state.chat,profile=state.profile;
+  if(await showChatMessage(id)){
+    const bubble=$("msg-"+id)?.querySelector(".bubble");
+    if(bubble){bubble.setAttribute("tabindex","-1");bubble.focus({preventScroll:true});}
+    return;
+  }
+  if(chat===state.chat&&profile===state.profile)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id}),true);
+}
+$("chat-search-form").addEventListener("submit",event=>{
+  event.preventDefault();
+  const jump=messageJump.exec($("chat-message-search").value.trim());
+  if(jump){clearTimeout(chatSearchTimer);return jumpToMessageNumber(Number(jump[1]));}
+  setChatQuery({});
+});
 $("chat-message-search").addEventListener("input",()=>{
-  clearTimeout(chatSearchTimer);chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
+  clearTimeout(chatSearchTimer);
+  if(messageJump.test($("chat-message-search").value.trim()))return;
+  chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
 });
 $("chat-search-clear").addEventListener("click",()=>{setChatQuery({chatSearch:""});$("chat-message-search").focus();});
 async function openChat(id,options={}){
@@ -5871,6 +5888,43 @@ async function openChat(id,options={}){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
+}
+let pinnedGeneration=-1;
+function renderChatPinned(data){
+  const box=$("chat-pinned"),items=data?.items||[],snap=data?.snapshot;
+  if(!snap||!items.length){box.hidden=true;return;}
+  const open=box.open;
+  $("chat-pinned-title").textContent=tr("Pinned messages ({n})",{n:(snap.pinned_total??items.length).toLocaleString(LANG)});
+  const body=$("chat-pinned-body"),notes=[tr("Listed by Telegram when the chat was last checked, {time}. This does not show when a message was pinned.",{time:fmtTime(snap.observed_at)})];
+  if(snap.carried_forward)notes.push(tr("The list was not refreshed at that check; this is the last list received."));
+  if(typeof snap.pinned_total==="number"&&snap.pinned_total!==snap.listed)notes.push(tr("Telegram reported {total} pinned messages; only {listed} are listed.",{total:(snap.pinned_total).toLocaleString(LANG),listed:(snap.listed).toLocaleString(LANG)}));
+  const list=node("ul","chat-pinned-list");
+  for(const item of items){
+    const row=node("li","chat-pinned-item"),label=node("span","chat-pinned-label");
+    const who=item.sender?(item.sender.name||(item.sender.username?"@"+item.sender.username:"")):"";
+    label.append(node("strong","",tr("Message #{id}",{id:item.message_id})));
+    if(item.saved){
+      if(who)label.append(" · "+who);
+      if(item.sent_at)label.append(" · "+fmtTime(item.sent_at));
+      if(item.deleted)label.append(" · "+tr("Deleted"));
+      if(item.text)label.append(node("span","chat-pinned-text",item.text));
+      const go=node("button","quiet small",tr("Show in chat"));go.type="button";
+      go.setAttribute("aria-label",tr("Show in chat: message #{id}",{id:item.message_id}));
+      go.addEventListener("click",()=>busy(go,()=>jumpToMessageNumber(item.message_id)));
+      row.append(label,go);
+    }else{label.append(node("span","chat-pinned-text",tr("Not saved in this workspace")));row.append(label);}
+    list.append(row);
+  }
+  body.replaceChildren(...notes.map(text=>node("p","hint",text)),list);
+  box.hidden=false;box.open=open;
+}
+async function loadChatPinned(){
+  const chat=state.chat,generation=chatGeneration;
+  renderChatPinned(null);
+  let data=null;
+  try{data=await json("chats/"+chat+"/pinned");}catch{return;}
+  if(chat!==state.chat||generation!==chatGeneration)return;
+  renderChatPinned(data);
 }
 const chatPositions=new Map();let replyReturn=null,chatPositionFrame=0;
 async function showChatMessage(id,{offset=null,flash=true}={}){
@@ -5925,6 +5979,7 @@ function fmtDuration(seconds){
 }
 async function loadChatMessages(mode,target=null){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed");
+  if(pinnedGeneration!==generation&&state.chatView==="messages"){pinnedGeneration=generation;loadChatPinned().catch(()=>{});}
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
   if((mode==='older'&&state.chatNextBefore===null)||(mode==='newer'&&state.chatNextAfter===null))return true;
