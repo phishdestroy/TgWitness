@@ -256,3 +256,4 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .msg-number { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; opacity: .8; }
 .workspace[data-current-view="chats"] button.msg-number-copy { min-height: 0; padding: 0 2px; border: 0; background: none; cursor: pointer; }
 .workspace[data-current-view="chats"] button.msg-number-copy:hover { color: var(--accent-text); text-decoration: underline; }
+@media (min-width: 1700px) { .workspace[data-current-view="chats"] #chat-feed { padding-inline: max(24px, calc((100% - 960px) / 2)); } }
