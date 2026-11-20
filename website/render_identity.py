@@ -211,7 +211,7 @@ def metadata(font):
     panel_languages = {"en", *(path.stem for path in (ROOT / "tgwitness/locales").glob("*.json"))}
     guide_languages = panel_languages | {path.stem for path in (ROOT / "tgwitness/guide_locales").glob("*.json") if path.stem != "keys"}
     labels = (
-        ("version", f"v{version} · pre-release", "#a7d7ff", "#16304a"),
+        ("version", f"v{version}", "#a7d7ff", "#16304a"),
         ("verification", "Tested environments", "#b9d8d0", "#16312f"),
         ("languages", f"{len(panel_languages)} interface languages · {len(guide_languages)} guide languages", "#becbe4", "#252a40"),
         ("license", "MIT", "#dcc294", "#332b1d"),
