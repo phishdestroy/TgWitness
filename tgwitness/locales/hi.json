@@ -10768,5 +10768,6 @@
   "The image is too large to scan.": "छवि स्कैन करने के लिए बहुत बड़ी है।",
   "Save a valid bot token from BotFather.": "BotFather से एक वैध बॉट टोकन सहेजें।",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram ने बॉट अनुरोध अस्वीकार कर दिया। इसके टोकन और अनुमतियों की जाँच करें।",
-  "Telegram has not ended this account's session; there is no loss to report.": "टेलीग्राम ने इस खाते का सत्र समाप्त नहीं किया है; रिपोर्ट करने के लिए कोई हानि नहीं है।"
+  "Telegram has not ended this account's session; there is no loss to report.": "टेलीग्राम ने इस खाते का सत्र समाप्त नहीं किया है; रिपोर्ट करने के लिए कोई हानि नहीं है।",
+  "Copy the Telegram link to this message": "इस संदेश का टेलीग्राम लिंक कॉपी करें"
 }

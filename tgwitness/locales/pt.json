@@ -10778,5 +10778,6 @@
   "The image is too large to scan.": "A imagem é grande demais para ser digitalizada.",
   "Save a valid bot token from BotFather.": "Salve um token válido do bot no BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "O Telegram recusou a solicitação do bot. Verifique o token e as permissões dele.",
-  "Telegram has not ended this account's session; there is no loss to report.": "O Telegram não encerrou a sessão desta conta; não há nenhuma perda a ser relatada."
+  "Telegram has not ended this account's session; there is no loss to report.": "O Telegram não encerrou a sessão desta conta; não há nenhuma perda a ser relatada.",
+  "Copy the Telegram link to this message": "Copie o link do Telegram desta mensagem"
 }

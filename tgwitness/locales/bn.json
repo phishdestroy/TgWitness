@@ -10768,5 +10768,6 @@
   "The image is too large to scan.": "ছবিটি স্ক্যান করার জন্য খুব বড়।",
   "Save a valid bot token from BotFather.": "BotFather থেকে একটি বৈধ বট টোকেন সংরক্ষণ করুন।",
   "Telegram refused the bot request. Check its token and permissions.": "টেলিগ্রাম বট অনুরোধ প্রত্যাখ্যান করেছে। এর টোকেন এবং অনুমতিগুলো পরীক্ষা করুন।",
-  "Telegram has not ended this account's session; there is no loss to report.": "টেলিগ্রাম এই অ্যাকাউন্টের সেশন শেষ করেনি; কোনো ক্ষতির রিপোর্ট করার কিছু নেই।"
+  "Telegram has not ended this account's session; there is no loss to report.": "টেলিগ্রাম এই অ্যাকাউন্টের সেশন শেষ করেনি; কোনো ক্ষতির রিপোর্ট করার কিছু নেই।",
+  "Copy the Telegram link to this message": "এই বার্তার টেলিগ্রাম লিঙ্কটি অনুলিপি করুন"
 }

@@ -10768,5 +10768,6 @@
   "The image is too large to scan.": "Görüntü, taranamayacak kadar büyük.",
   "Save a valid bot token from BotFather.": "BotFather'dan geçerli bir bot jetonu kaydedin.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram, bot talebini reddetti. Botun tokenını ve izinlerini kontrol edin.",
-  "Telegram has not ended this account's session; there is no loss to report.": "Telegram bu hesabın oturumunu sonlandırmadı; herhangi bir kayıp söz konusu değildir."
+  "Telegram has not ended this account's session; there is no loss to report.": "Telegram bu hesabın oturumunu sonlandırmadı; herhangi bir kayıp söz konusu değildir.",
+  "Copy the Telegram link to this message": "Telegram bağlantısını bu mesaja kopyala"
 }

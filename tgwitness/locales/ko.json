@@ -10717,5 +10717,6 @@
   "The image is too large to scan.": "이미지가 너무 커서 스캔할 수 없습니다.",
   "Save a valid bot token from BotFather.": "BotFather에서 유효한 봇 토큰을 저장하세요.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram에서 봇 요청을 거부했습니다. 토큰과 권한을 확인해 보세요.",
-  "Telegram has not ended this account's session; there is no loss to report.": "텔레그램은 이 계정의 세션을 종료하지 않았으므로, 보고할 손실은 없습니다."
+  "Telegram has not ended this account's session; there is no loss to report.": "텔레그램은 이 계정의 세션을 종료하지 않았으므로, 보고할 손실은 없습니다.",
+  "Copy the Telegram link to this message": "이 메시지의 텔레그램 링크를 복사하세요"
 }

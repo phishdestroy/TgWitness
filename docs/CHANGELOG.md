@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In a channel or supergroup, clicking the message number in a chat bubble copies the Telegram link to that message (`https://t.me/c/<channel>/<message>`), which opens it for an account that is a member.
 - Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
 - A wordy figure in an HTML report tile, such as "No observation period recorded", is set in a small font instead of the large number size.
