@@ -107,10 +107,14 @@ export function createResponsiveShell({node, icon, tr}) {
   sidebar.addEventListener("click", event => {
     if (event.target.closest("[data-view], #lock-panel, #mode-switch, .doc-toggle")) setOpen(false, false);
   });
+  let routedView = null;
   window.addEventListener("tgwitness:route", event => {
-    syncRail(event.detail?.view || null);
+    const view = event.detail?.view || null, reason = event.detail?.reason;
+    syncRail(view);
     closeMenus();
-    if (event.detail?.reason !== "initial") setOpen(false, false);
+    const settling = reason === "initial" || (reason === "replace" && (routedView === null || view === routedView));
+    routedView = view;
+    if (!settling) setOpen(false, false);
   });
   window.addEventListener("tgwitness:lock", () => {closeMenus();setOpen(false, false);});
   document.addEventListener("keydown", event => {
