@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/HOW-IT-WORKS.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Follow the message. Understand the evidence.

@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Independent capture](OPTIONAL-CAPTURE.md)
 
+**English** · [Русский](ru/OFFICIAL-WITNESS.md)
+
 ![Independent capture](assets/presentation/chapter-capture.svg)
 
 # Official client witness
