@@ -1544,7 +1544,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData 必須為其主要 DC 包含且僅包含一項授權。",
   "TELEGRAM BOT": "Telegram 機器人",
   "Tag, branch or commit": "標籤、分支或提交",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目標不在此帳號已讀的對話中。請重新整理群組清單，或在「參數」中提高聊天清單的上限。",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "目標不在此帳號已讀的對話中。請重新整理群組清單，或在「參數」中提高聊天清單的上限。若要參與私人聊天，請先透過邀請連結加入該聊天室。",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "目標未出現在此帳號的前 1,000 則對話中。請重新整理群組清單。",
   "Team chat": "團隊聊天",
   "Telegram": "Telegram",
@@ -10550,5 +10550,6 @@
   "Not saved in this workspace": "未儲存於此工作區",
   "Show in chat": "在聊天室中顯示",
   "Show in chat: message #{id}": "在聊天室中顯示：訊息 #{id}",
-  "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}"
+  "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}",
+  "Sticker {emoji}": "貼圖 {emoji}"
 }

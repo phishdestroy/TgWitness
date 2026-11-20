@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
 
+**English** · [Русский](ru/STORAGE.md)
+
 ![Deployment & recovery](assets/presentation/chapter-operate.svg)
 
 # Storage and recovery

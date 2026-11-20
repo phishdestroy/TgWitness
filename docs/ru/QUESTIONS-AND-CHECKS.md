@@ -70,7 +70,7 @@ gh attestation verify "TgWitness-${VERSION}.zip" --repo phishdestroy/TgWitness \
   --source-ref "refs/tags/v${VERSION}" --deny-self-hosted-runners
 ```
 
-**Снимок GitHub Actions** ([запечатанное доказательство](../TRUST.md#sealed-evidence)). `WORKFLOW_SHA`
+**Сбор через GitHub Actions** ([запечатанное доказательство](../TRUST.md#sealed-evidence)). `WORKFLOW_SHA`
 — это `workflow_sha`, указанный в `tgwitness/sealed_policy.json` установки, которой вы доверяете:
 
 ```sh

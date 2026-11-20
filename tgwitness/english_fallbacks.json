@@ -2507,7 +2507,7 @@
   "Takeout finalization is pending. The saved archive remains verifiable.",
   "Takeout may have a delay or be unavailable for this account. Choose regular explicitly if you want to use the ordinary session.",
   "Target",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.",
   "Target prefix",
   "Target unobserved",
   "Tasks completed",

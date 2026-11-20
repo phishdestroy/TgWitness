@@ -1548,7 +1548,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData חייב להכיל אישור אחד בלבד עבור ה-DC הראשי שלו.",
   "TELEGRAM BOT": "בוט טלגרם",
   "Tag, branch or commit": "תג, ענף או התחייבות",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target אינו מופיע בין הדיאלוגים שהחשבון הזה קרא. רענן את רשימת הקבוצות או הגדל את מגבלת רשימת הצ'אטים תחת \"פרמטרים\".",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Target אינו מופיע בין הדיאלוגים שהחשבון הזה קרא. רענן את רשימת הקבוצות או הגדל את מגבלת רשימת הצ'אטים תחת \"פרמטרים\". כדי להשתתף בצ'אט פרטי, הצטרפו אליו תחילה באמצעות קישור ההזמנה.",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "היעד אינו מופיע ב-1,000 השיחות הראשונות בחשבון זה. רענן את רשימת הקבוצות.",
   "Team chat": "צ'אט צוותי",
   "Telegram": "Telegram",
@@ -10652,5 +10652,6 @@
   "Not saved in this workspace": "לא נשמר בסביבת העבודה הזו",
   "Show in chat": "הצג בצ'אט",
   "Show in chat: message #{id}": "הצג בצ'אט: הודעה מס' {id}",
-  "Open in chat: message #{id}": "פתח בצ'אט: הודעה מס' {id}"
+  "Open in chat: message #{id}": "פתח בצ'אט: הודעה מס' {id}",
+  "Sticker {emoji}": "מדבקה {emoji}"
 }
