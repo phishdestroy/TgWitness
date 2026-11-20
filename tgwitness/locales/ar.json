@@ -6527,7 +6527,6 @@
   "The most recent rows are listed; totals cover every row.": "يتم سرد الأسطر الأحدث؛ وتشمل الإجماليات كل سطر.",
   "rows": "صفوف",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "تم حسابها من ملف events.jsonl بواسطة المعالجات المذكورة. وهي تشير إلى ما يجب التحقق منه، وليس إلى ما حدث.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "تم الإبلاغ عنها: ما لا يقل عن 5 مشاركين جدد و3 أضعاف متوسط عدد رسائلهم خلال 14 يومًا، مع رسائل أقل من 1.5 ضعف متوسط عدد رسائلهم. لا يتم الإبلاغ عن الأيام السبعة الأولى من أي محادثة.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "أرقام الرسائل المحفوظة المميزة لكل محادثة ونسبة الرسائل الخدمية منها.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "تغييرات العضوية التي أبلغ عنها Telegram، مرة واحدة لكل شخص، ومحادثة، وتغيير، ويوم.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "رسائل الخدمة المثبتة، وإشعارات إلغاء التثبيت، والرسائل المثبتة التي تمت إضافتها أو إزالتها بين لقطات حالة الدردشة.",
@@ -10821,5 +10820,6 @@
   "changed the chat name to “{title}”": "تم تغيير اسم الدردشة إلى «{title}»",
   "pinned a message, number {n}": "تم تثبيت رسالة، رقم {n}",
   "Messages found: {n}": "عدد الرسائل التي تم العثور عليها: {n}",
-  "Messages found: {n}+": "عدد الرسائل التي تم العثور عليها: {n}+"
+  "Messages found: {n}+": "عدد الرسائل التي تم العثور عليها: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "تم الإبلاغ عنها: ما لا يقل عن 5 مشاركين جدد و3 أضعاف متوسط عدد رسائلهم خلال 14 يومًا، مع ألا يتجاوز عدد رسائلهم 1.5 ضعف متوسط عدد رسائلهم. لا يتم الإبلاغ عن الدردشة خلال الأيام السبعة الأولى من إنشائها. ويُحسب الشخص الذي ينشر لأول مرة في عدة دردشات مرة واحدة في كل دردشة."
 }
