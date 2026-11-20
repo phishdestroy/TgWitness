@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- `verify.py` words a refusal that has a plain reason without the exception name: "VERIFICATION FAILED: Duplicate ZIP members" instead of "VERIFICATION FAILED: ValueError: Duplicate ZIP members". Other failures keep the name of their type.
 - In the report viewer on a phone, a table that scrolls sideways, such as Senders, fades at its right edge instead of looking cut off.
 - In the viewer of an evidence report the senders and indicators search fields have an accessible name (the same text as their placeholder), and the selection checkbox of a record shows a focus ring when it is reached with the keyboard.
 - If the first load of a chat fails, the chat view shows the chat header, the reason and a Retry button instead of a blank screen on a phone.
