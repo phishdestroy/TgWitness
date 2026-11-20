@@ -10811,5 +10811,6 @@
   "Watchlist match": "Kuzatuv ro'yxati mosligi",
   "Workspace deleted": "Ish maydoni o'chirildi",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Jamoat MTProxy</strong><span>Kamroq barqaror · avtomatik hovuz</span>",
-  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Yozuvchi ekranni oching va Desktop yoki Web, mahalliy eksport yoki vizual yozib olish hamda taqdim etilgan ulagichni tanlang. Ushbu rejim alohida rasmiy-klient sessiyasidan foydalanadi."
 }

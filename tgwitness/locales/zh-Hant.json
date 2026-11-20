@@ -10760,5 +10760,6 @@
   "Watchlist match": "符合觀察清單條件",
   "Workspace deleted": "工作區已刪除",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>公開 MTProxy</strong><span>穩定性較差 · 自動池</span>",
-  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "開啟錄製畫面，選擇「桌面」或「網頁」、原生匯出或視覺擷取，以及已配置的連接器。此模式會使用一個獨立的官方客戶端連線。"
 }
