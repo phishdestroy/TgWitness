@@ -10610,5 +10610,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "O Telegram informou que havia {total} mensagens fixadas; no entanto, apenas {listed} estão listadas.",
   "Not saved in this workspace": "Não foi salvo neste espaço de trabalho",
   "Show in chat": "Mostrar no chat",
-  "Show in chat: message #{id}": "Mostrar no chat: mensagem nº {id}"
+  "Show in chat: message #{id}": "Mostrar no chat: mensagem nº {id}",
+  "Open in chat: message #{id}": "Abrir no chat: mensagem nº {id}"
 }

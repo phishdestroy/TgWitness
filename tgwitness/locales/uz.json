@@ -10600,5 +10600,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram {total} ta belgilangan xabarni xabar qildi; faqat {listed} tasi ro'yxatda ko'rsatilgan.",
   "Not saved in this workspace": "Ushbu ish maydonida saqlanmagan",
   "Show in chat": "Suhbatda ko'rsating",
-  "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}"
+  "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
+  "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}"
 }

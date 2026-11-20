@@ -10651,5 +10651,6 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram דיווחה על {total} הודעות מוצמדות; ברשימה מופיעות רק {listed}.",
   "Not saved in this workspace": "לא נשמר בסביבת העבודה הזו",
   "Show in chat": "הצג בצ'אט",
-  "Show in chat: message #{id}": "הצג בצ'אט: הודעה מס' {id}"
+  "Show in chat: message #{id}": "הצג בצ'אט: הודעה מס' {id}",
+  "Open in chat: message #{id}": "פתח בצ'אט: הודעה מס' {id}"
 }

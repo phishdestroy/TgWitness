@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
+- After **Verify journal** the result box is green only when a timestamp receipt covers the last record; with only the signed journal checked it is neutral, so the unfinished layers are not shown in a success colour.
+- In the report preview, **Journal head** is a bordered row like the other sections instead of bare text pressed against them.
 - On a phone the Signed archive card on Export records uses the same side padding as the cards below it, so headings and buttons line up.
 - On a desktop pointer the star that marks a chat as priority no longer covers the time of the last message in the chat list; the time moves aside while the row is hovered or focused.
 - Chat search accepts `#` and a message number to jump to that saved message. A **Pinned messages** list under the chat status shows what Telegram listed as pinned at the last chat-state check, with each saved message and a jump button, and says when a pinned number has no saved record. New route `GET /api/chats/{chat_id}/pinned`.
