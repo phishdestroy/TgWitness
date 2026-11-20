@@ -283,7 +283,7 @@ class Layout:
         for start in range(0, len(items), 4):
             row = self.mirror(items[start:start + 4])
             with pdf.table(col_widths=[1] * len(row), first_row_as_headings=False, line_height=5,
-                           borders_layout="HORIZONTAL_LINES", text_align=self.align, padding=2.5) as table:
+                           borders_layout="HORIZONTAL_LINES", text_align=self.align, align=self.align, padding=2.5) as table:
                 labels, values = table.row(), table.row()
                 for label, value in row:
                     labels.cell(label.upper(), style=self.face(size=7, color=MUTED))
@@ -330,7 +330,7 @@ class Layout:
             self.pdf.set_draw_color(*self.design.line)
         with self.pdf.table(col_widths=self.mirror((30, 70)), first_row_as_headings=False, line_height=4.6,
                             borders_layout=self.design.table_border, cell_fill_color=self.design.tint,
-                            text_align=self.align, padding=1.6 if self.design.name == "classic" else self.design.table_padding,
+                            text_align=self.align, align=self.align, padding=1.6 if self.design.name == "classic" else self.design.table_padding,
                             cell_fill_mode="COLUMNS" if self.rtl else "EVEN_COLUMNS") as table:
             for key, value in rows:
                 row = table.row()
@@ -352,7 +352,7 @@ class Layout:
             self.pdf.set_draw_color(*self.design.line)
         with self.pdf.table(col_widths=self.mirror(widths) if widths else None, line_height=4.4,
                             borders_layout=self.design.table_border,
-                            text_align=self.align, padding=self.design.table_padding,
+                            text_align=self.align, align=self.align, padding=self.design.table_padding,
                             headings_style=self.FontFace(emphasis="BOLD", size_pt=8, fill_color=self.design.tint,
                                                          color=self.design.ink if self.design.name != "classic" else None)) as table:
             head = table.row()
@@ -767,7 +767,7 @@ def custody_steps(say, data):
 def transfers(lay, say):
     lay.heading(say("Custody transfers"))
     lay.text(say("Fill in by hand when the printed report or the archive changes hands."), size=8.5, color=MUTED)
-    with lay.pdf.table(line_height=8, borders_layout="ALL", text_align=lay.align, padding=1.4,
+    with lay.pdf.table(line_height=8, borders_layout="ALL", text_align=lay.align, align=lay.align, padding=1.4,
                        headings_style=lay.FontFace(emphasis="BOLD", size_pt=8, fill_color=FILL)) as table:
         head = table.row()
         for column in lay.mirror((say("Date and time"), say("Released by"), say("Received by"), say("Purpose"),

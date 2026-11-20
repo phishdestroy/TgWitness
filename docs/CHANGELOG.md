@@ -26,6 +26,7 @@
 ## Unreleased
 
 - While messages are being selected in a chat, the chat-wide Build report button is hidden, so the selection bar has the only Build report button.
+- In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
 - A wordy figure in an HTML report tile, such as "No observation period recorded", is set in a small font instead of the large number size.
 - A saved attachment in the chat view shows its file name, type and size, and offers Preview only for images, audio and video.
