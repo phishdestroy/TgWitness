@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Project reference](README.md)
 
+**English** · [Русский](ru/PRODUCT.md)
+
 ![Project reference](assets/presentation/chapter-project.svg)
 
 # TgWitness product and collection model
