@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Collection](COLLECTION-MODES.md)
 
+**English** · [Русский](ru/DISTRIBUTED-EXPORT.md)
+
 ![Collection](assets/presentation/chapter-collect.svg)
 
 # Distributed chat export
