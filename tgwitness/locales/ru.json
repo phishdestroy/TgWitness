@@ -10686,6 +10686,7 @@
   "The value must be at most {n}.": "Значение должно быть не больше {n}.",
   "Enter a whole number.": "Введите целое число.",
   "Enter a number.": "Введите число.",
-  "via bot ID {id}": "через бота с ID {id}",
+  "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
+  "pinned a message, number {n}": "закрепил сообщение № {n}",
   "Post author: {name}": "Автор сообщения: {name}"
 }

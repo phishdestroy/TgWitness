@@ -10624,6 +10624,7 @@
   "The value must be at most {n}.": "La valeur doit être inférieure ou égale à {n}.",
   "Enter a whole number.": "Entrez un nombre entier.",
   "Enter a number.": "Entrez un nombre.",
-  "via bot ID {id}": "via le bot n° {id}",
+  "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
+  "pinned a message, number {n}": "a épinglé un message, le numéro {n}",
   "Post author: {name}": "Auteur du message : {name}"
 }

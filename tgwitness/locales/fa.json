@@ -10614,6 +10614,7 @@
   "The value must be at most {n}.": "مقدار باید حداکثر {n} باشد.",
   "Enter a whole number.": "یک عدد صحیح وارد کنید.",
   "Enter a number.": "عددی را وارد کنید.",
-  "via bot ID {id}": "از طریق آی‌دی ربات {id}",
+  "changed the chat name to “{title}”": "نام چت را به «{title}» تغییر داد.",
+  "pinned a message, number {n}": "پیامی سنجاق شد، شماره {n}",
   "Post author: {name}": "نویسندهٔ پست: {name}"
 }

@@ -10563,6 +10563,7 @@
   "The value must be at most {n}.": "ค่าต้องไม่เกิน{n}",
   "Enter a whole number.": "กรอกจำนวนเต็ม",
   "Enter a number.": "กรอกตัวเลข",
-  "via bot ID {id}": "ผ่าน ID บอท {id}",
+  "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
+  "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}",
   "Post author: {name}": "ผู้เขียนบทความ: {name}"
 }

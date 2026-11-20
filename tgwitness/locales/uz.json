@@ -10614,6 +10614,7 @@
   "The value must be at most {n}.": "Qiymat eng ko'pi bilan {n} bo'lishi kerak.",
   "Enter a whole number.": "Butun son kiring.",
   "Enter a number.": "Raqamni kiriting.",
-  "via bot ID {id}": "bot ID {id} orqali",
+  "changed the chat name to “{title}”": "Suhbat nomini \"{title}\" ga o'zgartirdi",
+  "pinned a message, number {n}": "{n}-raqamli xabarni biriktirdi",
   "Post author: {name}": "Post muallifi: {name}"
 }

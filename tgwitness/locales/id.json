@@ -10563,6 +10563,7 @@
   "The value must be at most {n}.": "Nilainya harus paling banyak {n}.",
   "Enter a whole number.": "Masukkan bilangan bulat.",
   "Enter a number.": "Masukkan sebuah angka.",
-  "via bot ID {id}": "melalui bot ID {id}",
+  "changed the chat name to “{title}”": "mengubah nama obrolan menjadi “{title}”",
+  "pinned a message, number {n}": "menandai pesan, nomor {n}",
   "Post author: {name}": "Penulis posting: {name}"
 }

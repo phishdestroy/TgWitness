@@ -10624,6 +10624,7 @@
   "The value must be at most {n}.": "El valor debe ser como máximo {n}.",
   "Enter a whole number.": "Introduce un número entero.",
   "Enter a number.": "Introduce un número.",
-  "via bot ID {id}": "a través del bot con ID {id}",
+  "changed the chat name to “{title}”": "He cambiado el nombre del chat a «{title}»",
+  "pinned a message, number {n}": "ha destacado un mensaje, el número {n}",
   "Post author: {name}": "Autor de la entrada: {name}"
 }

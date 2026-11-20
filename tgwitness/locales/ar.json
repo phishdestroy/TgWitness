@@ -10818,6 +10818,7 @@
   "The value must be at most {n}.": "يجب ألا تتجاوز القيمة {n}.",
   "Enter a whole number.": "أدخل عددًا صحيحًا.",
   "Enter a number.": "أدخل رقمًا.",
-  "via bot ID {id}": "عبر البوت رقم {id}",
+  "changed the chat name to “{title}”": "تم تغيير اسم الدردشة إلى «{title}»",
+  "pinned a message, number {n}": "تم تثبيت رسالة، رقم {n}",
   "Post author: {name}": "مؤلف المنشور: {name}"
 }

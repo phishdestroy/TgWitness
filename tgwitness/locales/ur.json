@@ -10614,6 +10614,7 @@
   "The value must be at most {n}.": "قدر زیادہ سے زیادہ{n} ہونی چاہیے۔",
   "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
   "Enter a number.": "ایک عدد درج کریں۔",
-  "via bot ID {id}": "بوٹ آئی ڈی {id} کے ذریعے",
+  "changed the chat name to “{title}”": "چیٹ کا نام \"{title}\" میں تبدیل کیا۔",
+  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}",
   "Post author: {name}": "پوسٹ کے مصنف: {name}"
 }

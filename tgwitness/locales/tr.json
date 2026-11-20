@@ -10614,6 +10614,7 @@
   "The value must be at most {n}.": "Değer, en fazla {n} olmalıdır.",
   "Enter a whole number.": "Bir tam sayı girin.",
   "Enter a number.": "Bir sayı girin.",
-  "via bot ID {id}": "{id} numaralı bot aracılığıyla",
+  "changed the chat name to “{title}”": "sohbet adını “{title}” olarak değiştirdi",
+  "pinned a message, number {n}": "{n} numaralı mesajı sabitledi",
   "Post author: {name}": "Yazının yazarı: {name}"
 }
