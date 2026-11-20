@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- On a phone, the Time witnesses button on Start, the signing identity cards on Exports and the Create access button no longer touch the text or card above them.
 - In Settings, Record protection leaves space between the Advanced protection settings button and the What the other side sees block.
 - On a phone, the choice buttons in the settings dialogs have a visible border and a touch-sized height of 44 pixels, so they look like buttons even when none is selected.
 - A saved record whose reactions are malformed (a missing count, an entry that is not a reaction, or a value that is not a list) no longer stops a report from being built: the report lists the readable reactions and skips the rest.
