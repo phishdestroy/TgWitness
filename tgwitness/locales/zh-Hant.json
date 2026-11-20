@@ -10553,5 +10553,7 @@
   "Open in chat: message #{id}": "在聊天室中開啟：訊息 #{id}",
   "Sticker {emoji}": "貼圖 {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目標不在此帳號已讀的對話中。請重新整理群組清單，或在「參數」中提高聊天清單的上限。",
-  "Exported completely": "已完全匯出"
+  "Exported completely": "已完全匯出",
+  "changed the chat name to “{title}”": "將聊天名稱更改為「{title}」",
+  "pinned a message, number {n}": "將第 {n} 則訊息設為置頂"
 }

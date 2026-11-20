@@ -10553,5 +10553,7 @@
   "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}",
   "Sticker {emoji}": "Stiker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Sasaran tidak termasuk dalam dialog yang dibaca oleh akaun ini. Segarkan semula senarai kumpulan atau naikkan had senarai sembang dalam Parameter.",
-  "Exported completely": "Dieksport sepenuhnya"
+  "Exported completely": "Dieksport sepenuhnya",
+  "changed the chat name to “{title}”": "Menukar nama sembang kepada \"{title}\"",
+  "pinned a message, number {n}": "melekatkan mesej, nombor {n}"
 }

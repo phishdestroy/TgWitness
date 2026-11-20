@@ -10553,5 +10553,7 @@
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
   "Sticker {emoji}": "สติ๊กเกอร์ {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target ไม่ได้อยู่ในรายชื่อกล่องสนทนาที่บัญชีนี้อ่านได้ โปรดรีเฟรชรายชื่อกลุ่มหรือเพิ่มขีดจำกัดรายชื่อแชทในส่วน Parameters",
-  "Exported completely": "ส่งออกเสร็จสิ้นแล้ว"
+  "Exported completely": "ส่งออกเสร็จสิ้นแล้ว",
+  "changed the chat name to “{title}”": "เปลี่ยนชื่อในแชทเป็น “{title}”",
+  "pinned a message, number {n}": "ได้ติดข้อความไว้ที่ด้านบน, หมายเลข {n}"
 }

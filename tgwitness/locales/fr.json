@@ -10614,5 +10614,7 @@
   "Open in chat: message #{id}": "Ouvrir dans le chat : message n° {id}",
   "Sticker {emoji}": "Autocollant {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "« Target » ne figure pas parmi les boîtes de dialogue consultées par ce compte. Veuillez actualiser la liste des groupes ou augmenter la limite de la liste des discussions dans les paramètres.",
-  "Exported completely": "Exporté dans son intégralité"
+  "Exported completely": "Exporté dans son intégralité",
+  "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
+  "pinned a message, number {n}": "a épinglé un message, le numéro {n}"
 }

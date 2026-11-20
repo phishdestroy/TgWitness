@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
 - The panel compresses its scripts, styles, pages and `locale.js` with gzip when the browser accepts it. A first load of the panel in Russian drops from about 4.7 MB to 1.3 MB; API responses are not compressed.
 - A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed.

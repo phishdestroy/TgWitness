@@ -10676,5 +10676,7 @@
   "Open in chat: message #{id}": "Открыть в чате: сообщение № {id}",
   "Sticker {emoji}": "Стикер {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Цели нет среди диалогов, прочитанных этим аккаунтом. Обновите список групп или увеличьте лимит списка чатов в «Параметрах».",
-  "Exported completely": "Полностью экспортировано"
+  "Exported completely": "Полностью экспортировано",
+  "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
+  "pinned a message, number {n}": "закрепил сообщение № {n}"
 }

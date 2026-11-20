@@ -10706,5 +10706,7 @@
   "Open in chat: message #{id}": "Otwórz w czacie: wiadomość nr {id}",
   "Sticker {emoji}": "Naklejka {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "„Target” nie znajduje się wśród okien dialogowych, które przeczytał to konto. Proszę odświeżyć listę grup lub zwiększyć limit listy czatów w sekcji „Parametry”.",
-  "Exported completely": "Całkowicie wyeksportowano"
+  "Exported completely": "Całkowicie wyeksportowano",
+  "changed the chat name to “{title}”": "zmieniłem nazwę użytkownika na czacie na „{title}”",
+  "pinned a message, number {n}": "przypiął wiadomość nr {n}"
 }

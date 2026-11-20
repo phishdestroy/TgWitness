@@ -10614,5 +10614,7 @@
   "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}",
   "Sticker {emoji}": "Pegatina {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» no figura entre los diálogos que ha leído esta cuenta. Actualice la lista de grupos o aumente el límite de la lista de chats en «Parámetros».",
-  "Exported completely": "Exportado por completo"
+  "Exported completely": "Exportado por completo",
+  "changed the chat name to “{title}”": "He cambiado el nombre del chat a «{title}»",
+  "pinned a message, number {n}": "ha destacado un mensaje, el número {n}"
 }

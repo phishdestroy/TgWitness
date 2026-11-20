@@ -10706,5 +10706,7 @@
   "Open in chat: message #{id}": "Відкрити в чаті: повідомлення № {id}",
   "Sticker {emoji}": "Стікер {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» відсутній серед діалогів, які переглянув цей обліковий запис. Оновіть список груп або збільште обмеження на кількість чатів у розділі «Параметри».",
-  "Exported completely": "Повністю експортовано"
+  "Exported completely": "Повністю експортовано",
+  "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
+  "pinned a message, number {n}": "закріпив повідомлення № {n}"
 }

@@ -10553,5 +10553,7 @@
   "Open in chat: message #{id}": "Buka di obrolan: pesan #{id}",
   "Sticker {emoji}": "Stiker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target tidak termasuk dalam dialog yang dibaca oleh akun ini. Segarkan daftar grup atau tingkatkan batas daftar obrolan di Parameter.",
-  "Exported completely": "Diekspor sepenuhnya"
+  "Exported completely": "Diekspor sepenuhnya",
+  "changed the chat name to “{title}”": "mengubah nama obrolan menjadi “{title}”",
+  "pinned a message, number {n}": "menandai pesan, nomor {n}"
 }
