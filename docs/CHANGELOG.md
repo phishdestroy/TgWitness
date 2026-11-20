@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- The in-app guide header and the example tag of the GitHub Actions form and the example image tag in deploy/env.example show the 1.0.0 release instead of 0.9.3.
 - `verify.py` also explains in plain words a signature that does not match ("the signature does not match the signed content: the file was changed, or it was signed by another key"), a signature or key field that is not valid base64, and a file that is not valid text, instead of an exception name and its raw message.
 - The Pseudo-secret page keeps its card style: a stray closing brace in the Sources stylesheet made the browser drop the rule that follows it.
 - The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
