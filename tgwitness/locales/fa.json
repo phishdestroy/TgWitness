@@ -10600,5 +10600,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "تلگرام گزارش داد که پیام‌های سنجاق‌شده {total} هستند؛ تنها {listed} فهرست شده‌اند.",
   "Not saved in this workspace": "در این فضای کاری ذخیره نشده است",
   "Show in chat": "در چت نمایش دهید",
-  "Show in chat: message #{id}": "نمایش در چت: پیام #{id}"
+  "Show in chat: message #{id}": "نمایش در چت: پیام #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy عمومی</strong><span>کم‌ثبات‌تر · استخر خودکار</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

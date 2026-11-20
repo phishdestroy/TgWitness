@@ -10549,5 +10549,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram báo cáo có {total} tin nhắn được ghim; nhưng chỉ có {listed} tin nhắn được liệt kê.",
   "Not saved in this workspace": "Chưa được lưu trong không gian làm việc này",
   "Show in chat": "Hiển thị trong cửa sổ trò chuyện",
-  "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}"
+  "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Công khai MTProxy</strong><span>Kém ổn định hơn · nhóm tự động</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

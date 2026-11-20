@@ -10549,5 +10549,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram รายงานว่ามีข้อความที่ถูกปักหมุด {total} ข้อความ แต่มีเพียง {listed} ข้อความที่แสดงอยู่ในรายการ",
   "Not saved in this workspace": "ยังไม่ถูกบันทึกในพื้นที่ทำงานนี้",
   "Show in chat": "แสดงในแชท",
-  "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}"
+  "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy สาธารณะ</strong><span>เสถียรน้อยกว่า · กลุ่มอัตโนมัติ</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

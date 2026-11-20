@@ -10600,5 +10600,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "টেলিগ্রাম রিপোর্ট করেছে {total} পিন করা বার্তাগুলো; শুধুমাত্র {listed} তালিকাভুক্ত করা হয়েছে।",
   "Not saved in this workspace": "এই ওয়ার্কস্পেসে সংরক্ষিত হয়নি",
   "Show in chat": "চ্যাটে দেখান",
-  "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}"
+  "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>পাবলিক MTProxy</strong><span>কম স্থিতিশীল · স্বয়ংক্রিয় পুল</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

@@ -10804,5 +10804,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "أفاد تطبيق Telegram بوجود {total} رسالة مثبتة؛ لكن لم يُدرج سوى {listed} منها.",
   "Not saved in this workspace": "لم يتم حفظه في مساحة العمل هذه",
   "Show in chat": "إظهار في الدردشة",
-  "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}"
+  "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>عام MTProxy</strong><span>أقل استقرارًا · المجموعة التلقائية</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

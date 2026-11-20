@@ -10672,5 +10672,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram сообщил о {total} закрепленных сообщениях; в списке указано лишь {listed}.",
   "Not saved in this workspace": "Не сохранено в этой рабочей области",
   "Show in chat": "Показать в чате",
-  "Show in chat: message #{id}": "Показать в чате: сообщение № {id}"
+  "Show in chat: message #{id}": "Показать в чате: сообщение № {id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Публичные MTProxy</strong><span>Менее стабильно · автоматический пул</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

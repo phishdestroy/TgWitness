@@ -10600,5 +10600,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram, {total} sabitlenmiş mesaj olduğunu bildirmişti; ancak listede sadece {listed} tanesi yer alıyor.",
   "Not saved in this workspace": "Bu çalışma alanında kaydedilmedi",
   "Show in chat": "Sohbette göster",
-  "Show in chat: message #{id}": "Sohbette göster: {id} numaralı mesaj"
+  "Show in chat: message #{id}": "Sohbette göster: {id} numaralı mesaj",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Genel MTProxy</strong><span>Daha az kararlı · otomatik havuz</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

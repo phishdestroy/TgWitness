@@ -10549,5 +10549,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "텔레그램은 고정된 메시지가 {total}건이라고 보고했으나, 목록에는 {listed}건만 표시되어 있습니다.",
   "Not saved in this workspace": "이 작업 공간에 저장되지 않았습니다",
   "Show in chat": "채팅에 표시",
-  "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}"
+  "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>공개 MTProxy</strong><span>덜 안정적 · 자동 풀</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

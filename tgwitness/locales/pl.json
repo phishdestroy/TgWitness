@@ -10702,5 +10702,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram zgłosił {total} przypięte wiadomości; na liście widnieje tylko {listed}.",
   "Not saved in this workspace": "Nie zapisano w tym obszarze roboczym",
   "Show in chat": "Pokaż na czacie",
-  "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}"
+  "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Publiczny MTProxy</strong><span>Mniej stabilny · automatyczna pula</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

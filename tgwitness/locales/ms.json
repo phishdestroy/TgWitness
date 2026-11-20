@@ -10549,5 +10549,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram melaporkan {total} mesej yang dipin; hanya {listed} yang disenaraikan.",
   "Not saved in this workspace": "Tidak disimpan di ruang kerja ini",
   "Show in chat": "Tunjukkan dalam sembang",
-  "Show in chat: message #{id}": "Tunjukkan dalam sembang: mesej #{id}"
+  "Show in chat: message #{id}": "Tunjukkan dalam sembang: mesej #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy Awam</strong><span>Kurang stabil · kolam automatik</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

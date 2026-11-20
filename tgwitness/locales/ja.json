@@ -10549,5 +10549,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegramでは{total}件の固定メッセージが報告されていますが、一覧には{listed}件しか表示されていません。",
   "Not saved in this workspace": "このワークスペースには保存されていません",
   "Show in chat": "チャットに表示",
-  "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}"
+  "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>パブリック MTProxy</strong><span>安定性が低い · 自動プール</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

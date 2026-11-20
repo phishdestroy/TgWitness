@@ -10600,5 +10600,7 @@
   "Telegram reported {total} pinned messages; only {listed} are listed.": "Telegram {total} ta belgilangan xabarni xabar qildi; faqat {listed} tasi ro'yxatda ko'rsatilgan.",
   "Not saved in this workspace": "Ushbu ish maydonida saqlanmagan",
   "Show in chat": "Suhbatda ko'rsating",
-  "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}"
+  "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Jamoat MTProxy</strong><span>Kamroq barqaror · avtomatik hovuz</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }
