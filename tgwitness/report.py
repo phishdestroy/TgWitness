@@ -138,7 +138,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", RECEIVED_WHERE, RECEIVED_RENAMED]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", "Sticker", RECEIVED_WHERE, RECEIVED_RENAMED]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -1778,6 +1778,10 @@ def ref_link(parts, folder, key, anchor, prefix=""):
     return link
 
 
+def media_name(say, info):
+    return say("Sticker") if info.get("sticker_emoji") else say(MEDIA_NAMES.get(info.get("kind"), "Media"))
+
+
 def content_text(say, info):
     poll, place, contact, dice = (info.get(key) or {} for key in ("poll", "location", "contact", "dice"))
     if poll:
@@ -1797,7 +1801,7 @@ def media_text(say, info):
     if not info:
         return ""
     size = " × ".join(str(info[k]) for k in ("width", "height") if info.get(k))
-    return " · ".join(x for x in (content_text(say, info), info.get("file_name"), info.get("mime_type"),
+    return " · ".join(x for x in (info.get("sticker_emoji"), content_text(say, info), info.get("file_name"), info.get("mime_type"),
                                   size_text(info["size"]) if type(info.get("size")) is int else "", size,
                                   say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
                                   info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
@@ -1852,7 +1856,7 @@ def record_html(event, say, titles, options, archive, base=""):
         found = shown_details(payload)
         parts.append(details_html(say, found))
         if found.get("media_info"):
-            parts.append('<div class="file">' + e(say(MEDIA_NAMES.get(found["media_info"]["kind"], "Media"))) + " · "
+            parts.append('<div class="file">' + e(media_name(say, found["media_info"])) + " · "
                          + e(media_text(say, found["media_info"])) + "</div>")
     if kind in ("message.deleted", "message.missing_on_recheck") and timer_expected(payload):
         parts.append('<div class="gone">' + e(timer_text(say, kind)) + "</div>")
@@ -2160,7 +2164,7 @@ def history_card(say, key, item, titles, linked=True):
         shown = details_html(say, version["details"]) if previous is None or pointing(previous) != pointing(version) else ""
         media = version["details"].get("media_info")
         if media and (previous is None or pointing(previous)[2] != pointing(version)[2]):
-            shown += '<div class="file">' + e(say(MEDIA_NAMES.get(media["kind"], "Media"))) + " · " \
+            shown += '<div class="file">' + e(media_name(say, media)) + " · " \
                 + e(media_text(say, media)) + "</div>"
         steps.append('<li><div class="vhead">' + head + '</div><div class="text">' + text + "</div>" + shown + "</li>")
         previous = version
