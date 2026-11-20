@@ -7224,7 +7224,8 @@
   "7d2efadac64ffe3f6fd2f69afb04b9ec7b3334e3d25f2b1c5802457301ffcb57": "<code>verify.py</code>, imzo faylsiz arxiv uchun \"arxivda manifest.sig yo'q, shuning uchun uning imzosi tekshirilmaydi\" deb chiqaradi, <code>KeyError</code> o'rniga.",
   "f303a6c0c55802f9c71c4e00262675839268b1fd1ee803367725a789ce99efff": "Telefonlarda sozlamalar oynalaridagi tanlov tugmalari ko'rinadigan chegara va 44 piksel bo'lgan tegish balandligiga ega, shuning uchun ular hech biri tanlanmagan bo'lsa ham tugma kabi ko'rinadi.",
   "77d97412272445a02bb2589ea4f7c7b7b681ee358d9178a64c4f08bcd00b1fc5": "Sozlamalarda, Yozuvni himoya qilish \"Kengaytirilgan himoya sozlamalari\" tugmasi bilan \"Boshqa tomon nimani ko'radi\" bloki orasida bo'sh joy qoldiradi.",
-  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Telefon ekranida Start tugmasidagi \"Vaqt guvohliklari\" tugmasi, Exports bo'limidagi imzo identifikatsiya kartochkalari va Create bo'limidagi \"Kirishni yaratish\" tugmasi endi ularning ustidagi matn yoki kartochkaga tegmaydi."
+  "2df4d2ccc84d20f03b6a48d1d987690ac38b53fc94050264bee825083be674a5": "Telefon ekranida Start tugmasidagi \"Vaqt guvohliklari\" tugmasi, Exports bo'limidagi imzo identifikatsiya kartochkalari va Create bo'limidagi \"Kirishni yaratish\" tugmasi endi ularning ustidagi matn yoki kartochkaga tegmaydi.",
+  "c60b117268121f3827af37277fc526b6ea27ab19ba624cadae4c178967350b86": "1700 piksel va undan keng ekranlarda chat xabarlari chap chetga yopishmay, Telegram Desktop'dagi kabi taxminan 960 piksel kenglikdagi markaziy ustunda joylashadi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",
