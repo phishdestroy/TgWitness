@@ -227,8 +227,9 @@ def svg_bars(rows, say, vertical=False):
     maximum = max((r["count"] for r in rows), default=0) or 1
     if vertical:
         step = 900 / max(1, len(rows))
+        width = min(max(.5, step - 2), 36)
         bars = ''.join('<rect class="chart-bar" x="%.2f" y="%.2f" width="%.2f" height="%.2f"><title>%s: %s</title></rect>' %
-                       (i * step + 1, 160 - row["count"] / maximum * 150, max(.5, step - 2),
+                       (i * step + (step - width) / 2, 160 - row["count"] / maximum * 150, width,
                         row["count"] / maximum * 150, e(row["label"]), row["count"]) for i, row in enumerate(rows))
         return ('<svg class="activity-svg" role="img" aria-label="' + e(say("Activity over time")) + '" viewBox="0 0 900 180">'
                 '<path class="chart-gridline" d="M0 10H900 M0 85H900 M0 160H900"/>' + bars + '</svg>'
@@ -379,9 +380,10 @@ def _pdf_section(lay, data, options):
                 lay.need(49)
                 y, step = pdf.get_y(), pdf.epw / len(rows)
                 pdf.set_fill_color(*accent)
+                width = min(max(.3, step - .5), 6)
                 for index, row in enumerate(rows):
                     height = row["count"] / maximum * 30
-                    pdf.rect(pdf.l_margin + index * step, y + 30 - height, max(.3, step - .5), height, style="F")
+                    pdf.rect(pdf.l_margin + index * step + (step - width) / 2, y + 30 - height, width, height, style="F")
                 pdf.set_y(y + 33)
                 lay.text(rows[0]["label"] + " — " + rows[-1]["label"] + " · UTC", size=8)
                 lay.text(say("Maximum per interval") + ': ' + str(maximum), size=8)

@@ -10603,6 +10603,8 @@
   "Show in chat: message #{id}": "چیٹ میں دکھائیں: پیغام #{id}",
   "Open in chat: message #{id}": "چیٹ میں کھولیں: پیغام #{id}",
   "Sticker {emoji}": "اسٹیکر {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "ہدف ان ڈائیلاگز میں شامل نہیں ہے جو اس اکاؤنٹ نے پڑھے ہیں۔ گروپ کی فہرست کو ریفریش کریں یا پیرامیٹرز میں چیٹ لسٹ کی حد بڑھائیں۔",
+  "Exported completely": "مکمل طور پر برآمد شدہ",
   "This field is required.": "یہ فیلڈ ضروری ہے۔",
   "Enter at least {n} characters.": "کم از کم {n} حروف درج کریں۔",
   "Enter at most {n} characters.": "زیادہ سے زیادہ {n} حروف درج کریں۔",

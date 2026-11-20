@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
   "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}",
   "Sticker {emoji}": "ステッカー {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "「Target」はこのアカウントが読み取ったダイアログに含まれていません。グループ一覧を更新するか、「パラメータ」でチャット一覧の上限を引き上げてください。",
+  "Exported completely": "完全にエクスポートされました",
   "This field is required.": "この欄は必須です。",
   "Enter at least {n} characters.": "{n}文字以上を入力してください。",
   "Enter at most {n} characters.": "最大{n}文字まで入力してください。",

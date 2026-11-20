@@ -10613,6 +10613,8 @@
   "Show in chat: message #{id}": "Mostrar no chat: mensagem nº {id}",
   "Open in chat: message #{id}": "Abrir no chat: mensagem nº {id}",
   "Sticker {emoji}": "Adesivo {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "O “Target” não consta entre as caixas de diálogo que esta conta leu. Atualize a lista de grupos ou aumente o limite da lista de bate-papos em “Parâmetros”.",
+  "Exported completely": "Exportado na íntegra",
   "This field is required.": "Este campo é obrigatório.",
   "Enter at least {n} characters.": "Digite pelo menos {n} caracteres.",
   "Enter at most {n} characters.": "Digite no máximo {n} caracteres.",
