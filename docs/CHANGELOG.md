@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the account export chat pages on a phone, the Rhythm table keeps readable columns and scrolls sideways with a faded edge instead of looking cut off.
 - On a phone, the Time witnesses button on Start, the signing identity cards on Exports and the Create access button no longer touch the text or card above them.
 - In Settings, Record protection leaves space between the Advanced protection settings button and the What the other side sees block.
 - On a phone, the choice buttons in the settings dialogs have a visible border and a touch-sized height of 44 pixels, so they look like buttons even when none is selected.
