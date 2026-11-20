@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
 
+**English** · [Русский](ru/ANALYSIS.md)
+
 ![Investigation](assets/presentation/chapter-investigate.svg)
 
 # Archive analysis
