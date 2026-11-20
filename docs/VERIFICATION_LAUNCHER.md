@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/VERIFICATION_LAUNCHER.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Verify an archive without typing a command

@@ -1,5 +1,7 @@
 # TgWitness: start, scale and evidence
 
+**English** · [Русский](ru/OVERVIEW.md)
+
 TgWitness is an open-source Telegram exporter and investigation workspace. Install
 it with one command, connect an account, choose the chats and export a signed
 archive. It also supports temporary collection on GitHub Actions and continuing
