@@ -114,6 +114,8 @@ def plain_failure(exc):
     if isinstance(exc, json.JSONDecodeError):
         return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
                 + type(exc).__name__ + "]")
+    if type(exc) is ValueError and detail:
+        return detail
     return type(exc).__name__ + ": " + detail
 
 
