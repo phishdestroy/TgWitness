@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Archive integrations](CLI.md)
 
+**English** · [Русский](ru/MCP.md)
+
 ![Archive integrations](assets/presentation/chapter-integrations.svg)
 
 # Read the archive through MCP

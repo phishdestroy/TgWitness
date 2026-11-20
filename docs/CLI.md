@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/CLI.md)
+
 ![Archive integrations](assets/presentation/chapter-integrations.svg)
 
 # Command line for scripts and agents

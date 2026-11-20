@@ -1492,7 +1492,7 @@
   "Enter a name for this witness.": "Bu tanık için bir ad girin.",
   "Telegram did not return this chat. Load chats and try again.": "Telegram bu sohbeti geri getirmedi. Sohbetleri yükleyin ve tekrar deneyin.",
   "The chosen Telegram folder was not found. Choose a folder again.": "Seçilen Telegram klasörü bulunamadı. Lütfen başka bir klasör seçin.",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Hedef, bu hesabın okuduğu diyaloglar arasında yer almıyor. Grup listesini yenileyin veya Parametreler bölümünden sohbet listesi sınırını artırın.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Hedef, bu hesabın okuduğu diyaloglar arasında yer almıyor. Grup listesini yenileyin veya Parametreler bölümünden sohbet listesi sınırını artırın. Özel bir sohbete katılmak için önce davet bağlantısı aracılığıyla sohbete katılın.",
   "New chat under observation: {chat}": "Gözlem altındaki yeni sohbet: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · #{id} bulunamadı: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "{chat}'teki {id} numaralı mesaj, yeniden kontrol sırasında bulunamadı",
@@ -10602,5 +10602,7 @@
   "Show in chat": "Sohbette göster",
   "Show in chat: message #{id}": "Sohbette göster: {id} numaralı mesaj",
   "Open in chat: message #{id}": "Sohbette aç: {id} numaralı mesaj",
+  "Sticker {emoji}": "Çıkartma {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Hedef, bu hesabın okuduğu diyaloglar arasında yer almıyor. Grup listesini yenileyin veya Parametreler bölümünden sohbet listesi sınırını artırın.",
   "Exported completely": "Tamamen dışa aktarıldı"
 }

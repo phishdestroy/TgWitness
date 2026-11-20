@@ -1544,7 +1544,7 @@
   "TData must contain exactly one authorization for its main DC.": "TDataには、そのメインDCに対する認証情報が正確に1つ含まれている必要があります。",
   "TELEGRAM BOT": "TELEGRAM ボット",
   "Tag, branch or commit": "タグ、ブランチ、またはコミット",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "「Target」はこのアカウントが読み取ったダイアログに含まれていません。グループ一覧を更新するか、「パラメータ」でチャット一覧の上限を引き上げてください。",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "「Target」はこのアカウントが読み取ったダイアログに含まれていません。グループ一覧を更新するか、「パラメータ」でチャット一覧の上限を引き上げてください。プライベートチャットに参加するには、まず招待リンクから参加してください。",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "対象はこのアカウントの最初の1,000件のダイアログに含まれていません。グループ一覧を更新してください。",
   "Team chat": "チームチャット",
   "Telegram": "Telegram",
@@ -10551,5 +10551,7 @@
   "Show in chat": "チャットに表示",
   "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
   "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}",
+  "Sticker {emoji}": "ステッカー {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "「Target」はこのアカウントが読み取ったダイアログに含まれていません。グループ一覧を更新するか、「パラメータ」でチャット一覧の上限を引き上げてください。",
   "Exported completely": "完全にエクスポートされました"
 }

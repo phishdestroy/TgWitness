@@ -1546,7 +1546,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData deve contenere esattamente un’autorizzazione per il proprio DC principale.",
   "TELEGRAM BOT": "BOT DI TELEGRAM",
   "Tag, branch or commit": "Tag, ramo o commit",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "\"Target\" non figura tra le finestre di dialogo lette da questo account. Aggiorni l’elenco dei gruppi oppure aumenti il limite dell’elenco delle chat in \"Parametri\".",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "\"Target\" non figura tra le finestre di dialogo lette da questo account. Aggiorni l’elenco dei gruppi oppure aumenti il limite dell’elenco delle chat in \"Parametri\". Per partecipare a una chat privata, si unisca innanzitutto alla chat tramite il link di invito.",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "Il destinatario non è presente nelle prime 1.000 conversazioni di questo account. Aggiorni l’elenco dei gruppi.",
   "Team chat": "Chat di gruppo",
   "Telegram": "Telegram",
@@ -10612,5 +10612,7 @@
   "Show in chat": "Mostra nella chat",
   "Show in chat: message #{id}": "Mostra nella chat: messaggio n. {id}",
   "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}",
+  "Sticker {emoji}": "Adesivo {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "\"Target\" non figura tra le finestre di dialogo lette da questo account. Aggiorni l’elenco dei gruppi oppure aumenti il limite dell’elenco delle chat in \"Parametri\".",
   "Exported completely": "Esportato integralmente"
 }

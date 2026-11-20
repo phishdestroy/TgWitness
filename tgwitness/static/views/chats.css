@@ -244,3 +244,5 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .chat-gallery-item img, .workspace[data-current-view="chats"] .chat-gallery-item video { max-width: 100%; height: auto; }
 .workspace[data-current-view="chats"] .chat-gallery-item .small { min-height: 32px; justify-self: start; }
 .workspace[data-current-view="chats"] .chat-gallery { padding: 8px 12px; }
+
+.workspace[data-current-view="chats"] .sticker-label { font-size: 13px; opacity: .85; margin: 4px 0; }

@@ -1544,7 +1544,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData ต้องมีสิทธิ์การอนุญาตเพียงหนึ่งสิทธิ์เท่านั้นสำหรับ DC หลักของมัน",
   "TELEGRAM BOT": "TELEGRAM BOT",
   "Tag, branch or commit": "แท็ก, สาขา หรือการคอมมิต",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target ไม่ได้อยู่ในรายชื่อกล่องสนทนาที่บัญชีนี้อ่านได้ โปรดรีเฟรชรายชื่อกลุ่มหรือเพิ่มขีดจำกัดรายชื่อแชทในส่วน Parameters",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Target ไม่ได้อยู่ในรายชื่อกล่องสนทนาที่บัญชีนี้อ่านได้ โปรดรีเฟรชรายชื่อกลุ่มหรือเพิ่มขีดจำกัดรายชื่อแชทในส่วน Parameters หากต้องการสนทนาแบบส่วนตัว ให้เข้าร่วมกลุ่มก่อนผ่านลิงก์เชิญ",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "เป้าหมายไม่อยู่ใน 1,000 บทสนทนาแรก ของบัญชีนี้ โปรดรีเฟรชรายชื่อกลุ่ม",
   "Team chat": "แชททีม",
   "Telegram": "Telegram",
@@ -10551,5 +10551,7 @@
   "Show in chat": "แสดงในแชท",
   "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
+  "Sticker {emoji}": "สติ๊กเกอร์ {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target ไม่ได้อยู่ในรายชื่อกล่องสนทนาที่บัญชีนี้อ่านได้ โปรดรีเฟรชรายชื่อกลุ่มหรือเพิ่มขีดจำกัดรายชื่อแชทในส่วน Parameters",
   "Exported completely": "ส่งออกเสร็จสิ้นแล้ว"
 }
