@@ -175,11 +175,11 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   the next recorded resumption, with the reason when the journal has one. The markers
   appear with all messages shown and hide while a message filter is on.
 - **Build report** above the messages opens the report studio with this chat selected.
-  The same button in an author's person card selects the chat and that author.
+  **Report on this person** in an author's person card, and in a message's **Author details**, selects the chat and that author when the session may read evidence.
   Both change only the draft; save it before exporting.
 - Pressing an author's name opens a person card beside the messages: saved profile,
   bio, profile photos, gifts, links, message counts and the activity timeline with its
-  journal records, plus **Refresh profile** and **Build report**. **Close**, Esc or
+  journal records, plus **Refresh profile** and **Report on this person**. **Close**, Esc or
   another chat closes the card; the chat keeps its position. **Rhythm** in the card
   counts the author's saved messages in this chat in UTC: active days, starts after
   6 hours of silence, median time to reply to someone else within 24 hours, the
