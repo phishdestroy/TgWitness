@@ -246,7 +246,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       [tr('Observed message senders'),counts.participants],[tr('Chats'),counts.chats]]){const entry=make('div');entry.append(make('dt',name),make('dd',count(value)));stats.append(entry);}
     const provenance=make('p',tr('Calculated from {n} journal records, through record #{last}.',{n:count(source.records),last:source.last_seq??'—'}),'hint');
     target.replaceChildren(stats,provenance);
-    const anchor=make('details'),summary=make('summary',tr('Journal head'));anchor.append(summary,make('code',source.journal_head||'—'));target.append(anchor);
+    const anchor=make('details','','report-advanced'),summary=make('summary',tr('Journal head'));anchor.append(summary,make('code',source.journal_head||'—'));target.append(anchor);
     if(!counts.selected_records)target.append(make('p',tr('No records match these choices. Change the filters and build the preview again.'),'report-preview-empty'));
     if(data.messages_not_found?.length)target.append(make('p',tr('Selected messages without a journal record')+': '
       +data.messages_not_found.map(item=>item.chat+': #'+item.message).join(', '),'notice warning'));
