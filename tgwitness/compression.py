@@ -1,5 +1,5 @@
 import gzip
-import zlib
+import hashlib
 
 COMPRESSIBLE = (b"text/javascript", b"application/javascript", b"text/css", b"text/html", b"image/svg+xml")
 SUFFIXES = (".js", ".css", ".svg", ".html")
@@ -64,7 +64,7 @@ class Compression:
         if not any(b"accept-encoding" in value.lower() for value in vary):
             headers.append((b"vary", b"Accept-Encoding"))
         if len(body) >= MINIMUM:
-            key = (len(body), zlib.crc32(body))
+            key = hashlib.sha256(body).digest()
             packed = self.cache.get(key)
             if packed is None:
                 packed = gzip.compress(body, 6, mtime=0)
