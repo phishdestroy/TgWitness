@@ -289,6 +289,14 @@ async function startViewer(meta){
     if(it.withheld)b.push('<span class="tag">'+esc(say("minimised"))+"</span>");return b.join("");}
   function pickBox(it){return '<input type="checkbox" class="pick"'+(V.selected.has(it.key)?" checked":"")+' aria-label="'+esc(say("Select"))+'">';}
   function shortText(t){return t.length>1200?t.slice(0,1200)+"…":t;}
+  function replyLine(it){const d=it.d||{},id=d.reply_to_message_id;if(!Number.isSafeInteger(id))return "";
+    if(d.forum_topic===true&&id===(d.reply_to_top_id||id))return "";
+    const other=Number.isSafeInteger(d.reply_to_peer_id)&&(chat?d.reply_to_peer_id!==meta.chat_id:d.reply_to_peer_id!==it.chat);
+    if(other)return '<div class="msg-reply">↩ '+esc(sayf("Reply to #{id} in another chat",{id}))+"</div>";
+    const replyChat=Number.isSafeInteger(d.reply_to_peer_id)?d.reply_to_peer_id:it.chat;
+    const original=chat?V.byKey.get("m"+id):V.items.find(x=>x.chat===replyChat&&x.msg===id&&["message","edited"].includes(x.cat));
+    const quote=original&&original.text?original.text.replace(/\s+/g," ").slice(0,90):"";
+    return '<div class="msg-reply">↩ '+esc(sayf("Reply to message #{id}",{id}))+(quote?"<span>"+esc(quote)+"</span>":"")+"</div>";}
   function forwardLine(d){const f=d&&d.forwarded_from;if(!f||typeof f!=="object")return "";
     const who=f.from_name||(f.from_id!=null?"ID "+f.from_id:say("a hidden sender"));
     return '<div class="msg-fwd">↪ '+esc(say("Forwarded from"))+" "+esc(String(who))+(f.channel_post!=null?" #"+esc(String(f.channel_post)):"")+"</div>";}
@@ -303,7 +311,7 @@ async function startViewer(meta){
     const times=[sayf("Sent: {time}",{time:it.sent||(it.chat==null?it.at:"")?when(it.sent||it.at):"—"}),...(it.chat!=null&&it.at?[sayf("Saved: {time}",{time:when(it.at)})]:[])].join(" · ");
     return '<article class="msg '+colour(it.uid??it.who)+(first?" first":"")+(last?" last":"")+(V.selected.has(it.key)?" picked":"")+'" data-key="'+it.key+'" role="listitem" tabindex="0">'
       +pickBox(it)+'<div class="msg-ava">'+(last?'<div class="ava">'+esc(initials(it.who))+"</div>":"")+'</div><div class="msg-bubble">'
-      +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+forwardLine(it.d)+media+hashNotice(it)
+      +(first?'<div class="msg-name">'+esc(it.who)+(it.user?"<span>@"+esc(it.user)+"</span>":"")+(it.note?"<span>"+esc(it.note)+"</span>":"")+"</div>":"")+forwardLine(it.d)+replyLine(it)+media+hashNotice(it)
       +(it.text?'<div class="msg-text" dir="auto">'+hl(shortText(it.text))+"</div>":"")+reactionLine(it.d)
       +'<div class="msg-foot">'+tags(it)+'<span class="msg-meta" title="'+esc(times)+'">'+(it.edited?esc(say("edited"))+" · ":"")+"#"+it.n+" · "+esc(clock(it.at))+"</span></div></div></article>";}
   function hashNotice(it){const h=it.fileHashes;if(!h||!/^[0-9a-f]{64}$/.test(h.sha))return "";

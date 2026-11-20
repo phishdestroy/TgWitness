@@ -104,6 +104,7 @@ code{direction:ltr;unicode-bidi:isolate}
 .msg-name{margin-bottom:2px;color:var(--h2);font-size:13.5px;font-weight:700}
 .msg-name span{margin-inline-start:6px;color:var(--muted);font-weight:500}
 .msg-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.msg-reply{margin-bottom:4px;padding:2px 8px;border-inline-start:3px solid var(--h2);border-radius:3px;color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}.msg-reply span{display:block;color:var(--soft);font-style:italic}
 .msg-fwd{margin-bottom:3px;color:var(--muted);font-size:12.5px;font-style:italic;overflow-wrap:anywhere}
 .msg-reacts{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.msg-react{padding:1px 8px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);font-size:12.5px}
 .msg-text mark,.d-text mark,.rec-text mark{padding:0 1px;border-radius:3px;background:color-mix(in srgb,#f5c542 60%,transparent);color:inherit}
