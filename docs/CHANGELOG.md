@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- When a chat export stops because the free disk space is too low for its attachments, the panel gives the reason and the way out ("Not enough free disk space for the attachments of this export. Free space or turn attachment downloads off under Sources → Recording.") instead of "Export failed (ValueError)". The reason is in the export record as `message`.
 - A message bubble in the viewer of an evidence report shows where a forwarded message came from ("Forwarded from Alex #5", the ID when no name was saved, or "a hidden sender") and its reactions as small chips, up to twelve per message.
 - A card of the account export report names where a forwarded message came from ("Forwarded from …", with the channel post number, post author and date when Telegram gave them, or "Sender not available") and lists its reactions ("reactions: 👍 3").
 - A card of the account export report shows where a text link really goes ("Link text “…” opens https://…") with a warning when the visible web address is not the target, and names the message a reply answers ("Reply to message #7"). Replies to another chat and forum topic roots are not named.
