@@ -10758,5 +10758,7 @@
   "Watchlist entries added": "已新增觀察清單項目",
   "Watchlist entries removed": "已移除觀察清單中的項目",
   "Watchlist match": "符合觀察清單條件",
-  "Workspace deleted": "工作區已刪除"
+  "Workspace deleted": "工作區已刪除",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>公開 MTProxy</strong><span>穩定性較差 · 自動池</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

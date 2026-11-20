@@ -10860,5 +10860,7 @@
   "Watchlist entries added": "נוספו רשומות לרשימת המעקב",
   "Watchlist entries removed": "הרשומות ברשימת המעקב הוסרו",
   "Watchlist match": "התאמה ברשימת המעקב",
-  "Workspace deleted": "סביבת העבודה נמחקה"
+  "Workspace deleted": "סביבת העבודה נמחקה",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy ציבורי</strong><span>פחות יציב · מאגר אוטומטי</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

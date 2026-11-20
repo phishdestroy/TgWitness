@@ -10809,5 +10809,7 @@
   "Watchlist entries added": "İzleme listesine girişler eklendi",
   "Watchlist entries removed": "İzleme listesindeki girişler kaldırıldı",
   "Watchlist match": "İzleme listesiyle eşleşme",
-  "Workspace deleted": "Çalışma alanı silindi"
+  "Workspace deleted": "Çalışma alanı silindi",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Genel MTProxy</strong><span>Daha az kararlı · otomatik havuz</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

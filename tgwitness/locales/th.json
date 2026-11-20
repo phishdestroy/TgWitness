@@ -10758,5 +10758,7 @@
   "Watchlist entries added": "เพิ่มรายการในรายชื่อติดตาม",
   "Watchlist entries removed": "รายการในรายการติดตามถูกลบแล้ว",
   "Watchlist match": "ตรงกับรายการติดตาม",
-  "Workspace deleted": "พื้นที่ทำงานถูกลบแล้ว"
+  "Workspace deleted": "พื้นที่ทำงานถูกลบแล้ว",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy สาธารณะ</strong><span>เสถียรน้อยกว่า · กลุ่มอัตโนมัติ</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

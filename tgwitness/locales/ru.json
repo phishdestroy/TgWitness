@@ -10881,5 +10881,7 @@
   "Watchlist entries added": "Добавлены записи в список наблюдения",
   "Watchlist entries removed": "Записи из списка наблюдения удалены",
   "Watchlist match": "Соответствие списку наблюдения",
-  "Workspace deleted": "Рабочая область удалена"
+  "Workspace deleted": "Рабочая область удалена",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Публичные MTProxy</strong><span>Менее стабильно · автоматический пул</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

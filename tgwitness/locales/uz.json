@@ -10809,5 +10809,7 @@
   "Watchlist entries added": "Kuzatuv ro'yxatiga yozuvlar qo'shildi",
   "Watchlist entries removed": "Kuzatuv ro'yxatidagi yozuvlar olib tashlandi",
   "Watchlist match": "Kuzatuv ro'yxati mosligi",
-  "Workspace deleted": "Ish maydoni o'chirildi"
+  "Workspace deleted": "Ish maydoni o'chirildi",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Jamoat MTProxy</strong><span>Kamroq barqaror · avtomatik hovuz</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

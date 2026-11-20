@@ -10758,5 +10758,7 @@
   "Watchlist entries added": "Đã thêm các mục vào danh sách theo dõi",
   "Watchlist entries removed": "Các mục trong danh sách theo dõi đã bị xóa",
   "Watchlist match": "Trận đấu trong danh sách theo dõi",
-  "Workspace deleted": "Không gian làm việc đã bị xóa"
+  "Workspace deleted": "Không gian làm việc đã bị xóa",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Công khai MTProxy</strong><span>Kém ổn định hơn · nhóm tự động</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }

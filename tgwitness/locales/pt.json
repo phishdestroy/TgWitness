@@ -10819,5 +10819,7 @@
   "Watchlist entries added": "Itens adicionados à lista de observação",
   "Watchlist entries removed": "Itens removidos da lista de observação",
   "Watchlist match": "Correspondência na lista de observação",
-  "Workspace deleted": "Espaço de trabalho excluído"
+  "Workspace deleted": "Espaço de trabalho excluído",
+  "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy Público</strong><span>Menos estável · pool automático</span>",
+  "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402"
 }
