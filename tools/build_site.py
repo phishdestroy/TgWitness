@@ -68,7 +68,7 @@ WIKI_ASSETS = {
     "assets/sources.png": "docs/assets/sources.png",
     "assets/connection.png": "docs/assets/connection.png",
 }
-STATIC = {"style.css": "website/style.css", "site.js": "website/site.js", "discovery.css": "website/discovery.css",
+STATIC = {"style.css": "website/style.css", "home.css": "website/home.css", "site.js": "website/site.js", "discovery.css": "website/discovery.css",
           "sealed.html": "website/sealed.html", "sealed.js": "tgwitness/static/cloud-capture.js", "sealed.css": "tgwitness/static/cloud-capture.css",
           "site-redirect.js": "website/site-redirect.js", "capture-site.css": "website/capture-site.css",
           "capture-locales.js": "tgwitness/static/cloud-capture-locales.js",
@@ -189,6 +189,41 @@ def render(template, values):
     return re.sub(r"@@([A-Z_]+)@@", replace, template)
 
 
+HOME_KEY = re.compile(r"\{\{(home\.[A-Za-z0-9_.]+)\}\}")
+
+
+def home_catalogue(read_public, lang):
+    english = json.loads(read_public("website/i18n/en.json"))["home"]
+    if any(not isinstance(text, str) or not text.strip() for text in english.values()):
+        raise ValueError("Empty homepage text in website/i18n/en.json")
+    local = {}
+    if lang != "en":
+        try:
+            local = json.loads(read_public(f"website/i18n/{lang}.json")).get("home", {})
+        except ValueError:
+            local = {}
+    words = {key: local[key] if isinstance(local.get(key), str) and local[key].strip() else text
+             for key, text in english.items()}
+    return words, lang == "en" or all(key in local for key in english)
+
+
+def home_fill(template, words):
+    used = set()
+
+    def replace(match):
+        if match[1] not in words:
+            raise ValueError("Unknown homepage key: " + match[1])
+        used.add(match[1])
+        return html.escape(words[match[1]], quote=True)
+    result = HOME_KEY.sub(replace, template)
+    unused = sorted(key for key in words if key not in used and not key.startswith("home.js."))
+    if unused:
+        raise ValueError("Unused homepage keys: " + ", ".join(unused))
+    if "{{home." in result:
+        raise ValueError("Unresolved homepage key")
+    return result
+
+
 def relative(page, target):
     return posixpath.relpath(target or ".", page or ".").rstrip("/") + "/"
 
@@ -286,11 +321,6 @@ def headings(content):
             for id_, inner in re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', content, re.S)]
 
 
-def home_body(template):
-    start, end = template.index("<body>") + len("<body>"), template.index("</body>")
-    return template[start:end]
-
-
 def inventory(root=ROOT):
     root = Path(root)
     strings = list(LABELS.values()) + list(FRAME) + [HOME_TITLE, HOME_DESCRIPTION, HOME_OG, HOME_IMAGE_ALT, WIKI_DESCRIPTION, NOTICE_LINK_NOTE,
@@ -304,8 +334,7 @@ def inventory(root=ROOT):
     strings += [label for label, _ in REFERENCE_GROUPS]
     for name in SITE_SCRIPTS:
         strings += site_i18n.script_strings((root / name).read_text(encoding="utf-8"))
-    fragments = {"home": home_body((root / "website/index.html").read_text(encoding="utf-8")),
-                 "intro": (root / "website/guide_intro.html").read_text(encoding="utf-8"),
+    fragments = {"intro": (root / "website/guide_intro.html").read_text(encoding="utf-8"),
                  "export-clinic": (root / "website/export-clinic/page.html").read_text(encoding="utf-8"),
                  "capture-instructions": site_wiki.to_html(site_wiki.split_title(
                      (root / CAPTURE_DOCS["en"]).read_text(encoding="utf-8"))[1])[0]}
@@ -400,7 +429,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             code = code if code in NOTICE_LANGUAGES else "en"
             context = site_context.render(path, code, translations[code], version)
             if path == prefix(code) + "index.html":
-                context = site_typography.homepage(context)
+                context = site_typography.homepage(context, code)
             stylesheet = relative_file(posixpath.dirname(path), "context.css")
             content = content.replace('</head>', f'<link rel="stylesheet" href="{stylesheet}"></head>', 1)
             content = content.replace('</main>', context + '</main>', 1)
@@ -571,19 +600,23 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
 
         if full_site:
 
-            body, _ = localize(home_body(home_template))
-            home = home_template[:home_template.index("<body>") + len("<body>")] + body + home_template[home_template.index("</body>"):]
-            home_dictionary = {key: site_typography.prose(t(key)) for key in
+            home_words, home_translated = home_catalogue(read_public, lang)
+            home = home_fill(home_template, home_words)
+            home_dictionary = {key: site_typography.prose(t(key), lang) for key in
                                site_i18n.script_strings(read_public("website/site.js").decode("utf-8"))}
+            home_dictionary.update({key: site_typography.prose(text, lang) for key, text in home_words.items()
+                                    if key.startswith("home.js.")})
             write(base + "index.html", site_typography.homepage(links(render(home, {
                 **guide_values(base), "ROOT": "" if not base else relative(base, ""), "TITLE": html.escape(t(HOME_TITLE), quote=True),
                 "SITE_DICT": json_script(home_dictionary),
+                "HOME_LANG": NOTICE_LANGUAGES[lang][1] if home_translated else "en",
+                "HOME_DIR": NOTICE_LANGUAGES[lang][2] if home_translated else "ltr",
                 "VALIDATION_URL": relative(base, prefix(lang if lang in site_validation.LANGUAGES else "en") + site_validation.PATH),
                 "DESCRIPTION": html.escape(t(HOME_DESCRIPTION), quote=True), "CANONICAL": html.escape(base_url + "/" + base, quote=True),
                 "OG_LOCALE": site_i18n.LANGUAGES[lang][3], "OG_DESCRIPTION": html.escape(t(HOME_OG), quote=True),
                 "OG_IMAGE_ALT": html.escape(t(HOME_IMAGE_ALT), quote=True),
                 "LANGUAGE_MENU": language_menu(base, ""), "THEME_TOGGLE": theme_toggle(),
-                "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True, software=repo_url, version=version)}), base)))
+                "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True, software=repo_url, version=version)}), base), lang))
 
         texts = {}
 
