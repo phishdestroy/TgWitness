@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
 
+**English** · [Русский](ru/SECURITY-MODEL.md)
+
 ![Deployment & recovery](assets/presentation/chapter-operate.svg)
 
 # Security and data handling
