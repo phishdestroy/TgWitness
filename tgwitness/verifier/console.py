@@ -3,6 +3,7 @@ from .common import (
     json,
     os,
     re,
+    failure_detail,
     safe_text,
     sys,
     unicodedata,
@@ -236,7 +237,7 @@ class Console:
 
     def failure(self, path, exc):
         self.field("File", safe_text(path))
-        message = safe_text(exc)
+        message = failure_detail(exc)
         label = ("Key mismatch" if "fingerprint" in message.lower() else
                  "File changed" if "File hash mismatch" in message or "ZIP changed during" in message else
                  "Signature mismatch" if isinstance(exc, InvalidSignature) else None)

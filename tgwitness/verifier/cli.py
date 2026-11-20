@@ -15,6 +15,7 @@ from .common import (
     re,
     read_json_file,
     read_member,
+    failure_detail,
     safe_text,
     sys,
     tempfile,
@@ -345,10 +346,10 @@ def verification_comparison(args, parser, mode):
     except Exception as exc:
         code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1
         if mode == "json":
-            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
             raise SystemExit(code)
         verification_print("ASSURANCE: fail")
-        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
     pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
     compared['assurance'] = assurance(compared)
     compared['assurance']['scope'] = 'two authenticated chat exports; the comparison covers their contents'
@@ -650,10 +651,10 @@ def verification_failure(args, parser, mode, console, exc):
         console.failure(args.bundle, exc)
         raise SystemExit(code)
     if mode == "json":
-        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
         raise SystemExit(code)
     verification_print("ASSURANCE: fail")
-    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + failure_detail(exc) + "\n")
 
 
 def verification_output(args, checked, console, mode):
