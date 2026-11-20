@@ -7234,7 +7234,8 @@
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Telefonning hisob eksport sahifalarida haftalik faoliyat xaritasi kunlari va soatlarning yozuvlari endi hujayralar tomonidan kesilmaydi.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Javob iqtibosida juda uzun muallif nomi va xizmat satrida ekranning chetidan oshib ketish o'rniga satr oxirida o'ralgan juda uzun yangi chat nomi.",
   "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Agar chatning birinchi yuklanishi muvaffaqiyatsiz bo'lsa, chat ko'rinishi bo'sh ekranning o'rniga chat sarlavhasi, sababi va \"Qayta urish\" tugmasini ko'rsatadi.",
-  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Dalil hisobotining ko'ruvchisida \"Jўнатувчилар\" va \"Indikatorlar\" qidiruv maydonlari uchun kirish mumkin bo'lgan nom (ularning o'rinbosar matni bilan bir xil) mavjud, shuningdek, yozuvning tanlov belgilash katagi klaviatura yordamida yetkazilganda fokus halqasini ko'rsatadi."
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Dalil hisobotining ko'ruvchisida \"Jўнатувчилар\" va \"Indikatorlar\" qidiruv maydonlari uchun kirish mumkin bo'lgan nom (ularning o'rinbosar matni bilan bir xil) mavjud, shuningdek, yozuvning tanlov belgilash katagi klaviatura yordamida yetkazilganda fokus halqasini ko'rsatadi.",
+  "435edfb33802d2636661c4e0fbaf960dc243ab81642d46ece2ad181d0f20337c": "Telefonning hisobot ko'ruvchisida yon tomonga siljiydigan, masalan, Senders jadvali kesilgan ko'rinishda emas, balki o'ng chetida so'nib ketadi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

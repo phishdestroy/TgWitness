@@ -7286,7 +7286,8 @@
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Trên các trang xuất dữ liệu tài khoản trên điện thoại, các nhãn ngày trong tuần và giờ trên bản đồ hoạt động hàng tuần không còn bị các ô cắt bớt nữa.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Tên tác giả rất dài trong phần trích dẫn phản hồi và tên cuộc trò chuyện mới rất dài trong dòng dịch vụ sẽ được tự động xuống dòng thay vì tràn ra ngoài mép màn hình.",
   "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Nếu lần tải đầu tiên của một cuộc trò chuyện không thành công, trên điện thoại, giao diện trò chuyện sẽ hiển thị tiêu đề cuộc trò chuyện, lý do và nút “Thử lại” thay vì màn hình trống.",
-  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Trong trình xem báo cáo chứng cứ, các trường tìm kiếm “người gửi” và “chỉ số” có tên dễ nhận biết (văn bản trùng với văn bản trong ô giữ chỗ), và ô chọn của một bản ghi sẽ hiển thị vòng tròn tập trung khi người dùng di chuyển con trỏ bàn phím đến đó."
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Trong trình xem báo cáo chứng cứ, các trường tìm kiếm “người gửi” và “chỉ số” có tên dễ nhận biết (văn bản trùng với văn bản trong ô giữ chỗ), và ô chọn của một bản ghi sẽ hiển thị vòng tròn tập trung khi người dùng di chuyển con trỏ bàn phím đến đó.",
+  "435edfb33802d2636661c4e0fbaf960dc243ab81642d46ece2ad181d0f20337c": "Trong trình xem báo cáo trên điện thoại, một bảng có thể cuộn ngang, chẳng hạn như bảng “Người gửi”, sẽ mờ dần ở mép phải thay vì bị cắt bớt."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",
