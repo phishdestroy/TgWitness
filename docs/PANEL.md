@@ -252,8 +252,8 @@ Messages are laid out like a Telegram chat, but every mark states what the journ
   star), and **N views** shows the view counter. These are the counts at the moment the message
   was saved; Telegram changes them later, and the hint on the chips says so. A message with
   no saved reactions or views has no such line. Later changes to the counts appear in the
-  [Journal](#journal) as **Reactions observed** records. The panel has no separate list of
-  pinned messages; a pin is shown as a service line when Telegram sent one.
+  [Journal](#journal) as **Reactions observed** records. A pin is also shown as a service
+  line when Telegram sent one.
 
 ### Read-only, sending and secrets
 
