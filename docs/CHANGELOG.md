@@ -26,6 +26,7 @@
 ## Unreleased
 
 - A message made of one to three emoji is shown in a large size in the chat view, as in Telegram.
+- Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
 - In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
 - In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
 - A wordy figure in an HTML report tile, such as "No observation period recorded", is set in a small font instead of the large number size.

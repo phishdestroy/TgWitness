@@ -10870,5 +10870,6 @@
   "The image is too large to scan.": "Зображення занадто велике, щоб його відсканувати.",
   "Save a valid bot token from BotFather.": "Збережіть дійсний токен бота, отриманий від BotFather.",
   "Telegram refused the bot request. Check its token and permissions.": "Telegram відхилив запит на створення бота. Перевірте його токен та дозволи.",
-  "Telegram has not ended this account's session; there is no loss to report.": "Telegram не завершив сеанс цього облікового запису; про жодні втрати не повідомляється."
+  "Telegram has not ended this account's session; there is no loss to report.": "Telegram не завершив сеанс цього облікового запису; про жодні втрати не повідомляється.",
+  "created the topic “{title}”": "створив тему «{title}»"
 }

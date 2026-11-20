@@ -6576,6 +6576,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(!m.sent_at&&(m.versions[0]?.observed_at||m.deleted_observed_at)){const o=node("span","origin origin-observed",tr("By observation time"));
     o.title=tr("Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.");meta.append(o);}
   const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
+  const number=node("span","msg-number","#"+m.message_id);number.title=tr("Message ID");meta.append(number);
   stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
