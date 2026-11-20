@@ -23,7 +23,7 @@ CSS = """
 .report-analytics{--chart-ink:var(--chart-accent)}.analytics-meta{font:11px/1.8 ui-monospace,monospace;overflow-wrap:anywhere;color:var(--muted)}
 .analytics-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}
 .analytics-totals div{padding:18px;background:var(--card,var(--paper));min-width:0}.analytics-totals b{font:30px/1.3 Georgia,serif;display:block}
-.analytics-totals span{font-size:11px;overflow-wrap:anywhere}.analytics-figure{margin:28px 0;padding:22px;border:1px solid var(--line);break-inside:avoid;min-width:0}
+.analytics-totals div>span{font-size:11px;overflow-wrap:anywhere}.analytics-figure{margin:28px 0;padding:22px;border:1px solid var(--line);break-inside:avoid;min-width:0}
 .analytics-figure figcaption{font-weight:650;font-size:16px;margin-bottom:12px}.analytics-figure p{font-size:12px;line-height:1.7;color:var(--muted)}
 .analytics-figure svg{width:100%;height:auto;display:block;direction:ltr}.analytics-svg-label{fill:var(--ink);font:12px system-ui,sans-serif}
 .analytics-axis{fill:var(--muted);font:10px ui-monospace,monospace}.analytics-gridline{stroke:var(--line);stroke-width:1}
@@ -128,6 +128,7 @@ def activity_svg(rows, say):
         y = 200-170*value/maximum
         parts.append(f'<line class="analytics-gridline" x1="50" y1="{y:.2f}" x2="705" y2="{y:.2f}"/><text class="analytics-axis" x="43" y="{y+4:.2f}" text-anchor="end">{value:g}</text>')
     step = 650/len(rows)
+    width = min(max(1, step-3), 36)
     for index, row in enumerate(rows):
         y = 200
         parts.append('<g><title>'+_e(row["period"]+' · '+str(row["total"]))+'</title>')
@@ -135,7 +136,7 @@ def activity_svg(rows, say):
             height = 170*row["counts"].get(kind, 0)/maximum
             y -= height
             if height:
-                parts.append(f'<rect x="{52+index*step:.2f}" y="{y:.2f}" width="{max(1,step-3):.2f}" height="{height:.2f}" fill="{color}"/>')
+                parts.append(f'<rect x="{52+index*step+(step-3-width)/2:.2f}" y="{y:.2f}" width="{width:.2f}" height="{height:.2f}" fill="{color}"/>')
         parts.append('</g>')
     parts.append('<text class="analytics-axis" x="50" y="223">'+_e(rows[0]["period"].split(' – ')[0])+'</text>')
     parts.append('<text class="analytics-axis" x="705" y="223" text-anchor="end">'+_e(rows[-1]["period"].split(' – ')[-1])+'</text></svg>')
@@ -274,6 +275,7 @@ def pdf(lay, data):
                 pdf.set_font("Sans",size=6)
                 pdf.cell(8,3,f'{maximum*fraction:g}',align="R")
             step = width/len(rows)
+            bar_width = min(max(.2, step-.8), 6)
             for index, row in enumerate(rows):
                 y = top+height
                 for kind, color in COLORS.items():
@@ -281,7 +283,7 @@ def pdf(lay, data):
                     y -= bar
                     if bar:
                         with pdf.local_context(fill_color=_rgb(color)):
-                            pdf.rect(left+index*step, y, max(.2,step-.8), bar, style="F")
+                            pdf.rect(left+index*step+(step-.8-bar_width)/2, y, bar_width, bar, style="F")
             pdf.set_y(top+height+3)
             lay.text(rows[0]["period"]+'  →  '+rows[-1]["period"]+' · UTC', size=8)
             kinds=list(KINDS)

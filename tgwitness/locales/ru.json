@@ -10686,6 +10686,6 @@
   "The value must be at most {n}.": "Значение должно быть не больше {n}.",
   "Enter a whole number.": "Введите целое число.",
   "Enter a number.": "Введите число.",
-  "Quiz": "Викторина",
-  "Live location": "Текущее местоположение"
+  "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
+  "pinned a message, number {n}": "закрепил сообщение № {n}"
 }

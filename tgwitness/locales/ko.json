@@ -10563,6 +10563,6 @@
   "The value must be at most {n}.": "값은 {n} 이하여야 합니다.",
   "Enter a whole number.": "정수를 입력하세요.",
   "Enter a number.": "숫자를 입력하세요.",
-  "Quiz": "퀴즈",
-  "Live location": "실시간 위치"
+  "changed the chat name to “{title}”": "채팅 이름을 “{title}”으로 변경했습니다.",
+  "pinned a message, number {n}": "메시지 {n}번을 고정했습니다"
 }

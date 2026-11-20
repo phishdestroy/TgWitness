@@ -10563,6 +10563,6 @@
   "The value must be at most {n}.": "該值必須小於或等於 {n}。",
   "Enter a whole number.": "請輸入一個整數。",
   "Enter a number.": "請輸入一個數字。",
-  "Quiz": "測驗",
-  "Live location": "即時位置"
+  "changed the chat name to “{title}”": "將聊天名稱更改為「{title}」",
+  "pinned a message, number {n}": "將第 {n} 則訊息設為置頂"
 }

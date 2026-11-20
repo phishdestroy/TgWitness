@@ -5751,6 +5751,11 @@ const serviceLabels={MessageActionChatAddUser:tr("added a member"),MessageAction
   MessageActionPinMessage:tr("pinned a message"),MessageActionChatEditTitle:tr("changed the chat name"),
   MessageActionChatEditPhoto:tr("changed the chat photo"),MessageActionChatCreate:tr("created the group"),MessageActionChannelCreate:tr("created the channel")};
 function serviceText(action){return serviceLabels[action]||String(action||"service event").replace(/^MessageAction/,"").replace(/([a-z])([A-Z])/g,"$1 $2").toLowerCase();}
+function serviceDetail(m){
+  if(m.service_action==="MessageActionChatEditTitle"&&m.service_title)return tr("changed the chat name to “{title}”",{title:m.service_title});
+  if(m.service_action==="MessageActionPinMessage"&&m.reply_to&&!m.reply_to_chat)return tr("pinned a message, number {n}",{n:m.reply_to});
+  return serviceText(m.service_action);
+}
 function serviceActor(m){
   const s=m.sender;
   return s&&s.id!==null&&s.id!==undefined&&s.id!==state.chat&&!s.name&&!s.username?tr("ID {id}",{id:s.id}):senderName(m);
@@ -6430,7 +6435,7 @@ function renderChatFeed(){
     const marks=marksBefore.get(m.message_id);if(marks)next.push(...marks);
     if(day!==lastDay){const chip=days.get(day)||node("div","chat-day"),label=fmtDay(when);chip.dataset.day=day;
       if(chip.textContent!==label)chip.textContent=label;chip.title=panelTime.fullDay(when);next.push(chip);lastDay=day;}
-    if(m.service_action){const service=node("div","chat-service",serviceActor(m)+" "+serviceText(m.service_action)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
+    if(m.service_action){const service=node("div","chat-service",serviceActor(m)+" "+serviceDetail(m)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
       const ref=m.reference;if(ref)boardView?.attach(service,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id});next.push(service);return;}
     const grouped=!marks&&joins(shown[index-1],m),continued=!marksBefore.has(shown[index+1]?.message_id)&&joins(m,shown[index+1]),post=channel&&(!m.sender||m.sender.id===state.chat);
     const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,continued,post,m.reply_to&&!m.reply_to_chat&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key(),chatPick?chatPick.has(m.message_id):null]);

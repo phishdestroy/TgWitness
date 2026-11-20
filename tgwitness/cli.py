@@ -336,7 +336,9 @@ def item_line(item):
                                      (item.get("text_truncated"), "text truncated")) if flag]
     if item.get("media_sha256"):
         marks.append("media " + item["media_sha256"][:16])
-    line = ("#" + str(source["event_seq"]) + "  " + when(item.get("observed_at")) + "  chat " + str(source["chat_id"])
+    reported = {"message.new": "sent", "message.edited": "edited"}.get(item["kind"], "Telegram time")
+    stamp = "observed " + when(item.get("observed_at")) + (" · " + reported + " " + when(item["source_at"]) if item.get("source_at") else "")
+    line = ("#" + str(source["event_seq"]) + "  " + stamp + "  chat " + str(source["chat_id"])
             + " · message " + str(source["message_id"]) + " · " + compact(who))
     if marks:
         line += " [" + ", ".join(marks) + "]"
@@ -357,11 +359,15 @@ def print_items(result, empty="No saved observations match."):
         print("Older records: add --before " + str(result["next_before"]))
 
 
+def count_text(count, noun):
+    return str(count) + " " + noun + ("" if count == 1 else "s")
+
+
 def print_stats(result):
     scope = "chat " + str(result["chat_id"]) if result.get("chat_id") is not None else "all chats in scope"
     if result.get("sender_id") is not None:
         scope += ", sender " + str(result["sender_id"])
-    print(scope + ": " + str(result["messages"]) + " messages from " + str(result["senders"]) + " senders"
+    print(scope + ": " + count_text(result["messages"], "message") + " from " + count_text(result["senders"], "sender")
           + ("" if result["complete"] else " (partial: time limit reached)"))
     if result.get("first_message_at"):
         print("Message times: " + when(result["first_message_at"]) + " to " + when(result["last_message_at"]))
@@ -370,17 +376,21 @@ def print_stats(result):
         return str(part["messages"]) + (" (" + format(part["share"] * 100, ".1f") + "%)" if part["share"] is not None else "")
     print("Edited " + percent(result["edited"]) + " · deleted " + percent(result["deleted"])
           + " · missing on recheck " + percent(result["missing_on_recheck"]))
-    print("By hour (UTC): " + " ".join(format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"])))
-    print("By weekday (UTC): " + " ".join(day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"])))
+    hours = [format(hour, "02") + ":" + str(count) for hour, count in enumerate(result["by_hour_utc"]) if count]
+    print("By hour (UTC): " + (" ".join(hours) + (" · other hours 0" if len(hours) < 24 else "") if hours else "no messages"))
+    days = [day + " " + str(count) for day, count in zip(WEEKDAYS, result["by_weekday_utc"]) if count]
+    print("By weekday (UTC): " + (" ".join(days) + (" · other days 0" if len(days) < 7 else "") if days else "no messages"))
     if result["peaks"]["days"]:
         print("Busiest days: " + ", ".join(p["date"] + " (" + str(p["messages"]) + ")" for p in result["peaks"]["days"]))
     if result["participants"]:
         print("Senders:")
         for person in result["participants"]:
             name = " ".join(filter(None, (person.get("name"), "@" + person["username"] if person.get("username") else None)))
+            span = (", from " + when(person["first_message_at"]) + " to " + when(person["last_message_at"])
+                    if person.get("first_message_at") and person.get("last_message_at") else "")
             print("  " + str(person["sender_id"] if person["sender_id"] is not None else "unknown") + "  "
-                  + (compact(name) or "(no name observed)") + " — " + str(person["messages"]) + " messages, "
-                  + str(person["edited"]) + " edited, " + str(person["deleted"]) + " deleted")
+                  + (compact(name) or "(no name observed)") + " — " + count_text(person["messages"], "message") + ", "
+                  + str(person["edited"]) + " edited, " + str(person["deleted"]) + " deleted" + span)
     for key, label in (("domains", "Domains"), ("handles", "@handles")):
         if result[key]:
             print(label + ": " + ", ".join(compact(entry[key[:-1]]) + " (" + str(entry["messages"]) + ")"
@@ -390,7 +400,7 @@ def print_stats(result):
     liveness = coverage.get("collector_liveness")
     if liveness:
         print("Time without confirmed collection: " + str(round(liveness["unconfirmed_seconds"] / 3600, 1)) + " h in "
-              + str(liveness["intervals"]) + " intervals")
+              + count_text(liveness["intervals"], "interval"))
     elif coverage.get("note"):
         print(coverage["note"])
 

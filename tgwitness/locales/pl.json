@@ -10716,6 +10716,6 @@
   "The value must be at most {n}.": "Wartość ta nie może przekraczać {n}.",
   "Enter a whole number.": "Wprowadź liczbę całkowitą.",
   "Enter a number.": "Wprowadź liczbę.",
-  "Quiz": "Quiz",
-  "Live location": "Aktualna lokalizacja"
+  "changed the chat name to “{title}”": "zmieniłem nazwę użytkownika na czacie na „{title}”",
+  "pinned a message, number {n}": "przypiął wiadomość nr {n}"
 }

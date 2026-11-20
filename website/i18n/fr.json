@@ -7144,7 +7144,8 @@
   "fab8c49c3a1031a930bc7424d27579b156edf2a788f860d2637bad8c673ab421": "Chiffrée pour la clé de votre navigateur",
   "c22c4501ab2b8880f85297e25e107de7ca17c38c5348fa9b9e3d8dd0cb055ba1": "Archive vérifiée",
   "a06d5ff18872d976b444a19e148eab5f887e9af774ec4136a4271039d8b4c329": "Un octet modifié échoue à la vérification",
-  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Ce que vous recevrez et comment le vérifier"
+  "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Ce que vous recevrez et comment le vérifier",
+  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Lorsque l'on ouvre une adresse qui ne fait pas partie du panneau, une petite page s'affiche désormais avec des liens vers les pages du panneau les plus proches, au lieu du code JSON brut."
  },
  "modes": {
   "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

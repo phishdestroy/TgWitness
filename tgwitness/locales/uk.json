@@ -10716,6 +10716,6 @@
   "The value must be at most {n}.": "Значення не повинно перевищувати {n}.",
   "Enter a whole number.": "Введіть ціле число.",
   "Enter a number.": "Введіть число.",
-  "Quiz": "Вікторина",
-  "Live location": "Потокове визначення місцезнаходження"
+  "changed the chat name to “{title}”": "змінив ім’я у чаті на «{title}»",
+  "pinned a message, number {n}": "закріпив повідомлення № {n}"
 }

@@ -10665,6 +10665,6 @@
   "The value must be at most {n}.": "הערך חייב להיות לכל היותר {n}.",
   "Enter a whole number.": "הזן מספר שלם.",
   "Enter a number.": "הזן מספר.",
-  "Quiz": "חידון",
-  "Live location": "מיקום בזמן אמת"
+  "changed the chat name to “{title}”": "שינה את שם הצ'אט ל-\"{title}\"",
+  "pinned a message, number {n}": "הצמיד הודעה, מספר {n}"
 }

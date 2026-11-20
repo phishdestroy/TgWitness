@@ -10563,6 +10563,6 @@
   "The value must be at most {n}.": "Giá trị này phải nhỏ hơn hoặc bằng {n}.",
   "Enter a whole number.": "Hãy nhập một số nguyên.",
   "Enter a number.": "Hãy nhập một số.",
-  "Quiz": "Bài trắc nghiệm",
-  "Live location": "Vị trí thời gian thực"
+  "changed the chat name to “{title}”": "đã đổi tên trong phòng chat thành “{title}”",
+  "pinned a message, number {n}": "đã ghim một tin nhắn, số {n}"
 }

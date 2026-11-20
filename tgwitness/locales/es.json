@@ -10624,6 +10624,6 @@
   "The value must be at most {n}.": "El valor debe ser como máximo {n}.",
   "Enter a whole number.": "Introduce un número entero.",
   "Enter a number.": "Introduce un número.",
-  "Quiz": "Cuestionario",
-  "Live location": "Ubicación en tiempo real"
+  "changed the chat name to “{title}”": "He cambiado el nombre del chat a «{title}»",
+  "pinned a message, number {n}": "ha destacado un mensaje, el número {n}"
 }
