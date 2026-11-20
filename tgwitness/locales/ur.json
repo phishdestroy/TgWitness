@@ -10605,6 +10605,13 @@
   "Sticker {emoji}": "اسٹیکر {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "ہدف ان ڈائیلاگز میں شامل نہیں ہے جو اس اکاؤنٹ نے پڑھے ہیں۔ گروپ کی فہرست کو ریفریش کریں یا پیرامیٹرز میں چیٹ لسٹ کی حد بڑھائیں۔",
   "Exported completely": "مکمل طور پر برآمد شدہ",
+  "This field is required.": "یہ فیلڈ ضروری ہے۔",
+  "Enter at least {n} characters.": "کم از کم {n} حروف درج کریں۔",
+  "Enter at most {n} characters.": "زیادہ سے زیادہ {n} حروف درج کریں۔",
+  "The value must be at least {n}.": "قدر کم از کم {n} ہونی چاہیے۔",
+  "The value must be at most {n}.": "قدر زیادہ سے زیادہ{n} ہونی چاہیے۔",
+  "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
+  "Enter a number.": "ایک عدد درج کریں۔",
   "changed the chat name to “{title}”": "چیٹ کا نام \"{title}\" میں تبدیل کیا۔",
   "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}"
 }

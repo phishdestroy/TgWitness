@@ -10615,6 +10615,13 @@
   "Sticker {emoji}": "Adesivo {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "O “Target” não consta entre as caixas de diálogo que esta conta leu. Atualize a lista de grupos ou aumente o limite da lista de bate-papos em “Parâmetros”.",
   "Exported completely": "Exportado na íntegra",
+  "This field is required.": "Este campo é obrigatório.",
+  "Enter at least {n} characters.": "Digite pelo menos {n} caracteres.",
+  "Enter at most {n} characters.": "Digite no máximo {n} caracteres.",
+  "The value must be at least {n}.": "O valor deve ser, no mínimo, {n}.",
+  "The value must be at most {n}.": "O valor deve ser, no máximo, {n}.",
+  "Enter a whole number.": "Digite um número inteiro.",
+  "Enter a number.": "Digite um número.",
   "changed the chat name to “{title}”": "alterei o nome do chat para “{title}”",
   "pinned a message, number {n}": "fixou uma mensagem, a número {n}"
 }

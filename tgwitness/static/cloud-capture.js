@@ -48,11 +48,12 @@
       const home=document.querySelector(".capture-header .brand");
       if (home) {const url=new URL(home.href);url.searchParams.set("lang",lang);home.href=url.href;}
     }
+    const story = `<div data-capture-story></div>`, storyLast = root.hasAttribute("data-story-last");
     root.innerHTML = `<div class="page-heading capture-heading"><div><span class="eyebrow">GITHUB ACTIONS <span class="capture-preview">${t("PREVIEW")}</span></span>
       <h1>${t("Capture a chat through GitHub")}</h1>
       <p class="page-description">${t("Collect a Telegram chat on a temporary runner. Receive an encrypted archive and GitHub provenance.")}</p></div>
       <label class="capture-language"><span>${t("Language")}</span><select id="capture-language">${Object.entries(languages).map(([code,name])=>`<option value="${esc(code)}" ${lang === code ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label></div>
-      <div data-capture-story></div><div class="capture-setup-heading" id="capture-setup" tabindex="-1"><h2>${t("Capture your chat")}</h2><p>${t("Follow these four steps. Keep this tab open.")}</p></div>
+      ${storyLast ? "" : story}<div class="capture-setup-heading" id="capture-setup" tabindex="-1"><h2>${t("Capture your chat")}</h2><p>${t("Follow these four steps. Keep this tab open.")}</p></div>
       <div class="capture-layout"><aside class="capture-rail"><ol class="capture-steps" aria-label="${t("Capture steps")}">${titles.map((title, i) => `<li><button type="button" data-capture-step="${i+1}" ${state.busy || (i > 0 && !ready()) ? "disabled" : ""} ${state.step === i+1 ? 'aria-current="step"' : ""}><span class="capture-number">${i+1}</span><span><strong>${title}</strong><small>${subtitles[i]}</small></span></button></li>`).join("")}</ol>
       <div class="capture-private">${icon("lock")}<p>${t("Your private key stays here. Save it before continuing.")}</p></div>
       <a id="instructions" class="text-link" href="https://phishdestroy.github.io/TgWitness/${lang === "en" ? "" : encodeURIComponent(lang) + "/"}docs/capture/" target="_blank" rel="noopener noreferrer">${t("Full instructions")}</a></aside>
@@ -61,7 +62,7 @@
       <p class="capture-feedback" role="status" ${state.busy || state.note ? "" : "hidden"}>${esc(state.busy ? t("Processing locally…") : state.note)}</p>
       ${state.step === 1 ? keyStep() : state.step === 2 ? githubStep() : state.step === 3 ? connectionStep() : resultStep()}
       </section><details class="capture-boundary"><summary>${t("What does GitHub verify?")}</summary><p>${t("The attestation binds the archive to an approved collector workflow and detects later changes. GitHub and the HTTPS tunnel are part of the trusted infrastructure.")}</p></details>
-      ${state.key ? button("reset", t("Start a new capture"), "quiet capture-reset") : ""}</div></div>`;
+      ${state.key ? button("reset", t("Start a new capture"), "quiet capture-reset") : ""}</div></div>${storyLast ? story : ""}`;
     root.querySelector("#recipient")?.setAttribute("aria-label", t("Public encryption key"));
     const recipient = root.querySelector("#recipient"); if (recipient) recipient.value = state.key?.recipient || "";
     window.TgWitnessCaptureStory?.mount(root.querySelector("[data-capture-story]"), lang);

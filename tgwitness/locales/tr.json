@@ -10605,6 +10605,13 @@
   "Sticker {emoji}": "Çıkartma {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Hedef, bu hesabın okuduğu diyaloglar arasında yer almıyor. Grup listesini yenileyin veya Parametreler bölümünden sohbet listesi sınırını artırın.",
   "Exported completely": "Tamamen dışa aktarıldı",
+  "This field is required.": "Bu alan zorunludur.",
+  "Enter at least {n} characters.": "En az {n} karakter girin.",
+  "Enter at most {n} characters.": "En fazla {n} karakter girin.",
+  "The value must be at least {n}.": "Değer en az {n} olmalıdır.",
+  "The value must be at most {n}.": "Değer, en fazla {n} olmalıdır.",
+  "Enter a whole number.": "Bir tam sayı girin.",
+  "Enter a number.": "Bir sayı girin.",
   "changed the chat name to “{title}”": "sohbet adını “{title}” olarak değiştirdi",
   "pinned a message, number {n}": "{n} numaralı mesajı sabitledi"
 }

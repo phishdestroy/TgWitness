@@ -10605,6 +10605,13 @@
   "Sticker {emoji}": "Stiker {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Maqsad ushbu hisob o'qigan dialoglar orasida yo'q. Guruhlar ro'yxatini yangilang yoki Parametrlarda suhbatlar ro'yxati chegarasini oshiring.",
   "Exported completely": "To'liq eksport qilindi",
+  "This field is required.": "Ushbu maydon majburiy.",
+  "Enter at least {n} characters.": "Kamida {n} belgini kiriting.",
+  "Enter at most {n} characters.": "{n} belgigacha kiriting.",
+  "The value must be at least {n}.": "Qiymat kamida {n} bo'lishi kerak.",
+  "The value must be at most {n}.": "Qiymat eng ko'pi bilan {n} bo'lishi kerak.",
+  "Enter a whole number.": "Butun son kiring.",
+  "Enter a number.": "Raqamni kiriting.",
   "changed the chat name to “{title}”": "Suhbat nomini \"{title}\" ga o'zgartirdi",
   "pinned a message, number {n}": "{n}-raqamli xabarni biriktirdi"
 }

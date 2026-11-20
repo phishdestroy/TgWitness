@@ -10554,6 +10554,13 @@
   "Sticker {emoji}": "貼圖 {emoji}",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "目標不在此帳號已讀的對話中。請重新整理群組清單，或在「參數」中提高聊天清單的上限。",
   "Exported completely": "已完全匯出",
+  "This field is required.": "此欄位為必填欄位。",
+  "Enter at least {n} characters.": "請輸入至少 {n} 個字元。",
+  "Enter at most {n} characters.": "請輸入最多 {n} 個字元。",
+  "The value must be at least {n}.": "該值必須至少為 {n}。",
+  "The value must be at most {n}.": "該值必須小於或等於 {n}。",
+  "Enter a whole number.": "請輸入一個整數。",
+  "Enter a number.": "請輸入一個數字。",
   "changed the chat name to “{title}”": "將聊天名稱更改為「{title}」",
   "pinned a message, number {n}": "將第 {n} 則訊息設為置頂"
 }
