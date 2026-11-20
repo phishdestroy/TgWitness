@@ -272,7 +272,7 @@ if (document.documentElement.classList.contains('home-page') && document.querySe
       element.classList.add('is-revealed');
       const delay = parseFloat(element.style.getPropertyValue('--rd')) || 0;
       setTimeout(() => element.classList.remove('will-reveal', 'is-revealed'), 2400 + delay * 1000);
-    }), {threshold: 0, rootMargin: '0px 0px -8% 0px'});
+    }), {threshold: 0, rootMargin: '0px 0px 12% 0px'});
     document.querySelectorAll('.will-reveal').forEach(element => {
       const siblings = [...element.parentElement.children].filter(child => child.classList.contains('will-reveal'));
       const order = siblings.indexOf(element);
@@ -375,10 +375,12 @@ if (document.documentElement.classList.contains('home-page') && document.querySe
   const stats = document.querySelector('[data-stats]');
   if (stats && !still && hasObserver) {
     const numbers = [...stats.querySelectorAll('[data-count-to]')];
-    numbers.forEach(number => { number.textContent = '0'; });
+    if (stats.getBoundingClientRect().top > innerHeight) stats.classList.add('tw-stats-wait');
     const counter = new IntersectionObserver(entries => {
       if (!entries[0].isIntersecting) return;
       counter.disconnect();
+      if (!stats.classList.contains('tw-stats-wait')) return;
+      stats.classList.remove('tw-stats-wait');
       const start = performance.now();
       const step = now => {
         const progress = Math.min(1, (now - start) / 1400);
