@@ -10719,5 +10719,8 @@
   "pinned a message, number {n}": "przypiął wiadomość nr {n}",
   "Messages found: {n}": "Znaleziono {n} wiadomości",
   "Messages found: {n}+": "Znaleziono wiadomości: {n}+",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Oznaczone: co najmniej 5 osób piszących po raz pierwszy oraz 3-krotność ich mediany z ostatnich 14 dni, przy czym długość wiadomości nie może przekraczać 1,5-krotności ich mediany. Pierwsze 7 dni czatu nie są oznaczane. Osoba, która po raz pierwszy pisze w kilku czatach, jest liczona tylko raz w każdym z nich."
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Oznaczone: co najmniej 5 osób piszących po raz pierwszy oraz 3-krotność ich mediany z ostatnich 14 dni, przy czym długość wiadomości nie może przekraczać 1,5-krotności ich mediany. Pierwsze 7 dni czatu nie są oznaczane. Osoba, która po raz pierwszy pisze w kilku czatach, jest liczona tylko raz w każdym z nich.",
+  "Choose at least {n}.": "Wybierz co najmniej {n}.",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "Wprowadź datę, np. 2026-10-01, lub godzinę wraz ze strefą czasową.",
+  "Choose one of the allowed values.": "Wybierz jedną z dopuszczalnych wartości."
 }
