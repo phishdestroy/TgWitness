@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- In the Ledger and margin and Reading series PDF designs, tables start at the body text instead of reaching into the margin where the chapter label stands.
 - In the Meridian, Atlas, Ledger and Horizon report designs a long figure label such as "No observation period recorded" wraps inside its tile, so the report no longer scrolls sideways on a phone.
 - Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
 - The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
