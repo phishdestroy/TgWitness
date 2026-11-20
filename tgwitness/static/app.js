@@ -6451,6 +6451,21 @@ function renderChatFeed(){
   }
   if(focusRow&&focusSelector)$(focusRow)?.querySelector(focusSelector)?.focus({preventScroll:true});
 }
+function sharedContentNode(info){
+  if(!info)return null;
+  const box=node("div","shared-content"),label=text=>box.append(node("div","shared-kind",text));
+  if(info.poll){label(info.poll.quiz?tr("Quiz"):tr("Poll"));box.append(node("div","shared-title",info.poll.question||""));
+    if(info.poll.answers?.length){const list=node("ol","shared-answers");for(const a of info.poll.answers)list.append(node("li","",a));box.append(list);}return box;}
+  if(info.location){const l=info.location;label(l.live_seconds?tr("Live location"):tr("Location"));
+    if(l.title)box.append(node("div","shared-title",l.title));if(l.address)box.append(node("div","",l.address));
+    if(l.lat!==undefined&&l.lng!==undefined)box.append(node("div","shared-coordinates",l.lat+", "+l.lng));return box;}
+  if(info.contact){label(tr("Contact"));box.append(node("div","shared-title",info.contact.name||""));
+    if(info.contact.phone)box.append(node("div","shared-coordinates",info.contact.phone));return box;}
+  if(info.url&&info.title){label(info.site_name||tr("Link preview"));box.append(node("div","shared-title",info.title));
+    let host="";try{host=new URL(info.url).hostname;}catch{}if(host)box.append(node("div","shared-coordinates",host));return box;}
+  if(info.dice){label(tr("Dice"));box.append(node("div","shared-title",[info.dice.emoji,info.dice.value].filter(x=>x!==undefined).join(" ")));return box;}
+  return null;
+}
 function messageText(value,m,className="bubble-text"){
   const profile=state.profile,revision=state.workspaceRevision,chat=state.chat,generation=chatGeneration;
   return window.TgWitnessPrivacy.render(value,{className,tr,
@@ -6492,9 +6507,10 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   const sticker=m.details?.media_info?.sticker_emoji;
   if(sticker)bubble.append(node("div","sticker-label",tr("Sticker {emoji}",{emoji:sticker})));
+  const shared=sharedContentNode(m.details?.media_info);if(shared)bubble.append(shared);
   m.media.forEach(media=>bubble.append(mediaNode(media)));
   const file=m.file?.state;
-  if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
+  if(m.has_media&&!m.media.length&&!file&&!shared){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const counts=m.details?.reactions||[];
   if(counts.length||m.details?.views!==undefined){const bar=node("div","bubble-reactions");
     bar.title=tr("Counts as they were when this message was saved; Telegram updates them later.");

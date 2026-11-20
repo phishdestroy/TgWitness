@@ -10613,6 +10613,8 @@
   "Show in chat: message #{id}": "Mostra nella chat: messaggio n. {id}",
   "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}",
   "Sticker {emoji}": "Adesivo {emoji}",
+  "Quiz": "Quiz",
+  "Live location": "Posizione in tempo reale",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "\"Target\" non figura tra le finestre di dialogo lette da questo account. Aggiorni l’elenco dei gruppi oppure aumenti il limite dell’elenco delle chat in \"Parametri\".",
   "Exported completely": "Esportato integralmente",
   "This field is required.": "Questo campo è obbligatorio.",
