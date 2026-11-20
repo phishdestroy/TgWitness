@@ -7125,7 +7125,8 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Jika Telegram masih menunjukkan sesi sementara, tamatkannya dalam Tetapan → Peranti.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Tangkapan yang belum selesai tidak boleh disambung selepas runner-nya hilang; larian baharu memulakan tangkapan baharu.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Mulakan tangkapan anda",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Kunci dan penyahsulitan kekal dalam tab pelayar ini. GitHub dan panel Telegram sementara dibuka dalam tab berasingan, dan wizard memberitahu bila perlu kembali."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Kunci dan penyahsulitan kekal dalam tab pelayar ini. GitHub dan panel Telegram sementara dibuka dalam tab berasingan, dan wizard memberitahu bila perlu kembali.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "Pada penunjuk desktop, bintang yang menandakan sembang sebagai keutamaan tidak lagi menutupi masa mesej terakhir dalam senarai sembang; masa itu akan berpindah ketika baris disasarkan atau diberi tumpuan."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

@@ -7177,7 +7177,8 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Telegram geçici oturumu hâlâ gösteriyorsa Ayarlar → Cihazlar'dan sonlandırın.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Yarım kalan bir yakalama, runner'ı gittikten sonra sürdürülemez; yeni bir çalıştırma yeni bir yakalama başlatır.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Yakalamanızı başlatın",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Anahtarlar ve şifre çözme bu tarayıcı sekmesinde kalır. GitHub ve geçici Telegram paneli ayrı sekmelerde açılır; sihirbaz ne zaman döneceğinizi söyler."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Anahtarlar ve şifre çözme bu tarayıcı sekmesinde kalır. GitHub ve geçici Telegram paneli ayrı sekmelerde açılır; sihirbaz ne zaman döneceğinizi söyler.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "Masaüstü sürücüsünde, bir sohbeti öncelikli olarak işaretleyen yıldız simgesi artık sohbet listesindeki son mesajın saat bilgisini örtmüyor; fare imlecini satırın üzerine getirdiğinizde veya satıra odaklandığınızda saat bilgisi kenara kayıyor."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",
