@@ -65,8 +65,15 @@ def banner(demo, stream=None):
                    "Telegram evidence workspace · signed · self-hosted")
 
 
+SERVICE_COMMANDS = ("setup", "open", "status", "start", "stop", "restart", "logs", "doctor", "guide", "paths", "token", "tunnel")
+
+
 def main():
     from .cli import COMMANDS
+    if sys.argv[1:2] and sys.argv[1] in SERVICE_COMMANDS:
+        raise SystemExit("tgwitness " + sys.argv[1] + " needs a copy installed by install.sh or install.ps1; this copy runs the "
+                         "panel server directly.\nUse 'tgwitness --check' to check this installation, 'tgwitness' to start the "
+                         "panel and 'tgwitness --help' for the other options.")
     if sys.argv[1:2] == ["verify"]:
         from .verify import main as verify
         sys.argv = ["tgwitness verify", *sys.argv[2:]]

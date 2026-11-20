@@ -10723,6 +10723,8 @@
   "Choose at least {n}.": "Виберіть хоча б {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Введіть дату, наприклад 2026-10-01, або час із зазначенням часового поясу.",
   "Choose one of the allowed values.": "Виберіть одне з допустимих значень.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Позначається день, де вперше написали щонайменше 5 і втричі більше за їхню медіану за 14 днів, а повідомлень менше ніж 1,5 медіани. Перші 7 днів чату не позначаються.",
+  "Post author: {name}": "Автор допису: {name}",
   "Partial-export storage must not be a link.": "Зберігання з частковим експортом не повинно бути посиланням.",
   "Invalid partial-export statement.": "Неправильна інструкція часткового експорту.",
   "Saved messages were signed with a different collector key.": "Збережені повідомлення були підписані іншим ключем колектора.",

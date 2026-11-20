@@ -10570,6 +10570,8 @@
   "Choose at least {n}.": "{n}을 최소한 하나 선택하십시오.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01과 같은 날짜나 시간대 정보가 포함된 시간을 입력하세요.",
   "Choose one of the allowed values.": "허용된 값 중 하나를 선택하십시오.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "플래그 지정 기준: 첫 게시자가 5명 이상이고, 14일 동안의 중앙값의 3배 이하이며, 메시지 수가 중앙값의 1.5배 미만인 경우. 채팅 시작 후 첫 7일 동안은 플래그가 지정되지 않습니다.",
+  "Post author: {name}": "글 작성자: {name}",
   "Partial-export storage must not be a link.": "부분 내보내기 저장소는 링크가 되어서는 안 됩니다.",
   "Invalid partial-export statement.": "부분 내보내기 문이 유효하지 않습니다.",
   "Saved messages were signed with a different collector key.": "저장된 메시지는 다른 수집자 키로 서명되었습니다.",

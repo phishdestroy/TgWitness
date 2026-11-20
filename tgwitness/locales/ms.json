@@ -10570,6 +10570,8 @@
   "Choose at least {n}.": "Pilih sekurang-kurangnya {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Masukkan tarikh seperti 2026-10-01 atau masa beserta zon waktu.",
   "Choose one of the allowed values.": "Pilih salah satu nilai yang dibenarkan.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Ditandakan: sekurang-kurangnya 5 penghantar pertama kali dan 3 kali ganda median 14 hari mereka, dengan mesej di bawah 1.5 kali ganda median mereka. 7 hari pertama sembang tidak ditandakan.",
+  "Post author: {name}": "Penulis pos: {name}",
   "Partial-export storage must not be a link.": "Simpanan eksport separa tidak boleh menjadi pautan.",
   "Invalid partial-export statement.": "Pernyataan eksport separa tidak sah.",
   "Saved messages were signed with a different collector key.": "Mesej yang disimpan telah ditandatangani dengan kunci pengumpul yang berbeza.",

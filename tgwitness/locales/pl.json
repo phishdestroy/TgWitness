@@ -10723,6 +10723,8 @@
   "Choose at least {n}.": "Wybierz co najmniej {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "Wprowadź datę, np. 2026-10-01, lub godzinę wraz ze strefą czasową.",
   "Choose one of the allowed values.": "Wybierz jedną z dopuszczalnych wartości.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Oznaczone: co najmniej 5 użytkowników publikujących po raz pierwszy i 3-krotność ich mediany z ostatnich 14 dni, przy czym długość wiadomości nie przekracza 1,5-krotności ich mediany. Pierwsze 7 dni czatu nie jest oznaczane.",
+  "Post author: {name}": "Autor wpisu: {name}",
   "Partial-export storage must not be a link.": "Magazyn przeznaczony do częściowego wywozu nie może stanowić ogniwa łańcucha.",
   "Invalid partial-export statement.": "Nieprawidłowa instrukcja częściowego eksportu.",
   "Saved messages were signed with a different collector key.": "Zapisane wiadomości zostały podpisane innym kluczem kolektora.",

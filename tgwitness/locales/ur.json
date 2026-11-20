@@ -10621,6 +10621,8 @@
   "Choose at least {n}.": "کم از کم ا{n} کا انتخاب کریں۔",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "ایک تاریخ درج کریں جیسے 2026-10-01 یا کسی ٹائم زون کے ساتھ وقت۔",
   "Choose one of the allowed values.": "مجاز اقدار میں سے ایک منتخب کریں۔",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "فلیگ کیا گیا: کم از کم 5 پہلی بار پوسٹ کرنے والے صارفین اور ان کی 14 روزہ اوسط کے تین گنا، جبکہ پیغامات ان کی اوسط کے 1.5 گنا سے کم ہیں۔ چیٹ کے پہلے 7 دن فلیگ نہیں کیے جاتے۔",
+  "Post author: {name}": "پوسٹ کے مصنف: {name}",
   "Partial-export storage must not be a link.": "جزوی برآمدی ذخیرہ ایک لنک نہیں ہونا چاہیے۔",
   "Invalid partial-export statement.": "غلط جزوی برآمدی بیان۔",
   "Saved messages were signed with a different collector key.": "محفوظ شدہ پیغامات ایک مختلف کلیکٹر کلید کے ساتھ دستخط کیے گئے تھے۔",

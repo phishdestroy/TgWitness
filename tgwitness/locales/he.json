@@ -10672,6 +10672,8 @@
   "Choose at least {n}.": "בחר לפחות {n}.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "הזן תאריך, כגון 2026-10-01, או שעה עם אזור זמן.",
   "Choose one of the allowed values.": "בחר באחד מהערכים המותרים.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "מסומן: לפחות 5 משתתפים שפרסמו לראשונה ופי 3 מהחציון שלהם ב-14 הימים האחרונים, עם הודעות הנמוכות מפי 1.5 מהחציון שלהם. 7 הימים הראשונים של צ'אט אינם מסומנים.",
+  "Post author: {name}": "מחבר הפוסט: {name}",
   "Partial-export storage must not be a link.": "אחסון לייצוא חלקי אינו יכול להיות קישור.",
   "Invalid partial-export statement.": "הצהרת ייצוא חלקי לא חוקית.",
   "Saved messages were signed with a different collector key.": "ההודעות שנשמרו נחתמו באמצעות מפתח אוסף שונה.",

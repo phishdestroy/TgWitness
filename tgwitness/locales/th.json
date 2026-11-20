@@ -10570,6 +10570,8 @@
   "Choose at least {n}.": "เลือกอย่างน้อย{n}",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "ป้อนวันที่ เช่น 2026-10-01 หรือเวลาพร้อมเขตเวลา",
   "Choose one of the allowed values.": "เลือกค่าหนึ่งจากค่าที่อนุญาต",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "ถูกทำเครื่องหมาย: มีผู้โพสต์ครั้งแรกอย่างน้อย 5 คน และจำนวนข้อความมากกว่า 3 เท่าของค่ามัธยฐานในช่วง 14 วัน โดยข้อความแต่ละข้อความต้องน้อยกว่า 1.5 เท่าของค่ามัธยฐานนั้น 7 วันแรกของการสนทนาจะไม่ถูกทำเครื่องหมาย",
+  "Post author: {name}": "ผู้เขียนบทความ: {name}",
   "Partial-export storage must not be a link.": "พื้นที่จัดเก็บสำหรับการส่งออกส่วนหนึ่งต้องไม่ใช่ลิงก์",
   "Invalid partial-export statement.": "คำสั่งการส่งออกส่วนหนึ่งไม่ถูกต้อง",
   "Saved messages were signed with a different collector key.": "ข้อความที่เก็บไว้ถูกลงนามด้วยกุญแจผู้รวบรวมที่ต่างกัน",

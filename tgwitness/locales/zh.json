@@ -10570,6 +10570,8 @@
   "Choose at least {n}.": "请至少选择一个{n}。",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "请输入日期（例如 2026-10-01）或带时区的具体时间。",
   "Choose one of the allowed values.": "请选择一个允许的值。",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "被标记：至少有 5 名首次发帖者，且发帖量达到其 14 天中位数的 3 倍，而单条消息长度不超过其中位数的 1.5 倍。聊天群的前 7 天不会被标记。",
+  "Post author: {name}": "文章作者：{name}",
   "Partial-export storage must not be a link.": "部分导出存储不能是链接。",
   "Invalid partial-export statement.": "部分导出语句无效。",
   "Saved messages were signed with a different collector key.": "已保存的消息使用了不同的收集器密钥进行签名。",

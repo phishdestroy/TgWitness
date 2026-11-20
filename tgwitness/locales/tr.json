@@ -10621,6 +10621,8 @@
   "Choose at least {n}.": "En az {n} seçin.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 gibi bir tarih veya saat dilimi içeren bir saat girin.",
   "Choose one of the allowed values.": "İzin verilen değerlerden birini seçin.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "İşaretlenenler: en az 5 ilk kez mesaj gönderen kullanıcı ve 14 günlük medyan değerlerinin 3 katı, mesajların ise medyan değerlerinin 1,5 katından az olması. Bir sohbetin ilk 7 günü işaretlenmez.",
+  "Post author: {name}": "Yazının yazarı: {name}",
   "Partial-export storage must not be a link.": "Kısmi ihracat deposu bir bağlantı olmamalıdır.",
   "Invalid partial-export statement.": "Geçersiz kısmi dışa aktarma deyimi.",
   "Saved messages were signed with a different collector key.": "Kaydedilen mesajlar farklı bir toplayıcı anahtarıyla imzalanmıştı.",
