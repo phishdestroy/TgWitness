@@ -7285,7 +7285,8 @@
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Boşluk içermeyen çok uzun bir gönderen adı, sohbet baloncuğunun kenarından taşmak yerine baloncuğun içinde sığar.",
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Telefonlardaki hesap dışa aktarma sayfalarında, haftalık etkinlik haritasındaki gün ve saat etiketleri artık hücreler tarafından kesilmiyor.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Bir yanıt alıntısındaki çok uzun yazar adı ve bir hizmet satırındaki çok uzun yeni sohbet adı, ekranın kenarından taşmak yerine satır sonuna sığacak şekilde düzenlenir.",
-  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Bir sohbetin ilk yüklemesi başarısız olursa, telefonda sohbet ekranında boş bir ekran yerine sohbet başlığı, hata nedeni ve bir “Tekrar Dene” düğmesi görüntülenir."
+  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Bir sohbetin ilk yüklemesi başarısız olursa, telefonda sohbet ekranında boş bir ekran yerine sohbet başlığı, hata nedeni ve bir “Tekrar Dene” düğmesi görüntülenir.",
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Bir kanıt raporunun görüntüleyicisinde, “gönderenler” ve “göstergeler” arama alanlarının erişilebilir bir adı vardır (yer tutucularıyla aynı metin) ve bir kaydın seçim kutucuğu, klavyeyle üzerine gelindiğinde odak halkası gösterir."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",

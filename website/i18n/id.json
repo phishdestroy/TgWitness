@@ -7285,7 +7285,8 @@
   "42a885dc8b95b9dea30b8ae19c7a5d69b53753bcdea4a32bc83815008e0a2965": "Nama pengirim yang sangat panjang tanpa spasi akan terpotong di dalam gelembung obrolannya, alih-alih melebihi tepinya.",
   "d260336eadec8575a0421d5d11992fcb38cbeb81de547393cce16a66977433f7": "Di halaman ekspor akun pada ponsel, label hari kerja dan jam pada peta aktivitas mingguan tidak lagi terpotong oleh sel.",
   "6377d20d201631646341c3435a8b08c26cb57c60c3cfff519ea9490ce51f2e7f": "Nama penulis yang sangat panjang dalam kutipan balasan dan nama obrolan baru yang sangat panjang dalam baris layanan akan dipotong secara otomatis alih-alih melebihi tepi layar.",
-  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Jika pemuatan awal obrolan gagal, tampilan obrolan akan menampilkan header obrolan, alasannya, dan tombol \"Coba Lagi\"—bukan layar kosong—di ponsel."
+  "d55bd140c4d9da992e7cb3107764491a6f128fbd6dd84adf26956de4862a02c1": "Jika pemuatan awal obrolan gagal, tampilan obrolan akan menampilkan header obrolan, alasannya, dan tombol \"Coba Lagi\"—bukan layar kosong—di ponsel.",
+  "496b6d54574a79e551aaa62f9ae95401708b92dcdf372a04a1ae03c6890af26e": "Di tampilan laporan bukti, kolom pencarian \"pengirim\" dan \"indikator\" memiliki nama yang dapat diakses (teks yang sama dengan placeholder-nya), dan kotak centang pemilihan pada suatu catatan menampilkan lingkaran fokus saat kursor keyboard mencapai kotak tersebut."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",
