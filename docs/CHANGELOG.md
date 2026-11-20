@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- The Pseudo-secret page keeps its card style: a stray closing brace in the Sources stylesheet made the browser drop the rule that follows it.
 - The hint shown when the trusted independent recorder mode is chosen is now translated into every language.
 
 ## 1.0.0 · 20 November 2026
