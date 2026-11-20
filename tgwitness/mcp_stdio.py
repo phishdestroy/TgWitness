@@ -32,6 +32,20 @@ def read_token(token_file=None, environ=None):
     return token
 
 
+async def preflight(url, token):
+    import httpx2
+    base = url[:-4] if url.endswith("/mcp") else url
+    try:
+        async with httpx2.AsyncClient(headers={"Authorization": "Bearer " + token}, timeout=10, trust_env=False,
+                                      follow_redirects=False) as http:
+            response = await http.get(base + "/api/archive/identity")
+    except (httpx2.TransportError, OSError):
+        raise OSError("The panel at " + base + " did not answer. Check the address and that TgWitness is running.") from None
+    if response.status_code in (401, 403):
+        raise ValueError("The panel refused this token (HTTP " + str(response.status_code) + "). It may be revoked, "
+                         "expired or copied incompletely. Issue a new connection in More tools → Integrations → MCP.")
+
+
 async def relay(url, token):
     import anyio
     import httpx2
