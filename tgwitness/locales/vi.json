@@ -1481,7 +1481,7 @@
   "Enter a name for this witness.": "Vui lòng nhập tên cho nhân chứng này.",
   "Telegram did not return this chat. Load chats and try again.": "Telegram không trả về cuộc trò chuyện này. Vui lòng tải lại các cuộc trò chuyện và thử lại.",
   "The chosen Telegram folder was not found. Choose a folder again.": "Không tìm thấy thư mục Telegram đã chọn. Vui lòng chọn lại một thư mục khác.",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target không nằm trong danh sách các cuộc trò chuyện mà tài khoản này đã đọc. Vui lòng làm mới danh sách nhóm hoặc tăng giới hạn danh sách trò chuyện trong phần Cài đặt.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Target không nằm trong danh sách các cuộc trò chuyện mà tài khoản này đã đọc. Vui lòng làm mới danh sách nhóm hoặc tăng giới hạn danh sách trò chuyện trong phần Cài đặt. Để tham gia một cuộc trò chuyện riêng tư, trước tiên quý vị hãy truy cập vào liên kết mời của cuộc trò chuyện đó.",
   "New chat under observation: {chat}": "Cuộc trò chuyện mới đang được theo dõi: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · không tìm thấy #{id}: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "Không tìm thấy tin nhắn số {id} khi kiểm tra lại trong {chat}",

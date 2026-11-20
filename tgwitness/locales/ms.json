@@ -1544,7 +1544,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData mesti mengandungi tepat satu kebenaran untuk DC utamanya.",
   "TELEGRAM BOT": "BOT TELEGRAM",
   "Tag, branch or commit": "Tag, cabang atau komit",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Sasaran tidak termasuk dalam dialog yang dibaca oleh akaun ini. Segarkan semula senarai kumpulan atau naikkan had senarai sembang dalam Parameter.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "Sasaran tidak termasuk dalam dialog yang dibaca oleh akaun ini. Segarkan semula senarai kumpulan atau naikkan had senarai sembang dalam Parameter. Untuk sembang peribadi, sertai dahulu menggunakan pautan jemputan.",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "Sasaran tidak berada dalam 1,000 dialog pertama akaun ini. Segarkan semula senarai kumpulan.",
   "Team chat": "Sembang Pasukan",
   "Telegram": "Telegram",

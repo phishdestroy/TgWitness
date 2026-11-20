@@ -1550,7 +1550,7 @@
   "TData must contain exactly one authorization for its main DC.": "TData musi zawierać dokładnie jedno upoważnienie dla swojego głównego serwera DC.",
   "TELEGRAM BOT": "BOT TELEGRAM",
   "Tag, branch or commit": "Etykieta, gałąź lub commit",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "„Target” nie znajduje się wśród okien dialogowych, które przeczytał to konto. Proszę odświeżyć listę grup lub zwiększyć limit listy czatów w sekcji „Parametry”.",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "„Target” nie znajduje się wśród okien dialogowych, które przeczytał to konto. Proszę odświeżyć listę grup lub zwiększyć limit listy czatów w sekcji „Parametry”. Aby dołączyć do prywatnego czatu, proszę najpierw skorzystać z linku zaproszeniowego.",
   "Target is not in this account's first 1,000 dialogs. Refresh the group list.": "Adresat nie znajduje się wśród pierwszych 1000 rozmów na tym koncie. Proszę odświeżyć listę grup.",
   "Team chat": "Czat zespołowy",
   "Telegram": "Telegram",

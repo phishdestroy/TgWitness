@@ -1514,7 +1514,7 @@
   "Enter a name for this witness.": "Введіть ім’я для цього свідка.",
   "Telegram did not return this chat. Load chats and try again.": "Telegram не повернув цей чат. Завантажте чати та спробуйте ще раз.",
   "The chosen Telegram folder was not found. Choose a folder again.": "Вибрану папку Telegram не знайдено. Виберіть папку ще раз.",
-  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» відсутній серед діалогів, які переглянув цей обліковий запис. Оновіть список груп або збільште обмеження на кількість чатів у розділі «Параметри».",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters. For a private chat, join it first with its invite link.": "«Target» відсутній серед діалогів, які переглянув цей обліковий запис. Оновіть список груп або збільште обмеження на кількість чатів у розділі «Параметри». Щоб приєднатися до приватного чату, спочатку перейдіть у нього за посиланням із запрошенням.",
   "New chat under observation: {chat}": "Новий чат під спостереженням: {chat}",
   "{chat} · not found #{id}: {excerpt}": "{chat} · не знайдено #{id}: {excerpt}",
   "Message #{id} not found at recheck in {chat}": "Повідомлення № {id} не знайдено під час повторної перевірки в {chat}",
