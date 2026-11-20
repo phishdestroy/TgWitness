@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- When the viewer of an evidence report has no records to list, its list says why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
 - In the Telegram account settings on a phone, the Profile button, the account picture and the account ID no longer touch the controls next to them.
 - On screens 1700 pixels wide and more, the messages of a chat form a centred column of about 960 pixels, as in Telegram Desktop, instead of clinging to the left edge.
 - On a phone, the Time witnesses button on Start, the signing identity cards on Exports and the Create access button no longer touch the text or card above them.
