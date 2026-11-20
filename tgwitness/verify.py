@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6779df0a3561efdff99a9625f8f1a4efeafd3a4be7b40cda35df2a90e9669c4c
+# TgWitness verifier sources SHA-256: 3572cb55e5bc12639b181192e625a0838de923af905e952d581e67d9da271e8b
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -11343,6 +11343,15 @@ def verification_archive(args):
         if args.channel:
             result["channel_check"] = check_channel(result, args.channel)
         result.pop("statements")
+        flagged = {}
+        for anchor in result["anchors"]:
+            if anchor["status"] != "ok":
+                flagged.setdefault(anchor["status"], []).append(anchor)
+        for status, items in sorted(flagged.items()):
+            notes.append("The witness recorded " + str(len(items)) + " check(s) with status " + status.replace("_", " ")
+                         + ", the first at " + str(items[0].get("at")) + " (record " + str(items[0].get("event_count")) + ").")
+        if result.get("no_response"):
+            notes.append("The witness recorded " + str(len(result["no_response"])) + " check(s) the collector did not answer.")
     else:
         return verification_evidence(args)
     return CheckResult(shown, result, pinned, notes)
