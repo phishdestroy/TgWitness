@@ -7145,7 +7145,11 @@
   "c22c4501ab2b8880f85297e25e107de7ca17c38c5348fa9b9e3d8dd0cb055ba1": "Zweryfikowane archiwum",
   "a06d5ff18872d976b444a19e148eab5f887e9af774ec4136a4271039d8b4c329": "Zmieniony bajt nie przejdzie weryfikacji",
   "102af37af95a302ad2afe7d6e3bf93b9cf4399f4103f67c233cb0018a85a9651": "Co otrzymasz i jak to sprawdzić",
-  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Otwarcie adresu, który nie należy do panelu, powoduje teraz wyświetlenie krótkiej strony z linkami do najbliższych stron panelu zamiast surowego kodu JSON."
+  "3629d0b3769d7bb3d3827ba71ba03b40c2557198cd006d1ba9cd16b1543628f2": "Otwarcie adresu, który nie należy do panelu, powoduje teraz wyświetlenie krótkiej strony z linkami do najbliższych stron panelu zamiast surowego kodu JSON.",
+  "adf8933fe0843973e89bbd40d02fea7583fa0645ece216648e30cf4619ca3958": "W formacie zwykłym każdy rekord zaczyna się od numeru sekwencyjnego w dzienniku oraz czasu, w którym kolektor go wykrył (<code>observed</code>), a następnie podawany jest czas zgłoszony przez Telegram, o ile taki istnieje: <code>sent</code> w przypadku wiadomości lub <code>edited</code> w przypadku edytowanej wersji. Powiadomienie o usunięciu zawiera wyłącznie czas wykrycia. Format <code>--json</code> zawiera obie te wartości jako <code>observed_at</code> i <code>source_at</code>.",
+  "0b3f4ba85ecf765c02e261167fb584448579aa38b816ab21791228ba58618209": "W widoku czatu w wierszu usługi dla czatu, którego nazwa została zmieniona, podana jest nowa nazwa, a w wierszu dla przypiętej wiadomości – jej numer.",
+  "582aad72ca3f566a4bceb8cfd7ddb76d7ef4e0fabf6036da2047837c02e3d692": "Wiadomości z podglądem linku wyświetlają adres strony, tytuł i nazwę serwera pod tekstem w oknie czatu.",
+  "b61d145a1116b2d06f78582263df24bc9f32285f458b0ab5062087da49040446": "Ankieta, lokalizacja lub miejsce, dane kontaktowe oraz wynik rzutu kostką są teraz wyświetlane w widoku czatu (pytanie i odpowiedzi, współrzędne i miejsce, imię i numer telefonu, emoji i wartość) zamiast pustej dymki z ikoną brakującego pliku, a ten sam tekst pojawia się w raportach HTML i PDF. W zminimalizowanych przekazach nadal nie są one uwzględniane."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",
