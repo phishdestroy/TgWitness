@@ -336,7 +336,9 @@ def item_line(item):
                                      (item.get("text_truncated"), "text truncated")) if flag]
     if item.get("media_sha256"):
         marks.append("media " + item["media_sha256"][:16])
-    line = ("#" + str(source["event_seq"]) + "  " + when(item.get("observed_at")) + "  chat " + str(source["chat_id"])
+    reported = {"message.new": "sent", "message.edited": "edited"}.get(item["kind"], "Telegram time")
+    stamp = "observed " + when(item.get("observed_at")) + (" · " + reported + " " + when(item["source_at"]) if item.get("source_at") else "")
+    line = ("#" + str(source["event_seq"]) + "  " + stamp + "  chat " + str(source["chat_id"])
             + " · message " + str(source["message_id"]) + " · " + compact(who))
     if marks:
         line += " [" + ", ".join(marks) + "]"
