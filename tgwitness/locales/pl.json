@@ -10705,6 +10705,8 @@
   "Show in chat: message #{id}": "Pokaż na czacie: wiadomość nr {id}",
   "Open in chat: message #{id}": "Otwórz w czacie: wiadomość nr {id}",
   "Sticker {emoji}": "Naklejka {emoji}",
+  "Quiz": "Quiz",
+  "Live location": "Aktualna lokalizacja",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "„Target” nie znajduje się wśród okien dialogowych, które przeczytał to konto. Proszę odświeżyć listę grup lub zwiększyć limit listy czatów w sekcji „Parametry”.",
   "Exported completely": "Całkowicie wyeksportowano"
 }

@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
   "Sticker {emoji}": "สติ๊กเกอร์ {emoji}",
+  "Quiz": "แบบทดสอบ",
+  "Live location": "ตำแหน่งปัจจุบัน",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target ไม่ได้อยู่ในรายชื่อกล่องสนทนาที่บัญชีนี้อ่านได้ โปรดรีเฟรชรายชื่อกลุ่มหรือเพิ่มขีดจำกัดรายชื่อแชทในส่วน Parameters",
   "Exported completely": "ส่งออกเสร็จสิ้นแล้ว"
 }

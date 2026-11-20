@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "Tunjukkan dalam sembang: mesej #{id}",
   "Open in chat: message #{id}": "Buka dalam sembang: mesej #{id}",
   "Sticker {emoji}": "Stiker {emoji}",
+  "Quiz": "Kuiz",
+  "Live location": "Lokasi langsung",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Sasaran tidak termasuk dalam dialog yang dibaca oleh akaun ini. Segarkan semula senarai kumpulan atau naikkan had senarai sembang dalam Parameter.",
   "Exported completely": "Dieksport sepenuhnya"
 }

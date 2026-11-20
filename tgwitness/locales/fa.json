@@ -10603,6 +10603,8 @@
   "Show in chat: message #{id}": "نمایش در چت: پیام #{id}",
   "Open in chat: message #{id}": "در چت باز کنید: پیام #{id}",
   "Sticker {emoji}": "استیکر {emoji}",
+  "Quiz": "آزمون",
+  "Live location": "مکان زنده",
   "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "هدف در میان دیالوگ‌هایی که این حساب خوانده است، وجود ندارد. فهرست گروه‌ها را تازه کنید یا حد مجاز لیست چت‌ها را در پارامترها افزایش دهید.",
   "Exported completely": "کاملاً صادر شد"
 }
