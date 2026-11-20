@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/INVESTIGATION-MODE.md)
+
 # Investigation mode
 
 A workspace for documenting a conversation: what the investigator did, what
