@@ -7125,7 +7125,10 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Se Telegram mostra ancora la sessione temporanea, chiudila in Impostazioni → Dispositivi.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Un'acquisizione incompleta non può riprendere dopo che il suo runner è sparito; una nuova esecuzione avvia una nuova acquisizione.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Avvia la tua acquisizione",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Le chiavi e la decifratura restano in questa scheda del browser. GitHub e il pannello temporaneo di Telegram si aprono in schede separate e la procedura ti dice quando tornare."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Le chiavi e la decifratura restano in questa scheda del browser. GitHub e il pannello temporaneo di Telegram si aprono in schede separate e la procedura ti dice quando tornare.",
+  "0894f36183b67c067cac7801afb4c30ccdc462bc4554a701710816bd498a28ca": "Il file <code>--checkpoint</code> deve essere il checkpoint firmato: una <code>statement</code>e contenente <code>format</code>, <code>public_key</code>,\n   <code>event_count</code> e <code>head_hash</code>, oltre a una <code>signature</code>. Qualsiasi altro file viene rifiutato con il seguente messaggio:\n   <em>Il file --checkpoint non è un checkpoint TgWitness firmato</em>, seguito dai campi richiesti.",
+  "f58bb6ce7ba7cf198f8890f65368faeea9250fccec1095dca08c749620fc51a6": "Su un dispositivo mobile, la scheda “Archivio firmato” nella sezione “Esporta record” utilizza lo stesso margine laterale delle schede sottostanti, in modo che le intestazioni e i pulsanti siano allineati.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "Sul puntatore del mouse, la stella che contrassegna una chat come prioritaria non copre più l'ora dell'ultimo messaggio nell'elenco delle chat; l'ora si sposta di lato quando si passa il mouse sulla riga o quando questa è selezionata."
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

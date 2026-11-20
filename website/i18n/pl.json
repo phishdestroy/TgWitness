@@ -7125,7 +7125,10 @@
   "2c28fa7ad89a66a3d5f3ab760df004c162fa7adfcefef842a0887bdb68ee069c": "Jeśli Telegram nadal pokazuje tymczasową sesję, zakończ ją w Ustawienia → Urządzenia.",
   "e5de6622453be3a13db146ed33707096d739018095e88882234e1052ab5e3dcc": "Niedokończonego przechwytywania nie da się wznowić po zniknięciu runnera; nowe uruchomienie zaczyna nowe przechwytywanie.",
   "f9bd4980f1122741f33a5dfd064a2f01a9a11c39581dad5a69b117de18d1cd73": "Rozpocznij przechwytywanie",
-  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Klucze i odszyfrowanie zostają w tej karcie przeglądarki. GitHub i tymczasowy panel Telegrama otwierają się w osobnych kartach, a kreator powie ci, kiedy wrócić."
+  "7da35de2dde298afdd31ffc70cc722a470e10fa6876f8f3fa1861c7f74ee9fcc": "Klucze i odszyfrowanie zostają w tej karcie przeglądarki. GitHub i tymczasowy panel Telegrama otwierają się w osobnych kartach, a kreator powie ci, kiedy wrócić.",
+  "0894f36183b67c067cac7801afb4c30ccdc462bc4554a701710816bd498a28ca": "Plik <code>--checkpoint</code> musi być podpisanym punktem kontrolnym: <code>statement</code>em zawierającym <code>format</code>, <code>public_key</code>,\n   <code>event_count</code> oraz <code>head_hash</code>, a także <code>signature</code>. Każdy inny plik zostanie odrzucony z następującym komunikatem:\n   <em>Plik --checkpoint nie jest podpisanym punktem kontrolnym TgWitness</em>, po czym podane zostaną wymagane pola.",
+  "f58bb6ce7ba7cf198f8890f65368faeea9250fccec1095dca08c749620fc51a6": "W wersji mobilnej karta archiwum „Podpisane” w sekcji „Eksportuj rekordy” ma takie samo wypełnienie po bokach jak karty znajdujące się poniżej, dzięki czemu nagłówki i przyciski są wyrównane.",
+  "3470e8da1270acc0a9cda2a8c999c62795423e8d77056470ab2e46b2e9fe9ff9": "W przypadku kursora myszy na komputerze stacjonarnym gwiazdka oznaczająca czat jako priorytetowy nie zasłania już godziny ostatniej wiadomości na liście czatów; godzina przesuwa się w bok, gdy kursor znajduje się nad wierszem lub gdy wiersz jest aktywny."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",
