@@ -10642,5 +10642,6 @@
   "No saved files in this chat": "אין קבצים שנשמרו בצ'אט זה",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "הקבצים מופיעים כאן לאחר שהאספן הוריד אותם. בדוק את מגבלות הקבצים תחת \"מקורות\".",
   "Open message #{id} in chat": "פתח את ההודעה מס' {id} בצ'אט",
-  "Report on this person": "דווח על אדם זה"
+  "Report on this person": "דווח על אדם זה",
+  "Sticker {emoji}": "מדבקה {emoji}"
 }

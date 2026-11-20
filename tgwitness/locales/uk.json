@@ -10693,5 +10693,6 @@
   "No saved files in this chat": "У цьому чаті немає збережених файлів",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "Файли з’являються тут після того, як колектор їх завантажить. Перевірте обмеження щодо розміру файлів у розділі «Джерела».",
   "Open message #{id} in chat": "Відкрити повідомлення № {id} у чаті",
-  "Report on this person": "Поскаржитися на цю особу"
+  "Report on this person": "Поскаржитися на цю особу",
+  "Sticker {emoji}": "Стікер {emoji}"
 }

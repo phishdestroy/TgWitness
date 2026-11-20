@@ -10540,5 +10540,6 @@
   "No saved files in this chat": "Tidak ada file yang disimpan dalam obrolan ini",
   "Files appear here once the collector has downloaded them. Check the file limits under Sources.": "File-file akan muncul di sini setelah pengumpul mengunduhnya. Periksa batas jumlah file di bagian Sumber.",
   "Open message #{id} in chat": "Buka pesan nomor {id} di obrolan",
-  "Report on this person": "Laporkan orang ini"
+  "Report on this person": "Laporkan orang ini",
+  "Sticker {emoji}": "Stiker {emoji}"
 }
