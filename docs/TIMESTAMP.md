@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/TIMESTAMP.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Independent timestamps and evidence handoff
