@@ -6371,7 +6371,6 @@
   "The most recent rows are listed; totals cover every row.": "Se muestran las filas más recientes; los totales abarcan todas las filas.",
   "rows": "filas",
   "Computed from events.jsonl by the listed processors. They point at what to check, not at what happened.": "Calculado a partir de events.jsonl mediante los procesadores indicados. Estos señalan qué hay que comprobar, no lo que ha ocurrido.",
-  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "Marcado: al menos 5 usuarios que publican por primera vez y 3 veces su mediana de los últimos 14 días, con mensajes inferiores a 1,5 veces su mediana. Los primeros 7 días de un chat no se marcan.",
   "Distinct saved message numbers per chat and the share taken by service messages.": "Números de mensajes guardados por chat y porcentaje que representan los mensajes de servicio.",
   "Membership changes Telegram reported, once per person, chat, change and day.": "Cambios en la composición de los miembros notificados por Telegram, una vez por persona, chat, cambio y día.",
   "Pin service messages, unpin notices and pinned messages added or removed between chat-state snapshots.": "Fijar mensajes de servicio, desmarcar avisos y mensajes fijados añadidos o eliminados entre instantáneas del estado del chat.",
@@ -10627,5 +10626,6 @@
   "changed the chat name to “{title}”": "He cambiado el nombre del chat a «{title}»",
   "pinned a message, number {n}": "ha destacado un mensaje, el número {n}",
   "Messages found: {n}": "Mensajes encontrados: {n}",
-  "Messages found: {n}+": "Mensajes encontrados: {n}+"
+  "Messages found: {n}+": "Mensajes encontrados: {n}+",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "Se marca: al menos 5 usuarios que publican por primera vez y 3 veces su mediana de los últimos 14 días, con mensajes que no superen 1,5 veces su mediana. Los primeros 7 días de un chat no se marcan. Una persona que publique por primera vez en varios chats se cuenta una vez en cada uno de ellos."
 }
