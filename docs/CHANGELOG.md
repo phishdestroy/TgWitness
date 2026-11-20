@@ -26,7 +26,7 @@
 
 ## Unreleased
 
-- The in-app guide header and the example tag of the GitHub Actions form show the 1.0.0 release instead of 0.9.3.
+- The in-app guide header and the example tag of the GitHub Actions form and the example image tag in deploy/env.example show the 1.0.0 release instead of 0.9.3.
 
 ## 1.0.0 · 20 November 2026
 
