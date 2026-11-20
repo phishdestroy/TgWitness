@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/EVIDENCE.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Evidence format v1
@@ -569,7 +571,9 @@ Validity is derived from the journal, never assumed:
 `coverage.json` member (defaults for older archives) and
 prints the account-wide line in its coverage summary. The archive's `get_capture_status`
 (MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.
+the account-wide sequence only to access covering the whole workspace. Asked for all chats at once, it
+lists at most 50 channels and supergroups, without their `clusters[]`, and reports the rest as
+`chats_truncated`; ask for one chat by `chat_id` to read it in full. The signed archive's `coverage.json` is not cut.
 
 Repeated observations of one service message count once, and the account service estimate
 uses only numbers inside the measured range. An applied scope must explicitly preserve

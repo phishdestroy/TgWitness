@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6779df0a3561efdff99a9625f8f1a4efeafd3a4be7b40cda35df2a90e9669c4c
+# TgWitness verifier sources SHA-256: 56fb921781c0e9d17200f0b54a22483fc730767df931904a893b0953c4a5ba05
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -92,6 +92,30 @@ def safe_text(value):
     text = re.sub(r"[\x00-\x08\x0b-\x1f\x7f-\x9f]", "", text)
     return re.sub("[\u061c\u200e\u200f\u2028\u2029\u202a-\u202e\u2066-\u2069]",
                   lambda match: "\\u%04x" % ord(match.group()), text)
+
+
+def failure_detail(exc):
+    text = safe_text(exc)
+    if not text and isinstance(exc, InvalidSignature):
+        return "the signature does not match the signed content: the file was changed, or it was signed by another key"
+    return text
+
+
+def plain_failure(exc):
+    detail = failure_detail(exc)
+    if isinstance(exc, zipfile.BadZipFile):
+        return "this file is not a ZIP archive, or it is damaged [" + type(exc).__name__ + "]"
+    if isinstance(exc, (FileNotFoundError, NotADirectoryError, IsADirectoryError)):
+        name = getattr(exc, "filename", None)
+        return "cannot read " + (safe_text(name) if name else "the file") + ": it does not exist or is not a file [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.json" in detail:
+        return "the archive has no manifest.json, so it is not a signed TgWitness archive [" + type(exc).__name__ + "]"
+    if isinstance(exc, KeyError) and "manifest.sig" in detail:
+        return "the archive has no manifest.sig, so its signature cannot be checked [" + type(exc).__name__ + "]"
+    if isinstance(exc, json.JSONDecodeError):
+        return ("a record or manifest is not valid JSON (character " + str(exc.pos) + "): the file is damaged or was not produced by TgWitness ["
+                + type(exc).__name__ + "]")
+    return type(exc).__name__ + ": " + detail
 
 
 def authenticate_statement(value, key_field="public_key"):
@@ -10466,7 +10490,7 @@ class Console:
 
     def failure(self, path, exc):
         self.field("File", safe_text(path))
-        message = safe_text(exc)
+        message = failure_detail(exc)
         label = ("Key mismatch" if "fingerprint" in message.lower() else
                  "File changed" if "File hash mismatch" in message or "ZIP changed during" in message else
                  "Signature mismatch" if isinstance(exc, InvalidSignature) else None)
@@ -11224,10 +11248,10 @@ def verification_comparison(args, parser, mode):
     except Exception as exc:
         code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1
         if mode == "json":
-            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+            verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
             raise SystemExit(code)
         verification_print("ASSURANCE: fail")
-        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
     pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
     compared['assurance'] = assurance(compared)
     compared['assurance']['scope'] = 'two authenticated chat exports; the comparison covers their contents'
@@ -11292,6 +11316,12 @@ def verification_json(args):
         if not args.evidence:
             notes.append("History report signature only: pass --evidence to cross-check the journal and counts.")
     else:
+        if "statement" not in data:
+            if {"document", "signed"} <= set(data):
+                raise ValueError("This is a case documentation file, not an evidence archive. Check it with: "
+                                 "python -m tgwitness.documentation_verify FILE --fingerprint FINGERPRINT")
+            raise ValueError("Unrecognised JSON file: it is not a TgWitness signed report, proof, dossier, "
+                             "selection or board document.")
         shown = "dossier"
         result = verify_dossier(args.bundle, args.fingerprint, args.evidence)
         pinned = bool(args.fingerprint)
@@ -11343,6 +11373,15 @@ def verification_archive(args):
         if args.channel:
             result["channel_check"] = check_channel(result, args.channel)
         result.pop("statements")
+        flagged = {}
+        for anchor in result["anchors"]:
+            if anchor["status"] != "ok":
+                flagged.setdefault(anchor["status"], []).append(anchor)
+        for status, items in sorted(flagged.items()):
+            notes.append("The witness recorded " + str(len(items)) + " check(s) with status " + status.replace("_", " ")
+                         + ", the first at " + str(items[0].get("at")) + " (record " + str(items[0].get("event_count")) + ").")
+        if result.get("no_response"):
+            notes.append("The witness recorded " + str(len(result["no_response"])) + " check(s) the collector did not answer.")
     else:
         return verification_evidence(args)
     return CheckResult(shown, result, pinned, notes)
@@ -11520,10 +11559,10 @@ def verification_failure(args, parser, mode, console, exc):
         console.failure(args.bundle, exc)
         raise SystemExit(code)
     if mode == "json":
-        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
+        verification_print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + failure_detail(exc)}, indent=2))
         raise SystemExit(code)
     verification_print("ASSURANCE: fail")
-    parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+    parser.exit(code, "VERIFICATION FAILED: " + plain_failure(exc) + "\n")
 
 
 def verification_output(args, checked, console, mode):

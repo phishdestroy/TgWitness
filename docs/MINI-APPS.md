@@ -96,7 +96,7 @@ and WebSocket endpoints.
 ## API
 
 ```sh
-curl -sS "http://127.0.0.1:8000/api/webapp?chat_id=-1001234567890&limit=200" \
+curl -sS "http://127.0.0.1:8787/api/webapp?chat_id=-1001234567890&limit=200" \
   -H "Authorization: Bearer $TGWITNESS_TOKEN"
 ```
 
@@ -106,7 +106,7 @@ limited to chosen chats see their own chats; `GET /api/webapp/captures/{seq}?cha
 returns one recorded opening.
 
 ```sh
-curl -sS -X POST http://127.0.0.1:8000/api/webapp/open \
+curl -sS -X POST http://127.0.0.1:8787/api/webapp/open \
   -H "Authorization: Bearer $TGWITNESS_TOKEN" -H "Content-Type: application/json" \
   -d '{"chat_id": 5104055776, "entry": {"type": "button", "seq": 1522, "row": 0, "column": 0}}'
 ```

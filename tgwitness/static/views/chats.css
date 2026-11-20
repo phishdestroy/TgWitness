@@ -244,3 +244,18 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .workspace[data-current-view="chats"] .chat-gallery-item img, .workspace[data-current-view="chats"] .chat-gallery-item video { max-width: 100%; height: auto; }
 .workspace[data-current-view="chats"] .chat-gallery-item .small { min-height: 32px; justify-self: start; }
 .workspace[data-current-view="chats"] .chat-gallery { padding: 8px 12px; }
+
+.workspace[data-current-view="chats"] .sticker-label { font-size: 13px; opacity: .85; margin: 4px 0; }
+.workspace[data-current-view="chats"] .shared-content { margin: 6px 0; padding: 8px 10px; border-inline-start: 3px solid var(--accent); border-radius: 6px; background: var(--surface-2); font-size: 13.5px; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .shared-kind { color: var(--muted); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.workspace[data-current-view="chats"] .shared-title { font-weight: 600; }
+.workspace[data-current-view="chats"] .shared-coordinates { color: var(--text-2); font-variant-numeric: tabular-nums; }
+.workspace[data-current-view="chats"] .shared-answers { margin: 4px 0 0; padding-inline-start: 22px; }
+.workspace[data-current-view="chats"] .bubble-via { margin: 2px 0 4px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .bubble-text.big-emoji { font-size: 40px; line-height: 1.25; padding-block: 2px; }
+.workspace[data-current-view="chats"] .msg-number { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; opacity: .8; }
+.workspace[data-current-view="chats"] button.msg-number-copy { min-height: 0; padding: 0 2px; border: 0; background: none; cursor: pointer; }
+.workspace[data-current-view="chats"] button.msg-number-copy:hover { color: var(--accent-text); text-decoration: underline; }
+@media (min-width: 1700px) { .workspace[data-current-view="chats"] #chat-feed { padding-inline: max(24px, calc((100% - 960px) / 2)); } }
+.workspace[data-current-view="chats"] .bubble-head, .workspace[data-current-view="chats"] .bubble-head .sender { min-width: 0; overflow-wrap: anywhere; }
+.workspace[data-current-view="chats"] .reply-quote b, .workspace[data-current-view="chats"] .reply-quote span, .workspace[data-current-view="chats"] .chat-service { min-width: 0; overflow-wrap: anywhere; }

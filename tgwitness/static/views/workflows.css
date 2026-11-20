@@ -222,3 +222,6 @@ html[data-ui-level=simple] .home-court { display: grid; gap: 4px; }
 .home-court[data-ready=false] { border-color: var(--warning-border); background: var(--warning-soft); }
 .home-court strong { font-size: 14.5px; overflow-wrap: anywhere; }
 .home-court small { overflow-wrap: anywhere; }
+.home-empty + button { margin-top: 12px; }
+#view-evidence p.hint + .card, #view-evidence .two-columns + .card { margin-top: 14px; }
+#access-submit, #access-cancel { margin-top: 14px; }

@@ -5,9 +5,9 @@ from itertools import islice
 import re
 from datetime import datetime
 
-from . import activity_maps, case_assessment, i18n, report_layouts, snapshot_analytics
+from . import activity_maps, case_assessment, i18n, message_details, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, utc_text
+from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, reactions_text, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
@@ -79,7 +79,7 @@ h2{font-size:20px;line-height:1.4;margin:28px 0 12px}h3{font-size:16px;margin:0}
 .panel,.message{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px;margin:14px 0}.panel>h2:first-child{margin-top:0}.notice{background:var(--warn);border-inline-start:3px solid #d7a33e;padding:14px 18px;margin:18px 0}
 .recipient-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 30px;padding-inline-start:22px;margin-bottom:0}.recipient-steps li{padding-inline-start:3px;margin:0}.recipient-steps p{font-size:13px;margin:4px 0 0}
 .facts{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,3fr);gap:8px 18px;margin:0}.facts dt{color:var(--muted)}.facts dd{margin:0;min-width:0}
-.chat-list{list-style:none;padding:0}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.chat-list{list-style:none;padding:0}.chat-list li[data-state]{border-inline-start:3px solid transparent;padding-inline-start:12px}.chat-list li[data-state=complete]{border-inline-start-color:#2f7d4f}.chat-list li[data-state=partial]{border-inline-start-color:#b7791f}.chat-list li[data-state=missing]{border-inline-start-color:#c0392b}.chat-title{display:grid;gap:2px;min-width:0}.chat-id{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
 .message-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 20px;flex-wrap:wrap}.record-link{font-size:12px;white-space:nowrap}.message-meta,.record-citation{font-size:12px;color:var(--muted);margin:8px 0}.message-meta span{display:inline-block;margin-inline-end:16px}.record-citation{border-top:1px solid var(--line);padding-top:8px}.record-citation code{color:var(--ink)}.message:target{outline:2px solid var(--accent);outline-offset:3px}
 .message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
 a{color:var(--accent);text-underline-offset:3px}a,code,pre,dd{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;margin:12px 0 0}
@@ -357,8 +357,10 @@ def chats_section(chats, say):
     for chat in chats:
         if type(chat.get('id')) is not int:
             continue
-        yield encoded('<li><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
-                      e(text(chat.get('title')) or str(chat['id'])) + '</a><span>' + e(chat_note(chat, say)) + '</span></li>')
+        state = chat.get('export_state') if chat.get('export_state') in ('complete', 'partial', 'missing') else 'unknown'
+        yield encoded('<li data-state="' + state + '"><span class="chat-title"><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
+                      e(text(chat.get('title')) or str(chat['id'])) + '</a><small class="chat-id" dir="ltr">' + e(say('ID {id}', id=chat['id']))
+                      + '</small></span><span>' + e(chat_note(chat, say)) + '</span></li>')
     yield encoded('</ul></section>')
 
 
@@ -426,6 +428,88 @@ def shared_row(row):
     return {'chat': safe_chat, 'message': safe_message}
 
 
+SERVICE_LABELS = {'MessageActionChatAddUser': 'added a member', 'MessageActionChatDeleteUser': 'removed a member or left',
+                  'MessageActionChatJoinedByLink': 'joined via invite link',
+                  'MessageActionChatJoinedByRequest': 'joined after a join request', 'MessageActionPinMessage': 'pinned a message',
+                  'MessageActionChatEditTitle': 'changed the chat name', 'MessageActionChatEditPhoto': 'changed the chat photo',
+                  'MessageActionChatCreate': 'created the group', 'MessageActionChannelCreate': 'created the channel'}
+
+
+def service_line(message, say):
+    action = message.get('action')
+    if message.get('_') != 'MessageService' or not isinstance(action, dict) or not isinstance(action.get('_'), str):
+        return ''
+    kind, title = action['_'], text(action.get('title'))
+    reply = message.get('reply_to')
+    pinned = reply.get('reply_to_msg_id') if isinstance(reply, dict) else None
+    if kind == 'MessageActionChatEditTitle' and title:
+        return say('changed the chat name to “{title}”', title=title)
+    if kind == 'MessageActionTopicCreate' and title:
+        return say('created the topic “{title}”', title=title)
+    if kind == 'MessageActionPinMessage' and type(pinned) is int:
+        return say('pinned a message, number {n}', n=pinned)
+    if kind in SERVICE_LABELS:
+        return say(SERVICE_LABELS[kind])
+    return say('Service message') + ': ' + re.sub(r'([a-z])([A-Z])', r'\1 \2', kind.removeprefix('MessageAction')).lower()
+
+
+def link_lines(message, body, say):
+    entities = message.get('entities')
+    if not isinstance(entities, list) or not body:
+        return []
+    units, lines = body.encode('utf-16-le'), []
+    for entity in entities[:50]:
+        if not isinstance(entity, dict) or entity.get('_') != 'MessageEntityTextUrl' or not isinstance(entity.get('url'), str):
+            continue
+        offset, length = entity.get('offset'), entity.get('length')
+        if type(offset) is not int or type(length) is not int or offset < 0 or length <= 0:
+            continue
+        shown = units[offset * 2:(offset + length) * 2].decode('utf-16-le', 'ignore')
+        line = say('Link text “{shown}” opens {url}', shown=shown[:80], url=entity['url'][:300])
+        if message_details.deceptive(shown, entity['url']):
+            line += ' · ' + say('The visible web address is not where the link goes.')
+        lines.append(line)
+    return lines
+
+
+def forward_line(message, say):
+    origin = message.get('fwd_from')
+    if not isinstance(origin, dict):
+        return ''
+    source = text(origin.get('from_name'))
+    peer = origin.get('from_id')
+    if not source and isinstance(peer, dict):
+        for key in ('channel_id', 'user_id', 'chat_id'):
+            if type(peer.get(key)) is int:
+                source = say('ID {id}', id=peer[key])
+                break
+    source = source or say('Sender not available')
+    if type(origin.get('channel_post')) is int:
+        source += ' #' + str(origin['channel_post'])
+    if text(origin.get('post_author')):
+        source += ' · ' + text(origin['post_author'])
+    if text(origin.get('date')):
+        source += ' · ' + utc_text(origin['date'])
+    return say('Forwarded from {name}', name=source)
+
+
+def reaction_line(message, say):
+    found = message_details.reactions(message.get('reactions'))
+    return say('reactions: {list}', list=reactions_text(found)) if found else ''
+
+
+def reply_line(message, say):
+    if message.get('_') == 'MessageService':
+        return ''
+    reply = message.get('reply_to')
+    if not isinstance(reply, dict) or reply.get('reply_to_peer_id') is not None or type(reply.get('reply_to_msg_id')) is not int:
+        return ''
+    number = reply['reply_to_msg_id']
+    if reply.get('forum_topic') is True and number == (reply.get('reply_to_top_id') or number):
+        return ''
+    return say('Reply to message #{id}', id=number)
+
+
 def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.html'):
     if sharing:
         row = shared_row(row)
@@ -454,7 +538,19 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         parts.append('<p class="muted user" dir="auto">' + e(text(chat.get('title'))) + '</p>')
     if text(message.get('username')):
         parts.append('<p class="muted user" dir="auto">@' + e(message['username']) + '</p>')
-    parts.append('<p class="message-text" dir="auto">' + e(body or say('No message text in this record.')) + '</p>')
+    parts.append('<p class="message-text" dir="auto">' + e(body or (not sharing and service_line(message, say)) or say('No message text in this record.')) + '</p>')
+    if not sharing:
+        info = message_details.media_info(message.get('media'))
+        if info:
+            shown = media_text(say, info)
+            parts.append('<p class="muted" dir="auto">' + e(media_name(say, info)) + (': ' + e(shown) if shown else '') + '</p>')
+        for line in [forward_line(message, say), reply_line(message, say), reaction_line(message, say), *link_lines(message, body, say)]:
+            if line:
+                parts.append('<p class="muted" dir="auto">' + e(line) + '</p>')
+        reply = message.get('reply_to')
+        topic = (reply.get('reply_to_top_id') or reply.get('reply_to_msg_id')) if isinstance(reply, dict) and reply.get('forum_topic') is True else None
+        if type(topic) is int:
+            parts.append('<p class="muted">' + e(say('Forum topic')) + ' #' + str(topic) + '</p>')
     if sharing and isinstance(message.get('reply_to'), dict):
         parts.append('<p class="reply-state">' + e(say(REPLY_STATE_LABELS[message['reply_to']['state']])) + '</p>')
     for attachment in message.get('attachments', ()):
@@ -667,12 +763,20 @@ def reason_text(value, say):
     return say(REASONS[value]) if value in REASONS else text(value)
 
 
+def group_number(say, value):
+    from .report import group_number as grouped
+    return grouped(say, value)
+
+
 def chat_note(chat, say):
     state = chat.get('export_state')
     if state == 'missing':
         return say('Not exported')
-    shown = say('Messages') + ': ' + str(chat.get('message_count', '—'))
-    return shown + ' · ' + say('Exported in part') if state == 'partial' else shown
+    count = chat.get('message_count', '—')
+    shown = say('Messages') + ': ' + str(group_number(say, count) if type(count) is int else count)
+    if state == 'partial':
+        return shown + ' · ' + say('Exported in part')
+    return shown + ' · ' + say('Exported completely') if state == 'complete' else shown
 
 
 def state_note(chat, say):

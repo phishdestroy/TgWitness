@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/QUESTIONS-AND-CHECKS.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # Questions and checks
@@ -212,7 +214,7 @@ from the moment it is stamped, after it could be edited.
   Its notice begins "Under the US Federal Rules of Evidence" and ends "Adapt this
   template to the rules that apply before signing" (`NOTICE` in
   [`tgwitness/court.py`](../tgwitness/court.py)).
-- [Jurisdiction guidance](JURISDICTION_GUIDANCE.md) in Report Studio covers 25
+- [Jurisdiction guidance](JURISDICTION_GUIDANCE.md) in Report Studio covers 31
   jurisdictions: legal basis, preparation tasks, legal sources, collection safeguards
   and an optional summary in the local language. Narrative reports carry jurisdiction
   terms in 25 languages ([templates and jurisdictions](NARRATIVE.md#templates-and-jurisdictions)).

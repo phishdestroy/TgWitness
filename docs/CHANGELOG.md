@@ -25,6 +25,60 @@
 
 ## Unreleased
 
+- A very long author name in a reply quote and a very long new chat name in a service line wrap instead of running past the edge of the screen.
+- In the account export pages on a phone, the weekday and hour labels of the weekly activity map are no longer cut off by the cells.
+- A very long sender name without spaces wraps inside its chat bubble instead of running past its edge.
+- In the account export chat pages on a phone, the Rhythm table keeps readable columns and scrolls sideways with a faded edge instead of looking cut off.
+- When the viewer of an evidence report has no records to list, its list says why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
+- When the viewer of an evidence report has no records to list, its list, senders and indicators tabs say why: "This report was saved without its data. Open report.html inside the archive for the viewer." for a report saved without its data, and "No data in this report." otherwise, instead of an empty area.
+- In the Telegram account settings on a phone, the Profile button, the account picture and the account ID no longer touch the controls next to them.
+- On screens 1700 pixels wide and more, the messages of a chat form a centred column of about 960 pixels, as in Telegram Desktop, instead of clinging to the left edge.
+- On a phone, the Time witnesses button on Start, the signing identity cards on Exports and the Create access button no longer touch the text or card above them.
+- In Settings, Record protection leaves space between the Advanced protection settings button and the What the other side sees block.
+- On a phone, the choice buttons in the settings dialogs have a visible border and a touch-sized height of 44 pixels, so they look like buttons even when none is selected.
+- A saved record whose reactions are malformed (a missing count, an entry that is not a reaction, or a value that is not a list) no longer stops a report from being built: the report lists the readable reactions and skips the rest.
+- `verify.py` says "the archive has no manifest.sig, so its signature cannot be checked" for an archive without its signature file, instead of a `KeyError`.
+- When a chat export stops because the free disk space is too low for its attachments, the panel gives the reason and the way out ("Not enough free disk space for the attachments of this export. Free space or turn attachment downloads off under Sources → Recording.") instead of "Export failed (ValueError)". The reason is in the export record as `message`.
+- A message bubble in the viewer of an evidence report shows where a forwarded message came from ("Forwarded from Alex #5", the ID when no name was saved, or "a hidden sender") and its reactions as small chips, up to twelve per message.
+- A card of the account export report names where a forwarded message came from ("Forwarded from …", with the channel post number, post author and date when Telegram gave them, or "Sender not available") and lists its reactions ("reactions: 👍 3").
+- A card of the account export report shows where a text link really goes ("Link text “…” opens https://…") with a warning when the visible web address is not the target, and names the message a reply answers ("Reply to message #7"). Replies to another chat and forum topic roots are not named.
+- The journal timeline names 40 more events in words, such as Chat details read, History reading started and Watchlist match, and any event without a name shows a readable title instead of its dotted code.
+- In a channel or supergroup, clicking the message number in a chat bubble copies the Telegram link to that message (`https://t.me/c/<channel>/<message>`), which opens it for an account that is a member.
+- A message made of one to three emoji is shown in a large size in the chat view, as in Telegram.
+- While messages are being selected in a chat, the chat-wide Build report button is hidden, so the selection bar has the only Build report button.
+- In the account export report a service message reads as a sentence on its card (for example "added a member", "changed the chat name to “…”", "pinned a message, number 42") instead of "No message text in this record." An action without a plain description shows "Service message" and its name.
+- Each message bubble in the chat view shows its Telegram message number next to the time, so a reader can match it with the number search and with the gaps listed in a report.
+- In the Ledger and margin PDF design, tables start at the body text instead of reaching into the margin where the chapter label stands.
+- In the PDF report the headings of the activity charts always stay on the same page as their chart in every design.
+- A wordy figure in an HTML report tile, such as "No observation period recorded", is set in a small font instead of the large number size.
+- A saved attachment in the chat view shows its file name, type and size, and offers Preview only for images, audio and video.
+- 146 more error messages from the panel's server side are translated into its 24 other languages, among them handover extracts, chat exports, the Case Board, documentation, watchlists, settings, storage, search records and report profiles. Before, the panel showed them in English whatever its language.
+- On a phone, a table in an HTML report that scrolls sideways fades at its right edge instead of looking cut off.
+- A rejected form shows its messages in the panel's language and in plain words ("This field is required.", "Enter at least 3 characters.", "Enter a date such as 2026-10-01 or a time with a timezone.", "Choose one of the allowed values.") instead of the server's English wording.
+- `python -m tgwitness.download` says why a download failed: the panel refused the token, nothing answered at the address, the token file or output cannot be used, or the disk is full, instead of the exception name or "HTTP 401; redirects are not followed".
+- Command line results show two labelled times: `observed` (when the collector saw the record) and, when Telegram reported one, `sent` for a message or `edited` for an edited version. A deletion notice has only the observation time. Before, one unlabelled time was printed. `--json` is unchanged.
+- `tgwitness stats` lists only the hours and weekdays that have messages (`other hours 0`), says `no messages` for an empty selection, gives each sender's first and last message time, and uses the singular for one message or interval. A value that is not a whole number for `--chat`, `--limit`, `--message` and the like says so instead of `invalid identifier value`.
+- `python -m tgwitness.file_hashes` and `python -m tgwitness.storage recover` name a file they cannot find or read instead of printing a traceback or the exception type.
+- The MCP stdio bridge checks the token with the panel before it starts. A revoked, expired or wrong token, or an unreachable panel, ends it at once with a message that says why, where before the client saw only "Connection closed".
+- The PDF of a handover extract prints the minimisation settings in words (period, chosen people, everyone else, message text, attachments, profile photos, masked contacts) as the HTML report does, instead of option names and `None` or `False`.
+- The method text of **First-time posters per day** says that a person who first posts in several chats is counted once in each, so the daily figure can exceed the number of senders, and that the volume condition is "at most 1.5x" the median.
+- A file in the **Media** tab without a message number no longer says "Message #null".
+- A rejected form shows the field name without the request prefix (`purpose`, not `body.purpose`).
+- A message sent through an inline bot shows "via bot ID" and a channel post shows its signed author under the sender line in the chat view.
+- A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
+- Printing the HTML report no longer leaves a stray dot before a heading with no section number, and the **Exact figures** tables under the charts are opened for printing and closed again afterwards, so the paper copy shows the same figures as the screen.
+- A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed. The HTML and PDF reports name the attachment **Sticker** and print the emoji in its details.
+- In the Meridian, Atlas, Ledger and Horizon report designs a long figure label such as "No observation period recorded" wraps inside its tile, so the report no longer scrolls sideways on a phone.
+- Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
+- The pages of a live chat export print the question and answers of a poll, the coordinates of a location and the value of a dice roll next to its label.
+- In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
+- Messages with a link preview show its site, title and host under the text in the chat view.
+- Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.
+- A poll, a location or venue, a contact and a dice roll now show what was shared in the chat view (question and answers, coordinates and place, name and phone, emoji and value) instead of an empty bubble with a missing-file icon, and the same text appears in the HTML and PDF reports. Minimised handovers still leave it out.
+- The panel compresses its scripts, styles, pages and `locale.js` with gzip when the browser accepts it. A first load of the panel in Russian drops from about 4.7 MB to 1.3 MB; API responses are not compressed.
+- A sticker message in the chat view is labelled **Sticker** with its emoji as saved in the message record, also when the sticker file itself cannot be previewed.
+- After **Verify journal** the result box is green only when a timestamp receipt covers the last record; with only the signed journal checked it is neutral, so the unfinished layers are not shown in a success colour.
+- In the report preview, **Journal head** is a bordered row like the other sections instead of bare text pressed against them.
 - On a phone the Signed archive card on Export records uses the same side padding as the cards below it, so headings and buttons line up.
 - On a desktop pointer the star that marks a chat as priority no longer covers the time of the last message in the chat list; the time moves aside while the row is hovered or focused.
 - Chat search accepts `#` and a message number to jump to that saved message. A **Pinned messages** list under the chat status shows what Telegram listed as pinned at the last chat-state check, with each saved message and a jump button, and says when a pinned number has no saved record. New route `GET /api/chats/{chat_id}/pinned`.

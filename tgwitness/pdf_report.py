@@ -283,7 +283,7 @@ class Layout:
         for start in range(0, len(items), 4):
             row = self.mirror(items[start:start + 4])
             with pdf.table(col_widths=[1] * len(row), first_row_as_headings=False, line_height=5,
-                           borders_layout="HORIZONTAL_LINES", text_align=self.align, padding=2.5) as table:
+                           borders_layout="HORIZONTAL_LINES", text_align=self.align, align=self.align, padding=2.5) as table:
                 labels, values = table.row(), table.row()
                 for label, value in row:
                     labels.cell(label.upper(), style=self.face(size=7, color=MUTED))
@@ -314,8 +314,7 @@ class Layout:
         self.gap(2)
 
     def heading(self, title):
-        if report_composition_pdf.active(self) and title in (
-                self.say("Recorded activity over time"), self.say("Observation times by weekday and hour")):
+        if title in (self.say("Recorded activity over time"), self.say("Observation times by weekday and hour")):
             self.need(110)
         if self.pdf.get_y() > self.pdf.h - 45:
             self.pdf.add_page()
@@ -331,15 +330,20 @@ class Layout:
             self.pdf.set_draw_color(*self.design.line)
         with self.pdf.table(col_widths=self.mirror((30, 70)), first_row_as_headings=False, line_height=4.6,
                             borders_layout=self.design.table_border, cell_fill_color=self.design.tint,
-                            text_align=self.align, padding=1.6 if self.design.name == "classic" else self.design.table_padding,
+                            text_align=self.align, align=self.align, padding=1.6 if self.design.name == "classic" else self.design.table_padding,
                             cell_fill_mode="COLUMNS" if self.rtl else "EVEN_COLUMNS") as table:
             for key, value in rows:
                 row = table.row()
                 mono = isinstance(value, Mono)
                 for text, style in self.mirror([(str(key), self.face(bold=True)),
-                                                (str(value), self.face(mono, 8 if mono else 8.8))]):
+                                                (self.fit(value, 1500), self.face(mono, 8 if mono else 8.8))]):
                     row.cell(text, style=style)
         self.gap(2)
+
+    @staticmethod
+    def fit(value, limit=600):
+        text = str(value)
+        return text if len(text) <= limit else text[:limit - 1] + "…"
 
     def grid(self, columns, rows, widths=None):
         if not rows:
@@ -348,7 +352,7 @@ class Layout:
             self.pdf.set_draw_color(*self.design.line)
         with self.pdf.table(col_widths=self.mirror(widths) if widths else None, line_height=4.4,
                             borders_layout=self.design.table_border,
-                            text_align=self.align, padding=self.design.table_padding,
+                            text_align=self.align, align=self.align, padding=self.design.table_padding,
                             headings_style=self.FontFace(emphasis="BOLD", size_pt=8, fill_color=self.design.tint,
                                                          color=self.design.ink if self.design.name != "classic" else None)) as table:
             head = table.row()
@@ -358,7 +362,7 @@ class Layout:
                 row = table.row()
                 for value in self.mirror(values):
                     mono = isinstance(value, Mono)
-                    row.cell(str(value), style=self.face(mono, 7.4 if mono else 8.2))
+                    row.cell(self.fit(value), style=self.face(mono, 7.4 if mono else 8.2))
         self.gap(2)
 
     def bullets(self, items, size=8.8):
@@ -600,7 +604,7 @@ def details_lines(say, d, *, include_media=True):
     media = d.get("media_info")
     if include_media and isinstance(media, dict) and media:
         description = report.media_text(say, media)
-        lines.append(say(report.MEDIA_NAMES.get(media.get("kind"), "Media"))
+        lines.append(report.media_name(say, media)
                      + (" · " + description if description else ""))
         if isinstance(media.get("title"), str) and media["title"]:
             lines.append(say("Link preview") + ": " + media["title"]
@@ -763,7 +767,7 @@ def custody_steps(say, data):
 def transfers(lay, say):
     lay.heading(say("Custody transfers"))
     lay.text(say("Fill in by hand when the printed report or the archive changes hands."), size=8.5, color=MUTED)
-    with lay.pdf.table(line_height=8, borders_layout="ALL", text_align=lay.align, padding=1.4,
+    with lay.pdf.table(line_height=8, borders_layout="ALL", text_align=lay.align, align=lay.align, padding=1.4,
                        headings_style=lay.FontFace(emphasis="BOLD", size_pt=8, fill_color=FILL)) as table:
         head = table.row()
         for column in lay.mirror((say("Date and time"), say("Released by"), say("Received by"), say("Purpose"),
@@ -1032,7 +1036,21 @@ class EvidencePDF:
                     (say("Shown unchanged, verified in full"), counts["unchanged"]),
                     (say("Minimised, signature verified"), counts["minimised"]), (say("Left out"), counts["left_out"])])
             if isinstance(selection, dict):
-                self.lay.kv([(str(k), ", ".join(map(str, v)) if isinstance(v, list) else str(v)) for k, v in selection.items()])
+                since, until = selection.get("since"), selection.get("until")
+                others = say(report.OTHERS.get(selection.get("others"), str(selection.get("others"))))
+                if selection.get("others") == "pseudonymize":
+                    others += " · " + say("{n} pseudonyms", n=selection.get("pseudonyms", 0))
+                people = ", ".join(map(str, selection.get("subjects") or [])) or say("Everyone in these chats is treated as another person")
+                self.lay.kv([
+                    (say("Chats"), ", ".join(map(str, selection.get("chats") or [])) or "—"),
+                    (say("Period"), (report.utc_text(since) if since else say("from the first record")) + " — "
+                     + (report.utc_text(until) if until else say("to the last record"))),
+                    (say("Chosen people"), people), (say("Everyone else"), others),
+                    (say("Message text"), say(report.TEXTS.get(selection.get("text"), str(selection.get("text"))))),
+                    (say("Attachments"), say(report.FILES.get(selection.get("attachments"), str(selection.get("attachments"))))),
+                    (say("Profile photos"), say("included for the chosen people") if selection.get("avatars") else say("not included")),
+                    (say("Phone numbers and e-mail addresses in texts"),
+                     say("masked") if selection.get("mask_contacts") else say("shown"))])
 
     def render_histories(self):
         say = self.say

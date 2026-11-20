@@ -138,7 +138,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", RECEIVED_WHERE, RECEIVED_RENAMED]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", "Sticker", RECEIVED_WHERE, RECEIVED_RENAMED]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -867,13 +867,14 @@ CSS = (
     "border-inline-start:1px solid var(--line)}"
     ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 96px;min-width:0;"
     "padding:8px 12px 9px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}.tile i{display:none}"
-    ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums}"
+    ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}"
+    ".tiles .tile b.text{font:600 15px/1.35 system-ui,sans-serif!important;letter-spacing:0!important}"
     ".tile>span{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}"
     "section.card{margin:30px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}"
     ".brief-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}.brief-cols ul{margin:4px 0 0;padding-inline-start:18px}"
     ".brief-cols li{margin:3px 0}@media (max-width:760px){.brief-cols{grid-template-columns:1fr}}"
     "section.card>h2{display:flex;align-items:baseline;gap:9px;font-size:18px;line-height:1.3;margin:0 0 6px}"
-    "h2 .num{font-weight:700}h2 .num:after{content:'.'}"
+    "h2 .num{font-weight:700}h2 .num:after{content:'.'}h2 .num:empty{display:none!important}"
     "h3{font-size:14.5px;margin:20px 0 8px}.lead{color:var(--muted);margin:0 0 14px;max-width:80ch}"
     "table{width:100%;border-collapse:collapse}"
     ".kv th,.kv td,.grid th,.grid td{border:1px solid var(--line);vertical-align:top}"
@@ -881,7 +882,11 @@ CSS = (
     ".kv td{padding:7px 12px;overflow-wrap:anywhere}"
     ".grid{font-size:13.5px}.grid th{text-align:start;font-size:12px;font-weight:650;color:var(--soft);padding:7px 10px;"
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
-    "@media (max-width:600px){.scroll>.grid{width:max-content;min-width:100%}"
+    "@media (max-width:600px){.scroll{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);"
+    "mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}"
+    "[dir=rtl] .scroll{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent);"
+    "mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent)}"
+    ".scroll>.grid{width:max-content;min-width:calc(100% - 24px);margin-inline-end:24px}"
     ".grid th,.grid td{max-width:15em;overflow-wrap:anywhere}.grid th{overflow-wrap:normal}.grid .pill{white-space:normal}}"
     ".scroll{overflow-x:auto}.scroll>svg.chat-timeline{min-width:640px}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
@@ -1022,6 +1027,9 @@ SCRIPT = r"""
 const page=document.documentElement.outerHTML;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const words=JSON.parse(($("#report-words")||{}).textContent||"{}"),say=k=>words[k]||k,lang=document.documentElement.lang;
+let reopened=[];
+window.addEventListener("beforeprint",()=>{reopened=$$("details.analytics-table:not([open])");reopened.forEach(d=>{d.open=true;});});
+window.addEventListener("afterprint",()=>{reopened.forEach(d=>{d.open=false;});reopened=[];});
 const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
 const bytes=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const canon=v=>v===null||typeof v!=="object"?JSON.stringify(v):Array.isArray(v)?"["+v.map(canon).join(",")+"]":
@@ -1211,8 +1219,10 @@ def tiles(items):
     for item in items:
         label, value, colour = item[:3]
         glyph = item[3] if len(item) > 3 else "info"
+        words = re.findall(r"[^\W\d_]{3,}", re.sub(r"<[^>]+>", "", value))
         out.append('<div class="tile tone-' + TILE_TONES.get(colour, "slate") + '" style="--c:var(--' + colour + ')"><i>'
-                   + icon(glyph) + "</i><b>" + value + "</b><span>" + e(label) + "</span></div>")
+                   + icon(glyph) + "</i><b" + (' class="text"' if len(words) > 1 else "") + ">" + value + "</b><span>"
+                   + e(label) + "</span></div>")
     return '<div class="tiles">' + "".join(out) + "</div>"
 
 
@@ -1711,7 +1721,10 @@ def timer_text(say, kind):
 
 
 def reactions_text(found):
-    return " ".join(str(x["reaction"]) + " " + str(x["count"]) for x in found[:20])
+    if not isinstance(found, (list, tuple)):
+        return ""
+    return " ".join(str(x["reaction"]) + " " + str(x.get("count", "")) for x in found[:20]
+                    if isinstance(x, dict) and x.get("reaction") is not None).strip()
 
 
 IOC_KINDS = {"url": "Link", "domain": "Domain", "wallet": "Wallet", "telegram": "Telegram username",
@@ -1774,12 +1787,30 @@ def ref_link(parts, folder, key, anchor, prefix=""):
     return link
 
 
+def media_name(say, info):
+    return say("Sticker") if info.get("sticker_emoji") else say(MEDIA_NAMES.get(info.get("kind"), "Media"))
+
+
+def content_text(say, info):
+    poll, place, contact, dice = (info.get(key) or {} for key in ("poll", "location", "contact", "dice"))
+    if poll:
+        head = (say("Quiz") + ": " if poll.get("quiz") else "") + (poll.get("question") or "")
+        return head + (" [" + " / ".join(poll["answers"]) + "]" if poll.get("answers") else "")
+    if place:
+        coordinates = ", ".join(str(place[k]) for k in ("lat", "lng") if k in place)
+        return " · ".join(x for x in (say("Live location") if place.get("live_seconds") else "", place.get("title"),
+                                      place.get("address"), coordinates) if x)
+    if contact:
+        return " · ".join(x for x in (contact.get("name"), contact.get("phone")) if x)
+    return " ".join(str(dice[k]) for k in ("emoji", "value") if k in dice)
+
+
 def media_text(say, info):
     from . import ephemeral
     if not info:
         return ""
     size = " × ".join(str(info[k]) for k in ("width", "height") if info.get(k))
-    return " · ".join(x for x in (info.get("file_name"), info.get("mime_type"),
+    return " · ".join(x for x in (info.get("sticker_emoji"), content_text(say, info), info.get("file_name"), info.get("mime_type"),
                                   size_text(info["size"]) if type(info.get("size")) is int else "", size,
                                   say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
                                   info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
@@ -1834,7 +1865,7 @@ def record_html(event, say, titles, options, archive, base=""):
         found = shown_details(payload)
         parts.append(details_html(say, found))
         if found.get("media_info"):
-            parts.append('<div class="file">' + e(say(MEDIA_NAMES.get(found["media_info"]["kind"], "Media"))) + " · "
+            parts.append('<div class="file">' + e(media_name(say, found["media_info"])) + " · "
                          + e(media_text(say, found["media_info"])) + "</div>")
     if kind in ("message.deleted", "message.missing_on_recheck") and timer_expected(payload):
         parts.append('<div class="gone">' + e(timer_text(say, kind)) + "</div>")
@@ -2142,7 +2173,7 @@ def history_card(say, key, item, titles, linked=True):
         shown = details_html(say, version["details"]) if previous is None or pointing(previous) != pointing(version) else ""
         media = version["details"].get("media_info")
         if media and (previous is None or pointing(previous)[2] != pointing(version)[2]):
-            shown += '<div class="file">' + e(say(MEDIA_NAMES.get(media["kind"], "Media"))) + " · " \
+            shown += '<div class="file">' + e(media_name(say, media)) + " · " \
                 + e(media_text(say, media)) + "</div>"
         steps.append('<li><div class="vhead">' + head + '</div><div class="text">' + text + "</div>" + shown + "</li>")
         previous = version

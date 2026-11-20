@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
 
+**English** · [Русский](ru/SIMILAR-CHANNELS.md)
+
 ![Investigation](assets/presentation/chapter-investigate.svg)
 
 # Similar channels
@@ -15,7 +17,7 @@ the channels' own records.
 ## Run a walk
 
 ```sh
-curl -sS -X POST http://127.0.0.1:8000/api/channel-graph \
+curl -sS -X POST http://127.0.0.1:8787/api/channel-graph \
   -H "Authorization: Bearer $TGWITNESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"seeds": [-1001234567890], "depth": 2, "per_source": 20, "total": 100,

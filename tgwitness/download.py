@@ -39,7 +39,13 @@ def download_export(url, token, destination, fmt="zip", profile="default", max_b
                            headers={"Authorization": "Bearer " + token, "Accept-Encoding": "identity"})
         response = connection.getresponse()
         if response.status != 200:
-            raise ValueError("Export request failed with HTTP " + str(response.status) + "; redirects are not followed.")
+            if response.status in (401, 403):
+                raise ValueError("The panel refused the token (HTTP " + str(response.status) + "). Use the current panel token.")
+            if response.status == 404:
+                raise ValueError("The panel has no such workspace or export format (HTTP 404).")
+            if 300 <= response.status < 400:
+                raise ValueError("The panel redirected the request (HTTP " + str(response.status) + "); redirects are not followed.")
+            raise ValueError("Export request failed with HTTP " + str(response.status) + ".")
         declared = response.getheader("Content-Length")
         expected = int(declared) if declared and declared.isdecimal() else None
         if expected is not None and expected > max_bytes:
@@ -86,6 +92,20 @@ def download_export(url, token, destination, fmt="zip", profile="default", max_b
             temp.unlink(missing_ok=True)
 
 
+def describe(exc, url):
+    if isinstance(exc, ConnectionRefusedError):
+        return "no panel answered at " + str(url) + ". Check the address and that TgWitness is running."
+    if isinstance(exc, TimeoutError):
+        return "the panel did not answer in time."
+    if isinstance(exc, FileNotFoundError):
+        return "cannot find " + str(getattr(exc, "filename", None) or "the file") + "."
+    if isinstance(exc, PermissionError):
+        return "no permission for " + str(getattr(exc, "filename", None) or "the file") + "."
+    if isinstance(exc, OSError) and exc.strerror:
+        return exc.strerror[0].lower() + exc.strerror[1:] + "."
+    return type(exc).__name__
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://127.0.0.1:8787")
@@ -104,7 +124,7 @@ def main():
     except UnicodeError:
         parser.exit(1, "Download failed: token file must contain a plain ASCII access token.\n")
     except (ValueError, OSError, http.client.HTTPException) as exc:
-        message = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+        message = str(exc) if isinstance(exc, ValueError) else describe(exc, args.url)
         parser.exit(1, "Download failed: " + message + "\n")
 
 

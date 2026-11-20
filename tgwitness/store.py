@@ -491,7 +491,7 @@ class Store:
             item = messages.setdefault(row["message_id"], {
                 "message_id": row["message_id"], "first_seq": row["seq"],
                 "reference": {"event_hash": row["hash"], "seq": row["seq"], "kind": row["kind"]}, "sender": None, "sent_at": None,
-                "reply_to": None, "reply_to_chat": None, "has_media": False, "service_action": None, "grouped_id": None,
+                "reply_to": None, "reply_to_chat": None, "has_media": False, "service_action": None, "service_title": None, "grouped_id": None,
                 "versions": [], "current_version": None, "media": [], "deleted": False, "deleted_observed_at": None,
                 "missing": False, "missing_observed_at": None, "auto_deleted": False,
                 "telegram_edited_at": None, "from_scheduled": False, "origins": [], "details": {}})
@@ -511,12 +511,22 @@ class Store:
                 item["reply_to_chat"] = item["reply_to_chat"] or reply_chat(payload, chat_id)
                 item["has_media"] = item["has_media"] or bool(payload.get("has_media"))
                 item["service_action"] = item["service_action"] or payload.get("service_action")
+                action = (payload.get("raw") or {}).get("action")
+                if isinstance(action, dict) and isinstance(action.get("title"), str) and action["title"]:
+                    item["service_title"] = item["service_title"] or action["title"][:200]
                 item["grouped_id"] = item["grouped_id"] or payload.get("grouped_id")
                 item["telegram_edited_at"] = payload.get("edited_at") or item["telegram_edited_at"]
                 item["from_scheduled"] = item["from_scheduled"] or bool((payload.get("raw") or {}).get("from_scheduled"))
                 shown = message_details.details(payload.get("raw"))
-                item["details"] = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards") if key in shown} \
-                    or item["details"]
+                picked = {key: shown[key] for key in ("forwarded_from", "reactions", "views", "forwards", "via_bot_id", "author") if key in shown}
+                kept = {key: value for key, value in (shown.get("media_info") or {}).items()
+                        if key in ("sticker_emoji", "poll", "location", "contact", "dice")}
+                media_info = shown.get("media_info") or {}
+                if media_info.get("kind") == "MessageMediaWebPage":
+                    kept.update({key: media_info[key] for key in ("url", "site_name", "title") if key in media_info})
+                if kept:
+                    picked["media_info"] = kept
+                item["details"] = picked or item["details"]
                 origin = {"message.new": "live", "message.snapshot": "history", "message.edited": "edit",
                           "message.recovered": "recheck"}[kind]
                 if origin not in item["origins"]:

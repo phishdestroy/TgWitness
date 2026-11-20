@@ -104,6 +104,9 @@ code{direction:ltr;unicode-bidi:isolate}
 .msg-name{margin-bottom:2px;color:var(--h2);font-size:13.5px;font-weight:700}
 .msg-name span{margin-inline-start:6px;color:var(--muted);font-weight:500}
 .msg-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.msg-reply{margin-bottom:4px;padding:2px 8px;border-inline-start:3px solid var(--h2);border-radius:3px;color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}.msg-reply span{display:block;color:var(--soft);font-style:italic}
+.msg-fwd{margin-bottom:3px;color:var(--muted);font-size:12.5px;font-style:italic;overflow-wrap:anywhere}
+.msg-reacts{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.msg-react{padding:1px 8px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);font-size:12.5px}
 .msg-text mark,.d-text mark,.rec-text mark{padding:0 1px;border-radius:3px;background:color-mix(in srgb,#f5c542 60%,transparent);color:inherit}
 .msg-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px;margin-top:3px}
 .msg-meta{margin-inline-start:auto;color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -224,7 +227,7 @@ code{direction:ltr;unicode-bidi:isolate}
   .msg-bubble{max-width:calc(100% - 44px)}.v-top{top:calc(var(--bar-height,64px) + 6px)}
   .v-searchbar{flex-wrap:wrap;gap:6px;padding:8px 10px}.v-searchbar #v-q{flex-basis:calc(100% - 30px)}
   .v-searchbar .v-jump{flex:1;min-width:0}.v-searchbar select{flex:1;min-width:0}
-  .v-page{padding:20px 12px 100px}.v-page-head h2{font-size:24px}.v-table table{min-width:650px}
+  .v-page{padding:20px 12px 100px}.v-page-head h2{font-size:24px}.v-table table{min-width:650px}.v-table th,.v-table td{white-space:nowrap}.v-table td:has(code){white-space:normal;min-width:240px}
   .v-selbar{width:calc(100% - 24px);bottom:12px;flex-wrap:wrap;padding:10px;gap:6px}.v-selbar b{flex:1 0 100%}
   .v-selbar .v-btn{white-space:normal;font-size:12px;padding:8px 10px}.v-cards{grid-template-columns:1fr}
   .v-feed.chat{padding:10px 4px}.msg{padding-inline-start:24px;gap:6px}.msg .pick{left:1px}

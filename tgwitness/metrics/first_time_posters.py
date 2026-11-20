@@ -10,8 +10,9 @@ BASELINE_DAYS = 14
 
 @register("first_time_posters_over_time", version=1, title="First-time posters per day",
           parameter="metric_first_time_posters",
-          methodology="Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x "
-                      "their median. A chat's first 7 days are not flagged.")
+          methodology="Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x "
+                      "their median. A chat's first 7 days are not flagged. A person who first posts in several chats "
+                      "is counted once in each.")
 class FirstTimePosters(Processor):
     columns = ("Day (UTC)", "First-time posters", "Messages")
 

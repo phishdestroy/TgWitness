@@ -140,10 +140,44 @@ def forward(header):
     return {k: v for k, v in found.items() if v not in (None, "")} or None
 
 
+def plain(value, limit=300):
+    if isinstance(value, dict):
+        value = value.get("text")
+    return value[:limit] if isinstance(value, str) and value else None
+
+
+def number(value):
+    return round(value, 6) if isinstance(value, (int, float)) and not isinstance(value, bool) else None
+
+
+def content(media):
+    kind = media.get("_")
+    if kind == "MessageMediaPoll" and isinstance(media.get("poll"), dict):
+        poll = media["poll"]
+        answers = [plain(a.get("text"), 200) for a in poll.get("answers") or [] if isinstance(a, dict)][:12]
+        found = {"question": plain(poll.get("question")), "answers": [a for a in answers if a],
+                 "quiz": bool(poll.get("quiz")), "multiple": bool(poll.get("multiple_choice")), "closed": bool(poll.get("closed"))}
+        return {"poll": {k: v for k, v in found.items() if v not in (None, [], False)}}
+    if kind in ("MessageMediaGeo", "MessageMediaGeoLive", "MessageMediaVenue") and isinstance(media.get("geo"), dict):
+        geo = media["geo"]
+        found = {"lat": number(geo.get("lat")), "lng": number(geo.get("long")), "title": plain(media.get("title"), 200),
+                 "address": plain(media.get("address"), 300),
+                 "live_seconds": media.get("period") if kind == "MessageMediaGeoLive" else None}
+        return {"location": {k: v for k, v in found.items() if v not in (None, "")}}
+    if kind == "MessageMediaContact":
+        name = " ".join(x for x in (plain(media.get("first_name"), 100), plain(media.get("last_name"), 100)) if x)
+        found = {"name": name, "phone": plain(media.get("phone_number"), 40), "user_id": media.get("user_id")}
+        return {"contact": {k: v for k, v in found.items() if v not in (None, "")}}
+    if kind == "MessageMediaDice":
+        found = {"emoji": plain(media.get("emoticon"), 16), "value": media.get("value")}
+        return {"dice": {k: v for k, v in found.items() if v not in (None, "")}}
+    return {}
+
+
 def media_info(media, unread=None):
     if not isinstance(media, dict) or media.get("_") in (None, "", "MessageMediaEmpty"):
         return None
-    info = {"kind": media["_"]}
+    info = {"kind": media["_"], **content(media)}
     document = media.get("document") if isinstance(media.get("document"), dict) else None
     if document:
         info.update(mime_type=document.get("mime_type"), size=document.get("size"), document_id=document.get("id"),
@@ -158,6 +192,8 @@ def media_info(media, unread=None):
                     info.update(width=attribute.get("w"), height=attribute.get("h"))
             elif name == "DocumentAttributeImageSize":
                 info.update(width=attribute.get("w"), height=attribute.get("h"))
+            elif name == "DocumentAttributeSticker" and isinstance(attribute.get("alt"), str):
+                info["sticker_emoji"] = attribute["alt"][:16]
     photo = media.get("photo") if isinstance(media.get("photo"), dict) else None
     if photo:
         sizes = [s for s in photo.get("sizes") or [] if isinstance(s, dict) and s.get("w")]

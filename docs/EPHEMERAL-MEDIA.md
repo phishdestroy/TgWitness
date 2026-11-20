@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Collection](COLLECTION-MODES.md)
 
+**English** · [Русский](ru/EPHEMERAL-MEDIA.md)
+
 ![Collection](assets/presentation/chapter-collect.svg)
 
 # Self-destructing media in the API journal

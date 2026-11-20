@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/INVESTIGATION-MODE.md)
+
 # Investigation mode
 
 A workspace for documenting a conversation: what the investigator did, what
@@ -257,8 +259,8 @@ FFmpeg. A second recording takes over from its own start.
 ## Documents for court
 
 The case package is a BagIt bag. Besides the report, the slides, the verification
-page, the signed original, the files and the indicators, it carries a `court/`
-folder:
+page, the signed original, the files and the indicators, it carries a
+`data/court/` folder:
 
 - **Certification of authenticity**, pre-filled in the shape of a Rule
   902(13)/(14) certificate: the document and its revision, the signing key
@@ -269,9 +271,9 @@ folder:
   given notice. The declarant reviews and completes the template before signing.
 - **Exhibit index**, numbering every cited file with its hash, size, type, the
   steps that cite it and their journal records, as CSV and HTML.
-- **Annex for official requests**: numeric IDs, usernames with the times they
-  were observed, Telegram's labels, and message references, with notes on the
-  data categories a provider is usually asked for and on Telegram's published
+- **Annex for official requests**, as CSV, HTML and JSON: numeric IDs, usernames with
+  the times they were observed, Telegram's labels, and message references, with notes
+  on the data categories a provider is usually asked for and on Telegram's published
   disclosure scope.
 - **Undercover activity record**, when there are personas, authorisations or
   outgoing messages.

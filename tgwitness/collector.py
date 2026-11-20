@@ -94,6 +94,10 @@ class UnreadableHistory(ValueError):
     pass
 
 
+class ExportRefused(ValueError):
+    pass
+
+
 SESSIONS_EVERY = 15 * 60
 SESSIONS_OBSERVING_EVERY = 120
 SECURITY_LOG_EVERY = 60
@@ -3479,7 +3483,7 @@ class Collector:
         await self.dialogs()
         if chat_id not in self.dialog_cache:
             raise ValueError("Target is not among the dialogs this account read. Refresh the group list or raise "
-                             "the chat list limit in Parameters.")
+                             "the chat list limit in Parameters. For a private chat, join it first with its invite link.")
         return self.dialog_cache[chat_id]["entity"]
 
     async def start(self):
@@ -5111,6 +5115,8 @@ class Collector:
             raise
         except BaseException as exc:
             record.update(phase="failed", error=type(exc).__name__)
+            if isinstance(exc, ExportRefused):
+                record["message"] = str(exc)
             self.handle_authorization_error(exc, "chat export", client=client)
             loss = (self.store.account_loss_statement(record.get("started_at"))
                     if isinstance(exc, AUTHORIZATION_ERRORS) else None)
@@ -5350,8 +5356,8 @@ class Collector:
             return {"file": "media/" + reused["sha256"], "file_sha256": reused["sha256"], "file_size": size,
                     "file_kind": kind, "file_reused": reused["source"]}
         if shutil.disk_usage(directory).free - self.download_reserved < size + self.param("media_min_free_mb") * 1024**2:
-            raise ValueError("Not enough free disk space for the attachments of this export. Free space or turn "
-                             "attachment downloads off under Sources → Recording.")
+            raise ExportRefused("Not enough free disk space for the attachments of this export. Free space or turn "
+                                "attachment downloads off under Sources → Recording.")
 
         async def progress(current, total):
             if max(current, total) > limit:

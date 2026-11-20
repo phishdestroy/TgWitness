@@ -455,7 +455,8 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 @media(max-width:700px){
   .hub-field:has(>.hub-switch)>.hub-field-text{flex:1 1 0}
   .hub-choices{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
-  .hub-choice{width:100%}
+  .hub-choice{width:100%;min-height:44px;border-color:var(--border);background:var(--surface)}
+  .hub-choice[aria-pressed=true]{border-color:var(--accent-border,var(--accent))}
   .hub-undo{bottom:10px;width:auto}
   .hub-summary{grid-template-columns:34px minmax(0,1fr) 16px;gap:2px 12px}
   .hub-summary>.hub-summary-icon,.hub-summary>.hub-arrow{grid-row:1/3}
@@ -488,3 +489,5 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .hub-summary:hover .hub-arrow{color:var(--accent);transform:translateX(3px)}
 [dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1) translateX(3px)}
 @media (prefers-reduced-motion:reduce){.hub-arrow{transition:none}.hub-summary:hover .hub-arrow{transform:none}[dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1)}}
+.hub-profile-link{margin-bottom:16px}
+.hub-actions + .hub-visibility{margin-top:24px}

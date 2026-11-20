@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
 
+**English** · [Русский](ru/EXPORT_HASHES.md)
+
 ![Evidence & verification](assets/presentation/chapter-evidence.svg)
 
 # File hashes and export preflight

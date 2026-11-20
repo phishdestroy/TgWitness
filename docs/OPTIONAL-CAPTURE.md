@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/OPTIONAL-CAPTURE.md)
+
 ![Independent capture](assets/presentation/chapter-capture.svg)
 
 # Optional independent browser and AyuGram capture

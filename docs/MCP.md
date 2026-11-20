@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) · [Archive integrations](CLI.md)
 
+**English** · [Русский](ru/MCP.md)
+
 ![Archive integrations](assets/presentation/chapter-integrations.svg)
 
 # Read the archive through MCP
@@ -64,6 +66,7 @@ The list shows recent use, last tool, address and requests in the last minute.
 **Revoke** ends access. **Rotate token** revokes the old credential and issues
 a replacement with the same scope, tools and expiry; copy the replacement once.
 Panel login tokens and Telegram credentials do not work as MCP tokens.
+The stdio bridge checks the token with the panel before it starts: a revoked, expired or wrong token ends it at once with a message that says so, and so does an unreachable panel address.
 
 ## Connect your client
 

@@ -1,9 +1,10 @@
+import html
 import re
 from difflib import get_close_matches
 
 from fastapi.exception_handlers import http_exception_handler
 from starlette.exceptions import HTTPException
-from starlette.responses import JSONResponse, RedirectResponse
+from starlette.responses import HTMLResponse, RedirectResponse
 
 ALIASES = {"/network-topology": "/topology", "/case-board": "/board", "/home": "/start", "/dashboard": "/start",
            "/overview": "/start", "/map": "/system-map", "/logs": "/system-log", "/log": "/system-log",
@@ -20,6 +21,17 @@ DOCUMENTS = (
     *("/settings/" + section for section in ("appearance", "level", "goal", "connection", "telegram", "chats", "collection",
                                              "protection", "notifications", "group")),
 )
+
+
+def missing_page(suggestions):
+    links = "".join('<li><a href="' + html.escape(path, quote=True) + '">' + html.escape(path) + "</a></li>" for path in suggestions)
+    return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            "<title>Page not found · TgWitness</title><style>:root{color-scheme:light dark}"
+            "body{font:16px/1.5 system-ui,sans-serif;max-width:32rem;margin:12vh auto;padding:0 20px}"
+            "a{color:#2a4fd6}@media(prefers-color-scheme:dark){a{color:#8fa8ff}}</style></head><body>"
+            "<h1>This page does not exist</h1><p>The address is not part of the TgWitness panel.</p>"
+            + ("<p>Did you mean:</p><ul>" + links + "</ul>" if links else "")
+            + '<p><a href="/start">Open the panel</a></p></body></html>')
 
 
 def register(app, static):
@@ -40,8 +52,9 @@ def register(app, static):
         if (error.status_code == 404 and request.method in ("GET", "HEAD")
                 and "text/html" in request.headers.get("accept", "")
                 and not request.url.path.startswith(("/api/", "/profiles/"))):
-            return JSONResponse({"error": "No such page", "did_you_mean":
-                get_close_matches(request.url.path, DOCUMENTS, n=3, cutoff=0.4)}, status_code=404)
+            return HTMLResponse(missing_page(get_close_matches(request.url.path, DOCUMENTS, n=3, cutoff=0.4)), status_code=404,
+                                headers={"Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'",
+                                         "Cache-Control": "no-store"})
         return await http_exception_handler(request, error)
 
     app.add_exception_handler(HTTPException, missing)

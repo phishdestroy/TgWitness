@@ -143,9 +143,18 @@ def main():
     parser.add_argument("manifest", type=Path)
     parser.add_argument("file", type=Path)
     args = parser.parse_args()
-    if args.manifest.stat().st_size > 32 * 1024**2:
-        parser.error("Hash manifest exceeds the size limit")
-    result = compare(args.file, json.loads(args.manifest.read_bytes()))
+    try:
+        if args.manifest.stat().st_size > 32 * 1024**2:
+            parser.error("Hash manifest exceeds the size limit")
+        result = compare(args.file, json.loads(args.manifest.read_bytes()))
+    except FileNotFoundError as exc:
+        parser.exit(2, "Cannot find " + str(exc.filename) + ".\n")
+    except PermissionError as exc:
+        parser.exit(2, "No permission for " + str(exc.filename) + ".\n")
+    except IsADirectoryError as exc:
+        parser.exit(2, str(exc.filename) + " is a folder, not a file.\n")
+    except ValueError as exc:
+        parser.exit(2, "The hash manifest is not valid: " + str(exc) + "\n")
     print(json.dumps(result, indent=2))
     raise SystemExit(0 if result["status"] == "match" else 1)
 

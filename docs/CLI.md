@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md)
 
+**English** · [Русский](ru/CLI.md)
+
 ![Archive integrations](assets/presentation/chapter-integrations.svg)
 
 # Command line for scripts and agents
@@ -70,6 +72,8 @@ observation time. Pages hold up to 50 records: follow `next_offset` (`--offset`)
 ranked search and `next_before` (`--before`) elsewhere.
 
 Ranked search stops at 1,000 results. The final page may be shorter than `--limit`. When more observations match, the last page says so (`truncated: true` with `--json`); narrow the query, chat or period.
+
+In plain output each record starts with its journal sequence and the time the collector saw it (`observed`), followed by the time Telegram reported when there is one: `sent` for a message, `edited` for an edited version. A deletion notice has only the observation time. `--json` carries both as `observed_at` and `source_at`.
 
 Every message result carries `untrusted_content: true`, the workspace, chat and
 message IDs, the journal sequence, the saved record hash and a panel link. Edits,
