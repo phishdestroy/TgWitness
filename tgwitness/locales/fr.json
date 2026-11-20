@@ -10625,5 +10625,8 @@
   "Enter a whole number.": "Entrez un nombre entier.",
   "Enter a number.": "Entrez un nombre.",
   "changed the chat name to “{title}”": "a changé le nom du salon de discussion pour « {title} »",
-  "pinned a message, number {n}": "a épinglé un message, le numéro {n}"
+  "pinned a message, number {n}": "a épinglé un message, le numéro {n}",
+  "Choose at least {n}.": "Sélectionnez au moins {n}.",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "Saisissez une date (par exemple : 01/10/2026) ou une heure avec un fuseau horaire.",
+  "Choose one of the allowed values.": "Choisissez l'une des valeurs autorisées."
 }

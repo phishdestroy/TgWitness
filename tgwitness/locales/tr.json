@@ -10615,5 +10615,8 @@
   "Enter a whole number.": "Bir tam sayı girin.",
   "Enter a number.": "Bir sayı girin.",
   "changed the chat name to “{title}”": "sohbet adını “{title}” olarak değiştirdi",
-  "pinned a message, number {n}": "{n} numaralı mesajı sabitledi"
+  "pinned a message, number {n}": "{n} numaralı mesajı sabitledi",
+  "Choose at least {n}.": "En az {n} seçin.",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 gibi bir tarih veya saat dilimi içeren bir saat girin.",
+  "Choose one of the allowed values.": "İzin verilen değerlerden birini seçin."
 }

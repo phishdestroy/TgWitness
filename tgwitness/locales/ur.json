@@ -10615,5 +10615,8 @@
   "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
   "Enter a number.": "ایک عدد درج کریں۔",
   "changed the chat name to “{title}”": "چیٹ کا نام \"{title}\" میں تبدیل کیا۔",
-  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}"
+  "pinned a message, number {n}": "ایک پیغام پن کیا، نمبر {n}",
+  "Choose at least {n}.": "کم از کم ا{n} کا انتخاب کریں۔",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "ایک تاریخ درج کریں جیسے 2026-10-01 یا کسی ٹائم زون کے ساتھ وقت۔",
+  "Choose one of the allowed values.": "مجاز اقدار میں سے ایک منتخب کریں۔"
 }

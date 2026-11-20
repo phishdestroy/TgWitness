@@ -10564,5 +10564,8 @@
   "Enter a whole number.": "整数を入力してください。",
   "Enter a number.": "数字を入力してください。",
   "changed the chat name to “{title}”": "チャット名を「{title}」に変更しました",
-  "pinned a message, number {n}": "メッセージを固定しました（番号{n}）"
+  "pinned a message, number {n}": "メッセージを固定しました（番号{n}）",
+  "Choose at least {n}.": "{n}を少なくとも1つ選択してください。",
+  "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01 のような日付、またはタイムゾーンを含む時刻を入力してください。",
+  "Choose one of the allowed values.": "許可されている値の中から1つを選択してください。"
 }
