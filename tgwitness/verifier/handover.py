@@ -45,7 +45,8 @@ def handover_range(records, chosen):
     if not numbers:
         raise ValueError("No record of chat " + str(chat) + " with message numbers " + str(low) + "-" + str(high)
                          + " is in this extract")
-    return {"chat_id": chat, "from": low, "to": high, "messages": len(numbers), "message_ids": numbers[:1000],
+    return {"chat_id": chat, "from": low, "to": high, "messages": len(numbers), "absent": high - low + 1 - len(numbers),
+            "message_ids": numbers[:1000],
             "records": sum(1 for r in records if r["chat_id"] == chat and type(r["message_id"]) is int
                            and low <= r["message_id"] <= high)}
 

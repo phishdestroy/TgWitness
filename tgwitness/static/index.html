@@ -1687,11 +1687,12 @@
           </div>
         </header>
         <div class="chat-status" id="chat-status"></div>
+        <details class="chat-pinned" hidden id="chat-pinned"><summary id="chat-pinned-title"></summary><div class="chat-pinned-body" id="chat-pinned-body"></div></details>
         <form class="chat-search-form" id="chat-search-form" role="search">
           <label class="visually-hidden" for="chat-message-search">Search saved messages</label>
-          <input id="chat-message-search" type="search" maxlength="512" placeholder="Search saved messages" autocomplete="off" aria-describedby="chat-search-hint" data-level="simple">
+          <input id="chat-message-search" type="search" maxlength="512" placeholder="Search or jump to #number" autocomplete="off" aria-describedby="chat-search-hint" data-level="simple">
           <button class="quiet small" id="chat-search-clear" type="button" hidden>Clear search</button>
-          <span class="visually-hidden" id="chat-search-hint">Search and filters cover all saved messages in this chat, including earlier versions.</span>
+          <span class="visually-hidden" id="chat-search-hint">Search and filters cover all saved messages in this chat, including earlier versions. Type # and a message number to jump to that message.</span>
         </form>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div><button class="secondary small chat-back-reply" hidden id="chat-back-reply" type="button">Back to reply</button>
