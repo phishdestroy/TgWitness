@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Searching inside a chat marks the matching words in the messages and shows how many messages were found, with a plus sign when more can be loaded.
 - In the chat view, the service line for a renamed chat gives the new name and the line for a pinned message gives its number.
 - Messages with a link preview show its site, title and host under the text in the chat view.
 - Opening an address that is not part of the panel now shows a short page with links to the closest panel pages instead of raw JSON.

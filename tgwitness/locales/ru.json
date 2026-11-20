@@ -10687,5 +10687,7 @@
   "Enter a whole number.": "Введите целое число.",
   "Enter a number.": "Введите число.",
   "changed the chat name to “{title}”": "изменил имя в чате на «{title}»",
-  "pinned a message, number {n}": "закрепил сообщение № {n}"
+  "pinned a message, number {n}": "закрепил сообщение № {n}",
+  "Messages found: {n}": "Найденных сообщений: {n}",
+  "Messages found: {n}+": "Найденных сообщений: {n}+"
 }
