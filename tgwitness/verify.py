@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 0e91a40f3fe2b15766419530999cf96550a5e1c96806ad7cc677cac5553dba53
+# TgWitness verifier sources SHA-256: 5697f4b2b1b4a2cd3e973d5011f76eff60ee91359cf37f48769c668bbf9a868b
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -5940,7 +5940,8 @@ def handover_range(records, chosen):
     if not numbers:
         raise ValueError("No record of chat " + str(chat) + " with message numbers " + str(low) + "-" + str(high)
                          + " is in this extract")
-    return {"chat_id": chat, "from": low, "to": high, "messages": len(numbers), "message_ids": numbers[:1000],
+    return {"chat_id": chat, "from": low, "to": high, "messages": len(numbers), "absent": high - low + 1 - len(numbers),
+            "message_ids": numbers[:1000],
             "records": sum(1 for r in records if r["chat_id"] == chat and type(r["message_id"]) is int
                            and low <= r["message_id"] <= high)}
 
@@ -11328,7 +11329,10 @@ def verification_archive(args):
         if result["range"]:
             notes.append("Range " + str(result["range"]["chat_id"]) + ":" + str(result["range"]["from"]) + "-"
                          + str(result["range"]["to"]) + ": " + str(result["range"]["records"]) + " record(s) for "
-                         + str(result["range"]["messages"]) + " message(s) in this extract, each checked.")
+                         + str(result["range"]["messages"]) + " message(s) in this extract, each checked."
+                         + (" " + str(result["range"]["absent"]) + " of the " + str(result["range"]["to"] - result["range"]["from"] + 1)
+                            + " numbers in the range have no record in this extract: left out by its rules, deleted or never used."
+                            if result["range"]["absent"] else ""))
     elif is_format(archive_format, "witness-v1"):
         shown = "witness"
         result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand, args.check_bitcoin)
