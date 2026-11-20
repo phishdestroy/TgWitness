@@ -10564,5 +10564,7 @@
   "Enter a whole number.": "整数を入力してください。",
   "Enter a number.": "数字を入力してください。",
   "changed the chat name to “{title}”": "チャット名を「{title}」に変更しました",
-  "pinned a message, number {n}": "メッセージを固定しました（番号{n}）"
+  "pinned a message, number {n}": "メッセージを固定しました（番号{n}）",
+  "Messages found: {n}": "見つかったメッセージ：{n}件",
+  "Messages found: {n}+": "見つかったメッセージ：{n}件以上"
 }

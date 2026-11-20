@@ -10564,5 +10564,7 @@
   "Enter a whole number.": "Masukkan nombor bulat.",
   "Enter a number.": "Masukkan nombor.",
   "changed the chat name to “{title}”": "Menukar nama sembang kepada \"{title}\"",
-  "pinned a message, number {n}": "melekatkan mesej, nombor {n}"
+  "pinned a message, number {n}": "melekatkan mesej, nombor {n}",
+  "Messages found: {n}": "Mesej yang ditemui: {n}",
+  "Messages found: {n}+": "Mesej yang ditemui: {n}+"
 }
