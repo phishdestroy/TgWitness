@@ -10704,5 +10704,7 @@
   "Show in chat": "Показати в чаті",
   "Show in chat: message #{id}": "Показати в чаті: повідомлення № {id}",
   "Open in chat: message #{id}": "Відкрити в чаті: повідомлення № {id}",
-  "Sticker {emoji}": "Стікер {emoji}"
+  "Sticker {emoji}": "Стікер {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "«Target» відсутній серед діалогів, які переглянув цей обліковий запис. Оновіть список груп або збільште обмеження на кількість чатів у розділі «Параметри».",
+  "Exported completely": "Повністю експортовано"
 }
