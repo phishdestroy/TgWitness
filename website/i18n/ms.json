@@ -7210,7 +7210,8 @@
   "2023bc4fbcf93832c5887dfeb7be2d162fb220559cd6067814d902600563a418": "Teks yang panjang dalam petak laporan HTML, seperti \"Tiada tempoh pemerhatian direkodkan\", ditetapkan dalam fon kecil bukannya saiz nombor besar.",
   "523a32b5c31ab1bc988bc11f615a65a459bcd75cb1d4ddf1cbb270fb9e0bff4b": "Lampiran yang disimpan dalam paparan sembang memaparkan nama fail, jenis dan saiznya, dan hanya menawarkan Pratonton untuk imej, audio dan video.",
   "c891254618c8cca8e1bfb84ee511712e996ae417860193eb4a0bdd032e747d87": "146 lagi mesej ralat daripada sisi pelayan panel telah diterjemahkan ke dalam 24 bahasa lain, termasuk petikan penyerahan, eksport sembang, Papan Kes, dokumentasi, senarai pantauan, tetapan, storan, rekod carian dan profil laporan. Sebelum ini, panel memaparkan mesej-mesej tersebut dalam bahasa Inggeris tanpa mengira bahasanya.",
-  "0117165ddbeb4b360d076e6128f5bf36ca8d64b521fa21b277aa85a2a57d70bf": "Pada telefon, jadual dalam laporan HTML yang digulung ke sisi akan memudar di tepi kanannya, bukannya kelihatan terputus."
+  "0117165ddbeb4b360d076e6128f5bf36ca8d64b521fa21b277aa85a2a57d70bf": "Pada telefon, jadual dalam laporan HTML yang digulung ke sisi akan memudar di tepi kanannya, bukannya kelihatan terputus.",
+  "7fa184fc6d2113365e17a5000099ee507675624c93f0a02822e51ef3dd5f8969": "Dalam laporan eksport akaun, mesej perkhidmatan dipaparkan sebagai satu ayat pada kadnya (contohnya \"ditambah seorang ahli\", \"dubah nama sembang kepada \"…\"\", \"dipin mesej, nombor 42\") bukannya \"Tiada teks mesej dalam rekod ini.\" Tindakan tanpa keterangan ringkas akan memaparkan \"Mesej perkhidmatan\" dan namanya."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",
