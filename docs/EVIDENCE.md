@@ -254,7 +254,9 @@ record's original hash to the journal root named in the signed manifest. `verify
 path, so every record is shown to belong to the same journal of that length and head, without the
 full journal; an extract of 100 messages checks in about a second whatever the journal size.
 `--range=CHAT:FROM-TO` additionally confirms that messages FROM to TO of a chat are in the extract
-and reports how many records it checked for them. Names inside file
+and reports how many records it checked for them. When some numbers of the range have no record in
+the extract, it also says how many: they were left out by the extract's rules, deleted or never used,
+and the extract alone does not tell which. Names inside file
 names are not detected. Review the final files before sharing: free text, file names and selected
 attachments can still identify people. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
 
