@@ -10675,6 +10675,8 @@
   "Show in chat: message #{id}": "Показать в чате: сообщение № {id}",
   "Open in chat: message #{id}": "Открыть в чате: сообщение № {id}",
   "Sticker {emoji}": "Стикер {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Цели нет среди диалогов, прочитанных этим аккаунтом. Обновите список групп или увеличьте лимит списка чатов в «Параметрах».",
+  "Exported completely": "Полностью экспортировано",
   "Quiz": "Викторина",
   "Live location": "Текущее местоположение"
 }

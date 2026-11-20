@@ -10603,6 +10603,8 @@
   "Show in chat: message #{id}": "Im Chat anzeigen: Nachricht Nr. {id}",
   "Open in chat: message #{id}": "Im Chat öffnen: Nachricht Nr. {id}",
   "Sticker {emoji}": "Sticker {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "„Target“ ist nicht unter den Dialogen aufgeführt, die dieses Konto gelesen hat. Aktualisieren Sie die Gruppenliste oder erhöhen Sie das Limit für die Chat-Liste unter „Parameter“.",
+  "Exported completely": "Vollständig exportiert",
   "Quiz": "Quiz",
   "Live location": "Aktueller Standort"
 }

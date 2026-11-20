@@ -10603,6 +10603,8 @@
   "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
   "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}",
   "Sticker {emoji}": "স্টিকার {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target এই অ্যাকাউন্ট দ্বারা পড়া ডায়ালগগুলির মধ্যে নেই। গ্রুপ তালিকা রিফ্রেশ করুন অথবা প্যারামিটারে চ্যাট তালিকা সীমা বাড়ান।",
+  "Exported completely": "সম্পূর্ণরূপে রপ্তানি করা হয়েছে",
   "Quiz": "কুইজ",
   "Live location": "বাসস্থান"
 }

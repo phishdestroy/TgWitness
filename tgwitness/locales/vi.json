@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}",
   "Open in chat: message #{id}": "Mở trong cửa sổ trò chuyện: tin nhắn số {id}",
   "Sticker {emoji}": "Hình dán {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target không nằm trong danh sách các cuộc trò chuyện mà tài khoản này đã đọc. Vui lòng làm mới danh sách nhóm hoặc tăng giới hạn danh sách trò chuyện trong phần Cài đặt.",
+  "Exported completely": "Đã xuất hoàn toàn",
   "Quiz": "Bài trắc nghiệm",
   "Live location": "Vị trí thời gian thực"
 }

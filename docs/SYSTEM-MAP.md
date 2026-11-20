@@ -1,5 +1,7 @@
 # System map
 
+**English** · [Русский](ru/SYSTEM-MAP.md)
+
 Open **More tools → System map**, or **Open the system map** on the Overview page, to inspect the current installation. The page is
 available to the main administrator. It refreshes every five seconds while visible;
 hidden tabs pause reads. Failed reads retain the last snapshot with a stale indicator.

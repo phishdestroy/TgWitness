@@ -414,6 +414,12 @@ def verification_json(args):
         if not args.evidence:
             notes.append("History report signature only: pass --evidence to cross-check the journal and counts.")
     else:
+        if "statement" not in data:
+            if {"document", "signed"} <= set(data):
+                raise ValueError("This is a case documentation file, not an evidence archive. Check it with: "
+                                 "python -m tgwitness.documentation_verify FILE --fingerprint FINGERPRINT")
+            raise ValueError("Unrecognised JSON file: it is not a TgWitness signed report, proof, dossier, "
+                             "selection or board document.")
         shown = "dossier"
         result = verify_dossier(args.bundle, args.fingerprint, args.evidence)
         pinned = bool(args.fingerprint)

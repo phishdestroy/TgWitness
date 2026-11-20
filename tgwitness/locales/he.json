@@ -10654,6 +10654,8 @@
   "Show in chat: message #{id}": "הצג בצ'אט: הודעה מס' {id}",
   "Open in chat: message #{id}": "פתח בצ'אט: הודעה מס' {id}",
   "Sticker {emoji}": "מדבקה {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target אינו מופיע בין הדיאלוגים שהחשבון הזה קרא. רענן את רשימת הקבוצות או הגדל את מגבלת רשימת הצ'אטים תחת \"פרמטרים\".",
+  "Exported completely": "יוצא במלואו",
   "Quiz": "חידון",
   "Live location": "מיקום בזמן אמת"
 }

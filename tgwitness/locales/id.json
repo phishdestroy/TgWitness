@@ -10552,6 +10552,8 @@
   "Show in chat: message #{id}": "Tampilkan di obrolan: pesan #{id}",
   "Open in chat: message #{id}": "Buka di obrolan: pesan #{id}",
   "Sticker {emoji}": "Stiker {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Target tidak termasuk dalam dialog yang dibaca oleh akun ini. Segarkan daftar grup atau tingkatkan batas daftar obrolan di Parameter.",
+  "Exported completely": "Diekspor sepenuhnya",
   "Quiz": "Kuis",
   "Live location": "Lokasi real-time"
 }

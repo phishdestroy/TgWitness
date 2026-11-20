@@ -10603,6 +10603,8 @@
   "Show in chat: message #{id}": "Sohbette göster: {id} numaralı mesaj",
   "Open in chat: message #{id}": "Sohbette aç: {id} numaralı mesaj",
   "Sticker {emoji}": "Çıkartma {emoji}",
+  "Target is not among the dialogs this account read. Refresh the group list or raise the chat list limit in Parameters.": "Hedef, bu hesabın okuduğu diyaloglar arasında yer almıyor. Grup listesini yenileyin veya Parametreler bölümünden sohbet listesi sınırını artırın.",
+  "Exported completely": "Tamamen dışa aktarıldı",
   "Quiz": "Test",
   "Live location": "Canlı konum"
 }

@@ -1,5 +1,7 @@
 [TgWitness](../README.md) / [Documentation](README.md) / Development
 
+**English** · [Русский](ru/CODE-MAP.md)
+
 ![Build and verify](assets/presentation/section-tools-static.svg)
 
 # Code and validation map
