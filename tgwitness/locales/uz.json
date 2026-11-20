@@ -10602,5 +10602,12 @@
   "Show in chat": "Suhbatda ko'rsating",
   "Show in chat: message #{id}": "Suhbatda ko'rsating: xabar #{id}",
   "Open in chat: message #{id}": "Suhbatda oching: xabar #{id}",
-  "Sticker {emoji}": "Stiker {emoji}"
+  "Sticker {emoji}": "Stiker {emoji}",
+  "This field is required.": "Ushbu maydon majburiy.",
+  "Enter at least {n} characters.": "Kamida {n} belgini kiriting.",
+  "Enter at most {n} characters.": "{n} belgigacha kiriting.",
+  "The value must be at least {n}.": "Qiymat kamida {n} bo'lishi kerak.",
+  "The value must be at most {n}.": "Qiymat eng ko'pi bilan {n} bo'lishi kerak.",
+  "Enter a whole number.": "Butun son kiring.",
+  "Enter a number.": "Raqamni kiriting."
 }

@@ -10602,5 +10602,12 @@
   "Show in chat": "Sohbette göster",
   "Show in chat: message #{id}": "Sohbette göster: {id} numaralı mesaj",
   "Open in chat: message #{id}": "Sohbette aç: {id} numaralı mesaj",
-  "Sticker {emoji}": "Çıkartma {emoji}"
+  "Sticker {emoji}": "Çıkartma {emoji}",
+  "This field is required.": "Bu alan zorunludur.",
+  "Enter at least {n} characters.": "En az {n} karakter girin.",
+  "Enter at most {n} characters.": "En fazla {n} karakter girin.",
+  "The value must be at least {n}.": "Değer en az {n} olmalıdır.",
+  "The value must be at most {n}.": "Değer, en fazla {n} olmalıdır.",
+  "Enter a whole number.": "Bir tam sayı girin.",
+  "Enter a number.": "Bir sayı girin."
 }

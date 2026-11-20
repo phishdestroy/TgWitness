@@ -10551,5 +10551,12 @@
   "Show in chat": "チャットに表示",
   "Show in chat: message #{id}": "チャットに表示：メッセージ #{id}",
   "Open in chat: message #{id}": "チャットで開く：メッセージ #{id}",
-  "Sticker {emoji}": "ステッカー {emoji}"
+  "Sticker {emoji}": "ステッカー {emoji}",
+  "This field is required.": "この欄は必須です。",
+  "Enter at least {n} characters.": "{n}文字以上を入力してください。",
+  "Enter at most {n} characters.": "最大{n}文字まで入力してください。",
+  "The value must be at least {n}.": "値は少なくとも{n}以上でなければなりません。",
+  "The value must be at most {n}.": "値は{n}以下でなければなりません。",
+  "Enter a whole number.": "整数を入力してください。",
+  "Enter a number.": "数字を入力してください。"
 }

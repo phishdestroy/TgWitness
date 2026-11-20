@@ -10612,5 +10612,12 @@
   "Show in chat": "Mostra nella chat",
   "Show in chat: message #{id}": "Mostra nella chat: messaggio n. {id}",
   "Open in chat: message #{id}": "Apri nella chat: messaggio n. {id}",
-  "Sticker {emoji}": "Adesivo {emoji}"
+  "Sticker {emoji}": "Adesivo {emoji}",
+  "This field is required.": "Questo campo è obbligatorio.",
+  "Enter at least {n} characters.": "Inserisci almeno {n} caratteri.",
+  "Enter at most {n} characters.": "Inserisci al massimo {n} caratteri.",
+  "The value must be at least {n}.": "Il valore deve essere almeno {n}.",
+  "The value must be at most {n}.": "Il valore deve essere al massimo {n}.",
+  "Enter a whole number.": "Inserisci un numero intero.",
+  "Enter a number.": "Inserisci un numero."
 }

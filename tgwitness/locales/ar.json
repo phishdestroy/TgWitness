@@ -10806,5 +10806,12 @@
   "Show in chat": "إظهار في الدردشة",
   "Show in chat: message #{id}": "إظهار في الدردشة: الرسالة رقم {id}",
   "Open in chat: message #{id}": "فتح في الدردشة: الرسالة رقم {id}",
-  "Sticker {emoji}": "ملصق {emoji}"
+  "Sticker {emoji}": "ملصق {emoji}",
+  "This field is required.": "هذا الحقل إلزامي.",
+  "Enter at least {n} characters.": "أدخل ما لا يقل عن {n} حرفًا.",
+  "Enter at most {n} characters.": "أدخل {n} حرفًا كحد أقصى.",
+  "The value must be at least {n}.": "يجب ألا تقل القيمة عن {n}.",
+  "The value must be at most {n}.": "يجب ألا تتجاوز القيمة {n}.",
+  "Enter a whole number.": "أدخل عددًا صحيحًا.",
+  "Enter a number.": "أدخل رقمًا."
 }

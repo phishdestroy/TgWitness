@@ -10551,5 +10551,12 @@
   "Show in chat": "채팅에 표시",
   "Show in chat: message #{id}": "채팅에 표시: 메시지 #{id}",
   "Open in chat: message #{id}": "채팅에서 열기: 메시지 #{id}",
-  "Sticker {emoji}": "스티커 {emoji}"
+  "Sticker {emoji}": "스티커 {emoji}",
+  "This field is required.": "이 항목은 필수 입력 사항입니다.",
+  "Enter at least {n} characters.": "{n} 이상의 문자를 입력하세요.",
+  "Enter at most {n} characters.": "{n}자 이내로 입력하세요.",
+  "The value must be at least {n}.": "값은 최소한 {n} 이상이어야 합니다.",
+  "The value must be at most {n}.": "값은 {n} 이하여야 합니다.",
+  "Enter a whole number.": "정수를 입력하세요.",
+  "Enter a number.": "숫자를 입력하세요."
 }

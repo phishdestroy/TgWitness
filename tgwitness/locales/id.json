@@ -10551,5 +10551,12 @@
   "Show in chat": "Tampilkan di obrolan",
   "Show in chat: message #{id}": "Tampilkan di obrolan: pesan #{id}",
   "Open in chat: message #{id}": "Buka di obrolan: pesan #{id}",
-  "Sticker {emoji}": "Stiker {emoji}"
+  "Sticker {emoji}": "Stiker {emoji}",
+  "This field is required.": "Kolom ini wajib diisi.",
+  "Enter at least {n} characters.": "Masukkan setidaknya {n} karakter.",
+  "Enter at most {n} characters.": "Masukkan paling banyak {n} karakter.",
+  "The value must be at least {n}.": "Nilainya harus setidaknya {n}.",
+  "The value must be at most {n}.": "Nilainya harus paling banyak {n}.",
+  "Enter a whole number.": "Masukkan bilangan bulat.",
+  "Enter a number.": "Masukkan sebuah angka."
 }

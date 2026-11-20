@@ -10551,5 +10551,12 @@
   "Show in chat": "Hiển thị trong cửa sổ trò chuyện",
   "Show in chat: message #{id}": "Hiển thị trong cuộc trò chuyện: tin nhắn số {id}",
   "Open in chat: message #{id}": "Mở trong cửa sổ trò chuyện: tin nhắn số {id}",
-  "Sticker {emoji}": "Hình dán {emoji}"
+  "Sticker {emoji}": "Hình dán {emoji}",
+  "This field is required.": "Trường này là trường bắt buộc.",
+  "Enter at least {n} characters.": "Vui lòng nhập ít nhất {n} ký tự.",
+  "Enter at most {n} characters.": "Nhập tối đa {n} ký tự.",
+  "The value must be at least {n}.": "Giá trị phải lớn hơn hoặc bằng {n}.",
+  "The value must be at most {n}.": "Giá trị này phải nhỏ hơn hoặc bằng {n}.",
+  "Enter a whole number.": "Hãy nhập một số nguyên.",
+  "Enter a number.": "Hãy nhập một số."
 }

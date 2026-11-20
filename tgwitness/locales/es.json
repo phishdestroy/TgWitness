@@ -10612,5 +10612,12 @@
   "Show in chat": "Mostrar en el chat",
   "Show in chat: message #{id}": "Mostrar en el chat: mensaje n.º {id}",
   "Open in chat: message #{id}": "Abrir en el chat: mensaje n.º {id}",
-  "Sticker {emoji}": "Pegatina {emoji}"
+  "Sticker {emoji}": "Pegatina {emoji}",
+  "This field is required.": "Este campo es obligatorio.",
+  "Enter at least {n} characters.": "Introduce al menos {n} caracteres.",
+  "Enter at most {n} characters.": "Introduce como máximo {n} caracteres.",
+  "The value must be at least {n}.": "El valor debe ser, como mínimo, {n}.",
+  "The value must be at most {n}.": "El valor debe ser como máximo {n}.",
+  "Enter a whole number.": "Introduce un número entero.",
+  "Enter a number.": "Introduce un número."
 }

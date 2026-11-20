@@ -10551,5 +10551,12 @@
   "Show in chat": "แสดงในแชท",
   "Show in chat: message #{id}": "แสดงในแชท: ข้อความ #{id}",
   "Open in chat: message #{id}": "เปิดในแชท: ข้อความ #{id}",
-  "Sticker {emoji}": "สติ๊กเกอร์ {emoji}"
+  "Sticker {emoji}": "สติ๊กเกอร์ {emoji}",
+  "This field is required.": "ช่องนี้ต้องกรอกข้อมูล",
+  "Enter at least {n} characters.": "กรุณาป้อนตัวอักษรอย่างน้อย{n}",
+  "Enter at most {n} characters.": "ใส่ตัวอักษรได้สูงสุด{n} ตัว",
+  "The value must be at least {n}.": "ค่าต้องไม่น้อยกว่า{n}",
+  "The value must be at most {n}.": "ค่าต้องไม่เกิน{n}",
+  "Enter a whole number.": "กรอกจำนวนเต็ม",
+  "Enter a number.": "กรอกตัวเลข"
 }

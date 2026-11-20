@@ -10602,5 +10602,12 @@
   "Show in chat": "چیٹ میں دکھائیں",
   "Show in chat: message #{id}": "چیٹ میں دکھائیں: پیغام #{id}",
   "Open in chat: message #{id}": "چیٹ میں کھولیں: پیغام #{id}",
-  "Sticker {emoji}": "اسٹیکر {emoji}"
+  "Sticker {emoji}": "اسٹیکر {emoji}",
+  "This field is required.": "یہ فیلڈ ضروری ہے۔",
+  "Enter at least {n} characters.": "کم از کم {n} حروف درج کریں۔",
+  "Enter at most {n} characters.": "زیادہ سے زیادہ {n} حروف درج کریں۔",
+  "The value must be at least {n}.": "قدر کم از کم {n} ہونی چاہیے۔",
+  "The value must be at most {n}.": "قدر زیادہ سے زیادہ{n} ہونی چاہیے۔",
+  "Enter a whole number.": "ایک صحیح عدد درج کریں۔",
+  "Enter a number.": "ایک عدد درج کریں۔"
 }

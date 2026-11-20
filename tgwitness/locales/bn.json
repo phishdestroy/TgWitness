@@ -10602,5 +10602,12 @@
   "Show in chat": "চ্যাটে দেখান",
   "Show in chat: message #{id}": "চ্যাটে দেখুন: বার্তা #{id}",
   "Open in chat: message #{id}": "চ্যাটে খুলুন: বার্তা #{id}",
-  "Sticker {emoji}": "স্টিকার {emoji}"
+  "Sticker {emoji}": "স্টিকার {emoji}",
+  "This field is required.": "এই ক্ষেত্রটি আবশ্যক।",
+  "Enter at least {n} characters.": "কমপক্ষে {n}টি অক্ষর লিখুন।",
+  "Enter at most {n} characters.": "সর্বোচ্চ {n}টি অক্ষর লিখুন।",
+  "The value must be at least {n}.": "মানটি কমপক্ষে {n} হতে হবে।",
+  "The value must be at most {n}.": "মানটি সর্বোচ্চ {n} হতে হবে।",
+  "Enter a whole number.": "একটি পূর্ণসংখ্যা লিখুন।",
+  "Enter a number.": "একটি সংখ্যা লিখুন।"
 }
