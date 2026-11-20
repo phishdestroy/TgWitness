@@ -10569,5 +10569,7 @@
   "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages at most 1.5x their median. A chat's first 7 days are not flagged. A person who first posts in several chats is counted once in each.": "신호 표시 기준: 첫 게시물을 올린 사용자가 최소 5명이며, 14일간의 중앙값의 3배 이하이고, 메시지 수는 중앙값의 최대 1.5배 이하인 경우. 채팅 시작 후 첫 7일 동안은 신호가 표시되지 않습니다. 여러 채팅에 처음으로 게시물을 올린 사용자는 각 채팅에서 한 번씩만 집계됩니다.",
   "Choose at least {n}.": "{n}을 최소한 하나 선택하십시오.",
   "Enter a date such as 2026-10-01 or a time with a timezone.": "2026-10-01과 같은 날짜나 시간대 정보가 포함된 시간을 입력하세요.",
-  "Choose one of the allowed values.": "허용된 값 중 하나를 선택하십시오."
+  "Choose one of the allowed values.": "허용된 값 중 하나를 선택하십시오.",
+  "Flagged: at least 5 first-time posters and 3x their 14-day median, with messages under 1.5x their median. A chat's first 7 days are not flagged.": "플래그 지정 기준: 첫 게시자가 5명 이상이고, 14일 동안의 중앙값의 3배 이하이며, 메시지 수가 중앙값의 1.5배 미만인 경우. 채팅 시작 후 첫 7일 동안은 플래그가 지정되지 않습니다.",
+  "Post author: {name}": "글 작성자: {name}"
 }
