@@ -100,6 +100,33 @@ for (const [kind, limit] of Object.entries(mediaTypes)) {
   }
   row.append(action); $("media-rules").append(row);
 }
+const mediaPresets = {
+  messages: {action: "exclude", types: []},
+  photos: {action: "download", types: ["photo"]},
+  light: {action: "download", types: ["photo", "voice", "video_note", "document"]},
+  all: {action: "download", types: Object.keys(mediaTypes)}};
+let applyingPreset = false;
+function applyPreset() {
+  const preset = mediaPresets[$("media-preset").value];
+  if (!preset) return;
+  applyingPreset = true;
+  $("media-action").value = preset.action;
+  for (const kind of Object.keys(mediaTypes)) {
+    $("type-" + kind).checked = preset.types.includes(kind);
+    $("limit-" + kind).value = $("common-limit").value;
+    $("action-" + kind).value = "";
+  }
+  applyingPreset = false;
+}
+$("common-limit").addEventListener("input", () => {
+  $("common-limit-value").textContent = $("common-limit").value;
+  if ($("media-preset").value === "custom") for (const kind of Object.keys(mediaTypes)) $("limit-" + kind).value = $("common-limit").value;
+  else applyPreset();
+});
+$("media-preset").addEventListener("change", applyPreset);
+$("media-rules").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
+$("media-action").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
+applyPreset();
 function selection() {
   const journal = $("export-mode").value === "journal";
   const selected = Array.from($("chats").selectedOptions, option => Number(option.value));
@@ -269,8 +296,7 @@ $("budget-fit").onclick = () => {
   clearAssessment(); $("preflight").click();
 };
 $("budget-messages").onclick = () => {
-  $("media-action").value = "exclude";
-  for (const kind of Object.keys(mediaTypes)) $("action-" + kind).value = "";
+  $("media-preset").value = "messages"; applyPreset();
   for (const id of ["include-avatars", "preserve-ephemeral-media", "account-photos", "account-stories", "account-other"]) $(id).checked = false;
   clearAssessment(); $("preflight").click();
 };
