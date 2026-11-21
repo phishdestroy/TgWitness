@@ -1,0 +1,95 @@
+name: Sealed capture (development build)
+
+# Runs the sealed capture path with the collector built from THIS repository and ref, so changes can be tested
+# in a fork before a release is pinned. The result is attested to this workflow, not to the approved
+# sealed-collector release, so `tgwitness.sealed_verify` rejects it by design. Check it with
+# `python -m tgwitness.verify evidence.zip` after decrypting. Use only for testing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipient:
+        description: Public recipient from the setup helper (never your private key)
+        required: true
+        type: string
+      session_minutes:
+        description: Maximum capture time
+        type: choice
+        default: '60'
+        options: ['30', '60', '120']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sealed-dev-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    name: Development capture from ${{ github.ref_name }}
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 220
+    steps:
+      - name: Checkout this ref
+        timeout-minutes: 5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: trusted-source
+          persist-credentials: false
+          submodules: false
+      - name: Start a fresh restricted capsule
+        timeout-minutes: 35
+        working-directory: trusted-source
+        env:
+          RECIPIENT: ${{ inputs.recipient }}
+          SESSION_MINUTES: ${{ inputs.session_minutes }}
+          CAPTURE_CLIENT: api
+        run: python3 -I scripts/sealed_runner.py start
+      - name: Deliver encrypted connection
+        timeout-minutes: 5
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: sealed-connection
+          path: ${{ runner.temp }}/tgwitness-sealed-${{ github.run_id }}-${{ github.run_attempt }}/public/connection.tgwsealed
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Wait for capture and stop network-facing processes
+        id: capture
+        timeout-minutes: 135
+        working-directory: trusted-source
+        run: python3 -I scripts/sealed_runner.py wait
+      - name: Attest the development archive
+        if: steps.capture.outputs.subject != ''
+        timeout-minutes: 5
+        id: attest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
+        with:
+          subject-path: ${{ steps.capture.outputs.subject }}
+      - name: Encrypt evidence and its attestation for the recipient
+        if: steps.capture.outputs.subject != ''
+        timeout-minutes: 12
+        working-directory: trusted-source
+        env:
+          ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: python3 -I scripts/sealed_runner.py pack
+      - name: Deliver encrypted result
+        if: steps.capture.outputs.subject != ''
+        timeout-minutes: 15
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: sealed-result
+          path: ${{ runner.temp }}/tgwitness-sealed-${{ github.run_id }}-${{ github.run_attempt }}/public/delivery*.tgwsealed
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Remove temporary private state
+        timeout-minutes: 3
+        if: always()
+        working-directory: trusted-source
+        run: python3 -I scripts/sealed_runner.py cleanup

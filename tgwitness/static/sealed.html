@@ -28,7 +28,7 @@
 <article><h3 data-i18n>Chat event journal</h3><p data-i18n>History and changes observed in one chat through the regular API. Attachment rules and avatars are configurable, account categories, date filters and Desktop views do not apply.</p></article>
 </div>
 <fieldset id="capture-settings"><legend data-i18n>Export settings</legend>
-<label for="export-mode" data-i18n>Export mode</label><select id="export-mode"><option value="takeout" data-i18n>Telegram Takeout · official export mechanism</option><option value="regular" data-i18n>Regular Telegram API</option><option value="journal" data-i18n>Chat event journal</option></select>
+<label for="export-mode" data-i18n>Export mode</label><select id="export-mode"><option value="auto" selected data-i18n>Automatic · recommended</option><option value="takeout" data-i18n>Telegram Takeout · official export mechanism</option><option value="regular" data-i18n>Regular Telegram API</option><option value="journal" data-i18n>Chat event journal</option></select>
 <p id="mode-description" class="hint" role="status"></p>
 <label for="export-scope" data-i18n>Export scope</label><select id="export-scope"><option value="account" data-i18n>All accessible chats</option><option value="chat" data-i18n>Selected chats</option></select>
 <div id="chat-picker" hidden><button class="secondary" id="refresh" data-i18n>Load my chats</button><p id="dialog-note" class="hint"></p><label for="chats" data-i18n>Chats to include</label><select id="chats" multiple size="6" aria-describedby="chat-help"></select><p id="chat-help" class="hint"></p></div>

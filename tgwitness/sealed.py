@@ -324,9 +324,34 @@ class Session:
             self.phase = "sealed"
             private_write(self.output / "result.json", canonical({"phase": "sealed"} if archive is not None else SEALED_RESULT))
         except Exception as exc:
-            self.phase, self.reason = "failed", type(exc).__name__
+            failure = type(exc).__name__
             (self.output / "evidence.zip").unlink(missing_ok=True)
+            if had_capture and not cancel and await self.salvage(failure):
+                self.phase, self.reason = "sealed", "salvaged_after_" + failure
+                return
+            self.phase, self.reason = "failed", failure
             private_write(self.output / "result.json", canonical({"phase": "failed"}))
+
+    async def salvage(self, failure):
+        """Keep what was collected when acquisition or full packaging fails: the signed journal records the failure."""
+        try:
+            self.store.append("sealed.failure", {"error": failure, "salvaged": "compact_journal",
+                "meaning": "Collection or full packaging failed. This archive is the compact signed journal of everything "
+                           "recorded before the failure; it is incomplete within the selected scope."})
+            for leftover in self.output.glob("delivery-*"):
+                leftover.unlink(missing_ok=True)
+            archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", compact=True))
+            if archive.stat().st_size > PART_BYTES:
+                await complete_in_thread(self.write_parts, archive)
+                archive.unlink()
+                private_write(self.output / "result.json", canonical(SEALED_RESULT))
+            else:
+                shutil.move(str(archive), self.output / "evidence.zip")
+                private_write(self.output / "result.json", canonical({"phase": "sealed"}))
+            return True
+        except Exception:
+            (self.output / "evidence.zip").unlink(missing_ok=True)
+            return False
 
     async def monitor(self):
         while self.phase not in TERMINAL:

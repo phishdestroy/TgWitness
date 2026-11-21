@@ -138,8 +138,9 @@ function selection() {
 let assessedSelection = null, assessmentResult = null;
 function describeMode() {
   const mode = $("export-mode").value;
-  $("mode-description").textContent = mode === "takeout" ? tr(
-    "Official export requests, with Telegram approval when required. Settings stay configurable below.") : mode === "regular" ? tr(
+  $("mode-description").textContent = mode === "auto" ? tr(
+    "Uses Takeout when Telegram allows it and the regular API otherwise. This runner signs in fresh, and Telegram usually refuses Takeout for sessions younger than 24 hours, so expect the regular API. The archive records which method was used.") : mode === "takeout" ? tr(
+    "Takeout only. Telegram usually refuses it for a session signed in less than 24 hours ago, and this runner always signs in fresh, so the capture may stop waiting for approval. Prefer Automatic.") : mode === "regular" ? tr(
     "Regular API cannot enumerate groups and channels you left, and contacts include Telegram users rather than the full saved phone contact list. Rate limits still apply.") : tr(
     "One chat, its history and changes observed while this runner is active.");
   $("chat-help").textContent = mode === "journal" ? tr("Choose one chat.") : tr(
