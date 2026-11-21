@@ -86,6 +86,7 @@ async def preview(exports, options, *, sample=True):
             requested = time.monotonic()
             messages = await collector.client.get_messages(dialog.entity, limit=MESSAGES_PER_CHAT)
             timing = history_sample(messages, time.monotonic() - requested)
+            timing["chat_id"], timing["kind"] = utils.get_peer_id(dialog.entity), kind_of(dialog.entity) or "private"
             observed["chats"].append(timing)
             observed["sampled_chats"] += 1
             for message in messages:
@@ -187,6 +188,7 @@ async def preview_capture(collector, chat_id, settings, remaining_seconds):
             requested = time.monotonic()
             rows = await collector.client.get_messages(entity, limit=MESSAGES_PER_CHAT)
         timing = history_sample(rows, time.monotonic() - requested)
+        timing["chat_id"] = chat_id
         sample["chats"].append(timing)
         for message in rows:
             sample["messages_examined"] += 1

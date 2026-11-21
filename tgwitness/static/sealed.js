@@ -150,6 +150,7 @@ function clearAssessment() {
   assessedSelection = null; assessmentResult = null; $("save-selection").disabled = true;
   $("preflight-result").textContent = ""; $("preflight-details").hidden = true;
   $("preflight-budget").textContent = ""; $("budget-actions").hidden = true;
+  $("budget-plan").hidden = true; $("budget-fit").hidden = true;
   const journal = $("export-mode").value === "journal";
   $("account-options").hidden = journal;
   $("export-scope").disabled = journal;
@@ -211,7 +212,54 @@ function renderAssessment(result) {
   $("budget-actions").hidden = !plan.suggestions.length;
   $("budget-messages").hidden = !plan.suggestions.includes("messages_only");
   $("budget-chats").hidden = !plan.suggestions.includes("fewer_chats") || $("export-mode").value === "journal";
+  renderPlan(plan, format);
 }
+function chatName(id) {
+  const option = Array.from($("chats").options).find(item => Number(item.value) === id);
+  return option ? option.textContent : tr("Chat {id}", {id});
+}
+function renderPlan(plan, format) {
+  const rows = plan.per_chat || [], body = $("budget-table").tBodies[0];
+  body.replaceChildren();
+  for (const chat of rows) {
+    const row = document.createElement("tr");
+    for (const value of [chatName(chat.chat_id), chat.unknown ? "?" : (chat.messages || 0).toLocaleString(),
+      chat.unknown ? "?" : format(chat.download_bytes) + (chat.unknown_size_files ? " +" : ""),
+      chat.unknown ? tr("not measured") : tr("{n} min", {n: Math.ceil((chat.seconds || 0) / 60)})]) {
+      const cell = document.createElement("td"); cell.textContent = value; row.append(cell);
+    }
+    if (plan.fit !== "estimated_fit" && (plan.fits_now || []).includes(chat.chat_id)) row.className = "fits";
+    body.append(row);
+  }
+  const recommended = plan.recommended_session_minutes;
+  $("budget-recommendation").textContent = plan.fit === "estimated_fit" ? tr(
+    "Everything selected fits this run.") : recommended ? tr(
+    "This selection needs a {minutes}-minute session. Finish or cancel this run and start a new one with {minutes} minutes, or keep only the chats that fit.",
+    {minutes: recommended}) : (plan.split_runs || []).length ? tr(
+    "Even a 120-minute session is not enough for everything selected.") : tr(
+    "Not all selected data could be measured, so no session length can be recommended.");
+  const list = $("budget-run-list"); list.replaceChildren();
+  for (const run of plan.split_runs || []) {
+    const item = document.createElement("li");
+    item.textContent = run.chat_ids.map(chatName).join(", ") + " — " + (run.unmeasured ? tr("not measured") :
+      tr("about {n} min of {total}", {n: Math.ceil(run.seconds / 60), total: run.session_minutes})) +
+      (run.exceeds_one_run ? " — " + tr("too large for one run: limit the dates") : "");
+    list.append(item);
+  }
+  $("budget-runs").hidden = !(plan.split_runs || []).length;
+  const fits = plan.fits_now || [];
+  $("budget-fit").hidden = plan.fit === "estimated_fit" || !fits.length || fits.length === rows.length || $("export-mode").value === "journal";
+  $("budget-fit").dataset.chats = JSON.stringify(fits);
+  $("budget-plan").hidden = !rows.length;
+}
+$("budget-fit").onclick = () => {
+  const keep = new Set(JSON.parse($("budget-fit").dataset.chats || "[]"));
+  $("export-scope").value = "chat"; clearAssessment();
+  const options = Array.from($("chats").options);
+  if (!options.length) { $("dialog-note").textContent = tr("Load my chats first, then press this button again."); $("refresh").focus(); return; }
+  for (const option of options) option.selected = keep.has(Number(option.value));
+  clearAssessment(); $("preflight").click();
+};
 $("budget-messages").onclick = () => {
   $("media-action").value = "exclude";
   for (const kind of Object.keys(mediaTypes)) $("action-" + kind).value = "";
