@@ -24,6 +24,7 @@ function translate() {
     if (!english.has(el)) english.set(el, el.textContent);
     el.textContent = tr(english.get(el));
   });
+  $("chat-search").placeholder = tr("Search chats"); $("chat-search").setAttribute("aria-label", tr("Search chats"));
 }
 $("language").onchange = () => {
   lang = $("language").value; translate(); describeMode();
@@ -73,12 +74,82 @@ bind("refresh", async () => {
   const result = await api("dialogs"); $("chats").replaceChildren();
   result.dialogs.forEach(chat => {const option = document.createElement("option");
     option.value = String(chat.chat_id); option.textContent = `${chat.title} (${chat.chat_id})`;
+    option.dataset.title = chat.title || ""; option.dataset.kind = chat.kind || "";
     $("chats").append(option);
   });
+  renderChatList();
   $("collect").disabled = !result.dialogs.length;
   $("preflight").disabled = !result.dialogs.length;
   clearAssessment();
   $("dialog-note").textContent = result.may_be_truncated ? tr("The dialog list reached its limit; some chats may be missing.") : "";
+});
+const LIMIT_STEPS = [1, 2, 5, 8, 10, 20, 50, 100, 200, 500, 1000, 2000];
+const commonLimit = () => LIMIT_STEPS[Number($("common-limit").value)] || 50;
+let chatKind = "";
+const kindGroup = kind => kind === "supergroup" ? "group" : kind;
+function renderChatList() {
+  const list = $("chat-list"); list.replaceChildren();
+  const single = $("export-mode").value === "journal";
+  for (const option of $("chats").options) {
+    const row = document.createElement("label"), box = document.createElement("input"), name = document.createElement("span"), meta = document.createElement("span");
+    row.className = "chat-row"; row.dataset.kind = kindGroup(option.dataset.kind || "");
+    row.dataset.search = ((option.dataset.title || "") + " " + option.value).toLowerCase();
+    box.type = single ? "radio" : "checkbox"; box.name = "chat-pick"; box.value = option.value; box.checked = option.selected;
+    name.textContent = option.dataset.title || option.value; meta.className = "chat-meta";
+    meta.textContent = (option.dataset.kind ? tr(kindLabels[kindGroup(option.dataset.kind)] || option.dataset.kind) + " · " : "") + option.value;
+    row.append(box, name, meta); list.append(row);
+  }
+  const loaded = $("chats").options.length > 0;
+  for (const id of ["chat-list", "chat-list-footer", "chat-search", "chat-kinds"]) $(id).hidden = !loaded;
+  filterChatList();
+}
+const kindLabels = {private: "Personal", bot: "Bots", group: "Groups", channel: "Channels"};
+function filterChatList() {
+  const query = $("chat-search").value.trim().toLowerCase();
+  for (const row of $("chat-list").children) row.hidden = (chatKind && row.dataset.kind !== chatKind) || (query && !row.dataset.search.includes(query));
+  syncChatList();
+}
+function syncChatList() {
+  if (!$("chat-list").children.length) return;
+  const single = $("export-mode").value === "journal", selected = new Set(Array.from($("chats").selectedOptions, o => o.value));
+  for (const box of $("chat-list").querySelectorAll("input")) {
+    if ((box.type === "radio") !== single) {renderChatList(); return;}
+    box.checked = selected.has(box.value);
+  }
+  $("chat-count").textContent = tr("{selected} of {total} chats selected", {selected: selected.size, total: $("chats").options.length});
+  $("chat-all").hidden = single;
+}
+$("chat-list").addEventListener("input", event => {
+  const box = event.target, single = $("export-mode").value === "journal";
+  for (const option of $("chats").options) {
+    if (option.value === box.value) option.selected = box.checked;
+    else if (single && box.checked) option.selected = false;
+  }
+});
+$("chat-search").addEventListener("input", event => {event.stopPropagation(); filterChatList();});
+$("chat-kinds").addEventListener("click", event => {
+  const chip = event.target.closest("button[data-kind]"); if (!chip) return;
+  chatKind = chip.dataset.kind;
+  for (const other of $("chat-kinds").children) other.classList.toggle("active", other === chip);
+  filterChatList();
+});
+function pickShown(state) {
+  const shown = new Set(Array.from($("chat-list").children).filter(row => !row.hidden).map(row => row.querySelector("input").value));
+  for (const option of $("chats").options) {
+    if (!state) option.selected = false;
+    else if (shown.has(option.value)) option.selected = true;
+  }
+  clearAssessment();
+}
+$("chat-all").onclick = () => pickShown(true);
+$("chat-none").onclick = () => pickShown(false);
+for (const card of document.querySelectorAll('input[name="mode-card"]')) card.addEventListener("input", () => {
+  if (!card.checked) return;
+  $("export-mode").value = card.value === "account" ? $("export-method").value : card.value;
+  renderChatList();
+});
+$("export-method").addEventListener("input", () => {
+  if (document.querySelector('input[name="mode-card"]:checked')?.value === "account") $("export-mode").value = $("export-method").value;
 });
 const chatCategories = ["personal", "bots", "private_groups", "public_groups", "private_channels", "public_channels"];
 const mediaTypes = {photo: 20, video: 100, animation: 20, video_note: 50, voice: 20, audio: 50, sticker: 5, document: 50};
@@ -115,14 +186,14 @@ function applyPreset() {
   $("oversized-media").value = "hashes_only";
   for (const kind of Object.keys(mediaTypes)) {
     $("type-" + kind).checked = true;
-    $("limit-" + kind).value = $("common-limit").value;
+    $("limit-" + kind).value = String(commonLimit());
     $("action-" + kind).value = download.length && !download.includes(kind) ? "hashes_only" : "";
   }
   applyingPreset = false;
 }
 $("common-limit").addEventListener("input", () => {
-  $("common-limit-value").textContent = $("common-limit").value;
-  if ($("media-preset").value === "custom") for (const kind of Object.keys(mediaTypes)) $("limit-" + kind).value = $("common-limit").value;
+  $("common-limit-value").textContent = commonLimit() + " MB";
+  if ($("media-preset").value === "custom") for (const kind of Object.keys(mediaTypes)) $("limit-" + kind).value = String(commonLimit());
   else applyPreset();
 });
 $("media-preset").addEventListener("change", applyPreset);
@@ -195,12 +266,12 @@ function clearAssessment() {
   }
   const investigation = $("export-mode").value === "chats";
   const journal = $("export-mode").value === "journal" || investigation;
-  $("account-options").hidden = journal;
+  document.querySelectorAll("#capture-settings .account-only").forEach(element => {element.hidden = journal;});
   $("export-scope").disabled = journal;
   $("export-format").disabled = journal;
-  for (const id of ["export-scope", "export-format"]) {
-    $(id).hidden = journal; document.querySelector(`label[for="${id}"]`).hidden = journal;
-  }
+  const card = document.querySelector(`input[name="mode-card"][value="${journal ? (investigation ? "chats" : "journal") : "account"}"]`);
+  if (card && !card.checked) card.checked = true;
+  if (!journal) $("export-method").value = $("export-mode").value;
   $("account-other").disabled = $("export-mode").value !== "takeout";
   if ($("account-other").disabled) $("account-other").checked = false;
   $("takeout-notice").hidden = $("export-mode").value !== "takeout";
@@ -213,6 +284,11 @@ function clearAssessment() {
   if (!journal) $("messages-first").checked = true;
   $("chat-picker").hidden = !journal && $("export-scope").value === "account";
   $("chats").multiple = !journal || investigation; $("chats").size = journal && !investigation ? 1 : 8;
+  if (journal && !investigation) {
+    const chosen = Array.from($("chats").selectedOptions);
+    chosen.slice(1).forEach(option => {option.selected = false;});
+  }
+  syncChatList();
   $("collect").disabled = !$("chat-picker").hidden && !$("chats").selectedOptions.length;
   $("preflight").disabled = $("collect").disabled;
   describeMode();
@@ -309,7 +385,7 @@ $("budget-messages").onclick = () => {
   for (const id of ["include-avatars", "preserve-ephemeral-media", "account-photos", "account-stories", "account-other"]) $(id).checked = false;
   clearAssessment(); $("preflight").click();
 };
-$("budget-chats").onclick = () => {$("export-scope").value = "chat"; clearAssessment(); $("chats").focus();};
+$("budget-chats").onclick = () => {$("export-scope").value = "chat"; clearAssessment(); ($("chat-search").hidden ? $("refresh") : $("chat-search")).focus();};
 $("save-selection").onclick = () => {
   if (!assessedSelection) return;
   const url = URL.createObjectURL(new Blob([JSON.stringify(assessedSelection, null, 2) + "\n"], {type: "application/json"}));
