@@ -32,6 +32,29 @@
 </div>
 </details>
 
+<details id="purpose"><summary>What this mode is for</summary>
+<div class="cp-body">
+<p>GitHub Actions capture exists for one purpose: to let you export your own Telegram data quickly, safely and verifiably. A court, regulator or opposing party can confirm which code produced the archive, where it ran, and that no one, including you, altered it afterwards. GitHub acts as an independent witness to the run, not as a free server.</p>
+<h3>Deliberately limited by design</h3>
+<p>To keep its footprint on GitHub minimal, this mode supports a single, bounded export and nothing more:</p>
+<ul class="cp-checks">
+<li><strong>One session of up to 120 minutes</strong>, including sign-in and any Takeout wait imposed by Telegram.</li>
+<li><strong>An initial media budget of 4 GiB.</strong> Files beyond the budget or per-type limits are recorded by Telegram's server-side hashes only.</li>
+<li><strong>No full workspace.</strong> Continuous observation, search, case management and investigation tools are not available.</li>
+<li><strong>No resume.</strong> Once the runner ends, the capture is over; a new run starts a new capture.</li>
+<li><strong>Short retention.</strong> Encrypted results remain on GitHub for one day. Download them promptly.</li>
+</ul>
+<div class="cp-callout"><h3>Please don't misuse it</h3><p>This mode is not intended for:</p><ul><li>repeated, scheduled or continuous runs;</li><li>bulk harvesting of channels or groups;</li><li>collecting accounts that aren't yours, or offering capture to others as a service.</li></ul><p>Every run executes in your own GitHub account and is subject to the <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#actions">GitHub Terms for Actions</a>. GitHub monitors Actions usage. If it considers a run abusive, it may terminate jobs, restrict Actions, disable the repository or suspend your account.</p></div>
+<h3>Need more? Choose the right mode</h3>
+<div class="table-wrap"><table><thead><tr><th>Your goal</th><th>Recommended mode</th></tr></thead><tbody>
+<tr><td>A one-off, verifiable export of your own chat or account</td><td><strong>GitHub Actions capture</strong> (this page)</td></tr>
+<tr><td>Attested collection at scale, long-running or continuous</td><td><strong><a href="@@REF_HIGH_ASSURANCE@@">Phala Cloud · Intel TDX</a></strong></td></tr>
+<tr><td>Maximum speed and volume, attestation not required</td><td><strong><a href="@@GUIDE_SERVER@@">Self-hosted panel</a></strong> or <strong><a href="@@GUIDE_START@@">local installation</a></strong></td></tr>
+</tbody></table></div>
+<p><strong>Phala Cloud</strong> runs the full TgWitness workspace inside an Intel TDX confidential machine. Neither the cloud provider nor the operator can read its memory or interfere with collection, and the processor signs an attestation of exactly what code is running. A reviewer can verify it independently. It has no session time limit and supports continuous observation and complete exports.</p>
+</div>
+</details>
+
 <details id="modes"><summary>Choose what to collect</summary>
 <div class="cp-body">
 <div class="cp-grid cp-grid-3">

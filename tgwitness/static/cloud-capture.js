@@ -12,7 +12,7 @@
       Object.keys(languages).find(code => code === tag.split("-")[0]) || "en";
   };
   let lang = languageTag(requested), epoch = 0;
-  const initial = () => ({step: 1, key: null, privateKey: null, saved: false, connection: null,
+  const initial = () => ({step: 1, key: null, privateKey: null, saved: false, acknowledged: false, connection: null,
     repository: "", busy: false, error: "", note: "", delivered: false});
   let state = initial();
   const t = en => {
@@ -82,12 +82,14 @@
     return `<p class="capture-lead">${t("Start the collector on GitHub, then return here.")}</p>
       <ol class="capture-checklist"><li><strong>${t("Create your own fork")}</strong><p>${t("Copy the code to your GitHub account. The repository contains no chats.")}</p>${link("https://github.com/phishdestroy/TgWitness/fork", t("Create a fork"))}</li>
       <li><strong>${t("Copy the public key")}</strong><p>${t("Paste this value into recipient in the GitHub form. Keep sealed-key.json on your device.")}</p><div class="capture-copy"><textarea id="recipient" rows="3" readonly></textarea>${button("copy", t("Copy"), "secondary")}</div></li>
-      <li><strong>${t("Run Sealed chat capture")}</strong><p>${t("Enable Actions in your fork. Open the workflow, press Run workflow, paste recipient and choose 30, 60 or 120 minutes.")}</p>
+      <li><strong>${t("Run Sealed chat capture")}</strong>
+      <label class="check-label capture-confirm"><input id="capture-acknowledged" type="checkbox" ${state.acknowledged ? "checked" : ""}>${t("I understand this mode is for a one-off, verifiable export of my own data, not for repeated runs or bulk collection, and that misuse may lead GitHub to restrict or suspend my account.")}</label>
+      <p>${t("Enable Actions in your fork. Open the workflow, press Run workflow, paste recipient and choose 30, 60 or 120 minutes.")}</p>
       <label for="capture-repository">${t("Your fork (optional shortcut)")}</label><input id="capture-repository" placeholder="username/TgWitness" value="${esc(state.repository)}" autocomplete="off" spellcheck="false" maxlength="160">
-      <a id="capture-workflow-link" class="secondary" ${repository() ? `href="https://github.com/${esc(repository())}/actions/workflows/sealed-witness.yml"` : "hidden"} target="_blank" rel="noopener noreferrer">${t("Open Actions in my fork")}${icon("external")}</a></li></ol>
+      <a id="capture-workflow-link" class="secondary" ${repository() && state.acknowledged ? `href="https://github.com/${esc(repository())}/actions/workflows/sealed-witness.yml"` : "hidden"} target="_blank" rel="noopener noreferrer">${t("Open Actions in my fork")}${icon("external")}</a></li></ol>
       <details class="capture-command"><summary>${t("Choose API export or official client")}</summary><p>${t("Set client to api for full-account Takeout or regular API export. Set client to official_web for guarded Telegram Web observation with video. Choose official_egress=proxy and supply official_proxy, or explicitly choose direct to use the runner public IP without a proxy. This visual mode records one selected chat as rendered, without a custom Telegram API session.")}</p><p>${t("Keep proxy credentials in the repository Actions secrets OFFICIAL_PROXY_USERNAME and OFFICIAL_PROXY_PASSWORD, never in workflow input fields. An optional official_expected_ip requires that exit address; both modes stop on an observed exit change. Direct mode exposes the runner address to Telegram. A Quick Tunnel opens the temporary panel; it does not provide the account exit.")}</p></details>
       <p class="hint">${t("No GitHub token is needed here. GitHub account limits and usage rules apply.")}</p>
-      <div class="capture-actions">${button("next", t("Run started — continue") + icon("arrow"))}${button("back", t("Back"), "quiet")}</div>`;
+      <div class="capture-actions">${button("next", t("Run started — continue") + icon("arrow"), "primary", !state.acknowledged)}${button("back", t("Back"), "quiet")}</div>`;
   }
   function connectionStep() {
     return `<p class="capture-lead">${t("Keep the GitHub run active. Download sealed-connection from its Artifacts, unzip it, and select the file below.")}</p>
@@ -173,13 +175,14 @@ python -m tgwitness.sealed_verify evidence.parts.json --bundle attestation.jsonl
   root.addEventListener("input", event => {
     if (event.target.id !== "capture-repository") return;
     state.repository=event.target.value.trim();
-    const target=root.querySelector("#capture-workflow-link");target.hidden=!repository();
+    const target=root.querySelector("#capture-workflow-link");target.hidden=!repository() || !state.acknowledged;
     if (repository()) target.href="https://github.com/"+repository()+"/actions/workflows/sealed-witness.yml";
   });
   root.addEventListener("change", event => {
     const input=event.target;
     if (input.id === "capture-language") {lang=languageTag(input.value);render();return;}
     if (input.id === "capture-key-saved") {state.saved=input.checked;render();return;}
+    if (input.id === "capture-acknowledged") {state.acknowledged=input.checked;render();return;}
     const file=input.files?.[0];if (!file) return;
     if (input.id === "key-file") perform(async()=>{
       if (file.size > 16384) throw new Error(t("This is not a key file. Choose sealed-key.json."));
