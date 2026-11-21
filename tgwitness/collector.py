@@ -5221,15 +5221,20 @@ class Collector:
                 "telethon_layer": LAYER, "meaning": UNPARSED_MEANING.format(layer=LAYER)})
         return low
 
+    def regular_history_wait(self):
+        """Pause between regular history pages: Telethon sleeps a second after every page of a long chat. The client's
+        learned bulk pacer already spaces history requests and backs off after FloodWait, so with it no fixed pause."""
+        return 0 if getattr(self.client, "bulk_pacer", None) is not None else None
+
     @asynccontextmanager
     async def history_reader(self, entity):
         if not isinstance(entity, types.Channel):
-            yield self.client, None
+            yield self.client, self.regular_history_wait()
             return
         blocked = self.takeout_blocked()
         if blocked:
             self.note("telegram.takeout_unavailable", {"reason": blocked, "meaning": TAKEOUT_SKIPPED_MEANING[blocked]})
-            yield self.client, None
+            yield self.client, self.regular_history_wait()
             return
         try:
             session = await self.client(functions.account.InitTakeoutSessionRequest(
@@ -5242,7 +5247,7 @@ class Collector:
             self.note("telegram.takeout_unavailable", {
                 "error_type": type(exc).__name__, "retry_after": getattr(exc, "seconds", None),
                 "meaning": "History is read without a Takeout session, about three times slower."})
-            yield self.client, None
+            yield self.client, self.regular_history_wait()
             return
         from .account_export_transport import WrappedClient
         reader = WrappedClient(self.client, session.id)
