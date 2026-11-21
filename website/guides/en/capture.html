@@ -23,7 +23,7 @@
 <li>A GitHub account and your own fork of TgWitness. The fork contains code, not chats.</li>
 <li>A Telegram account you can sign in to by QR code or phone. <a href="@@GUIDE_DEDICATED_ACCOUNT@@">A separate account</a> is safer.</li>
 <li>A modern browser on your computer. Keep the wizard tab open until the end.</li>
-<li>Enough time: one session lasts up to 120 minutes, including sign-in and any Takeout approval.</li>
+<li>Enough time: you choose the session length, from 30 minutes to 5 hours, including sign-in and any Takeout approval.</li>
 </ul>
 <div class="cp-grid">
 <div class="cp-card cp-danger"><h3>Never put these into GitHub</h3><p>Phone numbers, login codes, Telegram passwords, the private key or a session never go into workflow inputs, commits, issues or logs. The only value GitHub receives is the public recipient key.</p></div>
@@ -38,7 +38,7 @@
 <h3>Deliberately limited by design</h3>
 <p>To keep its footprint on GitHub minimal, this mode supports a single, bounded export and nothing more:</p>
 <ul class="cp-checks">
-<li><strong>One session of up to 120 minutes</strong>, including sign-in and any Takeout wait imposed by Telegram.</li>
+<li><strong>One session, from 30 minutes to 5 hours as you choose</strong>, including sign-in and any Takeout wait imposed by Telegram. GitHub ends any job after 6 hours.</li>
 <li><strong>An initial media budget of 4 GiB.</strong> Files beyond the budget or per-type limits are recorded by Telegram's server-side hashes only.</li>
 <li><strong>No full workspace.</strong> Continuous observation, search, case management and investigation tools are not available.</li>
 <li><strong>No resume.</strong> Once the runner ends, the capture is over; a new run starts a new capture.</li>
@@ -58,11 +58,11 @@
 <details id="modes"><summary>Choose what to collect</summary>
 <div class="cp-body">
 <div class="cp-grid cp-grid-3">
-<div class="cp-card cp-option"><p class="cp-tag">Default</p><h3>Telegram Takeout</h3><p>All accessible chats or a selection, with dates, account categories, media rules and JSON/HTML views.</p><p class="cp-note">Telegram's official export. Telegram may ask for approval in another session, and the wait counts against your session time.</p></div>
-<div class="cp-card cp-option"><h3>Regular Telegram API</h3><p>The same account scope without starting Takeout.</p><p class="cp-note">Cannot list channels you have left or fetch Takeout-only personal data. Telegram rate limits still apply.</p></div>
+<div class="cp-card cp-option"><p class="cp-tag">Default</p><h3>Account export</h3><p>All accessible chats or a selection, with Telegram Desktop chat categories, dates, account data, media rules and JSON/HTML views.</p><p class="cp-note">The automatic method uses Takeout when Telegram allows it and the regular API otherwise. A fresh session usually gets the regular API; the archive records which one was used. You can require either method.</p></div>
+<div class="cp-card cp-option"><h3>Chat investigation</h3><p>Selected chats, each as its own signed chat archive: the authors of the messages with their message counts, the chat card, the admin log when this account can read it, and absent message IDs rechecked one by one.</p><p class="cp-note">Works for chats with content protection. Up to 50 chats per run, exported one after another.</p></div>
 <div class="cp-card cp-option"><h3>Chat event journal</h3><p>One chat: its history and the changes observed while the run is active.</p><p class="cp-note">Date filters, account categories and Desktop-style views do not apply.</p></div>
 </div>
-<p>All three modes receive the same GitHub attestation and encrypted delivery. Takeout is never silently replaced by the regular API.</p>
+<p>All modes receive the same GitHub attestation and encrypted delivery. When you require Takeout, it is never silently replaced by the regular API.</p>
 </div>
 </details>
 

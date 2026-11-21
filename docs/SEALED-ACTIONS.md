@@ -52,7 +52,7 @@ substitution on sample data. **Start my capture** opens the wizard.
    Confirm that you saved it to unlock the next step. If you already have a
    delivery file, load the saved key and choose **I already have an archive**.
 3. Fork TgWitness, enable Actions in the fork, and run **Sealed chat capture**.
-   Paste the public recipient and choose 30, 60, or 120 minutes. Never put a
+   Paste the public recipient and choose a session length from 30 minutes to 5 hours. Never put a
    phone number, login code, Telegram password, private key, or session in
    workflow inputs, commits, issues, or logs.
 4. During the run, download **sealed-connection** from Artifacts and unzip it.
@@ -68,9 +68,11 @@ substitution on sample data. **Start my capture** opens the wizard.
    fields empty to use the built-in pool; a partial or malformed pair is rejected.
    Session imports are not allowed. Choose the export mode and scope. The connection
    link contains an access secret: keep it private.
-6. Choose **Telegram Takeout**, **Regular Telegram API** or **Chat event journal**.
-   For account export, choose all accessible chats or load and select one or more
-   chats, then set dates, chat types, account categories and attachment rules.
+6. Choose **Automatic**, **Telegram Takeout** or **Regular Telegram API** for an account
+   export, or **Chat investigation** or **Chat event journal**. For account export,
+   choose all accessible chats or load and select one or more chats, then set dates,
+   Telegram Desktop chat categories, account data and attachment rules. Chat
+   investigation exports up to 50 selected chats, each as its own signed chat archive.
    Check settings and size, optionally save the settings JSON for an independent
    reviewer, then press **Start capture**. Settings are fixed after starting.
    Resume works only while this runner exists; finishing early preserves acquired
@@ -100,7 +102,7 @@ rate. Use **Messages only** or select fewer chats when the estimate exceeds the 
 
 Telegram's reported Takeout wait is added to the budget. The collector stops acquisition
 when the remaining time is needed for packaging, retains acquired data and marks a partial
-result. A 120-minute session therefore uses its remaining collection window rather than
+result. A long session therefore uses its remaining collection window rather than
 waiting for the deadline before preparing the archive. The display identifies selections
 whose full size could not be sampled.
 
@@ -108,17 +110,19 @@ whose full size could not be sampled.
 
 | Capture mode | Configurable scope | Difference |
 | --- | --- | --- |
-| Telegram Takeout, the default | All accessible cloud chats or selected chats, dates, account categories, media policies and JSON/HTML views | Uses Telegram's official export mechanism; approval or waiting may be required. Takeout can enumerate left channels/groups where Telegram permits it and request additional personal data. |
+| Automatic, the default | All accessible cloud chats or selected chats, dates, Telegram Desktop chat categories, account data, media policies and JSON/HTML views | Uses Takeout when Telegram allows it and the regular API otherwise. This runner always signs in fresh, and Telegram usually refuses Takeout to a session younger than 24 hours, so expect the regular API. The archive records which method was used. |
+| Telegram Takeout | The same account scope and output choices | Takeout only. Uses Telegram's official export mechanism; approval or waiting may be required, and a fresh session usually waits longer than the run. Takeout can enumerate left channels/groups where Telegram permits it and request additional personal data. |
 | Regular Telegram API | The same account scope and output choices, subject to methods available through the regular API | Does not initialize Takeout; cannot enumerate left channels/supergroups or fetch Takeout-only personal data. Contacts cover Telegram users rather than the complete saved phone contact list. Rate limits still apply. |
+| Chat investigation | Up to 50 selected chats, attachment policies | Each chat becomes its own signed chat archive inside the evidence archive: visible history, the authors of the messages with their message counts and first and last message, the chat card, the admin log when this account can read it, and absent message IDs rechecked one by one. Works for chats with content protection. A chat still running at the deadline is kept as a signed partial snapshot. |
 | Chat event journal | One selected chat, attachment policies and optional avatars | Captures history and changes observed during this run. Account categories, date filters and Desktop-compatible views do not apply. |
 
-All three modes have the same GitHub attestation and encrypted delivery. Takeout
-selects the acquisition method and is never silently replaced by regular API access.
+All modes have the same GitHub attestation and encrypted delivery. When Takeout is
+required, it is never silently replaced by regular API access.
 TgWitness generates the JSON/HTML views from the captured records and preserves
 the selected acquisition method in the export. See the
 [official Takeout API](https://core.telegram.org/api/takeout).
 
-Defaults use Takeout, all accessible chat types including archived chats, all
+Defaults use the automatic method, all accessible chat types including archived chats, all
 dates, account profile and contacts, compatible JSON and HTML, and file downloads.
 The initial media budget is 4 GiB, with visible per-type file limits; larger files
 or exhausted download budgets use server hashes where available. Review these
@@ -126,8 +130,8 @@ limits before collecting. Hashes cannot reconstruct a file. Optional photos,
 stories, session metadata and extra personal data remain separate choices.
 
 Takeout may require approval in an established Telegram session. Telegram sets
-the delay; a new login or runner does not bypass it. The maximum capture window
-is 120 minutes including login and approval, so a large account or long approval
+the delay; a new login or runner does not bypass it. The capture window you choose,
+at most 5 hours, includes login and approval, so a large account or long approval
 wait may not finish. A persistent local export can resume the same session, but
 does not inherit GitHub attestation.
 
