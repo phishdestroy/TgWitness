@@ -236,7 +236,8 @@ function renderPlan(plan, format) {
     "Everything selected fits this run.") : recommended ? tr(
     "This selection needs a {minutes}-minute session. Finish or cancel this run and start a new one with {minutes} minutes, or keep only the chats that fit.",
     {minutes: recommended}) : (plan.split_runs || []).length ? tr(
-    "Even a 120-minute session is not enough for everything selected.") : tr(
+    "Even the longest session, {minutes} minutes, is not enough for everything selected.",
+    {minutes: plan.split_runs[0].session_minutes}) : tr(
     "Not all selected data could be measured, so no session length can be recommended.");
   const list = $("budget-run-list"); list.replaceChildren();
   for (const run of plan.split_runs || []) {

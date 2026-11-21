@@ -40,7 +40,7 @@ window.TGW_SEALED_LOCALES = {
   "Too much for one run. Start these as separate runs, one GitHub run each:": "Слишком много для одного запуска. Запустите их отдельно, по одному запуску GitHub для каждого:",
   "Everything selected fits this run.": "Всё выбранное помещается в данный запуск.",
   "This selection needs a {minutes}-minute session. Finish or cancel this run and start a new one with {minutes} minutes, or keep only the chats that fit.": "Для этого выбора требуется сессия продолжительностью {minutes} минут. Завершите или отмените этот запуск и начните новый с продолжительностью {minutes} минут, либо сохраните только те чаты, которые помещаются.",
-  "Even a 120-minute session is not enough for everything selected.": "Даже 120-минутного сеанса не хватит, чтобы охватить всё выбранное.",
+  "Even the longest session, {minutes} minutes, is not enough for everything selected.": "Даже самого длительного сеанса, {minutes} минут, не хватит для всего выбранного.",
   "Not all selected data could be measured, so no session length can be recommended.": "Не все выбранные данные удалось измерить, поэтому рекомендуемую продолжительность сеанса определить невозможно.",
   "about {n} min of {total}": "около {n} мин из {total}",
   "too large for one run: limit the dates": "Слишком большой объем для одного запуска: ограничьте диапазон дат",

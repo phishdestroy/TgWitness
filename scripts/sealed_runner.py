@@ -141,8 +141,8 @@ def start_official(directory, name, config):
 def start():
     directory, name = location()
     minutes = os.environ.get("SESSION_MINUTES", "30")
-    if not re.fullmatch(r"[0-9]{1,3}", minutes) or not 10 <= int(minutes) <= 120:
-        raise Public("Session duration must be 10..120 minutes")
+    if not re.fullmatch(r"[0-9]{1,3}", minutes) or not 10 <= int(minutes) <= 300:
+        raise Public("Session duration must be 10..300 minutes")
     recipient = os.environ.get("RECIPIENT", "")
     if not re.fullmatch(r"[A-Za-z0-9+/]{500,1500}={0,2}", recipient):
         raise Public("Paste the public recipient from the setup helper")

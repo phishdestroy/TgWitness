@@ -78,7 +78,7 @@ def estimate(sample, options=None):
                             "rates": "history request timing measured; download and packaging rates assumed"}}
 
 
-SESSION_CHOICES = (30, 60, 120)
+SESSION_CHOICES = (30, 60, 120, 180, 240, 300)
 
 
 def recommended_minutes(value, spent_seconds):

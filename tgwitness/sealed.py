@@ -80,7 +80,7 @@ class Session:
             raise ValueError("A sealed capture requires a new empty data directory")
         if self.output.exists() and any(self.output.iterdir()):
             raise ValueError("A sealed capture requires a new empty output directory")
-        if len(config["token"]) != 43 or not 60 <= config["seconds"] <= 7200:
+        if len(config["token"]) != 43 or not 60 <= config["seconds"] <= 18000:
             raise ValueError("Invalid sealed session configuration")
         self.recipient = recipient_id(config["recipient"])
         self.output.mkdir(parents=True, exist_ok=True, mode=0o700)
