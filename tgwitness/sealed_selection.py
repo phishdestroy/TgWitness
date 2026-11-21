@@ -7,11 +7,15 @@ from .account_export import AccountExportOptions
 from .monitoring import Capture, normalize_capture
 from .store import canonical
 
+MAX_CHAT_EXPORTS = 50
+
 
 class Selection(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    mode: Literal["chat", "account"] = "chat"
+    mode: Literal["chat", "account", "chats"] = "chat"
     chat_id: int | None = Field(default=None, strict=True)
+    # Investigation export: each chat becomes its own signed chat export inside the sealed archive, in this order.
+    chat_ids: list[int] | None = Field(default=None, min_length=1, max_length=MAX_CHAT_EXPORTS)
     capture: Capture = Field(default_factory=lambda: Capture.model_validate({
         **normalize_capture(None), "include_avatars": False, "messages_first": True}))
     account_scope: Literal["all", "selected"] | None = None
@@ -19,7 +23,17 @@ class Selection(BaseModel):
 
     @model_validator(mode="after")
     def scope(self):
-        if self.mode == "chat":
+        if self.mode != "chats" and self.chat_ids is not None:
+            raise ValueError("Chat lists belong to the chat investigation export.")
+        if self.mode == "chats":
+            if (self.chat_id is not None or self.account_options is not None or self.account_scope is not None
+                    or not self.chat_ids):
+                raise ValueError("Select one or more chats for the investigation export.")
+            if any(type(c) is not int or c == 0 or not -(2**63) < c < 2**63 for c in self.chat_ids):
+                raise ValueError("Chat IDs must be nonzero 64-bit integers.")
+            if len(set(self.chat_ids)) != len(self.chat_ids):
+                raise ValueError("Each chat can be selected once.")
+        elif self.mode == "chat":
             if self.chat_id is None or self.account_options is not None or self.account_scope is not None:
                 raise ValueError("Select a chat and its capture settings.")
         else:
@@ -37,6 +51,8 @@ class Selection(BaseModel):
         if self.mode == "account":
             return {"mode": "account", "account_scope": self.account_scope,
                     "account_options": self.account_options.model_dump()}
+        if self.mode == "chats":
+            return {"mode": "chats", "chat_ids": list(self.chat_ids), "capture": normalize_capture(self.capture.model_dump())}
         return {"mode": "chat", "chat_id": self.chat_id, "capture": normalize_capture(self.capture.model_dump())}
 
 
@@ -50,6 +66,8 @@ def checked_selection(events, internal, expected=None, require_complete=False):
     event = events[0]
     if event.get("mode") == "account":
         raw = {"mode": "account", "account_options": event.get("options")}
+    elif event.get("mode") == "chats":
+        raw = {"mode": "chats", "chat_ids": event.get("chat_ids"), "capture": event.get("capture")}
     else:
         raw = {"mode": "chat", "chat_id": event.get("chat_id"), "capture": event.get("capture")}
     settings = Selection.model_validate(raw).settings()
@@ -66,11 +84,20 @@ def checked_selection(events, internal, expected=None, require_complete=False):
             raise ValueError("Account export differs from the signed capture selection")
     elif account is not None:
         raise ValueError("Unexpected account export in a chat capture")
+    chats = internal.get("chat_exports") or []
+    if settings["mode"] != "chats" and chats:
+        raise ValueError("Unexpected chat export in this capture")
+    if any(item["chat_id"] not in settings.get("chat_ids", ()) for item in chats):
+        raise ValueError("A chat export is outside the signed capture selection")
     if expected is not None and Selection.model_validate(expected).settings() != settings:
         raise ValueError("Capture settings differ from the independently expected selection")
-    complete = account["complete_within_scope"] if account else None
+    if settings["mode"] == "chats":
+        complete = ([item["chat_id"] for item in chats if item["complete"]] == settings["chat_ids"])
+        mode = "chat_export"
+    else:
+        complete = account["complete_within_scope"] if account else None
+        mode = transport if account else "journal"
     if require_complete and complete is not True:
-        raise ValueError("A complete account export within the selected scope is required")
-    return {"selection": settings, "selection_sha256": digest,
-            "mode": transport if account else "journal", "complete_within_scope": complete,
-            "expected_selection_matched": True if expected is not None else None}
+        raise ValueError("A complete export within the selected scope is required")
+    return {"selection": settings, "selection_sha256": digest, "mode": mode, "complete_within_scope": complete,
+            "chat_exports": chats or None, "expected_selection_matched": True if expected is not None else None}

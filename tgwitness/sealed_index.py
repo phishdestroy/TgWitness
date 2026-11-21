@@ -8,12 +8,13 @@ import hashlib
 import re
 from html import escape
 
-SEALED_KINDS = ("sealed.started", "sealed.selection", "sealed.account_export", "sealed.finished", "sealed.failure",
+SEALED_KINDS = ("sealed.started", "sealed.selection", "sealed.account_export", "sealed.chat_export", "sealed.finished", "sealed.failure",
                 "sealed.packaging", "account_export.transport")
 
 REASONS = {
     "account_export_finished": ("complete", "The export finished within the selected scope."),
     "history_and_media_finished": ("complete", "Chat history and attachments finished."),
+    "chat_exports_finished": ("complete", "Every selected chat was exported."),
     "user_finish": ("partial", "Stopped early in the capture panel. Data acquired until then is kept."),
     "deadline": ("partial", "The session time ran out. Data acquired until then is kept."),
     "packaging_reserve": ("partial", "Collection stopped to leave time for packaging. Data acquired until then is kept."),
@@ -45,6 +46,8 @@ STYLE = (
     "background:var(--card);border-radius:8px;margin:0 0 14px}.alert.warn{border-color:var(--warn)}"
     "pre{white-space:pre-wrap;margin:6px 0 0;padding:10px;border-radius:8px;background:var(--bg);"
     "border:1px solid var(--line)}ol{margin:0;padding-left:20px}li{margin:4px 0}a{color:var(--accent)}"
+    ".list td:first-child{width:auto;color:var(--ink)}.list tr.head td{color:var(--muted);font-weight:600;font-size:13px}"
+    ".list td{padding-right:14px}"
 )
 STYLE_HASH = "sha256-" + base64.b64encode(hashlib.sha256(STYLE.encode()).digest()).decode()
 
@@ -91,6 +94,11 @@ def outcome(facts):
     state, text = REASONS.get(finished.get("reason"), ("partial", "Capture ended: " + str(finished.get("reason"))))
     if exported and exported.get("complete_within_scope") is False:
         state = "partial"
+    chats = facts.get("sealed.chat_export") or []
+    if any(not item.get("complete") for item in chats):
+        state = "partial"
+        text = (f"{sum(1 for c in chats if c.get('complete'))} of {len(chats)} selected chats were exported completely. "
+                "The table below shows what happened to each chat.")
     return state, {"complete": "Complete within the selected scope", "partial": "Partial"}[state], text
 
 
@@ -125,13 +133,16 @@ def page(facts, events, fingerprint=None, head_hash=None):
 
     mode = selection.get("mode")
     options = selection.get("account_options") or {}
-    requested = options.get("transport") if mode == "account" else "chat event journal"
+    requested = (options.get("transport") if mode == "account" else "chat export" if mode == "chats"
+                 else "chat event journal")
     used = transports[-1].get("transport") if transports else (requested if requested != "auto" else None)
     used_reason = transports[-1].get("meaning") if transports else None
     scope = ("all accessible chats" if selection.get("account_scope") == "all" else
              f"{len(options.get('chat_ids') or [])} selected chats" if mode == "account" else
+             f"{len(selection.get('chat_ids') or [])} selected chats" if mode == "chats" else
              f"one chat (ID {_e(selection.get('chat_id'))})")
-    selection_rows = [("Mode", _e({"account": "Account export", "chat": "Chat event journal"}.get(mode, mode))),
+    selection_rows = [("Mode", _e({"account": "Account export", "chat": "Chat event journal",
+                                   "chats": "Chat investigation export"}.get(mode, mode))),
                       ("Scope", _e(scope) if mode != "chat" else scope),
                       ("Method requested", _e(requested)), ("Method used", _e(used) if used else "recorded in the journal"),
                       ("Why", _e(used_reason) if used_reason else None),
@@ -161,7 +172,44 @@ def page(facts, events, fingerprint=None, head_hash=None):
                 ("Fresh session only", "yes" if started.get("session_import_allowed") is False else _e(started.get("session_import_allowed"))),
                 ("Session logout", _e(finished.get("revocation")))]
 
+    chats = facts.get("sealed.chat_export") or []
+    if chats:
+        missing = sum((c.get("message_ids") or {}).get("missing") or 0 for c in chats)
+        stats = [f'<div class="stat"><b>{_number(sum(c.get("captured") or 0 for c in chats))}</b><span>Messages saved</span></div>',
+                 f'<div class="stat"><b>{sum(1 for c in chats if c.get("complete"))} / {len(chats)}</b>'
+                 '<span>Chats complete</span></div>',
+                 f'<div class="stat"><b>{_number(missing)}</b><span>Message IDs absent after recheck</span></div>']
+
+    def gaps(c):
+        ids = c.get("message_ids")
+        if not ids:
+            return "—"
+        if not ids.get("missing"):
+            return f'none · IDs {_e(ids.get("first_id"))}–{_e(ids.get("last_id"))}'
+        largest = ", ".join(f"{_e(low)}–{_e(high)}" for low, high in ids.get("largest_runs") or [])
+        return (f'<b>{_number(ids["missing"])}</b> in {_number(ids.get("missing_runs") or 0)} ranges'
+                + (f'<br><span class="muted">largest: {largest}</span>' if largest else ""))
+
+    chat_rows = "".join(
+        f'<tr><td>{_e(c.get("title") or "—")}<br><span class="muted"><code>{_e(c.get("chat_id"))}</code></span></td><td>'
+        + ('<span class="complete">complete</span>' if c.get("complete") else
+           '<span class="partial">partial snapshot</span>' if c.get("phase") == "snapshot" else
+           f'<span class="failed">{_e(c.get("phase") or "failed")}{" · " + _e(c["error"]) if c.get("error") else ""}</span>')
+        + f'</td><td>{_number(c.get("captured") or 0)}</td><td>{gaps(c)}</td><td>'
+        + (f'<code>{_e(c["file"])}</code>' if c.get("file") else "—") + "</td></tr>" for c in chats)
+    chat_section = ('<section class="card wide"><h2>Chat exports</h2><table class="list"><tr class="head"><td>Chat</td>'
+                    '<td>Result</td><td>Messages</td><td>Absent message IDs</td><td>File</td></tr>'
+                    f'{chat_rows}</table><p class="muted">This column counts message IDs that Telegram did not return '
+                    'for this account, after each one was requested again individually. The archive records the '
+                    'absence; a deleted message, a message hidden from this account and an unused number all appear '
+                    'the same way here.</p></section>') if chats else ""
     account_entry = ""
+    if chats:
+        account_entry = ('<li>Extract each <code>chat-export-NNN.zip</code> and open <code>chat.html</code>. '
+                         '<code>authors.csv</code> lists everyone who wrote, with message counts and first and last '
+                         'message; <code>message-ids.json</code> lists missing ID ranges; <code>admin-log.json</code> '
+                         'is present when this account could read the admin log. A partial snapshot is a signed live '
+                         'archive of the chat in progress when the run ended.</li>')
     if exported.get("file"):
         account_entry = (f'<li>Extract <code>{_e(exported["file"])}</code> ({_size(exported.get("bytes"))}, SHA-256 '
                          f'<code>{_e(exported.get("sha256"))}</code>) and open its <code>index.html</code>: per-chat pages, '
@@ -179,6 +227,7 @@ def page(facts, events, fingerprint=None, head_hash=None):
         + f'<section class="card"><h2>Check these identifiers</h2>{_rows(identity)}</section>'
         + f'<section class="card"><h2>What was captured</h2>{_rows(selection_rows)}</section>'
         + (f'<section class="card"><h2>Coverage</h2>{_rows(coverage_rows)}</section>' if coverage_rows else "")
+        + chat_section
         + '<section class="card wide"><h2>Next steps</h2><ol>' + account_entry
         + '<li>Compare the workflow run, collector commit and recipient key above with the run you started and '
           'the key you saved.</li>'

@@ -100,21 +100,23 @@ for (const [kind, limit] of Object.entries(mediaTypes)) {
   }
   row.append(action); $("media-rules").append(row);
 }
+// Presets never drop a file type: types that are not downloaded keep Telegram server hashes.
 const mediaPresets = {
-  messages: {action: "exclude", types: []},
-  photos: {action: "download", types: ["photo"]},
-  light: {action: "download", types: ["photo", "voice", "video_note", "document"]},
-  all: {action: "download", types: Object.keys(mediaTypes)}};
+  all: Object.keys(mediaTypes),
+  light: ["photo", "voice", "video_note", "document"],
+  photos: ["photo"],
+  messages: []};
 let applyingPreset = false;
 function applyPreset() {
-  const preset = mediaPresets[$("media-preset").value];
-  if (!preset) return;
+  const download = mediaPresets[$("media-preset").value];
+  if (!download) return;
   applyingPreset = true;
-  $("media-action").value = preset.action;
+  $("media-action").value = download.length ? "download" : "hashes_only";
+  $("oversized-media").value = "hashes_only";
   for (const kind of Object.keys(mediaTypes)) {
-    $("type-" + kind).checked = preset.types.includes(kind);
+    $("type-" + kind).checked = true;
     $("limit-" + kind).value = $("common-limit").value;
-    $("action-" + kind).value = "";
+    $("action-" + kind).value = download.length && !download.includes(kind) ? "hashes_only" : "";
   }
   applyingPreset = false;
 }
@@ -128,8 +130,10 @@ $("media-rules").addEventListener("change", () => { if (!applyingPreset) $("medi
 $("media-action").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 applyPreset();
 function selection() {
-  const journal = $("export-mode").value === "journal";
+  const investigation = $("export-mode").value === "chats";
+  const journal = $("export-mode").value === "journal" || investigation;
   const selected = Array.from($("chats").selectedOptions, option => Number(option.value));
+  if (investigation && selected.length > 50) throw new Error(tr("Select at most 50 chats for one run."));
   if ((journal || $("export-scope").value === "chat") && !selected.length) {
     throw new Error(tr("Load chats and select at least one."));
   }
@@ -161,9 +165,11 @@ function selection() {
     if ($("include-avatars").checked) throw new Error("Participant avatar capture is available in single-chat regular capture. For account export use Account profile photos.");
     return {mode: "account", account_scope: $("export-scope").value === "account" ? "all" : "selected", account_options: options};
   }
-  return {chat_id: Number($("chats").value), capture: {download_media: true, media_action: $("media-action").value,
+  const capture = {download_media: true, media_action: $("media-action").value,
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
-    messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types}};
+    messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types};
+  if (investigation) return {mode: "chats", chat_ids: selected, capture};
+  return {chat_id: Number($("chats").value), capture};
 }
 let assessedSelection = null, assessmentResult = null;
 function describeMode() {
@@ -171,9 +177,11 @@ function describeMode() {
   $("mode-description").textContent = mode === "auto" ? tr(
     "Uses Takeout when Telegram allows it and the regular API otherwise. This runner signs in fresh, and Telegram usually refuses Takeout for sessions younger than 24 hours, so expect the regular API. The archive records which method was used.") : mode === "takeout" ? tr(
     "Takeout only. Telegram usually refuses it for a session signed in less than 24 hours ago, and this runner always signs in fresh, so the capture may stop waiting for approval. Prefer Automatic.") : mode === "regular" ? tr(
-    "Regular API cannot enumerate groups and channels you left, and contacts include Telegram users rather than the full saved phone contact list. Rate limits still apply.") : tr(
+    "Regular API cannot enumerate groups and channels you left, and contacts include Telegram users rather than the full saved phone contact list. Rate limits still apply.") : mode === "chats" ? tr(
+    "Each selected chat becomes its own signed chat archive: full visible history, files by your rules, everyone who wrote with message counts and first and last message, the chat card, the admin log when this account can read it, and missing message-ID ranges rechecked one by one. Works for chats with content protection.") : tr(
     "One chat, its history and changes observed while this runner is active.");
-  $("chat-help").textContent = mode === "journal" ? tr("Choose one chat.") : tr(
+  $("chat-help").textContent = mode === "journal" ? tr("Choose one chat.") : mode === "chats" ? tr(
+    "Select up to 50 chats. They are exported one after another, in this list's order.") : tr(
     "Select one or more chats, use Ctrl or Cmd with a click to add another, or Shift with arrow keys. An empty selection cannot start an account export.");
 }
 function clearAssessment() {
@@ -185,7 +193,8 @@ function clearAssessment() {
     $("own-" + name).disabled = !$("cat-" + name).checked;
     if ($("own-" + name).disabled) $("own-" + name).checked = false;
   }
-  const journal = $("export-mode").value === "journal";
+  const investigation = $("export-mode").value === "chats";
+  const journal = $("export-mode").value === "journal" || investigation;
   $("account-options").hidden = journal;
   $("export-scope").disabled = journal;
   $("export-format").disabled = journal;
@@ -203,7 +212,7 @@ function clearAssessment() {
   $("preserve-ephemeral-media").parentElement.hidden = !journal;
   if (!journal) $("messages-first").checked = true;
   $("chat-picker").hidden = !journal && $("export-scope").value === "account";
-  $("chats").multiple = !journal; $("chats").size = journal ? 1 : 6;
+  $("chats").multiple = !journal || investigation; $("chats").size = journal && !investigation ? 1 : 8;
   $("collect").disabled = !$("chat-picker").hidden && !$("chats").selectedOptions.length;
   $("preflight").disabled = $("collect").disabled;
   describeMode();
@@ -379,6 +388,19 @@ function renderState(state) {
     if (account?.wait_reason === "takeout_approval" && state.phase === "collecting") $("status").textContent =
       tr("Telegram requires export approval from another device that was already signed in before this request. The requesting session and a fresh login cannot approve it. After allowing the export there, click Check export approval. Telegram reported {delay} seconds of waiting, this runner has {remaining} seconds left. A new runner may require approval again.",
         {delay: account.delay_seconds, remaining: state.remaining_seconds});
+    const chats = state.chat_exports;
+    if (chats) {
+      const kept = chats.kept || [], saved = kept.reduce((sum, item) => sum + (item.captured || 0), 0) + (chats.current?.captured || 0);
+      $("capture-messages").textContent = String(saved);
+      $("capture-unavailable").textContent = String(kept.filter(item => !item.complete).length);
+      $("complete-summary").textContent = tr("{done} of {total} chats exported completely, {messages} messages saved.",
+        {done: kept.filter(item => item.complete).length, total: chats.total, messages: saved}) +
+        (state.revocation === "revoked" ? " " + tr("Telegram session revocation confirmed.") : "");
+      $("capture-transfer").hidden = chats.current_chat == null;
+      $("capture-transfer").textContent = chats.current_chat == null ? "" : tr("Chat {number} of {total}: {captured} messages read.",
+        {number: kept.length + 1, total: chats.total, captured: chats.current?.captured || 0});
+      $("resume").hidden = true;
+    }
     if (state.authorized) {$("api-hash").value = ""; $("phone").value = ""; qrId = null;}
     renderError();
     if (terminal) {ended = true; sessionStorage.removeItem("sealed-access");}
