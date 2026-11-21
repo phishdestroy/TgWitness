@@ -56,3 +56,5 @@
 .budget-table tr.fits td { background:var(--accent-soft); }
 #budget-run-list { margin:6px 0 0; padding-left:22px; line-height:1.7; }
 #budget-actions button { margin:4px 8px 4px 0; }
+.chat-categories label { display:block; }
+.chat-categories label.own-only { margin-left:28px; color:var(--muted); font-size:14px; }

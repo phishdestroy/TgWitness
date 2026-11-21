@@ -35,6 +35,7 @@ from .telegram_client import FLOOD_ERRORS, in_lane
 LOG = logging.getLogger("tgwitness.export")
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
+CATEGORIES = ("personal", "bots", "private_groups", "public_groups", "private_channels", "public_channels")
 FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_duplicated")
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
@@ -66,6 +67,9 @@ class AccountExportOptions(BaseModel):
     from_utc: str | None = None
     to_utc: str | None = None
     own_messages_only: bool = False
+    # Telegram Desktop export categories. None keeps the selection defined by chat_kinds alone.
+    chat_categories: list[Literal[CATEGORIES]] | None = Field(default=None, max_length=len(CATEGORIES))
+    own_only_categories: list[Literal[CATEGORIES]] = Field(default_factory=list, max_length=len(CATEGORIES))
     include_archived: bool = True
     media_types: list[Literal[MEDIA]] = Field(default_factory=lambda: list(MEDIA), max_length=len(MEDIA))
     media_action: Literal["download", "hashes_only", "exclude"] = "download"
@@ -120,7 +124,30 @@ class AccountExportOptions(BaseModel):
         self.sender_ids = sorted(set(self.sender_ids))
         self.chat_kinds = [k for k in KINDS if k in self.chat_kinds]
         self.media_types = [k for k in MEDIA if k in self.media_types]
+        if self.chat_categories is not None:
+            self.chat_categories = [c for c in CATEGORIES if c in self.chat_categories]
+        self.own_only_categories = [c for c in CATEGORIES if c in self.own_only_categories]
         return self
+
+
+def category_of(kind, username):
+    """Telegram Desktop export category of a chat: public groups and channels have a public username."""
+    if kind == "private":
+        return "personal"
+    if kind == "bot":
+        return "bots"
+    if kind in ("group", "supergroup"):
+        return "public_groups" if username else "private_groups"
+    return "public_channels" if username else "private_channels"
+
+
+def chat_in_scope(options, kind, username):
+    categories = options.get("chat_categories")
+    return kind in options["chat_kinds"] and (categories is None or category_of(kind, username) in categories)
+
+
+def own_only_for(options, kind, username):
+    return bool(options["own_messages_only"] or category_of(kind, username) in options.get("own_only_categories", ()))
 
 
 def sha(data):

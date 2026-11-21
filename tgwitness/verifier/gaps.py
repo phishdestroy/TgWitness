@@ -54,6 +54,11 @@ def gap_scope(options, inventory):
     kinds = options.get("chat_kinds")
     if isinstance(kinds, list) and not set(SHARED_KINDS) <= set(kinds):
         reasons.add("chat_kinds")
+    categories = options.get("chat_categories")
+    if isinstance(categories, list) and not {"personal", "bots", "private_groups"} <= set(categories):
+        reasons.add("chat_kinds")
+    if options.get("own_only_categories"):
+        reasons.add("own_messages_only")
     for key, reason in (("chat_ids", "chat_ids"), ("sender_ids", "sender_filter"), ("text_contains", "text_filter"),
                         ("own_messages_only", "own_messages_only")):
         if options.get(key):

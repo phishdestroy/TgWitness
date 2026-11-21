@@ -216,8 +216,9 @@ class Transport:
                 if not result.chats or isinstance(result, t.messages.Chats):
                     break
         tasks, notes = [], {}
+        from .account_export import chat_in_scope, own_only_for
         for chat in chats.values():
-            chat["selected"] = (chat["kind"] in self.options["chat_kinds"]
+            chat["selected"] = (chat_in_scope(self.options, chat["kind"], chat.get("username"))
                                 and (not selected_ids or chat["id"] in selected_ids)
                                 and (self.options["include_archived"] or chat["archived"] is False))
             if chat["archived"] is None and not self.options["include_archived"]:
@@ -226,7 +227,8 @@ class Transport:
                 continue
             for index in chat["ranges"]:
                 tasks.append({"id": "messages:" + str(chat["id"]) + ":" + str(index), "category": "messages",
-                    "chat_id": chat["id"], "telegram_range": ranges[index], "own_only": self.options["own_messages_only"]})
+                    "chat_id": chat["id"], "telegram_range": ranges[index],
+                    "own_only": own_only_for(self.options, chat["kind"], chat.get("username"))})
         titles, checked, slots = {chat["id"]: chat["title"] for chat in chats.values()}, 0, asyncio.Semaphore(DISCOVERY_PROBES)
         self.report("checking", 0, len(tasks))
 

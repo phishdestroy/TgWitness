@@ -80,6 +80,7 @@ bind("refresh", async () => {
   clearAssessment();
   $("dialog-note").textContent = result.may_be_truncated ? tr("The dialog list reached its limit; some chats may be missing.") : "";
 });
+const chatCategories = ["personal", "bots", "private_groups", "public_groups", "private_channels", "public_channels"];
 const mediaTypes = {photo: 20, video: 100, animation: 20, video_note: 50, voice: 20, audio: 50, sticker: 5, document: 50};
 const mediaNames = {photo: "Photos", video: "Videos", animation: "Animations", video_note: "Video messages",
   voice: "Voice messages", audio: "Audio", sticker: "Stickers", document: "Documents"};
@@ -113,8 +114,10 @@ function selection() {
   }
   const options = {transport: $("export-mode").value, export_format: $("export-format").value,
     chat_ids: $("export-scope").value === "account" ? [] : selected,
-    chat_kinds: ["private", "bot", "group", "supergroup", "channel"].filter(kind => $("kind-" + kind).checked),
-    include_archived: $("account-archived").checked, own_messages_only: $("account-own").checked,
+    chat_kinds: chatCategories.some(name => $("cat-" + name).checked) ? ["private", "bot", "group", "supergroup", "channel"] : [],
+    chat_categories: chatCategories.filter(name => $("cat-" + name).checked),
+    own_only_categories: ["private_groups", "public_groups"].filter(name => $("cat-" + name).checked && $("own-" + name).checked),
+    include_archived: $("account-archived").checked, own_messages_only: false,
     messages_first: true, media_action: $("media-action").value, oversized_media: $("oversized-media").value,
     max_media_file_mib: 2000, max_total_gib: Number($("total-budget").value), budget_exhausted: "hashes_only",
     media_types: Object.keys(types).filter(k => types[k].enabled).map(k => k === "video_note" ? "video_message" : k),
@@ -151,6 +154,10 @@ function clearAssessment() {
   $("preflight-result").textContent = ""; $("preflight-details").hidden = true;
   $("preflight-budget").textContent = ""; $("budget-actions").hidden = true;
   $("budget-plan").hidden = true; $("budget-fit").hidden = true;
+  for (const name of ["private_groups", "public_groups"]) {
+    $("own-" + name).disabled = !$("cat-" + name).checked;
+    if ($("own-" + name).disabled) $("own-" + name).checked = false;
+  }
   const journal = $("export-mode").value === "journal";
   $("account-options").hidden = journal;
   $("export-scope").disabled = journal;
