@@ -28,7 +28,7 @@ def peer_id(value):
     return f"{identity[0]}{identity[1]}" if identity else None
 
 
-DELETED_ACCOUNT = "Deleted Account"  # what Telegram Desktop exports for a user whose account was deleted
+DELETED_ACCOUNT = "Deleted Account"
 
 
 def name(value):

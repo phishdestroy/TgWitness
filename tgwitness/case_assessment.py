@@ -260,7 +260,6 @@ def journal(context, coverage):
 
 
 def split_failures(context):
-    """Failed pages and files apart from the limits recorded when the chat list was frozen; older contexts keep one count."""
     coverage, limits = context.get("coverage") or {}, context.get("known_limits")
     if "failures" not in coverage:
         return {}

@@ -14,7 +14,6 @@ class Presentation(BaseModel):
     participant_chart: bool = True
     chat_chart: bool = True
     composition_chart: bool = True
-    # names: the sender's name, @username and ID, for an investigator's own capture; aliases hide people in charts.
     participant_labels: Literal["aliases", "ids", "names"] = "aliases"
     chart_limit: int = Field(default=10, ge=5, le=30)
     jurisdiction_guidance: guidance.Options = Field(default_factory=guidance.Options)

@@ -17,7 +17,6 @@ SECRET_FIELDS = frozenset({"access_hash", "file_reference", "auth_key", "api_has
 DIRECT_PEER_LIMIT = 20
 DISCOVERY_PROBES = 4
 AVATAR_PAGE = 20
-# Errors that stop or pause the export; any other refusal for one peer is recorded on its photo row.
 AVATAR_STOPS = (errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError, errors.TakeoutInvalidError,
                 errors.UnauthorizedError)
 
@@ -109,7 +108,6 @@ class Transport:
         self.client = None
         self.metadata = {}
         self.emoji = {}
-        # Photo lookups of this run by peer: a page retried after FLOOD_WAIT continues instead of asking again.
         self.avatar_lookups = {}
         self.progress = None
 
@@ -396,7 +394,6 @@ class Transport:
         raise ValueError("Unknown export category")
 
     def note_avatars(self, entities, messages, chat_id):
-        """Remember every user and chat with a photo that a history page named, with how often each one wrote."""
         known, added = self.secret.setdefault("avatar_peers", {}), False
         senders, written = {}, {}
         for message in messages:
@@ -427,7 +424,6 @@ class Transport:
             self.save()
 
     async def current_photo(self, peer, client=None):
-        """The photo a peer shows now: the newest profile photo of a user, the chat photo of a group or channel."""
         client = client or self.collector.client
         if isinstance(peer, (t.InputPeerUser, t.InputPeerSelf, t.InputPeerUserFromMessage)):
             result = await client(f.photos.GetUserPhotosRequest(utils.get_input_user(peer), 0, 0, 1))
@@ -442,7 +438,6 @@ class Transport:
         return photo if isinstance(photo, t.Photo) else None
 
     async def avatar_page(self, cursor):
-        """Photos of the selected chats first, then of the people who wrote most; one row per peer, cursor = position."""
         known = self.secret.get("avatar_peers", {})
         order = self.secret.get("avatar_order")
         if order is None:

@@ -48,13 +48,18 @@ REASONS = {'Stopped before acquisition completed.': 'Stopped before acquisition 
            'hashes_only': 'File hashes saved; file bytes were not downloaded.',
            'hashes_unavailable': 'Telegram did not return hashes for this file.',
            'no_additional_data': 'Telegram returned no data for this file.'}
-# Files a sealed run's stop left unread carry its finish reason; they were never attempted, so a card says so plainly.
-STOP_REASONS = {'user_finish': 'Collection was finished in the capture panel before this file was downloaded.',
-                'deadline': 'The session time ran out before this file was downloaded.',
-                'packaging_reserve': 'Collection ended before this file was downloaded, to leave time for packaging.',
-                'storage_limit': 'The GitHub Actions machine ran low on disk space before this file was downloaded.',
-                'server_shutdown': 'The GitHub Actions machine ended the capture before this file was downloaded.'}
+STOP_REASONS = {'user_finish': 'Not downloaded: stopped in the panel.',
+                'deadline': 'Not downloaded: the session time ran out.',
+                'packaging_reserve': 'Not downloaded: the remaining time was left for packaging.',
+                'storage_limit': 'Not downloaded: the GitHub machine disk was nearly full.',
+                'server_shutdown': 'Not downloaded: the GitHub machine stopped.'}
 REASONS.update({sealed_index.REASONS[key][1]: label for key, label in STOP_REASONS.items()})
+LIMIT_TEXTS = ("This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.",
+               "With strict chosen chats the session list is not read, so when this session signed in is unknown; this "
+               "export used the regular session instead of Takeout.",
+               "Telegram asked to wait before a Takeout export; this export used the regular session.",
+               "Regular API export cannot enumerate left channels and supergroups.",
+               "Regular API contacts include Telegram users, not the complete saved phone contact list.")
 ARCHIVE_FILES = {'export_results.html': 'Your chats, laid out the way Telegram shows them',
                  'index.html': 'The report: what was collected, how complete it is and how to check it',
                  'map.html': 'Activity map: when messages were written and which message numbers are missing',
@@ -134,14 +139,10 @@ def technical(value, say):
 
 
 class Record(dict):
-    """A message record read from a signed data page. source is (data file, line number, SHA-256 of the line without
-    its line break), so a chat page can name the exact signed line each message shows."""
     __slots__ = ('source',)
 
 
 def filled(value):
-    """The record without empty fields (null, false, empty text, list or object), for reading on a chat page. Telegram
-    records repeat dozens of empty sender and message flags; the signed line keeps every field."""
     if isinstance(value, dict):
         kept = {key: filled(item) for key, item in value.items()}
         return {key: item for key, item in kept.items() if item is not None and item is not False and item not in ('', [], {})}
@@ -151,7 +152,6 @@ def filled(value):
 
 
 def readable(value, depth=0):
-    """JSON for reading: an object or list that fits on one line stays on it, longer ones open one field per line."""
     flat = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(', ', ': '))
     if not isinstance(value, (dict, list)) or not value or depth + len(flat) <= 96:
         return flat
@@ -163,13 +163,8 @@ def readable(value, depth=0):
 
 
 def record_details(row, say):
-    # Inside <pre> only &, < and > need escaping; quotes stay as they are, which keeps a chat page readable and small.
     return ('<details><summary>' + e(say('Technical details')) + '</summary><pre dir="ltr">'
             + html.escape(readable(filled(row)), quote=False) + '</pre></details>')
-
-
-RECORD_SOURCE_NOTE = ('Each message names its source in the signed data: the data file, the line and the SHA-256 of that '
-                      'line without its line break. Technical details leave out empty fields; the signed line keeps them.')
 
 
 def record_source(row, say, prefix):
@@ -177,7 +172,7 @@ def record_source(row, say, prefix):
     if not source:
         return ''
     file, line, digest = source
-    return ('<br>' + e(say('Source in the signed data')) + ': <a href="' + e(prefix + file) + '"><code dir="ltr">' + e(file)
+    return ('<br>' + e(say('Source')) + ': <a href="' + e(prefix + file) + '"><code dir="ltr">' + e(file)
             + '</code></a> · ' + e(say('line {line}', line=line)) + ' · SHA-256 <code dir="ltr">' + e(digest) + '</code>')
 
 
@@ -435,7 +430,7 @@ def omissions_section(context, say):
         yield encoded('<li>' + e(note) + '</li>')
     for omission in omissions:
         if isinstance(omission, str):
-            shown = omission
+            shown = say(omission) if omission in LIMIT_TEXTS else omission
         elif isinstance(omission, dict):
             shown = ' · '.join(str(omission.get(key, '')) for key in ('section', 'reason') if omission.get(key))
         else:
@@ -687,7 +682,6 @@ def account_chat_index(context, chat, counts, months):
 def account_chat_pages(context, chat, rows):
     counts, months, count, size, start, end = [], {}, 0, 0, None, None
     for record, row in enumerate(rows(), 1):
-        # A page is sized by what it shows: the record without its empty fields.
         length = len(canonical(filled(row)))
         if count and (count >= CHAT_PAGE_RECORDS or size + length > CHAT_PAGE_DATA_BYTES):
             counts.append((count, start, end))
@@ -773,7 +767,7 @@ def account_chat(context, chat, rows):
         if context.get('chat_map'):
             yield encoded(context['chat_map'])
     yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.'))
-                  + ' ' + e(say(RECORD_SOURCE_NOTE)) + '</p>')
+                  + '</p>')
     yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a>'
                   + ('<a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a>' if first else '')
                   + '<a href="#verification">' + e(say('Verification')) + '</a></nav><section id="messages">')
@@ -918,6 +912,6 @@ def text_keys():
                                                                      'Failed pages and files', 'Known limits',
                                                                      'Files not reached before collection stopped',
                                                                      'Export steps not reached before collection stopped',
-                                                                     RECORD_SOURCE_NOTE,
+                                                                     *LIMIT_TEXTS,
                                                                      *REASONS.values(), *STATE_NOTES.values(),
                                                                      *ARCHIVE_FILES.values()]))

@@ -134,7 +134,6 @@ def verify_parts(archive, manifest):
 
 
 def export_category(kind, username):
-    """Telegram Desktop export category; public groups and channels have a public username."""
     if kind == "private":
         return "personal"
     if kind == "bot":

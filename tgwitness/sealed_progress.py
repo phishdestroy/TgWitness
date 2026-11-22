@@ -1,8 +1,3 @@
-"""One progress view of a sealed capture for the panel: stage, overall percent and per-part counters.
-
-Totals come from the pre-start assessment and are estimates; the panel labels them so. The overall percent never reaches
-100 while collection runs, because the archive still has to be packaged and attested.
-"""
 from .export_budget import DOWNLOAD_BYTES_PER_SECOND
 
 FINISHED_MEDIA = ("done", "hashed", "skipped", "failed", "cancelled")
@@ -20,7 +15,6 @@ def percent(value, running=True):
 
 
 def blended(parts):
-    """Time-weighted mean of (share, weight) pairs; parts without a known share or weight are left out."""
     known = [(value, weight) for value, weight in parts if value is not None and weight]
     if not known:
         return None

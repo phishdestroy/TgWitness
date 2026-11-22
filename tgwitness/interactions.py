@@ -134,8 +134,6 @@ RESTRICTION_TEXT = {
                   "outside its mutual contacts, not a request rate). Panel sending, joining and bot buttons are paused "
                   "until {until}; secret chats with mutual contacts or started by the other side continue, and reading "
                   "continues."}
-# Telegram's spam limits stop first contact with non-contacts only. Mutual contacts and people who wrote first stay
-# reachable, so actions inside such a conversation are not held back by these two.
 CONTACT_LIMITS = frozenset({"spam_block", "peer_flood"})
 
 
@@ -195,7 +193,6 @@ GOAL_OFF = "Telegram actions from the panel are off for the Evidence for a case 
 
 
 def permitted(collector, conversation=False):
-    """conversation: the action stays inside a conversation the other side started or with a mutual contact."""
     store = collector.store
     check_pause(collector)
     check_restriction(store, conversation)

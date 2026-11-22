@@ -9,7 +9,6 @@ def finalize(export, job, reason):
     from .account_export import durable_write, read_json, sha
 
     directory = export.directory(job["job_id"])
-    # Files and steps sealed below with this reason were not reached; counts keep them apart from real failures.
     export.current["finish_reason"] = reason
     export.recover(job)
     if export.inventory is None:

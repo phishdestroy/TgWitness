@@ -453,7 +453,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                                    "Collection gaps and unavailable attachments remain recorded in the journal."}
                     write_member("PACKAGING.json", [canonical(packaging)])
                     write_member("index.html", [sealed_index.page(sealed_facts, result["events"], result.get("fingerprint"),
-                                                                  result.get("head_hash"))
+                                                                  result.get("head_hash"), options.get("language", "en"))
                                                 if sealed_facts.get("sealed.started") else compact_index(result["events"])])
                 else:
                     english_original(context, write_member, hashes, "report",

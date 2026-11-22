@@ -1,14 +1,14 @@
 import hashlib
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from . import i18n
 from .account_export import AccountExportOptions
 from .monitoring import Capture, normalize_capture
 from .store import canonical
 
 MAX_CHAT_EXPORTS = 50
-# A @username, a numeric user ID from this account's chats, or an international phone number.
 SECRET_PEER = r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20}|\+[0-9]{7,15})$"
 
 
@@ -18,10 +18,7 @@ def secret_target(value):
 
 
 class SecretVisibility(BaseModel):
-    """What the other side of a captured secret chat may see. The default sends nothing: no read receipts, no
-    opened notices for self-destructing content, no typing. Downloading and viewing files never notifies anyone."""
     model_config = ConfigDict(extra="forbid")
-    # on_open: the panel marks messages read a few seconds after they appear while the panel is in view.
     read_receipts: Literal["never", "manual", "on_reply", "on_open"] = "never"
     content_opened: Literal["never", "manual"] = "never"
     typing: Literal["hidden", "shown", "before_send"] = "hidden"
@@ -31,16 +28,22 @@ class Selection(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mode: Literal["chat", "account", "chats", "secret"] = "chat"
     chat_id: int | None = Field(default=None, strict=True)
-    # Pseudo-secret capture: start a secret chat with this user, accept ones the other side starts, or both.
     secret_peer: str | None = Field(default=None, pattern=SECRET_PEER)
     accept_incoming: bool | None = None
     secret_visibility: SecretVisibility | None = None
-    # Investigation export: each chat becomes its own signed chat export inside the sealed archive, in this order.
     chat_ids: list[int] | None = Field(default=None, min_length=1, max_length=MAX_CHAT_EXPORTS)
     capture: Capture = Field(default_factory=lambda: Capture.model_validate({
         **normalize_capture(None), "include_avatars": False, "messages_first": True}))
     account_scope: Literal["all", "selected"] | None = None
     account_options: AccountExportOptions | None = None
+    report_language: str | None = None
+
+    @field_validator("report_language")
+    @classmethod
+    def language_supported(cls, value):
+        if value is not None and value not in i18n.LANGUAGES:
+            raise ValueError("Unsupported report language")
+        return value
 
     @model_validator(mode="after")
     def scope(self):
@@ -77,9 +80,18 @@ class Selection(BaseModel):
             if self.account_scope is not None and self.account_scope != inferred:
                 raise ValueError("Selected scope requires chat IDs; all-chat scope must not restrict chat IDs.")
             self.account_scope = inferred
+            if self.report_language is not None:
+                self.account_options.report_language = self.report_language
         return self
 
+    @property
+    def language(self):
+        return self.report_language or "en"
+
     def settings(self):
+        return {**self.mode_settings(), **({"report_language": self.report_language} if self.report_language else {})}
+
+    def mode_settings(self):
         if self.mode == "account":
             return {"mode": "account", "account_scope": self.account_scope,
                     "account_options": self.account_options.model_dump()}
@@ -88,7 +100,6 @@ class Selection(BaseModel):
         if self.mode == "secret":
             return {"mode": "secret", "secret_peer": self.secret_peer, "accept_incoming": self.accept_incoming,
                     "capture": normalize_capture(self.capture.model_dump()),
-                    # Absent in archives made before this choice existed; they keep their original digest.
                     **({"secret_visibility": self.secret_visibility.model_dump()} if self.secret_visibility else {})}
         return {"mode": "chat", "chat_id": self.chat_id, "capture": normalize_capture(self.capture.model_dump())}
 
@@ -110,6 +121,8 @@ def checked_selection(events, internal, expected=None, require_complete=False):
                "capture": event.get("capture"), "secret_visibility": event.get("secret_visibility")}
     else:
         raw = {"mode": "chat", "chat_id": event.get("chat_id"), "capture": event.get("capture")}
+    if event.get("report_language") is not None:
+        raw["report_language"] = event["report_language"]
     settings = Selection.model_validate(raw).settings()
     digest = selection_hash(settings)
     transport = settings["account_options"]["transport"] if settings["mode"] == "account" else "regular"

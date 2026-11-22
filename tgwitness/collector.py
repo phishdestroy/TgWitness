@@ -5222,8 +5222,6 @@ class Collector:
         return low
 
     def regular_history_wait(self):
-        """Pause between regular history pages: Telethon sleeps a second after every page of a long chat. The client's
-        learned bulk pacer already spaces history requests and backs off after FloodWait, so with it no fixed pause."""
         return 0 if getattr(self.client, "bulk_pacer", None) is not None else None
 
     @asynccontextmanager

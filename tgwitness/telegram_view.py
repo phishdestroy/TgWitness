@@ -37,8 +37,6 @@ def safe_link(value):
 
 
 def formatted(text, entities, emoji=None):
-    """Text with its entities. emoji maps a custom emoji document ID to a saved still image shown in place of the
-    fallback character; animated custom emoji keep the fallback character."""
     spans, pictures = [], {}
     for start, end, value in entity_spans(text, entities):
         kind = value['type']
@@ -97,8 +95,6 @@ class View:
         self.formats = {}
 
     def format_of(self, path):
-        """What a saved sticker or custom emoji file is, from its first bytes: 'image' (WebP, PNG), 'video' (WebM) or
-        None (an animated .tgs sticker, which a browser cannot play, or an unreadable file)."""
         if path not in self.formats:
             try:
                 with (Path(self.export.directory) / path).open('rb') as stream:
@@ -110,7 +106,6 @@ class View:
         return self.formats[path]
 
     def custom_emoji(self, row):
-        """Saved custom emoji of a message: document ID -> attachment, for the IDs its text entities name."""
         named = {item.get('document_id') for item in row.get('entities') or []
                  if isinstance(item, dict) and item.get('_') == 'MessageEntityCustomEmoji'}
         return {attachment['media_id']: attachment for attachment in row.get('attachments') or []
@@ -122,14 +117,12 @@ class View:
                 if self.format_of(attachment['file']) == 'image'}
 
     def person(self, row):
-        """The author's name; a deleted account is named so, with its ID, since several can write in one chat."""
         found = name(row.get('sender'))
         if found == DELETED_ACCOUNT:
             return self.say('Deleted account') + (' · ID ' + str(row['from_id']) if type(row.get('from_id')) is int else '')
         return found
 
     def photo(self, peer_id, prefix):
-        """Relative path of the saved current photo of a chat or person, when the export holds one."""
         path = self.avatars.get(peer_id) if type(peer_id) is int else None
         return prefix + path if isinstance(path, str) and MEDIA_PATH.fullmatch(path) else None
 
@@ -217,7 +210,7 @@ class View:
         for attachment in row.get('attachments') or []:
             kind, path = attachment.get('kind'), attachment.get('file')
             if attachment.get('media_id') in custom and isinstance(path, str) and MEDIA_PATH.fullmatch(path):
-                continue  # custom emoji of the text, listed under it by emoji_files
+                continue
             label = say(labels.get(kind, 'Attachment'))
             if not isinstance(path, str) or not MEDIA_PATH.fullmatch(path):
                 parts.append('<div class="attachment unavailable"><strong>' + e(label) + '</strong><span>'
@@ -249,7 +242,6 @@ class View:
         return ''.join(parts)
 
     def emoji_files(self, row):
-        """Custom emoji stand in the text (still ones are drawn there); each saved file stays one click away."""
         links, seen = [], set()
         for key, attachment in self.custom_emoji(row).items():
             path = attachment['file']

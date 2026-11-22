@@ -68,7 +68,6 @@ class AccountExportOptions(BaseModel):
     from_utc: str | None = None
     to_utc: str | None = None
     own_messages_only: bool = False
-    # Telegram Desktop export categories. None keeps the selection defined by chat_kinds alone.
     chat_categories: list[Literal[CATEGORIES]] | None = Field(default=None, max_length=len(CATEGORIES))
     own_only_categories: list[Literal[CATEGORIES]] = Field(default_factory=list, max_length=len(CATEGORIES))
     include_archived: bool = True
@@ -86,7 +85,6 @@ class AccountExportOptions(BaseModel):
     include_stories: bool = True
     include_session_metadata: bool = True
     include_other_data: bool = True
-    # Current photo of every selected chat and of everyone whose messages were read, saved after all messages.
     include_avatars: bool = False
 
     @field_validator("report_language")
@@ -134,7 +132,6 @@ class AccountExportOptions(BaseModel):
 
 
 def category_of(kind, username):
-    """Telegram Desktop export category of a chat: public groups and channels have a public username."""
     if kind == "private":
         return "personal"
     if kind == "bot":
@@ -148,10 +145,6 @@ ACCOUNT_DATA_FIRST = ("profile", "contacts", "sessions")
 
 
 def reading_order(tasks, chats):
-    """The essentials first, so a run that ends early still holds them: profile, contacts and sessions, then private
-    chats and bots, other account data, ordinary groups, and supergroups and channels from the smallest (by their
-    newest message ID). Within a rank the dialog list order, most recent first, is kept. Files follow all messages.
-    Photos of chats and people come last: they are taken from the people the history pages named."""
     from .export_budget import read_rank
     kinds = {chat["id"]: chat.get("kind") for chat in chats}
 
@@ -165,8 +158,6 @@ def reading_order(tasks, chats):
 
 
 def attachment_order(tasks, chats):
-    """Files follow the reading order, except that photos of chats and people come right after the files of private
-    chats and bots: they are looked up after all messages, when every author is known, and they are small."""
     kinds = {chat["id"]: chat.get("kind") for chat in chats}
     photos = [task for task in tasks if task["category"] == "avatars"]
     rest = [task for task in tasks if task["category"] != "avatars"]
@@ -330,7 +321,6 @@ class AccountExport:
         self.discovery_saved = 0.0
         self.packaging_copies, self.record_bytes = 1, 0
         self.transport_factory = transport.Transport
-        # Set by a sealed GitHub Actions capture: the run whose attestation signs the archive holding this export.
         self.sealed_run = None
 
     def directory(self, job_id):
@@ -764,7 +754,6 @@ class AccountExport:
             self.counts["steps_not_reached"] = self.counts.get("steps_not_reached", 0) + 1
 
     def stopped(self, reason):
-        """Whether a failed file or step only records that collection was stopped before reaching it."""
         finish = (getattr(self, "current", None) or {}).get("finish_reason")
         return isinstance(reason, str) and reason == finish
 

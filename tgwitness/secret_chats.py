@@ -292,8 +292,6 @@ class SecretChats:
             return True
 
     def hear(self, client):
-        """Read receipts and typing of the other side arrive as plain updates. Observation handles them while it runs;
-        without it (a sealed secret chat capture, or observation paused) this handler records them."""
         async def heard(update):
             if self.client is not client or getattr(self.collector, "running", False):
                 return
@@ -624,7 +622,6 @@ class SecretChats:
         return bool(getattr(entity, "mutual_contact", False))
 
     def conversation(self, chat_id):
-        """The other side started this chat or is a mutual contact; Telegram's spam limits allow both."""
         try:
             chat = self.require().status(chat_id)
         except Exception:
@@ -705,7 +702,6 @@ class SecretChats:
                                         "reason": "accept_incoming turned off"})
             return None
         try:
-            # The other side started this chat, so Telegram's spam limits on first contact do not apply.
             chat = await self.acting(manager.accept, chat_id, conversation=True)
         except Exception as exc:
             self.note("accept_failed", {"secret_chat_id": chat_id, "automatic": automatic,
@@ -729,7 +725,6 @@ class SecretChats:
                 "secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "method": "messages.setEncryptedTyping"},
                 functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True),
                 visibility.typing_seconds(text))
-        # Telegram dates the message between these two moments; the other side's read receipt names a message date.
         started = utcnow()
         random_id = await self.acting(manager.send_message, chat_id, text, conversation=conversation)
         chat = manager.status(chat_id)
@@ -799,7 +794,6 @@ class SecretChats:
         visibility.require(self.store, chat_id, True, "content_opened", "manual")
         interactions.permitted(self.collector, self.conversation(chat_id))
         manager = self.require()
-        # The journal keeps random IDs as decimal strings (64-bit values do not survive JSON numbers everywhere).
         ids = sorted({int(value) for value in random_ids})
         keys = [str(value) for value in ids]
         if set(keys) - {str(row[0]) for row in self.received(chat_id, [*keys, *ids])}:

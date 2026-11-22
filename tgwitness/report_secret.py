@@ -170,8 +170,6 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         elif name == "peer_read":
             chat["counts"]["read"] += shown
             event("Read", until=payload.get("max_date_at"))
-            # The receipt names the date of the newest message they read; Telegram dates a sent message no earlier
-            # than the moment this account started sending it.
             if type(payload.get("max_date")) is int:
                 for target in chat["messages"].values():
                     if target["direction"] == "out" and target["read_by_peer"] is None and target["sent_from"] is not None                             and target["sent_from"] <= payload["max_date"]:
@@ -183,7 +181,6 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             if payload.get("status") != "succeeded":
                 event("A notice to the other side was not confirmed")
             elif name == "read_result":
-                # Notices this account sent: what the other side was shown, and when.
                 event("This account sent a read receipt up to {time}", until=request.get("max_date_at"))
                 bound = request.get("max_date")
                 for target in chat["messages"].values():
@@ -217,7 +214,6 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
 
 
 def sent_from(payload, at):
-    """Whole second from which Telegram may have dated a sent message: the send start, or one second before the record."""
     from datetime import datetime
     try:
         if isinstance(payload.get("send_started_at"), str):
@@ -228,7 +224,6 @@ def sent_from(payload, at):
 
 
 def peer_badges(say, item, when):
-    """What the other side's app reported about a message this account sent."""
     found = []
     if item.get("read_by_peer"):
         found.append(say("read by the other side · {time}", time=when(item["read_by_peer"]["at"])))
@@ -242,7 +237,6 @@ def peer_badges(say, item, when):
 
 
 def bubble_meta(say, chat, item, when):
-    """Who, when and which signed record: the sender for received messages, the record number and its hash prefix."""
     parts = [say("Sent")] if item["direction"] == "out" else [say("Received"), sender_label(chat["peer"])]
     parts += [when(item["at"]), say("Record #{n}", n=item["seq"])]
     if isinstance(item.get("hash"), str) and item["hash"]:

@@ -4,22 +4,15 @@ MIB = 1024**2
 DOWNLOAD_BYTES_PER_SECOND = MIB
 PACKAGING_BYTES_PER_SECOND = 16 * MIB
 SAFETY_FACTOR = 2
-# History is read in pages of 100 messages, one request at a time, no faster than the account's learned pause between
-# bulk reads (the sealed runner starts at 0.6 s). A short sample request measures latency, not throughput.
 PAGE_MESSAGES = 100
 PAGE_GAP_SECONDS = .6
 HISTORY_SAFETY = 1.25
-# Reading order: account data, private chats and bots, ordinary groups, then supergroups and channels from the
-# smallest; within a rank the dialog list order (most recent first) is kept. Messages of every chat come before files.
 READ_RANKS = {"private": 1, "bot": 1, "group": 3, "supergroup": 4, "channel": 4}
-# Photos of chats and people: one lookup and one small download each, at most AVATAR_LIMIT per export, read after all
-# messages and before the other files.
 AVATAR_LIMIT = 2000
 AVATAR_SECONDS = 2 * PAGE_GAP_SECONDS
 
 
 def avatar_peers(per_chat):
-    """Expected photos: each private chat or bot, each group with roughly one author per 20 messages, and the account."""
     peers = 1
     for chat in per_chat:
         if chat.get("unknown"):
@@ -102,7 +95,6 @@ def estimate(sample, options=None):
             "history_seconds": math.ceil(history_seconds), "metadata_seconds": metadata_seconds,
             "avatar_seconds": avatar_seconds,
             "hash_seconds": math.ceil(hashes / 10),
-            # Account exports read in this order; chat exports keep the order the chats were selected in.
             "per_chat": sorted(per_chat, key=lambda c: read_rank(c.get("kind"), c.get("messages")))
             if all(c.get("kind") for c in per_chat) else per_chat,
             "assumptions": {"download_bytes_per_second": DOWNLOAD_BYTES_PER_SECOND,
@@ -116,9 +108,6 @@ SESSION_CHOICES = (30, 60, 120, 180, 240, 300)
 
 
 def recommended_minutes(value, spent_seconds):
-    """Shortest offered session that fits the whole estimate, counting time already spent signing in.
-
-    None when nothing is offered that fits, or when the estimate is incomplete."""
     if value["unknown"]:
         return None
     for minutes in SESSION_CHOICES:
@@ -130,7 +119,6 @@ def recommended_minutes(value, spent_seconds):
 
 
 def fitting_chats(per_chat, available_seconds, metadata=0):
-    """Measured chats that fit together in the remaining collection time, smallest first to keep the most chats."""
     budget, chosen = available_seconds - metadata, []
     for chat in sorted((c for c in per_chat if not c.get("unknown") and c.get("chat_id") is not None),
                        key=lambda c: c["seconds"]):
@@ -141,10 +129,6 @@ def fitting_chats(per_chat, available_seconds, metadata=0):
 
 
 def split_runs(per_chat, spent_seconds, metadata=0, minutes=SESSION_CHOICES[-1]):
-    """Group measured chats into separate longest-session runs (first fit, largest first).
-
-    Each run must still sign in, so the time spent signing in this run is reserved in every run. A chat too large
-    for one run gets its own run marked "exceeds_one_run"; restrict its dates to fit."""
     session = minutes * 60
     runs = []
     for chat in sorted((c for c in per_chat if not c.get("unknown") and c.get("chat_id") is not None),
@@ -170,11 +154,6 @@ def split_runs(per_chat, spent_seconds, metadata=0, minutes=SESSION_CHOICES[-1])
 
 
 def reachable_reserve(value, remaining_seconds, session_seconds):
-    """Archive preparation time for the part of the selection the run can reach.
-
-    Collection stops when the time runs out and only what was collected is packaged, so a selection larger than the
-    run reserves time for the reachable share, not for everything selected. The share solves
-    share = (remaining - baseline - share * packaging_of_all) / acquisition."""
     full = sealing_reserve(session_seconds, value["output_bytes"], value["messages_to_read"])
     if remaining_seconds >= value["acquisition_seconds"] + full:
         return full
@@ -203,7 +182,6 @@ def plan(sample, options, remaining_seconds, session_seconds):
     spent = max(0, session_seconds - remaining_seconds)
     return {**value, "fit": fit, "remaining_seconds": remaining_seconds,
             "collection_seconds": available, "sealing_reserve_seconds": reserve,
-            # Everything selected, packaged in full; the reserve above covers only what this run can reach.
             "estimated_total_seconds": required + sealing_reserve(session_seconds, value["output_bytes"],
                                                                   value["messages_to_read"]),
             "recommended_session_minutes": recommended_minutes(value, spent),

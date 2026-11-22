@@ -13,7 +13,6 @@ $("language").replaceChildren(...Object.entries(window.TGW_SEALED_LANGUAGES || {
   .map(([code, name]) => Object.assign(document.createElement("option"), {value: code, textContent: name})));
 let qrId = null, ended = false;
 let lastState = null, connectionFailed = false, statusError = "", actionError = "";
-// Chats left out of an account export from the plan table; changing other settings starts from all chats again.
 let droppedChats = new Set();
 const english = new WeakMap();
 const tr = (text, values = {}) => {
@@ -27,7 +26,6 @@ if (fragment.has("access")) {
   history.replaceState(null, "", location.pathname);
 }
 const token = sessionStorage.getItem("sealed-access") || "";
-// The live controls under the secret chats offer the same choices as the start screen.
 for (const [from, to] of [["vis-read", "live-read"], ["vis-opened", "live-opened"], ["vis-typing", "live-typing"]])
   $(to).replaceChildren(...Array.from($(from).options, option => option.cloneNode(true)));
 function translate() {
@@ -74,7 +72,6 @@ function credentials() {
   }
   return {api_id: Number(id), api_hash: hash};
 }
-// "+62 878 80918834", "+7 (999) 123-45-67" and "0049 ..." are sent as "+<digits>"; the country code is required.
 const phoneValue = value => {
   const text = String(value || "").trim();
   if (!/^\+?[0-9\s().-]{7,32}$/.test(text)) return text;
@@ -175,7 +172,6 @@ $("export-method").addEventListener("input", () => {
 });
 const SECRET_PEER = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$|^[0-9]{1,20}$|^\+[0-9]{7,15}$/;
 const peerHint = () => tr("Enter a @username, a phone number with + and the country code, or choose a person from your chats.");
-// "+7 (999) 123-45-67" becomes "+79991234567"; usernames and IDs stay as typed.
 const peerValue = value => {
   const text = String(value || "").trim();
   return /^\+[0-9\s().-]+$/.test(text) ? "+" + text.replace(/[^0-9]/g, "") : text;
@@ -250,8 +246,6 @@ function renderSecret(secret) {
   if (signature === secretSignature) return;
   secretSignature = signature;
   for (const field of $("secret-chats").querySelectorAll("input[data-chat]")) secretDrafts[field.dataset.chat] = field.value;
-  // A new message rebuilds the threads: keep each thread's scroll position (or stay at the newest message), open
-  // previews and the caret in the message field, so reading or typing is not interrupted.
   const scroll = {}, active = document.activeElement;
   for (const thread of $("secret-chats").querySelectorAll(".secret-thread[data-chat]"))
     scroll[thread.dataset.chat] = {top: thread.scrollTop, end: thread.scrollHeight - thread.scrollTop - thread.clientHeight < 48};
@@ -305,8 +299,6 @@ function renderSecret(secret) {
   if (field) {field.focus({preventScroll: true}); field.setSelectionRange(typing.start, typing.end);}
 }
 let stickTo = null, visibilitySaving = false;
-// Read receipts "5 seconds after it appears here": only while this panel is in view, and once the newest received
-// message has been shown for 5 seconds; a newer message restarts the wait. Files are never opened by this.
 const AUTO_READ_MS = 5000, autoTimers = {}, autoDone = {};
 let lastSecretForRead = null;
 function autoRead(secret, records) {
@@ -387,14 +379,11 @@ function secretThread(records, chatId, pending, vis) {
   const files = new Map(mine.filter(r => r.kind === "secret_chat.file").map(r => [String(r.payload.random_id), r.payload]));
   const deleted = new Set(mine.filter(r => r.kind === "secret_chat.action" && r.payload?.action === "DeleteMessages")
     .flatMap(r => (r.payload.details?.random_ids || []).map(String)));
-  // Notices this panel sent: read receipts cover messages up to a time; opened notices name messages.
   const readUpTo = succeeded(mine, "secret_chat.read").map(r => ({at: Date.parse(r.payload.max_date_at), when: r.observed_at}))
     .filter(item => Number.isFinite(item.at)).sort((a, b) => b.at - a.at)[0];
   const opened = new Map(succeeded(mine, "secret_chat.contents").flatMap(r => (r.payload.random_ids || []).map(id => [String(id), r.observed_at])));
   const time = value => String(value || "").slice(11, 19);
   const thread = document.createElement("div"); thread.className = "secret-thread"; thread.dataset.chat = String(chatId);
-  // The other side's read receipts name the date of the newest message they read; Telegram dates a sent message
-  // after this panel started sending it. Opened notices name the self-destructing messages they opened.
   const theirReads = mine.filter(r => r.kind === "secret_chat.peer_read").map(r => ({max: Date.parse(r.payload.max_date_at),
     when: r.payload.read_at || r.observed_at})).filter(item => Number.isFinite(item.max));
   const theirOpens = new Map(mine.filter(r => r.kind === "secret_chat.action" && r.payload?.action === "ReadMessages")
@@ -430,7 +419,6 @@ function secretThread(records, chatId, pending, vis) {
       if (openedAt) status.append(chip(tr("Opened by them · {time}", {time: time(openedAt)}), "seen"));
     }
     if (incoming) {
-      // Read receipts cover messages up to a whole second, as sent to Telegram.
       const read = readUpTo && Math.floor(Date.parse(record.observed_at) / 1000) * 1000 <= readUpTo.at;
       status.append(chip(read ? tr("Shown as read · {time}", {time: time(readUpTo.when)}) : tr("Not shown as read"), read ? "seen" : "quiet"));
       if (p.ttl || p.media) {
@@ -458,14 +446,12 @@ $("secret-start").onclick = () => {
   if (!SECRET_PEER.test(user)) {actionError = peerHint(); renderError(); return;}
   secretAction("secret/create", {user}).then(() => {if (!actionError) $("secret-new").value = "";});
 };
-// Saved copies are shown from this runner; nothing is sent to Telegram, so the other side is not notified.
 const viewed = new Map();
 function showPreview(button, url) {
   const bubble = button.closest(".secret-bubble"), kind = bubble.dataset.kind || "", thread = button.closest(".secret-thread");
   const preview = document.createElement(kind === "Video" ? "video" : kind === "Audio" ? "audio" : "img");
   preview.className = "secret-preview"; preview.src = url;
   if (preview.tagName !== "IMG") preview.controls = true; else preview.alt = "";
-  // The preview grows the thread after it loads; a thread at its newest message stays there.
   const atEnd = thread && thread.scrollHeight - thread.scrollTop - thread.clientHeight < 48;
   preview.addEventListener(preview.tagName === "IMG" ? "load" : "loadedmetadata", () => {
     if (atEnd && thread) thread.scrollTop = thread.scrollHeight;
@@ -483,7 +469,6 @@ async function viewSecretFile(button) {
       if (!response.ok) throw new Error(tr("The saved file could not be opened."));
       viewed.set(digest, URL.createObjectURL(await response.blob()));
     }
-    // The thread may have been rebuilt while the file loaded; show it on the current button.
     const current = button.isConnected ? button : $("secret-chats").querySelector(`button[data-secret-action="view"][data-item="${CSS.escape(digest)}"]`);
     if (current && !current.closest(".secret-bubble").querySelector(".secret-preview")) showPreview(current, viewed.get(digest));
     shownPreviews.add(digest);
@@ -498,7 +483,6 @@ $("secret-chats").addEventListener("click", event => {
   if (action === "send") {
     const field = $("secret-chats").querySelector(`input[data-chat="${id}"]`), text = field.value.trim();
     if (!text) return;
-    // Cleared before the request: the reply rebuilds the thread, and a failed send puts the text back.
     field.value = ""; secretDrafts[id] = ""; stickTo = id;
     secretAction(`secret/${id}/send`, {text}).then(() => {
       if (!actionError) return;
@@ -532,7 +516,6 @@ for (const [kind, limit] of Object.entries(mediaTypes)) {
   }
   row.append(action); $("media-rules").append(row);
 }
-// Presets never drop a file type: types that are not downloaded keep Telegram server hashes.
 const mediaPresets = {
   all: Object.keys(mediaTypes),
   light: ["photo", "voice", "video_note", "document"],
@@ -566,6 +549,9 @@ function keptChats() {
   return (assessmentResult?.time_plan?.per_chat || []).map(chat => chat.chat_id).filter(id => !droppedChats.has(id));
 }
 function selection() {
+  return {...modeSelection(), report_language: lang};
+}
+function modeSelection() {
   const investigation = $("export-mode").value === "chats", secret = $("export-mode").value === "secret";
   const journal = $("export-mode").value === "journal" || investigation || secret;
   const selected = Array.from($("chats").selectedOptions, option => Number(option.value));
@@ -600,7 +586,6 @@ function selection() {
     include_profile_photos: $("account-photos").checked, include_stories: $("account-stories").checked,
     include_session_metadata: $("account-sessions").checked, include_other_data: $("account-other").checked,
     include_avatars: $("account-avatars").checked,
-    // An investigator's own capture: charts name each sender with @username and ID instead of aliases.
     report_presentation: {participant_labels: "names"}};
   const accountMode = !journal;
   if (accountMode) {
@@ -736,7 +721,6 @@ function chatName(id) {
   const planned = (assessmentResult?.time_plan?.per_chat || []).find(chat => chat.chat_id === id);
   return option ? option.textContent : planned?.title || tr("Chat {id}", {id});
 }
-// What a start now would hold, chat by chat: messages of all included chats in reading order first, then files.
 function forecast(plan) {
   let budget = Math.max(0, (plan.collection_seconds || 0) - (plan.metadata_seconds || 0));
   const result = new Map(), rows = (plan.per_chat || []).filter(chat => !droppedChats.has(chat.chat_id));
@@ -747,7 +731,6 @@ function forecast(plan) {
     budget = Math.max(0, budget - need);
     result.set(chat.chat_id, {messages: share >= 1 ? "all" : share > 0 ? "part" : "none", share, files: "none"});
   }
-  // Photos of chats and people are read after all messages and before the other files.
   budget = Math.max(0, budget - (plan.avatar_seconds || 0));
   for (const chat of rows) {
     const item = result.get(chat.chat_id);
@@ -827,7 +810,6 @@ function renderPlan(plan, format) {
   $("budget-order").hidden = !account;
   $("budget-plan").hidden = !rows.length;
 }
-// The include boxes sit inside the settings form; ticking them must not discard the assessment they belong to.
 $("budget-table").addEventListener("input", event => event.stopPropagation());
 $("budget-table").addEventListener("change", event => {
   const box = event.target.closest("input[data-chat]");
@@ -921,7 +903,6 @@ function renderMeter(progress) {
   $("meter-fill").style.width = known ? progress.percent + "%" : "";
   if (known) $("meter-bar").setAttribute("aria-valuenow", String(progress.percent)); else $("meter-bar").removeAttribute("aria-valuenow");
   $("meter-elapsed").textContent = tr("Elapsed: {time}", {time: duration(progress.elapsed_seconds)});
-  // A selection larger than the session does not run to its estimate: collection stops at the time limit.
   const budget = lastState?.time_budget, stops = budget?.collection_seconds;
   $("meter-eta").textContent = waiting ? tr("Telegram asked to wait until {time}", {time: waiting}) :
     progress.stage === "packaging" ? "" : progress.eta_seconds != null && stops != null &&

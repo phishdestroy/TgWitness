@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 5bfed35d10a0ba7729728f1583ec4c8da51ed2e123c6acc93b809425f98baf7a
+# TgWitness verifier sources SHA-256: 5fd8cb9b13131ec672b02c5caab558c8f3e0b66cd9654188f5f977554b62459d
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -6580,7 +6580,6 @@ def verify_parts(archive, manifest):
 
 
 def export_category(kind, username):
-    """Telegram Desktop export category; public groups and channels have a public username."""
     if kind == "private":
         return "personal"
     if kind == "bot":

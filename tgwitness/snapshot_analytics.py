@@ -21,7 +21,7 @@ SCOPE_JOURNAL = "Journal charts count message observations at capture time in UT
 SCOPE_SNAPSHOT = "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope."
 CAUTION = "Activity counts saved observations. Sender identifiers are Telegram account numbers. Zero means no included observations."
 UNKNOWN = "Unknown or withheld"
-DELETED = "Deleted Account"  # the name Telegram Desktop gives a user whose account was deleted
+DELETED = "Deleted Account"
 OTHER = "Other / unlisted"
 
 
@@ -193,7 +193,6 @@ def selected(options):
 
 
 def alias_map(people):
-    """Chart alias numbers: participants with an ID, ordered by the text of the ID, numbered from 1."""
     return {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None),
                                                                 key=lambda row: str(row["id"])), 1)}
 
@@ -246,7 +245,6 @@ def e(value):
 
 
 def display(label, say):
-    """A label as shown: a deleted account is named in the report language; its ID stays."""
     text = str(label)
     if text == DELETED or text.startswith(DELETED + " · "):
         return say("Deleted account") + text[len(DELETED):]
@@ -254,7 +252,6 @@ def display(label, say):
 
 
 def rank_label(row, say):
-    """A bar label: the participant or chat name and its Telegram ID, once, whatever the label mode added already."""
     label = row["label"]
     name = say(label) if label in (UNKNOWN, OTHER, *KIND_LABELS.values()) else display(label, say)
     identity = row.get("id")

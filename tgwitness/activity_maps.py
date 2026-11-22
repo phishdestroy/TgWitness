@@ -333,7 +333,6 @@ def lane_rows(groups, absent, origin, step, count, say):
                     firm += amount
                 else:
                     likely += amount
-        # Numbers from the shared account-wide sequence are attributed by estimate; say so next to the count.
         total = say("{n} msgs", n=thousands(say, len(times))) + "".join(
             " · " + text for text in ((say("absent {n}", n=number(firm, say)) if firm >= 0.05 else ""),
                                       (say("likely absent {n}", n=number(likely, say)) if likely >= 0.05 else "")) if text)
