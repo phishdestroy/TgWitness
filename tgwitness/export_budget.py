@@ -169,9 +169,25 @@ def split_runs(per_chat, spent_seconds, metadata=0, minutes=SESSION_CHOICES[-1])
     return runs
 
 
+def reachable_reserve(value, remaining_seconds, session_seconds):
+    """Archive preparation time for the part of the selection the run can reach.
+
+    Collection stops when the time runs out and only what was collected is packaged, so a selection larger than the
+    run reserves time for the reachable share, not for everything selected. The share solves
+    share = (remaining - baseline - share * packaging_of_all) / acquisition."""
+    full = sealing_reserve(session_seconds, value["output_bytes"], value["messages_to_read"])
+    if remaining_seconds >= value["acquisition_seconds"] + full:
+        return full
+    baseline = sealing_reserve(session_seconds)
+    packaging = full - baseline
+    share = min(1, max(0, (remaining_seconds - baseline) / max(1, value["acquisition_seconds"] + packaging)))
+    return sealing_reserve(session_seconds, math.ceil(value["output_bytes"] * share),
+                           math.ceil(value["messages_to_read"] * share))
+
+
 def plan(sample, options, remaining_seconds, session_seconds):
     value = estimate(sample, options)
-    reserve = sealing_reserve(session_seconds, value["output_bytes"], value["messages_to_read"])
+    reserve = reachable_reserve(value, remaining_seconds, session_seconds)
     available = max(0, remaining_seconds - reserve)
     required = value["acquisition_seconds"]
     fit = "over_budget" if required > available else "unknown" if value["unknown"] else "estimated_fit"
@@ -187,7 +203,9 @@ def plan(sample, options, remaining_seconds, session_seconds):
     spent = max(0, session_seconds - remaining_seconds)
     return {**value, "fit": fit, "remaining_seconds": remaining_seconds,
             "collection_seconds": available, "sealing_reserve_seconds": reserve,
-            "estimated_total_seconds": required + reserve,
+            # Everything selected, packaged in full; the reserve above covers only what this run can reach.
+            "estimated_total_seconds": required + sealing_reserve(session_seconds, value["output_bytes"],
+                                                                  value["messages_to_read"]),
             "recommended_session_minutes": recommended_minutes(value, spent),
             "fits_now": fitting_chats(value["per_chat"], available, metadata=value["metadata_seconds"]),
             "split_runs": split_runs(value["per_chat"], spent, value["metadata_seconds"]) if required > available else [],

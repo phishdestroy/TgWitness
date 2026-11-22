@@ -717,7 +717,7 @@ function humanBytes(bytes) {
   return size.toLocaleString(lang, {maximumFractionDigits: digits}) + " " + units[unit];
 }
 function renderSummary(plan, verdict) {
-  const box = $("plan-summary"), needed = Math.ceil((plan.acquisition_seconds + plan.sealing_reserve_seconds) / 60);
+  const box = $("plan-summary"), needed = Math.ceil((plan.estimated_total_seconds ?? plan.acquisition_seconds + plan.sealing_reserve_seconds) / 60);
   const available = Math.ceil(plan.remaining_seconds / 60);
   box.replaceChildren();
   const status = document.createElement("p"); status.className = "plan-verdict " + plan.fit; status.textContent = verdict;
