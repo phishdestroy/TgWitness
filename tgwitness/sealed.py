@@ -5,6 +5,7 @@ import hashlib
 import io
 import json
 import logging
+import re
 import secrets
 import shutil
 import time
@@ -65,9 +66,23 @@ class Login(StrictBody):
 class Phone(Login):
     phone: str = Field(pattern=r"^\+[0-9]{7,16}$")
 
+    @field_validator("phone", mode="before")
+    @classmethod
+    def international(cls, value):
+        # "+7 (999) 123-45-67", "0049 ..." and "79991234567" become "+<digits>"; the country code is required.
+        if not isinstance(value, str) or not re.fullmatch(r"\s*\+?[0-9\s().-]{7,32}", value):
+            return value
+        digits = re.sub(r"[^0-9]", "", value)
+        return "+" + (digits[2:] if digits.startswith("00") else digits)
+
 
 class Code(StrictBody):
-    code: str = Field(min_length=3, max_length=12, pattern=r"^[0-9 -]+$")
+    code: str = Field(min_length=3, max_length=16, pattern=r"^\s*[0-9][0-9 -]*\s*$")
+
+    @field_validator("code", mode="after")
+    @classmethod
+    def digits(cls, value):
+        return re.sub(r"[^0-9]", "", value)
 
 
 class Password(StrictBody):
@@ -336,8 +351,38 @@ class Session:
             return None
         from . import secret_chats
         view = secret_chats.of(self.collector).view()
+        from . import visibility
+        fields = visibility.effective(self.store)
         return {**{key: view.get(key) for key in ("connected", "error", "chats", "people", "records", "interaction_problem",
-                                                   "pending_files")}, "notice": self.secret_notice}
+                                                   "pending_files")}, "notice": self.secret_notice, "counts": self.secret_counts(),
+                "visibility": {key: fields[key] for key in ("read_receipts", "content_opened", "typing")}}
+
+    def secret_media_type(self, digest):
+        """Media type of a decrypted secret chat file, only for files this capture saved; None otherwise."""
+        with self.store.lock:
+            row = self.store.db.execute(
+                "SELECT m.payload FROM events f JOIN events m ON m.seq = json_extract(f.payload,'$.message_event') "
+                "WHERE f.kind='secret_chat.file' AND json_extract(f.payload,'$.media_sha256')=? LIMIT 1", (digest,)).fetchone()
+        if row is None:
+            return None
+        media = (json.loads(row[0]).get("media") or {})
+        mime = media.get("mime_type") if isinstance(media.get("mime_type"), str) else ""
+        if media.get("_") == "decryptedMessageMediaPhoto":
+            mime = "image/jpeg"
+        return mime if re.fullmatch(r"(image|video|audio)/[a-z0-9.+-]{1,40}", mime or "") else "application/octet-stream"
+
+    def secret_counts(self):
+        """Totals over the whole journal, for the summary; the record list above is capped."""
+        counts = {"received": 0, "sent": 0, "files": 0, "notices": 0}
+        with self.store.lock:
+            rows = self.store.db.execute(
+                "SELECT kind, json_extract(payload,'$.direction'), count(*) FROM events WHERE kind IN "
+                "('secret_chat.message','secret_chat.file','secret_chat.action') GROUP BY 1, 2").fetchall()
+        for kind, direction, number in rows:
+            key = ("received" if direction == "in" else "sent") if kind == "secret_chat.message" else \
+                "files" if kind == "secret_chat.file" else "notices"
+            counts[key] += number
+        return counts
 
     async def begin_secret(self, selection):
         from . import secret_chats, secret_module
@@ -353,8 +398,14 @@ class Session:
             **{key: module.get(key) for key in ("name", "version", "commit", "sha256", "source", "license", "state")},
             "route": "runner_image", "meaning": "The pseudo-secret protocol module was built into this runner's image "
             "from the pinned upstream archive and matched the SHA-256 fixed in this release before it was loaded."})
+        if selection.secret_visibility is not None:
+            from . import visibility
+            chosen = selection.secret_visibility.model_dump()
+            visibility.change(self.collector, visibility.Change(workspace=visibility.Fields(**{
+                **visibility.DEFAULTS, **chosen, "invisible": False})), operator="sealed panel")
         self.store.append("sealed.selection", {"mode": "secret", "secret_peer": selection.secret_peer,
             "accept_incoming": selection.accept_incoming, "capture": settings, "selection": self.selection,
+            **({"secret_visibility": selection.secret_visibility.model_dump()} if selection.secret_visibility else {}),
             "selection_sha256": selection_hash(self.selection), "free_disk_bytes": shutil.disk_usage(self.root).free,
             "remaining_seconds": self.status()["remaining_seconds"], "transport": "regular",
             "total_size_and_duration": "observed during the run"})
@@ -633,12 +684,22 @@ def create_app(root, output, config, client_factory=WitnessClient):
         response.headers.update({"Cache-Control": "no-store", "Referrer-Policy": "no-referrer",
             "X-Content-Type-Options": "nosniff", "X-Frame-Options": "DENY",
             "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; "
-                "connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"})
+                "connect-src 'self'; img-src 'self' data: blob:; media-src blob:; frame-ancestors 'none'; base-uri 'none'; "
+                "form-action 'none'"})
         return response
 
     @app.exception_handler(RequestValidationError)
     async def invalid(request, exc):
-        return JSONResponse({"detail": "Invalid request fields"}, status_code=422)
+        fields = {str(error.get("loc", ("",))[-1]) for error in exc.errors()}
+        hints = {"phone": "Enter the phone number with its country code, for example +15551234567.",
+                 "code": "Enter the login code from Telegram, digits only.",
+                 "api_id": "Enter a valid API ID and API hash, or leave both empty.",
+                 "api_hash": "Enter a valid API ID and API hash, or leave both empty.",
+                 "user": "Enter a @username, a phone number with + and the country code, or a numeric user ID.",
+                 "secret_peer": "Enter a @username, a phone number with + and the country code, or a numeric user ID."}
+        known = [hints[name] for name in sorted(fields) if name in hints]
+        detail = " ".join(dict.fromkeys(known)) or "Invalid request fields: " + ", ".join(sorted(f for f in fields if f))
+        return JSONResponse({"detail": detail}, status_code=422)
 
     async def operation(call, *args, login=False, fresh=False):
         session = app.state.session
@@ -783,6 +844,41 @@ def create_app(root, output, config, client_factory=WitnessClient):
     @app.post("/api/secret/{chat_id}/close")
     async def secret_close(chat_id: int):
         return await secret_call("close", chat_id)
+
+    class SecretOpened(StrictBody):
+        random_ids: list[str] = Field(min_length=1, max_length=100)
+
+        @field_validator("random_ids")
+        @classmethod
+        def numeric(cls, values):
+            if not all(re.fullmatch(r"-?[0-9]{1,20}", value) for value in values):
+                raise ValueError("random_ids")
+            return values
+
+    # Visible to the other side, and only as chosen for this capture: each request and its outcome is journaled.
+    @app.post("/api/secret/{chat_id}/read")
+    async def secret_read(chat_id: int):
+        return await secret_call("mark_read", chat_id, "manual", "sealed panel")
+
+    @app.post("/api/secret/{chat_id}/opened")
+    async def secret_opened(chat_id: int, body: SecretOpened):
+        return await secret_call("mark_opened", chat_id, [int(value) for value in body.random_ids], "sealed panel")
+
+    @app.post("/api/secret/{chat_id}/typing")
+    async def secret_typing(chat_id: int):
+        return await secret_call("send_typing", chat_id, "sealed panel")
+
+    @app.get("/api/secret/media/{digest}")
+    async def secret_media(digest: str):
+        # Viewing a saved copy here sends nothing to Telegram; the other side is not notified.
+        session = app.state.session
+        if not session.secret_mode or not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise HTTPException(404, "No such file")
+        mime = session.secret_media_type(digest)
+        path = session.store.root / "media" / digest
+        if mime is None or path.is_symlink() or not path.is_file():
+            raise HTTPException(404, "No such file")
+        return FileResponse(path, media_type=mime, headers={"Content-Disposition": "inline"})
 
     @app.post("/api/cancel")
     async def cancel():

@@ -737,9 +737,9 @@ class SecretChats:
 
     def unopened(self, chat_id):
         from . import visibility
-        opened = set(visibility.marks(self.store).get("opened:" + visibility.mark_key(chat_id, True)) or [])
+        opened = {str(value) for value in visibility.marks(self.store).get("opened:" + visibility.mark_key(chat_id, True)) or []}
         return [{"random_id": str(row[0]), "observed_at": row[1], "ttl": row[2], "media": row[3]}
-                for row in self.received(chat_id) if (row[2] or row[3]) and row[0] not in opened][:20]
+                for row in self.received(chat_id) if (row[2] or row[3]) and str(row[0]) not in opened][:20]
 
     def definite(self):
         return tuple(error for error in (getattr(library, name, None) for name in ("ChatClosed", "ChatNotReady",
@@ -775,8 +775,10 @@ class SecretChats:
         visibility.require(self.store, chat_id, True, "content_opened", "manual")
         interactions.permitted(self.collector, self.conversation(chat_id))
         manager = self.require()
-        ids = sorted(set(random_ids))
-        if set(ids) - {row[0] for row in self.received(chat_id, ids)}:
+        # The journal keeps random IDs as decimal strings (64-bit values do not survive JSON numbers everywhere).
+        ids = sorted({int(value) for value in random_ids})
+        keys = [str(value) for value in ids]
+        if set(keys) - {str(row[0]) for row in self.received(chat_id, [*keys, *ids])}:
             raise ValueError("Only received messages saved here can be marked as opened.")
         details = {"secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "trigger": "manual", "random_ids": ids,
                    "method": "messages.sendEncryptedService", "service_action": "DecryptedMessageActionReadMessages",

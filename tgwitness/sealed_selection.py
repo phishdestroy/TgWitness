@@ -17,6 +17,15 @@ def secret_target(value):
     return int(value) if value.isdigit() else value
 
 
+class SecretVisibility(BaseModel):
+    """What the other side of a captured secret chat may see. The default sends nothing: no read receipts, no
+    opened notices for self-destructing content, no typing. Downloading and viewing files never notifies anyone."""
+    model_config = ConfigDict(extra="forbid")
+    read_receipts: Literal["never", "manual", "on_reply"] = "never"
+    content_opened: Literal["never", "manual"] = "never"
+    typing: Literal["hidden", "shown", "before_send"] = "hidden"
+
+
 class Selection(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mode: Literal["chat", "account", "chats", "secret"] = "chat"
@@ -24,6 +33,7 @@ class Selection(BaseModel):
     # Pseudo-secret capture: start a secret chat with this user, accept ones the other side starts, or both.
     secret_peer: str | None = Field(default=None, pattern=SECRET_PEER)
     accept_incoming: bool | None = None
+    secret_visibility: SecretVisibility | None = None
     # Investigation export: each chat becomes its own signed chat export inside the sealed archive, in this order.
     chat_ids: list[int] | None = Field(default=None, min_length=1, max_length=MAX_CHAT_EXPORTS)
     capture: Capture = Field(default_factory=lambda: Capture.model_validate({
@@ -35,7 +45,8 @@ class Selection(BaseModel):
     def scope(self):
         if self.mode != "chats" and self.chat_ids is not None:
             raise ValueError("Chat lists belong to the chat investigation export.")
-        if self.mode != "secret" and (self.secret_peer is not None or self.accept_incoming is not None):
+        if self.mode != "secret" and (self.secret_peer is not None or self.accept_incoming is not None
+                                      or self.secret_visibility is not None):
             raise ValueError("Secret chat settings belong to the secret chat capture.")
         if self.mode == "secret":
             if self.chat_id is not None or self.account_options is not None or self.account_scope is not None:
@@ -75,7 +86,9 @@ class Selection(BaseModel):
             return {"mode": "chats", "chat_ids": list(self.chat_ids), "capture": normalize_capture(self.capture.model_dump())}
         if self.mode == "secret":
             return {"mode": "secret", "secret_peer": self.secret_peer, "accept_incoming": self.accept_incoming,
-                    "capture": normalize_capture(self.capture.model_dump())}
+                    "capture": normalize_capture(self.capture.model_dump()),
+                    # Absent in archives made before this choice existed; they keep their original digest.
+                    **({"secret_visibility": self.secret_visibility.model_dump()} if self.secret_visibility else {})}
         return {"mode": "chat", "chat_id": self.chat_id, "capture": normalize_capture(self.capture.model_dump())}
 
 
@@ -93,7 +106,7 @@ def checked_selection(events, internal, expected=None, require_complete=False):
         raw = {"mode": "chats", "chat_ids": event.get("chat_ids"), "capture": event.get("capture")}
     elif event.get("mode") == "secret":
         raw = {"mode": "secret", "secret_peer": event.get("secret_peer"), "accept_incoming": event.get("accept_incoming"),
-               "capture": event.get("capture")}
+               "capture": event.get("capture"), "secret_visibility": event.get("secret_visibility")}
     else:
         raw = {"mode": "chat", "chat_id": event.get("chat_id"), "capture": event.get("capture")}
     settings = Selection.model_validate(raw).settings()

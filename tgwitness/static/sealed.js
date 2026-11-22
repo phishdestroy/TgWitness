@@ -1,8 +1,16 @@
 "use strict";
 const $ = id => document.getElementById(id);
+const panelLanguage = code => {
+  const value = String(code || "").toLowerCase();
+  return /^zh-(hant|tw|hk|mo)/.test(value) ? "zh-Hant" : value.split("-")[0];
+};
 let lang = (navigator.languages?.length ? navigator.languages : [navigator.language || ""])
-  .map(code => String(code).toLowerCase().split("-")[0])
+  .map(panelLanguage)
   .find(code => code === "en" || window.TGW_SEALED_LOCALES?.[code]) || "en";
+const RTL = ["ar", "fa", "he", "ur"];
+$("language").replaceChildren(...Object.entries(window.TGW_SEALED_LANGUAGES || {en: "English", ru: "Русский"})
+  .filter(([code]) => code === "en" || window.TGW_SEALED_LOCALES?.[code])
+  .map(([code, name]) => Object.assign(document.createElement("option"), {value: code, textContent: name})));
 let qrId = null, ended = false;
 let lastState = null, connectionFailed = false, statusError = "", actionError = "";
 const english = new WeakMap();
@@ -19,6 +27,7 @@ if (fragment.has("access")) {
 const token = sessionStorage.getItem("sealed-access") || "";
 function translate() {
   document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
   $("language").value = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => {
     if (!english.has(el)) english.set(el, el.textContent);
@@ -40,7 +49,7 @@ async function api(path, body) {
       "X-TgWitness-System-Language": navigator.language},
     body: body === undefined ? undefined : JSON.stringify(body), cache: "no-store", redirect: "error"});
   const data = await response.json();
-  if (!response.ok) throw Object.assign(new Error(data.detail || "Request failed"), {status: response.status});
+  if (!response.ok) throw Object.assign(new Error(tr(data.detail || "Request failed")), {status: response.status});
   return data;
 }
 function bind(id, action) {
@@ -60,8 +69,15 @@ function credentials() {
   }
   return {api_id: Number(id), api_hash: hash};
 }
+// "+62 878 80918834", "+7 (999) 123-45-67" and "0049 ..." are sent as "+<digits>"; the country code is required.
+const phoneValue = value => {
+  const text = String(value || "").trim();
+  if (!/^\+?[0-9\s().-]{7,32}$/.test(text)) return text;
+  const digits = text.replace(/[^0-9]/g, "");
+  return "+" + (digits.startsWith("00") ? digits.slice(2) : digits);
+};
 bind("send-code", async () => {
-  await api("phone", {...credentials(), phone: $("phone").value.trim()});
+  await api("phone", {...credentials(), phone: phoneValue($("phone").value)});
   qrId = null; $("qr-image").hidden = true;
 });
 bind("confirm-code", async () => {await api("code", {code: $("code").value}); $("code").value = "";});
@@ -200,9 +216,11 @@ function personLabel(people, id) {
   const person = people?.[String(id)] || {};
   return [person.name, person.username ? "@" + person.username : null, id != null ? "ID " + id : null].filter(Boolean).join(" · ");
 }
-function secretButton(text, action, id, cls) {
+function secretButton(text, action, id, cls, item) {
   const button = document.createElement("button"); button.type = "button"; button.className = cls;
-  button.textContent = text; button.dataset.secretAction = action; button.dataset.chat = String(id); return button;
+  button.textContent = text; button.dataset.secretAction = action; button.dataset.chat = String(id);
+  if (item !== undefined) button.dataset.item = String(item);
+  return button;
 }
 function renderSecret(secret) {
   $("secret-live").hidden = !secret;
@@ -211,10 +229,14 @@ function renderSecret(secret) {
     secret.notice ? tr("The secret chat could not be started: {reason}", {reason: secret.notice}) :
     secret.interaction_problem ? secret.interaction_problem : !secret.connected ? tr("Connecting secret chats…") :
     !(secret.chats || []).length ? tr("Waiting for a secret chat. Start one above, or ask the other side to start one with this account.") : "";
-  const messages = (secret.records || []).filter(r => r.kind === "secret_chat.message");
-  $("capture-messages").textContent = String(messages.length);
-  $("capture-unavailable").textContent = String((secret.chats || []).filter(chat => chat.state === "closed").length);
-  const signature = JSON.stringify([secret.chats, messages.map(r => r.seq), lang]);
+  const records = secret.records || [];
+  const messages = records.filter(r => r.kind === "secret_chat.message");
+  const shownKinds = ["secret_chat.message", "secret_chat.action", "secret_chat.file"];
+  $("capture-messages").textContent = String(secret.counts ? secret.counts.received + secret.counts.sent : messages.length);
+  $("capture-unavailable").textContent = String(secret.counts ? secret.counts.files : records.filter(r => r.kind === "secret_chat.file").length);
+  $("capture-unavailable-label").textContent = tr("Files saved");
+  const signature = JSON.stringify([secret.chats, records.filter(r => shownKinds.includes(r.kind)).map(r => r.seq),
+    secret.pending_files, lang]);
   if (signature === secretSignature) return;
   secretSignature = signature;
   for (const field of $("secret-chats").querySelectorAll("input[data-chat]")) secretDrafts[field.dataset.chat] = field.value;
@@ -231,16 +253,16 @@ function renderSecret(secret) {
       key.textContent = (chat.key_visualization.match(/.{1,8}/g) || []).join(" "); head.append(key);
     }
     card.append(head);
-    const thread = document.createElement("div"); thread.className = "secret-thread";
-    for (const record of messages.filter(r => String(r.payload?.secret_chat_id) === String(chat.id)).slice(-30)) {
-      const bubble = document.createElement("p"), meta = document.createElement("small");
-      bubble.className = "secret-bubble " + (record.payload.direction === "out" ? "out" : "in");
-      bubble.textContent = record.payload.text || (record.payload.media ? tr("Attachment") : "");
-      meta.textContent = (record.payload.direction === "out" ? tr("Sent") : tr("Received")) + " · " +
-        String(record.observed_at || "").replace("T", " ").slice(0, 19) + " UTC · " + tr("Record #{n}", {n: record.seq});
-      bubble.append(meta); thread.append(bubble);
+    card.append(secretThread(records, chat.id, secret.pending_files, secret.visibility));
+    if (chat.state === "ready") {
+      const tools = document.createElement("div"), vis = secret.visibility || {};
+      tools.className = "secret-tools";
+      tools.append(chip(vis.read_receipts === "never" && vis.typing === "hidden" && vis.content_opened === "never"
+        ? tr("Invisible: nothing is shown to the other side") : tr("Visible only as chosen; every notice is journaled"), "quiet"));
+      if (vis.read_receipts === "manual") tools.append(secretButton(tr("Mark as read"), "read", chat.id, "chip-button"));
+      if (vis.typing === "shown") tools.append(secretButton(tr("Show typing"), "typing", chat.id, "chip-button"));
+      card.append(tools);
     }
-    card.append(thread);
     const actions = document.createElement("div"); actions.className = "secret-actions";
     if (chat.state === "requested" && !chat.outbound) actions.append(secretButton(tr("Accept"), "accept", chat.id, "primary"));
     if (chat.state === "ready") {
@@ -253,6 +275,81 @@ function renderSecret(secret) {
   }
 }
 const secretStates = {requested: "Waiting for the other side", ready: "Established", closed: "Ended"};
+const secretMedia = {decryptedMessageMediaPhoto: "Photo", decryptedMessageMediaVideo: "Video",
+  decryptedMessageMediaDocument: "File", decryptedMessageMediaAudio: "Audio", decryptedMessageMediaGeoPoint: "Location",
+  decryptedMessageMediaVenue: "Venue", decryptedMessageMediaContact: "Contact", decryptedMessageMediaExternalDocument: "Sticker",
+  decryptedMessageMediaWebPage: "Link preview"};
+const stamp = record => String(record.observed_at || "").replace("T", " ").slice(0, 19) + " UTC · " + tr("Record #{n}", {n: record.seq});
+function secretEvent(record) {
+  const action = record.payload?.action, details = record.payload?.details || {};
+  const ids = details.random_ids || record.payload?.random_ids || [];
+  const text = action === "SetMessageTTL" ? (details.ttl_seconds ? tr("The other side set the self-destruct timer to {seconds} s", {seconds: details.ttl_seconds})
+      : tr("The other side turned the self-destruct timer off"))
+    : action === "ScreenshotMessages" ? tr("The other side took a screenshot")
+    : action === "DeleteMessages" ? tr("The other side deleted messages ({count}); TgWitness keeps them", {count: ids.length})
+    : action === "FlushHistory" ? tr("The other side cleared the history; TgWitness keeps every message")
+    : action === "ReadMessages" ? tr("The other side opened self-destructing content")
+    : tr("Service notice: {action}", {action: action || "?"});
+  const line = document.createElement("p"); line.className = "secret-event" + (action === "ScreenshotMessages" || action === "DeleteMessages" ? " alert" : "");
+  line.textContent = text;
+  const meta = document.createElement("small"); meta.textContent = stamp(record); line.append(meta);
+  return line;
+}
+const chip = (text, cls) => Object.assign(document.createElement("span"), {className: "secret-chip " + (cls || ""), textContent: text});
+const succeeded = (records, kind) => {
+  const done = new Set(records.filter(r => r.kind === kind + "_result" && r.payload?.status === "succeeded").map(r => r.payload.request_event));
+  return records.filter(r => r.kind === kind + "_requested" && done.has(r.seq));
+};
+function secretThread(records, chatId, pending, vis) {
+  const mine = records.filter(r => String(r.payload?.secret_chat_id) === String(chatId));
+  const files = new Map(mine.filter(r => r.kind === "secret_chat.file").map(r => [String(r.payload.random_id), r.payload]));
+  const deleted = new Set(mine.filter(r => r.kind === "secret_chat.action" && r.payload?.action === "DeleteMessages")
+    .flatMap(r => (r.payload.details?.random_ids || []).map(String)));
+  // Notices this panel sent: read receipts cover messages up to a time; opened notices name messages.
+  const readUpTo = succeeded(mine, "secret_chat.read").map(r => ({at: Date.parse(r.payload.max_date_at), when: r.observed_at}))
+    .filter(item => Number.isFinite(item.at)).sort((a, b) => b.at - a.at)[0];
+  const opened = new Map(succeeded(mine, "secret_chat.contents").flatMap(r => (r.payload.random_ids || []).map(id => [String(id), r.observed_at])));
+  const time = value => String(value || "").slice(11, 19);
+  const thread = document.createElement("div"); thread.className = "secret-thread";
+  for (const record of mine.filter(r => r.kind === "secret_chat.message" || r.kind === "secret_chat.action").slice(-40)) {
+    if (record.kind === "secret_chat.action") {thread.append(secretEvent(record)); continue;}
+    const p = record.payload, id = String(p.random_id), incoming = p.direction !== "out";
+    const bubble = document.createElement("div"), meta = document.createElement("small"), status = document.createElement("div");
+    bubble.className = "secret-bubble " + (incoming ? "in" : "out") + (deleted.has(id) ? " deleted" : "");
+    bubble.dataset.kind = p.media ? secretMedia[p.media._] || "" : "";
+    const file = files.get(id);
+    if (p.media) {
+      const media = document.createElement("span"), parts = [tr(secretMedia[p.media._] || "Attachment")];
+      if (p.media.duration) parts.push(tr("{seconds} s", {seconds: p.media.duration}));
+      if (p.media.size) parts.push(humanBytes(p.media.size));
+      media.className = "secret-media"; media.textContent = parts.join(" · "); bubble.append(media);
+    }
+    const body = p.text || p.media?.caption;
+    if (body) bubble.append(Object.assign(document.createElement("span"), {className: "secret-text", textContent: body}));
+    status.className = "secret-status";
+    if (p.media) status.append(file ? chip(tr("Saved · SHA-256 {hash}", {hash: String(file.media_sha256 || "").slice(0, 12) + "…"}), "ok")
+      : chip(pending ? tr("Downloading…") : tr("Not saved: see the journal"), pending ? "" : "bad"));
+    else status.append(chip(tr("Saved"), "ok"));
+    if (p.ttl) status.append(chip(tr("Timer {seconds} s · kept here", {seconds: p.ttl}), "warn"));
+    if (deleted.has(id)) status.append(chip(tr("Deleted by the other side · kept here"), "bad"));
+    if (incoming) {
+      // Read receipts cover messages up to a whole second, as sent to Telegram.
+      const read = readUpTo && Math.floor(Date.parse(record.observed_at) / 1000) * 1000 <= readUpTo.at;
+      status.append(chip(read ? tr("Shown as read · {time}", {time: time(readUpTo.when)}) : tr("Not shown as read"), read ? "seen" : "quiet"));
+      if (p.ttl || p.media) {
+        const at = opened.get(id);
+        if (at) status.append(chip(tr("Opened for them · {time}", {time: time(at)}), "seen"));
+        else if (vis?.content_opened === "manual") status.append(secretButton(tr("Open for them"), "opened", chatId, "chip-button", id));
+        else status.append(chip(tr("Not opened for them"), "quiet"));
+      }
+    }
+    if (file && /Photo|Video|Audio/.test(secretMedia[p.media?._] || "")) status.append(secretButton(tr("View here"), "view", chatId, "chip-button", file.media_sha256));
+    bubble.append(status);
+    meta.textContent = (incoming ? tr("Received") : tr("Sent")) + " · " + stamp(record);
+    bubble.append(meta); thread.append(bubble);
+  }
+  return thread;
+}
 async function secretAction(path, body) {
   actionError = "";
   try {const result = await api(path, body); secretSignature = ""; renderSecret(result.secret);}
@@ -264,9 +361,32 @@ $("secret-start").onclick = () => {
   if (!SECRET_PEER.test(user)) {actionError = peerHint(); renderError(); return;}
   secretAction("secret/create", {user}).then(() => {if (!actionError) $("secret-new").value = "";});
 };
+// Saved copies are shown from this runner; nothing is sent to Telegram, so the other side is not notified.
+const viewed = new Map();
+async function viewSecretFile(button) {
+  const digest = button.dataset.item, bubble = button.closest(".secret-bubble");
+  const shown = bubble.querySelector(".secret-preview");
+  if (shown) {shown.remove(); button.textContent = tr("View here"); return;}
+  button.disabled = true; actionError = "";
+  try {
+    if (!viewed.has(digest)) {
+      const response = await fetch("/api/secret/media/" + digest, {headers: {"Authorization": "Bearer " + token}, cache: "no-store", redirect: "error"});
+      if (!response.ok) throw new Error(tr("The saved file could not be opened."));
+      viewed.set(digest, URL.createObjectURL(await response.blob()));
+    }
+    const url = viewed.get(digest), kind = bubble.dataset.kind || "";
+    const preview = document.createElement(kind === "Video" ? "video" : kind === "Audio" ? "audio" : "img");
+    preview.className = "secret-preview"; preview.src = url;
+    if (preview.tagName !== "IMG") preview.controls = true; else preview.alt = "";
+    button.closest(".secret-status").after(preview); button.textContent = tr("Hide");
+  } catch (error) {actionError = error.message; renderError();}
+  finally {button.disabled = false;}
+}
 $("secret-chats").addEventListener("click", event => {
   const button = event.target.closest("button[data-secret-action]"); if (!button) return;
   const id = button.dataset.chat, action = button.dataset.secretAction;
+  if (action === "view") {viewSecretFile(button); return;}
+  if (action === "opened") {secretAction(`secret/${id}/opened`, {random_ids: [button.dataset.item]}); return;}
   if (action === "send") {
     const field = $("secret-chats").querySelector(`input[data-chat="${id}"]`), text = field.value.trim();
     if (!text) return;
@@ -372,7 +492,8 @@ function selection() {
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
     messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types};
   if (investigation) return {mode: "chats", chat_ids: selected, capture};
-  if (secret) return {mode: "secret", secret_peer: peerValue($("secret-peer").value) || null, accept_incoming: $("secret-accept").checked, capture};
+  if (secret) return {mode: "secret", secret_peer: peerValue($("secret-peer").value) || null, accept_incoming: $("secret-accept").checked,
+    secret_visibility: {read_receipts: $("vis-read").value, content_opened: $("vis-opened").value, typing: $("vis-typing").value}, capture};
   return {chat_id: Number($("chats").value), capture};
 }
 let assessedSelection = null, assessmentResult = null;
@@ -572,6 +693,13 @@ function renderError() {
     "Open the connection file with your private key in the setup helper first.") :
     actionError || (lastState?.phase === "collecting" ? lastState.account_export?.error || "" : "");
 }
+let lastSecret = null;
+function secretSummary(secret) {
+  const counts = secret?.counts;
+  if (!counts) return tr("Secret chat capture finished. The archive lists every recorded message, file and notice.");
+  return tr("Secret chat capture finished: {messages} messages ({received} received, {sent} sent), {files} files and {notices} service notices are signed into the journal.",
+    {messages: counts.received + counts.sent, received: counts.received, sent: counts.sent, files: counts.files, notices: counts.notices});
+}
 function chatSummary(state) {
   const history = state.history, media = state.media || {};
   const pending = ["queued", "retry", "running", "cancelled"].reduce((sum, key) => sum + (media[key] || 0), 0);
@@ -596,6 +724,7 @@ function renderSteps(state) {
 }
 function renderState(state) {
     const terminal = ["sealed", "cancelled", "failed"].includes(state.phase);
+    if (state.secret?.counts) lastSecret = state.secret;
     renderSteps(state);
     $("login").hidden = state.authorized || state.phase !== "login";
     $("selection").hidden = !state.authorized || state.phase !== "login";
@@ -607,7 +736,8 @@ function renderState(state) {
     $("complete-summary").textContent = account ?
       (account.phase === "done" ? tr("Export completed within the selected scope.") : tr("Partial export: some selected data could not be acquired.")) + " " + tr(
         "{messages} messages preserved, {failures} recorded failures. See coverage details in the archive.",
-        {messages: account.counts?.messages || 0, failures: account.coverage?.failures || 0}) : chatSummary(state);
+        {messages: account.counts?.messages || 0, failures: account.coverage?.failures || 0}) :
+      state.selection?.mode === "secret" ? secretSummary(state.secret?.counts ? state.secret : lastSecret) : chatSummary(state);
     if (state.revocation === "revoked") $("complete-summary").textContent += " " + tr(
       "Telegram session revocation confirmed.");
     $("capture-messages").textContent = String(account ? Math.max(account.counts?.messages || 0, account.acquisition?.messages_preserved || 0) : state.history.captured || 0);
