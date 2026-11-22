@@ -93,6 +93,8 @@
   }
   function connectionStep() {
     return `<p class="capture-lead">${t("Keep the GitHub run active. Download sealed-connection from its Artifacts, unzip it, and select the file below.")}</p>
+      ${state.connection ? "" : `<p class="hint">${t("The runner first builds its collector from the pinned source. The sealed-connection artifact usually appears 5 to 15 minutes after the run starts; refresh the run page until it is listed under Artifacts.")}</p>
+      ${repository() ? link("https://github.com/" + esc(repository()) + "/actions/workflows/sealed-witness.yml", t("Open my capture runs"), "secondary") : ""}`}
       <div class="capture-file-path"><span>sealed-connection.zip</span>${icon("arrow")}<strong>connection.tgwsealed</strong></div>
       <label class="capture-file-picker" for="connection-file">${icon("file")}<strong>${t("Open connection.tgwsealed")}</strong><span>${t("The connection is decrypted on this device.")}</span><input class="capture-file-input" id="connection-file" type="file" accept=".tgwsealed" ${state.busy ? "disabled" : ""}></label>
       ${state.connection ? `<div class="capture-success">${icon("check")}<div><strong>${t("Your temporary panel is ready")}</strong><p>${t("Open the temporary panel, sign in to Telegram and choose the export mode, chats and attachments before starting.")}</p></div></div>
