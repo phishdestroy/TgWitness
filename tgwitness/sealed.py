@@ -28,7 +28,7 @@ from .failures import describe
 from . import export_budget
 from .provenance import run_receipt
 from .sealed_crypto import recipient_id
-from .sealed_selection import Selection, selection_hash
+from .sealed_selection import SECRET_PEER, Selection, secret_target, selection_hash
 from .sealed_parts import EncryptedParts, PART_BYTES, SEALED_RESULT
 from .security import InstanceLock, Vault, private_write
 from .store import Store, canonical
@@ -98,6 +98,7 @@ class Session:
         self.account_job = None
         self.chats_task, self.chat_results, self.current_chat = None, None, None
         self.secret_mode = False
+        self.secret_notice = None
         self.provision_secret_module()
         self.selection = None
         receipt = run_receipt(self.store, self.vault)
@@ -335,8 +336,8 @@ class Session:
             return None
         from . import secret_chats
         view = secret_chats.of(self.collector).view()
-        return {key: view.get(key) for key in ("connected", "error", "chats", "people", "records", "interaction_problem",
-                                                "pending_files")}
+        return {**{key: view.get(key) for key in ("connected", "error", "chats", "people", "records", "interaction_problem",
+                                                   "pending_files")}, "notice": self.secret_notice}
 
     async def begin_secret(self, selection):
         from . import secret_chats, secret_module
@@ -365,8 +366,11 @@ class Session:
         self.phase = "collecting"
         self.collection_started = time.monotonic()
         if selection.secret_peer is not None:
-            user = int(selection.secret_peer) if selection.secret_peer.isdigit() else selection.secret_peer
-            await chats.create(user)
+            try:
+                await chats.create(secret_target(selection.secret_peer))
+            except Exception as exc:
+                # Capture is already running and the attempt is in the journal; incoming chats are still accepted.
+                self.secret_notice = describe(exc)
 
     def require_secret(self):
         if not self.secret_mode or self.phase != "collecting":
@@ -748,7 +752,7 @@ def create_app(root, output, config, client_factory=WitnessClient):
         return JSONResponse({"phase": "sealing"}, status_code=202)
 
     class SecretUser(StrictBody):
-        user: str = Field(min_length=1, max_length=64, pattern=r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20})$")
+        user: str = Field(min_length=1, max_length=64, pattern=SECRET_PEER)
 
     class SecretText(StrictBody):
         text: str = Field(min_length=1, max_length=4096)
@@ -765,8 +769,8 @@ def create_app(root, output, config, client_factory=WitnessClient):
 
     @app.post("/api/secret/create")
     async def secret_create(body: SecretUser):
-        user = body.user.removeprefix("@")
-        return await secret_call("create", int(user) if user.isdigit() else user)
+        app.state.session.secret_notice = None
+        return await secret_call("create", secret_target(body.user))
 
     @app.post("/api/secret/{chat_id}/accept")
     async def secret_accept(chat_id: int):

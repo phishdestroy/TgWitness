@@ -8,6 +8,13 @@ from .monitoring import Capture, normalize_capture
 from .store import canonical
 
 MAX_CHAT_EXPORTS = 50
+# A @username, a numeric user ID from this account's chats, or an international phone number.
+SECRET_PEER = r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20}|\+[0-9]{7,15})$"
+
+
+def secret_target(value):
+    value = value.removeprefix("@")
+    return int(value) if value.isdigit() else value
 
 
 class Selection(BaseModel):
@@ -15,7 +22,7 @@ class Selection(BaseModel):
     mode: Literal["chat", "account", "chats", "secret"] = "chat"
     chat_id: int | None = Field(default=None, strict=True)
     # Pseudo-secret capture: start a secret chat with this user, accept ones the other side starts, or both.
-    secret_peer: str | None = Field(default=None, pattern=r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20})$")
+    secret_peer: str | None = Field(default=None, pattern=SECRET_PEER)
     accept_incoming: bool | None = None
     # Investigation export: each chat becomes its own signed chat export inside the sealed archive, in this order.
     chat_ids: list[int] | None = Field(default=None, min_length=1, max_length=MAX_CHAT_EXPORTS)
@@ -35,7 +42,7 @@ class Selection(BaseModel):
                 raise ValueError("A secret chat capture takes no chat or account selection.")
             self.accept_incoming = True if self.accept_incoming is None else self.accept_incoming
             if self.secret_peer is not None:
-                self.secret_peer = self.secret_peer.removeprefix("@") if not self.secret_peer.isdigit() else self.secret_peer
+                self.secret_peer = self.secret_peer.removeprefix("@")
             if self.secret_peer is None and not self.accept_incoming:
                 raise ValueError("Name the user to start a secret chat with, or accept secret chats started by others.")
         elif self.mode == "chats":

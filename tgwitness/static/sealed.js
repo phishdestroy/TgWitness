@@ -25,6 +25,7 @@ function translate() {
     el.textContent = tr(english.get(el));
   });
   $("chat-search").placeholder = tr("Search chats"); $("chat-search").setAttribute("aria-label", tr("Search chats"));
+  $("secret-people-search").placeholder = tr("Search people"); $("secret-people-search").setAttribute("aria-label", tr("Search people"));
 }
 $("language").onchange = () => {
   lang = $("language").value; translate(); describeMode();
@@ -151,7 +152,48 @@ for (const card of document.querySelectorAll('input[name="mode-card"]')) card.ad
 $("export-method").addEventListener("input", () => {
   if (document.querySelector('input[name="mode-card"]:checked')?.value === "account") $("export-mode").value = $("export-method").value;
 });
-const SECRET_PEER = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$|^[0-9]{1,20}$/;
+const SECRET_PEER = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$|^[0-9]{1,20}$|^\+[0-9]{7,15}$/;
+const peerHint = () => tr("Enter a @username, a phone number with + and the country code, or choose a person from your chats.");
+// "+7 (999) 123-45-67" becomes "+79991234567"; usernames and IDs stay as typed.
+const peerValue = value => {
+  const text = String(value || "").trim();
+  return /^\+[0-9\s().-]+$/.test(text) ? "+" + text.replace(/[^0-9]/g, "") : text;
+};
+let secretPeople = [];
+function renderPeople() {
+  const list = $("secret-people"), query = $("secret-people-search").value.trim().toLowerCase(), current = peerValue($("secret-peer").value);
+  const shown = secretPeople.filter(person => !query || ((person.title || "") + " " + person.chat_id).toLowerCase().includes(query)).slice(0, 300);
+  list.replaceChildren();
+  for (const person of shown) {
+    const row = document.createElement("button"), name = document.createElement("span"), meta = document.createElement("span");
+    row.type = "button"; row.className = "person-row"; row.dataset.peer = String(person.chat_id);
+    row.classList.toggle("active", current === String(person.chat_id));
+    name.textContent = person.title || tr("Deleted account"); meta.className = "chat-meta"; meta.textContent = "ID " + person.chat_id;
+    row.append(name, meta); list.append(row);
+  }
+  if (!shown.length) list.append(Object.assign(document.createElement("p"), {className: "hint empty", textContent: tr("No personal chats match.")}));
+  list.hidden = $("secret-people-search").hidden = false;
+  const options = $("secret-people-options"); options.replaceChildren();
+  for (const person of secretPeople.slice(0, 500)) {
+    const option = document.createElement("option"); option.value = String(person.chat_id); option.label = person.title || ""; options.append(option);
+  }
+}
+function pickedPerson() {
+  const value = peerValue($("secret-peer").value), person = secretPeople.find(item => String(item.chat_id) === value);
+  $("secret-peer-picked").textContent = person ? tr("Selected: {name}", {name: (person.title || tr("Deleted account")) + " · ID " + person.chat_id}) : "";
+}
+bind("secret-people-load", async () => {
+  const result = await api("dialogs");
+  secretPeople = result.dialogs.filter(dialog => dialog.kind === "private");
+  renderPeople(); pickedPerson();
+});
+$("secret-people-search").addEventListener("input", event => {event.stopPropagation(); renderPeople();});
+$("secret-people").addEventListener("click", event => {
+  const row = event.target.closest("button[data-peer]"); if (!row) return;
+  $("secret-peer").value = row.dataset.peer;
+  $("secret-peer").dispatchEvent(new Event("input", {bubbles: true}));
+});
+$("secret-peer").addEventListener("input", () => {pickedPerson(); if (secretPeople.length) renderPeople();});
 let secretSignature = "";
 const secretDrafts = {};
 function personLabel(people, id) {
@@ -166,6 +208,7 @@ function renderSecret(secret) {
   $("secret-live").hidden = !secret;
   if (!secret) return;
   $("secret-note").textContent = secret.error ? tr("Secret chats reported an error: {error}", {error: secret.error}) :
+    secret.notice ? tr("The secret chat could not be started: {reason}", {reason: secret.notice}) :
     secret.interaction_problem ? secret.interaction_problem : !secret.connected ? tr("Connecting secret chats…") :
     !(secret.chats || []).length ? tr("Waiting for a secret chat. Start one above, or ask the other side to start one with this account.") : "";
   const messages = (secret.records || []).filter(r => r.kind === "secret_chat.message");
@@ -217,8 +260,8 @@ async function secretAction(path, body) {
   renderError();
 }
 $("secret-start").onclick = () => {
-  const user = $("secret-new").value.trim();
-  if (!SECRET_PEER.test(user)) {actionError = tr("Enter a @username or a numeric user ID."); renderError(); return;}
+  const user = peerValue($("secret-new").value);
+  if (!SECRET_PEER.test(user)) {actionError = peerHint(); renderError(); return;}
   secretAction("secret/create", {user}).then(() => {if (!actionError) $("secret-new").value = "";});
 };
 $("secret-chats").addEventListener("click", event => {
@@ -290,8 +333,8 @@ function selection() {
   const selected = Array.from($("chats").selectedOptions, option => Number(option.value));
   if (investigation && selected.length > 50) throw new Error(tr("Select at most 50 chats for one run."));
   if (secret) {
-    const peer = $("secret-peer").value.trim();
-    if (peer && !SECRET_PEER.test(peer)) throw new Error(tr("Enter a @username or a numeric user ID."));
+    const peer = peerValue($("secret-peer").value);
+    if (peer && !SECRET_PEER.test(peer)) throw new Error(peerHint());
     if (!peer && !$("secret-accept").checked) throw new Error(tr("Name a user to start a secret chat with, or accept secret chats started by others."));
   }
   if (!secret && (journal || $("export-scope").value === "chat") && !selected.length) {
@@ -329,7 +372,7 @@ function selection() {
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
     messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types};
   if (investigation) return {mode: "chats", chat_ids: selected, capture};
-  if (secret) return {mode: "secret", secret_peer: $("secret-peer").value.trim() || null, accept_incoming: $("secret-accept").checked, capture};
+  if (secret) return {mode: "secret", secret_peer: peerValue($("secret-peer").value) || null, accept_incoming: $("secret-accept").checked, capture};
   return {chat_id: Number($("chats").value), capture};
 }
 let assessedSelection = null, assessmentResult = null;
@@ -369,6 +412,7 @@ function clearAssessment() {
   $("account-other").disabled = $("export-mode").value !== "takeout";
   if ($("account-other").disabled) $("account-other").checked = false;
   $("takeout-notice").hidden = $("export-mode").value !== "takeout";
+  $("account-note").hidden = journal;
   $("include-avatars").disabled = !journal;
   $("include-avatars").parentElement.hidden = !journal;
   if (!journal) $("include-avatars").checked = false;
@@ -383,7 +427,7 @@ function clearAssessment() {
     chosen.slice(1).forEach(option => {option.selected = false;});
   }
   syncChatList();
-  $("collect").disabled = secret ? !(SECRET_PEER.test($("secret-peer").value.trim()) || $("secret-accept").checked)
+  $("collect").disabled = secret ? !(SECRET_PEER.test(peerValue($("secret-peer").value)) || $("secret-accept").checked)
     : !$("chat-picker").hidden && !$("chats").selectedOptions.length;
   $("preflight").disabled = $("collect").disabled;
   describeMode();
@@ -538,8 +582,21 @@ function chatSummary(state) {
     {captured: history.captured || 0, unavailable: history.unavailable || 0, done: media.done || 0, hashed: media.hashed || 0,
       skipped: media.skipped || 0, failed: media.failed || 0, pending});
 }
+const STEPS = ["login", "choose", "capture", "seal"];
+function renderSteps(state) {
+  const step = state.phase === "login" ? (state.authorized ? "choose" : "login") : state.phase === "collecting" ? "capture" : "seal";
+  const index = STEPS.indexOf(step), stopped = ["cancelled", "failed"].includes(state.phase);
+  for (const item of $("steps").children) {
+    const at = STEPS.indexOf(item.dataset.step);
+    item.classList.toggle("done", at < index || state.phase === "sealed" && at === index);
+    item.classList.toggle("current", at === index && state.phase !== "sealed" && !stopped);
+    item.classList.toggle("stopped", at === index && stopped);
+    if (at === index) item.setAttribute("aria-current", "step"); else item.removeAttribute("aria-current");
+  }
+}
 function renderState(state) {
     const terminal = ["sealed", "cancelled", "failed"].includes(state.phase);
+    renderSteps(state);
     $("login").hidden = state.authorized || state.phase !== "login";
     $("selection").hidden = !state.authorized || state.phase !== "login";
     $("code-box").hidden = state.login !== "login_required";

@@ -127,10 +127,16 @@ RESTRICTIONS = {"FrozenMethodInvalidError": ("frozen", None), "UserRestrictedErr
                 "PeerFloodError": ("peer_flood", 24 * 3600)}
 RESTRICTION_TEXT = {
     "frozen": "Telegram has frozen this account. Sending, joining and pressing bot buttons are off; reading continues.",
-    "spam_block": "Telegram limits this account (spam block). Sending, joining and pressing bot buttons are off "
-                  "until {until}; reading continues.",
-    "peer_flood": "Telegram reported too many actions from this account (PEER_FLOOD). Sending, joining and pressing "
-                  "bot buttons are off until {until}; reading continues."}
+    "spam_block": "Telegram limits this account (spam block): it cannot start conversations with people outside its "
+                  "mutual contacts. Panel sending, joining and bot buttons are paused until {until}; secret chats with "
+                  "mutual contacts or started by the other side continue, and reading continues.",
+    "peer_flood": "Telegram refused a first contact from this account (PEER_FLOOD: a spam limit on writing to people "
+                  "outside its mutual contacts, not a request rate). Panel sending, joining and bot buttons are paused "
+                  "until {until}; secret chats with mutual contacts or started by the other side continue, and reading "
+                  "continues."}
+# Telegram's spam limits stop first contact with non-contacts only. Mutual contacts and people who wrote first stay
+# reachable, so actions inside such a conversation are not held back by these two.
+CONTACT_LIMITS = frozenset({"spam_block", "peer_flood"})
 
 
 def restriction(store):
@@ -142,9 +148,9 @@ def restriction(store):
     return current
 
 
-def check_restriction(store):
+def check_restriction(store, conversation=False):
     current = restriction(store)
-    if current:
+    if current and not (conversation and current["kind"] in CONTACT_LIMITS):
         until = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(current["until"])) if current.get("until") else None
         raise AccountRestricted(RESTRICTION_TEXT[current["kind"]].format(until=until))
 
@@ -188,10 +194,11 @@ def pace_status(store):
 GOAL_OFF = "Telegram actions from the panel are off for the Evidence for a case goal."
 
 
-def permitted(collector):
+def permitted(collector, conversation=False):
+    """conversation: the action stays inside a conversation the other side started or with a mutual contact."""
     store = collector.store
     check_pause(collector)
-    check_restriction(store)
+    check_restriction(store, conversation)
     goal = (store.get_setting("goal_preset", None) or store.get_setting("setup", None) or {}).get("goal")
     if goal == "evidence":
         raise ValueError(GOAL_OFF)

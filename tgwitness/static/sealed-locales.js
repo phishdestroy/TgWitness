@@ -11,7 +11,7 @@ window.TGW_SEALED_LOCALES = {
   "Enter a valid API ID and a 32-character hexadecimal API hash, or leave both fields empty.": "Введите действительный идентификатор API и 32-символьный шестнадцатеричный хеш API или оставьте оба поля пустыми.",
   "Get API credentials at my.telegram.org": "Получить API-пару на my.telegram.org",
   "Sign in with QR": "Войти по QR-коду",
-  "Or enter your phone number, including country code": "Или введите телефон с кодом страны",
+  "Your phone number, including country code": "Ваш номер телефона с кодом страны",
   "Get login code": "Получить код входа",
   "Code from Telegram": "Код из Telegram",
   "Confirm code": "Подтвердить код",
@@ -240,6 +240,23 @@ window.TGW_SEALED_LOCALES = {
   "Messages to read": "Сообщения для чтения",
   "Needed, including archive preparation": "Требуется, включая подготовку архива",
   "Total": "Всего",
-  "No code, or it expired? Press Get login code again or sign in with QR. The unfinished attempt is replaced.": "Нет кода или его срок истек? Нажмите «Получить код входа» ещё раз или войдите с помощью QR-кода. Незавершённая попытка будет заменена."
+  "No code, or it expired? Press Get login code again or sign in with QR. The unfinished attempt is replaced.": "Нет кода или его срок истек? Нажмите «Получить код входа» ещё раз или войдите с помощью QR-кода. Незавершённая попытка будет заменена.",
+  "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, номер телефона с «+» и кодом страны или человек из чатов этого аккаунта. У большинства людей нет username: выберите человека из своих чатов или введите его номер.",
+  "Capture": "Сбор",
+  "Choose": "Выбор",
+  "Choose from my chats": "Выбрать из моих чатов",
+  "Deleted account": "Удалённый аккаунт",
+  "Enter a @username, a phone number with + and the country code, or choose a person from your chats.": "Введите @username, номер телефона с «+» и кодом страны или выберите человека из своих чатов.",
+  "If Telegram limits this account (spam block), it can start secret chats only with mutual contacts. Add each other to contacts, or let the other side start the chat: incoming chats are accepted either way.": "Если Telegram ограничил этот аккаунт (спам-блок), он может начинать секретные чаты только со взаимными контактами. Добавьте друг друга в контакты или попросите собеседника начать чат: входящие чаты принимаются в любом случае.",
+  "No personal chats match.": "Личных чатов не найдено.",
+  "Phone number": "Номер телефона",
+  "QR code": "QR-код",
+  "Scan it in Telegram on your phone: Settings → Devices → Link Desktop Device.": "Отсканируйте его в Telegram на телефоне: Настройки → Устройства → Подключить устройство.",
+  "Sealed archive": "Запечатанный архив",
+  "Sealed capture": "Запечатанный сбор",
+  "Search people": "Поиск людей",
+  "Selected: {name}": "Выбрано: {name}",
+  "Sign in": "Вход",
+  "The secret chat could not be started: {reason}": "Не удалось запустить секретный чат: {reason}"
  }
 };
