@@ -8319,7 +8319,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Akun yang dihapus diberi nama \"Akun yang dihapus · ID N\", bukan hanya angka saja.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Tangkapan layar GitHub Actions: foto-foto obrolan dan orang-orang tetap muncul setelah FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Penjelasan GitHub Actions: banyaknya pilihan tidak lagi menghambat proses awal; pengumpulan dihentikan saat batas waktu tercapai dan arsip dikemas.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Balas pesan #N\" ditampilkan sebagai label dalam 13 bahasa."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Balas pesan #N\" ditampilkan sebagai label dalam 13 bahasa.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Catatan GitHub Actions: ekspor seluruh akun hanya dapat mengabaikan obrolan tunggal jika perkiraan telah mencakup semua obrolan; jumlah obrolan yang diekspor mencakup obrolan terpilih yang tidak pernah dimulai; ringkasan ekspor akun menampilkan berkas yang belum diakses sebelum proses dihentikan; jurnal mencatat asal modul pseudo-secret; berkas SVG dari obrolan rahasia diunduh alih-alih dibuka di panel."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",

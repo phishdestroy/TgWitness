@@ -8319,7 +8319,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Các tài khoản đã bị xóa được đặt tên là “Tài khoản đã bị xóa · ID N” thay vì chỉ là một con số đơn thuần.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Ảnh chụp màn hình GitHub Actions: các ảnh chụp màn hình cuộc trò chuyện và hình ảnh người dùng vẫn tiếp tục xuất hiện sau khi FLOOD_WAIT kết thúc.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Quá trình ghi lại GitHub Actions: việc chọn nhiều mục không còn cản trở quá trình bắt đầu; quá trình thu thập sẽ dừng lại khi hết thời gian quy định và tệp lưu trữ sẽ được đóng gói.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Trả lời tin nhắn số #N\" được hiển thị dưới dạng nhãn bằng 13 ngôn ngữ."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Trả lời tin nhắn số #N\" được hiển thị dưới dạng nhãn bằng 13 ngôn ngữ.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Ghi nhận từ GitHub Actions: việc xuất toàn bộ tài khoản chỉ có thể loại trừ các cuộc trò chuyện riêng lẻ khi quá trình ước tính đã xem xét tất cả các cuộc trò chuyện; số lượng cuộc trò chuyện được xuất bao gồm cả những cuộc trò chuyện đã chọn nhưng chưa bao giờ được bắt đầu; bản tóm tắt xuất tài khoản hiển thị các tệp chưa được truy cập trước khi dừng; nhật ký ghi lại nguồn gốc của mô-đun “pseudo-secret”; các tệp SVG từ một cuộc trò chuyện bí mật được tải xuống thay vì mở trực tiếp trong bảng điều khiển."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

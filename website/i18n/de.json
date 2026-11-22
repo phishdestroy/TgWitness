@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Gelöschte Konten werden als „Gelöschtes Konto · ID N“ bezeichnet, anstatt nur mit einer bloßen Nummer.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions-Aufzeichnung: Fotos von Chats und Personen werden nach FLOOD_WAIT weiterhin aufgenommen.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "GitHub Actions im Überblick: Eine große Auswahl verhindert nicht mehr den Start; die Erfassung wird nach Ablauf der Zeitbegrenzung beendet und das Archiv wird gepackt.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "„Auf Nachricht Nr. N antworten“ wird als Beschriftung in 13 Sprachen angezeigt."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "„Auf Nachricht Nr. N antworten“ wird als Beschriftung in 13 Sprachen angezeigt.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "GitHub Actions-Erfassung: Bei Exporten des gesamten Kontos können einzelne Chats nur dann ausgelassen werden, wenn die Schätzung alle Chats berücksichtigt hat; die Anzahl der exportierten Chats umfasst auch ausgewählte Chats, die nie gestartet wurden; Zusammenfassungen von Kontoexporten zeigen Dateien an, auf die vor dem Abbruch nicht zugegriffen wurde; das Protokoll hält fest, woher das pseudo-geheime Modul stammt; SVG-Dateien aus einem geheimen Chat werden heruntergeladen, anstatt im Panel geöffnet zu werden."
  },
  "modes": {
   "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",

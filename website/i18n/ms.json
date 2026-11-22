@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Akaun yang dipadam dinamakan \"Akaun yang dipadam · ID N\" dan bukannya hanya nombor.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions merakam: gambar sembang dan orang berterusan selepas FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "GitHub Actions capture: pemilihan besar tidak lagi menghalang permulaan; pengumpulan berhenti apabila had masa mencapai dan arkib dipakejkan.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Balas mesej #N\" dipaparkan sebagai label dalam 13 bahasa."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Balas mesej #N\" dipaparkan sebagai label dalam 13 bahasa.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "GitHub Actions merakam: eksport seluruh akaun hanya boleh mengecualikan sembang individu apabila anggaran melihat semua sembang; eksport sembang merangkumi kiraan sembang terpilih yang tidak pernah dimulakan; ringkasan eksport akaun memaparkan fail yang tidak dicapai sebelum pemberhentian; jurnal merekodkan asal modul pseudo-rahsia; fail SVG dimuat turun dari sembang rahsia dan bukannya dibuka dalam panel."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

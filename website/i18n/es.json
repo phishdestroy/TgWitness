@@ -8319,7 +8319,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Las cuentas eliminadas se denominan «Cuenta eliminada · ID N», en lugar de un simple número.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Captura de GitHub Actions: las fotos de los chats y de las personas continúan después de FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Captura de GitHub Actions: una selección extensa ya no impide el inicio; la recopilación se detiene al alcanzar el límite de tiempo y el archivo se empaqueta.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "«Responder al mensaje n.º N» aparece como etiqueta en 13 idiomas."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "«Responder al mensaje n.º N» aparece como etiqueta en 13 idiomas.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Captura de GitHub Actions: las exportaciones de toda la cuenta solo pueden omitir chats individuales cuando la estimación ha tenido en cuenta todos los chats; el recuento de chats exportados incluye chats seleccionados que nunca se iniciaron; los resúmenes de exportación de la cuenta muestran archivos a los que no se había accedido antes de la interrupción; el registro detalla de dónde procedía el módulo «pseudo-secreto»; los archivos SVG de un chat secreto se descargan en lugar de abrirse en el panel."
  },
  "modes": {
   "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",

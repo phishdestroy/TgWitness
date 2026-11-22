@@ -8319,7 +8319,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "As contas excluídas são denominadas “Conta excluída · ID N”, em vez de apenas um número.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Captura do GitHub Actions: as fotos de bate-papos e pessoas continuam após o FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Captura do GitHub Actions: uma seleção extensa não impede mais o início; a coleta é interrompida ao atingir o limite de tempo e o arquivo é compactado.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "“Responder à mensagem nº N” aparece como um rótulo em 13 idiomas."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "“Responder à mensagem nº N” aparece como um rótulo em 13 idiomas.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Captura do GitHub Actions: as exportações de toda a conta podem omitir conversas individuais apenas quando a estimativa considerou todas as conversas; a contagem de conversas exportadas inclui conversas selecionadas que nunca foram iniciadas; os resumos das exportações da conta mostram arquivos que não foram acessados antes da interrupção; o diário registra a origem do módulo pseudo-secreto; os arquivos SVG de uma conversa secreta são baixados em vez de abertos no painel."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

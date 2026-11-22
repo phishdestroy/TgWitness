@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Usunięte konta noszą nazwę „Usunięte konto · ID N” zamiast samego numeru.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Zrzut ekranu z GitHub Actions: zdjęcia czatów i osób pojawiają się nadal po zakończeniu FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Zrzut ekranu z GitHub Actions: duży wybór nie blokuje już rozpoczęcia; pobieranie zatrzymuje się po upływie limitu czasu, a archiwum zostaje spakowane.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "„Odpowiedz na wiadomość nr N” pojawia się jako etykieta w 13 językach."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "„Odpowiedz na wiadomość nr N” pojawia się jako etykieta w 13 językach.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Zrzut ekranu z GitHub Actions: eksporty całego konta mogą pomijać pojedyncze czaty tylko wtedy, gdy szacunek uwzględnił wszystkie czaty; liczba czatów objętych eksportem obejmuje wybrane czaty, które nigdy nie zostały rozpoczęte; podsumowania eksportu konta pokazują pliki, do których nie uzyskano dostępu przed zatrzymaniem; dziennik rejestruje, skąd pochodzi moduł „pseudo-secret”; pliki SVG z tajnego czatu są pobierane zamiast otwierane w panelu."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",

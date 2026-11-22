@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Les comptes supprimés sont nommés « Compte supprimé · ID N » au lieu d'un simple numéro.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Capture d'écran de GitHub Actions : les photos des discussions et des personnes continuent après FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Capture d'écran de GitHub Actions : un grand nombre d'éléments ne bloque plus le démarrage ; la collecte s'arrête à la limite de temps et l'archive est compressée.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "« Répondre au message n° N » apparaît sous forme d'étiquette en 13 langues."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "« Répondre au message n° N » apparaît sous forme d'étiquette en 13 langues.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Capture d'écran de GitHub Actions : les exportations de l'intégralité du compte ne peuvent omettre certaines discussions que si l'estimation a pris en compte toutes les discussions ; le nombre de discussions exportées inclut celles qui n'ont jamais été lancées ; les résumés d'exportation du compte affichent des fichiers qui n'ont pas été traités avant l'arrêt ; le journal indique d'où provient le module pseudo-secret ; les fichiers SVG provenant d'une discussion secrète sont téléchargés au lieu de s'ouvrir dans le panneau."
  },
  "modes": {
   "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

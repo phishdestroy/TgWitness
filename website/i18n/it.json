@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Gli account cancellati vengono denominati \"Account cancellato · ID N\" anziché con un semplice numero.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Screenshot di GitHub Actions: le foto delle chat e delle persone continuano dopo FLOOD_WAIT.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Screenshot di GitHub Actions: una selezione di grandi dimensioni non blocca più l'avvio; la raccolta si interrompe allo scadere del tempo limite e l'archivio viene compresso.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Rispondi al messaggio n. N\" appare come etichetta in 13 lingue."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Rispondi al messaggio n. N\" appare come etichetta in 13 lingue.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "Capture di GitHub Actions: le esportazioni dell'intero account possono tralasciare singole chat solo se la stima ha rilevato tutte le chat; il conteggio delle chat esportate include chat selezionate che non sono mai state avviate; i riepiloghi delle esportazioni dell'account mostrano file non raggiunti prima dell'interruzione; il registro riporta la provenienza del modulo pseudo-segreto; i file SVG provenienti da una chat segreta vengono scaricati anziché aperti nel pannello."
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

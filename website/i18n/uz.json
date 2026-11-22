@@ -8267,7 +8267,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Oʻchirib tashlangan hisoblar oddiy raqam oʻrniga \"Oʻchirib tashlangan hisob · ID N\" deb nomlanadi.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions qayd etadi: suhbatlar va odamlarning fotosuratlari FLOOD_WAITdan keyin ham davom etadi.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "GitHub Actions yozib olish: katta tanlov endi boshlanishni bloklamaydi; yig'ish vaqt chegarasida to'xtaydi va arxiv qadoqlanadi.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Xabarga #N javob bering\" 13 tilda yorliq sifatida yozilgan."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"Xabarga #N javob bering\" 13 tilda yorliq sifatida yozilgan.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "GitHub Actions yozib oladi: butun hisob eksportlari faqat agar baholash har bir suhbatni ko'rgan bo'lsa, yakka suhbatlarni o'tkazib yuborishi mumkin; suhbat eksporti qoplamasi hech qachon boshlanmagan tanlangan suhbatlarni hisobga oladi; hisob eksporti xulosalari to'xtashdan oldin yetib bormagan fayllarni ko'rsatadi; jurnal psevdoxufiya modulining qayerdan kelganini qayd etadi; maxfiy suhbatdan olingan SVG fayllar paneldagi ochilish o'rniga yuklab olinadi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

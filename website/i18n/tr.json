@@ -8319,7 +8319,8 @@
   "916777a44012bf4a825eb578ad61cdc28401d7c928d277993aaa36410cc40c7a": "Silinen hesaplar, sadece bir sayı yerine “Silinmiş hesap · ID N” şeklinde adlandırılır.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions ekran görüntüsü: FLOOD_WAIT'ten sonra sohbetlerin ve kişilerin fotoğrafları devam ediyor.",
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "GitHub Actions'ın işleyişi: Geniş bir seçim yelpazesi artık başlangıcı engellemiyor; toplama işlemi zaman sınırında duruyor ve arşiv paketleniyor.",
-  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"#N numaralı mesaja yanıt ver\" ifadesi, 13 dilde bir etiket olarak yer almaktadır."
+  "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "\"#N numaralı mesaja yanıt ver\" ifadesi, 13 dilde bir etiket olarak yer almaktadır.",
+  "a694c3573db82cb02977ac9c89a0defb1b78f8298b8446643c13a2663fafa03e": "GitHub Actions kaydı: Hesap genelinde yapılan dışa aktarımlar, yalnızca tahmin sürecinde tüm sohbetler gözden geçirilmişse tekil sohbetleri dışarıda bırakabilir; sohbet dışa aktarım kapsamı, hiç başlatılmamış seçili sohbetleri de içerir; hesap dışa aktarım özetleri, durdurma işleminden önce erişilemeyen dosyaları gösterir; günlük, sözde gizli modülün nereden geldiğini kaydeder; gizli bir sohbetten alınan SVG dosyaları, panelde açılmak yerine indirilir."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",
