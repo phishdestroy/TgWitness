@@ -10859,7 +10859,7 @@
   "Export steps not reached before collection stopped": "שלבי הייצוא שלא הושלמו לפני הפסקת האיסוף",
   "Not reached before collection stopped": "לא הושג לפני שהאיסוף הופסק",
   "line {line}": "שורה {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} שניות",
   "{run} · attempt {attempt}": "{run} · ניסיון {attempt}",
   "Sealed capture result": "תוצאות תהליך האיסוף החסוי",
   "Capture ended: {reason}": "האיסוף הסתיים: {reason}",

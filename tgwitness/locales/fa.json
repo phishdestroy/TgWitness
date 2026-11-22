@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "مراحل خروجی‌گیری که پیش از توقف جمع‌آوری انجام نشده‌اند",
   "Not reached before collection stopped": "پیش از توقف جمع‌آوری به آن دسترسی حاصل نشد",
   "line {line}": "خط {line}",
-  "{s} s": "{s}s",
+  "{s} s": "{s} ثانیه",
   "{run} · attempt {attempt}": "{run} · تلاش {attempt}",
   "Sealed capture result": "نتیجه اجرای جمع‌آوری مهر و موم‌شده",
   "Capture ended: {reason}": "جمع‌آوری پایان یافت: {reason}",

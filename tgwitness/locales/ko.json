@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "증거 수집이 중단되기 전까지 완료되지 않은 내보내기 단계",
   "Not reached before collection stopped": "수집이 중단되기 전까지 연락이 닿지 않음",
   "line {line}": "줄 {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s}초",
   "{run} · attempt {attempt}": "{run} · 시도 {attempt}",
   "Sealed capture result": "봉인된 수집 작업 결과",
   "Capture ended: {reason}": "수집 종료: {reason}",

@@ -35,7 +35,7 @@ STYLE = (
     ".grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}"
     ".card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}"
     ".wide{grid-column:1/-1}.lead{font-size:16px;margin:0 0 6px}.muted{color:var(--muted)}"
-    "table{width:100%;border-collapse:collapse}td{padding:5px 0;border-bottom:1px solid var(--line);vertical-align:top}"
+    "table{width:100%;border-collapse:collapse}td{padding:5px 0;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}"
     "td:first-child{color:var(--muted);width:42%;padding-inline-end:10px}tr:last-child td{border-bottom:0}"
     "code{font:12.5px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;word-break:break-all}"
     ".stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}"
@@ -46,8 +46,15 @@ STYLE = (
     "border:1px solid var(--line);direction:ltr;text-align:left}ol{margin:0;padding-inline-start:20px}"
     "ul.limits{margin:0;padding-inline-start:18px}li{margin:4px 0}a{color:var(--accent)}"
     ".list td:first-child{width:auto;color:var(--ink)}.list tr.head td{color:var(--muted);font-weight:600;font-size:13px}"
-    ".list td{padding-inline-end:14px}.card:has(>table.list){overflow-x:auto}"
-    ".log td{padding-inline-end:14px}.log td:first-child,.log td.elapsed{width:1%;white-space:nowrap;"
+    ".list td{padding-inline-end:14px}.list code{word-break:normal;white-space:nowrap}.card:has(>table.list){overflow-x:auto}"
+    "@media(max-width:640px){.list tr.head{display:none}.list tr{display:block;padding:10px 0;"
+    "border-bottom:1px solid var(--line)}.list tr:last-child{border-bottom:0}.list td{display:flex;gap:12px;"
+    "justify-content:space-between;align-items:baseline;border:0;padding:3px 0;text-align:end}"
+    ".list td::before{content:attr(data-label);color:var(--muted);font-size:13px;text-align:start;flex:1 1 0}"
+    ".list td>span{flex:0 1 auto}"
+    ".list td:first-child{display:block;font-weight:600;text-align:start;padding-bottom:6px}"
+    ".list td:first-child::before{content:none}.list td:first-child code{font-weight:400}}"
+    ".log td{padding-inline-end:14px;overflow-wrap:anywhere}.log td:first-child,.log td.elapsed{width:1%;white-space:nowrap;"
     "font-variant-numeric:tabular-nums}.log td.elapsed{color:var(--muted)}.waits{margin:12px 0 0}"
 )
 STYLE_HASH = "sha256-" + base64.b64encode(hashlib.sha256(STYLE.encode()).digest()).decode()
@@ -229,7 +236,7 @@ def run_log(facts, say):
             state = (say("complete") if payload.get("complete") else say("partial snapshot") if payload.get("phase") == "snapshot"
                      else say("failed"))
             captured = payload.get("captured") if type(payload.get("captured")) is int else 0
-            rows.append((at, say("Chat exported: {title}", title=title) + " · " + state + " · "
+            rows.append((at, say("Chat exported: {title}", title="\u2068" + str(title) + "\u2069") + " · " + state + " · "
                          + _counted(say, "{n} messages", captured)))
         elif kind == "account_export.completed":
             rows.append((at, say("Account export finished")))
@@ -259,7 +266,7 @@ def run_log(facts, say):
     for at, text in rows:
         moment = _seconds(at)
         elapsed = "+" + _duration(say, moment - origin) if moment is not None and origin is not None else ""
-        table.append(f'<tr><td><time datetime="{_e(at)}">{_e(_clock(at))}</time></td><td class="elapsed">{_e(elapsed)}</td>'
+        table.append(f'<tr><td><time datetime="{_e(at)}">{_e(_clock(at))}</time></td><td class="elapsed"><bdi>{_e(elapsed)}</bdi></td>'
                      f"<td>{_e(text)}</td></tr>")
     waits = facts.get("waits") or {}
     if waits:
@@ -423,22 +430,28 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
             return _e(say("not measured"))
         if not ids.get("missing"):
             return _e(say("none · IDs {first}–{last}", first=ids.get("first_id"), last=ids.get("last_id")))
-        largest = ", ".join(f"{_e(low)}–{_e(high)}" for low, high in ids.get("largest_runs") or [])
+        largest = ", ".join(_e(low) if low == high else f"{_e(low)}–{_e(high)}" for low, high in ids.get("largest_runs") or [])
         return (marked("{n} in {runs} ranges", n="<b>" + _number(ids["missing"]) + "</b>", runs=_number(ids.get("missing_runs") or 0))
-                + (f'<br><span class="muted">{_e(say("largest:"))} {largest}</span>' if largest else ""))
+                + (f'<br><span class="muted">{_e(say("largest:"))} <span dir="ltr">{largest}</span></span>' if largest else ""))
 
-    chat_rows = "".join(
-        f'<tr><td>{_e(c.get("title") or "—")}<br><span class="muted"><code>{_e(c.get("chat_id"))}</code></span></td><td>'
-        + (f'<span class="complete">{_e(say("complete"))}</span>' if c.get("complete") else
-           f'<span class="partial">{_e(say("partial snapshot"))}</span>' if c.get("phase") == "snapshot" else
-           f'<span class="failed">{_e(say("failed") if (c.get("phase") or "failed") == "failed" else c.get("phase"))}'
-           f'{" · " + _e(c["error"]) if c.get("error") else ""}</span>')
-        + f'</td><td>{_number(c.get("captured") or 0)}</td><td>{gaps(c)}</td><td>'
-        + (f'<code>{_e(c["file"])}</code>' if c.get("file") else "—") + "</td></tr>" for c in chats) + "".join(
-        f'<tr><td>—<br><span class="muted"><code>{_e(chat_id)}</code></span></td><td><span class="partial">'
-        f'{_e(say("Not reached before the stop"))}</span></td><td>0</td><td>—</td><td>—</td></tr>' for chat_id in unstarted_chats(facts, chats))
+    columns = [_e(say(name)) for name in ("Chat", "Result", "Messages", "Absent message IDs", "File")]
+
+    def row(cells):
+        return "<tr>" + "".join(f'<td data-label="{label}"><span>{cell}</span></td>' for label, cell in zip(columns, cells)) + "</tr>"
+
+    chat_rows = "".join(row((
+        f'<bdi>{_e(c.get("title") or "—")}</bdi><br><span class="muted"><code dir="ltr">{_e(c.get("chat_id"))}</code></span>',
+        f'<span class="complete">{_e(say("complete"))}</span>' if c.get("complete") else
+        f'<span class="partial">{_e(say("partial snapshot"))}</span>' if c.get("phase") == "snapshot" else
+        f'<span class="failed">{_e(say("failed") if (c.get("phase") or "failed") == "failed" else c.get("phase"))}'
+        f'{" · " + _e(c["error"]) if c.get("error") else ""}</span>',
+        _number(c.get("captured") or 0), gaps(c),
+        f'<code>{_e(c["file"])}</code>' if c.get("file") else "—")) for c in chats) + "".join(row((
+            f'—<br><span class="muted"><code dir="ltr">{_e(chat_id)}</code></span>',
+            f'<span class="partial">{_e(say("Not reached before the stop"))}</span>', "0", "—", "—"))
+        for chat_id in unstarted_chats(facts, chats))
     chat_section = (f'<section class="card wide"><h2>{_e(say("Chat exports"))}</h2><table class="list"><tr class="head">'
-                    + "".join(f"<td>{_e(say(name))}</td>" for name in ("Chat", "Result", "Messages", "Absent message IDs", "File"))
+                    + "".join(f"<td>{label}</td>" for label in columns)
                     + f'</tr>{chat_rows}</table></section>') if chats else ""
     account_entry = ""
     if chats:

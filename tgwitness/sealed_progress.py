@@ -97,8 +97,8 @@ def chats(progress, plan, elapsed, eta, title_of):
     overall = share(len(kept) + (current_share if reading else 0), total)
     messages = sum(item.get("captured") or 0 for item in kept) + (current.get("captured") or 0 if reading else 0)
     messages_total, bytes_total = plan_totals(plan)
-    stage = "files" if reading and current.get("stage") == "files" else "packaging" if current.get("stage") == "packaging" \
-        else "messages"
+    stage = "files" if reading and current.get("stage") == "files" else "chat_packaging" \
+        if reading and current.get("stage") == "packaging" else "messages"
     files = sum(item.get("files") or 0 for item in kept) + (current.get("files_done") or 0 if reading else 0)
     return {"stage": stage, "percent": percent(overall), "detail": None,
             "messages": {"done": messages, "total": messages_total},

@@ -10749,7 +10749,7 @@
   "Export steps not reached before collection stopped": "ขั้นตอนการส่งออกที่ยังไม่เสร็จสิ้นก่อนการเก็บรวบรวมข้อมูลถูกหยุดลง",
   "Not reached before collection stopped": "ยังไม่ได้รับการติดต่อก่อนที่การเก็บรวบรวมข้อมูลจะหยุดลง",
   "line {line}": "บรรทัด {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} วินาที",
   "Sealed capture result": "ผลจากการเก็บข้อมูลที่ปิดผนึก",
   "Capture ended: {reason}": "การเก็บรวบรวมข้อมูลสิ้นสุดลง: {reason}",
   "Salvaged after a failure": "กู้คืนได้หลังจากเกิดข้อผิดพลาด",
