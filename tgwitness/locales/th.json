@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "แสดงเป็น {label} ในแผนภูมิ",
   "likely absent {n}": "likely absent {n}",
   "Absent numbers in channels and supergroups": "หมายเลขที่ขาดหายไปในช่องและกลุ่มใหญ่",
-  "Absent numbers in the shared account numbering": "หมายเลขที่ขาดหายในระบบการจัดหมายเลขบัญชีร่วม"
+  "Absent numbers in the shared account numbering": "หมายเลขที่ขาดหายในระบบการจัดหมายเลขบัญชีร่วม",
+  "read by the other side · {time}": "ถูกอ่านโดยฝ่ายตรงข้าม · {time}",
+  "opened by the other side · {time}": "เปิดโดยฝ่ายตรงข้าม · {time}",
+  "The other side was typing": "ฝ่ายตรงข้ามกำลังพิมพ์ข้อความ"
 }

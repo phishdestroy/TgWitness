@@ -33,7 +33,8 @@ def text_keys():
             "The other side deleted {n} messages; TgWitness keeps them.",
             "The other side deleted {n} message; TgWitness keeps it.", "The other side read {n} messages.",
             "The other side read {n} message.", "A message could not be decrypted and was refused.",
-            "Telegram rejected a sent message.", "A file could not be saved.", "User {id}", "Pseudo-secret", "ID {id}"]
+            "Telegram rejected a sent message.", "A file could not be saved.", "User {id}", "Pseudo-secret", "ID {id}",
+            "read by the other side · {time}", "opened by the other side · {time}", "The other side was typing"]
 
 
 def media_of(media):
@@ -124,7 +125,8 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                        "ttl": payload.get("ttl") if type(payload.get("ttl")) is int and payload.get("ttl") > 0 else None,
                        "random_id": str(payload.get("random_id")), "media": media_of(payload.get("media")),
                        "reply_to": str(payload["reply_to_random_id"]) if payload.get("reply_to_random_id") else None,
-                       "file": None, "deleted": None}
+                       "file": None, "deleted": None, "read_by_peer": None, "opened_by_peer": None,
+                       "sent_from": sent_from(payload, at) if out else None}
             chat["items"].append(message)
             chat["messages"][message["random_id"]] = message
         elif name == "file":
@@ -153,12 +155,24 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                 event("The other side cleared the history; TgWitness keeps it.")
             elif action == "ReadMessages":
                 chat["counts"]["read"] += len(ids)
+                for random_id in ids:
+                    target = chat["messages"].get(random_id)
+                    if target is not None and target["direction"] == "out" and target["opened_by_peer"] is None:
+                        target["opened_by_peer"] = {"seq": seq, "at": at}
                 event("read", n=len(ids))
             elif isinstance(action, str):
                 event(action)
         elif name == "peer_read":
             chat["counts"]["read"] += shown
             event("Read", until=payload.get("max_date_at"))
+            # The receipt names the date of the newest message they read; Telegram dates a sent message no earlier
+            # than the moment this account started sending it.
+            if type(payload.get("max_date")) is int:
+                for target in chat["messages"].values():
+                    if target["direction"] == "out" and target["read_by_peer"] is None and target["sent_from"] is not None                             and target["sent_from"] <= payload["max_date"]:
+                        target["read_by_peer"] = {"seq": seq, "at": payload.get("read_at") or at}
+        elif name == "peer_typing":
+            event("The other side was typing", start=payload.get("started_at") or at, end=payload.get("last_seen_at"))
         elif name == "decrypt_failed":
             event("A message could not be decrypted and was refused.")
         elif name == "send_failed":
@@ -174,6 +188,27 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         chat.pop("shown")
         result.append(chat)
     return sorted(result, key=lambda chat: (chat["started"] or {}).get("at") or "")
+
+
+def sent_from(payload, at):
+    """Whole second from which Telegram may have dated a sent message: the send start, or one second before the record."""
+    from datetime import datetime
+    try:
+        if isinstance(payload.get("send_started_at"), str):
+            return int(datetime.fromisoformat(payload["send_started_at"]).timestamp())
+        return int(datetime.fromisoformat(at).timestamp()) - 1
+    except (TypeError, ValueError):
+        return None
+
+
+def peer_badges(say, item, when):
+    """What the other side's app reported about a message this account sent."""
+    found = []
+    if item.get("read_by_peer"):
+        found.append(say("read by the other side · {time}", time=when(item["read_by_peer"]["at"])))
+    if item.get("opened_by_peer"):
+        found.append(say("opened by the other side · {time}", time=when(item["opened_by_peer"]["at"])))
+    return found
 
 
 def bubble_meta(say, chat, item, when):
@@ -216,6 +251,8 @@ def event_text(say, item, when):
         return say(text, n=item.get("n", 0))
     if text == "Ended":
         return say("Ended") + (" · " + str(item["reason"]) if item.get("reason") else "")
+    if text == "The other side was typing":
+        return say(text) + " · " + when(item["start"]) + (" – " + when(item["end"]) if item.get("end") else "")
     return say(text)
 
 
@@ -274,6 +311,7 @@ CSS = """
 .secret-bubble .file,.secret-bubble .meta{color:var(--muted);font-size:12px}.secret-bubble .meta{justify-self:end}
 .secret-bubble .badge{justify-self:start;padding:1px 8px;border-radius:999px;background:var(--bad);color:#fff;font-size:11px;font-weight:650}
 .secret-bubble .badge.timer{background:var(--warn)}
+.secret-bubble .badge.seen{background:var(--accent,#2563eb)}
 .secret-chat .limited{margin:0;padding:10px 18px;background:var(--warntint);color:var(--warn);font-size:13px}
 [dir=rtl] .secret-bubble{align-self:flex-end;border-radius:16px 16px 6px 16px}[dir=rtl] .secret-bubble.out{align-self:flex-start;border-radius:16px 16px 16px 6px}
 @media print{.secret-bubble{box-shadow:none;outline:1px solid var(--line)}}
@@ -310,6 +348,8 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
                 parts.append('<span class="badge">' + e(say("deleted by the other side; kept here")) + "</span>")
             if item["ttl"]:
                 parts.append('<span class="badge timer">' + e(say("timer {n} s", n=item["ttl"])) + "</span>")
+            for badge in peer_badges(say, item, when):
+                parts.append('<span class="badge seen">' + e(badge) + "</span>")
             media = item["media"]
             if media and media["image"] and item["file"] and (media.get("mime") in IMAGES or not media.get("mime")):
                 if archive:
@@ -336,6 +376,7 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
     if not conversations:
         return
     ink, muted, bad, warn = colors
+    seen = (37, 99, 235)
     page = lay.pdf
     lay.section(say(TITLE), say(LEAD))
     for chat in conversations:
@@ -366,6 +407,8 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 blocks.append(("badge", say("deleted by the other side; kept here"), bad))
             if item["ttl"]:
                 blocks.append(("badge", say("timer {n} s", n=item["ttl"]), warn))
+            for badge in peer_badges(say, item, when):
+                blocks.append(("badge", badge, seen))
             media = item["media"]
             if media and media["image"] and item["file"]:
                 image = preview(media_root, item["file"], PDF_IMAGE_BYTES)

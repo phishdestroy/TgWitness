@@ -209,6 +209,7 @@ class SecretChats:
         self.asked = set()
         self.early = {}
         self.open_at = {}
+        self.heard = None
 
     @property
     def store(self):
@@ -271,6 +272,7 @@ class SecretChats:
                          "DecryptFailed", "SendFailed"):
                 manager.on(name, getattr(self, "on_" + name))
             self.manager, self.client = manager, client
+            self.hear(client)
             keep, held = self.early.pop(client, (None, ()))
             if keep:
                 client.remove_event_handler(keep)
@@ -288,6 +290,23 @@ class SecretChats:
             self.resume_files()
             self.spawn(self.refresh(manager, client))
             return True
+
+    def hear(self, client):
+        """Read receipts and typing of the other side arrive as plain updates. Observation handles them while it runs;
+        without it (a sealed secret chat capture, or observation paused) this handler records them."""
+        async def heard(update):
+            if self.client is not client or getattr(self.collector, "running", False):
+                return
+            from .visibility import heard_update
+            try:
+                heard_update(self.collector, update)
+            except Exception:
+                LOG.exception("A secret chat read receipt or typing notice could not be recorded")
+
+        from telethon import events
+        client.add_event_handler(heard, events.Raw(types=(types.UpdateEncryptedChatTyping,
+                                                          types.UpdateEncryptedMessagesRead)))
+        self.heard = client, heard
 
     async def refresh(self, manager, client):
         checked = time.monotonic()
@@ -323,6 +342,9 @@ class SecretChats:
 
     async def _detach(self):
         manager, self.manager, self.client = self.manager, None, None
+        listener, self.heard = self.heard, None
+        if listener is not None:
+            listener[0].remove_event_handler(listener[1])
         for task in list(self.tasks):
             task.cancel()
         await asyncio.gather(*self.tasks, return_exceptions=True)
@@ -707,10 +729,12 @@ class SecretChats:
                 "secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "method": "messages.setEncryptedTyping"},
                 functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True),
                 visibility.typing_seconds(text))
+        # Telegram dates the message between these two moments; the other side's read receipt names a message date.
+        started = utcnow()
         random_id = await self.acting(manager.send_message, chat_id, text, conversation=conversation)
         chat = manager.status(chat_id)
         sent = self.note("message", {"secret_chat_id": chat_id, "peer_user_id": chat.peer_user_id, "direction": "out",
-                                     "random_id": random_id, "text": text, "ttl": chat.ttl,
+                                     "random_id": random_id, "text": text, "ttl": chat.ttl, "send_started_at": started,
                                      **({"typing_before_send": typing} if typing else {})})
         if fields["read_receipts"] == "on_reply":
             try:

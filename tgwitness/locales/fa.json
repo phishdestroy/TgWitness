@@ -10816,5 +10816,8 @@
   "Shown as {label} in the charts": "در نمودارها به صورت {label} نمایش داده شده است.",
   "likely absent {n}": "احتمالاً غایب {n}",
   "Absent numbers in channels and supergroups": "اعداد غایب در کانال‌ها و ابرگروه‌ها",
-  "Absent numbers in the shared account numbering": "اعداد غایب در شماره‌گذاری حساب مشترک"
+  "Absent numbers in the shared account numbering": "اعداد غایب در شماره‌گذاری حساب مشترک",
+  "read by the other side · {time}": "خوانده شده توسط طرف مقابل · {time}",
+  "opened by the other side · {time}": "باز شده توسط طرف مقابل · {time}",
+  "The other side was typing": "طرف مقابل در حال تایپ بود"
 }

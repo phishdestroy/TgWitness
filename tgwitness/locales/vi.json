@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "Được hiển thị dưới dạng {label} trong các biểu đồ",
   "likely absent {n}": "có khả năng thiếu {n}",
   "Absent numbers in channels and supergroups": "Các số tin nhắn thiếu trong các kênh và siêu nhóm",
-  "Absent numbers in the shared account numbering": "Các số tin nhắn thiếu trong hệ thống đánh số chung của tài khoản"
+  "Absent numbers in the shared account numbering": "Các số tin nhắn thiếu trong hệ thống đánh số chung của tài khoản",
+  "read by the other side · {time}": "đã được bên kia đọc · {time}",
+  "opened by the other side · {time}": "được mở bởi phía bên kia · {time}",
+  "The other side was typing": "Bên kia đang gõ"
 }

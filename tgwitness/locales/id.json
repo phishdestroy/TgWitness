@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "Ditampilkan sebagai {label} dalam bagan",
   "likely absent {n}": "kemungkinan tidak ada {n}",
   "Absent numbers in channels and supergroups": "Nomor yang tidak ada di saluran dan supergrup",
-  "Absent numbers in the shared account numbering": "Nomor yang tidak ada dalam penomoran akun bersama"
+  "Absent numbers in the shared account numbering": "Nomor yang tidak ada dalam penomoran akun bersama",
+  "read by the other side · {time}": "dibaca oleh pihak lain · {time}",
+  "opened by the other side · {time}": "dibuka oleh pihak lain · {time}",
+  "The other side was typing": "Pihak lain sedang mengetik"
 }

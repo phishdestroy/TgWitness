@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "チャート上では {label} として表示されます",
   "likely absent {n}": "欠落の可能性あり {n}",
   "Absent numbers in channels and supergroups": "チャンネルおよびスーパーグループにおける欠番",
-  "Absent numbers in the shared account numbering": "共有アカウント番号体系における欠番"
+  "Absent numbers in the shared account numbering": "共有アカウント番号体系における欠番",
+  "read by the other side · {time}": "相手側による既読 · {time}",
+  "opened by the other side · {time}": "相手側によって開始されました · {time}",
+  "The other side was typing": "相手は入力中だった"
 }

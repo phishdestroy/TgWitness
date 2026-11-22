@@ -10816,5 +10816,8 @@
   "Shown as {label} in the charts": "চার্টে {label} হিসেবে দেখানো হয়েছে",
   "likely absent {n}": "সম্ভাব্য অনুপস্থিত {n}",
   "Absent numbers in channels and supergroups": "চ্যানেল এবং সুপারগ্রুপে অনুপস্থিত সংখ্যা",
-  "Absent numbers in the shared account numbering": "সমন্বিত অ্যাকাউন্ট নম্বরকরণে অনুপস্থিত সংখ্যা"
+  "Absent numbers in the shared account numbering": "সমন্বিত অ্যাকাউন্ট নম্বরকরণে অনুপস্থিত সংখ্যা",
+  "read by the other side · {time}": "অন্য পক্ষ দ্বারা পড়া · {time}",
+  "opened by the other side · {time}": "অন্য পক্ষ দ্বারা খোলা · {time}",
+  "The other side was typing": "অন্য পক্ষ টাইপ করছিল"
 }

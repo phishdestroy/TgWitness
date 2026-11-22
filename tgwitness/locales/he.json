@@ -10867,5 +10867,8 @@
   "Shown as {label} in the charts": "מוצג בתרשימים כ- {label}",
   "likely absent {n}": "ככל הנראה חסר {n}",
   "Absent numbers in channels and supergroups": "מספרים חסרים בערוצים ובקבוצות-על",
-  "Absent numbers in the shared account numbering": "מספרים חסרים במספור המשותף של החשבון"
+  "Absent numbers in the shared account numbering": "מספרים חסרים במספור המשותף של החשבון",
+  "read by the other side · {time}": "נקרא על ידי הצד השני · {time}",
+  "opened by the other side · {time}": "נפתח על ידי הצד השני · {time}",
+  "The other side was typing": "הצד השני הקליד"
 }

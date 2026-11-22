@@ -10826,5 +10826,8 @@
   "Shown as {label} in the charts": "Exibido como {label} nos gráficos",
   "likely absent {n}": "provavelmente ausente {n}",
   "Absent numbers in channels and supergroups": "Números ausentes em canais e supergrupos",
-  "Absent numbers in the shared account numbering": "Números ausentes na numeração compartilhada da conta"
+  "Absent numbers in the shared account numbering": "Números ausentes na numeração compartilhada da conta",
+  "read by the other side · {time}": "lido pelo outro lado · {time}",
+  "opened by the other side · {time}": "aberto pelo outro lado · {time}",
+  "The other side was typing": "O outro lado estava digitando"
 }

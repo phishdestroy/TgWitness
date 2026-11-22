@@ -10816,5 +10816,8 @@
   "Shown as {label} in the charts": "Çizelgelerde {label} olarak gösterilir",
   "likely absent {n}": "muhtemelen eksik {n}",
   "Absent numbers in channels and supergroups": "Kanallarda ve süper gruplarda eksik numaralar",
-  "Absent numbers in the shared account numbering": "Paylaşılan hesap numaralandırmasında eksik numaralar"
+  "Absent numbers in the shared account numbering": "Paylaşılan hesap numaralandırmasında eksik numaralar",
+  "read by the other side · {time}": "karşı taraf tarafından okundu · {time}",
+  "opened by the other side · {time}": "karşı taraf tarafından açıldı · {time}",
+  "The other side was typing": "Karşı taraf yazıyordu"
 }

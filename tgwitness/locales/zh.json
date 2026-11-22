@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "在图表中显示为 {label}",
   "likely absent {n}": "可能缺失 {n}",
   "Absent numbers in channels and supergroups": "频道和超级群组中的缺失编号",
-  "Absent numbers in the shared account numbering": "共享账号编号中的缺失编号"
+  "Absent numbers in the shared account numbering": "共享账号编号中的缺失编号",
+  "read by the other side · {time}": "已被对方阅读 · {time}",
+  "opened by the other side · {time}": "由对方发起 · {time}",
+  "The other side was typing": "对方正在输入"
 }

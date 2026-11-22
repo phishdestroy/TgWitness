@@ -10888,5 +10888,8 @@
   "Shown as {label} in the charts": "В диаграммах отображается как {label}",
   "likely absent {n}": "вероятно отсутствует {n}",
   "Absent numbers in channels and supergroups": "Отсутствующие номера в каналах и супергруппах",
-  "Absent numbers in the shared account numbering": "Отсутствующие номера в общей нумерации аккаунта"
+  "Absent numbers in the shared account numbering": "Отсутствующие номера в общей нумерации аккаунта",
+  "read by the other side · {time}": "прочитано собеседником · {time}",
+  "opened by the other side · {time}": "открыто собеседником · {time}",
+  "The other side was typing": "Собеседник печатал"
 }

@@ -11020,5 +11020,8 @@
   "Shown as {label} in the charts": "يظهر في المخططات على النحو التالي: {label}",
   "likely absent {n}": "من المحتمل أن يكون غائبًا {n}",
   "Absent numbers in channels and supergroups": "الأرقام الغائبة في القنوات والمجموعات الفائقة",
-  "Absent numbers in the shared account numbering": "الأرقام الغائبة في نظام ترقيم الحساب المشترك"
+  "Absent numbers in the shared account numbering": "الأرقام الغائبة في نظام ترقيم الحساب المشترك",
+  "read by the other side · {time}": "تمت قراءتها من قبل الطرف الآخر · {time}",
+  "opened by the other side · {time}": "تم فتحها من قبل الطرف الآخر · {time}",
+  "The other side was typing": "كان الطرف الآخر يكتب"
 }

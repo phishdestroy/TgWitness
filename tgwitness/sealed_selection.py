@@ -21,7 +21,8 @@ class SecretVisibility(BaseModel):
     """What the other side of a captured secret chat may see. The default sends nothing: no read receipts, no
     opened notices for self-destructing content, no typing. Downloading and viewing files never notifies anyone."""
     model_config = ConfigDict(extra="forbid")
-    read_receipts: Literal["never", "manual", "on_reply"] = "never"
+    # on_open: the panel marks messages read a few seconds after they appear while the panel is in view.
+    read_receipts: Literal["never", "manual", "on_reply", "on_open"] = "never"
     content_opened: Literal["never", "manual"] = "never"
     typing: Literal["hidden", "shown", "before_send"] = "hidden"
 

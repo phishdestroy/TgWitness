@@ -10918,5 +10918,8 @@
   "Shown as {label} in the charts": "У діаграмах позначається як {label}",
   "likely absent {n}": "ймовірно відсутні {n}",
   "Absent numbers in channels and supergroups": "Відсутні номери в каналах та супергрупах",
-  "Absent numbers in the shared account numbering": "Відсутні номери у спільній нумерації облікового запису"
+  "Absent numbers in the shared account numbering": "Відсутні номери у спільній нумерації облікового запису",
+  "read by the other side · {time}": "прочитано іншою стороною · {time}",
+  "opened by the other side · {time}": "відкрито іншою стороною · {time}",
+  "The other side was typing": "Інша сторона набирала текст"
 }

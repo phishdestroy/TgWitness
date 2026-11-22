@@ -12,6 +12,7 @@ import time
 from contextlib import asynccontextmanager
 from functools import partial
 from pathlib import Path
+from typing import Literal
 from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request
@@ -26,10 +27,10 @@ from .middleware import KEEP_ALIVE_SECONDS, RequestLimit
 from .monitoring import capture_settings, normalize_capture
 from .export_preflight import preview_capture
 from .failures import describe
-from . import export_budget
+from . import export_budget, sealed_progress
 from .provenance import run_receipt
 from .sealed_crypto import recipient_id
-from .sealed_selection import SECRET_PEER, Selection, secret_target, selection_hash
+from .sealed_selection import SECRET_PEER, SecretVisibility, Selection, secret_target, selection_hash
 from .sealed_parts import EncryptedParts, PART_BYTES, SEALED_RESULT
 from .security import InstanceLock, Vault, private_write
 from .store import Store, canonical
@@ -158,6 +159,7 @@ class Session:
 
     def status(self):
         account = self.account_export.public(self.account_job) if self.account_job else None
+        budget = self.time_budget(account)
         return {"phase": self.phase, "login": self.collector.phase, "reason": self.reason,
                 "authorized": bool(self.store.get_setting("account", None)),
                 "remaining_seconds": max(0, int(self.config["seconds"] - (time.monotonic() - self.started))),
@@ -165,8 +167,8 @@ class Session:
                 "capture": capture_settings(self.store),
                 "selection": self.selection,
                 "selection_sha256": selection_hash(self.selection) if self.selection else None,
-                "account_export": account, "time_budget": self.time_budget(account),
-                "chat_exports": self.chat_progress(),
+                "account_export": account, "time_budget": budget,
+                "chat_exports": self.chat_progress(), "progress": self.progress(account, budget),
                 "secret": self.secret_status(),
                 "recipient_sha256": self.recipient, "context": self.config["context"], "revocation": self.revocation}
 
@@ -175,8 +177,30 @@ class Session:
             return None
         current = self.collector.export_public() if self.current_chat is not None else None
         return {"total": len(self.selection["chat_ids"]), "kept": list(self.chat_results), "current_chat": self.current_chat,
-                "current": {key: current.get(key) for key in ("phase", "captured", "total", "eta_seconds", "stage")}
+                "current": {key: current.get(key) for key in ("phase", "captured", "total", "eta_seconds", "stage",
+                                                              "files_done", "files_total", "ranges_done", "ranges_total")}
                 if current else None}
+
+    def progress(self, account, budget):
+        """Stage, overall percent and counters of the running capture; None outside collection and in secret chats."""
+        if self.phase not in ("collecting", "sealing", "sealed") or self.secret_mode or not self.selection:
+            return None
+        plan = self.assessment.get("time_plan") if self.assessment else None
+        elapsed = time.monotonic() - self.collection_started if self.collection_started is not None else 0
+        eta = budget.get("estimated_remaining_seconds") if budget else None
+        title = lambda chat_id: (self.collector.dialog_cache.get(chat_id) or {}).get("title")  # noqa: E731
+        if account:
+            value = sealed_progress.account(account, plan, elapsed, eta)
+        elif self.chat_results is not None:
+            value = sealed_progress.chats(self.chat_progress(), plan, elapsed, eta, title)
+        else:
+            value = sealed_progress.chat(self.collector.history.status(), self.store.media_stats(), self.media_bytes,
+                                         plan, elapsed, eta, title(self.selection.get("chat_id")))
+        if self.phase == "sealing":
+            value.update(stage="packaging", percent=None)
+        elif self.phase == "sealed":
+            value.update(stage="sealed", percent=100, eta_seconds=None, transfer=None)
+        return value
 
     def require_login(self):
         if self.phase != "login" or self.store.get_setting("account", None):
@@ -304,7 +328,7 @@ class Session:
         complete = snapshot is None and state.get("phase") == "done"
         payload = {"chat_id": chat_id, "title": (self.collector.dialog_cache.get(chat_id) or {}).get("title"),
                    "file": None, "complete": complete, "phase": "snapshot" if snapshot else state.get("phase"),
-                   "captured": state.get("captured"), "error": state.get("error")}
+                   "captured": state.get("captured"), "files": state.get("files_done"), "error": state.get("error")}
         if source is not None:
             folder = self.root / "chat-exports"
             folder.mkdir(mode=0o700, exist_ok=True)
@@ -317,7 +341,7 @@ class Session:
                 payload["message_ids"] = message_id_summary(folder / name)
         self.store.append("sealed.chat_export", payload)
         self.chat_results.append({k: payload.get(k) for k in ("chat_id", "title", "file", "complete", "phase", "captured",
-                                                              "message_ids")})
+                                                              "files", "message_ids")})
 
     async def stop_chats(self, cancel):
         """Keep a signed partial snapshot of the chat in progress, then stop the remaining chat exports."""
@@ -353,8 +377,12 @@ class Session:
         view = secret_chats.of(self.collector).view()
         from . import visibility
         fields = visibility.effective(self.store)
-        return {**{key: view.get(key) for key in ("connected", "error", "chats", "people", "records", "interaction_problem",
-                                                   "pending_files")}, "notice": self.secret_notice, "counts": self.secret_counts(),
+        typing = visibility.of(self.collector).typing_now
+        chats = [{**chat, "peer_typing": [item["action"] for item in typing(chat["id"], secret=True)]}
+                 for chat in view.get("chats") or []]
+        return {**{key: view.get(key) for key in ("connected", "error", "people", "records", "interaction_problem",
+                                                   "pending_files")}, "chats": chats,
+                "notice": self.secret_notice, "counts": self.secret_counts(),
                 "visibility": {key: fields[key] for key in ("read_receipts", "content_opened", "typing")}}
 
     def secret_media_type(self, digest):
@@ -398,11 +426,7 @@ class Session:
             **{key: module.get(key) for key in ("name", "version", "commit", "sha256", "source", "license", "state")},
             "route": "runner_image", "meaning": "The pseudo-secret protocol module was built into this runner's image "
             "from the pinned upstream archive and matched the SHA-256 fixed in this release before it was loaded."})
-        if selection.secret_visibility is not None:
-            from . import visibility
-            chosen = selection.secret_visibility.model_dump()
-            visibility.change(self.collector, visibility.Change(workspace=visibility.Fields(**{
-                **visibility.DEFAULTS, **chosen, "invisible": False})), operator="sealed panel")
+        self.apply_visibility(selection.secret_visibility)
         self.store.append("sealed.selection", {"mode": "secret", "secret_peer": selection.secret_peer,
             "accept_incoming": selection.accept_incoming, "capture": settings, "selection": self.selection,
             **({"secret_visibility": selection.secret_visibility.model_dump()} if selection.secret_visibility else {}),
@@ -422,6 +446,15 @@ class Session:
             except Exception as exc:
                 # Capture is already running and the attempt is in the journal; incoming chats are still accepted.
                 self.secret_notice = describe(exc)
+
+    def apply_visibility(self, chosen):
+        """What the other side may see, chosen at the start and changeable during the capture; each change is journaled.
+        The other side's typing is evidence too: shown live in the panel and signed into the journal as bursts."""
+        from . import visibility
+        values = chosen.model_dump() if chosen is not None else {}
+        visibility.change(self.collector, visibility.Change(workspace=visibility.Fields(**{
+            **visibility.DEFAULTS, **values, "invisible": False, "show_peer_typing": True, "record_peer_typing": True})),
+            operator="sealed panel")
 
     def require_secret(self):
         if not self.secret_mode or self.phase != "collecting":
@@ -855,10 +888,27 @@ def create_app(root, output, config, client_factory=WitnessClient):
                 raise ValueError("random_ids")
             return values
 
+    class SecretRead(StrictBody):
+        trigger: Literal["manual", "on_open"] = "manual"
+        shown_seconds: int | None = Field(default=None, ge=0, le=3600)
+
     # Visible to the other side, and only as chosen for this capture: each request and its outcome is journaled.
     @app.post("/api/secret/{chat_id}/read")
-    async def secret_read(chat_id: int):
-        return await secret_call("mark_read", chat_id, "manual", "sealed panel")
+    async def secret_read(chat_id: int, body: SecretRead | None = None):
+        body = body or SecretRead()
+        cause = {"shown_in_panel_seconds": body.shown_seconds} if body.trigger == "on_open" and body.shown_seconds is not None             else None
+        return await secret_call("mark_read", chat_id, body.trigger, "sealed panel", cause)
+
+    @app.post("/api/secret/visibility")
+    async def secret_visibility(body: SecretVisibility):
+        session = app.state.session
+        async with session.lock:
+            try:
+                session.require_secret()
+                session.apply_visibility(body)
+            except Exception as exc:
+                raise HTTPException(400, describe(exc)) from None
+            return {"secret": session.secret_status()}
 
     @app.post("/api/secret/{chat_id}/opened")
     async def secret_opened(chat_id: int, body: SecretOpened):

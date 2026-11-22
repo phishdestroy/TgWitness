@@ -10816,5 +10816,8 @@
   "Shown as {label} in the charts": "Jadvalda {label} deb ko'rsatilgan",
   "likely absent {n}": "ehtimol yo'q {n}",
   "Absent numbers in channels and supergroups": "Kanal va superguruhlardagi yo'qolgan raqamlar",
-  "Absent numbers in the shared account numbering": "Ushbu hisob raqamlash tizimidagi yo'qolgan raqamlar"
+  "Absent numbers in the shared account numbering": "Ushbu hisob raqamlash tizimidagi yo'qolgan raqamlar",
+  "read by the other side · {time}": "boshqa tomon tomonidan o'qildi · {time}",
+  "opened by the other side · {time}": "boshqa tomon tomonidan ochildi · {time}",
+  "The other side was typing": "Qarshi tomon yozmoqda edi"
 }

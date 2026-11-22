@@ -10765,5 +10765,8 @@
   "Shown as {label} in the charts": "차트에서는 {label}로 표시됨",
   "likely absent {n}": "누락 가능성이 높은 {n}",
   "Absent numbers in channels and supergroups": "채널 및 슈퍼그룹의 누락된 번호",
-  "Absent numbers in the shared account numbering": "공유 계정 번호 체계에서 누락된 번호"
+  "Absent numbers in the shared account numbering": "공유 계정 번호 체계에서 누락된 번호",
+  "read by the other side · {time}": "상대방이 읽음 · {time}",
+  "opened by the other side · {time}": "상대방이 열었습니다 · {time}",
+  "The other side was typing": "상대방이 글을 입력 중이었다"
 }
