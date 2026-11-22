@@ -1248,7 +1248,8 @@ class AccountExport:
                         raise ValueError("An attachment changed while packaging.")
                 selected = [c for c in self.inventory["chats"] if c["selected"]]
                 states = self.chat_states(chat_counts)
-                gap_scan, activity = MessageGaps(gap_scope(job["options"], self.inventory)), activity_maps.ActivityMap()
+                finished = {name for name, page in self.progress.items() if page["terminal"] and page["outcome"] == "ok"}
+                gap_scan, activity = MessageGaps(gap_scope(job["options"], self.inventory, finished)), activity_maps.ActivityMap()
                 for chat in selected:
                     for data_file in message_pages.get(chat["id"], ()):
                         with (directory / data_file).open("rb") as stream:

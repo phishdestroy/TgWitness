@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Message-number gap check: a missing number that two chats claim through replies is no longer assigned to either, a fully proven gap spanning several chats names none as top, a proven gap cannot be downgraded through the borderline allowance, and the scope says when a shared-history page was not finished or only own messages were read. Exports made before still verify.
 - GitHub Actions capture: on phones the cover page shows each exported chat as a card with a label next to each value. Chat names and run times keep their order in right-to-left languages, and durations under a minute are shown in the page language. While a chat's own archive is being packaged, the panel shows this step and the remaining time.
 - Backup: the backup folder appears only after the copy is complete, so running out of disk space or pressing Ctrl+C leaves nothing to clean up. A new command checks a backup against its manifest: `tgwitness verify-backup FOLDER`.
 - Avatars without a photo in reports and Telegram views show the same initials as in the panel, including usernames, names of the form User 12345 and names made only of digits.
