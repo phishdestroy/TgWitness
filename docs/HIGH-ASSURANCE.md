@@ -355,8 +355,12 @@ not on the server, and the collector's statements cannot be forged that way beca
 signs a fresh challenge. With `--quick-tunnel` the second secret is the address key instead:
 whoever reads it can post a false address that the panel would accept.
 
-The collector's public statement leaves out the server's address and the sources of logins;
-both stay in the signed journal.
+The collector's public statement leaves out the server's address, the sources of logins, the
+text of the user data, the ntfy.sh topic that receives the quick tunnel's address and the
+Gateway DoH subdomain. The address and the sources of logins stay in the signed journal; the
+statement gives only the SHA-256 hashes of the user data. The collector prepares statements
+for a fresh challenge one at a time and answers HTTP 429 while four such requests are already
+waiting.
 
 ## Debug deployment and lock
 

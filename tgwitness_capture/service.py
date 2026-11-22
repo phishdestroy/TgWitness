@@ -372,6 +372,13 @@ def create_app(root, config=None):
                 return JSONResponse({"detail": "Cross-origin control is disabled"}, status_code=403)
             if request.headers.get("content-length", "0").isdigit() and int(request.headers.get("content-length", "0")) > 16384:
                 return JSONResponse({"detail": "Request too large"}, status_code=413)
+            total, chunks = 0, []
+            async for chunk in request.stream():
+                total += len(chunk)
+                if total > 16384:
+                    return JSONResponse({"detail": "Request too large"}, status_code=413)
+                chunks.append(chunk)
+            request._body = b"".join(chunks)
         response = await call_next(request)
         response.headers.update({"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff",
                                  "X-Frame-Options": "DENY", "Referrer-Policy": "no-referrer"})

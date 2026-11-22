@@ -230,7 +230,7 @@ class LifecycleOperations:
             app.state.storage = Storage(store, vault, collector.outside_route)
             from ..capture_connections import CaptureConnections
 
-            app.state.capture = CaptureConnections(store, vault)
+            app.state.capture = CaptureConnections(store, vault, collector.outside_route)
             app.state.operator_bot = OperatorBot(app.state)
             if not store.get_setting("demo", False):
                 storage_task = asyncio.create_task(app.state.storage.loop())

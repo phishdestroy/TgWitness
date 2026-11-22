@@ -306,7 +306,7 @@ async def set_alerts(
                 422,
                 "Apprise does not recognise one of the destination addresses. Check it against the Apprise wiki.",
             )
-    if any((alerts.own_socket(u) for u in urls if u not in saved)) and (
+    if any((alerts.admin_only(u) for u in urls if u not in saved)) and (
         not (request.state.principal.admin or netclient.private_allowed())
     ):
         raise HTTPException(
@@ -459,15 +459,32 @@ async def assurance_statement(challenge: str = "", *, ctx=Depends(current_contex
         cached = getattr(ctx.app.state, "assurance_cache", None)
         if cached is not None and time.monotonic() - cached[0] < 10:
             return cached[1]
-    statement = await asyncio.to_thread(
-        assurance.statement,
-        ctx.app.state.vault,
-        ctx.app.state.run_receipt,
-        ctx.app.state.run_event_seq,
-        ctx.app.state.assurance["mode"],
-        ctx.app.state.assurance["provider"],
-        challenge or None,
-    )
+    gate = getattr(ctx.app.state, "assurance_gate", None)
+    if gate is None:
+        gate = ctx.app.state.assurance_gate = {"lock": asyncio.Lock(), "waiting": 0}
+    if challenge and gate["waiting"] >= assurance.CHALLENGE_QUEUE:
+        raise HTTPException(
+            429,
+            "Too many requests. Wait before trying again.",
+            headers={"Retry-After": "5", "Cache-Control": "no-store"},
+        )
+    gate["waiting"] += bool(challenge)
+    try:
+        async with gate["lock"]:
+            cached = getattr(ctx.app.state, "assurance_cache", None)
+            if not challenge and cached is not None and time.monotonic() - cached[0] < 10:
+                return cached[1]
+            statement = await asyncio.to_thread(
+                assurance.statement,
+                ctx.app.state.vault,
+                ctx.app.state.run_receipt,
+                ctx.app.state.run_event_seq,
+                ctx.app.state.assurance["mode"],
+                ctx.app.state.assurance["provider"],
+                challenge or None,
+            )
+    finally:
+        gate["waiting"] -= bool(challenge)
     if not challenge:
         ctx.app.state.assurance_cache = (time.monotonic(), statement)
     return statement

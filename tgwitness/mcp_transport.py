@@ -33,28 +33,41 @@ def remember_panel_origin(app, request):
     app.state.archive_mcp_origins = origins
 
 
+def panel_origins(request, registered=()):
+    server, port = request.scope.get("server") or ("127.0.0.1", 8787)
+    hosts = set()
+    if server not in ("0.0.0.0", "::"):
+        hosts.add(server.lower())
+    hosts.update(("127.0.0.1", "localhost", "::1"))
+    authorities = {("[" + host + "]" if ":" in host else host) +
+                   (":" + str(port) if port not in (80, 443) else "") for host in hosts}
+    origins = {request.scope.get("scheme", "http") + "://" + host for host in authorities}
+    for origin in registered:
+        authorities.add(urlsplit(origin).netloc)
+        origins.add(origin)
+    public = os.environ.get("TGWITNESS_PUBLIC_URL", "").strip()
+    if public:
+        parsed = urlsplit(public)
+        if parsed.scheme == "https" and parsed.hostname and not (parsed.username or parsed.password or parsed.query or parsed.fragment):
+            authorities.add(parsed.netloc.lower())
+            origins.add("https://" + parsed.netloc.lower())
+    return authorities, origins
+
+
 def trusted_request(request, registered=()):
     try:
-        server, port = request.scope.get("server") or ("127.0.0.1", 8787)
-        hosts = set()
-        if server not in ("0.0.0.0", "::"):
-            hosts.add(server.lower())
-        hosts.update(("127.0.0.1", "localhost", "::1"))
-        authorities = {("[" + host + "]" if ":" in host else host) +
-                       (":" + str(port) if port not in (80, 443) else "") for host in hosts}
-        origins = {request.scope.get("scheme", "http") + "://" + host for host in authorities}
-        for origin in registered:
-            authorities.add(urlsplit(origin).netloc)
-            origins.add(origin)
-        public = os.environ.get("TGWITNESS_PUBLIC_URL", "").strip()
-        if public:
-            parsed = urlsplit(public)
-            if parsed.scheme == "https" and parsed.hostname and not (parsed.username or parsed.password or parsed.query or parsed.fragment):
-                authorities.add(parsed.netloc.lower())
-                origins.add("https://" + parsed.netloc.lower())
+        authorities, origins = panel_origins(request, registered)
         host = request.headers.get("host", "").lower()
         origin = request.headers.get("origin")
         return host in authorities and (not origin or origin.lower() in origins)
+    except ValueError:
+        return False
+
+
+def panel_address(request, url, registered=()):
+    try:
+        parsed = urlsplit(url)
+        return parsed.scheme in ("http", "https") and parsed.netloc.lower() in panel_origins(request, registered)[0]
     except ValueError:
         return False
 
