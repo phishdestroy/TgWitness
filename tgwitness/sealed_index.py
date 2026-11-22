@@ -174,16 +174,21 @@ def page(facts, events, fingerprint=None, head_hash=None):
 
     chats = facts.get("sealed.chat_export") or []
     if chats:
-        missing = sum((c.get("message_ids") or {}).get("missing") or 0 for c in chats)
+        missing = sum((c.get("message_ids") or {}).get("missing") or 0 for c in chats
+                      if (c.get("message_ids") or {}).get("numbered_per_chat"))
         stats = [f'<div class="stat"><b>{_number(sum(c.get("captured") or 0 for c in chats))}</b><span>Messages saved</span></div>',
                  f'<div class="stat"><b>{sum(1 for c in chats if c.get("complete"))} / {len(chats)}</b>'
                  '<span>Chats complete</span></div>',
-                 f'<div class="stat"><b>{_number(missing)}</b><span>Message IDs absent after recheck</span></div>']
+                 f'<div class="stat"><b>{_number(missing)}</b><span>Message IDs absent after recheck, '
+                 'channels and supergroups</span></div>']
 
     def gaps(c):
         ids = c.get("message_ids")
         if not ids:
             return "—"
+        if not ids.get("numbered_per_chat"):
+            return ('not measured<br><span class="muted">this chat type shares one numbering with every private chat '
+                    'and basic group of the account</span>')
         if not ids.get("missing"):
             return f'none · IDs {_e(ids.get("first_id"))}–{_e(ids.get("last_id"))}'
         largest = ", ".join(f"{_e(low)}–{_e(high)}" for low, high in ids.get("largest_runs") or [])
@@ -199,10 +204,12 @@ def page(facts, events, fingerprint=None, head_hash=None):
         + (f'<code>{_e(c["file"])}</code>' if c.get("file") else "—") + "</td></tr>" for c in chats)
     chat_section = ('<section class="card wide"><h2>Chat exports</h2><table class="list"><tr class="head"><td>Chat</td>'
                     '<td>Result</td><td>Messages</td><td>Absent message IDs</td><td>File</td></tr>'
-                    f'{chat_rows}</table><p class="muted">This column counts message IDs that Telegram did not return '
-                    'for this account, after each one was requested again individually. The archive records the '
-                    'absence; a deleted message, a message hidden from this account and an unused number all appear '
-                    'the same way here.</p></section>') if chats else ""
+                    f'{chat_rows}</table><p class="muted">Channels and supergroups number their messages 1, 2, 3… inside '
+                    'each chat, so this column counts the numbers between the first and last message that Telegram did '
+                    'not return for this account, after each one was requested again individually. A deleted message '
+                    'and a message hidden from this account appear the same way here. Private chats, bot chats and '
+                    'basic groups draw their numbers from one counter shared by the whole account, so a gap there '
+                    'reflects messages in other chats; for them this column reads "not measured".</p></section>') if chats else ""
     account_entry = ""
     if chats:
         account_entry = ('<li>Extract each <code>chat-export-NNN.zip</code> and open <code>chat.html</code>. '

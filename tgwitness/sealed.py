@@ -528,9 +528,9 @@ def message_id_summary(path):
     except (OSError, KeyError, ValueError, zipfile.BadZipFile):
         return None
     ranges = info.get("missing_ranges") or []
-    return {"first_id": info.get("first_id"), "last_id": info.get("last_id"), "present": info.get("present"),
-            "missing": info.get("missing"), "missing_runs": len(ranges), "largest_runs": sorted(
-                ranges, key=lambda r: r[0] - r[1])[:5]}
+    return {"numbered_per_chat": info.get("numbered_per_chat") is True, "first_id": info.get("first_id"),
+            "last_id": info.get("last_id"), "present": info.get("present"), "missing": info.get("missing"),
+            "missing_runs": len(ranges), "largest_runs": sorted(ranges, key=lambda r: r[0] - r[1])[:5]}
 
 
 def create_app(root, output, config, client_factory=WitnessClient):
