@@ -143,9 +143,10 @@ def message(row, chat_id=None):
 
 
 class DesktopExport:
-    def __init__(self, directory, inventory, receipts, job, coverage, states=None):
+    def __init__(self, directory, inventory, receipts, job, coverage, states=None, avatars=None):
         self.directory, self.inventory, self.receipts, self.job, self.coverage = directory, inventory, receipts, job, coverage
         self.states = states or {}
+        self.avatars = avatars or {}
         self.index = sqlite3.connect("")
         try:
             self.index_messages()

@@ -249,7 +249,7 @@ class AccountExportCheck:
                 if self.options.get("include_archived") is False and chat.get("archived"):
                     raise ValueError("Account export selected an excluded archived chat")
             self.chats[cid] = chat
-        metadata_categories = {"profile", "contacts", "sessions", "profile_photos", "stories", "other_data"}
+        metadata_categories = {"profile", "contacts", "sessions", "profile_photos", "stories", "other_data", "avatars"}
         for task in self.inventory["tasks"]:
             task_id, category = task["id"], task["category"]
             if not isinstance(task_id, str) or not task_id or task_id in self.tasks:
@@ -275,7 +275,7 @@ class AccountExportCheck:
                                if chat["selected"] and not any(t["statement"].get("chat_id") == cid for t in self.tasks.values())]
         category_options = {"profile": "include_profile", "contacts": "include_contacts",
                             "sessions": "include_session_metadata", "profile_photos": "include_profile_photos",
-                            "stories": "include_stories", "other_data": "include_other_data"}
+                            "stories": "include_stories", "other_data": "include_other_data", "avatars": "include_avatars"}
         for category, option in category_options.items():
             present = any(t["statement"]["category"] == category for t in self.tasks.values())
             if self.options.get(option) is True and not present:

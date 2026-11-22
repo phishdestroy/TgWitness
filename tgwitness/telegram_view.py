@@ -68,7 +68,9 @@ def formatted(text, entities):
     return ''.join(parts)
 
 
-def avatar(label):
+def avatar(label, src=None):
+    if src:
+        return '<img class="avatar photo-avatar" src="' + e(src) + '" alt="" loading="lazy">'
     initials = ''.join(part[0] for part in label.split()[:2]) or '?'
     tone = int(hashlib.sha256(label.encode()).hexdigest()[:2], 16) % 6
     return '<span class="avatar tone-' + str(tone) + '" aria-hidden="true">' + e(initials.upper()) + '</span>'
@@ -79,6 +81,12 @@ class View:
         self.export = export
         self.say = Words(export.job['options'].get('report_language', 'en'))
         self.reply_cache = {}
+        self.avatars = getattr(export, 'avatars', None) or {}
+
+    def photo(self, peer_id, prefix):
+        """Relative path of the saved current photo of a chat or person, when the export holds one."""
+        path = self.avatars.get(peer_id) if type(peer_id) is int else None
+        return prefix + path if isinstance(path, str) and MEDIA_PATH.fullmatch(path) else None
 
     def head(self, title, prefix=''):
         say = self.say
@@ -111,7 +119,7 @@ class View:
             count = self.export.index.execute('SELECT COUNT(*) FROM messages WHERE chat=?', (chat['id'],)).fetchone()[0]
             state = self.state(chat)
             yield ('<li><a class="chat-row" href="chats/chat_' + f'{number:03d}' + '/messages.html">'
-                   + avatar(title) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count'
+                   + avatar(title, self.photo(chat['id'], '')) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count'
                    + ('' if state == 'complete' else ' gap') + '">'
                    + e(chat_note({'message_count': count, 'export_state': state}, say))
                    + '</span><span aria-hidden="true">›</span></a></li>').encode()
@@ -192,7 +200,8 @@ class View:
         identifier = str(row['id'])
         service = bool(row.get('action'))
         classes = 'message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
-        parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender),
+        author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
+        parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender, self.photo(author, '../../')),
                  '<div class="bubble"><div class="sender" dir="auto">' + e(sender) + '</div>']
         forward = value.get('forwarded_from')
         if forward:
@@ -223,7 +232,7 @@ class View:
         title = chat.get('title') or str(chat['id'])
         note = state_note({'export_state': self.state(chat)}, self.say)
         yield self.head(title, '../../')
-        yield ('<header class="chat-heading">' + avatar(title) + '<div><h1 dir="auto">' + e(title)
+        yield ('<header class="chat-heading">' + avatar(title, self.photo(chat['id'], '../../')) + '<div><h1 dir="auto">' + e(title)
                + '</h1><p class="muted">Telegram · UTC</p></div></header>' + self.pager(page, pages)
                + ('<p class="chat-note">' + e(note) + '</p>' if note else '')
                + '<section class="conversation" aria-label="' + e(self.say('Messages')) + '">').encode()

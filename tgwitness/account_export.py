@@ -40,7 +40,8 @@ FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_du
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 CATEGORY_OPTIONS = {"profile": "include_profile", "contacts": "include_contacts", "sessions": "include_session_metadata",
-                    "profile_photos": "include_profile_photos", "stories": "include_stories", "other_data": "include_other_data"}
+                    "profile_photos": "include_profile_photos", "stories": "include_stories", "other_data": "include_other_data",
+                    "avatars": "include_avatars"}
 LIMITATIONS = [
     "A snapshot of the data Telegram returned to this account during the recorded acquisition intervals, signed with the collector key in the manifest.",
     "Messages appear in the version Telegram returned at acquisition; live recording keeps earlier versions and deletion notices, and Sources → Pseudo-secret keeps Secret Chats.",
@@ -85,6 +86,8 @@ class AccountExportOptions(BaseModel):
     include_stories: bool = True
     include_session_metadata: bool = True
     include_other_data: bool = True
+    # Current photo of every selected chat and of everyone whose messages were read, saved after all messages.
+    include_avatars: bool = False
 
     @field_validator("report_language")
     @classmethod
@@ -147,11 +150,14 @@ ACCOUNT_DATA_FIRST = ("profile", "contacts", "sessions")
 def reading_order(tasks, chats):
     """The essentials first, so a run that ends early still holds them: profile, contacts and sessions, then private
     chats and bots, other account data, ordinary groups, and supergroups and channels from the smallest (by their
-    newest message ID). Within a rank the dialog list order, most recent first, is kept. Files follow all messages."""
+    newest message ID). Within a rank the dialog list order, most recent first, is kept. Files follow all messages.
+    Photos of chats and people come last: they are taken from the people the history pages named."""
     from .export_budget import read_rank
     kinds = {chat["id"]: chat.get("kind") for chat in chats}
 
     def rank(task):
+        if task["category"] == "avatars":
+            return (9, 0)
         if task["category"] != "messages":
             return (0, 0) if task["category"] in ACCOUNT_DATA_FIRST else (2, 0)
         return read_rank(kinds.get(task["chat_id"]), task.get("newest_message_id") or 0)
@@ -1174,6 +1180,7 @@ class AccountExport:
                 hash_manifests = set()
                 message_pages = {}
                 chat_counts = {}
+                avatars = {}
                 captured_from = captured_until = None
                 for envelope in self.receipts:
                     receipt = envelope["statement"]
@@ -1195,6 +1202,8 @@ class AccountExport:
                             for index, attachment in enumerate(row.get("attachments", [])):
                                 if attachment["outcome"] == "saved":
                                     media.add(attachment["file"])
+                                    if receipt["category"] == "avatars" and type(row.get("peer_id")) is int:
+                                        avatars[row["peer_id"]] = attachment["file"]
                                 if attachment.get("server_hashes"):
                                     body = canonical(attachment["server_hashes"])
                                     name = "hashes/" + sha(body) + ".json"
@@ -1262,7 +1271,8 @@ class AccountExport:
                       "export_state": states.get(chat["id"], "missing")} for chat in selected)))
                 if job["options"].get("export_format", "tgwitness") != "tgwitness":
                     from .telegram_export import DesktopExport
-                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"], states)
+                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"], states,
+                                            avatars)
                     try:
                         if job["options"]["export_format"] in ("telegram_json", "telegram_both"):
                             write("result.json", desktop.json())

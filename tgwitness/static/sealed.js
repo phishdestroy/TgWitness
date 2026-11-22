@@ -599,13 +599,13 @@ function selection() {
     include_profile: $("account-profile").checked, include_contacts: $("account-contacts").checked,
     include_profile_photos: $("account-photos").checked, include_stories: $("account-stories").checked,
     include_session_metadata: $("account-sessions").checked, include_other_data: $("account-other").checked,
+    include_avatars: $("account-avatars").checked,
     // An investigator's own capture: charts name each sender with @username and ID instead of aliases.
     report_presentation: {participant_labels: "names"}};
   const accountMode = !journal;
   if (accountMode) {
     if (!$("total-budget").checkValidity() || !Number.isInteger(options.max_total_gib)) throw new Error(tr("Enter a whole media budget from 1 to 1024 GiB."));
     if (options.to_utc && options.from_utc && options.to_utc <= options.from_utc) throw new Error(tr("The end date must be on or after the start date."));
-    if ($("include-avatars").checked) throw new Error("Participant avatar capture is available in single-chat regular capture. For account export use Account profile photos.");
     return {mode: "account", account_scope: options.chat_ids.length ? "selected" : "all", account_options: options};
   }
   const capture = {download_media: true, media_action: $("media-action").value,
@@ -747,6 +747,8 @@ function forecast(plan) {
     budget = Math.max(0, budget - need);
     result.set(chat.chat_id, {messages: share >= 1 ? "all" : share > 0 ? "part" : "none", share, files: "none"});
   }
+  // Photos of chats and people are read after all messages and before the other files.
+  budget = Math.max(0, budget - (plan.avatar_seconds || 0));
   for (const chat of rows) {
     const item = result.get(chat.chat_id);
     if (chat.unknown || item.messages !== "all") continue;
@@ -843,7 +845,7 @@ $("budget-fit").onclick = () => {
 };
 $("budget-messages").onclick = () => {
   $("media-preset").value = "messages"; applyPreset();
-  for (const id of ["include-avatars", "preserve-ephemeral-media", "account-photos", "account-stories", "account-other"]) $(id).checked = false;
+  for (const id of ["include-avatars", "preserve-ephemeral-media", "account-photos", "account-avatars", "account-stories", "account-other"]) $(id).checked = false;
   clearAssessment(); $("preflight").click();
 };
 $("budget-chats").onclick = () => {$("export-scope").value = "chat"; clearAssessment(); ($("chat-search").hidden ? $("refresh") : $("chat-search")).focus();};

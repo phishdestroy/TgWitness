@@ -12,6 +12,20 @@ HISTORY_SAFETY = 1.25
 # Reading order: account data, private chats and bots, ordinary groups, then supergroups and channels from the
 # smallest; within a rank the dialog list order (most recent first) is kept. Messages of every chat come before files.
 READ_RANKS = {"private": 1, "bot": 1, "group": 3, "supergroup": 4, "channel": 4}
+# Photos of chats and people: one lookup and one small download each, at most AVATAR_LIMIT per export, read after all
+# messages and before the other files.
+AVATAR_LIMIT = 2000
+AVATAR_SECONDS = 2 * PAGE_GAP_SECONDS
+
+
+def avatar_peers(per_chat):
+    """Expected photos: each private chat or bot, each group with roughly one author per 20 messages, and the account."""
+    peers = 1
+    for chat in per_chat:
+        if chat.get("unknown"):
+            continue
+        peers += 1 if chat.get("kind") in ("private", "bot") else 1 + min(500, math.ceil((chat.get("messages") or 0) / 20))
+    return min(AVATAR_LIMIT, peers)
 
 
 def read_rank(kind, messages=0):
@@ -75,16 +89,18 @@ def estimate(sample, options=None):
         download += media
         hashes += ranges
         text_bytes += metadata
-    if any(options.get(key) for key in ("include_profile_photos", "include_stories", "include_other_data", "include_avatars")):
+    if any(options.get(key) for key in ("include_profile_photos", "include_stories", "include_other_data")):
         unknown.append("additional_files")
+    avatar_seconds = math.ceil(AVATAR_SECONDS * avatar_peers(per_chat)) if options.get("include_avatars") else 0
     if options.get("transport") == "takeout" and not options.get("chat_ids"):
         unknown.append("takeout_inventory")
     metadata_seconds = 60 if any(options.get(key) for key in ("include_profile", "include_contacts", "include_session_metadata")) else 0
     return {"complete_inventory": bool(complete), "unknown": sorted(set(unknown)),
             "messages_to_read": messages, "download_bytes": download,
             "output_bytes": download + text_bytes + hashes * 160,
-            "acquisition_seconds": math.ceil(SAFETY_FACTOR * seconds + metadata_seconds),
+            "acquisition_seconds": math.ceil(SAFETY_FACTOR * seconds + metadata_seconds + avatar_seconds),
             "history_seconds": math.ceil(history_seconds), "metadata_seconds": metadata_seconds,
+            "avatar_seconds": avatar_seconds,
             "hash_seconds": math.ceil(hashes / 10),
             # Account exports read in this order; chat exports keep the order the chats were selected in.
             "per_chat": sorted(per_chat, key=lambda c: read_rank(c.get("kind"), c.get("messages")))

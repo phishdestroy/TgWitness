@@ -10,11 +10,21 @@ from telethon.tl import functions as f, types as t
 
 from .scope import kind_of
 from . import file_hashes
+from .export_budget import AVATAR_LIMIT
 
 SECRET_FIELDS = frozenset({"access_hash", "file_reference", "auth_key", "api_hash", "session", "string_session",
                            "token", "password", "secret", "hash", "takeout_id", "future_auth_token"})
 DIRECT_PEER_LIMIT = 20
 DISCOVERY_PROBES = 4
+AVATAR_PAGE = 20
+# Errors that stop or pause the export; any other refusal for one peer is recorded on its photo row.
+AVATAR_STOPS = (errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError, errors.TakeoutInvalidError,
+                errors.UnauthorizedError)
+
+
+def decode_peer(encoded):
+    with BinaryReader(base64.b64decode(encoded, validate=True)) as reader:
+        return reader.tgread_object()
 
 
 def history_messages(result, task, cursor=0):
@@ -179,7 +189,10 @@ class Transport:
             if not ranges:
                 ranges = [None]
         elif self.options["transport"] == "regular":
-            if not self.options["chat_ids"] and {"group", "supergroup", "channel"} & set(self.options["chat_kinds"]):
+            from .account_export import chat_in_scope
+            channels = any(chat_in_scope(self.options, kind, username)
+                           for kind in ("group", "supergroup", "channel") for username in (None, "public"))
+            if not self.options["chat_ids"] and channels:
                 gaps.append("Regular API export cannot enumerate left channels and supergroups.")
             if self.options["include_contacts"]:
                 gaps.append("Regular API contacts include Telegram users, not the complete saved phone contact list.")
@@ -269,7 +282,7 @@ class Transport:
         gaps += ["Selected chat " + str(cid) + " was not returned in the visible inventory." for cid in sorted(missing)]
         for flag, category in (("include_profile", "profile"), ("include_contacts", "contacts"),
                 ("include_session_metadata", "sessions"), ("include_profile_photos", "profile_photos"),
-                ("include_stories", "stories"), ("include_other_data", "other_data")):
+                ("include_stories", "stories"), ("include_other_data", "other_data"), ("include_avatars", "avatars")):
             if self.options[flag]:
                 tasks.append({"id": category, "category": category, "chat_id": None, "cursor_start": 0})
         if self.options["include_contacts"]:
@@ -333,6 +346,8 @@ class Transport:
             messages = history_messages(result, task, cursor)
             rows = [message for message in messages if not isinstance(message, t.MessageEmpty)]
             next_cursor = min((message.id for message in messages), default=cursor)
+            if self.options.get("include_avatars"):
+                self.note_avatars(entities, rows, task["chat_id"])
             output = []
             for message in rows:
                 record = safe(message)
@@ -346,6 +361,8 @@ class Transport:
                               from_id=sender_id, sender=safe(entities.get(sender_id)))
                 output.append((record, attachments(getattr(message, "media", None))))
             return output, next_cursor, not messages
+        if category == "avatars":
+            return await self.avatar_page(cursor)
         if category == "profile":
             value = await self.client(f.users.GetFullUserRequest(t.InputUserSelf()))
             return [({"category": category, "data": safe(value)}, None)], cursor, True
@@ -375,6 +392,85 @@ class Transport:
                 raise ValueError("Additional personal data requires Takeout; regular API was selected.")
             return [({"category": category, "type": "additional_personal_data"}, t.InputTakeoutFileLocation())], cursor, True
         raise ValueError("Unknown export category")
+
+    def note_avatars(self, entities, messages, chat_id):
+        """Remember every user and chat with a photo that a history page named, with how often each one wrote."""
+        known, added = self.secret.setdefault("avatar_peers", {}), False
+        senders, written = {}, {}
+        for message in messages:
+            sender = getattr(message, "sender_id", None)
+            if sender is None and getattr(message, "from_id", None):
+                sender = utils.get_peer_id(message.from_id)
+            if sender is not None:
+                senders.setdefault(sender, message.id)
+                written[sender] = written.get(sender, 0) + 1
+        for peer_id, entity in entities.items():
+            if str(peer_id) in known or not isinstance(getattr(entity, "photo", None), (t.UserProfilePhoto, t.ChatPhoto)):
+                continue
+            if isinstance(entity, t.User) and entity.min:
+                if peer_id not in senders or chat_id not in self.peers:
+                    continue
+                peer = t.InputPeerUserFromMessage(self.peers[chat_id], senders[peer_id], entity.id)
+            else:
+                try:
+                    peer = utils.get_input_peer(entity)
+                except TypeError:
+                    continue
+            known[str(peer_id)] = [base64.b64encode(bytes(peer)).decode("ascii"), 0]
+            added = True
+        for sender, count in written.items():
+            if str(sender) in known:
+                known[str(sender)][1] += count
+        if added:
+            self.save()
+
+    async def current_photo(self, peer, client=None):
+        """The photo a peer shows now: the newest profile photo of a user, the chat photo of a group or channel."""
+        client = client or self.collector.client
+        if isinstance(peer, (t.InputPeerUser, t.InputPeerSelf, t.InputPeerUserFromMessage)):
+            result = await client(f.photos.GetUserPhotosRequest(utils.get_input_user(peer), 0, 0, 1))
+            return next((photo for photo in result.photos if isinstance(photo, t.Photo)), None)
+        if isinstance(peer, t.InputPeerChannel):
+            full = await client(f.channels.GetFullChannelRequest(utils.get_input_channel(peer)))
+        elif isinstance(peer, t.InputPeerChat):
+            full = await client(f.messages.GetFullChatRequest(peer.chat_id))
+        else:
+            return None
+        photo = getattr(full.full_chat, "chat_photo", None)
+        return photo if isinstance(photo, t.Photo) else None
+
+    async def avatar_page(self, cursor):
+        """Photos of the selected chats first, then of the people who wrote most; one row per peer, cursor = position."""
+        known = self.secret.get("avatar_peers", {})
+        order = self.secret.get("avatar_order")
+        if order is None:
+            chats = [str(cid) for cid in self.peers if str(cid) in known]
+            first = set(chats)
+            rest = sorted((key for key in known if key not in first), key=lambda key: (-known[key][1], int(key)))
+            order = chats + rest
+            self.secret["avatar_order"], self.secret["avatar_skipped"] = order[:AVATAR_LIMIT], max(0, len(order) - AVATAR_LIMIT)
+            self.save()
+            order = self.secret["avatar_order"]
+        rows = []
+        for key in order[cursor:cursor + AVATAR_PAGE]:
+            row = {"category": "avatars", "id": int(key), "peer_id": int(key), "messages_read": known[key][1]}
+            try:
+                photo = await self.current_photo(decode_peer(known[key][0]))
+            except AVATAR_STOPS:
+                raise
+            except errors.RPCError as exc:
+                rows.append(({**row, "photo": None, "unavailable": getattr(exc, "message", None) or type(exc).__name__}, None))
+                continue
+            if photo is None:
+                rows.append(({**row, "photo": None}, None))
+                continue
+            rows.append(({**row, "photo_id": photo.id, "set_at": safe(photo.date), "data": safe(photo)}, photo))
+        after = min(len(order), cursor + AVATAR_PAGE)
+        terminal = after >= len(order)
+        if terminal and self.secret.get("avatar_skipped"):
+            rows.append(({"category": "avatars", "type": "limit", "limit": AVATAR_LIMIT,
+                          "not_saved": self.secret["avatar_skipped"]}, None))
+        return rows, after, terminal
 
     async def extra_media(self, row, task):
         if row["category"] != "messages" or "sticker" not in self.options["media_types"]:
@@ -461,6 +557,8 @@ class Transport:
             result = await client(f.stories.GetStoriesByIDRequest(t.InputPeerSelf(), [message_id]))
             source = next((s for s in result.stories if s.id == message_id), None)
             refreshed = getattr(source, "media", None)
+        elif category == "avatars" and message_id and str(message_id) in self.secret.get("avatar_peers", {}):
+            refreshed = await self.current_photo(decode_peer(self.secret["avatar_peers"][str(message_id)][0]), client)
         elif category == "profile_photos" and message_id:
             result = await client(f.photos.GetUserPhotosRequest(t.InputUserSelf(), 0, message_id + 1, 1))
             refreshed = next((p for p in result.photos if p.id == message_id), None)
