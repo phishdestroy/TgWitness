@@ -104,3 +104,14 @@ details.advanced > summary { cursor:pointer; font-weight:600; }
 .secret-bubble small { display:block; margin-top:4px; color:var(--muted); font-size:11.5px; }
 .secret-actions { display:flex; gap:8px; align-items:center; padding:10px 14px; border-top:1px solid var(--border); }
 .secret-actions input { flex:1 1 auto; margin:0; }
+.plan-summary { margin:12px 0 6px; }
+.plan-verdict { font-weight:600; margin:0 0 8px; }
+.plan-verdict.estimated_fit { color:var(--success); }
+.plan-verdict.over_budget, .plan-verdict.no_collection_time { color:var(--danger); }
+.plan-verdict.unknown { color:var(--warning); }
+.plan-tiles { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; }
+.plan-tiles > div { border:1px solid var(--border); border-radius:var(--radius); padding:10px 12px; background:var(--surface); }
+.plan-tiles strong { display:block; font-size:20px; }
+.plan-tiles span { color:var(--muted); font-size:12.5px; }
+.budget-table tr.total td { font-weight:600; border-top:2px solid var(--border); }
+@media (max-width:720px) { .plan-tiles { grid-template-columns:1fr 1fr; } }

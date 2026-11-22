@@ -350,7 +350,7 @@ function clearAssessment() {
   assessedSelection = null; assessmentResult = null; $("save-selection").disabled = true;
   $("preflight-result").textContent = ""; $("preflight-details").hidden = true;
   $("preflight-budget").textContent = ""; $("budget-actions").hidden = true;
-  $("budget-plan").hidden = true; $("budget-fit").hidden = true;
+  $("budget-plan").hidden = true; $("budget-fit").hidden = true; $("plan-summary").hidden = true;
   for (const name of ["private_groups", "public_groups"]) {
     $("own-" + name).disabled = !$("cat-" + name).checked;
     if ($("own-" + name).disabled) $("own-" + name).checked = false;
@@ -403,13 +403,9 @@ bind("preflight", async () => {
   $("collect").disabled = !result.can_start;
 });
 function renderAssessment(result) {
-  const sample = result.sample || {}, format = bytes => bytes >= 1048576 ? (bytes / 1048576).toFixed(2) + " MiB" :
-    bytes >= 1024 ? (bytes / 1024).toFixed(1) + " KiB" : (bytes || 0) + " B";
-  $("preflight-result").textContent = (result.can_start ? tr("Settings accepted.") : tr("Cannot start with these resources.")) + " " + tr(
-    "Sample: {messages} messages, file downloads {downloads}, estimated unique hash data {hashes}. {minutes} session minutes remain.",
-    {messages: sample.messages_examined || 0, downloads: format(sample.known_download_bytes),
-      hashes: format(sample.hash_manifest_estimate_bytes), minutes: Math.ceil(result.remaining_seconds / 60)}) + " " +
-    (result.issues || []).map(issue => tr(issue.message)).join(" ");
+  const format = humanBytes;
+  $("preflight-result").textContent = (result.can_start ? tr("Settings accepted.") : tr("Cannot start with these resources.")) +
+    ((result.issues || []).length ? " " + result.issues.map(issue => tr(issue.message)).join(" ") : "");
   const plan = result.time_plan;
   if (!plan) return;
   const minutes = seconds => Math.ceil(seconds / 60), states = {
@@ -417,16 +413,38 @@ function renderAssessment(result) {
     over_budget: tr("The selected volume exceeds the available time."),
     no_collection_time: tr("Only archive preparation time remains."),
     unknown: tr("Not all selected data could be measured.")};
-  $("preflight-budget").textContent = (states[plan.fit] || "") + " " + tr(
-    "{messages} history messages counted. Estimated work: {work} min, archive preparation: {sealing} min, available: {available} min. Download assumption: 1 MiB/s with a 2× time margin.",
-    {messages: plan.messages_to_read, work: minutes(plan.acquisition_seconds), sealing: minutes(plan.sealing_reserve_seconds),
-      available: minutes(plan.remaining_seconds)}) +
+  renderSummary(plan, states[plan.fit] || "");
+  $("preflight-budget").textContent = tr("Download assumption: 1 MiB/s with a 2× time margin.") +
     (plan.approval === "not_requested" ? " " + tr("Takeout approval time will be added when Telegram reports it.") : "") +
     (plan.files_exceed_budget ? " " + tr("Estimated files also exceed the selected download budget.") : "");
   $("budget-actions").hidden = !plan.suggestions.length;
   $("budget-messages").hidden = !plan.suggestions.includes("messages_only");
   $("budget-chats").hidden = !plan.suggestions.includes("fewer_chats") || $("export-mode").value === "journal";
   renderPlan(plan, format);
+}
+function humanBytes(bytes) {
+  const value = Number(bytes) || 0, units = ["B", "KiB", "MiB", "GiB", "TiB"];
+  let size = value, unit = 0;
+  const digitsFor = value => unit === 0 || value >= 10 ? 0 : 1;
+  const rounded = value => Math.round(value * 10 ** digitsFor(value)) / 10 ** digitsFor(value);
+  while (rounded(size) >= 1024 && unit < units.length - 1) {size /= 1024; unit++;}
+  const digits = digitsFor(size);
+  return size.toLocaleString(lang, {maximumFractionDigits: digits}) + " " + units[unit];
+}
+function renderSummary(plan, verdict) {
+  const box = $("plan-summary"), needed = Math.ceil((plan.acquisition_seconds + plan.sealing_reserve_seconds) / 60);
+  const available = Math.ceil(plan.remaining_seconds / 60);
+  box.replaceChildren();
+  const status = document.createElement("p"); status.className = "plan-verdict " + plan.fit; status.textContent = verdict;
+  const tiles = document.createElement("div"); tiles.className = "plan-tiles";
+  for (const [value, label] of [[tr("{n} min", {n: needed}), tr("Needed, including archive preparation")],
+      [tr("{n} min", {n: available}), tr("Left in this session")],
+      [Number(plan.messages_to_read || 0).toLocaleString(lang), tr("Messages to read")],
+      [humanBytes(plan.download_bytes), tr("Files to download")]]) {
+    const tile = document.createElement("div"), strong = document.createElement("strong"), span = document.createElement("span");
+    strong.textContent = value; span.textContent = label; tile.append(strong, span); tiles.append(tile);
+  }
+  box.append(status, tiles); box.hidden = false;
 }
 function chatName(id) {
   const option = Array.from($("chats").options).find(item => Number(item.value) === id);
@@ -445,6 +463,17 @@ function renderPlan(plan, format) {
     if (plan.fit !== "estimated_fit" && (plan.fits_now || []).includes(chat.chat_id)) row.className = "fits";
     body.append(row);
   }
+  const measured = rows.filter(chat => !chat.unknown);
+  if (rows.length > 1) {
+    const total = document.createElement("tr"); total.className = "total";
+    for (const value of [tr("Total"), measured.reduce((sum, chat) => sum + (chat.messages || 0), 0).toLocaleString(lang),
+        humanBytes(measured.reduce((sum, chat) => sum + (chat.download_bytes || 0), 0)),
+        tr("{n} min", {n: Math.ceil(measured.reduce((sum, chat) => sum + (chat.seconds || 0), 0) / 60)})]) {
+      const cell = document.createElement("td"); cell.textContent = value; total.append(cell);
+    }
+    body.append(total);
+  }
+  $("budget-legend").hidden = !body.querySelector("tr.fits");
   const recommended = plan.recommended_session_minutes;
   $("budget-recommendation").textContent = plan.fit === "estimated_fit" ? tr(
     "Everything selected fits this run.") : recommended ? tr(

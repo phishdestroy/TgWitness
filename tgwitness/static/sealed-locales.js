@@ -232,6 +232,13 @@ window.TGW_SEALED_LOCALES = {
   "Start secret chat": "Начать секретный чат",
   "Waiting for a secret chat. Start one above, or ask the other side to start one with this account.": "Ожидание секретного чата. Создайте его выше или попросите собеседника создать его с помощью этой учетной записи.",
   "Waiting for the other side": "Ожидание ответа от другой стороны",
-  "Waiting for you to accept": "Ждем вашего одобрения"
+  "Waiting for you to accept": "Ждем вашего одобрения",
+  "Download assumption: 1 MiB/s with a 2× time margin.": "Предположение о скорости загрузки: 1 МиБ/с с запасом времени 2×.",
+  "Files to download": "Файлы для скачивания",
+  "Highlighted chats fit together in the time left.": "Выделенные чаты помещаются в оставшееся время.",
+  "Left in this session": "Осталось в этой сессии",
+  "Messages to read": "Сообщения для чтения",
+  "Needed, including archive preparation": "Требуется, включая подготовку архива",
+  "Total": "Всего"
  }
 };
