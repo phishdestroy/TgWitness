@@ -8268,7 +8268,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Pengumpulan data dalam GitHub Actions: pilihan besar tidak lagi menghalang permulaan; pengumpulan berhenti pada had masa dan arkib dipaketkan.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "Dalam 13 bahasa, \"Balas mesej #N\" kini dipaparkan sebagai label, bukan sebagai arahan.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Laporan: tampilan sembang menamakan setiap mesej perkhidmatan, nama alias peserta dan sebab skop jurang diterjemahkan, carta dengan satu baris diabaikan, kad kepercayaan memaparkan tarikh dan cap jari utama dalam bentuk yang mudah dibaca, dan PDF tidak lagi meninggalkan halaman kosong sebelum mereka.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Pengumpulan data dalam GitHub Actions: memuat turun foto sembang dan orang disambung semula selepas jeda FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Pengumpulan data dalam GitHub Actions: memuat turun foto sembang dan orang disambung semula selepas jeda FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "GitHub Actions capture: sembang yang arkib langsungnya tidak dapat dimulakan mengekalkan mesej yang telah dibaca apabila pelaksanaan berhenti, dibungkus sebagai snapshot separa.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Label antara muka yang ditinggalkan dalam bahasa Inggeris di Thai, Uzbek, Hindi dan beberapa bahasa lain telah diterjemahkan."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

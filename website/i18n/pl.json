@@ -8268,7 +8268,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Gromadzenie danych w GitHub Actions: duży wybór nie blokuje już uruchomienia; gromadzenie danych zatrzymuje się po upływie limitu czasu, a archiwum jest pakowane.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "W 13 językach fraza „Odpowiedz na wiadomość nr N” jest teraz wyświetlana jako etykieta, a nie jako polecenie.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Raporty: w widoku czatu nazwy wszystkich wiadomości serwisowych, aliasy uczestników oraz przyczyny braków w zakresie danych są przetłumaczone, wykresy zawierające tylko jeden wiersz zostały pominięte, karty zaufania pokazują daty i odciski kluczy w czytelnej formie, a plik PDF nie zawiera już pustej strony przed nimi.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Gromadzenie danych w GitHub Actions: pobieranie zdjęć z czatów i profili użytkowników zostaje wznowione po przerwie FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Gromadzenie danych w GitHub Actions: pobieranie zdjęć z czatów i profili użytkowników zostaje wznowione po przerwie FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Zrzut z GitHub Actions: czat, którego archiwizacja na żywo nie mogła się rozpocząć, zachowuje wiadomości już przeczytane w momencie zatrzymania uruchomienia, spakowane jako częściowa migawka.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Oznaczenia elementów interfejsu, które w językach tajskim, uzbeckim, hindi i kilku innych pozostały w języku angielskim, zostały przetłumaczone."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",

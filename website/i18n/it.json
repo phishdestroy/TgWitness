@@ -8268,7 +8268,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Raccolta dati in GitHub Actions: una selezione di grandi dimensioni non blocca più l’avvio; la raccolta si interrompe allo scadere del limite di tempo e l’archivio viene compresso.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "In 13 lingue, «Reply to message #N» ora appare come etichetta, non come comando.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Report: nella vista della chat vengono tradotti i nomi di ogni messaggio di servizio, gli alias dei partecipanti e i motivi relativi all’ambito delle lacune; i grafici con una sola riga vengono omessi; le schede di affidabilità mostrano date e impronte digitali delle chiavi in forma leggibile; inoltre, il PDF non presenta più una pagina vuota prima di esse.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Raccolta dati in GitHub Actions: il download delle foto delle chat e dei profili riprende dopo una pausa FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Raccolta dati in GitHub Actions: il download delle foto delle chat e dei profili riprende dopo una pausa FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Screenshot di GitHub Actions: una chat il cui archivio in tempo reale non è riuscito ad avviarsi conserva i messaggi già letti al momento dell'interruzione dell'esecuzione, raggruppati in un'istantanea parziale.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Le etichette dell'interfaccia, che in thailandese, uzbeko, hindi e diverse altre lingue erano rimaste in inglese, sono state tradotte."
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",
