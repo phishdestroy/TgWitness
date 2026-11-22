@@ -12,6 +12,5 @@ authentication dependencies and the existing optional registrations.
 `current_context` reads `request.app.state.api_context`, so profile dispatch uses
 the child's state, locks and scope. It does not use a process-global workspace.
 
-Run `tools/test_api_refactor.py` and `tools/test_api_authorization_matrix.py` in an
-authorized test environment. The route audit includes FastAPI's nested routers;
-checking only top-level `APIRoute` objects can miss included endpoints.
+A route audit has to include FastAPI's nested routers: checking only top-level
+`APIRoute` objects misses included endpoints.

@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Deployment and recovery](../DEPLOYMENT.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Развёртывание и восстановление](DEPLOYMENT.md)
 
 [English](../STORAGE.md) · **Русский**
 
@@ -28,8 +28,7 @@
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Когда диск заполняется](#when-the-disk-is-filling-up)
 - [Подключить место назначения](#connect-a-destination)

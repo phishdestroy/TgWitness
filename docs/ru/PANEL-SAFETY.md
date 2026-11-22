@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Getting started](../QUICKSTART.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Начало работы](QUICKSTART.md)
 
 [English](../PANEL-SAFETY.md) · **Русский**
 
@@ -7,7 +7,7 @@
 <a id="panel-safeguards"></a>
 # Меры безопасности панели
 
-[Документация](../README.md) · [Аккаунты](../ACCOUNTS.md) · [Хранение](../STORAGE.md)
+[Документация](../README.md) · [Аккаунты](ACCOUNTS.md) · [Хранение](STORAGE.md)
 
 Панель дважды проверяет, от имени какой учетной записи вы действуете, анализирует импортированные файлы перед
 входом в систему и отключает действия в чате, пока вы их не включите. Это делается для предотвращения
@@ -15,8 +15,7 @@
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Проверка файла](#file-check)
 - [Контекст учетной записи](#account-context)

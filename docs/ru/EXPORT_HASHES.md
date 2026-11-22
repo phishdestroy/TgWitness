@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Доказательства и проверка](../EVIDENCE.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Доказательства и проверка](EVIDENCE.md)
 
 [English](../EXPORT_HASHES.md) · **Русский**
 
@@ -25,8 +25,7 @@
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Что означают хэши](#what-the-hashes-mean)
 - [Сравнение загруженного файла](#compare-a-downloaded-file)

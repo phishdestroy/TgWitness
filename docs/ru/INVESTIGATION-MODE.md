@@ -13,24 +13,23 @@
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Что фиксирует режим](#what-the-mode-records)
-— [Карточки тем](#subject-cards)
-— [Схемы разговоров](#conversation-plans)
-— [Машинный перевод](#machine-translation)
-— [Списки наблюдения](#watchlists)
-— [Онлайн-наблюдение](#online-watch)
-— [Коды в изображениях](#codes-in-images)
-— [Что показывают клиент и время загрузки](#what-a-client-and-an-upload-time-show)
-— [Прикрытие и полномочия](#cover-and-authority)
-— [Управление учётной записью](#account-control)
-— [Что видит противоположная сторона](#what-the-other-side-sees)
-— [Настройки отчётов](#report-settings)
-— [Запись экрана](#screen-recording)
-— [Документы для суда](#documents-for-court)
-— [Что остаётся за кадром](#what-stays-out)
+- [Карточки тем](#subject-cards)
+- [Схемы разговоров](#conversation-plans)
+- [Машинный перевод](#machine-translation)
+- [Списки наблюдения](#watchlists)
+- [Онлайн-наблюдение](#online-watch)
+- [Коды в изображениях](#codes-in-images)
+- [Что показывают клиент и время загрузки](#what-a-client-and-an-upload-time-show)
+- [Прикрытие и полномочия](#cover-and-authority)
+- [Управление учётной записью](#account-control)
+- [Что видит противоположная сторона](#what-the-other-side-sees)
+- [Настройки отчётов](#report-settings)
+- [Запись экрана](#screen-recording)
+- [Документы для суда](#documents-for-court)
+- [Что остаётся за кадром](#what-stays-out)
 
 </details>
 

@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Independent capture](../OPTIONAL-CAPTURE.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Независимый сбор данных](OPTIONAL-CAPTURE.md)
 
 [English](../TRUSTED-LIVE.md) · **Русский**
 
@@ -13,7 +13,7 @@ Trusted Live — это автономный официальный клиент
 коннектор. Он не запускает коллектор Telethon от TgWitness и не импортирует сессию Telegram.
 
 Валидация включает автоматизированные приемочные тесты и
-[интеграцию CPU Ubuntu и WARP](../VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026).
+[интеграцию CPU Ubuntu и WARP](VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026).
 Сбор данных в режиме реального времени с реальных счетов (нативный экспорт/гибридный сбор) и подтверждение подлинности образа TDX данного регистратора
 остаются отдельными проверками в режиме реального времени.
 
@@ -21,8 +21,7 @@ Trusted Live — это автономный официальный клиент
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Что реализовано](#what-is-implemented)
 - [Что охватывает каждая запись](#what-each-record-covers)
@@ -193,7 +192,7 @@ python -m ruff check .
 усечение по сравнению с сохраненными контрольными точками, сбои провайдеров и реальное кодирование FFmpeg.
 В тесте FFmpeg используется синтетический видеоисточник; в наборе тестов браузера — локальные фикстуры.
 Эти тесты с локальными фикстурами **не** учитывают реальную сессию Telegram/WARP или брандмауэр Linux.
-Позднее [прогонка интеграции CPU Ubuntu и WARP](../VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+Позднее [прогонка интеграции CPU Ubuntu и WARP](VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
 фиксирует фактическую изоляцию маршрута, чтение данных провайдером, запуск официального клиента и проверку видео.
 
 Прием частного контейнера обеспечивает сборку закрепленного образа в Linux.

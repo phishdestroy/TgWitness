@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Investigation](../INVESTIGATION.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Расследование](INVESTIGATION.md)
 
 [English](../SEARCH.md) · **Русский**
 
@@ -7,7 +7,7 @@
 <a id="full-text-search"></a>
 # Поиск по полному тексту
 
-[Анализ архивов](../ANALYSIS.md) · [Локальное распознавание текста и транскрипция](../MEDIA-ANALYSIS.md) · [Вики](../wiki/Archive-and-Integrations.md)
+[Анализ архивов](ANALYSIS.md) · [Локальное распознавание текста и транскрипция](MEDIA-ANALYSIS.md) · [Вики](../wiki/Archive-and-Integrations.md)
 
 **Предварительный просмотр.** В **Журнале** выберите **Наилучшее соответствие · формы слов** рядом с полем поиска.
 Результаты ранжируются по алгоритму BM25 и включают другие формы того же слова:
@@ -20,8 +20,7 @@
 
 <details>
 
-<summary>
-На этой странице</summary>
+<summary>На этой странице</summary>
 
 - [Синтаксис поиска](#search-syntax)
 - [Языки](#languages)

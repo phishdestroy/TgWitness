@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Доказательства и проверка](../EVIDENCE.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Доказательства и проверка](EVIDENCE.md)
 
 ![Доказательства и проверка](../assets/presentation/chapter-evidence.svg)
 
@@ -128,4 +128,4 @@ python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo
 
 SBOM описывает заявленные версии пакетов, а сканирование сверяет эти версии со своей
 базой уязвимостей. Архивы доказательств проверяются отдельно — по
-[процедуре проверки для их режима сбора](../EVIDENCE.md#verification-scope).
+[процедуре проверки для их режима сбора](EVIDENCE.md#verification-scope).

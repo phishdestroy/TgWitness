@@ -7,12 +7,12 @@
 <a id="command-line-for-scripts-and-agents"></a>
 # Командная строка для скриптов и агентов
 
-[MCP только для чтения](../MCP.md) · [Полнотекстовый поиск](../SEARCH.md) · [Вики](../wiki/Archive-and-Integrations.md)
+[MCP только для чтения](MCP.md) · [Полнотекстовый поиск](SEARCH.md) · [Вики](../wiki/Archive-and-Integrations.md)
 
 **Предварительный просмотр.** `tgwitness search`, `context`, `messages`, `stats` и `export` считывают
 сохраненные наблюдения для скриптов и ИИ-агентов. Они не могут отправлять что-либо в
 Telegram, изменять настройки или вносить изменения в подписанный журнал. `tgwitness index` и
-`tgwitness backup` ([ниже ](#index-and-backup)) работают с локальным каталогом данных и
+`tgwitness backup` ([ниже](#index-and-backup)) работают с локальным каталогом данных и
 не требуют токена.
 
 При использовании `--json` в stdout выводится ровно один документ JSON (`export` выводит строки JSON).
@@ -60,7 +60,7 @@ tgwitness search 'перевод карта' --json
 
 | Команда | Результат |
 | --- | --- |
-| `tgwitness search QUERY [--chat ID] [--since] [--until] [--any] [--limit N] [--offset N]` | Сначала отображаются наиболее подходящие результаты: формы слов, точные фразы в кавычках, домены и `@username` ([синтаксис](../SEARCH.md#search-syntax)) |
+| `tgwitness search QUERY [--chat ID] [--since] [--until] [--any] [--limit N] [--offset N]` | Сначала отображаются наиболее подходящие результаты: формы слов, точные фразы в кавычках, домены и `@username` ([синтаксис](SEARCH.md#search-syntax)) |
 | `tgwitness search QUERY --exact [--before SEQ]` | Точный текст, сначала самые новые, без указателя |
 | `tgwitness context CHAT_ID MESSAGE_ID [--limit N] [--before SEQ]` | Сохраненные сообщения в пределах десяти идентификаторов сообщений в обе стороны |
 | `tgwitness messages [--limit N] [--offset N]` | Чаты, которые можно прочитать |

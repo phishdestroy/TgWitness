@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Расследование](../INVESTIGATION.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Расследование](INVESTIGATION.md)
 
 ![Расследование](../assets/presentation/chapter-investigate.svg)
 

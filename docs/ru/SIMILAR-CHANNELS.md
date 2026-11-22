@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Investigation](../INVESTIGATION.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Расследование](INVESTIGATION.md)
 
 [English](../SIMILAR-CHANNELS.md) · **Русский**
 

@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Archive integrations](../CLI.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Интеграция с архивами](CLI.md)
 
 [English](../WEBHOOKS.md) · **Русский**
 
@@ -64,7 +64,7 @@
 <a id="n8n-example"></a>
 ## Пример n8n
 
-Импортируйте [пример рабочего процесса ](../../integrations/n8n-tgwitness.json)
+Импортируйте [пример рабочего процесса](../../integrations/n8n-tgwitness.json)
 . Он находится в неактивном состоянии
 и не содержит секретов или последующих действий. Установите `TGWITNESS_WEBHOOK_SECRET`
 в

@@ -1,8 +1,8 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Project reference](../README.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Справочная документация по проекту](../README.md)
 
 [English](../SERVICE-ICONS.md) · **Русский**
 
-![Ссылка на проект](../assets/presentation/chapter-project.svg)
+![Справочная документация по проекту](../assets/presentation/chapter-project.svg)
 
 <a id="service-icons"></a>
 # Значки сервисов

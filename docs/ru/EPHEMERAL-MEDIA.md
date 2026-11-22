@@ -1,4 +1,4 @@
-[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Collection](../COLLECTION-MODES.md)
+[TgWitness](../../README.md) / [Документация](../README.md) / [Папка](README.md) · [Сбор данных](COLLECTION-MODES.md)
 
 [English](../EPHEMERAL-MEDIA.md) · **Русский**
 
