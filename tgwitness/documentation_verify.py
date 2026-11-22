@@ -3,6 +3,7 @@ import argparse
 import base64
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -89,7 +90,7 @@ def main(argv=None):
     print("Steps %d · notes %d · conclusions %d" % (result["steps"], result["notes"], result["conclusions"]))
     print("Sealed records opened and matched: %d · still sealed: %d" % (len(result["revealed"]), len(result["still_sealed"])))
     if args.reveal:
-        with args.reveal.open("x", encoding="utf-8") as target:
+        with os.fdopen(os.open(args.reveal, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8") as target:
             json.dump(result["revealed"], target, ensure_ascii=False, indent=2)
     return 0
 
