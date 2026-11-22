@@ -20,6 +20,7 @@ COMMANDS_HELP = """commands:
   index, search, context, messages, stats, export
                         Read the saved journal from the command line
   backup FOLDER         Copy the data directory while the panel keeps running
+  verify-backup FOLDER  Check a backup folder against its manifest
 
 Commands from setup to tunnel need a copy installed by install.sh or install.ps1.
 Details: tgwitness COMMAND --help

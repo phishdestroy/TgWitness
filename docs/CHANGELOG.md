@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- `tgwitness backup` publishes the folder only after the copy is complete, so a full disk or Ctrl+C leaves nothing to clean up; `tgwitness verify-backup FOLDER` checks a backup against its manifest.
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
