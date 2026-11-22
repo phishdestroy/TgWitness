@@ -70,7 +70,7 @@ CSS = """
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
 .evidence-conditions td code{display:block;background:none;border:0;padding:0;white-space:normal;line-height:1.6}.evidence-conditions td code+code{margin-top:6px}
 .evidence-conditions td code span{display:inline-block;max-width:100%;overflow-wrap:anywhere}
-.evidence-conditions pre.command{margin:14px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg2,var(--bg))}
+.evidence-conditions pre.command{margin:14px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg2,var(--bg))}.evidence-conditions pre.command span{display:inline-block;max-width:100%;overflow-wrap:anywhere}
 .case-assessment{--state-ok:#1d6b4f;--state-warn:#93570b;--state-bad:#b23b1e;--state-info:var(--accent,#2457c5);--state-off:var(--muted)}
 @media(prefers-color-scheme:dark){html:not([data-theme=light]) .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}}
 html[data-theme=dark] .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}
@@ -389,7 +389,8 @@ def conditions_html(data, say, e):
             + '</p><table><thead><tr><th>' + e(say("Condition")) + '</th><th>' + e(say("What it establishes")) + '</th><th>'
             + e(say("In this archive")) + '</th><th>' + e(say("How the recipient checks it")) + '</th></tr></thead><tbody>' + "".join(rows)
             + '</tbody></table><p class="assessment-review"><strong>' + e(say(data["minimum"])) + '</strong> '
-            + e(say(data["outcome"])) + '</p><pre class="command" dir="ltr">' + e(data["command"]) + '</pre></div>')
+            + e(say(data["outcome"])) + '</p><pre class="command" dir="ltr">' + ' '.join('<span>' + e(token) + '</span>' for token in data["command"].split())
+            + '</pre></div>')
 
 
 def html(data, say):

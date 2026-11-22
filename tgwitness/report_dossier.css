@@ -122,4 +122,5 @@ html[data-template=editorial] .dossier{--dossier-navy:#382c2a;--dossier-gold:#e7
 .dossier section.card :is(.scroll,table)+p.lead{margin:12px 0 0;font-size:13px}
 .dossier .analytics-heading h2{font:550 25px/1.25 Georgia,'Times New Roman',serif;letter-spacing:-.025em;margin:8px 0 12px}
 .dossier .analytics-totals b{font:550 28px/1.2 system-ui,sans-serif;letter-spacing:-.03em}
+code.command>span{display:inline-block;max-width:100%;overflow-wrap:anywhere}code.hash>span{display:inline-block;margin-inline-end:1ch}
 @media(max-width:600px){.heatmap-scroll:has(>.habits-table){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}[dir=rtl] .heatmap-scroll:has(>.habits-table){-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent)}.habits-table{min-width:520px;margin-inline-end:24px}}

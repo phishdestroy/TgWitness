@@ -298,20 +298,29 @@ def scope(policy, say, sharing=False):
     return ''.join(parts)
 
 
+def command_html(text):
+    return '<code class="command" dir="ltr">' + ' '.join('<span>' + e(token) + '</span>' for token in text.split()) + '</code>'
+
+
+def hash_html(value):
+    if isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value):
+        return '<code class="hash" dir="ltr">' + ''.join('<span>' + value[i:i + 4] + '</span>' for i in range(0, 64, 4)) + '</code>'
+    return '<code dir="ltr">' + e(value) + '</code>'
+
+
 def verification(context, say, sharing=False):
     name = context['archive_name']
     parts = ['<section id="verification"><h2>' + e(say('Verification')) + '</h2><p>' +
              e(say('TgWitness signs this archive with the collector key; a change to any file breaks the signature.')) + '</p>',
              '<p>' + e(say('This HTML is protected by the archive manifest. Verify the ZIP; this page alone has no standalone signature.')) + '</p>',
              '<p>' + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + '</p>',
-             '<h3>' + e(say('Signing key fingerprint (SHA-256)')) + '</h3><p><code dir="ltr">' + e(context.get('fingerprint')) + '</code></p>',
+             '<h3>' + e(say('Signing key fingerprint (SHA-256)')) + '</h3><p>' + hash_html(context.get('fingerprint')) + '</p>',
              '<p>' + e(say('Run the verifier from an independently trusted installation.')) + ' ' +
              e(say(RECEIVED_WHERE, name=name)) + ' ' + e(say(RECEIVED_RENAMED)) + '</p>' +
-             '<code class="command">python verify.py ../' + e(name) + ' --fingerprint TRUSTED_SHA256</code>']
+             command_html('python verify.py ../' + name + ' --fingerprint TRUSTED_SHA256')]
     if sharing:
         parts += ['<p>' + e(say('Optional source comparison checks the archive reference, not the correctness of filtering or redaction.')) + '</p>',
-                  '<code class="command">python verify.py ../' + e(name) +
-                  ' --fingerprint TRUSTED_SHA256 --evidence ../' + e(context['source_archive_name']) + '</code>',
+                  command_html('python verify.py ../' + name + ' --fingerprint TRUSTED_SHA256 --evidence ../' + context['source_archive_name']),
                   '<p>' + e(say('Source archive SHA-256')) + ': <code dir="ltr">' + e(context.get('source_archive_sha256')) + '</code></p>']
     parts.append('</section><section><h2>' + e(say('Reading this record')) + '</h2><ul>')
     for limitation in context.get('limitations', ()):
