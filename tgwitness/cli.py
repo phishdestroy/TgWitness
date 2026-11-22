@@ -614,7 +614,8 @@ def verify_backup(args):
     manifest = {}
     try:
         manifest = json.loads((folder / "backup-manifest.json").read_text(encoding="utf-8"))
-        if manifest.get("format") != "tgwitness-backup-v1" or not isinstance(manifest.get("files"), list):
+        if (not isinstance(manifest, dict) or manifest.get("format") != "tgwitness-backup-v1"
+                or not isinstance(manifest.get("files"), list)):
             raise ValueError
     except (OSError, ValueError):
         problems.append("backup-manifest.json is missing or unreadable")
