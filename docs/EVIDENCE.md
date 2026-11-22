@@ -288,7 +288,11 @@ report is sealed with the workspace's Ed25519 key and can be verified separately
   number is the Ed25519 key fingerprint. The Ed25519 seal travels inside the CMS as the
   unsigned attribute `2.25.240684792623320047764573196045913242332` and names the
   certificate's SHA-256 with `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the
-  certificate. The certificate is not qualified: a PDF reader shows the signature as valid and
+  certificate. The signature value lies outside `/ByteRange`, so `verify.py` accepts the CMS only
+  in the form TgWitness writes it: one certificate, one signer that names it, detached content,
+  no repeated attribute, no unsigned attribute other than the seal and the signature time stamp
+  (whose imprint and TSA signature it checks), and only zero padding after the CMS. The
+  certificate is not qualified: a PDF reader shows the signature as valid and
   the signer as unknown or untrusted until the certificate is trusted; compare the Ed25519
   fingerprint instead. Chinese, Japanese and Korean PDFs need a font
   on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports

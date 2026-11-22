@@ -733,13 +733,24 @@ def timestamp_revocation(archive, names, base, reply, tsa_ca=None):
             extra += x509.load_pem_x509_certificates(Path(path).read_bytes())
         except (OSError, ValueError):
             pass
-    problems = []
+    try:
+        subject = revocation_subject(reply, extra)
+    except (ValueError, TypeError, IndexError, InvalidSignature, UnsupportedAlgorithm) as exc:
+        return {"status": "failed", "error": str(exc), "detail": "revocation check failed: " + str(exc)}
+    states, problems = [], []
     for kind in found:
         try:
-            return revocation_status(kind, read_member(archive, base + "." + kind), revocation_subject(reply, extra))
+            states.append(revocation_status(kind, read_member(archive, base + "." + kind), subject))
         except (ValueError, TypeError, IndexError, InvalidSignature, UnsupportedAlgorithm) as exc:
             problems.append(kind.upper() + ": " + str(exc))
-    return {"status": "failed", "error": "; ".join(problems), "detail": "revocation check failed: " + "; ".join(problems)}
+    revoked = [state for state in states if state["status"] == "revoked"]
+    if revoked:
+        return revoked[0]
+    if problems:
+        return {"status": "invalid", "error": "; ".join(problems),
+                "detail": "revocation data present but not valid for this time stamp: " + "; ".join(problems)}
+    return next((state for state in states if state["status"] == "revoked_after"), None) \
+        or max(states, key=lambda state: state["as_of"])
 
 
 def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None, check_bitcoin=False):
@@ -771,6 +782,9 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 if entry["revocation"]["status"] == "revoked":
                     raise ValueError("The " + service + " timestamp is invalid: its " + entry["revocation"]["detail"]
                                      + ("; reason " + entry["revocation"]["reason"] if entry["revocation"]["reason"] else ""))
+                if entry["revocation"]["status"] == "invalid":
+                    raise ValueError("The revocation data stored with the " + service + " timestamp is not valid for it: "
+                                     + entry["revocation"]["error"])
             elif proof_name.endswith(".ots"):
                 proof = read_member(archive, proof_name)
                 entry.update(kind="opentimestamps", **(confirm_ots(proof, digest) if check_bitcoin else ots_summary(proof, digest)))
@@ -1190,16 +1204,19 @@ def tdx_check(evidence, binding, at, source, binds):
         found = tdx_verify(bytes.fromhex(evidence["quote"]), binding, at, evidence.get("collateral"))
     except (ValueError, KeyError, TypeError, IndexError, struct.error) as exc:
         return {"status": "fail", "detail": str(exc) or type(exc).__name__}
+    status = "pass"
     if found["tcb"] is None:
-        found["tcb"] = {"status": "not checked", "detail": "TCB status not checked (no collateral in the " + source + ")",
-                        "revocation": "not checked",
-                        **({"collector_error": str(evidence["collateral_error"])[:200]}
-                           if evidence.get("collateral_error") else {})}
-    return {"status": "pass", **found, "binds": binds}
+        status, found["tcb"] = "partial", {
+            "status": "not checked", "detail": "TCB status not checked (no collateral in the " + source + ")",
+            "revocation": "not checked",
+            **({"collector_error": str(evidence["collateral_error"])[:200]} if evidence.get("collateral_error") else {})}
+    return {"status": status, **found, "binds": binds}
 
 
 def tdx_summary(quotes):
-    return {"status": "pass" if all(q["status"] == "pass" for q in quotes) else "fail", "checked": "offline",
+    states = {q["status"] for q in quotes}
+    return {"status": "pass" if states == {"pass"} else "partial" if states <= {"pass", "partial"} else "fail",
+            "checked": "offline",
             "root": "Intel SGX Root CA pinned in this verifier", "root_sha256": INTEL_SGX_ROOT_SHA256,
             "quotes": quotes, "not_checked": TDX_NOT_CHECKED}
 
@@ -1260,7 +1277,7 @@ def tdx_lines(tdx):
     lines = []
     for quote in tdx["quotes"]:
         where = "Intel TDX quote" + (" at record " + str(quote["record"]) if "record" in quote else "")
-        if quote["status"] != "pass":
+        if quote["status"] not in ("pass", "partial"):
             lines.append(where + ": " + quote["status"] + " · " + quote["detail"]
                          + (" (" + quote["error"] + ")" if quote.get("error") else ""))
             continue

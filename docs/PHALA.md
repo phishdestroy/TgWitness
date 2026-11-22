@@ -187,7 +187,10 @@ Without a network, `verify.py` checks each quote's signature, the chain from the
 certificate to Intel's root (pinned in the file), that the quote comes from Intel's production
 quoting enclave, that the machine cannot be debugged or migrated, and that the quote covers the
 start record or the signed statement. With Intel's collateral stored beside the quote, it also
-computes the platform's security level as of the time of the record. Which code ran, the
+computes the platform's security level as of the time of the record. Without the collateral
+(Intel's service did not answer when the quote was taken), the platform's TCB status, Intel's
+revocation lists, the QE Identity and the TDX module are not checked: the quote's status is
+`partial` instead of `pass`, and the condition line says so. Which code ran, the
 provider log and Intel's current rating stay with `python -m tgwitness.cloud verify`, so the
 offline result is marked partial.
 

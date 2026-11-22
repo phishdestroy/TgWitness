@@ -471,7 +471,7 @@ class Console:
         self.heading("Intel TDX")
         for quote in tdx["quotes"]:
             where = self.t("record {n}", n=self.number(quote["record"])) + " · " if "record" in quote else ""
-            if quote["status"] != "pass":
+            if quote["status"] not in ("pass", "partial"):
                 self.check("bad", "Intel TDX quote", where + self.t(quote["detail"])
                            + (" · " + quote["error"] if quote.get("error") else ""))
                 continue
