@@ -8418,7 +8418,8 @@
   "0a4d95470eda2b0f77343c6e2bab1137ededb8dd5626b36f78a7310c3d6a8c20": "<span data-keep>“Suspected Hijacker”</span>类别中连续的42行数据，8月",
   "a9c493228602d51fbe843ed32cb548a4c474ffa06a97c5eb6523c7b7c4f27363": "附件1，第448页→第444页，第50行→第1行，按时间从早到晚排序。 8月份的42行数据块和9月份的1行数据（“账户钓鱼”）构成了<span data-keep>“Suspected Hijacker”</span>类别中的43行。42行独立提交的数据在其余5行8月份数据中形成连续序列的概率为6 / C(47, 5)，约为0.0004%。",
   "c2a525a11a5dcc0f0cd7ecc3b7b975623810158cef73e84a305978cf8d6feb71": "<code>tgwitness backup FOLDER</code>\n会在控制面板持续运行的同时复制数据目录：\n先复制检查点，然后通过在线备份 API 复制 SQLite 文件，接着复制键、媒体和\n配置文件，因此任何被复制的检查点都不会比被复制的日志更新。<code>backup-manifest.json</code>\n列出了每个文件的 SHA-256 值以及日志头。 要恢复，请停止 TgWitness 并用该文件夹替换\n整个数据目录。下次启动时会记录日志是从较旧的副本\n恢复的。该记录会将日志与保存在\n<code>TGWITNESS_STATE_DIR</code>\n（位于数据目录之外的文件夹）中的日志头进行比较：即\nCompose 中的 <code>tgwitness-state</code>\n卷、systemd 单元中的 <code>/var/lib/tgwitness-state</code>\n，以及其他情况下的用户本地状态文件夹\n中。日志头按数据目录路径分别保存：若恢复到其他路径或另一台计算机上，系统将无法检测到，因此请在您的记录中注明此次恢复操作。若没有可写入的状态文件夹，系统将无法检测到恢复操作，日志会记录一次相关提示。",
-  "aa23e5cbed2b67543530a3865c552b23fd1f2e2fa037bac7a2779d5af3c1177c": "<code>tgwitness verify-backup</code> 在遇到不是 JSON 对象的备份清单时，会将其报告为“无法读取”，而不是直接因错误而停止。"
+  "aa23e5cbed2b67543530a3865c552b23fd1f2e2fa037bac7a2779d5af3c1177c": "<code>tgwitness verify-backup</code> 在遇到不是 JSON 对象的备份清单时，会将其报告为“无法读取”，而不是直接因错误而停止。",
+  "ce09337f5133d0e895055c1abd2b8fcacd23c03dbe3cc5801123a4e47b66a186": "<code>tgwitness backup</code>会省略还原文件夹中随附的<code>backup-manifest.json</code>文件，因此对已还原的数据目录进行备份时，验证会通过。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

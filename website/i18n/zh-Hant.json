@@ -8366,7 +8366,8 @@
   "0a4d95470eda2b0f77343c6e2bab1137ededb8dd5626b36f78a7310c3d6a8c20": "<span data-keep>“Suspected Hijacker”</span>類別中連續的42行資料，8月",
   "a9c493228602d51fbe843ed32cb548a4c474ffa06a97c5eb6523c7b7c4f27363": "附件 1，第 448 頁 → 第 444 頁，第 50 行 → 第 1 行，由舊至新。 這 42 行 8 月的資料區塊以及 1 行 9 月的資料（「帳戶釣魚」），共構成 <span data-keep>“Suspected Hijacker”</span>類別中的 43 行。42 行獨立提交的資料行，在其他 5 行 8 月資料行中形成一連串不中斷序列的機率為 6 / C(47, 5)，約為 0.0004%。",
   "c2a525a11a5dcc0f0cd7ecc3b7b975623810158cef73e84a305978cf8d6feb71": "<code>tgwitness backup FOLDER</code>\n會在控制面板持續運作的同時複製資料目錄：\n首先複製檢查點，接著透過線上備份 API 複製 SQLite 檔案，然後是金鑰、媒體和\n設定檔，因此任何複製的檢查點都不會比複製的日誌更新。<code>backup-manifest.json</code>\n列出了每個檔案的 SHA-256 值以及日誌頭。 若要還原，請停止 TgWitness 並將\n整個資料目錄替換為該資料夾。下次啟動時，系統會記錄日誌是從\n較舊的副本還原而來。該記錄會將日誌與儲存於\n<code>TGWITNESS_STATE_DIR</code>\n（位於資料目錄外的資料夾）中的日誌頭進行比對：若在\nCompose 中的 <code>tgwitness-state</code>\n卷、systemd 單元中的 <code>/var/lib/tgwitness-state</code>\n，以及其他情況下的使用者本機狀態資料夾\n。日誌頭是按資料目錄路徑分別儲存的：若還原至其他路徑或另一台電腦，系統將無法偵測到此情況，因此請在您的記錄中註明此還原操作。若無可寫入的狀態資料夾，系統將無法偵測到還原操作，且日誌會記錄此情況一次。",
-  "aa23e5cbed2b67543530a3865c552b23fd1f2e2fa037bac7a2779d5af3c1177c": "<code>tgwitness verify-backup</code> 會將非 JSON 物件的備份清單報告為「無法讀取」，而非直接因錯誤而中止執行。"
+  "aa23e5cbed2b67543530a3865c552b23fd1f2e2fa037bac7a2779d5af3c1177c": "<code>tgwitness verify-backup</code> 會將非 JSON 物件的備份清單報告為「無法讀取」，而非直接因錯誤而中止執行。",
+  "ce09337f5133d0e895055c1abd2b8fcacd23c03dbe3cc5801123a4e47b66a186": "<code>tgwitness backup</code> 會省略還原資料夾中隨附的 <code>backup-manifest.json</code> 檔案，因此還原後的資料目錄備份仍可通過驗證。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
