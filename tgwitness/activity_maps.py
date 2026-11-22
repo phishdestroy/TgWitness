@@ -224,9 +224,10 @@ def loss_level(value, peak):
     return 1 + min(3, int(value / peak * 3.999))
 
 
-def legend(say, loss=True):
-    parts = ['<div class="map-legend"><span><i></i>' + e(say("No messages")) + '</span><span><i data-a="2"></i>'
-             + e(say("Few messages")) + '</span><span><i data-a="4"></i>' + e(say("Many messages")) + '</span>']
+def legend(say, loss=True, intensity=True):
+    parts = ['<div class="map-legend">'] + ([
+        '<span><i></i>' + e(say("No messages")) + '</span><span><i data-a="2"></i>' + e(say("Few messages"))
+        + '</span><span><i data-a="4"></i>' + e(say("Many messages")) + '</span>'] if intensity else [])
     if loss:
         parts.append('<span><i class="loss"></i>' + e(say("Absent message numbers (a larger dot means more)")) + '</span>')
     return ''.join(parts) + '</div>'
@@ -331,7 +332,7 @@ def week(matrix, say, title, loss=False):
             cells.append(cell(0, 1, value, peak, tip) if loss else cell(value, peak, 0, 0, tip))
         rows.append('<tr>' + ''.join(cells) + '</tr>')
     return ('<div class="map-card"><h3>' + e(title) + '</h3>' + note + '<div class="map-scroll"><table class="map-grid map-week">'
-            '<thead>' + head + '</thead><tbody>' + ''.join(rows) + '</tbody></table></div>' + legend(say, loss) + '</div>')
+            '<thead>' + head + '</thead><tbody>' + ''.join(rows) + '</tbody></table></div>' + legend(say, loss, not loss) + '</div>')
 
 
 def lane_rows(groups, absent, origin, step, count, say):
