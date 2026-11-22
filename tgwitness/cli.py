@@ -328,10 +328,21 @@ def when(value):
     return value[:19].replace("T", " ") + " UTC" if isinstance(value, str) else "time unknown"
 
 
-def item_line(item):
+def sender_labels(items):
+    labels = {}
+    for item in items:
+        sender = item.get("sender") or {}
+        label = "@" + sender["username"] if sender.get("username") else sender.get("name")
+        if sender.get("id") and label:
+            labels.setdefault(sender["id"], label)
+    return labels
+
+
+def item_line(item, labels=None):
     source, sender = item["source"], item.get("sender") or {}
     who = ("@" + sender["username"] if sender.get("username") else sender.get("name")
-           or ("sender " + str(sender["id"]) if sender.get("id") else "sender unknown"))
+           or ("sender " + str(sender["id"]) + (" (" + labels[sender["id"]] + ")" if labels and sender["id"] in labels else "")
+               if sender.get("id") else "sender unknown"))
     marks = [mark for flag, mark in ((item.get("deletion_notice"), "deletion notice"),
                                      (item.get("missing_on_recheck"), "missing on recheck"),
                                      (item["kind"] == "message.edited", "edited version"),
@@ -349,8 +360,9 @@ def item_line(item):
 
 def print_items(result, empty="No saved observations match."):
     items = result.get("items", [])
+    labels = sender_labels(items)
     for item in items:
-        print(item_line(item))
+        print(item_line(item, labels))
     if not items:
         print(empty)
     if result.get("next_offset") is not None and result.get("ranked"):
