@@ -8367,7 +8367,8 @@
   "a9c493228602d51fbe843ed32cb548a4c474ffa06a97c5eb6523c7b7c4f27363": "부록 1, 448쪽 → 444쪽, 50행 → 1행, 가장 오래된 것부터 최신 순. 42행으로 구성된 8월 블록과 9월의 한 행(“계정 피싱”)이 <span data-keep>“Suspected Hijacker”</span> 범주에 속한 43행을 구성한다. 42개의 독립적으로 제출된 행이 다른 5개의 8월 행들 사이에서 하나의 끊김 없는 연속을 형성할 확률은 6 / C(47, 5)로, 약 0.0004%이다.",
   "c2a525a11a5dcc0f0cd7ecc3b7b975623810158cef73e84a305978cf8d6feb71": "<code>tgwitness backup FOLDER</code>\n은 패널이 계속 실행되는 동안 데이터 디렉터리를 복사합니다:\n먼저 체크포인트를 복사한 다음, 온라인 백업 API를 통해 SQLite 파일을 복사하고, 그 다음 키, 미디어 및\n프로필을 복사하므로, 복사된 체크포인트 중 어느 것도 복사된 저널보다 최신 버전이 아닙니다. <code>backup-manifest.json</code>\n에는 모든 파일의 SHA-256 해시값과 저널 헤드가 나열되어 있습니다. 복원하려면 TgWitness를 중지하고\n전체 데이터 디렉터리를 해당 폴더로 교체하십시오. 다음 시작 시 저널이 더 오래된 사본에서\n복원되었음을 기록합니다. 이 기록은 저널을 데이터 디렉터리 외부의 폴더인\n<code>TGWITNESS_STATE_DIR</code>\n에 보관된 헤더와 비교합니다:\nCompose의 <code>tgwitness-state</code>\n볼륨, systemd 유닛의 <code>/var/lib/tgwitness-state</code>\n, 그 외의 경우 사용자의 로컬 상태 폴더\n입니다. 헤드는 데이터 디렉터리 경로별로 보관되므로, 다른 경로나 다른 컴퓨터로 복원하는 경우 감지되지 않으므로 복원 내역을 별도로 기록해 두십시오. 쓰기 가능한 상태 폴더가 없으면 복원이 감지되지 않으며, 로그에 한 번 해당 내용이 기록됩니다.",
   "aa23e5cbed2b67543530a3865c552b23fd1f2e2fa037bac7a2779d5af3c1177c": "<code>tgwitness verify-backup</code>는 JSON 객체가 아닌 백업 매니페스트를 오류로 중단하지 않고 읽을 수 없는 것으로 보고합니다.",
-  "ce09337f5133d0e895055c1abd2b8fcacd23c03dbe3cc5801123a4e47b66a186": "<code>tgwitness backup</code>은 복원된 폴더에 포함되어 있던 <code>backup-manifest.json</code> 파일을 제외하기 때문에, 복원된 데이터 디렉터리의 백업은 검증됩니다."
+  "ce09337f5133d0e895055c1abd2b8fcacd23c03dbe3cc5801123a4e47b66a186": "<code>tgwitness backup</code>은 복원된 폴더에 포함되어 있던 <code>backup-manifest.json</code> 파일을 제외하기 때문에, 복원된 데이터 디렉터리의 백업은 검증됩니다.",
+  "e722bc32bb63db4b920641d5d88ceb4c8ea89b1b6173c556944dc49fe43dc120": "<code>tgwitness backup</code>을 마운트된 드라이브나 쓰기 권한이 없는 상위 폴더 내의 폴더 등, 이미 존재하는 빈 폴더에 수행하면, 해당 폴더의 내용을 덮어쓰는 대신 그 자리에 파일을 채워 넣습니다."
  },
  "modes": {
   "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",
