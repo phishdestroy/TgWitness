@@ -1058,7 +1058,285 @@
     showControls(lab);
   }
 
-  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash, steps, compare, chain, seal,
+  function zoom50(lab) {
+    const strip = lab.querySelector('[data-z50-strip]');
+    const text = lab.querySelector('[data-z50-text]');
+    const stamp = lab.querySelector('[data-z50-date]');
+    const HIJACK = 'Suspected Hijacker';
+    const rows = [{row:50, page:448, cls:'is-org', day:'2025-08-■', range:T('on or after 8 Aug'), type:'Cheating (753)', note:T('Other row · pasted Portuguese profile'), quote:'jogado pela última vez a 8 de ago.'}];
+    const lower = [[49, 'Got DM’d with a fake prize'], [48, 'This account is clearly compromised', 'dup'], [47, 'Asking for weird stuff now'],
+      [46, 'Messages sound like a script'], [45, 'Suddenly messaging people weird links probably stolen'],
+      [44, 'My friend said they can’t get into this account anymore'], [43, 'Trying to impersonate support staff'],
+      [42, 'They’re acting like they want to help but they’re baiting people', 'dup']];
+    lower.forEach(([row, quote, dup]) => rows.push({row, page:448, cls:'is-burst', day:'2025-08-■', range:T('8–19 Aug'), type:HIJACK, quote, dup}));
+    rows.push({row:41, page:448, cls:'is-anchor', day:'2025-08-1■', range:T('10–19 Aug'), type:HIJACK, note:T('The date box slipped and left the digit “1” visible'), quote:'It’s acting like a phishing account'});
+    const upper = [[40, 447, 'This account is clearly compromised', 'dup'], [39, 447, 'Might be a bot using someone else’s name'],
+      [38, 447, 'Acting way off pretty sure someone else is using it', '3/3'], [37, 447, 'Could be a hijacked profile'],
+      [36, 447, 'That’s not how they used to type'], [35, 447, 'Real owner probably doesn’t even know'], [34, 447, 'Something definitely wrong here'],
+      [33, 447, 'Spreading sketchy Discord links'], [32, 447, 'Got a weird phishing DM'], [31, 447, 'Too many red flags definitely not the real person'],
+      [30, 447, 'Acting way off pretty sure someone else is using it', '2/3'], [29, 447, 'Might be a bot now used to be real', 'dup'],
+      [28, 446, 'Got a sketchy invite from this account'], [27, 446, 'Profile looks real but the actions don’t'],
+      [26, 446, 'Seems like they lost access completely'], [25, 446, 'My friend can’t log in, says someone changed the password'],
+      [24, 446, 'Name’s the same but energy’s totally off'], [23, 446, 'My friend posted that their account was stolen this is the one'],
+      [22, 446, 'Used to play with this person this ain’t them'], [21, 446, 'Acting way off pretty sure someone else is using it', '1/3'],
+      [20, 446, 'Everyone in voice chat agrees it’s a stolen account'], [19, 446, 'Friend warned me to report this one'],
+      [18, 446, 'This account just started acting shady overnight'], [17, 445, 'This account looks like it got hacked'],
+      [16, 445, 'Friend said they lost their stuff and this account is acting off'], [15, 445, 'They’re impersonating creators for scams'],
+      [14, 445, 'They used to post memes, now it’s crypto spam'], [13, 445, 'Might be a bot now used to be real', 'dup'],
+      [12, 445, 'This account was legit not anymore'], [11, 445, 'That’s a stolen account, for sure'], [10, 445, 'Real person probably got locked out'],
+      [9, 445, 'Friend’s account got hacked this is it'], [8, 445, 'They’re acting like they want to help but they’re baiting people', 'dup']];
+    upper.forEach(([row, page, quote, dup]) => rows.push({row, page, cls:'is-burst', day:'2025-08-■', range:T('on or after 10 Aug'), type:HIJACK, quote, dup}));
+    [[7, 445, 'Offensive Avatar', T('Other row · Chinese text')], [6, 444, 'Cheating (730)', T('Other row'), 'multiple hacks, smurfing.'],
+      [5, 444, 'Offensive Persona Name', T('Other row · Russian text about the profile')], [4, 444, 'Harassment (730)', T('Other row'), 'toxic']]
+      .forEach(([row, page, type, note, quote]) => rows.push({row, page, cls:'is-org', day:'2025-08-■', range:T('late Aug'), type, note, quote}));
+    [[3, HIJACK, T('Other row'), 'This person using bot scams for account fishing'], [2, 'Offensive Avatar', T('Other row · short Cyrillic text')],
+      [1, 'Offensive Avatar', T('Other row · the newest readable row in Anlage 1'), 'p***r']]
+      .forEach(([row, type, note, quote]) => rows.push({row, page:444, cls:'is-sep', day:'2025-09-■', range:T('1–29 Sep'), type, note, quote}));
+    const label = item => T('Row {row} · p. {page}', {row:item.row, page:item.page});
+    const duplicate = item => item.dup === 'dup' ? T('repeated text') : item.dup ? T('repeated text {n}', {n:item.dup}) : '';
+    let active = null;
+    const show = (item, cell) => {
+      if (active) active.classList.remove('is-active');
+      active = cell;
+      cell.classList.add('is-active');
+      const head = document.createElement('strong');
+      head.textContent = label(item) + ' · ' + item.type;
+      const parts = [head];
+      const extra = [item.note, duplicate(item)].filter(Boolean).join(' · ');
+      if (extra) parts.push(document.createTextNode(' · ' + extra));
+      if (item.quote) {
+        const quote = document.createElement('q');
+        quote.lang = 'en';
+        quote.textContent = item.quote;
+        parts.push(document.createTextNode(' · '), quote);
+      }
+      text.replaceChildren(...parts);
+      stamp.textContent = item.day + ' · ' + item.range;
+    };
+    rows.forEach(item => {
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'z50-cell ' + item.cls;
+      cell.setAttribute('role', 'listitem');
+      cell.setAttribute('aria-label', label(item) + ' · ' + item.type + ' · ' + item.day);
+      cell.title = label(item) + ' · ' + item.day + ' · ' + item.type;
+      cell.addEventListener('mouseenter', () => show(item, cell));
+      cell.addEventListener('focus', () => show(item, cell));
+      cell.addEventListener('click', () => show(item, cell));
+      strip.append(cell);
+    });
+    showControls(lab);
+  }
+
+  function lootbox(lab) {
+    const POOL = [
+      {key:'profile', name:'Offensive Profile', count:1148, cls:'t-profile', pct:'57.5%'},
+      {key:'hijack', name:'Suspected Hijacker', count:312, cls:'t-hijack', pct:'15.6%'},
+      {key:'cheat', name:'Cheating', count:290, cls:'t-cheat', pct:'14.5%'},
+      {key:'persona', name:'Offensive Name', count:87, cls:'t-other', pct:'4.4%'},
+      {key:'avatar', name:'Offensive Avatar', count:57, cls:'t-other', pct:'2.9%'},
+      {key:'other', name:'Harassment / Spam', count:101, cls:'t-other', pct:'5.1%'},
+    ];
+    const TOTAL = 1995;
+    const ITEM_STEP = 140;
+    const $ = selector => lab.querySelector(selector);
+    const track = $('[data-lb-track]');
+    const shell = track.parentElement;
+    const tag = $('[data-lb-tag]');
+    const status = $('[data-lb-status]');
+    const spinBtn = $('[data-lb-spin]');
+    const draw50Btn = $('[data-lb-draw50]');
+    const counselBtn = $('[data-lb-counsel]');
+    const nodes = {hijack:$('[data-lb-node="hijack"]'), profile:$('[data-lb-node="profile"]'), odds:$('[data-lb-node="odds"]')};
+    const vals = {hijack:$('[data-lb-val="hijack"]'), profile:$('[data-lb-val="profile"]'), odds:$('[data-lb-val="odds"]')};
+    const notes = {hijack:$('[data-lb-note="hijack"]'), profile:$('[data-lb-note="profile"]'), odds:$('[data-lb-note="odds"]')};
+
+    const logF = new Float64Array(TOTAL + 1);
+    for (let i = 1; i <= TOTAL; i += 1) logF[i] = logF[i - 1] + Math.log(i);
+    const logC = (n, k) => (k < 0 || k > n ? -Infinity : logF[n] - logF[k] - logF[n - k]);
+    const tailP = k => {
+      let sum = 0;
+      const denom = logC(TOTAL, 50);
+      for (let x = k; x <= 50; x += 1) sum += Math.exp(logC(312, x) + logC(TOTAL - 312, 50 - x) - denom);
+      return Math.min(1, sum);
+    };
+    const formatProb = value => {
+      if (value >= 0.01) return (value * 100).toFixed(1) + '%';
+      const [mantissa, exp] = value.toExponential(1).split('e');
+      const sup = {'-':'⁻', '0':'⁰', '1':'¹', '2':'²', '3':'³', '4':'⁴', '5':'⁵', '6':'⁶', '7':'⁷', '8':'⁸', '9':'⁹'};
+      return mantissa + ' × 10' + String(Number(exp)).split('').map(ch => sup[ch] || ch).join('');
+    };
+
+    const pickOne = () => {
+      let r = Math.random() * TOTAL;
+      for (const item of POOL) {
+        if (r < item.count) return item;
+        r -= item.count;
+      }
+      return POOL[0];
+    };
+
+    const buildReel = items => {
+      track.replaceChildren();
+      items.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'lb-reel-item ' + item.cls;
+        const cat = document.createElement('span');
+        cat.className = 'cat';
+        cat.textContent = item.name;
+        const meta = document.createElement('span');
+        meta.className = 'meta';
+        meta.textContent = T('Drop: {pct}', {pct:item.pct});
+        el.append(cat, meta);
+        track.appendChild(el);
+      });
+    };
+
+    const setTone = broken => {
+      lab.dataset.state = broken ? 'error' : 'ok';
+      Object.values(nodes).forEach(node => {
+        node.classList.toggle('is-broken', broken);
+        node.classList.toggle('is-valid', !broken);
+      });
+    };
+
+    let spinning = false;
+    let singleSpins = 0;
+    let draws50 = 0;
+    let best50 = 0;
+    let animFrame = 0;
+
+    const stopSpin = () => {
+      if (animFrame) { cancelAnimationFrame(animFrame); animFrame = 0; }
+      spinning = false;
+      spinBtn.disabled = false;
+      draw50Btn.disabled = false;
+    };
+
+    const animateReel = (fromX, toX, duration, onDone) => {
+      const start = performance.now();
+      let lastActive = -1;
+      const step = now => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 4);
+        const x = fromX + (toX - fromX) * eased;
+        track.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
+        const idx = Math.floor((shell.clientWidth / 2 - x) / ITEM_STEP);
+        if (idx !== lastActive) {
+          if (lastActive >= 0 && track.children[lastActive]) track.children[lastActive].classList.remove('is-active');
+          if (idx >= 0 && track.children[idx]) track.children[idx].classList.add('is-active');
+          lastActive = idx;
+        }
+        if (t < 1) {
+          animFrame = requestAnimationFrame(step);
+        } else {
+          if (lastActive >= 0 && track.children[lastActive]) track.children[lastActive].classList.remove('is-active');
+          animFrame = 0;
+          onDone();
+        }
+      };
+      track.style.transform = `translate3d(${fromX}px,0,0)`;
+      animFrame = requestAnimationFrame(step);
+    };
+
+    buildReel(Array.from({length:14}, pickOne));
+
+    spinBtn.addEventListener('click', () => {
+      if (spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+      draw50Btn.disabled = true;
+
+      const items = Array.from({length:56}, pickOne);
+      const winIndex = 42;
+      const winner = items[winIndex];
+      buildReel(items);
+
+      const centerOffset = shell.clientWidth / 2 - 66;
+      const jitter = (Math.random() - 0.5) * 76;
+      const targetX = -(winIndex * ITEM_STEP - centerOffset + jitter);
+
+      animateReel(0, targetX, 2900, () => {
+        stopSpin();
+        singleSpins += 1;
+        const winCard = track.children[winIndex];
+        if (winCard) winCard.classList.add('is-winner');
+        tag.textContent = T('Single box #{n} · {name}', {n:singleSpins, name:winner.name});
+        status.textContent = winner.key === 'hijack'
+          ? T('Box #{n}: dropped “{name}” (15.6% chance). Now pull that 43 times out of 50.', {n:singleSpins, name:winner.name})
+          : T('Box #{n}: dropped “{name}” ({pct} in Anlage 1). Counsel covered 1,944 rows like this under black rectangles.', {n:singleSpins, name:winner.name, pct:winner.pct});
+      });
+    });
+
+    draw50Btn.addEventListener('click', () => {
+      if (spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+      draw50Btn.disabled = true;
+
+      const remaining = POOL.map(item => item.count);
+      let left = TOTAL;
+      let hijack = 0;
+      let profile = 0;
+      const preview = [];
+      for (let i = 0; i < 50; i += 1) {
+        let r = Math.random() * left;
+        let chosen = POOL[0];
+        for (let j = 0; j < POOL.length; j += 1) {
+          if (r < remaining[j]) { remaining[j] -= 1; chosen = POOL[j]; break; }
+          r -= remaining[j];
+        }
+        left -= 1;
+        if (chosen.key === 'hijack') hijack += 1;
+        else if (chosen.key === 'profile') profile += 1;
+        preview.push(chosen);
+      }
+
+      buildReel(preview);
+      const centerOffset = shell.clientWidth / 2 - 66;
+      const targetX = -(36 * ITEM_STEP - centerOffset);
+
+      animateReel(0, targetX, 750, () => {
+        stopSpin();
+        draws50 += 1;
+        if (hijack > best50) best50 = hijack;
+
+        setTone(false);
+        tag.textContent = T('Fair 50-box draw #{n}', {n:draws50});
+        vals.hijack.textContent = T('{n} of 50', {n:hijack});
+        notes.hijack.textContent = T('{pct}% of this draw (expected ~15.6%)', {pct:hijack * 2});
+        vals.profile.textContent = T('{n} of 50', {n:profile});
+        notes.profile.textContent = T('{pct}% of this draw (expected ~57.5%)', {pct:profile * 2});
+        vals.odds.textContent = formatProb(tailP(hijack));
+        notes.odds.textContent = T('50-box draws: {draws} · Best: {best} of 50', {draws:draws50, best:best50});
+        status.textContent = T('Random draw #{n}: {h} “{hijack}”, {p} “{profile}”, {o} other. Best random draw so far: {best} of 50 (counsel delivered 43 of 50).',
+          {n:draws50, h:hijack, p:profile, o:50 - hijack - profile, best:best50, hijack:POOL[1].name, profile:POOL[0].name});
+      });
+    });
+
+    counselBtn.addEventListener('click', () => {
+      stopSpin();
+      const rigged = Array.from({length:14}, (_, i) => (i % 7 === 0 ? POOL[4] : POOL[1]));
+      buildReel(rigged);
+      track.style.transform = 'translate3d(0px,0,0)';
+
+      setTone(true);
+      tag.textContent = T('As delivered · 1 Oct 2025');
+      vals.hijack.textContent = T('{n} of 50', {n:43});
+      notes.hijack.textContent = T('86% of counsel\'s visible sample');
+      vals.profile.textContent = T('{n} of 50', {n:0});
+      notes.profile.textContent = T('1,147 covered · 1 empty');
+      vals.odds.textContent = formatProb(tailP(43));
+      notes.odds.textContent = draws50
+        ? T('50-box draws: {draws} · Best: {best} of 50', {draws:draws50, best:best50})
+        : T('50-box draws: 0 · Best: —');
+      status.textContent = T('Counsel’s visible selection from Anlage 1: 43 of 50 “{hijack}” (all after the ban, Aug–Sep 2025) and 0 of 1,148 “{profile}”.', {hijack:POOL[1].name, profile:POOL[0].name});
+    });
+
+    showControls(lab);
+  }
+
+  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash, steps, compare, chain, seal, lootbox, zoom50,
                   vsDeploy, vsReach, vsLog, vsDns, vsActions, pvTabs, phChain, phChecks, phRollback};
   document.querySelectorAll('[data-lab]').forEach(lab => {
     Promise.resolve().then(() => setups[lab.dataset.lab](lab)).catch(() => {
