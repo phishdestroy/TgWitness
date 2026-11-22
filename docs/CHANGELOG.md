@@ -26,7 +26,6 @@
 
 ## Unreleased
 
-- Command-line listings name a sender who is shown only by ID, such as an edited version, with the name seen for that ID elsewhere in the same listing.
 - Verification of PDF reports: `verify.py` accepts the CMS signature only in the form TgWitness writes it, with one certificate and one signer, detached content, no unexpected attributes and only zero padding after it; a signature time stamp is checked against the signature and its TSA, and its time is reported. An Intel TDX quote checked without Intel's collateral is `partial` instead of `pass` and says what was not checked. Every stored OCSP and CRL file of a time stamp is checked, a revocation in one outweighs a good answer in another, and a file that does not verify fails verification. A capture checked with `--sealed-attestation` is described by what the GitHub attestation shows.
 - Network and endpoints: `/api/assurance` no longer publishes the user data text, the quick tunnel's ntfy.sh topic or the Gateway DoH subdomain, only hashes, and answers HTTP 429 while four statements for a fresh challenge are pending. Accesses other than the main administrator may add only HTTP(S) Apprise services and email. Recorder connections refuse internal addresses unless `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` and follow the workspace route and Hide IP; the MCP check contacts only this panel's own addresses. The network client rejects invalid methods, addresses and header fields before connecting, and the browser recorder limits chunked request bodies.
 - `tgwitness backup` into an empty folder that already exists, such as a mounted drive or a folder in a parent you cannot write to, fills that folder in place instead of replacing it.
@@ -40,6 +39,7 @@
 - Backup: the backup folder appears only after the copy is complete, so running out of disk space or pressing Ctrl+C leaves nothing to clean up. A new command checks a backup against its manifest: `tgwitness verify-backup FOLDER`.
 - Avatars without a photo in reports and Telegram views show the same initials as in the panel, including usernames, names of the form User 12345 and names made only of digits.
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
+- Command-line listings name a sender who is shown only by ID, such as an edited version, with the name seen for that ID elsewhere in the same listing.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
 - Reports: the chat view names every service event, participant aliases and the gap-scope reasons are translated, charts with a single row are left out, trust cards show dates and key fingerprints in readable form, and the PDF no longer leaves a blank page before them.
