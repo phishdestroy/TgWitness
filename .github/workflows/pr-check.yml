@@ -28,6 +28,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python tools/sync_notice.py --check
+      - run: python tools/sync_notice_translations.py --check
+      - run: python tools/sync_verifier_languages.py --check
       - run: 'python -m pip install --require-hashes --only-binary=:all: -r deploy/site.lock'
       - name: Build the isolated public site
         env:
@@ -55,6 +57,7 @@ jobs:
           python -m pip check
           python -m pip install --require-hashes --only-binary=:all: -r deploy/audit.lock
       - run: python -m ruff check .
+      - run: python tools/build_board_schemas.py --check
       - name: Check the source allowlist and build the public archive
         run: |
           python -I tools/publication_guard.py --git-index
