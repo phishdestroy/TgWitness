@@ -10906,5 +10906,6 @@
   "Gap runs": "Kekosongan",
   "Gap runs attributed with high confidence": "Kekosongan yang diperuntukkan kepada sembang dengan keyakinan tinggi",
   "Message numbers below the oldest exported message": "Nombor yang hilang yang lebih lama daripada mesej eksport tertua",
-  "Messages are shown oldest first. The signed JSONL files are authoritative.": "Mesej disusun mengikut urutan kronologi, dari yang tertua ke yang terbaru. Fail JSONL yang disahkan adalah sahih."
+  "Messages are shown oldest first. The signed JSONL files are authoritative.": "Mesej disusun mengikut urutan kronologi, dari yang tertua ke yang terbaru. Fail JSONL yang disahkan adalah sahih.",
+  "The {n} most active senders; each column is one interval.": "{n} penghantar dengan mesej terbanyak. Setiap lajur adalah satu selang masa."
 }
