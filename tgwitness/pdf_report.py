@@ -1444,7 +1444,9 @@ class ChatPDF:
                                              "the profile at export time."))
         self.lay.grid([say("Participant"), "ID", say("Messages"), say("First message"), say("Last message")],
                  [["\n".join([(p["name"] or say("Unknown")) + (" @" + p["username"] if p.get("username") else "")]
-                              + report.poster_notes(say, p, self.chat)), Mono(str(p["user_id"])),
+                              + report.poster_notes(say, p, self.chat)
+                              + ([say("Shown as {label} in the charts", label=p["chart_label"])] if p.get("chart_label") else [])),
+                   Mono(str(p["user_id"])),
                    p["messages"], report.utc_text(p["first_message_at"]), report.utc_text(p["last_message_at"])]
                   for p in self.people[:100]], (32, 18, 10, 20, 20))
 

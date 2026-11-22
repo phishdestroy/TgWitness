@@ -3155,7 +3155,9 @@ class ChatHTML:
         rows = [['<span class="ava ' + colour(p["user_id"]) + '" style="width:30px;height:30px;font-size:12px;display:inline-grid">'
                  + e(initials(p["name"] or p["user_id"])) + "</span> <b>" + e(p["name"] or say("Unknown")) + "</b>"
                  + (' <span class="uname">@' + e(p["username"]) + "</span>" if p.get("username") else "")
-                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat)),
+                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat))
+                 + ("<br><small>" + e(say("Shown as {label} in the charts", label=p["chart_label"])) + "</small>"
+                    if p.get("chart_label") else ""),
                  "<code>" + e(p["user_id"]) + "</code>", num(p["messages"]),
                  '<div class="meter"><i style="width:' + str(max(2, round(100 * p["messages"] / top))) + '%"></i></div>',
                  when(p["first_message_at"]), when(p["last_message_at"])] for p in self.people[:100]]

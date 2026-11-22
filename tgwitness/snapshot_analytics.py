@@ -186,13 +186,23 @@ def selected(options):
     return [(key, title) for key, title in CHARTS if options.get(CONTROLS[key], True)]
 
 
+def alias_map(people):
+    """Chart alias numbers: participants with an ID, ordered by the text of the ID, numbered from 1."""
+    return {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None),
+                                                                key=lambda row: str(row["id"])), 1)}
+
+
+def alias_label(number):
+    return "Participant %02d" % number
+
+
 def project(data, options):
     if data.get("projected"):
         return data
     output = {**data, "projected": True, "participant_labels": options.get("participant_labels", "aliases"),
               "sender_groups": sum(row.get("id") is not None for row in data["participants"])}
     people = data["participants"]
-    aliases = {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None), key=lambda row: str(row["id"])), 1)}
+    aliases = alias_map(people)
     output["participants"] = [{**row, "id": ("participant-%02d" % aliases[row["id"]]) if row["id"] is not None else None,
         "label": ("Participant %02d" % aliases[row["id"]]) if row["id"] is not None else UNKNOWN}
         if options.get("participant_labels", "aliases") == "aliases" else {**row, "label": str(row["id"]) if row["id"] is not None else UNKNOWN}

@@ -10761,5 +10761,6 @@
   "Workspace deleted": "ワークスペースが削除されました",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>パブリック MTProxy</strong><span>安定性が低い · 自動プール</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
-  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "レコーダー画面を開き、「デスクトップ」または「Web」、「ネイティブエクスポート」または「ビジュアルキャプチャ」、およびプロビジョニング済みのコネクタを選択します。このモードでは、別の公式クライアントセッションが使用されます。"
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "レコーダー画面を開き、「デスクトップ」または「Web」、「ネイティブエクスポート」または「ビジュアルキャプチャ」、およびプロビジョニング済みのコネクタを選択します。このモードでは、別の公式クライアントセッションが使用されます。",
+  "Shown as {label} in the charts": "チャート上では {label} として表示されます"
 }

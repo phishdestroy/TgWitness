@@ -10914,5 +10914,6 @@
   "Workspace deleted": "Obszar roboczy został usunięty",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Publiczny MTProxy</strong><span>Mniej stabilny · automatyczna pula</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
-  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Otwórz ekran rejestratora, aby wybrać opcję „Pulpit” lub „Sieć”, eksport natywny lub przechwytywanie wizualne oraz przydzielony łącznik. Ten tryb wykorzystuje oddzielną sesję oficjalnego klienta."
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Otwórz ekran rejestratora, aby wybrać opcję „Pulpit” lub „Sieć”, eksport natywny lub przechwytywanie wizualne oraz przydzielony łącznik. Ten tryb wykorzystuje oddzielną sesję oficjalnego klienta.",
+  "Shown as {label} in the charts": "W wykresach oznaczona jako {label}"
 }

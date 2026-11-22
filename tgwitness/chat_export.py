@@ -461,6 +461,12 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
             if stats["files_reused"]:
                 meta["attachments_reused"] = {"messages": stats["files_reused"], "meaning": REUSED_MEANING}
             analytics = report.snapshot_analytics.collect(records(scratch_path), "snapshot", meta.get("chat"))
+            if (options or {}).get("participant_labels", "aliases") == "aliases":
+                aliases = report.snapshot_analytics.alias_map(analytics["participants"])
+                for person in people:
+                    key = str(person["user_id"]) if person.get("user_id") is not None else None
+                    if key in aliases:
+                        person["chart_label"] = report.snapshot_analytics.alias_label(aliases[key])
             analytics = report.snapshot_analytics.project(analytics, options)
             write_member("analytics.json", [canonical(analytics)])
             context = {"kind": "chat", "options": options, "report_id": str(uuid.uuid4()), "created_at": meta["exported_at"],

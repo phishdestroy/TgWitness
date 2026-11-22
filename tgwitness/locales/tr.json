@@ -10812,5 +10812,6 @@
   "Workspace deleted": "Çalışma alanı silindi",
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Genel MTProxy</strong><span>Daha az kararlı · otomatik havuz</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
-  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Kayıt ekranını açarak Masaüstü veya Web seçeneğini, yerel dışa aktarma veya görsel yakalama seçeneğini ve hazırlanan bağlayıcıyı seçin. Bu mod, ayrı bir resmi istemci oturumu kullanır."
+  "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Kayıt ekranını açarak Masaüstü veya Web seçeneğini, yerel dışa aktarma veya görsel yakalama seçeneğini ve hazırlanan bağlayıcıyı seçin. Bu mod, ayrı bir resmi istemci oturumu kullanır.",
+  "Shown as {label} in the charts": "Çizelgelerde {label} olarak gösterilir"
 }
