@@ -7,8 +7,4 @@
 <a id="service-icons"></a>
 # Значки сервисов
 
-Символы, отображаемые локально в `tgwitness/static/services-icons.svg`, взяты из
-[Simple Icons 16.36.0](https://github.com/simple-icons/simple-icons/releases/tag/16.36.0),
-лицензируемого по лицензии [CC0-1.0](https://github.com/simple-icons/simple-icons/blob/16.36.0/LICENSE.md).
-Логотипы сторонних сервисов не означают их одобрения.
-Сервисы без встроенного логотипа обозначаются инициалами с пометкой. Запросы на внешние значки не отправляются.
+Символы, размещённые локально в папке `tgwitness/static/services-icons.svg`, взяты из [набора Simple Icons 16.36.0](https://github.com/simple-icons/simple-icons/releases/tag/16.36.0), лицензированного по [лицензии CC0-1.0](https://github.com/simple-icons/simple-icons/blob/16.36.0/LICENSE.md). Логотипы сторонних сервисов служат для их идентификации; их использование не подразумевает одобрения со стороны этих сервисов. Сервисы, не имеющие собственного логотипа, обозначаются инициалами с подписью. Запросы на использование внешних значков не осуществляются.
