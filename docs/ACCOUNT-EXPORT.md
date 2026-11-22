@@ -76,11 +76,14 @@ Every account archive contains `message-gaps.json` and `map.html`. Channels and 
 number their messages per chat, so each absent number between the first and last exported
 message is a message of that chat. Private chats, bots and basic groups share one number
 sequence for the whole account: an absent number there belonged to some chat. Its chat is
-proven when an exported reply or pin points at the number; otherwise it is estimated from
-which chats were active in the time between the neighbouring messages, and the remainder is
-attributed to chats not in the export. Each run carries its time window, neighbours, the
+proven when an exported reply or pin points at the number; when replies in two different
+chats point at the same number, it is disputed and assigned to neither. Otherwise it is
+estimated from which chats were active in the time between the neighbouring messages, and
+the remainder is attributed to chats not in the export. Each run carries its time window, neighbours, the
 shares per chat and a confidence label. A limited scope (filters, unselected chats) is
-stated, because absent numbers then include messages outside the selection.
+stated, because absent numbers then include messages outside the selection. The scope
+also says when a page of a private chat, bot or ordinary group was not finished, or when
+only the account's own messages were read.
 
 `map.html` shows a calendar, chats over time and weekday-by-hour grids for messages and for
 absent numbers, with tables of every chat and the largest runs. Chat pages show their own
