@@ -2904,7 +2904,7 @@ MEDIA_NAMES = {"MessageMediaPhoto": "Photo", "MessageMediaDocument": "File", "Me
 
 
 def initials(name):
-    words = [w for w in re.split(r"\s+", str(name or "").strip()) if w]
+    words = [w for w in re.split(r"\s+", str(name or "").strip()) if w and w[0].isalnum()]
     return ("".join(w[0] for w in words[:2]) or "?").upper()
 
 

@@ -83,7 +83,7 @@ def formatted(text, entities, emoji=None):
 def avatar(label, src=None):
     if src:
         return '<img class="avatar photo-avatar" src="' + e(src) + '" alt="" loading="lazy">'
-    initials = ''.join(part[0] for part in label.split()[:2]) or '?'
+    initials = ''.join(part[0] for part in [word for word in label.split() if word[0].isalnum()][:2]) or '?'
     tone = int(hashlib.sha256(label.encode()).hexdigest()[:2], 16) % 6
     return '<span class="avatar tone-' + str(tone) + '" aria-hidden="true">' + e(initials.upper()) + '</span>'
 
