@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "หมายเลขที่ขาดหายในระบบการจัดหมายเลขบัญชีร่วม",
   "read by the other side · {time}": "ถูกอ่านโดยฝ่ายตรงข้าม · {time}",
   "opened by the other side · {time}": "เปิดโดยฝ่ายตรงข้าม · {time}",
-  "The other side was typing": "ฝ่ายตรงข้ามกำลังพิมพ์ข้อความ"
+  "The other side was typing": "ฝ่ายตรงข้ามกำลังพิมพ์ข้อความ",
+  "shown as read to the other side · {time}": "แสดงว่าอ่านแล้วให้ฝ่ายตรงข้าม · {time}",
+  "opened for the other side · {time}": "เปิดให้ฝ่ายตรงข้าม · {time}",
+  "This account sent a read receipt up to {time}": "บัญชีนี้ได้ส่งการยืนยันการอ่านจนถึง{time}",
+  "This account opened self-destructing content for the other side": "บัญชีนี้ได้เปิดเนื้อหาที่ลบอัตโนมัติสำหรับฝ่ายตรงข้าม",
+  "This account showed typing": "บัญชีนี้แสดงว่ากำลังพิมพ์",
+  "A notice to the other side was not confirmed": "การแจ้งเตือนไปยังฝ่ายตรงข้ามยังไม่ได้รับการยืนยัน"
 }

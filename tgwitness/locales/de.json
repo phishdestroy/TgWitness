@@ -10819,5 +10819,11 @@
   "Absent numbers in the shared account numbering": "Fehlende Nummern in der gemeinsamen Kontonummerierung",
   "read by the other side · {time}": "von der anderen Seite gelesen · {time}",
   "opened by the other side · {time}": "von der anderen Seite geöffnet · {time}",
-  "The other side was typing": "Die andere Seite tippte gerade"
+  "The other side was typing": "Die andere Seite tippte gerade",
+  "shown as read to the other side · {time}": "Für die andere Seite als gelesen angezeigt · {time}",
+  "opened for the other side · {time}": "Für die andere Seite geöffnet · {time}",
+  "This account sent a read receipt up to {time}": "Dieses Konto hat bis {time} eine Lesebestätigung gesendet.",
+  "This account opened self-destructing content for the other side": "Dieser Account hat selbstzerstörende Inhalte für die andere Seite freigeschaltet",
+  "This account showed typing": "Dieser Account zeigte, dass gerade getippt wurde",
+  "A notice to the other side was not confirmed": "Eine Benachrichtigung an die andere Seite wurde nicht bestätigt"
 }

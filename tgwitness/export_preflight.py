@@ -88,6 +88,7 @@ async def preview(exports, options, *, sample=True):
             messages = await collector.client.get_messages(dialog.entity, limit=MESSAGES_PER_CHAT)
             timing = history_sample(messages, time.monotonic() - requested)
             timing["chat_id"], timing["kind"] = utils.get_peer_id(dialog.entity), kind_of(dialog.entity) or "private"
+            timing["title"] = dialog.name or None
             own_only = own_only_for(options, timing["kind"], getattr(dialog.entity, "username", None))
             observed["chats"].append(timing)
             observed["sampled_chats"] += 1

@@ -34,7 +34,10 @@ def text_keys():
             "The other side deleted {n} message; TgWitness keeps it.", "The other side read {n} messages.",
             "The other side read {n} message.", "A message could not be decrypted and was refused.",
             "Telegram rejected a sent message.", "A file could not be saved.", "User {id}", "Pseudo-secret", "ID {id}",
-            "read by the other side · {time}", "opened by the other side · {time}", "The other side was typing"]
+            "read by the other side · {time}", "opened by the other side · {time}", "The other side was typing",
+            "shown as read to the other side · {time}", "opened for the other side · {time}",
+            "This account sent a read receipt up to {time}", "This account opened self-destructing content for the other side",
+            "This account showed typing", "A notice to the other side was not confirmed"]
 
 
 def media_of(media):
@@ -64,6 +67,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         values.append(through)
     found, wanted = {}, set(chats) if chats is not None else None
     window, kinds, picked = getattr(allowed, "time", None), getattr(allowed, "kinds", None), set()
+    asked = {}
     for seq, at, kind, raw, digest in connection.execute(query + " ORDER BY seq", values):
         try:
             payload = json.loads(raw)
@@ -126,6 +130,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                        "random_id": str(payload.get("random_id")), "media": media_of(payload.get("media")),
                        "reply_to": str(payload["reply_to_random_id"]) if payload.get("reply_to_random_id") else None,
                        "file": None, "deleted": None, "read_by_peer": None, "opened_by_peer": None,
+                       "shown_read": None, "opened_for_peer": None,
                        "sent_from": sent_from(payload, at) if out else None}
             chat["items"].append(message)
             chat["messages"][message["random_id"]] = message
@@ -171,6 +176,27 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                 for target in chat["messages"].values():
                     if target["direction"] == "out" and target["read_by_peer"] is None and target["sent_from"] is not None                             and target["sent_from"] <= payload["max_date"]:
                         target["read_by_peer"] = {"seq": seq, "at": payload.get("read_at") or at}
+        elif name in ("read_requested", "contents_requested"):
+            asked[seq] = payload
+        elif name in ("read_result", "contents_result") and asked.get(payload.get("request_event")) is not None:
+            request = asked.pop(payload["request_event"])
+            if payload.get("status") != "succeeded":
+                event("A notice to the other side was not confirmed")
+            elif name == "read_result":
+                # Notices this account sent: what the other side was shown, and when.
+                event("This account sent a read receipt up to {time}", until=request.get("max_date_at"))
+                bound = request.get("max_date")
+                for target in chat["messages"].values():
+                    if target["direction"] == "in" and target["shown_read"] is None and type(bound) is int                             and (sent_from(target, target["at"]) or 0) + 1 <= bound:
+                        target["shown_read"] = {"seq": seq, "at": at}
+            else:
+                event("This account opened self-destructing content for the other side")
+                for random_id in map(str, request.get("random_ids") or []):
+                    target = chat["messages"].get(random_id)
+                    if target is not None and target["opened_for_peer"] is None:
+                        target["opened_for_peer"] = {"seq": seq, "at": at}
+        elif name == "typing_burst":
+            event("This account showed typing", start=payload.get("started_at") or at, end=payload.get("last_notice_at"))
         elif name == "peer_typing":
             event("The other side was typing", start=payload.get("started_at") or at, end=payload.get("last_seen_at"))
         elif name == "decrypt_failed":
@@ -208,6 +234,10 @@ def peer_badges(say, item, when):
         found.append(say("read by the other side · {time}", time=when(item["read_by_peer"]["at"])))
     if item.get("opened_by_peer"):
         found.append(say("opened by the other side · {time}", time=when(item["opened_by_peer"]["at"])))
+    if item.get("shown_read"):
+        found.append(say("shown as read to the other side · {time}", time=when(item["shown_read"]["at"])))
+    if item.get("opened_for_peer"):
+        found.append(say("opened for the other side · {time}", time=when(item["opened_for_peer"]["at"])))
     return found
 
 
@@ -251,8 +281,11 @@ def event_text(say, item, when):
         return say(text, n=item.get("n", 0))
     if text == "Ended":
         return say("Ended") + (" · " + str(item["reason"]) if item.get("reason") else "")
-    if text == "The other side was typing":
-        return say(text) + " · " + when(item["start"]) + (" – " + when(item["end"]) if item.get("end") else "")
+    if text == "This account sent a read receipt up to {time}":
+        return say(text, time=when(item["until"]) if item.get("until") else "?")
+    if text in ("The other side was typing", "This account showed typing"):
+        end = item.get("end") if isinstance(item.get("end"), str) and str(item["end"])[:19] != str(item["start"])[:19] else None
+        return say(text) + " · " + when(item["start"]) + (" – " + when(end) if end else "")
     return say(text)
 
 
@@ -311,7 +344,7 @@ CSS = """
 .secret-bubble .file,.secret-bubble .meta{color:var(--muted);font-size:12px}.secret-bubble .meta{justify-self:end}
 .secret-bubble .badge{justify-self:start;padding:1px 8px;border-radius:999px;background:var(--bad);color:#fff;font-size:11px;font-weight:650}
 .secret-bubble .badge.timer{background:var(--warn)}
-.secret-bubble .badge.seen{background:var(--accent,#2563eb)}
+.secret-bubble .badge.seen{background:transparent;color:var(--accent-text,var(--accent,#1d4ed8));box-shadow:inset 0 0 0 1px var(--accent,#2563eb)}
 .secret-chat .limited{margin:0;padding:10px 18px;background:var(--warntint);color:var(--warn);font-size:13px}
 [dir=rtl] .secret-bubble{align-self:flex-end;border-radius:16px 16px 6px 16px}[dir=rtl] .secret-bubble.out{align-self:flex-start;border-radius:16px 16px 16px 6px}
 @media print{.secret-bubble{box-shadow:none;outline:1px solid var(--line)}}

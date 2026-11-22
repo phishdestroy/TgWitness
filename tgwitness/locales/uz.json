@@ -10819,5 +10819,11 @@
   "Absent numbers in the shared account numbering": "Ushbu hisob raqamlash tizimidagi yo'qolgan raqamlar",
   "read by the other side · {time}": "boshqa tomon tomonidan o'qildi · {time}",
   "opened by the other side · {time}": "boshqa tomon tomonidan ochildi · {time}",
-  "The other side was typing": "Qarshi tomon yozmoqda edi"
+  "The other side was typing": "Qarshi tomon yozmoqda edi",
+  "shown as read to the other side · {time}": "qarshi tomonga o'qilgani ko'rsatilgan · {time}",
+  "opened for the other side · {time}": "boshqa tomon uchun ochildi · {time}",
+  "This account sent a read receipt up to {time}": "Ushbu hisob o'qilganligi haqidagi kvitansiyani soat {time}gacha yubordi.",
+  "This account opened self-destructing content for the other side": "Ushbu hisob boshqa tomon uchun o'z-o'zini yo'q qiladigan kontentni ochdi",
+  "This account showed typing": "Ushbu hisob yozishni ko'rsatdi",
+  "A notice to the other side was not confirmed": "Qarshi tomonga bildirishnoma tasdiqlanmadi"
 }

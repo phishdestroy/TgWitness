@@ -10819,5 +10819,11 @@
   "Absent numbers in the shared account numbering": "اعداد غایب در شماره‌گذاری حساب مشترک",
   "read by the other side · {time}": "خوانده شده توسط طرف مقابل · {time}",
   "opened by the other side · {time}": "باز شده توسط طرف مقابل · {time}",
-  "The other side was typing": "طرف مقابل در حال تایپ بود"
+  "The other side was typing": "طرف مقابل در حال تایپ بود",
+  "shown as read to the other side · {time}": "به طرف مقابل به‌عنوان خوانده نشان داده شده · {time}",
+  "opened for the other side · {time}": "برای طرف مقابل باز شد · {time}",
+  "This account sent a read receipt up to {time}": "این حساب تا زمان {time} رسید خوانده شدن ارسال کرد.",
+  "This account opened self-destructing content for the other side": "این حساب برای طرف مقابل محتوای خودویرانگر را باز کرد",
+  "This account showed typing": "این حساب نشان می‌داد در حال تایپ است",
+  "A notice to the other side was not confirmed": "اعلامیه‌ای به طرف مقابل تأیید نشد"
 }

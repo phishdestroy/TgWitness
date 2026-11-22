@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "共享账号编号中的缺失编号",
   "read by the other side · {time}": "已被对方阅读 · {time}",
   "opened by the other side · {time}": "由对方发起 · {time}",
-  "The other side was typing": "对方正在输入"
+  "The other side was typing": "对方正在输入",
+  "shown as read to the other side · {time}": "已显示为“已读”·{time}",
+  "opened for the other side · {time}": "已向对方开放 · {time}",
+  "This account sent a read receipt up to {time}": "该账号最晚于{time}发送了已读回执",
+  "This account opened self-destructing content for the other side": "该账号为“对方”开启了自毁内容",
+  "This account showed typing": "该账号显示正在输入",
+  "A notice to the other side was not confirmed": "向“对方”发送的通知未获确认"
 }

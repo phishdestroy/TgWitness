@@ -10819,5 +10819,11 @@
   "Absent numbers in the shared account numbering": "Paylaşılan hesap numaralandırmasında eksik numaralar",
   "read by the other side · {time}": "karşı taraf tarafından okundu · {time}",
   "opened by the other side · {time}": "karşı taraf tarafından açıldı · {time}",
-  "The other side was typing": "Karşı taraf yazıyordu"
+  "The other side was typing": "Karşı taraf yazıyordu",
+  "shown as read to the other side · {time}": "karşı tarafa okundu olarak gösterildi · {time}",
+  "opened for the other side · {time}": "karşı taraf için açıldı · {time}",
+  "This account sent a read receipt up to {time}": "Bu hesap, {time} saatine kadar okundu bilgisi gönderdi",
+  "This account opened self-destructing content for the other side": "Bu hesap, karşı taraf için kendiliğinden silinen içerik paylaştı",
+  "This account showed typing": "Bu hesapta yazma işlemi görüldü",
+  "A notice to the other side was not confirmed": "Karşı tarafa yapılan bildirim teyit edilmedi"
 }

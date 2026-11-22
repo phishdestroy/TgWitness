@@ -11023,5 +11023,11 @@
   "Absent numbers in the shared account numbering": "الأرقام الغائبة في نظام ترقيم الحساب المشترك",
   "read by the other side · {time}": "تمت قراءتها من قبل الطرف الآخر · {time}",
   "opened by the other side · {time}": "تم فتحها من قبل الطرف الآخر · {time}",
-  "The other side was typing": "كان الطرف الآخر يكتب"
+  "The other side was typing": "كان الطرف الآخر يكتب",
+  "shown as read to the other side · {time}": "يظهر للطرف الآخر على أنه قد تمت قراءته · {time}",
+  "opened for the other side · {time}": "تم فتحه للطرف الآخر · {time}",
+  "This account sent a read receipt up to {time}": "أرسل هذا الحساب إشعارًا بالقراءة حتى {time}",
+  "This account opened self-destructing content for the other side": "قام هذا الحساب بفتح محتوى ذاتي التدمير للطرف الآخر",
+  "This account showed typing": "أظهر هذا الحساب أنه كان يكتب",
+  "A notice to the other side was not confirmed": "لم يتم تأكيد إرسال إشعار إلى الطرف الآخر"
 }

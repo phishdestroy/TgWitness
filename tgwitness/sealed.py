@@ -107,7 +107,9 @@ class Session:
         self.store.bind(self.vault)
         self.vault.save("network", {"kind": "direct"})
         self.store.set_setting("route_policy", {"exposure": "tunnel", "outside_enabled": False})
-        self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4})
+        # Every run is a fresh login, so the workspace's gentle start for a new account would halve the reading speed of
+        # every run; the learned pause between bulk reads still grows whenever Telegram asks to slow down.
+        self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4, "warmup_minutes": 0})
         self.collector = Collector(self.store, self.vault, client_factory)
         self.account_export = AccountExport(self.collector, self.store, self.vault)
         self.account_export.packaging_copies = 2
@@ -212,8 +214,17 @@ class Session:
         if chat_id is not None and chat_id not in self.collector.dialog_cache:
             raise ValueError("Select a chat from this account's dialog list")
 
+    def seed_pacing(self):
+        """Start bulk reads of this fresh login at 0.6 s apart; Telegram flood waits lengthen it, success shortens it."""
+        from .swarm.floodwait_learner import SETTING
+        account = (self.store.get_setting("account", None) or {}).get("id")
+        saved = self.store.get_setting(SETTING, {}) or {}
+        if account is not None and saved.get("account_id") != account:
+            self.store.set_setting(SETTING, {"account_id": account, "seed_ms": round(export_budget.PAGE_GAP_SECONDS * 1000)})
+
     async def preview(self, selection):
         self.require_selection(selection.chat_id)
+        self.seed_pacing()
         if selection.mode == "account":
             from .export_preflight import preview
             result = await preview(self.account_export, selection.account_options.model_dump())
@@ -252,6 +263,7 @@ class Session:
         return result
 
     async def begin_selection(self, selection):
+        self.seed_pacing()
         if self.assessment and self.assessment["selection_sha256"] != selection_hash(selection.settings()):
             self.assessment = None
         if self.assessment is None:
@@ -526,7 +538,9 @@ class Session:
                 try:
                     await self.account_export.pause(self.account_job)
                     if not cancel:
-                        job = await self.account_export.finalize_partial(self.account_job, "Capture ended: " + reason)
+                        from .sealed_index import REASONS
+                        job = await self.account_export.finalize_partial(
+                            self.account_job, REASONS.get(reason, (None, "Capture ended: " + reason))[1])
                         path = self.account_export.result_path(self.account_job)
                         self.store.append("sealed.account_export", {"job_id": self.account_job, "file": ACCOUNT_MEMBER,
                             "sha256": file_sha(path), "bytes": path.stat().st_size, "complete_within_scope": job["phase"] == "done",

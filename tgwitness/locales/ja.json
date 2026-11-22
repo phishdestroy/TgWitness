@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "共有アカウント番号体系における欠番",
   "read by the other side · {time}": "相手側による既読 · {time}",
   "opened by the other side · {time}": "相手側によって開始されました · {time}",
-  "The other side was typing": "相手は入力中だった"
+  "The other side was typing": "相手は入力中だった",
+  "shown as read to the other side · {time}": "相手側に「既読」と表示済み · {time}",
+  "opened for the other side · {time}": "相手側向けに公開 · {time}",
+  "This account sent a read receipt up to {time}": "このアカウントは、{time}までに既読通知を送信しました。",
+  "This account opened self-destructing content for the other side": "このアカウントは、相手側に向けて自己消滅型コンテンツを開いた",
+  "This account showed typing": "このアカウントは入力中だった",
+  "A notice to the other side was not confirmed": "相手側への通知は確認されなかった"
 }

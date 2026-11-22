@@ -10819,5 +10819,11 @@
   "Absent numbers in the shared account numbering": "সমন্বিত অ্যাকাউন্ট নম্বরকরণে অনুপস্থিত সংখ্যা",
   "read by the other side · {time}": "অন্য পক্ষ দ্বারা পড়া · {time}",
   "opened by the other side · {time}": "অন্য পক্ষ দ্বারা খোলা · {time}",
-  "The other side was typing": "অন্য পক্ষ টাইপ করছিল"
+  "The other side was typing": "অন্য পক্ষ টাইপ করছিল",
+  "shown as read to the other side · {time}": "অন্য পক্ষের কাছে পড়া হিসেবে দেখানো · {time}",
+  "opened for the other side · {time}": "অন্য পক্ষের জন্য খোলা · {time}",
+  "This account sent a read receipt up to {time}": "এই অ্যাকাউন্টটি পাঠিয়েছে একটি রিড রসিদ, যা সর্বশেষ {time} পর্যন্ত।",
+  "This account opened self-destructing content for the other side": "এই অ্যাকাউন্টটি অন্য পক্ষের জন্য স্ব-ধ্বংসশীল বিষয়বস্তু খুলে দিয়েছে",
+  "This account showed typing": "এই অ্যাকাউন্টে টাইপিং দেখা গেছে",
+  "A notice to the other side was not confirmed": "অন্য পক্ষকে জানানো হয়েছে কি না তা নিশ্চিত করা যায়নি"
 }

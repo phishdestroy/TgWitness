@@ -10891,5 +10891,11 @@
   "Absent numbers in the shared account numbering": "Отсутствующие номера в общей нумерации аккаунта",
   "read by the other side · {time}": "прочитано собеседником · {time}",
   "opened by the other side · {time}": "открыто собеседником · {time}",
-  "The other side was typing": "Собеседник печатал"
+  "The other side was typing": "Собеседник печатал",
+  "shown as read to the other side · {time}": "собеседнику показано как прочитанное · {time}",
+  "opened for the other side · {time}": "открыто для собеседника · {time}",
+  "This account sent a read receipt up to {time}": "Этот аккаунт отметил прочитанными сообщения до {time}",
+  "This account opened self-destructing content for the other side": "Этот аккаунт открыл для собеседника самоуничтожающееся содержимое",
+  "This account showed typing": "Этот аккаунт показал «печатает»",
+  "A notice to the other side was not confirmed": "Уведомление собеседнику не подтверждено"
 }

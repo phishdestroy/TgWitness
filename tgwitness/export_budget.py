@@ -4,6 +4,19 @@ MIB = 1024**2
 DOWNLOAD_BYTES_PER_SECOND = MIB
 PACKAGING_BYTES_PER_SECOND = 16 * MIB
 SAFETY_FACTOR = 2
+# History is read in pages of 100 messages, one request at a time, no faster than the account's learned pause between
+# bulk reads (the sealed runner starts at 0.6 s). A short sample request measures latency, not throughput.
+PAGE_MESSAGES = 100
+PAGE_GAP_SECONDS = .6
+HISTORY_SAFETY = 1.25
+# Reading order: account data, private chats and bots, ordinary groups, then supergroups and channels from the
+# smallest; within a rank the dialog list order (most recent first) is kept. Messages of every chat come before files.
+READ_RANKS = {"private": 1, "bot": 1, "group": 3, "supergroup": 4, "channel": 4}
+
+
+def read_rank(kind, messages=0):
+    rank = READ_RANKS.get(kind, 4)
+    return rank, (messages or 0) if rank == 4 else 0
 
 
 def sealing_reserve(session_seconds, output_bytes=0, messages=0):
@@ -35,7 +48,7 @@ def estimate(sample, options=None):
         total, count = chat["history_messages"], chat["sample_messages"]
         if total is None or (total and not count):
             unknown.append("history_count")
-            per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "unknown": True})
+            per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "title": chat.get("title"), "unknown": True})
             continue
         if chat["unknown_size_files"]:
             unknown.append("file_size")
@@ -46,15 +59,18 @@ def estimate(sample, options=None):
         media = math.ceil(chat["download_bytes"] * scale)
         ranges = math.ceil(chat["hash_ranges"] * scale)
         metadata = math.ceil(chat["text_bytes"] * scale) + total * 2048
-        rate = min(100, max(1, count) / max(.05, chat["request_seconds"]))
-        chat_seconds = total / rate + media / DOWNLOAD_BYTES_PER_SECOND + ranges / 10
+        rate = PAGE_MESSAGES / max(PAGE_GAP_SECONDS, chat["request_seconds"])
+        reading = HISTORY_SAFETY * total / rate
+        files = SAFETY_FACTOR * (media / DOWNLOAD_BYTES_PER_SECOND + ranges / 10)
+        chat_seconds = (reading + files) / SAFETY_FACTOR
         seconds += chat_seconds
         history_seconds += total / rate
-        per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "unknown": False,
+        per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "title": chat.get("title"), "unknown": False,
                          "unknown_size_files": chat["unknown_size_files"],
                          "messages": total, "download_bytes": media,
                          "output_bytes": media + math.ceil(chat["text_bytes"] * scale) + total * 2048 + ranges * 160,
-                         "seconds": math.ceil(SAFETY_FACTOR * chat_seconds)})
+                         "seconds": math.ceil(reading + files), "history_seconds": math.ceil(reading),
+                         "file_seconds": math.ceil(files)})
         messages += total
         download += media
         hashes += ranges
@@ -70,7 +86,9 @@ def estimate(sample, options=None):
             "acquisition_seconds": math.ceil(SAFETY_FACTOR * seconds + metadata_seconds),
             "history_seconds": math.ceil(history_seconds), "metadata_seconds": metadata_seconds,
             "hash_seconds": math.ceil(hashes / 10),
-            "per_chat": sorted(per_chat, key=lambda c: -(c.get("seconds") or 0)),
+            # Account exports read in this order; chat exports keep the order the chats were selected in.
+            "per_chat": sorted(per_chat, key=lambda c: read_rank(c.get("kind"), c.get("messages")))
+            if all(c.get("kind") for c in per_chat) else per_chat,
             "assumptions": {"download_bytes_per_second": DOWNLOAD_BYTES_PER_SECOND,
                             "packaging_bytes_per_second": PACKAGING_BYTES_PER_SECOND,
                             "safety_factor": SAFETY_FACTOR, "history_counts": "entire accessible history",

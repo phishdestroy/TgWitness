@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "Nomor yang tidak ada dalam penomoran akun bersama",
   "read by the other side · {time}": "dibaca oleh pihak lain · {time}",
   "opened by the other side · {time}": "dibuka oleh pihak lain · {time}",
-  "The other side was typing": "Pihak lain sedang mengetik"
+  "The other side was typing": "Pihak lain sedang mengetik",
+  "shown as read to the other side · {time}": "ditampilkan sebagai telah dibaca oleh pihak lain · {time}",
+  "opened for the other side · {time}": "dibuka untuk pihak lain · {time}",
+  "This account sent a read receipt up to {time}": "Akun ini mengirimkan tanda telah dibaca hingga pukul {time}",
+  "This account opened self-destructing content for the other side": "Akun ini membuka konten yang akan terhapus sendiri untuk pihak lain",
+  "This account showed typing": "Akun ini menunjukkan sedang mengetik",
+  "A notice to the other side was not confirmed": "Pemberitahuan kepada pihak lain belum dikonfirmasi"
 }

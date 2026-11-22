@@ -10870,5 +10870,11 @@
   "Absent numbers in the shared account numbering": "מספרים חסרים במספור המשותף של החשבון",
   "read by the other side · {time}": "נקרא על ידי הצד השני · {time}",
   "opened by the other side · {time}": "נפתח על ידי הצד השני · {time}",
-  "The other side was typing": "הצד השני הקליד"
+  "The other side was typing": "הצד השני הקליד",
+  "shown as read to the other side · {time}": "מוצג כנקרא לצד השני · {time}",
+  "opened for the other side · {time}": "נפתח עבור הצד השני · {time}",
+  "This account sent a read receipt up to {time}": "חשבון זה שלח אישור קריאה עד השעה {time}",
+  "This account opened self-destructing content for the other side": "חשבון זה פתח תוכן המתכלה מעצמו עבור הצד השני",
+  "This account showed typing": "בחשבון זה נראתה פעילות הקלדה",
+  "A notice to the other side was not confirmed": "הודעה לצד השני לא אושרה"
 }

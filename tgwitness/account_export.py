@@ -141,6 +141,23 @@ def category_of(kind, username):
     return "public_channels" if username else "private_channels"
 
 
+ACCOUNT_DATA_FIRST = ("profile", "contacts", "sessions")
+
+
+def reading_order(tasks, chats):
+    """The essentials first, so a run that ends early still holds them: profile, contacts and sessions, then private
+    chats and bots, other account data, ordinary groups, and supergroups and channels from the smallest (by their
+    newest message ID). Within a rank the dialog list order, most recent first, is kept. Files follow all messages."""
+    from .export_budget import read_rank
+    kinds = {chat["id"]: chat.get("kind") for chat in chats}
+
+    def rank(task):
+        if task["category"] != "messages":
+            return (0, 0) if task["category"] in ACCOUNT_DATA_FIRST else (2, 0)
+        return read_rank(kinds.get(task["chat_id"]), task.get("newest_message_id") or 0)
+    return sorted(tasks, key=rank)
+
+
 def chat_in_scope(options, kind, username):
     categories = options.get("chat_categories")
     return kind in options["chat_kinds"] and (categories is None or category_of(kind, username) in categories)
@@ -995,6 +1012,7 @@ class AccountExport:
                     network.progress = None
                     self.current.pop("discovery", None)
                     self.current["current_chat"] = None
+                tasks = reading_order(tasks, chats)
                 if job["options"]["transport"] == "auto" and options["transport"] == "regular":
                     declined = self.vault.read("account-export-" + job["job_id"]).get("takeout_declined")
                     gaps = ["This session signed in less than 24 hours ago, so this export used the regular session "

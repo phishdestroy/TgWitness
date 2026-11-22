@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "공유 계정 번호 체계에서 누락된 번호",
   "read by the other side · {time}": "상대방이 읽음 · {time}",
   "opened by the other side · {time}": "상대방이 열었습니다 · {time}",
-  "The other side was typing": "상대방이 글을 입력 중이었다"
+  "The other side was typing": "상대방이 글을 입력 중이었다",
+  "shown as read to the other side · {time}": "상대방에게 '읽음'으로 표시됨 · {time}",
+  "opened for the other side · {time}": "상대방에게 열림 · {time}",
+  "This account sent a read receipt up to {time}": "이 계정은 {time}까지 읽음 확인을 보냈습니다.",
+  "This account opened self-destructing content for the other side": "이 계정은 상대방을 위해 자동 삭제되는 콘텐츠를 열었습니다.",
+  "This account showed typing": "이 계정은 입력 중임을 나타냈습니다",
+  "A notice to the other side was not confirmed": "상대방에 대한 통지는 확인되지 않았습니다."
 }

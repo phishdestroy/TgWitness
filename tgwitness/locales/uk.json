@@ -10921,5 +10921,11 @@
   "Absent numbers in the shared account numbering": "Відсутні номери у спільній нумерації облікового запису",
   "read by the other side · {time}": "прочитано іншою стороною · {time}",
   "opened by the other side · {time}": "відкрито іншою стороною · {time}",
-  "The other side was typing": "Інша сторона набирала текст"
+  "The other side was typing": "Інша сторона набирала текст",
+  "shown as read to the other side · {time}": "показано як прочитане для іншої сторони · {time}",
+  "opened for the other side · {time}": "відкрито для іншої сторони · {time}",
+  "This account sent a read receipt up to {time}": "Цей акаунт надіслав підтвердження прочитання о {time}",
+  "This account opened self-destructing content for the other side": "Цей акаунт відкрив самознищуваний контент для іншої сторони",
+  "This account showed typing": "Цей акаунт показував, що користувач набирає текст",
+  "A notice to the other side was not confirmed": "Повідомлення для іншої сторони не було підтверджено"
 }

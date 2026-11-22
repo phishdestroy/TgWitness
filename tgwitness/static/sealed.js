@@ -13,6 +13,8 @@ $("language").replaceChildren(...Object.entries(window.TGW_SEALED_LANGUAGES || {
   .map(([code, name]) => Object.assign(document.createElement("option"), {value: code, textContent: name})));
 let qrId = null, ended = false;
 let lastState = null, connectionFailed = false, statusError = "", actionError = "";
+// Chats left out of an account export from the plan table; changing other settings starts from all chats again.
+let droppedChats = new Set();
 const english = new WeakMap();
 const tr = (text, values = {}) => {
   const translated = lang === "en" ? text : window.TGW_SEALED_LOCALES?.[lang]?.[text];
@@ -559,6 +561,10 @@ $("media-preset").addEventListener("change", applyPreset);
 $("media-rules").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 $("media-action").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 applyPreset();
+function keptChats() {
+  if (!droppedChats.size) return [];
+  return (assessmentResult?.time_plan?.per_chat || []).map(chat => chat.chat_id).filter(id => !droppedChats.has(id));
+}
 function selection() {
   const investigation = $("export-mode").value === "chats", secret = $("export-mode").value === "secret";
   const journal = $("export-mode").value === "journal" || investigation || secret;
@@ -579,7 +585,7 @@ function selection() {
     types[kind] = {enabled: $("type-" + kind).checked, max_mb: Number(field.value), action: $("action-" + kind).value || null};
   }
   const options = {transport: $("export-mode").value, export_format: $("export-format").value,
-    chat_ids: $("export-scope").value === "account" ? [] : selected,
+    chat_ids: $("export-scope").value === "account" ? keptChats() : selected,
     chat_kinds: chatCategories.some(name => $("cat-" + name).checked) ? ["private", "bot", "group", "supergroup", "channel"] : [],
     chat_categories: chatCategories.filter(name => $("cat-" + name).checked),
     own_only_categories: ["private_groups", "public_groups"].filter(name => $("cat-" + name).checked && $("own-" + name).checked),
@@ -598,7 +604,7 @@ function selection() {
     if (!$("total-budget").checkValidity() || !Number.isInteger(options.max_total_gib)) throw new Error(tr("Enter a whole media budget from 1 to 1024 GiB."));
     if (options.to_utc && options.from_utc && options.to_utc <= options.from_utc) throw new Error(tr("The end date must be on or after the start date."));
     if ($("include-avatars").checked) throw new Error("Participant avatar capture is available in single-chat regular capture. For account export use Account profile photos.");
-    return {mode: "account", account_scope: $("export-scope").value === "account" ? "all" : "selected", account_options: options};
+    return {mode: "account", account_scope: options.chat_ids.length ? "selected" : "all", account_options: options};
   }
   const capture = {download_media: true, media_action: $("media-action").value,
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
@@ -623,7 +629,7 @@ function describeMode() {
     "Select one or more chats, use Ctrl or Cmd with a click to add another, or Shift with arrow keys. An empty selection cannot start an account export.");
 }
 function clearAssessment() {
-  assessedSelection = null; assessmentResult = null; $("save-selection").disabled = true;
+  assessedSelection = null; assessmentResult = null; droppedChats = new Set(); $("save-selection").disabled = true;
   $("preflight-result").textContent = ""; $("preflight-details").hidden = true;
   $("preflight-budget").textContent = ""; $("budget-actions").hidden = true;
   $("budget-plan").hidden = true; $("budget-fit").hidden = true; $("plan-summary").hidden = true;
@@ -725,40 +731,83 @@ function renderSummary(plan, verdict) {
 }
 function chatName(id) {
   const option = Array.from($("chats").options).find(item => Number(item.value) === id);
-  return option ? option.textContent : tr("Chat {id}", {id});
+  const planned = (assessmentResult?.time_plan?.per_chat || []).find(chat => chat.chat_id === id);
+  return option ? option.textContent : planned?.title || tr("Chat {id}", {id});
+}
+// What a start now would hold, chat by chat: messages of all included chats in reading order first, then files.
+function forecast(plan) {
+  let budget = Math.max(0, (plan.collection_seconds || 0) - (plan.metadata_seconds || 0));
+  const result = new Map(), rows = (plan.per_chat || []).filter(chat => !droppedChats.has(chat.chat_id));
+  for (const chat of rows) {
+    if (chat.unknown) {result.set(chat.chat_id, {messages: "unknown"}); continue;}
+    const need = chat.history_seconds ?? chat.seconds ?? 0;
+    const share = need <= budget ? 1 : budget > 0 ? budget / need : 0;
+    budget = Math.max(0, budget - need);
+    result.set(chat.chat_id, {messages: share >= 1 ? "all" : share > 0 ? "part" : "none", share, files: "none"});
+  }
+  for (const chat of rows) {
+    const item = result.get(chat.chat_id);
+    if (chat.unknown || item.messages !== "all") continue;
+    const need = chat.file_seconds ?? 0;
+    item.files = !need || need <= budget ? "all" : budget > 0 ? "part" : "none";
+    budget = Math.max(0, budget - need);
+  }
+  return result;
+}
+function outcomeOf(chat, item) {
+  if (!item) return "dropped";
+  if (item.messages === "unknown") return "unknown";
+  if (item.messages !== "all") return item.messages;
+  return !chat.download_bytes || item.files === "all" ? "all" : "files";
+}
+function outcomeText(chat, item) {
+  const state = outcomeOf(chat, item);
+  return [{dropped: tr("Left out"), unknown: tr("not measured"), none: tr("Not reached"), all: tr("Complete"),
+    part: item && tr("Newest ~{n} messages", {n: Math.max(1, Math.floor((chat.messages || 0) * (item.share || 0))).toLocaleString(lang)}),
+    files: item?.files === "part" ? tr("Messages; files in part") : tr("Messages; no files")}[state], state];
 }
 function renderPlan(plan, format) {
-  const rows = plan.per_chat || [], body = $("budget-table").tBodies[0];
+  const rows = plan.per_chat || [], body = $("budget-table").tBodies[0], outcome = forecast(plan);
+  const account = !["chats", "journal", "secret"].includes($("export-mode").value);
   body.replaceChildren();
   for (const chat of rows) {
-    const row = document.createElement("tr");
-    for (const value of [chatName(chat.chat_id), chat.unknown ? "?" : (chat.messages || 0).toLocaleString(),
+    const row = document.createElement("tr"), pick = document.createElement("td"), box = document.createElement("input");
+    box.type = "checkbox"; box.checked = !droppedChats.has(chat.chat_id); box.disabled = !account || rows.length < 2;
+    box.dataset.chat = String(chat.chat_id); box.setAttribute("aria-label", tr("Include {name}", {name: chatName(chat.chat_id)}));
+    pick.append(box); row.append(pick);
+    const [text, state] = outcomeText(chat, outcome.get(chat.chat_id));
+    for (const value of [chatName(chat.chat_id), chat.unknown ? "?" : (chat.messages || 0).toLocaleString(lang),
       chat.unknown ? "?" : format(chat.download_bytes) + (chat.unknown_size_files ? " +" : ""),
       chat.unknown ? tr("not measured") : tr("{n} min", {n: Math.ceil((chat.seconds || 0) / 60)})]) {
       const cell = document.createElement("td"); cell.textContent = value; row.append(cell);
     }
-    if (plan.fit !== "estimated_fit" && (plan.fits_now || []).includes(chat.chat_id)) row.className = "fits";
+    const result = document.createElement("td"); result.className = "outcome " + state; result.textContent = text; row.append(result);
+    if (droppedChats.has(chat.chat_id)) row.className = "dropped";
     body.append(row);
   }
-  const measured = rows.filter(chat => !chat.unknown);
+  const kept = rows.filter(chat => !chat.unknown && !droppedChats.has(chat.chat_id));
   if (rows.length > 1) {
     const total = document.createElement("tr"); total.className = "total";
-    for (const value of [tr("Total"), measured.reduce((sum, chat) => sum + (chat.messages || 0), 0).toLocaleString(lang),
-        humanBytes(measured.reduce((sum, chat) => sum + (chat.download_bytes || 0), 0)),
-        tr("{n} min", {n: Math.ceil(measured.reduce((sum, chat) => sum + (chat.seconds || 0), 0) / 60)})]) {
+    for (const value of ["", tr("Total"), kept.reduce((sum, chat) => sum + (chat.messages || 0), 0).toLocaleString(lang),
+        humanBytes(kept.reduce((sum, chat) => sum + (chat.download_bytes || 0), 0)),
+        tr("{n} min", {n: Math.ceil(kept.reduce((sum, chat) => sum + (chat.seconds || 0), 0) / 60)}), ""]) {
       const cell = document.createElement("td"); cell.textContent = value; total.append(cell);
     }
     body.append(total);
   }
-  $("budget-legend").hidden = !body.querySelector("tr.fits");
+  const states = rows.filter(chat => outcome.has(chat.chat_id)).map(chat => outcomeOf(chat, outcome.get(chat.chat_id)));
+  const complete = states.filter(state => state === "all").length, missed = states.filter(state => state === "none").length;
+  const partial = states.filter(state => state === "part" || state === "files").length;
+  const everything = complete === states.length && !droppedChats.size && plan.fit === "estimated_fit";
+  $("budget-legend").hidden = true;
   const recommended = plan.recommended_session_minutes;
-  $("budget-recommendation").textContent = plan.fit === "estimated_fit" ? tr(
-    "Everything selected fits this run.") : recommended ? tr(
+  $("budget-recommendation").textContent = everything ? tr("Everything selected fits this run.") :
+    tr("If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.",
+      {complete, total: states.length, partial, missed}) + (recommended && !droppedChats.size ? " " + tr(
     "This selection needs a {minutes}-minute session. Finish or cancel this run and start a new one with {minutes} minutes, or keep only the chats that fit.",
-    {minutes: recommended}) : (plan.split_runs || []).length ? tr(
+    {minutes: recommended}) : (plan.split_runs || []).length && !droppedChats.size && complete < states.length ? " " + tr(
     "Even the longest session, {minutes} minutes, is not enough for everything selected.",
-    {minutes: plan.split_runs[0].session_minutes}) : tr(
-    "Not all selected data could be measured, so no session length can be recommended.");
+    {minutes: plan.split_runs[0].session_minutes}) : "");
   const list = $("budget-run-list"); list.replaceChildren();
   for (const run of plan.split_runs || []) {
     const item = document.createElement("li");
@@ -767,19 +816,28 @@ function renderPlan(plan, format) {
       (run.exceeds_one_run ? " — " + tr("too large for one run: limit the dates") : "");
     list.append(item);
   }
-  $("budget-runs").hidden = !(plan.split_runs || []).length;
-  const fits = plan.fits_now || [];
-  $("budget-fit").hidden = plan.fit === "estimated_fit" || !fits.length || fits.length === rows.length || $("export-mode").value === "journal";
-  $("budget-fit").dataset.chats = JSON.stringify(fits);
+  $("budget-runs").hidden = !(plan.split_runs || []).length || droppedChats.size > 0 || everything;
+  const finished = rows.filter(chat => outcomeOf(chat, outcome.get(chat.chat_id)) === "all").map(chat => chat.chat_id);
+  $("budget-fit").hidden = !account || everything || !finished.length || finished.length === states.length;
+  $("budget-fit").dataset.chats = JSON.stringify(finished);
+  $("budget-order").hidden = !account;
   $("budget-plan").hidden = !rows.length;
 }
+// The include boxes sit inside the settings form; ticking them must not discard the assessment they belong to.
+$("budget-table").addEventListener("input", event => event.stopPropagation());
+$("budget-table").addEventListener("change", event => {
+  const box = event.target.closest("input[data-chat]");
+  if (!box || !assessmentResult?.time_plan) return;
+  event.stopPropagation();
+  const id = Number(box.dataset.chat), all = (assessmentResult.time_plan.per_chat || []).length;
+  if (box.checked) droppedChats.delete(id); else droppedChats.add(id);
+  if (droppedChats.size >= all) {droppedChats.delete(id); box.checked = true; return;}
+  renderPlan(assessmentResult.time_plan, humanBytes);
+});
 $("budget-fit").onclick = () => {
   const keep = new Set(JSON.parse($("budget-fit").dataset.chats || "[]"));
-  $("export-scope").value = "chat"; clearAssessment();
-  const options = Array.from($("chats").options);
-  if (!options.length) { $("dialog-note").textContent = tr("Load my chats first, then press this button again."); $("refresh").focus(); return; }
-  for (const option of options) option.selected = keep.has(Number(option.value));
-  clearAssessment(); $("preflight").click();
+  for (const chat of assessmentResult?.time_plan?.per_chat || []) if (!keep.has(chat.chat_id)) droppedChats.add(chat.chat_id);
+  renderPlan(assessmentResult.time_plan, humanBytes);
 };
 $("budget-messages").onclick = () => {
   $("media-preset").value = "messages"; applyPreset();

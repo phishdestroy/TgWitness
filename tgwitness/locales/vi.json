@@ -10768,5 +10768,11 @@
   "Absent numbers in the shared account numbering": "Các số tin nhắn thiếu trong hệ thống đánh số chung của tài khoản",
   "read by the other side · {time}": "đã được bên kia đọc · {time}",
   "opened by the other side · {time}": "được mở bởi phía bên kia · {time}",
-  "The other side was typing": "Bên kia đang gõ"
+  "The other side was typing": "Bên kia đang gõ",
+  "shown as read to the other side · {time}": "được hiển thị là đã đọc đối với bên kia · {time}",
+  "opened for the other side · {time}": "đã mở cho phía bên kia · {time}",
+  "This account sent a read receipt up to {time}": "Tài khoản này đã gửi thông báo đã đọc vào lúc {time}",
+  "This account opened self-destructing content for the other side": "Tài khoản này đã mở nội dung tự hủy dành cho phía bên kia",
+  "This account showed typing": "Tài khoản này cho thấy đang gõ chữ",
+  "A notice to the other side was not confirmed": "Thông báo gửi đến phía bên kia chưa được xác nhận"
 }
