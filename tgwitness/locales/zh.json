@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "在取证停止前未完成的导出步骤",
   "Not reached before collection stopped": "采集停止前未处理",
   "line {line}": "行 {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} 秒",
   "{run} · attempt {attempt}": "{run} · 尝试 {attempt}",
   "Sealed capture result": "密封采集操作的结果",
   "Capture ended: {reason}": "采集结束：{reason}",

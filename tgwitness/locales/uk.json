@@ -10910,7 +10910,7 @@
   "Export steps not reached before collection stopped": "Кроки експорту, не розпочаті до зупинки збору",
   "Not reached before collection stopped": "Не розпочато до зупинки збору",
   "line {line}": "рядок {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} с",
   "{run} · attempt {attempt}": "{run} · спроба {attempt}",
   "Sealed capture result": "Результат процедури збору даних під печаткою",
   "Capture ended: {reason}": "Збір даних завершено: {reason}",

@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "संग्रह रुकने से पहले निर्यात चरण पूरे नहीं हुए",
   "Not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त नहीं किया गया",
   "line {line}": "पंक्ति {line}",
-  "{s} s": "{s}s",
+  "{s} s": "{s} सेकंड",
   "{run} · attempt {attempt}": "{run} · प्रयास {attempt}",
   "Sealed capture result": "सीलबंद संग्रह रन का परिणाम",
   "Capture ended: {reason}": "संग्रह समाप्त: {reason}",

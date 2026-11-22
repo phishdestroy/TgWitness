@@ -11012,7 +11012,7 @@
   "Export steps not reached before collection stopped": "لم يتم الوصول إلى خطوات التصدير قبل توقف عملية جمع البيانات",
   "Not reached before collection stopped": "لم يتم الوصول إليها قبل توقف عملية الجمع",
   "line {line}": "السطر {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} ثانية",
   "{run} · attempt {attempt}": "{run} · محاولة {attempt}",
   "Sealed capture result": "نتيجة عملية الجمع المختومة",
   "Capture ended: {reason}": "انتهى جمع البيانات: {reason}",

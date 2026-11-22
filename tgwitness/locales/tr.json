@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "Toplama işlemi durdurulmadan önce tamamlanamayan dışa aktarma adımları",
   "Not reached before collection stopped": "Toplama işlemi durdurulmadan önce ulaşılamadı",
   "line {line}": "satır {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} saniye",
   "{run} · attempt {attempt}": "{run} · deneme {attempt}",
   "Sealed capture result": "Mühürlü veri toplama işleminin sonucu",
   "Capture ended: {reason}": "Toplama işlemi sona erdi: {reason}",

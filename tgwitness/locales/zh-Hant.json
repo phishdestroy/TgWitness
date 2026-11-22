@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "在取證中止前尚未完成的匯出步驟",
   "Not reached before collection stopped": "採集停止前未處理",
   "line {line}": "行 {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} 秒",
   "{run} · attempt {attempt}": "{run} · 嘗試 {attempt}",
   "Sealed capture result": "密封蒐集作業之結果",
   "Capture ended: {reason}": "資料蒐集結束：{reason}",

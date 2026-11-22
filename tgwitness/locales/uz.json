@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "Yig'ish to'xtatilgunga qadar bajarilmagan eksport bosqichlari",
   "Not reached before collection stopped": "To'plash to'xtatilgunga qadar erishilmagan",
   "line {line}": "{line}-qator",
-  "{s} s": "{s}s",
+  "{s} s": "{s} s",
   "{run} · attempt {attempt}": "{run}· urinish {attempt}",
   "Sealed capture result": "Muhrlangan to'plamni ishga tushirish natijasi",
   "Capture ended: {reason}": "Yig'ish yakunlandi: {reason}",

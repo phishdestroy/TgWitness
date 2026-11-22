@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "Các bước xuất dữ liệu chưa được thực hiện trước khi việc thu thập bị dừng lại",
   "Not reached before collection stopped": "Chưa liên lạc được trước khi việc thu thập dữ liệu dừng lại",
   "line {line}": "dòng {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} giây",
   "{run} · attempt {attempt}": "{run} · thử {attempt}",
   "Sealed capture result": "Kết quả của đợt thu thập dữ liệu được niêm phong",
   "Capture ended: {reason}": "Việc thu thập đã kết thúc: {reason}",

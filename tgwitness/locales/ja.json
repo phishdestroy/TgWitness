@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "収集が中断される前に完了しなかったエクスポート手順",
   "Not reached before collection stopped": "収集が停止される前に到達しなかった",
   "line {line}": "行 {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s}秒",
   "{run} · attempt {attempt}": "{run} · 試行 {attempt}",
   "Sealed capture result": "封印された収集作業の結果",
   "Capture ended: {reason}": "収集終了：{reason}",

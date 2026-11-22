@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে এক্সপোর্ট ধাপগুলো সম্পন্ন হয়নি",
   "Not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে পৌঁছানো যায়নি",
   "line {line}": "লাইন {line}",
-  "{s} s": "{s}s",
+  "{s} s": "{s} সেকেন্ড",
   "{run} · attempt {attempt}": "{run} · চেষ্টা {attempt}",
   "Sealed capture result": "সিল করা সংগ্রহ চালানোর ফলাফল",
   "Capture ended: {reason}": "সংগ্রহ শেষ: {reason}",

@@ -10808,7 +10808,7 @@
   "Export steps not reached before collection stopped": "اکٹھا کرنا روکے جانے سے پہلے برآمد کے مراحل مکمل نہیں ہوئے",
   "Not reached before collection stopped": "جمع کرنے کے عمل کے رک جانے سے پہلے حاصل نہیں کیا گیا",
   "line {line}": "سطر {line}",
-  "{s} s": "{s}s",
+  "{s} s": "{s} سیکنڈ",
   "{run} · attempt {attempt}": "{run} · کوشش {attempt}",
   "Sealed capture result": "مہر شدہ مجموعے کے چلانے کا نتیجہ",
   "Capture ended: {reason}": "جمع‌آوری ختم: {reason}",

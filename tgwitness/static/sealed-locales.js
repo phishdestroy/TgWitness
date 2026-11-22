@@ -372,7 +372,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Снимите галочку с чата, чтобы исключить его.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оценка времени и объёма охватывает {sampled} из {total} чатов, поэтому в таблице перечислены только они. Экспорт по-прежнему охватывает все чаты; чтобы исключить некоторые чаты, выберите те, которые хотите экспортировать.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оценка времени и объёма относится к {sampled} чатам, поэтому в таблице перечислены только они. Экспорт по-прежнему охватывает все чаты; чтобы исключить некоторые чаты, выберите те, которые хотите экспортировать.",
-  "Chat histories read": "Прочитаны истории чатов"
+  "Chat histories read": "Прочитаны истории чатов",
+  "Packaging this chat's archive": "Упаковка архива этого чата"
  },
  "ar": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "اسم مستخدم (@username)، أو رقم هاتف يبدأ بـ + ورمز البلد، أو شخص من محادثات هذا الحساب. معظم الأشخاص ليس لديهم اسم مستخدم: اخترهم من محادثاتك أو أدخل رقمهم.",
@@ -726,7 +727,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "قم بإلغاء تحديد الدردشة لإستبعادها.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تشمل تقديرات الوقت والحجم {sampled} من {total} محادثة، لذا لا يسرد الجدول سوى تلك المحادثات. لا يزال التصدير يشمل كل المحادثات؛ لاستبعاد محادثات معينة، اختر المحادثات التي تريد تصديرها بدلاً من ذلك.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "يشمل تقدير الوقت والحجم الدردشات {sampled}، لذا لا يسرد الجدول سوى تلك الدردشات. لا يزال التصدير يشمل كل الدردشات؛ لاستبعاد دردشات معينة، اختر الدردشات التي تريد تصديرها بدلاً من ذلك.",
-  "Chat histories read": "قراءة سجلات الدردشة"
+  "Chat histories read": "قراءة سجلات الدردشة",
+  "Packaging this chat's archive": "تعبئة أرشيف هذه المحادثة"
  },
  "bn": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + চিহ্নসহ দেশ কোড যুক্ত একটি ফোন নম্বর, অথবা এই অ্যাকাউন্টের চ্যাট থেকে কোনো ব্যক্তি। অধিকাংশ মানুষের কোনো ব্যবহারকারীর নাম থাকে না: আপনার চ্যাট থেকে নির্বাচন করুন অথবা তাদের নম্বর লিখুন।",
@@ -1079,7 +1081,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "চ্যাটটিকে বাদ দিতে এর টিক চিহ্ন তুলে ফেলুন।",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "সময় ও আকারের অনুমানটি {sampled}টি {total} চ্যাটের, তাই টেবিলে শুধুমাত্র সেগুলোই দেখানো হয়েছে। এক্সপোর্ট এখনও প্রতিটি চ্যাটই অন্তর্ভুক্ত করে; চ্যাটগুলো বাদ দিতে চাইলে, পরিবর্তে যে চ্যাটগুলো এক্সপোর্ট করতে চান সেগুলো নির্বাচন করুন।",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "সময় ও আকারের অনুমানটি {sampled} চ্যাটগুলোকে অন্তর্ভুক্ত করে, তাই টেবিলে শুধুমাত্র সেগুলোই দেখানো হয়েছে। এক্সপোর্ট এখনও সব চ্যাটই অন্তর্ভুক্ত করে; চ্যাটগুলো বাদ দিতে চাইলে, পরিবর্তে যে চ্যাটগুলো এক্সপোর্ট করতে চান সেগুলো নির্বাচন করুন।",
-  "Chat histories read": "চ্যাট ইতিহাসসমূহ পড়া হয়েছে"
+  "Chat histories read": "চ্যাট ইতিহাসসমূহ পড়া হয়েছে",
+  "Packaging this chat's archive": "এই চ্যাটের আর্কাইভ প্যাক করা হচ্ছে"
  },
  "de": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Ein @username, eine Telefonnummer mit „+“ und der Ländervorwahl oder eine Person aus den Chats dieses Kontos. Die meisten Personen haben keinen Benutzernamen: Wähle sie aus deinen Chats aus oder gib ihre Nummer ein.",
@@ -1433,7 +1436,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Deaktivieren Sie ein Chat-Feld, um es auszuschließen.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Die Schätzung von Zeit und Größe bezieht sich auf {sampled} von {total} Chats, daher sind in der Tabelle nur diese aufgeführt. Der Export umfasst weiterhin alle Chats; um Chats auszuschließen, wählen Sie stattdessen die zu exportierenden Chats aus.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Die Schätzung von Zeit und Umfang bezieht sich auf {sampled} Chats, daher sind in der Tabelle nur diese aufgeführt. Der Export umfasst weiterhin alle Chats; um Chats auszuschließen, wählen Sie stattdessen die Chats aus, die exportiert werden sollen.",
-  "Chat histories read": "Gelesene Chat-Verläufe"
+  "Chat histories read": "Gelesene Chat-Verläufe",
+  "Packaging this chat's archive": "Das Archiv dieses Chats wird gepackt"
  },
  "es": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un número de teléfono con el signo «+» y el código de país, o una persona de los chats de esta cuenta. La mayoría de las personas no tienen nombre de usuario: elígelas de tus chats o introduce su número.",
@@ -1787,7 +1791,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Desmarca un chat para excluirlo.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La estimación de tiempo y tamaño abarca {sampled} de los {total} chats, por lo que la tabla solo muestra esos. La exportación sigue abarcando todos los chats; para excluir algunos, selecciona los chats que deseas exportar.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La estimación de tiempo y tamaño abarca los chats {sampled}, por lo que la tabla solo muestra esos. La exportación sigue abarcando todos los chats; para excluir algunos, selecciona los chats que deseas exportar.",
-  "Chat histories read": "Historiales de chat leídos"
+  "Chat histories read": "Historiales de chat leídos",
+  "Packaging this chat's archive": "Empaquetando el archivo de este chat"
  },
  "fa": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "یک @username، یک شماره تلفن همراه با علامت + و پیش‌شماره کشور، یا فردی از چت‌های این حساب. بیشتر افراد نام کاربری ندارند: آن‌ها را از چت‌های خود انتخاب کنید یا شماره آن‌ها را وارد کنید.",
@@ -2139,7 +2144,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "برای حذف یک چت، تیک آن را بردارید.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تخمین زمان و حجم مربوط به {sampled} چت از مجموع {total} چت است، بنابراین جدول فقط آن‌ها را نمایش می‌دهد. خروجی همچنان شامل همه چت‌ها می‌شود؛ برای حذف چت‌ها، چت‌های مورد نظر را برای خروجی انتخاب کنید.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تخمین زمان و حجم شامل {sampled} چت است، بنابراین جدول فقط آن‌ها را فهرست می‌کند. خروجی همچنان همه چت‌ها را در بر می‌گیرد؛ برای حذف چت‌ها، چت‌های مورد نظر را برای خروجی انتخاب کنید.",
-  "Chat histories read": "تاریخچه‌های چت خوانده شدند"
+  "Chat histories read": "تاریخچه‌های چت خوانده شدند",
+  "Packaging this chat's archive": "بسته‌بندی آرشیو این چت"
  },
  "fr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numéro de téléphone avec le signe « + » et l'indicatif du pays, ou une personne figurant dans les discussions de ce compte. La plupart des gens n'ont pas de nom d'utilisateur : sélectionnez-les dans vos discussions ou saisissez leur numéro.",
@@ -2493,7 +2499,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Décochez une conversation pour l'exclure.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "L'estimation de la durée et de la taille porte sur {sampled} des {total} discussions ; le tableau ne répertorie donc que celles-ci. L'exportation couvre néanmoins toutes les discussions ; pour en exclure certaines, sélectionnez plutôt les discussions à exporter.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "L'estimation de la durée et de la taille porte sur les discussions {sampled}, c'est pourquoi le tableau ne répertorie que celles-ci. L'exportation couvre toutefois l'ensemble des discussions ; pour en exclure certaines, sélectionnez plutôt les discussions que vous souhaitez exporter.",
-  "Chat histories read": "Historique des conversations lu"
+  "Chat histories read": "Historique des conversations lu",
+  "Packaging this chat's archive": "Compression de l'archive de cette conversation"
  },
  "he": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, מספר טלפון עם סימן + וקוד המדינה, או אדם מהצ'אטים של חשבון זה. לרוב האנשים אין שם משתמש: בחר אותם מהצ'אטים שלך או הזן את המספר שלהם.",
@@ -2847,7 +2854,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "הסר את הסימון משיחה כדי להשאיר אותה מחוץ לרשימה.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "אומדן הזמן והגודל מתייחס ל-{sampled} מתוך {total} צ'אטים, ולכן הטבלה מציגה רק אותם. הייצוא עדיין מכסה את כל הצ'אטים; כדי להשאיר צ'אטים מחוץ לייצוא, בחר את הצ'אטים שברצונך לייצא במקום זאת.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "אומדן הזמן והגודל מתייחס לצ'אטים שנדגמו {sampled}, ולכן הטבלה מציגה רק אותם. הייצוא עדיין מכסה את כל הצ'אטים; כדי להשאיר צ'אטים מחוץ לייצוא, בחר את הצ'אטים שברצונך לייצא במקום זאת.",
-  "Chat histories read": "היסטוריית צ'אט נקראה"
+  "Chat histories read": "היסטוריית צ'אט נקראה",
+  "Packaging this chat's archive": "אריזת הארכיון של הצ'אט הזה"
  },
  "hi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + और देश कोड के साथ एक फ़ोन नंबर, या इस खाते की चैट्स से कोई व्यक्ति। अधिकांश लोगों का कोई यूज़रनेम नहीं होता: उन्हें अपनी चैट्स से चुनें या उनका नंबर दर्ज करें।",
@@ -3200,7 +3208,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "चैट को अनटिक करें ताकि उसे शामिल न किया जाए।",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "समय और आकार का अनुमान {sampled} चैट्स को कवर करता है, इसलिए तालिका में केवल वे ही सूचीबद्ध हैं। एक्सपोर्ट अभी भी हर चैट को कवर करता है; चैट्स को बाहर रखने के लिए, एक्सपोर्ट के लिए चैट्स चुनें।",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "समय और आकार का अनुमान {total} चैट्स में से {sampled} चैट्स को कवर करता है, इसलिए तालिका में केवल उन्हीं को सूचीबद्ध किया गया है। एक्सपोर्ट अभी भी हर चैट को कवर करता है; चैट्स को बाहर रखने के लिए, एक्सपोर्ट के लिए चैट्स का चयन करें।",
-  "Chat histories read": "चैट इतिहास पढ़े गए"
+  "Chat histories read": "चैट इतिहास पढ़े गए",
+  "Packaging this chat's archive": "इस चैट का आर्काइव पैकेज किया जा रहा है"
  },
  "id": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, nomor telepon dengan tanda + dan kode negara, atau seseorang dari obrolan akun ini. Kebanyakan orang tidak memiliki nama pengguna: pilih mereka dari obrolan Anda atau masukkan nomor telepon mereka.",
@@ -3554,7 +3563,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Hapus centang pada obrolan untuk mengabaikannya.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Perkiraan waktu dan ukuran mencakup {sampled} dari {total} obrolan, sehingga tabel hanya mencantumkan obrolan tersebut. Ekspor tetap mencakup setiap obrolan; untuk mengabaikan obrolan tertentu, pilih obrolan yang akan diekspor.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Perkiraan waktu dan ukuran mencakup obrolan {sampled}, sehingga tabel hanya mencantumkan obrolan tersebut. Ekspor tetap mencakup semua obrolan; untuk mengesampingkan obrolan tertentu, pilih obrolan yang akan diekspor.",
-  "Chat histories read": "Riwayat obrolan yang dibaca"
+  "Chat histories read": "Riwayat obrolan yang dibaca",
+  "Packaging this chat's archive": "Sedang mengemas arsip obrolan ini"
  },
  "it": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numero di telefono con il segno + e il prefisso internazionale, oppure una persona presente nelle chat di questo account. La maggior parte delle persone non ha un nome utente: sceglilo dalle tue chat oppure inserisci il suo numero.",
@@ -3908,7 +3918,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Deseleziona una chat per escluderla.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La stima relativa a tempi e dimensioni riguarda un campione {sampled} di {total} chat, pertanto la tabella ne elenca solo quelle. L'esportazione copre comunque tutte le chat; per escluderne alcune, seleziona invece le chat da esportare.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La stima relativa a tempi e dimensioni riguarda le chat {sampled}, pertanto la tabella ne elenca solo quelle. L'esportazione copre comunque tutte le chat; per escluderne alcune, seleziona invece le chat da esportare.",
-  "Chat histories read": "Cronologie delle chat lette"
+  "Chat histories read": "Cronologie delle chat lette",
+  "Packaging this chat's archive": "Compressione dell’archivio di questa chat"
  },
  "ja": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username、+と国コードを含む電話番号、またはこのアカウントのチャットに参加している人物。多くの人はユーザー名を持っていません。チャットから相手を選択するか、電話番号を入力してください。",
@@ -4262,7 +4273,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "チャットのチェックを外すと、そのチャットは除外されます。",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "所要時間とサイズの推定値は、{total}件のチャットのうち{sampled}件のサンプルを対象としているため、表にはそれらのチャットのみが記載されています。エクスポート自体はすべてのチャットを対象としています。チャットを除外したい場合は、エクスポートするチャットを個別に選択してください。",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "所要時間とサイズの推定値は{sampled}のチャットを対象としているため、表にはそれらのチャットのみが記載されています。エクスポート自体はすべてのチャットを対象としています。チャットを除外したい場合は、エクスポートするチャットを個別に選択してください。",
-  "Chat histories read": "チャット履歴の閲覧"
+  "Chat histories read": "チャット履歴の閲覧",
+  "Packaging this chat's archive": "このチャットのアーカイブをパッケージ化中"
  },
  "ko": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username 또는 + 기호와 국가 코드가 포함된 전화번호, 혹은 이 계정의 채팅에 등장하는 사람. 대부분의 사람은 사용자 이름이 없으므로, 채팅에서 해당 사람을 선택하거나 전화번호를 입력하세요.",
@@ -4616,7 +4628,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "채팅을 선택 해제하면 해당 채팅이 제외됩니다.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "예상 소요 시간 및 용량은 {total}개의 채팅 중 {sampled}개를 표본으로 추출한 것이므로, 표에는 해당 채팅만 나열되어 있습니다. 내보내기 작업은 여전히 모든 채팅을 대상으로 합니다. 특정 채팅을 제외하려면 내보낼 채팅을 직접 선택하십시오.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "예상 소요 시간 및 용량은 {sampled} 채팅을 기준으로 산출되었으므로, 표에는 해당 채팅만 나열되어 있습니다. 내보내기 작업은 여전히 모든 채팅을 대상으로 수행되므로, 특정 채팅을 제외하려면 내보낼 채팅을 직접 선택하십시오.",
-  "Chat histories read": "읽은 채팅 기록"
+  "Chat histories read": "읽은 채팅 기록",
+  "Packaging this chat's archive": "이 채팅의 아카이브를 패키징 중입니다"
  },
  "ms": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Satu nama pengguna @username, nombor telefon dengan tanda + dan kod negara, atau seseorang daripada sembang akaun ini. Kebanyakan orang tiada nama pengguna: pilih mereka daripada sembang anda atau masukkan nombor mereka.",
@@ -4970,7 +4983,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Batalkan tanda pada sembang untuk mengeluarkannya.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Anggaran masa dan saiz merangkumi {sampled} daripada {total} sembang, jadi jadual hanya menyenaraikan yang tersebut. Eksport masih merangkumi setiap sembang; untuk mengecualikan sembang, pilih sembang yang hendak dieksport.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Anggaran masa dan saiz merangkumi sembang y{sampled}, jadi jadual hanya menyenaraikan sembang tersebut. Eksport masih merangkumi setiap sembang; untuk mengecualikan sembang, pilih sembang yang hendak dieksport.",
-  "Chat histories read": "Sejarah sembang dibaca"
+  "Chat histories read": "Sejarah sembang dibaca",
+  "Packaging this chat's archive": "Memaket arkib sembang ini"
  },
  "pl": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, numer telefonu z symbolem + i kodem kraju lub osoba z czatów tego konta. Większość osób nie ma nazwy użytkownika: wybierz je z czatów lub wprowadź ich numer.",
@@ -5324,7 +5338,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Odznacz czat, aby go pominąć.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Szacunkowy czas i rozmiar dotyczą {sampled} z {total} czatów, więc w tabeli wymieniono tylko te. Eksport nadal obejmuje wszystkie czaty; aby pominąć niektóre czaty, należy wybrać te, które mają zostać wyeksportowane.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Szacunkowy czas i rozmiar dotyczą czatów z {sampled}, więc w tabeli wymieniono tylko te czaty. Eksport nadal obejmuje wszystkie czaty; aby pominąć niektóre czaty, należy wybrać te, które mają zostać wyeksportowane.",
-  "Chat histories read": "Przeczytano historie czatów"
+  "Chat histories read": "Przeczytano historie czatów",
+  "Packaging this chat's archive": "Pakowanie archiwum tej rozmowy"
  },
  "pt": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Um @username, um número de telefone com + e o código do país, ou uma pessoa dos chats desta conta. A maioria das pessoas não tem nome de usuário: escolha-as em seus chats ou digite o número delas.",
@@ -5678,7 +5693,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Desmarque um chat para excluí-lo.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "A estimativa de tempo e tamanho abrange {sampled} de {total} conversas, portanto a tabela lista apenas essas. A exportação ainda abrange todas as conversas; para excluir conversas, selecione as que deseja exportar.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "A estimativa de tempo e tamanho abrange as conversas {sampled}, portanto, a tabela lista apenas essas. A exportação ainda abrange todas as conversas; para excluir algumas, selecione as conversas que deseja exportar.",
-  "Chat histories read": "Histórico de conversas lido"
+  "Chat histories read": "Histórico de conversas lido",
+  "Packaging this chat's archive": "Empacotando o arquivo deste chat"
  },
  "th": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, หมายเลขโทรศัพท์ที่มีเครื่องหมาย + และรหัสประเทศ หรือบุคคลจากบทสนทนาของบัญชีนี้ ผู้ใช้ส่วนใหญ่ไม่มีชื่อผู้ใช้: เลือกจากบทสนทนาของคุณหรือป้อนหมายเลขโทรศัพท์ของพวกเขา",
@@ -6032,7 +6048,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "ยกเลิกการเลือกช่องสนทนาเพื่อไม่รวมมันไว้",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "การประมาณเวลาและขนาดนี้ครอบคลุม {sampled} ของ {total} การสนทนา ดังนั้นตารางจึงแสดงเฉพาะการสนทนาเหล่านั้นเท่านั้น การส่งออกยังคงครอบคลุมการสนทนาทุกครั้ง หากต้องการไม่ส่งออกการสนทนาใด ๆ ให้เลือกการสนทนาที่ต้องการส่งออกแทน",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "การประมาณเวลาและขนาดนี้ครอบคลุมการสนทนาที่{sampled} ดังนั้นตารางจึงแสดงเฉพาะการสนทนาเหล่านั้นเท่านั้น การส่งออกยังคงครอบคลุมการสนทนาทั้งหมด; หากต้องการไม่ส่งออกการสนทนาบางรายการ ให้เลือกการสนทนาที่ต้องการส่งออกแทน",
-  "Chat histories read": "อ่านประวัติการสนทนา"
+  "Chat histories read": "อ่านประวัติการสนทนา",
+  "Packaging this chat's archive": "กำลังจัดแพ็กเกจไฟล์เก็บถาวรของบทสนทนานี้"
  },
  "tr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Bir @username adı, + işareti ve ülke kodunu içeren bir telefon numarası veya bu hesabın sohbetlerindeki bir kişi. Çoğu kişinin kullanıcı adı yoktur: sohbetlerinizden birini seçin veya numarasını girin.",
@@ -6386,7 +6403,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Bir sohbeti hariç tutmak için işaretini kaldırın.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Tahmini süre ve boyut, {total} sohbetin {sampled}'ini kapsar; bu nedenle tabloda yalnızca bunlar listelenir. Dışa aktarma işlemi yine de her sohbeti kapsar; sohbetleri dışarıda bırakmak için, bunun yerine dışa aktarılacak sohbetleri seçin.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Tahmini süre ve boyut, {sampled} sohbetleri kapsar; bu nedenle tabloda yalnızca bunlar listelenir. Dışa aktarma işlemi yine de tüm sohbetleri kapsar; sohbetleri dışarıda bırakmak istiyorsanız, bunun yerine dışa aktarılacak sohbetleri seçin.",
-  "Chat histories read": "Okunan sohbet geçmişleri"
+  "Chat histories read": "Okunan sohbet geçmişleri",
+  "Packaging this chat's archive": "Bu sohbetin arşivini paketleme"
  },
  "uk": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, номер телефону з символом «+» та кодом країни або учасник чатів цього облікового запису. Більшість людей не мають імені користувача: виберіть їх із ваших чатів або введіть їхній номер.",
@@ -6740,7 +6758,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Зніміть галочку біля чату, щоб його виключити.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оцінка часу та розміру охоплює {sampled} із {total} чатів, тому в таблиці вказано лише їх. Експорт все одно охоплює всі чати; щоб виключити певні чати, виберіть ті, які потрібно експортувати.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оцінка часу та розміру стосується {sampled} чатів, тому в таблиці вказано лише їх. Експорт все одно охоплює всі чати; щоб виключити певні чати, виберіть ті, які потрібно експортувати.",
-  "Chat histories read": "Прочитано історії чатів"
+  "Chat histories read": "Прочитано історії чатів",
+  "Packaging this chat's archive": "Упаковка архіву цього чату"
  },
  "ur": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username، + کے ساتھ ملک کا کوڈ والا فون نمبر، یا اس اکاؤنٹ کی چیٹس میں سے کوئی شخص۔ زیادہ تر لوگوں کا کوئی یوزر نیم نہیں ہوتا: انہیں اپنی چیٹس سے منتخب کریں یا ان کا نمبر درج کریں۔",
@@ -7094,7 +7113,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "کسی چیٹ کو منتخب نہ کریں تاکہ اسے شامل نہ کیا جائے۔",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "وقت اور حجم کا تخمینہ {sampled} کردہ {total} چیٹس پر محیط ہے، لہٰذا جدول میں صرف وہی دکھائی گئی ہیں۔ ایکسپورٹ اب بھی ہر چیٹ کو شامل کرتا ہے؛ چیٹس کو خارج کرنے کے لیے براہِ راست وہ چیٹس منتخب کریں جنہیں آپ ایکسپورٹ کرنا چاہتے ہیں۔",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "وقت اور حجم کا تخمینہ {sampled} چیٹس پر محیط ہے، لہٰذا جدول میں صرف وہی دکھائی گئی ہیں۔ ایکسپورٹ اب بھی ہر چیٹ کو شامل کرتا ہے؛ چیٹس کو خارج کرنے کے لیے براہِ راست وہ چیٹس منتخب کریں جنہیں آپ ایکسپورٹ کرنا چاہتے ہیں۔",
-  "Chat histories read": "چٹ ہسٹریاں پڑھی گئی"
+  "Chat histories read": "چٹ ہسٹریاں پڑھی گئی",
+  "Packaging this chat's archive": "اس چیٹ کے آرکائیو کی پیکیجنگ"
  },
  "uz": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + belgisi va mamlakat kodi bilan telefon raqami yoki ushbu hisobning suhbatlaridagi shaxs. Ko'pchilikda foydalanuvchi nomi yo'q: suhbatlaringizdan tanlang yoki raqamini kiriting.",
@@ -7448,7 +7468,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Suhbatni ro'yxatdan olib tashlash uchun belgi qo'yishni bekor qiling.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Vaqt va hajm bo'yicha taxmin {sampled}dan {total} suhbatlarni qamrab oladi, shuning uchun jadvalda faqat ular ko'rsatiladi. Eksport barcha suhbatlarni qamrab oladi; suhbatlarni chiqarib tashlash uchun eksport qilmoqchi bo'lgan suhbatlarni tanlang.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Vaqt va hajm bo'yicha taxmin {sampled} suhbatlarni qamrab oladi, shuning uchun jadvalda faqat ular ko'rsatilgan. Eksport barcha suhbatlarni qamrab oladi; suhbatlarni chiqarib tashlash uchun eksport qilmoqchi bo'lgan suhbatlarni tanlang.",
-  "Chat histories read": "Suhbat tarixlari o'qildi"
+  "Chat histories read": "Suhbat tarixlari o'qildi",
+  "Packaging this chat's archive": "Ushbu suhbat arxivini qadoqlash"
  },
  "vi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Một @username; một số điện thoại kèm dấu + và mã quốc gia; hoặc một người trong các cuộc trò chuyện của tài khoản này. Hầu hết mọi người không có tên người dùng: hãy chọn họ từ các cuộc trò chuyện của bạn hoặc nhập số điện thoại của họ.",
@@ -7802,7 +7823,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "Bỏ chọn một cuộc trò chuyện để loại trừ nó.",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Ước tính về thời gian và dung lượng chỉ áp dụng cho {sampled} trong số {total} cuộc trò chuyện, do đó bảng chỉ liệt kê những cuộc trò chuyện đó. Quá trình xuất vẫn bao gồm mọi cuộc trò chuyện; để loại trừ các cuộc trò chuyện, hãy chọn các cuộc trò chuyện cần xuất thay thế.",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Ước tính về thời gian và dung lượng áp dụng cho các cuộc trò chuyện {sampled}, do đó bảng chỉ liệt kê những cuộc trò chuyện đó. Quá trình xuất vẫn bao gồm mọi cuộc trò chuyện; để loại trừ các cuộc trò chuyện, hãy chọn các cuộc trò chuyện cần xuất thay thế.",
-  "Chat histories read": "Lịch sử trò chuyện đã đọc"
+  "Chat histories read": "Lịch sử trò chuyện đã đọc",
+  "Packaging this chat's archive": "Đang đóng gói tệp lưu trữ của cuộc trò chuyện này"
  },
  "zh": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一个 @username、一个带 + 号和国家代码的电话号码，或该账户聊天记录中的一位联系人。大多数人没有用户名：请从您的聊天记录中选择，或直接输入对方的电话号码。",
@@ -8156,7 +8178,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "取消勾选某条聊天记录即可将其排除在外。",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "时间和大小估算基于{total}个聊天中的{sampled}个抽样，因此表格中仅列出了这些聊天。导出操作仍涵盖所有聊天；若要排除某些聊天，请自行选择要导出的聊天。",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "时间和大小估算基于{sampled}个聊天记录，因此表格中仅列出了这些。导出操作仍涵盖所有聊天记录；若要排除某些聊天记录，请自行选择要导出的聊天记录。",
-  "Chat histories read": "已读取的聊天记录"
+  "Chat histories read": "已读取的聊天记录",
+  "Packaging this chat's archive": "正在打包此聊天记录的归档文件"
  },
  "zh-Hant": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一個 @username、一個帶有 + 號及國家代碼的電話號碼，或是來自此帳號聊天室中的一位聯絡人。多數人沒有使用者名稱：請從您的聊天室中選擇，或直接輸入對方的電話號碼。",
@@ -8510,7 +8533,8 @@ window.TGW_SEALED_LOCALES = {
   "Untick a chat to leave it out.": "取消勾選某個聊天室即可將其排除在外。",
   "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "時間與大小估算值涵蓋了 {sampled} 個（佔 {total} 個）的聊天室，因此表格中僅列出這些聊天室。匯出操作仍會涵蓋所有聊天室；若要排除某些聊天室，請改為手動選擇要匯出的聊天室。",
   "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "時間與大小估算涵蓋了 {sampled} 個聊天室，因此表格中僅列出這些聊天室。匯出操作仍會涵蓋所有聊天室；若要排除某些聊天室，請改為手動選擇要匯出的聊天室。",
-  "Chat histories read": "已讀的聊天記錄"
+  "Chat histories read": "已讀的聊天記錄",
+  "Packaging this chat's archive": "正在打包此對話的歸檔檔"
  }
 };
 window.TGW_SEALED_LANGUAGES = {"en": "English", "uk": "Українська", "es": "Español", "pt": "Português (Brasil)", "tr": "Türkçe", "ar": "العربية", "fa": "فارسی", "ur": "اردو", "hi": "हिन्दी", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "zh": "简体中文", "fr": "Français", "de": "Deutsch", "it": "Italiano", "uz": "O‘zbekcha", "ko": "한국어", "zh-Hant": "繁體中文", "ms": "Bahasa Melayu", "pl": "Polski", "ja": "日本語", "th": "ไทย", "he": "עברית", "bn": "বাংলা", "ru": "Русский"};

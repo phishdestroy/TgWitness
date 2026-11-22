@@ -10757,7 +10757,7 @@
   "Export steps not reached before collection stopped": "Langkah-langkah ekspor yang belum tercapai sebelum pengumpulan dihentikan",
   "Not reached before collection stopped": "Belum tercapai sebelum pengumpulan dihentikan",
   "line {line}": "baris {line}",
-  "{s} s": "{s} s",
+  "{s} s": "{s} detik",
   "{run} · attempt {attempt}": "{run} · upaya {attempt}",
   "Sealed capture result": "Hasil proses pengumpulan data yang disegel",
   "Capture ended: {reason}": "Pengumpulan data telah berakhir: {reason}",
