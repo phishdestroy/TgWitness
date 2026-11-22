@@ -545,6 +545,29 @@ def copy_backup(root, target):
     return files, databases, heads
 
 
+def publish_into(staging, target):
+    lock = target / ".tgwitness-publish"
+    try:
+        lock.mkdir()
+    except FileExistsError:
+        return False
+    moved = []
+    try:
+        if any(item != lock and not item.name.startswith(".tgwitness-backup-") for item in target.iterdir()):
+            return False
+        names = sorted(item.name for item in staging.iterdir())
+        for name in [n for n in names if n != "backup-manifest.json"] + [n for n in names if n == "backup-manifest.json"]:
+            os.rename(staging / name, target / name)
+            moved.append(target / name)
+        return True
+    except BaseException:
+        for item in moved:
+            shutil.rmtree(item, ignore_errors=True) if item.is_dir() else item.unlink(missing_ok=True)
+        raise
+    finally:
+        lock.rmdir()
+
+
 def backup(args):
     root = (args.data_dir or default_root()).resolve()
     target = args.destination.resolve()
@@ -557,8 +580,9 @@ def backup(args):
     if target.exists() and (not target.is_dir() or any(target.iterdir())):
         print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
         return EXIT_USAGE
+    inside = target.is_dir()
     target.parent.mkdir(parents=True, exist_ok=True)
-    staging = Path(tempfile.mkdtemp(prefix=".tgwitness-backup-", dir=target.parent))
+    staging = Path(tempfile.mkdtemp(prefix=".tgwitness-backup-", dir=target if inside else target.parent))
     try:
         files, databases, heads = copy_backup(root, staging)
         from . import __version__
@@ -569,9 +593,12 @@ def backup(args):
         (staging / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
         os.chmod(staging / "backup-manifest.json", 0o600)
         try:
-            if target.is_dir() and not any(target.iterdir()):
-                target.rmdir()
-            os.rename(staging, target)
+            if inside:
+                if not publish_into(staging, target):
+                    print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
+                    return EXIT_USAGE
+            else:
+                os.rename(staging, target)
         except OSError as exc:
             if exc.errno in (errno.ENOTEMPTY, errno.EEXIST):
                 print("The backup folder must be new or empty: " + str(target), file=sys.stderr)

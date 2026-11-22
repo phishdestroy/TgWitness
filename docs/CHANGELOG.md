@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- `tgwitness backup` into an empty folder that already exists, such as a mounted drive or a folder in a parent you cannot write to, fills that folder in place instead of replacing it.
 - `tgwitness backup` leaves out a `backup-manifest.json` that came with a restored folder, so a backup of a restored data directory verifies.
 - `tgwitness verify-backup` reports a backup manifest that is not a JSON object as unreadable instead of stopping with an error.
 - Reports with a Selected data section: when there are unobserved message IDs but no ranges are listed, the HTML and PDF reports no longer also say that none were found.
