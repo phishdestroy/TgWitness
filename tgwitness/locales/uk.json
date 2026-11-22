@@ -11076,5 +11076,6 @@
   "Participants by observation count": "Учасники за кількістю спостережень",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметри: найменший зазначений розрив у номерах повідомлень становить {smallest}; для кожної нумерації вказано не більше {listed} розривів.",
   "ranges: {n}": "діапазони: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Невиявлені ідентифікатори: {ids}. Діапазони: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Невиявлені ідентифікатори: {ids}. Діапазони: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "історія деяких приватних чатів, ботів або звичайних груп не була прочитана до кінця"
 }

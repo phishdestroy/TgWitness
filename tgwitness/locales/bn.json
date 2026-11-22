@@ -10974,5 +10974,6 @@
   "Participants by observation count": "পর্যবেক্ষণ অনুযায়ী অংশগ্রহণকারীদের সংখ্যা",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "পরামিতি: বার্তা নম্বরগুলির তালিকায় সবচেয়ে ছোট ফাঁকটি {smallest}; প্রতিটি নম্বরীকরণের জন্য সর্বোচ্চ {listed}টি ফাঁক তালিকাভুক্ত করা হয়েছে।",
   "ranges: {n}": "পরিসর: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "অবলোকিত আইডি: {ids}। পরিসর: {ranges}।"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "অবলোকিত আইডি: {ids}। পরিসর: {ranges}।",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "কিছু ব্যক্তিগত চ্যাট, বট বা সাধারণ গ্রুপের ইতিহাস শেষ পর্যন্ত পড়া হয়নি"
 }

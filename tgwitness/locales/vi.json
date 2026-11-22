@@ -10923,5 +10923,6 @@
   "Participants by observation count": "Số lượng người tham gia theo số lần quan sát",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Các thông số: khoảng cách nhỏ nhất được liệt kê trong số thứ tự tin nhắn là {smallest}; tối đa {listed} khoảng cách được liệt kê cho mỗi dãy số.",
   "ranges: {n}": "khoảng: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID chưa được ghi nhận: {ids}. Khoảng ID: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID chưa được ghi nhận: {ids}. Khoảng ID: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "lịch sử của một số cuộc trò chuyện riêng tư, bot hoặc nhóm thông thường chưa được đọc đến hết"
 }

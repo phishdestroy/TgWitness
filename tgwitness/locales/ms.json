@@ -10923,5 +10923,6 @@
   "Participants by observation count": "Peserta mengikut bilangan pemerhatian",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: jurang terpendek yang disenaraikan dalam nombor mesej: {smallest}. Sebanyak maksimum {listed} jurang disenaraikan untuk setiap penomboran.",
   "ranges: {n}": "julat: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak diperhatikan: {ids}. Julat: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak diperhatikan: {ids}. Julat: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "sejarah beberapa sembang peribadi, bot atau kumpulan biasa tidak dibaca sehingga habis"
 }

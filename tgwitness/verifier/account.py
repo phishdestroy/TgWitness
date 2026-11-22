@@ -463,10 +463,15 @@ class AccountExportCheck:
             self.counts["media_hashed"] = self.media_hashed
         gaps = None
         if "message-gaps.json" in self.files:
+            declared = strict_json(read_member(self.archive, "message-gaps.json", MAX_JSON_BYTES))
+            self.gaps.scope = gap_scope(self.options, self.inventory,
+                                        {name for name, state in self.tasks.items() if state["terminal"] and state["ok"]})
             computed = self.gaps.result()
-            if not gaps_match(strict_json(read_member(self.archive, "message-gaps.json", MAX_JSON_BYTES)), computed,
-                              self.gaps.borderline):
-                raise ValueError("message-gaps.json differs from the message numbers in the signed pages")
+            if not gaps_match(declared, computed, self.gaps.borderline):
+                self.gaps.scope = gap_scope(self.options, self.inventory)
+                computed = self.gaps.result(legacy=True)
+                if not gaps_match(declared, computed, self.gaps.borderline):
+                    raise ValueError("message-gaps.json differs from the message numbers in the signed pages")
             shared = computed["shared"]
             gaps = {"scope": computed["scope"], "lines": gap_lines(computed),
                     "shared": {key: shared[key] for key in ("messages", "absent", "runs", "proven", "below_first")},

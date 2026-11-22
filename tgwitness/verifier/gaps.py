@@ -49,7 +49,7 @@ def gap_shared(chat_id):
     return type(chat_id) is int and chat_id != 0 and chat_id > CHANNEL_BASE
 
 
-def gap_scope(options, inventory):
+def gap_scope(options, inventory, done=None):
     reasons = set()
     kinds = options.get("chat_kinds")
     if isinstance(kinds, list) and not set(SHARED_KINDS) <= set(kinds):
@@ -70,6 +70,16 @@ def gap_scope(options, inventory):
         reasons.add("unselected_chats")
     if inventory.get("discovery_complete") is not True:
         reasons.add("inventory_incomplete")
+    if done is not None:
+        tasks = [task for task in inventory.get("tasks", ()) if isinstance(task, dict) and task.get("category") == "messages"]
+        for chat in chats:
+            if isinstance(chat, dict) and chat.get("kind") in SHARED_KINDS and chat.get("selected") is True:
+                pages = [task for task in tasks if task.get("chat_id") == chat.get("id")]
+                if not pages or any(task.get("id") not in done for task in pages):
+                    reasons.add("shared_history_incomplete")
+        if any(task.get("own_only") is True and not (isinstance(task.get("chat_id"), int) and task["chat_id"] <= CHANNEL_BASE)
+               for task in tasks):
+            reasons.add("own_messages_only")
     return {"complete": not reasons, "reasons": sorted(reasons), "from_utc": options.get("from_utc"),
             "to_utc": options.get("to_utc")}
 
@@ -128,7 +138,8 @@ class MessageGaps:
         for number, at in self.ordered(chat_id):
             yield number, at, chat_id
 
-    def result(self):
+    def result(self, legacy=False):
+        self.borderline = set()
         shared = sorted(chat for chat, kind in self.kinds.items() if kind in SHARED_KINDS)
         ids, times, owners = array("q"), array("q"), array("q")
         conflicts, inversions = {"count": 0, "examples": []}, {"count": 0, "examples": []}
@@ -148,10 +159,10 @@ class MessageGaps:
             ids.append(number)
             times.append(at)
             owners.append(chat)
-        proven, claims = self.proven(ids)
+        proven, claims = self.proven(ids, legacy)
         conflicts["count"] += claims["count"]
         conflicts["examples"] = (conflicts["examples"] + claims["examples"])[:GAP_EXAMPLES]
-        gaps, by_chat, outside = self.attribute(ids, times, owners, proven)
+        gaps, by_chat, outside = self.attribute(ids, times, owners, proven, legacy)
         for chat in shared:
             by_chat.setdefault(chat, {"messages": 0, "proven": 0, "expected": 0.0, "high": 0})["messages"] = len(self.ids[chat])
         first = ids[0] if ids else None
@@ -181,8 +192,9 @@ class MessageGaps:
             "chats": self.numbered(),
         }
 
-    def proven(self, ids):
+    def proven(self, ids, legacy=False):
         refs, found, claims = self.references, {}, {"count": 0, "examples": []}
+        disputed = set()
         entries = sorted(tuple(refs[i:i + 5]) for i in range(0, len(refs), 5))
         for target, owner, source_chat, source_id, relation in entries:
             position = bisect.bisect_left(ids, target)
@@ -190,14 +202,18 @@ class MessageGaps:
                 continue
             if target in found:
                 if found[target][1] != owner:
+                    disputed.add(target)
                     claims["count"] += 1
                     if len(claims["examples"]) < GAP_EXAMPLES:
                         claims["examples"].append([target, found[target][1], owner])
                 continue
             found[target] = (target, owner, source_chat, source_id, relation)
+        if not legacy:
+            for target in disputed:
+                del found[target]
         return found, claims
 
-    def attribute(self, ids, times, owners, proven):
+    def attribute(self, ids, times, owners, proven, legacy=False):
         gaps, by_chat, outside = [], {}, 0.0
         share = GAP_UNKNOWN_SHARE if self.scope.get("complete") else GAP_OUT_OF_SCOPE_SHARE
         targets = sorted(proven)
@@ -243,6 +259,8 @@ class MessageGaps:
             ranked = sorted(scores.items(), key=lambda item: (-item[1], item[0]))
             best_chat, best = (ranked[0][0], ranked[0][1] / whole) if ranked else (None, 0.0)
             top, level = (best_chat, best) if best >= other / whole else (None, other / whole)
+            if not legacy and unproven == 0 and len({item[1] for item in inside}) > 1:
+                top = None
             confidence = ("proven" if unproven == 0 else "high" if level >= GAP_HIGH else
                           "medium" if level >= GAP_MEDIUM else "low")
             second = ranked[1][1] / whole if len(ranked) > 1 else 0.0
@@ -304,6 +322,7 @@ def gap_values_match(declared, computed):
 def gap_entry_matches(declared, computed, borderline):
     if not isinstance(declared, dict) or declared.keys() != computed.keys():
         return False
+    borderline = borderline and computed.get("confidence") != "proven"
     for key in computed:
         if key == "likely":
             if not isinstance(declared[key], list) or any(not isinstance(item, list) or len(item) != 2 for item in declared[key]):

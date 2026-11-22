@@ -22,7 +22,8 @@ SCOPE_REASONS = {"chat_kinds": "some chat kinds were not selected", "chat_ids": 
                  "archived_excluded": "archived chats were excluded", "sender_filter": "a sender filter was applied",
                  "text_filter": "a text filter was applied", "own_messages_only": "only own messages were kept",
                  "unselected_chats": "some private chats or groups were not selected",
-                 "inventory_incomplete": "the chat list was incomplete"}
+                 "inventory_incomplete": "the chat list was incomplete",
+                 "shared_history_incomplete": "the history of some private chats, bots or ordinary groups was not read to the end"}
 CSS = """
 .activity-map{--map-accent:var(--chart-accent,var(--accent,#235dcc));--map-loss:#d9480f;--map-empty:var(--line,#dce2eb);--map-paper:var(--card,var(--paper,#fff))}
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}

@@ -11178,5 +11178,6 @@
   "Participants by observation count": "المشاركون حسب عدد الملاحظات",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "المعلمات: أصغر فجوة مدرجة في أرقام الرسائل هي {smallest}؛ ويتم إدراج ما لا يزيد عن {listed} فجوة لكل ترقيم.",
   "ranges: {n}": "النطاقات: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "المعرفات غير الملحوظة: {ids}. النطاقات: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "المعرفات غير الملحوظة: {ids}. النطاقات: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "لم يتم قراءة سجل بعض المحادثات الخاصة أو الروبوتات أو المجموعات العادية حتى النهاية"
 }

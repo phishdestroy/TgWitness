@@ -10974,5 +10974,6 @@
   "Participants by observation count": "مشاہدے کی بنیاد پر شرکاء کی تعداد",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پیرامیٹرز: پیغامات کے نمبروں میں درج سب سے چھوٹا وقفہ {smallest} ہے؛ ہر شمار کے لیے زیادہ سے زیادہ {listed} وقفے درج کیے گئے ہیں۔",
   "ranges: {n}": "حدود: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "غیر مشاہدہ شدہ آئی ڈیز: {ids}۔ حدود: {ranges}۔"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "غیر مشاہدہ شدہ آئی ڈیز: {ids}۔ حدود: {ranges}۔",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "کچھ نجی چیٹس، بوٹس یا عام گروپس کی تاریخ آخر تک نہیں پڑھی گئی"
 }

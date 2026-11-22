@@ -10984,5 +10984,6 @@
   "Participants by observation count": "Participantes según el recuento de observaciones",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parámetros: la diferencia más pequeña entre los números de los mensajes que figura en la lista es {smallest}; se indican como máximo {listed} diferencias para cada numeración.",
   "ranges: {n}": "rangos: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID no observados: {ids}. Rangos: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID no observados: {ids}. Rangos: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "El historial de algunos chats privados, bots o grupos normales no se ha leído hasta el final"
 }

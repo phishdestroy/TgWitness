@@ -10923,5 +10923,6 @@
   "bot Telegram proof GitHub witness": "หลักฐานจากบอท Telegram และพยานจาก GitHub",
   "{run} · attempt {attempt}": "{run} · หมายเลขการลอง {attempt}",
   "ranges: {n}": "ช่วง: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID ที่ไม่ถูกตรวจพบ: {ids}. ช่วง: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID ที่ไม่ถูกตรวจพบ: {ids}. ช่วง: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ประวัติการสนทนาของบางห้องสนทนาส่วนตัว บอท หรือกลุ่มทั่วไป ยังไม่ถูกอ่านจนจบ"
 }

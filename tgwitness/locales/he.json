@@ -11025,5 +11025,6 @@
   "Participants by observation count": "משתתפים לפי מספר התצפיות",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "פרמטרים: הפער הקטן ביותר המופיע ברשימה במספרי ההודעות הוא {smallest}; לכל היותר מופיעים {listed} פערים עבור כל מספור.",
   "ranges: {n}": "טווחים: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "מזהים שלא נצפו: {ids}. טווחים: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "מזהים שלא נצפו: {ids}. טווחים: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ההיסטוריה של חלק מהצ'אטים הפרטיים, הבוטים או הקבוצות הרגילות לא נקראה עד הסוף"
 }

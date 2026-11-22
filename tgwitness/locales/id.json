@@ -10923,5 +10923,6 @@
   "Participants by observation count": "Peserta berdasarkan jumlah pengamatan",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: selisih terkecil yang tercantum dalam nomor pesan adalah {smallest}; paling banyak {listed} selisih tercantum untuk setiap penomoran.",
   "ranges: {n}": "rentang: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak terdeteksi: {ids}. Rentang: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak terdeteksi: {ids}. Rentang: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "riwayat beberapa obrolan pribadi, bot, atau grup biasa tidak dibaca sampai akhir"
 }

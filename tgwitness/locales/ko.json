@@ -10923,5 +10923,6 @@
   "Participants by observation count": "관찰 횟수별 참여자",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "매개변수: 메시지 번호 간에 나열된 가장 작은 간격은 {smallest}이며, 각 번호 체계에 대해 최대 {listed}개의 간격이 나열됩니다.",
   "ranges: {n}": "범위: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "확인되지 않은 ID: {ids}. 범위: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "확인되지 않은 ID: {ids}. 범위: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "일부 비공개 채팅, 봇 또는 일반 그룹의 기록이 끝까지 읽히지 않았습니다"
 }

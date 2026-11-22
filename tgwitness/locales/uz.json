@@ -10974,5 +10974,6 @@
   "Participants by observation count": "Ishtirokchilar kuzatuv bo'yicha soni",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametrlar: xabar raqamlaridagi ro'yxatda keltirilgan eng kichik bo'shliq: {smallest}. Har bir raqamlash bo'yicha eng ko'pi bilan {listed} bo'shliq ro'yxatga olinadi.",
   "ranges: {n}": "diapazonlar: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Ko'rilmagan IDlar: {ids}. Diapazonlar: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Ko'rilmagan IDlar: {ids}. Diapazonlar: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ba'zi shaxsiy suhbatlar, botlar yoki oddiy guruhlar tarixi oxirigacha o'qilmagan"
 }

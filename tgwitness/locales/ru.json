@@ -11061,5 +11061,6 @@
   "Participants by observation count": "Участники по количеству наблюдений",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметры: наименьший указанный разрыв в номерах сообщений равен {smallest}; для каждой нумерации указано не более {listed} разрывов.",
   "ranges: {n}": "диапазоны: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Незафиксированные идентификаторы: {ids}. Диапазоны: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Незафиксированные идентификаторы: {ids}. Диапазоны: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "история некоторых личных чатов, ботов или обычных групп не была прочитана до конца"
 }

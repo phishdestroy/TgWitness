@@ -10923,5 +10923,6 @@
   "Participants by observation count": "按观察次数排序的参与者",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "参数：消息编号中列出的最小间隔为{smallest}；每个编号最多列出{listed}个间隔。",
   "ranges: {n}": "范围：{n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未观察到的 ID：{ids}。范围：{ranges}。"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未观察到的 ID：{ids}。范围：{ranges}。",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私聊、机器人或普通群组的聊天记录未被读取至末尾"
 }

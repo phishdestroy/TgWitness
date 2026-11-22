@@ -10974,5 +10974,6 @@
   "Participants by observation count": "निरीक्षण द्वारा प्रतिभागियों की गिनती",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "पैरामीटर: संदेश संख्याओं में सूचीबद्ध सबसे छोटा अंतराल {smallest} है; प्रत्येक क्रमांकन के लिए अधिकतम {listed} अंतराल सूचीबद्ध किए गए हैं।",
   "ranges: {n}": "श्रेणियाँ: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "अनदेखे आईडी: {ids}। श्रेणियाँ: {ranges}।"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "अनदेखे आईडी: {ids}। श्रेणियाँ: {ranges}।",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "कुछ निजी चैट, बॉट्स या सामान्य समूहों का इतिहास अंत तक नहीं पढ़ा गया था"
 }

@@ -10923,5 +10923,6 @@
   "Participants by observation count": "観察回数別の参加者数",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "パラメータ：メッセージ番号にリストされている最小のギャップは{smallest}です。各番号付けについて、最大{listed}個のギャップがリストされています。",
   "ranges: {n}": "範囲：{n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "確認されなかったID：{ids}。範囲：{ranges}。"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "確認されなかったID：{ids}。範囲：{ranges}。",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "一部のプライベートチャット、ボット、または通常のグループの履歴が最後まで読み込まれていませんでした"
 }

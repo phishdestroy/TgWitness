@@ -10974,5 +10974,6 @@
   "Participants by observation count": "شرکت‌کنندگان بر اساس شمارش مشاهده",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پارامترها: کوچک‌ترین شکاف فهرست‌شده در شماره‌های پیام {smallest} است؛ حداکثر {listed} شکاف برای هر شماره‌گذاری فهرست می‌شود.",
   "ranges: {n}": "بازه‌ها: {n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "شناسهٔ مشاهده‌نشده: {ids}. بازه‌ها: {ranges}."
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "شناسهٔ مشاهده‌نشده: {ids}. بازه‌ها: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "تاریخچه برخی چت‌های خصوصی، ربات‌ها یا گروه‌های عادی تا انتها خوانده نشد"
 }

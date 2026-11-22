@@ -10923,5 +10923,6 @@
   "Participants by observation count": "按觀察次數排序的參與者",
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "參數：訊息編號中列出的最小間隔為 {smallest}；每組編號最多列出 {listed} 個間隔。",
   "ranges: {n}": "範圍：{n}",
-  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未觀察到的 ID：{ids}。範圍：{ranges}。"
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未觀察到的 ID：{ids}。範圍：{ranges}。",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私人聊天、機器人或一般群組的對話紀錄並未讀取至結尾"
 }
