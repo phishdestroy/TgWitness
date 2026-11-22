@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "উচ্চ বিশ্বাসের ভিত্তিতে একটি চ্যাটে ফাঁক নির্ধারণ করা হয়েছে",
   "Message numbers below the oldest exported message": "সবচেয়ে পুরনো রপ্তানি করা বার্তার চেয়েও পুরনো অনুপস্থিত নম্বরসমূহ",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "বার্তাগুলো কালানুক্রমিকভাবে সাজানো, সবচেয়ে পুরনো থেকে সবচেয়ে নতুন পর্যন্ত। স্বাক্ষরিত JSONL ফাইলগুলোই কর্তৃপক্ষীয়।",
-  "The {n} most active senders; each column is one interval.": "{n}টি সবচেয়ে সক্রিয় প্রেরক। প্রতিটি কলাম একটি সময়কাল নির্দেশ করে।"
+  "The {n} most active senders; each column is one interval.": "{n}টি সবচেয়ে সক্রিয় প্রেরক। প্রতিটি কলাম একটি সময়কাল নির্দেশ করে।",
+  "No public link": "কোনও পাবলিক লিঙ্ক নেই",
+  "Public link": "পাবলিক লিঙ্ক",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json রপ্তানি করার সময় প্রতিটি প্রেরকের নাম এবং এর উৎস দেখায়: অ্যাকাউন্টের যোগাযোগসমূহ অথবা টেলিগ্রাম প্রোফাইল। যেখানে জার্নালে বার্তা প্রেরণের সময় নাম রেকর্ড করা হয়েছিল, sender-names.json এবং পাঠযোগ্য অনুলিপিগুলো সেটি ব্যবহার করে; নাম এবং ব্যবহারকারীর নাম পরিবর্তনশীল।",
+  "excluded by the attachment settings": "সংযুক্তি সেটিংস দ্বারা বাদ দেওয়া হয়েছে",
+  "incomplete server hashes; file content not downloaded": "অসম্পূর্ণ সার্ভার হ্যাশ; ফাইলের বিষয়বস্তু ডাউনলোড হয়নি",
+  "member": "সদস্য",
+  "not a member": "সদস্য নয়",
+  "server hashes saved; file content not downloaded": "সার্ভার হ্যাশ সংরক্ষিত; ফাইলের বিষয়বস্তু ডাউনলোড করা হয়নি",
+  "server hashes unavailable; file content not downloaded": "সার্ভার হ্যাশ অনুপলব্ধ; ফাইল সামগ্রী ডাউনলোড করা হয়নি",
+  "Basic group": "গ্রুপ",
+  "No observations in this selection: {list}.": "{list} দ্বারা এই নির্বাচনে কিছুই পাওয়া যায়নি।",
+  "restricted member": "সীমিত অধিকারের সদস্য",
+  "{n} edit": "{n}সম্পাদিত বার্তা",
+  "{n} deletion": "{n} মুছে ফেলা বার্তা",
+  "{n} saved file": "{n} ফাইল সংরক্ষিত"
 }

@@ -11045,5 +11045,20 @@
   "Gap runs attributed with high confidence": "Пробелы, отнесенные к чату с высокой степенью достоверности",
   "Message numbers below the oldest exported message": "Отсутствующие номера, более старые, чем самое старое экспортированное сообщение",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Сообщения приведены в хронологическом порядке, от самых старых к самым новым. Авторитетными являются подписанные файлы JSONL.",
-  "The {n} most active senders; each column is one interval.": "{n} самых активных отправителей. Каждый столбец соответствует одному временному интервалу."
+  "The {n} most active senders; each column is one interval.": "{n} самых активных отправителей. Каждый столбец соответствует одному временному интервалу.",
+  "No public link": "Без публичной ссылки",
+  "Public link": "Публичная ссылка",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Файл chat.json содержит имя каждого отправителя на момент экспорта и его источник: контакты аккаунта или профиль в Telegram. Если в журнале было зафиксировано имя на момент отправки сообщения, то в файле sender-names.json и в читаемых копиях используется именно оно; имена и пользовательские имена могут изменяться.",
+  "excluded by the attachment settings": "исключено настройками вложений",
+  "incomplete server hashes; file content not downloaded": "неполные хэши сервера; содержимое файлов не загружено",
+  "member": "участник",
+  "not a member": "не является участником",
+  "server hashes saved; file content not downloaded": "Сохранены хэши сервера; содержимое файлов не загружалось",
+  "server hashes unavailable; file content not downloaded": "Хэши сервера недоступны; содержимое файлов не загружено",
+  "Basic group": "Группа",
+  "No observations in this selection: {list}.": "В этой подборке по критерию: {list} ничего не найдено.",
+  "restricted member": "участник с ограниченными правами",
+  "{n} edit": "{n} отредактированное сообщение",
+  "{n} deletion": "{n} удалённое сообщение",
+  "{n} saved file": "Сохранен файл {n}"
 }

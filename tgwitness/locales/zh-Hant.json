@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "已針對某則對話以高度信心程度標記出缺失處",
   "Message numbers below the oldest exported message": "早於最舊匯出訊息的缺失號碼",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "訊息依時間順序排列，由最舊至最新。經簽名的 JSONL 檔案為權威版本。",
-  "The {n} most active senders; each column is one interval.": "{n}位最活躍的發訊者。每欄代表一個時間區間。"
+  "The {n} most active senders; each column is one interval.": "{n}位最活躍的發訊者。每欄代表一個時間區間。",
+  "No public link": "無公開連結",
+  "Public link": "公開連結",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json 會列出匯出時每位發訊者的姓名及其來源：該帳號的聯絡人或 Telegram 個人檔案。若日誌在訊息發送時已記錄該姓名，則 sender-names.json 及可讀副本均採用該名稱；姓名與使用者名稱皆可變更。",
+  "excluded by the attachment settings": "因附件設定而被排除",
+  "incomplete server hashes; file content not downloaded": "伺服器雜湊值不完整；檔案內容未下載",
+  "member": "成員",
+  "not a member": "非成員",
+  "server hashes saved; file content not downloaded": "已儲存伺服器雜湊值；未下載檔案內容",
+  "server hashes unavailable; file content not downloaded": "無法取得伺服器雜湊值；未下載檔案內容",
+  "Basic group": "群組",
+  "No observations in this selection: {list}.": "在以下選項中未找到任何內容：{list}。",
+  "restricted member": "權限受限的會員",
+  "{n} edit": "{n} 則已編輯的訊息",
+  "{n} deletion": "{n} 則已刪除的訊息",
+  "{n} saved file": "已儲存 {n} 個檔案"
 }

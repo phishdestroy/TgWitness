@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "فاصله‌ها با اطمینان بالا به یک گفت‌وشنود نسبت داده شده‌اند",
   "Message numbers below the oldest exported message": "اعداد مفقود که قدیمی‌تر از قدیمی‌ترین پیام صادرشده هستند",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "پیام‌ها به ترتیب زمانی، از قدیمی‌ترین تا جدیدترین، ارائه شده‌اند. فایل‌های JSONL امضا شده معتبر هستند.",
-  "The {n} most active senders; each column is one interval.": "فعال‌ترین ارسال‌کننده‌های {n}. هر ستون یک بازه زمانی است."
+  "The {n} most active senders; each column is one interval.": "فعال‌ترین ارسال‌کننده‌های {n}. هر ستون یک بازه زمانی است.",
+  "No public link": "هیچ لینک عمومی",
+  "Public link": "لینک عمومی",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "فایل chat.json نام هر فرستنده را در زمان خروجی‌گیری و منبع آن (تماس‌های حساب یا پروفایل تلگرام) نشان می‌دهد. هر جا که ژورنال در زمان ارسال پیام نام را ثبت کرده باشد، فایل sender-names.json و نسخه‌های قابل‌خواندن از آن نام را استفاده می‌کنند؛ نام‌ها و نام‌های کاربری قابل تغییر هستند.",
+  "excluded by the attachment settings": "مستثنی‌شده توسط تنظیمات پیوست",
+  "incomplete server hashes; file content not downloaded": "هش‌های ناقص سرور؛ محتوای فایل دانلود نشده است",
+  "member": "عضو",
+  "not a member": "عضو نیست",
+  "server hashes saved; file content not downloaded": "هش‌های سرور ذخیره شده‌اند؛ محتوای فایل دانلود نشده است",
+  "server hashes unavailable; file content not downloaded": "هش‌های سرور در دسترس نیستند؛ محتوای فایل دانلود نشده است",
+  "Basic group": "گروه",
+  "No observations in this selection: {list}.": "در این انتخاب توسط: {list} هیچ چیزی یافت نشد.",
+  "restricted member": "عضو با حقوق محدود",
+  "{n} edit": "پیام ویرایش‌شده توسط {n}",
+  "{n} deletion": "پیام حذف‌شدهٔ {n}",
+  "{n} saved file": " پروندهٔ {n} ذخیره شد"
 }

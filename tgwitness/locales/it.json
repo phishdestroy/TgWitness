@@ -10968,5 +10968,20 @@
   "Gap runs attributed with high confidence": "Lacune attribuite a una chat con un elevato grado di certezza",
   "Message numbers below the oldest exported message": "Numeri mancanti più vecchi del messaggio esportato più antico",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "I messaggi sono in ordine cronologico, dal più vecchio al più recente. I file JSONL firmati fanno fede.",
-  "The {n} most active senders; each column is one interval.": "I {n} mittenti più attivi. Ogni colonna corrisponde a un intervallo di tempo."
+  "The {n} most active senders; each column is one interval.": "I {n} mittenti più attivi. Ogni colonna corrisponde a un intervallo di tempo.",
+  "No public link": "Nessun link pubblico",
+  "Public link": "Link pubblico",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Il file chat.json riporta il nome di ciascun mittente al momento dell’esportazione e la sua fonte: i contatti dell’account o il profilo Telegram. Laddove il registro abbia registrato il nome al momento dell’invio del messaggio, il file sender-names.json e le copie leggibili lo utilizzano; nomi e nomi utente sono modificabili.",
+  "excluded by the attachment settings": "esclusi dalle impostazioni degli allegati",
+  "incomplete server hashes; file content not downloaded": "hash dei server incompleti; contenuto dei file non scaricato",
+  "member": "membro",
+  "not a member": "non è iscritto",
+  "server hashes saved; file content not downloaded": "hash dei server salvati; contenuto dei file non scaricato",
+  "server hashes unavailable; file content not downloaded": "hash dei server non disponibili; contenuto dei file non scaricato",
+  "Basic group": "Gruppo",
+  "No observations in this selection: {list}.": "Nessun risultato trovato in questa selezione per: {list}.",
+  "restricted member": "membro con diritti limitati",
+  "{n} edit": "{n} messaggio modificato",
+  "{n} deletion": "{n} messaggio cancellato",
+  "{n} saved file": "File {n} salvato"
 }

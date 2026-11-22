@@ -58,7 +58,7 @@ html[data-template=editorial] .dossier{--dossier-navy:#382c2a;--dossier-gold:#e7
 .dossier .stamp .stamp-label,.dossier .stamp .stamp-key span{color:#52616a}.dossier .stamp .stamp-key{background:#eae8e1;color:#263e4c;border-radius:2px;font-size:11px}
 .dossier .stamp.partial .stamp-state{color:#87500b}.dossier .stamp.ok .stamp-state{color:#256a55}.dossier .stamp.bad .stamp-state{color:#a62e39}
 .dossier .stamp-hint{color:#234e66;background:white;border-color:#d7d1c5;border-radius:2px}
-.dossier .tiles,.account-dossier .stats{gap:0;border:1px solid var(--line);background:var(--card,var(--paper));margin:0;grid-template-columns:repeat(4,minmax(0,1fr));border-top:0}
+.dossier .tiles{gap:0;border:1px solid var(--line);background:var(--card,var(--paper));margin:0;grid-template-columns:repeat(4,minmax(0,1fr));border-top:0}.account-dossier .stats{gap:0;border:1px solid var(--line);background:var(--card,var(--paper));margin:0;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:0}
 .dossier .tile,.account-dossier .stat{background:transparent;border:0;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;padding:22px 24px;min-width:0}
 .dossier .tile b,.account-dossier .stat dd{font:500 31px/1.3 Georgia,'Times New Roman',serif;color:var(--ink);letter-spacing:-.025em}
 .dossier .tile>span,.account-dossier .stat dt{font-size:10px;letter-spacing:.07em;color:var(--muted)}

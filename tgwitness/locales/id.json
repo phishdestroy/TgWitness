@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "Kesenjangan yang ditetapkan pada suatu obrolan dengan tingkat keyakinan tinggi",
   "Message numbers below the oldest exported message": "Nomor yang hilang yang lebih tua dari pesan tertua yang diekspor",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Pesan-pesan disusun berdasarkan urutan kronologis, dari yang tertua hingga yang terbaru. Berkas JSONL yang telah ditandatangani memiliki keabsahan hukum.",
-  "The {n} most active senders; each column is one interval.": "{n} pengirim paling aktif. Setiap kolom mewakili satu interval waktu."
+  "The {n} most active senders; each column is one interval.": "{n} pengirim paling aktif. Setiap kolom mewakili satu interval waktu.",
+  "No public link": "Tidak ada tautan publik",
+  "Public link": "Tautan publik",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Berkas chat.json mencantumkan nama setiap pengirim pada saat ekspor beserta sumbernya: daftar kontak akun atau profil Telegram. Jika jurnal mencatat nama tersebut pada saat pesan dikirim, berkas sender-names.json dan salinan yang dapat dibaca menggunakannya; nama dan nama pengguna dapat diubah.",
+  "excluded by the attachment settings": "dikecualikan oleh pengaturan lampiran",
+  "incomplete server hashes; file content not downloaded": "hash server tidak lengkap; isi berkas tidak diunduh",
+  "member": "anggota",
+  "not a member": "bukan anggota",
+  "server hashes saved; file content not downloaded": "hash server disimpan; isi berkas tidak diunduh",
+  "server hashes unavailable; file content not downloaded": "hash server tidak tersedia; isi berkas tidak diunduh",
+  "Basic group": "Grup",
+  "No observations in this selection: {list}.": "Tidak ditemukan apa pun dalam pilihan ini oleh: {list}.",
+  "restricted member": "anggota dengan hak terbatas",
+  "{n} edit": "{n} pesan yang diedit",
+  "{n} deletion": "{n} pesan yang dihapus",
+  "{n} saved file": "Berkas {n} disimpan"
 }

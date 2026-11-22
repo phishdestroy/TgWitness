@@ -332,7 +332,7 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
                       ("Scope", _e(scope)),
                       ("Method requested", _e(method(requested))),
                       ("Method used", _e(method(used)) if used else _e(say("recorded in the journal"))),
-                      ("Why", _e(say(used_reason)) if used_reason else None),
+                      ("Why", _e(say(used_reason)) if used_reason and not limits_of(facts) else None),
                       ("Date range (UTC)", _e(" → ".join(str(x or "…") for x in (options.get("from_utc"), options.get("to_utc"))))
                        if options.get("from_utc") or options.get("to_utc") else None),
                       ("Media budget", _e(str(options.get("max_total_gib")) + " GiB") if options.get("max_total_gib") else None),

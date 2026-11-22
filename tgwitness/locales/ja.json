@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "高い確信度で特定されたチャットの欠落箇所",
   "Message numbers below the oldest exported message": "エクスポートされたメッセージの中で最も古いものより以前の欠落した番号",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "メッセージは古いものから新しいものへと時系列順に並んでいます。署名付きJSONLファイルが正式な記録となります。",
-  "The {n} most active senders; each column is one interval.": "{n}人の最もアクティブな送信者。各列は1つの時間区間を表す。"
+  "The {n} most active senders; each column is one interval.": "{n}人の最もアクティブな送信者。各列は1つの時間区間を表す。",
+  "No public link": "公開リンクなし",
+  "Public link": "公開リンク",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json には、エクスポート時点での各送信者の名前とその出典（アカウントの連絡先または Telegram プロフィール）が記載されています。メッセージ送信時にジャーナルに名前が記録されていた場合、sender-names.json および読み取り可能なコピーではその名前が使用されます。名前およびユーザー名は変更される可能性があります。",
+  "excluded by the attachment settings": "添付設定により除外されたもの",
+  "incomplete server hashes; file content not downloaded": "サーバーのハッシュ値が不完全；ファイルの内容はダウンロードされていない",
+  "member": "メンバー",
+  "not a member": "メンバーではありません",
+  "server hashes saved; file content not downloaded": "サーバーのハッシュ値は保存済み。ファイルの内容はダウンロードされていない。",
+  "server hashes unavailable; file content not downloaded": "サーバーのハッシュ値は利用不可。ファイルの内容はダウンロードされていない。",
+  "Basic group": "グループ",
+  "No observations in this selection: {list}.": "{list}によるこの選択項目には何も見つかりませんでした。",
+  "restricted member": "権限が制限されたメンバー",
+  "{n} edit": "{n}件の編集済みメッセージ",
+  "{n} deletion": "{n}件の削除済みメッセージ",
+  "{n} saved file": "{n}ファイルが保存されました"
 }

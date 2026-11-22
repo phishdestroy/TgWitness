@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "신뢰도가 높은 채팅에 대해 누락된 부분이 지정됨",
   "Message numbers below the oldest exported message": "내보낸 메시지 중 가장 오래된 메시지보다 더 오래된 누락된 번호들",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "메시지는 가장 오래된 것부터 가장 최근 것까지 시간순으로 나열되어 있습니다. 서명된 JSONL 파일이 공식적인 근거 자료입니다.",
-  "The {n} most active senders; each column is one interval.": "{n}명의 가장 활발한 발신자. 각 열은 하나의 시간 구간을 나타냅니다."
+  "The {n} most active senders; each column is one interval.": "{n}명의 가장 활발한 발신자. 각 열은 하나의 시간 구간을 나타냅니다.",
+  "No public link": "공개 링크 없음",
+  "Public link": "공개 링크",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json 파일은 내보내기 시점의 각 발신자 이름과 그 출처(계정의 연락처 또는 텔레그램 프로필)를 제공합니다. 메시지 전송 당시 일지에 기록된 이름이 있는 경우, sender-names.json 파일과 가독성 있는 사본에서는 해당 이름을 사용합니다. 이름과 사용자 이름은 변경될 수 있습니다.",
+  "excluded by the attachment settings": "첨부 파일 설정에 의해 제외됨",
+  "incomplete server hashes; file content not downloaded": "서버 해시 값이 불완전함; 파일 내용은 다운로드되지 않음",
+  "member": "회원",
+  "not a member": "회원이 아님",
+  "server hashes saved; file content not downloaded": "서버 해시값은 저장되었으며, 파일 내용은 다운로드되지 않았습니다.",
+  "server hashes unavailable; file content not downloaded": "서버 해시 값 미확인; 파일 내용 미다운로드",
+  "Basic group": "그룹",
+  "No observations in this selection: {list}.": "{list}에 의해 선택된 항목에서 아무것도 발견되지 않았습니다.",
+  "restricted member": "권한이 제한된 회원",
+  "{n} edit": "{n} 편집된 메시지",
+  "{n} deletion": "{n} 삭제된 메시지",
+  "{n} saved file": "{n}개의 파일 저장됨"
 }

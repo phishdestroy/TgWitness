@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "Yuqori ishonch bilan suhbatga tegishli bo'lgan bo'shliqlar",
   "Message numbers below the oldest exported message": "Eng eski eksport qilingan xabardan ham eski bo'lgan raqamlar yo'qolgan",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Xabarlar eng qadimdan eng yangigacha kronologik tartibda joylashtirilgan. Imzolangan JSONL fayllar haqiqiy hisoblanadi.",
-  "The {n} most active senders; each column is one interval.": "{n} eng faol jo'natuvchilar. Har bir ustun bitta vaqt oralig'ini bildiradi."
+  "The {n} most active senders; each column is one interval.": "{n} eng faol jo'natuvchilar. Har bir ustun bitta vaqt oralig'ini bildiradi.",
+  "No public link": "Ochiq havolasi yo'q",
+  "Public link": "Ommaviy havola",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json eksportda har bir jo'natuvchining ismini va uning manbasini ko'rsatadi: akkaunt kontaktlari yoki Telegram profili. Agar jurnal xabar yuborilgan paytda ismini qayd etgan bo'lsa, sender-names.json va o'qiladigan nusxalarda aynan shu ishlatiladi; ismlar va foydalanuvchi nomlari o'zgartirilishi mumkin.",
+  "excluded by the attachment settings": "ilova sozlamalari orqali chetlatilgan",
+  "incomplete server hashes; file content not downloaded": "to'liq bo'lmagan server xeshlari; fayl mazmuni yuklab olinmagan",
+  "member": "a'zo",
+  "not a member": "a'zo emas",
+  "server hashes saved; file content not downloaded": "Server xeshlari saqlangan; fayl mazmuni yuklab olinmagan",
+  "server hashes unavailable; file content not downloaded": "server hashlari mavjud emas; fayl mazmuni yuklab olinmagan",
+  "Basic group": "Guruh",
+  "No observations in this selection: {list}.": "{list} tomonidan tanlangan ushbu ma'lumotlarda hech narsa topilmadi.",
+  "restricted member": "cheklangan huquqlarga ega a'zo",
+  "{n} edit": "{n}tahrirlangan xabar",
+  "{n} deletion": "{n} o'chirib yuborilgan xabar",
+  "{n} saved file": "{n}-fayl saqlangan"
 }

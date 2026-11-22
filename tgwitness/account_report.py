@@ -99,8 +99,8 @@ nav{display:flex;gap:8px 18px;flex-wrap:wrap;margin:18px 0;font-size:13px}nav a{
 .transcript-pages{align-items:center}.transcript-page-numbers{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;direction:ltr}.transcript-page-numbers a,.transcript-page-numbers [aria-current]{display:inline-grid;place-items:center;min-width:36px;min-height:36px;padding:4px 8px;border:1px solid var(--line);border-radius:5px;text-decoration:none;font-variant-numeric:tabular-nums}.transcript-page-numbers [aria-current]{background:var(--soft);color:var(--accent);font-weight:700;border-color:var(--accent)}
 .account-dossier.transcript-index .account-cover{padding:24px 28px;margin-bottom:16px}.account-dossier.transcript-index .account-cover h1{font-size:clamp(25px,4vw,38px);margin:14px 0;max-width:none}.account-dossier.transcript-index .account-cover .lead{font-size:14px}.transcript-summary{display:flex;gap:24px 44px;flex-wrap:wrap;margin:20px 0}.transcript-summary dt{font-size:12px;color:var(--muted)}.transcript-summary dd{margin:4px 0 0;font:600 25px/1.3 ui-monospace,monospace}
 .transcript-calendar h3{font:600 20px/1.5 ui-monospace,monospace;margin-top:24px}.transcript-months{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:10px 0 22px}.transcript-months>a,.transcript-months>span{display:flex;flex-direction:column;gap:4px;padding:10px 6px;text-align:center;border:1px solid var(--line);border-radius:6px;text-decoration:none;min-width:0;overflow-wrap:anywhere}.transcript-months>a{background:var(--paper);border-bottom:3px solid var(--accent)}.transcript-months>span{color:var(--muted)}.transcript-months small{font-variant-numeric:tabular-nums}
-.transcript-page-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.transcript-page-list li{margin:0;min-width:0}.transcript-page-list a{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;padding:14px;border:1px solid var(--line);border-radius:6px;text-decoration:none;background:var(--paper)}.transcript-page-list small{width:100%}.transcript-months a:focus-visible,.transcript-page-list a:focus-visible,.transcript-pages a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-@media(max-width:600px){.transcript-months{grid-template-columns:repeat(3,minmax(0,1fr))}.transcript-page-list{grid-template-columns:1fr}.account-dossier.transcript-index .account-cover{padding:20px}}
+.transcript-page-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}.transcript-page-list li{margin:0;min-width:0}.transcript-page-list a{display:grid;gap:1px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;background:var(--paper);font-size:13px}.transcript-page-list small{font-size:11.5px}.transcript-months a:focus-visible,.transcript-page-list a:focus-visible,.transcript-pages a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){.transcript-months{grid-template-columns:repeat(3,minmax(0,1fr))}.transcript-page-list{grid-template-columns:repeat(2,minmax(0,1fr))}.account-dossier.transcript-index .account-cover{padding:20px}}
 code{font:12px/1.6 ui-monospace,monospace}.command{display:block;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;white-space:pre-wrap;direction:ltr;unicode-bidi:plaintext}
 details{border-top:1px solid var(--line);padding-top:10px;margin-top:16px}summary{cursor:pointer;color:var(--muted);font-size:12px}li{margin-bottom:7px}footer{border-top:1px solid var(--line);margin-top:32px;padding-top:16px;font-size:12px;color:var(--muted)}
 @media(prefers-color-scheme:dark){:root{--bg:#101722;--paper:#182231;--ink:#e8eef8;--muted:#abb8cb;--line:#354258;--accent:#9cc0ff;--soft:#233553;--warn:#332c1f}}
@@ -247,12 +247,18 @@ def opening(context, title, sharing=False, compact=False):
 
 def stats(counts, say):
     parts = ['<dl class="stats">']
+    unreached = counts.get('media_not_reached') if type(counts.get('media_not_reached')) is int else 0
     for key, label in COUNT_LABELS.items():
         value = counts.get(key)
+        if key == 'media_skipped' and type(value) is int:
+            value -= min(value, unreached)
         if key in ('media_skipped', 'media_hashed') and value == 0 or key == 'records' and value == counts.get('messages'):
             continue
         if type(value) is int and value >= 0:
-            parts.append('<div class="stat"><dt>' + e(say(label)) + '</dt><dd>' + str(value) + '</dd></div>')
+            parts.append('<div class="stat"><dt>' + e(say(label)) + '</dt><dd>' + str(activity_maps.thousands(say, value)) + '</dd></div>')
+        if key == 'media_skipped' and unreached:
+            parts.append('<div class="stat"><dt>' + e(say('Files not reached before collection stopped')) + '</dt><dd>'
+                         + str(activity_maps.thousands(say, unreached)) + '</dd></div>')
     return ''.join(parts) + '</dl>'
 
 
@@ -661,8 +667,8 @@ def account_chat_index(context, chat, counts, months):
     yield encoded('<nav><a href="../index.html">← ' + e(say('Account export')) + '</a><a href="../map.html">'
                   + e(say('Activity map')) + '</a><a href="' + chat_page_name(stem, 1) + '#messages">'
                   + e(say('Messages')) + '</a></nav><dl class="transcript-summary"><div><dt>' + e(say('Messages'))
-                  + '</dt><dd>' + str(sum(row[0] for row in counts)) + '</dd></div><div><dt>' + e(say('Transcript pages'))
-                  + '</dt><dd><a href="#transcript-pages">' + str(len(counts)) + '</a></dd></div></dl>')
+                  + '</dt><dd>' + str(activity_maps.thousands(say, sum(row[0] for row in counts))) + '</dd></div><div><dt>' + e(say('Transcript pages'))
+                  + '</dt><dd><a href="#transcript-pages">' + str(activity_maps.thousands(say, len(counts))) + '</a></dd></div></dl>')
     yield encoded('<p>' + e(say('Messages are shown oldest first. The signed JSONL files are authoritative.'))
                   + '</p>')
     if months:
@@ -688,8 +694,8 @@ def account_chat_index(context, chat, counts, months):
     for page, (count, start, end) in enumerate(counts, 1):
         dates = ('—' if start is None else activity_maps.day_text(start) + ' — ' + activity_maps.day_text(end) + ' UTC')
         yield encoded('<li><a href="' + chat_page_name(stem, page) + '#messages"><strong>' + e(say('Page')) + ' ' + str(page)
-                      + '</strong><span>' + e(say('Messages')) + ': ' + str(count) + '</span><small>' + e(dates)
-                      + '</small><small>' + e(say('Records')) + ' ' + str(first) + '–' + str(first + count - 1) + '</small></a></li>')
+                      + '</strong><small>' + e(dates) + '</small><small>' + e(say('Records')) + ' ' + str(first) + '–'
+                      + str(first + count - 1) + '</small></a></li>')
         first += count
     yield encoded('</ul></section>')
     yield ending(say)
@@ -804,8 +810,9 @@ def account_chat(context, chat, rows):
                   e(say('Messages are shown oldest first. The signed JSONL files are authoritative.')) + '</p>')
     if state_note(chat, say):
         yield encoded('<p class="notice">' + e(state_note(chat, say)) + '</p>')
-    yield encoded(copy_context(context, say))
     pagination = context.get('pagination') or {}
+    if pagination.get('page', 1) == 1:
+        yield encoded(copy_context(context, say))
     # Charts and the assessment describe the whole chat: they open it once, and later pages go straight to messages.
     first = pagination.get('page', 1) == 1
     if first:

@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "Yüksek güvenilirlikle bir sohbete atanan boşluklar",
   "Message numbers below the oldest exported message": "Dışa aktarılan en eski mesajdan daha eski olan eksik numaralar",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Mesajlar, en eskiden en yeniye doğru kronolojik sırayla düzenlenmiştir. İmzalı JSONL dosyaları kesin geçerliliğe sahiptir.",
-  "The {n} most active senders; each column is one interval.": "{n} en aktif gönderen. Her sütun bir zaman aralığını temsil eder."
+  "The {n} most active senders; each column is one interval.": "{n} en aktif gönderen. Her sütun bir zaman aralığını temsil eder.",
+  "No public link": "Halka açık bağlantı yok",
+  "Public link": "Herkese açık bağlantı",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json dosyası, dışa aktarım sırasında her gönderenin adını ve kaynağını (hesabın rehberindeki kişiler veya Telegram profili) belirtir. Günlük dosyası, mesajın gönderildiği anda adı kaydetmişse, sender-names.json dosyası ve okunabilir kopyalar bu adı kullanır; adlar ve kullanıcı adları değiştirilebilir.",
+  "excluded by the attachment settings": "ek ayarları nedeniyle hariç tutuldu",
+  "incomplete server hashes; file content not downloaded": "eksik sunucu hash değerleri; dosya içeriği indirilmemiştir",
+  "member": "üye",
+  "not a member": "üye değil",
+  "server hashes saved; file content not downloaded": "sunucu hash değerleri kaydedildi; dosya içeriği indirilmedi",
+  "server hashes unavailable; file content not downloaded": "sunucu hash değerleri mevcut değil; dosya içeriği indirilmedi",
+  "Basic group": "Grup",
+  "No observations in this selection: {list}.": "{list} tarafından yapılan bu seçimde hiçbir şey bulunamadı.",
+  "restricted member": "sınırlı haklara sahip üye",
+  "{n} edit": "{n} düzenlenmiş mesaj",
+  "{n} deletion": "{n} silinmiş mesaj",
+  "{n} saved file": "{n} dosya kaydedildi"
 }

@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "Lücken, die einem Chat mit hoher Sicherheit zugeordnet wurden",
   "Message numbers below the oldest exported message": "Fehlende Nummern, die älter sind als die älteste exportierte Nachricht",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Die Nachrichten sind in chronologischer Reihenfolge angeordnet, von der ältesten bis zur neuesten. Die signierten JSONL-Dateien sind maßgebend.",
-  "The {n} most active senders; each column is one interval.": "Die {n} aktivsten Absender. Jede Spalte entspricht einem Zeitintervall."
+  "The {n} most active senders; each column is one interval.": "Die {n} aktivsten Absender. Jede Spalte entspricht einem Zeitintervall.",
+  "No public link": "Kein öffentlicher Link",
+  "Public link": "Öffentlicher Link",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json gibt den Namen jedes Absenders zum Zeitpunkt des Exports sowie dessen Quelle an: die Kontakte des Kontos oder das Telegram-Profil. Wenn das Protokoll den Namen zum Zeitpunkt einer Nachricht erfasst hat, verwenden sender-names.json und die lesbaren Kopien diesen; Namen und Benutzernamen sind veränderbar.",
+  "excluded by the attachment settings": "durch die Anhangseinstellungen ausgeschlossen",
+  "incomplete server hashes; file content not downloaded": "Unvollständige Server-Hashes; Dateiinhalte nicht heruntergeladen",
+  "member": "Mitglied",
+  "not a member": "kein Mitglied",
+  "server hashes saved; file content not downloaded": "Server-Hashes gespeichert; Dateiinhalte nicht heruntergeladen",
+  "server hashes unavailable; file content not downloaded": "Server-Hashes nicht verfügbar; Dateiinhalt nicht heruntergeladen",
+  "Basic group": "Gruppe",
+  "No observations in this selection: {list}.": "In dieser Auswahl von: {list} wurde nichts gefunden.",
+  "restricted member": "Mitglied mit eingeschränkten Rechten",
+  "{n} edit": "{n} bearbeitete Nachricht",
+  "{n} deletion": "{n} gelöschte Nachricht",
+  "{n} saved file": "{n}-Datei gespeichert"
 }

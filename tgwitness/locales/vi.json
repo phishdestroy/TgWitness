@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "Các khoảng trống được gán cho một cuộc trò chuyện với mức độ tin cậy cao",
   "Message numbers below the oldest exported message": "Các số điện thoại bị thiếu có thời gian trước cả tin nhắn xuất ra cũ nhất",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Các tin nhắn được sắp xếp theo thứ tự thời gian, từ cũ nhất đến mới nhất. Các tệp JSONL đã được ký số là bản chính thức.",
-  "The {n} most active senders; each column is one interval.": "{n} người gửi tin nhắn tích cực nhất. Mỗi cột tương ứng với một khoảng thời gian."
+  "The {n} most active senders; each column is one interval.": "{n} người gửi tin nhắn tích cực nhất. Mỗi cột tương ứng với một khoảng thời gian.",
+  "No public link": "Không có liên kết công khai",
+  "Public link": "Liên kết công khai",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Tệp chat.json cung cấp tên của từng người gửi tại thời điểm xuất dữ liệu cùng với nguồn gốc của tên đó: danh bạ của tài khoản hoặc hồ sơ Telegram. Trong trường hợp nhật ký đã ghi lại tên tại thời điểm gửi tin nhắn, tệp sender-names.json và các bản sao có thể đọc được sẽ sử dụng tên đó; tên và tên người dùng có thể thay đổi.",
+  "excluded by the attachment settings": "bị loại trừ theo cài đặt tệp đính kèm",
+  "incomplete server hashes; file content not downloaded": "băm máy chủ không đầy đủ; nội dung tệp chưa được tải xuống",
+  "member": "thành viên",
+  "not a member": "không phải là thành viên",
+  "server hashes saved; file content not downloaded": "Các giá trị băm của máy chủ đã được lưu trữ; nội dung tệp không được tải xuống",
+  "server hashes unavailable; file content not downloaded": "không có mã băm máy chủ; nội dung tệp không được tải xuống",
+  "Basic group": "Nhóm",
+  "No observations in this selection: {list}.": "Không tìm thấy kết quả nào trong phần lựa chọn này theo: {list}.",
+  "restricted member": "thành viên có quyền hạn bị hạn chế",
+  "{n} edit": "{n} tin nhắn đã chỉnh sửa",
+  "{n} deletion": "{n} tin nhắn đã xóa",
+  "{n} saved file": "Tệp {n} đã được lưu"
 }

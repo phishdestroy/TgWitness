@@ -10968,5 +10968,20 @@
   "Gap runs attributed with high confidence": "Lagunas asignadas a un chat con un alto grado de confianza",
   "Message numbers below the oldest exported message": "Números que faltan anteriores al mensaje exportado más antiguo",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Los mensajes aparecen en orden cronológico, de más antiguos a más recientes. Los archivos JSONL firmados son los que tienen carácter oficial.",
-  "The {n} most active senders; each column is one interval.": "Los {n} remitentes más activos. Cada columna corresponde a un intervalo de tiempo."
+  "The {n} most active senders; each column is one interval.": "Los {n} remitentes más activos. Cada columna corresponde a un intervalo de tiempo.",
+  "No public link": "Sin enlace público",
+  "Public link": "Enlace público",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "El archivo chat.json indica el nombre de cada remitente en el momento de la exportación y su origen: los contactos de la cuenta o el perfil de Telegram. Cuando el registro ha capturado el nombre en el momento de enviar un mensaje, el archivo sender-names.json y las copias legibles lo utilizan; los nombres y los nombres de usuario son modificables.",
+  "excluded by the attachment settings": "excluidos por la configuración de archivos adjuntos",
+  "incomplete server hashes; file content not downloaded": "Hashes de servidor incompletos; contenido de los archivos no descargado",
+  "member": "miembro",
+  "not a member": "no es miembro",
+  "server hashes saved; file content not downloaded": "Se han guardado los hash del servidor; no se ha descargado el contenido de los archivos.",
+  "server hashes unavailable; file content not downloaded": "No se dispone de los hash del servidor; no se ha descargado el contenido de los archivos",
+  "Basic group": "Grupo",
+  "No observations in this selection: {list}.": "No se ha encontrado nada en esta selección de: {list}.",
+  "restricted member": "miembro con derechos restringidos",
+  "{n} edit": "{n} mensaje editado",
+  "{n} deletion": "{n} mensaje eliminado",
+  "{n} saved file": "Archivo {n} guardado"
 }

@@ -10968,5 +10968,20 @@
   "Gap runs attributed with high confidence": "Lacunes attribuées à une conversation avec un niveau de confiance élevé",
   "Message numbers below the oldest exported message": "Numéros manquants antérieurs au message exporté le plus ancien",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Les messages sont classés par ordre chronologique, du plus ancien au plus récent. Les fichiers JSONL signés font autorité.",
-  "The {n} most active senders; each column is one interval.": "Les {n} expéditeurs les plus actifs. Chaque colonne correspond à un intervalle de temps."
+  "The {n} most active senders; each column is one interval.": "Les {n} expéditeurs les plus actifs. Chaque colonne correspond à un intervalle de temps.",
+  "No public link": "Pas de lien public",
+  "Public link": "Lien public",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Le fichier chat.json indique le nom de chaque expéditeur au moment de l’exportation ainsi que sa source : les contacts du compte ou le profil Telegram. Lorsque le journal a enregistré le nom au moment de l’envoi d’un message, le fichier sender-names.json et les copies lisibles l’utilisent ; les noms et les noms d’utilisateur sont modifiables.",
+  "excluded by the attachment settings": "exclues par les paramètres de pièces jointes",
+  "incomplete server hashes; file content not downloaded": "hachages de serveur incomplets ; contenu des fichiers non téléchargé",
+  "member": "membre",
+  "not a member": "n'est pas membre",
+  "server hashes saved; file content not downloaded": "Hachages du serveur enregistrés ; contenu des fichiers non téléchargé",
+  "server hashes unavailable; file content not downloaded": "Hachages du serveur indisponibles ; contenu des fichiers non téléchargé",
+  "Basic group": "Groupe",
+  "No observations in this selection: {list}.": "Aucun résultat trouvé dans cette sélection par : {list}.",
+  "restricted member": "membre disposant de droits restreints",
+  "{n} edit": "{n} message modifié",
+  "{n} deletion": "{n} message supprimé",
+  "{n} saved file": "Fichier {n} enregistré"
 }

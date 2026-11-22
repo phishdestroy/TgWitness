@@ -11060,5 +11060,20 @@
   "Gap runs attributed with high confidence": "Luki przypisane do czatu z wysokim stopniem pewności",
   "Message numbers below the oldest exported message": "Brakujące numery starsze niż najstarsza wyeksportowana wiadomość",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Wiadomości są ułożone w porządku chronologicznym, od najstarszych do najnowszych. Autorytatywne są podpisane pliki JSONL.",
-  "The {n} most active senders; each column is one interval.": "{n} najbardziej aktywnych nadawców. Każda kolumna odpowiada jednemu przedziałowi czasowemu."
+  "The {n} most active senders; each column is one interval.": "{n} najbardziej aktywnych nadawców. Każda kolumna odpowiada jednemu przedziałowi czasowemu.",
+  "No public link": "Brak publicznego linku",
+  "Public link": "Link publiczny",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Plik chat.json podaje imię każdego nadawcy w momencie eksportu oraz jego źródło: kontakty na koncie lub profil w Telegramie. Tam, gdzie dziennik zapisał imię w momencie wysłania wiadomości, plik sender-names.json oraz czytelne kopie wykorzystują właśnie tę informację; imiona i nazwy użytkowników mogą ulegać zmianom.",
+  "excluded by the attachment settings": "wykluczone przez ustawienia załączników",
+  "incomplete server hashes; file content not downloaded": "niekompletne skróty serwerowe; zawartość plików nie została pobrana",
+  "member": "członek",
+  "not a member": "nie jestem członkiem",
+  "server hashes saved; file content not downloaded": "Zapisano skróty serwerowe; zawartość plików nie została pobrana",
+  "server hashes unavailable; file content not downloaded": "skróty serwerowe niedostępne; zawartość plików nie została pobrana",
+  "Basic group": "Grupa",
+  "No observations in this selection: {list}.": "W tej selekcji według: {list} nie znaleziono żadnych wyników.",
+  "restricted member": "użytkownik z ograniczonymi uprawnieniami",
+  "{n} edit": "{n} edytowana wiadomość",
+  "{n} deletion": "{n} usunięta wiadomość",
+  "{n} saved file": "Zapisano plik {n}"
 }

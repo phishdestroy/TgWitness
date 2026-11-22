@@ -10907,5 +10907,20 @@
   "Gap runs attributed with high confidence": "ช่องว่างที่ระบุในบทสนทนาด้วยความมั่นใจสูง",
   "Message numbers below the oldest exported message": "หมายเลขที่ขาดหายไปซึ่งมีอายุมากกว่าข้อความที่ส่งออกที่เก่าที่สุด",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "ข้อความจัดเรียงตามลำดับเวลา จากเก่าที่สุดไปยังใหม่ที่สุด ไฟล์ JSONL ที่ลงนามแล้วถือเป็นข้อมูลที่มีผลผูกพัน",
-  "The {n} most active senders; each column is one interval.": "{n} ผู้ส่งที่ใช้งานมากที่สุด แต่ละคอลัมน์แสดงช่วงเวลาหนึ่ง"
+  "The {n} most active senders; each column is one interval.": "{n} ผู้ส่งที่ใช้งานมากที่สุด แต่ละคอลัมน์แสดงช่วงเวลาหนึ่ง",
+  "No public link": "ไม่มีลิงก์สาธารณะ",
+  "Public link": "ลิงก์สาธารณะ",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "ไฟล์ chat.json แสดงชื่อของผู้ส่งแต่ละคนขณะส่งออกและแหล่งที่มา: รายชื่อติดต่อของบัญชีหรือโปรไฟล์ Telegram หากบันทึกชื่อไว้ในบันทึกขณะส่งข้อความ ไฟล์ sender-names.json และสำเนาที่อ่านได้จะใช้ชื่อนั้น; ชื่อและชื่อผู้ใช้สามารถเปลี่ยนแปลงได้",
+  "excluded by the attachment settings": "ถูกยกเว้นตามการตั้งค่าไฟล์แนบ",
+  "incomplete server hashes; file content not downloaded": "ค่าแฮชของเซิร์ฟเวอร์ไม่ครบถ้วน; เนื้อหาไฟล์ยังไม่ถูกดาวน์โหลด",
+  "member": "สมาชิก",
+  "not a member": "ไม่ใช่สมาชิก",
+  "server hashes saved; file content not downloaded": "เก็บค่าแฮชของเซิร์ฟเวอร์ไว้; ไม่ดาวน์โหลดเนื้อหาไฟล์",
+  "server hashes unavailable; file content not downloaded": "ไม่มีค่าแฮชของเซิร์ฟเวอร์; เนื้อหาไฟล์ไม่ถูกดาวน์โหลด",
+  "Basic group": "กลุ่ม",
+  "No observations in this selection: {list}.": "ไม่พบอะไรในตัวเลือกนี้จาก: {list}.",
+  "restricted member": "สมาชิกที่มีสิทธิ์จำกัด",
+  "{n} edit": "{n} ข้อความที่ได้รับการแก้ไข",
+  "{n} deletion": "{n} ข้อความที่ถูกลบ",
+  "{n} saved file": "{n} ไฟล์ถูกบันทึก"
 }

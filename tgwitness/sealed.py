@@ -302,6 +302,7 @@ class Session:
         if free < self.collector.param("media_min_free_mb") * 1024**2 or self.status()["remaining_seconds"] <= 0:
             raise ValueError("Not enough free disk or capture time")
         self.store.set_setting("capture", settings)
+        self.report_language = selection.report_language
         self.selection = selection.settings()
         self.store.append("sealed.selection", {"mode": "chats", "chat_ids": list(selection.chat_ids), "capture": settings,
             **self.language_field(), "selection": self.selection, "selection_sha256": selection_hash(self.selection),
@@ -317,7 +318,8 @@ class Session:
         for chat_id in chat_ids:
             self.current_chat = chat_id
             try:
-                await self.collector.start_export(chat_id, {"language": self.report_language or "en"})
+                await self.collector.start_export(chat_id, {"language": self.report_language or "en",
+                                                            "sealed_run": self.account_export.sealed_run})
                 await asyncio.gather(self.collector.export_task, return_exceptions=True)
             except asyncio.CancelledError:
                 raise
@@ -426,6 +428,7 @@ class Session:
         settings = normalize_capture(selection.capture.model_dump())
         self.store.set_setting("capture", settings)
         self.store.set_setting(secret_chats.SETTING, {"enabled": True, "accept_incoming": selection.accept_incoming})
+        self.report_language = selection.report_language
         self.selection = selection.settings()
         module = secret_module.describe()
         self.store.append("secret_chat.module_installed", {

@@ -11009,5 +11009,20 @@
   "Gap runs attributed with high confidence": "פערים שהוקצו לצ'אט ברמת ביטחון גבוהה",
   "Message numbers below the oldest exported message": "מספרים חסרים שקדמו להודעה הישנה ביותר שיוצאה",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "ההודעות מופיעות בסדר כרונולוגי, מהישנה ביותר ועד החדשה ביותר. קבצי ה-JSONL החתומים הם הקובעים.",
-  "The {n} most active senders; each column is one interval.": "{n} השולחים הפעילים ביותר. כל עמודה מייצגת פרק זמן אחד."
+  "The {n} most active senders; each column is one interval.": "{n} השולחים הפעילים ביותר. כל עמודה מייצגת פרק זמן אחד.",
+  "No public link": "אין קישור ציבורי",
+  "Public link": "קישור ציבורי",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "הקובץ chat.json מציין את שמו של כל שולח בעת הייצוא ואת מקורו: אנשי הקשר של החשבון או פרופיל טלגרם. במקרים שבהם היומן תיעד את השם בזמן שליחת ההודעה, הקובץ sender-names.json והעותקים הניתנים לקריאה משתמשים בו; שמות ושמות משתמש ניתנים לשינוי.",
+  "excluded by the attachment settings": "לא נכלל בהגדרות הקבצים המצורפים",
+  "incomplete server hashes; file content not downloaded": "חשישים לא שלמים של השרת; תוכן הקבצים לא הורד",
+  "member": "חבר",
+  "not a member": "אינו חבר",
+  "server hashes saved; file content not downloaded": "ה-hash של השרת נשמר; תוכן הקובץ לא הורד",
+  "server hashes unavailable; file content not downloaded": "חשישי השרת אינם זמינים; תוכן הקבצים לא הורד",
+  "Basic group": "קבוצה",
+  "No observations in this selection: {list}.": "לא נמצא דבר בבחירה זו לפי: {list}.",
+  "restricted member": "חבר עם זכויות מוגבלות",
+  "{n} edit": "{n} הודעה שעברה עריכה",
+  "{n} deletion": "{n} הודעה שנמחקה",
+  "{n} saved file": "קובץ {n} נשמר"
 }

@@ -142,7 +142,8 @@ def text_keys():
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
-                              + list(FILES.values()) + list(WITHHELD.values())))
+                              + list(FILES.values()) + list(WITHHELD.values()) + list(ROLE_NAMES.values())
+                              + list(CHAT_KINDS.values()) + list(VISIBILITIES.values())))
 
 
 def e(value):
@@ -1555,7 +1556,7 @@ def viewer_meta(say, kind, context, **extra):
 
 
 def records_pointer(say, number, anchor, title, count, label, lead=""):
-    return (section(number, anchor, title, lead) + '<div class="records-pointer"><b>' + e(label) + "</b><span>"
+    return (section(number, anchor, title, lead) + '<div class="records-pointer"><b>' + e(label) + "</b> <span>"
             + e(say("Search, filters, people, indicators and every item in full are in the viewer tab. Select items to "
                     "print them or to save an extract that verify.py checks against this archive."))
             + '</span><a class="v-btn" href="#data" data-view="data">' + e(say("Open")) + " →</a></div></section>")
@@ -3106,6 +3107,7 @@ class ChatHTML:
         yield from self.render_header()
         yield from self.render_summary()
         yield from self.render_messages()
+        yield case_assessment.html(case_assessment.snapshot(self.context, "chat", self.meta), self.say).encode("utf-8")
         yield from self.render_custody()
 
     def render_header(self):
@@ -3150,10 +3152,10 @@ class ChatHTML:
         self.numbers = iter(range(1, 100))
         yield brief_section(say, *chat_brief(say, self.meta, self.stats, self.ids, self.account_text)).encode("utf-8")
         yield snapshot_analytics.html_section(self.context.get("analytics"), self.options, say).encode("utf-8")
-        yield case_assessment.html(case_assessment.snapshot(self.context, "chat", self.meta), say).encode("utf-8")
         yield case_section(say, next(self.numbers), self.options, [
             (say("Chat"), '<span class="chathead"><span class="ava ' + colour(self.chat.get("id")) + '">' + e(initials(self.chat_title))
-             + "</span><span><b>" + e(self.chat_title) + "</b><br><small>" + e(self.chat.get("kind")) + " · " + e(self.chat.get("visibility"))
+             + "</span><span><b>" + e(self.chat_title) + "</b><br><small>" + e(say(CHAT_KINDS.get(self.chat.get("kind"), str(self.chat.get("kind")))))
+             + " · " + e(say(VISIBILITIES.get(self.chat.get("visibility"), str(self.chat.get("visibility")))))
              + " · id " + e(self.chat.get("id")) + "</small></span></span>"),
             (say("First message"), when(self.stats["first_at"])), (say("Last message"), when(self.stats["last_at"])),
             (say("Exporting account"), e(self.account_text)),
@@ -3265,6 +3267,8 @@ def chat_chunks(meta, records, context):
 LABELS = (("scam", "Telegram marks this chat as a scam", "bad"),
           ("fake", "Telegram marks this chat as fake: it impersonates someone", "bad"),
           ("restricted", "Telegram restricts this chat", "warn"), ("verified", "Verified by Telegram", "ok"))
+CHAT_KINDS = {"supergroup": "Supergroup", "channel": "Channel", "group": "Basic group", "private": "Private chat", "bot": "Bot"}
+VISIBILITIES = {"public": "Public link", "private": "No public link"}
 ROLE_NAMES = {"creator": "creator", "admin": "administrator", "member": "member", "restricted": "restricted member",
               "left": "not a member"}
 ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined",

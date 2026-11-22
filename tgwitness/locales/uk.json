@@ -11060,5 +11060,20 @@
   "Gap runs attributed with high confidence": "Пропуски, віднесені до чату з високим рівнем впевненості",
   "Message numbers below the oldest exported message": "Відсутні номери, датовані раніше за найстаріше експортоване повідомлення",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "Повідомлення розташовані в хронологічному порядку, від найстаріших до найновіших. Підписані файли JSONL є авторитетними.",
-  "The {n} most active senders; each column is one interval.": "{n} найактивніших відправників. Кожен стовпець відповідає одному часовому інтервалу."
+  "The {n} most active senders; each column is one interval.": "{n} найактивніших відправників. Кожен стовпець відповідає одному часовому інтервалу.",
+  "No public link": "Посилання не публікується",
+  "Public link": "Публічне посилання",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "Файл chat.json містить ім’я кожного відправника на момент експорту та його джерело: контакти акаунта або профіль Telegram. Якщо журнал зафіксував ім’я на момент надсилання повідомлення, файл senders-names.json та читабельні копії використовують саме його; імена та імена користувачів можуть змінюватися.",
+  "excluded by the attachment settings": "виключено налаштуваннями вкладень",
+  "incomplete server hashes; file content not downloaded": "неповні хеш-коди сервера; вміст файлів не завантажено",
+  "member": "учасник",
+  "not a member": "не є учасником",
+  "server hashes saved; file content not downloaded": "Збережено хеші сервера; вміст файлів не завантажено",
+  "server hashes unavailable; file content not downloaded": "хеші сервера недоступні; вміст файлів не завантажено",
+  "Basic group": "Група",
+  "No observations in this selection: {list}.": "У цій добірці за критерієм: {list} нічого не знайдено.",
+  "restricted member": "учасник з обмеженими правами",
+  "{n} edit": "{n} відредаговане повідомлення",
+  "{n} deletion": "{n} видалене повідомлення",
+  "{n} saved file": "Збережено файл {n}"
 }

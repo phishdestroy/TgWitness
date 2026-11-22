@@ -272,7 +272,8 @@ def split_failures(context):
 
 
 def sealed_run(context):
-    run = context.get("sealed_run") or (context.get("digest") or {}).get("sealed_run")
+    run = (context.get("sealed_run") or (context.get("digest") or {}).get("sealed_run")
+           or (context.get("options") or {}).get("sealed_run"))
     if not isinstance(run, dict):
         return None
     repo, number = run.get("repository"), run.get("run_id")

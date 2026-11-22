@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "اعلیٰ اعتماد کے ساتھ چیٹ میں وقفے منسوب کیے گئے",
   "Message numbers below the oldest exported message": "سب سے قدیم برآمد شدہ پیغام سے بھی پرانے نمبر غائب ہیں۔",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "پیغامات زمانی ترتیب میں ہیں، سب سے پرانے سے لے کر تازہ ترین تک۔ دستخط شدہ JSONL فائلیں مستند ہیں۔",
-  "The {n} most active senders; each column is one interval.": "سب سے زیادہ فعال بھیجنے والے   {n}۔   ہر کالم ایک وقتی وقفہ ہے۔"
+  "The {n} most active senders; each column is one interval.": "سب سے زیادہ فعال بھیجنے والے   {n}۔   ہر کالم ایک وقتی وقفہ ہے۔",
+  "No public link": "کوئی عوامی لنک نہیں",
+  "Public link": "عوامی لنک",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json ہر بھیجنے والے کا نام برآمد کے وقت اور اس کا ماخذ بتاتا ہے: اکاؤنٹ کے رابطے یا ٹیلیگرام پروفائل۔ جہاں جرنل نے پیغام کے وقت نام ریکارڈ کیا تھا، sender-names.json اور قابلِ مطالعہ نقول اسے استعمال کرتی ہیں؛ نام اور صارف نام تبدیل کیے جا سکتے ہیں۔",
+  "excluded by the attachment settings": "منسلکات کی ترتیبات کی وجہ سے خارج",
+  "incomplete server hashes; file content not downloaded": "نامکمل سرور ہیشز؛ فائل کا مواد ڈاؤن لوڈ نہیں ہوا",
+  "member": "رکن",
+  "not a member": "رکن نہیں",
+  "server hashes saved; file content not downloaded": "سرور ہیشز محفوظ کیے گئے؛ فائل کا مواد ڈاؤن لوڈ نہیں کیا گیا",
+  "server hashes unavailable; file content not downloaded": "سرور ہیشز دستیاب نہیں؛ فائل کا مواد ڈاؤن لوڈ نہیں ہوا",
+  "Basic group": "گروپ",
+  "No observations in this selection: {list}.": "{list} کی اس انتخاب میں کچھ بھی نہیں ملا۔",
+  "restricted member": "محدود اختیارات والا رکن",
+  "{n} edit": "{n}پیغام میں ترمیم",
+  "{n} deletion": "{n} حذف شدہ پیغام",
+  "{n} saved file": "{n}فائل محفوظ ہوئی"
 }

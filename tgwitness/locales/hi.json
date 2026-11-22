@@ -10958,5 +10958,20 @@
   "Gap runs attributed with high confidence": "उच्च विश्वास के साथ एक चैट को आवंटित अंतराल",
   "Message numbers below the oldest exported message": "सबसे पुराने निर्यात किए गए संदेश से भी पुराने नंबर",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "संदेश कालानुक्रमिक क्रम में हैं, सबसे पुराने से लेकर सबसे नए तक। हस्ताक्षरित JSONL फ़ाइलें प्रामाणिक हैं।",
-  "The {n} most active senders; each column is one interval.": "{n} सबसे सक्रिय प्रेषक। प्रत्येक स्तंभ एक समय अंतराल है।"
+  "The {n} most active senders; each column is one interval.": "{n} सबसे सक्रिय प्रेषक। प्रत्येक स्तंभ एक समय अंतराल है।",
+  "No public link": "कोई सार्वजनिक लिंक नहीं",
+  "Public link": "सार्वजनिक लिंक",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "chat.json प्रत्येक प्रेषक का नाम निर्यात के समय और उसका स्रोत देता है: खाते के संपर्क या टेलीग्राम प्रोफ़ाइल। जहाँ जर्नल ने संदेश के समय नाम दर्ज किया था, sender-names.json और पठनीय प्रतियाँ इसका उपयोग करती हैं; नाम और उपयोगकर्ता नाम परिवर्तनीय हैं।",
+  "excluded by the attachment settings": "संलग्नता सेटिंग्स द्वारा बहिष्कृत",
+  "incomplete server hashes; file content not downloaded": "अधूरे सर्वर हैश; फ़ाइल सामग्री डाउनलोड नहीं हुई",
+  "member": "सदस्य",
+  "not a member": "सदस्य नहीं",
+  "server hashes saved; file content not downloaded": "सर्वर हैश सहेजे गए; फ़ाइल सामग्री डाउनलोड नहीं की गई",
+  "server hashes unavailable; file content not downloaded": "सर्वर हैश उपलब्ध नहीं हैं; फ़ाइल सामग्री डाउनलोड नहीं की गई",
+  "Basic group": "समूह",
+  "No observations in this selection: {list}.": "{list} द्वारा इस चयन में कुछ भी नहीं मिला।",
+  "restricted member": "प्रतिबंधित अधिकारों वाला सदस्य",
+  "{n} edit": "{n}संपादित संदेश",
+  "{n} deletion": "{n} मिटाया गया संदेश",
+  "{n} saved file": "{n}फ़ाइल सहेजी गई"
 }

@@ -11162,5 +11162,20 @@
   "Gap runs attributed with high confidence": "تم تعيين الثغرات لمحادثة مع درجة ثقة عالية",
   "Message numbers below the oldest exported message": "الأرقام المفقودة التي يرجع تاريخها إلى ما قبل أقدم رسالة تم تصديرها",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "الرسائل مرتبة ترتيبًا زمنيًا، من الأقدم إلى الأحدث. وتعتبر ملفات JSONL الموقعة هي المرجع المعتمد.",
-  "The {n} most active senders; each column is one interval.": "{n} المرسلون الأكثر نشاطًا. كل عمود يمثل فترة زمنية واحدة."
+  "The {n} most active senders; each column is one interval.": "{n} المرسلون الأكثر نشاطًا. كل عمود يمثل فترة زمنية واحدة.",
+  "No public link": "لا يوجد رابط عام",
+  "Public link": "رابط عام",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "يقدم ملف chat.json اسم كل مرسل عند التصدير ومصدره: جهات اتصال الحساب أو ملف تعريف Telegram. وحيثما سجلت السجلات الاسم وقت إرسال الرسالة، يستخدمه ملف sender-names.json والنسخ القابلة للقراءة؛ الأسماء وأسماء المستخدمين قابلة للتغيير.",
+  "excluded by the attachment settings": "مستبعدة وفقًا لإعدادات المرفقات",
+  "incomplete server hashes; file content not downloaded": "تجزئات الخادم غير مكتملة؛ لم يتم تنزيل محتوى الملف",
+  "member": "عضو",
+  "not a member": "ليس عضوًا",
+  "server hashes saved; file content not downloaded": "تم حفظ التجزئات (هاشات) الخادم؛ ولم يتم تنزيل محتوى الملفات",
+  "server hashes unavailable; file content not downloaded": "تجزئات الخادم غير متوفرة؛ لم يتم تنزيل محتوى الملف",
+  "Basic group": "المجموعة",
+  "No observations in this selection: {list}.": "لم يتم العثور على أي شيء في هذه المجموعة من قبل: {list}.",
+  "restricted member": "عضو ذو حقوق محدودة",
+  "{n} edit": "{n} رسالة محررة",
+  "{n} deletion": "{n} رسالة محذوفة",
+  "{n} saved file": "تم حفظ ملف {n}"
 }

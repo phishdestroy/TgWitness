@@ -10968,5 +10968,20 @@
   "Gap runs attributed with high confidence": "Lacunas atribuídas a um chat com alto grau de confiança",
   "Message numbers below the oldest exported message": "Números ausentes anteriores à mensagem mais antiga exportada",
   "Messages are shown oldest first. The signed JSONL files are authoritative.": "As mensagens estão em ordem cronológica, da mais antiga à mais recente. Os arquivos JSONL assinados são considerados oficiais.",
-  "The {n} most active senders; each column is one interval.": "Os {n} remetentes mais ativos. Cada coluna corresponde a um intervalo de tempo."
+  "The {n} most active senders; each column is one interval.": "Os {n} remetentes mais ativos. Cada coluna corresponde a um intervalo de tempo.",
+  "No public link": "Sem link público",
+  "Public link": "Link público",
+  "chat.json gives each sender's name at export and its source: the account's contacts or the Telegram profile. Where the journal recorded the name at the time of a message, sender-names.json and the readable copies use it; names and usernames are mutable.": "O arquivo chat.json fornece o nome de cada remetente no momento da exportação e sua origem: os contatos da conta ou o perfil do Telegram. Quando o registro registrou o nome no momento da mensagem, o arquivo sender-names.json e as cópias legíveis utilizam esse nome; nomes e nomes de usuário são mutáveis.",
+  "excluded by the attachment settings": "excluídos pelas configurações de anexos",
+  "incomplete server hashes; file content not downloaded": "hashes incompletos do servidor; conteúdo do arquivo não baixado",
+  "member": "membro",
+  "not a member": "não é membro",
+  "server hashes saved; file content not downloaded": "Hashes do servidor salvos; conteúdo dos arquivos não baixado",
+  "server hashes unavailable; file content not downloaded": "Hashes do servidor indisponíveis; conteúdo do arquivo não baixado",
+  "Basic group": "Grupo",
+  "No observations in this selection: {list}.": "Nada encontrado nesta seleção por: {list}.",
+  "restricted member": "membro com direitos restritos",
+  "{n} edit": "{n} mensagem editada",
+  "{n} deletion": "{n} mensagem excluída",
+  "{n} saved file": "Arquivo {n} salvo"
 }
