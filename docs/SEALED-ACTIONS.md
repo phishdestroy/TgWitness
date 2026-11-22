@@ -69,7 +69,7 @@ substitution on sample data. **Start my capture** opens the wizard.
    Session imports are not allowed. Choose the export mode and scope. The connection
    link contains an access secret: keep it private.
 6. Choose **Automatic**, **Telegram Takeout** or **Regular Telegram API** for an account
-   export, or **Chat investigation** or **Chat event journal**. For account export,
+   export, or **Chat investigation**, **Chat event journal** or **Secret chat**. For account export,
    choose all accessible chats or load and select one or more chats, then set dates,
    Telegram Desktop chat categories, account data and attachment rules. Chat
    investigation exports up to 50 selected chats, each as its own signed chat archive.
@@ -115,6 +115,7 @@ whose full size could not be sampled.
 | Regular Telegram API | The same account scope and output choices, subject to methods available through the regular API | Does not initialize Takeout; cannot enumerate left channels/supergroups or fetch Takeout-only personal data. Contacts cover Telegram users rather than the complete saved phone contact list. Rate limits still apply. |
 | Chat investigation | Up to 50 selected chats, attachment policies | Each chat becomes its own signed chat archive inside the evidence archive: visible history, the authors of the messages with their message counts and first and last message, the chat card, the admin log when this account can read it, and absent message IDs rechecked one by one. Absent IDs are counted only for channels and supergroups, which number messages 1, 2, 3… inside each chat; private chats, bot chats and basic groups take their numbers from one counter shared by the whole account, so a gap there reflects messages in other chats and is reported as not measured. Works for chats with content protection. A chat still running at the deadline is kept as a signed partial snapshot. |
 | Chat event journal | One selected chat, attachment policies and optional avatars | Captures history and changes observed during this run. Account categories, date filters and Desktop-compatible views do not apply. |
+| Secret chat | A user to start a secret chat with, acceptance of secret chats the other side starts, attachment policies | The runner becomes one of the two devices of the secret chat. Messages, files, timers, deletions, screenshot and read notices that arrive during the run, and messages written from the capture screen, are signed into the journal; the report shows the conversation with the sender, time, record number and record hash of every message. Secret chats keep no history on Telegram's servers, so nothing from before the run exists to capture. The pinned pseudo-secret protocol module is built into the runner image and checked against its pinned SHA-256 before loading; the journal records which module was used. |
 
 All modes have the same GitHub attestation and encrypted delivery. When Takeout is
 required, it is never silently replaced by regular API access.
