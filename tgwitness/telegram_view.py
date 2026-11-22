@@ -263,8 +263,9 @@ class View:
         service = bool(row.get('action'))
         classes = 'message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
         author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
+        anonymous = service and not row.get('from_id') and not self.person(row)
         parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender, self.photo(author, '../../')),
-                 '<div class="bubble"><div class="sender" dir="auto">' + e(sender) + '</div>']
+                 '<div class="bubble">' + ('' if anonymous else '<div class="sender" dir="auto">' + e(sender) + '</div>')]
         forward = value.get('forwarded_from')
         if forward:
             parts.append('<p class="forward">' + e(say('Forwarded from')) + ': <bdi>' + e(forward) + '</bdi></p>')
@@ -273,6 +274,8 @@ class View:
             labels = {'create_group': 'created the group', 'create_channel': 'created the channel',
                       'edit_group_title': 'changed the chat name', 'edit_group_photo': 'changed the chat photo',
                       'pin_message': 'pinned a message'}
+            if value.get('action') == 'create_channel' and chat.get('kind') in ('group', 'supergroup'):
+                value = {**value, 'action': 'create_group'}
             parts.append('<p class="service-label">' + e(say(labels.get(value.get('action'), 'Service message')))
                          + (' · <bdi>' + e(value['title']) + '</bdi>' if value.get('title') else '') + '</p>')
         parts.append(self.attachments(row, value))

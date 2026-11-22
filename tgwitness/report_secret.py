@@ -33,7 +33,7 @@ def text_keys():
             "The other side deleted {n} messages; TgWitness keeps them.",
             "The other side deleted {n} message; TgWitness keeps it.", "The other side read {n} messages.",
             "The other side read {n} message.", "A message could not be decrypted and was refused.",
-            "Telegram rejected a sent message.", "A file could not be saved.", "User {id}", "Pseudo-secret", "ID {id}",
+            "Telegram rejected a sent message.", "A file could not be saved.", "User {id}", "Pseudo-secret", "Chat ID", "ID {id}",
             "read by the other side · {time}", "opened by the other side · {time}", "The other side was typing",
             "shown as read to the other side · {time}", "opened for the other side · {time}",
             "This account sent a read receipt up to {time}", "This account opened self-destructing content for the other side",
@@ -237,17 +237,11 @@ def peer_badges(say, item, when):
 
 
 def bubble_meta(say, chat, item, when):
-    parts = [say("Sent")] if item["direction"] == "out" else [say("Received"), sender_label(chat["peer"])]
+    parts = [say("Sent") if item["direction"] == "out" else say("Received")]
     parts += [when(item["at"]), say("Record #{n}", n=item["seq"])]
     if isinstance(item.get("hash"), str) and item["hash"]:
         parts.append("SHA-256 " + item["hash"][:12])
     return " · ".join(part for part in parts if part)
-
-
-def sender_label(peer):
-    name, username = peer.get("name"), peer.get("username")
-    return " ".join(part for part in (name, "@" + username if username else None,
-                                      "ID " + str(peer["id"]) if peer.get("id") is not None else None) if part)
 
 
 def peer_label(say, peer):
@@ -289,7 +283,7 @@ def facts(say, chat, when):
     origin = say("Request from the other side") if started.get("direction") == "in" else say("Requested by this account")
     return [(say(OTHER_SIDE), " · ".join(filter(None, (peer_label(say, peer), "@" + peer["username"] if peer.get("username") else None,
                                                       say("ID {id}", id=peer["id"]) if peer.get("id") is not None else None)))),
-            (say("Pseudo-secret"), "#" + str(chat["id"])),
+            (say("Chat ID"), "#" + str(chat["id"])),
             (say("Started"), when(started["at"]) + " · " + origin if started.get("at") else None),
             (say("Status"), status),
             (say(KEY), " ".join(chat["key"][i:i + 8] for i in range(0, len(chat["key"]), 8)) if chat.get("key") else None)]
@@ -334,7 +328,7 @@ CSS = """
 .secret-bubble.out{align-self:flex-end;border-radius:16px 16px 6px 16px;background:var(--tint)}
 .secret-bubble.deleted{background:var(--badtint);outline:1px solid var(--bad-line)}
 .secret-bubble .text{white-space:pre-wrap;unicode-bidi:plaintext}
-.secret-bubble img{display:block;max-width:min(100%,360px);max-height:280px;border-radius:10px;object-fit:contain}
+.secret-bubble img,.secret-bubble video{display:block;max-width:min(100%,360px);max-height:280px;border-radius:10px;object-fit:contain}
 .secret-bubble .file,.secret-bubble .meta{color:var(--muted);font-size:12px}.secret-bubble .meta{justify-self:end}
 .secret-bubble .badge{justify-self:start;padding:1px 8px;border-radius:999px;background:var(--bad);color:#fff;font-size:11px;font-weight:650}
 .secret-bubble .badge.timer{background:var(--warn)}
@@ -388,6 +382,9 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
                         budget -= len(data)
                         parts.append('<img loading="lazy" alt="' + e(media.get("name") or say("Photo")) + '" src="data:'
                                      + e(media.get("mime") or "image/jpeg") + ";base64," + base64.b64encode(data).decode("ascii") + '">')
+            elif media and archive and item["file"] and str(media.get("mime") or "").startswith(("video/", "audio/")):
+                tag = "video" if media["mime"].startswith("video/") else "audio"
+                parts.append("<" + tag + ' controls preload="none" src="media/' + e(item["file"]["sha256"]) + '"></' + tag + ">")
             if item["text"]:
                 parts.append('<div class="text">' + e(item["text"]) + "</div>")
             if media:

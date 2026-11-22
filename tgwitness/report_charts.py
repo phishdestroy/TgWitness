@@ -395,7 +395,7 @@ METRICS_INTRO = "Computed from events.jsonl by the listed processors. They point
 
 def metric_texts():
     from . import metrics
-    found = [METRICS_TITLE, METRICS_INTRO, "Processors that ran: {list}", "Method", "Flagged for review: {n}",
+    found = [METRICS_TITLE, METRICS_INTRO, "Processors that ran: {list}", "No observations in this selection: {list}.", "Method", "Flagged for review: {n}",
              "Showing the latest {shown} of {total} rows.", "Chat {id}, {day}: {found} first-time posters (median {base}), "
              "{messages} messages (median {base_messages})"]
     for cls in metrics.load().values():
@@ -423,7 +423,13 @@ def metrics_html(data, say):
     parts = ['<section class="card report-analytics" id="report-metrics"><h2>' + _e(say(METRICS_TITLE)) + '</h2><p>'
              + _e(say(METRICS_INTRO)) + '</p><p class="analytics-meta">' + _e(say("Processors that ran: {list}", list=ran))
              + '</p>']
+    empty = [item for item in data["processors"] if not item.get("rows") and not item.get("flags_total")]
+    if empty:
+        parts.append('<p>' + _e(say("No observations in this selection: {list}.", list=", ".join(say(item["title"]) for item in empty)))
+                     + '</p>')
     for item in data["processors"]:
+        if item in empty:
+            continue
         columns, rows = [say(c) for c in item["columns"]], item.get("rows") or []
         parts.append('<figure class="analytics-figure chart-card metric-figure"><figcaption>' + _e(say(item["title"]))
                      + ' <span class="analytics-basis">' + _e(item["name"]) + ' v' + _e(item["version"]) + '</span></figcaption>')

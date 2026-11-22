@@ -163,6 +163,11 @@ def utc_text(value, seconds=True):
         return str(value)
 
 
+def language_name(code):
+    from .sealed_index import LANGUAGE_NAMES
+    return LANGUAGE_NAMES.get(code, code)
+
+
 def when(value):
     if not value:
         return "—"
@@ -279,6 +284,7 @@ class Digest:
         self.actions, self.previews, self.action_count = {}, {}, 0
         self.own_messages, self.own_total, self.own_scope = [], 0, set()
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
+        self.sealed_run = None
         self.analytics = report_analytics.Analytics()
         self.repeats = report_repeats.Repeats()
         self.media_repeats = report_media.MediaRepeats()
@@ -321,6 +327,8 @@ class Digest:
         self.forward_sources.add(event)
         self.metrics.add(event)
         kind, payload, chat = event["kind"], event["payload"], report_analytics.chat_key(event)
+        if kind == "sealed.started" and isinstance(payload.get("context"), dict) and self.sealed_run is None:
+            self.sealed_run = {key: payload["context"].get(key) for key in ("repository", "run_id", "run_attempt")}
         if kind == "beacon.drand":
             self.trust_signals["drand"] += 1
         if kind == "process.started":
@@ -347,7 +355,9 @@ class Digest:
         if chat is not None:
             self.chats[chat] = self.chats.get(chat, 0) + 1
             if report_analytics.secret_chat_id(event) is not None:
-                self.titles[chat] = "Secret Chat " + str(payload["secret_chat_id"])
+                name = payload.get("peer_name") if isinstance(payload.get("peer_name"), str) and payload["peer_name"] else None
+                if name or chat not in self.titles:
+                    self.titles[chat] = "🔒 " + (name or "#" + str(payload["secret_chat_id"]))
             if kind in TITLE_KINDS and isinstance(payload.get("title"), str):
                 self.titles[chat] = payload["title"]
         if kind == "scope.applied":
@@ -417,7 +427,7 @@ class Digest:
                 "senders": len(self.senders), "first": self.first, "last": self.last, "first_hash": self.first_hash,
                 "clients": list(self.clients.values()), "routes": list(self.routes.values()), "clocks": self.clocks,
                 "indicators": self.indicators.result(), "trust_signals": dict(self.trust_signals),
-                "telegram_observations": self.telegram_observations,
+                "sealed_run": self.sealed_run, "telegram_observations": self.telegram_observations,
                 "local_records_only": self.local_records_only is True,
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
@@ -1125,7 +1135,7 @@ CSS += report_layouts.CSS
 CSS += report_secret.CSS
 SCRIPT += "\n" + CONSOLE_JS + "\n" + report_layouts.report_profile.SCRIPT
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
-CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; script-src " + SCRIPT_HASH
+CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; media-src 'self' file:; script-src " + SCRIPT_HASH
        + "; frame-src 'self' file:; base-uri 'none'; form-action 'none'")
 SCRIPT_WORDS = ("Context message", "Matches export filters", "Copy", "Copied", "Signature valid · this file not yet checked",
                 "Verified: this file is exactly as signed", "Signed", "Not yet checked", "Changed",
@@ -2733,7 +2743,7 @@ class EvidenceHTML:
         yield case_assessment.html(case_assessment.journal(self.context, self.coverage), say).encode("utf-8")
         yield case_section(say, next(self.numbers), self.options, [
             (say("Observing account"), e(self.account_text)),
-            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
+            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(language_name(say.language)) + "</span>"),
             (say("Report ID"), "<code>" + e(self.report_id) + "</code>"), (say("Created"), when(self.created)),
             (say("Produced by"), e(self.producer.get("software")) + " " + e(self.producer.get("version")) + " · "
              + e(self.producer.get("project")))]).encode("utf-8")
@@ -3147,7 +3157,7 @@ class ChatHTML:
              + " · id " + e(self.chat.get("id")) + "</small></span></span>"),
             (say("First message"), when(self.stats["first_at"])), (say("Last message"), when(self.stats["last_at"])),
             (say("Exporting account"), e(self.account_text)),
-            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
+            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(language_name(say.language)) + "</span>"),
             (say("Report ID"), "<code>" + e(self.report_id) + "</code>")]).encode("utf-8")
         if source_rows(say, self.meta, self.stats):
             yield source_section(say, next(self.numbers), self.meta, self.stats).encode("utf-8")

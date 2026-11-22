@@ -93,7 +93,7 @@ h2{font-size:20px;line-height:1.4;margin:28px 0 12px}h3{font-size:16px;margin:0}
 .facts{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,3fr);gap:8px 18px;margin:0}.facts dt{color:var(--muted)}.facts dd{margin:0;min-width:0}
 .chat-list{list-style:none;padding:0}.chat-list li[data-state]{border-inline-start:3px solid transparent;padding-inline-start:12px}.chat-list li[data-state=complete]{border-inline-start-color:#2f7d4f}.chat-list li[data-state=partial]{border-inline-start-color:#b7791f}.chat-list li[data-state=missing]{border-inline-start-color:#c0392b}.chat-title{display:grid;gap:2px;min-width:0}.chat-id{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
 .message-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 20px;flex-wrap:wrap}.record-link{font-size:12px;white-space:nowrap}.message-meta,.record-citation{font-size:12px;color:var(--muted);margin:8px 0}.message-meta span{display:inline-block;margin-inline-end:16px}.record-citation{border-top:1px solid var(--line);padding-top:8px}.record-citation code{color:var(--ink)}.message:target{outline:2px solid var(--accent);outline-offset:3px}
-.message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
+.message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:10px 0}.message-when{font-size:12px;color:var(--muted);white-space:nowrap}.record-citation details{border:0;margin:4px 0 0;padding:0}.record-citation>span{display:block}.attachment-preview{display:block;max-width:min(100%,420px);max-height:360px;border-radius:6px;margin:8px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
 a{color:var(--accent);text-underline-offset:3px}a,code,pre,dd{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;margin:12px 0 0}
 nav{display:flex;gap:8px 18px;flex-wrap:wrap;margin:18px 0;font-size:13px}nav a{padding:4px 0}
 .transcript-pages{align-items:center}.transcript-page-numbers{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;direction:ltr}.transcript-page-numbers a,.transcript-page-numbers [aria-current]{display:inline-grid;place-items:center;min-width:36px;min-height:36px;padding:4px 8px;border:1px solid var(--line);border-radius:5px;text-decoration:none;font-variant-numeric:tabular-nums}.transcript-page-numbers [aria-current]{background:var(--soft);color:var(--accent);font-weight:700;border-color:var(--accent)}
@@ -172,8 +172,8 @@ def record_source(row, say, prefix):
     if not source:
         return ''
     file, line, digest = source
-    return ('<br>' + e(say('Source')) + ': <a href="' + e(prefix + file) + '"><code dir="ltr">' + e(file)
-            + '</code></a> · ' + e(say('line {line}', line=line)) + ' · SHA-256 <code dir="ltr">' + e(digest) + '</code>')
+    return ('<span>' + e(say('Source')) + ': <a href="' + e(prefix + file) + '"><code dir="ltr">' + e(file)
+            + '</code></a> · ' + e(say('line {line}', line=line)) + ' · SHA-256 <code dir="ltr">' + e(digest) + '</code></span>')
 
 
 def timestamp(value, say):
@@ -220,7 +220,7 @@ def copy_context(context, say, sharing=False):
         method = context.get('options', {}).get('transport')
         if method in ('regular', 'takeout'):
             parts.append('<dt>' + e(say('Collection method')) + '</dt><dd>' + e(say(VALUES[method])) + '</dd>')
-    parts.append('<dt>' + e(say('Report language')) + '</dt><dd><bdi>' + e(say.language) + '</bdi></dd></dl>')
+    parts.append('<dt>' + e(say('Report language')) + '</dt><dd><bdi>' + e(sealed_index.LANGUAGE_NAMES.get(say.language, say.language)) + '</bdi></dd></dl>')
     parts.append('<p class="muted">' + e(say('Times retain their recorded timezone. UTC is the common time reference; an offset shows the difference from UTC. Missing timezones are marked.')) + '</p>')
     if not sharing and (context.get('captured_from') or context.get('captured_until')):
         parts.append('<p class="muted">' + e(say("Capture times come from the collector's clock. Collection may pause or resume between the first and last recorded capture.")) + '</p>')
@@ -238,7 +238,7 @@ def opening(context, title, sharing=False, compact=False):
     script_policy = (' script-src ' + report_layouts.report_profile.SCRIPT_HASH + ';') if design == 'profile_overview' else ''
     yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
-                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;;' + e(script_policy) + '">'
+                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; img-src &#39;self&#39; file:; media-src &#39;self&#39; file:; base-uri &#39;none&#39;; form-action &#39;none&#39;;' + e(script_policy) + '">'
                   '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + activity_maps.CSS + '</style></head><body class="dossier account-dossier' + (' transcript-index' if compact else '') + '"><main>'
                   '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
                   + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'
@@ -328,17 +328,19 @@ def account_index(context, chats):
         return
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, say('Account export'))
-    yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#chats">' + e(say('Chats')) + '</a>' + map_link(context, say)
-                  + '<a href="#coverage">' + e(say('Coverage')) + '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
+    yield encoded('<nav><a href="#chats">' + e(say('Chats')) + '</a>' + map_link(context, say)
+                  + '<a href="#coverage">' + e(say('Coverage')) + '</a><a href="#case-assessment">' + e(say(case_assessment.TITLE))
+                  + '</a><a href="#start">' + e(say('Start here')) + '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
     yield encoded(archive_views(context, say))
-    yield encoded(recipient_guide(say))
+    yield encoded(stats(context.get('counts', {}), say))
+    yield from chats_section(chats, say)
+    yield from coverage_section(context, say)
+    yield from omissions_section(context, say)
+    yield encoded(copy_context(context, say) + scope(context.get('options', {}), say))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     yield encoded(case_assessment.html(case_assessment.snapshot(context), say))
     yield encoded('<p class="notice">' + e(say('Original account data may contain personal information. Prepare a separate minimized copy before sharing.')) + '</p>')
-    yield encoded(stats(context.get('counts', {}), say) + copy_context(context, say) + scope(context.get('options', {}), say))
-    yield from coverage_section(context, say)
-    yield from chats_section(chats, say)
-    yield from omissions_section(context, say)
+    yield encoded(recipient_guide(say))
     yield encoded(verification(context, say))
     yield ending(say)
 
@@ -392,13 +394,17 @@ def coverage_section(context, say):
     complete = (context.get('complete_within_scope') is True and coverage.get('inventory_complete') is True
                 and type(coverage.get('failures')) is int and coverage['failures'] == 0
                 and type(coverage.get('tasks_total')) is int and coverage.get('tasks_done') == coverage['tasks_total'])
-    yield encoded('<section id="coverage"><h2>' + e(say('Coverage')) + '</h2><p class="badge">' +
-                  e(say('Completed within selected scope') if complete else say('Partial acquisition')) + '</p><p>' +
-                  e(say('Acquisition is not an atomic account snapshot. Deleted, inaccessible or previously edited data may be unavailable.')) + '</p><dl class="facts">')
     limits, failures = context.get('known_limits'), coverage.get('failures')
     split = isinstance(limits, list) and type(failures) is int
     counts = context.get('counts') or {}
     files, steps = (counts.get(key) if type(counts.get(key)) is int else 0 for key in ('media_not_reached', 'steps_not_reached'))
+    limited = (not complete and split and limits and failures == len(limits) and not files and not steps
+               and coverage.get('inventory_complete') is True and not coverage.get('omitted')
+               and type(coverage.get('tasks_total')) is int and coverage.get('tasks_done') == coverage['tasks_total'])
+    yield encoded('<section id="coverage"><h2>' + e(say('Coverage')) + '</h2><p class="badge">' +
+                  e(say('Completed within selected scope') if complete else say('Finished with known limits') if limited
+                    else say('Partial acquisition')) + '</p><p>' +
+                  e(say('Acquisition is not an atomic account snapshot. Deleted, inaccessible or previously edited data may be unavailable.')) + '</p><dl class="facts">')
     for label, value in (('Tasks completed', coverage.get('tasks_done')), ('Tasks planned', coverage.get('tasks_total')),
                          *((('Failed pages and files', max(0, failures - len(limits) - files - steps)), ('Known limits', len(limits)),
                             ('Files not reached before collection stopped', files or None), ('Export steps not reached before collection stopped', steps or None))
@@ -491,7 +497,7 @@ SERVICE_LABELS = {'MessageActionChatAddUser': 'added a member', 'MessageActionCh
                   'MessageActionChatCreate': 'created the group', 'MessageActionChannelCreate': 'created the channel'}
 
 
-def service_line(message, say):
+def service_line(message, say, group=False):
     action = message.get('action')
     if message.get('_') != 'MessageService' or not isinstance(action, dict) or not isinstance(action.get('_'), str):
         return ''
@@ -504,6 +510,8 @@ def service_line(message, say):
         return say('created the topic “{title}”', title=title)
     if kind == 'MessageActionPinMessage' and type(pinned) is int:
         return say('pinned a message, number {n}', n=pinned)
+    if kind == 'MessageActionChannelCreate' and group:
+        return say(SERVICE_LABELS['MessageActionChatCreate'])
     if kind in SERVICE_LABELS:
         return say(SERVICE_LABELS[kind])
     return say('Service message') + ': ' + re.sub(r'([a-z])([A-Z])', r'\1 \2', kind.removeprefix('MessageAction')).lower()
@@ -566,7 +574,7 @@ def reply_line(message, say):
     return say('Reply to message #{id}', id=number)
 
 
-def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.html'):
+def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.html', group=False):
     if sharing:
         row = shared_row(row)
         chat, message = row['chat'], row['message']
@@ -576,7 +584,7 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         person = message.get('sender')
         sender = ' '.join(text(person.get(key)) for key in ('first_name', 'last_name')).strip() if isinstance(person, dict) else ''
         sender = sender or (text(person.get('title')) if isinstance(person, dict) else text(person)) or text(message.get('from'))
-    sender = sender or say('Sender not available')
+    sender = sender or say('Service message' if message.get('_') == 'MessageService' else 'Sender not available')
     body = next((message[key] for key in ('text', 'message', 'caption') if isinstance(message.get(key), str) and message[key]), '')
     identifier = message.get('id')
     marker = ' data-message-id="' + e(identifier) + '"' if type(identifier) in (str, int) else ''
@@ -584,17 +592,16 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
     if sharing and message.get('state') == 'withheld':
         return withheld_card(message, say, reference, marker, page_path)
     parts = ['<article class="message" id="' + reference + '"' + marker + '><div class="message-head"><h3 class="user" dir="auto">' + e(sender) +
-             '</h3><a class="record-link" href="#' + reference + '">' + e(say('Record')) + ' <bdi>' + f'{number:06d}' + '</bdi></a></div>',
-             '<p class="message-meta"><span>' + e(say('Message date')) + ': ' + timestamp(message.get('date'), say) + '</span>']
+             '</h3><span class="message-when">' + timestamp(message.get('date'), say) + ' · <a class="record-link" href="#' + reference + '">'
+             + e(say('Record')) + ' <bdi>' + f'{number:06d}' + '</bdi></a></span></div>']
     edited = text(message.get('edited')) or text(message.get('edit_date'))
     if edited:
-        parts.append('<span>' + e(say('Edited date')) + ': ' + timestamp(edited, say) + '</span>')
-    parts.append('</p>')
+        parts.append('<p class="message-meta">' + e(say('Edited date')) + ': ' + timestamp(edited, say) + '</p>')
     if sharing:
         parts.append('<p class="muted user" dir="auto">' + e(text(chat.get('title'))) + '</p>')
     if text(message.get('username')):
         parts.append('<p class="muted user" dir="auto">@' + e(message['username']) + '</p>')
-    parts.append('<p class="message-text" dir="auto">' + e(body or (not sharing and service_line(message, say)) or say('No message text in this record.')) + '</p>')
+    parts.append('<p class="message-text" dir="auto">' + e(body or (not sharing and service_line(message, say, group)) or say('No message text in this record.')) + '</p>')
     if not sharing:
         info = message_details.media_info(message.get('media'))
         if info:
@@ -613,7 +620,15 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
         if not isinstance(attachment, dict):
             continue
         if attachment.get('outcome') == 'saved' and MEDIA_PATH.fullmatch(text(attachment.get('file'))):
-            parts.append('<p><a download href="' + prefix + attachment['file'] + '">' + e(say('Included original attachment')) + '</a></p>')
+            source, kind = prefix + attachment['file'], attachment.get('kind')
+            if kind == 'photo':
+                parts.append('<a href="' + source + '"><img class="attachment-preview" src="' + source + '" alt="' + e(say('Photo'))
+                             + '" loading="lazy"></a>')
+            elif kind in ('video', 'video_message', 'animation'):
+                parts.append('<video class="attachment-preview" controls preload="none" src="' + source + '"></video>')
+            elif kind in ('voice', 'audio'):
+                parts.append('<audio controls preload="none" src="' + source + '"></audio>')
+            parts.append('<p><a download href="' + source + '">' + e(say('Included original attachment')) + '</a></p>')
         elif not sharing and attachment.get('outcome') == 'hashed':
             hashes = attachment.get('server_hashes') or {}
             manifest = 'hashes/' + hashlib.sha256(canonical(hashes)).hexdigest() + '.json'
@@ -623,9 +638,10 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
                          + prefix + manifest + '">' + e(say('Download file hashes')) + '</a></p>')
         elif not sharing:
             parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(reason_text(attachment.get('reason'), say)) + '</span></p>')
-    parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference
-                 + '</code>' + record_source(row, say, prefix) + '</p>')
-    parts.append(technical(row, say) if sharing else record_details(row, say))
+    source = record_source(row, say, prefix)
+    parts.append('<div class="record-citation">' + (source or e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#'
+                                                    + reference + '</code>')
+                 + (technical(row, say) if sharing else record_details(row, say)) + '</div>')
     parts.append('</article>')
     return ''.join(parts)
 
@@ -647,7 +663,7 @@ def account_chat_index(context, chat, counts, months):
                   + e(say('Messages')) + '</a></nav><dl class="transcript-summary"><div><dt>' + e(say('Messages'))
                   + '</dt><dd>' + str(sum(row[0] for row in counts)) + '</dd></div><div><dt>' + e(say('Transcript pages'))
                   + '</dt><dd><a href="#transcript-pages">' + str(len(counts)) + '</a></dd></div></dl>')
-    yield encoded('<p>' + e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.'))
+    yield encoded('<p>' + e(say('Messages are shown oldest first. The signed JSONL files are authoritative.'))
                   + '</p>')
     if months:
         years = sorted({month[:4] for month in months}, reverse=True)
@@ -677,6 +693,36 @@ def account_chat_index(context, chat, counts, months):
         first += count
     yield encoded('</ul></section>')
     yield ending(say)
+
+
+def chronological(directory, data_files):
+    order = []
+    for index, data_file in enumerate(data_files):
+        with (directory / data_file).open('rb') as stream:
+            offset = 0
+            for line, raw in enumerate(stream, 1):
+                identity = json.loads(raw).get('id')
+                order.append((identity if type(identity) is int else -1, index, line, offset))
+                offset += len(raw)
+    order.sort()
+
+    def rows():
+        opened, stream = None, None
+        try:
+            for _, index, line, offset in order:
+                if opened != index:
+                    if stream:
+                        stream.close()
+                    stream, opened = (directory / data_files[index]).open('rb'), index
+                stream.seek(offset)
+                raw = stream.readline()
+                row = Record(json.loads(raw))
+                row.source = (data_files[index], line, hashlib.sha256(raw.removesuffix(b'\n')).hexdigest())
+                yield row
+        finally:
+            if stream:
+                stream.close()
+    return rows
 
 
 def account_chat_pages(context, chat, rows):
@@ -755,7 +801,7 @@ def account_chat(context, chat, rows):
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, text(chat.get('title')) or str(chat.get('id', '')))
     yield encoded('<p><a href="../index.html">← ' + e(say('Account export')) + '</a></p><p>' +
-                  e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>')
+                  e(say('Messages are shown oldest first. The signed JSONL files are authoritative.')) + '</p>')
     if state_note(chat, say):
         yield encoded('<p class="notice">' + e(state_note(chat, say)) + '</p>')
     yield encoded(copy_context(context, say))
@@ -776,7 +822,8 @@ def account_chat(context, chat, rows):
     seen = False
     for number, row in enumerate(rows, pagination.get('first_record', 1)):
         seen = True
-        yield encoded(gap_marks(context, say, row.get('id')) + message_card(row, say, prefix='../', number=number, page_path=page_path))
+        yield encoded(gap_marks(context, say, row.get('id')) + message_card(row, say, prefix='../', number=number, page_path=page_path,
+                                                                                 group=chat.get('kind') in ('group', 'supergroup')))
     if not seen:
         yield encoded('<p>' + e(say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>')
     if pagination.get('page', 1) == pagination.get('pages', 1):

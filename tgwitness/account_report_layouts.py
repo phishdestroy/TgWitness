@@ -78,7 +78,7 @@ def transcript(context, rows, *, chat=None, sharing=False):
             yield '<p><a href="../index.html">← ' + view.e(say('Account export')) + '</a></p>'
             if view.state_note(chat, say):
                 yield '<p class="notice">' + view.e(view.state_note(chat, say)) + '</p>'
-            yield '<p>' + view.e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>'
+            yield '<p>' + view.e(say('Messages are shown oldest first. The signed JSONL files are authoritative.')) + '</p>'
             yield ('<p>' + view.e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.'))
                    + '</p>')
             if (context.get('pagination') or {}).get('page', 1) == 1 and context.get('chat_map'):
@@ -96,7 +96,8 @@ def transcript(context, rows, *, chat=None, sharing=False):
         for number, row in enumerate(rows, pagination.get('first_record', 1)):
             seen = True
             marks = '' if sharing else view.gap_marks(context, say, row.get('id'))
-            yield marks + view.message_card(row, say, prefix='' if sharing else '../', sharing=sharing, number=number, page_path=path)
+            yield marks + view.message_card(row, say, prefix='' if sharing else '../', sharing=sharing, number=number, page_path=path,
+                                                    group=(chat or {}).get('kind') in ('group', 'supergroup'))
         if not seen:
             yield '<p>' + view.e(say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>'
         if not sharing and pagination.get('page', 1) == pagination.get('pages', 1):

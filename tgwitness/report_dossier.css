@@ -86,7 +86,7 @@ html[data-template=editorial] .dossier{--dossier-navy:#382c2a;--dossier-gold:#e7
 .account-dossier .account-cover{margin-bottom:0;border-bottom:4px solid var(--dossier-gold)}
 .account-dossier .account-cover .badge{background:transparent;border:0;padding:0;color:#c7d6de;text-transform:uppercase;letter-spacing:.1em;font-size:10px;margin-top:24px}
 .account-dossier .account-cover h1{margin-top:10px}.account-dossier .account-cover .lead{color:#d0dce3;max-width:68ch;font-size:15px}
-.account-dossier .message{border-radius:2px;padding:24px 28px;border-inline-start:3px solid var(--line)}
+.account-dossier .message{border-radius:2px;padding:14px 20px;margin:8px 0;border-inline-start:3px solid var(--line)}
 .account-dossier .record-link{font-family:ui-monospace,monospace}.account-dossier .recipient-steps{gap:24px 36px}.account-dossier .recipient-steps li::marker{color:var(--accent);font-family:ui-monospace,monospace}
 .account-dossier .notice{border-radius:0}.account-dossier nav{padding:12px 0;border-bottom:1px solid var(--line)}
 .account-dossier .assessment-basis{color:var(--muted)}

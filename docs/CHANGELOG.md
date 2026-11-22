@@ -27,6 +27,8 @@
 ## Unreleased
 
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
+- Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
+- Evidence reports of a GitHub Actions run name the run as the attested collection run; pseudo-secret chat videos play inline.
 - Account export chat pages are three times smaller; each message links its signed source line.
 - Files a stop left undownloaded are counted as not reached, not as failures, and say why.
 - Deleted accounts are named "Deleted account · ID N" instead of a bare number.

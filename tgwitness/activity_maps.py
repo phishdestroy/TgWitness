@@ -13,7 +13,8 @@ GAPS_SHOWN = 300
 WEEK_ORIGIN = 4 * DAY
 DAY_WINDOW, HOUR_WINDOW = 2 * DAY, 3 * 3600
 DAY_NAMES = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-MONTH_NAMES = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+MONTH_NAMES = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+               "November", "December")
 CONFIDENCE = {"proven": "proven by a reply or pin", "high": "high confidence", "medium": "medium confidence",
               "low": "low confidence"}
 SCOPE_REASONS = {"chat_kinds": "some chat kinds were not selected", "chat_ids": "only listed chats were selected",
@@ -26,7 +27,7 @@ CSS = """
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}
 .activity-map .map-card{min-width:0;padding:20px 22px;border:1px solid var(--line);background:var(--map-paper);border-radius:12px;margin:18px 0;break-inside:avoid}
 .activity-map h3{font:600 15px/1.4 system-ui,sans-serif;margin:0 0 6px}.activity-map .map-note{font-size:12px;color:var(--muted);margin:4px 0 14px;max-width:90ch}
-.map-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}.map-kpis div{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
+.map-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin:18px 0}.map-kpis div{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
 .map-kpis strong{display:block;font-size:22px;line-height:1.3;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.5}.map-kpis span{font-size:12px;color:var(--muted)}
 .map-scroll{overflow-x:auto;direction:ltr;padding-bottom:4px}.map-grid{border-collapse:separate;border-spacing:3px}
 .map-grid caption{text-align:start;font:600 12px/1.6 system-ui,sans-serif;color:var(--muted);padding-bottom:4px}
@@ -96,15 +97,15 @@ def thousands(say, value):
 
 def number(value, say=None):
     if isinstance(value, float):
-        if value < 10:
-            return ("%.1f" % value).rstrip("0").rstrip(".")
+        if value < 0.95:
+            return "<1"
         return str(thousands(say, round(value)))
     return str(thousands(say, value))
 
 
 class ActivityMap:
     def __init__(self):
-        self.times, self.senders, self.kinds = {}, {}, {}
+        self.times, self.senders, self.kinds, self.names = {}, {}, {}, {}
         self.gap_links = {}
 
     def add(self, chat_id, kind, row):
@@ -115,6 +116,12 @@ class ActivityMap:
         self.kinds.setdefault(chat_id, kind)
         self.times.setdefault(chat_id, array("q")).append(at)
         self.senders.setdefault(chat_id, array("q")).append(sender if type(sender) is int else 0)
+        person = row.get("sender")
+        if type(sender) is int and sender not in self.names and isinstance(person, dict):
+            name = (" ".join(str(person.get(key) or "") for key in ("first_name", "last_name")).strip()
+                    or str(person.get("title") or ""))
+            if name or person.get("deleted") is True:
+                self.names[sender] = name or None
 
     def span(self, chats=None):
         values = [(min(t), max(t)) for chat, t in self.times.items() if t and (chats is None or chat in chats)]
@@ -170,6 +177,11 @@ def grid(start, end):
     return origin, STEPS[-1], (end - origin) // STEPS[-1] + 1
 
 
+def column_label(origin, step, index):
+    at = datetime.fromtimestamp(origin + index * step, timezone.utc)
+    return at.strftime("%m-%d %H:%M") if step < DAY else at.strftime("%Y-%m-%d")
+
+
 def bin_label(origin, step, index):
     at = datetime.fromtimestamp(origin + index * step, timezone.utc)
     return at.strftime("%Y-%m-%d %H:00") if step < DAY else at.strftime("%Y-%m-%d")
@@ -212,9 +224,9 @@ def loss_level(value, peak):
 
 def legend(say, loss=True):
     parts = ['<div class="map-legend"><span><i></i>' + e(say("No messages")) + '</span><span><i data-a="2"></i>'
-             + e(say("Fewer messages")) + '</span><span><i data-a="4"></i>' + e(say("More messages")) + '</span>']
+             + e(say("Few messages")) + '</span><span><i data-a="4"></i>' + e(say("Many messages")) + '</span>']
     if loss:
-        parts.append('<span><i class="loss"></i>' + e(say("Absent message numbers (larger dot, more)")) + '</span>')
+        parts.append('<span><i class="loss"></i>' + e(say("Absent message numbers (a larger dot means more)")) + '</span>')
     return ''.join(parts) + '</div>'
 
 
@@ -282,7 +294,8 @@ def lanes(rows, origin, step, count, say, title, note):
     loss_peak = max((value for row in rows for value in row["losses"]), default=0.0)
     segment = max(1, -(-count // 6))
     header = '<tr><th></th>' + ''.join('<th scope="colgroup" colspan="%d">%s</th>' % (
-        min(segment, count - index), e(bin_label(origin, step, index)[:10])) for index in range(0, count, segment)) + '<th></th></tr>'
+        min(segment, count - index), e(column_label(origin, step, index)) if index == 0 or count - index >= segment else "")
+        for index in range(0, count, segment)) + '<th></th></tr>'
     body = []
     for row in rows:
         cells = ['<th scope="row" class="lane" dir="auto" title="' + e(row["label"]) + (' · ' + e(say("ID {id}", id=row["id"])) if type(row.get("id")) is int else '') + '">'
@@ -375,7 +388,7 @@ def account_map(activity, gaps, chats, say):
             groups.append((None, say("Chats not in this export"), None, (), True))
         parts.append(lanes(lane_rows(groups, absent, origin, step, count, say), origin, step, count, say,
                            say("Chats over time"), say("The {n} chats with the most absent numbers and messages; each column is one interval of the period.", n=len(groups))))
-    pair = week(counts, say, say("Messages by weekday and hour")) + week(losses, say, say("Absent numbers by weekday and hour"), loss=True)
+    pair = week(counts, say, say("Messages by weekday and hour")) + week(losses, say, say("Absent message numbers by weekday and hour"), loss=True)
     if pair:
         parts.append('<div class="map-pair">' + pair + '</div>')
     if isinstance(gaps, dict):
@@ -424,16 +437,16 @@ def gap_details(gaps, titles, say):
     if shared["messages"]:
         parts.append('<div class="map-card"><h3>' + e(say("Private chats, bots and basic groups")) + '</h3><p class="map-note">'
                      + e(say("These chats share one message number sequence for the whole account. A missing number between two exported messages was a message of some chat. Its chat is proven when an exported reply or pin points at it; otherwise it is estimated from which chats were active between the neighbouring messages. The rest goes to chats not in this export.")) + '</p>')
-        parts.append(kpis([(shared["absent"], say("Absent numbers")), (shared["runs"], say("Runs")),
+        parts.append(kpis([(shared["absent"], say("Absent numbers")), (shared["runs"], say("Gap runs")),
                            (shared["proven"], say("Proven by a reply or pin")),
-                           (sum(1 for g in shared["gaps"] if g["confidence"] == "high"), say("Runs attributed with high confidence")),
+                           (sum(1 for g in shared["gaps"] if g["confidence"] == "high"), say("Gap runs attributed with high confidence")),
                            (number(shared["not_in_export"]["expected"], say), say("Likely in chats not in this export")),
-                           (shared["below_first"], say("Numbers below the oldest exported message"))], say))
+                           (shared["below_first"], say("Message numbers below the oldest exported message"))], say))
         rows = sorted((item for item in shared["by_chat"] if item[2] or item[3] >= 0.05), key=lambda item: (-(item[2] + item[3]), item[0]))
         if rows:
             parts.append('<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Messages"))
                          + '</th><th class="num">' + e(say("Proven absent")) + '</th><th class="num">' + e(say("Likely absent"))
-                         + '</th><th class="num">' + e(say("Runs with high confidence")) + '</th></tr></thead><tbody>')
+                         + '</th><th class="num">' + e(say("Gap runs attributed with high confidence")) + '</th></tr></thead><tbody>')
             for chat, messages, proven, expected, high in rows[:200]:
                 link = (('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))) + chat_id_tag(chat, say)
                 parts.append('<tr><td>' + link + '</td><td class="num">' + str(thousands(say, messages)) + '</td><td class="num">' + str(thousands(say, proven))
@@ -442,8 +455,8 @@ def gap_details(gaps, titles, say):
         if shared["gaps"]:
             ordered = sorted(shared["gaps"], key=lambda g: (-g["count"], g["from"]))[:GAPS_SHOWN]
             parts.append('<h3>' + e(say("Largest runs of absent numbers")) + '</h3><div class="map-scroll"><table class="map-table"><thead><tr><th>'
-                         + e(say("Numbers")) + '</th><th>' + e(say("Between")) + '</th><th>' + e(say("Neighbours")) + '</th><th>'
-                         + e(say("Most likely chat")) + '</th></tr></thead><tbody>')
+                         + e(say("Message numbers")) + '</th><th>' + e(say("Between")) + '</th><th>' + e(say("Neighbours")) + '</th><th>'
+                         + e(say("Chat it most likely belongs to")) + '</th></tr></thead><tbody>')
             for gap in ordered:
                 numbers = str(gap["from"]) + ("" if gap["from"] == gap["to"] else "–" + str(gap["to"])) + " (" + str(gap["count"]) + ")"
                 neighbours = chat_title(gap["after"][1], titles, say) + " → " + chat_title(gap["before"][1], titles, say)
@@ -467,9 +480,9 @@ def gap_details(gaps, titles, say):
     if numbered:
         parts.append('<div class="map-card"><h3>' + e(say("Channels and supergroups")) + '</h3><p class="map-note">'
                      + e(say("Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.")) + '</p>'
-                     '<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Numbers"))
+                     '<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Message numbers"))
                      + '</th><th class="num">' + e(say("Messages")) + '</th><th class="num">' + e(say("Absent numbers"))
-                     + '</th><th class="num">' + e(say("Runs")) + '</th></tr></thead><tbody>')
+                     + '</th><th class="num">' + e(say("Gap runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
                          + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
@@ -498,11 +511,17 @@ def chat_map(activity, gaps, chat, say):
         for sender in senders:
             totals[sender] = totals.get(sender, 0) + 1
         top = sorted(totals, key=lambda s: (-totals[s], s))[:TOP_SENDERS]
-        groups = [(("sender", sender), say("Sender {id}", id=sender) if sender else say("Sender not recorded"), None,
+        def person(sender):
+            if not sender:
+                return say("No sender in the record")
+            if sender not in activity.names:
+                return say("Sender {id}", id=sender)
+            return (activity.names[sender] or say("Deleted account")) + " · " + say("ID {id}", id=sender)
+        groups = [(("sender", sender), person(sender), None,
                    [at for at, who in zip(times, senders) if who == sender], False) for sender in top]
         parts.append(lanes(lane_rows(groups, [], origin, step, count, say), origin, step, count, say, say("Participants over time"),
-                           say("The {n} most active senders by Telegram ID; each column is one interval.", n=len(top))))
-    parts.append(week(losses, say, say("Absent numbers by weekday and hour"), loss=True))
+                           say("The {n} most active senders; each column is one interval.", n=len(top))))
+    parts.append(week(losses, say, say("Absent message numbers by weekday and hour"), loss=True))
     return ''.join(parts) + '</section>'
 
 
@@ -547,12 +566,12 @@ def marker_html(marker, say):
 
 class MarkerPlacer:
     def __init__(self, found):
-        self.pending = sorted(found)
+        self.pending = sorted(found, reverse=True)
         self.locations = {}
 
     def before(self, current):
         found = []
-        while self.pending and type(current) is int and self.pending[-1][0] > current:
+        while self.pending and type(current) is int and self.pending[-1][0] < current:
             found.append(self.pending.pop())
         return found
 

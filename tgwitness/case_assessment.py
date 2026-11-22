@@ -272,7 +272,7 @@ def split_failures(context):
 
 
 def sealed_run(context):
-    run = context.get("sealed_run")
+    run = context.get("sealed_run") or (context.get("digest") or {}).get("sealed_run")
     if not isinstance(run, dict):
         return None
     repo, number = run.get("repository"), run.get("run_id")
@@ -365,12 +365,6 @@ def html(data, say):
     if not data.get("supporting_files_included"):
         parts.append('<p class="assessment-review">' + e(say(STANDALONE)) + '</p>')
     parts.append(conditions_html(data.get("evidence_conditions"), say, e))
-    parts.append('<ol class="assessment-overview" aria-label="' + e(say(OVERVIEW)) + '">')
-    for number, item in enumerate(data["checks"], 1):
-        parts.append('<li data-status="' + e(item["status"]) + '"><a href="#assessment-' + e(item["id"]) + '">'
-                     '<span class="assessment-index">' + f'{number:02d}' + '</span><strong>' + e(say(item["title"]))
-                     + '</strong><span class="assessment-state">' + e(say(STATUSES[item["status"]])) + '</span></a></li>')
-    parts.append('</ol>')
     parts.append('<div class="assessment-grid">')
     for number, item in enumerate(data["checks"], 1):
         conclusion = item["result"]

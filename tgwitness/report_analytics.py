@@ -156,6 +156,7 @@ class Analytics:
         self.period_overflow = False
         self.participants = _Groups()
         self.chats = _Groups()
+        self.account = None
         self.chat_days = report_chat_timeline.ChatDays()
 
     def _period(self, moment, kind, seq):
@@ -180,6 +181,8 @@ class Analytics:
         if not isinstance(event, dict):
             return
         event_kind = event.get("kind")
+        if event_kind == "account.authorized" and isinstance(event.get("payload"), dict):
+            self.account = _identifier(event["payload"].get("account_id")) or self.account
         kind = "new" if event_kind == "secret_chat.message" else KINDS.get(event_kind) if isinstance(event_kind, str) else None
         if kind is None:
             return
@@ -188,7 +191,10 @@ class Analytics:
         self.chats.add(chat_key(event), kind, seq)
         if kind in MESSAGE_KINDS:
             self.message_observations += 1
-            self.participants.add(sender_id(event), kind, seq)
+            sender = sender_id(event)
+            if sender is None and event_kind == "secret_chat.message" and (event.get("payload") or {}).get("direction") == "out":
+                sender = self.account
+            self.participants.add(sender, kind, seq)
         moment = _time(event.get("observed_at"))
         if moment is None:
             self.invalid_time_events += 1
