@@ -554,7 +554,7 @@ def backup(args):
     if target == root or target.is_relative_to(root) or root.is_relative_to(target):
         print("Choose a backup folder outside the data directory.", file=sys.stderr)
         return EXIT_USAGE
-    if target.exists() and any(target.iterdir()):
+    if target.exists() and (not target.is_dir() or any(target.iterdir())):
         print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
         return EXIT_USAGE
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -569,6 +569,8 @@ def backup(args):
         (staging / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
         os.chmod(staging / "backup-manifest.json", 0o600)
         try:
+            if target.is_dir() and not any(target.iterdir()):
+                target.rmdir()
             os.rename(staging, target)
         except OSError as exc:
             if exc.errno in (errno.ENOTEMPTY, errno.EEXIST):

@@ -129,7 +129,7 @@ These two commands read the data directory directly and take no token or `--url`
 | `tgwitness index status [--workspace ID] [--data-dir DIR] [--json]` | Search index state of one workspace or, by default, every workspace: mode, `ready`, `building` or `not built`, indexed and journal head sequence. Works while the panel runs |
 | `tgwitness index rebuild [--workspace ID] [--data-dir DIR] [--json]` | Rebuilds the index from the first journal record. Rewrites only the derived index, never the signed journal. Exits with code `3` while the panel has the workspace open. Nothing is built when the workspace keeps its index in memory or has search off |
 | `tgwitness backup FOLDER [--data-dir DIR] [--json]` | Copies the whole data directory into a new or empty folder outside it while the panel keeps running, and writes `backup-manifest.json` with every file's SHA-256 and the journal heads. The folder appears only when the copy is complete; a failed or interrupted copy leaves nothing behind |
-| `tgwitness verify-backup FOLDER [--json]` | Read-only check of a backup folder: every listed file's size and SHA-256, files the manifest does not list, and the journal heads |
+| `tgwitness verify-backup FOLDER [--json]` | Checks a backup folder without changing it: compares the size and SHA-256 of every file listed in the manifest, reports files that the manifest does not list, and compares the latest record of each journal with the manifest |
 
 `index` accepts `--workspace default` or a workspace ID; the default is `all`. The
 backup skips temporary exports, SQLite sidecar files and lock files. The folder

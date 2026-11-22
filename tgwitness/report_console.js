@@ -20,7 +20,7 @@ const FILE_STATUS={above_limit:()=>say("Larger than the size limit"),duration_li
 const fileStatus=d=>d.file_status?(FILE_STATUS[d.file_status]?FILE_STATUS[d.file_status]():human(d.file_status)):say("File not in this archive");
 const span=s=>{s=Math.round(s||0);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
   return [d?sayf("{n} d",{n:num(d)}):"",h?sayf("{n} h",{n:num(h)}):"",m&&!d?sayf("{n} min",{n:num(m)}):""].filter(Boolean).join(" ")||sayf("{n} s",{n:num(s)});};
-const initials=s=>String(s||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";
+const initials=s=>{const text=String(s||"").trim().replace(/^@/,""),words=text.split(/\s+/).filter(w=>/^\p{L}/u.test(w)&&w!=="ID");return words.length?(words[0][0]+(words[1]?.[0]||"")).toUpperCase():/\d/.test(text)?"#":"?";};
 const colour=v=>"c"+(Math.abs([...String(v)].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))%7);
 const ic=name=>'<svg class="i" aria-hidden="true"><use href="#i-'+name+'"/></svg>';
 const SEARCH='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>';
