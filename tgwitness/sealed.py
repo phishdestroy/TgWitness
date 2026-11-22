@@ -644,8 +644,9 @@ def create_app(root, output, config, client_factory=WitnessClient):
             try:
                 if login:
                     session.require_login()
-                if fresh and session.collector.login_client is not None:
-                    raise ValueError("Finish the existing login attempt or cancel this capsule")
+                if fresh and (session.collector.login_client is not None or session.collector.qr_task is not None):
+                    # A new phone or QR sign-in replaces an unfinished one: the code may have expired or never arrived.
+                    await session.collector.cancel_login()
                 return await asyncio.wait_for(call(*args), 120)
             except Exception as exc:
                 raise HTTPException(400, describe(exc)) from None

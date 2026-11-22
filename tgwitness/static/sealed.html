@@ -19,9 +19,9 @@
 <p><a href="https://my.telegram.org/apps" target="_blank" rel="noreferrer" data-i18n>Get API credentials at my.telegram.org</a></p></details>
 <button class="secondary" id="qr" data-i18n>Sign in with QR</button><img id="qr-image" alt="Telegram login QR" hidden>
 <div class="runner-phone"><label for="phone" data-i18n>Or enter your phone number, including country code</label><input id="phone" type="tel" autocomplete="off" placeholder="+…"><button class="primary" id="send-code" data-i18n>Get login code</button></div>
-<div id="code-box" hidden><label for="code" data-i18n>Code from Telegram</label><input id="code" autocomplete="one-time-code" inputmode="numeric"><button class="primary" id="confirm-code" data-i18n>Confirm code</button></div>
+<div id="code-box" hidden><label for="code" data-i18n>Code from Telegram</label><input id="code" autocomplete="one-time-code" inputmode="numeric"><button class="primary" id="confirm-code" data-i18n>Confirm code</button><p class="hint" data-i18n>No code, or it expired? Press Get login code again or sign in with QR. The unfinished attempt is replaced.</p></div>
 <div id="password-box" hidden><label for="password" data-i18n>Telegram two-step verification password</label><input id="password" type="password" autocomplete="off"><button class="primary" id="confirm-password" data-i18n>Confirm password</button></div></section>
-<section class="card padded" id="selection" hidden><h2 data-i18n>Choose what to export</h2><p class="hint" data-i18n>The scope and settings are fixed once collection starts. All three modes use the same approved GitHub runner, signed journal and encrypted delivery.</p>
+<section class="card padded" id="selection" hidden><h2 data-i18n>Choose what to export</h2><p class="hint" data-i18n>The scope and settings are fixed once collection starts. Every mode uses the same approved GitHub runner, signed journal and encrypted delivery.</p>
 <fieldset id="capture-settings"><legend data-i18n>Export settings</legend>
 <div class="mode-cards" role="radiogroup" aria-label="Export mode">
 <label class="mode-card"><input type="radio" name="mode-card" value="account" checked><span><strong data-i18n>Account export</strong><span data-i18n>The whole account or selected chats, like Telegram Desktop, with account data and readable views.</span></span></label>

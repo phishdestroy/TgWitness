@@ -18,7 +18,7 @@ window.TGW_SEALED_LOCALES = {
   "Telegram two-step verification password": "Пароль двухэтапной проверки Telegram",
   "Confirm password": "Подтвердить пароль",
   "Choose what to export": "Выберите данные для выгрузки",
-  "The scope and settings are fixed once collection starts. All three modes use the same approved GitHub runner, signed journal and encrypted delivery.": "Состав и настройки фиксируются при запуске, все три режима используют утверждённый сборщик GitHub, подписанный журнал и зашифрованную передачу архива.",
+  "The scope and settings are fixed once collection starts. Every mode uses the same approved GitHub runner, signed journal and encrypted delivery.": "Состав и настройки фиксируются при запуске. Все режимы используют утверждённый сборщик GitHub, подписанный журнал и зашифрованную передачу архива.",
   "Telegram’s official export mechanism. All accessible cloud chats or selected chats, dates, account data and attachments. Telegram may require export approval or a wait that exceeds this runner’s lifetime.": "Официальный механизм экспорта Telegram, можно выбрать все доступные облачные чаты или отдельные чаты, период, данные аккаунта и вложения. Telegram может запросить подтверждение и ожидание дольше срока работы этого запуска.",
   "Chat event journal": "Журнал одного чата",
   "Export settings": "Настройки выгрузки",
@@ -239,6 +239,7 @@ window.TGW_SEALED_LOCALES = {
   "Left in this session": "Осталось в этой сессии",
   "Messages to read": "Сообщения для чтения",
   "Needed, including archive preparation": "Требуется, включая подготовку архива",
-  "Total": "Всего"
+  "Total": "Всего",
+  "No code, or it expired? Press Get login code again or sign in with QR. The unfinished attempt is replaced.": "Нет кода или его срок истек? Нажмите «Получить код входа» ещё раз или войдите с помощью QR-кода. Незавершённая попытка будет заменена."
  }
 };
