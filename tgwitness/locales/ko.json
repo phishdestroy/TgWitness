@@ -5790,7 +5790,7 @@
   "Saved settings apply to newly prepared files.": "저장된 설정은 새로 준비된 파일에 적용됩니다.",
   "Service messages": "서비스 메시지",
   "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope.": "스냅샷 차트는 UTC 기준으로 기록된 메시지 시간을 사용하여 이 사본에 포함된 메시지 행의 수를 집계합니다. 선택된 범위 외부의 활동은 재구성하지 않습니다.",
-  "Sun": "Sun",
+  "Sun": "일",
   "THE RECORD IN NUMBERS": "숫자로 보는 기록",
   "Thu": "목",
   "Tue": "화",

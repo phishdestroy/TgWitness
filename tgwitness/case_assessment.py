@@ -368,7 +368,7 @@ def fact_text(value, say):
 def fact_html(key, value, say, e):
     if key == "fingerprint" and isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value):
         return '<dd class="hash" dir="ltr">' + ''.join('<span>' + value[i:i + 4] + '</span>' for i in range(0, 64, 4)) + '</dd>'
-    return '<dd dir="auto">' + e(fact_text(value, say)) + '</dd>'
+    return '<dd><bdi>' + e(fact_text(value, say)) + '</bdi></dd>'
 
 
 def conditions_html(data, say, e):

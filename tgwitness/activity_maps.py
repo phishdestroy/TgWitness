@@ -309,7 +309,7 @@ def lanes(rows, origin, step, count, say, title, note):
             if loss_level(lost, loss_peak):
                 tip += " · " + say("absent: {n}", n=number(lost, say))
             cells.append(cell(value, peak, lost, loss_peak, tip))
-        cells.append('<td class="total" title="' + e(row["total"]) + '">' + e(row["total"]) + '</td>')
+        cells.append('<td class="total" title="' + e(row["total"]) + '"><bdi>' + e(row["total"]) + '</bdi></td>')
         body.append('<tr' + (' class="outside"' if row.get("outside") else '') + '>' + ''.join(cells) + '</tr>')
     columns = '<colgroup><col class="lane-col">' + '<col>' * count + '<col class="total-col"></colgroup>'
     return ('<div class="map-card"><h3>' + e(title) + '</h3><p class="map-note">' + e(note) + '</p><div class="map-scroll">'

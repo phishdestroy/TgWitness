@@ -5790,7 +5790,7 @@
   "Saved settings apply to newly prepared files.": "已保存的设置将应用于新准备的文件。",
   "Service messages": "服务消息",
   "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope.": "快照图表根据UTC时间统计本副本中包含的消息行数，不会重建所选范围之外的活动。",
-  "Sun": "Sun",
+  "Sun": "周日",
   "THE RECORD IN NUMBERS": "数据记录的数字概览",
   "Thu": "周四",
   "Tue": "周二",

@@ -5790,7 +5790,7 @@
   "Saved settings apply to newly prepared files.": "保存された設定は、新しく作成されるファイルに適用されます。",
   "Service messages": "サービスメッセージ",
   "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope.": "スナップショットチャートは、UTCで記録されたメッセージ時刻に基づき、このコピーに含まれるメッセージ行数をカウントします。選択された範囲外のアクティビティを再構築することはありません。",
-  "Sun": "Sun",
+  "Sun": "日",
   "THE RECORD IN NUMBERS": "数値で見る記録",
   "Thu": "木",
   "Tue": "火",
