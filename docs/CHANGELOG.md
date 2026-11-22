@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Reports in Arabic, Persian, Urdu and Hebrew: message ID ranges, chat IDs that start with a minus sign, dates and file sizes are shown left to right, as in the JSON files, on the activity map, in chat pages and their page list, and on the GitHub Actions cover page. The number of ranges of absent message IDs is shown as its own label, which reads correctly in every language.
 - GitHub Actions capture: on phones the cover page shows each exported chat as a card with a label next to each value. Chat names and run times keep their order in right-to-left languages, and durations under a minute are shown in the page language. While a chat's own archive is being packaged, the panel shows this step and the remaining time.
 - Backup: the backup folder appears only after the copy is complete, so running out of disk space or pressing Ctrl+C leaves nothing to clean up. A new command checks a backup against its manifest: `tgwitness verify-backup FOLDER`.
 - Avatars without a photo in reports and Telegram views show the same initials as in the panel, including usernames, names of the form User 12345 and names made only of digits.

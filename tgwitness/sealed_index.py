@@ -429,10 +429,13 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
         if not ids.get("numbered_per_chat"):
             return _e(say("not measured"))
         if not ids.get("missing"):
-            return _e(say("none · IDs {first}–{last}", first=ids.get("first_id"), last=ids.get("last_id")))
+            return marked("none · IDs {first}–{last}", first='<span dir="ltr">' + _e(ids.get("first_id")),
+                          last=_e(ids.get("last_id")) + "</span>")
         largest = ", ".join(_e(low) if low == high else f"{_e(low)}–{_e(high)}" for low, high in ids.get("largest_runs") or [])
-        return (marked("{n} in {runs} ranges", n="<b>" + _number(ids["missing"]) + "</b>", runs=_number(ids.get("missing_runs") or 0))
-                + (f'<br><span class="muted">{_e(say("largest:"))} <span dir="ltr">{largest}</span></span>' if largest else ""))
+        details = [marked("ranges: {n}", n=_number(ids.get("missing_runs") or 0))]
+        if largest:
+            details.append(f'{_e(say("largest:"))} <span dir="ltr">{largest}</span>')
+        return "<b>" + _number(ids["missing"]) + "</b>" + "".join(f'<br><span class="muted">{line}</span>' for line in details)
 
     columns = [_e(say(name)) for name in ("Chat", "Result", "Messages", "Absent message IDs", "File")]
 

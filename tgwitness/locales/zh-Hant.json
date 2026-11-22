@@ -5536,11 +5536,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "此預覽採用您當前的選項。它不會儲存這些選項，也不會產生經簽署的匯出檔。",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "本報告從 {chats} 個聊天室中選取 {n} 筆記錄：{m} 則訊息觀察記錄、{e} 次編輯記錄及 {d} 則刪除觀察記錄。",
   "Too many choices to list. Enter the Telegram IDs below.": "選項過多，無法一一列舉。請在下方輸入Telegram ID。",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "未觀察到的 ID：{ids} 位於 {ranges} 範圍內。",
   "Unobserved message IDs": "未被觀察到的訊息 ID",
   "Use the complete workspace or focus on particular chats, authors and dates.": "請使用完整的工作區，或聚焦於特定的聊天室、發訊者及日期。",
   "Whole workspace": "整個工作區",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} 範圍，{ids} 未被監測到的訊息 ID。",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "發送者篩選條件會與記錄中的發送者 ID 進行比對。未標示發送者的刪除通知將被排除在外。",
   "Changes and deleted messages": "變更與已刪除訊息",
   "Context outside the selected filters": "選定篩選條件以外的上下文",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "該帳號的所有聊天紀錄",
   "{selected} of {listed} chats in the list": "清單中 {listed} 則對話中的 {selected} 則",
   "none · IDs {first}–{last}": "無 · 識別碼 {first}–{last}",
-  "{n} in {runs} ranges": "{n} 在 {runs} 範圍內",
   "Signed records:": "已簽署紀錄：",
   "recorded in the journal": "已記錄於案件紀錄中",
   "All {n} selected chats were read to the end, with no failures.": "所有選定的 {n} 則聊天記錄均已完整讀取至結尾，未發生任何讀取失敗。",
@@ -10924,5 +10921,7 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "私人聊天、機器人及一般群組均採用同一帳戶範圍內的編號系統。此編號僅能在「整帳戶資料蒐集」功能啟用時進行追蹤；本日誌並無此類時間段。",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "私人聊天、機器人、一般群組以及該帳號自身的訊息均採用同一編號序列，因此測量範圍須明確記錄為包含所有項目，且不得排除任何聊天內容。",
   "Participants by observation count": "按觀察次數排序的參與者",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "參數：訊息編號中列出的最小間隔為 {smallest}；每組編號最多列出 {listed} 個間隔。"
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "參數：訊息編號中列出的最小間隔為 {smallest}；每組編號最多列出 {listed} 個間隔。",
+  "ranges: {n}": "範圍：{n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未觀察到的 ID：{ids}。範圍：{ranges}。"
 }

@@ -25,6 +25,7 @@ from .verify import (SCOPE_REASONS, SEAL_CLOSE, SEAL_OPEN, coverage_lines, finge
 SEAL_FORMAT = "tgwitness-report-seal-v1"
 CUSTODY_FORMAT = "tgwitness-custody-v1"
 RTL = ("ar", "fa", "ur", "he")
+LTR_SPANS = re.compile(r"\{\w+\}\s?[–-]\s?\{\w+\}|(?<![\w{])\d+(?:[.:]\d+)?\s?[–-]\s?\d+(?:[.:]\d+)?(?![\w}])")
 HIDDEN_CODEPOINTS = frozenset((*range(0x00, 0x09), *range(0x0B, 0x20), *range(0x7F, 0xA0),
                              0x200E, 0x200F, 0x2028, 0x2029, *range(0x202A, 0x202F), *range(0x2066, 0x206A)))
 
@@ -124,9 +125,16 @@ class Words:
             text = self.table.get(SINGULAR[text], SINGULAR[text])
         else:
             text = entry
+        if self.direction == "rtl":
+            text = LTR_SPANS.sub(lambda found: "\u2066" + found.group(0) + "\u2069", text)
+            values = {name: "\u2068" + str(value) + "\u2069" for name, value in values.items()}
         for name, value in values.items():
             text = text.replace("{" + name + "}", str(value))
         return text
+
+
+def isolated(say, value):
+    return "\u2068" + str(value) + "\u2069" if getattr(say, "direction", "ltr") == "rtl" else str(value)
 
 
 def text_keys():
@@ -722,8 +730,8 @@ def readme(context, files, english):
     for label, key in ((say("Case ID"), "case_id"), (say("Examiner"), "examiner"), (say("Organization"), "organization")):
         if options.get(key):
             lines.append(label + ": " + options[key])
-    lines += [say("Created") + ": " + utc_text(context["created_at"]), say("Report ID") + ": " + context["report_id"],
-              say("Signing key fingerprint") + ": " + fp]
+    lines += [say("Created") + ": " + isolated(say, utc_text(context["created_at"])),
+              say("Report ID") + ": " + isolated(say, context["report_id"]), say("Signing key fingerprint") + ": " + isolated(say, fp)]
     report_name = "chat.html" if not (evidence or handover) else "report.html"
     lines += ["", say("Start here"), "-" * 64,
               say("Extract the complete archive before opening the HTML report. Keep viewer/ and media/ beside it."),
@@ -1824,10 +1832,10 @@ def media_text(say, info):
     if not info:
         return ""
     size = " × ".join(str(info[k]) for k in ("width", "height") if info.get(k))
-    return " · ".join(x for x in (info.get("sticker_emoji"), content_text(say, info), info.get("file_name"), info.get("mime_type"),
-                                  size_text(info["size"]) if type(info.get("size")) is int else "", size,
-                                  say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
-                                  info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
+    return " · ".join(isolated(say, x) for x in (info.get("sticker_emoji"), content_text(say, info), info.get("file_name"),
+                                                 info.get("mime_type"), size_text(info["size"]) if type(info.get("size")) is int else "",
+                                                 size, say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
+                                                 info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
 
 
 def secret_record_lines(say, payload):
@@ -2327,7 +2335,7 @@ def ranges_text(ranges, total, limit=8):
     pairs = [(r["low"], r["high"]) if isinstance(r, dict) else tuple(r) for r in ranges[:limit]]
     shown = [str(low) if low == high else str(low) + "–" + str(high) for low, high in pairs]
     more = max(total, len(ranges)) - len(shown)
-    return ('<span class="ranges">' + e(", ".join(shown) + (" … +" + str(more) if more > 0 else "")) + "</span>"
+    return ('<span class="ranges" dir="ltr">' + e(", ".join(shown) + (" … +" + str(more) if more > 0 else "")) + "</span>"
             if shown else "—")
 
 
@@ -3297,13 +3305,13 @@ def source_rows(say, meta, stats):
         if type(profile.get(key)) is int:
             rows.append((say(label), "{:,}".format(profile[key]).replace(",", " "), None))
     if profile.get("created_at"):
-        rows.append((say("Created"), utc_text(profile["created_at"]) + (" · " + say("as “{title}”", title=profile["created_title"])
-                                                                        if profile.get("created_title") else ""), None))
+        rows.append((say("Created"), isolated(say, utc_text(profile["created_at"]))
+                     + (" · " + say("as “{title}”", title=profile["created_title"]) if profile.get("created_title") else ""), None))
     elif profile:
         rows.append((say("Created"), say("Not visible to this account: Telegram did not return message 1"), None))
     for item in stats.get("renames") or []:
-        rows.append((say("Title in the history"), utc_text(item.get("date")) + " · “" + str(item["title"]) + "” · #"
-                     + str(item.get("id")), None))
+        rows.append((say("Title in the history"), isolated(say, utc_text(item.get("date"))) + " · “" + isolated(say, item["title"])
+                     + "” · #" + str(item.get("id")), None))
     if profile.get("linked_chat_id"):
         rows.append((say("Linked discussion"), "id " + str(profile["linked_chat_id"]), None))
     if profile.get("noforwards"):
@@ -3390,7 +3398,7 @@ def journal_change_rows(say, items):
     for item in items:
         versions = [v for v in item["events"] if v["kind"] not in JOURNAL_NOTICES and "link" not in v]
         link = next((v["link"] for v in item["events"] if "link" in v), None)
-        notices = [say(JOURNAL_NOTICES[v["kind"]]) + " · " + utc_text(v["observed_at"])
+        notices = [say(JOURNAL_NOTICES[v["kind"]]) + " · " + isolated(say, utc_text(v["observed_at"]))
                    + (" · " + attribution_text(say, v["attribution"], link) if "attribution" in v else "")
                    for v in item["events"] if v["kind"] in JOURNAL_NOTICES]
         edits = sum(1 for v in versions if v["kind"] == "message.edited")
@@ -3435,7 +3443,7 @@ def chat_subject(meta, context):
 
 
 def absent_known(say, entry):
-    return (say(JOURNAL_NOTICES.get(entry.get("kind"), "Deleted")) + " · " + utc_text(entry.get("at")) + " · "
+    return (say(JOURNAL_NOTICES.get(entry.get("kind"), "Deleted")) + " · " + isolated(say, utc_text(entry.get("at"))) + " · "
             + say("Observed versions, preserved" if entry.get("saved") else "No saved message"))
 
 
