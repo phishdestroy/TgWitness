@@ -630,7 +630,7 @@ Checks whether the installed program matches a published version.
 The result counts as current only while the running program files are unchanged:
 check again after an update. No token is needed and only public repositories work;
 chats and credentials are not uploaded. A match identifies the code on disk. It is not
-hardware attestation; for that, see [Phala Cloud](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx).
+hardware attestation; for that, see [Phala Cloud](PHALA.md#confidential-vm-on-phala-cloud-intel-tdx).
 
 ## Protection modes
 

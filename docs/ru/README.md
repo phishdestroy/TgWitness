@@ -151,7 +151,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 **Откуда берутся сообщения.** TgWitness получает их от Telegram через
 зашифрованный сеанс MTProto аккаунта, как и официальные приложения, и по мере поступления
 подписывает каждое и заносит в журнал. [Сбор через GitHub Actions](SEALED-ACTIONS.md) и
-[Phala Intel TDX](HIGH-ASSURANCE.md) дополнительно аттестуют коллектор, который их получил.
+[Phala Intel TDX](PHALA.md) дополнительно аттестуют коллектор, который их получил.
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-chain-mobile-static.svg">
@@ -260,7 +260,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 </tr>
 <tr>
 <td width="50%" align="center"><a href="https://phishdestroy.github.io/TgWitness/ru/docs/archive/"><b>Поиск по архиву, ИИ и MCP&nbsp;↗</b></a><br><sub>Поиск по архиву и клиенты только для чтения</sub></td>
-<td width="50%" align="center"><a href="HIGH-ASSURANCE.md"><b>Запечатанное облачное развёртывание&nbsp;↗</b></a><br><sub>Коллектор внутри Intel TDX</sub></td>
+<td width="50%" align="center"><a href="PHALA.md"><b>Запечатанное облачное развёртывание&nbsp;↗</b></a><br><sub>Коллектор внутри Intel TDX</sub></td>
 </tr>
 </table>
 
@@ -366,7 +366,7 @@ AES-256-GCM; ключи передаются отдельно.
 протокола и включите её для аккаунта, чтобы записывать созданные или принятые в нём чаты.
 Доступные способы получения данных описаны в разделе [Границы сбора](../COLLECTION.md).
 
-[Phala / Intel TDX и развёртывания с аудитом](HIGH-ASSURANCE.md) ·
+[Phala / Intel TDX](PHALA.md) · [Развёртывания с аудитом](HIGH-ASSURANCE.md) ·
 [Проверка Phala в реальных условиях](../VERIFICATION.md#live-phala-cloud-deployment--4-november-2026) ·
 [Границы доверия](../SECURITY-MODEL.md)
 

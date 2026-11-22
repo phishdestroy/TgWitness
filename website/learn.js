@@ -647,7 +647,419 @@
     showControls(lab);
   }
 
-  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash, steps, compare, chain, seal};
+  const whenVisible = (lab, start) => {
+    if (motion.matches || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      start();
+    }, {threshold:.45});
+    observer.observe(lab);
+  };
+
+  function vsDeploy(lab) {
+    const wires = [];
+    lab.querySelectorAll('.vs-scene [data-wire]').forEach(path => {
+      const pulse = path.cloneNode(false);
+      pulse.setAttribute('class', 'vs-pulse');
+      pulse.removeAttribute('data-wire');
+      path.after(pulse);
+      wires.push([path.dataset.wire, path, pulse]);
+    });
+    const play = lab.querySelector('[data-play]');
+    const next = lab.querySelector('[data-next]');
+    const label = lab.querySelector('[data-step-label]');
+    const status = lab.querySelector('[data-deploy-status]');
+    const idle = status.textContent;
+    const plan = [null,
+      {nodes:['cf'], wires:[['cf']], text:T('Cloudflare creates the tunnel and the DNS records. No server exists yet: the panel address leads nowhere until the server connects.')},
+      {nodes:['api', 'firewall'], wires:[['api']], text:T('The provider creates a firewall with no inbound rules. Every connection from outside stops here, SSH included.')},
+      {nodes:['server'], wires:[['make']], text:T('The server is created behind that firewall with no SSH key, no backups and no console agent. Its cloud-init is all it receives.')},
+      {nodes:['git'], chips:['ssh', 'code'], wires:[['git']], text:T('First boot: cloud-init masks SSH, locks root, fetches exactly one commit and installs only packages whose SHA-256 that commit lists.')},
+      {chips:['collector', 'key'], wires:[['tunnel']], text:T('The collector starts and creates its signing key on the server. cloudflared dials out to Cloudflare: the panel is reachable, and only through the tunnel.')},
+      {nodes:['record'], wires:[['tunnel'], ['cf', true]], text:T('The collector signs the server ID and the hash of its cloud-init; deploy checks both and writes deployment.json. Publish the collector fingerprint through a channel you do not control alone.')},
+    ];
+    const last = plan.length - 1;
+    let step = 0;
+    let timer;
+    let playing = false;
+    const render = () => {
+      lab.dataset.step = String(step);
+      const on = new Set(['computer']);
+      const chips = new Set();
+      const done = new Set();
+      for (let index = 1; index <= step; index += 1) {
+        (plan[index].nodes || []).forEach(name => on.add(name));
+        (plan[index].chips || []).forEach(name => chips.add(name));
+        plan[index].wires.forEach(([name]) => done.add(name));
+      }
+      const active = new Map(step ? plan[step].wires.map(([name, back]) => [name, !!back]) : []);
+      lab.querySelectorAll('.vs-scene [data-node]').forEach(node => node.classList.toggle('is-on', on.has(node.dataset.node)));
+      lab.querySelectorAll('.vs-scene [data-chip]').forEach(chip => chip.classList.toggle('is-on', chips.has(chip.dataset.chip)));
+      wires.forEach(([name, path, pulse]) => {
+        path.classList.toggle('is-done', done.has(name));
+        pulse.classList.toggle('is-active', active.has(name));
+        pulse.classList.toggle('is-reverse', active.get(name) === true);
+      });
+      lab.querySelectorAll('[data-deploy-step]').forEach(item => {
+        const number = Number(item.dataset.deployStep);
+        item.classList.toggle('is-done', number < step || step === last);
+        item.classList.toggle('is-current', number === step && step !== last);
+      });
+      status.textContent = step ? plan[step].text : idle;
+      label.textContent = step === last ? T('Deployed / {n} of 6', {n:step}) : step ? T('Step / {n} of 6', {n:step}) : T('Ready / 0 of 6');
+      play.textContent = playing ? T('Pause') : step === last ? T('Replay deployment') : T('Play deployment');
+      next.disabled = step === last;
+      lab.classList.toggle('is-playing', playing);
+    };
+    const stop = () => { clearTimeout(timer); playing = false; render(); };
+    const advance = () => {
+      step = Math.min(step + 1, last);
+      if (step === last) playing = false;
+      render();
+      if (playing) timer = setTimeout(advance, 2700);
+    };
+    const start = () => {
+      if (motion.matches) { step = last; render(); return; }
+      if (step === last) step = 0;
+      playing = true;
+      advance();
+    };
+    play.addEventListener('click', () => { if (playing) stop(); else start(); });
+    next.addEventListener('click', () => { stop(); advance(); });
+    lab.querySelector('[data-reset]').addEventListener('click', () => { stop(); step = 0; render(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && playing) stop(); });
+    window.addEventListener('pagehide', stop);
+    motion.addEventListener('change', stop);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => { if (!entries[0].isIntersecting && playing) stop(); }).observe(lab);
+    }
+    showControls(lab);
+    render();
+    whenVisible(lab, () => { if (!playing && step === 0) start(); });
+  }
+
+  function vsReach(lab) {
+    const status = lab.querySelector('[data-reach-status]');
+    const idle = status.textContent;
+    const lamps = [...lab.querySelectorAll('[data-lamp]')].map(lamp => [lamp, lamp.textContent]);
+    const actors = {
+      api:{lamp:T('Recorded · verify fails'), result:'seen', text:T('Console, rescue, password reset, rebuild, snapshots and firewall openings all go through the provider API. Each lands in the provider log of your account, and verify fails on it. A stolen token changes nothing about that.')},
+      tunnel:{lamp:T('Second connector reported'), result:'seen', text:T('The tunnel token lets someone run a second connector and route panel traffic elsewhere. Cloudflare lists every connector with its address, and verify reports any that does not run on the server. The collector\'s statements still cannot be forged: each one signs a fresh challenge.')},
+      network:{lamp:T('Shows as gaps'), result:'gap', text:T('Someone on the provider network, lawful interception included, can block or delay traffic. They cannot alter Telegram content: the session key is created on the server and MTProto pins Telegram\'s server keys. Blocking shows as gaps in the journal.')},
+      host:{lamp:T('Not in any log you can see'), result:'unseen', text:T('With root on the host, someone can pause your server, read its memory and signing key, change data before it is signed or move its clock. Only your server is affected, and no customer-visible log records it. This takes the provider\'s staff, a state that compels the provider, or a compromise of the provider itself.')},
+    };
+    let actor = 'none';
+    const render = animate => {
+      lab.dataset.actor = actor;
+      pressed(lab, 'data-actor', actor);
+      const chosen = actors[actor];
+      lamps.forEach(([lamp, text]) => {
+        const mine = lamp.dataset.lamp === actor;
+        lamp.textContent = mine ? chosen.lamp : text;
+        lamp.dataset.result = mine ? chosen.result : '';
+      });
+      lab.dataset.state = !chosen ? 'ok' : chosen.result === 'unseen' ? 'error' : chosen.result === 'gap' ? 'warning' : 'ok';
+      status.textContent = chosen ? chosen.text : idle;
+      if (animate && chosen && !motion.matches) {
+        lab.querySelector(`[data-layer="${actor}"]`).animate([{transform:'scale(.98)'}, {transform:'none'}], {duration:320, easing:'cubic-bezier(.2,.8,.2,1)'});
+      }
+    };
+    lab.querySelectorAll('button[data-actor]').forEach(button => button.addEventListener('click', () => {
+      actor = actor === button.dataset.actor ? 'none' : button.dataset.actor;
+      render(true);
+    }));
+    showControls(lab);
+    render(false);
+  }
+
+  function vsLog(lab) {
+    const rows = lab.querySelector('[data-log-rows]');
+    const verdict = lab.querySelector('[data-verdict]');
+    const exit = lab.querySelector('[data-exit]');
+    const status = lab.querySelector('[data-log-status]');
+    const marks = {pass:T('PASS'), fail:T('FAIL'), review:T('REVIEW')};
+    const reason = {
+      created:T('server created'), part:T('part of the deployment'), console:T('web console (VNC) credentials requested'),
+      power:T('power or restart: collection was interrupted; compare with the journal'), unknown:T('not expected in this mode'),
+    };
+    const base = [[T('0 s'), 'create_server', 'pass', reason.created], [T('1 s'), 'apply_firewall', 'pass', reason.part],
+                  [T('4 s'), 'start_server', 'pass', reason.part]];
+    const scenarios = {
+      clean:{rows:base, text:T('Creation, the firewall and the first start, all within 30 minutes of creation: the provider log passes.')},
+      console:{rows:[...base, [T('day 3'), 'request_console', 'fail', reason.console]], text:T('Someone asked the provider for web console credentials. That is a way into the running server, so the check fails, whoever asked and whatever happened next.')},
+      restart:{rows:[...base, [T('day 5'), 'reboot_server', 'review', reason.power]], text:T('A restart is not a way in, but collection stopped for a while. The report marks it for review: the gap in the journal should match the restart.')},
+      unknown:{rows:[...base, [T('day 2'), 'change_dns_ptr', 'review', reason.unknown]], text:T('Nobody classified this action in advance. Reverse DNS is harmless here, but verify does not guess: anything unforeseen goes to review, never to pass.')},
+    };
+    let timers = [];
+    const show = name => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      pressed(lab, 'data-scenario', name);
+      const data = scenarios[name];
+      rows.replaceChildren(...data.rows.map(([time, command, result, why]) => {
+        const row = document.createElement('tr');
+        row.className = 'is-pending';
+        row.dataset.result = result;
+        const when = document.createElement('td');
+        when.textContent = time;
+        const what = document.createElement('td');
+        const code = document.createElement('code');
+        code.textContent = command;
+        what.append(code);
+        const judged = document.createElement('td');
+        const mark = document.createElement('span');
+        mark.className = 'vs-mark';
+        mark.textContent = marks[result];
+        judged.append(mark, ' ' + why);
+        row.append(when, what, judged);
+        return row;
+      }));
+      const worst = data.rows.some(row => row[2] === 'fail') ? 'fail' : data.rows.some(row => row[2] === 'review') ? 'review' : 'pass';
+      const finish = () => {
+        verdict.textContent = marks[worst];
+        exit.textContent = T('exit {n}', {n:{pass:0, fail:1, review:2}[worst]});
+        lab.dataset.verdict = worst;
+        lab.dataset.state = worst === 'fail' ? 'error' : worst === 'review' ? 'warning' : 'ok';
+        status.textContent = data.text;
+      };
+      const items = [...rows.children];
+      if (motion.matches) {
+        items.forEach(row => { row.className = 'is-' + row.dataset.result; });
+        finish();
+        return;
+      }
+      lab.dataset.verdict = 'pending';
+      lab.dataset.state = 'ok';
+      verdict.textContent = '…';
+      exit.textContent = '';
+      status.textContent = T('Checking {n} actions…', {n:items.length});
+      items.forEach((row, index) => {
+        timers.push(setTimeout(() => { row.className = 'is-checking'; }, 200 + index * 560));
+        timers.push(setTimeout(() => { row.className = 'is-' + row.dataset.result; }, 560 + index * 560));
+      });
+      timers.push(setTimeout(finish, 700 + items.length * 560));
+    };
+    lab.querySelectorAll('[data-scenario]').forEach(button => button.addEventListener('click', () => show(button.dataset.scenario)));
+    showControls(lab);
+    lab.dataset.verdict = 'pass';
+    whenVisible(lab, () => show('clean'));
+  }
+
+  function vsDns(lab) {
+    const status = lab.querySelector('[data-dns-status]');
+    const path = lab.querySelector('[data-flow-path]');
+    const results = {
+      on:{resolver:'logged', dns53:'blocked', dot:'blocked', doh:'unseen', telegram:'unseen', tunnel:'recorded'},
+      off:{resolver:'unseen', dns53:'unseen', dot:'unseen', doh:'unseen', telegram:'unseen', tunnel:'recorded'},
+    };
+    const labels = {logged:T('Logged by Cloudflare'), blocked:T('Blocked by the provider firewall'),
+                    unseen:T('Passes · not in the Gateway log'), recorded:T('Cloudflare records the connector\'s address')};
+    const texts = {on:status.textContent, off:T('Without Gateway DNS the server asks the provider\'s resolver, and no outside party records which names it looked up. Cloudflare\'s record of the tunnel remains.')};
+    const paths = {on:path.textContent, off:T('plain DNS → the provider\'s resolver')};
+    const render = mode => {
+      pressed(lab, 'data-gateway-mode', mode);
+      lab.dataset.gateway = mode;
+      path.textContent = paths[mode];
+      lab.querySelectorAll('li[data-flow]').forEach(item => {
+        const result = results[mode][item.dataset.flow];
+        item.dataset.result = result;
+        item.querySelector('[data-flow-state]').textContent = mode === 'off' && result === 'unseen'
+          ? T('Passes · no outside record') : labels[result];
+        if (!motion.matches) item.animate([{opacity:.4}, {opacity:1}], {duration:300, easing:'ease-out'});
+      });
+      lab.dataset.state = mode === 'on' ? 'ok' : 'warning';
+      status.textContent = texts[mode];
+    };
+    lab.querySelectorAll('[data-gateway-mode]').forEach(button => button.addEventListener('click', () => render(button.dataset.gatewayMode)));
+    showControls(lab);
+  }
+
+  function vsActions(lab) {
+    const rows = lab.querySelector('[data-action-rows]');
+    const initial = rows.innerHTML;
+    const verdict = lab.querySelector('[data-verdict]');
+    const exit = lab.querySelector('[data-exit]');
+    const status = lab.querySelector('[data-action-status]');
+    const idle = status.textContent;
+    const marks = {pass:T('PASS'), fail:T('FAIL'), review:T('REVIEW')};
+    const notes = {
+      pass:T('Part of a normal deployment: it passes.'),
+      fail:T('A way into the running server, or a copy of its disk: verify fails, whoever did it.'),
+      review:T('Not a way in, but not expected either: the report marks it for review.'),
+    };
+    const update = () => {
+      const results = [...rows.querySelectorAll('tr')].map(row => row.className.replace('is-', ''));
+      const worst = results.includes('fail') ? 'fail' : results.includes('review') ? 'review' : 'pass';
+      verdict.textContent = marks[worst];
+      exit.textContent = T('exit {n}', {n:{pass:0, fail:1, review:2}[worst]});
+      lab.dataset.verdict = worst;
+      lab.dataset.state = worst === 'fail' ? 'error' : worst === 'review' ? 'warning' : 'ok';
+      return worst;
+    };
+    const reasons = [...lab.querySelectorAll('.pv-reasons li')].map(item => item.textContent);
+    lab.querySelectorAll('[data-action-result]').forEach((button, index) => button.addEventListener('click', () => {
+      const result = button.dataset.actionResult;
+      const row = document.createElement('tr');
+      row.className = 'is-' + result;
+      const what = document.createElement('td');
+      what.append(button.querySelector('code').cloneNode(true));
+      const judged = document.createElement('td');
+      const mark = document.createElement('span');
+      mark.className = 'vs-mark';
+      mark.textContent = marks[result];
+      judged.append(mark, ' ' + (reasons[index] || ''));
+      row.append(what, judged);
+      rows.append(row);
+      button.setAttribute('aria-pressed', 'true');
+      if (!motion.matches) row.animate([{opacity:0, transform:'translateY(-6px)'}, {opacity:1, transform:'none'}], {duration:320, easing:'cubic-bezier(.2,.8,.2,1)'});
+      update();
+      status.textContent = notes[result];
+    }));
+    lab.querySelector('[data-action-reset]').addEventListener('click', () => {
+      rows.innerHTML = initial;
+      lab.querySelectorAll('[data-action-result]').forEach(button => button.setAttribute('aria-pressed', 'false'));
+      update();
+      status.textContent = idle;
+    });
+    showControls(lab);
+    update();
+  }
+
+  function pvTabs(lab) {
+    const tabs = [...lab.querySelectorAll('[data-tab]')];
+    const panels = [...lab.querySelectorAll('[data-panel]')];
+    const open = (slug, focus) => {
+      tabs.forEach(tab => {
+        const on = tab.dataset.tab === slug;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focus) tab.focus();
+      });
+      panels.forEach(panel => {
+        const on = panel.dataset.panel === slug;
+        panel.hidden = !on;
+        if (on && !motion.matches) panel.animate([{opacity:0, transform:'translateY(8px)'}, {opacity:1, transform:'none'}], {duration:300, easing:'cubic-bezier(.2,.8,.2,1)'});
+      });
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => open(tab.dataset.tab));
+      tab.addEventListener('keydown', event => {
+        const step = {ArrowRight:1, ArrowLeft:-1}[event.key];
+        if (!step) return;
+        event.preventDefault();
+        open(tabs[(index + step + tabs.length) % tabs.length].dataset.tab, true);
+      });
+    });
+    const fromHash = () => {
+      const panel = panels.find(item => '#' + item.id === location.hash);
+      if (panel) open(panel.dataset.panel);
+    };
+    lab.parentElement.querySelectorAll('a[href^="#provider-"]').forEach(link => link.addEventListener('click', () => setTimeout(fromHash)));
+    window.addEventListener('hashchange', fromHash);
+    showControls(lab);
+    open(tabs[0].dataset.tab);
+    fromHash();
+  }
+
+  function phChain(lab) {
+    const links = [...lab.querySelectorAll('[data-chain]')];
+    const play = lab.querySelector('[data-play]');
+    const label = lab.querySelector('[data-step-label]');
+    const status = lab.querySelector('[data-chain-status]');
+    const idle = status.textContent;
+    let step = 0;
+    let timer;
+    const render = () => {
+      links.forEach((item, index) => {
+        item.classList.toggle('is-done', index < step);
+        item.classList.toggle('is-current', index === step - 1);
+      });
+      lab.dataset.step = String(step);
+      label.textContent = T('{n} of 5', {n:step});
+      status.textContent = step ? links[step - 1].querySelector('strong').textContent + ': ' + links[step - 1].querySelector('span:last-child').textContent : idle;
+    };
+    const stop = () => { clearTimeout(timer); timer = null; play.disabled = false; };
+    const run = () => {
+      stop();
+      if (motion.matches) { step = links.length; render(); return; }
+      step = 0;
+      play.disabled = true;
+      const next = () => {
+        step += 1;
+        render();
+        if (step < links.length) timer = setTimeout(next, 1100); else stop();
+      };
+      next();
+    };
+    play.addEventListener('click', run);
+    lab.querySelector('[data-reset]').addEventListener('click', () => { stop(); step = 0; render(); });
+    showControls(lab);
+    render();
+    whenVisible(lab, run);
+  }
+
+  function phChecks(lab) {
+    const rows = [...lab.querySelectorAll('[data-check]')];
+    const verdict = lab.querySelector('[data-verdict]');
+    const exit = lab.querySelector('[data-exit]');
+    const status = lab.querySelector('[data-checks-status]');
+    const passed = status.textContent;
+    let timers = [];
+    const show = scenario => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      pressed(lab, 'data-scenario', scenario);
+      const finish = () => {
+        const failed = rows.find(row => row.dataset.check === scenario);
+        verdict.textContent = failed ? T('FAIL') : T('PASS');
+        exit.textContent = T('exit {n}', {n:failed ? 1 : 0});
+        lab.dataset.state = failed ? 'error' : 'ok';
+        lab.dataset.verdict = failed ? 'fail' : 'pass';
+        status.textContent = failed ? failed.querySelector('code').textContent + ': ' + failed.querySelector('.ph-bad').textContent : passed;
+      };
+      const settle = row => {
+        const bad = row.dataset.check === scenario;
+        row.className = bad ? 'is-fail' : 'is-pass';
+        row.querySelector('.ph-ok').hidden = bad;
+        row.querySelector('.ph-bad').hidden = !bad;
+      };
+      if (motion.matches) { rows.forEach(settle); finish(); return; }
+      lab.dataset.verdict = 'pending';
+      verdict.textContent = '…';
+      exit.textContent = '';
+      rows.forEach(row => { row.className = 'is-pending'; row.querySelector('.ph-ok').hidden = false; row.querySelector('.ph-bad').hidden = true; });
+      rows.forEach((row, index) => {
+        timers.push(setTimeout(() => { row.className = 'is-checking'; }, 150 + index * 420));
+        timers.push(setTimeout(() => settle(row), 450 + index * 420));
+      });
+      timers.push(setTimeout(finish, 600 + rows.length * 420));
+    };
+    lab.querySelectorAll('[data-scenario]').forEach(button => button.addEventListener('click', () => show(button.dataset.scenario)));
+    showControls(lab);
+    rows.forEach(row => { row.className = 'is-pass'; });
+    whenVisible(lab, () => show('ok'));
+  }
+
+  function phRollback(lab) {
+    const status = lab.querySelector('[data-rollback-status]');
+    const idle = status.textContent;
+    const rolled = lab.querySelector('[data-rollback-text]').textContent;
+    const count = lab.querySelector('[data-journal-count]');
+    const full = count.textContent;
+    const go = back => {
+      lab.classList.toggle('is-rolled', back);
+      lab.dataset.state = back ? 'error' : 'ok';
+      count.textContent = back ? T('{n} records', {n:96}) : full;
+      status.textContent = back ? rolled : idle;
+    };
+    lab.querySelector('[data-rollback]').addEventListener('click', () => go(true));
+    lab.querySelector('[data-reset]').addEventListener('click', () => go(false));
+    showControls(lab);
+  }
+
+  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash, steps, compare, chain, seal,
+                  vsDeploy, vsReach, vsLog, vsDns, vsActions, pvTabs, phChain, phChecks, phRollback};
   document.querySelectorAll('[data-lab]').forEach(lab => {
     Promise.resolve().then(() => setups[lab.dataset.lab](lab)).catch(() => {
       lab.querySelectorAll('[data-enhanced]').forEach(node => { node.hidden = true; });

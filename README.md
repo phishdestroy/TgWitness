@@ -180,7 +180,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | Intel TDX | The attested environment, expected measurements, fresh challenge and bound collector key. |
 
 TgWitness takes no side: the same checks apply to the operator and the project.
-[Questions and checks](docs/QUESTIONS-AND-CHECKS.md) · [GitHub capture](docs/SEALED-ACTIONS.md) · [Intel TDX](docs/HIGH-ASSURANCE.md) · [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+[Questions and checks](docs/QUESTIONS-AND-CHECKS.md) · [GitHub capture](docs/SEALED-ACTIONS.md) · [Intel TDX](docs/PHALA.md) · [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
 
 </details>
 
