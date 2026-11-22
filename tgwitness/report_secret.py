@@ -102,7 +102,9 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         elif name == "accepted":
             event("Accepted automatically" if payload.get("automatic") else "Accepted here")
         elif name == "ready":
-            chat["state"], chat["key"] = "ready", payload.get("key_visualization") or chat["key"]
+            key = payload.get("key_visualization")
+            chat["state"] = "ready"
+            chat["key"] = "".join(key.split()) if isinstance(key, str) and key.strip() else chat["key"]
             event("Established")
         elif name == "closed":
             chat["state"] = "closed"
@@ -172,6 +174,21 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         chat.pop("shown")
         result.append(chat)
     return sorted(result, key=lambda chat: (chat["started"] or {}).get("at") or "")
+
+
+def bubble_meta(say, chat, item, when):
+    """Who, when and which signed record: the sender for received messages, the record number and its hash prefix."""
+    parts = [say("Sent")] if item["direction"] == "out" else [say("Received"), sender_label(chat["peer"])]
+    parts += [when(item["at"]), say("Record #{n}", n=item["seq"])]
+    if isinstance(item.get("hash"), str) and item["hash"]:
+        parts.append("SHA-256 " + item["hash"][:12])
+    return " · ".join(part for part in parts if part)
+
+
+def sender_label(peer):
+    name, username = peer.get("name"), peer.get("username")
+    return " ".join(part for part in (name, "@" + username if username else None,
+                                      "ID " + str(peer["id"]) if peer.get("id") is not None else None) if part)
 
 
 def peer_label(say, peer):
@@ -309,8 +326,7 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
             if media:
                 parts.append('<div class="file">' + e(media_line(say, media, size_text))
                              + (" · SHA-256 " + e(item["file"]["sha256"]) if item["file"] else "") + "</div>")
-            parts.append('<span class="meta">' + e(say("Sent") if item["direction"] == "out" else say("Received")) + " · "
-                         + e(when(item["at"])) + " · " + e(say("Record #{n}", n=item["seq"])) + "</span></div>")
+            parts.append('<span class="meta">' + e(bubble_meta(say, chat, item, when)) + "</span></div>")
         parts.append("</div></article>")
     parts.append("</section>")
     return "".join(parts)
@@ -367,8 +383,7 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 blocks.append(("text", item["text"], ink))
             if media:
                 blocks.append(("small", media_line(say, media, size_text) + (" · SHA-256 " + item["file"]["sha256"] if item["file"] else ""), muted))
-            blocks.append(("meta", (say("Sent") if out else say("Received")) + " · " + when(item["at"]) + " · "
-                           + say("Record #{n}", n=item["seq"]), muted))
+            blocks.append(("meta", bubble_meta(say, chat, item, when), muted))
             heights = []
             for kind, value, extra in blocks:
                 if kind == "image":
