@@ -10838,5 +10838,7 @@
   "A notice to the other side was not confirmed": "Non è stata confermata la ricezione di una notifica da parte dell’altra parte",
   "Failed pages and files": "Pagine e file non disponibili",
   "Known limits": "Limiti noti",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Realizzato all’interno di GitHub Actions con l’esecuzione {run} (tentativo {attempt}) del {repository}. Il file attestation.jsonl di GitHub, fornito insieme al file evidence.zip, firma l’archivio che contiene questa esportazione."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Realizzato all’interno di GitHub Actions con l’esecuzione {run} (tentativo {attempt}) del {repository}. Il file attestation.jsonl di GitHub, fornito insieme al file evidence.zip, firma l’archivio che contiene questa esportazione.",
+  "Custom emoji": "Emoji personalizzate",
+  "Animated sticker": "Adesivo animato"
 }

@@ -10777,5 +10777,7 @@
   "A notice to the other side was not confirmed": "相手側への通知は確認されなかった",
   "Failed pages and files": "読み込みに失敗したページおよびファイル",
   "Known limits": "既知の制限事項",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}の{run}実行（{attempt}試行）内でGitHub Actionsにより作成。GitHubのattestation.jsonlがevidence.zipと共に提供され、このエクスポートデータを格納するアーカイブに署名されています。"
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}の{run}実行（{attempt}試行）内でGitHub Actionsにより作成。GitHubのattestation.jsonlがevidence.zipと共に提供され、このエクスポートデータを格納するアーカイブに署名されています。",
+  "Custom emoji": "カスタム絵文字",
+  "Animated sticker": "アニメーションステッカー"
 }

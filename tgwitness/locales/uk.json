@@ -10930,5 +10930,7 @@
   "A notice to the other side was not confirmed": "Повідомлення для іншої сторони не було підтверджено",
   "Failed pages and files": "Сторінки та файли, з якими не вдалося працювати",
   "Known limits": "Відомі обмеження",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Створено в рамках GitHub Actions під час запуску {run} (спроба {attempt}) репозиторію {repository}. Файл attestation.jsonl від GitHub, наданий разом із evidence.zip, підписує архів, що містить цей експорт."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Створено в рамках GitHub Actions під час запуску {run} (спроба {attempt}) репозиторію {repository}. Файл attestation.jsonl від GitHub, наданий разом із evidence.zip, підписує архів, що містить цей експорт.",
+  "Custom emoji": "Кастомний емодзі",
+  "Animated sticker": "Анімований стікер"
 }

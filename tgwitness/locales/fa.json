@@ -10828,5 +10828,7 @@
   "A notice to the other side was not confirmed": "اعلامیه‌ای به طرف مقابل تأیید نشد",
   "Failed pages and files": "صفحات و فایل‌های ناموفق",
   "Known limits": "محدودیت‌های شناخته‌شده",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "ساخته شده در داخل GitHub Actions، اجرا {run} (تلاش {attempt}) از {repository}. فایل attestation.jsonl گیت‌هاب که در کنار evidence.zip ارائه می‌شود، آرشیوی را که این خروجی را در خود دارد، امضا می‌کند."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "ساخته شده در داخل GitHub Actions، اجرا {run} (تلاش {attempt}) از {repository}. فایل attestation.jsonl گیت‌هاب که در کنار evidence.zip ارائه می‌شود، آرشیوی را که این خروجی را در خود دارد، امضا می‌کند.",
+  "Custom emoji": "ایموجی سفارشی",
+  "Animated sticker": "استیکر متحرک"
 }

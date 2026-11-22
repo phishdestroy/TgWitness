@@ -10777,5 +10777,7 @@
   "A notice to the other side was not confirmed": "Pemberitahuan kepada pihak lain belum dikonfirmasi",
   "Failed pages and files": "Halaman dan berkas yang gagal",
   "Known limits": "Batasan yang diketahui",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Dibuat dalam GitHub Actions pada eksekusi {run} (upaya {attempt}) dari {repository}. Berkas attestation.jsonl dari GitHub, yang disertakan bersama evidence.zip, menandatangani arsip yang berisi ekspor ini."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Dibuat dalam GitHub Actions pada eksekusi {run} (upaya {attempt}) dari {repository}. Berkas attestation.jsonl dari GitHub, yang disertakan bersama evidence.zip, menandatangani arsip yang berisi ekspor ini.",
+  "Custom emoji": "Emoji khusus",
+  "Animated sticker": "Stiker animasi"
 }

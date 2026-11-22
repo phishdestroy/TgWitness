@@ -10777,5 +10777,7 @@
   "A notice to the other side was not confirmed": "Thông báo gửi đến phía bên kia chưa được xác nhận",
   "Failed pages and files": "Các trang và tệp không thành công",
   "Known limits": "Các hạn chế đã biết",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Được tạo trong lần chạy GitHub Actions {run} (lần thử {attempt}) của {repository}. Tệp attestation.jsonl của GitHub, được cung cấp kèm theo tệp evidence.zip, sẽ ký xác thực tệp lưu trữ chứa bản xuất này."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Được tạo trong lần chạy GitHub Actions {run} (lần thử {attempt}) của {repository}. Tệp attestation.jsonl của GitHub, được cung cấp kèm theo tệp evidence.zip, sẽ ký xác thực tệp lưu trữ chứa bản xuất này.",
+  "Custom emoji": "Biểu tượng cảm xúc tùy chỉnh",
+  "Animated sticker": "Hình dán động"
 }

@@ -10828,5 +10828,7 @@
   "A notice to the other side was not confirmed": "Karşı tarafa yapılan bildirim teyit edilmedi",
   "Failed pages and files": "Hatalı sayfalar ve dosyalar",
   "Known limits": "Bilinen sınırlamalar",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}'nin {run} ({attempt} denemesi) çalıştırması kapsamında GitHub Actions içinde oluşturulmuştur. GitHub'ın evidence.zip dosyasının yanında sunulan attestation.jsonl dosyası, bu dışa aktarmayı içeren arşivi imzalar."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}'nin {run} ({attempt} denemesi) çalıştırması kapsamında GitHub Actions içinde oluşturulmuştur. GitHub'ın evidence.zip dosyasının yanında sunulan attestation.jsonl dosyası, bu dışa aktarmayı içeren arşivi imzalar.",
+  "Custom emoji": "Özel emoji",
+  "Animated sticker": "Animasyonlu çıkartma"
 }

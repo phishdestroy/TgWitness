@@ -10828,5 +10828,7 @@
   "A notice to the other side was not confirmed": "Qarshi tomonga bildirishnoma tasdiqlanmadi",
   "Failed pages and files": "Muvaffaqiyatsiz sahifalar va fayllar",
   "Known limits": "Ma'lum cheklovlar",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{run} (attempt {attempt}) {repository} ichida yaratilgan. GitHubning attestation.jsonl hujjati, evidence.zip bilan birga yetkazilgan, ushbu eksportni o'z ichiga olgan arxivni imzolaydi."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{run} (attempt {attempt}) {repository} ichida yaratilgan. GitHubning attestation.jsonl hujjati, evidence.zip bilan birga yetkazilgan, ushbu eksportni o'z ichiga olgan arxivni imzolaydi.",
+  "Custom emoji": "Moslashtirilgan emoji",
+  "Animated sticker": "Animasiyalangan stiker"
 }

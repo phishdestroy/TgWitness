@@ -10777,5 +10777,7 @@
   "A notice to the other side was not confirmed": "向“对方”发送的通知未获确认",
   "Failed pages and files": "无法访问的页面和文件",
   "Known limits": "已知限制",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "本报告由 GitHub Actions 运行 {run}（尝试 {attempt}）生成，源自 {repository}。GitHub 的 attestation.jsonl 文件与 evidence.zip 一同交付，该文件对包含此导出数据的归档文件进行了签名。"
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "本报告由 GitHub Actions 运行 {run}（尝试 {attempt}）生成，源自 {repository}。GitHub 的 attestation.jsonl 文件与 evidence.zip 一同交付，该文件对包含此导出数据的归档文件进行了签名。",
+  "Custom emoji": "自定义表情符号",
+  "Animated sticker": "动态贴纸"
 }

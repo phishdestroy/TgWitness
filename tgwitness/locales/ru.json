@@ -10900,5 +10900,7 @@
   "A notice to the other side was not confirmed": "Уведомление собеседнику не подтверждено",
   "Failed pages and files": "Страницы и файлы со сбоем",
   "Known limits": "Известные ограничения",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Создано в рамках запуска GitHub Actions {run} (попытка {attempt}) репозитория {repository}. Файл attestation.jsonl от GitHub, предоставленный вместе с файлом evidence.zip, подписывает архив, содержащий данный экспорт."
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Создано в рамках запуска GitHub Actions {run} (попытка {attempt}) репозитория {repository}. Файл attestation.jsonl от GitHub, предоставленный вместе с файлом evidence.zip, подписывает архив, содержащий данный экспорт.",
+  "Custom emoji": "Кастомный эмодзи",
+  "Animated sticker": "Анимированный стикер"
 }

@@ -36,10 +36,15 @@ def safe_link(value):
     return None
 
 
-def formatted(text, entities):
-    spans = []
+def formatted(text, entities, emoji=None):
+    """Text with its entities. emoji maps a custom emoji document ID to a saved still image shown in place of the
+    fallback character; animated custom emoji keep the fallback character."""
+    spans, pictures = [], {}
     for start, end, value in entity_spans(text, entities):
         kind = value['type']
+        if kind == 'custom_emoji' and (emoji or {}).get(value.get('document_id')):
+            pictures[start] = (end, '<img class="custom-emoji" src="' + e(emoji[value['document_id']]) + '" alt="'
+                               + e(text[start:end]) + '" title="' + e(text[start:end]) + '">')
         tag, attributes = TAGS.get(kind, ('', ''))
         url = value.get('href') if kind == 'text_link' else text[start:end] if kind == 'link' else None
         if kind == 'email':
@@ -52,9 +57,16 @@ def formatted(text, entities):
             tag, attributes = 'a', ' href="' + e(url) + '" rel="noreferrer noopener"'
         if tag:
             spans.append((start, end, tag, attributes))
-    points = sorted({0, len(text), *(point for span in spans for point in span[:2])})
-    parts = []
+    points = sorted({0, len(text), *(point for span in spans for point in span[:2]),
+                     *(point for start, (end, _) in pictures.items() for point in (start, end))})
+    parts, hidden = [], 0
     for start, end in zip(points, points[1:]):
+        if start < hidden:
+            continue
+        if start in pictures:
+            hidden, picture = pictures[start]
+            parts.append(picture)
+            continue
         active = sorted((span for span in spans if span[0] <= start and span[1] >= end), key=lambda span: (span[0], -span[1]))
         linked, tags = False, []
         for _, _, tag, attributes in active:
@@ -82,6 +94,32 @@ class View:
         self.say = Words(export.job['options'].get('report_language', 'en'))
         self.reply_cache = {}
         self.avatars = getattr(export, 'avatars', None) or {}
+        self.formats = {}
+
+    def format_of(self, path):
+        """What a saved sticker or custom emoji file is, from its first bytes: 'image' (WebP, PNG), 'video' (WebM) or
+        None (an animated .tgs sticker, which a browser cannot play, or an unreadable file)."""
+        if path not in self.formats:
+            try:
+                with (Path(self.export.directory) / path).open('rb') as stream:
+                    head = stream.read(12)
+            except (OSError, TypeError):
+                head = b''
+            self.formats[path] = ('image' if head[:4] == b'RIFF' and head[8:12] == b'WEBP' or head[:4] == b'\x89PNG'
+                                  else 'video' if head[:4] == b'\x1a\x45\xdf\xa3' else None)
+        return self.formats[path]
+
+    def custom_emoji(self, row):
+        """Saved custom emoji of a message: document ID -> attachment, for the IDs its text entities name."""
+        named = {item.get('document_id') for item in row.get('entities') or []
+                 if isinstance(item, dict) and item.get('_') == 'MessageEntityCustomEmoji'}
+        return {attachment['media_id']: attachment for attachment in row.get('attachments') or []
+                if attachment.get('media_id') in named and isinstance(attachment.get('file'), str)
+                and MEDIA_PATH.fullmatch(attachment['file'])}
+
+    def emoji_pictures(self, row):
+        return {key: '../../' + attachment['file'] for key, attachment in self.custom_emoji(row).items()
+                if self.format_of(attachment['file']) == 'image'}
 
     def photo(self, peer_id, prefix):
         """Relative path of the saved current photo of a chat or person, when the export holds one."""
@@ -168,8 +206,11 @@ class View:
         parts = []
         labels = {'photo': 'Photo', 'video': 'Video', 'video_message': 'Video message', 'audio': 'Audio',
                   'voice': 'Voice message', 'document': 'File', 'sticker': 'Sticker', 'animation': 'GIF'}
+        custom = set(self.custom_emoji(row))
         for attachment in row.get('attachments') or []:
             kind, path = attachment.get('kind'), attachment.get('file')
+            if attachment.get('media_id') in custom and isinstance(path, str) and MEDIA_PATH.fullmatch(path):
+                continue  # custom emoji of the text, listed under it by emoji_files
             label = say(labels.get(kind, 'Attachment'))
             if not isinstance(path, str) or not MEDIA_PATH.fullmatch(path):
                 parts.append('<div class="attachment unavailable"><strong>' + e(label) + '</strong><span>'
@@ -180,8 +221,16 @@ class View:
             original = str(value.get('file_name') or '').replace('\\', '/').rsplit('/', 1)[-1]
             download = original or path.split('/')[-1]
             mime = value.get('mime_type') or ''
-            if kind == 'photo' or kind == 'sticker' and mime in ('image/webp', 'image/png'):
+            shape = (('image' if mime in ('image/webp', 'image/png') else 'video' if mime == 'video/webm' else None)
+                     if mime else self.format_of(path)) if kind == 'sticker' else None
+            if kind == 'photo':
                 parts.append('<a class="photo" href="' + src + '"><img src="' + src + '" alt="' + e(label) + '" loading="lazy"></a>')
+            elif shape == 'image':
+                parts.append('<a class="photo sticker" href="' + src + '"><img src="' + src + '" alt="' + e(label) + '" loading="lazy"></a>')
+            elif shape == 'video':
+                parts.append('<video class="sticker" autoplay loop muted playsinline src="' + src + '" aria-label="' + e(label) + '"></video>')
+            elif kind == 'sticker':
+                label = say('Animated sticker')
             elif kind in ('video', 'video_message', 'animation'):
                 parts.append('<video controls preload="none" src="' + src + '" aria-label="' + e(label) + '"></video>')
             elif kind in ('voice', 'audio'):
@@ -191,6 +240,20 @@ class View:
             parts.append('<a class="attachment" href="' + src + '" download="' + e(download) + '"><strong dir="auto">'
                          + e(original or label) + '</strong><small>' + e(say('Download') + size_label) + '</small></a>')
         return ''.join(parts)
+
+    def emoji_files(self, row):
+        """Custom emoji stand in the text (still ones are drawn there); each saved file stays one click away."""
+        links, seen = [], set()
+        for key, attachment in self.custom_emoji(row).items():
+            path = attachment['file']
+            if path in seen:
+                continue
+            seen.add(path)
+            size = attachment.get('bytes')
+            links.append('<a href="../../' + path + '" download="' + e(path.split('/')[-1]) + '">'
+                         + e(self.say('Custom emoji') + (' · ' + f'{size / 1024:.1f} KiB' if type(size) is int and size >= 0 else ''))
+                         + '</a>')
+        return '<p class="emoji-files">' + ''.join(links) + '</p>' if links else ''
 
     def card(self, row, chat):
         say, value = self.say, message(row)
@@ -215,7 +278,8 @@ class View:
                          + (' · <bdi>' + e(value['title']) + '</bdi>' if value.get('title') else '') + '</p>')
         parts.append(self.attachments(row, value))
         if row.get('text'):
-            parts.append('<div class="message-text" dir="auto">' + formatted(row['text'], row.get('entities')) + '</div>')
+            parts.append('<div class="message-text" dir="auto">' + formatted(row['text'], row.get('entities'), self.emoji_pictures(row)) + '</div>')
+        parts.append(self.emoji_files(row))
         for field, label in (('poll', 'Poll'), ('contact_information', 'Contact'), ('location_information', 'Location')):
             detail = value.get(field)
             if detail:

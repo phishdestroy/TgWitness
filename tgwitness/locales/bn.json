@@ -10828,5 +10828,7 @@
   "A notice to the other side was not confirmed": "অন্য পক্ষকে জানানো হয়েছে কি না তা নিশ্চিত করা যায়নি",
   "Failed pages and files": "ব্যর্থ পৃষ্ঠা ও ফাইলসমূহ",
   "Known limits": "পরিচিত সীমাবদ্ধতা",
-  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": " GitHub Actions-এর ভিতরে {run} (attempt {attempt}) {repository}-এ তৈরি। GitHub-এর attestation.jsonl, যা evidence.zip-এর পাশে সরবরাহ করা হয়, এই এক্সপোর্ট ধারণকারী আর্কাইভটিকে স্বাক্ষর করে।"
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": " GitHub Actions-এর ভিতরে {run} (attempt {attempt}) {repository}-এ তৈরি। GitHub-এর attestation.jsonl, যা evidence.zip-এর পাশে সরবরাহ করা হয়, এই এক্সপোর্ট ধারণকারী আর্কাইভটিকে স্বাক্ষর করে।",
+  "Custom emoji": "কাস্টম ইমোজি",
+  "Animated sticker": "অ্যানিমেটেড স্টিকার"
 }
