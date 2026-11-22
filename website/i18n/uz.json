@@ -8270,7 +8270,8 @@
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Hisobotlar: suhbat ko'rinishi har bir xizmat xabarini nomlaydi, ishtirokchilar laqablari va bo'shliq-doiradagi sabablar tarjima qilingan, bitta qatorli diagrammalar chiqarib tashlangan, ishonch kartalari sanalarni va kalit barmoq izlarini o'qiladigan shaklda ko'rsatadi, va PDF endi ularning oldidan bo'sh sahifa qoldirmaydi.",
   "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actionsdagi ma'lumotlarni yig'ish: suhbatlar va odamlarning fotosuratlarini yuklab olish FLOOD_WAIT tanaffusidan keyin davom ettiriladi.",
   "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "GitHub Actions ichida ma'lumotlarni yig'ish: jonli arxivi ishga tushirilmagan suhbat, dastur to'xtaganida allaqachon o'qilgan xabarlarni qisman snapshot shaklida saqlab turadi.",
-  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Interfeys yorliqlari Tay, O'zbek, Hind va boshqa bir nechta tillarda ingliz tilida qoldirilgan bo'lsa, ular tarjima qilinadi."
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Interfeys yorliqlari Tay, O'zbek, Hind va boshqa bir nechta tillarda ingliz tilida qoldirilgan bo'lsa, ular tarjima qilinadi.",
+  "42317839214fb16ee217499104fa34c9192516087f413a865d6d5d6833421d27": "GitHub Actionsdagi ma'lumotlarni yig'ish: vaqt va hajm rejasida faqat suhbatlarning bir qismini qamrab olganda qachon amalga oshirilishi ko'rsatiladi; xabarlar o'qilganda panel o'qilgan suhbat tarixlarini hisoblaydi; hisob eksportida esa tugallanmagan har bir suhbat bir marta nomlanadi."
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",
