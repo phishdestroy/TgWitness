@@ -23,7 +23,7 @@
 <li>A GitHub account and your own fork of TgWitness. The fork contains code, not chats.</li>
 <li>A Telegram account you can sign in to by QR code or phone. <a href="@@GUIDE_DEDICATED_ACCOUNT@@">A separate account</a> is safer.</li>
 <li>A modern browser on your computer. Keep the wizard tab open until the end.</li>
-<li>Enough time: one session lasts up to 120 minutes, including sign-in and any Takeout approval.</li>
+<li>Enough time: you choose the session length, from 30 minutes to 5 hours, including sign-in and any Takeout approval.</li>
 </ul>
 <div class="cp-grid">
 <div class="cp-card cp-danger"><h3>Never put these into GitHub</h3><p>Phone numbers, login codes, Telegram passwords, the private key or a session never go into workflow inputs, commits, issues or logs. The only value GitHub receives is the public recipient key.</p></div>
@@ -32,14 +32,38 @@
 </div>
 </details>
 
+<details id="purpose"><summary>What this mode is for</summary>
+<div class="cp-body">
+<p>GitHub Actions capture exists for one purpose: to let you export your own Telegram data quickly, safely and verifiably. A court, regulator or opposing party can confirm which code produced the archive, where it ran, and that no one, including you, altered it afterwards. GitHub acts as an independent witness to the run, not as a free server.</p>
+<h3>Deliberately limited by design</h3>
+<p>To keep its footprint on GitHub minimal, this mode supports a single, bounded export and nothing more:</p>
+<ul class="cp-checks">
+<li><strong>One session, from 30 minutes to 5 hours as you choose</strong>, including sign-in and any Takeout wait imposed by Telegram. GitHub ends any job after 6 hours.</li>
+<li><strong>An initial media budget of 4 GiB.</strong> Files beyond the budget or per-type limits are recorded by Telegram's server-side hashes only.</li>
+<li><strong>No full workspace.</strong> Continuous observation, search, case management and investigation tools are not available.</li>
+<li><strong>No resume.</strong> Once the runner ends, the capture is over; a new run starts a new capture.</li>
+<li><strong>Short retention.</strong> Encrypted results remain on GitHub for one day. Download them promptly.</li>
+</ul>
+<div class="cp-callout"><h3>Please don't misuse it</h3><p>This mode is not intended for:</p><ul><li>repeated, scheduled or continuous runs;</li><li>bulk harvesting of channels or groups;</li><li>collecting accounts that aren't yours, or offering capture to others as a service.</li></ul><p>Every run executes in your own GitHub account and is subject to the <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#actions">GitHub Terms for Actions</a>. GitHub monitors Actions usage. If it considers a run abusive, it may terminate jobs, restrict Actions, disable the repository or suspend your account.</p></div>
+<h3>Need more? Choose the right mode</h3>
+<div class="table-wrap"><table><thead><tr><th>Your goal</th><th>Recommended mode</th></tr></thead><tbody>
+<tr><td>A one-off, verifiable export of your own chat or account</td><td><strong>GitHub Actions capture</strong> (this page)</td></tr>
+<tr><td>Attested collection at scale, long-running or continuous</td><td><strong><a href="@@GUIDE_PHALA@@">Phala Cloud · Intel TDX</a></strong></td></tr>
+<tr><td>Maximum speed and volume, attestation not required</td><td><strong><a href="@@GUIDE_SERVER@@">Self-hosted panel</a></strong> or <strong><a href="@@GUIDE_START@@">local installation</a></strong></td></tr>
+</tbody></table></div>
+<p><strong>Phala Cloud</strong> runs the full TgWitness workspace inside an Intel TDX confidential machine. Neither the cloud provider nor the operator can read its memory or interfere with collection, and the processor signs an attestation of exactly what code is running. A reviewer can verify it independently. It has no session time limit and supports continuous observation and complete exports.</p>
+</div>
+</details>
+
 <details id="modes"><summary>Choose what to collect</summary>
 <div class="cp-body">
 <div class="cp-grid cp-grid-3">
-<div class="cp-card cp-option"><p class="cp-tag">Default</p><h3>Telegram Takeout</h3><p>All accessible chats or a selection, with dates, account categories, media rules and JSON/HTML views.</p><p class="cp-note">Telegram's official export. Telegram may ask for approval in another session, and the wait counts against your session time.</p></div>
-<div class="cp-card cp-option"><h3>Regular Telegram API</h3><p>The same account scope without starting Takeout.</p><p class="cp-note">Cannot list channels you have left or fetch Takeout-only personal data. Telegram rate limits still apply.</p></div>
+<div class="cp-card cp-option"><p class="cp-tag">Default</p><h3>Account export</h3><p>All accessible chats or a selection, with Telegram Desktop chat categories, dates, account data, media rules and JSON/HTML views.</p><p class="cp-note">The automatic method uses Takeout when Telegram allows it and the regular API otherwise. A fresh session usually gets the regular API; the archive records which one was used. You can require either method.</p></div>
+<div class="cp-card cp-option"><h3>Chat investigation</h3><p>Selected chats, each as its own signed chat archive: the authors of the messages with their message counts, the chat card, the admin log when this account can read it, and absent message IDs rechecked one by one.</p><p class="cp-note">Works for chats with content protection. Up to 50 chats per run, exported one after another.</p></div>
+<div class="cp-card cp-option"><h3>Secret chat</h3><p>Start or accept a secret chat; every message, file, timer, deletion and screenshot notice that arrives during the run is signed into the journal.</p><p class="cp-note">Secret chats keep no history on Telegram's servers, so only what happens during the run is recorded. You can write from the capture screen.</p></div>
 <div class="cp-card cp-option"><h3>Chat event journal</h3><p>One chat: its history and the changes observed while the run is active.</p><p class="cp-note">Date filters, account categories and Desktop-style views do not apply.</p></div>
 </div>
-<p>All three modes receive the same GitHub attestation and encrypted delivery. Takeout is never silently replaced by the regular API.</p>
+<p>All modes receive the same GitHub attestation and encrypted delivery. When you require Takeout, it is never silently replaced by the regular API.</p>
 </div>
 </details>
 

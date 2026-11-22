@@ -4,6 +4,26 @@ MIB = 1024**2
 DOWNLOAD_BYTES_PER_SECOND = MIB
 PACKAGING_BYTES_PER_SECOND = 16 * MIB
 SAFETY_FACTOR = 2
+PAGE_MESSAGES = 100
+PAGE_GAP_SECONDS = .6
+HISTORY_SAFETY = 1.25
+READ_RANKS = {"private": 1, "bot": 1, "group": 3, "supergroup": 4, "channel": 4}
+AVATAR_LIMIT = 2000
+AVATAR_SECONDS = 2 * PAGE_GAP_SECONDS
+
+
+def avatar_peers(per_chat):
+    peers = 1
+    for chat in per_chat:
+        if chat.get("unknown"):
+            continue
+        peers += 1 if chat.get("kind") in ("private", "bot") else 1 + min(500, math.ceil((chat.get("messages") or 0) / 20))
+    return min(AVATAR_LIMIT, peers)
+
+
+def read_rank(kind, messages=0):
+    rank = READ_RANKS.get(kind, 4)
+    return rank, (messages or 0) if rank == 4 else 0
 
 
 def sealing_reserve(session_seconds, output_bytes=0, messages=0):
@@ -30,10 +50,12 @@ def estimate(sample, options=None):
     if not complete:
         unknown.append("unsampled_chats")
     messages = download = hashes = text_bytes = seconds = history_seconds = 0
+    per_chat = []
     for chat in chats:
         total, count = chat["history_messages"], chat["sample_messages"]
         if total is None or (total and not count):
             unknown.append("history_count")
+            per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "title": chat.get("title"), "unknown": True})
             continue
         if chat["unknown_size_files"]:
             unknown.append("file_size")
@@ -44,24 +66,37 @@ def estimate(sample, options=None):
         media = math.ceil(chat["download_bytes"] * scale)
         ranges = math.ceil(chat["hash_ranges"] * scale)
         metadata = math.ceil(chat["text_bytes"] * scale) + total * 2048
-        rate = min(100, max(1, count) / max(.05, chat["request_seconds"]))
-        seconds += total / rate + media / DOWNLOAD_BYTES_PER_SECOND + ranges / 10
+        rate = PAGE_MESSAGES / max(PAGE_GAP_SECONDS, chat["request_seconds"])
+        reading = HISTORY_SAFETY * total / rate
+        files = SAFETY_FACTOR * (media / DOWNLOAD_BYTES_PER_SECOND + ranges / 10)
+        chat_seconds = (reading + files) / SAFETY_FACTOR
+        seconds += chat_seconds
         history_seconds += total / rate
+        per_chat.append({"chat_id": chat.get("chat_id"), "kind": chat.get("kind"), "title": chat.get("title"), "unknown": False,
+                         "unknown_size_files": chat["unknown_size_files"],
+                         "messages": total, "download_bytes": media,
+                         "output_bytes": media + math.ceil(chat["text_bytes"] * scale) + total * 2048 + ranges * 160,
+                         "seconds": math.ceil(reading + files), "history_seconds": math.ceil(reading),
+                         "file_seconds": math.ceil(files)})
         messages += total
         download += media
         hashes += ranges
         text_bytes += metadata
-    if any(options.get(key) for key in ("include_profile_photos", "include_stories", "include_other_data", "include_avatars")):
+    if any(options.get(key) for key in ("include_profile_photos", "include_stories", "include_other_data")):
         unknown.append("additional_files")
+    avatar_seconds = math.ceil(AVATAR_SECONDS * avatar_peers(per_chat)) if options.get("include_avatars") else 0
     if options.get("transport") == "takeout" and not options.get("chat_ids"):
         unknown.append("takeout_inventory")
     metadata_seconds = 60 if any(options.get(key) for key in ("include_profile", "include_contacts", "include_session_metadata")) else 0
     return {"complete_inventory": bool(complete), "unknown": sorted(set(unknown)),
             "messages_to_read": messages, "download_bytes": download,
             "output_bytes": download + text_bytes + hashes * 160,
-            "acquisition_seconds": math.ceil(SAFETY_FACTOR * seconds + metadata_seconds),
+            "acquisition_seconds": math.ceil(SAFETY_FACTOR * seconds + metadata_seconds + avatar_seconds),
             "history_seconds": math.ceil(history_seconds), "metadata_seconds": metadata_seconds,
+            "avatar_seconds": avatar_seconds,
             "hash_seconds": math.ceil(hashes / 10),
+            "per_chat": sorted(per_chat, key=lambda c: read_rank(c.get("kind"), c.get("messages")))
+            if all(c.get("kind") for c in per_chat) else per_chat,
             "assumptions": {"download_bytes_per_second": DOWNLOAD_BYTES_PER_SECOND,
                             "packaging_bytes_per_second": PACKAGING_BYTES_PER_SECOND,
                             "safety_factor": SAFETY_FACTOR, "history_counts": "entire accessible history",
@@ -69,9 +104,69 @@ def estimate(sample, options=None):
                             "rates": "history request timing measured; download and packaging rates assumed"}}
 
 
+SESSION_CHOICES = (30, 60, 120, 180, 240, 300)
+
+
+def recommended_minutes(value, spent_seconds):
+    if value["unknown"]:
+        return None
+    for minutes in SESSION_CHOICES:
+        session = minutes * 60
+        reserve = sealing_reserve(session, value["output_bytes"], value["messages_to_read"])
+        if spent_seconds + value["acquisition_seconds"] + reserve <= session:
+            return minutes
+    return None
+
+
+def fitting_chats(per_chat, available_seconds, metadata=0):
+    budget, chosen = available_seconds - metadata, []
+    for chat in sorted((c for c in per_chat if not c.get("unknown") and c.get("chat_id") is not None),
+                       key=lambda c: c["seconds"]):
+        if chat["seconds"] <= budget:
+            chosen.append(chat["chat_id"])
+            budget -= chat["seconds"]
+    return chosen
+
+
+def split_runs(per_chat, spent_seconds, metadata=0, minutes=SESSION_CHOICES[-1]):
+    session = minutes * 60
+    runs = []
+    for chat in sorted((c for c in per_chat if not c.get("unknown") and c.get("chat_id") is not None),
+                       key=lambda c: -c["seconds"]):
+        for run in runs:
+            reserve = sealing_reserve(session, run["output_bytes"] + chat["output_bytes"], run["messages"] + chat["messages"])
+            if spent_seconds + metadata + run["seconds"] + chat["seconds"] + reserve <= session:
+                run["chat_ids"].append(chat["chat_id"])
+                run["seconds"] += chat["seconds"]
+                run["output_bytes"] += chat["output_bytes"]
+                run["messages"] += chat["messages"]
+                break
+        else:
+            reserve = sealing_reserve(session, chat["output_bytes"], chat["messages"])
+            runs.append({"session_minutes": minutes, "chat_ids": [chat["chat_id"]], "seconds": chat["seconds"],
+                         "output_bytes": chat["output_bytes"], "messages": chat["messages"],
+                         "exceeds_one_run": spent_seconds + metadata + chat["seconds"] + reserve > session})
+    unmeasured = [c["chat_id"] for c in per_chat if c.get("unknown") and c.get("chat_id") is not None]
+    if unmeasured:
+        runs.append({"session_minutes": minutes, "chat_ids": unmeasured, "seconds": None, "output_bytes": None,
+                     "messages": None, "exceeds_one_run": None, "unmeasured": True})
+    return runs
+
+
+def reachable_reserve(value, remaining_seconds, session_seconds):
+    full = sealing_reserve(session_seconds, value["output_bytes"], value["messages_to_read"])
+    if remaining_seconds >= value["acquisition_seconds"] + full:
+        return full
+    baseline = sealing_reserve(session_seconds)
+    packaging = full - baseline
+    share = min(1, max(0, (remaining_seconds - baseline) / max(1, value["acquisition_seconds"] + packaging)))
+    return sealing_reserve(session_seconds, math.ceil(value["output_bytes"] * share),
+                           math.ceil(value["messages_to_read"] * share))
+
+
 def plan(sample, options, remaining_seconds, session_seconds):
     value = estimate(sample, options)
-    reserve = sealing_reserve(session_seconds, value["output_bytes"], value["messages_to_read"])
+    reserve = reachable_reserve(value, remaining_seconds, session_seconds)
     available = max(0, remaining_seconds - reserve)
     required = value["acquisition_seconds"]
     fit = "over_budget" if required > available else "unknown" if value["unknown"] else "estimated_fit"
@@ -84,9 +179,14 @@ def plan(sample, options, remaining_seconds, session_seconds):
         suggestions.append("messages_only")
     if fit in ("over_budget", "unknown", "no_collection_time"):
         suggestions.append("fewer_chats")
+    spent = max(0, session_seconds - remaining_seconds)
     return {**value, "fit": fit, "remaining_seconds": remaining_seconds,
             "collection_seconds": available, "sealing_reserve_seconds": reserve,
-            "estimated_total_seconds": required + reserve,
+            "estimated_total_seconds": required + sealing_reserve(session_seconds, value["output_bytes"],
+                                                                  value["messages_to_read"]),
+            "recommended_session_minutes": recommended_minutes(value, spent),
+            "fits_now": fitting_chats(value["per_chat"], available, metadata=value["metadata_seconds"]),
+            "split_runs": split_runs(value["per_chat"], spent, value["metadata_seconds"]) if required > available else [],
             "approval": "not_requested" if options.get("transport") == "takeout" else "not_required",
             "files_exceed_budget": files_exceed_budget, "suggestions": suggestions,
             "maximum_download_bytes_at_assumed_rate": max(0, int((available / SAFETY_FACTOR) * DOWNLOAD_BYTES_PER_SECOND))}

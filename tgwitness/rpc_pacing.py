@@ -7,7 +7,8 @@ BULK_READS = (functions.messages.GetHistoryRequest, functions.messages.GetDialog
               functions.channels.GetAdminLogRequest, functions.messages.GetMessagesRequest,
               functions.channels.GetMessagesRequest, functions.channels.GetParticipantsRequest,
               functions.messages.GetMessagesViewsRequest, functions.contacts.ResolveUsernameRequest,
-              functions.channels.GetFullChannelRequest)
+              functions.channels.GetFullChannelRequest, functions.messages.GetFullChatRequest,
+              functions.photos.GetUserPhotosRequest)
 
 
 def bulk_request(request):

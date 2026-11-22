@@ -28,9 +28,13 @@ def peer_id(value):
     return f"{identity[0]}{identity[1]}" if identity else None
 
 
+DELETED_ACCOUNT = "Deleted Account"
+
+
 def name(value):
     value = value or {}
-    return value.get("title") or " ".join(value.get(k) or "" for k in ("first_name", "last_name")).strip() or None
+    found = value.get("title") or " ".join(value.get(k) or "" for k in ("first_name", "last_name")).strip()
+    return found or (DELETED_ACCOUNT if value.get("deleted") is True else None)
 
 
 def dates(value, key="date"):
@@ -143,9 +147,10 @@ def message(row, chat_id=None):
 
 
 class DesktopExport:
-    def __init__(self, directory, inventory, receipts, job, coverage, states=None):
+    def __init__(self, directory, inventory, receipts, job, coverage, states=None, avatars=None):
         self.directory, self.inventory, self.receipts, self.job, self.coverage = directory, inventory, receipts, job, coverage
         self.states = states or {}
+        self.avatars = avatars or {}
         self.index = sqlite3.connect("")
         try:
             self.index_messages()

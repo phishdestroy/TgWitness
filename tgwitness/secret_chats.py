@@ -209,6 +209,7 @@ class SecretChats:
         self.asked = set()
         self.early = {}
         self.open_at = {}
+        self.heard = None
 
     @property
     def store(self):
@@ -271,6 +272,7 @@ class SecretChats:
                          "DecryptFailed", "SendFailed"):
                 manager.on(name, getattr(self, "on_" + name))
             self.manager, self.client = manager, client
+            self.hear(client)
             keep, held = self.early.pop(client, (None, ()))
             if keep:
                 client.remove_event_handler(keep)
@@ -288,6 +290,21 @@ class SecretChats:
             self.resume_files()
             self.spawn(self.refresh(manager, client))
             return True
+
+    def hear(self, client):
+        async def heard(update):
+            if self.client is not client or getattr(self.collector, "running", False):
+                return
+            from .visibility import heard_update
+            try:
+                heard_update(self.collector, update)
+            except Exception:
+                LOG.exception("A secret chat read receipt or typing notice could not be recorded")
+
+        from telethon import events
+        client.add_event_handler(heard, events.Raw(types=(types.UpdateEncryptedChatTyping,
+                                                          types.UpdateEncryptedMessagesRead)))
+        self.heard = client, heard
 
     async def refresh(self, manager, client):
         checked = time.monotonic()
@@ -323,6 +340,9 @@ class SecretChats:
 
     async def _detach(self):
         manager, self.manager, self.client = self.manager, None, None
+        listener, self.heard = self.heard, None
+        if listener is not None:
+            listener[0].remove_event_handler(listener[1])
         for task in list(self.tasks):
             task.cancel()
         await asyncio.gather(*self.tasks, return_exceptions=True)
@@ -588,34 +608,91 @@ class SecretChats:
         if pending.pop(name, None) is not None:
             self.collector.vault.save(PENDING, pending)
 
-    async def acting(self, call, *args, **kwargs):
+    async def acting(self, call, *args, conversation=False, **kwargs):
         from . import interactions
-        interactions.permitted(self.collector)
+        interactions.permitted(self.collector, conversation)
         try:
             return await call(*args, **kwargs)
         except Exception as exc:
             interactions.note_restriction(self.store, exc)
             raise
 
-    async def create(self, user):
-        manager = self.require()
+    def mutual(self, user_id):
+        entity = self.collector.people.get(user_id) or self.collector.dialog_cache.get(user_id, {}).get("entity")
+        return bool(getattr(entity, "mutual_contact", False))
+
+    def conversation(self, chat_id):
+        try:
+            chat = self.require().status(chat_id)
+        except Exception:
+            return False
+        return not chat.is_outbound or self.mutual(chat.peer_user_id)
+
+    async def by_phone(self, phone):
         client = self.collector.client
         try:
-            entity = await client.get_input_entity(user)
-        except ValueError:
-            if not isinstance(user, int):
-                raise ValueError("Telegram has no user with this username.") from None
-            await self.collector.dialogs()
-            try:
-                entity = await client.get_input_entity(user)
-            except ValueError:
-                raise ValueError("This account does not know that user ID yet. Use the @username, "
-                                 "or open a chat with the user first.") from None
-        if not isinstance(utils.get_peer(entity), types.PeerUser):
-            raise ValueError("This needs a Telegram user, not a group or channel.")
-        chat = await self.acting(manager.create, entity)
+            found = await client(functions.contacts.ResolvePhoneRequest(phone))
+            user = next((u for u in found.users if isinstance(u, types.User)), None)
+            if user is not None:
+                return user
+        except Exception as exc:
+            if type(exc).__name__ not in ("PhoneNotOccupiedError", "PhoneNumberInvalidError"):
+                LOG.info("Phone lookup without a contact failed: %s", type(exc).__name__)
+            if type(exc).__name__ == "PhoneNumberInvalidError":
+                raise ValueError("Telegram rejected this phone number. Use the international format, e.g. +15551234567.") from None
+        contact = types.InputPhoneContact(client_id=secrets.randbits(62), phone=phone, first_name=phone, last_name="")
+        imported = await client(functions.contacts.ImportContactsRequest([contact]))
+        user = next((u for u in imported.users if isinstance(u, types.User)), None)
+        if user is None:
+            raise ValueError("No Telegram account with this number is visible to this account. The number may be "
+                             "unregistered, or its owner allows finding it only by their contacts.")
+        self.note("contact_imported", {"peer_user_id": user.id, "phone": phone, **self.identity(user.id),
+                                       "meaning": "The number was added to this account's contacts to find its Telegram "
+                                                  "user. The other side is not notified by this step."})
+        return user
+
+    async def create(self, user):
+        from . import interactions
+        from .failures import describe
+        manager = self.require()
+        client = self.collector.client
+        target = {"target": user if isinstance(user, int) else str(user)}
+        try:
+            if isinstance(user, str) and user.startswith("+"):
+                entity = await self.by_phone(user)
+            else:
+                try:
+                    entity = await client.get_input_entity(user)
+                except ValueError:
+                    if not isinstance(user, int):
+                        raise ValueError("Telegram has no user with this username.") from None
+                    await self.collector.dialogs()
+                    try:
+                        entity = await client.get_input_entity(user)
+                    except ValueError:
+                        raise ValueError("This account does not know that user ID yet. Use the @username or phone "
+                                         "number, or open a chat with the user first.") from None
+            if not isinstance(utils.get_peer(entity), types.PeerUser):
+                raise ValueError("This needs a Telegram user, not a group or channel.")
+            peer_id = utils.get_peer_id(entity)
+            target["peer_user_id"] = peer_id
+            if not isinstance(entity, types.User):
+                entity = await client.get_entity(entity)
+            self.collector.people[peer_id] = entity
+            mutual = bool(getattr(entity, "mutual_contact", False))
+            current = interactions.restriction(self.store)
+            if current and current["kind"] in interactions.CONTACT_LIMITS and not mutual:
+                raise interactions.AccountRestricted(
+                    "Telegram limits this account to its mutual contacts and people who wrote first, and this user is "
+                    "neither. Add each other to contacts, or ask them to start the secret chat; incoming secret chats "
+                    "are still accepted.")
+            chat = await self.acting(manager.create, entity, conversation=mutual)
+        except Exception as exc:
+            self.note("request_failed", {**target, **self.identity(target.get("peer_user_id")), "direction": "out",
+                                         "reason": describe(exc), "telegram_error": type(exc).__name__})
+            raise
         self.note("requested", {"secret_chat_id": chat.id, "peer_user_id": chat.peer_user_id, "direction": "out",
-                                **self.identity(chat.peer_user_id)})
+                                "mutual_contact": mutual, **self.identity(chat.peer_user_id)})
         return self.snapshot(chat)
 
     async def accept(self, chat_id, automatic=False):
@@ -625,7 +702,7 @@ class SecretChats:
                                         "reason": "accept_incoming turned off"})
             return None
         try:
-            chat = await self.acting(manager.accept, chat_id)
+            chat = await self.acting(manager.accept, chat_id, conversation=True)
         except Exception as exc:
             self.note("accept_failed", {"secret_chat_id": chat_id, "automatic": automatic,
                                         "reason": str(exc) if isinstance(exc, ValueError) else type(exc).__name__})
@@ -641,16 +718,18 @@ class SecretChats:
         from . import interactions, visibility
         manager = self.require()
         fields, typing = visibility.effective(self.store, chat_id, True), None
+        conversation = self.conversation(chat_id)
         if fields["typing"] == "before_send":
-            interactions.permitted(self.collector)
+            interactions.permitted(self.collector, conversation)
             typing = await visibility.show_typing(self.collector, "secret_chat.typing", {
                 "secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "method": "messages.setEncryptedTyping"},
                 functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True),
                 visibility.typing_seconds(text))
-        random_id = await self.acting(manager.send_message, chat_id, text)
+        started = utcnow()
+        random_id = await self.acting(manager.send_message, chat_id, text, conversation=conversation)
         chat = manager.status(chat_id)
         sent = self.note("message", {"secret_chat_id": chat_id, "peer_user_id": chat.peer_user_id, "direction": "out",
-                                     "random_id": random_id, "text": text, "ttl": chat.ttl,
+                                     "random_id": random_id, "text": text, "ttl": chat.ttl, "send_started_at": started,
                                      **({"typing_before_send": typing} if typing else {})})
         if fields["read_receipts"] == "on_reply":
             try:
@@ -677,9 +756,9 @@ class SecretChats:
 
     def unopened(self, chat_id):
         from . import visibility
-        opened = set(visibility.marks(self.store).get("opened:" + visibility.mark_key(chat_id, True)) or [])
+        opened = {str(value) for value in visibility.marks(self.store).get("opened:" + visibility.mark_key(chat_id, True)) or []}
         return [{"random_id": str(row[0]), "observed_at": row[1], "ttl": row[2], "media": row[3]}
-                for row in self.received(chat_id) if (row[2] or row[3]) and row[0] not in opened][:20]
+                for row in self.received(chat_id) if (row[2] or row[3]) and str(row[0]) not in opened][:20]
 
     def definite(self):
         return tuple(error for error in (getattr(library, name, None) for name in ("ChatClosed", "ChatNotReady",
@@ -689,7 +768,7 @@ class SecretChats:
     async def mark_read(self, chat_id, trigger, operator=None, cause=None):
         from . import interactions, visibility
         visibility.require(self.store, chat_id, True, "read_receipts", trigger)
-        interactions.permitted(self.collector)
+        interactions.permitted(self.collector, self.conversation(chat_id))
         self.require()
         newest = max((row[1] for row in self.received(chat_id)), default=None)
         if newest is None:
@@ -713,10 +792,11 @@ class SecretChats:
     async def mark_opened(self, chat_id, random_ids, operator=None):
         from . import interactions, visibility
         visibility.require(self.store, chat_id, True, "content_opened", "manual")
-        interactions.permitted(self.collector)
+        interactions.permitted(self.collector, self.conversation(chat_id))
         manager = self.require()
-        ids = sorted(set(random_ids))
-        if set(ids) - {row[0] for row in self.received(chat_id, ids)}:
+        ids = sorted({int(value) for value in random_ids})
+        keys = [str(value) for value in ids]
+        if set(keys) - {str(row[0]) for row in self.received(chat_id, [*keys, *ids])}:
             raise ValueError("Only received messages saved here can be marked as opened.")
         details = {"secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "trigger": "manual", "random_ids": ids,
                    "method": "messages.sendEncryptedService", "service_action": "DecryptedMessageActionReadMessages",
@@ -733,7 +813,7 @@ class SecretChats:
     async def send_typing(self, chat_id, operator=None):
         from . import interactions, visibility
         visibility.require(self.store, chat_id, True, "typing", "shown")
-        interactions.permitted(self.collector)
+        interactions.permitted(self.collector, self.conversation(chat_id))
         self.require()
         request = functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True)
         return await visibility.of(self.collector).ping(("secret", chat_id), "secret_chat.typing", {
@@ -742,7 +822,7 @@ class SecretChats:
 
     async def close(self, chat_id):
         manager = self.require()
-        await self.acting(manager.close, chat_id, reason="ended from TgWitness")
+        await self.acting(manager.close, chat_id, conversation=True, reason="ended from TgWitness")
 
     @staticmethod
     def snapshot(chat):

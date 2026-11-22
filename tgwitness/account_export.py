@@ -35,11 +35,13 @@ from .telegram_client import FLOOD_ERRORS, in_lane
 LOG = logging.getLogger("tgwitness.export")
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
+CATEGORIES = ("personal", "bots", "private_groups", "public_groups", "private_channels", "public_channels")
 FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_duplicated")
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 CATEGORY_OPTIONS = {"profile": "include_profile", "contacts": "include_contacts", "sessions": "include_session_metadata",
-                    "profile_photos": "include_profile_photos", "stories": "include_stories", "other_data": "include_other_data"}
+                    "profile_photos": "include_profile_photos", "stories": "include_stories", "other_data": "include_other_data",
+                    "avatars": "include_avatars"}
 LIMITATIONS = [
     "A snapshot of the data Telegram returned to this account during the recorded acquisition intervals, signed with the collector key in the manifest.",
     "Messages appear in the version Telegram returned at acquisition; live recording keeps earlier versions and deletion notices, and Sources → Pseudo-secret keeps Secret Chats.",
@@ -66,6 +68,8 @@ class AccountExportOptions(BaseModel):
     from_utc: str | None = None
     to_utc: str | None = None
     own_messages_only: bool = False
+    chat_categories: list[Literal[CATEGORIES]] | None = Field(default=None, max_length=len(CATEGORIES))
+    own_only_categories: list[Literal[CATEGORIES]] = Field(default_factory=list, max_length=len(CATEGORIES))
     include_archived: bool = True
     media_types: list[Literal[MEDIA]] = Field(default_factory=lambda: list(MEDIA), max_length=len(MEDIA))
     media_action: Literal["download", "hashes_only", "exclude"] = "download"
@@ -81,6 +85,7 @@ class AccountExportOptions(BaseModel):
     include_stories: bool = True
     include_session_metadata: bool = True
     include_other_data: bool = True
+    include_avatars: bool = False
 
     @field_validator("report_language")
     @classmethod
@@ -120,7 +125,54 @@ class AccountExportOptions(BaseModel):
         self.sender_ids = sorted(set(self.sender_ids))
         self.chat_kinds = [k for k in KINDS if k in self.chat_kinds]
         self.media_types = [k for k in MEDIA if k in self.media_types]
+        if self.chat_categories is not None:
+            self.chat_categories = [c for c in CATEGORIES if c in self.chat_categories]
+        self.own_only_categories = [c for c in CATEGORIES if c in self.own_only_categories]
         return self
+
+
+def category_of(kind, username):
+    if kind == "private":
+        return "personal"
+    if kind == "bot":
+        return "bots"
+    if kind in ("group", "supergroup"):
+        return "public_groups" if username else "private_groups"
+    return "public_channels" if username else "private_channels"
+
+
+ACCOUNT_DATA_FIRST = ("profile", "contacts", "sessions")
+
+
+def reading_order(tasks, chats):
+    from .export_budget import read_rank
+    kinds = {chat["id"]: chat.get("kind") for chat in chats}
+
+    def rank(task):
+        if task["category"] == "avatars":
+            return (9, 0)
+        if task["category"] != "messages":
+            return (0, 0) if task["category"] in ACCOUNT_DATA_FIRST else (2, 0)
+        return read_rank(kinds.get(task["chat_id"]), task.get("newest_message_id") or 0)
+    return sorted(tasks, key=rank)
+
+
+def attachment_order(tasks, chats):
+    kinds = {chat["id"]: chat.get("kind") for chat in chats}
+    photos = [task for task in tasks if task["category"] == "avatars"]
+    rest = [task for task in tasks if task["category"] != "avatars"]
+    at = next((index for index, task in enumerate(rest) if task["category"] == "messages"
+               and kinds.get(task["chat_id"]) not in ("private", "bot")), len(rest))
+    return rest[:at] + photos + rest[at:]
+
+
+def chat_in_scope(options, kind, username):
+    categories = options.get("chat_categories")
+    return kind in options["chat_kinds"] and (categories is None or category_of(kind, username) in categories)
+
+
+def own_only_for(options, kind, username):
+    return bool(options["own_messages_only"] or category_of(kind, username) in options.get("own_only_categories", ()))
 
 
 def sha(data):
@@ -269,6 +321,7 @@ class AccountExport:
         self.discovery_saved = 0.0
         self.packaging_copies, self.record_bytes = 1, 0
         self.transport_factory = transport.Transport
+        self.sealed_run = None
 
     def directory(self, job_id):
         if not isinstance(job_id, str) or not JOB_ID.fullmatch(job_id):
@@ -408,6 +461,11 @@ class AccountExport:
     def chat_label(self, chat_id):
         title = next((chat.get("title") for chat in (self.inventory or {}).get("chats", ()) if chat.get("id") == chat_id), None)
         return {"id": chat_id, "title": title} if title else chat_id
+
+    def task_label(self, task):
+        if task["category"] == "avatars":
+            return {"id": None, "title": "Photos of chats and people", "task": "avatars"}
+        return self.chat_label(task["chat_id"])
 
     async def finish(self, job_id, reason="Stopped before acquisition completed."):
         from .account_finalization import finalize
@@ -667,6 +725,8 @@ class AccountExport:
             else:
                 self.counts["media_skipped"] += 1
                 self.failures += attachment["outcome"] == "failed"
+                if attachment["outcome"] == "failed" and self.stopped(attachment.get("reason")):
+                    self.counts["media_not_reached"] = self.counts.get("media_not_reached", 0) + 1
             if attachment.get("representation") and attachment["outcome"] in ("saved", "hashed"):
                 self.cache_attachment(attachment)
 
@@ -690,6 +750,12 @@ class AccountExport:
         self.head = sha(canonical(envelope))
         self.counts["messages_seen"] += receipt.get("seen_count", 0) if receipt["category"] == "messages" else 0
         self.failures += receipt["outcome"] == "failed"
+        if receipt["outcome"] == "failed" and self.stopped(receipt.get("error")):
+            self.counts["steps_not_reached"] = self.counts.get("steps_not_reached", 0) + 1
+
+    def stopped(self, reason):
+        finish = (getattr(self, "current", None) or {}).get("finish_reason")
+        return isinstance(reason, str) and reason == finish
 
     def chat_states(self, counts):
         complete = {}
@@ -968,6 +1034,7 @@ class AccountExport:
                     network.progress = None
                     self.current.pop("discovery", None)
                     self.current["current_chat"] = None
+                tasks = reading_order(tasks, chats)
                 if job["options"]["transport"] == "auto" and options["transport"] == "regular":
                     declined = self.vault.read("account-export-" + job["job_id"]).get("takeout_declined")
                     gaps = ["This session signed in less than 24 hours ago, so this export used the regular session "
@@ -987,16 +1054,18 @@ class AccountExport:
                 await self.retry(lambda: network.validate_inventory(self.inventory))
             self.current.update(phase="running", error=None, wait_until=None, delay_seconds=None, wait_reason=None)
             self.persist()
+            tasks = self.inventory["tasks"]
             if options.get("messages_first", False):
                 from .account_acquisition import StagedTransport
                 network = StagedTransport(network, self, {**job, "options": options})
                 await network.prepare()
-            for task in self.inventory["tasks"]:
+                tasks = attachment_order(tasks, self.inventory["chats"])
+            for task in tasks:
                 previous = self.progress.get(task["id"])
                 if previous and previous["terminal"]:
                     continue
                 cursor = previous["cursor_after"] if previous else task["cursor_start"]
-                self.current["current_chat"] = self.chat_label(task["chat_id"])
+                self.current["current_chat"] = self.task_label(task)
                 if task.get("discovery_error"):
                     await complete_in_thread(self.seal, job, task, cursor, cursor, True, [], 0, utcnow(), "failed", task["discovery_error"])
                     continue
@@ -1127,6 +1196,7 @@ class AccountExport:
                 hash_manifests = set()
                 message_pages = {}
                 chat_counts = {}
+                avatars = {}
                 captured_from = captured_until = None
                 for envelope in self.receipts:
                     receipt = envelope["statement"]
@@ -1148,6 +1218,8 @@ class AccountExport:
                             for index, attachment in enumerate(row.get("attachments", [])):
                                 if attachment["outcome"] == "saved":
                                     media.add(attachment["file"])
+                                    if receipt["category"] == "avatars" and type(row.get("peer_id")) is int:
+                                        avatars[row["peer_id"]] = attachment["file"]
                                 if attachment.get("server_hashes"):
                                     body = canonical(attachment["server_hashes"])
                                     name = "hashes/" + sha(body) + ".json"
@@ -1182,6 +1254,8 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
+                    "known_limits": [item for item in self.inventory.get("gaps", []) if isinstance(item, str)],
+                    "sealed_run": self.sealed_run,
                     "omissions": report_omissions(self.inventory.get("gaps", []),
                                                   [*self.current.get("omissions", []), *self.unread_omissions()], self.progress),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
@@ -1190,8 +1264,10 @@ class AccountExport:
                     def message_rows(chat=chat):
                         for data_file in message_pages.get(chat["id"], ()):
                             with (directory / data_file).open("rb") as stream:
-                                for raw in stream:
-                                    yield json.loads(raw)
+                                for line, raw in enumerate(stream, 1):
+                                    row = account_report.Record(json.loads(raw))
+                                    row.source = (data_file, line, hashlib.sha256(raw.removesuffix(b"\n")).hexdigest())
+                                    yield row
                     chat_analytics = account_report.snapshot_analytics.Analytics("snapshot")
                     for row in message_rows():
                         analytics.snapshot(row, chat)
@@ -1201,7 +1277,8 @@ class AccountExport:
                     context = {**report_context, "analytics": account_report.snapshot_analytics.project(chat_analytics.result(), report_context["presentation"]),
                                "chat_map": account_report.chat_map(report_context, activity, gap_map, display_chat),
                                "gap_markers": activity_maps.MarkerPlacer(activity_maps.markers(gap_map, chat["id"], chat.get("kind")))}
-                    for name, content in account_report.account_chat_pages(context, display_chat, message_rows):
+                    ordered = account_report.chronological(directory, message_pages.get(chat["id"], []))
+                    for name, content in account_report.account_chat_pages(context, display_chat, ordered):
                         write(name, content)
                     activity.gap_links[chat["id"]] = context["gap_markers"].locations
                 report_context["analytics"] = account_report.snapshot_analytics.project(analytics.result(), report_context["presentation"])
@@ -1213,7 +1290,8 @@ class AccountExport:
                       "export_state": states.get(chat["id"], "missing")} for chat in selected)))
                 if job["options"].get("export_format", "tgwitness") != "tgwitness":
                     from .telegram_export import DesktopExport
-                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"], states)
+                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"], states,
+                                            avatars)
                     try:
                         if job["options"]["export_format"] in ("telegram_json", "telegram_both"):
                             write("result.json", desktop.json())

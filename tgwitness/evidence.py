@@ -19,6 +19,7 @@ from . import asic
 from . import indicators
 from . import pdf_report
 from . import report
+from . import sealed_index
 from . import tuning
 from . import verification_kit
 from . import viewer
@@ -368,7 +369,21 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                     write_member("media-repeats.json", [canonical({**analysis["repeated_media"], "source": source})])
                     write_member("forward-sources.json", [canonical({**analysis["forward_sources"], "source": source})])
                     write_member("observed-sources.gexf", [report.report_forwards.gexf(analysis["forward_sources"], analysis["titles"])])
+                sealed_facts = {}
                 for event in snapshot.events():
+                    sealed_index.collect(sealed_facts, event)
+                    if event["kind"] == "sealed.chat_export" and event["payload"].get("file") is not None:
+                        item = event["payload"]
+                        if not re.fullmatch(r"chat-export-[0-9]{3}\.zip", item["file"]) or item["file"] in hashes:
+                            raise ValueError("Invalid or duplicate sealed chat export")
+                        folder = store.root / "chat-exports"
+                        source = folder / item["file"]
+                        if source.is_symlink() or source.resolve().parent != folder.resolve():
+                            raise ValueError("Invalid sealed chat export path")
+                        with source.open("rb") as incoming:
+                            calculated = write_member(item["file"], iter(lambda: incoming.read(1024 * 1024), b""))
+                        if calculated != item["sha256"] or source.stat().st_size != item["bytes"]:
+                            raise ValueError("Sealed chat export changed before packaging")
                     if event["kind"] == "sealed.account_export":
                         item = event["payload"]
                         job = item.get("job_id", "")
@@ -437,7 +452,9 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                                    "All signed journal events, file-hash manifests and preserved media remain included. "
                                    "Collection gaps and unavailable attachments remain recorded in the journal."}
                     write_member("PACKAGING.json", [canonical(packaging)])
-                    write_member("index.html", [compact_index(result["events"])])
+                    write_member("index.html", [sealed_index.page(sealed_facts, result["events"], result.get("fingerprint"),
+                                                                  result.get("head_hash"), options.get("language", "en"))
+                                                if sealed_facts.get("sealed.started") else compact_index(result["events"])])
                 else:
                     english_original(context, write_member, hashes, "report",
                                      lambda english: pdf_report.report_pdf(

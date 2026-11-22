@@ -7,7 +7,7 @@ MAX_CHATS = 5000
 DAY_LIMIT = 120
 WEEK_LIMIT = 104
 TITLE = "Chats over time"
-NOTE = ("Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns "
+NOTE = ("Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns "
         "had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means "
         "no message was recorded there.")
 COLOR = "#247e8c"

@@ -18,7 +18,7 @@ from . import report_chat_timeline, report_design, report_forwards, report_histo
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
-from .verify import (SEAL_CLOSE, SEAL_OPEN, coverage_lines, fingerprint, fingerprint_colors, ots_summary,
+from .verify import (SCOPE_REASONS, SEAL_CLOSE, SEAL_OPEN, coverage_lines, fingerprint, fingerprint_colors, ots_summary,
                      timestamp_reply_summary, timestamp_signature, verify_checkpoint)
 
 SEAL_FORMAT = "tgwitness-report-seal-v1"
@@ -139,10 +139,11 @@ def text_keys():
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
     return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", "Sticker", RECEIVED_WHERE, RECEIVED_RENAMED]
-                              + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
+                              + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values()) + list(SCOPE_REASONS)
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
-                              + list(FILES.values()) + list(WITHHELD.values())))
+                              + list(FILES.values()) + list(WITHHELD.values()) + list(ROLE_NAMES.values())
+                              + list(CHAT_KINDS.values()) + list(VISIBILITIES.values())))
 
 
 def e(value):
@@ -161,6 +162,11 @@ def utc_text(value, seconds=True):
         return moment.strftime("%Y-%m-%d %H:%M:%S" if seconds else "%Y-%m-%d %H:%M") + " UTC"
     except ValueError:
         return str(value)
+
+
+def language_name(code):
+    from .sealed_index import LANGUAGE_NAMES
+    return LANGUAGE_NAMES.get(code, code)
 
 
 def when(value):
@@ -199,14 +205,14 @@ def duration_text(say, seconds):
     return say("{n} min", n=rest // 60)
 
 
-def observed_text(say, coverage, window=None):
+def observed_text(say, coverage, window=None, short=False):
     periods = (coverage or {}).get("continuous")
     if window is not None and not all(window):
         return say("0 records selected") + (" · " + say("No observation period recorded") if periods == [] else "")
     if periods is None:
         return say("Not recorded in this export")
     if not periods:
-        return say("No observation period recorded")
+        return say("Not recorded" if short else "No observation period recorded")
     if window is None:
         seconds = [p.get("seconds") or 0 for p in periods]
     else:
@@ -279,6 +285,7 @@ class Digest:
         self.actions, self.previews, self.action_count = {}, {}, 0
         self.own_messages, self.own_total, self.own_scope = [], 0, set()
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
+        self.sealed_run = None
         self.analytics = report_analytics.Analytics()
         self.repeats = report_repeats.Repeats()
         self.media_repeats = report_media.MediaRepeats()
@@ -321,6 +328,8 @@ class Digest:
         self.forward_sources.add(event)
         self.metrics.add(event)
         kind, payload, chat = event["kind"], event["payload"], report_analytics.chat_key(event)
+        if kind == "sealed.started" and isinstance(payload.get("context"), dict) and self.sealed_run is None:
+            self.sealed_run = {key: payload["context"].get(key) for key in ("repository", "run_id", "run_attempt")}
         if kind == "beacon.drand":
             self.trust_signals["drand"] += 1
         if kind == "process.started":
@@ -347,7 +356,9 @@ class Digest:
         if chat is not None:
             self.chats[chat] = self.chats.get(chat, 0) + 1
             if report_analytics.secret_chat_id(event) is not None:
-                self.titles[chat] = "Secret Chat " + str(payload["secret_chat_id"])
+                name = payload.get("peer_name") if isinstance(payload.get("peer_name"), str) and payload["peer_name"] else None
+                if name or chat not in self.titles:
+                    self.titles[chat] = "🔒 " + (name or "#" + str(payload["secret_chat_id"]))
             if kind in TITLE_KINDS and isinstance(payload.get("title"), str):
                 self.titles[chat] = payload["title"]
         if kind == "scope.applied":
@@ -417,7 +428,7 @@ class Digest:
                 "senders": len(self.senders), "first": self.first, "last": self.last, "first_hash": self.first_hash,
                 "clients": list(self.clients.values()), "routes": list(self.routes.values()), "clocks": self.clocks,
                 "indicators": self.indicators.result(), "trust_signals": dict(self.trust_signals),
-                "telegram_observations": self.telegram_observations,
+                "sealed_run": self.sealed_run, "telegram_observations": self.telegram_observations,
                 "local_records_only": self.local_records_only is True,
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
@@ -853,6 +864,8 @@ CSS = (
     "border:1px solid var(--line);border-inline-start:4px solid var(--muted);background:var(--bg2);"
     "-webkit-print-color-adjust:exact;print-color-adjust:exact}"
     ".stamp svg{grid-row:1/span 4;width:32px;height:32px}.stamp .core{fill:var(--muted)}"
+    ".stamp>.stamp-top,.stamp>.stamp-key,.stamp>a{grid-column:1/-1}.stamp-top{display:flex;gap:12px;align-items:center}"
+    ".stamp-top>svg{flex:0 0 32px}@media print{.stamp-key>span{margin-inline-end:.6em}}"
     ".stamp .tick,.stamp .cross,.stamp .warn{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;"
     "stroke-linejoin:round;opacity:0}"
     ".stamp.ok{border-inline-start-color:var(--ok)}.stamp.ok .core{fill:var(--ok)}.stamp.ok .tick{opacity:1}"
@@ -865,7 +878,7 @@ CSS = (
     ".stamp.bad .stamp-state{color:var(--bad)}.stamp-key{font:11.5px " + MONO + ";color:var(--muted);overflow-wrap:anywhere}"
     ".tiles{display:flex;flex-wrap:wrap;margin:22px 0 0;border-top:1px solid var(--line);"
     "border-inline-start:1px solid var(--line)}"
-    ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 96px;min-width:0;"
+    ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 150px;min-width:0;"
     "padding:8px 12px 9px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}.tile i{display:none}"
     ".tile b{font-size:19px;line-height:1.25;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}"
     ".tiles .tile b.text{font:600 15px/1.35 system-ui,sans-serif!important;letter-spacing:0!important}"
@@ -1125,7 +1138,7 @@ CSS += report_layouts.CSS
 CSS += report_secret.CSS
 SCRIPT += "\n" + CONSOLE_JS + "\n" + report_layouts.report_profile.SCRIPT
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
-CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; script-src " + SCRIPT_HASH
+CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; media-src 'self' file:; script-src " + SCRIPT_HASH
        + "; frame-src 'self' file:; base-uri 'none'; form-action 'none'")
 SCRIPT_WORDS = ("Context message", "Matches export filters", "Copy", "Copied", "Signature valid · this file not yet checked",
                 "Verified: this file is exactly as signed", "Signed", "Not yet checked", "Changed",
@@ -1545,7 +1558,7 @@ def viewer_meta(say, kind, context, **extra):
 
 
 def records_pointer(say, number, anchor, title, count, label, lead=""):
-    return (section(number, anchor, title, lead) + '<div class="records-pointer"><b>' + e(label) + "</b><span>"
+    return (section(number, anchor, title, lead) + '<div class="records-pointer"><b>' + e(label) + "</b> <span>"
             + e(say("Search, filters, people, indicators and every item in full are in the viewer tab. Select items to "
                     "print them or to save an extract that verify.py checks against this archive."))
             + '</span><a class="v-btn" href="#data" data-view="data">' + e(say("Open")) + " →</a></div></section>")
@@ -2366,7 +2379,7 @@ def gap_overview(say, summary):
     measured, skipped, listed = [], [], []
     for name, item in sequences:
         if item.get("status") != "applicable":
-            skipped.append([name, item.get("reason") or "—"])
+            skipped.append([name, say(item["reason"]) if item.get("reason") else "—"])
             continue
         row = [name, str(item["observed_from"]) + " – " + str(item["observed_to"]), item["observed"], item["missing"],
                format(item["density"] * 100, ".2f") + "%", item["largest_gap"]]
@@ -2378,7 +2391,7 @@ def gap_overview(say, summary):
                            gap["after"]["message_id"], gap["after"]["observed_at"],
                            gap["before"]["message_id"], gap["before"]["observed_at"]])
     note = " ".join((
-        say("Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.",
+        say("Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.",
             smallest=settings["gap_cluster_min"], listed=settings["gap_clusters_listed"]),
         say("The account-wide numbering is measured where it applies.") if settings["gap_account_sequence"]
         else say("The account-wide numbering is not measured."),
@@ -2457,7 +2470,7 @@ def coverage_section(say, number, coverage):
     out = section(number, "coverage", say("Coverage"), say(coverage.get("meaning") or "Recorded observation intervals."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
-                                                                    if periods else "<p>—</p>")
+                                                                    if periods else '<p class="lead">' + e(say("No observation period recorded")) + "</p>")
     if gaps:
         out += "<h3>" + e(say("Gaps")) + "</h3>" + table([say("Interval start"), say("Interval end"), say("Reason")], gaps)
     if ids:
@@ -2709,7 +2722,7 @@ class EvidenceHTML:
                         (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
                          if self.anchors or self.archive else "—", "ok", "seal"),
                         (say("Observation period"), e(observed_text(say, self.coverage, (self.digest["first"], self.digest["last"])
-                                                                    if self.filtered else None)), "pink", "eye")])
+                                                                    if self.filtered else None, short=True)), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
     def render_summary(self):
@@ -2733,7 +2746,7 @@ class EvidenceHTML:
         yield case_assessment.html(case_assessment.journal(self.context, self.coverage), say).encode("utf-8")
         yield case_section(say, next(self.numbers), self.options, [
             (say("Observing account"), e(self.account_text)),
-            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
+            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(language_name(say.language)) + "</span>"),
             (say("Report ID"), "<code>" + e(self.report_id) + "</code>"), (say("Created"), when(self.created)),
             (say("Produced by"), e(self.producer.get("software")) + " " + e(self.producer.get("version")) + " · "
              + e(self.producer.get("project")))]).encode("utf-8")
@@ -2828,7 +2841,7 @@ class EvidenceHTML:
             steps.append((say("Checkpoints timestamped"), (when(latest.get("time")) + " · " + e(latest["service"]))
                           if latest else e(say("none in this export"))))
         steps += [(say("Journal verified and exported"), when(self.created)),
-                  (say("Report sealed"), when(self.created) + " · " + e(self.options.get("examiner") or ""))]
+                  (say("Report sealed"), when(self.created) + (" · " + e(self.options["examiner"]) if self.options.get("examiner") else ""))]
         yield custody_section(say, next(self.numbers), steps, [
             (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
             (say("Program build"), build_html(say, self.producer)),
@@ -3096,6 +3109,7 @@ class ChatHTML:
         yield from self.render_header()
         yield from self.render_summary()
         yield from self.render_messages()
+        yield case_assessment.html(case_assessment.snapshot(self.context, "chat", self.meta), self.say).encode("utf-8")
         yield from self.render_custody()
 
     def render_header(self):
@@ -3140,14 +3154,14 @@ class ChatHTML:
         self.numbers = iter(range(1, 100))
         yield brief_section(say, *chat_brief(say, self.meta, self.stats, self.ids, self.account_text)).encode("utf-8")
         yield snapshot_analytics.html_section(self.context.get("analytics"), self.options, say).encode("utf-8")
-        yield case_assessment.html(case_assessment.snapshot(self.context, "chat", self.meta), say).encode("utf-8")
         yield case_section(say, next(self.numbers), self.options, [
             (say("Chat"), '<span class="chathead"><span class="ava ' + colour(self.chat.get("id")) + '">' + e(initials(self.chat_title))
-             + "</span><span><b>" + e(self.chat_title) + "</b><br><small>" + e(self.chat.get("kind")) + " · " + e(self.chat.get("visibility"))
+             + "</span><span><b>" + e(self.chat_title) + "</b><br><small>" + e(say(CHAT_KINDS.get(self.chat.get("kind"), str(self.chat.get("kind")))))
+             + " · " + e(say(VISIBILITIES.get(self.chat.get("visibility"), str(self.chat.get("visibility")))))
              + " · id " + e(self.chat.get("id")) + "</small></span></span>"),
             (say("First message"), when(self.stats["first_at"])), (say("Last message"), when(self.stats["last_at"])),
             (say("Exporting account"), e(self.account_text)),
-            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
+            (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(language_name(say.language)) + "</span>"),
             (say("Report ID"), "<code>" + e(self.report_id) + "</code>")]).encode("utf-8")
         if source_rows(say, self.meta, self.stats):
             yield source_section(say, next(self.numbers), self.meta, self.stats).encode("utf-8")
@@ -3155,7 +3169,9 @@ class ChatHTML:
         rows = [['<span class="ava ' + colour(p["user_id"]) + '" style="width:30px;height:30px;font-size:12px;display:inline-grid">'
                  + e(initials(p["name"] or p["user_id"])) + "</span> <b>" + e(p["name"] or say("Unknown")) + "</b>"
                  + (' <span class="uname">@' + e(p["username"]) + "</span>" if p.get("username") else "")
-                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat)),
+                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat))
+                 + ("<br><small>" + e(say("Shown as {label} in the charts", label=snapshot_analytics.display(p["chart_label"], say))) + "</small>"
+                    if p.get("chart_label") else ""),
                  "<code>" + e(p["user_id"]) + "</code>", num(p["messages"]),
                  '<div class="meter"><i style="width:' + str(max(2, round(100 * p["messages"] / top))) + '%"></i></div>',
                  when(p["first_message_at"]), when(p["last_message_at"])] for p in self.people[:100]]
@@ -3253,6 +3269,8 @@ def chat_chunks(meta, records, context):
 LABELS = (("scam", "Telegram marks this chat as a scam", "bad"),
           ("fake", "Telegram marks this chat as fake: it impersonates someone", "bad"),
           ("restricted", "Telegram restricts this chat", "warn"), ("verified", "Verified by Telegram", "ok"))
+CHAT_KINDS = {"supergroup": "Supergroup", "channel": "Channel", "group": "Basic group", "private": "Private chat", "bot": "Bot"}
+VISIBILITIES = {"public": "Public link", "private": "No public link"}
 ROLE_NAMES = {"creator": "creator", "admin": "administrator", "member": "member", "restricted": "restricted member",
               "left": "not a member"}
 ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined",

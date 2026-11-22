@@ -8,12 +8,14 @@ STEPS = (3600, 6 * 3600, DAY, WEEK, 30 * DAY, 91 * DAY, 365 * DAY)
 COLUMNS = 60
 TOP_ROWS = 25
 TOP_SENDERS = 12
+SERVICE = -1
 YEARS = 6
 GAPS_SHOWN = 300
 WEEK_ORIGIN = 4 * DAY
 DAY_WINDOW, HOUR_WINDOW = 2 * DAY, 3 * 3600
 DAY_NAMES = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-MONTH_NAMES = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+MONTH_NAMES = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+               "November", "December")
 CONFIDENCE = {"proven": "proven by a reply or pin", "high": "high confidence", "medium": "medium confidence",
               "low": "low confidence"}
 SCOPE_REASONS = {"chat_kinds": "some chat kinds were not selected", "chat_ids": "only listed chats were selected",
@@ -26,32 +28,32 @@ CSS = """
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}
 .activity-map .map-card{min-width:0;padding:20px 22px;border:1px solid var(--line);background:var(--map-paper);border-radius:12px;margin:18px 0;break-inside:avoid}
 .activity-map h3{font:600 15px/1.4 system-ui,sans-serif;margin:0 0 6px}.activity-map .map-note{font-size:12px;color:var(--muted);margin:4px 0 14px;max-width:90ch}
-.map-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}.map-kpis div{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
-.map-kpis strong{display:block;font-size:22px;line-height:1.3;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.5}.map-kpis span{font-size:12px;color:var(--muted)}
+.map-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.map-kpis div{flex:1 1 128px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
+.map-kpis strong{display:block;font:600 24px/1.25 system-ui,sans-serif;letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.45}.map-kpis span{display:block;margin-top:6px;font-size:12px;line-height:1.4;color:var(--muted)}
 .map-scroll{overflow-x:auto;direction:ltr;padding-bottom:4px}.map-grid{border-collapse:separate;border-spacing:3px}
-.map-grid caption{text-align:start;font:600 12px/1.6 system-ui,sans-serif;color:var(--muted);padding-bottom:4px}
+.map-grid caption{text-align:start;font:600 12px/1.6 system-ui,sans-serif;color:var(--muted);padding-bottom:4px;white-space:nowrap}
 .map-grid th{font:500 10px/1.3 system-ui,sans-serif;color:var(--muted);text-align:start;white-space:nowrap;overflow:hidden;border:0!important;padding:0 4px 0 0!important;background:transparent!important}
 .map-grid td{width:15px;min-width:15px;height:15px;padding:0!important;border:0!important;border-radius:3px;background:var(--map-empty);position:relative}
-.map-grid td.blank{background:transparent}.map-grid td[data-a="1"]{background:color-mix(in srgb,var(--map-accent) 25%,var(--map-paper))}
+.map-grid td.blank{background:transparent}.map-calendar td.blank{box-shadow:inset 0 0 0 1px var(--map-empty)}.map-grid td[data-a="1"]{background:color-mix(in srgb,var(--map-accent) 25%,var(--map-paper))}
 .map-grid td[data-a="2"]{background:color-mix(in srgb,var(--map-accent) 48%,var(--map-paper))}.map-grid td[data-a="3"]{background:color-mix(in srgb,var(--map-accent) 72%,var(--map-paper))}
 .map-grid td[data-a="4"]{background:var(--map-accent)}
 .map-grid td[data-l]::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%);border-radius:50%;background:var(--map-loss);box-shadow:0 0 0 1.5px var(--map-paper)}
 .map-grid td[data-l="1"]::after{width:4px;height:4px}.map-grid td[data-l="3"]::after{width:8px;height:8px}.map-grid td[data-l="4"]::after{width:10px;height:10px}
-.map-id{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:156px}.map-lanes td{width:auto;min-width:0;height:16px}
-.map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 10px/1.2 ui-monospace,monospace;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.map-lanes tr.outside th.lane{color:var(--map-loss);font-style:italic}.map-week{width:100%;table-layout:fixed}.map-week td{width:auto;min-width:0;height:20px}.map-week th[scope=row]{width:42px;overflow:visible}.map-week thead th:first-child{width:42px}.map-week thead th[scope=col]{overflow:visible}
+.map-id{font:11px/1.4 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:210px}.map-lanes col.total-col{width:230px}.map-lanes td{width:auto;min-width:0;height:16px}
+.map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 11px/1.2 system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.map-lanes tr.outside th.lane{color:var(--map-loss);font-style:italic;white-space:normal;text-overflow:clip;font-size:11px;line-height:1.2;padding-block:2px!important}.map-week{width:100%;table-layout:fixed}.map-week td{width:auto;min-width:0;height:20px}.map-week th[scope=row]{width:42px;overflow:visible}.map-week thead th:first-child{width:42px}.map-week thead th[scope=col]{overflow:visible}
 .map-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:11px;color:var(--muted);margin-top:12px}
 .map-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--map-empty);vertical-align:-1px;margin-inline-end:5px}.map-legend i[data-a="2"]{background:color-mix(in srgb,var(--map-accent) 48%,var(--map-paper))}
 .map-legend i[data-a="4"]{background:var(--map-accent)}.map-legend i.loss{width:8px;height:8px;border-radius:50%;background:var(--map-loss)}
 .map-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.map-pair .map-card{margin:0}
 .map-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}.map-table th,.map-table td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
 .map-table td.num,.map-table th.num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.map-badge{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;border:1px solid var(--line);margin-inline-start:4px}
-.map-badge.proven,.map-badge.high{border-color:var(--map-loss);color:var(--map-loss)}.gap-mark{margin:10px 0;padding:9px 14px;border:1px dashed var(--map-loss,#d9480f);border-radius:8px;font-size:13px;color:var(--ink)}
+.map-badge.proven,.map-badge.high{border-color:var(--map-loss);color:var(--map-loss)}.map-badge.medium{border-color:color-mix(in srgb,var(--map-loss) 40%,var(--line));color:var(--ink)}.map-badge.low{color:var(--muted)}.map-table .map-id{display:block;margin:2px 0 0}.gap-mark{margin:10px 0;padding:9px 14px;border:1px dashed var(--map-loss,#d9480f);border-radius:8px;font-size:13px;color:var(--ink)}
 .gap-mark b{color:var(--map-loss,#d9480f)}.gap-mark small{display:block;color:var(--muted)}
 .gap-mark:target{outline:3px solid var(--map-loss,#d9480f);outline-offset:3px;scroll-margin-top:32px}
 .map-runs summary{cursor:pointer;font-weight:600}.map-run-list{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .map-run-list li{min-width:0}.map-run{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px 14px;border:1px solid var(--line);border-inline-start:3px solid var(--map-loss);border-radius:6px;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
-a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
+a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
 @media(max-width:720px){.map-run-list{grid-template-columns:1fr}.activity-map .map-card{padding:16px}}
 @media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}.map-lanes thead th[scope=colgroup]{writing-mode:vertical-rl;transform:rotate(180deg);height:80px;padding:0 0 4px!important;text-align:end;white-space:nowrap;overflow:visible}}
 @media print{.map-grid td,.map-grid td::after,.map-legend i{print-color-adjust:exact;-webkit-print-color-adjust:exact}.map-scroll{overflow:visible}}
@@ -96,15 +98,15 @@ def thousands(say, value):
 
 def number(value, say=None):
     if isinstance(value, float):
-        if value < 10:
-            return ("%.1f" % value).rstrip("0").rstrip(".")
+        if value < 0.95:
+            return "<1"
         return str(thousands(say, round(value)))
     return str(thousands(say, value))
 
 
 class ActivityMap:
     def __init__(self):
-        self.times, self.senders, self.kinds = {}, {}, {}
+        self.times, self.senders, self.kinds, self.names = {}, {}, {}, {}
         self.gap_links = {}
 
     def add(self, chat_id, kind, row):
@@ -114,7 +116,14 @@ class ActivityMap:
         sender = row.get("from_id")
         self.kinds.setdefault(chat_id, kind)
         self.times.setdefault(chat_id, array("q")).append(at)
-        self.senders.setdefault(chat_id, array("q")).append(sender if type(sender) is int else 0)
+        service = row.get("type") == "service" or bool(row.get("action"))
+        self.senders.setdefault(chat_id, array("q")).append(SERVICE if service else sender if type(sender) is int else 0)
+        person = row.get("sender")
+        if type(sender) is int and sender not in self.names and isinstance(person, dict):
+            name = (" ".join(str(person.get(key) or "") for key in ("first_name", "last_name")).strip()
+                    or str(person.get("title") or ""))
+            if name or person.get("deleted") is True:
+                self.names[sender] = name or None
 
     def span(self, chats=None):
         values = [(min(t), max(t)) for chat, t in self.times.items() if t and (chats is None or chat in chats)]
@@ -170,6 +179,11 @@ def grid(start, end):
     return origin, STEPS[-1], (end - origin) // STEPS[-1] + 1
 
 
+def column_label(origin, step, index):
+    at = datetime.fromtimestamp(origin + index * step, timezone.utc)
+    return at.strftime("%m-%d %H:%M") if step < DAY else at.strftime("%Y-%m-%d")
+
+
 def bin_label(origin, step, index):
     at = datetime.fromtimestamp(origin + index * step, timezone.utc)
     return at.strftime("%Y-%m-%d %H:00") if step < DAY else at.strftime("%Y-%m-%d")
@@ -210,11 +224,12 @@ def loss_level(value, peak):
     return 1 + min(3, int(value / peak * 3.999))
 
 
-def legend(say, loss=True):
-    parts = ['<div class="map-legend"><span><i></i>' + e(say("No messages")) + '</span><span><i data-a="2"></i>'
-             + e(say("Fewer messages")) + '</span><span><i data-a="4"></i>' + e(say("More messages")) + '</span>']
+def legend(say, loss=True, intensity=True):
+    parts = ['<div class="map-legend">'] + ([
+        '<span><i></i>' + e(say("No messages")) + '</span><span><i data-a="2"></i>' + e(say("Few messages"))
+        + '</span><span><i data-a="4"></i>' + e(say("Many messages")) + '</span>'] if intensity else [])
     if loss:
-        parts.append('<span><i class="loss"></i>' + e(say("Absent message numbers (larger dot, more)")) + '</span>')
+        parts.append('<span><i class="loss"></i>' + e(say("Absent message numbers (a larger dot means more)")) + '</span>')
     return ''.join(parts) + '</div>'
 
 
@@ -236,7 +251,7 @@ def calendar(days, losses, say):
     shown, hidden = years[-YEARS:], years[:-YEARS]
     peak, loss_peak = max(days.values(), default=0), max(losses.values(), default=0.0)
     parts = ['<div class="map-card"><h3>' + e(say("Calendar")) + '</h3><p class="map-note">'
-             + e(say("Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.")) + '</p>']
+             + e(say("Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.")) + '</p>']
     for year in reversed(shown):
         first = max(low, int(datetime(year, 1, 1, tzinfo=timezone.utc).timestamp()) // DAY)
         last = min(high, int(datetime(year, 12, 31, tzinfo=timezone.utc).timestamp()) // DAY)
@@ -282,7 +297,8 @@ def lanes(rows, origin, step, count, say, title, note):
     loss_peak = max((value for row in rows for value in row["losses"]), default=0.0)
     segment = max(1, -(-count // 6))
     header = '<tr><th></th>' + ''.join('<th scope="colgroup" colspan="%d">%s</th>' % (
-        min(segment, count - index), e(bin_label(origin, step, index)[:10])) for index in range(0, count, segment)) + '<th></th></tr>'
+        min(segment, count - index), e(column_label(origin, step, index)) if index == 0 or count - index >= segment else "")
+        for index in range(0, count, segment)) + '<th></th></tr>'
     body = []
     for row in rows:
         cells = ['<th scope="row" class="lane" dir="auto" title="' + e(row["label"]) + (' · ' + e(say("ID {id}", id=row["id"])) if type(row.get("id")) is int else '') + '">'
@@ -293,7 +309,7 @@ def lanes(rows, origin, step, count, say, title, note):
             if loss_level(lost, loss_peak):
                 tip += " · " + say("absent: {n}", n=number(lost, say))
             cells.append(cell(value, peak, lost, loss_peak, tip))
-        cells.append('<td class="total">' + e(row["total"]) + '</td>')
+        cells.append('<td class="total" title="' + e(row["total"]) + '"><bdi>' + e(row["total"]) + '</bdi></td>')
         body.append('<tr' + (' class="outside"' if row.get("outside") else '') + '>' + ''.join(cells) + '</tr>')
     columns = '<colgroup><col class="lane-col">' + '<col>' * count + '<col class="total-col"></colgroup>'
     return ('<div class="map-card"><h3>' + e(title) + '</h3><p class="map-note">' + e(note) + '</p><div class="map-scroll">'
@@ -316,21 +332,26 @@ def week(matrix, say, title, loss=False):
             cells.append(cell(0, 1, value, peak, tip) if loss else cell(value, peak, 0, 0, tip))
         rows.append('<tr>' + ''.join(cells) + '</tr>')
     return ('<div class="map-card"><h3>' + e(title) + '</h3>' + note + '<div class="map-scroll"><table class="map-grid map-week">'
-            '<thead>' + head + '</thead><tbody>' + ''.join(rows) + '</tbody></table></div>' + legend(say, loss) + '</div>')
+            '<thead>' + head + '</thead><tbody>' + ''.join(rows) + '</tbody></table></div>' + legend(say, loss, not loss) + '</div>')
 
 
 def lane_rows(groups, absent, origin, step, count, say):
     rows = []
     for key, label, link, times, outside in groups:
-        counts, losses = [0] * count, [0.0] * count
+        counts, losses, firm, likely = [0] * count, [0.0] * count, 0.0, 0.0
         for at in times:
             counts[min(count - 1, max(0, (at - origin) // step))] += 1
-        for owner, start, end, amount, _ in absent:
+        for owner, start, end, amount, quality in absent:
             if owner == key or outside and owner is None:
                 for index, part in spread(amount, start, end, origin, step, count):
                     losses[index] += part
-        lost = sum(losses)
-        total = say("{n} msgs", n=thousands(say, len(times))) + (" · " + say("absent {n}", n=number(lost, say)) if lost >= 0.05 else "")
+                if quality in ("certain", "proven"):
+                    firm += amount
+                else:
+                    likely += amount
+        total = say("{n} msgs", n=thousands(say, len(times))) + "".join(
+            " · " + text for text in ((say("absent {n}", n=number(firm, say)) if firm >= 0.05 else ""),
+                                      (say("likely absent {n}", n=number(likely, say)) if likely >= 0.05 else "")) if text)
         rows.append({"id": key, "label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
     return rows
 
@@ -351,12 +372,13 @@ def account_map(activity, gaps, chats, say):
     for owner, _, _, amount, _ in absent:
         owners[owner] = owners.get(owner, 0.0) + amount
     shared = gaps["shared"] if isinstance(gaps, dict) else None
-    lost_total = (shared["absent"] if shared else 0) + sum(item["absent"] for item in (gaps or {}).get("chats", []))
     parts = ['<section class="activity-map" id="activity-map"><h2>' + e(say("Activity and absent message numbers")) + '</h2>',
              '<p class="map-note">' + e(say("Message dates come from Telegram and are shown in UTC. Absent numbers are messages this export does not hold: deleted, hidden from this account or left out by the selection.")) + '</p>']
     parts.append(kpis([(total, say("Messages")), (len(activity.times), say("Chats with messages")), (len(days), say("Active days")),
                        (day_text(start) + " → " + day_text(end) if start is not None else "—", say("First and last message")),
-                       (lost_total, say("Absent message numbers")),
+                       (sum(item["absent"] for item in (gaps or {}).get("chats", [])),
+                        say("Absent numbers in channels and supergroups")),
+                       (shared["absent"] if shared else 0, say("Absent numbers in the shared account numbering")),
                        (shared["proven"] if shared else 0, say("Proven by a reply or pin"))], say))
     parts.append(numbered_runs(gaps, titles, activity.gap_links, say))
     parts.append(calendar(days, lost_days, say))
@@ -369,7 +391,7 @@ def account_map(activity, gaps, chats, say):
             groups.append((None, say("Chats not in this export"), None, (), True))
         parts.append(lanes(lane_rows(groups, absent, origin, step, count, say), origin, step, count, say,
                            say("Chats over time"), say("The {n} chats with the most absent numbers and messages; each column is one interval of the period.", n=len(groups))))
-    pair = week(counts, say, say("Messages by weekday and hour")) + week(losses, say, say("Absent numbers by weekday and hour"), loss=True)
+    pair = week(counts, say, say("Messages by weekday and hour")) + week(losses, say, say("Absent message numbers by weekday and hour"), loss=True)
     if pair:
         parts.append('<div class="map-pair">' + pair + '</div>')
     if isinstance(gaps, dict):
@@ -418,16 +440,16 @@ def gap_details(gaps, titles, say):
     if shared["messages"]:
         parts.append('<div class="map-card"><h3>' + e(say("Private chats, bots and basic groups")) + '</h3><p class="map-note">'
                      + e(say("These chats share one message number sequence for the whole account. A missing number between two exported messages was a message of some chat. Its chat is proven when an exported reply or pin points at it; otherwise it is estimated from which chats were active between the neighbouring messages. The rest goes to chats not in this export.")) + '</p>')
-        parts.append(kpis([(shared["absent"], say("Absent numbers")), (shared["runs"], say("Runs")),
+        parts.append(kpis([(shared["absent"], say("Absent numbers")), (shared["runs"], say("Gap runs")),
                            (shared["proven"], say("Proven by a reply or pin")),
-                           (sum(1 for g in shared["gaps"] if g["confidence"] == "high"), say("Runs attributed with high confidence")),
+                           (sum(1 for g in shared["gaps"] if g["confidence"] == "high"), say("Gap runs attributed with high confidence")),
                            (number(shared["not_in_export"]["expected"], say), say("Likely in chats not in this export")),
-                           (shared["below_first"], say("Numbers below the oldest exported message"))], say))
+                           (shared["below_first"], say("Message numbers below the oldest exported message"))], say))
         rows = sorted((item for item in shared["by_chat"] if item[2] or item[3] >= 0.05), key=lambda item: (-(item[2] + item[3]), item[0]))
         if rows:
             parts.append('<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Messages"))
                          + '</th><th class="num">' + e(say("Proven absent")) + '</th><th class="num">' + e(say("Likely absent"))
-                         + '</th><th class="num">' + e(say("Runs with high confidence")) + '</th></tr></thead><tbody>')
+                         + '</th><th class="num">' + e(say("Gap runs attributed with high confidence")) + '</th></tr></thead><tbody>')
             for chat, messages, proven, expected, high in rows[:200]:
                 link = (('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))) + chat_id_tag(chat, say)
                 parts.append('<tr><td>' + link + '</td><td class="num">' + str(thousands(say, messages)) + '</td><td class="num">' + str(thousands(say, proven))
@@ -436,8 +458,8 @@ def gap_details(gaps, titles, say):
         if shared["gaps"]:
             ordered = sorted(shared["gaps"], key=lambda g: (-g["count"], g["from"]))[:GAPS_SHOWN]
             parts.append('<h3>' + e(say("Largest runs of absent numbers")) + '</h3><div class="map-scroll"><table class="map-table"><thead><tr><th>'
-                         + e(say("Numbers")) + '</th><th>' + e(say("Between")) + '</th><th>' + e(say("Neighbours")) + '</th><th>'
-                         + e(say("Most likely chat")) + '</th></tr></thead><tbody>')
+                         + e(say("Message numbers")) + '</th><th>' + e(say("Between")) + '</th><th>' + e(say("Neighbours")) + '</th><th>'
+                         + e(say("Chat it most likely belongs to")) + '</th></tr></thead><tbody>')
             for gap in ordered:
                 numbers = str(gap["from"]) + ("" if gap["from"] == gap["to"] else "–" + str(gap["to"])) + " (" + str(gap["count"]) + ")"
                 neighbours = chat_title(gap["after"][1], titles, say) + " → " + chat_title(gap["before"][1], titles, say)
@@ -461,9 +483,9 @@ def gap_details(gaps, titles, say):
     if numbered:
         parts.append('<div class="map-card"><h3>' + e(say("Channels and supergroups")) + '</h3><p class="map-note">'
                      + e(say("Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.")) + '</p>'
-                     '<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Numbers"))
+                     '<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Message numbers"))
                      + '</th><th class="num">' + e(say("Messages")) + '</th><th class="num">' + e(say("Absent numbers"))
-                     + '</th><th class="num">' + e(say("Runs")) + '</th></tr></thead><tbody>')
+                     + '</th><th class="num">' + e(say("Gap runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
                          + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
@@ -486,17 +508,25 @@ def chat_map(activity, gaps, chat, say):
                        (number(sum(amount for *_, amount, _ in absent), say), say("Absent message numbers"))], say))
     parts.append(calendar(days, lost_days, say))
     senders = activity.senders.get(chat["id"], array("q"))
-    if times and chat.get("kind") in ("group", "supergroup") and len(set(senders)) > 1:
+    people = set(senders) - {SERVICE}
+    if times and chat.get("kind") in ("group", "supergroup") and len(people) > 1:
         origin, step, count = grid(min(times), max(times))
         totals = {}
         for sender in senders:
-            totals[sender] = totals.get(sender, 0) + 1
+            if sender != SERVICE:
+                totals[sender] = totals.get(sender, 0) + 1
         top = sorted(totals, key=lambda s: (-totals[s], s))[:TOP_SENDERS]
-        groups = [(("sender", sender), say("Sender {id}", id=sender) if sender else say("Sender not recorded"), None,
+        def person(sender):
+            if not sender:
+                return say("No sender in the record")
+            if sender not in activity.names:
+                return say("Sender {id}", id=sender)
+            return (activity.names[sender] or say("Deleted account")) + " · " + say("ID {id}", id=sender)
+        groups = [(("sender", sender), person(sender), None,
                    [at for at, who in zip(times, senders) if who == sender], False) for sender in top]
         parts.append(lanes(lane_rows(groups, [], origin, step, count, say), origin, step, count, say, say("Participants over time"),
-                           say("The {n} most active senders by Telegram ID; each column is one interval.", n=len(top))))
-    parts.append(week(losses, say, say("Absent numbers by weekday and hour"), loss=True))
+                           say("The {n} most active senders; each column is one interval.", n=len(top))))
+    parts.append(week(losses, say, say("Absent message numbers by weekday and hour"), loss=True))
     return ''.join(parts) + '</section>'
 
 
@@ -541,12 +571,12 @@ def marker_html(marker, say):
 
 class MarkerPlacer:
     def __init__(self, found):
-        self.pending = sorted(found)
+        self.pending = sorted(found, reverse=True)
         self.locations = {}
 
     def before(self, current):
         found = []
-        while self.pending and type(current) is int and self.pending[-1][0] > current:
+        while self.pending and type(current) is int and self.pending[-1][0] < current:
             found.append(self.pending.pop())
         return found
 

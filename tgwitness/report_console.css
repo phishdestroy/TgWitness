@@ -32,7 +32,7 @@ code{direction:ltr;unicode-bidi:isolate}
 .v-filters input[type=checkbox]:checked,.pick:checked{border-color:var(--accent);background:var(--accent)}
 .v-filters input[type=checkbox]:checked:after,.pick:checked:after{content:"";width:9px;height:5px;margin-top:-2px;border:2px solid #fff;
   border-top:0;border-right:0;transform:rotate(-45deg)}
-.v-switches label{justify-content:space-between}
+.v-switches label{justify-content:space-between}.v-switches label span{white-space:normal;overflow:visible;line-height:1.3}
 .v-switches input[type=checkbox]{order:2;position:relative;width:34px;height:20px;border:0;border-radius:999px;background:var(--line2)}
 .v-switches input[type=checkbox]:after,.v-switches input[type=checkbox]:checked:after{content:"";position:absolute;top:2px;left:2px;width:16px;
   height:16px;margin:0;border:0;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgb(0 0 0 / .25);transform:none;transition:transform .18s}
@@ -243,4 +243,4 @@ code{direction:ltr;unicode-bidi:isolate}
   body.printing-selection>*{display:none!important}body.printing-selection #print-sheet{display:block!important}
   #print-sheet h1{margin:0 0 6px;font:600 20px Georgia,serif}#print-sheet .p-item{padding:8px 0;border-top:1px solid #999;break-inside:avoid}
   #print-sheet .p-head{color:#444;font-size:11px}#print-sheet .p-text{margin-top:3px;font-size:12.5px;white-space:pre-wrap}
-  #print-sheet .p-hash{margin-top:2px;color:#555;font:10px ui-monospace,Menlo,monospace}#print-sheet .p-note{margin-top:12px;color:#444;font-size:11px}}
+  #print-sheet .p-hash{margin-top:2px;color:#555;font:10px ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}#print-sheet .p-note{margin-top:12px;color:#444;font-size:11px}}

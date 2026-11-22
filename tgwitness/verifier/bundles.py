@@ -20,6 +20,7 @@ ASIC_SHA256 = "http://www.w3.org/2001/04/xmlenc#sha256"
 ASIC_MANIFEST, ASIC_SIGNATURE = "META-INF/ASiCManifest.xml", "META-INF/signature.p7s"
 ASIC_RECORD_MANIFEST, ASIC_RECORD = "META-INF/ASiCEvidenceRecordManifest.xml", "META-INF/evidencerecord.ers"
 ASIC_ADDED_MANIFEST = re.compile(r"META-INF/ASiCManifest([0-9]{3})\.xml")
+CHAT_EXPORT_MEMBER = re.compile(r"chat-export-[0-9]{3}\.zip")
 
 
 def container_members(archive, names, listed):
@@ -132,6 +133,8 @@ def verify_container(archive, names, container, digests):
 def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False, max_gib=None,
                   check_bitcoin=False):
     from .account import verify_account_export
+    from .chat import verify_chat_export
+    from .live import LIVE_START, verify_live_export
     from .board import verify_board
     from .chain import canonical, fingerprint, is_format
     from .completeness import COMPLETENESS_KINDS, completeness_certificate
@@ -184,11 +187,21 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
                     gap_settings = saved_gaps.get("parameters")
             observed, outside = Coverage(gap_settings), OutsideRecords()
             sequence_events = []
-            hash_files, account_exports, starts = set(), [], []
+            hash_files, account_exports, starts, chat_exports = set(), [], [], []
 
             def take(event):
                 if event["kind"] == "process.started":
                     starts.append(event)
+                if event["kind"] == "sealed.chat_export" and event["payload"].get("file") is not None:
+                    item = event["payload"]
+                    name = item["file"]
+                    if (not isinstance(name, str) or not CHAT_EXPORT_MEMBER.fullmatch(name)
+                            or any(bound["file"] == name for bound in chat_exports)
+                            or type(item.get("chat_id")) is not int or type(item.get("complete")) is not bool
+                            or manifest["files"].get(name) != item.get("sha256")
+                            or archive.getinfo(name).file_size != item.get("bytes")):
+                        raise ValueError("Sealed chat export differs from its journal binding")
+                    chat_exports.append(item)
                 if event["kind"] == "sealed.account_export":
                     item = event["payload"]
                     if (account_exports or item.get("file") != "account-export.zip"
@@ -228,6 +241,26 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
                 if account["job_id"] != binding["job_id"] or account["complete_within_scope"] != binding["complete_within_scope"]:
                     raise ValueError("Account export coverage differs from its journal binding")
                 result["account_export"] = account
+            if {name for name in manifest["files"] if CHAT_EXPORT_MEMBER.fullmatch(name)} != {c["file"] for c in chat_exports}:
+                raise ValueError("Unbound sealed chat export")
+            checked_chats = []
+            for binding in chat_exports:
+                with archive.open(binding["file"]) as incoming:
+                    partial = incoming.read(30 + len(LIVE_START))
+                    incoming.seek(0)
+                    if partial[:4] == b"PK\x03\x04" and partial[30:] == LIVE_START.encode("ascii"):
+                        if binding["complete"]:
+                            raise ValueError("A partial chat snapshot is bound as a complete chat export")
+                        chat = verify_live_export(incoming, fp, max_gib=max_gib)
+                        chat_id = (chat.get("chat") or {}).get("id")
+                    else:
+                        chat = verify_chat_export(incoming, fp, max_gib=max_gib)
+                        chat_id = (chat.get("chat") or {}).get("id")
+                if chat_id != binding["chat_id"]:
+                    raise ValueError("A sealed chat export contains a different chat than its journal binding")
+                checked_chats.append({"chat_id": binding["chat_id"], "file": binding["file"], "complete": binding["complete"],
+                                      "format": chat.get("format"), "message_count": chat.get("message_count")})
+            result["chat_exports"] = checked_chats
             if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
                 raise ValueError("Manifest does not match journal")
         except Exception:

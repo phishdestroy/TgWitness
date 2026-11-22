@@ -41,7 +41,7 @@ def assess(options, free_bytes):
 
 
 async def preview(exports, options, *, sample=True):
-    from .account_export import AccountExportOptions, media_info
+    from .account_export import AccountExportOptions, chat_in_scope, media_info, own_only_for
     from .account_export_transport import attachments
     options = AccountExportOptions.model_validate(options).model_dump()
     result = assess(options, shutil.disk_usage(exports.root).free)
@@ -75,7 +75,8 @@ async def preview(exports, options, *, sample=True):
             if number > MAX_DIALOGS:
                 break
             cid, kind = utils.get_peer_id(dialog.entity), kind_of(dialog.entity) or "private"
-            if (kind in options["chat_kinds"] and (not options["chat_ids"] or cid in options["chat_ids"])
+            if (chat_in_scope(options, kind, getattr(dialog.entity, "username", None))
+                    and (not options["chat_ids"] or cid in options["chat_ids"])
                     and (options["include_archived"] or getattr(dialog, "folder_id", None) != 1)):
                 selected.append(dialog)
         observed["dialog_inventory_complete"] = number <= MAX_DIALOGS
@@ -86,6 +87,9 @@ async def preview(exports, options, *, sample=True):
             requested = time.monotonic()
             messages = await collector.client.get_messages(dialog.entity, limit=MESSAGES_PER_CHAT)
             timing = history_sample(messages, time.monotonic() - requested)
+            timing["chat_id"], timing["kind"] = utils.get_peer_id(dialog.entity), kind_of(dialog.entity) or "private"
+            timing["title"] = dialog.name or None
+            own_only = own_only_for(options, timing["kind"], getattr(dialog.entity, "username", None))
             observed["chats"].append(timing)
             observed["sampled_chats"] += 1
             for message in messages:
@@ -94,7 +98,7 @@ async def preview(exports, options, *, sample=True):
                 row = {"category": "messages", "date": message.date.isoformat() if message.date else None,
                        "from_id": utils.get_peer_id(message.from_id) if message.from_id else None,
                        "text": message.message or "", "outgoing": bool(message.out)}
-                if not exports.selected(row, options):
+                if not exports.selected(row, options) or (own_only and not message.out):
                     continue
                 observed["matching_messages"] += 1
                 for media in attachments(message.media):
@@ -187,6 +191,7 @@ async def preview_capture(collector, chat_id, settings, remaining_seconds):
             requested = time.monotonic()
             rows = await collector.client.get_messages(entity, limit=MESSAGES_PER_CHAT)
         timing = history_sample(rows, time.monotonic() - requested)
+        timing["chat_id"] = chat_id
         sample["chats"].append(timing)
         for message in rows:
             sample["messages_examined"] += 1

@@ -5,12 +5,14 @@ import hashlib
 import io
 import json
 import logging
+import re
 import secrets
 import shutil
 import time
 from contextlib import asynccontextmanager
 from functools import partial
 from pathlib import Path
+from typing import Literal
 from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request
@@ -25,16 +27,17 @@ from .middleware import KEEP_ALIVE_SECONDS, RequestLimit
 from .monitoring import capture_settings, normalize_capture
 from .export_preflight import preview_capture
 from .failures import describe
-from . import export_budget
+from . import export_budget, sealed_progress
 from .provenance import run_receipt
 from .sealed_crypto import recipient_id
-from .sealed_selection import Selection, selection_hash
+from .sealed_selection import SECRET_PEER, SecretVisibility, Selection, secret_target, selection_hash
 from .sealed_parts import EncryptedParts, PART_BYTES, SEALED_RESULT
 from .security import InstanceLock, Vault, private_write
 from .store import Store, canonical
 from .workers import complete_in_thread
 
 STATIC = Path(__file__).with_name("static")
+IMAGE_MODULES = Path("/usr/share/tgwitness-modules")
 TERMINAL = {"sealed", "cancelled", "failed"}
 # The account export travels inside the sealed evidence archive under this name; its own verify commands point at it.
 ACCOUNT_MEMBER = "account-export.zip"
@@ -63,9 +66,22 @@ class Login(StrictBody):
 class Phone(Login):
     phone: str = Field(pattern=r"^\+[0-9]{7,16}$")
 
+    @field_validator("phone", mode="before")
+    @classmethod
+    def international(cls, value):
+        if not isinstance(value, str) or not re.fullmatch(r"\s*\+?[0-9\s().-]{7,32}", value):
+            return value
+        digits = re.sub(r"[^0-9]", "", value)
+        return "+" + (digits[2:] if digits.startswith("00") else digits)
+
 
 class Code(StrictBody):
-    code: str = Field(min_length=3, max_length=12, pattern=r"^[0-9 -]+$")
+    code: str = Field(min_length=3, max_length=16, pattern=r"^\s*[0-9][0-9 -]*\s*$")
+
+    @field_validator("code", mode="after")
+    @classmethod
+    def digits(cls, value):
+        return re.sub(r"[^0-9]", "", value)
 
 
 class Password(StrictBody):
@@ -80,7 +96,7 @@ class Session:
             raise ValueError("A sealed capture requires a new empty data directory")
         if self.output.exists() and any(self.output.iterdir()):
             raise ValueError("A sealed capture requires a new empty output directory")
-        if len(config["token"]) != 43 or not 60 <= config["seconds"] <= 7200:
+        if len(config["token"]) != 43 or not 60 <= config["seconds"] <= 18000:
             raise ValueError("Invalid sealed session configuration")
         self.recipient = recipient_id(config["recipient"])
         self.output.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -89,12 +105,19 @@ class Session:
         self.store.bind(self.vault)
         self.vault.save("network", {"kind": "direct"})
         self.store.set_setting("route_policy", {"exposure": "tunnel", "outside_enabled": False})
-        self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4})
+        self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4, "warmup_minutes": 0})
         self.collector = Collector(self.store, self.vault, client_factory)
         self.account_export = AccountExport(self.collector, self.store, self.vault)
+        self.account_export.sealed_run = {key: config["context"].get(key) for key in
+                                          ("repository", "run_id", "run_attempt", "collector_sha")}
         self.account_export.packaging_copies = 2
         self.account_job = None
+        self.chats_task, self.chat_results, self.current_chat = None, None, None
+        self.secret_mode = False
+        self.secret_notice = None
+        self.provision_secret_module()
         self.selection = None
+        self.report_language = None
         receipt = run_receipt(self.store, self.vault)
         self.collector.run_id = receipt["run_id"]
         self.store.append("collector.started", receipt)
@@ -115,7 +138,12 @@ class Session:
     def time_budget(self, account=None):
         remaining = max(0, int(self.config["seconds"] - (time.monotonic() - self.started)))
         account = account if account is not None else self.account_export.public(self.account_job) if self.account_job else {}
-        if not self.account_job and self.phase == "collecting":
+        if self.chat_results is not None and self.phase == "collecting":
+            current = (self.collector.export_state or {}).get("captured", 0) if self.current_chat is not None else 0
+            seen = sum(item.get("captured") or 0 for item in self.chat_results) + (current or 0)
+            account = {"counts": {"messages_seen": seen, "unique_media_bytes": 0},
+                       "acquisition": {"history_complete": False, "bytes_preserved": seen * 2048}}
+        elif not self.account_job and self.phase == "collecting":
             history = self.collector.history.status()
             if time.monotonic() - self.media_bytes_at >= 5:
                 with self.store.reading() as db:
@@ -132,6 +160,7 @@ class Session:
 
     def status(self):
         account = self.account_export.public(self.account_job) if self.account_job else None
+        budget = self.time_budget(account)
         return {"phase": self.phase, "login": self.collector.phase, "reason": self.reason,
                 "authorized": bool(self.store.get_setting("account", None)),
                 "remaining_seconds": max(0, int(self.config["seconds"] - (time.monotonic() - self.started))),
@@ -139,8 +168,39 @@ class Session:
                 "capture": capture_settings(self.store),
                 "selection": self.selection,
                 "selection_sha256": selection_hash(self.selection) if self.selection else None,
-                "account_export": account, "time_budget": self.time_budget(account),
+                "account_export": account, "time_budget": budget,
+                "chat_exports": self.chat_progress(), "progress": self.progress(account, budget),
+                "secret": self.secret_status(),
                 "recipient_sha256": self.recipient, "context": self.config["context"], "revocation": self.revocation}
+
+    def chat_progress(self):
+        if self.chat_results is None:
+            return None
+        current = self.collector.export_public() if self.current_chat is not None else None
+        return {"total": len(self.selection["chat_ids"]), "kept": list(self.chat_results), "current_chat": self.current_chat,
+                "current": {key: current.get(key) for key in ("phase", "captured", "total", "eta_seconds", "stage",
+                                                              "files_done", "files_total", "ranges_done", "ranges_total")}
+                if current else None}
+
+    def progress(self, account, budget):
+        if self.phase not in ("collecting", "sealing", "sealed") or self.secret_mode or not self.selection:
+            return None
+        plan = self.assessment.get("time_plan") if self.assessment else None
+        elapsed = time.monotonic() - self.collection_started if self.collection_started is not None else 0
+        eta = budget.get("estimated_remaining_seconds") if budget else None
+        title = lambda chat_id: (self.collector.dialog_cache.get(chat_id) or {}).get("title")  # noqa: E731
+        if account:
+            value = sealed_progress.account(account, plan, elapsed, eta)
+        elif self.chat_results is not None:
+            value = sealed_progress.chats(self.chat_progress(), plan, elapsed, eta, title)
+        else:
+            value = sealed_progress.chat(self.collector.history.status(), self.store.media_stats(), self.media_bytes,
+                                         plan, elapsed, eta, title(self.selection.get("chat_id")))
+        if self.phase == "sealing":
+            value.update(stage="packaging", percent=None)
+        elif self.phase == "sealed":
+            value.update(stage="sealed", percent=100, eta_seconds=None, transfer=None)
+        return value
 
     def require_login(self):
         if self.phase != "login" or self.store.get_setting("account", None):
@@ -152,11 +212,36 @@ class Session:
         if chat_id is not None and chat_id not in self.collector.dialog_cache:
             raise ValueError("Select a chat from this account's dialog list")
 
+    def seed_pacing(self):
+        from .swarm.floodwait_learner import SETTING
+        account = (self.store.get_setting("account", None) or {}).get("id")
+        saved = self.store.get_setting(SETTING, {}) or {}
+        if account is not None and saved.get("account_id") != account:
+            self.store.set_setting(SETTING, {"account_id": account, "seed_ms": round(export_budget.PAGE_GAP_SECONDS * 1000)})
+
     async def preview(self, selection):
         self.require_selection(selection.chat_id)
+        self.seed_pacing()
         if selection.mode == "account":
             from .export_preflight import preview
             result = await preview(self.account_export, selection.account_options.model_dump())
+        elif selection.mode == "chats":
+            result = None
+            for chat_id in selection.chat_ids:
+                self.require_selection(chat_id)
+                part = await preview_capture(self.collector, chat_id, normalize_capture(selection.capture.model_dump()),
+                                             self.status()["remaining_seconds"])
+                if result is None:
+                    result = part
+                    continue
+                result["sample"]["chats"] += part["sample"]["chats"]
+                for key in ("messages_examined", "known_download_bytes", "known_hash_source_bytes",
+                            "hash_manifest_estimate_bytes", "unknown_size_files", "excluded_attachments"):
+                    result["sample"][key] = result["sample"].get(key, 0) + part["sample"].get(key, 0)
+                result["sample"]["performed"] = result["sample"].get("performed") and part["sample"].get("performed")
+                result["can_start"] = result["can_start"] and part["can_start"]
+                result["issues"] += part["issues"]
+            result["sample"]["visible_selected_chats"] = len(selection.chat_ids)
         else:
             result = await preview_capture(self.collector, selection.chat_id,
                                        normalize_capture(selection.capture.model_dump()),
@@ -175,6 +260,7 @@ class Session:
         return result
 
     async def begin_selection(self, selection):
+        self.seed_pacing()
         if self.assessment and self.assessment["selection_sha256"] != selection_hash(selection.settings()):
             self.assessment = None
         if self.assessment is None:
@@ -186,8 +272,13 @@ class Session:
             raise ValueError("Not enough disk or time remains for the selected capture and packaging.")
         if self.assessment["time_plan"]["fit"] == "no_collection_time":
             raise ValueError("Not enough time remains for collection and archive packaging.")
+        self.report_language = selection.report_language
         if selection.mode == "chat":
             return await self.begin(selection.chat_id, selection.capture)
+        if selection.mode == "chats":
+            return await self.begin_chats(selection)
+        if selection.mode == "secret":
+            return await self.begin_secret(selection)
         self.require_selection(None)
         if self.status()["remaining_seconds"] <= 0:
             raise ValueError("No capture time remains.")
@@ -195,7 +286,7 @@ class Session:
         job = await self.account_export.start(options, archive_name=ACCOUNT_MEMBER)
         self.account_job = job["id"]
         self.selection = selection.settings()
-        self.store.append("sealed.selection", {"mode": "account", "options": options,
+        self.store.append("sealed.selection", {"mode": "account", "options": options, **self.language_field(),
             "selection": self.selection, "selection_sha256": selection_hash(self.selection),
             "free_disk_bytes": shutil.disk_usage(self.root).free, "remaining_seconds": self.status()["remaining_seconds"],
             "transport": options["transport"], "total_size_and_duration": "estimated",
@@ -203,9 +294,193 @@ class Session:
         self.phase = "collecting"
         self.collection_started = time.monotonic()
 
+    async def begin_chats(self, selection):
+        for chat_id in selection.chat_ids:
+            self.require_selection(chat_id)
+        settings = normalize_capture(selection.capture.model_dump())
+        free = shutil.disk_usage(self.root).free
+        if free < self.collector.param("media_min_free_mb") * 1024**2 or self.status()["remaining_seconds"] <= 0:
+            raise ValueError("Not enough free disk or capture time")
+        self.store.set_setting("capture", settings)
+        self.report_language = selection.report_language
+        self.selection = selection.settings()
+        self.store.append("sealed.selection", {"mode": "chats", "chat_ids": list(selection.chat_ids), "capture": settings,
+            **self.language_field(), "selection": self.selection, "selection_sha256": selection_hash(self.selection),
+            "free_disk_bytes": free, "remaining_seconds": self.status()["remaining_seconds"],
+            "transport": "regular", "total_size_and_duration": "estimated",
+            "time_plan": self.assessment["time_plan"] if self.assessment else None})
+        self.chat_results = []
+        self.phase = "collecting"
+        self.collection_started = time.monotonic()
+        self.chats_task = asyncio.create_task(self.run_chats(list(selection.chat_ids)))
+
+    async def run_chats(self, chat_ids):
+        for chat_id in chat_ids:
+            self.current_chat = chat_id
+            try:
+                await self.collector.start_export(chat_id, {"language": self.report_language or "en",
+                                                            "sealed_run": self.account_export.sealed_run})
+                await asyncio.gather(self.collector.export_task, return_exceptions=True)
+            except asyncio.CancelledError:
+                raise
+            except Exception as exc:
+                payload = {"chat_id": chat_id, "title": (self.collector.dialog_cache.get(chat_id) or {}).get("title"),
+                           "file": None, "complete": False, "phase": "failed", "captured": 0, "error": type(exc).__name__}
+                self.store.append("sealed.chat_export", payload)
+                self.chat_results.append({k: payload.get(k) for k in ("chat_id", "title", "file", "complete", "phase",
+                                                                      "captured", "message_ids")})
+                continue
+            self.keep_chat_export(chat_id)
+        self.current_chat = None
+
+    def keep_chat_export(self, chat_id, snapshot=None):
+        state = self.collector.export_state or {}
+        source = snapshot or (self.collector.export_path if state.get("ready") else None)
+        complete = snapshot is None and state.get("phase") == "done"
+        payload = {"chat_id": chat_id, "title": (self.collector.dialog_cache.get(chat_id) or {}).get("title"),
+                   "file": None, "complete": complete, "phase": "snapshot" if snapshot else state.get("phase"),
+                   "captured": state.get("captured"), "files": state.get("files_done"), "error": state.get("error")}
+        if source is not None:
+            folder = self.root / "chat-exports"
+            folder.mkdir(mode=0o700, exist_ok=True)
+            name = f"chat-export-{sum(1 for item in self.chat_results if item.get('file')) + 1:03d}.zip"
+            shutil.move(str(source), folder / name)
+            if self.collector.export_path == source:
+                self.collector.export_path = None
+            payload.update(file=name, sha256=file_sha(folder / name), bytes=(folder / name).stat().st_size)
+            if snapshot is None:
+                payload["message_ids"] = message_id_summary(folder / name)
+        self.store.append("sealed.chat_export", payload)
+        self.chat_results.append({k: payload.get(k) for k in ("chat_id", "title", "file", "complete", "phase", "captured",
+                                                              "files", "message_ids")})
+
+    async def stop_chats(self, cancel):
+        if self.chats_task is None or self.chats_task.done():
+            return
+        chat_id, state, snapshot = self.current_chat, self.collector.export_state or {}, None
+        if not cancel and chat_id is not None and state.get("phase") == "running":
+            try:
+                snapshot = await complete_in_thread(self.collector.live_snapshot, state["id"])
+            except Exception:
+                snapshot = None
+        self.chats_task.cancel()
+        await asyncio.gather(self.chats_task, return_exceptions=True)
+        if chat_id is not None and not cancel:
+            self.keep_chat_export(chat_id, Path(snapshot) if snapshot else None)
+        self.current_chat = None
+
+    def provision_secret_module(self):
+        from . import secret_module
+        source = IMAGE_MODULES / secret_module.FILE
+        if not source.is_file() or source.is_symlink():
+            secret_module.home = self.root / "modules"
+            return
+        target = self.root / "modules"
+        target.mkdir(mode=0o700, exist_ok=True)
+        shutil.copyfile(source, target / secret_module.FILE)
+        secret_module.restore(self.root)
+
+    def secret_status(self):
+        if not self.secret_mode:
+            return None
+        from . import secret_chats
+        view = secret_chats.of(self.collector).view()
+        from . import visibility
+        fields = visibility.effective(self.store)
+        typing = visibility.of(self.collector).typing_now
+        chats = [{**chat, "peer_typing": [item["action"] for item in typing(chat["id"], secret=True)]}
+                 for chat in view.get("chats") or []]
+        return {**{key: view.get(key) for key in ("connected", "error", "people", "records", "interaction_problem",
+                                                   "pending_files")}, "chats": chats,
+                "notice": self.secret_notice, "counts": self.secret_counts(),
+                "visibility": {key: fields[key] for key in ("read_receipts", "content_opened", "typing")}}
+
+    def secret_media_type(self, digest):
+        with self.store.lock:
+            row = self.store.db.execute(
+                "SELECT m.payload FROM events f JOIN events m ON m.seq = json_extract(f.payload,'$.message_event') "
+                "WHERE f.kind='secret_chat.file' AND json_extract(f.payload,'$.media_sha256')=? LIMIT 1", (digest,)).fetchone()
+        if row is None:
+            return None
+        media = (json.loads(row[0]).get("media") or {})
+        mime = media.get("mime_type") if isinstance(media.get("mime_type"), str) else ""
+        if media.get("_") == "decryptedMessageMediaPhoto":
+            mime = "image/jpeg"
+        return mime if re.fullmatch(r"(image|video|audio)/[a-z0-9.+-]{1,40}", mime or "") else "application/octet-stream"
+
+    def secret_counts(self):
+        counts = {"received": 0, "sent": 0, "files": 0, "notices": 0}
+        with self.store.lock:
+            rows = self.store.db.execute(
+                "SELECT kind, json_extract(payload,'$.direction'), count(*) FROM events WHERE kind IN "
+                "('secret_chat.message','secret_chat.file','secret_chat.action') GROUP BY 1, 2").fetchall()
+        for kind, direction, number in rows:
+            key = ("received" if direction == "in" else "sent") if kind == "secret_chat.message" else \
+                "files" if kind == "secret_chat.file" else "notices"
+            counts[key] += number
+        return counts
+
+    async def begin_secret(self, selection):
+        from . import secret_chats, secret_module
+        self.require_selection(None)
+        if not secret_chats.available():
+            raise ValueError("This runner has no checked pseudo-secret module, so secret chats cannot be captured here.")
+        settings = normalize_capture(selection.capture.model_dump())
+        self.store.set_setting("capture", settings)
+        self.store.set_setting(secret_chats.SETTING, {"enabled": True, "accept_incoming": selection.accept_incoming})
+        self.report_language = selection.report_language
+        self.selection = selection.settings()
+        module = secret_module.describe()
+        self.store.append("secret_chat.module_installed", {
+            **{key: module.get(key) for key in ("name", "version", "commit", "sha256", "source", "license", "state")},
+            "route": "runner_image", "meaning": "The pseudo-secret protocol module was built into this runner's image "
+            "from the pinned upstream archive and matched the SHA-256 fixed in this release before it was loaded."})
+        self.apply_visibility(selection.secret_visibility)
+        self.store.append("sealed.selection", {"mode": "secret", "secret_peer": selection.secret_peer,
+            "accept_incoming": selection.accept_incoming, "capture": settings, **self.language_field(),
+            "selection": self.selection,
+            **({"secret_visibility": selection.secret_visibility.model_dump()} if selection.secret_visibility else {}),
+            "selection_sha256": selection_hash(self.selection), "free_disk_bytes": shutil.disk_usage(self.root).free,
+            "remaining_seconds": self.status()["remaining_seconds"], "transport": "regular",
+            "total_size_and_duration": "observed during the run"})
+        self.secret_mode = True
+        await self.collector.restore()
+        chats = secret_chats.of(self.collector)
+        if chats.manager is None:
+            await chats.attach(self.collector.client)
+        self.phase = "collecting"
+        self.collection_started = time.monotonic()
+        if selection.secret_peer is not None:
+            try:
+                await chats.create(secret_target(selection.secret_peer))
+            except Exception as exc:
+                self.secret_notice = describe(exc)
+
+    def language_field(self):
+        return {"report_language": self.report_language} if self.report_language else {}
+
+    def report_options(self):
+        from .report import resolved
+        return resolved(language_hint=self.report_language or "en")
+
+    def apply_visibility(self, chosen):
+        from . import visibility
+        values = chosen.model_dump() if chosen is not None else {}
+        visibility.change(self.collector, visibility.Change(workspace=visibility.Fields(**{
+            **visibility.DEFAULTS, **values, "invisible": False, "show_peer_typing": True, "record_peer_typing": True})),
+            operator="sealed panel")
+
+    def require_secret(self):
+        if not self.secret_mode or self.phase != "collecting":
+            raise ValueError("No secret chat capture is running.")
+        from . import secret_chats
+        return secret_chats.of(self.collector)
+
     async def resume(self):
         if self.phase != "collecting":
             raise ValueError("No capture to resume.")
+        if self.chats_task:
+            raise ValueError("Chat exports continue on their own; there is nothing to resume.")
         if self.account_job:
             return await self.account_export.resume(self.account_job)
         return await self.collector.history.resume()
@@ -217,8 +492,8 @@ class Session:
         if free < self.collector.param("media_min_free_mb") * 1024**2 or self.status()["remaining_seconds"] <= 0:
             raise ValueError("Not enough free disk or capture time")
         self.store.set_setting("capture", settings)
-        self.selection = Selection(chat_id=chat_id, capture=settings).settings()
-        self.store.append("sealed.selection", {"chat_id": chat_id, "capture": settings,
+        self.selection = Selection(chat_id=chat_id, capture=settings, report_language=self.report_language).settings()
+        self.store.append("sealed.selection", {"chat_id": chat_id, "capture": settings, **self.language_field(),
             "selection": self.selection, "selection_sha256": selection_hash(self.selection),
             "free_disk_bytes": free, "remaining_seconds": self.status()["remaining_seconds"],
             "transport": "regular", "total_size_and_duration": "estimated",
@@ -251,7 +526,7 @@ class Session:
                     for block in iter(lambda: incoming.read(1024**2), b""):
                         outgoing.write(block)
             else:
-                export_file(self.store, self.vault, "zip", compact=True, output_stream=outgoing,
+                export_file(self.store, self.vault, "zip", self.report_options(), compact=True, output_stream=outgoing,
                             max_uncompressed_bytes=1024 * 1024**3)
 
     async def finish(self, reason, cancel=False):
@@ -265,13 +540,21 @@ class Session:
                 try:
                     await self.account_export.pause(self.account_job)
                     if not cancel:
-                        job = await self.account_export.finalize_partial(self.account_job, "Capture ended: " + reason)
+                        from .sealed_index import REASONS
+                        job = await self.account_export.finalize_partial(
+                            self.account_job, REASONS.get(reason, (None, "Capture ended: " + reason))[1])
                         path = self.account_export.result_path(self.account_job)
                         self.store.append("sealed.account_export", {"job_id": self.account_job, "file": ACCOUNT_MEMBER,
                             "sha256": file_sha(path), "bytes": path.stat().st_size, "complete_within_scope": job["phase"] == "done",
-                            "coverage": job["coverage"], "counts": job["counts"]})
+                            "coverage": job["coverage"], "counts": job["counts"],
+                            "limits": [item for item in job.get("omissions") or [] if isinstance(item, str)][:50]})
                 except Exception as exc:
                     acquisition_error = exc
+            if self.chats_task:
+                try:
+                    await self.stop_chats(cancel)
+                except Exception as exc:
+                    acquisition_error = acquisition_error or exc
             pending = self.collector.login_client
             before_stop = await self.revoke() if pending is not None else "no_session"
             stop_error = None
@@ -287,6 +570,7 @@ class Session:
             self.store.append("sealed.finished", {"reason": reason, "revocation": revoked,
                 "history": self.collector.history.status(), "media": self.store.media_stats(),
                 "account_export": self.account_export.public(self.account_job) if self.account_job else None,
+                "chat_exports": self.chat_results,
                 "meaning": "Partial reads, skipped attachments and failed downloads remain visible in this journal."})
             if acquisition_error:
                 raise acquisition_error
@@ -297,7 +581,9 @@ class Session:
                 private_write(self.output / "result.json", canonical({"phase": self.phase}))
                 return
             try:
-                archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", compact=bool(self.account_job)))
+                nested = bool(self.account_job) or self.chat_results is not None
+                archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", self.report_options(),
+                                                           compact=nested))
             except (BundleSizeLimit, OSError) as exc:
                 disk_full = isinstance(exc, OSError) and (exc.errno in (errno.ENOSPC, errno.EDQUOT)
                                                          or getattr(exc, "winerror", None) == 112)
@@ -307,7 +593,8 @@ class Session:
                     "reason": "disk_full" if disk_full else "archive_size_limit",
                     "full_journal": True, "preserved_media_omitted": False})
                 try:
-                    archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", compact=True))
+                    archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip",
+                                                               self.report_options(), compact=True))
                 except (BundleSizeLimit, OSError) as compact_error:
                     if isinstance(compact_error, OSError) and not (compact_error.errno in (errno.ENOSPC, errno.EDQUOT)
                             or getattr(compact_error, "winerror", None) == 112):
@@ -324,9 +611,34 @@ class Session:
             self.phase = "sealed"
             private_write(self.output / "result.json", canonical({"phase": "sealed"} if archive is not None else SEALED_RESULT))
         except Exception as exc:
-            self.phase, self.reason = "failed", type(exc).__name__
+            failure = type(exc).__name__
             (self.output / "evidence.zip").unlink(missing_ok=True)
+            if had_capture and not cancel and await self.salvage(failure):
+                self.phase, self.reason = "sealed", "salvaged_after_" + failure
+                return
+            self.phase, self.reason = "failed", failure
             private_write(self.output / "result.json", canonical({"phase": "failed"}))
+
+    async def salvage(self, failure):
+        try:
+            self.store.append("sealed.failure", {"error": failure, "salvaged": "compact_journal",
+                "meaning": "Collection or full packaging failed. This archive is the compact signed journal of everything "
+                           "recorded before the failure; it is incomplete within the selected scope."})
+            for leftover in self.output.glob("delivery-*"):
+                leftover.unlink(missing_ok=True)
+            archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", self.report_options(),
+                                                       compact=True))
+            if archive.stat().st_size > PART_BYTES:
+                await complete_in_thread(self.write_parts, archive)
+                archive.unlink()
+                private_write(self.output / "result.json", canonical(SEALED_RESULT))
+            else:
+                shutil.move(str(archive), self.output / "evidence.zip")
+                private_write(self.output / "result.json", canonical({"phase": "sealed"}))
+            return True
+        except Exception:
+            (self.output / "evidence.zip").unlink(missing_ok=True)
+            return False
 
     async def monitor(self):
         while self.phase not in TERMINAL:
@@ -345,6 +657,12 @@ class Session:
                             await self.finish("account_export_finished")
                         elif self.account_export.storage_pressure():
                             await self.finish("storage_limit")
+                        continue
+                    if self.secret_mode:
+                        continue
+                    if self.chats_task:
+                        if self.chats_task.done():
+                            await self.finish("chat_exports_finished")
                         continue
                     state = self.collector.history.status()
                     pending = sum(n for k, n in self.store.media_stats().items() if k in ("queued", "retry", "running"))
@@ -370,6 +688,19 @@ class Session:
             self.store.close()
             self.instance_lock.close()
             self.closed = True
+
+
+def message_id_summary(path):
+    import zipfile
+    try:
+        with zipfile.ZipFile(path) as archive:
+            info = json.loads(archive.read("message-ids.json"))
+    except (OSError, KeyError, ValueError, zipfile.BadZipFile):
+        return None
+    ranges = info.get("missing_ranges") or []
+    return {"numbered_per_chat": info.get("numbered_per_chat") is True, "first_id": info.get("first_id"),
+            "last_id": info.get("last_id"), "present": info.get("present"), "missing": info.get("missing"),
+            "missing_runs": len(ranges), "largest_runs": sorted(ranges, key=lambda r: r[0] - r[1])[:5]}
 
 
 def create_app(root, output, config, client_factory=WitnessClient):
@@ -404,12 +735,22 @@ def create_app(root, output, config, client_factory=WitnessClient):
         response.headers.update({"Cache-Control": "no-store", "Referrer-Policy": "no-referrer",
             "X-Content-Type-Options": "nosniff", "X-Frame-Options": "DENY",
             "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; "
-                "connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"})
+                "connect-src 'self'; img-src 'self' data: blob:; media-src blob:; frame-ancestors 'none'; base-uri 'none'; "
+                "form-action 'none'"})
         return response
 
     @app.exception_handler(RequestValidationError)
     async def invalid(request, exc):
-        return JSONResponse({"detail": "Invalid request fields"}, status_code=422)
+        fields = {str(error.get("loc", ("",))[-1]) for error in exc.errors()}
+        hints = {"phone": "Enter the phone number with its country code, for example +15551234567.",
+                 "code": "Enter the login code from Telegram, digits only.",
+                 "api_id": "Enter a valid API ID and API hash, or leave both empty.",
+                 "api_hash": "Enter a valid API ID and API hash, or leave both empty.",
+                 "user": "Enter a @username, a phone number with + and the country code, or a numeric user ID.",
+                 "secret_peer": "Enter a @username, a phone number with + and the country code, or a numeric user ID."}
+        known = [hints[name] for name in sorted(fields) if name in hints]
+        detail = " ".join(dict.fromkeys(known)) or "Invalid request fields: " + ", ".join(sorted(f for f in fields if f))
+        return JSONResponse({"detail": detail}, status_code=422)
 
     async def operation(call, *args, login=False, fresh=False):
         session = app.state.session
@@ -419,8 +760,8 @@ def create_app(root, output, config, client_factory=WitnessClient):
             try:
                 if login:
                     session.require_login()
-                if fresh and session.collector.login_client is not None:
-                    raise ValueError("Finish the existing login attempt or cancel this capsule")
+                if fresh and (session.collector.login_client is not None or session.collector.qr_task is not None):
+                    await session.collector.cancel_login()
                 return await asyncio.wait_for(call(*args), 120)
             except Exception as exc:
                 raise HTTPException(400, describe(exc)) from None
@@ -520,6 +861,89 @@ def create_app(root, output, config, client_factory=WitnessClient):
                     await session.finish("user_finish")
             session.finish_task = asyncio.create_task(finalize())
         return JSONResponse({"phase": "sealing"}, status_code=202)
+
+    class SecretUser(StrictBody):
+        user: str = Field(min_length=1, max_length=64, pattern=SECRET_PEER)
+
+    class SecretText(StrictBody):
+        text: str = Field(min_length=1, max_length=4096)
+
+    async def secret_call(name, *args):
+        session = app.state.session
+        async with session.lock:
+            try:
+                chats = session.require_secret()
+                result = await asyncio.wait_for(getattr(chats, name)(*args), 120)
+            except Exception as exc:
+                raise HTTPException(400, describe(exc)) from None
+            return {"result": result if name != "send" else str(result), "secret": session.secret_status()}
+
+    @app.post("/api/secret/create")
+    async def secret_create(body: SecretUser):
+        app.state.session.secret_notice = None
+        return await secret_call("create", secret_target(body.user))
+
+    @app.post("/api/secret/{chat_id}/accept")
+    async def secret_accept(chat_id: int):
+        return await secret_call("accept", chat_id)
+
+    @app.post("/api/secret/{chat_id}/send")
+    async def secret_send(chat_id: int, body: SecretText):
+        return await secret_call("send", chat_id, body.text)
+
+    @app.post("/api/secret/{chat_id}/close")
+    async def secret_close(chat_id: int):
+        return await secret_call("close", chat_id)
+
+    class SecretOpened(StrictBody):
+        random_ids: list[str] = Field(min_length=1, max_length=100)
+
+        @field_validator("random_ids")
+        @classmethod
+        def numeric(cls, values):
+            if not all(re.fullmatch(r"-?[0-9]{1,20}", value) for value in values):
+                raise ValueError("random_ids")
+            return values
+
+    class SecretRead(StrictBody):
+        trigger: Literal["manual", "on_open"] = "manual"
+        shown_seconds: int | None = Field(default=None, ge=0, le=3600)
+
+    @app.post("/api/secret/{chat_id}/read")
+    async def secret_read(chat_id: int, body: SecretRead | None = None):
+        body = body or SecretRead()
+        cause = {"shown_in_panel_seconds": body.shown_seconds} if body.trigger == "on_open" and body.shown_seconds is not None             else None
+        return await secret_call("mark_read", chat_id, body.trigger, "sealed panel", cause)
+
+    @app.post("/api/secret/visibility")
+    async def secret_visibility(body: SecretVisibility):
+        session = app.state.session
+        async with session.lock:
+            try:
+                session.require_secret()
+                session.apply_visibility(body)
+            except Exception as exc:
+                raise HTTPException(400, describe(exc)) from None
+            return {"secret": session.secret_status()}
+
+    @app.post("/api/secret/{chat_id}/opened")
+    async def secret_opened(chat_id: int, body: SecretOpened):
+        return await secret_call("mark_opened", chat_id, [int(value) for value in body.random_ids], "sealed panel")
+
+    @app.post("/api/secret/{chat_id}/typing")
+    async def secret_typing(chat_id: int):
+        return await secret_call("send_typing", chat_id, "sealed panel")
+
+    @app.get("/api/secret/media/{digest}")
+    async def secret_media(digest: str):
+        session = app.state.session
+        if not session.secret_mode or not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise HTTPException(404, "No such file")
+        mime = session.secret_media_type(digest)
+        path = session.store.root / "media" / digest
+        if mime is None or path.is_symlink() or not path.is_file():
+            raise HTTPException(404, "No such file")
+        return FileResponse(path, media_type=mime, headers={"Content-Disposition": "inline"})
 
     @app.post("/api/cancel")
     async def cancel():

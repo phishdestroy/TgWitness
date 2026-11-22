@@ -94,11 +94,13 @@ def verify(evidence, bundle, repo, policy=DEFAULT_POLICY, trusted_root=None, run
     internal = verify_bundle(evidence, max_gib=max_gib)
     if parts and internal["fingerprint"] != fingerprint(parts["public_key"]):
         raise ValueError("Multipart manifest and evidence use different signing identities")
-    started, finished, accounts, selections = [], [], [], []
+    started, finished, accounts, selections, failures = [], [], [], [], []
     with zipfile.ZipFile(evidence) as archive, archive.open("events.jsonl") as incoming:
         for line in incoming:
             event = json.loads(line)
-            if event["kind"] == "sealed.started":
+            if event["kind"] == "sealed.failure":
+                failures.append(event["payload"])
+            elif event["kind"] == "sealed.started":
                 started.append(event["payload"])
             elif event["kind"] == "sealed.finished":
                 finished.append(event["payload"])
@@ -121,13 +123,17 @@ def verify(evidence, bundle, repo, policy=DEFAULT_POLICY, trusted_root=None, run
         if path.stat().st_size > 1024**2:
             raise ValueError("Expected selection file is too large")
         expected = json.loads(path.read_bytes())
+    if failures and require_complete:
+        raise ValueError("Archive was salvaged after a collection or packaging failure and is incomplete")
     selection = checked_selection(selections, internal, expected, require_complete)
+    if failures:
+        selection = {**selection, "complete_within_scope": False}
     digest = hashlib.sha256()
     with evidence.open("rb") as incoming:
         for block in iter(lambda: incoming.read(1024**2), b""):
             digest.update(block)
     return {"verified": True, "sha256": digest.hexdigest(), "workflow": WORKFLOW, **approved, "attested_at": when,
-            "journal": internal, "collection": finished[0], **selection,
+            "journal": internal, "collection": finished[0], **selection, "salvaged_after_failure": failures[:1] or None,
             "limitation": "Acquisition is bound to the approved GitHub-hosted collector and its fresh Telegram "
                           "session. Verification trusts GitHub execution and the approved code; collection results "
                           "state the selected scope and completeness. Hardware isolation is a separate TDX check."}

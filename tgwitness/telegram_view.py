@@ -1,14 +1,16 @@
+from datetime import datetime
 import hashlib
 from html import escape
 import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from .account_report import chat_note, reason_text, state_note
+from .account_report import chat_note, reason_text, service_line, state_note
 from .report import Words
-from .telegram_export import MEDIA_PATH, dates, entity_spans, message, name
+from .telegram_export import DELETED_ACCOUNT, MEDIA_PATH, dates, entity_spans, message, name
 
 CSS = (Path(__file__).parent / 'static' / 'telegram-export.css').read_text(encoding='utf-8')
+GROUP_SECONDS = 300
 TAGS = {'bold': ('strong', ''), 'italic': ('em', ''), 'underline': ('u', ''),
         'strikethrough': ('s', ''), 'code': ('code', ''), 'pre': ('code', ' class="pre"'),
         'blockquote': ('span', ' class="quote"'), 'spoiler': ('span', ' class="spoiler" tabindex="0"')}
@@ -36,10 +38,13 @@ def safe_link(value):
     return None
 
 
-def formatted(text, entities):
-    spans = []
+def formatted(text, entities, emoji=None):
+    spans, pictures = [], {}
     for start, end, value in entity_spans(text, entities):
         kind = value['type']
+        if kind == 'custom_emoji' and (emoji or {}).get(value.get('document_id')):
+            pictures[start] = (end, '<img class="custom-emoji" src="' + e(emoji[value['document_id']]) + '" alt="'
+                               + e(text[start:end]) + '" title="' + e(text[start:end]) + '">')
         tag, attributes = TAGS.get(kind, ('', ''))
         url = value.get('href') if kind == 'text_link' else text[start:end] if kind == 'link' else None
         if kind == 'email':
@@ -52,9 +57,16 @@ def formatted(text, entities):
             tag, attributes = 'a', ' href="' + e(url) + '" rel="noreferrer noopener"'
         if tag:
             spans.append((start, end, tag, attributes))
-    points = sorted({0, len(text), *(point for span in spans for point in span[:2])})
-    parts = []
+    points = sorted({0, len(text), *(point for span in spans for point in span[:2]),
+                     *(point for start, (end, _) in pictures.items() for point in (start, end))})
+    parts, hidden = [], 0
     for start, end in zip(points, points[1:]):
+        if start < hidden:
+            continue
+        if start in pictures:
+            hidden, picture = pictures[start]
+            parts.append(picture)
+            continue
         active = sorted((span for span in spans if span[0] <= start and span[1] >= end), key=lambda span: (span[0], -span[1]))
         linked, tags = False, []
         for _, _, tag, attributes in active:
@@ -68,7 +80,9 @@ def formatted(text, entities):
     return ''.join(parts)
 
 
-def avatar(label):
+def avatar(label, src=None):
+    if src:
+        return '<img class="avatar photo-avatar" src="' + e(src) + '" alt="" loading="lazy">'
     initials = ''.join(part[0] for part in label.split()[:2]) or '?'
     tone = int(hashlib.sha256(label.encode()).hexdigest()[:2], 16) % 6
     return '<span class="avatar tone-' + str(tone) + '" aria-hidden="true">' + e(initials.upper()) + '</span>'
@@ -79,6 +93,40 @@ class View:
         self.export = export
         self.say = Words(export.job['options'].get('report_language', 'en'))
         self.reply_cache = {}
+        self.avatars = getattr(export, 'avatars', None) or {}
+        self.formats = {}
+
+    def format_of(self, path):
+        if path not in self.formats:
+            try:
+                with (Path(self.export.directory) / path).open('rb') as stream:
+                    head = stream.read(12)
+            except (OSError, TypeError):
+                head = b''
+            self.formats[path] = ('image' if head[:4] == b'RIFF' and head[8:12] == b'WEBP' or head[:4] == b'\x89PNG'
+                                  else 'video' if head[:4] == b'\x1a\x45\xdf\xa3' else None)
+        return self.formats[path]
+
+    def custom_emoji(self, row):
+        named = {item.get('document_id') for item in row.get('entities') or []
+                 if isinstance(item, dict) and item.get('_') == 'MessageEntityCustomEmoji'}
+        return {attachment['media_id']: attachment for attachment in row.get('attachments') or []
+                if attachment.get('media_id') in named and isinstance(attachment.get('file'), str)
+                and MEDIA_PATH.fullmatch(attachment['file'])}
+
+    def emoji_pictures(self, row):
+        return {key: '../../' + attachment['file'] for key, attachment in self.custom_emoji(row).items()
+                if self.format_of(attachment['file']) == 'image'}
+
+    def person(self, row):
+        found = name(row.get('sender'))
+        if found == DELETED_ACCOUNT:
+            return self.say('Deleted account') + (' · ID ' + str(row['from_id']) if type(row.get('from_id')) is int else '')
+        return found
+
+    def photo(self, peer_id, prefix):
+        path = self.avatars.get(peer_id) if type(peer_id) is int else None
+        return prefix + path if isinstance(path, str) and MEDIA_PATH.fullmatch(path) else None
 
     def head(self, title, prefix=''):
         say = self.say
@@ -111,7 +159,7 @@ class View:
             count = self.export.index.execute('SELECT COUNT(*) FROM messages WHERE chat=?', (chat['id'],)).fetchone()[0]
             state = self.state(chat)
             yield ('<li><a class="chat-row" href="chats/chat_' + f'{number:03d}' + '/messages.html">'
-                   + avatar(title) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count'
+                   + avatar(title, self.photo(chat['id'], '')) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count'
                    + ('' if state == 'complete' else ' gap') + '">'
                    + e(chat_note({'message_count': count, 'export_state': state}, say))
                    + '</span><span aria-hidden="true">›</span></a></li>').encode()
@@ -146,7 +194,7 @@ class View:
                 with (self.export.directory / found[1]).open('rb') as stream:
                     stream.seek(found[2])
                     original = json.loads(stream.readline())
-                sender = name(original.get('sender')) or self.say('Sender not available')
+                sender = self.person(original) or self.say('Sender not available')
                 text = ' '.join((original.get('text') or '').split())
                 excerpt = text[:160] + ('…' if len(text) > 160 else '') if text else self.say('Media or service message')
                 if len(self.reply_cache) >= 128:
@@ -160,8 +208,11 @@ class View:
         parts = []
         labels = {'photo': 'Photo', 'video': 'Video', 'video_message': 'Video message', 'audio': 'Audio',
                   'voice': 'Voice message', 'document': 'File', 'sticker': 'Sticker', 'animation': 'GIF'}
+        custom = set(self.custom_emoji(row))
         for attachment in row.get('attachments') or []:
             kind, path = attachment.get('kind'), attachment.get('file')
+            if attachment.get('media_id') in custom and isinstance(path, str) and MEDIA_PATH.fullmatch(path):
+                continue
             label = say(labels.get(kind, 'Attachment'))
             if not isinstance(path, str) or not MEDIA_PATH.fullmatch(path):
                 parts.append('<div class="attachment unavailable"><strong>' + e(label) + '</strong><span>'
@@ -172,8 +223,16 @@ class View:
             original = str(value.get('file_name') or '').replace('\\', '/').rsplit('/', 1)[-1]
             download = original or path.split('/')[-1]
             mime = value.get('mime_type') or ''
-            if kind == 'photo' or kind == 'sticker' and mime in ('image/webp', 'image/png'):
+            shape = (('image' if mime in ('image/webp', 'image/png') else 'video' if mime == 'video/webm' else None)
+                     if mime else self.format_of(path)) if kind == 'sticker' else None
+            if kind == 'photo':
                 parts.append('<a class="photo" href="' + src + '"><img src="' + src + '" alt="' + e(label) + '" loading="lazy"></a>')
+            elif shape == 'image':
+                parts.append('<a class="photo sticker" href="' + src + '"><img src="' + src + '" alt="' + e(label) + '" loading="lazy"></a>')
+            elif shape == 'video':
+                parts.append('<video class="sticker" autoplay loop muted playsinline src="' + src + '" aria-label="' + e(label) + '"></video>')
+            elif kind == 'sticker':
+                label = say('Animated sticker')
             elif kind in ('video', 'video_message', 'animation'):
                 parts.append('<video controls preload="none" src="' + src + '" aria-label="' + e(label) + '"></video>')
             elif kind in ('voice', 'audio'):
@@ -184,29 +243,56 @@ class View:
                          + e(original or label) + '</strong><small>' + e(say('Download') + size_label) + '</small></a>')
         return ''.join(parts)
 
-    def card(self, row, chat):
+    def emoji_files(self, row):
+        links, seen = [], set()
+        for key, attachment in self.custom_emoji(row).items():
+            path = attachment['file']
+            if path in seen:
+                continue
+            seen.add(path)
+            size = attachment.get('bytes')
+            links.append('<a href="../../' + path + '" download="' + e(path.split('/')[-1]) + '">'
+                         + e(self.say('Custom emoji') + (' · ' + f'{size / 1024:.1f} KiB' if type(size) is int and size >= 0 else ''))
+                         + '</a>')
+        return '<p class="emoji-files">' + ''.join(links) + '</p>' if links else ''
+
+    def author(self, row, chat):
+        if row.get('action'):
+            return None
+        author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
+        stamp = dates(row.get('date')).get('date', '')
+        try:
+            moment = datetime.fromisoformat(stamp).timestamp()
+        except ValueError:
+            return None
+        return (author, bool(row.get('outgoing')), stamp[:10], moment) if author else None
+
+    def card(self, row, chat, continued=False, grouped=False):
         say, value = self.say, message(row)
-        sender = name(row.get('sender')) or (chat.get('title') if chat.get('kind') == 'channel' and row.get('post') else None)
+        sender = self.person(row) or (chat.get('title') if chat.get('kind') == 'channel' and row.get('post') else None)
         sender = sender or (str(row['from_id']) if row.get('from_id') else say('Sender not available'))
         at = value.get('date', '')
         identifier = str(row['id'])
         service = bool(row.get('action'))
-        classes = 'message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
-        parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender),
-                 '<div class="bubble"><div class="sender" dir="auto">' + e(sender) + '</div>']
+        classes = ('message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
+                   ) + (' continued' if continued else '') + (' grouped' if grouped else '')
+        author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
+        anonymous = service and not row.get('from_id') and not self.person(row)
+        parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender, self.photo(author, '../../')),
+                 '<div class="bubble">' + ('' if anonymous else '<div class="sender" dir="auto">' + e(sender) + '</div>')]
         forward = value.get('forwarded_from')
         if forward:
             parts.append('<p class="forward">' + e(say('Forwarded from')) + ': <bdi>' + e(forward) + '</bdi></p>')
         parts.append(self.reply(row, chat))
         if service:
-            labels = {'create_group': 'created the group', 'create_channel': 'created the channel',
-                      'edit_group_title': 'changed the chat name', 'edit_group_photo': 'changed the chat photo',
-                      'pin_message': 'pinned a message'}
-            parts.append('<p class="service-label">' + e(say(labels.get(value.get('action'), 'Service message')))
-                         + (' · <bdi>' + e(value['title']) + '</bdi>' if value.get('title') else '') + '</p>')
+            line = service_line(row, say, chat.get('kind') in ('group', 'supergroup')) or say('Service message')
+            title = value.get('title')
+            parts.append('<p class="service-label">' + e(line)
+                         + (' · <bdi>' + e(title) + '</bdi>' if title and str(title) not in line else '') + '</p>')
         parts.append(self.attachments(row, value))
         if row.get('text'):
-            parts.append('<div class="message-text" dir="auto">' + formatted(row['text'], row.get('entities')) + '</div>')
+            parts.append('<div class="message-text" dir="auto">' + formatted(row['text'], row.get('entities'), self.emoji_pictures(row)) + '</div>')
+        parts.append(self.emoji_files(row))
         for field, label in (('poll', 'Poll'), ('contact_information', 'Contact'), ('location_information', 'Location')):
             detail = value.get(field)
             if detail:
@@ -223,17 +309,19 @@ class View:
         title = chat.get('title') or str(chat['id'])
         note = state_note({'export_state': self.state(chat)}, self.say)
         yield self.head(title, '../../')
-        yield ('<header class="chat-heading">' + avatar(title) + '<div><h1 dir="auto">' + e(title)
+        yield ('<header class="chat-heading">' + avatar(title, self.photo(chat['id'], '../../')) + '<div><h1 dir="auto">' + e(title)
                + '</h1><p class="muted">Telegram · UTC</p></div></header>' + self.pager(page, pages)
                + ('<p class="chat-note">' + e(note) + '</p>' if note else '')
                + '<section class="conversation" aria-label="' + e(self.say('Messages')) + '">').encode()
         day = None
-        for row in batch:
+        keys = [self.author(row, chat) for row in batch]
+        joined = [bool(a and b and a[:3] == b[:3] and 0 <= b[3] - a[3] <= GROUP_SECONDS) for a, b in zip(keys, keys[1:])]
+        for index, row in enumerate(batch):
             current = dates(row.get('date')).get('date', '')[:10]
             if current != day:
                 yield ('<div class="date-divider"><span>' + e(current or self.say('Not recorded')) + '</span></div>').encode()
                 day = current
-            yield self.card(row, chat).encode()
+            yield self.card(row, chat, index > 0 and joined[index - 1], index < len(joined) and joined[index]).encode()
         if not batch and not note:
             yield ('<p class="empty">' + e(self.say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>').encode()
         yield ('</section>' + self.pager(page, pages) + '<footer>TgWitness · <a href="../../chats/' + str(chat['id'])

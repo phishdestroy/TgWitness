@@ -9,6 +9,7 @@ def finalize(export, job, reason):
     from .account_export import durable_write, read_json, sha
 
     directory = export.directory(job["job_id"])
+    export.current["finish_reason"] = reason
     export.recover(job)
     if export.inventory is None:
         inventory = {"format": "tgwitness-account-export-inventory-v1", "public_key": export.vault.public_key,

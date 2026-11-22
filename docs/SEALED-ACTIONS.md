@@ -52,7 +52,7 @@ substitution on sample data. **Start my capture** opens the wizard.
    Confirm that you saved it to unlock the next step. If you already have a
    delivery file, load the saved key and choose **I already have an archive**.
 3. Fork TgWitness, enable Actions in the fork, and run **Sealed chat capture**.
-   Paste the public recipient and choose 30, 60, or 120 minutes. Never put a
+   Paste the public recipient and choose a session length from 30 minutes to 5 hours. Never put a
    phone number, login code, Telegram password, private key, or session in
    workflow inputs, commits, issues, or logs.
 4. During the run, download **sealed-connection** from Artifacts and unzip it.
@@ -68,9 +68,11 @@ substitution on sample data. **Start my capture** opens the wizard.
    fields empty to use the built-in pool; a partial or malformed pair is rejected.
    Session imports are not allowed. Choose the export mode and scope. The connection
    link contains an access secret: keep it private.
-6. Choose **Telegram Takeout**, **Regular Telegram API** or **Chat event journal**.
-   For account export, choose all accessible chats or load and select one or more
-   chats, then set dates, chat types, account categories and attachment rules.
+6. Choose **Automatic**, **Telegram Takeout** or **Regular Telegram API** for an account
+   export, or **Chat investigation**, **Chat event journal** or **Secret chat**. For account export,
+   choose all accessible chats or load and select one or more chats, then set dates,
+   Telegram Desktop chat categories, account data and attachment rules. Chat
+   investigation exports up to 50 selected chats, each as its own signed chat archive.
    Check settings and size, optionally save the settings JSON for an independent
    reviewer, then press **Start capture**. Settings are fixed after starting.
    Resume works only while this runner exists; finishing early preserves acquired
@@ -100,34 +102,60 @@ rate. Use **Messages only** or select fewer chats when the estimate exceeds the 
 
 Telegram's reported Takeout wait is added to the budget. The collector stops acquisition
 when the remaining time is needed for packaging, retains acquired data and marks a partial
-result. A 120-minute session therefore uses its remaining collection window rather than
+result. A long session therefore uses its remaining collection window rather than
 waiting for the deadline before preparing the archive. The display identifies selections
 whose full size could not be sampled.
+
+The plan table shows, chat by chat, what a start now would hold. Messages of every
+included chat are read first, in this order: account data, private chats and bots,
+groups, then large groups and channels from the smallest. Photos of chats and people
+follow, then files. A selection larger than the session can still start: the packaging
+reserve covers only the part the run can reach, collection stops at the time limit, and
+the archive records every chat read in part or not reached. Untick a chat in the table to
+leave it out. When Telegram asks the account to slow down (`FLOOD_WAIT`), the pause
+between history pages grows and then shrinks again after successful pages, so the
+measured reading rate can stay below the estimate.
 
 ## Choose this mode or a persistent workspace
 
 | Capture mode | Configurable scope | Difference |
 | --- | --- | --- |
-| Telegram Takeout, the default | All accessible cloud chats or selected chats, dates, account categories, media policies and JSON/HTML views | Uses Telegram's official export mechanism; approval or waiting may be required. Takeout can enumerate left channels/groups where Telegram permits it and request additional personal data. |
+| Automatic, the default | All accessible cloud chats or selected chats, dates, Telegram Desktop chat categories, account data, media policies and JSON/HTML views | Uses Takeout when Telegram allows it and the regular API otherwise. This runner always signs in fresh, and Telegram usually refuses Takeout to a session younger than 24 hours, so expect the regular API. The archive records which method was used. |
+| Telegram Takeout | The same account scope and output choices | Takeout only. Uses Telegram's official export mechanism; approval or waiting may be required, and a fresh session usually waits longer than the run. Takeout can enumerate left channels/groups where Telegram permits it and request additional personal data. |
 | Regular Telegram API | The same account scope and output choices, subject to methods available through the regular API | Does not initialize Takeout; cannot enumerate left channels/supergroups or fetch Takeout-only personal data. Contacts cover Telegram users rather than the complete saved phone contact list. Rate limits still apply. |
+| Chat investigation | Up to 50 selected chats, attachment policies | Each chat becomes its own signed chat archive inside the evidence archive: visible history, the authors of the messages with their message counts and first and last message, the chat card, the admin log when this account can read it, and absent message IDs rechecked one by one. Absent IDs are counted only for channels and supergroups, which number messages 1, 2, 3… inside each chat; private chats, bot chats and basic groups take their numbers from one counter shared by the whole account, so a gap there reflects messages in other chats and is reported as not measured. Works for chats with content protection. A chat still running at the deadline is kept as a signed partial snapshot. |
 | Chat event journal | One selected chat, attachment policies and optional avatars | Captures history and changes observed during this run. Account categories, date filters and Desktop-compatible views do not apply. |
+| Secret chat | A user to start a secret chat with (a @username, a phone number, or a person chosen from the account's chats), acceptance of secret chats the other side starts, attachment policies | The runner becomes one of the two devices of the secret chat. Messages, files, timers, deletions, screenshot and read notices that arrive during the run, and messages written from the capture screen, are signed into the journal; the report shows the conversation with the sender, time, record number and record hash of every message. Secret chats keep no history on Telegram's servers, so nothing from before the run exists to capture. If Telegram limits the account (spam block or `PEER_FLOOD`), it can start secret chats only with mutual contacts; chats the other side starts are still accepted and answered. A refused attempt is signed into the journal with Telegram's reason, and a phone number that had to be added to the account's contacts to find its user is recorded as well. Everything is saved first and the runner stays invisible by default: no read receipts, no typing, and self-destructing content is not opened for the other side. The selection can allow read receipts, opened notices and typing manually or with replies; each notice sent and its outcome is signed into the journal. Viewing saved files in the panel notifies no one. The pinned pseudo-secret protocol module is built into the runner image and checked against its pinned SHA-256 before loading; the journal records which module was used. |
 
-All three modes have the same GitHub attestation and encrypted delivery. Takeout
-selects the acquisition method and is never silently replaced by regular API access.
+All modes have the same GitHub attestation and encrypted delivery. When Takeout is
+required, it is never silently replaced by regular API access.
 TgWitness generates the JSON/HTML views from the captured records and preserves
 the selected acquisition method in the export. See the
 [official Takeout API](https://core.telegram.org/api/takeout).
 
-Defaults use Takeout, all accessible chat types including archived chats, all
+Defaults use the automatic method, all accessible chat types including archived chats, all
 dates, account profile and contacts, compatible JSON and HTML, and file downloads.
 The initial media budget is 4 GiB, with visible per-type file limits; larger files
 or exhausted download budgets use server hashes where available. Review these
 limits before collecting. Hashes cannot reconstruct a file. Optional photos,
 stories, session metadata and extra personal data remain separate choices.
+**Photos of chats and people**, on by default, saves the current photo of each selected
+chat and of the people who wrote in it, at most 2,000 per export: the chats first, then
+the authors with the most messages. The JSON/HTML views show them as avatars in the chat
+list and next to messages. Custom emoji are drawn in the message text when they are still
+images; animated ones keep their fallback character, and every saved file is linked under
+the message.
+
+The cover of the result, `index.html`, says whether every selected chat was read to the
+end. **Finished with known limits** means all selected chats were read without failures,
+but limits of a new sign-in remain, for example no Takeout for a session younger than
+24 hours, or contacts limited to Telegram users; because of them the verifier reports the
+export as not complete. Failed pages and files are listed separately from these known
+limits.
 
 Takeout may require approval in an established Telegram session. Telegram sets
-the delay; a new login or runner does not bypass it. The maximum capture window
-is 120 minutes including login and approval, so a large account or long approval
+the delay; a new login or runner does not bypass it. The capture window you choose,
+at most 5 hours, includes login and approval, so a large account or long approval
 wait may not finish. A persistent local export can resume the same session, but
 does not inherit GitHub attestation.
 
@@ -316,7 +344,8 @@ artifact name and digest) is public. Never put chat names in public metadata.
 
 ## Scope and validation
 
-This mode uses the signed journal and account-export engine. Secret Chats,
+This mode uses the signed journal and account-export engine. Secret chats
+(captured only by the Secret chat mode, from the moment the runner joins them),
 deleted history from before collection and data inaccessible to the account are
 excluded. Private cloud chats are eligible when selected. The chat picker is
 capped at 20,000 dialogs; account export discovers its own inventory. Missing data, failed files and unfinished

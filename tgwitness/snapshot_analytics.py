@@ -2,6 +2,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 import html
 import math
+import re
 import statistics
 
 
@@ -21,6 +22,7 @@ SCOPE_JOURNAL = "Journal charts count message observations at capture time in UT
 SCOPE_SNAPSHOT = "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope."
 CAUTION = "Activity counts saved observations. Sender identifiers are Telegram account numbers. Zero means no included observations."
 UNKNOWN = "Unknown or withheld"
+DELETED = "Deleted Account"
 OTHER = "Other / unlisted"
 
 
@@ -123,11 +125,16 @@ class Analytics:
         if not service:
             person = row.get("sender")
             name = (' '.join(label(person.get(key)) for key in ("first_name", "last_name")).strip()
-                    or label(person.get("title"))) if isinstance(person, dict) else label(person)
+                    or label(person.get("title")) or (DELETED if person.get("deleted") is True else "")
+                    ) if isinstance(person, dict) else label(person)
+            name = row.get("from") or name
+            username = label(person.get("username")) if isinstance(person, dict) else ""
+            if username:
+                name = (str(name or "") + " @" + username).strip()
             sender = row.get("from_id")
             if isinstance(sender, dict):
                 sender = next((str(key) + ':' + str(sender[key]) for key in ("user_id", "channel_id", "chat_id") if type(sender.get(key)) is int), None)
-            self.message(row.get("date"), sender, row.get("from") or name,
+            self.message(row.get("date"), sender, name,
                          chat.get("id"), chat.get("title"), row.get("id"), row.get("reply_to_message_id"))
 
     def result(self):
@@ -186,22 +193,44 @@ def selected(options):
     return [(key, title) for key, title in CHARTS if options.get(CONTROLS[key], True)]
 
 
+def shown(data, options):
+    charts = [(key, title) for key, title in selected(options)
+              if key not in ("participants", "chats") or len(data.get(key, [])) > 1]
+    keys = [key for key, _ in charts]
+    return charts, next((key for key in ("chats", "participants", "heatmap", "activity") if key in keys), keys[-1] if keys else None)
+
+
+def alias_map(people):
+    return {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None),
+                                                                key=lambda row: str(row["id"])), 1)}
+
+
+def alias_label(number):
+    return "Participant %02d" % number
+
+
 def project(data, options):
     if data.get("projected"):
         return data
     output = {**data, "projected": True, "participant_labels": options.get("participant_labels", "aliases"),
               "sender_groups": sum(row.get("id") is not None for row in data["participants"])}
     people = data["participants"]
-    aliases = {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None), key=lambda row: str(row["id"])), 1)}
+    aliases = alias_map(people)
+    mode = options.get("participant_labels", "aliases")
+
+    def named(row):
+        if row["id"] is None:
+            return UNKNOWN
+        shown = str(row.get("label") or "")
+        number = str(row["id"]).split(":")[-1]
+        return shown + " · ID " + number if mode == "names" and shown and shown != str(row["id"]) else "ID " + number             if mode == "names" else str(row["id"])
     output["participants"] = [{**row, "id": ("participant-%02d" % aliases[row["id"]]) if row["id"] is not None else None,
         "label": ("Participant %02d" % aliases[row["id"]]) if row["id"] is not None else UNKNOWN}
-        if options.get("participant_labels", "aliases") == "aliases" else {**row, "label": str(row["id"]) if row["id"] is not None else UNKNOWN}
-        for row in people]
+        if mode == "aliases" else {**row, "label": named(row)} for row in people]
     if "habits" in data:
         output["habits"] = ([{**row, "id": "participant-%02d" % aliases[row["id"]], "label": "Participant %02d" % aliases[row["id"]]}
                              for row in data["habits"] if row["id"] in aliases]
-                            if options.get("participant_labels", "aliases") == "aliases"
-                            else [{**row, "label": str(row["id"])} for row in data["habits"]])
+                            if mode == "aliases" else [{**row, "label": named(row)} for row in data["habits"]])
     for key, control in CONTROLS.items():
         if not options.get(control, True):
             output.pop(key, None)
@@ -223,6 +252,26 @@ def e(value):
     return html.escape(str(value))
 
 
+def display(label, say):
+    text = str(label)
+    alias = re.fullmatch(r"Participant (\d{2,})", text)
+    if alias:
+        return say("Participant {n}", n=alias.group(1))
+    if text == DELETED or text.startswith(DELETED + " · "):
+        return say("Deleted account") + text[len(DELETED):]
+    return text
+
+
+def rank_label(row, say):
+    label = row["label"]
+    name = say(label) if label in (UNKNOWN, OTHER, *KIND_LABELS.values()) else display(label, say)
+    identity = row.get("id")
+    if (not identity or label == str(identity) or identity in KIND_LABELS or str(identity).startswith("participant-")
+            or str(label).endswith("ID " + str(identity).split(":")[-1])):
+        return name
+    return name + " · " + str(identity)
+
+
 def svg_bars(rows, say, vertical=False):
     maximum = max((r["count"] for r in rows), default=0) or 1
     if vertical:
@@ -238,9 +287,7 @@ def svg_bars(rows, say, vertical=False):
                 + e(rows[-1]["label"] if rows else "—") + '</span></div>')
     parts = ['<div class="rank-chart">']
     for row in rows:
-        name = say(row["label"]) if row["label"] in (UNKNOWN, OTHER, *KIND_LABELS.values()) else row["label"]
-        suffix = ' · ' + str(row['id']) if row.get('id') and row['label'] != str(row['id']) and row['id'] not in KIND_LABELS and not str(row['id']).startswith('participant-') else ''
-        parts.append('<div class="rank-row"><span class="rank-label" dir="auto">' + e(name + suffix) + '</span><strong>'
+        parts.append('<div class="rank-row"><span class="rank-label" dir="auto">' + e(rank_label(row, say)) + '</span><strong>'
                      + str(row["count"]) + '</strong><svg aria-hidden="true" viewBox="0 0 800 10" preserveAspectRatio="none">'
                      '<rect class="chart-track" width="800" height="10" rx="3"/><rect class="chart-bar" width="'
                      + str(800 * row["count"] / maximum) + '" height="10" rx="3"/></svg></div>')
@@ -261,7 +308,7 @@ def heatmap(data, say):
                          (level, e(names[day]), hour, count, count))
         parts.append('</tr>')
     peak = max((n for day in data["heatmap"] for n in day), default=0)
-    return ''.join(parts) + '</tbody></table></div><p class="chart-note">' + e(say("Darker cells mean more included observations. Maximum per cell: {n}", n=peak)) + '</p>'
+    return ''.join(parts) + '</tbody></table></div><p class="chart-note">' + e(say("A stronger colour means more included observations. Maximum per cell: {n}", n=peak)) + '</p>'
 
 
 def duration(seconds, say):
@@ -275,7 +322,7 @@ def duration(seconds, say):
 def habit_rows(data, say, top_n):
     titles = [say("Participant"), say("Messages"), say("Starts after {hours} h of silence", hours=data.get("pause_hours", PAUSE_HOURS)),
               say("Median reply time"), say("Longest run in a row"), say("Night share, 00–06 UTC")]
-    rows = [[row["label"], str(row["messages"]), str(row["started_after_pause"]), duration(row["median_reply_seconds"], say),
+    rows = [[display(row["label"], say), str(row["messages"]), str(row["started_after_pause"]), duration(row["median_reply_seconds"], say),
              str(row["longest_run"]), str(round(row["night_share"] * 100)) + "%"] for row in data.get("habits", [])[:top_n]]
     return titles, rows
 
@@ -304,7 +351,8 @@ def html_section(data, options, say):
                          (data.get("sender_groups", len(data.get("participants", []))), "Listed sender identifiers"), (data["undated"], "Without a usable timestamp")):
         parts.append('<div><strong>' + str(grouped(say, value)) + '</strong><span>' + e(say(title)) + '</span></div>')
     parts.append('</div><div class="analytics-grid">')
-    for key, title in selected(options):
+    charts, habits_after = shown(data, options)
+    for key, title in charts:
         parts.append('<article class="chart-card chart-' + key + '"><h3>' + e(say(title)) + '</h3>')
         if key == "heatmap":
             parts.append(heatmap(data, say))
@@ -323,7 +371,7 @@ def html_section(data, options, say):
         if data.get("unlisted", {}).get(key):
             parts.append('<p class="chart-note">' + e(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key])) + '</p>')
         parts.append('</article>')
-        if key == "participants" and data.get("habits"):
+        if key == habits_after and data.get("habits"):
             parts.append(habits_html(data, say, options.get("chart_limit", 10)))
     parts.append('</div><p class="analytics-caution">' + e(say(CAUTION)) + '</p></section>')
     return ''.join(parts)
@@ -344,7 +392,8 @@ def _pdf_section(lay, data, options):
     lay.section(say("Activity & participants"), say(data["method"]))
     lay.figures([(say("Records analysed"), grouped(say, data["records"])), (say("Message observations" if data["basis"] == "journal" else "Message rows"), grouped(say, data["messages"])),
                  (say("Without a usable timestamp"), grouped(say, data["undated"]))])
-    for key, title in selected(options):
+    charts, habits_after = shown(data, options)
+    for key, title in charts:
         if key in ("participants", "chats", "composition"):
             count = len(ranking(data, key, options.get("chart_limit", 10))) if key != "composition" else len(data[key])
             lay.need(min(pdf.eph - 15, 22 + count * 13))
@@ -370,7 +419,7 @@ def _pdf_section(lay, data, options):
                 pdf.cell(step, 3, f"{hour:02d}", align="C")
             pdf.set_y(y + 38)
             lay.text(say("UTC hour · message observations / rows"), size=8)
-            lay.text(say("Darker cells mean more included observations. Maximum per cell: {n}", n=peak), size=8)
+            lay.text(say("A stronger colour means more included observations. Maximum per cell: {n}", n=peak), size=8)
         else:
             rows = ([{"label": r["from"] + (' / ' + r["to"] if r["from"] != r["to"] else ''), "count": r["count"]}
                      for r in data["activity"]] if key == "activity" else ranking(data, key, options.get("chart_limit", 10))
@@ -390,9 +439,7 @@ def _pdf_section(lay, data, options):
             else:
                 for row in rows:
                     lay.need(18)
-                    name = say(row["label"]) if row["label"] in (UNKNOWN, OTHER, *KIND_LABELS.values()) else row["label"]
-                    suffix = ' · ' + str(row['id']) if row.get('id') and row['label'] != str(row['id']) and row['id'] not in KIND_LABELS and not str(row['id']).startswith('participant-') else ''
-                    lay.text(name + suffix + "   ·   " + str(row["count"]), size=8)
+                    lay.text(rank_label(row, say) + "   ·   " + str(row["count"]), size=8)
                     pdf.set_fill_color(*accent)
                     pdf.rect(pdf.l_margin, pdf.get_y(), pdf.epw * row["count"] / maximum, 2, style="F")
                     lay.gap(4)
@@ -400,7 +447,7 @@ def _pdf_section(lay, data, options):
                 lay.text(say("No included data for this chart."))
         if data.get("unlisted", {}).get(key):
             lay.text(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key]), size=8)
-        if key == "participants" and data.get("habits"):
+        if key == habits_after and data.get("habits"):
             titles, rows = habit_rows(data, say, options.get("chart_limit", 10))
             lay.need(22 + len(rows) * 13)
             lay.heading(say("Rhythm"))

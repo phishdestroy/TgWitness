@@ -30,7 +30,7 @@ html[data-report-design=profile_overview] .dossier .hero .stamp{margin-top:14px;
 .profile-result{color:var(--muted);flex-basis:100%}.profile-scope{overflow-wrap:anywhere}.profile-filter-state button{padding:6px 10px;min-height:32px}
 .profile-section{margin:0;border:0;border-bottom:1px solid var(--line);padding:0;scroll-margin-top:calc(var(--bar-height,72px) + var(--profile-tools-height) + var(--profile-index-height) + var(--profile-filter-height) + 16px)}
 .profile-section>summary{display:flex;align-items:center;gap:10px;padding:22px 0;cursor:pointer;color:var(--ink);list-style:none}
-.profile-section>summary::-webkit-details-marker{display:none}.profile-section>summary::before{content:'+';font:18px/1 ui-monospace,monospace;width:18px;color:var(--muted)}.profile-section[open]>summary::before{content:'−'}
+.profile-section>summary::-webkit-details-marker{display:none}.profile-section>summary::before{content:'+';font:18px/1 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;width:18px;color:var(--muted)}.profile-section[open]>summary::before{content:'−'}
 .profile-section>summary h2{font:650 13px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em;margin:0}.profile-count{font-size:11px;color:var(--muted)}
 .profile-section-body{padding:0 0 28px;min-width:0}[data-report-design=profile_overview] .profile-section-body>.card,[data-report-design=profile_overview] .profile-section-body>.panel{border:0;border-radius:0;box-shadow:none;background:none;padding:12px 0;margin:0 0 14px}
 .profile-section-body>.card>h2{font-size:16px}.profile-section-body>#records>h2,.profile-section-body>#messages>h2,.profile-section-body>section>h2 .sec-no{display:none}

@@ -14,7 +14,7 @@ class Presentation(BaseModel):
     participant_chart: bool = True
     chat_chart: bool = True
     composition_chart: bool = True
-    participant_labels: Literal["aliases", "ids"] = "aliases"
+    participant_labels: Literal["aliases", "ids", "names"] = "aliases"
     chart_limit: int = Field(default=10, ge=5, le=30)
     jurisdiction_guidance: guidance.Options = Field(default_factory=guidance.Options)
 
@@ -156,6 +156,7 @@ class Analytics:
         self.period_overflow = False
         self.participants = _Groups()
         self.chats = _Groups()
+        self.account = None
         self.chat_days = report_chat_timeline.ChatDays()
 
     def _period(self, moment, kind, seq):
@@ -180,6 +181,8 @@ class Analytics:
         if not isinstance(event, dict):
             return
         event_kind = event.get("kind")
+        if event_kind == "account.authorized" and isinstance(event.get("payload"), dict):
+            self.account = _identifier(event["payload"].get("account_id")) or self.account
         kind = "new" if event_kind == "secret_chat.message" else KINDS.get(event_kind) if isinstance(event_kind, str) else None
         if kind is None:
             return
@@ -188,7 +191,10 @@ class Analytics:
         self.chats.add(chat_key(event), kind, seq)
         if kind in MESSAGE_KINDS:
             self.message_observations += 1
-            self.participants.add(sender_id(event), kind, seq)
+            sender = sender_id(event)
+            if sender is None and event_kind == "secret_chat.message" and (event.get("payload") or {}).get("direction") == "out":
+                sender = self.account
+            self.participants.add(sender, kind, seq)
         moment = _time(event.get("observed_at"))
         if moment is None:
             self.invalid_time_events += 1
@@ -261,7 +267,7 @@ def selected(data, options):
     options = options or {}
     value = options.get("chart_limit", 10)
     limit = max(5, min(30, value)) if type(value) is int else 10
-    labels = "ids" if options.get("participant_labels") == "ids" else "aliases"
+    labels = "ids" if options.get("participant_labels") in ("ids", "names") else "aliases"
     output = {key: data[key] for key in ("format", "basis", "timezone", "activity_events", "message_observations",
                                        "first_observed_at", "last_observed_at", "invalid_time_events")}
     output.update(totals=dict(data["totals"]), sequence=dict(data["sequence"]))

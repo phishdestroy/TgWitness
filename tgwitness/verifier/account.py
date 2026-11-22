@@ -133,6 +133,16 @@ def verify_parts(archive, manifest):
     return list(accounts.values())
 
 
+def export_category(kind, username):
+    if kind == "private":
+        return "personal"
+    if kind == "bot":
+        return "bots"
+    if kind in ("group", "supergroup"):
+        return "public_groups" if username else "private_groups"
+    return "public_channels" if username else "private_channels"
+
+
 def account_export_integer(value, name, minimum=0):
     if type(value) is not int or value < minimum:
         raise ValueError("Invalid account export " + name)
@@ -232,10 +242,13 @@ class AccountExportCheck:
                     raise ValueError("Account export selected a chat outside its frozen options")
                 if self.options.get("chat_kinds") is not None and chat.get("kind") not in self.options["chat_kinds"]:
                     raise ValueError("Account export selected a chat kind outside its frozen options")
+                categories = self.options.get("chat_categories")
+                if categories is not None and export_category(chat.get("kind"), chat.get("username")) not in categories:
+                    raise ValueError("Account export selected a chat category outside its frozen options")
                 if self.options.get("include_archived") is False and chat.get("archived"):
                     raise ValueError("Account export selected an excluded archived chat")
             self.chats[cid] = chat
-        metadata_categories = {"profile", "contacts", "sessions", "profile_photos", "stories", "other_data"}
+        metadata_categories = {"profile", "contacts", "sessions", "profile_photos", "stories", "other_data", "avatars"}
         for task in self.inventory["tasks"]:
             task_id, category = task["id"], task["category"]
             if not isinstance(task_id, str) or not task_id or task_id in self.tasks:
@@ -249,6 +262,10 @@ class AccountExportCheck:
                 newest = account_export_integer(task["newest_message_id"], "newest message ID")
                 if task["cursor_start"] != newest + 1 or type(task.get("own_only")) is not bool:
                     raise ValueError("Invalid message task boundary")
+                chat = self.chats[task["chat_id"]]
+                if (export_category(chat.get("kind"), chat.get("username")) in (self.options.get("own_only_categories") or ())
+                        and task["own_only"] is not True):
+                    raise ValueError("Account export read all messages in a category limited to own messages")
             elif category not in metadata_categories or task.get("chat_id") is not None:
                 raise ValueError("Invalid account export task category")
             self.tasks[task_id] = {"statement": task, "cursor": task["cursor_start"], "terminal": False, "ok": True}
@@ -257,7 +274,7 @@ class AccountExportCheck:
                                if chat["selected"] and not any(t["statement"].get("chat_id") == cid for t in self.tasks.values())]
         category_options = {"profile": "include_profile", "contacts": "include_contacts",
                             "sessions": "include_session_metadata", "profile_photos": "include_profile_photos",
-                            "stories": "include_stories", "other_data": "include_other_data"}
+                            "stories": "include_stories", "other_data": "include_other_data", "avatars": "include_avatars"}
         for category, option in category_options.items():
             present = any(t["statement"]["category"] == category for t in self.tasks.values())
             if self.options.get(option) is True and not present:

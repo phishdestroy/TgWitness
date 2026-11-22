@@ -1,5 +1,5 @@
 from html import escape
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 from . import jurisdiction_guidance
 
@@ -34,7 +34,7 @@ LABELS = {"records": "Records", "first": "First record", "last": "Last record", 
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",
           "anchored_through": "Timestamp covers through record", "unanchored_tail": "Records after that checkpoint",
           "timestamp": "Timestamp", "messages": "Messages", "tasks_done": "Tasks completed", "tasks_total": "Tasks planned",
-          "failures": "Failures and gaps", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
+          "failures": "Failures and gaps", "failed": "Failed pages and files", "limits": "Known limits", "not_reached": "Not reached before collection stopped", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
           "drand": "Recorded drand rounds", "starts": "Recorded process starts", "tdx": "Process starts carrying a TDX quote",
           "operator_fields": "Case fields supplied by the operator", "complete": "Completed within selected scope"}
 RESULTS = {
@@ -57,14 +57,29 @@ CSS = """
 .assessment-item{border:1px solid #8894a455;border-radius:12px;padding:18px;min-width:0;break-inside:avoid}
 .assessment-item h3{margin:0 0 8px;font-size:16px}.assessment-state{font-size:12px;font-weight:600}
 .assessment-item p{line-height:1.6;overflow-wrap:anywhere}.assessment-item dl{font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
-.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-family:monospace}
+.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-variant-numeric:tabular-nums}
+.case-assessment .assessment-item dd.hash{grid-column:1/-1;max-width:40ch;text-align:start;font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.case-assessment .assessment-item dd.hash span{display:inline-block;margin-inline-end:1ch}
+.case-assessment .assessment-item dt:has(+dd.hash){grid-column:1/-1}.assessment-references code{font:inherit;font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;background:none;border:0;padding:0;color:inherit}
 .assessment-review{padding:12px;border-inline-start:3px solid #697d99;margin-top:14px}
 .evidence-conditions{margin:18px 0;overflow-x:auto}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
 .evidence-conditions table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .evidence-conditions th,.evidence-conditions td{border-top:1px solid #8894a455;padding:8px;text-align:start;vertical-align:top;overflow-wrap:break-word}
+.evidence-conditions thead th:nth-child(1){width:15%}.evidence-conditions thead th:nth-child(2){width:27%}.evidence-conditions thead th:nth-child(3){width:30%}.evidence-conditions thead th:nth-child(4){width:28%}
 .evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding-top:12px}
 .evidence-conditions tr[data-status="checked_locally"] strong{color:var(--ok,#08734a)}.evidence-conditions tr[data-status="not_included"] strong{color:var(--muted)}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.evidence-conditions td code{display:block;background:none;border:0;padding:0;white-space:normal;line-height:1.6}.evidence-conditions td code+code{margin-top:6px}
+.evidence-conditions td code span{display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.evidence-conditions pre.command{margin:14px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg2,var(--bg))}.evidence-conditions pre.command span{display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.case-assessment{--state-ok:#1d6b4f;--state-warn:#93570b;--state-bad:#b23b1e;--state-info:var(--accent,#2457c5);--state-off:var(--muted)}
+@media(prefers-color-scheme:dark){html:not([data-theme=light]) .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}}
+html[data-theme=dark] .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}
+.case-assessment [data-status]{--state:var(--state-warn)}.case-assessment [data-status=checked_locally]{--state:var(--state-ok)}
+.case-assessment [data-status=recipient]{--state:var(--state-info)}.case-assessment [data-status=incomplete]{--state:var(--state-bad)}
+.case-assessment [data-status=not_included]{--state:var(--state-off)}
+.case-assessment .assessment-state{color:var(--state);align-self:flex-start;padding:3px 10px 3px 9px;border-radius:999px;background:color-mix(in srgb,var(--state) 10%,transparent);font-weight:600}
+.case-assessment .assessment-state::before{align-self:center}.evidence-conditions tr[data-status] td>strong{color:var(--state)}
+@media screen and (min-width:761px){.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd){grid-column:1/-1;columns:2;column-gap:48px}.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd)>*{break-inside:avoid}.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd)>.assessment-heading{column-span:all}}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.evidence-conditions thead{display:none}
 .evidence-conditions tbody,.evidence-conditions tr,.evidence-conditions th,.evidence-conditions td{display:block}
@@ -143,9 +158,17 @@ def evidence_conditions(kind, context, count=0, latest=None, signals=None):
                               "This archive carries no journal checkpoints; it is bound through the evidence journal of the same workspace.",
                               "python verify.py tgwitness-evidence.zip --witness witness.zip --witness-fingerprint WITNESS_SHA256"))
     tdx = (signals or {}).get("tdx", 0)
-    rows.append(condition("environment", "recorded" if tdx else "not_included",
-                          "TDX quotes were recorded at {n} process starts." if tdx else "No attested collection run in this archive.",
-                          "python -m tgwitness.cloud verify · --sealed-attestation", n=tdx))
+    sealed = sealed_run(context)
+    if sealed and not tdx:
+        rows.append(condition("environment", "recorded",
+                              "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, "
+                              "delivered next to evidence.zip, signs the archive that holds this export.",
+                              "python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo " + sealed["repository"],
+                              **sealed))
+    else:
+        rows.append(condition("environment", "recorded" if tdx else "not_included",
+                              "TDX quotes were recorded at {n} process starts." if tdx else "No attested collection run in this archive.",
+                              "python -m tgwitness.cloud verify · --sealed-attestation", n=tdx))
     stamped = rows[2]["status"] == "checked_locally"
     command = ("python verify.py " + archive + " --fingerprint " + fp
                + (" --tsa-ca tsa-root.pem" if rows[2]["status"] in ("checked_locally", "partial", "recorded")
@@ -251,6 +274,29 @@ def journal(context, coverage):
                   conditions=evidence_conditions("handover" if handover else "evidence", context, count, latest, signals)), options)
 
 
+def split_failures(context):
+    coverage, limits = context.get("coverage") or {}, context.get("known_limits")
+    if "failures" not in coverage:
+        return {}
+    if isinstance(limits, list) and type(coverage["failures"]) is int:
+        counts = context.get("counts") or {}
+        unreached = sum(counts.get(key) for key in ("media_not_reached", "steps_not_reached") if type(counts.get(key)) is int)
+        return {"failed": max(0, coverage["failures"] - len(limits) - unreached), "limits": len(limits),
+                **({"not_reached": unreached} if unreached else {})}
+    return {"failures": coverage["failures"]}
+
+
+def sealed_run(context):
+    run = (context.get("sealed_run") or (context.get("digest") or {}).get("sealed_run")
+           or (context.get("options") or {}).get("sealed_run"))
+    if not isinstance(run, dict):
+        return None
+    repo, number = run.get("repository"), run.get("run_id")
+    if not (isinstance(repo, str) and re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) and str(number).isdigit()):
+        return None
+    return {"repository": repo, "run": str(number), "attempt": str(run.get("run_attempt") or 1)}
+
+
 def snapshot(context, kind="account", meta=None):
     meta = meta or {}
     sharing = kind == "sharing"
@@ -272,7 +318,8 @@ def snapshot(context, kind="account", meta=None):
             "Review the public selection and transformations. If authorized, compare the derivative against the separately retained original." if sharing else
             "Review filters, limits, task failures and message-ID coverage against the specific period and conversations needed for the case.",
             {"messages": meta.get("message_count", counts.get("messages")), **({} if sharing or chat else
-             {"complete": complete, **{k: coverage[k] for k in ("tasks_done", "tasks_total", "failures") if k in coverage}})},
+             {"complete": complete, **{k: coverage[k] for k in ("tasks_done", "tasks_total") if k in coverage},
+              **split_failures(context)})},
             ("messages.jsonl", "manifest.json") if sharing else ("chat.json", "message-ids.json") if kind == "chat" else ("inventory.json", "manifest.json")),
         row("time", "not_included", "Independent time bounds",
             "This copy contains capture or export times recorded by the collector.",
@@ -305,7 +352,23 @@ def result_text(result, say):
 
 
 def fact_text(value, say):
-    return say("Yes" if value else "No") if isinstance(value, bool) else number_text(value, say) if value is not None else say("Not recorded")
+    if isinstance(value, bool):
+        return say("Yes" if value else "No")
+    if isinstance(value, str) and re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(Z|[+-]\d\d:\d\d)?", value):
+        try:
+            moment = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return value
+        if moment.tzinfo:
+            return moment.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S") + " UTC"
+        return moment.strftime("%Y-%m-%d %H:%M:%S")
+    return number_text(value, say) if value is not None else say("Not recorded")
+
+
+def fact_html(key, value, say, e):
+    if key == "fingerprint" and isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value):
+        return '<dd class="hash" dir="ltr">' + ''.join('<span>' + value[i:i + 4] + '</span>' for i in range(0, 64, 4)) + '</dd>'
+    return '<dd><bdi>' + e(fact_text(value, say)) + '</bdi></dd>'
 
 
 def conditions_html(data, say, e):
@@ -319,13 +382,15 @@ def conditions_html(data, say, e):
             rows.append('<tr class="condition-role"><th colspan="4" scope="rowgroup">' + e(say(role)) + '</th></tr>')
         rows.append('<tr data-status="' + e(item["status"]) + '"><th scope="row">' + e(say(item["title"])) + '</th><td'
                     + labels[0] + e(say(item["scope"])) + '</td><td' + labels[1] + '<strong>' + e(say(STATUSES[item["status"]]))
-                    + '</strong><br>' + e(result_text(item["detail"], say)) + '</td><td' + labels[2] + '<code dir="ltr">'
-                    + e(item["check"]) + '</code></td></tr>')
+                    + '</strong><br>' + e(result_text(item["detail"], say)) + '</td><td' + labels[2]
+                    + ''.join('<code dir="ltr">' + ' '.join('<span>' + e(token) + '</span>' for token in part.split()) + '</code>'
+                              for part in item["check"].split(" · ")) + '</td></tr>')
     return ('<div class="evidence-conditions"><h3>' + e(say(CONDITIONS_TITLE)) + '</h3><p>' + e(say(CONDITIONS_INTRO))
             + '</p><table><thead><tr><th>' + e(say("Condition")) + '</th><th>' + e(say("What it establishes")) + '</th><th>'
             + e(say("In this archive")) + '</th><th>' + e(say("How the recipient checks it")) + '</th></tr></thead><tbody>' + "".join(rows)
             + '</tbody></table><p class="assessment-review"><strong>' + e(say(data["minimum"])) + '</strong> '
-            + e(say(data["outcome"])) + '</p><pre class="command" dir="ltr">' + e(data["command"]) + '</pre></div>')
+            + e(say(data["outcome"])) + '</p><pre class="command" dir="ltr">' + ' '.join('<span>' + e(token) + '</span>' for token in data["command"].split())
+            + '</pre></div>')
 
 
 def html(data, say):
@@ -334,22 +399,21 @@ def html(data, say):
     if not data.get("supporting_files_included"):
         parts.append('<p class="assessment-review">' + e(say(STANDALONE)) + '</p>')
     parts.append(conditions_html(data.get("evidence_conditions"), say, e))
-    parts.append('<ol class="assessment-overview" aria-label="' + e(say(OVERVIEW)) + '">')
-    for number, item in enumerate(data["checks"], 1):
-        parts.append('<li data-status="' + e(item["status"]) + '"><a href="#assessment-' + e(item["id"]) + '">'
-                     '<span class="assessment-index">' + f'{number:02d}' + '</span><strong>' + e(say(item["title"]))
-                     + '</strong><span class="assessment-state">' + e(say(STATUSES[item["status"]])) + '</span></a></li>')
-    parts.append('</ol>')
     parts.append('<div class="assessment-grid">')
     for number, item in enumerate(data["checks"], 1):
         conclusion = item["result"]
         parts.append('<article class="assessment-item" id="assessment-' + e(item["id"]) + '" data-status="' + e(item["status"]) + '" data-assessment="' + e(item["id"]) + '"><div class="assessment-heading"><span class="assessment-index">'
                      + f'{number:02d}' + '</span><h3>' + e(say(item["title"])) + '</h3></div><div class="assessment-state">' + e(say(STATUSES[item["status"]]))
-                     + '</div><p class="assessment-result">' + e(result_text(conclusion, say)) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p><dl>')
-        parts.extend('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>' for k, v in item["facts"].items())
-        parts.append('</dl><p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
+                     + '</div><p class="assessment-result">' + e(result_text(conclusion, say)) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p>')
+        if item["facts"]:
+            parts.append('<dl>' + ''.join('<dt>' + e(say(LABELS.get(k, k))) + '</dt>' + fact_html(k, v, say, e)
+                                          for k, v in item["facts"].items()) + '</dl>')
+        parts.append('<p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
-            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(reference_text(item["references"])) + '</p>')
+            shown = item["references"][:REFERENCES_SHOWN]
+            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': '
+                         + ', '.join('<code dir="ltr">' + e(name) + '</code>' for name in shown)
+                         + (' … +' + str(len(item["references"]) - len(shown)) if len(item["references"]) > len(shown) else '') + '</p>')
         parts.append('</article>')
     return ''.join(parts) + '</div></section>' + jurisdiction_guidance.html(data.get("jurisdiction_guidance"))
 
@@ -371,7 +435,7 @@ def pdf(lay, data):
         lay.callout(say(conditions["minimum"]) + " " + say(conditions["outcome"]))
         lay.command(conditions["command"])
     lay.assessment_overview(data)
-    lay.pdf.add_page()
+    lay.gap(6)
     for number, item in enumerate(data["checks"], 1):
         lay.assessment_card(number, item)
     jurisdiction_guidance.pdf(lay, data.get("jurisdiction_guidance"))
@@ -382,7 +446,8 @@ def text_keys():
     conditions = [data["evidence_conditions"] for data in examples] + [
         evidence_conditions("evidence", {"journal_verified": True, "anchors": [{}]}, 2, {"event_count": 1}, {"tdx": 1}),
         evidence_conditions("evidence", {"anchors": [{}]}, 2, {"event_count": 2}),
-        evidence_conditions("evidence", {"anchors": [{}]}, 2)]
+        evidence_conditions("evidence", {"anchors": [{}]}, 2),
+        evidence_conditions("account", {"sealed_run": {"repository": "o/r", "run_id": 1, "run_attempt": 1}})]
     return list(dict.fromkeys([TITLE, INTRO, OVERVIEW, *ACQUISITION_METHODS.values(), "Scope of this conclusion", "Independent review", "Evidence references", "Not recorded",
                               CONDITIONS_TITLE, CONDITIONS_INTRO, "Condition", "What it establishes", "In this archive",
                               "How the recipient checks it", *(text for pair in CONDITIONS.values() for text in pair), *ROLES.values(),

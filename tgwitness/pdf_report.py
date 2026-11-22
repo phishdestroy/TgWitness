@@ -760,7 +760,7 @@ def custody_steps(say, data):
         steps.append((say("Checkpoints timestamped"), report.utc_text(latest["time"]) + " · " + latest["service"]
                       if latest else say("none in this export")))
     steps += [(say("Journal verified and exported"), report.utc_text(data["created_at"])),
-              (say("Report sealed"), report.utc_text(data["created_at"]) + " · " + (data["case"].get("examiner") or ""))]
+              (say("Report sealed"), report.utc_text(data["created_at"]) + (" · " + data["case"]["examiner"] if data["case"].get("examiner") else ""))]
     return steps
 
 
@@ -1444,7 +1444,9 @@ class ChatPDF:
                                              "the profile at export time."))
         self.lay.grid([say("Participant"), "ID", say("Messages"), say("First message"), say("Last message")],
                  [["\n".join([(p["name"] or say("Unknown")) + (" @" + p["username"] if p.get("username") else "")]
-                              + report.poster_notes(say, p, self.chat)), Mono(str(p["user_id"])),
+                              + report.poster_notes(say, p, self.chat)
+                              + ([say("Shown as {label} in the charts", label=report.snapshot_analytics.display(p["chart_label"], say))] if p.get("chart_label") else [])),
+                   Mono(str(p["user_id"])),
                    p["messages"], report.utc_text(p["first_message_at"]), report.utc_text(p["last_message_at"])]
                   for p in self.people[:100]], (32, 18, 10, 20, 20))
 

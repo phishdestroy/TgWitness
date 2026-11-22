@@ -10,7 +10,7 @@ on:
         description: Maximum capture time (partial results are labelled)
         type: choice
         default: '30'
-        options: ['30', '60', '120']
+        options: ['30', '60', '120', '180', '240', '300']
       client:
         description: API export or official Telegram Web with video
         type: choice
