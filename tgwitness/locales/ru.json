@@ -10902,5 +10902,9 @@
   "Known limits": "Известные ограничения",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Создано в рамках запуска GitHub Actions {run} (попытка {attempt}) репозитория {repository}. Файл attestation.jsonl от GitHub, предоставленный вместе с файлом evidence.zip, подписывает архив, содержащий данный экспорт.",
   "Custom emoji": "Кастомный эмодзи",
-  "Animated sticker": "Анимированный стикер"
+  "Animated sticker": "Анимированный стикер",
+  "Deleted account": "Удалённый аккаунт",
+  "Files not reached before collection stopped": "Файлы, до которых сбор не дошёл до остановки",
+  "Export steps not reached before collection stopped": "Шаги экспорта, не начатые до остановки сбора",
+  "Not reached before collection stopped": "Не начато до остановки сбора"
 }

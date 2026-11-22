@@ -6,7 +6,7 @@ from urllib.parse import urlsplit
 
 from .account_report import chat_note, reason_text, state_note
 from .report import Words
-from .telegram_export import MEDIA_PATH, dates, entity_spans, message, name
+from .telegram_export import DELETED_ACCOUNT, MEDIA_PATH, dates, entity_spans, message, name
 
 CSS = (Path(__file__).parent / 'static' / 'telegram-export.css').read_text(encoding='utf-8')
 TAGS = {'bold': ('strong', ''), 'italic': ('em', ''), 'underline': ('u', ''),
@@ -121,6 +121,13 @@ class View:
         return {key: '../../' + attachment['file'] for key, attachment in self.custom_emoji(row).items()
                 if self.format_of(attachment['file']) == 'image'}
 
+    def person(self, row):
+        """The author's name; a deleted account is named so, with its ID, since several can write in one chat."""
+        found = name(row.get('sender'))
+        if found == DELETED_ACCOUNT:
+            return self.say('Deleted account') + (' · ID ' + str(row['from_id']) if type(row.get('from_id')) is int else '')
+        return found
+
     def photo(self, peer_id, prefix):
         """Relative path of the saved current photo of a chat or person, when the export holds one."""
         path = self.avatars.get(peer_id) if type(peer_id) is int else None
@@ -192,7 +199,7 @@ class View:
                 with (self.export.directory / found[1]).open('rb') as stream:
                     stream.seek(found[2])
                     original = json.loads(stream.readline())
-                sender = name(original.get('sender')) or self.say('Sender not available')
+                sender = self.person(original) or self.say('Sender not available')
                 text = ' '.join((original.get('text') or '').split())
                 excerpt = text[:160] + ('…' if len(text) > 160 else '') if text else self.say('Media or service message')
                 if len(self.reply_cache) >= 128:
@@ -257,7 +264,7 @@ class View:
 
     def card(self, row, chat):
         say, value = self.say, message(row)
-        sender = name(row.get('sender')) or (chat.get('title') if chat.get('kind') == 'channel' and row.get('post') else None)
+        sender = self.person(row) or (chat.get('title') if chat.get('kind') == 'channel' and row.get('post') else None)
         sender = sender or (str(row['from_id']) if row.get('from_id') else say('Sender not available'))
         at = value.get('date', '')
         identifier = str(row['id'])

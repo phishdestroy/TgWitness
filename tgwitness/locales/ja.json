@@ -10779,5 +10779,9 @@
   "Known limits": "既知の制限事項",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}の{run}実行（{attempt}試行）内でGitHub Actionsにより作成。GitHubのattestation.jsonlがevidence.zipと共に提供され、このエクスポートデータを格納するアーカイブに署名されています。",
   "Custom emoji": "カスタム絵文字",
-  "Animated sticker": "アニメーションステッカー"
+  "Animated sticker": "アニメーションステッカー",
+  "Deleted account": "削除されたアカウント",
+  "Files not reached before collection stopped": "収集が中断される前に到達できなかったファイル",
+  "Export steps not reached before collection stopped": "収集が中断される前に完了しなかったエクスポート手順",
+  "Not reached before collection stopped": "収集が停止される前に到達しなかった"
 }

@@ -10779,5 +10779,9 @@
   "Known limits": "ข้อจำกัดที่ทราบ",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "สร้างขึ้นภายใน GitHub Actions run {run} (attempt {attempt}) ของ {repository} ไฟล์ attestation.jsonl ของ GitHub ซึ่งส่งมาพร้อมกับ evidence.zip จะลงนามในไฟล์เก็บถาวรที่เก็บข้อมูลการส่งออกนี้",
   "Custom emoji": "อีโมจิที่กำหนดเอง",
-  "Animated sticker": "สติกเกอร์เคลื่อนไหว"
+  "Animated sticker": "สติกเกอร์เคลื่อนไหว",
+  "Deleted account": "บัญชีที่ถูกลบ",
+  "Files not reached before collection stopped": "ไฟล์ที่ยังไม่ถูกเข้าถึงก่อนการเก็บรวบรวมข้อมูลถูกหยุดลง",
+  "Export steps not reached before collection stopped": "ขั้นตอนการส่งออกที่ยังไม่เสร็จสิ้นก่อนการเก็บรวบรวมข้อมูลถูกหยุดลง",
+  "Not reached before collection stopped": "ยังไม่ได้รับการติดต่อก่อนที่การเก็บรวบรวมข้อมูลจะหยุดลง"
 }

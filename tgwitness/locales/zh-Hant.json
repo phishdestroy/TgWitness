@@ -10779,5 +10779,9 @@
   "Known limits": "已知限制",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "此報告由 GitHub Actions 執行 {run}（嘗試 {attempt}）中的 {repository} 所生成。GitHub 的 attestation.jsonl 檔案將與 evidence.zip 一併交付，並對存放此匯出資料的壓縮檔進行簽名。",
   "Custom emoji": "自訂表情符號",
-  "Animated sticker": "動畫貼圖"
+  "Animated sticker": "動畫貼圖",
+  "Deleted account": "已刪除的帳號",
+  "Files not reached before collection stopped": "在收集作業停止前未能取得之檔案",
+  "Export steps not reached before collection stopped": "在取證中止前尚未完成的匯出步驟",
+  "Not reached before collection stopped": "採集停止前未處理"
 }

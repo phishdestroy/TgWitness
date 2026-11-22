@@ -10779,5 +10779,9 @@
   "Known limits": "Had yang diketahui",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Dibuat dalam GitHub Actions menjalankan {run} (cubaan {attempt}) pada {repository}. attestation.jsonl GitHub, yang dihantar bersama evidence.zip, menandatangani arkib yang mengandungi eksport ini.",
   "Custom emoji": "Emoji tersuai",
-  "Animated sticker": "Stiker animasi"
+  "Animated sticker": "Stiker animasi",
+  "Deleted account": "Akaun yang dipadam",
+  "Files not reached before collection stopped": "Fail yang belum diakses sebelum pengumpulan dihentikan",
+  "Export steps not reached before collection stopped": "Langkah-langkah eksport yang belum dicapai sebelum pengumpulan dihentikan",
+  "Not reached before collection stopped": "Tidak sempat dicapai sebelum pengumpulan dihentikan"
 }

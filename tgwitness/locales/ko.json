@@ -10779,5 +10779,9 @@
   "Known limits": "알려진 한계",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}의 {run} 실행({attempt} 시도) 내에서 생성됨. GitHub의 attestation.jsonl 파일이 evidence.zip과 함께 제공되며, 이 파일이 해당 내보내기 데이터를 포함하는 아카이브에 서명합니다.",
   "Custom emoji": "사용자 정의 이모지",
-  "Animated sticker": "애니메이션 스티커"
+  "Animated sticker": "애니메이션 스티커",
+  "Deleted account": "삭제된 계정",
+  "Files not reached before collection stopped": "수집이 중단되기 전까지 접근하지 못한 파일",
+  "Export steps not reached before collection stopped": "증거 수집이 중단되기 전까지 완료되지 않은 내보내기 단계",
+  "Not reached before collection stopped": "수집이 중단되기 전까지 연락이 닿지 않음"
 }

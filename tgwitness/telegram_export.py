@@ -28,9 +28,13 @@ def peer_id(value):
     return f"{identity[0]}{identity[1]}" if identity else None
 
 
+DELETED_ACCOUNT = "Deleted Account"  # what Telegram Desktop exports for a user whose account was deleted
+
+
 def name(value):
     value = value or {}
-    return value.get("title") or " ".join(value.get(k) or "" for k in ("first_name", "last_name")).strip() or None
+    found = value.get("title") or " ".join(value.get(k) or "" for k in ("first_name", "last_name")).strip()
+    return found or (DELETED_ACCOUNT if value.get("deleted") is True else None)
 
 
 def dates(value, key="date"):

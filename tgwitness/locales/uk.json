@@ -10932,5 +10932,9 @@
   "Known limits": "Відомі обмеження",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Створено в рамках GitHub Actions під час запуску {run} (спроба {attempt}) репозиторію {repository}. Файл attestation.jsonl від GitHub, наданий разом із evidence.zip, підписує архів, що містить цей експорт.",
   "Custom emoji": "Кастомний емодзі",
-  "Animated sticker": "Анімований стікер"
+  "Animated sticker": "Анімований стікер",
+  "Deleted account": "Видалений акаунт",
+  "Files not reached before collection stopped": "Файли, до яких збір не дійшов до зупинки",
+  "Export steps not reached before collection stopped": "Кроки експорту, не розпочаті до зупинки збору",
+  "Not reached before collection stopped": "Не розпочато до зупинки збору"
 }

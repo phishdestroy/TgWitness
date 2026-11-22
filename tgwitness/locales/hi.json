@@ -10830,5 +10830,9 @@
   "Known limits": "ज्ञात सीमाएँ",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": " GitHub Actions के अंदर बनाया गया, {run} (attempt {attempt}) चलाता है {repository}। GitHub का attestation.jsonl, जो evidence.zip के बगल में दिया जाता है, इस एक्सपोर्ट को रखने वाले आर्काइव पर हस्ताक्षर करता है।",
   "Custom emoji": "कस्टम इमोजी",
-  "Animated sticker": "एनिमेटेड स्टिकर"
+  "Animated sticker": "एनिमेटेड स्टिकर",
+  "Deleted account": "मिटाया गया खाता",
+  "Files not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त न की गई फ़ाइलें",
+  "Export steps not reached before collection stopped": "संग्रह रुकने से पहले निर्यात चरण पूरे नहीं हुए",
+  "Not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त नहीं किया गया"
 }

@@ -21,6 +21,7 @@ SCOPE_JOURNAL = "Journal charts count message observations at capture time in UT
 SCOPE_SNAPSHOT = "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope."
 CAUTION = "Activity counts saved observations. Sender identifiers are Telegram account numbers. Zero means no included observations."
 UNKNOWN = "Unknown or withheld"
+DELETED = "Deleted Account"  # the name Telegram Desktop gives a user whose account was deleted
 OTHER = "Other / unlisted"
 
 
@@ -123,7 +124,8 @@ class Analytics:
         if not service:
             person = row.get("sender")
             name = (' '.join(label(person.get(key)) for key in ("first_name", "last_name")).strip()
-                    or label(person.get("title"))) if isinstance(person, dict) else label(person)
+                    or label(person.get("title")) or (DELETED if person.get("deleted") is True else "")
+                    ) if isinstance(person, dict) else label(person)
             name = row.get("from") or name
             username = label(person.get("username")) if isinstance(person, dict) else ""
             if username:
@@ -243,10 +245,18 @@ def e(value):
     return html.escape(str(value))
 
 
+def display(label, say):
+    """A label as shown: a deleted account is named in the report language; its ID stays."""
+    text = str(label)
+    if text == DELETED or text.startswith(DELETED + " · "):
+        return say("Deleted account") + text[len(DELETED):]
+    return text
+
+
 def rank_label(row, say):
     """A bar label: the participant or chat name and its Telegram ID, once, whatever the label mode added already."""
     label = row["label"]
-    name = say(label) if label in (UNKNOWN, OTHER, *KIND_LABELS.values()) else label
+    name = say(label) if label in (UNKNOWN, OTHER, *KIND_LABELS.values()) else display(label, say)
     identity = row.get("id")
     if (not identity or label == str(identity) or identity in KIND_LABELS or str(identity).startswith("participant-")
             or str(label).endswith("ID " + str(identity).split(":")[-1])):
@@ -304,7 +314,7 @@ def duration(seconds, say):
 def habit_rows(data, say, top_n):
     titles = [say("Participant"), say("Messages"), say("Starts after {hours} h of silence", hours=data.get("pause_hours", PAUSE_HOURS)),
               say("Median reply time"), say("Longest run in a row"), say("Night share, 00–06 UTC")]
-    rows = [[row["label"], str(row["messages"]), str(row["started_after_pause"]), duration(row["median_reply_seconds"], say),
+    rows = [[display(row["label"], say), str(row["messages"]), str(row["started_after_pause"]), duration(row["median_reply_seconds"], say),
              str(row["longest_run"]), str(round(row["night_share"] * 100)) + "%"] for row in data.get("habits", [])[:top_n]]
     return titles, rows
 

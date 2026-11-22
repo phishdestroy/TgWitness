@@ -10840,5 +10840,9 @@
   "Known limits": "Limiti noti",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Realizzato all’interno di GitHub Actions con l’esecuzione {run} (tentativo {attempt}) del {repository}. Il file attestation.jsonl di GitHub, fornito insieme al file evidence.zip, firma l’archivio che contiene questa esportazione.",
   "Custom emoji": "Emoji personalizzate",
-  "Animated sticker": "Adesivo animato"
+  "Animated sticker": "Adesivo animato",
+  "Deleted account": "Account cancellato",
+  "Files not reached before collection stopped": "File non raggiunti prima dell’interruzione della raccolta",
+  "Export steps not reached before collection stopped": "Passaggi di esportazione non completati prima dell’interruzione della raccolta",
+  "Not reached before collection stopped": "Non raggiunto prima dell’interruzione della raccolta"
 }

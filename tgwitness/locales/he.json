@@ -10881,5 +10881,9 @@
   "Known limits": "מגבלות ידועות",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "נוצר בתוך GitHub Actions, ריצה {run} (ניסיון {attempt}) של {repository}. קובץ attestation.jsonl של GitHub, הנמסר לצד הקובץ evidence.zip, חותם על הארכיון המכיל ייצוא זה.",
   "Custom emoji": "אימוג'ים מותאמים אישית",
-  "Animated sticker": "מדבקה מונפשת"
+  "Animated sticker": "מדבקה מונפשת",
+  "Deleted account": "חשבון שנמחק",
+  "Files not reached before collection stopped": "קבצים שלא הושגו לפני הפסקת האיסוף",
+  "Export steps not reached before collection stopped": "שלבי הייצוא שלא הושלמו לפני הפסקת האיסוף",
+  "Not reached before collection stopped": "לא הושג לפני שהאיסוף הופסק"
 }

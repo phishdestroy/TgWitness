@@ -10779,5 +10779,9 @@
   "Known limits": "Các hạn chế đã biết",
   "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Được tạo trong lần chạy GitHub Actions {run} (lần thử {attempt}) của {repository}. Tệp attestation.jsonl của GitHub, được cung cấp kèm theo tệp evidence.zip, sẽ ký xác thực tệp lưu trữ chứa bản xuất này.",
   "Custom emoji": "Biểu tượng cảm xúc tùy chỉnh",
-  "Animated sticker": "Hình dán động"
+  "Animated sticker": "Hình dán động",
+  "Deleted account": "Tài khoản đã bị xóa",
+  "Files not reached before collection stopped": "Các tệp chưa được truy cập trước khi quá trình thu thập bị dừng lại",
+  "Export steps not reached before collection stopped": "Các bước xuất dữ liệu chưa được thực hiện trước khi việc thu thập bị dừng lại",
+  "Not reached before collection stopped": "Chưa liên lạc được trước khi việc thu thập dữ liệu dừng lại"
 }
