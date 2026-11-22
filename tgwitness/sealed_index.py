@@ -100,10 +100,17 @@ def limits_of(facts):
     return [item for item in found if isinstance(item, str)]
 
 
+def not_reached_of(exported):
+    """Files and export steps left untouched because collection was stopped (panel, time limit) before them."""
+    counts = exported.get("counts") or {}
+    return tuple(counts.get(key) if type(counts.get(key)) is int else 0 for key in ("media_not_reached", "steps_not_reached"))
+
+
 def failures_of(exported, limits):
-    """Failed pages and files: the coverage count also holds the recorded limits, which are not failures."""
+    """Failed pages and files: the coverage count also holds the recorded limits and what the stop left unreached,
+    which are not failures."""
     failures = (exported.get("coverage") or {}).get("failures")
-    return max(0, failures - len(limits)) if type(failures) is int else None
+    return max(0, failures - len(limits) - sum(not_reached_of(exported))) if type(failures) is int else None
 
 
 def finished_with_limits(facts):
@@ -219,6 +226,7 @@ def page(facts, events, fingerprint=None, head_hash=None):
     if exported:
         limits = limits_of(facts)
         failures = failures_of(exported, limits)
+        files, steps = not_reached_of(exported)
         coverage_rows = [
             ("Complete within scope", "yes" if exported.get("complete_within_scope") else
              "no · because of the known limits below" if finished_with_limits(facts) else "no"),
@@ -227,6 +235,9 @@ def page(facts, events, fingerprint=None, head_hash=None):
              if coverage.get("tasks_total") else None),
             ("Failed pages and files", (_number(failures) + " · listed under Omissions in the export index" if failures
                                         else "none") if failures is not None else None),
+            ("Not reached before the stop", " · ".join(part for part in (
+                f"{_number(files)} files" if files else "", f"{_number(steps)} export steps" if steps else "") if part)
+             or None),
             ("Known limits", '<ul class="limits">' + "".join(f"<li>{_e(item)}</li>" for item in limits) + "</ul>"
              if limits else None),
             ("Coverage", _e(coverage.get("scope")) if coverage.get("scope") else None)]

@@ -34,7 +34,7 @@ LABELS = {"records": "Records", "first": "First record", "last": "Last record", 
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",
           "anchored_through": "Timestamp covers through record", "unanchored_tail": "Records after that checkpoint",
           "timestamp": "Timestamp", "messages": "Messages", "tasks_done": "Tasks completed", "tasks_total": "Tasks planned",
-          "failures": "Failures and gaps", "failed": "Failed pages and files", "limits": "Known limits", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
+          "failures": "Failures and gaps", "failed": "Failed pages and files", "limits": "Known limits", "not_reached": "Not reached before collection stopped", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
           "drand": "Recorded drand rounds", "starts": "Recorded process starts", "tdx": "Process starts carrying a TDX quote",
           "operator_fields": "Case fields supplied by the operator", "complete": "Completed within selected scope"}
 RESULTS = {
@@ -265,7 +265,10 @@ def split_failures(context):
     if "failures" not in coverage:
         return {}
     if isinstance(limits, list) and type(coverage["failures"]) is int:
-        return {"failed": max(0, coverage["failures"] - len(limits)), "limits": len(limits)}
+        counts = context.get("counts") or {}
+        unreached = sum(counts.get(key) for key in ("media_not_reached", "steps_not_reached") if type(counts.get(key)) is int)
+        return {"failed": max(0, coverage["failures"] - len(limits) - unreached), "limits": len(limits),
+                **({"not_reached": unreached} if unreached else {})}
     return {"failures": coverage["failures"]}
 
 

@@ -735,6 +735,8 @@ class AccountExport:
             else:
                 self.counts["media_skipped"] += 1
                 self.failures += attachment["outcome"] == "failed"
+                if attachment["outcome"] == "failed" and self.stopped(attachment.get("reason")):
+                    self.counts["media_not_reached"] = self.counts.get("media_not_reached", 0) + 1
             if attachment.get("representation") and attachment["outcome"] in ("saved", "hashed"):
                 self.cache_attachment(attachment)
 
@@ -758,6 +760,13 @@ class AccountExport:
         self.head = sha(canonical(envelope))
         self.counts["messages_seen"] += receipt.get("seen_count", 0) if receipt["category"] == "messages" else 0
         self.failures += receipt["outcome"] == "failed"
+        if receipt["outcome"] == "failed" and self.stopped(receipt.get("error")):
+            self.counts["steps_not_reached"] = self.counts.get("steps_not_reached", 0) + 1
+
+    def stopped(self, reason):
+        """Whether a failed file or step only records that collection was stopped before reaching it."""
+        finish = (getattr(self, "current", None) or {}).get("finish_reason")
+        return isinstance(reason, str) and reason == finish
 
     def chat_states(self, counts):
         complete = {}

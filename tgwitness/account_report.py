@@ -347,8 +347,11 @@ def coverage_section(context, say):
                   e(say('Acquisition is not an atomic account snapshot. Deleted, inaccessible or previously edited data may be unavailable.')) + '</p><dl class="facts">')
     limits, failures = context.get('known_limits'), coverage.get('failures')
     split = isinstance(limits, list) and type(failures) is int
+    counts = context.get('counts') or {}
+    files, steps = (counts.get(key) if type(counts.get(key)) is int else 0 for key in ('media_not_reached', 'steps_not_reached'))
     for label, value in (('Tasks completed', coverage.get('tasks_done')), ('Tasks planned', coverage.get('tasks_total')),
-                         *((('Failed pages and files', max(0, failures - len(limits))), ('Known limits', len(limits)))
+                         *((('Failed pages and files', max(0, failures - len(limits) - files - steps)), ('Known limits', len(limits)),
+                            ('Files not reached before collection stopped', files or None), ('Export steps not reached before collection stopped', steps or None))
                            if split else (('Failures and gaps', failures),))):
         if type(value) is int:
             yield encoded('<dt>' + e(say(label)) + '</dt><dd>' + str(value) + '</dd>')
@@ -855,5 +858,7 @@ def text_keys():
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
                               + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps',
                                                                      'Failed pages and files', 'Known limits',
+                                                                     'Files not reached before collection stopped',
+                                                                     'Export steps not reached before collection stopped',
                                                                      *REASONS.values(), *STATE_NOTES.values(),
                                                                      *ARCHIVE_FILES.values()]))
