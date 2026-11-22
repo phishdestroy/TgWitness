@@ -167,7 +167,7 @@ def single(chart):
     return chart.get("status", "available") == "available" and len(chart.get("rows") or []) < 2
 
 
-def bars_html(chart, say):
+def bars_html(chart, say, heading=None):
     if error := _unavailable(chart, say):
         return error
     rows = chart["rows"]
@@ -181,9 +181,10 @@ def bars_html(chart, say):
     if not rows:
         return '<p>'+_e(say("No observations in this selection."))+'</p>'
     parts.append('</div>')
-    parts.append(_table([say("Observations"), say("First record"), say("Last record")],
-                        [(label(r, say)+' · '+str(r["total"]), '#'+str(r["first_seq"]) if r.get("first_seq") else '—',
-                          '#'+str(r["last_seq"]) if r.get("last_seq") else '—') for r in rows], say))
+    if heading:
+        parts.append(_table([say(heading), say("Observations"), say("First record"), say("Last record")],
+                            [(label(r, say), _grouped(say, r["total"]), '#'+str(r["first_seq"]) if r.get("first_seq") else '—',
+                              '#'+str(r["last_seq"]) if r.get("last_seq") else '—') for r in rows], say))
     return ''.join(parts)
 
 
@@ -215,7 +216,7 @@ def html(data, say):
                      +(heat_svg(chart, say) if observed else '<p>'+_e(say("No observations in this selection."))+'</p>'))
         if observed:
             parts.append(_table([say("Period (UTC)"), say("Observations")],
-                               [(say(DAYS[d])+f' {hour:02d}:00', value) for d, row in enumerate(chart["rows"]) for hour, value in enumerate(row)], say))
+                               [(say(DAYS[d])+f' {hour:02d}:00', value) for d, row in enumerate(chart["rows"]) for hour, value in enumerate(row) if value], say))
         parts.append('</figure>')
     parts.append('<div class="analytics-pair">')
     for key, title in (("participants", "Participants by observation count"), ("chats", "Activity by chat")):
@@ -225,7 +226,7 @@ def html(data, say):
                 parts.append('<p>'+_e(say(PEOPLE_NOTE))+'</p>')
                 if data.get("participant_labels", "aliases") == "aliases":
                     parts.append('<p>'+_e(say(PRIVACY_NOTE))+'</p>')
-            parts.append('<p>'+_e(say("Observations"))+': '+str(chart["total"])+'</p>'+bars_html(chart, say)+'</figure>')
+            parts.append('<p>'+_e(say("Observations"))+': '+str(chart["total"])+'</p>'+bars_html(chart, say, "Participant" if key == "participants" else "Chat")+'</figure>')
     parts.append('</div>')
     parts.append(report_chat_timeline.html(data.get("chat_timeline"), say, _table))
     if composition := data.get("composition"):
