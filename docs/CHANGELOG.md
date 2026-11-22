@@ -26,7 +26,7 @@
 
 ## Unreleased
 
-- Selection report: when there are unobserved message IDs but no ranges are listed, the HTML and PDF reports no longer also say that none were found.
+- Reports with a Selected data section: when there are unobserved message IDs but no ranges are listed, the HTML and PDF reports no longer also say that none were found.
 - Panel and report translations: in most languages a number now stands where the language puts it, for example “3 of 10 chats”, instead of after the noun as if it were a name, and it no longer runs into the next word. Phrases about exactly one item use the singular, and the documentation checklist shows when each goal was last seen.
 - Message-number gap check: a missing number that replies in two different chats point at is no longer assigned to either chat, and a proven gap whose numbers belong to several chats names no single chat. Verification no longer accepts a message-gaps.json that marks a proven gap as only likely. The scope says when a page of a private chat, bot or ordinary group was not finished, or when only the account's own messages were read. Exports made earlier still pass verification.
 - Reports in Arabic, Persian, Urdu and Hebrew: message ID ranges, chat IDs that start with a minus sign, dates and file sizes are shown left to right, as in the JSON files, on the activity map, in chat pages and their page list, and on the GitHub Actions cover page. The number of ranges of absent message IDs is shown as its own label, which reads correctly in every language.
