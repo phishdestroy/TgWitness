@@ -217,7 +217,7 @@ def html(data, say):
             parts.append('<figure class="analytics-figure chart-card chart-'+key+'"><figcaption>'+_e(say(title))+'</figcaption>')
             if key == 'participants':
                 parts.append('<p>'+_e(say(PEOPLE_NOTE))+'</p>')
-                if data.get("participant_labels") != "ids":
+                if data.get("participant_labels", "aliases") == "aliases":
                     parts.append('<p>'+_e(say(PRIVACY_NOTE))+'</p>')
             parts.append('<p>'+_e(say("Observations"))+': '+str(chart["total"])+'</p>'+bars_html(chart, say)+'</figure>')
     parts.append('</div>')
@@ -343,7 +343,7 @@ def pdf(lay, data):
         lay.heading(say(title))
         if key == 'participants':
             lay.text(say(PEOPLE_NOTE),size=8)
-            if data.get("participant_labels") != 'ids':
+            if data.get("participant_labels", "aliases") == "aliases":
                 lay.text(say(PRIVACY_NOTE),size=8)
         if chart.get("status") != 'available':
             lay.text(say("This chart exceeds the grouping limit. Exact overall counts remain available."),size=9)

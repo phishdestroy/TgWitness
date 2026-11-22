@@ -14,7 +14,8 @@ class Presentation(BaseModel):
     participant_chart: bool = True
     chat_chart: bool = True
     composition_chart: bool = True
-    participant_labels: Literal["aliases", "ids"] = "aliases"
+    # names: the sender's name, @username and ID, for an investigator's own capture; aliases hide people in charts.
+    participant_labels: Literal["aliases", "ids", "names"] = "aliases"
     chart_limit: int = Field(default=10, ge=5, le=30)
     jurisdiction_guidance: guidance.Options = Field(default_factory=guidance.Options)
 
@@ -261,7 +262,7 @@ def selected(data, options):
     options = options or {}
     value = options.get("chart_limit", 10)
     limit = max(5, min(30, value)) if type(value) is int else 10
-    labels = "ids" if options.get("participant_labels") == "ids" else "aliases"
+    labels = "ids" if options.get("participant_labels") in ("ids", "names") else "aliases"
     output = {key: data[key] for key in ("format", "basis", "timezone", "activity_events", "message_observations",
                                        "first_observed_at", "last_observed_at", "invalid_time_events")}
     output.update(totals=dict(data["totals"]), sequence=dict(data["sequence"]))

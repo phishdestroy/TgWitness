@@ -156,14 +156,33 @@ def page(facts, events, fingerprint=None, head_hash=None):
         history = finished["history"]
         counts = {"messages_seen": history.get("captured"), **{"media_" + k: v for k, v in (finished.get("media") or {}).items()}}
     stats = []
-    for key, value in counts.items():
+
+    def stat(value, label, size=False):
         if isinstance(value, (int, float)) and not isinstance(value, bool):
-            shown = _size(value) if "bytes" in key else _number(value)
-            stats.append(f'<div class="stat"><b>{shown}</b><span>{_e(_human(key))}</span></div>')
+            stats.append(f'<div class="stat"><b>{_size(value) if size else _number(value)}</b><span>{_e(label)}</span></div>')
+
+    number = lambda *keys: max((counts.get(k) for k in keys if isinstance(counts.get(k), int)), default=None)  # noqa: E731
+    stat(number("messages_exported", "messages_preserved", "messages", "messages_seen"), "Messages saved")
+    if isinstance(counts.get("chats_selected"), int):
+        stats.append(f'<div class="stat"><b>{_number(counts.get("chats_done") or 0)} / {_number(counts["chats_selected"])}'
+                     '</b><span>Chats finished</span></div>')
+    stat(number("media_saved", "media_done"), "Files saved")
+    if counts.get("unique_media_bytes") or counts.get("bytes_saved"):
+        stat(counts.get("unique_media_bytes") or counts.get("bytes_saved"), "File bytes saved", size=True)
+    for key, label in (("media_hashed", "Files with hashes only"), ("media_skipped", "Files not saved")):
+        if counts.get(key):
+            stat(counts[key], label)
     coverage = exported.get("coverage") or {}
-    coverage_rows = [(_human(k), _e(v)) for k, v in coverage.items() if not isinstance(v, (dict, list))]
+    coverage_rows = []
     if exported:
-        coverage_rows.insert(0, ("Complete within scope", "yes" if exported.get("complete_within_scope") else "no"))
+        coverage_rows = [
+            ("Complete within scope", "yes" if exported.get("complete_within_scope") else "no"),
+            ("Chat list read completely", {True: "yes", False: "no"}.get(coverage.get("inventory_complete"))),
+            ("Export steps finished", f'{_number(coverage.get("tasks_done") or 0)} of {_number(coverage.get("tasks_total") or 0)}'
+             if coverage.get("tasks_total") else None),
+            ("Recorded gaps and failures", _number(coverage["failures"]) + " · listed under Omissions in the export index"
+             if coverage.get("failures") else "none" if "failures" in coverage else None),
+            ("Coverage", _e(coverage.get("scope")) if coverage.get("scope") else None)]
 
     identity = [("Repository", _e(repo)), ("Workflow run", run_link), ("Collector commit", commit_link),
                 ("Recipient key SHA-256", "<code>" + _e(started.get("recipient_sha256")) + "</code>"),
@@ -229,12 +248,19 @@ def page(facts, events, fingerprint=None, head_hash=None):
         f'<header><h1>Sealed capture result</h1><span class="badge {state}">{_e(label)}</span></header>'
         + "".join(alerts)
         + f'<div class="grid"><section class="card wide"><p class="lead">{_e(explanation)}</p>'
-          f'<p class="muted">Ended: {_e(finished.get("reason"))}. Built only from records signed during this run.</p>'
+          '<p class="muted">Built only from records signed during this run.</p>'
         + (f'<div class="stats">{"".join(stats)}</div>' if stats else "") + "</section>"
         + f'<section class="card"><h2>Check these identifiers</h2>{_rows(identity)}</section>'
         + f'<section class="card"><h2>What was captured</h2>{_rows(selection_rows)}</section>'
         + (f'<section class="card"><h2>Coverage</h2>{_rows(coverage_rows)}</section>' if coverage_rows else "")
         + chat_section
+        + '<section class="card wide"><h2>GitHub attestation</h2><p>After this archive was built, GitHub signed '
+          '<code>evidence.zip</code> for workflow run ' + run_link + ' at collector commit ' + commit_link
+        + '. The signature is <code>attestation.jsonl</code>, delivered next to <code>evidence.zip</code>: it signs this '
+          'archive, so it cannot be inside it.</p><p>A valid attestation shows that this exact file came out of that run of '
+          'the approved workflow from that source code, and that no one, including the repository owner, changed a byte '
+          'afterwards. It does not make GitHub or Telegram trustworthy, and it covers only what this account could see '
+          'while the run was active.</p></section>'
         + '<section class="card wide"><h2>Next steps</h2><ol>' + account_entry
         + '<li>Compare the workflow run, collector commit and recipient key above with the run you started and '
           'the key you saved.</li>'

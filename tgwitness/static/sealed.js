@@ -598,7 +598,9 @@ function selection() {
     to_utc: $("through-date").value ? new Date(Date.parse($("through-date").value + "T00:00:00Z") + 86400000).toISOString() : null,
     include_profile: $("account-profile").checked, include_contacts: $("account-contacts").checked,
     include_profile_photos: $("account-photos").checked, include_stories: $("account-stories").checked,
-    include_session_metadata: $("account-sessions").checked, include_other_data: $("account-other").checked};
+    include_session_metadata: $("account-sessions").checked, include_other_data: $("account-other").checked,
+    // An investigator's own capture: charts name each sender with @username and ID instead of aliases.
+    report_presentation: {participant_labels: "names"}};
   const accountMode = !journal;
   if (accountMode) {
     if (!$("total-budget").checkValidity() || !Number.isInteger(options.max_total_gib)) throw new Error(tr("Enter a whole media budget from 1 to 1024 GiB."));

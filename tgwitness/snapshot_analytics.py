@@ -124,10 +124,14 @@ class Analytics:
             person = row.get("sender")
             name = (' '.join(label(person.get(key)) for key in ("first_name", "last_name")).strip()
                     or label(person.get("title"))) if isinstance(person, dict) else label(person)
+            name = row.get("from") or name
+            username = label(person.get("username")) if isinstance(person, dict) else ""
+            if username:
+                name = (str(name or "") + " @" + username).strip()
             sender = row.get("from_id")
             if isinstance(sender, dict):
                 sender = next((str(key) + ':' + str(sender[key]) for key in ("user_id", "channel_id", "chat_id") if type(sender.get(key)) is int), None)
-            self.message(row.get("date"), sender, row.get("from") or name,
+            self.message(row.get("date"), sender, name,
                          chat.get("id"), chat.get("title"), row.get("id"), row.get("reply_to_message_id"))
 
     def result(self):
@@ -203,15 +207,21 @@ def project(data, options):
               "sender_groups": sum(row.get("id") is not None for row in data["participants"])}
     people = data["participants"]
     aliases = alias_map(people)
+    mode = options.get("participant_labels", "aliases")
+
+    def named(row):
+        if row["id"] is None:
+            return UNKNOWN
+        shown = str(row.get("label") or "")
+        number = str(row["id"]).split(":")[-1]
+        return shown + " · ID " + number if mode == "names" and shown and shown != str(row["id"]) else "ID " + number             if mode == "names" else str(row["id"])
     output["participants"] = [{**row, "id": ("participant-%02d" % aliases[row["id"]]) if row["id"] is not None else None,
         "label": ("Participant %02d" % aliases[row["id"]]) if row["id"] is not None else UNKNOWN}
-        if options.get("participant_labels", "aliases") == "aliases" else {**row, "label": str(row["id"]) if row["id"] is not None else UNKNOWN}
-        for row in people]
+        if mode == "aliases" else {**row, "label": named(row)} for row in people]
     if "habits" in data:
         output["habits"] = ([{**row, "id": "participant-%02d" % aliases[row["id"]], "label": "Participant %02d" % aliases[row["id"]]}
                              for row in data["habits"] if row["id"] in aliases]
-                            if options.get("participant_labels", "aliases") == "aliases"
-                            else [{**row, "label": str(row["id"])} for row in data["habits"]])
+                            if mode == "aliases" else [{**row, "label": named(row)} for row in data["habits"]])
     for key, control in CONTROLS.items():
         if not options.get(control, True):
             output.pop(key, None)
