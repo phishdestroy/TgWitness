@@ -34,6 +34,7 @@
 - GitHub Actions capture: whole-account exports can leave out single chats only when the estimate saw every chat; the chat export cover counts selected chats that were never started; account export summaries show files not reached before the stop; the journal records where the pseudo-secret module came from; SVG files from a secret chat download instead of opening in the panel.
 - GitHub Actions capture: a chat whose live archive could not start keeps the messages already read when the run stops, packaged as a partial snapshot.
 - Interface labels left in English in Thai, Uzbek, Hindi and several other languages are translated.
+- GitHub Actions capture: the time and size plan says when it covers only part of the chats; while messages are read the panel counts chat histories read; account export omissions name each unfinished chat once.
 - Account export chat pages are three times smaller; each message links its signed source line.
 - Files a stop left undownloaded are counted as not reached, not as failures, and say why.
 - Deleted accounts are named "Deleted account · ID N" instead of a bare number.
