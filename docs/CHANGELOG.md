@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Avatar initials in reports and Telegram views match the panel: `@name` gives its first letter, `User 12345` gives `U`, a bare number gives `#`.
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
