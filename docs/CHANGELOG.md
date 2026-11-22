@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Selection report: when absent IDs exist but no range rows fit, it no longer also says that none were found.
 - Message-number gap check: a missing number that replies in two different chats point at is no longer assigned to either chat, and a proven gap whose numbers belong to several chats names no single chat. Verification no longer accepts a message-gaps.json that marks a proven gap as only likely. The scope says when a page of a private chat, bot or ordinary group was not finished, or when only the account's own messages were read. Exports made earlier still pass verification.
 - Reports in Arabic, Persian, Urdu and Hebrew: message ID ranges, chat IDs that start with a minus sign, dates and file sizes are shown left to right, as in the JSON files, on the activity map, in chat pages and their page list, and on the GitHub Actions cover page. The number of ranges of absent message IDs is shown as its own label, which reads correctly in every language.
 - GitHub Actions capture: on phones the cover page shows each exported chat as a card with a label next to each value. Chat names and run times keep their order in right-to-left languages, and durations under a minute are shown in the page language. While a chat's own archive is being packaged, the panel shows this step and the remaining time.

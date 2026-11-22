@@ -104,7 +104,7 @@ def html(material, say):
                            escape(neighbor_text(row.get("before"), say)).replace('\n', '<br>'),
                            escape(neighbor_text(row.get("after"), say)).replace('\n', '<br>')]
                           for row in rows])
-        else:
+        elif not gaps["ids_total"]:
             out += '<p>' + e(say("No unobserved message IDs were found between the saved boundaries.")) + '</p>'
         if gaps.get("truncated"):
             out += '<p>' + e(result_text({"text": "Showing {shown} of {total} ranges.", "values": {"shown": len(rows), "total": gaps["ranges_total"]}}, say)) + '</p>'
