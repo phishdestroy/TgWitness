@@ -8320,7 +8320,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Coleta de dados no GitHub Actions: uma seleção grande não bloqueia mais o início; a coleta é interrompida ao atingir o limite de tempo e o arquivo é compactado.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "Em 13 idiomas, “Responder à mensagem #N” agora aparece como um rótulo, e não como um comando.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Relatórios: a visualização do chat nomeia todas as mensagens de serviço; os apelidos dos participantes e os motivos do escopo de lacunas são traduzidos; gráficos com uma única linha são omitidos; os cartões de confiança mostram datas e impressões digitais de chaves de forma legível; e o PDF não deixa mais uma página em branco antes deles.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Coleta de dados no GitHub Actions: o download de fotos de conversas e perfis de pessoas é retomado após uma pausa FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Coleta de dados no GitHub Actions: o download de fotos de conversas e perfis de pessoas é retomado após uma pausa FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Coleta de dados no GitHub Actions: um chat cujo arquivo ao vivo não pôde ser iniciado mantém as mensagens já lidas quando a execução é interrompida, agrupadas como um instantâneo parcial.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Os rótulos da interface que permaneceram em inglês nas versões em tailandês, uzbeque, hindi e vários outros idiomas foram traduzidos."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

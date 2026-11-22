@@ -8320,7 +8320,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Recopilación de datos en GitHub Actions: una selección extensa ya no bloquea el inicio; la recopilación se detiene al alcanzar el límite de tiempo y el archivo se empaqueta.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "En 13 idiomas, «Responder al mensaje n.º N» ahora aparece como una etiqueta, no como un comando.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Informes: en la vista de chat se nombran todos los mensajes de servicio; se traducen los alias de los participantes y los motivos de los intervalos sin datos; se omiten los gráficos de una sola fila; las tarjetas de confianza muestran las fechas y las huellas digitales de las claves de forma legible; y el PDF ya no deja una página en blanco antes de ellas.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Recopilación de datos en GitHub Actions: la descarga de fotos de chats y de personas se reanuda tras una pausa FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Recopilación de datos en GitHub Actions: la descarga de fotos de chats y de personas se reanuda tras una pausa FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Recopilación de datos en GitHub Actions: un chat cuyo archivo en tiempo real no se ha podido iniciar conserva los mensajes ya leídos cuando se detiene la ejecución, empaquetados como una instantánea parcial.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Se han traducido las etiquetas de la interfaz que se habían dejado en inglés en tailandés, uzbeko, hindi y varios otros idiomas."
  },
  "modes": {
   "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",
