@@ -151,6 +151,90 @@ for (const card of document.querySelectorAll('input[name="mode-card"]')) card.ad
 $("export-method").addEventListener("input", () => {
   if (document.querySelector('input[name="mode-card"]:checked')?.value === "account") $("export-mode").value = $("export-method").value;
 });
+const SECRET_PEER = /^@?[A-Za-z][A-Za-z0-9_]{3,31}$|^[0-9]{1,20}$/;
+let secretSignature = "";
+const secretDrafts = {};
+function personLabel(people, id) {
+  const person = people?.[String(id)] || {};
+  return [person.name, person.username ? "@" + person.username : null, id != null ? "ID " + id : null].filter(Boolean).join(" · ");
+}
+function secretButton(text, action, id, cls) {
+  const button = document.createElement("button"); button.type = "button"; button.className = cls;
+  button.textContent = text; button.dataset.secretAction = action; button.dataset.chat = String(id); return button;
+}
+function renderSecret(secret) {
+  $("secret-live").hidden = !secret;
+  if (!secret) return;
+  $("secret-note").textContent = secret.error ? tr("Secret chats reported an error: {error}", {error: secret.error}) :
+    secret.interaction_problem ? secret.interaction_problem : !secret.connected ? tr("Connecting secret chats…") :
+    !(secret.chats || []).length ? tr("Waiting for a secret chat. Start one above, or ask the other side to start one with this account.") : "";
+  const messages = (secret.records || []).filter(r => r.kind === "secret_chat.message");
+  $("capture-messages").textContent = String(messages.length);
+  $("capture-unavailable").textContent = String((secret.chats || []).filter(chat => chat.state === "closed").length);
+  const signature = JSON.stringify([secret.chats, messages.map(r => r.seq), lang]);
+  if (signature === secretSignature) return;
+  secretSignature = signature;
+  for (const field of $("secret-chats").querySelectorAll("input[data-chat]")) secretDrafts[field.dataset.chat] = field.value;
+  const list = $("secret-chats"); list.replaceChildren();
+  for (const chat of secret.chats || []) {
+    const card = document.createElement("article"), head = document.createElement("header"), title = document.createElement("strong");
+    card.className = "secret-card"; title.textContent = personLabel(secret.people, chat.peer_user_id);
+    const state = document.createElement("span"); state.className = "secret-state " + chat.state;
+    state.textContent = chat.state === "requested" && !chat.outbound ? tr("Waiting for you to accept")
+      : tr(secretStates[chat.state] || chat.state);
+    head.append(title, state);
+    if (chat.key_visualization) {
+      const key = document.createElement("code"); key.className = "secret-key";
+      key.textContent = (chat.key_visualization.match(/.{1,8}/g) || []).join(" "); head.append(key);
+    }
+    card.append(head);
+    const thread = document.createElement("div"); thread.className = "secret-thread";
+    for (const record of messages.filter(r => String(r.payload?.secret_chat_id) === String(chat.id)).slice(-30)) {
+      const bubble = document.createElement("p"), meta = document.createElement("small");
+      bubble.className = "secret-bubble " + (record.payload.direction === "out" ? "out" : "in");
+      bubble.textContent = record.payload.text || (record.payload.media ? tr("Attachment") : "");
+      meta.textContent = (record.payload.direction === "out" ? tr("Sent") : tr("Received")) + " · " +
+        String(record.observed_at || "").replace("T", " ").slice(0, 19) + " UTC · " + tr("Record #{n}", {n: record.seq});
+      bubble.append(meta); thread.append(bubble);
+    }
+    card.append(thread);
+    const actions = document.createElement("div"); actions.className = "secret-actions";
+    if (chat.state === "requested" && !chat.outbound) actions.append(secretButton(tr("Accept"), "accept", chat.id, "primary"));
+    if (chat.state === "ready") {
+      const field = document.createElement("input"); field.type = "text"; field.maxLength = 4096; field.dataset.chat = String(chat.id);
+      field.placeholder = tr("Message"); field.setAttribute("aria-label", tr("Message")); field.value = secretDrafts[chat.id] || "";
+      actions.append(field, secretButton(tr("Send"), "send", chat.id, "primary"));
+    }
+    if (chat.state !== "closed") actions.append(secretButton(tr("End chat"), "close", chat.id, "quiet"));
+    card.append(actions); list.append(card);
+  }
+}
+const secretStates = {requested: "Waiting for the other side", ready: "Established", closed: "Ended"};
+async function secretAction(path, body) {
+  actionError = "";
+  try {const result = await api(path, body); secretSignature = ""; renderSecret(result.secret);}
+  catch (error) {actionError = error.message;}
+  renderError();
+}
+$("secret-start").onclick = () => {
+  const user = $("secret-new").value.trim();
+  if (!SECRET_PEER.test(user)) {actionError = tr("Enter a @username or a numeric user ID."); renderError(); return;}
+  secretAction("secret/create", {user}).then(() => {if (!actionError) $("secret-new").value = "";});
+};
+$("secret-chats").addEventListener("click", event => {
+  const button = event.target.closest("button[data-secret-action]"); if (!button) return;
+  const id = button.dataset.chat, action = button.dataset.secretAction;
+  if (action === "send") {
+    const field = $("secret-chats").querySelector(`input[data-chat="${id}"]`), text = field.value.trim();
+    if (!text) return;
+    secretAction(`secret/${id}/send`, {text}).then(() => {if (!actionError) {secretDrafts[id] = ""; field.value = "";}});
+  } else secretAction(`secret/${id}/${action}`, {});
+});
+$("secret-chats").addEventListener("keydown", event => {
+  if (event.key === "Enter" && event.target.matches("input[data-chat]")) {
+    event.preventDefault(); event.target.parentElement.querySelector('button[data-secret-action="send"]')?.click();
+  }
+});
 const chatCategories = ["personal", "bots", "private_groups", "public_groups", "private_channels", "public_channels"];
 const mediaTypes = {photo: 20, video: 100, animation: 20, video_note: 50, voice: 20, audio: 50, sticker: 5, document: 50};
 const mediaNames = {photo: "Photos", video: "Videos", animation: "Animations", video_note: "Video messages",
@@ -201,11 +285,16 @@ $("media-rules").addEventListener("change", () => { if (!applyingPreset) $("medi
 $("media-action").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 applyPreset();
 function selection() {
-  const investigation = $("export-mode").value === "chats";
-  const journal = $("export-mode").value === "journal" || investigation;
+  const investigation = $("export-mode").value === "chats", secret = $("export-mode").value === "secret";
+  const journal = $("export-mode").value === "journal" || investigation || secret;
   const selected = Array.from($("chats").selectedOptions, option => Number(option.value));
   if (investigation && selected.length > 50) throw new Error(tr("Select at most 50 chats for one run."));
-  if ((journal || $("export-scope").value === "chat") && !selected.length) {
+  if (secret) {
+    const peer = $("secret-peer").value.trim();
+    if (peer && !SECRET_PEER.test(peer)) throw new Error(tr("Enter a @username or a numeric user ID."));
+    if (!peer && !$("secret-accept").checked) throw new Error(tr("Name a user to start a secret chat with, or accept secret chats started by others."));
+  }
+  if (!secret && (journal || $("export-scope").value === "chat") && !selected.length) {
     throw new Error(tr("Load chats and select at least one."));
   }
   const types = {};
@@ -240,12 +329,14 @@ function selection() {
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
     messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types};
   if (investigation) return {mode: "chats", chat_ids: selected, capture};
+  if (secret) return {mode: "secret", secret_peer: $("secret-peer").value.trim() || null, accept_incoming: $("secret-accept").checked, capture};
   return {chat_id: Number($("chats").value), capture};
 }
 let assessedSelection = null, assessmentResult = null;
 function describeMode() {
   const mode = $("export-mode").value;
-  $("mode-description").textContent = mode === "auto" ? tr(
+  $("mode-description").textContent = mode === "secret" ? tr(
+    "A secret chat lives only on the two devices. This runner becomes one of them: it starts or accepts the chat, keeps every message and file as they arrive, and signs them into the journal. Nothing from before the run can be recovered.") : mode === "auto" ? tr(
     "Uses Takeout when Telegram allows it and the regular API otherwise. This runner signs in fresh, and Telegram usually refuses Takeout for sessions younger than 24 hours, so expect the regular API. The archive records which method was used.") : mode === "takeout" ? tr(
     "Takeout only. Telegram usually refuses it for a session signed in less than 24 hours ago, and this runner always signs in fresh, so the capture may stop waiting for approval. Prefer Automatic.") : mode === "regular" ? tr(
     "Regular API cannot enumerate groups and channels you left, and contacts include Telegram users rather than the full saved phone contact list. Rate limits still apply.") : mode === "chats" ? tr(
@@ -264,12 +355,15 @@ function clearAssessment() {
     $("own-" + name).disabled = !$("cat-" + name).checked;
     if ($("own-" + name).disabled) $("own-" + name).checked = false;
   }
-  const investigation = $("export-mode").value === "chats";
-  const journal = $("export-mode").value === "journal" || investigation;
+  const investigation = $("export-mode").value === "chats", secret = $("export-mode").value === "secret";
+  const journal = $("export-mode").value === "journal" || investigation || secret;
+  $("secret-options").hidden = !secret;
+  $("chat-picker").closest("section").hidden = secret;
+  $("preflight").hidden = secret;
   document.querySelectorAll("#capture-settings .account-only").forEach(element => {element.hidden = journal;});
   $("export-scope").disabled = journal;
   $("export-format").disabled = journal;
-  const card = document.querySelector(`input[name="mode-card"][value="${journal ? (investigation ? "chats" : "journal") : "account"}"]`);
+  const card = document.querySelector(`input[name="mode-card"][value="${journal ? (investigation ? "chats" : secret ? "secret" : "journal") : "account"}"]`);
   if (card && !card.checked) card.checked = true;
   if (!journal) $("export-method").value = $("export-mode").value;
   $("account-other").disabled = $("export-mode").value !== "takeout";
@@ -282,14 +376,15 @@ function clearAssessment() {
   $("preserve-ephemeral-media").disabled = !journal;
   $("preserve-ephemeral-media").parentElement.hidden = !journal;
   if (!journal) $("messages-first").checked = true;
-  $("chat-picker").hidden = !journal && $("export-scope").value === "account";
+  $("chat-picker").hidden = secret || (!journal && $("export-scope").value === "account");
   $("chats").multiple = !journal || investigation; $("chats").size = journal && !investigation ? 1 : 8;
   if (journal && !investigation) {
     const chosen = Array.from($("chats").selectedOptions);
     chosen.slice(1).forEach(option => {option.selected = false;});
   }
   syncChatList();
-  $("collect").disabled = !$("chat-picker").hidden && !$("chats").selectedOptions.length;
+  $("collect").disabled = secret ? !(SECRET_PEER.test($("secret-peer").value.trim()) || $("secret-accept").checked)
+    : !$("chat-picker").hidden && !$("chats").selectedOptions.length;
   $("preflight").disabled = $("collect").disabled;
   describeMode();
 }
@@ -477,6 +572,7 @@ function renderState(state) {
         {number: kept.length + 1, total: chats.total, captured: chats.current?.captured || 0});
       $("resume").hidden = true;
     }
+    renderSecret(state.phase === "collecting" ? state.secret : null);
     if (state.authorized) {$("api-hash").value = ""; $("phone").value = ""; qrId = null;}
     renderError();
     if (terminal) {ended = true; sessionStorage.removeItem("sealed-access");}

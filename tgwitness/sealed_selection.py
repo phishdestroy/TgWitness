@@ -12,8 +12,11 @@ MAX_CHAT_EXPORTS = 50
 
 class Selection(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    mode: Literal["chat", "account", "chats"] = "chat"
+    mode: Literal["chat", "account", "chats", "secret"] = "chat"
     chat_id: int | None = Field(default=None, strict=True)
+    # Pseudo-secret capture: start a secret chat with this user, accept ones the other side starts, or both.
+    secret_peer: str | None = Field(default=None, pattern=r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20})$")
+    accept_incoming: bool | None = None
     # Investigation export: each chat becomes its own signed chat export inside the sealed archive, in this order.
     chat_ids: list[int] | None = Field(default=None, min_length=1, max_length=MAX_CHAT_EXPORTS)
     capture: Capture = Field(default_factory=lambda: Capture.model_validate({
@@ -25,7 +28,17 @@ class Selection(BaseModel):
     def scope(self):
         if self.mode != "chats" and self.chat_ids is not None:
             raise ValueError("Chat lists belong to the chat investigation export.")
-        if self.mode == "chats":
+        if self.mode != "secret" and (self.secret_peer is not None or self.accept_incoming is not None):
+            raise ValueError("Secret chat settings belong to the secret chat capture.")
+        if self.mode == "secret":
+            if self.chat_id is not None or self.account_options is not None or self.account_scope is not None:
+                raise ValueError("A secret chat capture takes no chat or account selection.")
+            self.accept_incoming = True if self.accept_incoming is None else self.accept_incoming
+            if self.secret_peer is not None:
+                self.secret_peer = self.secret_peer.removeprefix("@") if not self.secret_peer.isdigit() else self.secret_peer
+            if self.secret_peer is None and not self.accept_incoming:
+                raise ValueError("Name the user to start a secret chat with, or accept secret chats started by others.")
+        elif self.mode == "chats":
             if (self.chat_id is not None or self.account_options is not None or self.account_scope is not None
                     or not self.chat_ids):
                 raise ValueError("Select one or more chats for the investigation export.")
@@ -53,6 +66,9 @@ class Selection(BaseModel):
                     "account_options": self.account_options.model_dump()}
         if self.mode == "chats":
             return {"mode": "chats", "chat_ids": list(self.chat_ids), "capture": normalize_capture(self.capture.model_dump())}
+        if self.mode == "secret":
+            return {"mode": "secret", "secret_peer": self.secret_peer, "accept_incoming": self.accept_incoming,
+                    "capture": normalize_capture(self.capture.model_dump())}
         return {"mode": "chat", "chat_id": self.chat_id, "capture": normalize_capture(self.capture.model_dump())}
 
 
@@ -68,6 +84,9 @@ def checked_selection(events, internal, expected=None, require_complete=False):
         raw = {"mode": "account", "account_options": event.get("options")}
     elif event.get("mode") == "chats":
         raw = {"mode": "chats", "chat_ids": event.get("chat_ids"), "capture": event.get("capture")}
+    elif event.get("mode") == "secret":
+        raw = {"mode": "secret", "secret_peer": event.get("secret_peer"), "accept_incoming": event.get("accept_incoming"),
+               "capture": event.get("capture")}
     else:
         raw = {"mode": "chat", "chat_id": event.get("chat_id"), "capture": event.get("capture")}
     settings = Selection.model_validate(raw).settings()
@@ -94,6 +113,8 @@ def checked_selection(events, internal, expected=None, require_complete=False):
     if settings["mode"] == "chats":
         complete = ([item["chat_id"] for item in chats if item["complete"]] == settings["chat_ids"])
         mode = "chat_export"
+    elif settings["mode"] == "secret":
+        complete, mode = None, "secret_chat"
     else:
         complete = account["complete_within_scope"] if account else None
         mode = transport if account else "journal"

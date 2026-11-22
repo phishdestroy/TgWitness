@@ -13,6 +13,14 @@ RUN pip install --no-cache-dir --require-hashes -r build.lock \
     && pip install --no-cache-dir --require-hashes --no-build-isolation -r requirements.lock \
     && pip install --no-cache-dir --no-deps --no-build-isolation . \
     && python -m pip check && python -m pip uninstall --yes pip
+# Pseudo-secret protocol module for secret chat capture: the pinned upstream archive, checked against the SHA-256 fixed in
+# tgwitness/secret_module.py. The capsule has no outside network, so it is fetched here; the capsule checks it again before
+# loading. If GitHub is unreachable or the archive differs, the image is built without it and secret chat capture reports so.
+RUN python -c "import pathlib, urllib.request; from tgwitness import secret_module as m; \
+data = urllib.request.urlopen(m.ARCHIVE, timeout=60).read(); m.checked(data); \
+folder = pathlib.Path('/usr/share/tgwitness-modules'); folder.mkdir(parents=True, exist_ok=True); \
+(folder / m.FILE).write_bytes(data); print('Pseudo-secret module provisioned:', m.INFO['commit'])" \
+    || echo "Pseudo-secret module not provisioned; secret chat capture is unavailable in this image."
 USER 10001:10001
 EXPOSE 8787
 CMD ["python", "-m", "tgwitness.sealed", "--config", "/config/session.json", "--data", "/data", "--out", "/output"]

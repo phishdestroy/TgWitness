@@ -35,6 +35,8 @@ from .store import Store, canonical
 from .workers import complete_in_thread
 
 STATIC = Path(__file__).with_name("static")
+# Built into the sealed image from the pinned upstream archive; checked again against the pinned SHA-256 before loading.
+IMAGE_MODULES = Path("/usr/share/tgwitness-modules")
 TERMINAL = {"sealed", "cancelled", "failed"}
 # The account export travels inside the sealed evidence archive under this name; its own verify commands point at it.
 ACCOUNT_MEMBER = "account-export.zip"
@@ -95,6 +97,8 @@ class Session:
         self.account_export.packaging_copies = 2
         self.account_job = None
         self.chats_task, self.chat_results, self.current_chat = None, None, None
+        self.secret_mode = False
+        self.provision_secret_module()
         self.selection = None
         receipt = run_receipt(self.store, self.vault)
         self.collector.run_id = receipt["run_id"]
@@ -147,6 +151,7 @@ class Session:
                 "selection_sha256": selection_hash(self.selection) if self.selection else None,
                 "account_export": account, "time_budget": self.time_budget(account),
                 "chat_exports": self.chat_progress(),
+                "secret": self.secret_status(),
                 "recipient_sha256": self.recipient, "context": self.config["context"], "revocation": self.revocation}
 
     def chat_progress(self):
@@ -222,6 +227,8 @@ class Session:
             return await self.begin(selection.chat_id, selection.capture)
         if selection.mode == "chats":
             return await self.begin_chats(selection)
+        if selection.mode == "secret":
+            return await self.begin_secret(selection)
         self.require_selection(None)
         if self.status()["remaining_seconds"] <= 0:
             raise ValueError("No capture time remains.")
@@ -311,6 +318,61 @@ class Session:
         if chat_id is not None and not cancel:
             self.keep_chat_export(chat_id, Path(snapshot) if snapshot else None)
         self.current_chat = None
+
+    def provision_secret_module(self):
+        from . import secret_module
+        source = IMAGE_MODULES / secret_module.FILE
+        if not source.is_file() or source.is_symlink():
+            secret_module.home = self.root / "modules"
+            return
+        target = self.root / "modules"
+        target.mkdir(mode=0o700, exist_ok=True)
+        shutil.copyfile(source, target / secret_module.FILE)
+        secret_module.restore(self.root)
+
+    def secret_status(self):
+        if not self.secret_mode:
+            return None
+        from . import secret_chats
+        view = secret_chats.of(self.collector).view()
+        return {key: view.get(key) for key in ("connected", "error", "chats", "people", "records", "interaction_problem",
+                                                "pending_files")}
+
+    async def begin_secret(self, selection):
+        from . import secret_chats, secret_module
+        self.require_selection(None)
+        if not secret_chats.available():
+            raise ValueError("This runner has no checked pseudo-secret module, so secret chats cannot be captured here.")
+        settings = normalize_capture(selection.capture.model_dump())
+        self.store.set_setting("capture", settings)
+        self.store.set_setting(secret_chats.SETTING, {"enabled": True, "accept_incoming": selection.accept_incoming})
+        self.selection = selection.settings()
+        module = secret_module.describe()
+        self.store.append("secret_chat.module_installed", {
+            **{key: module.get(key) for key in ("name", "version", "commit", "sha256", "source", "license", "state")},
+            "route": "runner_image", "meaning": "The pseudo-secret protocol module was built into this runner's image "
+            "from the pinned upstream archive and matched the SHA-256 fixed in this release before it was loaded."})
+        self.store.append("sealed.selection", {"mode": "secret", "secret_peer": selection.secret_peer,
+            "accept_incoming": selection.accept_incoming, "capture": settings, "selection": self.selection,
+            "selection_sha256": selection_hash(self.selection), "free_disk_bytes": shutil.disk_usage(self.root).free,
+            "remaining_seconds": self.status()["remaining_seconds"], "transport": "regular",
+            "total_size_and_duration": "observed during the run"})
+        self.secret_mode = True
+        await self.collector.restore()
+        chats = secret_chats.of(self.collector)
+        if chats.manager is None:
+            await chats.attach(self.collector.client)
+        self.phase = "collecting"
+        self.collection_started = time.monotonic()
+        if selection.secret_peer is not None:
+            user = int(selection.secret_peer) if selection.secret_peer.isdigit() else selection.secret_peer
+            await chats.create(user)
+
+    def require_secret(self):
+        if not self.secret_mode or self.phase != "collecting":
+            raise ValueError("No secret chat capture is running.")
+        from . import secret_chats
+        return secret_chats.of(self.collector)
 
     async def resume(self):
         if self.phase != "collecting":
@@ -488,6 +550,8 @@ class Session:
                             await self.finish("account_export_finished")
                         elif self.account_export.storage_pressure():
                             await self.finish("storage_limit")
+                        continue
+                    if self.secret_mode:
                         continue
                     if self.chats_task:
                         if self.chats_task.done():
@@ -681,6 +745,39 @@ def create_app(root, output, config, client_factory=WitnessClient):
                     await session.finish("user_finish")
             session.finish_task = asyncio.create_task(finalize())
         return JSONResponse({"phase": "sealing"}, status_code=202)
+
+    class SecretUser(StrictBody):
+        user: str = Field(min_length=1, max_length=64, pattern=r"^(@?[A-Za-z][A-Za-z0-9_]{3,31}|[0-9]{1,20})$")
+
+    class SecretText(StrictBody):
+        text: str = Field(min_length=1, max_length=4096)
+
+    async def secret_call(name, *args):
+        session = app.state.session
+        async with session.lock:
+            try:
+                chats = session.require_secret()
+                result = await asyncio.wait_for(getattr(chats, name)(*args), 120)
+            except Exception as exc:
+                raise HTTPException(400, describe(exc)) from None
+            return {"result": result if name != "send" else str(result), "secret": session.secret_status()}
+
+    @app.post("/api/secret/create")
+    async def secret_create(body: SecretUser):
+        user = body.user.removeprefix("@")
+        return await secret_call("create", int(user) if user.isdigit() else user)
+
+    @app.post("/api/secret/{chat_id}/accept")
+    async def secret_accept(chat_id: int):
+        return await secret_call("accept", chat_id)
+
+    @app.post("/api/secret/{chat_id}/send")
+    async def secret_send(chat_id: int, body: SecretText):
+        return await secret_call("send", chat_id, body.text)
+
+    @app.post("/api/secret/{chat_id}/close")
+    async def secret_close(chat_id: int):
+        return await secret_call("close", chat_id)
 
     @app.post("/api/cancel")
     async def cancel():
