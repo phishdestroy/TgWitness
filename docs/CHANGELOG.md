@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- `tgwitness backup` publishes the folder only after the copy is complete, so a full disk or Ctrl+C leaves nothing to clean up; `tgwitness verify-backup FOLDER` checks a backup against its manifest.
 - Avatar initials in reports and Telegram views match the panel: `@name` gives its first letter, `User 12345` gives `U`, a bare number gives `#`.
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.

@@ -1,15 +1,17 @@
 import argparse
+import errno
 import hashlib
 import json
 import os
 import shutil
 import sqlite3
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
-COMMANDS = ("index", "search", "context", "messages", "stats", "export", "backup")
+COMMANDS = ("index", "search", "context", "messages", "stats", "export", "backup", "verify-backup")
 SQLITE_HEADER = b"SQLite format 3\x00"
 BACKUP_SKIP_SUFFIXES = ("-wal", "-shm", "-journal", ".tmp", ".pid")
 BACKUP_SKIP_NAMES = (".instance.lock", "fulltext.sqlite3")
@@ -506,19 +508,7 @@ def file_sha256(path):
     return digest.hexdigest()
 
 
-def backup(args):
-    root = (args.data_dir or default_root()).resolve()
-    target = args.destination.resolve()
-    if not (root / "journal.sqlite3").is_file():
-        print("No journal found in " + str(root), file=sys.stderr)
-        return EXIT_FAILURE
-    if target == root or target.is_relative_to(root) or root.is_relative_to(target):
-        print("Choose a backup folder outside the data directory.", file=sys.stderr)
-        return EXIT_USAGE
-    if target.exists() and any(target.iterdir()):
-        print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
-        return EXIT_USAGE
-    target.mkdir(parents=True, exist_ok=True, mode=0o700)
+def copy_backup(root, target):
     files, checkpoints, databases, others = [], [], [], []
     for folder, directories, names in os.walk(root):
         directories[:] = [d for d in directories if d not in BACKUP_SKIP_DIRS]
@@ -551,21 +541,49 @@ def backup(args):
                 continue
         os.chmod(copy, 0o600)
         files.append({"path": relative.as_posix(), "bytes": copy.stat().st_size, "sha256": file_sha256(copy)})
-    heads = {}
-    for name, workspace in workspaces(target, "all"):
-        connection = sqlite3.connect((workspace / "journal.sqlite3").as_uri() + "?mode=ro&immutable=1", uri=True)
+    heads = journal_heads(target)
+    return files, databases, heads
+
+
+def backup(args):
+    root = (args.data_dir or default_root()).resolve()
+    target = args.destination.resolve()
+    if not (root / "journal.sqlite3").is_file():
+        print("No journal found in " + str(root), file=sys.stderr)
+        return EXIT_FAILURE
+    if target == root or target.is_relative_to(root) or root.is_relative_to(target):
+        print("Choose a backup folder outside the data directory.", file=sys.stderr)
+        return EXIT_USAGE
+    if target.exists() and any(target.iterdir()):
+        print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
+        return EXIT_USAGE
+    target.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=".tgwitness-backup-", dir=target.parent))
+    try:
+        files, databases, heads = copy_backup(root, staging)
+        from . import __version__
+        manifest = {"format": "tgwitness-backup-v1", "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                    "source": str(root), "version": __version__, "journal_heads": heads, "files": files,
+                    "restore": "Stop TgWitness, replace the whole data directory with this folder (without this manifest), "
+                               "then start. The journal records that it was restored from an older copy."}
+        (staging / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
+        os.chmod(staging / "backup-manifest.json", 0o600)
         try:
-            row = connection.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
-        finally:
-            connection.close()
-        heads[name] = {"seq": row[0], "hash": row[1]} if row else None
-    from . import __version__
-    manifest = {"format": "tgwitness-backup-v1", "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                "source": str(root), "version": __version__, "journal_heads": heads, "files": files,
-                "restore": "Stop TgWitness, replace the whole data directory with this folder (without this manifest), "
-                           "then start. The journal records that it was restored from an older copy."}
-    (target / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
-    os.chmod(target / "backup-manifest.json", 0o600)
+            os.rename(staging, target)
+        except OSError as exc:
+            if exc.errno in (errno.ENOTEMPTY, errno.EEXIST):
+                print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
+                return EXIT_USAGE
+            raise
+    except KeyboardInterrupt:
+        print("Backup interrupted. Nothing was written to " + str(target) + ".", file=sys.stderr)
+        return 130
+    except OSError as exc:
+        print("Backup failed, nothing was written to " + str(target) + ": " + (exc.strerror or type(exc).__name__),
+              file=sys.stderr)
+        return EXIT_FAILURE
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
     summary = {"backup": str(target), "files": len(files), "databases": len(databases),
                "bytes": sum(item["bytes"] for item in files), "journal_heads": heads}
     print(json.dumps(summary, ensure_ascii=False) if args.json else
@@ -573,6 +591,63 @@ def backup(args):
           + "\nJournal heads: " + ", ".join(k + " #" + str((v or {}).get("seq")) for k, v in heads.items())
           + "\nKeep this folder as private as the data directory: it holds the Telegram session and signing keys.")
     return 0
+
+
+def journal_heads(root):
+    heads = {}
+    for name, workspace in workspaces(root, "all"):
+        connection = sqlite3.connect((workspace / "journal.sqlite3").as_uri() + "?mode=ro&immutable=1", uri=True)
+        try:
+            row = connection.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+        finally:
+            connection.close()
+        heads[name] = {"seq": row[0], "hash": row[1]} if row else None
+    return heads
+
+
+def verify_backup(args):
+    folder = args.folder.resolve()
+    problems = []
+    listed = {}
+    manifest = {}
+    try:
+        manifest = json.loads((folder / "backup-manifest.json").read_text(encoding="utf-8"))
+        if manifest.get("format") != "tgwitness-backup-v1" or not isinstance(manifest.get("files"), list):
+            raise ValueError
+    except (OSError, ValueError):
+        problems.append("backup-manifest.json is missing or unreadable")
+        manifest = {}
+    for item in manifest.get("files", []):
+        try:
+            relative, size, digest = item["path"], item["bytes"], item["sha256"]
+            path = (folder / relative).resolve()
+            if not path.is_relative_to(folder) or path == folder:
+                problems.append("Path outside the backup: " + str(relative))
+                continue
+            listed[path] = relative
+            if not path.is_file():
+                problems.append("Missing: " + relative)
+            elif path.stat().st_size != size or file_sha256(path) != digest:
+                problems.append("Changed: " + relative)
+        except (KeyError, TypeError, OSError):
+            problems.append("Unreadable manifest entry")
+    if manifest:
+        for path in folder.rglob("*"):
+            if path.is_file() and path != folder / "backup-manifest.json" and path.resolve() not in listed:
+                problems.append("Not in the manifest: " + path.relative_to(folder).as_posix())
+        try:
+            if journal_heads(folder) != manifest.get("journal_heads"):
+                problems.append("Journal heads differ from the manifest")
+        except sqlite3.Error:
+            problems.append("A journal in the backup cannot be read")
+    result = {"folder": str(folder), "verified": not problems, "files": len(listed), "problems": problems}
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False))
+    elif problems:
+        print("Backup does not match its manifest:\n" + "\n".join("  " + item for item in problems), file=sys.stderr)
+    else:
+        print("Backup verified: " + str(len(listed)) + " files match the manifest.")
+    return 0 if not problems else EXIT_FAILURE
 
 
 def archive_command(args):
@@ -686,7 +761,12 @@ def main(argv=None):
     saved.add_argument("--data-dir", type=Path, default=None,
                        help="Data directory (default TGWITNESS_DATA, data/live or this installation's data)")
     saved.add_argument("--json", action="store_true", help="Print one JSON document on stdout")
+    checked = commands.add_parser("verify-backup", help="Check a backup folder against its manifest without changing it")
+    checked.add_argument("folder", type=Path, help="Backup folder made by tgwitness backup")
+    checked.add_argument("--json", action="store_true", help="Print one JSON document on stdout")
     args = parser.parse_args(argv)
+    if args.command == "verify-backup":
+        return verify_backup(args)
     if args.command == "index":
         return index(args)
     if args.command == "backup":
