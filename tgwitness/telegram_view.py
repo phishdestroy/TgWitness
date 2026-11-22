@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from .account_report import chat_note, reason_text, service_line, state_note
+from .avatar_initials import initials as initials_of
 from .report import Words
 from .telegram_export import DELETED_ACCOUNT, MEDIA_PATH, dates, entity_spans, message, name
 
@@ -83,9 +84,8 @@ def formatted(text, entities, emoji=None):
 def avatar(label, src=None):
     if src:
         return '<img class="avatar photo-avatar" src="' + e(src) + '" alt="" loading="lazy">'
-    initials = ''.join(part[0] for part in [word for word in label.split() if word[0].isalnum()][:2]) or '?'
     tone = int(hashlib.sha256(label.encode()).hexdigest()[:2], 16) % 6
-    return '<span class="avatar tone-' + str(tone) + '" aria-hidden="true">' + e(initials.upper()) + '</span>'
+    return '<span class="avatar tone-' + str(tone) + '" aria-hidden="true">' + e(initials_of(label)) + '</span>'
 
 
 class View:
