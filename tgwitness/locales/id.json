@@ -4098,7 +4098,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "Tidak ada celah pengumpulan data yang tercatat. Pengecualian yang dipilih pengguna tetap berlaku.",
   "No additional date restriction": "Tanpa batasan tanggal",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "Catatan pesan tidak disertakan. Periksa cakupan dan pengecualian sebelum menarik kesimpulan.",
-  "No message text in this record.": "Teks pesan tidak disertakan.",
+  "No message text in this record.": "Tidak ada teks pesan dalam catatan ini.",
   "No message text in this sample.": "Contoh ini tidak menyertakan teks pesan.",
   "Not recorded": "Tidak tercatat",
   "Omissions and unavailable data": "Data yang dihilangkan dan tidak tersedia",
@@ -10783,5 +10783,13 @@
   "Deleted account": "Akun yang dihapus",
   "Files not reached before collection stopped": "Berkas-berkas yang belum berhasil diakses sebelum proses pengumpulan dihentikan",
   "Export steps not reached before collection stopped": "Langkah-langkah ekspor yang belum tercapai sebelum pengumpulan dihentikan",
-  "Not reached before collection stopped": "Belum tercapai sebelum pengumpulan dihentikan"
+  "Not reached before collection stopped": "Belum tercapai sebelum pengumpulan dihentikan",
+  "Source in the signed data": "Sumber dalam data yang telah ditandatangani",
+  "line {line}": "baris {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Setiap pesan mencantumkan sumbernya dalam data yang ditandatangani: berkas data, baris, dan nilai SHA-256 dari baris tersebut tanpa pemisah baris. Rincian teknis tidak menyertakan kolom kosong; baris yang ditandatangani tetap menyertakannya.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Pengumpulan data telah diselesaikan di panel penangkapan sebelum berkas ini diunduh.",
+  "The session time ran out before this file was downloaded.": "Waktu sesi habis sebelum berkas ini diunduh.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Pengumpulan data telah selesai sebelum berkas ini diunduh, agar ada waktu untuk pengemasan.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Mesin GitHub Actions kehabisan ruang disk sebelum berkas ini diunduh.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Mesin GitHub Actions menghentikan proses penangkapan sebelum berkas ini diunduh."
 }

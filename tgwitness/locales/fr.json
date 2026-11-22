@@ -1302,7 +1302,7 @@
   "Replies to {name}: {n}": "Réponses à {name} : {n}",
   "Reply": "Répondre",
   "Reply keyboard": "Clavier de réponse",
-  "Reply to message #{id}": "Répondre au message n° {id}",
+  "Reply to message #{id}": "Réponse au message n° {id}",
   "Reply-keyboard presses": "Appuis sur les touches du clavier de réponse",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "Les rapports considèrent comme une interruption tout silence d'une durée supérieure à trois de ces intervalles, et d'au moins trois minutes.",
   "Repository": "Dépôt",
@@ -4125,7 +4125,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "Aucune lacune de collecte n’a été enregistrée. Les exclusions sélectionnées par l’utilisateur s’appliquent toujours.",
   "No additional date restriction": "Aucune restriction supplémentaire concernant la date",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "Aucun enregistrement de message n’est inclus dans cette vue. Vérifiez le champ d’application et les omissions avant de tirer des conclusions.",
-  "No message text in this record.": "Ce dossier ne contient aucun texte de message.",
+  "No message text in this record.": "Cet enregistrement ne contient aucun texte de message.",
   "No message text in this sample.": "Cet exemple ne contient aucun texte de message.",
   "Not recorded": "Non enregistré",
   "Omissions and unavailable data": "Omissions et données indisponibles",
@@ -10844,5 +10844,13 @@
   "Deleted account": "Compte supprimé",
   "Files not reached before collection stopped": "Fichiers non accessibles avant l'arrêt de la collecte",
   "Export steps not reached before collection stopped": "Étapes d’exportation non effectuées avant l’arrêt de la collecte",
-  "Not reached before collection stopped": "Non atteint avant l'arrêt de la collecte"
+  "Not reached before collection stopped": "Non atteint avant l'arrêt de la collecte",
+  "Source in the signed data": "Source dans les données signées",
+  "line {line}": "ligne {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Chaque message indique sa source dans les données signées : le fichier de données, la ligne et la valeur SHA-256 de cette ligne sans son saut de ligne. Les détails techniques omettent les champs vides ; la ligne signée les conserve.",
+  "Collection was finished in the capture panel before this file was downloaded.": "La collecte a été finalisée dans le panneau de capture avant le téléchargement de ce fichier.",
+  "The session time ran out before this file was downloaded.": "La session a expiré avant que ce fichier ne soit téléchargé.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "La collecte s'est terminée avant le téléchargement de ce fichier, afin de laisser le temps nécessaire à la mise en forme.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "La machine GitHub Actions a manqué d’espace disque avant que ce fichier ne soit téléchargé.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Le robot GitHub Actions a interrompu la capture avant que ce fichier ne soit téléchargé."
 }

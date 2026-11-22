@@ -1306,7 +1306,7 @@
   "Replies to {name}: {n}": "Odpowiedzi na {name}: {n}",
   "Reply": "Odpowiedz",
   "Reply keyboard": "Klawiatura odpowiedzi",
-  "Reply to message #{id}": "Odpowiedz na wiadomość nr {id}",
+  "Reply to message #{id}": "Odpowiedź na wiadomość nr {id}",
   "Reply-keyboard presses": "Naciśnięcia klawiszy odpowiedzi",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "W raportach cisza trwająca dłużej niż trzy z tych interwałów i co najmniej trzy minuty jest traktowana jako luka.",
   "Repository": "Repozytorium",
@@ -10936,5 +10936,13 @@
   "Deleted account": "Usunięte konto",
   "Files not reached before collection stopped": "Pliki, do których nie uzyskano dostępu przed zakończeniem gromadzenia danych",
   "Export steps not reached before collection stopped": "Etapy eksportu, do których nie doszło przed przerwaniem gromadzenia danych",
-  "Not reached before collection stopped": "Nie uzyskano przed przerwaniem gromadzenia danych"
+  "Not reached before collection stopped": "Nie uzyskano przed przerwaniem gromadzenia danych",
+  "Source in the signed data": "Źródło w danych podpisanych",
+  "line {line}": "linia {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Każda wiadomość zawiera w podpisanych danych informację o swoim źródle: plik danych, wiersz oraz wartość SHA-256 tego wiersza bez znaku końca wiersza. W szczegółach technicznych pominięto puste pola; podpisany wiersz zachowuje je.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Gromadzenie danych zostało zakończone w panelu przechwytywania przed pobraniem tego pliku.",
+  "The session time ran out before this file was downloaded.": "Czas sesji upłynął przed pobraniem tego pliku.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Gromadzenie danych zakończyło się przed pobraniem tego pliku, aby pozostawić czas na przygotowanie pakietu dowodowego.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Przed pobraniem tego pliku na serwerze GitHub Actions zabrakło miejsca na dysku.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Maszyna GitHub Actions zakończyła przechwytywanie przed pobraniem tego pliku."
 }

@@ -5,7 +5,7 @@ from itertools import islice
 import re
 from datetime import datetime
 
-from . import activity_maps, case_assessment, i18n, message_details, report_layouts, snapshot_analytics
+from . import activity_maps, case_assessment, i18n, message_details, report_layouts, sealed_index, snapshot_analytics
 from .report_analytics import Presentation
 from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, reactions_text, utc_text
 from .store import canonical
@@ -48,6 +48,13 @@ REASONS = {'Stopped before acquisition completed.': 'Stopped before acquisition 
            'hashes_only': 'File hashes saved; file bytes were not downloaded.',
            'hashes_unavailable': 'Telegram did not return hashes for this file.',
            'no_additional_data': 'Telegram returned no data for this file.'}
+# Files a sealed run's stop left unread carry its finish reason; they were never attempted, so a card says so plainly.
+STOP_REASONS = {'user_finish': 'Collection was finished in the capture panel before this file was downloaded.',
+                'deadline': 'The session time ran out before this file was downloaded.',
+                'packaging_reserve': 'Collection ended before this file was downloaded, to leave time for packaging.',
+                'storage_limit': 'The GitHub Actions machine ran low on disk space before this file was downloaded.',
+                'server_shutdown': 'The GitHub Actions machine ended the capture before this file was downloaded.'}
+REASONS.update({sealed_index.REASONS[key][1]: label for key, label in STOP_REASONS.items()})
 ARCHIVE_FILES = {'export_results.html': 'Your chats, laid out the way Telegram shows them',
                  'index.html': 'The report: what was collected, how complete it is and how to check it',
                  'map.html': 'Activity map: when messages were written and which message numbers are missing',
@@ -124,6 +131,54 @@ def encoded(value):
 def technical(value, say):
     return '<details><summary>' + e(say('Technical details')) + '</summary><pre dir="ltr">' + e(
         json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2)) + '</pre></details>'
+
+
+class Record(dict):
+    """A message record read from a signed data page. source is (data file, line number, SHA-256 of the line without
+    its line break), so a chat page can name the exact signed line each message shows."""
+    __slots__ = ('source',)
+
+
+def filled(value):
+    """The record without empty fields (null, false, empty text, list or object), for reading on a chat page. Telegram
+    records repeat dozens of empty sender and message flags; the signed line keeps every field."""
+    if isinstance(value, dict):
+        kept = {key: filled(item) for key, item in value.items()}
+        return {key: item for key, item in kept.items() if item is not None and item is not False and item not in ('', [], {})}
+    if isinstance(value, list):
+        return [filled(item) for item in value]
+    return value
+
+
+def readable(value, depth=0):
+    """JSON for reading: an object or list that fits on one line stays on it, longer ones open one field per line."""
+    flat = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(', ', ': '))
+    if not isinstance(value, (dict, list)) or not value or depth + len(flat) <= 96:
+        return flat
+    pad = ' ' * (depth + 1)
+    if isinstance(value, dict):
+        items = [pad + json.dumps(key, ensure_ascii=False) + ': ' + readable(value[key], depth + 1) for key in sorted(value)]
+        return '{\n' + ',\n'.join(items) + '\n' + ' ' * depth + '}'
+    return '[\n' + ',\n'.join(pad + readable(item, depth + 1) for item in value) + '\n' + ' ' * depth + ']'
+
+
+def record_details(row, say):
+    # Inside <pre> only &, < and > need escaping; quotes stay as they are, which keeps a chat page readable and small.
+    return ('<details><summary>' + e(say('Technical details')) + '</summary><pre dir="ltr">'
+            + html.escape(readable(filled(row)), quote=False) + '</pre></details>')
+
+
+RECORD_SOURCE_NOTE = ('Each message names its source in the signed data: the data file, the line and the SHA-256 of that '
+                      'line without its line break. Technical details leave out empty fields; the signed line keeps them.')
+
+
+def record_source(row, say, prefix):
+    source = getattr(row, 'source', None)
+    if not source:
+        return ''
+    file, line, digest = source
+    return ('<br>' + e(say('Source in the signed data')) + ': <a href="' + e(prefix + file) + '"><code dir="ltr">' + e(file)
+            + '</code></a> · ' + e(say('line {line}', line=line)) + ' · SHA-256 <code dir="ltr">' + e(digest) + '</code>')
 
 
 def timestamp(value, say):
@@ -573,8 +628,9 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
                          + prefix + manifest + '">' + e(say('Download file hashes')) + '</a></p>')
         elif not sharing:
             parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(reason_text(attachment.get('reason'), say)) + '</span></p>')
-    parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference + '</code></p>')
-    parts.append(technical(row, say))
+    parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference
+                 + '</code>' + record_source(row, say, prefix) + '</p>')
+    parts.append(technical(row, say) if sharing else record_details(row, say))
     parts.append('</article>')
     return ''.join(parts)
 
@@ -631,7 +687,8 @@ def account_chat_index(context, chat, counts, months):
 def account_chat_pages(context, chat, rows):
     counts, months, count, size, start, end = [], {}, 0, 0, None, None
     for record, row in enumerate(rows(), 1):
-        length = len(canonical(row))
+        # A page is sized by what it shows: the record without its empty fields.
+        length = len(canonical(filled(row)))
         if count and (count >= CHAT_PAGE_RECORDS or size + length > CHAT_PAGE_DATA_BYTES):
             counts.append((count, start, end))
             count, size, start, end = 0, 0, None, None
@@ -715,7 +772,8 @@ def account_chat(context, chat, rows):
         yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
         if context.get('chat_map'):
             yield encoded(context['chat_map'])
-    yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
+    yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.'))
+                  + ' ' + e(say(RECORD_SOURCE_NOTE)) + '</p>')
     yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a>'
                   + ('<a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a>' if first else '')
                   + '<a href="#verification">' + e(say('Verification')) + '</a></nav><section id="messages">')
@@ -860,5 +918,6 @@ def text_keys():
                                                                      'Failed pages and files', 'Known limits',
                                                                      'Files not reached before collection stopped',
                                                                      'Export steps not reached before collection stopped',
+                                                                     RECORD_SOURCE_NOTE,
                                                                      *REASONS.values(), *STATE_NOTES.values(),
                                                                      *ARCHIVE_FILES.values()]))

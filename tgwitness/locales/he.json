@@ -1304,7 +1304,7 @@
   "Replies to {name}: {n}": "תשובות ל-{name}: {n}",
   "Reply": "השב",
   "Reply keyboard": "מקלדת תגובה",
-  "Reply to message #{id}": "השב להודעה מס' {id}",
+  "Reply to message #{id}": "תשובה להודעה מס' {id}",
   "Reply-keyboard presses": "לחיצות על מקשי התשובה במקלדת",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "הדוחות מתייחסים לשתיקה הנמשכת יותר משלושה מהפרקי זמן הללו, ולפחות שלוש דקות, כאל פער.",
   "Repository": "מאגר",
@@ -4152,7 +4152,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "לא נרשמו פערים באיסוף. החריגים שנבחרו על ידי המשתמש עדיין חלים.",
   "No additional date restriction": "אין הגבלת תאריך נוספת",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "בתצוגה זו לא נכללים רשומות הודעות. יש לבדוק את היקף הנתונים ואת ההשמטות לפני שמסיקים מסקנות.",
-  "No message text in this record.": "אין טקסט הודעות ברשומה זו.",
+  "No message text in this record.": "אין טקסט הודעה ברשומה זו.",
   "No message text in this sample.": "דוגמה זו אינה כוללת טקסט של הודעות.",
   "Not recorded": "לא נרשם",
   "Omissions and unavailable data": "השמטות ונתונים חסרים",
@@ -10885,5 +10885,13 @@
   "Deleted account": "חשבון שנמחק",
   "Files not reached before collection stopped": "קבצים שלא הושגו לפני הפסקת האיסוף",
   "Export steps not reached before collection stopped": "שלבי הייצוא שלא הושלמו לפני הפסקת האיסוף",
-  "Not reached before collection stopped": "לא הושג לפני שהאיסוף הופסק"
+  "Not reached before collection stopped": "לא הושג לפני שהאיסוף הופסק",
+  "Source in the signed data": "מקור בנתונים החתומים",
+  "line {line}": "שורה {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "כל הודעה מציינת את מקורה בנתונים החתומים: קובץ הנתונים, השורה וה-SHA-256 של אותה שורה ללא תו מעבר השורה. בפרטים הטכניים לא מופיעים שדות ריקים; השורה החתומה שומרת אותם.",
+  "Collection was finished in the capture panel before this file was downloaded.": "האיסוף הושלם בלוח הלכידה לפני שהקובץ הורד.",
+  "The session time ran out before this file was downloaded.": "זמן ההפעלה פקע לפני שהקובץ הורד.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "האיסוף הסתיים לפני שהקובץ הורד, כדי להשאיר זמן לאריזה.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "למכונת GitHub Actions נגמר שטח הדיסק לפני שהקובץ הורד.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "מכונת ה-GitHub Actions הפסיקה את הלכידה לפני שהקובץ הזה הורד."
 }

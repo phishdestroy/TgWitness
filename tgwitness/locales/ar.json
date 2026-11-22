@@ -11038,5 +11038,13 @@
   "Deleted account": "حساب محذوف",
   "Files not reached before collection stopped": "الملفات التي لم يتم الوصول إليها قبل توقف عملية جمع البيانات",
   "Export steps not reached before collection stopped": "لم يتم الوصول إلى خطوات التصدير قبل توقف عملية جمع البيانات",
-  "Not reached before collection stopped": "لم يتم الوصول إليها قبل توقف عملية الجمع"
+  "Not reached before collection stopped": "لم يتم الوصول إليها قبل توقف عملية الجمع",
+  "Source in the signed data": "المصدر في البيانات الموقعة",
+  "line {line}": "السطر {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "تحدد كل رسالة مصدرها في البيانات الموقعة: ملف البيانات، والسطر، ورمز SHA-256 الخاص بذلك السطر دون فاصل الأسطر. تُستبعد الحقول الفارغة من التفاصيل الفنية؛ بينما يحتفظ السطر الموقّع بها.",
+  "Collection was finished in the capture panel before this file was downloaded.": "تم الانتهاء من عملية التجميع في لوحة الاستخراج قبل تنزيل هذا الملف.",
+  "The session time ran out before this file was downloaded.": "انتهت مدة الجلسة قبل تنزيل هذا الملف.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "انتهى جمع البيانات قبل تنزيل هذا الملف، لإتاحة الوقت لتجهيز الملفات.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "نفدت مساحة القرص في آلة GitHub Actions قبل تنزيل هذا الملف.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "أوقف نظام GitHub Actions عملية الاستخراج قبل تنزيل هذا الملف."
 }

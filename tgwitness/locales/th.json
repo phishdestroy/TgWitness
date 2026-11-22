@@ -1300,7 +1300,7 @@
   "Replies to {name}: {n}": "จำนวนข้อความตอบกลับถึง{name}: {n}",
   "Reply": "ตอบ",
   "Reply keyboard": "แป้นพิมพ์ตอบกลับ",
-  "Reply to message #{id}": "ตอบกลับข้อความ #{id}",
+  "Reply to message #{id}": "การตอบกลับข้อความ #{id}",
   "Reply-keyboard presses": "การกดปุ่มบนคีย์บอร์ดเพื่อตอบกลับ",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "รายงานจะถือว่าความเงียบที่ยาวนานกว่าสามช่วงเวลาดังกล่าว และอย่างน้อยสามนาที เป็นช่องว่าง",
   "Repository": "Repository",
@@ -10783,5 +10783,13 @@
   "Deleted account": "บัญชีที่ถูกลบ",
   "Files not reached before collection stopped": "ไฟล์ที่ยังไม่ถูกเข้าถึงก่อนการเก็บรวบรวมข้อมูลถูกหยุดลง",
   "Export steps not reached before collection stopped": "ขั้นตอนการส่งออกที่ยังไม่เสร็จสิ้นก่อนการเก็บรวบรวมข้อมูลถูกหยุดลง",
-  "Not reached before collection stopped": "ยังไม่ได้รับการติดต่อก่อนที่การเก็บรวบรวมข้อมูลจะหยุดลง"
+  "Not reached before collection stopped": "ยังไม่ได้รับการติดต่อก่อนที่การเก็บรวบรวมข้อมูลจะหยุดลง",
+  "Source in the signed data": "แหล่งข้อมูลในข้อมูลที่ลงนาม",
+  "line {line}": "บรรทัด {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "ทุกข้อความจะระบุแหล่งที่มาในข้อมูลที่ลงลายมือชื่อ: ไฟล์ข้อมูล, บรรทัด และ SHA-256 ของบรรทัดนั้นโดยไม่รวมการขึ้นบรรทัดใหม่ รายละเอียดทางเทคนิคจะไม่รวมช่องว่าง; ส่วนบรรทัดที่ลงลายมือชื่อจะเก็บช่องว่างเหล่านั้นไว้",
+  "Collection was finished in the capture panel before this file was downloaded.": "การเก็บรวบรวมข้อมูลได้เสร็จสิ้นในแผงการจับข้อมูลก่อนที่ไฟล์นี้จะถูกดาวน์โหลด",
+  "The session time ran out before this file was downloaded.": "เวลาเซสชันหมดลงก่อนที่ไฟล์นี้จะถูกดาวน์โหลด",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "การเก็บรวบรวมข้อมูลสิ้นสุดลงก่อนที่ไฟล์นี้จะถูกดาวน์โหลด เพื่อเหลือเวลาสำหรับการจัดเตรียมไฟล์",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "เครื่อง GitHub Actions หมดพื้นที่ดิสก์ก่อนที่จะดาวน์โหลดไฟล์นี้",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "ระบบ GitHub Actions ได้หยุดการเก็บข้อมูลก่อนที่ไฟล์นี้จะถูกดาวน์โหลด"
 }

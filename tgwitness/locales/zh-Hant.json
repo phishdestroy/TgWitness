@@ -1300,7 +1300,7 @@
   "Replies to {name}: {n}": "對 {name} 的回覆：{n}",
   "Reply": "回覆",
   "Reply keyboard": "回覆鍵盤",
-  "Reply to message #{id}": "回覆訊息 #{id}",
+  "Reply to message #{id}": "對訊息 #{id} 的回覆",
   "Reply-keyboard presses": "回覆鍵盤按壓",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "報告將超過三個此類間隔且至少三分鐘的靜默狀態，視為一個空檔。",
   "Repository": "儲存庫",
@@ -4098,7 +4098,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "未记录任何资料擷取缺口。使用者选定的排除项目仍适用。",
   "No additional date restriction": "無額外日期限制",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "此檢視畫面中未包含任何訊息記錄。在得出結論前，請先確認檢視範圍及遺漏內容。",
-  "No message text in this record.": "此记录不包含任何消息内容。",
+  "No message text in this record.": "此記錄不包含訊息文字。",
   "No message text in this sample.": "此範例中不含任何訊息內容。",
   "Not recorded": "未記錄",
   "Omissions and unavailable data": "遺漏與不可用資料",
@@ -10783,5 +10783,13 @@
   "Deleted account": "已刪除的帳號",
   "Files not reached before collection stopped": "在收集作業停止前未能取得之檔案",
   "Export steps not reached before collection stopped": "在取證中止前尚未完成的匯出步驟",
-  "Not reached before collection stopped": "採集停止前未處理"
+  "Not reached before collection stopped": "採集停止前未處理",
+  "Source in the signed data": "簽名資料中的來源",
+  "line {line}": "行 {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "每則訊息在簽名資料中皆標明其來源：資料檔案、行號，以及該行（不含換行符）的 SHA-256 雜湊值。技術細節中省略了空欄位；簽名資料中的該行則保留了這些欄位。",
+  "Collection was finished in the capture panel before this file was downloaded.": "在下載此檔案之前，已於擷取面板中完成資料蒐集。",
+  "The session time ran out before this file was downloaded.": "在下載此檔案之前，會話時間已超時。",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "資料蒐集在下載此檔案前已結束，以預留時間進行封裝。",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "在下載此檔案之前，GitHub Actions 執行環境的磁碟空間已所剩無幾。",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions 系統在該檔案下載完成前即終止了擷取程序。"
 }

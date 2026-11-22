@@ -4125,7 +4125,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "Não há lacunas de aquisição registradas. Exclusões selecionadas pelo usuário permanecem válidas.",
   "No additional date restriction": "Sem restrição adicional de data",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "Nenhum registro de mensagem está incluído nesta visualização. Verifique o escopo e as omissões antes de tirar conclusões.",
-  "No message text in this record.": "Sem texto de mensagens.",
+  "No message text in this record.": "Não há texto da mensagem neste registro.",
   "No message text in this sample.": "Sem texto de mensagem.",
   "Not recorded": "Não registrado",
   "Omissions and unavailable data": "Omissões e dados indisponíveis",
@@ -10844,5 +10844,13 @@
   "Deleted account": "Conta excluída",
   "Files not reached before collection stopped": "Arquivos não acessados antes da interrupção da coleta",
   "Export steps not reached before collection stopped": "Etapas de exportação não concluídas antes da interrupção da coleta",
-  "Not reached before collection stopped": "Não foi acessado antes da interrupção da coleta"
+  "Not reached before collection stopped": "Não foi acessado antes da interrupção da coleta",
+  "Source in the signed data": "Fonte nos dados assinados",
+  "line {line}": "linha {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Cada mensagem identifica sua origem nos dados assinados: o arquivo de dados, a linha e o SHA-256 dessa linha sem a quebra de linha. Os detalhes técnicos omitem campos vazios; a linha assinada os mantém.",
+  "Collection was finished in the capture panel before this file was downloaded.": "A coleta foi concluída no painel de captura antes que este arquivo fosse baixado.",
+  "The session time ran out before this file was downloaded.": "O tempo de sessão expirou antes que este arquivo fosse baixado.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "A coleta foi encerrada antes que este arquivo fosse baixado, para dar tempo para a organização dos dados.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "A máquina do GitHub Actions ficou sem espaço em disco antes que este arquivo fosse baixado.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "A máquina do GitHub Actions interrompeu a captura antes que este arquivo fosse baixado."
 }

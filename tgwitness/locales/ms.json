@@ -1300,7 +1300,7 @@
   "Replies to {name}: {n}": "Balasan kepada {name}: {n}",
   "Reply": "Balas",
   "Reply keyboard": "Paparan papan kekunci balasan",
-  "Reply to message #{id}": "Balas mesej #{id}",
+  "Reply to message #{id}": "Balasan kepada mesej #{id}",
   "Reply-keyboard presses": "Tekan butang papan kekunci balasan",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "Laporan menganggap ketiadaan bunyi melebihi tiga selang ini, dan sekurang-kurangnya tiga minit, sebagai jurang.",
   "Repository": "Repositori",
@@ -10783,5 +10783,13 @@
   "Deleted account": "Akaun yang dipadam",
   "Files not reached before collection stopped": "Fail yang belum diakses sebelum pengumpulan dihentikan",
   "Export steps not reached before collection stopped": "Langkah-langkah eksport yang belum dicapai sebelum pengumpulan dihentikan",
-  "Not reached before collection stopped": "Tidak sempat dicapai sebelum pengumpulan dihentikan"
+  "Not reached before collection stopped": "Tidak sempat dicapai sebelum pengumpulan dihentikan",
+  "Source in the signed data": "Sumber dalam data yang disahkan",
+  "line {line}": "baris {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Setiap mesej menamakan sumbernya dalam data yang disahkan: fail data, baris dan SHA-256 baris tersebut tanpa pemisah baris. Butiran teknikal mengabaikan medan kosong; baris yang disahkan mengekalkan medan tersebut.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Pengumpulan telah disiapkan di panel tangkapan sebelum fail ini dimuat turun.",
+  "The session time ran out before this file was downloaded.": "Masa sesi tamat sebelum fail ini dimuat turun.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Pengumpulan dihentikan sebelum fail ini dimuat turun, untuk memberi masa bagi pembungkusan.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Mesin GitHub Actions kehabisan ruang cakera sebelum fail ini dimuat turun.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Mesin GitHub Actions menghentikan tangkapan sebelum fail ini dimuat turun."
 }

@@ -1090,7 +1090,7 @@
   "Join request sent. Waiting for administrator approval.": "Đã gửi yêu cầu tham gia. Đang chờ quản trị viên phê duyệt.",
   "Journal record #{n}": "Bản ghi sổ nhật ký #{n}",
   "Preview the Telegram link first.": "Hãy xem trước liên kết Telegram trước.",
-  "Reply to message #{id}": "Trả lời tin nhắn #{id}",
+  "Reply to message #{id}": "Trả lời cho tin nhắn #{id}",
   "Select a chat.": "Hãy chọn một cuộc trò chuyện.",
   "Select a saved message button.": "Hãy chọn một nút tin nhắn đã lưu.",
   "Sending as {account}": "Đang gửi với tư cách {account}",
@@ -10783,5 +10783,13 @@
   "Deleted account": "Tài khoản đã bị xóa",
   "Files not reached before collection stopped": "Các tệp chưa được truy cập trước khi quá trình thu thập bị dừng lại",
   "Export steps not reached before collection stopped": "Các bước xuất dữ liệu chưa được thực hiện trước khi việc thu thập bị dừng lại",
-  "Not reached before collection stopped": "Chưa liên lạc được trước khi việc thu thập dữ liệu dừng lại"
+  "Not reached before collection stopped": "Chưa liên lạc được trước khi việc thu thập dữ liệu dừng lại",
+  "Source in the signed data": "Nguồn trong dữ liệu đã được ký xác nhận",
+  "line {line}": "dòng {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Mỗi tin nhắn đều ghi rõ nguồn gốc của nó trong dữ liệu đã được ký điện tử: tệp dữ liệu, dòng tin nhắn và giá trị SHA-256 của dòng đó (không bao gồm ký tự xuống dòng). Các chi tiết kỹ thuật loại bỏ các trường trống; dòng tin nhắn đã được ký điện tử vẫn giữ nguyên các trường này.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Việc thu thập đã được hoàn tất trong bảng điều khiển thu thập trước khi tệp này được tải xuống.",
+  "The session time ran out before this file was downloaded.": "Thời gian phiên làm việc đã hết trước khi tệp này được tải xuống.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Việc thu thập đã kết thúc trước khi tệp này được tải xuống, để dành thời gian cho việc đóng gói.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Máy chạy GitHub Actions đã hết dung lượng đĩa trước khi tệp này được tải xuống.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Hệ thống GitHub Actions đã dừng quá trình thu thập trước khi tệp này được tải xuống."
 }

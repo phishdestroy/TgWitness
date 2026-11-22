@@ -4058,7 +4058,7 @@
   "Archive reference": "Referencia del archivo",
   "Archived chats excluded.": "Se excluyen los chats archivados.",
   "Archived chats included.": "Se incluyen los chats archivados.",
-  "Attachment not included": "No se incluyen archivos adjuntos",
+  "Attachment not included": "Archivo adjunto no incluido",
   "Before relying on this copy, ask for the ZIP verification result and confirm the signer's key through a separate trusted channel.": "Antes de confiar en esta copia, solicita el resultado de la verificación ZIP y confirma la clave del firmante a través de un canal de confianza independiente.",
   "Capture times come from the collector's clock. Collection may pause or resume between the first and last recorded capture.": "Las horas de captura proceden del reloj del recopilador. La recopilación puede pausarse o reanudarse entre la primera y la última captura registrada.",
   "Change task": "Modificar tarea",
@@ -4125,7 +4125,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "No se han registrado lagunas en la recopilación. Las exclusiones seleccionadas por el usuario siguen siendo válidas.",
   "No additional date restriction": "Sin restricciones de fecha adicionales",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "En esta vista no se incluyen registros de mensajes. Comprueba el alcance y las omisiones antes de sacar conclusiones.",
-  "No message text in this record.": "No hay texto de mensajes en este registro.",
+  "No message text in this record.": "No hay texto del mensaje en este registro.",
   "No message text in this sample.": "No hay texto de mensajes en esta muestra.",
   "Not recorded": "No registrado",
   "Omissions and unavailable data": "Omisiones y datos no disponibles",
@@ -10844,5 +10844,13 @@
   "Deleted account": "Cuenta eliminada",
   "Files not reached before collection stopped": "Archivos a los que no se tuvo acceso antes de que se interrumpiera la recopilación",
   "Export steps not reached before collection stopped": "Pasos de la exportación no completados antes de que se interrumpiera la recopilación",
-  "Not reached before collection stopped": "No se había alcanzado antes de que se interrumpiera la recopilación"
+  "Not reached before collection stopped": "No se había alcanzado antes de que se interrumpiera la recopilación",
+  "Source in the signed data": "Fuente en los datos firmados",
+  "line {line}": "línea {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Cada mensaje indica su origen en los datos firmados: el archivo de datos, la línea y el SHA-256 de dicha línea sin su salto de línea. Los detalles técnicos omiten los campos vacíos; la línea firmada los conserva.",
+  "Collection was finished in the capture panel before this file was downloaded.": "La recopilación se completó en el panel de captura antes de que se descargara este archivo.",
+  "The session time ran out before this file was downloaded.": "La sesión caducó antes de que se descargara este archivo.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "La recopilación finalizó antes de que se descargara este archivo, para dejar tiempo para el empaquetado.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "La máquina de GitHub Actions se quedó sin espacio en disco antes de que se descargara este archivo.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "La máquina de GitHub Actions detuvo la captura antes de que se descargara este archivo."
 }

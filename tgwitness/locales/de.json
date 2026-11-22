@@ -1302,7 +1302,7 @@
   "Replies to {name}: {n}": "Antworten an {name}: {n}",
   "Reply": "Antworten",
   "Reply keyboard": "Antworttastatur",
-  "Reply to message #{id}": "Auf Nachricht Nr. {id} antworten",
+  "Reply to message #{id}": "Antwort auf Nachricht Nr. {id}",
   "Reply-keyboard presses": "Antastungen der Antworttasten",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "In den Berichten wird eine Stille, die länger als drei dieser Intervalle und mindestens drei Minuten dauert, als Lücke gewertet.",
   "Repository": "Repository",
@@ -10834,5 +10834,13 @@
   "Deleted account": "Gelöschtes Konto",
   "Files not reached before collection stopped": "Dateien, auf die vor Beendigung der Erfassung nicht zugegriffen werden konnte",
   "Export steps not reached before collection stopped": "Exportschritte, die vor Beendigung der Erfassung noch nicht erreicht wurden",
-  "Not reached before collection stopped": "Vor Beendigung der Datenerfassung nicht erreicht"
+  "Not reached before collection stopped": "Vor Beendigung der Datenerfassung nicht erreicht",
+  "Source in the signed data": "Quelle in den signierten Daten",
+  "line {line}": "Zeile {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Jede Nachricht nennt in den signierten Daten ihre Quelle: die Datendatei, die Zeile und den SHA-256-Hash dieser Zeile ohne Zeilenumbruch. Technische Details lassen leere Felder außer Acht; die signierte Zeile behält sie bei.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Die Erfassung wurde im Erfassungsfenster abgeschlossen, bevor diese Datei heruntergeladen wurde.",
+  "The session time ran out before this file was downloaded.": "Die Sitzungsdauer ist abgelaufen, bevor diese Datei heruntergeladen wurde.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Die Erfassung wurde vor dem Herunterladen dieser Datei beendet, um Zeit für die Aufbereitung zu lassen.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Dem GitHub-Actions-Server ging der Speicherplatz aus, bevor diese Datei heruntergeladen wurde.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Die GitHub-Actions-Maschine hat die Erfassung beendet, bevor diese Datei heruntergeladen wurde."
 }

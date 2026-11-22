@@ -10834,5 +10834,13 @@
   "Deleted account": "حساب حذف‌شده",
   "Files not reached before collection stopped": "فایل‌هایی که پیش از توقف جمع‌آوری به آن‌ها دسترسی پیدا نشده بود",
   "Export steps not reached before collection stopped": "مراحل خروجی‌گیری که پیش از توقف جمع‌آوری انجام نشده‌اند",
-  "Not reached before collection stopped": "پیش از توقف جمع‌آوری به آن دسترسی حاصل نشد"
+  "Not reached before collection stopped": "پیش از توقف جمع‌آوری به آن دسترسی حاصل نشد",
+  "Source in the signed data": "منبع در داده‌های امضا شده",
+  "line {line}": "خط {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "هر پیام منبع خود را در داده‌های امضا شده نام می‌برد: فایل داده، خط و SHA-256 آن خط بدون شکست خط. جزئیات فنی فیلدهای خالی را حذف می‌کنند؛ اما خط امضا شده آن‌ها را حفظ می‌کند.",
+  "Collection was finished in the capture panel before this file was downloaded.": "جمع‌آوری در پنل ضبط پیش از دانلود این فایل انجام شده بود.",
+  "The session time ran out before this file was downloaded.": "زمان جلسه قبل از دانلود این فایل منقضی شد.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "جمع‌آوری پیش از دانلود این فایل متوقف شد تا زمان کافی برای بسته‌بندی باقی بماند.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "ماشین GitHub Actions قبل از دانلود این فایل، فضای دیسک کمی داشت.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "ماشین GitHub Actions ضبط را پیش از دانلود این فایل متوقف کرد."
 }

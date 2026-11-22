@@ -1183,7 +1183,7 @@
   "Join request sent. Waiting for administrator approval.": "Запрос на присоединение отправлен. Ожидается одобрение администратора.",
   "Journal record #{n}": "Запись журнала № {n}",
   "Preview the Telegram link first.": "Сначала просмотрите ссылку в Telegram.",
-  "Reply to message #{id}": "Ответить на сообщение № {id}",
+  "Reply to message #{id}": "Ответ на сообщение № {id}",
   "Select a chat.": "Выберите чат.",
   "Select a saved message button.": "Нажмите кнопку «Выбрать сохранённое сообщение».",
   "Sending as {account}": "Отправка от имени {account}",
@@ -4214,7 +4214,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "Пробелы в сборе данных не зафиксированы. Исключения, выбранные пользователем, по-прежнему действуют.",
   "No additional date restriction": "Дополнительных ограничений по дате нет",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "Записи сообщений не включены.",
-  "No message text in this record.": "В этой записи отсутствует текст сообщений.",
+  "No message text in this record.": "В этой записи нет текста сообщения.",
   "No message text in this sample.": "В данном примере текст сообщений отсутствует.",
   "Not recorded": "Не записано",
   "Omissions and unavailable data": "Пропуски и недоступные данные",
@@ -10906,5 +10906,13 @@
   "Deleted account": "Удалённый аккаунт",
   "Files not reached before collection stopped": "Файлы, до которых сбор не дошёл до остановки",
   "Export steps not reached before collection stopped": "Шаги экспорта, не начатые до остановки сбора",
-  "Not reached before collection stopped": "Не начато до остановки сбора"
+  "Not reached before collection stopped": "Не начато до остановки сбора",
+  "Source in the signed data": "Источник в подписанных данных",
+  "line {line}": "строка {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "У каждого сообщения указан его источник в подписанных данных: файл данных, номер строки и SHA-256 этой строки без символа перевода строки. В технических подробностях пустые поля опущены; в подписанной строке они сохранены.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Сбор завершили в панели до того, как этот файл был скачан.",
+  "The session time ran out before this file was downloaded.": "Время сеанса истекло до того, как этот файл был скачан.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Сбор завершён до скачивания этого файла, чтобы оставить время на упаковку архива.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "На машине GitHub Actions заканчивалось место на диске до того, как этот файл был скачан.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Машина GitHub Actions прервала сбор до того, как этот файл был скачан."
 }

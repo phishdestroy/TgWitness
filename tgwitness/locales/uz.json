@@ -1302,7 +1302,7 @@
   "Replies to {name}: {n}": "{name}ga javoblar: {n}",
   "Reply": "Javob",
   "Reply keyboard": "Javob klaviaturasi",
-  "Reply to message #{id}": "Xabarga javob bering #{id}",
+  "Reply to message #{id}": "#{id}-xabarga javob",
   "Reply-keyboard presses": "Javob — klaviatura bosishlari",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "Hisobotlar bu intervallardan uchtadan ortig'i davomida, kamida uch daqiqa davomida jimlikni bo'shliq deb hisoblaydi.",
   "Repository": "Repozitoriya",
@@ -10834,5 +10834,13 @@
   "Deleted account": "O'chirib tashlangan hisob",
   "Files not reached before collection stopped": "Yig'ish to'xtatilgunga qadar erishilmagan fayllar",
   "Export steps not reached before collection stopped": "Yig'ish to'xtatilgunga qadar bajarilmagan eksport bosqichlari",
-  "Not reached before collection stopped": "To'plash to'xtatilgunga qadar erishilmagan"
+  "Not reached before collection stopped": "To'plash to'xtatilgunga qadar erishilmagan",
+  "Source in the signed data": "Imzolangan ma'lumotlardagi manba",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Har bir xabar imzolangan ma'lumotlarda manbasini ko'rsatadi: ma'lumot fayli, satr va satr bo'linish belgisi chiqarib tashlangan holdagi o'sha satrning SHA-256 xesh qiymati. Texnik tafsilotlarda bo'sh maydonlar chiqarib tashlanadi; imzolangan satr esa ularni saqlaydi.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Ushbu fayl yuklab olinishidan oldin ushlash panelida yig'ish yakunlandi.",
+  "The session time ran out before this file was downloaded.": "Ushbu fayl yuklab olinishidan oldin sessiya vaqti tugadi.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Ushbu fayl yuklab olinishidan oldin yig'ish to'xtatildi, paketlash uchun vaqt ajratish maqsadida.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "GitHub Actions mashinasi ushbu fayl yuklab olinishidan oldin disk joyi kamayib qoldi.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions mashinasi ushbu fayl yuklab olinishidan oldin yozib olishni to'xtatdi.",
+  "line {line}": "{line}-qator"
 }

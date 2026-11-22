@@ -10834,5 +10834,13 @@
   "Deleted account": "مٹایا گیا اکاؤنٹ",
   "Files not reached before collection stopped": "وہ فائلیں جن تک رسائی جمع بندی رک جانے سے پہلے نہیں پہنچی",
   "Export steps not reached before collection stopped": "اکٹھا کرنا روکے جانے سے پہلے برآمد کے مراحل مکمل نہیں ہوئے",
-  "Not reached before collection stopped": "جمع کرنے کے عمل کے رک جانے سے پہلے حاصل نہیں کیا گیا"
+  "Not reached before collection stopped": "جمع کرنے کے عمل کے رک جانے سے پہلے حاصل نہیں کیا گیا",
+  "Source in the signed data": "دستخط شدہ ڈیٹا میں ماخذ",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "ہر پیغام اپنے ماخذ کا نام دستخط شدہ ڈیٹا میں بتاتا ہے: ڈیٹا فائل، لائن اور اس لائن کا SHA-256 (لائن بریک کے بغیر). تکنیکی تفصیلات خالی فیلڈز کو خارج کر دیتی ہیں؛ دستخط شدہ لائن انہیں برقرار رکھتی ہے۔",
+  "Collection was finished in the capture panel before this file was downloaded.": "اس فائل کے ڈاؤن لوڈ ہونے سے پہلے کیپچر پینل میں کلیکشن مکمل کر دی گئی تھی۔",
+  "The session time ran out before this file was downloaded.": "اس فائل کے ڈاؤن لوڈ ہونے سے پہلے سیشن کا وقت ختم ہو گیا۔",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "اس فائل کے ڈاؤن لوڈ ہونے سے پہلے ہی کلیکشن ختم کر دی گئی تاکہ پیکیجنگ کے لیے وقت رہے۔",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "GitHub Actions مشین کے پاس اس فائل کے ڈاؤن لوڈ ہونے سے پہلے ڈسک کی جگہ کم رہ گئی تھی۔",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions مشین نے اس فائل کے ڈاؤن لوڈ ہونے سے پہلے ہی کیپچر ختم کر دیا۔",
+  "line {line}": "سطر {line}"
 }

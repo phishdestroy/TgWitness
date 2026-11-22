@@ -10834,5 +10834,13 @@
   "Deleted account": "Silinmiş hesap",
   "Files not reached before collection stopped": "Toplama işlemi durdurulmadan önce erişilemeyen dosyalar",
   "Export steps not reached before collection stopped": "Toplama işlemi durdurulmadan önce tamamlanamayan dışa aktarma adımları",
-  "Not reached before collection stopped": "Toplama işlemi durdurulmadan önce ulaşılamadı"
+  "Not reached before collection stopped": "Toplama işlemi durdurulmadan önce ulaşılamadı",
+  "Source in the signed data": "İmzalı verilerdeki kaynak",
+  "line {line}": "satır {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Her mesaj, imzalı verilerde kaynağını belirtir: veri dosyası, satır ve satır sonu işareti hariç o satırın SHA-256 değeri. Teknik ayrıntılarda boş alanlar hariç tutulur; imzalı satırda ise bunlar korunur.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Bu dosya indirilmeden önce, toplama işlemi yakalama panelinde tamamlanmıştır.",
+  "The session time ran out before this file was downloaded.": "Bu dosya indirilemeden oturum süresi doldu.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Paketleme için zaman ayırmak amacıyla, bu dosya indirilmeden önce veri toplama işlemi sonlandırılmıştır.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "Bu dosya indirilmeden önce GitHub Actions makinesinde disk alanı yetersiz kaldı.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions makinesi, bu dosya indirilmeden önce yakalama işlemini sonlandırdı."
 }

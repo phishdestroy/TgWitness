@@ -1090,7 +1090,7 @@
   "Join request sent. Waiting for administrator approval.": "已发送加入请求。正在等待管理员批准。",
   "Journal record #{n}": "日志记录 #{n}",
   "Preview the Telegram link first.": "请先预览 Telegram 链接。",
-  "Reply to message #{id}": "回复消息 #{id}",
+  "Reply to message #{id}": "对消息 #{id} 的回复",
   "Select a chat.": "请选择一个聊天。",
   "Select a saved message button.": "请选择一个已保存的消息按钮。",
   "Sending as {account}": "正在以 {account} 身份发送",
@@ -10783,5 +10783,13 @@
   "Deleted account": "已删除的账户",
   "Files not reached before collection stopped": "在采集停止前未获取到的文件",
   "Export steps not reached before collection stopped": "在取证停止前未完成的导出步骤",
-  "Not reached before collection stopped": "采集停止前未处理"
+  "Not reached before collection stopped": "采集停止前未处理",
+  "Source in the signed data": "签名数据中的来源",
+  "line {line}": "行 {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "在签名数据中，每条消息都会标明其来源：数据文件、行号以及该行（不含换行符）的 SHA-256 哈希值。技术细节中省略了空字段；签名行中则保留了这些字段。",
+  "Collection was finished in the capture panel before this file was downloaded.": "在下载本文件之前，已在捕获面板中完成了数据采集。",
+  "The session time ran out before this file was downloaded.": "在下载此文件之前，会话时间已超时。",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "数据采集在下载本文件前已结束，以便留出打包时间。",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "在下载此文件之前，GitHub Actions 服务器已出现磁盘空间不足的情况。",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "在下载本文件之前，GitHub Actions 系统已终止了数据捕获操作。"
 }

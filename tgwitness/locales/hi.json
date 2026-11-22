@@ -10834,5 +10834,13 @@
   "Deleted account": "मिटाया गया खाता",
   "Files not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त न की गई फ़ाइलें",
   "Export steps not reached before collection stopped": "संग्रह रुकने से पहले निर्यात चरण पूरे नहीं हुए",
-  "Not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त नहीं किया गया"
+  "Not reached before collection stopped": "संग्रह रुकने से पहले प्राप्त नहीं किया गया",
+  "Source in the signed data": "हस्ताक्षरित डेटा में स्रोत",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "प्रत्येक संदेश हस्ताक्षरित डेटा में अपने स्रोत का नाम बताता है: डेटा फ़ाइल, पंक्ति और उस पंक्ति का SHA-256 (बिना लाइन ब्रेक के)। तकनीकी विवरण खाली फ़ील्ड्स को छोड़ देते हैं; हस्ताक्षरित पंक्ति उन्हें रखती है।",
+  "Collection was finished in the capture panel before this file was downloaded.": "इस फ़ाइल को डाउनलोड करने से पहले कैप्चर पैनल में संग्रह पूरा किया गया था।",
+  "The session time ran out before this file was downloaded.": "इस फ़ाइल डाउनलोड होने से पहले सत्र समय समाप्त हो गया।",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "इस फ़ाइल को डाउनलोड करने से पहले संग्रह समाप्त कर दिया गया, ताकि पैकेजिंग के लिए समय मिल सके।",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "इस फ़ाइल डाउनलोड होने से पहले GitHub Actions मशीन में डिस्क स्थान कम पड़ गया था।",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions मशीन ने इस फ़ाइल के डाउनलोड होने से पहले कैप्चर प्रक्रिया समाप्त कर दी।",
+  "line {line}": "पंक्ति {line}"
 }

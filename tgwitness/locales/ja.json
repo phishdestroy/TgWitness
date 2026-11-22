@@ -10783,5 +10783,13 @@
   "Deleted account": "削除されたアカウント",
   "Files not reached before collection stopped": "収集が中断される前に到達できなかったファイル",
   "Export steps not reached before collection stopped": "収集が中断される前に完了しなかったエクスポート手順",
-  "Not reached before collection stopped": "収集が停止される前に到達しなかった"
+  "Not reached before collection stopped": "収集が停止される前に到達しなかった",
+  "Source in the signed data": "署名付きデータ内のソース",
+  "line {line}": "行 {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "署名付きデータ内の各メッセージには、その出所（データファイル名、行番号、および改行を除いたその行のSHA-256ハッシュ値）が明記されている。技術的な詳細については、空のフィールドは省略されるが、署名付きデータ内の行にはそれらが保持されている。",
+  "Collection was finished in the capture panel before this file was downloaded.": "このファイルがダウンロードされる前に、キャプチャパネルでの収集は完了していました。",
+  "The session time ran out before this file was downloaded.": "このファイルのダウンロードが完了する前に、セッション時間が切れてしまいました。",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "パッケージングの時間を確保するため、このファイルのダウンロード前に収集を終了した。",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "このファイルがダウンロードされる前に、GitHub Actions マシンのディスク容量が不足しました。",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "このファイルがダウンロードされる前に、GitHub Actions マシンが取得を終了しました。"
 }

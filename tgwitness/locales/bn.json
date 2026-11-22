@@ -1302,7 +1302,7 @@
   "Replies to {name}: {n}": "{name}-এর উত্তরসমূহ: {n}",
   "Reply": "উত্তর দিন",
   "Reply keyboard": "প্রত্যুত্তর কীবোর্ড",
-  "Reply to message #{id}": "বার্তা #{id}-এ উত্তর দিন",
+  "Reply to message #{id}": "বার্তা #{id}-এর উত্তর",
   "Reply-keyboard presses": "উত্তর-কীবোর্ড চাপ",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "রিপোর্টগুলো এই ইন্টারভালগুলোর মধ্যে কোনো নীরবতা যদি তিনটির বেশি এবং কমপক্ষে তিন মিনিট দীর্ঘ হয়, তা ফাঁক হিসেবে বিবেচনা করে।",
   "Repository": "গুদাম",
@@ -10834,5 +10834,13 @@
   "Deleted account": "মুছে ফেলা অ্যাকাউন্ট",
   "Files not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে অ্যাক্সেস করা যায়নি এমন ফাইলসমূহ",
   "Export steps not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে এক্সপোর্ট ধাপগুলো সম্পন্ন হয়নি",
-  "Not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে পৌঁছানো যায়নি"
+  "Not reached before collection stopped": "সংগ্রহ বন্ধ হওয়ার আগে পৌঁছানো যায়নি",
+  "Source in the signed data": "স্বাক্ষরিত ডেটায় উৎস",
+  "line {line}": "লাইন {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "প্রতিটি বার্তা স্বাক্ষরিত ডেটায় তার উৎস উল্লেখ করে: ডেটা ফাইল, লাইন নম্বর এবং সেই লাইনের SHA-256 (লাইন বিরতি বাদ দিয়ে)। প্রযুক্তিগত বিবরণে ফাঁকা ক্ষেত্রগুলো বাদ দেওয়া হয়; স্বাক্ষরিত লাইনে সেগুলো রাখা হয়।",
+  "Collection was finished in the capture panel before this file was downloaded.": "এই ফাইলটি ডাউনলোড করার আগে ক্যাপচার প্যানেলে সংগ্রহ সম্পন্ন করা হয়েছিল।",
+  "The session time ran out before this file was downloaded.": "এই ফাইলটি ডাউনলোড হওয়ার আগেই সেশন সময় শেষ হয়ে গেছে।",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "এই ফাইলটি ডাউনলোড হওয়ার আগেই সংগ্রহ বন্ধ করা হয়েছিল, প্যাকেজিংয়ের জন্য সময় রাখতে।",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "GitHub Actions মেশিনে এই ফাইল ডাউনলোড করার আগে ডিস্ক স্পেস কমে গিয়েছিল।",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "GitHub Actions মেশিন এই ফাইলটি ডাউনলোড হওয়ার আগেই ক্যাপচার বন্ধ করে দিয়েছে।"
 }

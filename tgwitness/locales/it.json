@@ -1302,7 +1302,7 @@
   "Replies to {name}: {n}": "Risposte a {name}: {n}",
   "Reply": "Rispondi",
   "Reply keyboard": "Tastiera di risposta",
-  "Reply to message #{id}": "Rispondi al messaggio n. {id}",
+  "Reply to message #{id}": "Risposta al messaggio n. {id}",
   "Reply-keyboard presses": "Pressioni sulla tastiera di risposta",
   "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "I rapporti considerano come «lacuna» un silenzio che superi tre di questi intervalli e che duri almeno tre minuti.",
   "Repository": "Repository",
@@ -10844,5 +10844,13 @@
   "Deleted account": "Account cancellato",
   "Files not reached before collection stopped": "File non raggiunti prima dell’interruzione della raccolta",
   "Export steps not reached before collection stopped": "Passaggi di esportazione non completati prima dell’interruzione della raccolta",
-  "Not reached before collection stopped": "Non raggiunto prima dell’interruzione della raccolta"
+  "Not reached before collection stopped": "Non raggiunto prima dell’interruzione della raccolta",
+  "Source in the signed data": "Fonte nei dati firmati",
+  "line {line}": "riga {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "Ogni messaggio indica la propria fonte nei dati firmati: il file di dati, la riga e l’SHA-256 di quella riga senza l’interruzione di riga. I dettagli tecnici tralasciano i campi vuoti; la riga firmata li conserva.",
+  "Collection was finished in the capture panel before this file was downloaded.": "La raccolta è stata completata nel pannello di acquisizione prima che questo file venisse scaricato.",
+  "The session time ran out before this file was downloaded.": "Il tempo a disposizione per la sessione è scaduto prima che questo file venisse scaricato.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "La raccolta è terminata prima che questo file venisse scaricato, per lasciare tempo per l’archiviazione.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "La macchina GitHub Actions ha esaurito lo spazio su disco prima che questo file venisse scaricato.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Il sistema GitHub Actions ha interrotto l’acquisizione prima che questo file venisse scaricato."
 }

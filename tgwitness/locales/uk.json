@@ -4179,7 +4179,7 @@
   "No acquisition gaps recorded. User-selected exclusions still apply.": "Прогалин у зборі даних не зафіксовано. Вибрані користувачем виключення залишаються чинними.",
   "No additional date restriction": "Без додаткових дата-обмежень",
   "No message records are included in this view. Check the scope and omissions before drawing conclusions.": "У цьому перегляді не містяться записи повідомлень. Перш ніж робити висновки, перевірте обсяг даних та пропуски.",
-  "No message text in this record.": "У цьому записі немає тексту повідомлень.",
+  "No message text in this record.": "У цьому записі немає тексту повідомлення.",
   "No message text in this sample.": "У цьому зразку немає тексту повідомлень.",
   "Not recorded": "Не записано",
   "Omissions and unavailable data": "Пропуски та недоступні дані",
@@ -10936,5 +10936,13 @@
   "Deleted account": "Видалений акаунт",
   "Files not reached before collection stopped": "Файли, до яких збір не дійшов до зупинки",
   "Export steps not reached before collection stopped": "Кроки експорту, не розпочаті до зупинки збору",
-  "Not reached before collection stopped": "Не розпочато до зупинки збору"
+  "Not reached before collection stopped": "Не розпочато до зупинки збору",
+  "Source in the signed data": "Джерело в підписаних даних",
+  "line {line}": "рядок {line}",
+  "Each message names its source in the signed data: the data file, the line and the SHA-256 of that line without its line break. Technical details leave out empty fields; the signed line keeps them.": "У кожному повідомленні вказано його джерело в підписаних даних: файл даних, рядок та SHA-256 цього рядка без розриву рядка. У технічних деталях порожні поля опущено; у підписаному рядку вони збережені.",
+  "Collection was finished in the capture panel before this file was downloaded.": "Збір завершили в панелі до того, як цей файл було завантажено.",
+  "The session time ran out before this file was downloaded.": "Час сеансу закінчився до того, як цей файл було завантажено.",
+  "Collection ended before this file was downloaded, to leave time for packaging.": "Збір завершено до завантаження цього файлу, щоб залишити час на пакування архіву.",
+  "The GitHub Actions machine ran low on disk space before this file was downloaded.": "На машині GitHub Actions закінчувалося місце на диску до того, як цей файл було завантажено.",
+  "The GitHub Actions machine ended the capture before this file was downloaded.": "Машина GitHub Actions перервала збір до того, як цей файл було завантажено."
 }
