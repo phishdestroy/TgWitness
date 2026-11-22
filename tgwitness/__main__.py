@@ -104,6 +104,16 @@ def main():
         raise SystemExit(0 if report["ready"] else 1)
     if not 1 <= args.port <= 65535:
         parser.error("Port must be between 1 and 65535")
+    if root.exists():
+        from .security import InstanceLock
+        try:
+            InstanceLock(root).close()
+        except RuntimeError:
+            print("This data directory is already open in another TgWitness: " + str(root)
+                  + "\nOpen that panel, stop it first, or choose another folder with --data-dir.", file=sys.stderr)
+            raise SystemExit(3)
+        except OSError:
+            pass
     import uvicorn
     from .app import create_app
     from .logging_config import server_logging
