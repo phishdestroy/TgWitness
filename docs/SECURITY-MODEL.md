@@ -177,7 +177,7 @@ moment the recipient obtained it, through another channel. A witness shows that 
 key retained the journal head; the custodian's key-control record shows who holds that
 key. Both are supporting checks; the minimum is third-party time.
 [GitHub Actions capture](SEALED-ACTIONS.md) or an
-[Intel TDX deployment](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx)
+[Intel TDX deployment](PHALA.md#confidential-vm-on-phala-cloud-intel-tdx)
 add workflow provenance or hardware measurements of the collection environment.
 
 Every verification answer lists the evidence conditions with how each was checked,

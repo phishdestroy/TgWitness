@@ -1,0 +1,351 @@
+<p class="guide-outcome">A server that collects for a case should not ask anyone to trust whoever runs it. Watch how TgWitness deploys one that a third party can check, what that check covers and what no customer-visible log can show.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong translate="no">0</strong><span>inbound ports: the panel is reached only through an outbound tunnel</span></div><div role="listitem"><strong translate="no">SSH</strong><span>masked and root locked from the first boot</span></div><div role="listitem"><strong>Read-only</strong><span>tokens are all a verifier needs</span></div><div role="listitem"><strong translate="no">0 · 1 · 2</strong><span>exit codes of verify: pass, fail, review</span></div></div>
+
+<h2 id="deploy">One command, six steps</h2>
+<p>You run <code>python -m tgwitness.cloud deploy</code>, or the <strong>Server 24/7</strong> wizard in the panel runs it for you. Your computer talks to two APIs, Cloudflare's and the provider's, and nothing else. The server builds itself from a single commit and never accepts a connection.</p>
+<figure class="lab vs-deploy" data-lab="vsDeploy" data-step="0" aria-labelledby="vs-deploy-caption">
+<div class="lab-top"><span class="lab-kicker">01 / DEPLOYMENT, STEP BY STEP</span><span class="sample-tag">The order deploy follows</span></div>
+<div class="vs-scene-wrap"><svg class="vs-scene vs-scene-wide" viewBox="0 0 720 352" role="img" aria-labelledby="vs-scene-title"><title id="vs-scene-title">Your computer creates a Cloudflare tunnel and, through the provider API, a firewall and a server. The server fetches one commit, starts the collector and connects outward to Cloudflare.</title>
+<path class="vs-wire" data-wire="cf" d="M60 132V8H619V18"/>
+<path class="vs-wire" data-wire="api" d="M166 150H222V49H280"/>
+<path class="vs-wire" data-wire="make" d="M365 80V128"/>
+<path class="vs-wire" data-wire="git" d="M574 281H540"/>
+<path class="vs-wire" data-wire="tunnel" d="M500 128V102H650V80"/>
+<g class="vs-node is-on" data-node="computer"><rect x="16" y="132" width="150" height="66" rx="12"/><text class="vs-title" x="91" y="160">Your computer</text><text class="vs-sub" x="91" y="182">tgwitness.cloud deploy</text></g>
+<g class="vs-node" data-node="api"><rect x="280" y="18" width="170" height="62" rx="12"/><text class="vs-title" x="365" y="45">Provider API</text><text class="vs-sub" x="365" y="66">firewall · server</text></g>
+<g class="vs-node" data-node="cf"><rect x="534" y="18" width="170" height="62" rx="12"/><text class="vs-title" x="619" y="45">Cloudflare</text><text class="vs-sub" x="619" y="66">tunnel · DNS</text></g>
+<g class="vs-node" data-node="git"><rect x="574" y="250" width="130" height="62" rx="12"/><text class="vs-title" x="639" y="277">Git</text><text class="vs-sub" x="639" y="298">one commit</text></g>
+<g class="vs-appear" data-node="firewall"><rect class="vs-wall" x="258" y="128" width="12" height="190" rx="4"/><text class="vs-sub vs-wall-label" x="264" y="338">no inbound rules</text><path class="vs-blocked" d="M178 250H244"/><path class="vs-cross" d="M240 242l12 16m0-16l-12 16"/></g>
+<g class="vs-appear" data-node="server"><rect class="vs-server" x="290" y="128" width="250" height="190" rx="14"/><text class="vs-title" x="415" y="153">Server</text>
+<g class="vs-chip" data-chip="ssh"><rect x="306" y="166" width="218" height="28" rx="7"/><text x="415" y="185">SSH masked · root locked</text></g>
+<g class="vs-chip" data-chip="code"><rect x="306" y="200" width="218" height="28" rx="7"/><text x="415" y="219">Commit checked · hashed packages</text></g>
+<g class="vs-chip" data-chip="collector"><rect x="306" y="234" width="218" height="28" rx="7"/><text x="415" y="253">Collector and cloudflared</text></g>
+<g class="vs-chip vs-key" data-chip="key"><rect x="306" y="268" width="218" height="28" rx="7"/><text x="415" y="287">Signing key, created here</text></g>
+</g>
+<g class="vs-appear vs-record" data-node="record"><rect x="22" y="214" width="138" height="40" rx="8"/><text x="91" y="239">deployment.json</text></g>
+</svg>
+<svg class="vs-scene vs-scene-tall" viewBox="0 0 360 520" role="img" aria-labelledby="vs-scene-tall-title"><title id="vs-scene-tall-title">Your computer creates a Cloudflare tunnel and, through the provider API, a firewall and a server. The server fetches one commit, starts the collector and connects outward to Cloudflare.</title>
+<path class="vs-wire" data-wire="cf" d="M160 39H200"/>
+<path class="vs-wire" data-wire="api" d="M40 68V104"/>
+<path class="vs-wire" data-wire="make" d="M85 162V220"/>
+<path class="vs-wire" data-wire="git" d="M275 450V420"/>
+<path class="vs-wire" data-wire="tunnel" d="M310 220V68"/>
+<g class="vs-node is-on" data-node="computer"><rect x="10" y="10" width="150" height="58" rx="12"/><text class="vs-title" x="85" y="35">Your computer</text><text class="vs-sub" x="85" y="55">tgwitness.cloud deploy</text></g>
+<g class="vs-node" data-node="cf"><rect x="200" y="10" width="150" height="58" rx="12"/><text class="vs-title" x="275" y="35">Cloudflare</text><text class="vs-sub" x="275" y="55">tunnel · DNS</text></g>
+<g class="vs-node" data-node="api"><rect x="10" y="104" width="150" height="58" rx="12"/><text class="vs-title" x="85" y="129">Provider API</text><text class="vs-sub" x="85" y="149">firewall · server</text></g>
+<g class="vs-node" data-node="git"><rect x="200" y="450" width="150" height="58" rx="12"/><text class="vs-title" x="275" y="475">Git</text><text class="vs-sub" x="275" y="495">one commit</text></g>
+<g class="vs-appear vs-record" data-node="record"><rect x="58" y="72" width="104" height="26" rx="7"/><text x="110" y="89">deployment.json</text></g>
+<g class="vs-appear" data-node="firewall"><rect class="vs-wall" x="34" y="220" width="12" height="200" rx="4"/><text class="vs-sub vs-wall-label vs-start" x="10" y="440">no inbound rules</text><path class="vs-blocked" d="M2 320H24"/><path class="vs-cross" d="M20 312l12 16m0-16l-12 16"/></g>
+<g class="vs-appear" data-node="server"><rect class="vs-server" x="60" y="220" width="290" height="200" rx="14"/><text class="vs-title" x="205" y="245">Server</text>
+<g class="vs-chip" data-chip="ssh"><rect x="76" y="258" width="258" height="28" rx="7"/><text x="205" y="277">SSH masked · root locked</text></g>
+<g class="vs-chip" data-chip="code"><rect x="76" y="292" width="258" height="28" rx="7"/><text x="205" y="311">Commit checked · hashed packages</text></g>
+<g class="vs-chip" data-chip="collector"><rect x="76" y="326" width="258" height="28" rx="7"/><text x="205" y="345">Collector and cloudflared</text></g>
+<g class="vs-chip vs-key" data-chip="key"><rect x="76" y="360" width="258" height="28" rx="7"/><text x="205" y="379">Signing key, created here</text></g>
+</g>
+</svg></div>
+<ol class="vs-steps">
+<li data-deploy-step="1"><strong>Tunnel and DNS at Cloudflare.</strong> The tunnel's ingress forwards the panel hostname to the panel alone; a witness hostname gets two read-only paths.</li>
+<li data-deploy-step="2"><strong>Firewall without inbound rules.</strong> Created through the provider API before the server exists, so nothing can ever connect in.</li>
+<li data-deploy-step="3"><strong>Server behind it.</strong> No SSH key, no backups, no console agent; a cloud-init file holds everything it needs.</li>
+<li data-deploy-step="4"><strong>First boot.</strong> SSH is masked and root locked; the server fetches exactly one commit, checks it and installs only packages whose SHA-256 is in that commit's locks.</li>
+<li data-deploy-step="5"><strong>Collector and key.</strong> TgWitness starts and creates its signing key on the server; cloudflared connects outward to Cloudflare.</li>
+<li data-deploy-step="6"><strong>Signed statement.</strong> The collector signs the server ID and the hash of its cloud-init; deploy checks both and writes <code>deployment.json</code> for the verifier.</li>
+</ol>
+<div class="lab-controls" data-enhanced hidden><button type="button" class="lab-primary" data-play>Play deployment</button><button type="button" data-next>Next step →</button><button type="button" data-reset>Reset</button><span data-step-label>Ready / 0 of 6</span></div>
+<p class="lab-status" data-deploy-status role="status">Six steps, in the order deploy runs them. Nothing is created before you confirm in the wizard.</p>
+<figcaption id="vs-deploy-caption">Named tunnel under your domain. With a quick tunnel there is no Cloudflare account: the server posts its random address, signed, to a random ntfy.sh topic.</figcaption>
+</figure>
+
+<h2 id="reach">Who can reach a cloud server</h2>
+<p>A cloud server is a QEMU process on the provider's physical host. Its memory, disk, network and clock all belong to that host. There are two ways in: the control plane you and your API token use, and the hosts themselves.</p>
+<figure class="lab vs-reach" data-lab="vsReach" data-actor="none" aria-labelledby="vs-reach-caption">
+<div class="lab-top"><span class="lab-kicker">02 / WHO CAN REACH THE SERVER</span><span class="sample-tag">One host, several customers</span></div>
+<div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Choose who tries to reach the server"><button type="button" data-actor="api" aria-pressed="false">Anyone with your API token</button><button type="button" data-actor="tunnel" aria-pressed="false">Anyone with the tunnel token</button><button type="button" data-actor="network" aria-pressed="false">Network interceptor</button><button type="button" data-actor="host" aria-pressed="false">Provider staff or a state</button></div>
+<div class="vs-stack">
+<div class="vs-layer" data-layer="api"><span class="panel-caption">CUSTOMER CONTROL PLANE</span><strong>Provider API and web console</strong><span class="vs-layer-text">create · console · rescue · rebuild · snapshot · firewall</span><span class="vs-lamp" data-lamp="api">Provider log of your account</span></div>
+<div class="vs-layer" data-layer="tunnel"><span class="panel-caption">CLOUDFLARE</span><strong>Tunnel to the panel</strong><span class="vs-layer-text">connectors · ingress · DNS</span><span class="vs-lamp" data-lamp="tunnel">Cloudflare's records</span></div>
+<div class="vs-host" data-layer="host"><span class="panel-caption">PHYSICAL HOST · LINUX AND KVM</span>
+<div class="vs-vms">
+<div class="vs-vm is-yours"><strong>Your server</strong><span>QEMU process</span><ul class="vs-parts"><li data-part="memory">memory</li><li data-part="disk">disk</li><li data-part="clock">clock</li></ul></div>
+<div class="vs-vm"><strong>Neighbour</strong><span>a bank</span></div>
+<div class="vs-vm"><strong>Neighbour</strong><span>a public body</span></div>
+</div>
+<span class="vs-lamp" data-lamp="host">No log you can see</span></div>
+<div class="vs-layer vs-wide" data-layer="network"><span class="panel-caption">PROVIDER NETWORK</span><strong>Virtual switch and uplinks</strong><span class="vs-layer-text">MTProto to Telegram · tunnel to Cloudflare</span><span class="vs-lamp" data-lamp="network">Gaps in the journal</span></div>
+</div>
+<p class="lab-status" data-reach-status role="status">Choose who tries to reach the server. Every customer action goes through the control plane and lands in the provider log; the host sits below it.</p>
+<figcaption id="vs-reach-caption">Reaching the host takes the provider's own staff, a state that compels the provider, or someone who has compromised the provider. Those operations affect only your server, and the neighbours notice nothing.</figcaption>
+</figure>
+<div class="threat-grid">
+<section class="threat-card is-covered" aria-labelledby="vs-fixed-title"><h3 id="vs-fixed-title"><span aria-hidden="true">✓</span> What stays fixed even then</h3><ul>
+<li><strong>Checkpoints already published</strong> to independent witnesses cannot be rewritten.</li>
+<li><strong>RFC 3161 and OpenTimestamps</strong> fix when each checkpoint existed; the host clock cannot move them.</li>
+<li><strong>Telegram still holds the messages.</strong> Another capture of the same chat contradicts a forgery.</li>
+</ul></section>
+<section class="threat-card is-open" aria-labelledby="vs-risk-title"><h3 id="vs-risk-title"><span aria-hidden="true">!</span> The realistic risk</h3><ul>
+<li>Manipulation <strong>at the moment of collection</strong> by someone with host access, not silent rewriting afterwards.</li>
+<li>Host access to every server on that host is a capability the provider guards closely; spending it covertly on one evidence server is a state-level decision.</li>
+<li>Answer it with two providers in different jurisdictions, or with the <a href="@@GUIDE_ASSURANCE_LEVELS@@">next assurance level</a>.</li>
+</ul></section>
+</div>
+
+<h2 id="log">How verify reads the provider log</h2>
+<p>The verifier asks the provider with a read-only key what happened to the server. Every action is sorted: creation and the start that belongs to it pass, any path into the server fails, power actions and anything nobody foresaw go to review. An unknown action never passes silently.</p>
+<figure class="lab vs-log" data-lab="vsLog" data-state="ok" aria-labelledby="vs-log-caption">
+<div class="lab-top"><span class="lab-kicker">03 / THE PROVIDER LOG, ACTION BY ACTION</span><span class="sample-tag">Hetzner action names · invented times</span></div>
+<div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Choose what happened to the server"><button type="button" data-scenario="clean" aria-pressed="true">Clean deployment</button><button type="button" data-scenario="console" aria-pressed="false">Console opened</button><button type="button" data-scenario="restart" aria-pressed="false">Server restarted</button><button type="button" data-scenario="unknown" aria-pressed="false">Unforeseen action</button></div>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">After creation</th><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-log-rows>
+<tr class="is-pass"><td>0 s</td><td><code>create_server</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr>
+<tr class="is-pass"><td>1 s</td><td><code>apply_firewall</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment</td></tr>
+<tr class="is-pass"><td>4 s</td><td><code>start_server</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment</td></tr>
+</tbody></table></div>
+<div class="vs-verdict" data-verdict-box><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code></div>
+<p class="lab-status" data-log-status role="status">Creation, the firewall and the first start, all within 30 minutes of creation: the provider log passes.</p>
+<figcaption id="vs-log-caption">Rules as in <code>tgwitness/providers/hetzner.py</code>. The full report also checks the firewall, the tunnel, the signed statement and, with <code>--evidence</code>, the journal; the worst result decides.</figcaption>
+</figure>
+
+<h2 id="cloudflare">What Cloudflare records</h2>
+<p>Cloudflare is a second witness that the provider does not control. The tunnel record shows where the connector runs. With Gateway DNS, Cloudflare also logs every name the server looks up, and the provider firewall keeps DNS from going anywhere else.</p>
+<figure class="lab vs-dns" data-lab="vsDns" data-gateway="on" aria-labelledby="vs-dns-caption">
+<div class="lab-top"><span class="lab-kicker">04 / WHAT LEAVES THE SERVER</span><span class="sample-tag">Hetzner · free Zero Trust plan</span></div>
+<div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Gateway DNS"><button type="button" data-gateway-mode="on" aria-pressed="true">Gateway DNS on</button><button type="button" data-gateway-mode="off" aria-pressed="false">Gateway DNS off</button></div>
+<ul class="vs-flows">
+<li data-flow="resolver" data-result="logged"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>Name lookup through the system resolver</strong><code data-flow-path>DNS over TLS, port 853 → Cloudflare Gateway</code></div><span class="vs-flow-state" data-flow-state>Logged by Cloudflare</span></li>
+<li data-flow="dns53" data-result="blocked"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>Plain DNS to another resolver</strong><code>port 53</code></div><span class="vs-flow-state" data-flow-state>Blocked by the provider firewall</span></li>
+<li data-flow="dot" data-result="blocked"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>DNS over TLS to another resolver</strong><code>port 853</code></div><span class="vs-flow-state" data-flow-state>Blocked by the provider firewall</span></li>
+<li data-flow="doh" data-result="unseen"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>DNS over HTTPS to another resolver</strong><code>port 443</code></div><span class="vs-flow-state" data-flow-state>Passes · not in the Gateway log</span></li>
+<li data-flow="telegram" data-result="unseen"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>Telegram data centre by IP address</strong><code>no lookup at all</code></div><span class="vs-flow-state" data-flow-state>Passes · not in the Gateway log</span></li>
+<li data-flow="tunnel" data-result="recorded"><span class="vs-flow-wire" aria-hidden="true"><i></i></span><div><strong>Tunnel to the panel</strong><code>outbound only</code></div><span class="vs-flow-state" data-flow-state>Cloudflare records the connector's address</span></li>
+</ul>
+<p class="lab-status" data-dns-status role="status">Cloudflare logs every name the server looks up through its resolver, and the firewall stops DNS to anyone else. Connections by IP address and DNS over HTTPS stay outside this log.</p>
+<figcaption id="vs-dns-caption">On the free plan Cloudflare keeps the Gateway log for 24 hours; evidence mode copies it into the signed journal. A Cloudflare One client with an outbound firewall would record every connection, Telegram included; TgWitness does not build that yet.</figcaption>
+</figure>
+
+<h2 id="providers">Providers</h2>
+<p>Five providers run the same sealed server. They differ in what their own log records, and that log is what a verifier reads to see whether anyone reached the server through the provider.</p>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Provider</th><th scope="col">Log kept</th><th scope="col">Names who acted</th><th scope="col">Console in the log</th><th scope="col">Gateway DNS</th><th scope="col">Panel wizard</th></tr></thead><tbody><tr><th scope="row"><a href="#provider-hetzner">Hetzner Cloud</a></th><td>While the server exists</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><th scope="row"><a href="#provider-aws">Amazon EC2</a></th><td>90 days</td><td>Yes</td><td>Agents and keys</td><td>No</td><td>No, command line</td></tr><tr><th scope="row"><a href="#provider-linode">Akamai (Linode)</a></th><td>90 days</td><td>Yes</td><td>No</td><td>No</td><td>No, command line</td></tr><tr><th scope="row"><a href="#provider-digitalocean">DigitalOcean</a></th><td>While the Droplet exists</td><td>No</td><td>No</td><td>No</td><td>No, command line</td></tr><tr><th scope="row"><a href="#provider-vultr">Vultr</a></th><td>30 days</td><td>Yes</td><td>Not identified</td><td>No</td><td>No, command line</td></tr></tbody></table></div>
+<p>The score measures the provider's log: how long it lasts, whether it names who acted, which ways into a running server it records and what a read key exposes. It does not measure the server, which is the same everywhere.</p>
+<div class="pv-tabs" data-lab="pvTabs">
+<div class="pv-tablist" role="tablist" aria-label="Providers" data-enhanced hidden><button type="button" role="tab" data-tab="hetzner" aria-selected="false" aria-controls="provider-hetzner"><strong>Hetzner Cloud</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i></span><span>8 / 10</span></button><button type="button" role="tab" data-tab="aws" aria-selected="false" aria-controls="provider-aws"><strong>Amazon EC2</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i></span><span>8 / 10</span></button><button type="button" role="tab" data-tab="linode" aria-selected="false" aria-controls="provider-linode"><strong>Akamai (Linode)</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>7 / 10</span></button><button type="button" role="tab" data-tab="digitalocean" aria-selected="false" aria-controls="provider-digitalocean"><strong>DigitalOcean</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>5 / 10</span></button><button type="button" role="tab" data-tab="vultr" aria-selected="false" aria-controls="provider-vultr"><strong>Vultr</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>3 / 10</span></button></div>
+<section class="pv-panel" id="provider-hetzner" data-panel="hetzner" aria-labelledby="provider-hetzner-title">
+<h3 id="provider-hetzner-title">Hetzner Cloud</h3>
+<p class="pv-lead">Hetzner records a request for web console credentials as an action and keeps the log while the server exists. Its firewall also takes outbound rules, so it is the only provider where Cloudflare can log every name the server looks up.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong>While the server exists</strong><span>log kept</span></div><div role="listitem"><strong>No</strong><span>names who acted</span></div><div role="listitem"><strong>Yes</strong><span>console request in the log</span></div><div role="listitem"><strong>€19.99</strong><span>a month for cpx22</span></div></div>
+<div class="pv-strength"><div class="pv-score"><span class="panel-caption">STRENGTH OF THE LOG</span><strong>8 / 10</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i></span></div>
+<div class="pv-proscons"><section><h4>Stronger</h4><ul class="is-plus"><li>Console requests are in the log</li><li>The log lasts as long as the server</li><li>Outbound firewall rules make Gateway DNS possible</li><li>User data is not returned through the API</li><li>Panel wizard and removal through the API</li></ul></section><section><h4>Weaker</h4><ul class="is-minus"><li>The log does not name who acted</li><li>Earlier firewall rules are not kept</li></ul></section></div></div>
+<p class="pv-when">The default choice: the strongest log for console access, the only one with Gateway DNS, and a wizard in the panel.</p>
+<h4>What the Hetzner Cloud log records</h4>
+<p>Actions on the server and on its firewall, with time and status. Read with a Read token of the same project.</p>
+<figure class="lab pv-actions-lab" data-lab="vsActions" data-state="ok" aria-labelledby="pv-actions-caption-hetzner">
+<div class="lab-top"><span class="lab-kicker">WHAT VERIFY MAKES OF EACH ACTION</span><span class="sample-tag">Action names from the Hetzner Cloud log</span></div>
+<p class="pv-hint">Press an action to add it to the log. The result is the worst of all actions.</p>
+<div class="pv-buttons" role="group" aria-label="Actions you can add to the log" data-enhanced hidden><button type="button" data-action-result="pass" aria-pressed="false"><code>create_server</code></button><button type="button" data-action-result="pass" aria-pressed="false"><code>start_server</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>request_console</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>enable_rescue</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>reset_password</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>rebuild_server</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>attach_iso</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>create_image</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>enable_backup</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>remove_firewall</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>reboot_server</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>set_firewall_rules</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>change_dns_ptr</code></button></div>
+<ol class="pv-reasons" hidden><li>server created</li><li>part of the deployment, within 30 minutes of creation</li><li>web console (VNC) credentials requested</li><li>rescue system enabled: another OS with access to the disk</li><li>root password reset</li><li>disk rebuilt from an image</li><li>ISO attached: the server can boot another OS</li><li>image of the disk created: a copy of the signing key at rest</li><li>provider backups enabled: copies of the disk, including the signing key at rest</li><li>firewall removed from the server</li><li>power or restart: collection was interrupted; compare with the journal</li><li>firewall rules replaced; earlier rule contents are not in the provider log</li><li>not expected in this mode</li></ol>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-action-rows><tr class="is-pass"><td><code>create_server</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr><tr class="is-pass"><td><code>start_server</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment, within 30 minutes of creation</td></tr></tbody></table></div>
+<div class="vs-verdict"><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code><button type="button" class="pv-reset" data-action-reset data-enhanced hidden>Reset</button></div>
+<p class="lab-status" data-action-status role="status">The deployment itself: creation and the start that belongs to it pass.</p>
+<figcaption id="pv-actions-caption-hetzner">Rules from <code>tgwitness/providers/hetzner.py</code>. An action nobody foresaw is marked for review, never passed.</figcaption>
+</figure>
+<h4>What the log does not show</h4>
+<ul class="pv-unseen"><li>Who performed an action: Hetzner&#x27;s log does not name the user.</li><li>The contents of earlier firewall rules: the log shows that they changed, not what they were.</li><li>Anything done on the physical host, below the API.</li></ul>
+<h4>Cloudflare on Hetzner Cloud</h4>
+<p>Cloudflare is a second witness that Hetzner Cloud does not control.</p>
+<ul class="pv-cf">
+<li class="is-yes"><strong>Tunnel</strong><span>The panel is reached only through a Cloudflare tunnel. Its ingress forwards the panel hostname to the panel alone.</span></li>
+<li class="is-yes"><strong>Connector check</strong><span>Cloudflare lists every connector with its address. <code>verify</code> checks that the connector runs from the server's address and reports any other.</span></li>
+<li class="is-yes"><strong>Quick tunnel</strong><span>Works without a domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>.</span></li>
+<li class="is-yes"><strong>Gateway DNS</strong><span>Available. The Hetzner firewall lets DNS leave only to Cloudflare Gateway over TLS, so Cloudflare logs every name the server looks up. Free Zero Trust plan; the log lasts 24 hours there, and evidence mode copies it into the journal.</span></li>
+<li class="is-yes"><strong>drand</strong><span>Evidence mode can add rounds from <code>drand.cloudflare.com</code>: records after a round are newer than it.</span></li>
+</ul>
+<h4>Server and price</h4>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Type</th><th scope="col">vCPU · memory · disk</th><th scope="col">Price</th></tr></thead>
+<tbody><tr><td><code>cpx22</code></td><td>2 vCPU · 4 GB · 80 GB</td><td>€19.99 a month excluding VAT in Nuremberg or Falkenstein, €16.99 in Helsinki; in Ashburn and Hillsboro cpx11 (2 vCPU · 2 GB) at €17.99 (<a href="https://www.hetzner.com/cloud/regular-performance/">price list</a>, 21 November 2026)</td></tr></tbody></table></div>
+<h4>Deploy and verify</h4>
+<p>In the panel on your own computer open <strong>More tools → Extras → Server 24/7</strong>, paste a Hetzner token (Read &amp; Write) and confirm. The wizard shows the server type, the price including VAT for your account and the version first, and creates nothing before you confirm. From a terminal:</p>
+<pre><code>python -m tgwitness.cloud deploy --provider hetzner --name case-1 --server-type cpx22 \
+    --ref v1.0.0 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<div class="table-wrap" tabindex="0"><table><tbody>
+<tr><th scope="row">To deploy</th><td>API token with Read &amp; Write permission of a dedicated project (HCLOUD_TOKEN)</td></tr>
+<tr><th scope="row">For the verifier</th><td>API token with Read permission of the same project</td></tr>
+</tbody></table></div>
+</section>
+<section class="pv-panel" id="provider-aws" data-panel="aws" aria-labelledby="provider-aws-title">
+<h3 id="provider-aws-title">Amazon EC2</h3>
+<p class="pv-lead">CloudTrail names the user behind every call and covers the agent and key paths into an instance: EC2 Instance Connect, Systems Manager and the serial console. Its event history keeps 90 days.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong>90 days</strong><span>log kept</span></div><div role="listitem"><strong>Yes</strong><span>names who acted</span></div><div role="listitem"><strong>Agents and keys</strong><span>console paths in the log</span></div><div role="listitem"><strong>≈ $21</strong><span>a month for t3.small with IPv4</span></div></div>
+<div class="pv-strength"><div class="pv-score"><span class="panel-caption">STRENGTH OF THE LOG</span><strong>8 / 10</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i></span></div>
+<div class="pv-proscons"><section><h4>Stronger</h4><ul class="is-plus"><li>Every call names who made it</li><li>Agent and key paths into the instance are covered</li><li>Volumes, snapshots and security groups are covered</li></ul></section><section><h4>Weaker</h4><ul class="is-minus"><li>Event history keeps 90 days by default</li><li>Broad read access exposes the user data</li><li>No outbound rules here, so no Gateway DNS</li><li>Command line only</li></ul></section></div></div>
+<p class="pv-when">When the opponent might use an organisation&#x27;s own AWS access: CloudTrail shows who did what. Produce the report within 90 days.</p>
+<h4>What the Amazon EC2 log records</h4>
+<p>CloudTrail management events with the user who made each call. Read with credentials allowed only ec2:DescribeInstances, ec2:DescribeSecurityGroups and cloudtrail:LookupEvents.</p>
+<figure class="lab pv-actions-lab" data-lab="vsActions" data-state="ok" aria-labelledby="pv-actions-caption-aws">
+<div class="lab-top"><span class="lab-kicker">WHAT VERIFY MAKES OF EACH ACTION</span><span class="sample-tag">Action names from the Amazon EC2 log</span></div>
+<p class="pv-hint">Press an action to add it to the log. The result is the worst of all actions.</p>
+<div class="pv-buttons" role="group" aria-label="Actions you can add to the log" data-enhanced hidden><button type="button" data-action-result="pass" aria-pressed="false"><code>RunInstances</code></button><button type="button" data-action-result="pass" aria-pressed="false"><code>CreateSecurityGroup</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>SendSSHPublicKey</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>SendSerialConsoleSSHPublicKey</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>StartSession</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>SendCommand</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>AssociateIamInstanceProfile</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>ModifyInstanceAttribute</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>CreateSnapshot</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>AttachVolume</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>AuthorizeSecurityGroupIngress</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>RebootInstances</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>ModifyInstanceMetadataOptions</code></button></div>
+<ol class="pv-reasons" hidden><li>server created</li><li>part of the deployment, within 30 minutes of creation</li><li>EC2 Instance Connect pushed an SSH key</li><li>serial console key pushed</li><li>Systems Manager session</li><li>Systems Manager command</li><li>instance profile attached: agents can be granted access</li><li>instance attribute changed (user data, type, kernel or security groups)</li><li>snapshot of a volume: a copy of the signing key at rest</li><li>a volume attached</li><li>inbound rule added</li><li>power or restart: collection was interrupted; compare with the journal</li><li>metadata service options changed</li></ol>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-action-rows><tr class="is-pass"><td><code>RunInstances</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr><tr class="is-pass"><td><code>CreateSecurityGroup</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment, within 30 minutes of creation</td></tr></tbody></table></div>
+<div class="vs-verdict"><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code><button type="button" class="pv-reset" data-action-reset data-enhanced hidden>Reset</button></div>
+<p class="lab-status" data-action-status role="status">The deployment itself: creation and the start that belongs to it pass.</p>
+<figcaption id="pv-actions-caption-aws">Rules from <code>tgwitness/providers/aws.py</code>. An action nobody foresaw is marked for review, never passed.</figcaption>
+</figure>
+<h4>What the log does not show</h4>
+<ul class="pv-unseen"><li>AWS staff and the underlying host.</li><li>Anything older than 90 days, unless you keep a CloudTrail trail.</li><li>Not a gap in the log but a risk: ec2:Describe* would return the user data with both tokens, so the verifier gets only the three actions above.</li></ul>
+<h4>Cloudflare on Amazon EC2</h4>
+<p>Cloudflare is a second witness that Amazon EC2 does not control.</p>
+<ul class="pv-cf">
+<li class="is-yes"><strong>Tunnel</strong><span>The panel is reached only through a Cloudflare tunnel. Its ingress forwards the panel hostname to the panel alone.</span></li>
+<li class="is-yes"><strong>Connector check</strong><span>Cloudflare lists every connector with its address. <code>verify</code> checks that the connector runs from the server's address and reports any other.</span></li>
+<li class="is-yes"><strong>Quick tunnel</strong><span>Works without a domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>.</span></li>
+<li class="is-no"><strong>Gateway DNS</strong><span>Not available on Amazon EC2: TgWitness sets outbound firewall rules only on Hetzner, and Gateway DNS needs them to keep DNS from going anywhere else.</span></li>
+<li class="is-yes"><strong>drand</strong><span>Evidence mode can add rounds from <code>drand.cloudflare.com</code>: records after a round are newer than it.</span></li>
+</ul>
+<h4>Server and price</h4>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Type</th><th scope="col">vCPU · memory · disk</th><th scope="col">Price</th></tr></thead>
+<tbody><tr><td><code>t3.small</code></td><td>2 vCPU · 2 GiB · EBS volume</td><td>about $17.52 a month on demand in Frankfurt, plus the EBS volume and $0.005 an hour (about $3.65) for the public IPv4 address (<a href="https://aws.amazon.com/ec2/pricing/on-demand/">price list</a>, 21 November 2026)</td></tr></tbody></table></div>
+<h4>Deploy and verify</h4>
+<p>Amazon EC2 runs from a terminal; the panel wizard covers Hetzner only.</p>
+<pre><code>python -m tgwitness.cloud deploy --provider aws --name case-1 --server-type t3.small \
+    --location eu-central-1 --ref v1.0.0 --quick-tunnel --provider-token-file aws.credentials</code></pre>
+<div class="table-wrap" tabindex="0"><table><tbody>
+<tr><th scope="row">To deploy</th><td>IAM credentials allowed ec2:DescribeVpcs, DescribeImages, CreateSecurityGroup, AuthorizeSecurityGroupIngress, RunInstances, CreateTags, DescribeInstances, DescribeSecurityGroupRules and RevokeSecurityGroupIngress</td></tr>
+<tr><th scope="row">For the verifier</th><td>IAM credentials allowed only ec2:DescribeInstances, ec2:DescribeSecurityGroups and cloudtrail:LookupEvents</td></tr>
+</tbody></table></div>
+</section>
+<section class="pv-panel" id="provider-linode" data-panel="linode" aria-labelledby="provider-linode-title">
+<h3 id="provider-linode-title">Akamai (Linode)</h3>
+<p class="pv-lead">Account events name the user, and the firewall keeps every rule version, so a verifier sees whether the rules ever changed. Lish and Glish console sessions are not events.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong>90 days</strong><span>log kept</span></div><div role="listitem"><strong>Yes</strong><span>names who acted</span></div><div role="listitem"><strong>No</strong><span>console sessions in the log</span></div><div role="listitem"><strong>$12</strong><span>a month for g6-standard-1</span></div></div>
+<div class="pv-strength"><div class="pv-score"><span class="panel-caption">STRENGTH OF THE LOG</span><strong>7 / 10</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+<div class="pv-proscons"><section><h4>Stronger</h4><ul class="is-plus"><li>Every event names who acted</li><li>Every firewall rule version is kept</li><li>Host reboots and migrations are visible</li></ul></section><section><h4>Weaker</h4><ul class="is-minus"><li>Console sessions are not events</li><li>Events keep 90 days</li><li>No outbound rules here, so no Gateway DNS</li><li>Command line only</li></ul></section></div></div>
+<p class="pv-when">When you want names in the log and a full firewall history, and can produce the report within 90 days.</p>
+<h4>What the Akamai (Linode) log records</h4>
+<p>Account events with the username, for 90 days. Read with a token limited to linodes, firewall and events, read-only.</p>
+<figure class="lab pv-actions-lab" data-lab="vsActions" data-state="ok" aria-labelledby="pv-actions-caption-linode">
+<div class="lab-top"><span class="lab-kicker">WHAT VERIFY MAKES OF EACH ACTION</span><span class="sample-tag">Action names from the Akamai (Linode) log</span></div>
+<p class="pv-hint">Press an action to add it to the log. The result is the worst of all actions.</p>
+<div class="pv-buttons" role="group" aria-label="Actions you can add to the log" data-enhanced hidden><button type="button" data-action-result="pass" aria-pressed="false"><code>linode_create</code></button><button type="button" data-action-result="pass" aria-pressed="false"><code>linode_boot</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>password_reset</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>linode_rebuild</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>lish_boot</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>linode_snapshot</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>backups_enable</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>linode_config_update</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>firewall_disable</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>firewall_rules_update</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>linode_migrate</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>host_reboot</code></button></div>
+<ol class="pv-reasons" hidden><li>server created</li><li>part of the deployment, within 30 minutes of creation</li><li>root password reset</li><li>disk rebuilt from an image</li><li>booted from the Lish console</li><li>snapshot of the disks: a copy of the signing key at rest</li><li>provider backups enabled: copies of the disk, including the signing key at rest</li><li>boot configuration changed: can boot another kernel or a rescue system</li><li>firewall disabled</li><li>firewall rules changed; compare the rule version</li><li>moved to another host</li><li>power or restart: collection was interrupted; compare with the journal</li></ol>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-action-rows><tr class="is-pass"><td><code>linode_create</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr><tr class="is-pass"><td><code>linode_boot</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment, within 30 minutes of creation</td></tr></tbody></table></div>
+<div class="vs-verdict"><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code><button type="button" class="pv-reset" data-action-reset data-enhanced hidden>Reset</button></div>
+<p class="lab-status" data-action-status role="status">The deployment itself: creation and the start that belongs to it pass.</p>
+<figcaption id="pv-actions-caption-linode">Rules from <code>tgwitness/providers/linode.py</code>. An action nobody foresaw is marked for review, never passed.</figcaption>
+</figure>
+<h4>What the log does not show</h4>
+<ul class="pv-unseen"><li>Lish and Glish console sessions. Root is locked at the first boot, so a console login would first need a password reset or a boot configuration change, and those are events.</li><li>Anything older than 90 days.</li><li>Anything done on the physical host, below the API.</li></ul>
+<h4>Cloudflare on Akamai (Linode)</h4>
+<p>Cloudflare is a second witness that Akamai (Linode) does not control.</p>
+<ul class="pv-cf">
+<li class="is-yes"><strong>Tunnel</strong><span>The panel is reached only through a Cloudflare tunnel. Its ingress forwards the panel hostname to the panel alone.</span></li>
+<li class="is-yes"><strong>Connector check</strong><span>Cloudflare lists every connector with its address. <code>verify</code> checks that the connector runs from the server's address and reports any other.</span></li>
+<li class="is-yes"><strong>Quick tunnel</strong><span>Works without a domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>.</span></li>
+<li class="is-no"><strong>Gateway DNS</strong><span>Not available on Akamai (Linode): TgWitness sets outbound firewall rules only on Hetzner, and Gateway DNS needs them to keep DNS from going anywhere else.</span></li>
+<li class="is-yes"><strong>drand</strong><span>Evidence mode can add rounds from <code>drand.cloudflare.com</code>: records after a round are newer than it.</span></li>
+</ul>
+<h4>Server and price</h4>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Type</th><th scope="col">vCPU · memory · disk</th><th scope="col">Price</th></tr></thead>
+<tbody><tr><td><code>g6-standard-1</code></td><td>1 CPU · 2 GB · 50 GB</td><td>$12.00 a month (<a href="https://www.akamai.com/cloud/pricing/cpu">price list</a>, 21 November 2026)</td></tr></tbody></table></div>
+<h4>Deploy and verify</h4>
+<p>Akamai (Linode) runs from a terminal; the panel wizard covers Hetzner only.</p>
+<pre><code>python -m tgwitness.cloud deploy --provider linode --name case-1 --server-type g6-standard-1 \
+    --ref v1.0.0 --quick-tunnel --provider-token-file linode.token</code></pre>
+<div class="table-wrap" tabindex="0"><table><tbody>
+<tr><th scope="row">To deploy</th><td>personal access token with linodes, firewall and events read/write scopes</td></tr>
+<tr><th scope="row">For the verifier</th><td>personal access token with linodes, firewall and events read-only scopes</td></tr>
+</tbody></table></div>
+</section>
+<section class="pv-panel" id="provider-digitalocean" data-panel="digitalocean" aria-labelledby="provider-digitalocean-title">
+<h3 id="provider-digitalocean-title">DigitalOcean</h3>
+<p class="pv-lead">Droplet actions stay while the Droplet exists, without the name of who acted. The Recovery Console and Cloud Firewall changes leave nothing in the log.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong>While the Droplet exists</strong><span>log kept</span></div><div role="listitem"><strong>No</strong><span>names who acted</span></div><div role="listitem"><strong>No</strong><span>console in the log</span></div><div role="listitem"><strong>$12</strong><span>a month for s-1vcpu-2gb</span></div></div>
+<div class="pv-strength"><div class="pv-score"><span class="panel-caption">STRENGTH OF THE LOG</span><strong>5 / 10</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+<div class="pv-proscons"><section><h4>Stronger</h4><ul class="is-plus"><li>Droplet actions are kept while the Droplet exists</li><li>User data is not returned through the API</li></ul></section><section><h4>Weaker</h4><ul class="is-minus"><li>The log does not name who acted</li><li>The Recovery Console is not logged</li><li>Firewall changes have no history</li><li>The tag firewall applies moments after creation</li><li>No outbound rules here, so no Gateway DNS</li><li>Command line only</li></ul></section></div></div>
+<p class="pv-when">When you already work there and the case does not hinge on console access or firewall history.</p>
+<h4>What the DigitalOcean log records</h4>
+<p>Droplet actions with time and status. Read with a read-only personal access token.</p>
+<figure class="lab pv-actions-lab" data-lab="vsActions" data-state="ok" aria-labelledby="pv-actions-caption-digitalocean">
+<div class="lab-top"><span class="lab-kicker">WHAT VERIFY MAKES OF EACH ACTION</span><span class="sample-tag">Action names from the DigitalOcean log</span></div>
+<p class="pv-hint">Press an action to add it to the log. The result is the worst of all actions.</p>
+<div class="pv-buttons" role="group" aria-label="Actions you can add to the log" data-enhanced hidden><button type="button" data-action-result="pass" aria-pressed="false"><code>create</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>password_reset</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>rebuild</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>restore</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>snapshot</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>enable_backups</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>change_kernel</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>reboot</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>resize</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>enable_ipv6</code></button></div>
+<ol class="pv-reasons" hidden><li>server created</li><li>root password reset</li><li>disk rebuilt from an image</li><li>disk restored from a backup or snapshot</li><li>snapshot of the disk: a copy of the signing key at rest</li><li>provider backups enabled: copies of the disk, including the signing key at rest</li><li>boot kernel changed</li><li>power or restart: collection was interrupted; compare with the journal</li><li>server resized</li><li>IPv6 enabled</li></ol>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-action-rows><tr class="is-pass"><td><code>create</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr></tbody></table></div>
+<div class="vs-verdict"><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code><button type="button" class="pv-reset" data-action-reset data-enhanced hidden>Reset</button></div>
+<p class="lab-status" data-action-status role="status">The deployment itself: creation and the start that belongs to it pass.</p>
+<figcaption id="pv-actions-caption-digitalocean">Rules from <code>tgwitness/providers/digitalocean.py</code>. An action nobody foresaw is marked for review, never passed.</figcaption>
+</figure>
+<h4>What the log does not show</h4>
+<ul class="pv-unseen"><li>Recovery Console sessions. The console agent is not installed and root is locked at the first boot, so a console login would first need a password reset, which is an action.</li><li>Cloud Firewall changes: they have no history, so only the current rules are checked.</li><li>Who performed an action.</li><li>Anything done on the physical host, below the API.</li></ul>
+<h4>Cloudflare on DigitalOcean</h4>
+<p>Cloudflare is a second witness that DigitalOcean does not control.</p>
+<ul class="pv-cf">
+<li class="is-yes"><strong>Tunnel</strong><span>The panel is reached only through a Cloudflare tunnel. Its ingress forwards the panel hostname to the panel alone.</span></li>
+<li class="is-yes"><strong>Connector check</strong><span>Cloudflare lists every connector with its address. <code>verify</code> checks that the connector runs from the server's address and reports any other.</span></li>
+<li class="is-yes"><strong>Quick tunnel</strong><span>Works without a domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>.</span></li>
+<li class="is-no"><strong>Gateway DNS</strong><span>Not available on DigitalOcean: TgWitness sets outbound firewall rules only on Hetzner, and Gateway DNS needs them to keep DNS from going anywhere else.</span></li>
+<li class="is-yes"><strong>drand</strong><span>Evidence mode can add rounds from <code>drand.cloudflare.com</code>: records after a round are newer than it.</span></li>
+</ul>
+<h4>Server and price</h4>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Type</th><th scope="col">vCPU · memory · disk</th><th scope="col">Price</th></tr></thead>
+<tbody><tr><td><code>s-1vcpu-2gb</code></td><td>1 vCPU · 2 GB · 50 GB</td><td>$12.00 a month (<a href="https://www.digitalocean.com/pricing/droplets">price list</a>, 21 November 2026)</td></tr></tbody></table></div>
+<h4>Deploy and verify</h4>
+<p>DigitalOcean runs from a terminal; the panel wizard covers Hetzner only.</p>
+<pre><code>python -m tgwitness.cloud deploy --provider digitalocean --name case-1 --server-type s-1vcpu-2gb \
+    --ref v1.0.0 --quick-tunnel --provider-token-file digitalocean.token</code></pre>
+<div class="table-wrap" tabindex="0"><table><tbody>
+<tr><th scope="row">To deploy</th><td>personal access token with write access of a dedicated team</td></tr>
+<tr><th scope="row">For the verifier</th><td>read-only personal access token of the same team</td></tr>
+</tbody></table></div>
+</section>
+<section class="pv-panel" id="provider-vultr" data-panel="vultr" aria-labelledby="provider-vultr-title">
+<h3 id="provider-vultr-title">Vultr</h3>
+<p class="pv-lead">The activity log names who called the API, but keeps 30 days and does not identify the web console. Any key that can read the instance also receives its console address and its user data with both tokens.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong>30 days</strong><span>log kept</span></div><div role="listitem"><strong>Yes</strong><span>names who acted</span></div><div role="listitem"><strong>Not identified</strong><span>console in the log</span></div><div role="listitem"><strong>$10</strong><span>a month for vc2-1c-2gb</span></div></div>
+<div class="pv-strength"><div class="pv-score"><span class="panel-caption">STRENGTH OF THE LOG</span><strong>3 / 10</strong><span class="pv-meter" aria-hidden="true" translate="no"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+<div class="pv-proscons"><section><h4>Stronger</h4><ul class="is-plus"><li>The activity log names the user and the address</li></ul></section><section><h4>Weaker</h4><ul class="is-minus"><li>The log keeps 30 days</li><li>The web console is not identified</li><li>A read key receives the console address and both tokens</li><li>No outbound rules here, so no Gateway DNS</li><li>Command line only</li></ul></section></div></div>
+<p class="pv-when">The cheapest, and the weakest. Fine for a test; for a case, produce the report within 30 days and treat both tokens as exposed.</p>
+<h4>What the Vultr log records</h4>
+<p>Account activity log with method, path, username and address, for 30 days, longer with an audit-log subscription. Read with a user that has read access and the activity_logs permission.</p>
+<figure class="lab pv-actions-lab" data-lab="vsActions" data-state="ok" aria-labelledby="pv-actions-caption-vultr">
+<div class="lab-top"><span class="lab-kicker">WHAT VERIFY MAKES OF EACH ACTION</span><span class="sample-tag">Action names from the Vultr log</span></div>
+<p class="pv-hint">Press an action to add it to the log. The result is the worst of all actions.</p>
+<div class="pv-buttons" role="group" aria-label="Actions you can add to the log" data-enhanced hidden><button type="button" data-action-result="pass" aria-pressed="false"><code>POST /instances</code></button><button type="button" data-action-result="pass" aria-pressed="false"><code>POST /firewalls/{firewall}/rules</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>POST /instances/{instance}/reinstall</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>POST /instances/{instance}/restore</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>POST /instances/{instance}/iso</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>POST /instances/{instance}/backup-schedule</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>POST /snapshots</code></button><button type="button" data-action-result="fail" aria-pressed="false"><code>PATCH /instances/{instance}</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>DELETE /firewalls/{firewall}/rules/{rule}</code></button><button type="button" data-action-result="review" aria-pressed="false"><code>POST /instances/{instance}/reboot</code></button></div>
+<ol class="pv-reasons" hidden><li>server created</li><li>part of the deployment, within 30 minutes of creation</li><li>disk reinstalled</li><li>disk restored from a backup or snapshot</li><li>ISO attached: the server can boot another OS</li><li>provider backups scheduled: copies of the disk, including the signing key at rest</li><li>snapshot of the disk: a copy of the signing key at rest</li><li>instance changed: user_data</li><li>firewall rule or group removed</li><li>power or restart: collection was interrupted; compare with the journal</li></ol>
+<div class="vs-log-wrap" tabindex="0"><table class="vs-actions"><thead><tr><th scope="col">Action</th><th scope="col">verify</th></tr></thead><tbody data-action-rows><tr class="is-pass"><td><code>POST /instances</code></td><td><span class="vs-mark" translate="no">PASS</span> server created</td></tr><tr class="is-pass"><td><code>POST /firewalls/{firewall}/rules</code></td><td><span class="vs-mark" translate="no">PASS</span> part of the deployment, within 30 minutes of creation</td></tr></tbody></table></div>
+<div class="vs-verdict"><span class="panel-caption">PROVIDER LOG RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code><button type="button" class="pv-reset" data-action-reset data-enhanced hidden>Reset</button></div>
+<p class="lab-status" data-action-status role="status">The deployment itself: creation and the start that belongs to it pass.</p>
+<figcaption id="pv-actions-caption-vultr">Rules from <code>tgwitness/providers/vultr.py</code>. An action nobody foresaw is marked for review, never passed.</figcaption>
+</figure>
+<h4>What the log does not show</h4>
+<ul class="pv-unseen"><li>Opening the web console: it is not identified as such in the activity log.</li><li>Anything older than 30 days, unless an audit-log subscription keeps it.</li><li>Not a gap in the log but a risk: any key that can read the instance receives its console address and its user data, so assume the verifier&#x27;s key can read both tokens.</li></ul>
+<h4>Cloudflare on Vultr</h4>
+<p>Cloudflare is a second witness that Vultr does not control.</p>
+<ul class="pv-cf">
+<li class="is-yes"><strong>Tunnel</strong><span>The panel is reached only through a Cloudflare tunnel. Its ingress forwards the panel hostname to the panel alone.</span></li>
+<li class="is-yes"><strong>Connector check</strong><span>Cloudflare lists every connector with its address. <code>verify</code> checks that the connector runs from the server's address and reports any other.</span></li>
+<li class="is-yes"><strong>Quick tunnel</strong><span>Works without a domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>.</span></li>
+<li class="is-no"><strong>Gateway DNS</strong><span>Not available on Vultr: TgWitness sets outbound firewall rules only on Hetzner, and Gateway DNS needs them to keep DNS from going anywhere else.</span></li>
+<li class="is-yes"><strong>drand</strong><span>Evidence mode can add rounds from <code>drand.cloudflare.com</code>: records after a round are newer than it.</span></li>
+</ul>
+<h4>Server and price</h4>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Type</th><th scope="col">vCPU · memory · disk</th><th scope="col">Price</th></tr></thead>
+<tbody><tr><td><code>vc2-1c-2gb</code></td><td>1 vCPU · 2 GB · 55 GB</td><td>$10.00 a month (<a href="https://www.vultr.com/pricing/">price list</a>, 21 November 2026)</td></tr></tbody></table></div>
+<h4>Deploy and verify</h4>
+<p>Vultr runs from a terminal; the panel wizard covers Hetzner only.</p>
+<pre><code>python -m tgwitness.cloud deploy --provider vultr --name case-1 --server-type vc2-1c-2gb \
+    --ref v1.0.0 --quick-tunnel --provider-token-file vultr.token</code></pre>
+<div class="table-wrap" tabindex="0"><table><tbody>
+<tr><th scope="row">To deploy</th><td>API key of a dedicated account or sub-account</td></tr>
+<tr><th scope="row">For the verifier</th><td>API key of a user with read access and the activity_logs permission</td></tr>
+</tbody></table></div>
+</section>
+</div>
+<p>This is the second of three assurance levels. <a href="@@GUIDE_ASSURANCE_LEVELS@@">Compare the levels</a>.</p>
+
+<h2 id="start">Start</h2>
+<p>In the panel on your own computer open <strong>More tools → Extras → Server 24/7</strong>, choose Hetzner and paste a token. The wizard shows the server type, the price and the version, and creates nothing before you confirm. The other providers run from a terminal:</p>
+<pre><code>python -m tgwitness.cloud plan   --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.0 --quick-tunnel
+python -m tgwitness.cloud deploy --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.0 --quick-tunnel \
+    --provider-token-file hetzner.token
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file read-only.token --report report.md</code></pre>
+<p>A quick tunnel needs no domain, but no Cloudflare account keeps a record of it, so the report is at best <code>INCOMPLETE</code>. For a case that has to stand, deploy under your own domain with a Cloudflare token.</p>
+<p>Every option, the token permissions, removal and the report format are in the <a href="@@REF_VERIFIED_SERVER@@">verified server reference</a>.</p>

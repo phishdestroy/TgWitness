@@ -193,7 +193,7 @@ stamping. TgWitness fixes each record from the moment it arrives.
   `python -m tgwitness.anchor verify --checkpoint checkpoint.json --request timestamp.tsq --response timestamp.tsr --ca trusted-tsa-root.pem`
   ([procedure](TIMESTAMP.md#procedure)). The Intel TDX attestation certificate is
   sealed by the Belgian government's qualified TSA, whose root is pinned in
-  `tgwitness/tsa_roots.py` ([attestation certificate](HIGH-ASSURANCE.md#attestation-certificate)).
+  `tgwitness/tsa_roots.py` ([attestation certificate](PHALA.md#attestation-certificate)).
 
 - Evidence mode sends each checkpoint to the Belgian government's qualified TSA
   together with freetsa.org and Sectigo (`DEFAULT_TSA` in `tgwitness/anchoring.py`).

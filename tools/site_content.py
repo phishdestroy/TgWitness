@@ -16,6 +16,9 @@ GUIDES = {
     "access": ("Share a case", "Give reviewers and analysts access to selected accounts and chats, with separate permissions, session limits and revocable tokens.", "access permissions roles scope reviewer analyst token sessions IP expiry revoke", "docs/ACCESS.md"),
     "witness": ("Set up a witness bot", "Publish signed journal checkpoints to your Telegram channel with a separate witness, its own key and read-only collector access.", "bot botfather telegram channel continuity checkpoint independent witness", "docs/WITNESS.md"),
     "signed-export": ("Why zero trust: Taylor Wessing, Dr. Zurheide, Dr. Schelinski", "A zero-trust case study: a GDPR answer signed by Dr. Patrick Zurheide and Dr. Tobias Schelinski of Taylor Wessing, checked against its own file, and the checkable model that would have left no room to deceive or doubt.", "case study qualified electronic signature lawyer signed export GDPR article 15 access request redaction pdf Taylor Wessing Zurheide Schelinski hash zero trust", "docs/EVIDENCE.md"),
+    "assurance-levels": ("Assurance levels", "Three ways to collect that others can check: GitHub Actions capture, a verified server and a confidential VM on Phala Cloud. Whom you trust, what each proves, how long it runs and what it costs.", "assurance levels github actions capture verified server vps phala intel tdx confidential vm trust price compare", "docs/HIGH-ASSURANCE.md"),
+    "verified-server": ("See how a verified server works", "Watch a sealed server being deployed through the API, see who can reach a cloud server, how verify judges the provider log and what Cloudflare records.", "server cloud deploy hetzner cloudflare tunnel gateway dns verify provider log hypervisor threat model price animation", "docs/HIGH-ASSURANCE.md"),
+    "phala": ("Phala Cloud and Intel TDX", "A confidential VM whose memory the host cannot read: the chain of trust from Intel's root, the six checks, what if TDX is broken, rollback of the disk and prices.", "phala intel tdx confidential vm attestation quote chain of trust checks rollback price court", "docs/PHALA.md"),
     "server": ("Keep it running", "Run TgWitness on a server with persistent storage, private panel access, backups and checks after a restart.", "docker compose deployment vps backup restore update restart operations", "docs/DEPLOYMENT.md"),
     "troubleshooting": ("Find what went wrong", "Check panel access, Telegram connection, missing messages, FloodWait and witness status using the right signals for each problem.", "help error token login disconnected floodwait gap pts qts recovery github", "docs/OPERATIONS.md"),
 }
@@ -24,6 +27,7 @@ GROUPS = (
     ("First steps", "Your first captured message", ("start", "dedicated-account", "accounts", "proxies", "exports", "capture")),
     ("Investigation & reporting", "From saved records to a shared report", ("cases", "case-board", "reports", "handover", "groups")),
     ("Understand the evidence", "Learn by trying it", ("concepts", "security", "witness", "signed-export")),
+    ("Assurance levels", "Who could have interfered", ("assurance-levels", "verified-server", "phala")),
     ("Go further", "Add only what you need", ("archive", "access", "server", "troubleshooting")),
 )
 
@@ -66,14 +70,15 @@ REFERENCE = {
     "storage": ("Storage and recovery", "Backups, moving older files to your cloud, copies under Object Lock and recovery on a new machine.", "storage backup rclone s3 offload object lock recovery disk", "docs/STORAGE.md"),
     "account-export": ("Account export", "Export what an account can read now: scope, resumable jobs, a signed archive and minimized sharing copies.", "account export takeout disclosure minimized sharing copy scope", "docs/ACCOUNT-EXPORT.md"),
     "showcase": ("Public showcase", "Publish saved messages of selected public channels and signed snapshots through expiring, revocable links.", "showcase public channel link snapshot redaction verify", "docs/LIVE-SHOWCASE.md"),
-    "high-assurance": ("High-assurance deployment", "A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.", "high assurance hetzner phala tdx cloudflare gateway dns sealed server", "docs/HIGH-ASSURANCE.md"),
+    "verified-server": ("Verified server", "A sealed 24/7 server on an ordinary VPS deployed through the provider's API: what each provider's log shows, what can go unseen, prices and the checks a third party can repeat.", "verified server vps hetzner digitalocean linode vultr aws provider log firewall cloudflare tunnel gateway dns price threat model", "docs/HIGH-ASSURANCE.md"),
+    "phala": ("Phala Cloud and Intel TDX", "A confidential VM whose memory the host cannot read: what it means for a court and for you, what the trust rests on, what if TDX is broken, prices and the technical checks.", "phala intel tdx confidential vm attestation quote dstack court trust price certificate", "docs/PHALA.md"),
 }
 
 REFERENCE_GROUPS = (
-    ("Set up", ("overview", "quickstart", "installation", "settings", "accounts", "access", "connection", "deployment", "high-assurance")),
+    ("Set up", ("overview", "quickstart", "installation", "settings", "accounts", "access", "connection", "deployment", "verified-server")),
     ("Collect", ("panel", "collection", "secret-chats", "history", "operations", "investigation", "features")),
     ("Archive & integrations", ("case-board", "analysis", "search", "mcp", "cli", "media-analysis", "webhooks", "showcase")),
-    ("Evidence", ("how-it-works", "case-reports", "account-export", "evidence", "translation", "witness", "timestamp", "storage")),
+    ("Evidence", ("how-it-works", "case-reports", "account-export", "evidence", "translation", "witness", "timestamp", "storage", "phala")),
     ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
 
@@ -95,5 +100,8 @@ LABELS = {
 }
 
 NEXT = {"archive": "case-board", "capture": "exports", "dedicated-account": "accounts", "start": "accounts", "accounts": "exports", "access": "security", "proxies": "accounts", "exports": "reports",
-        "concepts": "cases", "cases": "case-board", "case-board": "reports", "reports": "handover", "handover": "access", "groups": "cases", "security": "start", "witness": "server", "signed-export": "exports",
+        "concepts": "cases", "cases": "case-board", "case-board": "reports", "reports": "handover", "handover": "access", "groups": "cases", "security": "start", "witness": "assurance-levels", "assurance-levels": "verified-server", "verified-server": "phala", "phala": "server", "signed-export": "exports",
         "server": "troubleshooting", "troubleshooting": "start"}
+
+REFERENCE_PARENT = {"verified-server": "assurance-levels", "phala": "assurance-levels"}
+REDIRECTS = {"docs/reference/high-assurance/": "docs/reference/verified-server/"}
