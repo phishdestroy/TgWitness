@@ -1264,10 +1264,8 @@ class AccountExport:
                     def message_rows(chat=chat):
                         for data_file in message_pages.get(chat["id"], ()):
                             with (directory / data_file).open("rb") as stream:
-                                for line, raw in enumerate(stream, 1):
-                                    row = account_report.Record(json.loads(raw))
-                                    row.source = (data_file, line, hashlib.sha256(raw.removesuffix(b"\n")).hexdigest())
-                                    yield row
+                                for raw in stream:
+                                    yield account_report.Record(json.loads(raw))
                     chat_analytics = account_report.snapshot_analytics.Analytics("snapshot")
                     for row in message_rows():
                         analytics.snapshot(row, chat)

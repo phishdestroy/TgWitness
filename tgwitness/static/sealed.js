@@ -544,8 +544,11 @@ $("media-preset").addEventListener("change", applyPreset);
 $("media-rules").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 $("media-action").addEventListener("change", () => { if (!applyingPreset) $("media-preset").value = "custom"; });
 applyPreset();
+function wholeInventory(plan) {
+  return plan?.complete_inventory === true;
+}
 function keptChats() {
-  if (!droppedChats.size) return [];
+  if (!droppedChats.size || !wholeInventory(assessmentResult?.time_plan)) return [];
   return (assessmentResult?.time_plan?.per_chat || []).map(chat => chat.chat_id).filter(id => !droppedChats.has(id));
 }
 function selection() {
@@ -759,7 +762,7 @@ function renderPlan(plan, format) {
   body.replaceChildren();
   for (const chat of rows) {
     const row = document.createElement("tr"), pick = document.createElement("td"), box = document.createElement("input");
-    box.type = "checkbox"; box.checked = !droppedChats.has(chat.chat_id); box.disabled = !account || rows.length < 2;
+    box.type = "checkbox"; box.checked = !droppedChats.has(chat.chat_id); box.disabled = !account || rows.length < 2 || !wholeInventory(plan);
     box.dataset.chat = String(chat.chat_id); box.setAttribute("aria-label", tr("Include {name}", {name: chatName(chat.chat_id)}));
     pick.append(box); row.append(pick);
     const [text, state] = outcomeText(chat, outcome.get(chat.chat_id));
@@ -805,7 +808,7 @@ function renderPlan(plan, format) {
   }
   $("budget-runs").hidden = !(plan.split_runs || []).length || droppedChats.size > 0 || everything;
   const finished = rows.filter(chat => outcomeOf(chat, outcome.get(chat.chat_id)) === "all").map(chat => chat.chat_id);
-  $("budget-fit").hidden = !account || everything || !finished.length || finished.length === states.length;
+  $("budget-fit").hidden = !account || !wholeInventory(plan) || everything || !finished.length || finished.length === states.length;
   $("budget-fit").dataset.chats = JSON.stringify(finished);
   $("budget-order").hidden = !account;
   $("budget-plan").hidden = !rows.length;

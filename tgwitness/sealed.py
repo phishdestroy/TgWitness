@@ -406,7 +406,8 @@ class Session:
         mime = media.get("mime_type") if isinstance(media.get("mime_type"), str) else ""
         if media.get("_") == "decryptedMessageMediaPhoto":
             mime = "image/jpeg"
-        return mime if re.fullmatch(r"(image|video|audio)/[a-z0-9.+-]{1,40}", mime or "") else "application/octet-stream"
+        return (mime if re.fullmatch(r"(image|video|audio)/[a-z0-9.+-]{1,40}", mime or "") and "svg" not in mime and "xml" not in mime
+                else "application/octet-stream")
 
     def secret_counts(self):
         counts = {"received": 0, "sent": 0, "files": 0, "notices": 0}
@@ -431,10 +432,14 @@ class Session:
         self.report_language = selection.report_language
         self.selection = selection.settings()
         module = secret_module.describe()
+        checked = module.get("state") == "checked"
         self.store.append("secret_chat.module_installed", {
             **{key: module.get(key) for key in ("name", "version", "commit", "sha256", "source", "license", "state")},
-            "route": "runner_image", "meaning": "The pseudo-secret protocol module was built into this runner's image "
-            "from the pinned upstream archive and matched the SHA-256 fixed in this release before it was loaded."})
+            "route": "runner_image" if checked else "environment",
+            "meaning": "The pseudo-secret protocol module was built into this runner's image from the pinned upstream "
+            "archive and matched the SHA-256 fixed in this release before it was loaded." if checked else
+            "The pseudo-secret protocol module was loaded from the Python environment; it was not compared with the "
+            "pinned upstream archive."})
         self.apply_visibility(selection.secret_visibility)
         self.store.append("sealed.selection", {"mode": "secret", "secret_peer": selection.secret_peer,
             "accept_incoming": selection.accept_incoming, "capture": settings, **self.language_field(),

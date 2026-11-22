@@ -252,9 +252,8 @@ def stats(counts, say):
         value = counts.get(key)
         if key == 'media_skipped' and type(value) is int:
             value -= min(value, unreached)
-        if key in ('media_skipped', 'media_hashed') and value == 0 or key == 'records' and value == counts.get('messages'):
-            continue
-        if type(value) is int and value >= 0:
+        hidden = key in ('media_skipped', 'media_hashed') and value == 0 or key == 'records' and value == counts.get('messages')
+        if not hidden and type(value) is int and value >= 0:
             parts.append('<div class="stat"><dt>' + e(say(label)) + '</dt><dd>' + str(activity_maps.thousands(say, value)) + '</dd></div>')
         if key == 'media_skipped' and unreached:
             parts.append('<div class="stat"><dt>' + e(say('Files not reached before collection stopped')) + '</dt><dd>'

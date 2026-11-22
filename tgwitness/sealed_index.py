@@ -163,6 +163,17 @@ def finish_text(say, reason):
     return say(REASONS[reason][1]) if reason in REASONS else say("Capture ended: {reason}", reason=reason)
 
 
+def unstarted_chats(facts, chats):
+    selection = (facts.get("sealed.selection") or [{}])[-1].get("selection") or {}
+    ids = selection.get("chat_ids") if selection.get("mode") == "chats" else None
+    started = {c.get("chat_id") for c in chats}
+    return [chat_id for chat_id in ids if chat_id not in started] if isinstance(ids, list) else []
+
+
+def selected_chats(facts, chats):
+    return len(chats) + len(unstarted_chats(facts, chats))
+
+
 def outcome(facts, say):
     finished = (facts.get("sealed.finished") or [{}])[-1]
     if facts.get("sealed.failure"):
@@ -178,10 +189,10 @@ def outcome(facts, say):
     if exported and exported.get("complete_within_scope") is False:
         state = "partial"
     chats = facts.get("sealed.chat_export") or []
-    if any(not item.get("complete") for item in chats):
+    done, total = sum(1 for c in chats if c.get("complete")), selected_chats(facts, chats)
+    if chats and done < total:
         state = "partial"
-        text = say("{done} of {total} selected chats were exported completely.",
-                   done=sum(1 for c in chats if c.get("complete")), total=len(chats))
+        text = say("{done} of {total} selected chats were exported completely.", done=done, total=total)
     return state, say(STATE_LABELS[state]), text
 
 
@@ -399,7 +410,7 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
         missing = sum((c.get("message_ids") or {}).get("missing") or 0 for c in chats
                       if (c.get("message_ids") or {}).get("numbered_per_chat"))
         stats = [f'<div class="stat"><b>{_number(sum(c.get("captured") or 0 for c in chats))}</b><span>{_e(say("Messages saved"))}</span></div>',
-                 f'<div class="stat"><b>{sum(1 for c in chats if c.get("complete"))} / {len(chats)}</b>'
+                 f'<div class="stat"><b>{sum(1 for c in chats if c.get("complete"))} / {selected_chats(facts, chats)}</b>'
                  f'<span>{_e(say("Chats complete"))}</span></div>',
                  f'<div class="stat"><b>{_number(missing)}</b><span>'
                  f'{_e(say("Message IDs absent after recheck, channels and supergroups"))}</span></div>']
@@ -423,7 +434,9 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
            f'<span class="failed">{_e(say("failed") if (c.get("phase") or "failed") == "failed" else c.get("phase"))}'
            f'{" · " + _e(c["error"]) if c.get("error") else ""}</span>')
         + f'</td><td>{_number(c.get("captured") or 0)}</td><td>{gaps(c)}</td><td>'
-        + (f'<code>{_e(c["file"])}</code>' if c.get("file") else "—") + "</td></tr>" for c in chats)
+        + (f'<code>{_e(c["file"])}</code>' if c.get("file") else "—") + "</td></tr>" for c in chats) + "".join(
+        f'<tr><td>—<br><span class="muted"><code>{_e(chat_id)}</code></span></td><td><span class="partial">'
+        f'{_e(say("Not reached before the stop"))}</span></td><td>0</td><td>—</td><td>—</td></tr>' for chat_id in unstarted_chats(facts, chats))
     chat_section = (f'<section class="card wide"><h2>{_e(say("Chat exports"))}</h2><table class="list"><tr class="head">'
                     + "".join(f"<td>{_e(say(name))}</td>" for name in ("Chat", "Result", "Messages", "Absent message IDs", "File"))
                     + f'</tr>{chat_rows}</table></section>') if chats else ""
