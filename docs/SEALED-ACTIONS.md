@@ -106,6 +106,16 @@ result. A long session therefore uses its remaining collection window rather tha
 waiting for the deadline before preparing the archive. The display identifies selections
 whose full size could not be sampled.
 
+The plan table shows, chat by chat, what a start now would hold. Messages of every
+included chat are read first, in this order: account data, private chats and bots,
+groups, then large groups and channels from the smallest. Photos of chats and people
+follow, then files. A selection larger than the session can still start: the packaging
+reserve covers only the part the run can reach, collection stops at the time limit, and
+the archive records every chat read in part or not reached. Untick a chat in the table to
+leave it out. When Telegram asks the account to slow down (`FLOOD_WAIT`), the pause
+between history pages grows and then shrinks again after successful pages, so the
+measured reading rate can stay below the estimate.
+
 ## Choose this mode or a persistent workspace
 
 | Capture mode | Configurable scope | Difference |
@@ -129,6 +139,19 @@ The initial media budget is 4 GiB, with visible per-type file limits; larger fil
 or exhausted download budgets use server hashes where available. Review these
 limits before collecting. Hashes cannot reconstruct a file. Optional photos,
 stories, session metadata and extra personal data remain separate choices.
+**Photos of chats and people**, on by default, saves the current photo of each selected
+chat and of the people who wrote in it, at most 2,000 per export: the chats first, then
+the authors with the most messages. The JSON/HTML views show them as avatars in the chat
+list and next to messages. Custom emoji are drawn in the message text when they are still
+images; animated ones keep their fallback character, and every saved file is linked under
+the message.
+
+The cover of the result, `index.html`, says whether every selected chat was read to the
+end. **Finished with known limits** means all selected chats were read without failures,
+but limits of a new sign-in remain, for example no Takeout for a session younger than
+24 hours, or contacts limited to Telegram users; because of them the verifier reports the
+export as not complete. Failed pages and files are listed separately from these known
+limits.
 
 Takeout may require approval in an established Telegram session. Telegram sets
 the delay; a new login or runner does not bypass it. The capture window you choose,
