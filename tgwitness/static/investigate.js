@@ -147,6 +147,7 @@
 
   const seconds = value => value < 10 ? String(Math.round(value * 10) / 10) : String(Math.round(value));
   const clock = value => (value || '').slice(11, 19);
+  const moment = value => fmtTime(value);
   const labelName = value => tr((LABELS.find(item => item[0] === value) || [value, value])[1]);
 
   const duration = value => value === null || value === undefined ? '—'
@@ -1032,7 +1033,7 @@
         node('span', 'doc-goal-status ' + (stat ? 'obtained' : ''), stat ? String(stat.count) : '0'),
         el('div', 'doc-goal-main', node('span', 'doc-goal-text', entry.value),
           node('span', 'doc-sub', [tr((ENTRY_KINDS.find(k => k[0] === entry.kind) || [, entry.kind])[1]),
-            entry.note, stat ? tr('last seen {at}', {at: clock(stat.last_at)}) : ''].filter(Boolean).join(' · '))),
+            entry.note, stat ? tr('last seen {at}', {at: moment(stat.last_at)}) : ''].filter(Boolean).join(' · '))),
         el('div', 'doc-row-actions doc-goal-tools', button('', 'ghost doc-icon-btn danger', async () => {
           await api('watchlists/' + item.id + '/entries/' + entry.id, undefined, {method: 'DELETE'});
           await loadLists(box);
@@ -1306,9 +1307,9 @@
         el('div', 'doc-goal-main', node('span', 'doc-goal-text', who),
           node('span', 'doc-sub', [item.user_id ? tr('Telegram ID {id}', {id: item.user_id}) : tr('not resolved yet'),
             item.username && item.label ? '@' + item.username : '',
-            item.last_checked_at ? tr('checked {at}', {at: clock(item.last_checked_at)}) : ''].filter(Boolean).join(' · ')),
+            item.last_checked_at ? tr('checked {at}', {at: moment(item.last_checked_at)}) : ''].filter(Boolean).join(' · ')),
           el('div', 'doc-chips', stateChip(item.last_state),
-            item.last_state?.was_online ? chip(tr('last online {at}', {at: clock(item.last_state.was_online)}), 'quiet', 'clock') : ''),
+            item.last_state?.was_online ? chip(tr('last online {at}', {at: moment(item.last_state.was_online)}), 'quiet', 'clock') : ''),
           item.note ? node('p', 'doc-sub', item.note) : ''),
         el('div', 'doc-row-actions doc-goal-tools',
           item.user_id ? button('', 'ghost doc-icon-btn', () => showPattern(box, item), 'chart', 'Show the daily pattern') : '',

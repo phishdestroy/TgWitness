@@ -5515,7 +5515,7 @@
   "Selected message samples": "Các mẫu tin nhắn được chọn",
   "Selected records": "Các bản ghi đã chọn",
   "Sender counts use new messages, history observations and recovered messages.": "Số lượng người gửi được tính dựa trên các tin nhắn mới, các quan sát lịch sử và các tin nhắn đã khôi phục.",
-  "Showing the latest {n} recorded periods. The report includes the complete selected period.": "Hiển thị{n} khoảng thời gian ghi lại gần đây nhất. Báo cáo bao gồm toàn bộ khoảng thời gian đã chọn.",
+  "Showing the latest {n} recorded periods. The report includes the complete selected period.": "Hiển thị {n} khoảng thời gian ghi lại gần đây nhất. Báo cáo bao gồm toàn bộ khoảng thời gian đã chọn.",
   "Showing {shown} of {total} ranges.": "Đang hiển thị {shown} trong tổng số {total} phạm vi.",
   "Showing {shown} of {total} selected records. Possible secrets are masked in this preview.": "Đang hiển thị {shown} trong số {total} bản ghi đã chọn. Các thông tin bí mật có thể có sẽ được che đi trong bản xem trước này.",
   "Source journal coverage": "Phạm vi nhật ký nguồn",
@@ -5937,7 +5937,7 @@
   "No workspace observation in the last {days} days": "Không có hoạt động quan sát không gian làm việc trong {days} ngày qua",
   "Workspace observation: {n} interruption in the available period": "Quan sát không gian làm việc: {n} lần gián đoạn trong khoảng thời gian có sẵn",
   "Workspace observation: {n} interruptions in the available period": {
-    "other": "Quan sát không gian làm việc: Có{n} lần gián đoạn trong khoảng thời gian có sẵn"
+    "other": "Quan sát không gian làm việc: Có {n} lần gián đoạn trong khoảng thời gian có sẵn"
   },
   "{n} cards": {
     "other": "{n} thẻ"
@@ -8211,7 +8211,7 @@
   "in use": "đang dùng",
   "investigation": "điều tra",
   "last online {at}": "lần cuối trực tuyến {at}",
-  "last seen {at}": "lần cuối được ghi nhận lúc {at}",
+  "last seen {at}": "lần quan sát cuối cùng: {at}",
   "listens on loopback": "lắng nghe trên loopback",
   "listens on the network": "lắng nghe trên mạng",
   "live · {n}s": "trực tiếp · {n} giây",

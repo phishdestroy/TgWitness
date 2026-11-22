@@ -6051,10 +6051,10 @@
     "other": "Спостереження за робочим простором: {n} переривання протягом доступного періоду"
   },
   "{n} cards": {
-    "one": "{n}-картка",
-    "few": "{n}-картки",
-    "many": "{n}-картки",
-    "other": "{n}. Картки"
+    "one": "{n} картка",
+    "few": "{n} картки",
+    "many": "{n} карток",
+    "other": "{n} картки"
   },
   "{n} comments": {
     "one": "{n} коментар",
@@ -7478,7 +7478,7 @@
   "Network topology": "Мережева топологія",
   "New goal": "Нова мета",
   "New photo, not applied yet": "Нове фото, ще не застосоване",
-  "New profile photo · SHA-256 {hash}": "Нове фото профілю · SHA-256{hash}",
+  "New profile photo · SHA-256 {hash}": "Нове фото профілю · SHA-256 {hash}",
   "New revision": "Нова редакція",
   "New workspace name": "Нова назва робочого простору",
   "New, historical, recovered, edited, deleted and missing observations.": "Нові, історичні, відновлені, відредаговані, видалені та відсутні спостереження.",
@@ -8329,7 +8329,7 @@
   "in use": "використовується",
   "investigation": "розслідування",
   "last online {at}": "останнє підключення {at}",
-  "last seen {at}": "останнє спостереження о {at}",
+  "last seen {at}": "останнє спостереження: {at}",
   "listens on loopback": "слухає loopback",
   "listens on the network": "слухає мережу",
   "live · {n}s": "наживо · {n} с",

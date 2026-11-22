@@ -2068,7 +2068,7 @@
   "{n} edited": "{n} modifié",
   "{n} encrypted object(s), {size}": "{n} objet(s) chiffré(s), {size}",
   "{n} event": "{n} événement",
-  "{n} event shown": "{n} événements affichés",
+  "{n} event shown": "{n} événement affiché",
   "{n} events": {
     "one": "{n} événement",
     "other": "{n} événements"
@@ -4840,7 +4840,7 @@
   "Channels and supergroups number their messages 1, 2, 3… A number between the first and the last observed one that was never seen is listed here; coverage.json lists every one.": "Les chaînes et les supergroupes numérotent leurs messages 1, 2, 3… Un numéro situé entre le premier et le dernier message observé, qui n’a jamais été vu, est répertorié ici ; coverage.json les répertorie tous.",
   "Absent numbers": "Chiffres manquants",
   "{n} records in {m} parts. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} enregistrements répartis en {m} parties. Chaque partie constitue une page distincte dotée de son propre sceau ; le fichier manifest.json répertorie son SHA-256.",
-  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} messages répartis en {m} parties, classés par ordre chronologique décroissant. Chaque partie constitue une page distincte dotée de son propre sceau ; le fichier manifest.json répertorie son SHA-256.",
+  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} messages répartis en {m} parties, de la plus ancienne à la plus récente. Chaque partie constitue une page distincte dotée de son propre sceau ; le fichier manifest.json répertorie son SHA-256.",
   "… and {n} more runs.": "… et {n} autres exécutions.",
   "Collector heartbeats: {n}": "Signaux de présence du collecteur : {n}",
   "This journal has {n} records, more than the {limit} one report page lists. The signed archive carries them as sealed parts; the journal files carry every record.": "Ce journal contient {n} enregistrements, soit plus que la {limit} indiquée sur une page de rapport. L'archive signée les contient sous forme de parties scellées ; les fichiers du journal contiennent tous les enregistrements.",
@@ -5977,8 +5977,8 @@
     "other": "Observation de l'espace de travail : {n} interruptions au cours de la période considérée"
   },
   "{n} cards": {
-    "one": "{n}e carte",
-    "other": "{n} cartes"
+    "one": "{n} fiche",
+    "other": "{n} fiches"
   },
   "{n} comments": {
     "one": "{n} commentaire",
@@ -8250,7 +8250,7 @@
   "in use": "utilisé",
   "investigation": "enquête",
   "last online {at}": "dernière connexion {at}",
-  "last seen {at}": "dernière observation {at}",
+  "last seen {at}": "dernière observation : {at}",
   "listens on loopback": "écoute sur loopback",
   "listens on the network": "écoute sur le réseau",
   "live · {n}s": "en direct · {n} s",

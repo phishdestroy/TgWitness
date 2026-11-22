@@ -8211,7 +8211,7 @@
   "in use": "使用中",
   "investigation": "調査",
   "last online {at}": "最終オンライン{at}",
-  "last seen {at}": "最終確認時刻 {at}",
+  "last seen {at}": "最終確認日時：{at}",
   "listens on loopback": "loopback で待ち受け",
   "listens on the network": "ネットワークで待ち受け",
   "live · {n}s": "ライブ · {n} 秒",

@@ -616,7 +616,7 @@
   "Export records": "Datensätze exportieren",
   "Export saved: {captured} messages, signed.": "Export der gespeicherten, signierten {captured}-Nachrichten.",
   "Export signed ZIP": "Signierte ZIP-Datei exportieren",
-  "Export started with {n} account. Observation keeps running.": "Der Export wurde mit {n} Konten gestartet. Die Überwachung läuft weiter.",
+  "Export started with {n} account. Observation keeps running.": "Der Export wurde mit {n} Konto gestartet. Die Überwachung läuft weiter.",
   "Export started with {n} accounts. Observation keeps running.": {
     "one": "Der Export wurde mit {n} Konto gestartet. Die Überwachung läuft weiter.",
     "other": "Der Export wurde mit {n} Konten gestartet. Die Beobachtung läuft weiter."
@@ -4840,7 +4840,7 @@
   "Channels and supergroups number their messages 1, 2, 3… A number between the first and the last observed one that was never seen is listed here; coverage.json lists every one.": "Kanäle und Supergruppen nummerieren ihre Nachrichten mit 1, 2, 3… Eine Nummer zwischen der ersten und der letzten beobachteten, die noch nie gesehen wurde, wird hier aufgeführt; „coverage.json“ listet jede einzelne auf.",
   "Absent numbers": "Fehlende Zahlen",
   "{n} records in {m} parts. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n}-Datensätze in {m}-Teilen. Jeder Teil ist eine eigene Seite mit eigenem Siegel; manifest.json listet seine SHA-256 auf.",
-  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n}-Nachrichten in {m}-Teilen, beginnend mit dem ältesten. Jeder Teil ist eine eigene Seite mit eigenem Siegel; manifest.json listet sein SHA-256 auf.",
+  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} Nachrichten in {m} Teilen, von der ältesten zur neuesten. Jeder Teil ist eine eigene Seite mit eigenem Siegel; manifest.json listet dessen SHA-256 auf.",
   "… and {n} more runs.": "… und {n} weitere Durchläufe.",
   "Collector heartbeats: {n}": "Collector-Heartbeats: {n}",
   "This journal has {n} records, more than the {limit} one report page lists. The signed archive carries them as sealed parts; the journal files carry every record.": "Dieses Protokoll enthält {n} Datensätze, mehr als die {limit}, die auf einer Berichtsseite aufgeführt werden können. Das signierte Archiv enthält sie als versiegelte Teile; die Protokolldateien enthalten jeden einzelnen Datensatz.",
@@ -6004,7 +6004,7 @@
     "other": "{n}-Karten"
   },
   "{n} comments": {
-    "one": "{n}er Kommentar",
+    "one": "{n} Kommentar",
     "other": "{n} Kommentare"
   },
   "Reply to {name}": "Antwort an {name}",
@@ -8250,7 +8250,7 @@
   "in use": "in Verwendung",
   "investigation": "Untersuchung",
   "last online {at}": "Zuletzt online {at}",
-  "last seen {at}": "Zuletzt gesehen um {at} Uhr",
+  "last seen {at}": "zuletzt beobachtet: {at}",
   "listens on loopback": "lauscht auf Loopback",
   "listens on the network": "lauscht im Netzwerk",
   "live · {n}s": "live · {n} s",

@@ -874,7 +874,7 @@
   "Telegram marks this message as edited; the earlier text was not saved.": "O Telegram marca esta mensagem como editada; o texto anterior não foi salvo.",
   "from history": "do histórico",
   "Loaded from chat history, not seen live": "Carregadas a partir do histórico de bate-papo, não exibidas em tempo real",
-  "{n} person with saved messages": "{n}ª pessoa com mensagens salvas",
+  "{n} person with saved messages": "{n} pessoa com mensagens salvas",
   "{n} people with saved messages": {
     "one": "{n} pessoa com mensagens salvas",
     "other": "{n} pessoas com mensagens salvas"
@@ -904,7 +904,7 @@
   "This chat": "Este chat",
   "The newest message is #{last}, so about {n} message numbers no longer exist — deleted earlier, they cannot be exported.": "A mensagem mais recente é a nº {last}; portanto, cerca de {n} números de mensagem não existem mais — excluídos anteriormente, eles não podem ser exportados.",
   "This is an ordinary group: message numbers differ between accounts, so only this account can download it.": "Este é um grupo comum: os números das mensagens variam entre as contas, portanto, apenas esta conta pode fazer o download.",
-  "Estimated time with {n} account: {time}": "Tempo estimado com {n} contas: {time}",
+  "Estimated time with {n} account: {time}": "Tempo estimado com {n} conta: {time}",
   "Estimated time with {n} accounts: {time}": {
     "one": "Tempo estimado com {n} conta: {time}",
     "other": "Tempo estimado com {n} contas: {time}"
@@ -4840,7 +4840,7 @@
   "Channels and supergroups number their messages 1, 2, 3… A number between the first and the last observed one that was never seen is listed here; coverage.json lists every one.": "Os canais e supergrupos numeram suas mensagens como 1, 2, 3… Um número entre o primeiro e o último observado que nunca foi visto é listado aqui; o coverage.json lista todos eles.",
   "Absent numbers": "Números ausentes",
   "{n} records in {m} parts. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "Registros {n} em partes {m}. Cada parte é uma página independente com seu próprio selo; manifest.json lista seu SHA-256.",
-  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "Mensagens {n} em partes {m}, da mais antiga para a mais recente. Cada parte é uma página independente com seu próprio selo; manifest.json lista seu SHA-256.",
+  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} mensagens em {m} partes, da mais antiga à mais recente. Cada parte é uma página independente com seu próprio selo; o arquivo manifest.json lista seu SHA-256.",
   "… and {n} more runs.": "… e mais {n} execuções.",
   "Collector heartbeats: {n}": "Signais de vida do coletor: {n}",
   "This journal has {n} records, more than the {limit} one report page lists. The signed archive carries them as sealed parts; the journal files carry every record.": "Este diário contém {n} registros, mais do que o {limit} que uma página de relatório pode exibir. O arquivo assinado os contém como partes seladas; os arquivos do diário contêm todos os registros.",
@@ -5973,7 +5973,7 @@
   "No workspace observation in the last {days} days": "Nenhuma observação da área de trabalho nos últimos {days} dias",
   "Workspace observation: {n} interruption in the available period": "Observação do ambiente de trabalho: {n} interrupção no período disponível",
   "Workspace observation: {n} interruptions in the available period": {
-    "one": "Observação da área de trabalho: {n}a interrupção no período disponível",
+    "one": "Observação do ambiente de trabalho: {n} interrupção no período disponível",
     "other": "Observação da área de trabalho: {n} interrupções no período disponível"
   },
   "{n} cards": {
@@ -8250,7 +8250,7 @@
   "in use": "em uso",
   "investigation": "investigação",
   "last online {at}": "última conexão {at}",
-  "last seen {at}": "visto pela última vez {at}",
+  "last seen {at}": "observado pela última vez: {at}",
   "listens on loopback": "escuta no loopback",
   "listens on the network": "escuta na rede",
   "live · {n}s": "ao vivo · {n} s",

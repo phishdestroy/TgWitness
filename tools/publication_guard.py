@@ -10,6 +10,7 @@ from pathlib import PurePosixPath
 import re
 import subprocess
 import tomllib
+import unicodedata
 import xml.etree.ElementTree as ET
 import zipfile
 from urllib.parse import unquote, urlsplit
@@ -136,6 +137,33 @@ def check_version_labels(root):
     return findings
 
 
+UNSPACED = {"ja", "zh", "zh-Hant", "th", "ko"}
+UNIT_SUFFIXES = {"s", "h", "m", "ms", "min", "B", "KB", "MB", "GB", "KiB", "MiB", "GiB", "d", "x", "px"}
+ATTACHED_SUFFIXES = {"bn": ("টি", "টা", "জন", "এর", "এ", "কে"), "fa": ("ها",),
+                     "uz": ("da", "dan", "ni", "ga", "gacha", "ta", "ning", "chi", "dagi", "lik", "lar", "dir", "gi")}
+ATTACHED_PREFIXES = {"ar": set("وبلفك")}
+
+
+def joined_placeholder(lang, key, text):
+    if lang in UNSPACED:
+        return False
+    wordy = lambda char: unicodedata.category(char)[0] in "LMN"
+    suffixes = ATTACHED_SUFFIXES.get(lang, ())
+    for found in re.finditer(r"\{(\w+)\}", text):
+        field, start, end = found.group(1), found.start(), found.end()
+        while start and wordy(text[start - 1]):
+            start -= 1
+        while end < len(text) and wordy(text[end]):
+            end += 1
+        before, after = text[start:found.start()], text[found.end():end]
+        if before and before not in ATTACHED_PREFIXES.get(lang, ()) and not re.search(r"\w\{" + field + r"\}", key):
+            return True
+        if after and after not in UNIT_SUFFIXES and not re.search(r"\{" + field + r"\}\w", key) and not (
+                after in suffixes or lang == "bn" and after.startswith(suffixes)):
+            return True
+    return False
+
+
 def check_catalogues(root):
     package = Path(root) / "tgwitness"
     findings = []
@@ -179,6 +207,8 @@ def check_catalogues(root):
                         findings.append(f"{name}: changed placeholders ({form}): {key}")
                     elif "\ufffd" in text or any(ord(char) < 32 and char not in "\n\r\t" for char in text):
                         findings.append(f"{name}: invalid translation characters ({form}): {key}")
+                    elif joined_placeholder(lang, key, text):
+                        findings.append(f"{name}: placeholder joined to a word ({form}): {key}")
     except (OSError, ValueError, TypeError, StopIteration) as exc:
         findings.append("Panel language catalogues could not be checked: " + str(exc))
     return findings

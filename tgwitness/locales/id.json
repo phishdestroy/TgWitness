@@ -5937,7 +5937,7 @@
   "No workspace observation in the last {days} days": "Tidak ada pengamatan ruang kerja dalam {days} hari terakhir",
   "Workspace observation: {n} interruption in the available period": "Pengamatan ruang kerja: {n} kali gangguan dalam periode yang tersedia",
   "Workspace observation: {n} interruptions in the available period": {
-    "other": "Pengamatan ruang kerja: T{n} kali gangguan dalam periode yang tersedia"
+    "other": "Pengamatan ruang kerja: {n} kali gangguan dalam periode yang tersedia"
   },
   "{n} cards": {
     "other": "{n} kartu"
@@ -8211,7 +8211,7 @@
   "in use": "digunakan",
   "investigation": "penyelidikan",
   "last online {at}": "terakhir online {at}",
-  "last seen {at}": "terakhir terlihat pukul {at}",
+  "last seen {at}": "terakhir terdeteksi: {at}",
   "listens on loopback": "mendengarkan di loopback",
   "listens on the network": "mendengarkan di jaringan",
   "live · {n}s": "langsung · {n} dtk",

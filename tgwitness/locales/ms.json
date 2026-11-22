@@ -5937,10 +5937,10 @@
   "No workspace observation in the last {days} days": "Tiada pemerhatian ruang kerja dalam {days} hari terakhir",
   "Workspace observation: {n} interruption in the available period": "Pengamatan ruang kerja: {n} gangguan dalam tempoh yang tersedia",
   "Workspace observation: {n} interruptions in the available period": {
-    "other": "Pengamatan ruang kerja: {n}gangguan dalam tempoh yang tersedia"
+    "other": "Pengamatan ruang kerja: {n} gangguan dalam tempoh yang tersedia"
   },
   "{n} cards": {
-    "other": "{n}kad"
+    "other": "{n} kad"
   },
   "{n} comments": {
     "other": "{n} komen"
@@ -7353,7 +7353,7 @@
   "Network topology": "Topologi rangkaian",
   "New goal": "Matlamat baru",
   "New photo, not applied yet": "Foto baru, belum digunakan lagi",
-  "New profile photo · SHA-256 {hash}": "Foto profil baru · SHA-256{hash}",
+  "New profile photo · SHA-256 {hash}": "Foto profil baru · SHA-256 {hash}",
   "New revision": "Semakan semula",
   "New workspace name": "Nama ruang kerja baru",
   "New, historical, recovered, edited, deleted and missing observations.": "Perhatian baharu, sejarah, dipulihkan, disunting, dipadam dan hilang.",
@@ -7543,7 +7543,7 @@
   "Profile photo removed": "Gambar profil dialih keluar",
   "Profile photo removed.": "Gambar profil dialih keluar.",
   "Profile photo saved": "Foto profil disimpan",
-  "Profile photo updated · SHA-256 {hash}": "Foto profil dikemas kini · SHA-256{hash}",
+  "Profile photo updated · SHA-256 {hash}": "Foto profil dikemas kini · SHA-256 {hash}",
   "Profile saved as journal record #{seq}.": "Profil disimpan sebagai rekod jurnal #{seq}.",
   "Profile saved; {n} changes since the previous snapshot.": "Profil disimpan; {n} perubahan sejak snapshot sebelumnya.",
   "Profile snapshot: {title}": "Siaran profil: {title}",
@@ -8211,7 +8211,7 @@
   "in use": "sedang digunakan",
   "investigation": "siasatan",
   "last online {at}": "akhir dalam talian {at}",
-  "last seen {at}": "terakhir dilihat {at}",
+  "last seen {at}": "terakhir diperhatikan: {at}",
   "listens on loopback": "mendengar pada loopback",
   "listens on the network": "mendengar pada rangkaian",
   "live · {n}s": "langsung · {n} s",

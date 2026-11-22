@@ -8393,7 +8393,7 @@
   "in pool": "в пуле",
   "investigation": "расследование",
   "last online {at}": "последнее появление в сети {at}",
-  "last seen {at}": "последнее появление {at}",
+  "last seen {at}": "последнее обнаружение: {at}",
   "messages in a row": "сообщения подряд",
   "needs Telegram Premium": "требуется Telegram Premium",
   "never": "никогда",

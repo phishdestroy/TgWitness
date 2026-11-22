@@ -904,7 +904,7 @@
   "This chat": "Este chat",
   "The newest message is #{last}, so about {n} message numbers no longer exist — deleted earlier, they cannot be exported.": "El mensaje más reciente es el n.º {last}, por lo que hay unos {n} números de mensaje que ya no existen: se eliminaron anteriormente y no se pueden exportar.",
   "This is an ordinary group: message numbers differ between accounts, so only this account can download it.": "Se trata de un grupo normal: los números de los mensajes varían según la cuenta, por lo que solo esta cuenta puede descargarlo.",
-  "Estimated time with {n} account: {time}": "Tiempo estimado con {n} cuentas: {time}",
+  "Estimated time with {n} account: {time}": "Tiempo estimado con {n} cuenta: {time}",
   "Estimated time with {n} accounts: {time}": {
     "one": "Tiempo estimado con {n} cuenta: {time}",
     "other": "Tiempo estimado con {n} cuentas: {time}"
@@ -914,7 +914,7 @@
   "starts the export and signs the archive": "inicia la exportación y firma el archivo",
   "no Telegram account connected": "No hay ninguna cuenta de Telegram conectada",
   "not possible for ordinary groups": "No es posible en el caso de los grupos normales.",
-  "Export started with {n} account. Observation keeps running.": "Se ha iniciado la exportación con {n} cuentas. La observación sigue en marcha.",
+  "Export started with {n} account. Observation keeps running.": "Se ha iniciado la exportación con {n} cuenta. La observación sigue en marcha.",
   "Export started with {n} accounts. Observation keeps running.": {
     "one": "Se ha iniciado la exportación con {n} cuenta. La observación continúa en marcha.",
     "other": "Se ha iniciado la exportación con {n} cuentas. La observación continúa en marcha."
@@ -4038,7 +4038,7 @@
     "one": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
     "other": "Se han omitido {n} enlaces: no se admiten los enlaces «Fake TLS» (clave que comienza por «ee»), las direcciones privadas ni los enlaces erróneos."
   },
-  "{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Enlace {n} omitido: no se admiten enlaces TLS falsos (secretos que empiezan por «ee»), direcciones privadas ni enlaces rotos.",
+  "{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
   "No collection while process was offline.": "No se ha realizado ninguna recopilación mientras el proceso estaba desconectado.",
   "the source was removed before this file was downloaded": "La fuente se eliminó antes de que se descargara este archivo",
   "Servers in preferred countries are tried first. Servers identified as being in avoided countries are excluded. Servers whose country is unknown remain eligible unless \"Use only servers in preferred countries\" is selected. A workspace keeps a working server; the choice applies when it picks the next one.": "En primer lugar, se prueban los servidores de los países preferidos. Se excluyen los servidores identificados como pertenecientes a países que deben evitarse. Los servidores cuyo país se desconoce siguen siendo elegibles, a menos que se seleccione la opción «Utilizar únicamente servidores de los países preferidos». Un espacio de trabajo mantiene un servidor operativo; la elección se aplica cuando se selecciona el siguiente.",
@@ -5977,7 +5977,7 @@
     "other": "Observación del espacio de trabajo: {n} interrupciones en el periodo disponible"
   },
   "{n} cards": {
-    "one": "{n}a ficha",
+    "one": "{n} tarjeta",
     "other": "{n} tarjetas"
   },
   "{n} comments": {
@@ -8250,7 +8250,7 @@
   "in use": "en uso",
   "investigation": "investigación",
   "last online {at}": "última conexión {at}",
-  "last seen {at}": "visto por última vez a las {at}",
+  "last seen {at}": "última observación: {at}",
   "listens on loopback": "escucha en loopback",
   "listens on the network": "escucha en la red",
   "live · {n}s": "en vivo · {n} s",

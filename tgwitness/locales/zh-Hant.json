@@ -8211,7 +8211,7 @@
   "in use": "使用中",
   "investigation": "調查",
   "last online {at}": "最後在線時間 {at}",
-  "last seen {at}": "最後出現時間 {at}",
+  "last seen {at}": "最後觀察到：{at}",
   "listens on loopback": "監聽 loopback",
   "listens on the network": "監聽網路",
   "live · {n}s": "即時 · {n} 秒",

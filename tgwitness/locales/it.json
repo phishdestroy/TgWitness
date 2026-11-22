@@ -2068,7 +2068,7 @@
   "{n} edited": "{n} modificato",
   "{n} encrypted object(s), {size}": "{n} oggetto/i crittografato/i, {size}",
   "{n} event": "{n} evento",
-  "{n} event shown": "{n} eventi visualizzati",
+  "{n} event shown": "{n} evento visualizzato",
   "{n} events": {
     "one": "{n} evento",
     "other": "{n} eventi"
@@ -4840,7 +4840,7 @@
   "Channels and supergroups number their messages 1, 2, 3… A number between the first and the last observed one that was never seen is listed here; coverage.json lists every one.": "I canali e i supergruppi numerano i propri messaggi 1, 2, 3… Qui viene elencato un numero compreso tra il primo e l’ultimo osservato che non è mai stato visto; coverage.json ne elenca tutti.",
   "Absent numbers": "Numeri mancanti",
   "{n} records in {m} parts. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} record in {m} parti. Ogni parte costituisce una pagina a sé stante con il proprio sigillo; il file manifest.json ne riporta lo SHA-256.",
-  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} messaggi in {m} parti, in ordine cronologico decrescente. Ogni parte costituisce una pagina a sé stante con il proprio sigillo; il file manifest.json ne riporta lo SHA-256.",
+  "{n} messages in {m} parts, oldest first. Each part is a page of its own with its own seal; manifest.json lists its SHA-256.": "{n} messaggi in {m} parti, dalla più vecchia alla più recente. Ogni parte costituisce una pagina a sé stante con il proprio sigillo; il file manifest.json ne riporta lo SHA-256.",
   "… and {n} more runs.": "… e altre esecuzioni ({n}).",
   "Collector heartbeats: {n}": "Heartbeat del collector: {n}",
   "This journal has {n} records, more than the {limit} one report page lists. The signed archive carries them as sealed parts; the journal files carry every record.": "Questo registro contiene {n} record, un numero superiore al {limit} indicato in una pagina di report. L’archivio firmato li contiene come parti sigillate; i file del registro contengono tutti i record.",
@@ -8250,7 +8250,7 @@
   "in use": "in uso",
   "investigation": "indagine",
   "last online {at}": "ultimo accesso online {at}",
-  "last seen {at}": "visto l'ultima volta alle {at}",
+  "last seen {at}": "ultima osservazione: {at}",
   "listens on loopback": "in ascolto su loopback",
   "listens on the network": "in ascolto sulla rete",
   "live · {n}s": "in tempo reale · {n} s",
