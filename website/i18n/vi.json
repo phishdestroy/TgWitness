@@ -8320,7 +8320,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Quá trình thu thập dữ liệu trong GitHub Actions: việc chọn nhiều mục không còn cản trở quá trình khởi động; việc thu thập sẽ dừng lại khi hết thời gian giới hạn và tệp lưu trữ sẽ được đóng gói.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "Trong 13 ngôn ngữ, \"Reply to message #N\" hiện được hiển thị dưới dạng nhãn, không phải là lệnh.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Báo cáo: giao diện trò chuyện liệt kê tên từng tin nhắn dịch vụ, biệt danh của người tham gia và các lý do phạm vi khoảng trống đã được dịch; các biểu đồ chỉ có một hàng đã bị loại bỏ; thẻ tin cậy hiển thị ngày tháng và dấu vân tay khóa dưới dạng dễ đọc; và tệp PDF không còn chèn trang trống trước các mục này nữa.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Quá trình thu thập dữ liệu trong GitHub Actions: việc tải xuống ảnh trong các cuộc trò chuyện và hồ sơ cá nhân sẽ tiếp tục sau khoảng thời gian tạm dừng FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Quá trình thu thập dữ liệu trong GitHub Actions: việc tải xuống ảnh trong các cuộc trò chuyện và hồ sơ cá nhân sẽ tiếp tục sau khoảng thời gian tạm dừng FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Quá trình thu thập dữ liệu trong GitHub Actions: một cuộc trò chuyện mà kho lưu trữ trực tiếp không thể khởi động sẽ giữ lại các tin nhắn đã được đọc khi quá trình chạy dừng lại, được đóng gói dưới dạng ảnh chụp nhanh một phần.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Các nhãn giao diện được giữ nguyên bằng tiếng Anh trong các phiên bản tiếng Thái, tiếng Uzbek, tiếng Hindi và một số ngôn ngữ khác đã được dịch."
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

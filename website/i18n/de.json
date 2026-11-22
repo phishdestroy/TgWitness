@@ -8268,7 +8268,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Datenerfassung in GitHub Actions: Eine große Auswahl blockiert den Start nicht mehr; die Erfassung wird nach Ablauf der Zeitbegrenzung beendet und das Archiv wird gepackt.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "In 13 Sprachen wird „Reply to message #N“ nun als Bezeichnung und nicht als Befehl angezeigt.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Berichte: In der Chat-Ansicht werden alle Servicemeldungen und Teilnehmer-Aliase benannt, die Gründe für Lücken im Erfassungsbereich werden übersetzt, Diagramme mit nur einer Zeile werden weggelassen, Vertrauenskarten zeigen Datumsangaben und Schlüssel-Fingerabdrücke in lesbarer Form an, und das PDF enthält vor diesen keine leere Seite mehr.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Datenerfassung in GitHub Actions: Das Herunterladen von Fotos aus Chats und von Personen wird nach einer FLOOD_WAIT-Pause fortgesetzt."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Datenerfassung in GitHub Actions: Das Herunterladen von Fotos aus Chats und von Personen wird nach einer FLOOD_WAIT-Pause fortgesetzt.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Datenerfassung in GitHub Actions: Ein Chat, dessen Live-Archiv nicht gestartet werden konnte, behält die bereits gelesenen Nachrichten bei, wenn der Lauf beendet wird, und verpackt sie als Teil-Snapshot.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Die in Englisch belassenen Beschriftungen der Benutzeroberfläche werden in Thai, Usbekisch, Hindi und mehreren anderen Sprachen übersetzt."
  },
  "modes": {
   "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",

@@ -8320,7 +8320,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "GitHub Actions'da veri toplama: geniş bir seçim artık başlangıcı engellemez; toplama işlemi zaman sınırında durur ve arşiv paketlenir.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "13 dilde, \"#N numaralı mesaja yanıt ver\" artık bir komut olarak değil, bir etiket olarak görüntülenir.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Raporlar: sohbet görünümünde her hizmet mesajı, katılımcı takma adları ve boşluk kapsamı nedenleri çevrilmiştir; tek satırlı grafikler çıkarılmıştır; güven kartları tarihleri ve anahtar parmak izlerini okunabilir biçimde gösterir; ayrıca PDF'de artık bunların önünde boş bir sayfa bırakılmamaktadır.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions'da veri toplama: sohbetlerin ve kişilerin fotoğraflarının indirilmesi, FLOOD_WAIT duraklamasından sonra yeniden başlar."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "GitHub Actions'da veri toplama: sohbetlerin ve kişilerin fotoğraflarının indirilmesi, FLOOD_WAIT duraklamasından sonra yeniden başlar.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "GitHub Actions'da veri toplama: canlı arşivi başlatılamayan bir sohbet, işlem durduğunda okunmuş mesajları kısmi bir anlık görüntü olarak paketlenmiş halde tutar.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Tayca, Özbekçe, Hintçe ve diğer bazı dillerde İngilizce olarak bırakılan arayüz etiketleri çevrilmiştir."
  },
  "modes": {
   "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",

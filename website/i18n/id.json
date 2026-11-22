@@ -8320,7 +8320,9 @@
   "9dfada20e34d0c01d292332be1ac1b618aab110621f7039c1d47654acded4fff": "Pengumpulan data di GitHub Actions: pilihan yang banyak tidak lagi menghalangi proses awal; pengumpulan berhenti pada batas waktu yang ditentukan dan arsip dikemas.",
   "62ab47c2ff0961d64fa4300dac594a6963604402ab37ca6197eddd03f2112622": "Dalam 13 bahasa, \"Balas pesan #N\" kini ditampilkan sebagai label, bukan sebagai perintah.",
   "f3e0a81ba8ad44c73bafc78f2c7efe6dd37bf49420b74491bdb50a829d162a10": "Laporan: tampilan obrolan mencantumkan nama setiap pesan layanan, alias peserta, dan alasan cakupan celah telah diterjemahkan; bagan dengan satu baris dihilangkan; kartu kepercayaan menampilkan tanggal dan sidik jari kunci dalam bentuk yang mudah dibaca; dan PDF tidak lagi menyisakan halaman kosong sebelum data tersebut.",
-  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Pengumpulan data di GitHub Actions: pengunduhan foto obrolan dan profil pengguna dilanjutkan setelah jeda FLOOD_WAIT."
+  "823feb55a395327487ec12be63a6d726803a0bd8375ad7fd80b25ed3c324406e": "Pengumpulan data di GitHub Actions: pengunduhan foto obrolan dan profil pengguna dilanjutkan setelah jeda FLOOD_WAIT.",
+  "c2f7291d8a1aca0db7db8fff71273df95dc80e0fa97c49d6f52baeedbb63db43": "Pengumpulan data di GitHub Actions: obrolan yang arsip langsungnya tidak dapat dimulai akan mempertahankan pesan-pesan yang sudah dibaca saat proses berhenti, dikemas sebagai snapshot parsial.",
+  "05f40159dc200b033469d0e08bd26789eeb32d7d6a625c4d4d228d46dc6b14a4": "Label antarmuka yang ditinggalkan dalam bahasa Inggris di bahasa Thailand, Uzbek, Hindi, dan beberapa bahasa lainnya telah diterjemahkan."
  },
  "modes": {
   "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",
