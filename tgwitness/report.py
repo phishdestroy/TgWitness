@@ -16,6 +16,7 @@ from pydantic import ConfigDict, Field, ValidationError, field_validator
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
 from . import report_chat_timeline, report_design, report_forwards, report_history, report_layouts, report_media, report_repeats, report_secret, report_selection, report_selection_view
 from . import indicators as ioc
+from .avatar_initials import initials
 from . import viewer
 from .store import canonical, utcnow
 from .verify import (SCOPE_REASONS, SEAL_CLOSE, SEAL_OPEN, coverage_lines, fingerprint, fingerprint_colors, ots_summary,
@@ -2901,11 +2902,6 @@ MEDIA_NAMES = {"MessageMediaPhoto": "Photo", "MessageMediaDocument": "File", "Me
                "MessageMediaGeo": "Location", "MessageMediaGeoLive": "Location", "MessageMediaVenue": "Location",
                "MessageMediaContact": "Contact", "MessageMediaPoll": "Poll", "MessageMediaDice": "Dice",
                "MessageMediaGame": "Game", "MessageMediaInvoice": "Invoice", "MessageMediaStory": "Story"}
-
-
-def initials(name):
-    words = [w for w in re.split(r"\s+", str(name or "").strip()) if w and w[0].isalnum()]
-    return ("".join(w[0] for w in words[:2]) or "?").upper()
 
 
 def colour(peer):

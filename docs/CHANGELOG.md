@@ -26,6 +26,8 @@
 
 ## Unreleased
 
+- Backup: the backup folder appears only after the copy is complete, so running out of disk space or pressing Ctrl+C leaves nothing to clean up. A new command checks a backup against its manifest: `tgwitness verify-backup FOLDER`.
+- Avatars without a photo in reports and Telegram views show the same initials as in the panel, including usernames, names of the form User 12345 and names made only of digits.
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
