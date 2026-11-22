@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Documentation: three assurance levels, each on its own page. [Assurance levels](https://phishdestroy.github.io/TgWitness/docs/assurance-levels/) compares GitHub Actions capture, a verified server and a confidential VM on Phala Cloud: whom you trust, what each proves, how long it runs, the price and when to choose it. [Verified server](HIGH-ASSURANCE.md) (formerly high-assurance deployment, whose address now forwards) covers ordinary VPS only, with a card for each provider: what its log records, which access paths fail `verify` and which stay unseen, its strength, server type and price. [Phala Cloud and Intel TDX](PHALA.md) is rewritten: why, what it means for a court and for you, what the trust rests on, who uses dstack, what if TDX is broken, rollback of the disk by the host, prices, then the technical reference. A new animated guide, [How a verified server works](https://phishdestroy.github.io/TgWitness/docs/verified-server/), plays the deployment step by step and shows who can reach a cloud server, how `verify` sorts the provider log and what Cloudflare records.
 - The Mini apps tab of the chat panel no longer skips a heading level, so screen readers list its sections under the chat name.
 - The Build report tab of Export records keeps its page heading for screen readers; it was removed from the page together with the visible heading.
 - The selected tab in a person's card is readable in the dark theme (it used the darker accent blue with a contrast of 3.3 to 1).

@@ -1,0 +1,26 @@
+<p class="guide-outcome">Three ways to collect Telegram evidence that someone else can check. Each level takes one more party out of the circle of trust, and each has its own page.</p>
+<ol class="al-ladder" aria-label="Three assurance levels, from the first to the third">
+<li class="al-step al-1"><span class="al-num" aria-hidden="true">1</span><span class="al-bar" aria-hidden="true"></span><strong>GitHub Actions capture</strong><span>You trust GitHub</span></li>
+<li class="al-step al-2"><span class="al-num" aria-hidden="true">2</span><span class="al-bar" aria-hidden="true"></span><strong>Verified server</strong><span>You trust the provider's hosts</span></li>
+<li class="al-step al-3"><span class="al-num" aria-hidden="true">3</span><span class="al-bar" aria-hidden="true"></span><strong>Confidential VM · Phala Cloud</strong><span>You trust Intel</span></li>
+</ol>
+
+<h2 id="levels">The three levels</h2>
+<div class="vs-levels al-levels">
+<article class="vs-level"><span class="panel-caption">LEVEL 1</span><strong>GitHub Actions capture</strong><p>A one-off export on a fresh GitHub runner. GitHub attests that the archive came from the approved workflow and collector commit, and the result is encrypted for the recipient.</p><dl><dt>You trust</dt><dd>GitHub, the pinned collector and the HTTPS tunnel</dd><dt>Runs for</dt><dd>One session of 30, 60 or 120 minutes</dd><dt>Price</dt><dd>No server; GitHub Actions minutes of your account</dd></dl><a class="al-open" href="@@GUIDE_CAPTURE@@">Open GitHub Actions capture →</a></article>
+<article class="vs-level is-main"><span class="panel-caption">LEVEL 2</span><strong>Verified server</strong><p>A VPS built through the provider's API from one commit, with no SSH and no inbound port. The provider's log and Cloudflare show how it was built and that nobody opened it.</p><dl><dt>You trust</dt><dd>The provider's hosts, and whoever can compel the provider</dd><dt>Runs for</dt><dd>Around the clock, for as long as you keep it</dd><dt>Price</dt><dd>From $10 a month; Hetzner <code>cpx22</code> €19.99</dd></dl><a class="al-open" href="@@REF_VERIFIED_SERVER@@">Open Verified server →</a></article>
+<article class="vs-level"><span class="panel-caption">LEVEL 3</span><strong>Confidential VM · Phala Cloud</strong><p>An Intel TDX virtual machine whose memory the host cannot read. The processor signs what runs inside, and anyone can check that signature to Intel's root, offline too.</p><dl><dt>You trust</dt><dd>Intel</dd><dt>Runs for</dt><dd>Around the clock, for as long as you keep it</dd><dt>Price</dt><dd>$0.06 an hour, about $44 a month</dd></dl><a class="al-open" href="@@GUIDE_PHALA@@">Open Phala Cloud and Intel TDX →</a></article>
+</div>
+
+<h2 id="compare">Side by side</h2>
+<div class="table-wrap" tabindex="0"><table class="al-table">
+<thead><tr><th scope="col">Level</th><th scope="col">Whom you trust</th><th scope="col">What it proves</th><th scope="col">How long it runs</th><th scope="col">Price</th><th scope="col">When to choose it</th></tr></thead>
+<tbody>
+<tr><th scope="row">1 · GitHub Actions capture</th><td>GitHub, the pinned collector and its dependencies, the HTTPS tunnel</td><td>The archive was produced by the approved workflow and commit on a fresh runner, under GitHub's attestation</td><td>One session of 30, 60 or 120 minutes</td><td>No server; GitHub Actions minutes of your account</td><td>A one-off export of an account or of chats, without running a server</td></tr>
+<tr><th scope="row">2 · Verified server</th><td>The provider's hosts and whoever can compel the provider; not you as operator</td><td>The server was built from one commit through the API, nothing could connect to it, nobody used the provider's access paths, and its signing key was created on it</td><td>Around the clock</td><td>From $10 to about $22 a month, depending on the provider</td><td>Watching chats for weeks or months, when your opponent cannot compel the provider</td></tr>
+<tr><th scope="row">3 · Confidential VM · Phala Cloud</th><td>Intel</td><td>Everything of level 2, and that the published code ran in a machine whose memory the host could neither read nor change</td><td>Around the clock</td><td>$0.06 to $0.23 an hour; about $44 a month for the smallest</td><td>When your opponent could reach the hosting company or a state could compel it</td></tr>
+</tbody></table></div>
+
+<h2 id="common">What every level keeps</h2>
+<p>All three write the same signed, hash-chained journal. Checkpoints held by a <a href="@@GUIDE_WITNESS@@">witness</a> and external time stamps fix what existed and when, whichever level collected it. A higher level does not change the archive format; it changes who could have interfered while it was collected.</p>
+<p>Not sure? Start with the <a href="@@GUIDE_VERIFIED_SERVER@@">animated walk-through of a verified server</a>.</p>

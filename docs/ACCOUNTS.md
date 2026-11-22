@@ -237,7 +237,7 @@ The warning heading stays visible in the import form; its full explanation opens
 automatically when files or a key/session string are supplied. It can be collapsed
 after reading, so the file picker and connection controls remain usable on a phone.
 
-An [attested deployment](HIGH-ASSURANCE.md) (Phala Cloud, Intel TDX) does not collect on
+An [attested deployment](PHALA.md) (Phala Cloud, Intel TDX) does not collect on
 an imported key. There, **Files** and **Auth key** connect only with **Create an independent
 authorization** selected; bulk import is refused. Phone and QR login work as usual.
 

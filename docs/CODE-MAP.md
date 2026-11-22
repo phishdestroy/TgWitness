@@ -20,7 +20,7 @@ and flexible deployment are part of that purpose.
 | --- | --- |
 | Preserve context and changes | [Collection](COLLECTION.md), [event records](EVIDENCE.md) and [history](HISTORY.md) retain observations, versions and acquisition boundaries. |
 | Independent archive verification | [Verification](VERIFICATION.md) checks signed journals, manifests, attachments, retained checkpoints and supported external receipts. |
-| Verifiable collection environments | [GitHub acquisition](SEALED-ACTIONS.md) binds the archive to the approved workflow and source; [Phala / Intel TDX](HIGH-ASSURANCE.md) verifies measurements, freshness and collector identity. |
+| Verifiable collection environments | [GitHub acquisition](SEALED-ACTIONS.md) binds the archive to the approved workflow and source; [Phala / Intel TDX](PHALA.md) verifies measurements, freshness and collector identity. |
 | Several acquisition paths | [Collection modes](COLLECTION-MODES.md), [official-client capture](TRUSTED-LIVE.md), [Secret Chat integration](PSEUDO-SECRET.md) and the MTProto frame helpers provide distinct ways to collect and examine records. |
 | Large workloads and recovery | [Public-history qualification](EXPORT-BENCHMARK-2026-11-06.md) documents multi-account collection, verified archives, pauses, resumed jobs and independent comparisons. |
 | Fast work with saved material | [Full-text search](SEARCH.md#benchmark) documents indexing and query measurements on a million-message journal; [analysis](ANALYSIS.md) and [investigation tools](INVESTIGATION.md) keep results linked to their sources. |

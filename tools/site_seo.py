@@ -28,6 +28,9 @@ PAGES = {
     "docs/archive/": ("Search & Analyze a Saved Telegram Archive", "Load Telegram history, search captured messages and review source-linked analysis. Connect archive tools for OCR, transcription, MCP and report workflows.", "Telegram archive analysis"),
     "docs/security/": ("Secure Telegram Sessions & Evidence Storage", "Review TgWitness session storage, signing keys, panel access and network exposure. Apply the security model to your Telegram collection workspace.", "Telegram session security"),
     "docs/access/": ("Share Telegram Case Access with Reviewers", "Grant reviewers access to selected Telegram accounts and chats. Set permissions, expiry and session limits, then revoke access when the task ends.", "Telegram evidence reviewer access"),
+    "docs/phala/": ("Phala Intel TDX: Confidential Telegram Collection", "See how a TgWitness collector runs in an Intel TDX confidential VM on Phala Cloud: chain of trust, six checks, TDX breaks, disk rollback and price.", "Phala Intel TDX Telegram collection"),
+    "docs/assurance-levels/": ("Telegram Evidence Assurance Levels Compared", "Compare GitHub Actions capture, a verified VPS and a Phala Intel TDX confidential VM: whom you trust, what each proves, run time, price and when to choose it.", "Telegram evidence assurance levels"),
+    "docs/verified-server/": ("How a Verified Telegram Collection Server Works", "Watch a sealed TgWitness server being deployed, see who can reach a cloud server, how verify judges the provider log and what Cloudflare records.", "verified Telegram collection server"),
     "docs/witness/": ("Set Up a Telegram Evidence Witness Bot", "Run an independent witness bot with its own signing key. Publish Telegram journal checkpoints and compare evidence exports with records retained elsewhere.", "Telegram evidence witness bot"),
     "docs/signed-export/": ("Zero Trust Case Study: Taylor Wessing, Dr. Zurheide & Dr. Schelinski", "Taylor Wessing's Dr. Patrick Zurheide and Dr. Tobias Schelinski signed a GDPR answer. Checked against its own file, it fails. A case study in zero trust.", "Taylor Wessing Zurheide Schelinski"),
     "docs/server/": ("Host TgWitness: Telegram Collection Server", "Run TgWitness on a server with persistent evidence storage, private panel access and backups. Check collection and recovery after updates or restarts.", "self hosted Telegram collection"),
@@ -43,7 +46,8 @@ PAGES = {
     "docs/reference/access/": ("TgWitness Access Tokens, Scopes & Permissions", "Configure scoped access to Telegram workspaces and chats in TgWitness. Review permissions, token expiry, IP restrictions, session limits and revocation.", "TgWitness access permissions"),
     "docs/reference/connection/": ("Telegram Proxy Routing & Connection Security", "Understand TgWitness proxy pools, IP modes, fallback policy and external-request routing. Review authentication and protection of stored connection secrets.", "Telegram proxy connection security"),
     "docs/reference/deployment/": ("Deploy TgWitness with Docker, HTTPS & Backups", "Deploy a persistent TgWitness collection service with Docker or operating-system services. Configure secure panel access, backups, updates and recovery.", "TgWitness Docker deployment"),
-    "docs/reference/high-assurance/": ("Phala Intel TDX: Attested Telegram Collection", "Deploy TgWitness on Phala or a conventional VM. Review Intel TDX quotes, OS measurements, collector identity and independent verification boundaries.", "Phala Intel TDX attestation"),
+    "docs/reference/verified-server/": ("Verified Server: Telegram Collection on a VPS", "Deploy a sealed TgWitness server on Hetzner, DigitalOcean, Linode, Vultr or AWS. See what each provider log shows, what stays unseen, prices and repeatable checks.", "verified Telegram collection server VPS"),
+    "docs/reference/phala/": ("Phala Intel TDX: Attested Telegram Collection", "Run TgWitness in an Intel TDX confidential VM on Phala Cloud: what it proves in court, what the trust rests on, what if TDX is broken, prices and checks.", "Phala Intel TDX attestation"),
     "docs/reference/panel/": ("TgWitness Panel: Chats, Journal & Exports", "Navigate TgWitness chats, sources, the signed journal, exports and account controls. Review panel actions, capture status and optional investigation tools.", "TgWitness Telegram panel"),
     "docs/reference/collection/": ("Save Edited & Deleted Telegram Messages", "See how TgWitness captures Telegram updates, keeps every edit and the text of deleted messages, and records scope, attachments, rechecks and coverage.", "save deleted Telegram messages"),
     "docs/reference/secret-chats/": ("Record Telegram Secret Chats in TgWitness", "Record Telegram Secret Chats that TgWitness creates or accepts: install the protocol extra, enable it per account and keep messages and timers in the journal.", "Telegram Secret Chats recording"),
@@ -94,6 +98,9 @@ RUSSIAN = {
     "docs/archive/": "Поиск и анализ сохранённого архива Telegram",
     "docs/security/": "Защита сессий Telegram и хранилища доказательств",
     "docs/access/": "Доступ рецензентов к материалам дела Telegram",
+    "docs/phala/": "Phala и Intel TDX: конфиденциальный сбор Telegram",
+    "docs/assurance-levels/": "Уровни доказательности для данных Telegram",
+    "docs/verified-server/": "Как работает проверяемый сервер сбора Telegram",
     "docs/witness/": "Настройка бота-свидетеля для доказательств Telegram",
     "docs/signed-export/": "Зачем нужен zero trust: кейс Taylor Wessing, Dr. Zurheide и Dr. Schelinski",
     "docs/server/": "Сервер TgWitness для сбора данных Telegram",
@@ -109,7 +116,8 @@ RUSSIAN = {
     "docs/reference/access/": "Токены, области доступа и разрешения TgWitness",
     "docs/reference/connection/": "Прокси Telegram и безопасность подключения",
     "docs/reference/deployment/": "Развёртывание TgWitness: Docker, HTTPS, бэкапы",
-    "docs/reference/high-assurance/": "Phala и Intel TDX: аттестация сборщика Telegram",
+    "docs/reference/verified-server/": "Проверяемый сервер: сбор Telegram на VPS",
+    "docs/reference/phala/": "Phala и Intel TDX: аттестация сборщика Telegram",
     "docs/reference/panel/": "Панель TgWitness: чаты, журнал и экспорт Telegram",
     "docs/reference/collection/": "Сохранение правок и удалённых сообщений Telegram",
     "docs/reference/secret-chats/": "Запись секретных чатов Telegram в TgWitness",
@@ -169,7 +177,7 @@ def metadata(path, title, description, lang):
         title = re.sub(r"\s*[|｜]\s*[^|｜]+$", "", clean(title, lang)).strip()
         if local.startswith("docs/reference/") and " · " in title:
             title = title.rsplit(" · ", 1)[0]
-        topic = "Phala / Intel TDX" if local.endswith("high-assurance/") else "Telegram"
+        topic = "Phala / Intel TDX" if local.endswith("phala/") else "Telegram"
         if local not in {"docs/reference/license/", "docs/reference/notice/", "docs/reference/changelog/", "docs/reference/architecture/", "docs/reference/verification/", "docs/reference/installation/", "docs/signed-export/"} and topic.lower() not in title.lower():
             title = topic + " · " + title
     return title + " | TgWitness", description, title

@@ -14,11 +14,11 @@ from urllib.parse import urlsplit
 
 if __package__:
     from . import site_seo
-    from .site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
+    from .site_content import GROUPS, GUIDES, LABELS, NEXT, REDIRECTS, REFERENCE, REFERENCE_GROUPS, REFERENCE_PARENT
     from . import site_diagrams, site_i18n, site_wiki, site_modes, site_account, site_llms, site_export_clinic, site_typography, site_validation, site_context
 else:
     import site_seo
-    from site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
+    from site_content import GROUPS, GUIDES, LABELS, NEXT, REDIRECTS, REFERENCE, REFERENCE_GROUPS, REFERENCE_PARENT
     import site_diagrams
     import site_i18n
     import site_wiki
@@ -401,7 +401,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     output = Path(output).absolute() if output is not None else root / "dist/site"
 
 
-    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
+    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES,
+                *(prefix(lang) + old + "index.html" for lang in LANGS for old in REDIRECTS), *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
                 *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES, *LLM_FILES}
     if output.resolve() != output:
         raise ValueError("Site output must not be a linked directory")
@@ -841,12 +842,26 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             footer = (f'<a class="reference" href="{values["REPO_URL"]}/edit/{values["BRANCH"]}/{source}">{labels["source"]} ↗</a>'
                       f'<a class="next-guide" href="{relative(path, wiki_hub + following + "/")}"><span>{labels["next"]}</span>'
                       f'<strong>{reference[following][0]} {arrow}</strong></a>')
+            parent = REFERENCE_PARENT.get(slug) if full_site else None
             page(f"{WIKI_HUB}{slug}/", title, description,
                  [(labels["home"], base if full_site else ""), (labels["docs"], hub if full_site else "docs/"),
-                  (labels["wiki"], wiki_hub if full_site else WIKI_HUB), (title, path)],
+                  (labels["wiki"], wiki_hub if full_site else WIKI_HUB),
+                  *([(guides[parent][0], hub + parent + "/")] if parent else []), (title, path)],
                  content, headings(content), footer,
                  notice(missing_by_page[path], english) if full_site else
                  '<p class="language-notice">' + html.escape(t(NOTICE_LINK_NOTE)) + '</p>')
+
+    for lang in LANGS:
+        for old, new in REDIRECTS.items():
+            moved = prefix(lang) + new
+            target = output / (prefix(lang) + old + "index.html")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            href = html.escape(relative(prefix(lang) + old, moved), quote=True)
+            target.write_text('<!doctype html><html><head><meta charset="utf-8"><title>TgWitness</title>'
+                              f'<link rel="canonical" href="{html.escape(base_url + "/" + moved, quote=True)}">'
+                              f'<meta http-equiv="refresh" content="0; url={href}"><meta name="robots" content="noindex"></head>'
+                              f'<body><a href="{href}">{html.escape(base_url + "/" + moved)}</a></body></html>\n',
+                              encoding="utf-8", newline="\n")
 
     for name, source in images.items():
         if WIKI_ASSETS.get(name) != source:

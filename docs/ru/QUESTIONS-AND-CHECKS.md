@@ -215,7 +215,7 @@ openssl dgst -sha256 -verify release-signing.pub -signature install.sh.sig insta
   ). Сертификат аттестации Intel TDX
   запечатан квалифицированным TSA правительства Бельгии, корневой сертификат которого закреплён в
   `tgwitness/tsa_roots.py`
-  ([сертификат аттестации ](../HIGH-ASSURANCE.md#attestation-certificate)
+  ([сертификат аттестации ](../PHALA.md#attestation-certificate)
   ).
 
 - В режиме «Evidence» каждая контрольная точка отправляется в квалифицированную службу временных отметок (TSA) правительства Бельгии

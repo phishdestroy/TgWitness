@@ -1,0 +1,142 @@
+<p class="guide-outcome">The highest of the three assurance levels. The collector runs in a confidential virtual machine whose memory the host cannot read, and the processor itself signs what runs inside. Anyone can check that signature against Intel's root, without trusting Phala, TgWitness or you.</p>
+<div class="fact-strip" role="list"><div role="listitem"><strong translate="no">Intel</strong><span>the only party you trust</span></div><div role="listitem"><strong>6 checks</strong><span>from Intel's root to the collector key</span></div><div role="listitem"><strong>Offline</strong><span>verify.py checks the quote without a network</span></div><div role="listitem"><strong translate="no">$0.06</strong><span>an hour for tdx.small, about $44 a month</span></div></div>
+
+<figure class="lab ph-hero" aria-labelledby="ph-hero-caption">
+<div class="lab-top"><span class="lab-kicker">THE HOST CANNOT LOOK INSIDE</span><span class="sample-tag">Intel TDX</span></div>
+<svg class="ph-scene" viewBox="0 0 720 270" role="img" aria-labelledby="ph-hero-title"><title id="ph-hero-title">Someone with root on the host tries to read the confidential machine's memory and is stopped; the processor's quote goes to the verifier, who checks it against Intel's root.</title>
+<rect class="ph-host" x="10" y="14" width="440" height="242" rx="16"/>
+<text class="ph-cap" x="30" y="40">PHYSICAL HOST · HYPERVISOR</text>
+<g class="ph-probe"><circle cx="70" cy="150" r="30"/><text class="vs-title" x="70" y="146">root</text><text class="vs-sub" x="70" y="163">on the host</text></g>
+<path class="ph-attack" d="M100 150H176"/><path class="ph-cross" d="M174 140l18 20m0-20l-18 20"/>
+<g class="ph-td"><rect class="ph-td-box" x="196" y="64" width="234" height="172" rx="14"/>
+<text class="vs-title" x="313" y="92">Confidential VM</text>
+<rect class="ph-row" x="214" y="108" width="198" height="32" rx="8"/><text x="313" y="129">Collector and signing key</text>
+<rect class="ph-row" x="214" y="148" width="198" height="32" rx="8"/><text x="313" y="169">Memory encrypted</text>
+<rect class="ph-row is-cpu" x="214" y="188" width="198" height="32" rx="8"/><text x="313" y="209">Processor signs a quote</text></g>
+<path class="pv-wire" d="M430 204H560V186"/><path class="pv-flow" d="M430 204H560V186"/>
+<path class="pv-wire is-read" d="M630 92V126"/><path class="pv-flow is-read" d="M630 92V126"/>
+<g class="pv-node is-verifier"><rect x="500" y="126" width="200" height="60" rx="12"/><text class="vs-title" x="600" y="152">Verifier</text><text class="vs-sub" x="600" y="172">checks the TDX quote</text></g>
+<g class="pv-node is-provider"><rect x="540" y="32" width="160" height="60" rx="12"/><text class="vs-title" x="620" y="58">Intel root</text><text class="vs-sub" x="620" y="78">pinned in the verifier</text></g>
+<text class="vs-sub ph-quote-label" x="495" y="222">TDX quote</text>
+</svg>
+<figcaption id="ph-hero-caption">Root on the host, the hypervisor and Phala's staff see only encrypted memory. What the verifier receives is a quote signed inside the processor, checked to Intel's root.</figcaption>
+</figure>
+
+<h2 id="why">Why</h2>
+<p>On a verified server the provider's log shows everything done through the API. It cannot show what someone with root on the physical host does: read the server's memory and its signing key, or change data before it is signed. Intel TDX closes that gap.</p>
+<div class="ph-compare">
+<section class="ph-side is-plain"><span class="panel-caption">ORDINARY VIRTUAL MACHINE</span><strong>The host sees inside</strong><ul><li>Memory, signing key included, readable by the host</li><li>Disk a file the host can copy</li><li>Which code runs: the collector's own account</li></ul></section>
+<section class="ph-side is-sealed"><span class="panel-caption">INTEL TDX ON PHALA CLOUD</span><strong>The host sees a sealed box</strong><ul><li>Memory encrypted and integrity-protected by the processor</li><li>Disk encrypted, keys from Phala's KMS</li><li>Which code runs: measured and signed by the processor</li></ul></section>
+</div>
+
+<h2 id="chain">The chain of trust</h2>
+<p>Every link is checked by the verifier itself. If one breaks, the result is a failure, not a warning.</p>
+<figure class="lab ph-chain-lab" data-lab="phChain" data-step="0" aria-labelledby="ph-chain-caption">
+<div class="lab-top"><span class="lab-kicker">01 / FROM INTEL'S ROOT TO THE COLLECTOR KEY</span><span class="sample-tag">What verify checks, in order</span></div>
+<ol class="ph-chain">
+<li data-chain="1"><span class="ph-dot" aria-hidden="true">1</span><strong>Intel root certificate</strong><span>Pinned inside the verifier; revocation lists and the platform's security level checked</span></li>
+<li data-chain="2"><span class="ph-dot" aria-hidden="true">2</span><strong>Certificate of this processor</strong><span>Signed by Intel, so the quote comes from a genuine Intel processor</span></li>
+<li data-chain="3"><span class="ph-dot" aria-hidden="true">3</span><strong>TDX quote</strong><span>Signed inside the processor, in production mode; the machine can be neither debugged nor migrated</span></li>
+<li data-chain="4"><span class="ph-dot" aria-hidden="true">4</span><strong>Measurements</strong><span>Firmware, kernel and OS image equal the published dstack image; the compose equals the one the commit builds</span></li>
+<li data-chain="5"><span class="ph-dot" aria-hidden="true">5</span><strong>Collector key</strong><span>The quote covers the collector's signed statement and the random challenge of this check</span></li>
+</ol>
+<div class="lab-controls" data-enhanced hidden><button type="button" class="lab-primary" data-play>Follow the chain</button><button type="button" data-reset>Reset</button><span data-step-label>0 of 5</span></div>
+<p class="lab-status" data-chain-status role="status">Five links, from a certificate Intel controls to the key that signs every record.</p>
+<figcaption id="ph-chain-caption">The same chain is checked offline by <code>verify.py</code> for every collector start recorded in the journal.</figcaption>
+</figure>
+
+<h2 id="checks">The six checks</h2>
+<p>Choose what happened to the deployment and watch which check stops it.</p>
+<figure class="lab ph-checks-lab" data-lab="phChecks" data-state="ok" aria-labelledby="ph-checks-caption">
+<div class="lab-top"><span class="lab-kicker">02 / WHAT VERIFY MAKES OF IT</span><span class="sample-tag">Check names from the report</span></div>
+<div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Choose what happened"><button type="button" data-scenario="ok" aria-pressed="true">Deployed as published</button><button type="button" data-scenario="tdx_os" aria-pressed="false">Development OS image</button><button type="button" data-scenario="tdx_compose" aria-pressed="false">Compose changed</button><button type="button" data-scenario="tdx_quote" aria-pressed="false">Debuggable machine</button><button type="button" data-scenario="tdx_binding" aria-pressed="false">Replayed quote</button></div>
+<ol class="ph-checks">
+<li data-check="tdx_binding"><code>tdx_binding</code><span class="ph-ok">The quote covers the collector's signed statement and this check's challenge</span><span class="ph-bad" hidden>The quote does not cover this check's challenge: an old answer replayed</span></li>
+<li data-check="tdx_quote"><code>tdx_quote</code><span class="ph-ok">The quote leads to Intel's root, the platform is up to date, the machine cannot be debugged or migrated</span><span class="ph-bad" hidden>The machine can be debugged: its memory is open to the host, so it is refused</span></li>
+<li data-check="tdx_compose_hash"><code>tdx_compose_hash</code><span class="ph-ok">RTMR3, replayed from dstack's event log, equals the hash of the reported compose</span><span class="ph-bad" hidden>RTMR3 does not equal the reported compose</span></li>
+<li data-check="tdx_compose"><code>tdx_compose</code><span class="ph-ok">The compose is byte for byte the one the deployed commit builds</span><span class="ph-bad" hidden>The compose is not the one the commit builds: other code ran; Phala's log also shows the new revision</span></li>
+<li data-check="tdx_identity"><code>tdx_identity</code><span class="ph-ok">The quote comes from the deployed application and instance, with keys from Phala's KMS and an encrypted disk</span><span class="ph-bad" hidden>The quote comes from another application or instance</span></li>
+<li data-check="tdx_os"><code>tdx_os</code><span class="ph-ok">MRTD and RTMR0-2 equal the values computed from the published production image</span><span class="ph-bad" hidden>The measurements match a development image, which has SSH</span></li>
+</ol>
+<div class="vs-verdict"><span class="panel-caption">RESULT</span><strong data-verdict>PASS</strong><code data-exit>exit 0</code></div>
+<p class="lab-status" data-checks-status role="status">All six checks pass: the published code ran in a sealed machine.</p>
+<figcaption id="ph-checks-caption">A failure is never softened into a warning. The full report also checks Phala's log of revisions, the tunnel and, with <code>--evidence</code>, every start in the journal.</figcaption>
+</figure>
+
+<h2 id="court">What it means for a court</h2>
+<div class="vs-levels ph-cards">
+<article class="vs-level"><span class="panel-caption">SIGNED BY HARDWARE</span><strong>How it was collected</strong><p>Intel hardware signs that this published code, at this commit, ran in a sealed machine that neither the hosting company nor the operator could read or change.</p></article>
+<article class="vs-level"><span class="panel-caption">REPEATABLE</span><strong>Anyone can check</strong><p>The standalone <code>verify.py</code> repeats the check offline, without a Phala account, a TgWitness server or trust in whoever produced the evidence.</p></article>
+<article class="vs-level"><span class="panel-caption">SEALED REPORT</span><strong>Time and signature</strong><p>The report carries a qualified EU time stamp, a second independent time stamp and the verifier's signature.</p></article>
+</div>
+<p>The attestation shows how the evidence was collected, not that what someone wrote in a message is true. What weight it carries is for the court or authority to decide.</p>
+
+<h2 id="you">What it means for you</h2>
+<ol class="ph-steps">
+<li><strong>Deploy from the panel</strong><span><strong>More tools → Extras → Server 24/7 → Confidential virtual machine · Phala Cloud</strong>, with a Phala Cloud API key. Without a domain you get a quick tunnel.</span></li>
+<li><strong>No way in, for you as well</strong><span>There is no SSH and no console. You work through the panel; data leaves only as exports.</span></li>
+<li><strong>Sign in inside the machine</strong><span>Log in to Telegram by phone or QR code, so the session key is created inside.</span></li>
+<li><strong>Leave the application as it is</strong><span>A changed compose fails the report. Restarts are listed.</span></li>
+</ol>
+
+<h2 id="trust">What the trust rests on</h2>
+<div class="ph-trust">
+<section class="ph-trusted"><span class="panel-caption">TRUSTED</span><strong>Intel</strong><p>The TDX module, the microcode, Intel's signing keys and the physical integrity of the memory bus. Nothing replaces them.</p></section>
+<section class="ph-verified"><span class="panel-caption">NOT TRUSTED, CHECKED</span><ul>
+<li><strong>dstack</strong><span>OS measurements rebuilt from the published image</span></li>
+<li><strong>TgWitness code</strong><span>compose rebuilt from the commit, byte for byte</span></li>
+<li><strong>Phala Cloud</strong><span>cannot read memory; any change is a new revision that fails</span></li>
+<li><strong>You</strong><span>no SSH, no console; the Telegram key is created inside</span></li>
+</ul></section>
+</div>
+<p>The host still controls the network and the clock. Blocked traffic shows as gaps in the journal, and time comes from RFC 3161 time stamps, OpenTimestamps and drand.</p>
+
+<h2 id="who">Who uses it</h2>
+<div class="vs-levels ph-cards">
+<article class="vs-level"><span class="panel-caption">DSTACK</span><strong>Open-source framework</strong><p>A project of the Linux Foundation's Confidential Computing Consortium, audited by zkSecurity and described in <a href="https://arxiv.org/abs/2509.11555">arXiv:2509.11555</a>. OpenRouter and NEAR AI build on it.</p></article>
+<article class="vs-level"><span class="panel-caption">PHALA CLOUD</span><strong>Hosting service</strong><p>Reports SOC 2 Type I and HIPAA compliance. Both concern how Phala runs its service; the proof does not rely on them.</p></article>
+</div>
+
+<h2 id="broken">What if TDX is broken</h2>
+<p>Processor flaws are found and fixed with microcode updates; Intel then rates platforms without the fix as out of date. Suppose someone breaks TDX on the machine that runs your collector:</p>
+<div class="threat-grid">
+<section class="threat-card is-open" aria-labelledby="ph-can"><h3 id="ph-can"><span aria-hidden="true">!</span> They can</h3><ul>
+<li>Read the memory of a machine on that host, the signing key included</li>
+<li>Sign false new records from then on</li>
+<li>Produce quotes that look valid for new records</li>
+</ul></section>
+<section class="threat-card is-covered" aria-labelledby="ph-cannot"><h3 id="ph-cannot"><span aria-hidden="true">✓</span> They cannot</h3><ul>
+<li>Change checkpoints that witnesses already hold</li>
+<li>Move RFC 3161 time stamps or OpenTimestamps receipts</li>
+<li>Change copies already stored under S3 Object Lock</li>
+<li>Change what Telegram itself still holds</li>
+<li>Change the result of earlier quotes: each is rated as of the time it was recorded</li>
+</ul></section>
+</div>
+<p>A break reaches forward, not back.</p>
+
+<h2 id="rollback">Rollback of the disk by the host</h2>
+<p>dstack encrypts the disk, but the host can put back an older copy of it; dstack acknowledges this limit. Checkpoints kept outside the machine catch it.</p>
+<figure class="lab ph-rollback-lab" data-lab="phRollback" data-state="ok" aria-labelledby="ph-rollback-caption">
+<div class="lab-top"><span class="lab-kicker">03 / AN OLDER DISK PUT BACK</span><span class="sample-tag">Invented record counts</span></div>
+<div class="ph-bars">
+<div class="ph-bar" data-bar="journal"><span class="panel-caption">JOURNAL ON THE MACHINE</span><span class="ph-track"><i></i></span><strong data-journal-count>128 records</strong></div>
+<div class="ph-bar is-witness"><span class="panel-caption">CHECKPOINT AT THE WITNESS</span><span class="ph-track"><i></i></span><strong>120 records</strong></div>
+<div class="ph-bar is-lock"><span class="panel-caption">COPY UNDER S3 OBJECT LOCK</span><span class="ph-track"><i></i></span><strong>128 records</strong></div>
+</div>
+<div class="lab-controls" data-enhanced hidden><button type="button" class="lab-primary" data-rollback>Put back an older disk</button><button type="button" data-reset>Reset</button></div>
+<p class="lab-status" data-rollback-status role="status">The journal, the witness's checkpoint and the locked copy agree.</p>
+<p hidden data-rollback-text>The machine restarts from 96 records. The witness holds a checkpoint at 120, so the shorter journal no longer matches and is reported; the locked copy still holds all 128 records.</p>
+<figcaption id="ph-rollback-caption">Run a witness and an off-site copy under Object Lock for every deployment on this level.</figcaption>
+</figure>
+
+<h2 id="price">Price</h2>
+<div class="vs-levels ph-cards ph-price">
+<article class="vs-level is-main"><span class="panel-caption">TDX.SMALL</span><strong>$0.06 an hour</strong><p>1 vCPU · 2 GB. About $43.80 a month. The wizard's choice.</p></article>
+<article class="vs-level"><span class="panel-caption">TDX.MEDIUM</span><strong>$0.12 an hour</strong><p>2 vCPU · 4 GB. About $87.60 a month.</p></article>
+<article class="vs-level"><span class="panel-caption">TDX.LARGE</span><strong>$0.23 an hour</strong><p>4 vCPU · 8 GB. About $167.90 a month.</p></article>
+</div>
+<p>Disk costs $0.000139 per GB an hour, about $0.10 per GB a month, while the machine exists, stopped or running. Prices from <a href="https://phala.com/pricing">Phala's price list</a> on 21 November 2026; the wizard shows the current price before anything is created.</p>
+
+<h2 id="reference">Technical reference</h2>
+<p>The six checks in detail, the command line, the offline <code>verify.py</code>, the sealed certificate and the live runs on Phala Cloud: <a href="@@REF_PHALA@@">Phala Cloud and Intel TDX reference</a>. All three levels side by side: <a href="@@GUIDE_ASSURANCE_LEVELS@@">assurance levels</a>.</p>

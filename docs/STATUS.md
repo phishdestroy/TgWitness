@@ -26,7 +26,7 @@ available under [Releases](https://github.com/phishdestroy/TgWitness/releases).
 | Separate witness with online Merkle continuity checks | [Witness](WITNESS.md) |
 | Official-client capture and session video | [Trusted Live](TRUSTED-LIVE.md) |
 | GitHub capture with a session time budget and encrypted delivery | [GitHub capture](SEALED-ACTIONS.md) |
-| Intel TDX collection, independent quote verification and an offline quote check in `verify.py` | [High assurance](HIGH-ASSURANCE.md) |
+| Intel TDX collection, independent quote verification and an offline quote check in `verify.py` | [High assurance](PHALA.md) |
 | Guided first setup: Just download, Follow chats or Evidence for a case | [First setup](SETTINGS.md) |
 | Case documentation: subject cards, conversation plans, translation, watchlists, online watch and a BagIt case package with court templates | [Investigation mode](INVESTIGATION-MODE.md) |
 | Exposure check of the investigating account's privacy rules and profile | [Account control](INVESTIGATION-MODE.md#account-control) |

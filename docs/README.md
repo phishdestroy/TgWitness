@@ -92,6 +92,7 @@ First time? Do it in this order:
 | Share something verifiable | [Export and verify](EVIDENCE.md#investigation-handoff) |
 | Publish checkpoints to a channel | [Witness bot](WITNESS.md#run-a-witness) |
 | Let others check the server itself | [High-assurance deployment](HIGH-ASSURANCE.md) |
+| Run the collector in a confidential VM | [Phala Cloud and Intel TDX](PHALA.md) |
 
 ### Operate and connect
 
