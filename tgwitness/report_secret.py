@@ -271,10 +271,14 @@ def event_text(say, item, when):
         return say("Ended") + (" · " + str(item["reason"]) if item.get("reason") else "")
     if text == "This account sent a read receipt up to {time}":
         return say(text, time=when(item["until"]) if item.get("until") else "?")
-    if text in ("The other side was typing", "This account showed typing"):
-        end = item.get("end") if isinstance(item.get("end"), str) and str(item["end"])[:19] != str(item["start"])[:19] else None
-        return say(text) + " · " + when(item["start"]) + (" – " + when(end) if end else "")
     return say(text)
+
+
+def event_line(say, item, when):
+    if item["text"] in ("The other side was typing", "This account showed typing"):
+        end = item.get("end") if isinstance(item.get("end"), str) and str(item["end"])[:19] != str(item["start"])[:19] else None
+        return when(item["start"]) + (" – " + when(end) if end else "") + " · " + say(item["text"])
+    return when(item["at"]) + " · " + event_text(say, item, when)
 
 
 def facts(say, chat, when):
@@ -361,7 +365,7 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
         parts.append('<div class="secret-thread">')
         for item in chat["items"]:
             if item["type"] == "event":
-                parts.append('<p class="secret-event">' + e(when(item["at"])) + " · " + e(event_text(say, item, when)) + "</p>")
+                parts.append('<p class="secret-event">' + e(event_line(say, item, when)) + "</p>")
                 continue
             classes = "secret-bubble" + (" out" if item["direction"] == "out" else "") + (" deleted" if item["deleted"] else "")
             parts.append('<div class="' + classes + '" id="secret-record-' + e(item["seq"]) + '">')
@@ -420,7 +424,7 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 lay.need(6)
                 page.set_font("Sans", "", 7.4)
                 page.set_text_color(*muted)
-                page.multi_cell(width, 3.6, when(item["at"]) + " · " + event_text(say, item, when), align="C",
+                page.multi_cell(width, 3.6, event_line(say, item, when), align="C",
                                 new_x=lay.XPos.LMARGIN, new_y=lay.YPos.NEXT)
                 page.ln(1.4)
                 continue

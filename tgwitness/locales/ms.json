@@ -4909,7 +4909,6 @@
   "The chat at export time": "Perbualan semasa eksport",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Apa yang dikatakan oleh Telegram tentang sembang apabila eksport bermula, dan kedudukan akaun yang mengeksport di dalamnya. Label seperti penipuan dan palsu adalah milik Telegram sendiri.",
   "Indicators": "Petunjuk",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Setiap baris adalah sembang dan setiap lajur adalah tempoh (UTC); sel yang lebih gelap mengandungi lebih banyak mesej yang diperhatikan. Lajur yang dihatch tidak mempunyai pengesahan tangkapan langsung: apa yang diposting pada masa itu tidak diketahui. Sel yang pucat dalam lajur yang diperhatikan bermaksud tiada mesej direkodkan di sana.",
   "Texts repeated across chats": "Teks yang diulang di merata sembang",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Teks mesej yang sama diperhatikan dalam lebih daripada satu sembang, dibandingkan selepas kes pendakian huruf dan jarak dipersamakan. Teks yang lebih pendek daripada {n} aksara tidak dibandingkan. Teks yang sepadan adalah petunjuk: ia tidak menunjukkan siapa yang menulis salinan tersebut atau bahawa mereka bersambung.",
   "Texts found in more than one chat: {n}.": "Teks yang ditemui dalam lebih daripada satu sembang: {n}.",
@@ -5754,7 +5753,6 @@
   "Cover": "Sembunyikan",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Sampul muka depan dan carta daripada jurnal ruang kerja ini. Eksport menambah rekod terpilih, penilaian kepercayaan dan bahan pengesahan.",
   "DRAFT PREVIEW · NOT SIGNED": "PRATONON DRAFT · TIDAK DITANDATANGANI",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Sel yang lebih gelap bermaksud lebih banyak pemerhatian disertakan. Maksimum setiap sel: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "Reka bentuk dan carta terpakai untuk eksport jurnal, sembang, akaun dan perkongsian baharu. Butiran kes terpakai untuk laporan jurnal dan sembang tunggal; suis rekod dan sejarah perubahan terpakai untuk jurnal. Eksport akaun dan perkongsian mengekalkan tetapan bahasa dan privasi mereka sendiri.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "Pratonton reka bentuk menggunakan sehingga 50,000 rekod sumber. Bina pratonton data di bawah untuk pilihan lengkap. PDF mempunyai susun cetak berasingan.",
   "Draft changed. Save before exporting.": "Draf telah diubah. Simpan sebelum mengeksport.",
@@ -8895,7 +8893,6 @@
   "Chats with messages": "Perbualan dengan mesej",
   "Checking export settings": "Semak tetapan eksport",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Setiap sembang ini menyusun nombor pada mesejnya sendiri, jadi setiap nombor yang hilang antara mesej pertama dan terakhir yang dieksport adalah mesej daripada sembang itu.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap petak mewakili satu hari UTC; baris mewakili hari dalam minggu. Gelap lebih gelap bermaksud lebih banyak mesej. Titik menandakan nombor mesej yang tiada apabila mesej bersebelahan berasingan tidak lebih daripada dua hari; jadual menyenaraikan yang selebihnya.",
   "Earlier years with messages: {years}": "Tahun-tahun awal dengan mesej: {years}",
   "Edits only": "Suntingan sahaja",
   "Everything else": "Segala yang lain",
@@ -10839,7 +10836,6 @@
   "Absent message IDs": "ID mesej tidak hadir",
   "The export finished within the selected scope.": "Pengeksportan selesai dalam skop yang dipilih.",
   "Chat history and attachments finished.": "Sejarah sembang dan lampiran selesai.",
-  "Every selected chat was exported.": "Setiap sembang yang dipilih telah dieksport.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Pengumpulan telah dihentikan lebih awal melalui panel tangkapan. Data yang dikumpul sehingga itu disimpan.",
   "The session time ran out. Data acquired until then is kept.": "Masa sesi telah tamat. Data yang dikumpul sehingga itu disimpan.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Pengumpulan dihentikan lebih awal untuk memberi masa mengemas kini arkib. Data yang dikumpul sehingga itu disimpan.",
@@ -10922,5 +10918,9 @@
   "restricted member": "ahli dengan hak terhad",
   "{n} edit": "{n}sunting mesej",
   "{n} deletion": "{n}mesej yang dipadam",
-  "{n} saved file": "Fail {n} disimpan"
+  "{n} saved file": "Fail {n} disimpan",
+  "Export of the selected chats has ended.": "Pengeksportan sembang terpilih telah selesai.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Setiap baris ialah sembang dan setiap lajur ialah tempoh (UTC); warna yang lebih terang bermaksud lebih banyak mesej diperhatikan. Lajur yang diarsir tidak mempunyai pengesahan tangkapan langsung: apa yang dihantar pada masa itu tidak diketahui. Sel pucat dalam lajur yang diperhatikan bermaksud tiada mesej direkodkan di situ.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Warna yang lebih terang bermaksud lebih banyak pemerhatian disertakan. Maksimum setiap sel: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap petak mewakili satu hari UTC; baris ialah hari dalam minggu. Warna yang lebih terang bermaksud lebih banyak mesej. Titik menandakan nombor mesej yang tiada apabila mesej bersebelahan berjarak paling jauh dua hari; jadual menyenaraikan baki mesej."
 }

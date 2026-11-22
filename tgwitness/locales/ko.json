@@ -4909,7 +4909,6 @@
   "The chat at export time": "내보내기 시점의 채팅 내용",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "내보내기가 시작되었을 때 Telegram가 채팅에 대해 언급한 내용과, 내보내는 계정이 그 채팅에서 차지하는 위치를 기재하십시오. ‘사기’나 ‘가짜’와 같은 레이블은 Telegram가 직접 지정한 것입니다.",
   "Indicators": "지표",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "각 행은 채팅을, 각 열은 기간(UTC)을 나타냅니다. 색이 진한 셀일수록 더 많은 메시지가 관측된 것입니다. 음영 처리된 열은 캡처 확인이 전혀 이루어지지 않은 것으로, 해당 기간에 어떤 게시물이 올라왔는지는 알 수 없습니다. 관측된 열에서 색이 옅은 셀은 해당 위치에 메시지가 기록되지 않았음을 의미합니다.",
   "Texts repeated across chats": "여러 채팅에서 반복적으로 등장하는 텍스트",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "두 개 이상의 채팅에서 관찰된 동일한 메시지 텍스트로, 대소문자와 공백을 표준화한 후 비교한 결과입니다. {n}자보다 짧은 텍스트는 비교 대상에서 제외됩니다. 일치하는 텍스트는 단서일 뿐이며, 누가 해당 메시지를 작성했는지 또는 메시지들 간에 연관성이 있는지는 보여주지 않습니다.",
   "Texts found in more than one chat: {n}.": "두 개 이상의 채팅에서 발견된 텍스트: {n}.",
@@ -5754,7 +5753,6 @@
   "Cover": "표지",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "이 작업 공간의 저널에 수록된 표지 및 차트. 내보내기 시 선택한 레코드, 신뢰도 평가 및 검증 자료가 추가됩니다.",
   "DRAFT PREVIEW · NOT SIGNED": "초안 미리보기 · 서명되지 않음",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "셀이 어두울수록 더 많은 관측값이 포함되어 있음을 의미합니다. 셀당 최대값: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "디자인 및 차트는 새로운 일지, 채팅, 계정 및 공유 내보내기 항목에 적용됩니다. 사례 세부 정보는 일지 및 단일 채팅 보고서에 적용되며, 기록 및 변경 내역 전환 기능은 일지에 적용됩니다. 계정 및 공유 내보내기 항목은 자체 언어 및 개인정보 보호 설정을 유지합니다.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "디자인 미리보기는 최대 50,000개의 원본 레코드를 사용합니다. 전체 선택 항목을 보려면 아래에서 데이터 미리보기를 생성하십시오. PDF에는 별도의 인쇄 레이아웃이 적용됩니다.",
   "Draft changed. Save before exporting.": "초안이 변경되었습니다. 내보내기 전에 저장하십시오.",
@@ -8895,7 +8893,6 @@
   "Chats with messages": "메시지가 포함된 채팅",
   "Checking export settings": "내보내기 설정 확인",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "각 채팅은 자체적으로 메시지 번호를 매기므로, 내보낸 첫 번째 메시지와 마지막 메시지 사이에 누락된 번호는 모두 해당 채팅의 메시지입니다.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "각 사각형은 UTC 기준 1일을 나타내며, 행은 요일을 나타냅니다. 색이 진할수록 메시지 수가 많음을 의미합니다. 점으로 표시된 부분은 인접한 메시지 간의 간격이 최대 2일인 메시지 번호를 나타내며, 나머지 메시지는 표에 나열되어 있습니다.",
   "Earlier years with messages: {years}": "메시지가 포함된 이전 연도: {years}",
   "Edits only": "편집 전용",
   "Everything else": "그 외 모든 항목",
@@ -10839,7 +10836,6 @@
   "Absent message IDs": "누락된 메시지 ID",
   "The export finished within the selected scope.": "선택한 범위 내에서 내보내기가 완료되었습니다.",
   "Chat history and attachments finished.": "채팅 기록 및 첨부 파일 부분 완료.",
-  "Every selected chat was exported.": "선택된 모든 채팅이 내보내졌습니다.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "캡처 패널을 통해 데이터 수집이 조기에 완료되었습니다. 그때까지 수집된 데이터는 보관됩니다.",
   "The session time ran out. Data acquired until then is kept.": "세션 시간이 만료되었습니다. 그 시점까지 수집된 데이터는 보관됩니다.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "아카이브를 압축할 시간을 확보하기 위해 수집을 조기에 종료했습니다. 그 시점까지 수집된 데이터는 보관되어 있습니다.",
@@ -10922,5 +10918,9 @@
   "restricted member": "권한이 제한된 회원",
   "{n} edit": "{n} 편집된 메시지",
   "{n} deletion": "{n} 삭제된 메시지",
-  "{n} saved file": "{n}개의 파일 저장됨"
+  "{n} saved file": "{n}개의 파일 저장됨",
+  "Export of the selected chats has ended.": "선택한 채팅의 내보내기가 완료되었습니다.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "각 행은 채팅을, 각 열은 기간(UTC)을 나타냅니다. 색상이 진할수록 해당 기간 동안 더 많은 메시지가 관찰되었음을 의미합니다. 음영 처리된 열은 캡처 확인이 전혀 이루어지지 않은 것으로, 해당 기간에 어떤 내용이 게시되었는지는 알 수 없습니다. 관찰된 열에서 색이 옅은 셀은 해당 위치에 메시지가 기록되지 않았음을 의미합니다.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "색상이 진할수록 포함된 관찰 사항이 더 많음을 의미합니다. 셀당 최대값: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "각 사각형은 UTC 기준 하루를 나타내며, 행은 요일을 나타냅니다. 색이 진할수록 메시지 수가 많습니다. 인접한 메시지 간 간격이 최대 2일인 경우, 해당 날짜의 메시지 수가 없을 때는 점으로 표시되며, 나머지 메시지는 표에 나열되어 있습니다."
 }

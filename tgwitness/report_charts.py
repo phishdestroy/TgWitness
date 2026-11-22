@@ -20,13 +20,13 @@ DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sun
 
 CSS = """
 .metric-chart{width:100%;height:72px;display:block;margin:8px 0}.metric-bar{fill:#5776b3}
-.report-analytics{--chart-ink:var(--chart-accent)}.analytics-meta{font:11px/1.8 ui-monospace,monospace;overflow-wrap:anywhere;color:var(--muted)}
+.report-analytics{--chart-ink:var(--chart-accent)}.analytics-meta{font:11px/1.8 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;overflow-wrap:anywhere;color:var(--muted)}
 .analytics-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}
 .analytics-totals div{padding:18px;background:var(--card,var(--paper));min-width:0}.analytics-totals b{font:30px/1.3 Georgia,serif;display:block}
 .analytics-totals div>span{font-size:11px;overflow-wrap:anywhere}.analytics-figure{margin:28px 0;padding:22px;border:1px solid var(--line);break-inside:avoid;min-width:0}
 .analytics-figure figcaption{font-weight:650;font-size:16px;margin-bottom:12px}.analytics-figure p{font-size:12px;line-height:1.7;color:var(--muted)}
 .analytics-figure svg{width:100%;height:auto;display:block;direction:ltr}.analytics-svg-label{fill:var(--ink);font:12px system-ui,sans-serif}
-.analytics-axis{fill:var(--muted);font:10px ui-monospace,monospace}.analytics-gridline{stroke:var(--line);stroke-width:1}
+.analytics-axis{fill:var(--muted);font:10px ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.analytics-gridline{stroke:var(--line);stroke-width:1}
 .analytics-legend{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;padding:0;font-size:11px}.analytics-legend li{display:flex;gap:6px;align-items:center}
 .analytics-legend svg{width:9px;height:9px;display:inline-block}.analytics-table{margin-top:18px}.analytics-table summary{cursor:pointer;font-size:12px;color:var(--accent);padding:8px 0}
 .analytics-data{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}.analytics-data th,.analytics-data td{border-bottom:1px solid var(--line);padding:8px 5px;overflow-wrap:anywhere;text-align:start}

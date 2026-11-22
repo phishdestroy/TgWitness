@@ -4909,7 +4909,6 @@
   "The chat at export time": "エクスポート時のチャット内容",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "エクスポートが開始された際のチャットについてTelegramが述べた内容、およびエクスポート元アカウントがその中で占める位置付け。「詐欺」や「偽物」といったラベルはTelegram自身のものです。",
   "Indicators": "指標",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "各行はチャットを表し、各列は期間（UTC）を表します。色が濃いセルほど、観測されたメッセージの数が多くなります。ハッチングが施された列には、キャプチャの確認がまったくありませんでした。つまり、その期間に何が投稿されたかは不明です。観測された列の色が薄いセルは、そこにメッセージが記録されなかったことを意味します。",
   "Texts repeated across chats": "複数のチャットで繰り返されるテキスト",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "複数のチャットで観測された同一のメッセージテキストを、大文字小文字とスペースを正規化した上で比較したものです。{n}文字未満のテキストは比較対象外です。一致するテキストは手がかりとなりますが、誰がそれらのメッセージを書いたのか、あるいはそれらが関連しているかどうかは示されません。",
   "Texts found in more than one chat: {n}.": "複数のチャットで確認されたテキスト：{n}。",
@@ -5754,7 +5753,6 @@
   "Cover": "表紙",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "このワークスペースのジャーナルからの表紙および図表です。エクスポート時には、選択されたレコード、信頼性評価、および検証資料が追加されます。",
   "DRAFT PREVIEW · NOT SIGNED": "ドラフトプレビュー・未署名",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "セルの色が濃いほど、より多くの観測結果が含まれています。1セルあたりの最大値：{n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "デザインおよびチャートは、新しいジャーナル、チャット、アカウント、および共有のエクスポートに適用されます。ケースの詳細は、ジャーナルおよび単一チャットのレポートに適用されます。レコードおよび変更履歴の切り替えは、ジャーナルに適用されます。アカウントおよび共有のエクスポートは、独自の言語およびプライバシー設定を維持します。",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "デザインプレビューでは、最大50,000件のソースレコードが使用されます。選択範囲全体を表示するには、以下のデータプレビューを作成してください。PDFには、別の印刷レイアウトが用意されています。",
   "Draft changed. Save before exporting.": "下書きが変更されました。エクスポートする前に保存してください。",
@@ -8895,7 +8893,6 @@
   "Chats with messages": "メッセージを含むチャット",
   "Checking export settings": "エクスポート設定の確認",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "各チャットではメッセージに個別の番号が割り当てられているため、エクスポートされた最初のメッセージと最後のメッセージの間に番号が欠けている場合は、その番号の範囲内のメッセージがすべてそのチャットに含まれていることになります。",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "各マスはUTCで1日分、行は曜日を表します。色が濃いほどメッセージ数が多いことを示します。ドットは、隣接するメッセージ間の間隔が最大2日以内のメッセージ番号が欠落していることを示し、表にはそれ以外のメッセージが一覧表示されています。",
   "Earlier years with messages: {years}": "過去のメッセージ：{years}",
   "Edits only": "編集のみ",
   "Everything else": "その他すべて",
@@ -10839,7 +10836,6 @@
   "Absent message IDs": "メッセージIDの欠落",
   "The export finished within the selected scope.": "選択した範囲内のエクスポートが完了しました。",
   "Chat history and attachments finished.": "チャット履歴および添付ファイルの記載は完了しました。",
-  "Every selected chat was exported.": "選択されたすべてのチャットがエクスポートされました。",
   "Stopped early in the capture panel. Data acquired until then is kept.": "収集はキャプチャパネルから早期に完了した。それまでに収集されたデータは保持されている。",
   "The session time ran out. Data acquired until then is kept.": "セッション時間が切れた。それまでに収集されたデータは保持される。",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "アーカイブのパッケージングに時間を確保するため、収集は予定より早めに終了した。それまでに収集されたデータは保持されている。",
@@ -10922,5 +10918,9 @@
   "restricted member": "権限が制限されたメンバー",
   "{n} edit": "{n}件の編集済みメッセージ",
   "{n} deletion": "{n}件の削除済みメッセージ",
-  "{n} saved file": "{n}ファイルが保存されました"
+  "{n} saved file": "{n}ファイルが保存されました",
+  "Export of the selected chats has ended.": "選択したチャットのエクスポートが完了しました。",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "各行はチャットを、各列は期間（UTC）を表しています。色が濃いほど、観測されたメッセージの数が多いことを示します。ハッチングが施された列は、取得の確認が全く得られなかったものであり、その期間に何が投稿されたかは不明です。観測された列の淡い色のセルは、その箇所でメッセージが記録されなかったことを意味します。",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "色が濃いほど、記載された所見が多いことを示す。1セルあたりの最大値：{n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "各マスはUTC基準の1日を表し、行は曜日を示しています。色が濃いほどメッセージ数が多いことを示します。隣接するメッセージの間隔が最大2日以内の場合、メッセージ数が存在しない行には点が記され、残りのメッセージ数は表に一覧表示されています。"
 }

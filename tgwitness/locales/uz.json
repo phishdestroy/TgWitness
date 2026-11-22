@@ -4936,7 +4936,6 @@
   "The chat at export time": "Eksport vaqtidagi suhbat",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram eksport boshlanganda chat haqida nima degandi va undagi eksport qiluvchi akkauntning o'rnini. \"Scam\" va \"fake\" kabi yorliqlar Telegramga tegishli.",
   "Indicators": "Ko'rsatkichlar",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Har bir qator chat, har bir ustun esa davr (UTC) ni anglatadi; qoraytirilgan hujayralarda ko'proq kuzatilgan xabarlar mavjud. Chiziqli ustunlarda hech qanday ushlash tasdig'i bo'lmagan: o'sha paytda nima e'lon qilingani noma'lum. Kuzatilgan ustundagi och rangli hujayra u yerda hech qanday xabar qayd etilmaganligini anglatadi.",
   "Texts repeated across chats": "Chatlarda takrorlangan matnlar",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Bir nechta chatda kuzatilgan bir xil xabar matni katta-kichik harflar va bo'shliqlar normalizatsiya qilingach solishtiriladi. {n} belgidan qisqa matnlar solishtirilmaydi. Mos kelgan matn lead deb ataladi: u nusxalarni kim yozganini yoki ularning bog'liqligini ko'rsatmaydi.",
   "Texts found in more than one chat: {n}.": "Bir nechta chatda topilgan matnlar: {n}.",
@@ -5788,7 +5787,6 @@
   "Cover": "Yopish",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Ushbu ish maydonining jurnalidan muqova va grafikalar. Eksport tanlangan yozuvlar, ishonch baholash va tasdiqlash materiallarini qo'shadi.",
   "DRAFT PREVIEW · NOT SIGNED": "LOYIHA KO'RINISHI · IMZOLANMADI",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Qorong'i hujayralar ko'proq kiritilgan kuzatuvlarni anglatadi. Har bir hujayra uchun maksimal: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "Yangi jurnal, chat, hisob va ulashish eksportlariga dizayn va grafikalar qo'llaniladi. Ish tafsilotlari jurnal va yakka chat hisobotlariga tegishli; yozuv va o'zgarishlar tarixi o'zgaruvchilari jurnalga tatbiq etiladi. Hisob va ulashish eksportlari o'z til va maxfiylik sozlamalarini saqlaydi.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "Dizayn ko'rinishi 50 000 tagacha manba yozuvlaridan foydalanadi. To'liq tanlov uchun quyidagi ma'lumotlar ko'rinishini yarating. PDFning alohida chop etish maketi mavjud.",
   "Draft changed. Save before exporting.": "Loyiha o'zgartirildi. Eksport qilishdan oldin saqlang.",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "Xabarli suhbatlar",
   "Checking export settings": "Eksport sozlamalarini tekshirish",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Har bir suhbat o'z xabarlarini raqamlaydi, shuning uchun birinchi va oxirgi eksport qilingan xabarlar orasidagi har bir yetishmayotgan raqam o'sha suhbatning xabari hisoblanadi.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Har bir kvadrat bitta UTC kunini anglatadi; qatorlar esa haftaning kunlaridir. Qoraygan joylar ko'proq xabarlar borligini bildiradi. Nuqta qo'shni xabarlar orasidagi farq ikki kundan oshmaydigan yo'qolgan xabar raqamlarini belgilaydi; jadvallarda esa qolganlari ko'rsatilgan.",
   "Earlier years with messages: {years}": "Avvalgi yillar bilan xabarlar: {years}",
   "Edits only": "Faqat tahrirlar",
   "Everything else": "Boshqa barcha narsalar",
@@ -10888,7 +10885,6 @@
   "Absent message IDs": "Xabar IDlari yo'q",
   "The export finished within the selected scope.": "Eksport tanlangan doirada yakunlandi.",
   "Chat history and attachments finished.": "Suhbat tarixi va ilovalar yakunlandi.",
-  "Every selected chat was exported.": "Har bir tanlangan suhbat eksport qilindi.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Yozib olish paneli orqali yig'ish erta yakunlandi. O'sha paytgacha to'plangan ma'lumotlar saqlanadi.",
   "The session time ran out. Data acquired until then is kept.": "Sessiya vaqti tugadi. Shu vaqtgacha to'plangan ma'lumotlar saqlanadi.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Yig'ish jarayoni arxivni qadoqlash uchun vaqt ajratish maqsadida erta yakunlandi. Shu vaqtgacha to'plangan ma'lumotlar saqlanadi.",
@@ -10973,5 +10969,9 @@
   "restricted member": "cheklangan huquqlarga ega a'zo",
   "{n} edit": "{n}tahrirlangan xabar",
   "{n} deletion": "{n} o'chirib yuborilgan xabar",
-  "{n} saved file": "{n}-fayl saqlangan"
+  "{n} saved file": "{n}-fayl saqlangan",
+  "Export of the selected chats has ended.": "Tanlangan suhbatlarning eksporti yakunlandi.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Har bir qator suhbatni, har bir ustun esa davrni (UTC) bildiradi; qalinroq rang ko'proq kuzatilgan xabarlar borligini anglatadi. Chiziqli ustunlarda yozib olinganlik tasdig'i bo'lmagan: o'sha paytda nima yozilgani noma'lum. Kuzatilgan ustundagi och hujayra esa u yerda hech qanday xabar qayd etilmaganligini bildiradi.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Qattiqroq rang ko'proq kuzatuvlar kiritilganligini anglatadi. Har bir hujayra uchun maksimal: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Har bir kvadrat bitta UTC kunini anglatadi; qatorlar haftaning kunlaridir. Rang qanchalik kuchli bo'lsa, shuncha ko'p xabar borligini bildiradi. Nuqta qo'shni xabarlar orasidagi bo'sh xabar raqamlarini belgilaydi; jadvallarda qolganlari keltirilgan."
 }

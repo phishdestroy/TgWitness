@@ -57,7 +57,7 @@ CSS = """
 .assessment-item{border:1px solid #8894a455;border-radius:12px;padding:18px;min-width:0;break-inside:avoid}
 .assessment-item h3{margin:0 0 8px;font-size:16px}.assessment-state{font-size:12px;font-weight:600}
 .assessment-item p{line-height:1.6;overflow-wrap:anywhere}.assessment-item dl{font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
-.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-family:monospace}
+.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}
 .assessment-review{padding:12px;border-inline-start:3px solid #697d99;margin-top:14px}
 .evidence-conditions{margin:18px 0;overflow-x:auto}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
 .evidence-conditions table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
@@ -65,6 +65,17 @@ CSS = """
 .evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding-top:12px}
 .evidence-conditions tr[data-status="checked_locally"] strong{color:var(--ok,#08734a)}.evidence-conditions tr[data-status="not_included"] strong{color:var(--muted)}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.evidence-conditions td code{display:block;background:none;border:0;padding:0;white-space:normal;line-height:1.6}.evidence-conditions td code+code{margin-top:6px}
+.evidence-conditions td code span{display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.evidence-conditions pre.command{margin:14px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg2,var(--bg))}
+.case-assessment{--state-ok:#1d6b4f;--state-warn:#93570b;--state-bad:#b23b1e;--state-info:var(--accent,#2457c5);--state-off:var(--muted)}
+@media(prefers-color-scheme:dark){html:not([data-theme=light]) .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}}
+html[data-theme=dark] .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;--state-bad:#ff8f86}
+.case-assessment [data-status]{--state:var(--state-warn)}.case-assessment [data-status=checked_locally]{--state:var(--state-ok)}
+.case-assessment [data-status=recipient]{--state:var(--state-info)}.case-assessment [data-status=incomplete]{--state:var(--state-bad)}
+.case-assessment [data-status=not_included]{--state:var(--state-off)}
+.case-assessment .assessment-state{color:var(--state);align-self:flex-start;padding:3px 10px 3px 9px;border-radius:999px;background:color-mix(in srgb,var(--state) 10%,transparent);font-weight:600}
+.case-assessment .assessment-state::before{align-self:center}.evidence-conditions tr[data-status] td>strong{color:var(--state)}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.evidence-conditions thead{display:none}
 .evidence-conditions tbody,.evidence-conditions tr,.evidence-conditions th,.evidence-conditions td{display:block}
@@ -351,8 +362,9 @@ def conditions_html(data, say, e):
             rows.append('<tr class="condition-role"><th colspan="4" scope="rowgroup">' + e(say(role)) + '</th></tr>')
         rows.append('<tr data-status="' + e(item["status"]) + '"><th scope="row">' + e(say(item["title"])) + '</th><td'
                     + labels[0] + e(say(item["scope"])) + '</td><td' + labels[1] + '<strong>' + e(say(STATUSES[item["status"]]))
-                    + '</strong><br>' + e(result_text(item["detail"], say)) + '</td><td' + labels[2] + '<code dir="ltr">'
-                    + e(item["check"]) + '</code></td></tr>')
+                    + '</strong><br>' + e(result_text(item["detail"], say)) + '</td><td' + labels[2]
+                    + ''.join('<code dir="ltr">' + ' '.join('<span>' + e(token) + '</span>' for token in part.split()) + '</code>'
+                              for part in item["check"].split(" · ")) + '</td></tr>')
     return ('<div class="evidence-conditions"><h3>' + e(say(CONDITIONS_TITLE)) + '</h3><p>' + e(say(CONDITIONS_INTRO))
             + '</p><table><thead><tr><th>' + e(say("Condition")) + '</th><th>' + e(say("What it establishes")) + '</th><th>'
             + e(say("In this archive")) + '</th><th>' + e(say("How the recipient checks it")) + '</th></tr></thead><tbody>' + "".join(rows)
@@ -371,9 +383,11 @@ def html(data, say):
         conclusion = item["result"]
         parts.append('<article class="assessment-item" id="assessment-' + e(item["id"]) + '" data-status="' + e(item["status"]) + '" data-assessment="' + e(item["id"]) + '"><div class="assessment-heading"><span class="assessment-index">'
                      + f'{number:02d}' + '</span><h3>' + e(say(item["title"])) + '</h3></div><div class="assessment-state">' + e(say(STATUSES[item["status"]]))
-                     + '</div><p class="assessment-result">' + e(result_text(conclusion, say)) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p><dl>')
-        parts.extend('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>' for k, v in item["facts"].items())
-        parts.append('</dl><p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
+                     + '</div><p class="assessment-result">' + e(result_text(conclusion, say)) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p>')
+        if item["facts"]:
+            parts.append('<dl>' + ''.join('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>'
+                                          for k, v in item["facts"].items()) + '</dl>')
+        parts.append('<p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
             parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(reference_text(item["references"])) + '</p>')
         parts.append('</article>')

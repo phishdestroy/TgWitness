@@ -297,7 +297,7 @@ def heatmap(data, say):
                          (level, e(names[day]), hour, count, count))
         parts.append('</tr>')
     peak = max((n for day in data["heatmap"] for n in day), default=0)
-    return ''.join(parts) + '</tbody></table></div><p class="chart-note">' + e(say("Darker cells mean more included observations. Maximum per cell: {n}", n=peak)) + '</p>'
+    return ''.join(parts) + '</tbody></table></div><p class="chart-note">' + e(say("A stronger colour means more included observations. Maximum per cell: {n}", n=peak)) + '</p>'
 
 
 def duration(seconds, say):
@@ -340,7 +340,9 @@ def html_section(data, options, say):
                          (data.get("sender_groups", len(data.get("participants", []))), "Listed sender identifiers"), (data["undated"], "Without a usable timestamp")):
         parts.append('<div><strong>' + str(grouped(say, value)) + '</strong><span>' + e(say(title)) + '</span></div>')
     parts.append('</div><div class="analytics-grid">')
-    for key, title in selected(options):
+    charts = [(key, title) for key, title in selected(options) if key != "chats" or len(data.get("chats", [])) > 1]
+    habits_after = "chats" if any(key == "chats" for key, _ in charts) else "participants"
+    for key, title in charts:
         parts.append('<article class="chart-card chart-' + key + '"><h3>' + e(say(title)) + '</h3>')
         if key == "heatmap":
             parts.append(heatmap(data, say))
@@ -359,7 +361,7 @@ def html_section(data, options, say):
         if data.get("unlisted", {}).get(key):
             parts.append('<p class="chart-note">' + e(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key])) + '</p>')
         parts.append('</article>')
-        if key == "participants" and data.get("habits"):
+        if key == habits_after and data.get("habits"):
             parts.append(habits_html(data, say, options.get("chart_limit", 10)))
     parts.append('</div><p class="analytics-caution">' + e(say(CAUTION)) + '</p></section>')
     return ''.join(parts)
@@ -381,6 +383,8 @@ def _pdf_section(lay, data, options):
     lay.figures([(say("Records analysed"), grouped(say, data["records"])), (say("Message observations" if data["basis"] == "journal" else "Message rows"), grouped(say, data["messages"])),
                  (say("Without a usable timestamp"), grouped(say, data["undated"]))])
     for key, title in selected(options):
+        if key == "chats" and len(data.get("chats", [])) < 2:
+            continue
         if key in ("participants", "chats", "composition"):
             count = len(ranking(data, key, options.get("chart_limit", 10))) if key != "composition" else len(data[key])
             lay.need(min(pdf.eph - 15, 22 + count * 13))
@@ -406,7 +410,7 @@ def _pdf_section(lay, data, options):
                 pdf.cell(step, 3, f"{hour:02d}", align="C")
             pdf.set_y(y + 38)
             lay.text(say("UTC hour · message observations / rows"), size=8)
-            lay.text(say("Darker cells mean more included observations. Maximum per cell: {n}", n=peak), size=8)
+            lay.text(say("A stronger colour means more included observations. Maximum per cell: {n}", n=peak), size=8)
         else:
             rows = ([{"label": r["from"] + (' / ' + r["to"] if r["from"] != r["to"] else ''), "count": r["count"]}
                      for r in data["activity"]] if key == "activity" else ranking(data, key, options.get("chart_limit", 10))

@@ -4936,7 +4936,6 @@
   "The chat at export time": "निर्यात समय पर चैट",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram ने चैट के बारे में क्या कहा जब निर्यात शुरू हुआ, और उसमें निर्यात करने वाले खाते की स्थिति। 'scam' और 'fake' जैसे लेबल Telegram के अपने हैं।",
   "Indicators": "सूचक",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "प्रत्येक पंक्ति एक चैट है और प्रत्येक स्तंभ एक अवधि (UTC) है; गहरे सेल में अधिक देखे गए संदेश होते हैं। धराशायी स्तंभों में बिल्कुल भी कैप्चर पुष्टि नहीं हुई थी: तब क्या पोस्ट किया गया था, यह अज्ञात है। एक देखे गए स्तंभ में एक फीका सेल का अर्थ है कि वहां कोई संदेश रिकॉर्ड नहीं किया गया था।",
   "Texts repeated across chats": "चैट्स में दोहराए गए टेक्स्ट",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "एक से अधिक चैट में देखा गया वही संदेश पाठ, जिसे अक्षर केस और रिक्ति सामान्य करने के बाद तुलना किया जाता है। {n} से कम अक्षरों वाले पाठों की तुलना नहीं की जाती है। मेल खाने वाला पाठ एक सुराग है: यह यह नहीं दर्शाता कि नकलें किसने लिखीं या वे जुड़े हुए हैं।",
   "Texts found in more than one chat: {n}.": "एक से अधिक चैट में पाए गए टेक्स्ट: {n}.",
@@ -5788,7 +5787,6 @@
   "Cover": "कवर",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "इस वर्कस्पेस की जर्नल से कवर और चार्ट। एक्सपोर्ट चयनित रिकॉर्ड, विश्वास मूल्यांकन और सत्यापन सामग्री जोड़ता है।",
   "DRAFT PREVIEW · NOT SIGNED": "ड्राफ़्ट पूर्वावलोकन · हस्ताक्षरित नहीं",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "गहरे रंग की कोशिकाओं का अर्थ है कि अधिक अवलोकन शामिल हैं। प्रति कोशिका अधिकतम: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "डिज़ाइन और चार्ट नए जर्नल, चैट, खाते और साझाकरण एक्सपोर्ट पर लागू होते हैं। केस विवरण जर्नल और एकल-चैट रिपोर्ट पर लागू होते हैं; रिकॉर्ड और परिवर्तन-इतिहास स्विच जर्नल पर लागू होते हैं। खाता और साझाकरण एक्सपोर्ट अपनी भाषा और गोपनीयता सेटिंग्स बनाए रखते हैं।",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "डिज़ाइन पूर्वावलोकन 50,000 स्रोत रिकॉर्ड तक का उपयोग करता है। पूर्ण चयन के लिए नीचे डेटा पूर्वावलोकन बनाएं। PDF का एक अलग प्रिंट लेआउट होता है।",
   "Draft changed. Save before exporting.": "ड्राफ़्ट बदला गया। निर्यात करने से पहले सहेजें।",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "संदेशों के साथ चैट",
   "Checking export settings": "निर्यात सेटिंग्स की जाँच",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "इनमें से प्रत्येक चैट अपने संदेशों को क्रमांकित करती है, इसलिए पहले और अंतिम निर्यात किए गए संदेश के बीच प्रत्येक अनुपस्थित संख्या उस चैट का एक संदेश है।",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "प्रत्येक वर्ग एक UTC दिन है; पंक्तियाँ सप्ताह के दिन हैं। गहरा रंग अधिक संदेशों को दर्शाता है। एक बिंदु उन अनुपस्थित संदेश संख्याओं को चिह्नित करता है जिनके आसन्न संदेश अधिकतम दो दिन दूर हैं; तालिकाएँ बाकी संदेशों को सूचीबद्ध करती हैं।",
   "Earlier years with messages: {years}": "संदेशों के साथ पिछले वर्ष: {years}",
   "Edits only": "केवल संपादन",
   "Everything else": "बाकी सब",
@@ -10889,7 +10886,6 @@
   "Absent message IDs": "संदेश आईडी अनुपस्थित",
   "The export finished within the selected scope.": "निर्यात चयनित दायरे के भीतर पूरा हो गया।",
   "Chat history and attachments finished.": "चैट इतिहास और संलग्नक समाप्त।",
-  "Every selected chat was exported.": "हर चयनित चैट को निर्यात किया गया।",
   "Stopped early in the capture panel. Data acquired until then is kept.": "कैप्चर पैनल से संग्रहण समय से पहले समाप्त कर दिया गया। तब तक एकत्रित डेटा सुरक्षित रखा गया है।",
   "The session time ran out. Data acquired until then is kept.": "सत्र का समय समाप्त हो गया। तब तक एकत्रित किया गया डेटा सुरक्षित रखा जाता है।",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "संग्रहण को आर्काइव पैकेजिंग के लिए समय बचाने हेतु समय से पहले समाप्त कर दिया गया। तब तक एकत्रित डेटा को रखा गया है।",
@@ -10973,5 +10969,9 @@
   "restricted member": "प्रतिबंधित अधिकारों वाला सदस्य",
   "{n} edit": "{n}संपादित संदेश",
   "{n} deletion": "{n} मिटाया गया संदेश",
-  "{n} saved file": "{n}फ़ाइल सहेजी गई"
+  "{n} saved file": "{n}फ़ाइल सहेजी गई",
+  "Export of the selected chats has ended.": "चयनित चैट्स का निर्यात समाप्त हो गया है।",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "प्रत्येक पंक्ति एक चैट है और प्रत्येक स्तंभ एक कालखंड (UTC); गहरा रंग अधिक देखे गए संदेशों को दर्शाता है। धराशायी स्तंभों में कोई कैप्चर पुष्टि नहीं थी: उस समय जो पोस्ट किया गया था वह अज्ञात है। एक देखे गए स्तंभ में फीका सेल होने का अर्थ है कि वहाँ कोई संदेश रिकॉर्ड नहीं हुआ।",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "गहरा रंग अधिक शामिल अवलोकनों का संकेत देता है। प्रत्येक सेल में अधिकतम: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "प्रत्येक वर्ग एक UTC दिन है; पंक्तियाँ सप्ताह के दिन हैं। गहरा रंग अधिक संदेशों को दर्शाता है। एक बिंदु उन अनुपस्थित संदेश संख्याओं को चिह्नित करता है जिनके पड़ोसी संदेश अधिकतम दो दिन दूर हैं; तालिकाएँ बाकी संदेशों को सूचीबद्ध करती हैं।"
 }

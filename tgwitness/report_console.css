@@ -243,4 +243,4 @@ code{direction:ltr;unicode-bidi:isolate}
   body.printing-selection>*{display:none!important}body.printing-selection #print-sheet{display:block!important}
   #print-sheet h1{margin:0 0 6px;font:600 20px Georgia,serif}#print-sheet .p-item{padding:8px 0;border-top:1px solid #999;break-inside:avoid}
   #print-sheet .p-head{color:#444;font-size:11px}#print-sheet .p-text{margin-top:3px;font-size:12.5px;white-space:pre-wrap}
-  #print-sheet .p-hash{margin-top:2px;color:#555;font:10px ui-monospace,Menlo,monospace}#print-sheet .p-note{margin-top:12px;color:#444;font-size:11px}}
+  #print-sheet .p-hash{margin-top:2px;color:#555;font:10px ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}#print-sheet .p-note{margin-top:12px;color:#444;font-size:11px}}

@@ -5044,7 +5044,6 @@
   "The chat at export time": "الدردشة في وقت التصدير",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "ما قاله Telegram عن الدردشة عند بدء التصدير، ومكان الحساب المُصدِّر فيها. التسميات مثل «احتيال» و«مزيف» هي تخص Telegram.",
   "Indicators": "المؤشرات",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "كل صف يمثل محادثة وكل عمود يمثل فترة زمنية (UTC)؛ وتحتوي الخلايا الداكنة على عدد أكبر من الرسائل التي تمت ملاحظتها. أما الأعمدة المظللة فلم يتم تأكيد التقاط أي رسائل فيها على الإطلاق: لذا فإن ما تم نشره حينها غير معروف. وتشير الخلية الفاتحة في عمود الملاحظة إلى عدم تسجيل أي رسالة فيه.",
   "Texts repeated across chats": "نصوص متكررة عبر الدردشات",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "نفس نص الرسالة الذي لوحظ في أكثر من محادثة واحدة، بعد مقارنة الأحرف الكبيرة والصغيرة والمسافات بعد توحيدها. لا تتم مقارنة النصوص التي يقل طولها عن {n} حرفًا. النص المطابق هو دليل: فهو لا يوضح من كتب النسخ أو ما إذا كانت مرتبطة ببعضها.",
   "Texts found in more than one chat: {n}.": "النصوص الموجودة في أكثر من محادثة واحدة: {n}.",
@@ -5924,7 +5923,6 @@
   "Cover": "الغلاف",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "الغلاف والرسوم البيانية من مجلة مساحة العمل هذه. يضيف التصدير السجلات المحددة وتقييم الثقة ومواد التحقق.",
   "DRAFT PREVIEW · NOT SIGNED": "معاينة المسودة · غير موقعة",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "تشير الخلايا الأغمق إلى تضمين المزيد من الملاحظات. الحد الأقصى لكل خلية: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "ينطبق التصميم والرسوم البيانية على عمليات التصدير الجديدة للسجل والمحادثة والحساب والمشاركة. تنطبق تفاصيل الحالة على تقارير السجل والمحادثة الفردية؛ بينما تنطبق خيارات السجل وسجل التغييرات على السجل. تحتفظ عمليات تصدير الحساب والمشاركة بإعدادات اللغة والخصوصية الخاصة بها.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "تستخدم معاينة التصميم ما يصل إلى 50,000 سجل مصدر. قم بإنشاء معاينة البيانات أدناه للاختيار الكامل. يحتوي ملف PDF على تخطيط طباعة منفصل.",
   "Draft changed. Save before exporting.": "تم تغيير المسودة. احفظ قبل التصدير.",
@@ -9120,7 +9118,6 @@
   "Chats with messages": "المحادثات التي تحتوي على رسائل",
   "Checking export settings": "التحقق من إعدادات التصدير",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "تقوم كل محادثة من هذه المحادثات بترقيم رسائلها الخاصة، لذا فإن كل رقم مفقود بين أول رسالة وأخر رسالة تم تصديرها يمثل رسالة من تلك المحادثة.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "يمثل كل مربع يومًا واحدًا بتوقيت UTC؛ والصفوف تمثل أيام الأسبوع. كلما كان اللون أغمق، زاد عدد الرسائل. تشير النقطة إلى أرقام الرسائل الغائبة التي لا يفصل بين الرسائل المجاورة لها سوى يومين كحد أقصى؛ وتسرد الجداول الباقي.",
   "Earlier years with messages: {years}": "السنوات السابقة التي تحتوي على رسائل: {years}",
   "Edits only": "التعديلات فقط",
   "Everything else": "كل شيء آخر",
@@ -11094,7 +11091,6 @@
   "Absent message IDs": "معرفات الرسائل غير الموجودة",
   "The export finished within the selected scope.": "اكتمل التصدير ضمن النطاق المحدد.",
   "Chat history and attachments finished.": "تم الانتهاء من سجل المحادثات والمرفقات.",
-  "Every selected chat was exported.": "تم تصدير كل محادثة تم اختيارها.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "تم الانتهاء من عملية الجمع مبكرًا من لوحة الاستخراج. ويتم الاحتفاظ بالبيانات التي تم جمعها حتى ذلك الحين.",
   "The session time ran out. Data acquired until then is kept.": "انتهت مدة الجلسة. يتم الاحتفاظ بالبيانات التي تم جمعها حتى ذلك الحين.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "تم إنهاء عملية جمع البيانات مبكرًا لإتاحة الوقت لتعبئة الأرشيف. ويتم الاحتفاظ بالبيانات التي تم جمعها حتى ذلك الحين.",
@@ -11177,5 +11173,9 @@
   "restricted member": "عضو ذو حقوق محدودة",
   "{n} edit": "{n} رسالة محررة",
   "{n} deletion": "{n} رسالة محذوفة",
-  "{n} saved file": "تم حفظ ملف {n}"
+  "{n} saved file": "تم حفظ ملف {n}",
+  "Export of the selected chats has ended.": "انتهى تصدير المحادثات المحددة.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "كل صف يمثل محادثة وكل عمود يمثل فترة زمنية (بتوقيت UTC)؛ كلما كان اللون أغمق، زاد عدد الرسائل التي تمت ملاحظتها. الأعمدة المظللة لم يتم تأكيد التقاطها على الإطلاق: ما تم نشره حينها غير معروف. الخلية ذات اللون الفاتح في عمود تمت ملاحظته تعني أنه لم يتم تسجيل أي رسالة فيه.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "كلما زادت قوة اللون، زاد عدد الملاحظات المضمنة. الحد الأقصى لكل خلية: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "يمثل كل مربع يومًا واحدًا بتوقيت غرينتش (UTC)؛ وتمثل الصفوف أيام الأسبوع. كلما كان اللون أغمق، زاد عدد الرسائل. تشير النقطة إلى أرقام الرسائل الغائبة التي لا يفصل بين الرسائل المجاورة لها سوى يومين كحد أقصى؛ وتدرج الجداول بقية الرسائل."
 }

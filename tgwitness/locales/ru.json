@@ -5031,7 +5031,6 @@
   "The chat at export time": "Чат на момент выгрузки",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Сведения о чате и положении выгружающего аккаунта, полученные от Telegram в начале выгрузки. Метки scam и fake принадлежат самому Telegram.",
   "Indicators": "Индикаторы",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Каждая строка — чат, каждый столбец — период (UTC); чем темнее ячейка, тем больше сообщений в ней наблюдалось. Заштрихованные столбцы не имеют ни одного подтверждения захвата: что было опубликовано в это время, неизвестно. Бледная ячейка в наблюдавшемся столбце означает, что сообщений там не записано.",
   "Texts repeated across chats": "Тексты, повторяющиеся в разных чатах",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Один и тот же текст сообщения, замеченный более чем в одном чате; сравнение без учёта регистра букв и пробелов. Тексты короче {n} символов не сравниваются. Совпадение текста — зацепка: оно не показывает, кто написал копии и связаны ли они между собой.",
   "Texts found in more than one chat: {n}.": "Текстов, найденных более чем в одном чате: {n}.",
@@ -5805,7 +5804,6 @@
   "Service messages": "Служебные сообщения",
   "Other records": "Другие записи",
   "Category limit reached. Unlisted observations: {n}": "Достигнут лимит категорий. Не перечислено наблюдений: {n}",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Чем темнее ячейка, тем больше наблюдений. Максимум в ячейке: {n}",
   "Journal charts count message observations at capture time in UTC. Repeat observations may refer to the same message. Edits and deletion notices are counted separately; they are not attributed to an editor or deleter.": "Диаграммы журнала считают наблюдения сообщений по времени записи в UTC. Повторные наблюдения могут относиться к одному сообщению. Правки и уведомления об удалении считаются отдельно; это не указание на того, кто изменил или удалил сообщение.",
   "Snapshot charts count the message rows included in this copy, using their recorded message time in UTC. They do not reconstruct activity outside the selected scope.": "Диаграммы снимка считают записи сообщений в этой копии по указанному времени сообщения в UTC. Активность за пределами выбранного объёма не восстанавливается.",
   "DRAFT PREVIEW · NOT SIGNED": "ЧЕРНОВИК · БЕЗ ПОДПИСИ",
@@ -9000,7 +8998,6 @@
   "Chats with messages": "Чаты с сообщениями",
   "Checking export settings": "Проверка настроек экспорта",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Каждый из этих чатов имеет собственную нумерацию сообщений, поэтому каждое пропущенное число между первым и последним экспортированным сообщением соответствует сообщению из данного чата.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Каждый квадрат соответствует одному дню по UTC; строки — дням недели. Чем темнее, тем больше сообщений. Точка обозначает отсутствующие номера сообщений, соседние сообщения которых разделены не более чем двумя днями; в таблицах перечислены остальные.",
   "Earlier years with messages: {years}": "Предыдущие годы с сообщениями: {years}",
   "Edits only": "Только правки",
   "Everything else": "Всё остальное",
@@ -10977,7 +10974,6 @@
   "Absent message IDs": "Пропущенные номера сообщений",
   "The export finished within the selected scope.": "Экспорт завершён в выбранном объёме.",
   "Chat history and attachments finished.": "История чата и вложения собраны полностью.",
-  "Every selected chat was exported.": "Все выбранные чаты экспортированы.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Сбор досрочно завершён в панели. Собранное до этого момента сохранено.",
   "The session time ran out. Data acquired until then is kept.": "Время сессии истекло. Собранное до этого момента сохранено.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Сбор завершён досрочно, чтобы оставить время на упаковку архива. Собранное до этого момента сохранено.",
@@ -11060,5 +11056,9 @@
   "restricted member": "участник с ограниченными правами",
   "{n} edit": "{n} отредактированное сообщение",
   "{n} deletion": "{n} удалённое сообщение",
-  "{n} saved file": "Сохранен файл {n}"
+  "{n} saved file": "Сохранен файл {n}",
+  "Export of the selected chats has ended.": "Экспорт выбранных чатов завершён.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Каждая строка — это чат, а каждый столбец — период времени (UTC); чем ярче цвет, тем больше зафиксированных сообщений. В заштрихованных столбцах подтверждение сбора данных отсутствовало: что было опубликовано в этот период, неизвестно. Бледная ячейка в столбце с зафиксированными данными означает, что в ней не было зафиксировано ни одного сообщения.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Чем ярче цвет, тем больше включенных наблюдений. Максимум на ячейку: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Каждый квадрат соответствует одному дню по UTC; строки обозначают дни недели. Чем ярче цвет, тем больше сообщений. Точка обозначает отсутствующие номера сообщений, соседние сообщения которых разделены не более чем двумя днями; остальные перечислены в таблицах."
 }

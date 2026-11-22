@@ -4909,7 +4909,6 @@
   "The chat at export time": "การสนทนา ณ เวลาส่งออก",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram ได้กล่าวถึงการสนทนาเมื่อการส่งออกเริ่มต้นขึ้น และตำแหน่งของบัญชีผู้ส่งออกในสนทนานั้น ป้ายกำกับเช่น \"scam\" และ \"fake\" เป็นของ Telegram เอง",
   "Indicators": "ตัวชี้วัด",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "แต่ละแถวคือแชท และแต่ละคอลัมน์คือช่วงเวลา (UTC); เซลล์ที่มีสีเข้มกว่ามีข้อความที่สังเกตได้มากขึ้น คอลัมน์ที่มีเส้นประไม่มีการยืนยันการจับภาพเลย: ไม่ทราบว่ามีการโพสต์อะไรในช่วงเวลานั้น เซลล์ที่มีสีจางในคอลัมน์ที่สังเกตได้หมายความว่าไม่มีการบันทึกข้อความที่นั่น",
   "Texts repeated across chats": "ข้อความที่ปรากฏซ้ำในหลายห้องสนทนา",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "ข้อความเดียวกันที่สังเกตเห็นในแชทมากกว่าหนึ่งแชท โดยเปรียบเทียบหลังจากปรับรูปแบบตัวอักษรและช่องว่างให้เป็นมาตรฐานแล้ว ข้อความที่มีความยาวน้อยกว่า {n} ตัวอักษรจะไม่ถูกเปรียบเทียบ ข้อความที่ตรงกันถือเป็นเบาะแส: มันไม่แสดงว่าใครเป็นผู้เขียนข้อความเหล่านั้นหรือว่าข้อความเหล่านั้นมีความเกี่ยวข้องกัน",
   "Texts found in more than one chat: {n}.": "ข้อความที่พบในแชทมากกว่าหนึ่งแชท: {n}.",
@@ -5754,7 +5753,6 @@
   "Cover": "หน้าปก",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "หน้าปกและแผนภูมิจากวารสารของพื้นที่ทำงานนี้ การส่งออกจะเพิ่มบันทึกที่เลือกไว้ การประเมินความน่าเชื่อถือ และเอกสารการตรวจสอบ",
   "DRAFT PREVIEW · NOT SIGNED": "ดูตัวอย่างร่าง · ไม่มีการลงนาม",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "เซลล์ที่มืดกว่าหมายถึงมีข้อมูลการสังเกตการณ์รวมอยู่มากขึ้น จำนวนสูงสุดต่อเซลล์: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "การออกแบบและแผนภูมิใช้กับการส่งออกใหม่ของบันทึกประจำวัน, การสนทนา, บัญชี และการแชร์ รายละเอียดกรณีใช้กับรายงานบันทึกประจำวันและรายงานการสนทนาเดี่ยว; สวิตช์บันทึกและประวัติการเปลี่ยนแปลงใช้กับบันทึกประจำวัน การส่งออกบัญชีและการแชร์จะรักษาการตั้งค่าภาษาและความเป็นส่วนตัวของตนเอง",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "การดูตัวอย่างการออกแบบใช้ข้อมูลต้นฉบับได้สูงสุด 50,000 รายการ สร้างตัวอย่างข้อมูลด้านล่างเพื่อดูการเลือกทั้งหมด ไฟล์PDF มีรูปแบบการพิมพ์ที่แยกต่างหาก",
   "Draft changed. Save before exporting.": "ร่างได้เปลี่ยนแปลงแล้ว โปรดบันทึกก่อนส่งออก",
@@ -8895,7 +8893,6 @@
   "Chats with messages": "การสนทนาที่มีข้อความ",
   "Checking export settings": "ตรวจสอบการตั้งค่าการส่งออก",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "การสนทนาแต่ละครั้งจะกำหนดหมายเลขให้กับข้อความของตัวเอง ดังนั้นทุกหมายเลขที่ขาดไประหว่างข้อความแรกและข้อความสุดท้ายที่ส่งออก คือข้อความจากการสนทนานั้น",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "แต่ละช่องสี่เหลี่ยมแทนหนึ่งวัน UTC; แถวแทนวันในสัปดาห์ สีที่เข้มขึ้นหมายถึงมีข้อความมากขึ้น จุดแสดงหมายเลขข้อความที่ขาดหายไป ซึ่งข้อความข้างเคียงมีระยะห่างกันไม่เกินสองวัน; ตารางแสดงข้อความที่เหลือ",
   "Earlier years with messages: {years}": "ปีที่ผ่านมาพร้อมข้อความ: {years}",
   "Edits only": "แก้ไขเท่านั้น",
   "Everything else": "ส่วนอื่นๆ",
@@ -10839,7 +10836,6 @@
   "Absent message IDs": "ไม่มีรหัสข้อความ",
   "The export finished within the selected scope.": "การส่งออกข้อมูลเสร็จสิ้นภายในขอบเขตที่เลือกไว้",
   "Chat history and attachments finished.": "ประวัติการสนทนาและไฟล์แนบเสร็จแล้ว",
-  "Every selected chat was exported.": "ทุกการสนทนาที่เลือกไว้ได้ถูกส่งออกแล้ว",
   "Stopped early in the capture panel. Data acquired until then is kept.": "การเก็บรวบรวมข้อมูลได้เสร็จสิ้นก่อนกำหนดจากแผงการจับข้อมูล ข้อมูลที่เก็บรวบรวมได้จนถึงขณะนั้นจะถูกเก็บรักษาไว้",
   "The session time ran out. Data acquired until then is kept.": "เวลาเซสชันหมดแล้ว ข้อมูลที่เก็บรวบรวมไว้จนถึงขณะนั้นจะถูกเก็บรักษาไว้",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "การเก็บรวบรวมข้อมูลได้ยุติลงก่อนกำหนดเพื่อจัดเวลาสำหรับการจัดเตรียมไฟล์เก็บถาวร ข้อมูลที่เก็บรวบรวมได้จนถึงขณะนั้นยังคงถูกเก็บรักษาไว้",
@@ -10922,5 +10918,9 @@
   "restricted member": "สมาชิกที่มีสิทธิ์จำกัด",
   "{n} edit": "{n} ข้อความที่ได้รับการแก้ไข",
   "{n} deletion": "{n} ข้อความที่ถูกลบ",
-  "{n} saved file": "{n} ไฟล์ถูกบันทึก"
+  "{n} saved file": "{n} ไฟล์ถูกบันทึก",
+  "Export of the selected chats has ended.": "การส่งออกการสนทนาที่เลือกไว้ได้เสร็จสิ้นแล้ว",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "แต่ละแถวแสดงการสนทนา และแต่ละคอลัมน์แสดงช่วงเวลา (UTC); สีที่เข้มขึ้นหมายถึงมีข้อความที่ตรวจพบมากขึ้น คอลัมน์ที่มีเส้นประแสดงว่าไม่มีการยืนยันการบันทึกเลย: ไม่ทราบว่ามีการโพสต์อะไรในช่วงเวลานั้น เซลล์สีจางในคอลัมน์ที่ตรวจพบหมายถึงไม่มีการบันทึกข้อความในจุดนั้น",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "สีที่เข้มขึ้นหมายถึงมีข้อสังเกตที่รวมไว้มากขึ้น จำนวนสูงสุดต่อเซลล์: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "แต่ละช่องแทนหนึ่งวันตามเวลา UTC; แถวแทนวันในสัปดาห์ สีที่เข้มขึ้นหมายถึงจำนวนข้อความที่มากขึ้น จุดแสดงถึงหมายเลขข้อความที่ขาดหายไป ซึ่งข้อความข้างเคียงมีระยะห่างกันไม่เกินสองวัน; ตารางแสดงข้อความที่เหลือ"
 }

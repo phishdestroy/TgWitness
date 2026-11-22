@@ -12,7 +12,7 @@ LOG_KINDS = ("collector.started", "account.authorized", "sealed.selection", "acc
 REASONS = {
     "account_export_finished": ("complete", "The export finished within the selected scope."),
     "history_and_media_finished": ("complete", "Chat history and attachments finished."),
-    "chat_exports_finished": ("complete", "Every selected chat was exported."),
+    "chat_exports_finished": ("complete", "Export of the selected chats has ended."),
     "user_finish": ("partial", "Stopped early in the capture panel. Data acquired until then is kept."),
     "deadline": ("partial", "The session time ran out. Data acquired until then is kept."),
     "packaging_reserve": ("partial", "Collection stopped to leave time for packaging. Data acquired until then is kept."),
@@ -32,7 +32,7 @@ STYLE = (
     "h1{font-size:22px;margin:0}h2{font-size:15px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.04em;"
     "color:var(--muted)}.badge{font-weight:700;padding:6px 12px;border-radius:999px;border:2px solid currentColor}"
     ".complete{color:var(--ok)}.partial{color:var(--warn)}.failed,.cancelled{color:var(--bad)}"
-    ".grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}"
+    ".grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}"
     ".card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}"
     ".wide{grid-column:1/-1}.lead{font-size:16px;margin:0 0 6px}.muted{color:var(--muted)}"
     "table{width:100%;border-collapse:collapse}td{padding:5px 0;border-bottom:1px solid var(--line);vertical-align:top}"
@@ -46,7 +46,7 @@ STYLE = (
     "border:1px solid var(--line);direction:ltr;text-align:left}ol{margin:0;padding-inline-start:20px}"
     "ul.limits{margin:0;padding-inline-start:18px}li{margin:4px 0}a{color:var(--accent)}"
     ".list td:first-child{width:auto;color:var(--ink)}.list tr.head td{color:var(--muted);font-weight:600;font-size:13px}"
-    ".list td{padding-inline-end:14px}"
+    ".list td{padding-inline-end:14px}.card:has(>table.list){overflow-x:auto}"
     ".log td{padding-inline-end:14px}.log td:first-child,.log td.elapsed{width:1%;white-space:nowrap;"
     "font-variant-numeric:tabular-nums}.log td.elapsed{color:var(--muted)}.waits{margin:12px 0 0}"
 )

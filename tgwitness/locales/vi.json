@@ -4909,7 +4909,6 @@
   "The chat at export time": "Cuộc trò chuyện tại thời điểm xuất",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Những gì Telegram đã nói về cuộc trò chuyện khi quá trình xuất dữ liệu bắt đầu, và vị trí của tài khoản xuất dữ liệu trong đó. Các nhãn như \"lừa đảo\" và \"giả mạo\" là của chính Telegram.",
   "Indicators": "Các chỉ số",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Mỗi hàng là một cuộc trò chuyện và mỗi cột là một khoảng thời gian (UTC); các ô màu đậm hơn chứa nhiều tin nhắn được quan sát hơn. Các cột có đường chéo không có xác nhận ghi lại nào cả: không rõ những gì đã được đăng vào thời điểm đó. Một ô màu nhạt trong cột quan sát có nghĩa là không có tin nhắn nào được ghi lại ở đó.",
   "Texts repeated across chats": "Các văn bản lặp lại trong các cuộc trò chuyện",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Cùng một nội dung tin nhắn được quan sát thấy trong nhiều hơn một cuộc trò chuyện, được so sánh sau khi đã chuẩn hóa chữ hoa/thường và khoảng cách. Các văn bản ngắn hơn {n} ký tự sẽ không được so sánh. Văn bản trùng khớp là một manh mối: nó không cho thấy ai đã viết các bản sao đó hoặc liệu chúng có liên quan đến nhau hay không.",
   "Texts found in more than one chat: {n}.": "Các văn bản xuất hiện trong hơn một cuộc trò chuyện: {n}.",
@@ -5754,7 +5753,6 @@
   "Cover": "Trang bìa",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Trang bìa và các biểu đồ từ tạp chí của không gian làm việc này. Quá trình xuất sẽ bao gồm các bản ghi đã chọn, đánh giá mức độ tin cậy và tài liệu xác minh.",
   "DRAFT PREVIEW · NOT SIGNED": "XEM TRƯỚC BẢN NHÁP · CHƯA ĐƯỢC KÝ",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Các ô có màu đậm hơn cho thấy có nhiều quan sát được bao gồm hơn. Số lượng tối đa trên mỗi ô: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "Thiết kế và biểu đồ áp dụng cho các bản xuất mới từ nhật ký, cuộc trò chuyện, tài khoản và chia sẻ. Chi tiết vụ việc áp dụng cho các báo cáo nhật ký và báo cáo cuộc trò chuyện đơn lẻ; các tùy chọn bật/tắt bản ghi và lịch sử thay đổi áp dụng cho nhật ký. Các bản xuất từ tài khoản và chia sẻ giữ nguyên cài đặt ngôn ngữ và quyền riêng tư của riêng chúng.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "Chế độ xem trước thiết kế sử dụng tối đa 50.000 bản ghi nguồn. Vui lòng tạo bản xem trước dữ liệu bên dưới để xem toàn bộ lựa chọn. Tệp PDF có bố cục in riêng biệt.",
   "Draft changed. Save before exporting.": "Bản nháp đã thay đổi. Vui lòng lưu trước khi xuất.",
@@ -8895,7 +8893,6 @@
   "Chats with messages": "Các cuộc trò chuyện có tin nhắn",
   "Checking export settings": "Kiểm tra cài đặt xuất",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Mỗi cuộc trò chuyện này đều đánh số riêng cho các tin nhắn của mình, do đó, mọi số thứ tự bị thiếu giữa tin nhắn đầu tiên và tin nhắn cuối cùng được xuất ra đều là một tin nhắn của cuộc trò chuyện đó.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Mỗi ô vuông tương ứng với một ngày theo giờ UTC; các hàng tương ứng với các ngày trong tuần. Màu càng đậm thì số lượng tin nhắn càng nhiều. Một chấm đánh dấu các số tin nhắn bị thiếu mà các tin nhắn liền kề cách nhau tối đa hai ngày; các bảng liệt kê phần còn lại.",
   "Earlier years with messages: {years}": "Các năm trước với tin nhắn: {years}",
   "Edits only": "Chỉ chỉnh sửa",
   "Everything else": "Mọi thứ khác",
@@ -10839,7 +10836,6 @@
   "Absent message IDs": "Thiếu ID tin nhắn",
   "The export finished within the selected scope.": "Quá trình xuất dữ liệu đã hoàn tất trong phạm vi đã chọn.",
   "Chat history and attachments finished.": "Lịch sử trò chuyện và tệp đính kèm đã hoàn tất.",
-  "Every selected chat was exported.": "Mọi cuộc trò chuyện được chọn đều đã được xuất ra.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Việc thu thập đã hoàn tất sớm từ bảng điều khiển thu thập. Dữ liệu đã thu thập được cho đến thời điểm đó vẫn được lưu giữ.",
   "The session time ran out. Data acquired until then is kept.": "Thời gian phiên làm việc đã hết. Dữ liệu được thu thập cho đến thời điểm đó vẫn được lưu giữ.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Việc thu thập đã được kết thúc sớm để dành thời gian đóng gói tệp lưu trữ. Dữ liệu thu thập được cho đến thời điểm đó vẫn được lưu giữ.",
@@ -10922,5 +10918,9 @@
   "restricted member": "thành viên có quyền hạn bị hạn chế",
   "{n} edit": "{n} tin nhắn đã chỉnh sửa",
   "{n} deletion": "{n} tin nhắn đã xóa",
-  "{n} saved file": "Tệp {n} đã được lưu"
+  "{n} saved file": "Tệp {n} đã được lưu",
+  "Export of the selected chats has ended.": "Việc xuất các cuộc trò chuyện đã chọn đã hoàn tất.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Mỗi hàng tương ứng với một cuộc trò chuyện và mỗi cột tương ứng với một khoảng thời gian (UTC); màu sắc đậm hơn cho thấy có nhiều tin nhắn được ghi nhận hơn. Các cột có nền chéo không có xác nhận ghi nhận nào cả: nội dung được đăng vào thời điểm đó là không rõ. Một ô màu nhạt trong cột có ghi nhận có nghĩa là không có tin nhắn nào được ghi lại tại đó.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Màu sắc đậm hơn có nghĩa là có nhiều quan sát được bao gồm hơn. Số lượng tối đa mỗi ô: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Mỗi ô vuông tương ứng với một ngày theo giờ UTC; các hàng tương ứng với các ngày trong tuần. Màu sắc đậm hơn cho thấy có nhiều tin nhắn hơn. Một chấm đánh dấu các số tin nhắn bị thiếu mà các tin nhắn liền kề có khoảng cách tối đa là hai ngày; các bảng liệt kê phần còn lại."
 }

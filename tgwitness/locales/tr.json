@@ -4936,7 +4936,6 @@
   "The chat at export time": "Dışa aktarım anındaki sohbet",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram'nin dışa aktarım başladığında sohbet hakkında söyledikleri ve dışa aktarım yapan hesabın bu sohbet içindeki yeri. \"Dolandırıcılık\" ve \"sahte\" gibi etiketler Telegram'ye aittir.",
   "Indicators": "Göstergeler",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Her satır bir sohbettir ve her sütun bir zaman dilimidir (UTC); daha koyu renkli hücreler daha fazla gözlemlenen mesaj içerir. Çizgili sütunlarda hiçbir yakalama onayı bulunmamaktadır: o sırada neyin gönderildiği bilinmemektedir. Gözlemlenen bir sütundaki soluk renkli hücre, orada hiçbir mesajın kaydedilmediği anlamına gelir.",
   "Texts repeated across chats": "Sohbetler arasında tekrarlanan metinler",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Birden fazla sohbette gözlemlenen aynı mesaj metni, büyük/küçük harf ve boşluklar normalleştirildikten sonra karşılaştırılmıştır. {n} karakterden kısa metinler karşılaştırılmamıştır. Eşleşen metin bir ipucudur: kopyaları kimin yazdığını veya bunların birbiriyle bağlantılı olduğunu göstermez.",
   "Texts found in more than one chat: {n}.": "Birden fazla sohbette bulunan metinler: {n}.",
@@ -5788,7 +5787,6 @@
   "Cover": "Kapak",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Bu çalışma alanının dergisinden kapak ve grafikler. Dışa aktarma işlemi, seçilen kayıtları, güven değerlendirmesini ve doğrulama materyallerini ekler.",
   "DRAFT PREVIEW · NOT SIGNED": "TASLAK ÖN İZLEME · İMZALANMAMIŞ",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Daha koyu renkli hücreler, daha fazla gözlemin dahil edildiği anlamına gelir. Hücre başına maksimum: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "Tasarım ve grafikler, yeni günlük, sohbet, hesap ve paylaşım dışa aktarımları için geçerlidir. Vaka ayrıntıları, günlük ve tekli sohbet raporları için geçerlidir; kayıt ve değişiklik geçmişi anahtarları ise günlük için geçerlidir. Hesap ve paylaşım dışa aktarımları, kendi dil ve gizlilik ayarlarını korur.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "Tasarım önizlemesi en fazla 50.000 kaynak kaydı kullanır. Tam seçim için aşağıdaki veri önizlemesini oluşturun. PDF'nin ayrı bir yazdırma düzeni vardır.",
   "Draft changed. Save before exporting.": "Taslak değiştirildi. Dışa aktarmadan önce kaydedin.",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "Mesaj içeren sohbetler",
   "Checking export settings": "Dışa aktarma ayarlarını kontrol etme",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Bu sohbetlerin her biri kendi mesajlarını numaralandırır; dolayısıyla, dışa aktarılan ilk ve son mesaj arasında eksik olan her numara, o sohbetin bir mesajıdır.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Her kare bir UTC gününü temsil eder; satırlar ise hafta günleridir. Rengi ne kadar koyu olursa, o kadar fazla mesaj olduğu anlamına gelir. Bir nokta, komşu mesajları arasında en fazla iki gün fark olan eksik mesaj numaralarını gösterir; tablolar ise geri kalanları listeler.",
   "Earlier years with messages: {years}": "Mesajların bulunduğu önceki yıllar: {years}",
   "Edits only": "Yalnızca düzenlemeler",
   "Everything else": "Diğer her şey",
@@ -10890,7 +10887,6 @@
   "Absent message IDs": "Eksik mesaj kimlikleri",
   "The export finished within the selected scope.": "Dışa aktarma, seçilen kapsam dahilinde tamamlandı.",
   "Chat history and attachments finished.": "Sohbet geçmişi ve ekler tamamlandı.",
-  "Every selected chat was exported.": "Seçilen tüm sohbetler dışa aktarıldı.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Toplama işlemi, yakalama panelinden erken bir aşamada tamamlandı. O ana kadar toplanan veriler saklanmaktadır.",
   "The session time ran out. Data acquired until then is kept.": "Oturum süresi doldu. O ana kadar toplanan veriler saklanır.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Arşivin paketlenmesine zaman ayırmak amacıyla toplama işlemi erken sonlandırılmıştır. O ana kadar toplanan veriler saklanmaktadır.",
@@ -10973,5 +10969,9 @@
   "restricted member": "sınırlı haklara sahip üye",
   "{n} edit": "{n} düzenlenmiş mesaj",
   "{n} deletion": "{n} silinmiş mesaj",
-  "{n} saved file": "{n} dosya kaydedildi"
+  "{n} saved file": "{n} dosya kaydedildi",
+  "Export of the selected chats has ended.": "Seçilen sohbetlerin dışa aktarımı tamamlandı.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Her satır bir sohbeti, her sütun ise bir dönemi (UTC) temsil eder; rengin koyu olması, o dönemde daha fazla mesajın gözlemlendiği anlamına gelir. Çizgili sütunlarda yakalama onayı hiç bulunmamaktadır: o dönemde neyin yayınlandığı bilinmemektedir. Gözlemlenen bir sütundaki soluk renkli hücre, o yerde hiçbir mesajın kaydedilmediğini gösterir.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Renk ne kadar koyu olursa, o kadar fazla gözlem yer almaktadır. Hücre başına maksimum: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Her kare bir UTC gününü temsil eder; satırlar hafta günlerini gösterir. Rengin koyu olması, daha fazla mesaj olduğu anlamına gelir. Komşu mesajlar arasında en fazla iki gün fark olan, mevcut olmayan mesaj numaraları bir nokta ile işaretlenmiştir; tabloda geri kalanlar listelenmiştir."
 }

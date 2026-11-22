@@ -682,7 +682,7 @@
   "DNS lookups",
   "Dangling reference: the source observation is missing.",
   "Dark",
-  "Darker cells mean more included observations. Maximum per cell: {n}",
+  "A stronger colour means more included observations. Maximum per cell: {n}",
   "Data directory",
   "Data minimisation",
   "Data shown here",

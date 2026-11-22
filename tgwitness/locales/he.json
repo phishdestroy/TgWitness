@@ -4963,7 +4963,6 @@
   "The chat at export time": "הצ'אט בזמן הייצוא",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "מה שאמר Telegram על הצ'אט כאשר הייצוא החל, ומקומה של החשבון המייצא בתוכו. תוויות כגון \"הונאה\" ו\"זיוף\" הן של Telegram עצמו.",
   "Indicators": "אינדיקטורים",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "כל שורה מייצגת צ'אט וכל עמודה מייצגת פרק זמן (UTC); תאים כהים יותר מכילים יותר הודעות שנצפו. בעמודות המקווקוות לא הייתה כל אישור לכידה: לא ידוע מה פורסם באותו זמן. תא בהיר בעמודה שנצפתה פירושו שלא נרשמה שם שום הודעה.",
   "Texts repeated across chats": "טקסטים החוזרים על עצמם בצ'אטים שונים",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "אותו טקסט הודעה שנצפה ביותר מצ'אט אחד, לאחר שנורמלו רישיות האותיות והרווחים. טקסטים הקצרים מ-{n} תווים אינם מושווים. טקסט תואם מהווה קצה חוט: הוא אינו מגלה מי כתב את ההודעות או שיש ביניהן קשר.",
   "Texts found in more than one chat: {n}.": "טקסטים שנמצאו ביותר מצ'אט אחד: {n}.",
@@ -5822,7 +5821,6 @@
   "Cover": "כריכה",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "עמוד השער והתרשימים מתוך היומן של סביבת העבודה הזו. הייצוא מוסיף את הרשומות הנבחרות, הערכת האמינות וחומר האימות.",
   "DRAFT PREVIEW · NOT SIGNED": "תצוגה מקדימה של טיוטה · לא חתומה",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "תאים כהים יותר מציינים מספר רב יותר של תצפיות כלולות. מקסימום לכל תא: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "העיצוב והתרשימים חלים על ייצוא חדש של יומנים, צ'אטים, חשבונות ושיתופים. פרטי המקרה חלים על דוחות יומן ודוחות צ'אט בודד; מתגי הרשומות והיסטוריית השינויים חלים על היומן. ייצוא חשבונות ושיתופים שומר על הגדרות השפה והפרטיות שלו.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "תצוגת המקדים של העיצוב משתמשת בעד 50,000 רשומות מקור. צרו את תצוגת המקדים של הנתונים להלן לקבלת הבחירה המלאה. ל-PDF יש פריסת הדפסה נפרדת.",
   "Draft changed. Save before exporting.": "הטיוטה שונתה. שמרו לפני הייצוא.",
@@ -8985,7 +8983,6 @@
   "Chats with messages": "צ'אטים עם הודעות",
   "Checking export settings": "בדיקת הגדרות הייצוא",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "כל אחד מהצ'אטים הללו מונה את ההודעות שלו, ולכן כל מספר חסר בין ההודעה הראשונה להודעה האחרונה שיוצאו הוא הודעה מאותו צ'אט.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "כל ריבוע מייצג יום אחד לפי שעון UTC; השורות מייצגות ימי שבוע. צבע כהה יותר מצביע על מספר רב יותר של הודעות. נקודה מסמנת מספרי הודעות חסרים שההודעות הסמוכות להן מרוחקות זו מזו לכל היותר ביומיים; הטבלאות מפרטות את השאר.",
   "Earlier years with messages: {years}": "שנים קודמות עם הודעות: {years}",
   "Edits only": "עריכות בלבד",
   "Everything else": "כל השאר",
@@ -10941,7 +10938,6 @@
   "Absent message IDs": "מזהי הודעות חסרים",
   "The export finished within the selected scope.": "הייצוא הושלם במסגרת ההיקף שנבחר.",
   "Chat history and attachments finished.": "היסטוריית הצ'אטים והקבצים המצורפים הושלמו.",
-  "Every selected chat was exported.": "כל צ'אט שנבחר יובא.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "האיסוף הושלם מוקדם מהצפוי באמצעות לוח הלכידה. הנתונים שנאספו עד לאותו רגע נשמרים.",
   "The session time ran out. Data acquired until then is kept.": "זמן ההפעלה הסתיים. הנתונים שנאספו עד לאותו רגע נשמרים.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "האיסוף הופסק מוקדם כדי להשאיר זמן לאריזת הארכיון. הנתונים שנאספו עד אז נשמרים.",
@@ -11024,5 +11020,9 @@
   "restricted member": "חבר עם זכויות מוגבלות",
   "{n} edit": "{n} הודעה שעברה עריכה",
   "{n} deletion": "{n} הודעה שנמחקה",
-  "{n} saved file": "קובץ {n} נשמר"
+  "{n} saved file": "קובץ {n} נשמר",
+  "Export of the selected chats has ended.": "ייצוא הצ'אטים שנבחרו הסתיים.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "כל שורה מייצגת צ'אט וכל עמודה מייצגת פרק זמן (UTC); צבע בולט יותר מעיד על מספר רב יותר של הודעות שנצפו. בעמודות המאוירות לא הייתה כל אישור לכידה: לא ידוע מה פורסם בהן באותה עת. תא בהיר בעמודה שנצפתה פירושו שלא נרשמה שם שום הודעה.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "צבע חזק יותר מסמן יותר תצפיות שנכללו. מקסימום לכל תא: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "כל ריבוע מייצג יום אחד לפי שעון UTC; השורות מייצגות ימי חול. צבע עז יותר מסמן כמות גדולה יותר של הודעות. נקודה מסמנת מספרי הודעות חסרים שההודעות הסמוכות להם מרוחקות זו מזו לכל היותר ביומיים; הטבלאות מפרטות את השאר."
 }

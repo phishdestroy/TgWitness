@@ -4936,7 +4936,6 @@
   "The chat at export time": "রপ্তানি করার সময় চ্যাট",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram যখন এক্সপোর্ট শুরু হয়েছিল তখন চ্যাট সম্পর্কে যা বলেছিল এবং এতে রপ্তানি করা অ্যাকাউন্টের অবস্থান। 'scam' এবং 'fake'-এর মতো লেবেলগুলো Telegram-এর নিজস্ব।",
   "Indicators": "ইন্ডিকেটরসমূহ",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "প্রতিটি সারি একটি চ্যাট এবং প্রতিটি কলাম একটি সময়কাল (UTC); গাঢ় কোষগুলোতে আরও বেশি পর্যবেক্ষিত বার্তা রয়েছে। ছায়াযুক্ত কলামগুলোতে কোনো ক্যাপচার নিশ্চিতকরণই ছিল না: তখন কী পোস্ট করা হয়েছিল তা অজানা। পর্যবেক্ষিত কলামের ফ্যাকাশে কোষ মানে সেখানে কোনো বার্তা রেকর্ড করা হয়নি।",
   "Texts repeated across chats": "চ্যাট জুড়ে পুনরাবৃত্তি হওয়া টেক্সটসমূহ",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "একই বার্তার পাঠ্য একাধিক চ্যাটে দেখা গেছে, অক্ষরের বড়-ছোট এবং ফাঁক-ফাঁক স্বাভাবিক করার পর তুলনা করা হয়েছে। {n}টির চেয়ে ছোট কোনো টেক্সট তুলনা করা হয় না। মিলিত টেক্সট একটি সূত্র: এটি দেখায় না কে নকল করেছে বা তারা সংযুক্ত।",
   "Texts found in more than one chat: {n}.": "এক বা একাধিক চ্যাটে পাওয়া টেক্সট: {n}",
@@ -5788,7 +5787,6 @@
   "Cover": "ঢেকে রাখুন",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "এই ওয়ার্কস্পেসের জার্নাল থেকে কভার এবং চার্ট। এক্সপোর্ট নির্বাচিত রেকর্ড, বিশ্বাস মূল্যায়ন এবং যাচাইকরণ উপাদান যোগ করে।",
   "DRAFT PREVIEW · NOT SIGNED": "খসড়া পূর্বরূপ · স্বাক্ষরিত নয়",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "গাঢ় কোষগুলো আরও অন্তর্ভুক্ত পর্যবেক্ষণ নির্দেশ করে। প্রতি কোষে সর্বোচ্চ: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "নতুন জার্নাল, চ্যাট, অ্যাকাউন্ট এবং শেয়ারিং এক্সপোর্টে ডিজাইন এবং চার্ট প্রযোজ্য। কেস বিবরণ জার্নাল এবং একক-চ্যাট রিপোর্টে প্রযোজ্য; রেকর্ড এবং পরিবর্তন-ইতিহাস সুইচ জার্নালে প্রযোজ্য। অ্যাকাউন্ট এবং শেয়ারিং এক্সপোর্টগুলো তাদের নিজস্ব ভাষা এবং গোপনীয়তা সেটিংস বজায় রাখে।",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "ডিজাইন প্রিভিউ সর্বোচ্চ ৫০,০০০টি সোর্স রেকর্ড ব্যবহার করে। সম্পূর্ণ নির্বাচনের জন্য নিচের ডেটা প্রিভিউ তৈরি করুন। PDF-এর একটি পৃথক প্রিন্ট লেআউট রয়েছে।",
   "Draft changed. Save before exporting.": "খসড়া পরিবর্তিত হয়েছে। রপ্তানির আগে সংরক্ষণ করুন।",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "বার্তা সহ চ্যাটসমূহ",
   "Checking export settings": "রপ্তানি সেটিংস পরীক্ষা করা",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "প্রতিটি চ্যাট নিজস্ব বার্তাগুলিকে নম্বর দেয়, তাই প্রথম এবং শেষ রপ্তানি করা বার্তার মধ্যে যে কোনো অনুপস্থিত নম্বরই সেই চ্যাটের একটি বার্তা।",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "প্রতিটি বর্গক্ষেত্র একটি UTC দিন; সারিগুলো সপ্তাহের দিনগুলো। গাঢ় রঙ মানে বেশি বার্তা। একটি বিন্দু অনুপস্থিত বার্তা নম্বর চিহ্নিত করে, যার পার্শ্ববর্তী বার্তাগুলোর মধ্যে সর্বোচ্চ দুই দিনের ব্যবধান; টেবিলগুলো বাকিগুলো তালিকাভুক্ত করে।",
   "Earlier years with messages: {years}": "বার্তা সহ পূর্ববর্তী বছরসমূহ: {years}",
   "Edits only": "শুধুমাত্র সম্পাদনা",
   "Everything else": "অন্যান্য সবকিছু",
@@ -10888,7 +10885,6 @@
   "Absent message IDs": "বার্তা আইডি অনুপস্থিত",
   "The export finished within the selected scope.": "নির্বাচিত পরিসরের মধ্যে এক্সপোর্ট সম্পন্ন হয়েছে।",
   "Chat history and attachments finished.": "চ্যাট ইতিহাস এবং সংযুক্তি সমাপ্ত।",
-  "Every selected chat was exported.": "নির্বাচিত প্রতিটি চ্যাট রপ্তানি করা হয়েছে।",
   "Stopped early in the capture panel. Data acquired until then is kept.": "ক্যাপচার প্যানেল থেকে সংগ্রহ আগেভাগেই শেষ করা হয়েছে। তখন পর্যন্ত সংগৃহীত ডেটা সংরক্ষণ করা হয়েছে।",
   "The session time ran out. Data acquired until then is kept.": "সেশন সময় শেষ হয়ে গেছে। তখন পর্যন্ত সংগৃহীত ডেটা সংরক্ষণ করা হয়েছে।",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "সংগ্রহ প্রক্রিয়া সময়ের আগেই শেষ করা হয়েছে যাতে আর্কাইভ প্যাকেজিংয়ের জন্য সময় থাকে। তখন পর্যন্ত সংগৃহীত ডেটা সংরক্ষণ করা হয়েছে।",
@@ -10973,5 +10969,9 @@
   "restricted member": "সীমিত অধিকারের সদস্য",
   "{n} edit": "{n}সম্পাদিত বার্তা",
   "{n} deletion": "{n} মুছে ফেলা বার্তা",
-  "{n} saved file": "{n} ফাইল সংরক্ষিত"
+  "{n} saved file": "{n} ফাইল সংরক্ষিত",
+  "Export of the selected chats has ended.": "নির্বাচিত চ্যাটগুলির এক্সপোর্ট শেষ হয়েছে।",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "প্রতিটি সারি একটি চ্যাট এবং প্রতিটি কলাম একটি সময়কাল (UTC); গাঢ় রঙ মানে সেখানে বেশি বার্তা দেখা গেছে। ছায়াযুক্ত কলামগুলিতে কোনো ক্যাপচার নিশ্চিতকরণ ছিল না: তখন কী পোস্ট করা হয়েছিল তা অজানা। পর্যবেক্ষিত কলামের ফ্যাকাশে কোষ মানে সেখানে কোনো বার্তা রেকর্ড হয়নি।",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "গাঢ় রঙ মানে আরও অন্তর্ভুক্ত পর্যবেক্ষণ। প্রতি কোষে সর্বোচ্চ: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "প্রতিটি বর্গ একটি UTC দিন; সারিগুলো সপ্তাহের দিনগুলো। গাঢ় রঙ মানে বেশি বার্তা। একটি বিন্দু অনুপস্থিত বার্তা নম্বর চিহ্নিত করে, যার পার্শ্ববর্তী বার্তাগুলোর মধ্যে সর্বোচ্চ দুই দিনের ব্যবধান; টেবিলগুলোতে বাকিগুলো তালিকাভুক্ত করা হয়েছে।"
 }

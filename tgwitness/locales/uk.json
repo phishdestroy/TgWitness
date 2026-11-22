@@ -4990,7 +4990,6 @@
   "The chat at export time": "Чат на момент експорту",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Що сказав Telegram про чат на момент початку експорту та про місце облікового запису, з якого здійснювався експорт, у цьому чаті. Такі мітки, як «шахрайство» та «підробка», належать Telegram.",
   "Indicators": "Показники",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Кожен рядок — чат, кожен стовпець — період (UTC); що темніша клітинка, то більше повідомлень у ній спостерігалося. Заштриховані стовпці не мають жодного підтвердження захоплення: що було опубліковано в цей час, невідомо. Бліда клітинка в стовпці, що спостерігався, означає, що повідомлень там не записано.",
   "Texts repeated across chats": "Тексти, що повторюються в різних чатах",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "Той самий текст повідомлення, помічений більш ніж в одному чаті; порівняння без урахування регістру літер і пробілів. Тексти коротші за {n} символів не порівнюються. Збіг тексту — зачіпка: він не показує, хто написав копії і чи пов'язані вони між собою.",
   "Texts found in more than one chat: {n}.": "Текстів, знайдених більш ніж в одному чаті: {n}.",
@@ -5856,7 +5855,6 @@
   "Cover": "Обкладинка",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Обкладинка та діаграми з журналу цієї робочої області. Експорт додає вибрані записи, оцінку надійності та матеріали перевірки.",
   "DRAFT PREVIEW · NOT SIGNED": "ПЕРЕДПРЕГЛЯД ПРОЕКТУ · НЕ ПІДПИСАНО",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Чим темніші комірки, тим більше спостережень у них міститься. Максимальне значення на комірку: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "Дизайн та діаграми застосовуються до нових експортів журналу, чату, облікового запису та спільного доступу. Деталі справи застосовуються до звітів журналу та окремих чатів; перемикачі записів та історії змін застосовуються до журналу. Експорти облікового запису та спільного доступу зберігають власні налаштування мови та конфіденційності.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "Попередній перегляд дизайну використовує до 50 000 вихідних записів. Створіть попередній перегляд даних нижче для повного вибору. Файл у форматі PDF має окремий макет друку.",
   "Draft changed. Save before exporting.": "Чернетка змінена. Збережіть перед експортом.",
@@ -9030,7 +9028,6 @@
   "Chats with messages": "Чати з повідомленнями",
   "Checking export settings": "Перевірка налаштувань експорту",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Кожен із цих чатів має власну нумерацію повідомлень, тому кожне пропущене число між першим і останнім експортованим повідомленням є повідомленням цього чату.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Кожен квадрат відповідає одному дню за UTC; рядки — дням тижня. Чим темніше, тим більше повідомлень. Крапка позначає відсутні номери повідомлень, сусідні з якими розташовані з інтервалом не більше двох днів; у таблицях наведено решту.",
   "Earlier years with messages: {years}": "Попередні роки з повідомленнями: {years}",
   "Edits only": "Тільки редагування",
   "Everything else": "Все інше",
@@ -10992,7 +10989,6 @@
   "Absent message IDs": "Відсутні ідентифікатори повідомлень",
   "The export finished within the selected scope.": "Експорт завершено в межах обраного обсягу.",
   "Chat history and attachments finished.": "Історія чатів та вкладення готові.",
-  "Every selected chat was exported.": "Було експортовано кожен вибраний чат.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "Збір даних було достроково завершено через панель збору. Дані, зібрані до цього моменту, зберігаються.",
   "The session time ran out. Data acquired until then is kept.": "Час сеансу закінчився. Дані, зібрані до цього моменту, зберігаються.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "Збір даних було достроково припинено, щоб залишити час на упаковку архіву. Дані, зібрані до цього моменту, зберігаються.",
@@ -11075,5 +11071,9 @@
   "restricted member": "учасник з обмеженими правами",
   "{n} edit": "{n} відредаговане повідомлення",
   "{n} deletion": "{n} видалене повідомлення",
-  "{n} saved file": "Збережено файл {n}"
+  "{n} saved file": "Збережено файл {n}",
+  "Export of the selected chats has ended.": "Експорт вибраних чатів завершено.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Кожен рядок — це чат, а кожен стовпець — період часу (UTC); чим яскравіший колір, тим більше повідомлень було зафіксовано. Штриховані стовпці взагалі не мали підтвердження збору даних: що було опубліковано в цей час, невідомо. Бліда комірка у стовпці з зафіксованими даними означає, що там не було записано жодного повідомлення.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Чим яскравіший колір, тим більше спостережень включено. Максимум на одну комірку: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Кожен квадрат відповідає одному дню за UTC; рядки — дні тижня. Чим яскравіший колір, тим більше повідомлень. Крапкою позначено відсутні номери повідомлень, сусідні з якими розташовані з інтервалом не більше двох днів; решта наведена в таблицях."
 }

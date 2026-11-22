@@ -8,6 +8,7 @@ STEPS = (3600, 6 * 3600, DAY, WEEK, 30 * DAY, 91 * DAY, 365 * DAY)
 COLUMNS = 60
 TOP_ROWS = 25
 TOP_SENDERS = 12
+SERVICE = -1
 YEARS = 6
 GAPS_SHOWN = 300
 WEEK_ORIGIN = 4 * DAY
@@ -27,19 +28,19 @@ CSS = """
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}
 .activity-map .map-card{min-width:0;padding:20px 22px;border:1px solid var(--line);background:var(--map-paper);border-radius:12px;margin:18px 0;break-inside:avoid}
 .activity-map h3{font:600 15px/1.4 system-ui,sans-serif;margin:0 0 6px}.activity-map .map-note{font-size:12px;color:var(--muted);margin:4px 0 14px;max-width:90ch}
-.map-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin:18px 0}.map-kpis div{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
-.map-kpis strong{display:block;font-size:22px;line-height:1.3;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.5}.map-kpis span{font-size:12px;color:var(--muted)}
+.map-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.map-kpis div{flex:1 1 128px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
+.map-kpis strong{display:block;font:600 24px/1.25 system-ui,sans-serif;letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.45}.map-kpis span{display:block;margin-top:6px;font-size:12px;line-height:1.4;color:var(--muted)}
 .map-scroll{overflow-x:auto;direction:ltr;padding-bottom:4px}.map-grid{border-collapse:separate;border-spacing:3px}
-.map-grid caption{text-align:start;font:600 12px/1.6 system-ui,sans-serif;color:var(--muted);padding-bottom:4px}
+.map-grid caption{text-align:start;font:600 12px/1.6 system-ui,sans-serif;color:var(--muted);padding-bottom:4px;white-space:nowrap}
 .map-grid th{font:500 10px/1.3 system-ui,sans-serif;color:var(--muted);text-align:start;white-space:nowrap;overflow:hidden;border:0!important;padding:0 4px 0 0!important;background:transparent!important}
 .map-grid td{width:15px;min-width:15px;height:15px;padding:0!important;border:0!important;border-radius:3px;background:var(--map-empty);position:relative}
-.map-grid td.blank{background:transparent}.map-grid td[data-a="1"]{background:color-mix(in srgb,var(--map-accent) 25%,var(--map-paper))}
+.map-grid td.blank{background:transparent}.map-calendar td.blank{box-shadow:inset 0 0 0 1px var(--map-empty)}.map-grid td[data-a="1"]{background:color-mix(in srgb,var(--map-accent) 25%,var(--map-paper))}
 .map-grid td[data-a="2"]{background:color-mix(in srgb,var(--map-accent) 48%,var(--map-paper))}.map-grid td[data-a="3"]{background:color-mix(in srgb,var(--map-accent) 72%,var(--map-paper))}
 .map-grid td[data-a="4"]{background:var(--map-accent)}
 .map-grid td[data-l]::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%);border-radius:50%;background:var(--map-loss);box-shadow:0 0 0 1.5px var(--map-paper)}
 .map-grid td[data-l="1"]::after{width:4px;height:4px}.map-grid td[data-l="3"]::after{width:8px;height:8px}.map-grid td[data-l="4"]::after{width:10px;height:10px}
-.map-id{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:250px}.map-lanes td{width:auto;min-width:0;height:16px}
-.map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 10px/1.2 ui-monospace,monospace;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.map-id{font:11px/1.4 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:210px}.map-lanes col.total-col{width:230px}.map-lanes td{width:auto;min-width:0;height:16px}
+.map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 11px/1.2 system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-lanes tr.outside th.lane{color:var(--map-loss);font-style:italic}.map-week{width:100%;table-layout:fixed}.map-week td{width:auto;min-width:0;height:20px}.map-week th[scope=row]{width:42px;overflow:visible}.map-week thead th:first-child{width:42px}.map-week thead th[scope=col]{overflow:visible}
 .map-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:11px;color:var(--muted);margin-top:12px}
 .map-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--map-empty);vertical-align:-1px;margin-inline-end:5px}.map-legend i[data-a="2"]{background:color-mix(in srgb,var(--map-accent) 48%,var(--map-paper))}
@@ -52,7 +53,7 @@ CSS = """
 .gap-mark:target{outline:3px solid var(--map-loss,#d9480f);outline-offset:3px;scroll-margin-top:32px}
 .map-runs summary{cursor:pointer;font-weight:600}.map-run-list{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .map-run-list li{min-width:0}.map-run{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px 14px;border:1px solid var(--line);border-inline-start:3px solid var(--map-loss);border-radius:6px;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
-a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
+a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
 @media(max-width:720px){.map-run-list{grid-template-columns:1fr}.activity-map .map-card{padding:16px}}
 @media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}.map-lanes thead th[scope=colgroup]{writing-mode:vertical-rl;transform:rotate(180deg);height:80px;padding:0 0 4px!important;text-align:end;white-space:nowrap;overflow:visible}}
 @media print{.map-grid td,.map-grid td::after,.map-legend i{print-color-adjust:exact;-webkit-print-color-adjust:exact}.map-scroll{overflow:visible}}
@@ -115,7 +116,8 @@ class ActivityMap:
         sender = row.get("from_id")
         self.kinds.setdefault(chat_id, kind)
         self.times.setdefault(chat_id, array("q")).append(at)
-        self.senders.setdefault(chat_id, array("q")).append(sender if type(sender) is int else 0)
+        service = row.get("type") == "service" or bool(row.get("action"))
+        self.senders.setdefault(chat_id, array("q")).append(SERVICE if service else sender if type(sender) is int else 0)
         person = row.get("sender")
         if type(sender) is int and sender not in self.names and isinstance(person, dict):
             name = (" ".join(str(person.get(key) or "") for key in ("first_name", "last_name")).strip()
@@ -248,7 +250,7 @@ def calendar(days, losses, say):
     shown, hidden = years[-YEARS:], years[:-YEARS]
     peak, loss_peak = max(days.values(), default=0), max(losses.values(), default=0.0)
     parts = ['<div class="map-card"><h3>' + e(say("Calendar")) + '</h3><p class="map-note">'
-             + e(say("Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.")) + '</p>']
+             + e(say("Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.")) + '</p>']
     for year in reversed(shown):
         first = max(low, int(datetime(year, 1, 1, tzinfo=timezone.utc).timestamp()) // DAY)
         last = min(high, int(datetime(year, 12, 31, tzinfo=timezone.utc).timestamp()) // DAY)
@@ -505,11 +507,13 @@ def chat_map(activity, gaps, chat, say):
                        (number(sum(amount for *_, amount, _ in absent), say), say("Absent message numbers"))], say))
     parts.append(calendar(days, lost_days, say))
     senders = activity.senders.get(chat["id"], array("q"))
-    if times and chat.get("kind") in ("group", "supergroup") and len(set(senders)) > 1:
+    people = set(senders) - {SERVICE}
+    if times and chat.get("kind") in ("group", "supergroup") and len(people) > 1:
         origin, step, count = grid(min(times), max(times))
         totals = {}
         for sender in senders:
-            totals[sender] = totals.get(sender, 0) + 1
+            if sender != SERVICE:
+                totals[sender] = totals.get(sender, 0) + 1
         top = sorted(totals, key=lambda s: (-totals[s], s))[:TOP_SENDERS]
         def person(sender):
             if not sender:

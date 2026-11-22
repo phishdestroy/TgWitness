@@ -4936,7 +4936,6 @@
   "The chat at export time": "O bate-papo no momento da exportação",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "O que Telegram disse sobre o chat quando a exportação começou e a posição da conta exportadora nele. Rótulos como “golpe” e “falso” são de autoria de Telegram.",
   "Indicators": "Indicadores",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Cada linha corresponde a um chat e cada coluna a um período (UTC); as células mais escuras contêm mais mensagens observadas. As colunas hachuradas não tiveram nenhuma confirmação de captura: não se sabe o que foi postado naquele momento. Uma célula clara em uma coluna de observação significa que nenhuma mensagem foi registrada ali.",
   "Texts repeated across chats": "Textos repetidos em diferentes conversas",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "O mesmo texto de mensagem observado em mais de um chat, comparado após a normalização de maiúsculas e minúsculas e espaçamento. Textos com menos de {n} caracteres não são comparados. O texto correspondente é uma pista: ele não revela quem escreveu as cópias nem que elas estejam relacionadas.",
   "Texts found in more than one chat: {n}.": "Textos encontrados em mais de um chat: {n}.",
@@ -5788,7 +5787,6 @@
   "Cover": "Capa",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "Capa e gráficos do diário deste espaço de trabalho. A exportação inclui os registros selecionados, a avaliação de confiança e o material de verificação.",
   "DRAFT PREVIEW · NOT SIGNED": "VISUALIZAÇÃO DO RASCUNHO · NÃO ASSINADO",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "Células mais escuras indicam mais observações incluídas. Máximo por célula: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "O design e os gráficos se aplicam a novas exportações de diário, bate-papo, conta e compartilhamento. Os detalhes do caso se aplicam a relatórios de diário e de bate-papo único; as opções de registro e histórico de alterações se aplicam ao diário. As exportações de conta e compartilhamento mantêm suas próprias configurações de idioma e privacidade.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "A visualização do design utiliza até 50.000 registros de origem. Gere a visualização de dados abaixo para obter a seleção completa. O PDF possui um layout de impressão separado.",
   "Draft changed. Save before exporting.": "Rascunho alterado. Salve antes de exportar.",
@@ -8946,7 +8944,6 @@
   "Chats with messages": "Conversas com mensagens",
   "Checking export settings": "Verificando as configurações de exportação",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "Cada uma dessas conversas numera suas próprias mensagens; portanto, cada número ausente entre a primeira e a última mensagem exportada corresponde a uma mensagem dessa conversa.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Cada quadrado corresponde a um dia UTC; as linhas representam os dias da semana. Quanto mais escuro, mais mensagens. Um ponto indica números de mensagens ausentes cujas mensagens vizinhas estão separadas por, no máximo, dois dias; as tabelas listam o restante.",
   "Earlier years with messages: {years}": "Anos anteriores com mensagens: {years}",
   "Edits only": "Apenas edições",
   "Everything else": "Todo o restante",
@@ -10900,7 +10897,6 @@
   "Absent message IDs": "ID de mensagens ausentes",
   "The export finished within the selected scope.": "A exportação foi concluída dentro do escopo selecionado.",
   "Chat history and attachments finished.": "Histórico de bate-papos e anexos concluídos.",
-  "Every selected chat was exported.": "Todas as conversas selecionadas foram exportadas.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "A coleta foi concluída antecipadamente a partir do painel de captura. Os dados coletados até aquele momento são mantidos.",
   "The session time ran out. Data acquired until then is kept.": "O tempo da sessão expirou. Os dados coletados até esse momento são mantidos.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "A coleta foi encerrada antecipadamente para dar tempo de compactar o arquivo. Os dados coletados até aquele momento foram mantidos.",
@@ -10983,5 +10979,9 @@
   "restricted member": "membro com direitos restritos",
   "{n} edit": "{n} mensagem editada",
   "{n} deletion": "{n} mensagem excluída",
-  "{n} saved file": "Arquivo {n} salvo"
+  "{n} saved file": "Arquivo {n} salvo",
+  "Export of the selected chats has ended.": "A exportação das conversas selecionadas foi concluída.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Cada linha corresponde a um chat e cada coluna a um período (UTC); uma cor mais intensa indica um maior número de mensagens observadas. As colunas hachuradas não tiveram nenhuma confirmação de captura: não se sabe o que foi postado naquele momento. Uma célula clara em uma coluna observada significa que nenhuma mensagem foi registrada ali.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "Uma cor mais intensa indica um maior número de observações incluídas. Máximo por célula: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Cada quadrado corresponde a um dia UTC; as linhas representam os dias da semana. Uma cor mais intensa indica um maior número de mensagens. Um ponto marca os números de mensagens ausentes cujas mensagens vizinhas estão separadas por, no máximo, dois dias; as tabelas listam o restante."
 }

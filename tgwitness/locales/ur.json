@@ -4936,7 +4936,6 @@
   "The chat at export time": "برآمد کے وقت چیٹ",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram نے ایکسپورٹ شروع ہونے پر چیٹ کے بارے میں کیا کہا، اور اس میں برآمد کرنے والے اکاؤنٹ کی جگہ کیا تھی۔ 'scam' اور 'fake' جیسے لیبلز Telegram کے اپنے ہیں۔",
   "Indicators": "انڈیکیٹرز",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "ہر قطار ایک چیٹ ہے اور ہر کالم ایک مدت (UTC) ہے؛ گہرے خلیے زیادہ دیکھے گئے پیغامات پر مشتمل ہوتے ہیں۔ دھاری دار کالموں میں بالکل بھی کوئی کیپچر تصدیق نہیں تھی: اس وقت جو کچھ بھی پوسٹ کیا گیا وہ نامعلوم ہے۔ ایک دیکھے گئے کالم میں ہلکے رنگ کا خلیہ اس بات کی علامت ہے کہ وہاں کوئی پیغام ریکارڈ نہیں ہوا۔",
   "Texts repeated across chats": "چٹس میں دہرائے گئے ٹیکسٹ",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "ایک ہی پیغام کا متن جو ایک سے زیادہ چیٹس میں دیکھا گیا، اسے حرفوں کی بڑی/چھوٹی صورت اور وقفوں کو یکساں کرنے کے بعد موازنہ کیا جاتا ہے۔ {n} سے کم حروف پر مشتمل متون کا موازنہ نہیں کیا جاتا۔ مطابقت پذیر متن ایک سراغ ہوتا ہے: یہ نہیں بتاتا کہ نقول کس نے لکھیں یا کہ وہ آپس میں جڑے ہوئے ہیں۔",
   "Texts found in more than one chat: {n}.": "ایک سے زیادہ چیٹس میں پائے جانے والے ٹیکسٹ: {n}",
@@ -5788,7 +5787,6 @@
   "Cover": "کوور",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "اس ورک اسپیس کے جرنل سے سرورق اور چارٹس۔ ایکسپورٹ منتخب کردہ ریکارڈز، اعتماد کے جائزے اور تصدیقی مواد شامل کرتا ہے۔",
   "DRAFT PREVIEW · NOT SIGNED": "مسودہ پیش نظارہ · بغیر دستخط کے",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "گہرے خلیے زیادہ شامل شدہ مشاہدات کی نشاندہی کرتے ہیں۔ فی خلیہ زیادہ سے زیادہ: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "ڈیزائن اور چارٹس نئے جرنل، چیٹ، اکاؤنٹ اور شیئرنگ ایکسپورٹس پر لاگو ہوتے ہیں۔ کیس کی تفصیلات جرنل اور سنگل چیٹ رپورٹس پر لاگو ہوتی ہیں؛ ریکارڈ اور تبدیلی کی تاریخ کے سوئچز جرنل پر لاگو ہوتے ہیں۔ اکاؤنٹ اور شیئرنگ ایکسپورٹس اپنی زبان اور پرائیویسی سیٹنگز برقرار رکھتے ہیں۔",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "ڈیزائن پریویو 50,000 تک ماخذ ریکارڈز استعمال کرتا ہے۔ مکمل انتخاب کے لیے نیچے ڈیٹا پریویو بنائیں۔ PDF کا الگ پرنٹ لے آؤٹ ہوتا ہے۔",
   "Draft changed. Save before exporting.": "مسودہ تبدیل ہو گیا ہے۔ برآمد کرنے سے پہلے محفوظ کریں۔",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "پیغامات کے ساتھ چیٹس",
   "Checking export settings": "ایکسپورٹ سیٹنگز کی جانچ",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "ان میں سے ہر ایک چیٹ اپنے پیغامات کو نمبر دیتا ہے، لہٰذا پہلے اور آخری برآمد شدہ پیغام کے درمیان ہر غائب نمبر اسی چیٹ کا ایک پیغام ہوتا ہے۔",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "ہر مربع ایک UTC دن ہے؛ قطاریں ہفتے کے دن ہیں۔ گہرا رنگ زیادہ پیغامات کی نشاندہی کرتا ہے۔ ایک نقطہ ان پیغامات کی تعداد کو ظاہر کرتا ہے جو موجود نہیں ہیں اور ان کے پڑوسی پیغامات کے درمیان زیادہ سے زیادہ دو دن کا وقفہ ہے؛ جدولیں باقی پیغامات کی فہرست دیتی ہیں۔",
   "Earlier years with messages: {years}": "پیغامات کے ساتھ پچھلے سال: {years}",
   "Edits only": "صرف ترمیمات",
   "Everything else": "باقی سب",
@@ -10889,7 +10886,6 @@
   "Absent message IDs": "پیغام کے آئی ڈیز موجود نہیں",
   "The export finished within the selected scope.": "منتخب دائرہ کار کے اندر ایکسپورٹ مکمل ہو گیا۔",
   "Chat history and attachments finished.": "چیٹ ہسٹری اور منسلکات مکمل۔",
-  "Every selected chat was exported.": "ہر منتخب چیٹ کو برآمد کیا گیا۔",
   "Stopped early in the capture panel. Data acquired until then is kept.": "کپچر پینل سے کلیکشن جلد ختم کر دی گئی۔ اس وقت تک جمع شدہ ڈیٹا محفوظ رکھا گیا ہے۔",
   "The session time ran out. Data acquired until then is kept.": "سیشن کا وقت ختم ہو گیا۔ اس وقت تک جمع کردہ ڈیٹا محفوظ رکھا جاتا ہے۔",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "آرکائیو پیکج کرنے کے لیے وقت نکالنے کے لیے جمع‌آوری وقت سے پہلے ختم کر دی گئی۔ اس وقت تک جمع کیا گیا ڈیٹا محفوظ رکھا گیا ہے۔",
@@ -10973,5 +10969,9 @@
   "restricted member": "محدود اختیارات والا رکن",
   "{n} edit": "{n}پیغام میں ترمیم",
   "{n} deletion": "{n} حذف شدہ پیغام",
-  "{n} saved file": "{n}فائل محفوظ ہوئی"
+  "{n} saved file": "{n}فائل محفوظ ہوئی",
+  "Export of the selected chats has ended.": "منتخب چیٹس کی برآمد ختم ہو چکی ہے۔",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "ہر قطار ایک چیٹ ہے اور ہر کالم ایک دورانیہ (UTC) ہے؛ گہرا رنگ زیادہ دیکھے گئے پیغامات کی نشاندہی کرتا ہے۔ دھاری دار کالموں میں کوئی گرفتاری کی تصدیق نہیں ہوئی: اس وقت جو کچھ پوسٹ کیا گیا وہ نامعلوم ہے۔ دیکھے گئے کالم میں ہلکے رنگ کا خلیہ اس بات کی علامت ہے کہ وہاں کوئی پیغام ریکارڈ نہیں ہوا۔",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "گہرا رنگ زیادہ شامل مشاہدات کی نشاندہی کرتا ہے۔ ہر خلیے میں زیادہ سے زیادہ: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "ہر مربع ایک UTC دن ہے؛ قطاریں ہفتے کے دن ہیں۔ گہرا رنگ زیادہ پیغامات کی نشاندہی کرتا ہے۔ ایک نقطہ ان پیغامات کی تعداد کو ظاہر کرتا ہے جو موجود نہیں ہیں اور ان کے پڑوسی پیغامات کے درمیان زیادہ سے زیادہ دو دن کا وقفہ ہے؛ جدولوں میں باقی پیغامات درج ہیں۔"
 }

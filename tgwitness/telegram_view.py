@@ -1,3 +1,4 @@
+from datetime import datetime
 import hashlib
 from html import escape
 import json
@@ -9,6 +10,7 @@ from .report import Words
 from .telegram_export import DELETED_ACCOUNT, MEDIA_PATH, dates, entity_spans, message, name
 
 CSS = (Path(__file__).parent / 'static' / 'telegram-export.css').read_text(encoding='utf-8')
+GROUP_SECONDS = 300
 TAGS = {'bold': ('strong', ''), 'italic': ('em', ''), 'underline': ('u', ''),
         'strikethrough': ('s', ''), 'code': ('code', ''), 'pre': ('code', ' class="pre"'),
         'blockquote': ('span', ' class="quote"'), 'spoiler': ('span', ' class="spoiler" tabindex="0"')}
@@ -254,14 +256,26 @@ class View:
                          + '</a>')
         return '<p class="emoji-files">' + ''.join(links) + '</p>' if links else ''
 
-    def card(self, row, chat):
+    def author(self, row, chat):
+        if row.get('action'):
+            return None
+        author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
+        stamp = dates(row.get('date')).get('date', '')
+        try:
+            moment = datetime.fromisoformat(stamp).timestamp()
+        except ValueError:
+            return None
+        return (author, bool(row.get('outgoing')), stamp[:10], moment) if author else None
+
+    def card(self, row, chat, continued=False, grouped=False):
         say, value = self.say, message(row)
         sender = self.person(row) or (chat.get('title') if chat.get('kind') == 'channel' and row.get('post') else None)
         sender = sender or (str(row['from_id']) if row.get('from_id') else say('Sender not available'))
         at = value.get('date', '')
         identifier = str(row['id'])
         service = bool(row.get('action'))
-        classes = 'message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
+        classes = ('message service' if service else 'message outgoing' if row.get('outgoing') else 'message incoming'
+                   ) + (' continued' if continued else '') + (' grouped' if grouped else '')
         author = row.get('from_id') or (chat['id'] if chat.get('kind') == 'channel' and row.get('post') else None)
         anonymous = service and not row.get('from_id') and not self.person(row)
         parts = ['<article class="' + classes + '" id="message' + identifier + '">', avatar(sender, self.photo(author, '../../')),
@@ -303,12 +317,14 @@ class View:
                + ('<p class="chat-note">' + e(note) + '</p>' if note else '')
                + '<section class="conversation" aria-label="' + e(self.say('Messages')) + '">').encode()
         day = None
-        for row in batch:
+        keys = [self.author(row, chat) for row in batch]
+        joined = [bool(a and b and a[:3] == b[:3] and 0 <= b[3] - a[3] <= GROUP_SECONDS) for a, b in zip(keys, keys[1:])]
+        for index, row in enumerate(batch):
             current = dates(row.get('date')).get('date', '')[:10]
             if current != day:
                 yield ('<div class="date-divider"><span>' + e(current or self.say('Not recorded')) + '</span></div>').encode()
                 day = current
-            yield self.card(row, chat).encode()
+            yield self.card(row, chat, index > 0 and joined[index - 1], index < len(joined) and joined[index]).encode()
         if not batch and not note:
             yield ('<p class="empty">' + e(self.say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>').encode()
         yield ('</section>' + self.pager(page, pages) + '<footer>TgWitness · <a href="../../chats/' + str(chat['id'])

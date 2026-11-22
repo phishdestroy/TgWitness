@@ -4936,7 +4936,6 @@
   "The chat at export time": "چت در زمان خروجی‌گیری",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "آنچه Telegram دربارهٔ چت هنگام شروع صدور گفت و جایگاه حساب صادرکننده در آن. برچسب‌هایی مانند «scam» و «fake» متعلق به خود Telegram هستند.",
   "Indicators": "شاخص‌ها",
-  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "هر ردیف یک چت و هر ستون یک بازه زمانی (UTC) است؛ سلول‌های تیره‌تر حاوی پیام‌های مشاهده‌شده بیشتر هستند. ستون‌های خط‌دار هیچ تأییدیه‌ای برای ضبط نداشته‌اند: آنچه در آن زمان ارسال شده است نامشخص است. یک سلول کم‌رنگ در یک ستون مشاهده‌شده به این معنی است که هیچ پیامی در آنجا ثبت نشده است.",
   "Texts repeated across chats": "متن‌های تکرارشده در چت‌ها",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "متن یکسان پیام که در بیش از یک چت مشاهده شده، پس از نرمال‌سازی حالت حروف و فاصله‌گذاری، با هم مقایسه می‌شوند. متن‌های کوتاه‌تر از {n} کاراکتر با هم مقایسه نمی‌شوند. متن تطبیق‌یافته یک سرنخ است: این امر نشان نمی‌دهد که چه کسی نسخه‌ها را نوشته یا اینکه آن‌ها با هم مرتبط هستند.",
   "Texts found in more than one chat: {n}.": "متن‌های یافت‌شده در بیش از یک چت: {n}.",
@@ -5788,7 +5787,6 @@
   "Cover": "پوشش",
   "Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material.": "جلد و نمودارها از مجله این فضای کاری. خروجی‌گیری، رکوردهای انتخاب‌شده، ارزیابی اعتماد و مطالب تأیید اعتبار را اضافه می‌کند.",
   "DRAFT PREVIEW · NOT SIGNED": "پیش‌نمایش پیش‌نویس · بدون امضا",
-  "Darker cells mean more included observations. Maximum per cell: {n}": "سلول‌های تیره‌تر به معنای مشاهدات بیشتر گنجانده‌شده هستند. حداکثر در هر سلول: {n}",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.": "طراحی و نمودارها برای خروجی‌های جدید دفترچه یادداشت، چت، حساب کاربری و اشتراک‌گذاری اعمال می‌شوند. جزئیات پرونده برای گزارش‌های دفترچه یادداشت و چت‌های تکی اعمال می‌شود؛ کلیدهای تغییر رکورد و تاریخچه تغییرات برای دفترچه یادداشت اعمال می‌شوند. خروجی‌های حساب کاربری و اشتراک‌گذاری، زبان و تنظیمات حریم خصوصی خود را حفظ می‌کنند.",
   "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.": "پیش‌نمایش طراحی از حداکثر ۵۰٬۰۰۰ رکورد منبع استفاده می‌کند. برای مشاهده کامل، پیش‌نمایش داده‌ها را در زیر بسازید. PDF دارای چیدمان چاپی جداگانه‌ای است.",
   "Draft changed. Save before exporting.": "پیش‌نویس تغییر کرد. قبل از خروجی گرفتن، ذخیره کنید.",
@@ -8940,7 +8938,6 @@
   "Chats with messages": "گفتگوها با پیام‌ها",
   "Checking export settings": "بررسی تنظیمات صدور",
   "Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.": "هر یک از این چت‌ها پیام‌های خود را شماره‌گذاری می‌کند، بنابراین هر شمارهٔ گمشده بین اولین و آخرین پیام صادرشده، پیام همان چت است.",
-  "Each square is one UTC day; rows are weekdays. Darker means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "هر مربع یک روز UTC است؛ سطرها روزهای هفته هستند. تیره‌تر بودن نشان‌دهنده تعداد پیام‌های بیشتر است. یک نقطه، شماره‌های پیام‌های غایب را نشان می‌دهد که پیام‌های مجاورشان حداکثر دو روز با هم فاصله دارند؛ جدول‌ها بقیه را فهرست می‌کنند.",
   "Earlier years with messages: {years}": "سال‌های قبل با پیام‌ها: {years}",
   "Edits only": "تنها ویرایش‌ها",
   "Everything else": "سایر موارد",
@@ -10889,7 +10886,6 @@
   "Absent message IDs": "عدم وجود شناسه پیام‌ها",
   "The export finished within the selected scope.": "خروجی‌گیری در محدودهٔ انتخاب‌شده به پایان رسید.",
   "Chat history and attachments finished.": "تاریخچه چت و پیوست‌ها پایان یافت.",
-  "Every selected chat was exported.": "هر گفتگوی انتخاب‌شده صادر شد.",
   "Stopped early in the capture panel. Data acquired until then is kept.": "جمع‌آوری از پنل ضبط زودهنگام پایان یافت. داده‌های جمع‌آوری‌شده تا آن زمان نگهداری می‌شوند.",
   "The session time ran out. Data acquired until then is kept.": "زمان جلسه منقضی شد. داده‌های جمع‌آوری‌شده تا آن زمان نگهداری می‌شوند.",
   "Collection stopped to leave time for packaging. Data acquired until then is kept.": "جمع‌آوری زودهنگام پایان یافت تا زمان لازم برای بسته‌بندی آرشیو فراهم شود. داده‌های جمع‌آوری‌شده تا آن زمان نگهداری می‌شوند.",
@@ -10973,5 +10969,9 @@
   "restricted member": "عضو با حقوق محدود",
   "{n} edit": "پیام ویرایش‌شده توسط {n}",
   "{n} deletion": "پیام حذف‌شدهٔ {n}",
-  "{n} saved file": " پروندهٔ {n} ذخیره شد"
+  "{n} saved file": " پروندهٔ {n} ذخیره شد",
+  "Export of the selected chats has ended.": "صادرات چت‌های منتخب پایان یافت.",
+  "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "هر سطر یک چت و هر ستون یک بازه زمانی (UTC) است؛ رنگ تیره‌تر نشان‌دهنده تعداد پیام‌های مشاهده‌شده بیشتر است. ستون‌های شطرنجی هیچ تأییدیه‌ای برای ضبط نداشته‌اند: آنچه در آن زمان ارسال شده، نامشخص است. یک سلول کم‌رنگ در یک ستون مشاهده‌شده به معنای عدم ثبت پیام در آن است.",
+  "A stronger colour means more included observations. Maximum per cell: {n}": "رنگ تیرهٔ بیشتر به معنای مشاهدات بیشتر است. حداکثر در هر سلول: {n}",
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "هر مربع یک روز UTC است؛ سطرها روزهای هفته هستند. رنگ قوی‌تر به معنای پیام‌های بیشتر است. یک نقطه نشان‌دهنده شماره‌های پیام‌های غایب است که پیام‌های مجاورشان حداکثر دو روز با هم فاصله دارند؛ جدول‌ها بقیه را فهرست می‌کنند."
 }
