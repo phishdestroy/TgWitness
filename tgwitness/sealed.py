@@ -112,6 +112,8 @@ class Session:
         self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4, "warmup_minutes": 0})
         self.collector = Collector(self.store, self.vault, client_factory)
         self.account_export = AccountExport(self.collector, self.store, self.vault)
+        self.account_export.sealed_run = {key: config["context"].get(key) for key in
+                                          ("repository", "run_id", "run_attempt", "collector_sha")}
         self.account_export.packaging_copies = 2
         self.account_job = None
         self.chats_task, self.chat_results, self.current_chat = None, None, None
@@ -544,7 +546,8 @@ class Session:
                         path = self.account_export.result_path(self.account_job)
                         self.store.append("sealed.account_export", {"job_id": self.account_job, "file": ACCOUNT_MEMBER,
                             "sha256": file_sha(path), "bytes": path.stat().st_size, "complete_within_scope": job["phase"] == "done",
-                            "coverage": job["coverage"], "counts": job["counts"]})
+                            "coverage": job["coverage"], "counts": job["counts"],
+                            "limits": [item for item in job.get("omissions") or [] if isinstance(item, str)][:50]})
                 except Exception as exc:
                     acquisition_error = exc
             if self.chats_task:

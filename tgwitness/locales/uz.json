@@ -10825,5 +10825,8 @@
   "This account sent a read receipt up to {time}": "Ushbu hisob o'qilganligi haqidagi kvitansiyani soat {time}gacha yubordi.",
   "This account opened self-destructing content for the other side": "Ushbu hisob boshqa tomon uchun o'z-o'zini yo'q qiladigan kontentni ochdi",
   "This account showed typing": "Ushbu hisob yozishni ko'rsatdi",
-  "A notice to the other side was not confirmed": "Qarshi tomonga bildirishnoma tasdiqlanmadi"
+  "A notice to the other side was not confirmed": "Qarshi tomonga bildirishnoma tasdiqlanmadi",
+  "Failed pages and files": "Muvaffaqiyatsiz sahifalar va fayllar",
+  "Known limits": "Ma'lum cheklovlar",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{run} (attempt {attempt}) {repository} ichida yaratilgan. GitHubning attestation.jsonl hujjati, evidence.zip bilan birga yetkazilgan, ushbu eksportni o'z ichiga olgan arxivni imzolaydi."
 }

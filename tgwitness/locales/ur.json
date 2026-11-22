@@ -10825,5 +10825,8 @@
   "This account sent a read receipt up to {time}": "اس اکاؤنٹ نے پڑھنے کی رسید{time} تک بھیجی۔",
   "This account opened self-destructing content for the other side": "اس اکاؤنٹ نے دوسری جانب کے لیے خود تباہ ہونے والا مواد کھولا",
   "This account showed typing": "اس اکاؤنٹ نے ٹائپنگ دکھائی",
-  "A notice to the other side was not confirmed": "دوسری جانب کو نوٹس کی تصدیق نہیں ہوئی"
+  "A notice to the other side was not confirmed": "دوسری جانب کو نوٹس کی تصدیق نہیں ہوئی",
+  "Failed pages and files": "ناکام صفحات اور فائلیں",
+  "Known limits": "معلوم حدود",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": " GitHub Actions کے اندر بنایا گیا، {run} ({attempt}) چلایا گیا {repository} کے اندر۔ GitHub کا attestation.jsonl، جو evidence.zip کے ساتھ فراہم کیا جاتا ہے، اس آرکائیو کو دستخط کرتا ہے جس میں یہ ایکسپورٹ موجود ہے۔"
 }

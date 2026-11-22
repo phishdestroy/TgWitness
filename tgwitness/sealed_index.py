@@ -45,7 +45,8 @@ STYLE = (
     ".stat span{color:var(--muted);font-size:12.5px}.alert{border-left:4px solid var(--bad);padding:10px 14px;"
     "background:var(--card);border-radius:8px;margin:0 0 14px}.alert.warn{border-color:var(--warn)}"
     "pre{white-space:pre-wrap;margin:6px 0 0;padding:10px;border-radius:8px;background:var(--bg);"
-    "border:1px solid var(--line)}ol{margin:0;padding-left:20px}li{margin:4px 0}a{color:var(--accent)}"
+    "border:1px solid var(--line)}ol{margin:0;padding-left:20px}ul.limits{margin:0;padding-left:18px}li{margin:4px 0}"
+    "a{color:var(--accent)}"
     ".list td:first-child{width:auto;color:var(--ink)}.list tr.head td{color:var(--muted);font-weight:600;font-size:13px}"
     ".list td{padding-right:14px}"
 )
@@ -85,6 +86,34 @@ def _rows(pairs):
     return "<table>" + "".join(f"<tr><td>{_e(k)}</td><td>{v}</td></tr>" for k, v in pairs if v not in (None, "")) + "</table>"
 
 
+CATEGORY_NAMES = {"personal": "private chats", "bots": "bots", "private_groups": "private groups",
+                  "public_groups": "public groups", "private_channels": "private channels",
+                  "public_channels": "public channels"}
+
+
+def limits_of(facts):
+    """Limits recorded when the chat list was frozen: what this sign-in could not read, such as Takeout-only data."""
+    exported = (facts.get("sealed.account_export") or [{}])[-1]
+    found = exported.get("limits")
+    if found is None:
+        found = (((facts.get("sealed.finished") or [{}])[-1]).get("account_export") or {}).get("omissions") or []
+    return [item for item in found if isinstance(item, str)]
+
+
+def failures_of(exported, limits):
+    """Failed pages and files: the coverage count also holds the recorded limits, which are not failures."""
+    failures = (exported.get("coverage") or {}).get("failures")
+    return max(0, failures - len(limits)) if type(failures) is int else None
+
+
+def finished_with_limits(facts):
+    exported = (facts.get("sealed.account_export") or [{}])[-1]
+    coverage, limits = exported.get("coverage") or {}, limits_of(facts)
+    return bool(exported.get("complete_within_scope") is False and limits and failures_of(exported, limits) == 0
+                and not coverage.get("omitted") and coverage.get("inventory_complete") is True
+                and coverage.get("tasks_total") and coverage.get("tasks_done") == coverage.get("tasks_total"))
+
+
 def outcome(facts):
     finished = (facts.get("sealed.finished") or [{}])[-1]
     if facts.get("sealed.failure"):
@@ -92,6 +121,13 @@ def outcome(facts):
                                                        "compact signed journal of everything recorded before it.")
     exported = (facts.get("sealed.account_export") or [{}])[-1]
     state, text = REASONS.get(finished.get("reason"), ("partial", "Capture ended: " + str(finished.get("reason"))))
+    if exported and finished.get("reason") == "account_export_finished" and finished_with_limits(facts):
+        done = (exported.get("counts") or {}).get("chats_done")
+        return "partial", "Finished with known limits", (
+            (f"All {_number(done)} selected chats were read to the end, with no failures. " if type(done) is int else
+             "Every export step finished, with no failures. ")
+            + "A new sign-in cannot read everything Telegram holds for the account; the limits listed under Coverage "
+            "remain, and because of them the verifier reports this export as not complete.")
     if exported and exported.get("complete_within_scope") is False:
         state = "partial"
     chats = facts.get("sealed.chat_export") or []
@@ -137,10 +173,17 @@ def page(facts, events, fingerprint=None, head_hash=None):
                  else "chat event journal")
     used = transports[-1].get("transport") if transports else (requested if requested != "auto" else None)
     used_reason = transports[-1].get("meaning") if transports else None
-    scope = ("all accessible chats" if selection.get("account_scope") == "all" else
-             f"{len(options.get('chat_ids') or [])} selected chats" if mode == "account" else
-             f"{len(selection.get('chat_ids') or [])} selected chats" if mode == "chats" else
-             f"one chat (ID {_e(selection.get('chat_id'))})")
+    counts = dict(exported.get("counts") or {})
+    if mode == "account":
+        categories = options.get("chat_categories")
+        scope = (f"{len(options.get('chat_ids') or [])} chosen chats" if options.get("chat_ids") else
+                 ", ".join(CATEGORY_NAMES.get(c, str(c)) for c in categories) if categories is not None
+                 and len(categories) < len(CATEGORY_NAMES) else "all chats of the account")
+        if type(counts.get("chats_selected")) is int and type(counts.get("chats_discovered")) is int:
+            scope += f" · {_number(counts['chats_selected'])} of {_number(counts['chats_discovered'])} chats in the list"
+    else:
+        scope = (f"{len(selection.get('chat_ids') or [])} selected chats" if mode == "chats" else
+                 f"one chat (ID {_e(selection.get('chat_id'))})")
     selection_rows = [("Mode", _e({"account": "Account export", "chat": "Chat event journal",
                                    "chats": "Chat investigation export"}.get(mode, mode))),
                       ("Scope", _e(scope) if mode != "chat" else scope),
@@ -151,7 +194,6 @@ def page(facts, events, fingerprint=None, head_hash=None):
                       ("Media budget", _e(str(options.get("max_total_gib")) + " GiB") if options.get("max_total_gib") else None),
                       ("Selection SHA-256", "<code>" + _e(selection_event.get("selection_sha256")) + "</code>")]
 
-    counts = dict(exported.get("counts") or {})
     if not counts and finished.get("history"):
         history = finished["history"]
         counts = {"messages_seen": history.get("captured"), **{"media_" + k: v for k, v in (finished.get("media") or {}).items()}}
@@ -169,19 +211,24 @@ def page(facts, events, fingerprint=None, head_hash=None):
     stat(number("media_saved", "media_done"), "Files saved")
     if counts.get("unique_media_bytes") or counts.get("bytes_saved"):
         stat(counts.get("unique_media_bytes") or counts.get("bytes_saved"), "File bytes saved", size=True)
-    for key, label in (("media_hashed", "Files with hashes only"), ("media_skipped", "Files not saved")):
+    for key, caption in (("media_hashed", "Files with hashes only"), ("media_skipped", "Files not saved")):
         if counts.get(key):
-            stat(counts[key], label)
+            stat(counts[key], caption)
     coverage = exported.get("coverage") or {}
     coverage_rows = []
     if exported:
+        limits = limits_of(facts)
+        failures = failures_of(exported, limits)
         coverage_rows = [
-            ("Complete within scope", "yes" if exported.get("complete_within_scope") else "no"),
+            ("Complete within scope", "yes" if exported.get("complete_within_scope") else
+             "no · because of the known limits below" if finished_with_limits(facts) else "no"),
             ("Chat list read completely", {True: "yes", False: "no"}.get(coverage.get("inventory_complete"))),
             ("Export steps finished", f'{_number(coverage.get("tasks_done") or 0)} of {_number(coverage.get("tasks_total") or 0)}'
              if coverage.get("tasks_total") else None),
-            ("Recorded gaps and failures", _number(coverage["failures"]) + " · listed under Omissions in the export index"
-             if coverage.get("failures") else "none" if "failures" in coverage else None),
+            ("Failed pages and files", (_number(failures) + " · listed under Omissions in the export index" if failures
+                                        else "none") if failures is not None else None),
+            ("Known limits", '<ul class="limits">' + "".join(f"<li>{_e(item)}</li>" for item in limits) + "</ul>"
+             if limits else None),
             ("Coverage", _e(coverage.get("scope")) if coverage.get("scope") else None)]
 
     identity = [("Repository", _e(repo)), ("Workflow run", run_link), ("Collector commit", commit_link),

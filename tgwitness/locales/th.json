@@ -10774,5 +10774,8 @@
   "This account sent a read receipt up to {time}": "บัญชีนี้ได้ส่งการยืนยันการอ่านจนถึง{time}",
   "This account opened self-destructing content for the other side": "บัญชีนี้ได้เปิดเนื้อหาที่ลบอัตโนมัติสำหรับฝ่ายตรงข้าม",
   "This account showed typing": "บัญชีนี้แสดงว่ากำลังพิมพ์",
-  "A notice to the other side was not confirmed": "การแจ้งเตือนไปยังฝ่ายตรงข้ามยังไม่ได้รับการยืนยัน"
+  "A notice to the other side was not confirmed": "การแจ้งเตือนไปยังฝ่ายตรงข้ามยังไม่ได้รับการยืนยัน",
+  "Failed pages and files": "หน้าและไฟล์ที่ผิดพลาด",
+  "Known limits": "ข้อจำกัดที่ทราบ",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "สร้างขึ้นภายใน GitHub Actions run {run} (attempt {attempt}) ของ {repository} ไฟล์ attestation.jsonl ของ GitHub ซึ่งส่งมาพร้อมกับ evidence.zip จะลงนามในไฟล์เก็บถาวรที่เก็บข้อมูลการส่งออกนี้"
 }

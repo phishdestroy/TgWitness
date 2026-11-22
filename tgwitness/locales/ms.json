@@ -10774,5 +10774,8 @@
   "This account sent a read receipt up to {time}": "Akaun ini menghantar resit baca sehingga {time}",
   "This account opened self-destructing content for the other side": "Akaun ini membuka kandungan yang akan musnah sendiri untuk pihak lain",
   "This account showed typing": "Akaun ini menunjukkan penulisan",
-  "A notice to the other side was not confirmed": "Notis kepada pihak lain tidak disahkan"
+  "A notice to the other side was not confirmed": "Notis kepada pihak lain tidak disahkan",
+  "Failed pages and files": "Halaman dan fail yang gagal",
+  "Known limits": "Had yang diketahui",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Dibuat dalam GitHub Actions menjalankan {run} (cubaan {attempt}) pada {repository}. attestation.jsonl GitHub, yang dihantar bersama evidence.zip, menandatangani arkib yang mengandungi eksport ini."
 }

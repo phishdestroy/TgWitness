@@ -345,8 +345,11 @@ def coverage_section(context, say):
     yield encoded('<section id="coverage"><h2>' + e(say('Coverage')) + '</h2><p class="badge">' +
                   e(say('Completed within selected scope') if complete else say('Partial acquisition')) + '</p><p>' +
                   e(say('Acquisition is not an atomic account snapshot. Deleted, inaccessible or previously edited data may be unavailable.')) + '</p><dl class="facts">')
+    limits, failures = context.get('known_limits'), coverage.get('failures')
+    split = isinstance(limits, list) and type(failures) is int
     for label, value in (('Tasks completed', coverage.get('tasks_done')), ('Tasks planned', coverage.get('tasks_total')),
-                         ('Failures and gaps', coverage.get('failures'))):
+                         *((('Failed pages and files', max(0, failures - len(limits))), ('Known limits', len(limits)))
+                           if split else (('Failures and gaps', failures),))):
         if type(value) is int:
             yield encoded('<dt>' + e(say(label)) + '</dt><dd>' + str(value) + '</dd>')
     yield encoded('</dl>' + technical(coverage, say) + '</section>')
@@ -851,5 +854,6 @@ def text_keys():
     return list(dict.fromkeys(keys + case_assessment.text_keys() + activity_maps.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
                               + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps',
+                                                                     'Failed pages and files', 'Known limits',
                                                                      *REASONS.values(), *STATE_NOTES.values(),
                                                                      *ARCHIVE_FILES.values()]))

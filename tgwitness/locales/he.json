@@ -10876,5 +10876,8 @@
   "This account sent a read receipt up to {time}": "חשבון זה שלח אישור קריאה עד השעה {time}",
   "This account opened self-destructing content for the other side": "חשבון זה פתח תוכן המתכלה מעצמו עבור הצד השני",
   "This account showed typing": "בחשבון זה נראתה פעילות הקלדה",
-  "A notice to the other side was not confirmed": "הודעה לצד השני לא אושרה"
+  "A notice to the other side was not confirmed": "הודעה לצד השני לא אושרה",
+  "Failed pages and files": "דפים וקבצים שלא נכללו",
+  "Known limits": "מגבלות ידועות",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "נוצר בתוך GitHub Actions, ריצה {run} (ניסיון {attempt}) של {repository}. קובץ attestation.jsonl של GitHub, הנמסר לצד הקובץ evidence.zip, חותם על הארכיון המכיל ייצוא זה."
 }

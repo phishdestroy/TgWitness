@@ -10774,5 +10774,8 @@
   "This account sent a read receipt up to {time}": "Tài khoản này đã gửi thông báo đã đọc vào lúc {time}",
   "This account opened self-destructing content for the other side": "Tài khoản này đã mở nội dung tự hủy dành cho phía bên kia",
   "This account showed typing": "Tài khoản này cho thấy đang gõ chữ",
-  "A notice to the other side was not confirmed": "Thông báo gửi đến phía bên kia chưa được xác nhận"
+  "A notice to the other side was not confirmed": "Thông báo gửi đến phía bên kia chưa được xác nhận",
+  "Failed pages and files": "Các trang và tệp không thành công",
+  "Known limits": "Các hạn chế đã biết",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Được tạo trong lần chạy GitHub Actions {run} (lần thử {attempt}) của {repository}. Tệp attestation.jsonl của GitHub, được cung cấp kèm theo tệp evidence.zip, sẽ ký xác thực tệp lưu trữ chứa bản xuất này."
 }

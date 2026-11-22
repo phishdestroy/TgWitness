@@ -313,6 +313,8 @@ class AccountExport:
         self.discovery_saved = 0.0
         self.packaging_copies, self.record_bytes = 1, 0
         self.transport_factory = transport.Transport
+        # Set by a sealed GitHub Actions capture: the run whose attestation signs the archive holding this export.
+        self.sealed_run = None
 
     def directory(self, job_id):
         if not isinstance(job_id, str) or not JOB_ID.fullmatch(job_id):
@@ -1227,6 +1229,8 @@ class AccountExport:
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
+                    "known_limits": [item for item in self.inventory.get("gaps", []) if isinstance(item, str)],
+                    "sealed_run": self.sealed_run,
                     "omissions": report_omissions(self.inventory.get("gaps", []),
                                                   [*self.current.get("omissions", []), *self.unread_omissions()], self.progress),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}

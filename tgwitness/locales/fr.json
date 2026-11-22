@@ -10835,5 +10835,8 @@
   "This account sent a read receipt up to {time}": "Ce compte a envoyé un accusé de lecture jusqu’à {time}",
   "This account opened self-destructing content for the other side": "Ce compte a ouvert du contenu autodestructible destiné à l’autre partie",
   "This account showed typing": "Ce compte indiquait qu'il était en train de taper",
-  "A notice to the other side was not confirmed": "Une notification adressée à l’autre partie n’a pas été confirmée."
+  "A notice to the other side was not confirmed": "Une notification adressée à l’autre partie n’a pas été confirmée.",
+  "Failed pages and files": "Pages et fichiers manquants",
+  "Known limits": "Limites connues",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "Généré dans GitHub Actions lors de l'exécution {run} (tentative {attempt}) du {repository}. Le fichier attestation.jsonl de GitHub, fourni avec le fichier evidence.zip, certifie l'archive contenant cette exportation."
 }

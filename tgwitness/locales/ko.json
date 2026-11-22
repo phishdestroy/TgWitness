@@ -10774,5 +10774,8 @@
   "This account sent a read receipt up to {time}": "이 계정은 {time}까지 읽음 확인을 보냈습니다.",
   "This account opened self-destructing content for the other side": "이 계정은 상대방을 위해 자동 삭제되는 콘텐츠를 열었습니다.",
   "This account showed typing": "이 계정은 입력 중임을 나타냈습니다",
-  "A notice to the other side was not confirmed": "상대방에 대한 통지는 확인되지 않았습니다."
+  "A notice to the other side was not confirmed": "상대방에 대한 통지는 확인되지 않았습니다.",
+  "Failed pages and files": "오류가 발생한 페이지 및 파일",
+  "Known limits": "알려진 한계",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": "{repository}의 {run} 실행({attempt} 시도) 내에서 생성됨. GitHub의 attestation.jsonl 파일이 evidence.zip과 함께 제공되며, 이 파일이 해당 내보내기 데이터를 포함하는 아카이브에 서명합니다."
 }

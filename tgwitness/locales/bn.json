@@ -10825,5 +10825,8 @@
   "This account sent a read receipt up to {time}": "এই অ্যাকাউন্টটি পাঠিয়েছে একটি রিড রসিদ, যা সর্বশেষ {time} পর্যন্ত।",
   "This account opened self-destructing content for the other side": "এই অ্যাকাউন্টটি অন্য পক্ষের জন্য স্ব-ধ্বংসশীল বিষয়বস্তু খুলে দিয়েছে",
   "This account showed typing": "এই অ্যাকাউন্টে টাইপিং দেখা গেছে",
-  "A notice to the other side was not confirmed": "অন্য পক্ষকে জানানো হয়েছে কি না তা নিশ্চিত করা যায়নি"
+  "A notice to the other side was not confirmed": "অন্য পক্ষকে জানানো হয়েছে কি না তা নিশ্চিত করা যায়নি",
+  "Failed pages and files": "ব্যর্থ পৃষ্ঠা ও ফাইলসমূহ",
+  "Known limits": "পরিচিত সীমাবদ্ধতা",
+  "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, delivered next to evidence.zip, signs the archive that holds this export.": " GitHub Actions-এর ভিতরে {run} (attempt {attempt}) {repository}-এ তৈরি। GitHub-এর attestation.jsonl, যা evidence.zip-এর পাশে সরবরাহ করা হয়, এই এক্সপোর্ট ধারণকারী আর্কাইভটিকে স্বাক্ষর করে।"
 }

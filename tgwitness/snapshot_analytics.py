@@ -243,6 +243,17 @@ def e(value):
     return html.escape(str(value))
 
 
+def rank_label(row, say):
+    """A bar label: the participant or chat name and its Telegram ID, once, whatever the label mode added already."""
+    label = row["label"]
+    name = say(label) if label in (UNKNOWN, OTHER, *KIND_LABELS.values()) else label
+    identity = row.get("id")
+    if (not identity or label == str(identity) or identity in KIND_LABELS or str(identity).startswith("participant-")
+            or str(label).endswith("ID " + str(identity).split(":")[-1])):
+        return name
+    return name + " · " + str(identity)
+
+
 def svg_bars(rows, say, vertical=False):
     maximum = max((r["count"] for r in rows), default=0) or 1
     if vertical:
@@ -258,9 +269,7 @@ def svg_bars(rows, say, vertical=False):
                 + e(rows[-1]["label"] if rows else "—") + '</span></div>')
     parts = ['<div class="rank-chart">']
     for row in rows:
-        name = say(row["label"]) if row["label"] in (UNKNOWN, OTHER, *KIND_LABELS.values()) else row["label"]
-        suffix = ' · ' + str(row['id']) if row.get('id') and row['label'] != str(row['id']) and row['id'] not in KIND_LABELS and not str(row['id']).startswith('participant-') else ''
-        parts.append('<div class="rank-row"><span class="rank-label" dir="auto">' + e(name + suffix) + '</span><strong>'
+        parts.append('<div class="rank-row"><span class="rank-label" dir="auto">' + e(rank_label(row, say)) + '</span><strong>'
                      + str(row["count"]) + '</strong><svg aria-hidden="true" viewBox="0 0 800 10" preserveAspectRatio="none">'
                      '<rect class="chart-track" width="800" height="10" rx="3"/><rect class="chart-bar" width="'
                      + str(800 * row["count"] / maximum) + '" height="10" rx="3"/></svg></div>')
@@ -410,9 +419,7 @@ def _pdf_section(lay, data, options):
             else:
                 for row in rows:
                     lay.need(18)
-                    name = say(row["label"]) if row["label"] in (UNKNOWN, OTHER, *KIND_LABELS.values()) else row["label"]
-                    suffix = ' · ' + str(row['id']) if row.get('id') and row['label'] != str(row['id']) and row['id'] not in KIND_LABELS and not str(row['id']).startswith('participant-') else ''
-                    lay.text(name + suffix + "   ·   " + str(row["count"]), size=8)
+                    lay.text(rank_label(row, say) + "   ·   " + str(row["count"]), size=8)
                     pdf.set_fill_color(*accent)
                     pdf.rect(pdf.l_margin, pdf.get_y(), pdf.epw * row["count"] / maximum, 2, style="F")
                     lay.gap(4)

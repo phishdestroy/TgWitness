@@ -34,7 +34,7 @@ LABELS = {"records": "Records", "first": "First record", "last": "Last record", 
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",
           "anchored_through": "Timestamp covers through record", "unanchored_tail": "Records after that checkpoint",
           "timestamp": "Timestamp", "messages": "Messages", "tasks_done": "Tasks completed", "tasks_total": "Tasks planned",
-          "failures": "Failures and gaps", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
+          "failures": "Failures and gaps", "failed": "Failed pages and files", "limits": "Known limits", "unchanged": "Unchanged records", "minimised": "Minimized records", "left_out": "Omitted records",
           "drand": "Recorded drand rounds", "starts": "Recorded process starts", "tdx": "Process starts carrying a TDX quote",
           "operator_fields": "Case fields supplied by the operator", "complete": "Completed within selected scope"}
 RESULTS = {
@@ -143,9 +143,17 @@ def evidence_conditions(kind, context, count=0, latest=None, signals=None):
                               "This archive carries no journal checkpoints; it is bound through the evidence journal of the same workspace.",
                               "python verify.py tgwitness-evidence.zip --witness witness.zip --witness-fingerprint WITNESS_SHA256"))
     tdx = (signals or {}).get("tdx", 0)
-    rows.append(condition("environment", "recorded" if tdx else "not_included",
-                          "TDX quotes were recorded at {n} process starts." if tdx else "No attested collection run in this archive.",
-                          "python -m tgwitness.cloud verify · --sealed-attestation", n=tdx))
+    sealed = sealed_run(context)
+    if sealed and not tdx:
+        rows.append(condition("environment", "recorded",
+                              "Made inside GitHub Actions run {run} (attempt {attempt}) of {repository}. GitHub's attestation.jsonl, "
+                              "delivered next to evidence.zip, signs the archive that holds this export.",
+                              "python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo " + sealed["repository"],
+                              **sealed))
+    else:
+        rows.append(condition("environment", "recorded" if tdx else "not_included",
+                              "TDX quotes were recorded at {n} process starts." if tdx else "No attested collection run in this archive.",
+                              "python -m tgwitness.cloud verify · --sealed-attestation", n=tdx))
     stamped = rows[2]["status"] == "checked_locally"
     command = ("python verify.py " + archive + " --fingerprint " + fp
                + (" --tsa-ca tsa-root.pem" if rows[2]["status"] in ("checked_locally", "partial", "recorded")
@@ -251,6 +259,26 @@ def journal(context, coverage):
                   conditions=evidence_conditions("handover" if handover else "evidence", context, count, latest, signals)), options)
 
 
+def split_failures(context):
+    """Failed pages and files apart from the limits recorded when the chat list was frozen; older contexts keep one count."""
+    coverage, limits = context.get("coverage") or {}, context.get("known_limits")
+    if "failures" not in coverage:
+        return {}
+    if isinstance(limits, list) and type(coverage["failures"]) is int:
+        return {"failed": max(0, coverage["failures"] - len(limits)), "limits": len(limits)}
+    return {"failures": coverage["failures"]}
+
+
+def sealed_run(context):
+    run = context.get("sealed_run")
+    if not isinstance(run, dict):
+        return None
+    repo, number = run.get("repository"), run.get("run_id")
+    if not (isinstance(repo, str) and re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) and str(number).isdigit()):
+        return None
+    return {"repository": repo, "run": str(number), "attempt": str(run.get("run_attempt") or 1)}
+
+
 def snapshot(context, kind="account", meta=None):
     meta = meta or {}
     sharing = kind == "sharing"
@@ -272,7 +300,8 @@ def snapshot(context, kind="account", meta=None):
             "Review the public selection and transformations. If authorized, compare the derivative against the separately retained original." if sharing else
             "Review filters, limits, task failures and message-ID coverage against the specific period and conversations needed for the case.",
             {"messages": meta.get("message_count", counts.get("messages")), **({} if sharing or chat else
-             {"complete": complete, **{k: coverage[k] for k in ("tasks_done", "tasks_total", "failures") if k in coverage}})},
+             {"complete": complete, **{k: coverage[k] for k in ("tasks_done", "tasks_total") if k in coverage},
+              **split_failures(context)})},
             ("messages.jsonl", "manifest.json") if sharing else ("chat.json", "message-ids.json") if kind == "chat" else ("inventory.json", "manifest.json")),
         row("time", "not_included", "Independent time bounds",
             "This copy contains capture or export times recorded by the collector.",
@@ -382,7 +411,8 @@ def text_keys():
     conditions = [data["evidence_conditions"] for data in examples] + [
         evidence_conditions("evidence", {"journal_verified": True, "anchors": [{}]}, 2, {"event_count": 1}, {"tdx": 1}),
         evidence_conditions("evidence", {"anchors": [{}]}, 2, {"event_count": 2}),
-        evidence_conditions("evidence", {"anchors": [{}]}, 2)]
+        evidence_conditions("evidence", {"anchors": [{}]}, 2),
+        evidence_conditions("account", {"sealed_run": {"repository": "o/r", "run_id": 1, "run_attempt": 1}})]
     return list(dict.fromkeys([TITLE, INTRO, OVERVIEW, *ACQUISITION_METHODS.values(), "Scope of this conclusion", "Independent review", "Evidence references", "Not recorded",
                               CONDITIONS_TITLE, CONDITIONS_INTRO, "Condition", "What it establishes", "In this archive",
                               "How the recipient checks it", *(text for pair in CONDITIONS.values() for text in pair), *ROLES.values(),
