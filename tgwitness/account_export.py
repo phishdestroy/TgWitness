@@ -293,16 +293,21 @@ def attachment_policy(media, task, options):
 
 
 
-def report_omissions(gaps, omissions, progress):
+def report_omissions(gaps, omissions, progress, titles=None):
     shown = []
     for item in [*gaps, *omissions]:
         if item not in shown:
             shown.append(item)
+    covered = {item["section"].rsplit(" · ID ", 1)[-1] for item in shown
+               if isinstance(item, dict) and " · ID " in str(item.get("section"))}
     for receipt in progress.values():
         if receipt.get("outcome") == "failed" and receipt.get("error"):
+            chat_id = receipt.get("chat_id")
+            if receipt.get("category") == "messages" and str(chat_id) in covered:
+                continue
             label = str(receipt.get("category") or "task")
-            if receipt.get("chat_id") is not None:
-                label += " · chat " + str(receipt["chat_id"])
+            if chat_id is not None:
+                label = str((titles or {}).get(chat_id, chat_id)) + " · ID " + str(chat_id) + " · " + label
             entry = {"section": label, "reason": str(receipt["error"])}
             if entry not in shown:
                 shown.append(entry)
@@ -774,14 +779,20 @@ class AccountExport:
         selected = [c for c in chats if c["selected"]]
         discovered = self.inventory.get("discovery_counts", {}).get("chats_discovered", len(chats))
         chat_tasks = {chat["id"]: [0, 0] for chat in selected}
+        histories = {chat["id"]: [0, 0] for chat in selected}
         for task in tasks:
             status = chat_tasks.get(task["chat_id"])
             if status is not None:
-                status[0] += 1
                 page = self.progress.get(task["id"])
-                status[1] += bool(page and page["terminal"] and page["outcome"] == "ok")
+                finished = bool(page and page["terminal"] and page["outcome"] == "ok")
+                status[0] += 1
+                status[1] += finished
+                if task.get("category") == "messages":
+                    histories[task["chat_id"]][0] += 1
+                    histories[task["chat_id"]][1] += finished
         self.current["counts"] = {**self.counts, "chats_discovered": discovered, "chats_selected": len(selected),
-            "chats_done": sum(total == done for total, done in chat_tasks.values())}
+            "chats_done": sum(total == done for total, done in chat_tasks.values()),
+            "chats_read": sum(total == done for total, done in histories.values())}
         options = self.current.get("options") or {}
         task_chats, task_categories = set(), set()
         for task in tasks:
@@ -1257,7 +1268,8 @@ class AccountExport:
                     "known_limits": [item for item in self.inventory.get("gaps", []) if isinstance(item, str)],
                     "sealed_run": self.sealed_run,
                     "omissions": report_omissions(self.inventory.get("gaps", []),
-                                                  [*self.current.get("omissions", []), *self.unread_omissions()], self.progress),
+                                                  [*self.current.get("omissions", []), *self.unread_omissions()], self.progress,
+                                                  {chat["id"]: chat.get("title") or str(chat["id"]) for chat in self.inventory.get("chats", [])}),
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
                 analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:

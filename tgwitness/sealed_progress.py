@@ -51,7 +51,7 @@ def account(job, plan, elapsed, eta):
             "messages": {"done": messages, "total": messages_total},
             "files": {"done": files, "skipped": counts.get("media_skipped") or 0, "total": None,
                       "bytes": counts.get("unique_media_bytes", counts.get("bytes_saved")) or 0, "bytes_total": bytes_total},
-            "chats": {"done": counts.get("chats_done") or 0, "total": counts.get("chats_selected"),
+            "chats": {"done": counts.get("chats_done") or 0, "read": counts.get("chats_read"), "total": counts.get("chats_selected"),
                       "found": counts.get("chats_discovered")},
             "tasks": {"done": coverage.get("tasks_done") or 0, "total": coverage.get("tasks_total")},
             "problems": coverage.get("failures") or 0,

@@ -811,6 +811,12 @@ function renderPlan(plan, format) {
   $("budget-fit").hidden = !account || !wholeInventory(plan) || everything || !finished.length || finished.length === states.length;
   $("budget-fit").dataset.chats = JSON.stringify(finished);
   $("budget-order").hidden = !account;
+  const sampled = account && !wholeInventory(plan), total = assessmentResult?.sample?.visible_selected_chats;
+  $("budget-untick").hidden = !account || sampled || rows.length < 2;
+  $("budget-sampled").hidden = !sampled;
+  $("budget-sampled").textContent = !sampled ? "" : Number.isInteger(total) && total > rows.length
+    ? tr("The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.", {sampled: rows.length, total})
+    : tr("The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.", {sampled: rows.length});
   $("budget-plan").hidden = !rows.length;
 }
 $("budget-table").addEventListener("input", event => event.stopPropagation());
@@ -916,7 +922,9 @@ function renderMeter(progress) {
   const detail = progress.detail;
   if (detail) parts.push(meterPart(tr("Chats checked"), detail.done, detail.total, detail.total ? of(detail.done, detail.total) : count(detail.done)));
   const chats = progress.chats;
-  if (chats?.total) parts.push(meterPart(tr("Chats finished"), chats.done, chats.total, of(chats.done, chats.total)));
+  if (chats?.total && progress.stage === "messages" && Number.isInteger(chats.read))
+    parts.push(meterPart(tr("Chat histories read"), chats.read, chats.total, of(chats.read, chats.total)));
+  else if (chats?.total) parts.push(meterPart(tr("Chats finished"), chats.done, chats.total, of(chats.done, chats.total)));
   const messages = progress.messages || {};
   parts.push(meterPart(tr("Messages"), messages.done, messages.total, messages.total ?
     tr("{done} of about {total}", {done: count(messages.done), total: count(messages.total)}) : count(messages.done)));

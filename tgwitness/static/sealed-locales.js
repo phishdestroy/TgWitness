@@ -355,7 +355,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} печатает…",
   "{size} of about {total}": "{size} из примерно {total}",
   "{size} of {total}": "{size} из {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Чаты читаются в таком порядке: данные аккаунта, личные чаты и боты, группы, затем большие группы и каналы — от меньших к большим. Сообщения всех чатов собираются раньше файлов, поэтому даже прерванный запуск сохранит главное. Снимите галочку, чтобы не выгружать чат.",
   "Complete": "Целиком",
   "If started now": "Если начать сейчас",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Если начать сейчас: {complete} из {total} чатов целиком, {partial} частично, {missed} не успеют.",
@@ -368,7 +367,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Не успеет",
   "Photos of chats and people": "Фотографии чатов и людей",
   "Saving photos of chats and people": "Сохраняем фото чатов и людей",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Сбор остановится по лимиту времени через {time}, затем архив будет упакован"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Сбор остановится по лимиту времени через {time}, затем архив будет упакован",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Чаты считываются в следующем порядке: данные учётной записи, личные чаты и боты, группы, затем большие группы и каналы, начиная с самых маленьких. Сообщения из каждого чата идут перед файлами, поэтому даже при преждевременном завершении запуска сохраняется самая важная информация.",
+  "Untick a chat to leave it out.": "Снимите галочку с чата, чтобы исключить его.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оценка времени и объёма охватывает {sampled} из {total} чатов, поэтому в таблице перечислены только они. Экспорт по-прежнему охватывает все чаты; чтобы исключить некоторые чаты, выберите те, которые хотите экспортировать.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оценка времени и объёма относится к {sampled} чатам, поэтому в таблице перечислены только они. Экспорт по-прежнему охватывает все чаты; чтобы исключить некоторые чаты, выберите те, которые хотите экспортировать.",
+  "Chat histories read": "Прочитаны истории чатов"
  },
  "ar": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "اسم مستخدم (@username)، أو رقم هاتف يبدأ بـ + ورمز البلد، أو شخص من محادثات هذا الحساب. معظم الأشخاص ليس لديهم اسم مستخدم: اخترهم من محادثاتك أو أدخل رقمهم.",
@@ -705,7 +709,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} يكتب…",
   "{size} of about {total}": "{size} من حوالي {total}",
   "{size} of {total}": "{size} من {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "تُقرأ المحادثات بالترتيب التالي: بيانات الحساب، ثم المحادثات الخاصة والروبوتات، ثم المجموعات، ثم المجموعات الكبيرة والقنوات بدءًا من الأصغر. تأتي رسائل كل محادثة قبل الملفات، لذا فإن أي عملية تنتهي مبكرًا ستحتفظ بالأساسيات. قم بإلغاء تحديد محادثة ما لاستبعادها.",
   "Complete": "اكتمل",
   "If started now": "إذا بدأت الآن",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "في حالة البدء الآن: تم إكمال {complete} من {total} محادثة، و{partial} جزئيًا، و{missed} لم يتم الوصول إليها.",
@@ -718,7 +721,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "لم يتم الوصول إليها",
   "Photos of chats and people": "صور للمحادثات والأشخاص",
   "Saving photos of chats and people": "حفظ صور المحادثات والأشخاص",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "يتوقف التجميع عند انتهاء المهلة المحددة في {time}، ثم يتم تجميع الأرشيف"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "يتوقف التجميع عند انتهاء المهلة المحددة في {time}، ثم يتم تجميع الأرشيف",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "تُقرأ المحادثات بالترتيب التالي: بيانات الحساب، ثم المحادثات الخاصة والروبوتات، ثم المجموعات، ثم المجموعات الكبيرة والقنوات بدءًا من الأصغر. وتأتي رسائل كل محادثة قبل الملفات، لذا فإن عملية التشغيل التي تنتهي مبكرًا لا تزال تحتفظ بالأساسيات.",
+  "Untick a chat to leave it out.": "قم بإلغاء تحديد الدردشة لإستبعادها.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تشمل تقديرات الوقت والحجم {sampled} من {total} محادثة، لذا لا يسرد الجدول سوى تلك المحادثات. لا يزال التصدير يشمل كل المحادثات؛ لاستبعاد محادثات معينة، اختر المحادثات التي تريد تصديرها بدلاً من ذلك.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "يشمل تقدير الوقت والحجم الدردشات {sampled}، لذا لا يسرد الجدول سوى تلك الدردشات. لا يزال التصدير يشمل كل الدردشات؛ لاستبعاد دردشات معينة، اختر الدردشات التي تريد تصديرها بدلاً من ذلك.",
+  "Chat histories read": "قراءة سجلات الدردشة"
  },
  "bn": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + চিহ্নসহ দেশ কোড যুক্ত একটি ফোন নম্বর, অথবা এই অ্যাকাউন্টের চ্যাট থেকে কোনো ব্যক্তি। অধিকাংশ মানুষের কোনো ব্যবহারকারীর নাম থাকে না: আপনার চ্যাট থেকে নির্বাচন করুন অথবা তাদের নম্বর লিখুন।",
@@ -1054,7 +1062,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} টাইপ করছে…",
   "{size} of about {total}": "{size} প্রায় {total}",
   "{size} of {total}": "{size}টি {total}এর",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "চ্যাটগুলো এই ক্রমে পড়া হয়: অ্যাকাউন্ট ডেটা, ব্যক্তিগত চ্যাট ও বট, গ্রুপ, তারপর বড় গ্রুপ এবং চ্যানেলগুলো সবচেয়ে ছোট থেকে। প্রতিটি চ্যাটের বার্তাগুলো ফাইলের আগে আসে, তাই আগে শেষ হওয়া একটি রানও প্রয়োজনীয় তথ্য ধারণ করে রাখে। কোনো চ্যাট বাদ দিতে তার টিক তুলে ফেলুন।",
   "Complete": "সম্পূর্ণ",
   "If started now": "যদি এখন শুরু করা হয়",
   "Include": "অন্তর্ভুক্ত করুন",
@@ -1067,7 +1074,12 @@ window.TGW_SEALED_LOCALES = {
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "এখন শুরু করলে: {total}টি চ্যাটের মধ্যে {complete}টি সম্পূর্ণ, {partial}টি আংশিক, {missed}টিতে সময় কুলাবে না।",
   "Photos of chats and people": "চ্যাট এবং ব্যক্তিদের ছবি",
   "Saving photos of chats and people": "চ্যাট এবং ব্যক্তিদের ছবি সংরক্ষণ",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}-এ নির্ধারিত সময়সীমা পূরণ হলে সংগ্রহ বন্ধ হয়, তারপর আর্কাইভ প্যাকেজ করা হয়"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}-এ নির্ধারিত সময়সীমা পূরণ হলে সংগ্রহ বন্ধ হয়, তারপর আর্কাইভ প্যাকেজ করা হয়",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "চ্যাটগুলো এই ক্রমে পড়া হয়: অ্যাকাউন্ট ডেটা, ব্যক্তিগত চ্যাট এবং বট, গ্রুপ, তারপর ছোট থেকে বড় গ্রুপ এবং চ্যানেল। প্রতিটি চ্যাটের বার্তাগুলো ফাইলের আগে আসে, তাই যদি কোনো রান আগে শেষ হয়ে যায়, তবুও প্রয়োজনীয় তথ্যগুলো থাকে।",
+  "Untick a chat to leave it out.": "চ্যাটটিকে বাদ দিতে এর টিক চিহ্ন তুলে ফেলুন।",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "সময় ও আকারের অনুমানটি {sampled}টি {total} চ্যাটের, তাই টেবিলে শুধুমাত্র সেগুলোই দেখানো হয়েছে। এক্সপোর্ট এখনও প্রতিটি চ্যাটই অন্তর্ভুক্ত করে; চ্যাটগুলো বাদ দিতে চাইলে, পরিবর্তে যে চ্যাটগুলো এক্সপোর্ট করতে চান সেগুলো নির্বাচন করুন।",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "সময় ও আকারের অনুমানটি {sampled} চ্যাটগুলোকে অন্তর্ভুক্ত করে, তাই টেবিলে শুধুমাত্র সেগুলোই দেখানো হয়েছে। এক্সপোর্ট এখনও সব চ্যাটই অন্তর্ভুক্ত করে; চ্যাটগুলো বাদ দিতে চাইলে, পরিবর্তে যে চ্যাটগুলো এক্সপোর্ট করতে চান সেগুলো নির্বাচন করুন।",
+  "Chat histories read": "চ্যাট ইতিহাসসমূহ পড়া হয়েছে"
  },
  "de": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Ein @username, eine Telefonnummer mit „+“ und der Ländervorwahl oder eine Person aus den Chats dieses Kontos. Die meisten Personen haben keinen Benutzernamen: Wähle sie aus deinen Chats aus oder gib ihre Nummer ein.",
@@ -1404,7 +1416,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} tippt gerade…",
   "{size} of about {total}": "{size} von etwa {total}",
   "{size} of {total}": "{size} von {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Chats werden in dieser Reihenfolge gelesen: Kontodaten, private Chats und Bots, Gruppen, dann große Gruppen und Kanäle, beginnend mit den kleinsten. Nachrichten aus jedem Chat werden vor Dateien gelesen, sodass auch bei einem vorzeitig beendeten Durchlauf die wesentlichen Informationen erhalten bleiben. Deaktivieren Sie einen Chat, um ihn auszuschließen.",
   "Complete": "Fertig",
   "If started now": "Falls jetzt gestartet",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Bei sofortigem Start: {complete} von {total} Chats abgeschlossen, {partial} teilweise, {missed} nicht erreicht.",
@@ -1417,7 +1428,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Nicht erreicht",
   "Photos of chats and people": "Fotos von Chats und Personen",
   "Saving photos of chats and people": "Speichern von Fotos aus Chats und von Personen",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Die Erfassung endet nach Ablauf der Frist in {time}, anschließend wird das Archiv gepackt"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Die Erfassung endet nach Ablauf der Frist in {time}, anschließend wird das Archiv gepackt",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Chats werden in dieser Reihenfolge gelesen: Kontodaten, private Chats und Bots, Gruppen, dann große Gruppen und Kanäle, beginnend mit den kleinsten. Nachrichten aus jedem Chat werden vor Dateien angezeigt, sodass auch bei einem vorzeitig beendeten Lauf die wesentlichen Informationen erhalten bleiben.",
+  "Untick a chat to leave it out.": "Deaktivieren Sie ein Chat-Feld, um es auszuschließen.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Die Schätzung von Zeit und Größe bezieht sich auf {sampled} von {total} Chats, daher sind in der Tabelle nur diese aufgeführt. Der Export umfasst weiterhin alle Chats; um Chats auszuschließen, wählen Sie stattdessen die zu exportierenden Chats aus.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Die Schätzung von Zeit und Umfang bezieht sich auf {sampled} Chats, daher sind in der Tabelle nur diese aufgeführt. Der Export umfasst weiterhin alle Chats; um Chats auszuschließen, wählen Sie stattdessen die Chats aus, die exportiert werden sollen.",
+  "Chat histories read": "Gelesene Chat-Verläufe"
  },
  "es": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un número de teléfono con el signo «+» y el código de país, o una persona de los chats de esta cuenta. La mayoría de las personas no tienen nombre de usuario: elígelas de tus chats o introduce su número.",
@@ -1754,7 +1770,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} está escribiendo…",
   "{size} of about {total}": "{size} de aproximadamente {total}",
   "{size} of {total}": "{size} de {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Los chats se leen en este orden: datos de la cuenta, chats privados y bots, grupos, y luego grupos grandes y canales, empezando por los más pequeños. Los mensajes de cada chat tienen prioridad sobre los archivos, por lo que una ejecución que finalice antes de tiempo seguirá conservando lo esencial. Desmarca un chat para excluirlo.",
   "Complete": "Completo",
   "If started now": "Si se inicia ahora",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Si se inicia ahora: {complete} de {total} chats completados, {partial} parcialmente completados, {missed} no alcanzados.",
@@ -1767,7 +1782,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "No alcanzado",
   "Photos of chats and people": "Fotografías de chats y personas",
   "Saving photos of chats and people": "Guardar fotos de chats y personas",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "La recopilación se detiene al alcanzar el límite de tiempo en {time}; a continuación, se empaqueta el archivo."
+  "Collection stops at the time limit in {time}, then the archive is packaged": "La recopilación se detiene al alcanzar el límite de tiempo en {time}; a continuación, se empaqueta el archivo.",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Los chats se leen en este orden: datos de la cuenta, chats privados y bots, grupos, y luego grupos grandes y canales, empezando por los más pequeños. Los mensajes de cada chat tienen prioridad sobre los archivos, por lo que una ejecución que finalice antes de tiempo seguirá conservando lo esencial.",
+  "Untick a chat to leave it out.": "Desmarca un chat para excluirlo.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La estimación de tiempo y tamaño abarca {sampled} de los {total} chats, por lo que la tabla solo muestra esos. La exportación sigue abarcando todos los chats; para excluir algunos, selecciona los chats que deseas exportar.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La estimación de tiempo y tamaño abarca los chats {sampled}, por lo que la tabla solo muestra esos. La exportación sigue abarcando todos los chats; para excluir algunos, selecciona los chats que deseas exportar.",
+  "Chat histories read": "Historiales de chat leídos"
  },
  "fa": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "یک @username، یک شماره تلفن همراه با علامت + و پیش‌شماره کشور، یا فردی از چت‌های این حساب. بیشتر افراد نام کاربری ندارند: آن‌ها را از چت‌های خود انتخاب کنید یا شماره آن‌ها را وارد کنید.",
@@ -2102,7 +2122,6 @@ window.TGW_SEALED_LOCALES = {
   "{size} of {total}": " {size} از {total}",
   "{done} of {total}": "{done} از {total}",
   "{done} saved of {total}": "{done} ذخیره‌شده از {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "گفت‌وگوها به این ترتیب خوانده می‌شوند: داده‌های حساب کاربری، چت‌های خصوصی و ربات‌ها، گروه‌ها، سپس گروه‌های بزرگ و کانال‌ها از کوچک‌ترین. پیام‌های هر گفت‌وگو قبل از فایل‌ها قرار می‌گیرند، بنابراین یک اجرای که زود پایان می‌یابد همچنان شامل موارد ضروری است. تیک یک گفت‌وگو را بردارید تا آن را حذف کنید.",
   "Complete": "تکمیل شد",
   "If started now": "اگر اکنون شروع شود",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "اگر اکنون شروع شود: {complete} از {total} گفتگو کامل شده، {partial} تا حدی کامل شده، {missed} دریافت نشده.",
@@ -2115,7 +2134,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "دسترسی صورت نگرفت",
   "Photos of chats and people": "عکس‌های چت‌ها و افراد",
   "Saving photos of chats and people": "ذخیره عکس‌های چت‌ها و افراد",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "جمع‌آوری در زمان تعیین‌شده در {time} متوقف می‌شود، سپس آرشیو بسته‌بندی می‌شود"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "جمع‌آوری در زمان تعیین‌شده در {time} متوقف می‌شود، سپس آرشیو بسته‌بندی می‌شود",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "چت‌ها به این ترتیب خوانده می‌شوند: داده‌های حساب، چت‌های خصوصی و ربات‌ها، گروه‌ها، سپس گروه‌های بزرگ و کانال‌ها از کوچک‌ترین. پیام‌های هر چت قبل از فایل‌ها قرار می‌گیرند، بنابراین یک اجرای زودهنگام همچنان شامل موارد ضروری است.",
+  "Untick a chat to leave it out.": "برای حذف یک چت، تیک آن را بردارید.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تخمین زمان و حجم مربوط به {sampled} چت از مجموع {total} چت است، بنابراین جدول فقط آن‌ها را نمایش می‌دهد. خروجی همچنان شامل همه چت‌ها می‌شود؛ برای حذف چت‌ها، چت‌های مورد نظر را برای خروجی انتخاب کنید.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "تخمین زمان و حجم شامل {sampled} چت است، بنابراین جدول فقط آن‌ها را فهرست می‌کند. خروجی همچنان همه چت‌ها را در بر می‌گیرد؛ برای حذف چت‌ها، چت‌های مورد نظر را برای خروجی انتخاب کنید.",
+  "Chat histories read": "تاریخچه‌های چت خوانده شدند"
  },
  "fr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numéro de téléphone avec le signe « + » et l'indicatif du pays, ou une personne figurant dans les discussions de ce compte. La plupart des gens n'ont pas de nom d'utilisateur : sélectionnez-les dans vos discussions ou saisissez leur numéro.",
@@ -2452,7 +2476,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} est en train de taper…",
   "{size} of about {total}": "{size} d'environ {total}",
   "{size} of {total}": "{size} sur {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Les discussions sont lues dans l'ordre suivant : données de compte, discussions privées et bots, groupes, puis grands groupes et canaux, en commençant par les plus petits. Les messages de chaque discussion sont traités avant les fichiers ; ainsi, même si l'exécution s'arrête prématurément, l'essentiel est conservé. Décochez une discussion pour l'exclure.",
   "Complete": "Terminé",
   "If started now": "Si vous commencez maintenant",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Si le processus est lancé maintenant : {complete} des {total} discussions sont terminées, {partial} sont partiellement terminées, {missed} n'ont pas été atteintes.",
@@ -2465,7 +2488,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Non atteint",
   "Photos of chats and people": "Photos de discussions et de personnes",
   "Saving photos of chats and people": "Enregistrement de photos de discussions et de personnes",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "La collecte s'arrête à l'expiration du délai de {time}, puis l'archive est compressée"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "La collecte s'arrête à l'expiration du délai de {time}, puis l'archive est compressée",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Les discussions sont lues dans cet ordre : données du compte, discussions privées et bots, groupes, puis grands groupes et canaux, en commençant par les plus petits. Les messages de chaque discussion sont traités avant les fichiers ; ainsi, même si une exécution s'arrête prématurément, l'essentiel est conservé.",
+  "Untick a chat to leave it out.": "Décochez une conversation pour l'exclure.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "L'estimation de la durée et de la taille porte sur {sampled} des {total} discussions ; le tableau ne répertorie donc que celles-ci. L'exportation couvre néanmoins toutes les discussions ; pour en exclure certaines, sélectionnez plutôt les discussions à exporter.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "L'estimation de la durée et de la taille porte sur les discussions {sampled}, c'est pourquoi le tableau ne répertorie que celles-ci. L'exportation couvre toutefois l'ensemble des discussions ; pour en exclure certaines, sélectionnez plutôt les discussions que vous souhaitez exporter.",
+  "Chat histories read": "Historique des conversations lu"
  },
  "he": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, מספר טלפון עם סימן + וקוד המדינה, או אדם מהצ'אטים של חשבון זה. לרוב האנשים אין שם משתמש: בחר אותם מהצ'אטים שלך או הזן את המספר שלהם.",
@@ -2802,7 +2830,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} מקליד…",
   "{size} of about {total}": "{size} של כ-{total}",
   "{size} of {total}": "{size} מתוך {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "הצ'אטים נקראים בסדר הבא: נתוני חשבון, צ'אטים פרטיים ובוטים, קבוצות, ולאחר מכן קבוצות גדולות וערוצים, מהקטן לגדול. הודעות מכל צ'אט מופיעות לפני קבצים, כך שגם ריצה שמסתיימת מוקדם תכלול את המידע החיוני. הסר את הסימון מצ'אט כדי להשאיר אותו מחוץ לתהליך.",
   "Complete": "השלם",
   "If started now": "אם מתחילים עכשיו",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "אם מתחילים כעת: {complete} מתוך {total} צ'אטים הושלמו, {partial} הושלמו חלקית, {missed} לא הושלמו.",
@@ -2815,7 +2842,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "לא הושג",
   "Photos of chats and people": "תמונות של צ'אטים ואנשים",
   "Saving photos of chats and people": "שמירת תמונות של צ'אטים ואנשים",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "האיסוף מסתיים עם תום פרק הזמן שנקבע ב-{time}, ולאחר מכן הארכיון נארז"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "האיסוף מסתיים עם תום פרק הזמן שנקבע ב-{time}, ולאחר מכן הארכיון נארז",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "הצ'אטים נקראים בסדר הבא: נתוני חשבון, צ'אטים פרטיים ובוטים, קבוצות, ולאחר מכן קבוצות גדולות וערוצים, מהקטן לגדול. הודעות מכל צ'אט מופיעות לפני קבצים, כך שגם ריצה שמסתיימת מוקדם עדיין מכילה את המידע החיוני.",
+  "Untick a chat to leave it out.": "הסר את הסימון משיחה כדי להשאיר אותה מחוץ לרשימה.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "אומדן הזמן והגודל מתייחס ל-{sampled} מתוך {total} צ'אטים, ולכן הטבלה מציגה רק אותם. הייצוא עדיין מכסה את כל הצ'אטים; כדי להשאיר צ'אטים מחוץ לייצוא, בחר את הצ'אטים שברצונך לייצא במקום זאת.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "אומדן הזמן והגודל מתייחס לצ'אטים שנדגמו {sampled}, ולכן הטבלה מציגה רק אותם. הייצוא עדיין מכסה את כל הצ'אטים; כדי להשאיר צ'אטים מחוץ לייצוא, בחר את הצ'אטים שברצונך לייצא במקום זאת.",
+  "Chat histories read": "היסטוריית צ'אט נקראה"
  },
  "hi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + और देश कोड के साथ एक फ़ोन नंबर, या इस खाते की चैट्स से कोई व्यक्ति। अधिकांश लोगों का कोई यूज़रनेम नहीं होता: उन्हें अपनी चैट्स से चुनें या उनका नंबर दर्ज करें।",
@@ -3151,7 +3183,6 @@ window.TGW_SEALED_LOCALES = {
   "{size} of about {total}": "लगभग {total} का {size}",
   "{size} of {total}": "{size} of {total}",
   "{done} of about {total}": "लगभग {total} में से {done}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "चैट इस क्रम में पढ़ी जाती हैं: खाता डेटा, निजी चैट और बॉट्स, समूह, फिर सबसे छोटे से बड़े समूह और चैनल। प्रत्येक चैट के संदेश फ़ाइलों से पहले आते हैं, इसलिए जो रन जल्दी समाप्त हो जाता है, उसमें भी आवश्यक जानकारी बनी रहती है। किसी चैट को छोड़ने के लिए उसे अनटिक करें।",
   "Complete": "पूर्ण",
   "If started now": "यदि अभी शुरू किया जाए",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "यदि अभी शुरू किया गया: {complete} में से {total} चैट पूरी हो चुकी हैं, {partial} आंशिक रूप से पूरी हुई हैं, {missed} प्राप्त नहीं हुई हैं।",
@@ -3164,7 +3195,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "पहुँच नहीं पाया गया",
   "Photos of chats and people": "चैट्स और लोगों की तस्वीरें",
   "Saving photos of chats and people": "चैट्स और लोगों की तस्वीरें सहेजना",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "{time} में समय सीमा पूरी होने पर संग्रह रुक जाता है, फिर आर्काइव पैकेज किया जाता है।"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "{time} में समय सीमा पूरी होने पर संग्रह रुक जाता है, फिर आर्काइव पैकेज किया जाता है।",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "चैट इस क्रम में पढ़े जाते हैं: खाता डेटा, निजी चैट और बॉट्स, समूह, फिर बड़े समूह और चैनल सबसे छोटे से। प्रत्येक चैट के संदेश फ़ाइलों से पहले आते हैं, इसलिए जो रन जल्दी समाप्त हो जाता है, उसमें भी आवश्यक चीज़ें मौजूद रहती हैं।",
+  "Untick a chat to leave it out.": "चैट को अनटिक करें ताकि उसे शामिल न किया जाए।",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "समय और आकार का अनुमान {sampled} चैट्स को कवर करता है, इसलिए तालिका में केवल वे ही सूचीबद्ध हैं। एक्सपोर्ट अभी भी हर चैट को कवर करता है; चैट्स को बाहर रखने के लिए, एक्सपोर्ट के लिए चैट्स चुनें।",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "समय और आकार का अनुमान {total} चैट्स में से {sampled} चैट्स को कवर करता है, इसलिए तालिका में केवल उन्हीं को सूचीबद्ध किया गया है। एक्सपोर्ट अभी भी हर चैट को कवर करता है; चैट्स को बाहर रखने के लिए, एक्सपोर्ट के लिए चैट्स का चयन करें।",
+  "Chat histories read": "चैट इतिहास पढ़े गए"
  },
  "id": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, nomor telepon dengan tanda + dan kode negara, atau seseorang dari obrolan akun ini. Kebanyakan orang tidak memiliki nama pengguna: pilih mereka dari obrolan Anda atau masukkan nomor telepon mereka.",
@@ -3501,7 +3537,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} sedang mengetik…",
   "{size} of about {total}": "{size} sekitar {total}",
   "{size} of {total}": "{size} dari {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Obrolan dibaca dalam urutan berikut: data akun, obrolan pribadi dan bot, grup, lalu grup besar dan saluran mulai dari yang terkecil. Pesan dari setiap obrolan didahulukan sebelum berkas, sehingga proses yang berakhir lebih awal tetap mencakup hal-hal penting. Hapus centang pada obrolan untuk mengabaikannya.",
   "Complete": "Selesai",
   "If started now": "Jika dimulai sekarang",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Jika dimulai sekarang: {complete} dari {total} obrolan telah selesai, {partial} sebagian, {missed} belum tercapai.",
@@ -3514,7 +3549,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Belum tercapai",
   "Photos of chats and people": "Foto obrolan dan orang-orang",
   "Saving photos of chats and people": "Menyimpan foto obrolan dan orang-orang",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Pengumpulan akan dihentikan pada batas waktu {time}, kemudian arsip akan dikemas"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Pengumpulan akan dihentikan pada batas waktu {time}, kemudian arsip akan dikemas",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Percakapan dibaca dalam urutan berikut: data akun, percakapan pribadi dan bot, grup, lalu grup besar dan saluran mulai dari yang terkecil. Pesan dari setiap percakapan didahulukan sebelum berkas, sehingga eksekusi yang berakhir lebih awal tetap menyimpan hal-hal penting.",
+  "Untick a chat to leave it out.": "Hapus centang pada obrolan untuk mengabaikannya.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Perkiraan waktu dan ukuran mencakup {sampled} dari {total} obrolan, sehingga tabel hanya mencantumkan obrolan tersebut. Ekspor tetap mencakup setiap obrolan; untuk mengabaikan obrolan tertentu, pilih obrolan yang akan diekspor.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Perkiraan waktu dan ukuran mencakup obrolan {sampled}, sehingga tabel hanya mencantumkan obrolan tersebut. Ekspor tetap mencakup semua obrolan; untuk mengesampingkan obrolan tertentu, pilih obrolan yang akan diekspor.",
+  "Chat histories read": "Riwayat obrolan yang dibaca"
  },
  "it": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numero di telefono con il segno + e il prefisso internazionale, oppure una persona presente nelle chat di questo account. La maggior parte delle persone non ha un nome utente: sceglilo dalle tue chat oppure inserisci il suo numero.",
@@ -3851,7 +3891,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} sta digitando…",
   "{size} of about {total}": "{size} di circa {total}",
   "{size} of {total}": "{size} di {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Le chat vengono lette in questo ordine: dati dell'account, chat private e bot, gruppi, poi gruppi numerosi e canali, a partire dal più piccolo. I messaggi di ogni chat vengono letti prima dei file, in modo che anche un'esecuzione che termina in anticipo conservi comunque le informazioni essenziali. Deselezionare una chat per escluderla.",
   "Complete": "Completa",
   "If started now": "Se avviato ora",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Se avviato ora: {complete} delle {total} chat completate, {partial} parzialmente completate, {missed} non raggiunte.",
@@ -3864,7 +3903,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Non raggiunto",
   "Photos of chats and people": "Foto di chat e persone",
   "Saving photos of chats and people": "Salvataggio di foto relative alle chat e alle persone",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "La raccolta termina allo scadere del limite di tempo {time}, dopodiché l’archivio viene compresso"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "La raccolta termina allo scadere del limite di tempo {time}, dopodiché l’archivio viene compresso",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Le chat vengono lette in questo ordine: dati dell'account, chat private e bot, gruppi, poi i gruppi più grandi e i canali, a partire dal più piccolo. I messaggi di ogni chat vengono prima dei file, quindi un'esecuzione che termina in anticipo conserva comunque le informazioni essenziali.",
+  "Untick a chat to leave it out.": "Deseleziona una chat per escluderla.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La stima relativa a tempi e dimensioni riguarda un campione {sampled} di {total} chat, pertanto la tabella ne elenca solo quelle. L'esportazione copre comunque tutte le chat; per escluderne alcune, seleziona invece le chat da esportare.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "La stima relativa a tempi e dimensioni riguarda le chat {sampled}, pertanto la tabella ne elenca solo quelle. L'esportazione copre comunque tutte le chat; per escluderne alcune, seleziona invece le chat da esportare.",
+  "Chat histories read": "Cronologie delle chat lette"
  },
  "ja": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username、+と国コードを含む電話番号、またはこのアカウントのチャットに参加している人物。多くの人はユーザー名を持っていません。チャットから相手を選択するか、電話番号を入力してください。",
@@ -4201,7 +4245,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name}さんが入力中です…",
   "{size} of about {total}": "{size}（約 {total}）",
   "{size} of {total}": "{size}の{total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "チャットの読み取り順序は、アカウントデータ、プライベートチャットとボット、グループ、そして大規模なグループやチャンネル（規模の小さいものから順に）となります。すべてのチャットのメッセージはファイルよりも先に読み込まれるため、実行が途中で終了した場合でも、重要な情報は確保されます。チャットを除外するには、チェックを外してください。",
   "Complete": "完了",
   "If started now": "今すぐ開始する場合",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "現在開始した場合：{total}件のチャットのうち、{complete}件が完了、{partial}件が一部完了、{missed}件に到達していません。",
@@ -4214,7 +4257,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "未到達",
   "Photos of chats and people": "チャットや人物の写真",
   "Saving photos of chats and people": "チャットや人物の写真の保存",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "データ収集は{time}の制限時間で終了し、その後アーカイブがパッケージ化されます"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "データ収集は{time}の制限時間で終了し、その後アーカイブがパッケージ化されます",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "チャットは、アカウントデータ、プライベートチャットとボット、グループ、そして大規模なグループやチャンネル（規模の小さいものから順に）という順序で読み込まれます。各チャットのメッセージはファイルよりも優先されるため、実行が途中で終了した場合でも、重要な情報は保持されます。",
+  "Untick a chat to leave it out.": "チャットのチェックを外すと、そのチャットは除外されます。",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "所要時間とサイズの推定値は、{total}件のチャットのうち{sampled}件のサンプルを対象としているため、表にはそれらのチャットのみが記載されています。エクスポート自体はすべてのチャットを対象としています。チャットを除外したい場合は、エクスポートするチャットを個別に選択してください。",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "所要時間とサイズの推定値は{sampled}のチャットを対象としているため、表にはそれらのチャットのみが記載されています。エクスポート自体はすべてのチャットを対象としています。チャットを除外したい場合は、エクスポートするチャットを個別に選択してください。",
+  "Chat histories read": "チャット履歴の閲覧"
  },
  "ko": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username 또는 + 기호와 국가 코드가 포함된 전화번호, 혹은 이 계정의 채팅에 등장하는 사람. 대부분의 사람은 사용자 이름이 없으므로, 채팅에서 해당 사람을 선택하거나 전화번호를 입력하세요.",
@@ -4551,7 +4599,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name}가 입력 중입니다…",
   "{size} of about {total}": "{size}, 약 {total}",
   "{size} of {total}": "{size} 중 {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "채팅은 계정 데이터, 비공개 채팅 및 봇, 그룹, 그리고 규모가 작은 것부터 순서대로 대규모 그룹 및 채널의 순서로 읽힙니다. 모든 채팅의 메시지는 파일보다 우선 처리되므로, 실행이 조기에 종료되더라도 필수 정보는 확보됩니다. 채팅을 제외하려면 해당 채팅의 체크 표시를 해제하세요.",
   "Complete": "완료",
   "If started now": "지금 시작하면",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "지금 시작할 경우: {total}개의 채팅 중 {complete}개가 완료되었고, {partial}개는 부분적으로 완료되었으며, {missed}개는 아직 처리되지 않았습니다.",
@@ -4564,7 +4611,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "도달하지 않음",
   "Photos of chats and people": "채팅 및 인물의 사진",
   "Saving photos of chats and people": "채팅 및 인물의 사진 저장",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}에 설정된 시간 제한이 되면 데이터 수집이 중단되며, 이후 아카이브가 패키징됩니다."
+  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}에 설정된 시간 제한이 되면 데이터 수집이 중단되며, 이후 아카이브가 패키징됩니다.",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "채팅은 계정 정보, 비공개 채팅 및 봇, 그룹, 그리고 규모가 작은 것부터 순서대로 대규모 그룹 및 채널의 순서로 읽힙니다. 모든 채팅의 메시지는 파일보다 먼저 처리되므로, 실행이 조기에 종료되더라도 필수 정보는 그대로 유지됩니다.",
+  "Untick a chat to leave it out.": "채팅을 선택 해제하면 해당 채팅이 제외됩니다.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "예상 소요 시간 및 용량은 {total}개의 채팅 중 {sampled}개를 표본으로 추출한 것이므로, 표에는 해당 채팅만 나열되어 있습니다. 내보내기 작업은 여전히 모든 채팅을 대상으로 합니다. 특정 채팅을 제외하려면 내보낼 채팅을 직접 선택하십시오.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "예상 소요 시간 및 용량은 {sampled} 채팅을 기준으로 산출되었으므로, 표에는 해당 채팅만 나열되어 있습니다. 내보내기 작업은 여전히 모든 채팅을 대상으로 수행되므로, 특정 채팅을 제외하려면 내보낼 채팅을 직접 선택하십시오.",
+  "Chat histories read": "읽은 채팅 기록"
  },
  "ms": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Satu nama pengguna @username, nombor telefon dengan tanda + dan kod negara, atau seseorang daripada sembang akaun ini. Kebanyakan orang tiada nama pengguna: pilih mereka daripada sembang anda atau masukkan nombor mereka.",
@@ -4901,7 +4953,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} sedang menaip…",
   "{size} of about {total}": "{size}daripada kira-kira {total}",
   "{size} of {total}": "{size} daripada {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Perbualan dibaca mengikut urutan ini: data akaun, perbualan peribadi dan bot, kumpulan, kemudian kumpulan besar dan saluran mengikut saiz terkecil. Mesej setiap perbualan didahulukan sebelum fail, jadi pelaksanaan yang berakhir awal masih mengekalkan perkara penting. Batalkan centang pada perbualan untuk mengecualikannya.",
   "Complete": "Selesai",
   "If started now": "Jika dimulakan sekarang",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Jika dimulakan sekarang: {complete} daripada {total} sembang telah diselesaikan, {partial} sebahagiannya, {missed} belum dicapai.",
@@ -4914,7 +4965,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Tidak dicapai",
   "Photos of chats and people": "Foto perbualan dan orang",
   "Saving photos of chats and people": "Menyimpan foto perbualan dan orang",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Pengumpulan dihentikan apabila had masa dalam {time} tamat, kemudian arkib dipakejkan"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Pengumpulan dihentikan apabila had masa dalam {time} tamat, kemudian arkib dipakejkan",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Perbualan dibaca mengikut urutan ini: data akaun, perbualan peribadi dan bot, kumpulan, kemudian kumpulan besar dan saluran dari yang paling kecil. Mesej setiap perbualan didahulukan sebelum fail, jadi larian yang berakhir awal masih mengekalkan perkara penting.",
+  "Untick a chat to leave it out.": "Batalkan tanda pada sembang untuk mengeluarkannya.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Anggaran masa dan saiz merangkumi {sampled} daripada {total} sembang, jadi jadual hanya menyenaraikan yang tersebut. Eksport masih merangkumi setiap sembang; untuk mengecualikan sembang, pilih sembang yang hendak dieksport.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Anggaran masa dan saiz merangkumi sembang y{sampled}, jadi jadual hanya menyenaraikan sembang tersebut. Eksport masih merangkumi setiap sembang; untuk mengecualikan sembang, pilih sembang yang hendak dieksport.",
+  "Chat histories read": "Sejarah sembang dibaca"
  },
  "pl": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, numer telefonu z symbolem + i kodem kraju lub osoba z czatów tego konta. Większość osób nie ma nazwy użytkownika: wybierz je z czatów lub wprowadź ich numer.",
@@ -5251,7 +5307,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} pisze…",
   "{size} of about {total}": "{size} około {total}",
   "{size} of {total}": "{size} z {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Czatów odczytuje się w następującej kolejności: dane konta, czaty prywatne i boty, grupy, a następnie duże grupy i kanały, zaczynając od najmniejszych. Wiadomości z każdego czatu mają pierwszeństwo przed plikami, więc nawet przedwcześnie zakończone uruchomienie nadal zawiera najważniejsze informacje. Aby pominąć czat, należy odznaczyć go.",
   "Complete": "Zakończ",
   "If started now": "Jeśli uruchomisz to teraz",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Jeśli rozpoczęto teraz: {complete} z {total} czatów zakończono, {partial} częściowo, {missed} nie osiągnięto.",
@@ -5264,7 +5319,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Nie osiągnięto",
   "Photos of chats and people": "Zdjęcia czatów i osób",
   "Saving photos of chats and people": "Zapisywanie zdjęć z czatów i osób",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Gromadzenie danych kończy się po upływie limitu czasowego wynoszącego {time}, a następnie archiwum jest pakowane"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Gromadzenie danych kończy się po upływie limitu czasowego wynoszącego {time}, a następnie archiwum jest pakowane",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Czatów odczytuje się w następującej kolejności: dane konta, czaty prywatne i boty, grupy, a następnie duże grupy i kanały, zaczynając od najmniejszych. Wiadomości z każdego czatu mają pierwszeństwo przed plikami, więc nawet przedwcześnie zakończone uruchomienie nadal zawiera najważniejsze informacje.",
+  "Untick a chat to leave it out.": "Odznacz czat, aby go pominąć.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Szacunkowy czas i rozmiar dotyczą {sampled} z {total} czatów, więc w tabeli wymieniono tylko te. Eksport nadal obejmuje wszystkie czaty; aby pominąć niektóre czaty, należy wybrać te, które mają zostać wyeksportowane.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Szacunkowy czas i rozmiar dotyczą czatów z {sampled}, więc w tabeli wymieniono tylko te czaty. Eksport nadal obejmuje wszystkie czaty; aby pominąć niektóre czaty, należy wybrać te, które mają zostać wyeksportowane.",
+  "Chat histories read": "Przeczytano historie czatów"
  },
  "pt": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Um @username, um número de telefone com + e o código do país, ou uma pessoa dos chats desta conta. A maioria das pessoas não tem nome de usuário: escolha-as em seus chats ou digite o número delas.",
@@ -5601,7 +5661,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} está digitando…",
   "{size} of about {total}": "{size} de aproximadamente {total}",
   "{size} of {total}": "{size} de {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "As conversas são lidas nesta ordem: dados da conta, conversas privadas e bots, grupos e, em seguida, grupos grandes e canais, começando pelos menores. As mensagens de cada conversa vêm antes dos arquivos, de modo que uma execução que termine mais cedo ainda contenha o essencial. Desmarque uma conversa para excluí-la.",
   "Complete": "Concluído",
   "If started now": "Se for iniciado agora",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Se iniciado agora: {complete} de {total} bate-papos concluídos, {partial} parcialmente concluídos, {missed} não acessados.",
@@ -5614,7 +5673,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Não alcançado",
   "Photos of chats and people": "Fotos de conversas e pessoas",
   "Saving photos of chats and people": "Salvar fotos de conversas e pessoas",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "A coleta é interrompida ao atingir o limite de tempo em {time}; em seguida, o arquivo é compactado"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "A coleta é interrompida ao atingir o limite de tempo em {time}; em seguida, o arquivo é compactado",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "As conversas são lidas nesta ordem: dados da conta, conversas privadas e bots, grupos e, em seguida, grupos grandes e canais, começando pelo menor. As mensagens de todas as conversas vêm antes dos arquivos; assim, mesmo que uma execução termine mais cedo, o essencial ainda é preservado.",
+  "Untick a chat to leave it out.": "Desmarque um chat para excluí-lo.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "A estimativa de tempo e tamanho abrange {sampled} de {total} conversas, portanto a tabela lista apenas essas. A exportação ainda abrange todas as conversas; para excluir conversas, selecione as que deseja exportar.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "A estimativa de tempo e tamanho abrange as conversas {sampled}, portanto, a tabela lista apenas essas. A exportação ainda abrange todas as conversas; para excluir algumas, selecione as conversas que deseja exportar.",
+  "Chat histories read": "Histórico de conversas lido"
  },
  "th": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, หมายเลขโทรศัพท์ที่มีเครื่องหมาย + และรหัสประเทศ หรือบุคคลจากบทสนทนาของบัญชีนี้ ผู้ใช้ส่วนใหญ่ไม่มีชื่อผู้ใช้: เลือกจากบทสนทนาของคุณหรือป้อนหมายเลขโทรศัพท์ของพวกเขา",
@@ -5951,7 +6015,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} กำลังพิมพ์…",
   "{size} of about {total}": "{size} ประมาณ {total}",
   "{size} of {total}": "{size} ของ {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "การอ่านการสนทนาจะดำเนินการตามลำดับต่อไปนี้: ข้อมูลบัญชี, การสนทนาส่วนตัวและบอท, กลุ่ม, แล้วกลุ่มใหญ่และช่องตามลำดับจากที่เล็กที่สุด ข้อความจากทุกการสนทนาจะปรากฏก่อนไฟล์ ดังนั้นการรันที่สิ้นสุดก่อนกำหนดยังคงเก็บข้อมูลสำคัญไว้ หากต้องการยกเว้นการสนทนาใด ให้ยกเลิกการเลือกการสนทนานั้น",
   "Complete": "เสร็จสิ้น",
   "If started now": "หากเริ่มตอนนี้",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "หากเริ่มตอนนี้: {complete} ของ {total} การสนทนาเสร็จสิ้น, {partial} เสร็จสิ้นบางส่วน, {missed} ยังไม่ถึง",
@@ -5964,7 +6027,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "ยังไม่ถึง",
   "Photos of chats and people": "รูปภาพของการสนทนาและบุคคล",
   "Saving photos of chats and people": "การบันทึกภาพหน้าจอของบทสนทนาและรูปภาพของผู้ใช้",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "การเก็บข้อมูลจะหยุดลงเมื่อถึงเวลาที่กำหนดใน{time} จากนั้นไฟล์เก็บถาวรจะถูกจัดแพ็กเกจ"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "การเก็บข้อมูลจะหยุดลงเมื่อถึงเวลาที่กำหนดใน{time} จากนั้นไฟล์เก็บถาวรจะถูกจัดแพ็กเกจ",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "การอ่านการสนทนาจะดำเนินการตามลำดับนี้: ข้อมูลบัญชี, การสนทนาส่วนตัวและบอท, กลุ่ม, แล้วกลุ่มใหญ่และช่องตามลำดับจากที่เล็กที่สุด ข้อความในทุกการสนทนาจะปรากฏก่อนไฟล์ ดังนั้นการรันที่สิ้นสุดก่อนกำหนดยังคงเก็บข้อมูลสำคัญไว้",
+  "Untick a chat to leave it out.": "ยกเลิกการเลือกช่องสนทนาเพื่อไม่รวมมันไว้",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "การประมาณเวลาและขนาดนี้ครอบคลุม {sampled} ของ {total} การสนทนา ดังนั้นตารางจึงแสดงเฉพาะการสนทนาเหล่านั้นเท่านั้น การส่งออกยังคงครอบคลุมการสนทนาทุกครั้ง หากต้องการไม่ส่งออกการสนทนาใด ๆ ให้เลือกการสนทนาที่ต้องการส่งออกแทน",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "การประมาณเวลาและขนาดนี้ครอบคลุมการสนทนาที่{sampled} ดังนั้นตารางจึงแสดงเฉพาะการสนทนาเหล่านั้นเท่านั้น การส่งออกยังคงครอบคลุมการสนทนาทั้งหมด; หากต้องการไม่ส่งออกการสนทนาบางรายการ ให้เลือกการสนทนาที่ต้องการส่งออกแทน",
+  "Chat histories read": "อ่านประวัติการสนทนา"
  },
  "tr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Bir @username adı, + işareti ve ülke kodunu içeren bir telefon numarası veya bu hesabın sohbetlerindeki bir kişi. Çoğu kişinin kullanıcı adı yoktur: sohbetlerinizden birini seçin veya numarasını girin.",
@@ -6301,7 +6369,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} yazıyor…",
   "{size} of about {total}": "{size} yaklaşık {total}",
   "{size} of {total}": "{size}'lik {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Sohbetler şu sırayla okunur: hesap verileri, özel sohbetler ve botlar, gruplar, ardından en küçüğünden başlayarak büyük gruplar ve kanallar. Her sohbetin mesajları dosyalardan önce gelir, böylece erken sona eren bir çalıştırma bile temel bilgileri içerir. Bir sohbeti hariç tutmak için işaretini kaldırın.",
   "Complete": "Tamam",
   "If started now": "Şimdi başlatılırsa",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Şu anda başlatılırsa: {total} sohbetin {complete}'i tamamlandı, {partial}'i kısmen tamamlandı, {missed}'e ulaşılamadı.",
@@ -6314,7 +6381,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Ulaşılmadı",
   "Photos of chats and people": "Sohbetlerin ve kişilerin fotoğrafları",
   "Saving photos of chats and people": "Sohbetlerin ve kişilerin fotoğraflarını kaydetme",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Veri toplama işlemi {time} süre sınırında sona erer, ardından arşiv paketlenir"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Veri toplama işlemi {time} süre sınırında sona erer, ardından arşiv paketlenir",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Sohbetler şu sırayla okunur: hesap verileri, özel sohbetler ve botlar, gruplar, ardından en küçüğünden başlayarak büyük gruplar ve kanallar. Her sohbetin mesajları dosyalardan önce gelir, bu sayede erken sona eren bir çalıştırma bile temel bilgileri içerir.",
+  "Untick a chat to leave it out.": "Bir sohbeti hariç tutmak için işaretini kaldırın.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Tahmini süre ve boyut, {total} sohbetin {sampled}'ini kapsar; bu nedenle tabloda yalnızca bunlar listelenir. Dışa aktarma işlemi yine de her sohbeti kapsar; sohbetleri dışarıda bırakmak için, bunun yerine dışa aktarılacak sohbetleri seçin.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Tahmini süre ve boyut, {sampled} sohbetleri kapsar; bu nedenle tabloda yalnızca bunlar listelenir. Dışa aktarma işlemi yine de tüm sohbetleri kapsar; sohbetleri dışarıda bırakmak istiyorsanız, bunun yerine dışa aktarılacak sohbetleri seçin.",
+  "Chat histories read": "Okunan sohbet geçmişleri"
  },
  "uk": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, номер телефону з символом «+» та кодом країни або учасник чатів цього облікового запису. Більшість людей не мають імені користувача: виберіть їх із ваших чатів або введіть їхній номер.",
@@ -6651,7 +6723,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} набирає текст…",
   "{size} of about {total}": "{size}, приблизно {total}",
   "{size} of {total}": "{size} з {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Чати зчитуються в такому порядку: дані облікового запису, приватні чати та боти, групи, а потім великі групи та канали, починаючи з найменших. Повідомлення з кожного чату зчитуються раніше, ніж файли, тому навіть якщо запуск завершиться достроково, найважливіша інформація все одно буде збережена. Зніміть галочку біля чату, щоб його пропустити.",
   "Complete": "Завершено",
   "If started now": "Якщо розпочати зараз",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Якщо розпочати зараз: {complete} із {total} чатів завершено, {partial} — частково, {missed} — не досягнуто.",
@@ -6664,7 +6735,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Не досягнуто",
   "Photos of chats and people": "Фотографії чатів та людей",
   "Saving photos of chats and people": "Збереження фотографій чатів та людей",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Збір даних припиняється після закінчення ліміту часу в {time}, після чого архів упаковується"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Збір даних припиняється після закінчення ліміту часу в {time}, після чого архів упаковується",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Чати зчитуються в такому порядку: дані облікового запису, приватні чати та боти, групи, а потім великі групи та канали, починаючи з найменших. Повідомлення з кожного чату йдуть перед файлами, тому навіть якщо виконання завершиться достроково, найважливіша інформація все одно збережеться.",
+  "Untick a chat to leave it out.": "Зніміть галочку біля чату, щоб його виключити.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оцінка часу та розміру охоплює {sampled} із {total} чатів, тому в таблиці вказано лише їх. Експорт все одно охоплює всі чати; щоб виключити певні чати, виберіть ті, які потрібно експортувати.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Оцінка часу та розміру стосується {sampled} чатів, тому в таблиці вказано лише їх. Експорт все одно охоплює всі чати; щоб виключити певні чати, виберіть ті, які потрібно експортувати.",
+  "Chat histories read": "Прочитано історії чатів"
  },
  "ur": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username، + کے ساتھ ملک کا کوڈ والا فون نمبر، یا اس اکاؤنٹ کی چیٹس میں سے کوئی شخص۔ زیادہ تر لوگوں کا کوئی یوزر نیم نہیں ہوتا: انہیں اپنی چیٹس سے منتخب کریں یا ان کا نمبر درج کریں۔",
@@ -7001,7 +7077,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} ٹائپ کر رہا ہے…",
   "{size} of about {total}": "{size} تقریباً {total} کا",
   "{size} of {total}": "{size} کا {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "چٹس اس ترتیب میں پڑھی جاتی ہیں: اکاؤنٹ کا ڈیٹا، نجی چٹس اور بوٹس، گروپس، پھر بڑے گروپس اور چینلز سب سے چھوٹے سے۔ ہر چٹ کے پیغامات فائلوں سے پہلے آتے ہیں، اس لیے اگر رن جلدی ختم ہو جائے تب بھی ضروری معلومات موجود رہتی ہیں۔ کسی چٹ کو خارج کرنے کے لیے اس کا ٹِک ہٹا دیں۔",
   "Complete": "مکمل",
   "If started now": "اگر اب شروع کیا جائے",
   "Include": "شامل کریں",
@@ -7014,7 +7089,12 @@ window.TGW_SEALED_LOCALES = {
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "اگر ابھی شروع کیا جائے: {total} میں سے {complete} چیٹس مکمل، {partial} جزوی، {missed} تک وقت نہیں پہنچے گا۔",
   "Photos of chats and people": "گفتگو اور افراد کی تصاویر",
   "Saving photos of chats and people": "گفتگو اور افراد کی تصاویر محفوظ کرنا",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "{time} میں وقت کی حد پر جمع کرنا بند ہو جاتا ہے، پھر آرکائیو پیک کیا جاتا ہے۔"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "{time} میں وقت کی حد پر جمع کرنا بند ہو جاتا ہے، پھر آرکائیو پیک کیا جاتا ہے۔",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "چٹس اس ترتیب سے پڑھی جاتی ہیں: اکاؤنٹ کا ڈیٹا، نجی چٹس اور بوٹس، گروپس، پھر بڑے گروپس اور چینلز سب سے چھوٹے سے۔ ہر چٹ کے پیغامات فائلوں سے پہلے آتے ہیں، اس لیے اگر رن جلدی ختم ہو جائے تب بھی ضروری معلومات محفوظ رہتی ہے۔",
+  "Untick a chat to leave it out.": "کسی چیٹ کو منتخب نہ کریں تاکہ اسے شامل نہ کیا جائے۔",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "وقت اور حجم کا تخمینہ {sampled} کردہ {total} چیٹس پر محیط ہے، لہٰذا جدول میں صرف وہی دکھائی گئی ہیں۔ ایکسپورٹ اب بھی ہر چیٹ کو شامل کرتا ہے؛ چیٹس کو خارج کرنے کے لیے براہِ راست وہ چیٹس منتخب کریں جنہیں آپ ایکسپورٹ کرنا چاہتے ہیں۔",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "وقت اور حجم کا تخمینہ {sampled} چیٹس پر محیط ہے، لہٰذا جدول میں صرف وہی دکھائی گئی ہیں۔ ایکسپورٹ اب بھی ہر چیٹ کو شامل کرتا ہے؛ چیٹس کو خارج کرنے کے لیے براہِ راست وہ چیٹس منتخب کریں جنہیں آپ ایکسپورٹ کرنا چاہتے ہیں۔",
+  "Chat histories read": "چٹ ہسٹریاں پڑھی گئی"
  },
  "uz": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + belgisi va mamlakat kodi bilan telefon raqami yoki ushbu hisobning suhbatlaridagi shaxs. Ko'pchilikda foydalanuvchi nomi yo'q: suhbatlaringizdan tanlang yoki raqamini kiriting.",
@@ -7351,7 +7431,6 @@ window.TGW_SEALED_LOCALES = {
   "{size} of about {total}": "{size} taxminan {total}",
   "{size} of {total}": "{size}dan {total}",
   "About {time} left, archive included": "Taxminan {time} qoldi, arxiv bilan birga",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Suhbatlar quyidagi tartibda o'qiladi: hisob ma'lumotlari, shaxsiy suhbatlar va botlar, guruhlar, keyin eng kichigidan boshlab katta guruhlar va kanallar. Har bir suhbatdagi xabarlar fayllardan oldin keladi, shuning uchun erta tugagan ish ham zarur ma'lumotlarni saqlab qoladi. Suhbatni ro'yxatdan chiqarish uchun belgi (✓)ni olib tashlang.",
   "Complete": "Tugallangan",
   "If started now": "Agar hozir boshlansa",
   "Include": "Kiritish",
@@ -7364,7 +7443,12 @@ window.TGW_SEALED_LOCALES = {
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Hozir boshlansa: {total} ta chatdan {complete} tasi to‘liq, {partial} tasi qisman, {missed} tasiga vaqt yetmaydi.",
   "Photos of chats and people": "Suhbatlar va odamlarning fotosuratlari",
   "Saving photos of chats and people": "Suhbatlar va odamlarning fotosuratlarini saqlash",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}da belgilangan vaqt chegarasiga yetgach yig'ish to'xtaydi, so'ngra arxiv qadoqlanadi"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "{time}da belgilangan vaqt chegarasiga yetgach yig'ish to'xtaydi, so'ngra arxiv qadoqlanadi",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Suhbatlar quyidagi tartibda o'qiladi: hisob ma'lumotlari, shaxsiy suhbatlar va botlar, guruhlar, keyin eng kichigidan boshlab katta guruhlar va kanallar. Har bir suhbatdagi xabarlar fayllardan oldin keladi, shuning uchun erta tugaydigan ish jarayoni ham zarur ma'lumotlarni saqlab qoladi.",
+  "Untick a chat to leave it out.": "Suhbatni ro'yxatdan olib tashlash uchun belgi qo'yishni bekor qiling.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Vaqt va hajm bo'yicha taxmin {sampled}dan {total} suhbatlarni qamrab oladi, shuning uchun jadvalda faqat ular ko'rsatiladi. Eksport barcha suhbatlarni qamrab oladi; suhbatlarni chiqarib tashlash uchun eksport qilmoqchi bo'lgan suhbatlarni tanlang.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Vaqt va hajm bo'yicha taxmin {sampled} suhbatlarni qamrab oladi, shuning uchun jadvalda faqat ular ko'rsatilgan. Eksport barcha suhbatlarni qamrab oladi; suhbatlarni chiqarib tashlash uchun eksport qilmoqchi bo'lgan suhbatlarni tanlang.",
+  "Chat histories read": "Suhbat tarixlari o'qildi"
  },
  "vi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Một @username; một số điện thoại kèm dấu + và mã quốc gia; hoặc một người trong các cuộc trò chuyện của tài khoản này. Hầu hết mọi người không có tên người dùng: hãy chọn họ từ các cuộc trò chuyện của bạn hoặc nhập số điện thoại của họ.",
@@ -7701,7 +7785,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} đang gõ…",
   "{size} of about {total}": "{size} khoảng {total}",
   "{size} of {total}": "{size} trong số {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "Các cuộc trò chuyện được đọc theo thứ tự sau: dữ liệu tài khoản, các cuộc trò chuyện riêng tư và bot, các nhóm, sau đó là các nhóm lớn và kênh, bắt đầu từ nhóm và kênh nhỏ nhất. Các tin nhắn trong mỗi cuộc trò chuyện được ưu tiên hiển thị trước các tệp tin, do đó một lần chạy kết thúc sớm vẫn giữ lại các thông tin cần thiết. Bỏ chọn một cuộc trò chuyện để loại trừ nó khỏi quá trình thu thập.",
   "Complete": "Hoàn thành",
   "If started now": "Nếu bắt đầu ngay bây giờ",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Nếu bắt đầu ngay bây giờ: {complete} trong số {total} cuộc trò chuyện đã hoàn tất, {partial} đã hoàn tất một phần, {missed} chưa tiếp cận được.",
@@ -7714,7 +7797,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "Chưa đạt được",
   "Photos of chats and people": "Hình ảnh các cuộc trò chuyện và người dùng",
   "Saving photos of chats and people": "Lưu ảnh chụp màn hình các cuộc trò chuyện và hình ảnh người dùng",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "Việc thu thập sẽ dừng lại khi hết thời hạn {time}, sau đó kho lưu trữ sẽ được đóng gói"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "Việc thu thập sẽ dừng lại khi hết thời hạn {time}, sau đó kho lưu trữ sẽ được đóng gói",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "Các cuộc trò chuyện được đọc theo thứ tự sau: dữ liệu tài khoản, các cuộc trò chuyện riêng tư và bot, các nhóm, sau đó là các nhóm lớn và kênh, bắt đầu từ nhóm nhỏ nhất. Các tin nhắn trong mỗi cuộc trò chuyện được ưu tiên hiển thị trước các tệp tin, do đó một lần chạy kết thúc sớm vẫn giữ lại các thông tin cần thiết.",
+  "Untick a chat to leave it out.": "Bỏ chọn một cuộc trò chuyện để loại trừ nó.",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Ước tính về thời gian và dung lượng chỉ áp dụng cho {sampled} trong số {total} cuộc trò chuyện, do đó bảng chỉ liệt kê những cuộc trò chuyện đó. Quá trình xuất vẫn bao gồm mọi cuộc trò chuyện; để loại trừ các cuộc trò chuyện, hãy chọn các cuộc trò chuyện cần xuất thay thế.",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "Ước tính về thời gian và dung lượng áp dụng cho các cuộc trò chuyện {sampled}, do đó bảng chỉ liệt kê những cuộc trò chuyện đó. Quá trình xuất vẫn bao gồm mọi cuộc trò chuyện; để loại trừ các cuộc trò chuyện, hãy chọn các cuộc trò chuyện cần xuất thay thế.",
+  "Chat histories read": "Lịch sử trò chuyện đã đọc"
  },
  "zh": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一个 @username、一个带 + 号和国家代码的电话号码，或该账户聊天记录中的一位联系人。大多数人没有用户名：请从您的聊天记录中选择，或直接输入对方的电话号码。",
@@ -8051,7 +8139,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name}正在输入……",
   "{size} of about {total}": "{size}，约 {total}",
   "{size} of {total}": "{size} 中的 {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "聊天记录按以下顺序读取：账户数据、私人聊天和机器人、群组，然后是大群组和频道（从规模最小的开始）。每个聊天的消息都优先于文件，因此即使运行提前结束，仍会保留关键信息。取消勾选某项聊天即可将其排除在外。",
   "Complete": "完成",
   "If started now": "如果现在开始",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "若现在开始：{complete}个{total}个聊天已完成，{partial}个部分完成，{missed}个尚未处理。",
@@ -8064,7 +8151,12 @@ window.TGW_SEALED_LOCALES = {
   "Not reached": "未达到",
   "Photos of chats and people": "聊天记录和人物的照片",
   "Saving photos of chats and people": "保存聊天记录和人物的照片",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "数据收集将在{time}时间限制到期时停止，随后将归档文件打包"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "数据收集将在{time}时间限制到期时停止，随后将归档文件打包",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "聊天记录按以下顺序读取：账户数据、私人聊天和机器人、群组，然后是大型群组和频道（从规模最小的开始）。每个聊天记录的消息都排在文件之前，因此即使运行提前结束，仍能保留关键信息。",
+  "Untick a chat to leave it out.": "取消勾选某条聊天记录即可将其排除在外。",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "时间和大小估算基于{total}个聊天中的{sampled}个抽样，因此表格中仅列出了这些聊天。导出操作仍涵盖所有聊天；若要排除某些聊天，请自行选择要导出的聊天。",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "时间和大小估算基于{sampled}个聊天记录，因此表格中仅列出了这些。导出操作仍涵盖所有聊天记录；若要排除某些聊天记录，请自行选择要导出的聊天记录。",
+  "Chat histories read": "已读取的聊天记录"
  },
  "zh-Hant": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一個 @username、一個帶有 + 號及國家代碼的電話號碼，或是來自此帳號聊天室中的一位聯絡人。多數人沒有使用者名稱：請從您的聊天室中選擇，或直接輸入對方的電話號碼。",
@@ -8401,7 +8493,6 @@ window.TGW_SEALED_LOCALES = {
   "{name} is typing…": "{name} 正在輸入……",
   "{size} of about {total}": "{size} 約 {total}",
   "{size} of {total}": "{size} 中的 {total}",
-  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials. Untick a chat to leave it out.": "聊天記錄的讀取順序如下：帳戶資料、私人聊天與機器人、群組，接著是從規模最小的開始依序讀取大型群組與頻道。每個聊天記錄中的訊息會優先於檔案，因此即使執行過程提前結束，仍會保留必要資訊。若要排除某個聊天記錄，請取消勾選該項目。",
   "Complete": "完成",
   "If started now": "若現在開始",
   "Include": "包含",
@@ -8414,7 +8505,12 @@ window.TGW_SEALED_LOCALES = {
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "若現在開始：{total} 個聊天中 {complete} 個完整，{partial} 個部分，{missed} 個來不及。",
   "Photos of chats and people": "聊天記錄與人物的照片",
   "Saving photos of chats and people": "儲存聊天記錄及人物的照片",
-  "Collection stops at the time limit in {time}, then the archive is packaged": "資料蒐集將於 {time} 的時限屆滿時停止，隨後將檔案打包"
+  "Collection stops at the time limit in {time}, then the archive is packaged": "資料蒐集將於 {time} 的時限屆滿時停止，隨後將檔案打包",
+  "Chats are read in this order: account data, private chats and bots, groups, then large groups and channels from the smallest. Messages of every chat come before files, so a run that ends early still holds the essentials.": "對話的讀取順序如下：帳戶資料、私人對話與機器人、群組，接著是從最小規模開始的大群組與頻道。每個對話的訊息都排在檔案之前，因此即使執行過程提前結束，仍能保留必要資訊。",
+  "Untick a chat to leave it out.": "取消勾選某個聊天室即可將其排除在外。",
+  "The time and size estimate covers {sampled} of {total} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "時間與大小估算值涵蓋了 {sampled} 個（佔 {total} 個）的聊天室，因此表格中僅列出這些聊天室。匯出操作仍會涵蓋所有聊天室；若要排除某些聊天室，請改為手動選擇要匯出的聊天室。",
+  "The time and size estimate covers {sampled} chats, so the table lists only those. The export still covers every chat; to leave chats out, choose the chats to export instead.": "時間與大小估算涵蓋了 {sampled} 個聊天室，因此表格中僅列出這些聊天室。匯出操作仍會涵蓋所有聊天室；若要排除某些聊天室，請改為手動選擇要匯出的聊天室。",
+  "Chat histories read": "已讀的聊天記錄"
  }
 };
 window.TGW_SEALED_LANGUAGES = {"en": "English", "uk": "Українська", "es": "Español", "pt": "Português (Brasil)", "tr": "Türkçe", "ar": "العربية", "fa": "فارسی", "ur": "اردو", "hi": "हिन्दी", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "zh": "简体中文", "fr": "Français", "de": "Deutsch", "it": "Italiano", "uz": "O‘zbekcha", "ko": "한국어", "zh-Hant": "繁體中文", "ms": "Bahasa Melayu", "pl": "Polski", "ja": "日本語", "th": "ไทย", "he": "עברית", "bn": "বাংলা", "ru": "Русский"};
