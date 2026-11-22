@@ -37,7 +37,7 @@ CSS = """
 .map-grid td[data-a="4"]{background:var(--map-accent)}
 .map-grid td[data-l]::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%);border-radius:50%;background:var(--map-loss);box-shadow:0 0 0 1.5px var(--map-paper)}
 .map-grid td[data-l="1"]::after{width:4px;height:4px}.map-grid td[data-l="3"]::after{width:8px;height:8px}.map-grid td[data-l="4"]::after{width:10px;height:10px}
-.map-id{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:156px}.map-lanes td{width:auto;min-width:0;height:16px}
+.map-id{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);white-space:nowrap;margin-inline-start:6px}.map-run .map-id{margin-inline-start:0}.map-lanes{width:100%;table-layout:fixed}.map-lanes col.lane-col{width:170px}.map-lanes col.total-col{width:250px}.map-lanes td{width:auto;min-width:0;height:16px}
 .map-lanes th.lane{overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink)}.map-lanes td.total{background:transparent;font:500 10px/1.2 ui-monospace,monospace;color:var(--muted);text-align:end;padding-inline-start:6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-lanes tr.outside th.lane{color:var(--map-loss);font-style:italic}.map-week{width:100%;table-layout:fixed}.map-week td{width:auto;min-width:0;height:20px}.map-week th[scope=row]{width:42px;overflow:visible}.map-week thead th:first-child{width:42px}.map-week thead th[scope=col]{overflow:visible}
 .map-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:11px;color:var(--muted);margin-top:12px}
@@ -293,7 +293,7 @@ def lanes(rows, origin, step, count, say, title, note):
             if loss_level(lost, loss_peak):
                 tip += " · " + say("absent: {n}", n=number(lost, say))
             cells.append(cell(value, peak, lost, loss_peak, tip))
-        cells.append('<td class="total">' + e(row["total"]) + '</td>')
+        cells.append('<td class="total" title="' + e(row["total"]) + '">' + e(row["total"]) + '</td>')
         body.append('<tr' + (' class="outside"' if row.get("outside") else '') + '>' + ''.join(cells) + '</tr>')
     columns = '<colgroup><col class="lane-col">' + '<col>' * count + '<col class="total-col"></colgroup>'
     return ('<div class="map-card"><h3>' + e(title) + '</h3><p class="map-note">' + e(note) + '</p><div class="map-scroll">'
@@ -322,15 +322,21 @@ def week(matrix, say, title, loss=False):
 def lane_rows(groups, absent, origin, step, count, say):
     rows = []
     for key, label, link, times, outside in groups:
-        counts, losses = [0] * count, [0.0] * count
+        counts, losses, firm, likely = [0] * count, [0.0] * count, 0.0, 0.0
         for at in times:
             counts[min(count - 1, max(0, (at - origin) // step))] += 1
-        for owner, start, end, amount, _ in absent:
+        for owner, start, end, amount, quality in absent:
             if owner == key or outside and owner is None:
                 for index, part in spread(amount, start, end, origin, step, count):
                     losses[index] += part
-        lost = sum(losses)
-        total = say("{n} msgs", n=thousands(say, len(times))) + (" · " + say("absent {n}", n=number(lost, say)) if lost >= 0.05 else "")
+                if quality in ("certain", "proven"):
+                    firm += amount
+                else:
+                    likely += amount
+        # Numbers from the shared account-wide sequence are attributed by estimate; say so next to the count.
+        total = say("{n} msgs", n=thousands(say, len(times))) + "".join(
+            " · " + text for text in ((say("absent {n}", n=number(firm, say)) if firm >= 0.05 else ""),
+                                      (say("likely absent {n}", n=number(likely, say)) if likely >= 0.05 else "")) if text)
         rows.append({"id": key, "label": label, "link": link, "counts": counts, "losses": losses, "total": total, "outside": outside})
     return rows
 
@@ -351,12 +357,13 @@ def account_map(activity, gaps, chats, say):
     for owner, _, _, amount, _ in absent:
         owners[owner] = owners.get(owner, 0.0) + amount
     shared = gaps["shared"] if isinstance(gaps, dict) else None
-    lost_total = (shared["absent"] if shared else 0) + sum(item["absent"] for item in (gaps or {}).get("chats", []))
     parts = ['<section class="activity-map" id="activity-map"><h2>' + e(say("Activity and absent message numbers")) + '</h2>',
              '<p class="map-note">' + e(say("Message dates come from Telegram and are shown in UTC. Absent numbers are messages this export does not hold: deleted, hidden from this account or left out by the selection.")) + '</p>']
     parts.append(kpis([(total, say("Messages")), (len(activity.times), say("Chats with messages")), (len(days), say("Active days")),
                        (day_text(start) + " → " + day_text(end) if start is not None else "—", say("First and last message")),
-                       (lost_total, say("Absent message numbers")),
+                       (sum(item["absent"] for item in (gaps or {}).get("chats", [])),
+                        say("Absent numbers in channels and supergroups")),
+                       (shared["absent"] if shared else 0, say("Absent numbers in the shared account numbering")),
                        (shared["proven"] if shared else 0, say("Proven by a reply or pin"))], say))
     parts.append(numbered_runs(gaps, titles, activity.gap_links, say))
     parts.append(calendar(days, lost_days, say))

@@ -10762,5 +10762,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>공개 MTProxy</strong><span>덜 안정적 · 자동 풀</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "레코더 화면을 열어 ‘데스크톱’ 또는 ‘웹’, ‘네이티브 내보내기’ 또는 ‘시각적 캡처’를 선택하고, 프로비저닝된 커넥터를 지정하십시오. 이 모드는 별도의 공식 클라이언트 세션을 사용합니다.",
-  "Shown as {label} in the charts": "차트에서는 {label}로 표시됨"
+  "Shown as {label} in the charts": "차트에서는 {label}로 표시됨",
+  "likely absent {n}": "누락 가능성이 높은 {n}",
+  "Absent numbers in channels and supergroups": "채널 및 슈퍼그룹의 누락된 번호",
+  "Absent numbers in the shared account numbering": "공유 계정 번호 체계에서 누락된 번호"
 }

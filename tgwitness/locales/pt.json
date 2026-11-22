@@ -10823,5 +10823,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy Público</strong><span>Menos estável · pool automático</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Abra a tela do gravador para escolher entre “Desktop” ou “Web”, exportação nativa ou captura visual, e o conector provisionado. Esse modo utiliza uma sessão separada do cliente oficial.",
-  "Shown as {label} in the charts": "Exibido como {label} nos gráficos"
+  "Shown as {label} in the charts": "Exibido como {label} nos gráficos",
+  "likely absent {n}": "provavelmente ausente {n}",
+  "Absent numbers in channels and supergroups": "Números ausentes em canais e supergrupos",
+  "Absent numbers in the shared account numbering": "Números ausentes na numeração compartilhada da conta"
 }

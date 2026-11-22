@@ -10762,5 +10762,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>Công khai MTProxy</strong><span>Kém ổn định hơn · nhóm tự động</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Mở màn hình trình ghi để chọn “Desktop” hoặc “Web”, “xuất bản gốc” hoặc “ghi lại hình ảnh”, và trình kết nối đã được cấp phép. Chế độ này sử dụng một phiên làm việc riêng biệt trên ứng dụng khách chính thức.",
-  "Shown as {label} in the charts": "Được hiển thị dưới dạng {label} trong các biểu đồ"
+  "Shown as {label} in the charts": "Được hiển thị dưới dạng {label} trong các biểu đồ",
+  "likely absent {n}": "có khả năng thiếu {n}",
+  "Absent numbers in channels and supergroups": "Các số tin nhắn thiếu trong các kênh và siêu nhóm",
+  "Absent numbers in the shared account numbering": "Các số tin nhắn thiếu trong hệ thống đánh số chung của tài khoản"
 }

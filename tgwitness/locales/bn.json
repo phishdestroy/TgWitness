@@ -10813,5 +10813,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>পাবলিক MTProxy</strong><span>কম স্থিতিশীল · স্বয়ংক্রিয় পুল</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "রেকর্ডার স্ক্রীন খুলে ডেস্কটপ বা ওয়েব, নেটিভ এক্সপোর্ট বা ভিজ্যুয়াল ক্যাপচার এবং প্রোভিশনকৃত সংযোগকারী নির্বাচন করুন। এই মোডটি একটি পৃথক অফিসিয়াল-ক্লায়েন্ট সেশন ব্যবহার করে।",
-  "Shown as {label} in the charts": "চার্টে {label} হিসেবে দেখানো হয়েছে"
+  "Shown as {label} in the charts": "চার্টে {label} হিসেবে দেখানো হয়েছে",
+  "likely absent {n}": "সম্ভাব্য অনুপস্থিত {n}",
+  "Absent numbers in channels and supergroups": "চ্যানেল এবং সুপারগ্রুপে অনুপস্থিত সংখ্যা",
+  "Absent numbers in the shared account numbering": "সমন্বিত অ্যাকাউন্ট নম্বরকরণে অনুপস্থিত সংখ্যা"
 }

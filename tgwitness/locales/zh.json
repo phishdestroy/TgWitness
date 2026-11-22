@@ -10762,5 +10762,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>公共 MTProxy</strong><span>稳定性较差 · 自动池</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "打开录制界面，选择“桌面”或“网页”、原生导出或可视化捕获，以及已配置的连接器。此模式使用一个独立的官方客户端会话。",
-  "Shown as {label} in the charts": "在图表中显示为 {label}"
+  "Shown as {label} in the charts": "在图表中显示为 {label}",
+  "likely absent {n}": "可能缺失 {n}",
+  "Absent numbers in channels and supergroups": "频道和超级群组中的缺失编号",
+  "Absent numbers in the shared account numbering": "共享账号编号中的缺失编号"
 }

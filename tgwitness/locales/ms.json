@@ -10762,5 +10762,8 @@
   "<strong>Public MTProxy</strong><span>Less stable · automatic pool</span>": "<strong>MTProxy Awam</strong><span>Kurang stabil · kolam automatik</span>",
   "-1001234567890: 402, 405 https://t.me/c/1234567890/402": "-1001234567890: 402, 405 https://t.me/c/1234567890/402",
   "Open the recorder screen to choose Desktop or Web, native export or visual capture, and the provisioned connector. This mode uses a separate official-client session.": "Buka skrin perakam untuk memilih Desktop atau Web, eksport asli atau tangkapan visual, dan penyambung yang disediakan. Mod ini menggunakan sesi klien rasmi berasingan.",
-  "Shown as {label} in the charts": "Ditunjukkan sebagai {label} dalam carta"
+  "Shown as {label} in the charts": "Ditunjukkan sebagai {label} dalam carta",
+  "likely absent {n}": "kemungkinan tiada {n}",
+  "Absent numbers in channels and supergroups": "Nombor yang tiada dalam saluran dan superkumpulan",
+  "Absent numbers in the shared account numbering": "Nombor yang tiada dalam penomboran akaun bersama"
 }
