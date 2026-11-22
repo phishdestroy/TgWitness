@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- `tgwitness backup` leaves out a `backup-manifest.json` that came with a restored folder, so a backup of a restored data directory verifies.
 - `tgwitness verify-backup` reports a backup manifest that is not a JSON object as unreadable instead of stopping with an error.
 - Reports with a Selected data section: when there are unobserved message IDs but no ranges are listed, the HTML and PDF reports no longer also say that none were found.
 - Panel and report translations: in most languages a number now stands where the language puts it, for example “3 of 10 chats”, instead of after the noun as if it were a name, and it no longer runs into the next word. Phrases about exactly one item use the singular, also where a language has a separate form for one or two. The documentation checklist shows the date and time each goal was last seen, and watched profiles show the date of the last check and of the last time online, not only the time. A French or Italian PDF transcript in several parts no longer says the newest messages come first.
