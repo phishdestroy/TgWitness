@@ -24,6 +24,7 @@ Progress, hints and errors go to stderr. Exit codes are stable:
 | `2` | Usage error or invalid request: bad date, unknown option, search index off |
 | `3` | Unavailable now: the workspace is open in a running panel, or the panel asks to retry later (rate limit, timeout) |
 | `4` | Access refused: missing, expired or revoked token, a chat outside its scope, a tool it does not allow |
+| `130` | `backup` stopped with Ctrl+C: nothing was written to the destination |
 
 ## Two ways to read
 
