@@ -531,7 +531,11 @@ def forgery_lines(result):
         lines.append("A separate witness key retained the head (" + ladder["witnessed"]["detail"]
                      + "): changing those records also needs that key.")
     if ladder.get("sealed", {}).get("status") == "pass":
-        lines.append("The collector key was created inside an attested Intel TDX VM: signing elsewhere needs a break of Intel TDX.")
+        lines.append("GitHub's signed build provenance (Sigstore, issued to the run's GitHub OIDC identity) binds this archive "
+                     "to a run of the approved workflow " + str((result.get("runtime_attestation") or {}).get("workflow"))
+                     + " on a GitHub-hosted runner, where the approved code creates the collector key and a new Telegram "
+                     "session: changing the archive needs a new attestation from a run of that workflow, or a break of "
+                     "GitHub Actions or Sigstore. The runner's hardware isolation is not attested.")
     if not lines:
         lines.append("No external time was checked in this run: use --tsa-ca or --check-bitcoin for the archive's "
                      "timestamps, or add a witness.")
@@ -551,11 +555,17 @@ def english(text, **values):
 
 
 def tdx_condition(tdx):
-    failed = next((q for q in tdx["quotes"] if q["status"] != "pass"), None)
+    failed = next((q for q in tdx["quotes"] if q["status"] not in ("pass", "partial")), None)
     if failed:
         return "missing", "Intel TDX check failed: {detail}", {"detail": (
             "record " + str(failed["record"]) + ": " if "record" in failed else "") + failed["detail"]
             + (" (" + failed["error"] + ")" if failed.get("error") else "")}
+    unchecked = sum(q["status"] == "partial" for q in tdx["quotes"])
+    if unchecked:
+        return ("partial", "{count} Intel TDX quote(s) verified offline and bound to the collector key; {missing} without "
+                           "Intel's collateral, so their TCB status, Intel's revocation lists, QE Identity and TDX module "
+                           "are not checked; the code the VM ran is not checked here",
+                {"count": len(tdx["quotes"]), "missing": unchecked})
     return ("partial", "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran "
                        "is not checked here", {"count": len(tdx["quotes"])})
 

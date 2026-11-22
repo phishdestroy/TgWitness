@@ -77,10 +77,14 @@ def archive_seal(archive, name, public_key):
 REPORT_JSON = "report-json-v1"
 PDF_SEAL = "2.25.240684792623320047764573196045913242332"
 SIGNING_TIME = "1.2.840.113549.1.9.5"
+PDF_SIGNATURE_TIMESTAMP = "1.2.840.113549.1.9.16.2.14"
+PDF_DATA, PDF_SHA256, PDF_ECDSA_SHA256 = "1.2.840.113549.1.7.1", "2.16.840.1.101.3.4.2.1", "1.2.840.10045.4.3.2"
 
 
 def read_pdf_seal(data):
-    from .timestamps import MESSAGE_DIGEST, SIGNED_DATA, children, der, oid
+    from .evidence_records import ers_reply
+    from .timestamps import MESSAGE_DIGEST, SIGNED_DATA, children, der, hashed, oid, stamp_time
+    from .timestamps import timestamp_token, tsa_signature_check, tst_info
     ranges = re.findall(rb"/ByteRange\s*\[\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*\]", data)
     if len(ranges) != 1:
         raise ValueError("Not a PDF signed by TgWitness: exactly one signature is expected")
@@ -89,27 +93,57 @@ def read_pdf_seal(data):
         raise ValueError("The PDF signature does not cover the whole file")
     raw = bytes.fromhex(data[b + 1:c - 1].decode("ascii"))
     content = hashlib.sha256(data[:b] + data[c:]).digest()
-    _, start, end = der(raw, 0)
+    tag, start, end = der(raw, 0)
+    if tag != 0x30 or any(raw[end:]):
+        raise ValueError("The PDF signature carries data after its CMS structure")
     info = children(raw, start, end)
-    if oid(raw, info[0][2], info[0][3]) != SIGNED_DATA:
+    if len(info) != 2 or info[0][0] != 0x06 or oid(raw, info[0][2], info[0][3]) != SIGNED_DATA or info[1][0] != 0xA0:
         raise ValueError("The PDF signature is not CMS signed data")
-    _, start, end = der(raw, info[1][2])
-    signed = children(raw, start, end)
-    certificates = next(item for item in signed if item[0] == 0xA0)
-    tag, offset, _, value_end = children(raw, certificates[2], certificates[3])[0]
-    der_certificate = raw[offset:value_end]
+    tag, start, end = der(raw, info[1][2])
+    signed = children(raw, start, end) if tag == 0x30 and end == info[1][3] else []
+    if [item[0] for item in signed] != [0x02, 0x31, 0x30, 0xA0, 0x31] or raw[signed[0][2]:signed[0][3]] != b"\x01":
+        raise ValueError("The PDF signature carries CMS fields TgWitness does not write")
+    certificates, signers = children(raw, signed[3][2], signed[3][3]), children(raw, signed[4][2], signed[4][3])
+    if len(certificates) != 1 or len(signers) != 1:
+        raise ValueError("The PDF signature must carry exactly one certificate and one signer")
+    encapsulated = children(raw, signed[2][2], signed[2][3])
+    if len(encapsulated) != 1 or encapsulated[0][0] != 0x06 or oid(raw, *encapsulated[0][2:]) != PDF_DATA:
+        raise ValueError("The PDF signature is not detached")
+    der_certificate = raw[certificates[0][1]:certificates[0][3]]
     certificate = x509.load_der_x509_certificate(der_certificate)
-    signer = children(raw, signed[-1][2], signed[-1][3])[0]
-    parts = children(raw, signer[2], signer[3])
-    attributes = next(item for item in parts if item[0] == 0xA0)
-    unsigned = next((item for item in parts if item[0] == 0xA1), None)
-    signature = next(item for item in parts if item[0] == 0x04)
+    parts = children(raw, signers[0][2], signers[0][3])
+    if [item[0] for item in parts] not in ([0x02, 0x30, 0x30, 0xA0, 0x30, 0x04], [0x02, 0x30, 0x30, 0xA0, 0x30, 0x04, 0xA1]) \
+            or raw[parts[0][2]:parts[0][3]] != b"\x01":
+        raise ValueError("The PDF signer carries fields TgWitness does not write")
+    attributes, signature = parts[3], parts[5]
+    unsigned = parts[6] if len(parts) == 7 else None
+
+    def algorithm(item, expected):
+        found = children(raw, item[2], item[3]) if item[0] == 0x30 else []
+        if not found or found[0][0] != 0x06 or oid(raw, *found[0][2:]) != expected or len(found) > 2 \
+                or len(found) == 2 and raw[found[1][1]:found[1][3]] != b"\x05\x00":
+            raise ValueError("The PDF signature names an algorithm TgWitness does not use")
+    digests = children(raw, signed[1][2], signed[1][3])
+    if len(digests) != 1:
+        raise ValueError("The PDF signature names an algorithm TgWitness does not use")
+    algorithm(digests[0], PDF_SHA256)
+    algorithm(parts[2], PDF_SHA256)
+    algorithm(parts[4], PDF_ECDSA_SHA256)
+    sid = children(raw, parts[1][2], parts[1][3])
+    if len(sid) != 2 or raw[sid[0][1]:sid[0][3]] != certificate.issuer.public_bytes() or sid[1][0] != 0x02 \
+            or int.from_bytes(raw[sid[1][2]:sid[1][3]], "big", signed=True) != certificate.serial_number:
+        raise ValueError("The PDF signer does not name the certificate in the signature")
 
     def values(item):
         found = {}
-        for _, _, s, e in children(raw, item[2], item[3]):
-            kind = children(raw, s, e)
-            found[oid(raw, kind[0][2], kind[0][3])] = children(raw, kind[1][2], kind[1][3])[0]
+        for kind_tag, _, s, e in children(raw, item[2], item[3]):
+            kind = children(raw, s, e) if kind_tag == 0x30 else []
+            if len(kind) != 2 or kind[0][0] != 0x06 or kind[1][0] != 0x31:
+                raise ValueError("Malformed PDF signature attribute")
+            name, value = oid(raw, kind[0][2], kind[0][3]), children(raw, kind[1][2], kind[1][3])
+            if name in found or len(value) != 1:
+                raise ValueError("A PDF signature attribute is repeated or holds more than one value")
+            found[name] = value[0]
         return found
     signed_attributes = values(attributes)
     digest = signed_attributes.get(MESSAGE_DIGEST)
@@ -117,9 +151,24 @@ def read_pdf_seal(data):
         raise ValueError("The PDF was changed after it was signed")
     certificate.public_key().verify(raw[signature[2]:signature[3]], b"\x31" + raw[attributes[1] + 1:attributes[3]],
                                     ec.ECDSA(hashes.SHA256()))
-    seal = values(unsigned).get(PDF_SEAL) if unsigned else None
-    if seal is None:
+    extra = values(unsigned) if unsigned else {}
+    seal = extra.get(PDF_SEAL)
+    if seal is None or seal[0] != 0x0C:
         raise ValueError("The PDF signature carries no TgWitness seal")
+    if set(extra) - {PDF_SEAL, PDF_SIGNATURE_TIMESTAMP}:
+        raise ValueError("The PDF signature carries unsigned attributes TgWitness does not write")
+    stamped = None
+    if PDF_SIGNATURE_TIMESTAMP in extra:
+        token = extra[PDF_SIGNATURE_TIMESTAMP]
+        reply = ers_reply(raw[token[1]:token[3]])
+        try:
+            found = tst_info(timestamp_token(reply)["tst"])
+            if found["hash"] != hashed(found["algorithm"], raw[signature[2]:signature[3]]):
+                raise ValueError("it covers other data than this signature")
+            tsa_signature_check(reply, ())
+        except (ValueError, TypeError, IndexError, KeyError) as exc:
+            raise ValueError("The time stamp on the PDF signature is invalid: " + str(exc)) from None
+        stamped = stamp_time(found["time"])
     seal = strict_json(raw[seal[2]:seal[3]].decode("utf-8"))
     certificate_sha256 = hashlib.sha256(der_certificate).hexdigest()
     if seal["statement"].get("document_certificate_sha256") != certificate_sha256 \
@@ -130,7 +179,8 @@ def read_pdf_seal(data):
     return content.hex(), seal, {"certificate": names[0].value if names else certificate.subject.rfc4514_string(),
                                  "certificate_subject": certificate.subject.rfc4514_string(),
                                  "certificate_sha256": certificate_sha256,
-                                 "signing_time": raw[when[2]:when[3]].decode("ascii") if when else None}
+                                 "signing_time": raw[when[2]:when[3]].decode("ascii") if when else None,
+                                 **({"signature_timestamp": stamped} if stamped else {})}
 
 
 def read_json_seal(data):

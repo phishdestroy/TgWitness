@@ -149,6 +149,9 @@ def register(app, authenticate):
     @app.post("/api/integrations/mcp/check", dependencies=[Depends(authenticate)])
     async def protocol_check(request: Request, body: ProtocolCheck):
         from .mcp_server import check_protocol
+        from .mcp_transport import panel_address
+        if body.url and not panel_address(request, body.url, getattr(app.state, "archive_mcp_origins", ())):
+            raise HTTPException(400, "MCP protocol or authorization check failed. Check the endpoint and credential.")
         token = body.token.get_secret_value()
         try:
             connections(app).resolve(token)

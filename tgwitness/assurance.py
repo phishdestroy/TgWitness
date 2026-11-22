@@ -32,6 +32,7 @@ ATTESTATION = ("self-reported by the collector process on its own host; root on 
                "falsify it. Compare with the provider's action log, firewall and the Cloudflare tunnel record.")
 QUOTES = threading.Lock()
 CACHE = {}
+CHALLENGE_QUEUE = 4
 
 
 def mode(environ=os.environ):
@@ -228,7 +229,18 @@ async def address_loop(vault, topic, interval=30, every=10800, host=quick_tunnel
 
 
 PRIVATE_HOST = ("recent_logins",)
-PRIVATE_PROVIDER = ("public_ipv4",)
+PRIVATE_PROVIDER = ("public_ipv4", "user_data_redacted")
+PRIVATE_DEPLOYMENT = ("beacon",)
+PRIVATE_GATEWAY = ("doh_subdomain",)
+
+
+def public_deployment(value):
+    if not isinstance(value, dict):
+        return value
+    found = {k: v for k, v in value.items() if k not in PRIVATE_DEPLOYMENT}
+    if isinstance(found.get("gateway"), dict):
+        found["gateway"] = {k: v for k, v in found["gateway"].items() if k not in PRIVATE_GATEWAY}
+    return found
 
 
 def attestation(selected, value):
@@ -263,7 +275,8 @@ def statement(vault, receipt, run_event_seq, selected, provider, challenge=None,
     if not challenge and CACHE.get("until", 0) > time.monotonic() and CACHE.get("key") == vault.public_key:
         return CACHE["answer"]
     host = {k: v for k, v in snapshot(selected, provider, root).items() if k not in PRIVATE_HOST}
-    host["provider"] = {k: v for k, v in provider.items() if k not in PRIVATE_PROVIDER}
+    host["provider"] = {k: v for k, v in host["provider"].items() if k not in PRIVATE_PROVIDER}
+    host["deployment"] = public_deployment(host["deployment"])
     value = {"format": "tgwitness-assurance-v1", "created_at": utcnow(), "challenge": challenge,
              "public_key": vault.public_key, "fingerprint": fingerprint(vault.public_key),
              "run_id": receipt["run_id"], "run_event_seq": run_event_seq, "version": receipt["version"],
