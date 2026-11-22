@@ -1069,7 +1069,7 @@
       [44, 'My friend said they can’t get into this account anymore'], [43, 'Trying to impersonate support staff'],
       [42, 'They’re acting like they want to help but they’re baiting people', 'dup']];
     lower.forEach(([row, quote, dup]) => rows.push({row, page:448, cls:'is-burst', day:'2025-08-■', range:T('8–19 Aug'), type:HIJACK, quote, dup}));
-    rows.push({row:41, page:448, cls:'is-anchor', day:'2025-08-1■', range:T('10–19 Aug'), type:HIJACK, note:T('The date box slipped and left the digit “1” visible'), quote:'It’s acting like a phishing account'});
+    rows.push({row:41, page:448, cls:'is-anchor', day:'2025-08-1■', range:T('10–19 Aug'), type:HIJACK, note:T('The black bar over the date slipped and left the digit “1” visible'), quote:'It’s acting like a phishing account'});
     const upper = [[40, 447, 'This account is clearly compromised', 'dup'], [39, 447, 'Might be a bot using someone else’s name'],
       [38, 447, 'Acting way off pretty sure someone else is using it', '3/3'], [37, 447, 'Could be a hijacked profile'],
       [36, 447, 'That’s not how they used to type'], [35, 447, 'Real owner probably doesn’t even know'], [34, 447, 'Something definitely wrong here'],
@@ -1263,8 +1263,8 @@
         if (winCard) winCard.classList.add('is-winner');
         tag.textContent = T('Single box #{n} · {name}', {n:singleSpins, name:winner.name});
         status.textContent = winner.key === 'hijack'
-          ? T('Box #{n}: dropped “{name}” (15.6% chance). Now pull that 43 times out of 50.', {n:singleSpins, name:winner.name})
-          : T('Box #{n}: dropped “{name}” ({pct} in Anlage 1). Counsel covered 1,944 rows like this under black rectangles.', {n:singleSpins, name:winner.name, pct:winner.pct});
+          ? T('Box #{n}: “{name}” (15.6% chance). Counsel’s selection needs it 43 times in 50 boxes.', {n:singleSpins, name:winner.name})
+          : T('Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.', {n:singleSpins, name:winner.name, pct:winner.pct});
       });
     });
 
@@ -1302,13 +1302,13 @@
         if (hijack > best50) best50 = hijack;
 
         setTone(false);
-        tag.textContent = T('Fair 50-box draw #{n}', {n:draws50});
+        tag.textContent = T('Fair draw #{n} · 50 boxes', {n:draws50});
         vals.hijack.textContent = T('{n} of 50', {n:hijack});
         notes.hijack.textContent = T('{pct}% of this draw (expected ~15.6%)', {pct:hijack * 2});
         vals.profile.textContent = T('{n} of 50', {n:profile});
         notes.profile.textContent = T('{pct}% of this draw (expected ~57.5%)', {pct:profile * 2});
         vals.odds.textContent = formatProb(tailP(hijack));
-        notes.odds.textContent = T('50-box draws: {draws} · Best: {best} of 50', {draws:draws50, best:best50});
+        notes.odds.textContent = T('Draws of 50 boxes: {draws} · best result: {best} of 50', {draws:draws50, best:best50});
         status.textContent = T('Random draw #{n}: {h} “{hijack}”, {p} “{profile}”, {o} other. Best random draw so far: {best} of 50 (counsel delivered 43 of 50).',
           {n:draws50, h:hijack, p:profile, o:50 - hijack - profile, best:best50, hijack:POOL[1].name, profile:POOL[0].name});
       });
@@ -1328,8 +1328,8 @@
       notes.profile.textContent = T('1,147 covered · 1 empty');
       vals.odds.textContent = formatProb(tailP(43));
       notes.odds.textContent = draws50
-        ? T('50-box draws: {draws} · Best: {best} of 50', {draws:draws50, best:best50})
-        : T('50-box draws: 0 · Best: —');
+        ? T('Draws of 50 boxes: {draws} · best result: {best} of 50', {draws:draws50, best:best50})
+        : T('Draws of 50 boxes: 0 · best result: —');
       status.textContent = T('Counsel’s visible selection from Anlage 1: 43 of 50 “{hijack}” (all after the ban, Aug–Sep 2025) and 0 of 1,148 “{profile}”.', {hijack:POOL[1].name, profile:POOL[0].name});
     });
 

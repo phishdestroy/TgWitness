@@ -1000,6 +1000,7 @@
 .lb-reel-item.is-winner { border-color:var(--lb-gold); box-shadow:0 0 0 1px var(--lb-gold),0 0 22px rgba(251,191,36,.45); }
 .lb-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:16px; }
 .lb-node { background:var(--lb-surface-2); border:1px solid var(--lb-border-soft); border-radius:10px; padding:13px 14px; display:flex; flex-direction:column; gap:5px; }
+.lb-node .lab-kicker { text-transform:uppercase; }
 .lb-node.is-broken { border-color:var(--lb-danger); background:var(--lb-danger-bg); }
 .lb-node.is-valid { border-color:var(--lb-ok); background:var(--lb-ok-bg); }
 .lb-node strong { font-size:19px; line-height:1.2; letter-spacing:-.01em; color:var(--lb-text); font-variant-numeric:tabular-nums; }
