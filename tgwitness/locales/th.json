@@ -8204,7 +8204,7 @@
   "in use": "กำลังใช้งาน",
   "investigation": "การสอบสวน",
   "last online {at}": "ครั้งสุดท้ายที่ออนไลน์{at}",
-  "last {at}": "{at}ล่าสุด",
+  "last seen {at}": "เห็นครั้งสุดท้าย {at}",
   "listens on loopback": "รอรับที่ loopback",
   "listens on the network": "รอรับบนเครือข่าย",
   "live · {n}s": "สด · {n} วินาที",

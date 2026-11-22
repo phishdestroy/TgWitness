@@ -6009,7 +6009,7 @@
     "many": "{n} przerw w ciągu {days} dni",
     "other": "{n} przerwy w ciągu {days} dni"
   },
-  "{n} interruption in {days} days": "{n} przerw{days} dni",
+  "{n} interruption in {days} days": "{n} przerw w ciągu {days} dni",
   "Export with {n} accounts": {
     "one": "Eksport z {n} kontem",
     "few": "Eksport z {n} kontami",
@@ -8328,7 +8328,7 @@
   "in use": "w użyciu",
   "investigation": "dochodzenie",
   "last online {at}": "ostatnio online {at}",
-  "last {at}": "last{at}",
+  "last seen {at}": "ostatnio widziano o {at}",
   "listens on loopback": "nasłuchuje na loopback",
   "listens on the network": "nasłuchuje w sieci",
   "live · {n}s": "na żywo · {n} s",

@@ -1032,7 +1032,7 @@
         node('span', 'doc-goal-status ' + (stat ? 'obtained' : ''), stat ? String(stat.count) : '0'),
         el('div', 'doc-goal-main', node('span', 'doc-goal-text', entry.value),
           node('span', 'doc-sub', [tr((ENTRY_KINDS.find(k => k[0] === entry.kind) || [, entry.kind])[1]),
-            entry.note, stat ? tr('last {at}', {at: clock(stat.last_at)}) : ''].filter(Boolean).join(' · '))),
+            entry.note, stat ? tr('last seen {at}', {at: clock(stat.last_at)}) : ''].filter(Boolean).join(' · '))),
         el('div', 'doc-row-actions doc-goal-tools', button('', 'ghost doc-icon-btn danger', async () => {
           await api('watchlists/' + item.id + '/entries/' + entry.id, undefined, {method: 'DELETE'});
           await loadLists(box);

@@ -8250,7 +8250,7 @@
   "in use": "زیرِ استعمال",
   "investigation": "تفتیش",
   "last online {at}": "آخری بار آن لائن {at}",
-  "last {at}": "آخری {at}",
+  "last seen {at}": "آخری بار دیکھا گیا {at}",
   "listens on loopback": "loopback پر سنتا ہے",
   "listens on the network": "نیٹ ورک پر سنتا ہے",
   "live · {n}s": "براہِ راست · {n} سیکنڈ",
@@ -9098,7 +9098,7 @@
   "Add message numbers": "پیغام نمبر شامل کریں",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "چٹ آئی ڈی، کولن اور پیغام نمبر، یا t.me/c لنکس۔ ہر سطر میں ایک چٹ۔",
   "Could not read: {text}": "پڑھا نہیں جا سکا: {text}",
-  "Show {n} more setting": "مزید {n} سیٹنگ دکھائیں",
+  "Show {n} more setting": "{n} مزید ترتیبات دکھائیں",
   "Show {n} more settings": {
     "one": "مزید {n} سیٹنگ دکھائیں",
     "other": "مزید {n} سیٹنگز دکھائیں"
@@ -10819,7 +10819,7 @@
   "Signing pages and downloading files started": "صفحات پر دستخط اور فائلوں کی ڈاؤن لوڈنگ شروع ہو گئی",
   "Pages signed: {pages}, with {n} records": "دستخط شدہ صفحات: {pages}، جن میں {n} ریکارڈز شامل ہیں۔",
   "all chats of the account": "اکاؤنٹ کی تمام چیٹس",
-  "{selected} of {listed} chats in the list": "فہرست میں {listed} چٹس کا {selected}",
+  "{selected} of {listed} chats in the list": "فہرست میں {listed} میں سے {selected} چیٹس",
   "none · IDs {first}–{last}": "کوئی نہیں · شناختی نمبر {first}–{last}",
   "Signed records:": "تصدیق شدہ ریکارڈز:",
   "recorded in the journal": "جرنل میں درج",
