@@ -357,14 +357,24 @@ class Session:
     async def stop_chats(self, cancel):
         if self.chats_task is None or self.chats_task.done():
             return
-        chat_id, state, snapshot = self.current_chat, self.collector.export_state or {}, None
+        chat_id, state, snapshot, salvage = self.current_chat, self.collector.export_state or {}, None, None
         if not cancel and chat_id is not None and state.get("phase") == "running":
             try:
                 snapshot = await complete_in_thread(self.collector.live_snapshot, state["id"])
             except Exception:
                 snapshot = None
+            if snapshot is None:
+                folder = self.collector.store.root / "temporary-exports"
+                folder.mkdir(mode=0o700, exist_ok=True)
+                salvage = folder / ("tgwitness-export-salvage-" + secrets.token_hex(8) + ".zip")
+                self.collector.export_salvage = salvage
         self.chats_task.cancel()
         await asyncio.gather(self.chats_task, return_exceptions=True)
+        if self.collector.export_task is not None:
+            await asyncio.gather(self.collector.export_task, return_exceptions=True)
+        self.collector.export_salvage = None
+        if salvage is not None and state.get("salvaged") == str(salvage) and salvage.is_file():
+            snapshot = salvage
         if chat_id is not None and not cancel:
             self.keep_chat_export(chat_id, Path(snapshot) if snapshot else None)
         self.current_chat = None
