@@ -921,9 +921,13 @@ function renderMeter(progress) {
   $("meter-fill").style.width = known ? progress.percent + "%" : "";
   if (known) $("meter-bar").setAttribute("aria-valuenow", String(progress.percent)); else $("meter-bar").removeAttribute("aria-valuenow");
   $("meter-elapsed").textContent = tr("Elapsed: {time}", {time: duration(progress.elapsed_seconds)});
+  // A selection larger than the session does not run to its estimate: collection stops at the time limit.
+  const budget = lastState?.time_budget, stops = budget?.collection_seconds;
   $("meter-eta").textContent = waiting ? tr("Telegram asked to wait until {time}", {time: waiting}) :
-    progress.stage === "packaging" ? "" : progress.eta_seconds != null ?
-    tr("About {time} left, archive included", {time: duration(progress.eta_seconds)}) : "";
+    progress.stage === "packaging" ? "" : progress.eta_seconds != null && stops != null &&
+    progress.eta_seconds > (budget.remaining_seconds ?? Infinity) ?
+    tr("Collection stops at the time limit in {time}, then the archive is packaged", {time: duration(stops)}) :
+    progress.eta_seconds != null ? tr("About {time} left, archive included", {time: duration(progress.eta_seconds)}) : "";
   const parts = [], of = (done, total) => tr("{done} of {total}", {done: count(done), total: count(total)});
   const detail = progress.detail;
   if (detail) parts.push(meterPart(tr("Chats checked"), detail.done, detail.total, detail.total ? of(detail.done, detail.total) : count(detail.done)));
