@@ -153,7 +153,7 @@ class StagedTransport:
             while True:
                 self.export.ensure_storage()
                 started = utcnow()
-                self.export.current["current_chat"] = self.export.chat_label(task["chat_id"])
+                self.export.current["current_chat"] = self.export.task_label(task)
                 try:
                     if task.get("discovery_error"):
                         self.save(task, cursor, cursor, True, [], started, error=task["discovery_error"])

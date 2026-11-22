@@ -48,6 +48,10 @@ def account(job, plan, elapsed, eta):
         detail = {"done": found.get("done") or 0, "total": found.get("total")}
         overall = None
     current = job.get("current_chat")
+    if stage == "messages" and (job.get("acquisition") or {}).get("history_complete"):
+        stage = "files"
+    if isinstance(current, dict) and current.get("task") == "avatars":
+        stage, current = "photos", None
     files = (counts.get("media_saved") or 0) + (counts.get("media_hashed") or 0)
     return {"stage": stage, "percent": percent(overall, phase not in ("done",)), "detail": detail,
             "messages": {"done": messages, "total": messages_total},

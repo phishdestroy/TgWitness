@@ -164,6 +164,17 @@ def reading_order(tasks, chats):
     return sorted(tasks, key=rank)
 
 
+def attachment_order(tasks, chats):
+    """Files follow the reading order, except that photos of chats and people come right after the files of private
+    chats and bots: they are looked up after all messages, when every author is known, and they are small."""
+    kinds = {chat["id"]: chat.get("kind") for chat in chats}
+    photos = [task for task in tasks if task["category"] == "avatars"]
+    rest = [task for task in tasks if task["category"] != "avatars"]
+    at = next((index for index, task in enumerate(rest) if task["category"] == "messages"
+               and kinds.get(task["chat_id"]) not in ("private", "bot")), len(rest))
+    return rest[:at] + photos + rest[at:]
+
+
 def chat_in_scope(options, kind, username):
     categories = options.get("chat_categories")
     return kind in options["chat_kinds"] and (categories is None or category_of(kind, username) in categories)
@@ -460,6 +471,11 @@ class AccountExport:
     def chat_label(self, chat_id):
         title = next((chat.get("title") for chat in (self.inventory or {}).get("chats", ()) if chat.get("id") == chat_id), None)
         return {"id": chat_id, "title": title} if title else chat_id
+
+    def task_label(self, task):
+        if task["category"] == "avatars":
+            return {"id": None, "title": "Photos of chats and people", "task": "avatars"}
+        return self.chat_label(task["chat_id"])
 
     async def finish(self, job_id, reason="Stopped before acquisition completed."):
         from .account_finalization import finalize
@@ -1040,16 +1056,18 @@ class AccountExport:
                 await self.retry(lambda: network.validate_inventory(self.inventory))
             self.current.update(phase="running", error=None, wait_until=None, delay_seconds=None, wait_reason=None)
             self.persist()
+            tasks = self.inventory["tasks"]
             if options.get("messages_first", False):
                 from .account_acquisition import StagedTransport
                 network = StagedTransport(network, self, {**job, "options": options})
                 await network.prepare()
-            for task in self.inventory["tasks"]:
+                tasks = attachment_order(tasks, self.inventory["chats"])
+            for task in tasks:
                 previous = self.progress.get(task["id"])
                 if previous and previous["terminal"]:
                     continue
                 cursor = previous["cursor_after"] if previous else task["cursor_start"]
-                self.current["current_chat"] = self.chat_label(task["chat_id"])
+                self.current["current_chat"] = self.task_label(task)
                 if task.get("discovery_error"):
                     await complete_in_thread(self.seal, job, task, cursor, cursor, True, [], 0, utcnow(), "failed", task["discovery_error"])
                     continue

@@ -886,6 +886,7 @@ function chatSummary(state) {
 }
 const STAGES = {inventory: "Reading the chat list", inventory_left: "Reading the channels and groups this account has left",
   checking: "Checking each chat before reading it", messages: "Reading messages", files: "Downloading files",
+  photos: "Saving photos of chats and people",
   waiting: "Waiting for Telegram", packaging: "Packaging the signed archive"};
 const count = value => Number(value || 0).toLocaleString(lang);
 function duration(seconds) {

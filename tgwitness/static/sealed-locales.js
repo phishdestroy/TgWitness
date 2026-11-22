@@ -366,7 +366,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Сообщения; без файлов",
   "Newest ~{n} messages": "Свежие ~{n} сообщений",
   "Not reached": "Не успеет",
-  "Photos of chats and people": "Фотографии чатов и людей"
+  "Photos of chats and people": "Фотографии чатов и людей",
+  "Saving photos of chats and people": "Сохраняем фото чатов и людей"
  },
  "ar": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "اسم مستخدم (@username)، أو رقم هاتف يبدأ بـ + ورمز البلد، أو شخص من محادثات هذا الحساب. معظم الأشخاص ليس لديهم اسم مستخدم: اخترهم من محادثاتك أو أدخل رقمهم.",
@@ -714,7 +715,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "الرسائل؛ بدون ملفات",
   "Newest ~{n} messages": "أحدث ~{n} رسالة",
   "Not reached": "لم يتم الوصول إليها",
-  "Photos of chats and people": "صور للمحادثات والأشخاص"
+  "Photos of chats and people": "صور للمحادثات والأشخاص",
+  "Saving photos of chats and people": "حفظ صور المحادثات والأشخاص"
  },
  "bn": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + চিহ্নসহ দেশ কোড যুক্ত একটি ফোন নম্বর, অথবা এই অ্যাকাউন্টের চ্যাট থেকে কোনো ব্যক্তি। অধিকাংশ মানুষের কোনো ব্যবহারকারীর নাম থাকে না: আপনার চ্যাট থেকে নির্বাচন করুন অথবা তাদের নম্বর লিখুন।",
@@ -1061,7 +1063,8 @@ window.TGW_SEALED_LOCALES = {
   "Newest ~{n} messages": "নতুনতম ~{n}টি বার্তা",
   "Not reached": "পৌঁছানো হয়নি",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "এখন শুরু করলে: {total}টি চ্যাটের মধ্যে {complete}টি সম্পূর্ণ, {partial}টি আংশিক, {missed}টিতে সময় কুলাবে না।",
-  "Photos of chats and people": "চ্যাট এবং ব্যক্তিদের ছবি"
+  "Photos of chats and people": "চ্যাট এবং ব্যক্তিদের ছবি",
+  "Saving photos of chats and people": "চ্যাট এবং ব্যক্তিদের ছবি সংরক্ষণ"
  },
  "de": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Ein @username, eine Telefonnummer mit „+“ und der Ländervorwahl oder eine Person aus den Chats dieses Kontos. Die meisten Personen haben keinen Benutzernamen: Wähle sie aus deinen Chats aus oder gib ihre Nummer ein.",
@@ -1409,7 +1412,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Nachrichten; keine Dateien",
   "Newest ~{n} messages": "Neueste ~{n} Nachrichten",
   "Not reached": "Nicht erreicht",
-  "Photos of chats and people": "Fotos von Chats und Personen"
+  "Photos of chats and people": "Fotos von Chats und Personen",
+  "Saving photos of chats and people": "Speichern von Fotos aus Chats und von Personen"
  },
  "es": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un número de teléfono con el signo «+» y el código de país, o una persona de los chats de esta cuenta. La mayoría de las personas no tienen nombre de usuario: elígelas de tus chats o introduce su número.",
@@ -1757,7 +1761,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Mensajes; sin archivos",
   "Newest ~{n} messages": "Últimos ~{n} mensajes",
   "Not reached": "No alcanzado",
-  "Photos of chats and people": "Fotografías de chats y personas"
+  "Photos of chats and people": "Fotografías de chats y personas",
+  "Saving photos of chats and people": "Guardar fotos de chats y personas"
  },
  "fa": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "یک @username، یک شماره تلفن همراه با علامت + و پیش‌شماره کشور، یا فردی از چت‌های این حساب. بیشتر افراد نام کاربری ندارند: آن‌ها را از چت‌های خود انتخاب کنید یا شماره آن‌ها را وارد کنید.",
@@ -2103,7 +2108,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "پیام‌ها؛ بدون فایل",
   "Newest ~{n} messages": "جدیدترین پیام‌های ~{n}",
   "Not reached": "دسترسی صورت نگرفت",
-  "Photos of chats and people": "عکس‌های چت‌ها و افراد"
+  "Photos of chats and people": "عکس‌های چت‌ها و افراد",
+  "Saving photos of chats and people": "ذخیره عکس‌های چت‌ها و افراد"
  },
  "fr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numéro de téléphone avec le signe « + » et l'indicatif du pays, ou une personne figurant dans les discussions de ce compte. La plupart des gens n'ont pas de nom d'utilisateur : sélectionnez-les dans vos discussions ou saisissez leur numéro.",
@@ -2451,7 +2457,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Messages ; pas de fichiers",
   "Newest ~{n} messages": "Derniers messages ~ {n}",
   "Not reached": "Non atteint",
-  "Photos of chats and people": "Photos de discussions et de personnes"
+  "Photos of chats and people": "Photos de discussions et de personnes",
+  "Saving photos of chats and people": "Enregistrement de photos de discussions et de personnes"
  },
  "he": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, מספר טלפון עם סימן + וקוד המדינה, או אדם מהצ'אטים של חשבון זה. לרוב האנשים אין שם משתמש: בחר אותם מהצ'אטים שלך או הזן את המספר שלהם.",
@@ -2799,7 +2806,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "הודעות; ללא קבצים",
   "Newest ~{n} messages": "ההודעות האחרונות ~{n}",
   "Not reached": "לא הושג",
-  "Photos of chats and people": "תמונות של צ'אטים ואנשים"
+  "Photos of chats and people": "תמונות של צ'אטים ואנשים",
+  "Saving photos of chats and people": "שמירת תמונות של צ'אטים ואנשים"
  },
  "hi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + और देश कोड के साथ एक फ़ोन नंबर, या इस खाते की चैट्स से कोई व्यक्ति। अधिकांश लोगों का कोई यूज़रनेम नहीं होता: उन्हें अपनी चैट्स से चुनें या उनका नंबर दर्ज करें।",
@@ -3146,7 +3154,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "संदेश; कोई फ़ाइलें नहीं",
   "Newest ~{n} messages": "नवीनतम ~{n} संदेश",
   "Not reached": "पहुँच नहीं पाया गया",
-  "Photos of chats and people": "चैट्स और लोगों की तस्वीरें"
+  "Photos of chats and people": "चैट्स और लोगों की तस्वीरें",
+  "Saving photos of chats and people": "चैट्स और लोगों की तस्वीरें सहेजना"
  },
  "id": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, nomor telepon dengan tanda + dan kode negara, atau seseorang dari obrolan akun ini. Kebanyakan orang tidak memiliki nama pengguna: pilih mereka dari obrolan Anda atau masukkan nomor telepon mereka.",
@@ -3494,7 +3503,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Pesan; tanpa berkas",
   "Newest ~{n} messages": "Pesan terbaru ~{n}",
   "Not reached": "Belum tercapai",
-  "Photos of chats and people": "Foto obrolan dan orang-orang"
+  "Photos of chats and people": "Foto obrolan dan orang-orang",
+  "Saving photos of chats and people": "Menyimpan foto obrolan dan orang-orang"
  },
  "it": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Un @username, un numero di telefono con il segno + e il prefisso internazionale, oppure una persona presente nelle chat di questo account. La maggior parte delle persone non ha un nome utente: sceglilo dalle tue chat oppure inserisci il suo numero.",
@@ -3842,7 +3852,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Messaggi; nessun file",
   "Newest ~{n} messages": "Ultimi ~{n} messaggi",
   "Not reached": "Non raggiunto",
-  "Photos of chats and people": "Foto di chat e persone"
+  "Photos of chats and people": "Foto di chat e persone",
+  "Saving photos of chats and people": "Salvataggio di foto relative alle chat e alle persone"
  },
  "ja": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username、+と国コードを含む電話番号、またはこのアカウントのチャットに参加している人物。多くの人はユーザー名を持っていません。チャットから相手を選択するか、電話番号を入力してください。",
@@ -4190,7 +4201,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "メッセージ；ファイルは含まない",
   "Newest ~{n} messages": "最新の ~{n} 件のメッセージ",
   "Not reached": "未到達",
-  "Photos of chats and people": "チャットや人物の写真"
+  "Photos of chats and people": "チャットや人物の写真",
+  "Saving photos of chats and people": "チャットや人物の写真の保存"
  },
  "ko": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username 또는 + 기호와 국가 코드가 포함된 전화번호, 혹은 이 계정의 채팅에 등장하는 사람. 대부분의 사람은 사용자 이름이 없으므로, 채팅에서 해당 사람을 선택하거나 전화번호를 입력하세요.",
@@ -4538,7 +4550,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "메시지; 파일 없음",
   "Newest ~{n} messages": "최신 ~{n}개의 메시지",
   "Not reached": "도달하지 않음",
-  "Photos of chats and people": "채팅 및 인물의 사진"
+  "Photos of chats and people": "채팅 및 인물의 사진",
+  "Saving photos of chats and people": "채팅 및 인물의 사진 저장"
  },
  "ms": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Satu nama pengguna @username, nombor telefon dengan tanda + dan kod negara, atau seseorang daripada sembang akaun ini. Kebanyakan orang tiada nama pengguna: pilih mereka daripada sembang anda atau masukkan nombor mereka.",
@@ -4886,7 +4899,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Mesej; tiada fail",
   "Newest ~{n} messages": "Mesej {n} terkini",
   "Not reached": "Tidak dicapai",
-  "Photos of chats and people": "Foto perbualan dan orang"
+  "Photos of chats and people": "Foto perbualan dan orang",
+  "Saving photos of chats and people": "Menyimpan foto perbualan dan orang"
  },
  "pl": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, numer telefonu z symbolem + i kodem kraju lub osoba z czatów tego konta. Większość osób nie ma nazwy użytkownika: wybierz je z czatów lub wprowadź ich numer.",
@@ -5234,7 +5248,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Wiadomości; brak plików",
   "Newest ~{n} messages": "Najnowsze ~{n} wiadomości",
   "Not reached": "Nie osiągnięto",
-  "Photos of chats and people": "Zdjęcia czatów i osób"
+  "Photos of chats and people": "Zdjęcia czatów i osób",
+  "Saving photos of chats and people": "Zapisywanie zdjęć z czatów i osób"
  },
  "pt": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Um @username, um número de telefone com + e o código do país, ou uma pessoa dos chats desta conta. A maioria das pessoas não tem nome de usuário: escolha-as em seus chats ou digite o número delas.",
@@ -5582,7 +5597,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Mensagens; sem arquivos",
   "Newest ~{n} messages": "Últimas ~{n} mensagens",
   "Not reached": "Não alcançado",
-  "Photos of chats and people": "Fotos de conversas e pessoas"
+  "Photos of chats and people": "Fotos de conversas e pessoas",
+  "Saving photos of chats and people": "Salvar fotos de conversas e pessoas"
  },
  "th": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, หมายเลขโทรศัพท์ที่มีเครื่องหมาย + และรหัสประเทศ หรือบุคคลจากบทสนทนาของบัญชีนี้ ผู้ใช้ส่วนใหญ่ไม่มีชื่อผู้ใช้: เลือกจากบทสนทนาของคุณหรือป้อนหมายเลขโทรศัพท์ของพวกเขา",
@@ -5930,7 +5946,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "ข้อความ; ไม่มีไฟล์",
   "Newest ~{n} messages": "ข้อความใหม่ล่าสุด ~{n} ข้อความ",
   "Not reached": "ยังไม่ถึง",
-  "Photos of chats and people": "รูปภาพของการสนทนาและบุคคล"
+  "Photos of chats and people": "รูปภาพของการสนทนาและบุคคล",
+  "Saving photos of chats and people": "การบันทึกภาพหน้าจอของบทสนทนาและรูปภาพของผู้ใช้"
  },
  "tr": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Bir @username adı, + işareti ve ülke kodunu içeren bir telefon numarası veya bu hesabın sohbetlerindeki bir kişi. Çoğu kişinin kullanıcı adı yoktur: sohbetlerinizden birini seçin veya numarasını girin.",
@@ -6278,7 +6295,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Mesajlar; dosya yok",
   "Newest ~{n} messages": "En yeni ~{n} mesaj",
   "Not reached": "Ulaşılmadı",
-  "Photos of chats and people": "Sohbetlerin ve kişilerin fotoğrafları"
+  "Photos of chats and people": "Sohbetlerin ve kişilerin fotoğrafları",
+  "Saving photos of chats and people": "Sohbetlerin ve kişilerin fotoğraflarını kaydetme"
  },
  "uk": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, номер телефону з символом «+» та кодом країни або учасник чатів цього облікового запису. Більшість людей не мають імені користувача: виберіть їх із ваших чатів або введіть їхній номер.",
@@ -6626,7 +6644,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Повідомлення; без файлів",
   "Newest ~{n} messages": "Останні ~{n} повідомлень",
   "Not reached": "Не досягнуто",
-  "Photos of chats and people": "Фотографії чатів та людей"
+  "Photos of chats and people": "Фотографії чатів та людей",
+  "Saving photos of chats and people": "Збереження фотографій чатів та людей"
  },
  "ur": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username، + کے ساتھ ملک کا کوڈ والا فون نمبر، یا اس اکاؤنٹ کی چیٹس میں سے کوئی شخص۔ زیادہ تر لوگوں کا کوئی یوزر نیم نہیں ہوتا: انہیں اپنی چیٹس سے منتخب کریں یا ان کا نمبر درج کریں۔",
@@ -6974,7 +6993,8 @@ window.TGW_SEALED_LOCALES = {
   "Newest ~{n} messages": "نئے ترین ~{n} پیغامات",
   "Not reached": "پورا نہیں ہوا",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "اگر ابھی شروع کیا جائے: {total} میں سے {complete} چیٹس مکمل، {partial} جزوی، {missed} تک وقت نہیں پہنچے گا۔",
-  "Photos of chats and people": "گفتگو اور افراد کی تصاویر"
+  "Photos of chats and people": "گفتگو اور افراد کی تصاویر",
+  "Saving photos of chats and people": "گفتگو اور افراد کی تصاویر محفوظ کرنا"
  },
  "uz": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "@username, + belgisi va mamlakat kodi bilan telefon raqami yoki ushbu hisobning suhbatlaridagi shaxs. Ko'pchilikda foydalanuvchi nomi yo'q: suhbatlaringizdan tanlang yoki raqamini kiriting.",
@@ -7322,7 +7342,8 @@ window.TGW_SEALED_LOCALES = {
   "Newest ~{n} messages": "Eng yangi ~{n} xabarlar",
   "Not reached": "Yetib bormadi",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "Hozir boshlansa: {total} ta chatdan {complete} tasi to‘liq, {partial} tasi qisman, {missed} tasiga vaqt yetmaydi.",
-  "Photos of chats and people": "Suhbatlar va odamlarning fotosuratlari"
+  "Photos of chats and people": "Suhbatlar va odamlarning fotosuratlari",
+  "Saving photos of chats and people": "Suhbatlar va odamlarning fotosuratlarini saqlash"
  },
  "vi": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "Một @username; một số điện thoại kèm dấu + và mã quốc gia; hoặc một người trong các cuộc trò chuyện của tài khoản này. Hầu hết mọi người không có tên người dùng: hãy chọn họ từ các cuộc trò chuyện của bạn hoặc nhập số điện thoại của họ.",
@@ -7670,7 +7691,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "Tin nhắn; không có tệp tin",
   "Newest ~{n} messages": "~{n} tin nhắn mới nhất",
   "Not reached": "Chưa đạt được",
-  "Photos of chats and people": "Hình ảnh các cuộc trò chuyện và người dùng"
+  "Photos of chats and people": "Hình ảnh các cuộc trò chuyện và người dùng",
+  "Saving photos of chats and people": "Lưu ảnh chụp màn hình các cuộc trò chuyện và hình ảnh người dùng"
  },
  "zh": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一个 @username、一个带 + 号和国家代码的电话号码，或该账户聊天记录中的一位联系人。大多数人没有用户名：请从您的聊天记录中选择，或直接输入对方的电话号码。",
@@ -8018,7 +8040,8 @@ window.TGW_SEALED_LOCALES = {
   "Messages; no files": "消息；不包含文件",
   "Newest ~{n} messages": "最新 ~{n} 条消息",
   "Not reached": "未达到",
-  "Photos of chats and people": "聊天记录和人物的照片"
+  "Photos of chats and people": "聊天记录和人物的照片",
+  "Saving photos of chats and people": "保存聊天记录和人物的照片"
  },
  "zh-Hant": {
   "A @username, a phone number with + and the country code, or a person from this account's chats. Most people have no username: choose them from your chats or enter their number.": "一個 @username、一個帶有 + 號及國家代碼的電話號碼，或是來自此帳號聊天室中的一位聯絡人。多數人沒有使用者名稱：請從您的聊天室中選擇，或直接輸入對方的電話號碼。",
@@ -8366,7 +8389,8 @@ window.TGW_SEALED_LOCALES = {
   "Newest ~{n} messages": "最新 ~{n} 則訊息",
   "Not reached": "尚未達成",
   "If started now: {complete} of {total} chats complete, {partial} in part, {missed} not reached.": "若現在開始：{total} 個聊天中 {complete} 個完整，{partial} 個部分，{missed} 個來不及。",
-  "Photos of chats and people": "聊天記錄與人物的照片"
+  "Photos of chats and people": "聊天記錄與人物的照片",
+  "Saving photos of chats and people": "儲存聊天記錄及人物的照片"
  }
 };
 window.TGW_SEALED_LANGUAGES = {"en": "English", "uk": "Українська", "es": "Español", "pt": "Português (Brasil)", "tr": "Türkçe", "ar": "العربية", "fa": "فارسی", "ur": "اردو", "hi": "हिन्दी", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "zh": "简体中文", "fr": "Français", "de": "Deutsch", "it": "Italiano", "uz": "O‘zbekcha", "ko": "한국어", "zh-Hant": "繁體中文", "ms": "Bahasa Melayu", "pl": "Polski", "ja": "日本語", "th": "ไทย", "he": "עברית", "bn": "বাংলা", "ru": "Русский"};
