@@ -1,6 +1,7 @@
 import asyncio
 import hashlib
 import ipaddress
+import json
 import secrets
 import tempfile
 import threading
@@ -8,12 +9,14 @@ import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
-import requests
 from cryptography.exceptions import InvalidSignature
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
 
 from tgwitness_capture.format import HEX, check_checkpoint, check_event, decode
 from tgwitness_capture.verify import verify_zip
+
+from . import netclient
+from .network import NetworkConfig
 
 KINDS = ("browser", "ayugram", "trusted")
 MAX_EXPORT = 512 * 1024 * 1024
@@ -74,8 +77,8 @@ class Connection(BaseModel):
 
 
 class CaptureConnections:
-    def __init__(self, store, vault):
-        self.store, self.vault = store, vault
+    def __init__(self, store, vault, outside=None):
+        self.store, self.vault, self.outside = store, vault, outside
         self.locks = {kind: asyncio.Lock() for kind in KINDS}
         self.guards = {kind: threading.RLock() for kind in KINDS}
         self.guard = threading.RLock()
@@ -113,30 +116,54 @@ class CaptureConnections:
             raise ValueError("Enable this recorder connection first. This does not start capture.")
         return connection
 
+    def _route(self, url):
+        host = urlsplit(url).hostname
+        local = host == "localhost" or host in LOCAL_SERVICES
+        try:
+            local = local or ipaddress.ip_address(host).is_loopback
+        except ValueError:
+            pass
+        if local or self.outside is None:
+            return NetworkConfig(kind="direct"), local
+        return self.outside(), False
+
     def _request(self, connection, method, path, body=None, *, destination=None, raw=False, timeout=30):
-        with requests.Session() as client:
-            client.trust_env = False
-            deadline = time.monotonic() + 120
-            with client.request(method, connection["url"] + "/api/" + path,
-                                headers={"Authorization": "Bearer " + connection["token"]},
-                                json=body, timeout=(5, timeout), allow_redirects=False, stream=True) as response:
-                if response.status_code != 200:
-                    raise ValueError("Recorder request refused (HTTP " + str(response.status_code)
-                                     + "). Check its token, selected tab and capture state.")
-                limit = MAX_EXPORT if destination else MAX_OBJECT if raw else 8 * 1024 * 1024
-                result, size = bytearray(), 0
-                for chunk in response.iter_content(65536):
-                    size += len(chunk)
-                    if size > limit or time.monotonic() > deadline:
-                        raise ValueError("Recorder response exceeded the size or time limit. Export locally for larger archives.")
-                    if destination:
-                        destination.write(chunk)
-                    else:
-                        result.extend(chunk)
-                if raw:
-                    return bytes(result)
-                if destination is None:
-                    return decode(bytes(result))
+        deadline = time.monotonic() + 120
+        limit = MAX_EXPORT if destination else MAX_OBJECT if raw else 8 * 1024 * 1024
+        result, size = bytearray(), 0
+
+        async def sink(chunk):
+            nonlocal size
+            size += len(chunk)
+            if size > limit or time.monotonic() > deadline:
+                raise ValueError("Recorder response exceeded the size or time limit. Export locally for larger archives.")
+            if destination:
+                destination.write(chunk)
+            else:
+                result.extend(chunk)
+
+        url = connection["url"] + "/api/" + path
+        network, local = self._route(url)
+        headers = {"Authorization": "Bearer " + connection["token"]}
+        if body is not None:
+            headers["Content-Type"] = "application/json"
+        try:
+            status, _, _ = asyncio.run(asyncio.wait_for(netclient.request(
+                method, url, network, headers, b"" if body is None else json.dumps(body).encode(), sink=sink,
+                timeout=timeout, limit=65536, private=local), 120))
+        except netclient.HTTPError as exc:
+            status = exc.status
+        except netclient.RouteError as exc:
+            raise ValueError(str(exc)) from None
+        except netclient.ProxyError as exc:
+            raise OSError(str(exc)) from None
+        if status != 200:
+            raise ValueError("Recorder request refused (HTTP " + str(status)
+                             + "). Check its token, selected tab and capture state.")
+        if raw:
+            return bytes(result)
+        if destination is None:
+            return decode(bytes(result))
 
     def _checkpoint(self, kind, connection):
         challenge = secrets.token_hex(32)

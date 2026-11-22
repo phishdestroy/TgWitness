@@ -133,9 +133,13 @@ back the time stamp; the `anchor.completed` record lists it as `unavailable` wit
 the issuer gave the OCSP signing purpose), the certificate ID and the status, and that the
 answer was issued at or after genTime or was still current then (nextUpdate). For a CRL it
 checks the issuer's signature, the same time window and that the serial number is not listed.
-It then reports `signing certificate not revoked as of <time> (OCSP|CRL)`, the failed check,
-or `revocation not checked (no OCSP/CRL in the archive)`. A signing certificate revoked at or
-before genTime fails verification; a later revocation is shown as a warning.
+Every OCSP and CRL file stored for the time stamp is checked, and a revocation in one of them
+outweighs a good answer in another. It then reports `signing certificate not revoked as of <time>
+(OCSP|CRL)`, `revocation check failed` when the issuer of the signing certificate is neither in
+the reply nor in `--tsa-ca`, or `revocation not checked (no OCSP/CRL in the archive)`. A signing
+certificate revoked at or before genTime fails verification; a later revocation is shown as a
+warning. A stored OCSP or CRL file that does not verify for the signing certificate (unreadable,
+signed by another key, about another certificate or out of date) also fails verification.
 
 ## Evidence records and renewal (RFC 4998)
 

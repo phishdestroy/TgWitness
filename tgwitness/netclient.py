@@ -2,13 +2,14 @@ import asyncio
 import ipaddress
 import json
 import os
+import re
 import socket
 import ssl
 import threading
 import time
 from collections import OrderedDict
 from contextlib import suppress
-from urllib.parse import urlencode, urlsplit
+from urllib.parse import quote, urlencode, urlsplit
 
 from python_socks import ProxyError, ProxyType
 from python_socks.async_.asyncio import Proxy
@@ -20,6 +21,9 @@ NAT64 = ipaddress.ip_network("64:ff9b::/96")
 DOH_URL = "https://1.1.1.1/dns-query"
 DNS_CACHE_LIMIT, DNS_CACHE_SECONDS = 128, 30
 _dns_cache, _dns_lock = OrderedDict(), threading.Lock()
+METHOD = re.compile(r"[A-Z]+")
+FIELD_NAME = re.compile(r"[!#$%&'*+.^_`|~0-9A-Za-z-]+")
+TARGET_SAFE = "!#$%&'()*+,/:;=?@[]~"
 
 
 class RouteError(Exception):
@@ -209,12 +213,21 @@ async def request(method, url, network, headers=None, body=b"", length=None, sin
     return await observe_request(_request, method, url, network, headers, body, length, sink, timeout, limit, private)
 
 
+def request_head(method, parts, headers):
+    if not METHOD.fullmatch(method) or not parts.netloc or any(not 0x20 < ord(c) < 0x7f for c in parts.netloc):
+        raise ValueError("Invalid HTTP request method or address.")
+    for name, value in (headers or {}).items():
+        if not FIELD_NAME.fullmatch(name) or any(c in value for c in "\r\n\0"):
+            raise ValueError("Invalid HTTP request header.")
+    return quote((parts.path or "/") + ("?" + parts.query if parts.query else ""), safe=TARGET_SAFE)
+
+
 async def _request(method, url, network, headers=None, body=b"", length=None, sink=None,
                    timeout=60, limit=1024 * 1024, private=False):
     parts = urlsplit(url)
+    path = request_head(method, parts, headers)
     reader, writer = await open_stream(url, network, timeout, private)
     try:
-        path = (parts.path or "/") + ("?" + parts.query if parts.query else "")
         size = len(body) if isinstance(body, (bytes, bytearray)) else length
         lines = [method + " " + path + " HTTP/1.1", "Host: " + parts.netloc, "User-Agent: TgWitness",
                  "Connection: close"]

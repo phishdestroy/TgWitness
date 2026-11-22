@@ -33,13 +33,48 @@ PROBLEM_PAGES = 20
 SUMMARY_KINDS = ("message.new", "message.recovered", "message.edited", "message.deleted", "message.missing_on_recheck")
 
 DIRECT_SOCKET = {"amqp", "amqps", "aprs", "deltachat", "deltachats", "growl", "irc", "ircs", "mailto", "mailtos",
-                 "mqtt", "mqtts", "rsyslog", "smpp", "smpps", "xmpp", "xmpps"}
+                 "mqtt", "mqtts", "nostr", "rsyslog", "smpp", "smpps", "xmpp", "xmpps"}
 
-OWN_SOCKET = DIRECT_SOCKET - {"mailto", "mailtos"}
+WEB_SERVICES = frozenset({
+    "46elks", "apprise", "apprises", "atalk", "azure", "bark", "barks", "betterstack", "bluesky", "brevo", "bsky",
+    "bulksms", "bulkvs", "burstsms", "chanify", "clickatell", "clicksend", "cliq", "cm", "d7sms", "dapnet",
+    "dingtalk", "discord", "dot", "eight00com", "elks", "emby", "embys", "enigma2", "enigma2s", "evolution",
+    "evolutions", "exotel", "feishu", "firehydrant", "flock", "flowtriq", "flowtriqs", "fluxer", "fluxers", "form",
+    "forms", "freemobile", "gchat", "github", "goalert", "goalerts", "gorush", "gorushs", "gotify", "gotifys",
+    "groundmail", "groupme", "guilded", "gupshup", "hassio", "hassios", "httpsms", "humhub", "humhubs", "ifttt",
+    "ilert", "incidentio", "infobip", "jellyfin", "jellyfins", "jira", "join", "json", "jsons", "kakao",
+    "kakaotalk", "kaleyra", "kavenegar", "klr", "kodi", "kodis", "kook", "kudosity", "kumulos", "lametric",
+    "lametrics", "lark", "lauther", "lfg", "line", "mailersend", "mailgun", "mastodon", "mastodons", "matrix",
+    "matrixs", "misskey", "misskeys", "mmost", "mmosts", "mobilemessage", "mobilemsg", "msg91", "msgbird",
+    "ncloud", "nclouds", "nctalk", "nctalks", "nexmo", "notica", "noticas", "notifiarr", "notifico", "notificos",
+    "notifyre", "ntfy", "ntfys", "o365", "octopush", "onebot", "onebots", "onesignal", "opsgenie", "pagerduty",
+    "pagertree", "parsep", "parseps", "pbul", "pinglet", "pinglets", "pingram", "pjet", "pjets", "plivo",
+    "postmark", "pover", "prowl", "psafer", "psafers", "push", "pushdeer", "pushdeers", "pushed", "pushme",
+    "pushplus", "pushward", "pushy", "qq", "reddit", "resend", "revolt", "ringc", "rocket", "rockets", "ryver",
+    "schan", "sendgrid", "sendpulse", "serwersms", "ses", "session", "sessions", "seven", "sfr", "signal",
+    "signalgrid", "signals", "signl4", "simplepush", "sinch", "slack", "smsc", "smseagle", "smseagles",
+    "smsmanager", "smsmgr", "smstunnel", "smtp2go", "sns", "sogs", "sparkpost", "spike", "splunk", "spugpush",
+    "spush", "squadcast", "stackfield", "strmlabs", "synology", "synologys", "telesign", "telnyx", "tgram",
+    "threema", "toot", "toots", "trigv", "trigvs", "tweet", "twilio", "twist", "twitter", "viber", "victorops",
+    "voipms", "vonage", "webex", "wechat", "wecom", "wecombot", "whapi", "whatsapp", "workflow", "workflows",
+    "wpush", "wxpusher", "wxteams", "x", "xbmc", "xbmcs", "xmatters", "xml", "xmls", "youlmk", "zalo", "zcliq",
+    "zohocliq", "zoom", "zulip"})
+
+CHECKED_SERVICES = WEB_SERVICES | {"mailto", "mailtos"}
 
 
-def own_socket(url):
-    return url.split("://", 1)[0].lower() in OWN_SOCKET
+def admin_only(url):
+    import apprise
+    plugin = apprise.Apprise.instantiate(url)
+    template = getattr(plugin, "template", None)
+    if not plugin or isinstance(template, apprise.AppriseAttachment) and template:
+        return True
+    names = set()
+    for value in (plugin.protocol, plugin.secure_protocol):
+        names.update([value] if isinstance(value, str) else value or ())
+    return not names or not {name.lower() for name in names} <= CHECKED_SERVICES
+
+
 _send_lock = threading.Lock()
 RESPONSE_BYTES = 1024 * 1024
 DELIVERY_SECONDS = 60
@@ -266,7 +301,7 @@ def _routed(proxy):
             except Refused as error:
                 guard["refused"] = str(error)
                 raise requests.exceptions.ConnectionError(str(error)) from None
-        settings = original(self, url, {}, stream, verify, cert)
+        settings = original(self, url, {}, stream, True if guard["on"] and verify is False else verify, cert)
         settings["proxies"] = {"http": proxy, "https": proxy} if proxy else {}
         return settings
 
@@ -325,6 +360,8 @@ def deliver(urls, title, body, network):
             for service in bundle:
                 service.redirects = False
                 service.asset.async_mode = False
+                if guard["on"]:
+                    service.verify_certificate = True
             result = bundle.notify(body=body, title=title)
         finally:
             guard["on"] = False
