@@ -164,16 +164,31 @@ class Local:
         paths = dict(workspaces(root))
         if workspace not in paths:
             raise Failure("No workspace " + repr(workspace) + " with a journal in " + str(root) + ".")
-        try:
-            self.lock = InstanceLock(paths[workspace])
-        except RuntimeError:
-            raise Failure("The panel has this workspace open. Stop it, or read through the panel with --url and an "
-                          "archive connection token (Integrations → MCP).", EXIT_BUSY) from None
-        try:
-            self.store = Store(paths[workspace])
-        except BaseException:
-            self.lock.close()
-            raise
+        self.copy = None
+        folder = paths[workspace]
+        if not (os.access(folder, os.W_OK) and os.access(folder / "journal.sqlite3", os.W_OK)):
+            self.lock = None
+            self.copy = Path(tempfile.mkdtemp(prefix="tgwitness-readonly-"))
+            try:
+                for name in ("journal.sqlite3", "journal.sqlite3-wal"):
+                    if (folder / name).is_file():
+                        shutil.copyfile(folder / name, self.copy / name)
+                self.store = Store(self.copy)
+            except BaseException:
+                shutil.rmtree(self.copy, ignore_errors=True)
+                raise
+            print("This folder is read-only: reading a private temporary copy of its journal.", file=sys.stderr)
+        else:
+            try:
+                self.lock = InstanceLock(folder)
+            except RuntimeError:
+                raise Failure("The panel has this workspace open. Stop it, or read through the panel with --url and an "
+                              "archive connection token (Integrations → MCP).", EXIT_BUSY) from None
+            try:
+                self.store = Store(folder)
+            except BaseException:
+                self.lock.close()
+                raise
         names = labels(root)
         state = SimpleNamespace(store=self.store, collector=SimpleNamespace(running=False))
         entries = {name: {"label": names.get(name, name),
@@ -214,7 +229,10 @@ class Local:
 
     def close(self):
         self.store.close()
-        self.lock.close()
+        if self.lock:
+            self.lock.close()
+        if self.copy:
+            shutil.rmtree(self.copy, ignore_errors=True)
 
 
 def validation_text(errors):
