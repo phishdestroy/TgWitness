@@ -5480,7 +5480,6 @@
   "Method and sources": "Metoda i źródła",
   "Method used": "Zastosowana metoda",
   "Monday": "Poniedziałek",
-  "Most observed participants": "Większość zaobserwowanych uczestników",
   "Neutral labels (Participant 01, 02…)": "Etykiety neutralne (Uczestnik 01, 02…)",
   "New-message observations": "Obserwacje dotyczące nowych wiadomości",
   "No observations in this selection.": "W tym zestawieniu nie ma żadnych obserwacji.",
@@ -6324,7 +6323,6 @@
   "Last observed number before": "Ostatni zaobserwowany numer przed",
   "First observed number after": "Pierwszy zaobserwowany numer po",
   "Account-wide message numbering": "Numeracja wiadomości w całym koncie",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Parametry: wymienione są luki obejmujące co najmniej {smallest} numerów wiadomości, maksymalnie {listed} dla każdej numeracji.",
   "The account-wide numbering is measured where it applies.": "W stosownych przypadkach stosuje się numerację obejmującą całe konto.",
   "The account-wide numbering is not measured.": "Numeracja obejmująca całe konto nie jest uwzględniana.",
   "A service-message estimate is shown.": "Wyświetlana jest szacunkowa liczba wiadomości serwisowych.",
@@ -11075,5 +11073,9 @@
   "Export of the selected chats has ended.": "Eksport wybranych czatów został zakończony.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Każdy wiersz odpowiada jednej rozmowie, a każda kolumna – okresowi (UTC); intensywniejszy kolor oznacza większą liczbę zarejestrowanych wiadomości. Kolumny zaznaczone kreskowaniem nie miały żadnego potwierdzenia przechwycenia: nie wiadomo, co zostało wówczas opublikowane. Jasna komórka w kolumnie z zarejestrowanymi wiadomościami oznacza, że nie odnotowano tam żadnej wiadomości.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Im intensywniejszy kolor, tym więcej uwag zostało uwzględnionych. Maksymalna liczba na komórkę: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Każdy kwadrat odpowiada jednemu dniu w czasie UTC; wiersze oznaczają dni tygodnia. Im intensywniejszy kolor, tym więcej wiadomości. Kropka oznacza brakujące numery wiadomości, których sąsiednie wiadomości dzieli co najwyżej dwa dni; pozostałe wiadomości są wymienione w tabelach."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Każdy kwadrat odpowiada jednemu dniu w czasie UTC; wiersze oznaczają dni tygodnia. Im intensywniejszy kolor, tym więcej wiadomości. Kropka oznacza brakujące numery wiadomości, których sąsiednie wiadomości dzieli co najwyżej dwa dni; pozostałe wiadomości są wymienione w tabelach.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Czat prywatny, boty i zwykłe grupy mają wspólną numerację obejmującą całe konto. Można to zmierzyć tylko wtedy, gdy włączone jest gromadzenie danych z całego konta; w tym dzienniku nie ma takiego okresu.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Czat prywatny, boty, zwykłe grupy oraz wiadomości własne konta otrzymują numery z tej samej sekwencji, dlatego w zakresie pomiaru należy uwzględnić wszystkie te elementy, nie wykluczając żadnych czatów.",
+  "Participants by observation count": "Uczestnicy według liczby obserwacji",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametry: najmniejsza wymieniona różnica w numerach wiadomości wynosi {smallest}; dla każdego numerowania wymieniono co najwyżej {listed} różnic."
 }

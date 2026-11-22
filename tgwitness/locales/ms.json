@@ -5399,7 +5399,6 @@
   "Method and sources": "Kaedah dan sumber",
   "Method used": "Kaedah yang digunakan",
   "Monday": "Isnin",
-  "Most observed participants": "Kebanyakan peserta yang diperhatikan",
   "Neutral labels (Participant 01, 02…)": "Label neutral (Peserta 01, 02…)",
   "New-message observations": "Pengamatan mesej baru",
   "No observations in this selection.": "Tiada pemerhatian dalam pilihan ini.",
@@ -6207,7 +6206,6 @@
   "Last observed number before": "Nombor terakhir yang diperhatikan sebelum",
   "First observed number after": "Nombor pertama yang diperhatikan selepas",
   "Account-wide message numbering": "Penomboran mesej merentas akaun",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Parameter: jurang nombor mesej {smallest} atau lebih disenaraikan, maksimum {listed} bagi setiap penomboran.",
   "The account-wide numbering is measured where it applies.": "Penomboran merentas akaun diukur di mana ia terpakai.",
   "The account-wide numbering is not measured.": "Penomboran merentas akaun tidak diukur.",
   "A service-message estimate is shown.": "Anggaran mesej perkhidmatan dipaparkan.",
@@ -10922,5 +10920,9 @@
   "Export of the selected chats has ended.": "Pengeksportan sembang terpilih telah selesai.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Setiap baris ialah sembang dan setiap lajur ialah tempoh (UTC); warna yang lebih terang bermaksud lebih banyak mesej diperhatikan. Lajur yang diarsir tidak mempunyai pengesahan tangkapan langsung: apa yang dihantar pada masa itu tidak diketahui. Sel pucat dalam lajur yang diperhatikan bermaksud tiada mesej direkodkan di situ.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Warna yang lebih terang bermaksud lebih banyak pemerhatian disertakan. Maksimum setiap sel: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap petak mewakili satu hari UTC; baris ialah hari dalam minggu. Warna yang lebih terang bermaksud lebih banyak mesej. Titik menandakan nombor mesej yang tiada apabila mesej bersebelahan berjarak paling jauh dua hari; jadual menyenaraikan baki mesej."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap petak mewakili satu hari UTC; baris ialah hari dalam minggu. Warna yang lebih terang bermaksud lebih banyak mesej. Titik menandakan nombor mesej yang tiada apabila mesej bersebelahan berjarak paling jauh dua hari; jadual menyenaraikan baki mesej.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Perbualan peribadi, bot dan kumpulan biasa berkongsi satu penomboran merentas akaun. Ia hanya boleh diukur semasa pengumpulan keseluruhan akaun diaktifkan; jurnal ini tidak mempunyai tempoh sedemikian.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Perbualan peribadi, bot, kumpulan biasa dan mesej akaun itu sendiri mengambil nombor daripada urutan yang sama, jadi pengukuran memerlukan skop yang direkodkan merangkumi kesemuanya tanpa mengecualikan mana-mana perbualan.",
+  "Participants by observation count": "Peserta mengikut bilangan pemerhatian",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: jurang terpendek yang disenaraikan dalam nombor mesej: {smallest}. Sebanyak maksimum {listed} jurang disenaraikan untuk setiap penomboran."
 }

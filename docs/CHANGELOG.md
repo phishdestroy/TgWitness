@@ -29,6 +29,7 @@
 - GitHub Actions capture: reports are in the panel language; the cover has a run log with FLOOD_WAIT totals.
 - Account export chat pages read oldest first, show photos, videos and voice inline, and open with the chat list.
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
+- Reports: the chat view names every service event, participant aliases and the gap-scope reasons are translated, charts with a single row are left out, trust cards show dates and key fingerprints in readable form, and the PDF no longer leaves a blank page before them.
 - Evidence reports of a GitHub Actions run name the run as the attested collection run; pseudo-secret chat videos play inline.
 - Account export chat pages are three times smaller; each message links its signed source line.
 - Files a stop left undownloaded are counted as not reached, not as failures, and say why.

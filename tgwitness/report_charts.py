@@ -20,20 +20,20 @@ DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sun
 
 CSS = """
 .metric-chart{width:100%;height:72px;display:block;margin:8px 0}.metric-bar{fill:#5776b3}
-.report-analytics{--chart-ink:var(--chart-accent)}.analytics-meta{font:11px/1.8 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;overflow-wrap:anywhere;color:var(--muted)}
+.report-analytics{--chart-ink:var(--chart-accent)}.analytics-meta{font-size:12px;line-height:1.8;overflow-wrap:anywhere;color:var(--muted);font-variant-numeric:tabular-nums}.analytics-meta code{font:11px/1.8 ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;background:none;border:0;padding:0;color:inherit}
 .analytics-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}
 .analytics-totals div{padding:18px;background:var(--card,var(--paper));min-width:0}.analytics-totals b{font:30px/1.3 Georgia,serif;display:block}
 .analytics-totals div>span{font-size:11px;overflow-wrap:anywhere}.analytics-figure{margin:28px 0;padding:22px;border:1px solid var(--line);break-inside:avoid;min-width:0}
 .analytics-figure figcaption{font-weight:650;font-size:16px;margin-bottom:12px}.analytics-figure p{font-size:12px;line-height:1.7;color:var(--muted)}
 .analytics-figure svg{width:100%;height:auto;display:block;direction:ltr}.analytics-svg-label{fill:var(--ink);font:12px system-ui,sans-serif}
-.analytics-axis{fill:var(--muted);font:10px ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.analytics-gridline{stroke:var(--line);stroke-width:1}
+.analytics-axis{fill:var(--muted);font:11px system-ui,sans-serif;font-variant-numeric:tabular-nums}.analytics-gridline{stroke:var(--line);stroke-width:1}
 .analytics-legend{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;padding:0;font-size:11px}.analytics-legend li{display:flex;gap:6px;align-items:center}
 .analytics-legend svg{width:9px;height:9px;display:inline-block}.analytics-table{margin-top:18px}.analytics-table summary{cursor:pointer;font-size:12px;color:var(--accent);padding:8px 0}
 .analytics-data{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}.analytics-data th,.analytics-data td{border-bottom:1px solid var(--line);padding:8px 5px;overflow-wrap:anywhere;text-align:start}
 .analytics-print-data{display:none}
 .analytics-bar{display:grid;grid-template-columns:minmax(110px,1fr) minmax(50px,2fr) 64px;gap:14px;align-items:center;margin:16px 0;font-size:12px}
 .analytics-bar-label{overflow-wrap:anywhere}.analytics-bar-value{text-align:end;font-variant-numeric:tabular-nums}.analytics-bar-track{background:var(--line);height:12px}
-.analytics-bar-fill{background:var(--chart-ink);height:100%;min-width:1px}.analytics-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.analytics-pair>.analytics-figure{margin-top:0}
+.analytics-bar-fill{background:var(--chart-ink);height:100%;min-width:1px}.analytics-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.analytics-pair>.analytics-figure{margin-top:0}.analytics-pair>.analytics-figure:only-child{grid-column:1/-1}
 .examination-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.85;max-width:80ch}.examination-part{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;break-inside:avoid}
 [data-report-design=classic] .examination-part{display:grid;grid-template-columns:minmax(130px,1fr) minmax(0,3fr);gap:24px}
 [data-report-design=classic] .examination-part h3{font:11px/1.8 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
@@ -46,7 +46,7 @@ CSS = """
 
 def text_keys():
     return [TITLE, INTRO, TIME_NOTE, PEOPLE_NOTE, PRIVACY_NOTE, REVIEW_TITLE, REVIEW_NOTE, *REVIEW_FIELDS.values(),
-            *KINDS.values(), *DAYS, "Recorded activity over time", "Observation times by weekday and hour", "Most observed participants",
+            *KINDS.values(), *DAYS, "Recorded activity over time", "Observation times by weekday and hour", "Participants by observation count",
             "Activity by chat", "Exact figures", "Period (UTC)", "Observations", "First record", "Last record", "Source file",
             "No observations in this selection.", "This chart exceeds the grouping limit. Exact overall counts remain available.",
             "Observations with an unusable time: {n}", "Participant {n}", "Sender {id}", "Chat {id}", "Unknown", "Other",
@@ -163,6 +163,10 @@ def _grouped(say, value):
     return group_number(say, value)
 
 
+def single(chart):
+    return chart.get("status", "available") == "available" and len(chart.get("rows") or []) < 2
+
+
 def bars_html(chart, say):
     if error := _unavailable(chart, say):
         return error
@@ -188,7 +192,8 @@ def html(data, say):
         return ''
     parts = ['<section class="card report-analytics" id="report-analytics"><div class="analytics-heading"><div><p class="eyebrow">'+_e(say("THE RECORD IN NUMBERS"))+'</p><h2>'+_e(say(TITLE))+'</h2></div><span class="analytics-basis">UTC</span></div><p>'+_e(say(INTRO))+'</p>']
     source = data.get("source") or {}
-    parts.append('<p class="analytics-meta">'+_e(say("Source file"))+': '+_e(source.get("file", "events.jsonl"))+'<br>SHA-256 · '+_e(source.get("sha256") or '—')+'</p>')
+    parts.append('<p class="analytics-meta">'+_e(say("Source file"))+': <code>'+_e(source.get("file", "events.jsonl"))+'</code>'
+                 +('<br>SHA-256 <code>'+_e(source["sha256"])+'</code>' if source.get("sha256") else '')+'</p>')
     parts.append('<p class="analytics-meta">'+_e(_moment(data.get("first_observed_at"))+' → '+_moment(data.get("last_observed_at")))
                  +' · UTC<br>'+_e(say("Observations"))+': '+_count(data["activity_events"])+'</p>')
     parts.append('<div class="analytics-totals">'+''.join('<div><b>'+_count(data["totals"].get(kind, 0))+'</b><span>'+_e(say(title))+'</span></div>' for kind, title in KINDS.items())+'</div>')
@@ -199,7 +204,8 @@ def html(data, say):
         else:
             rows = activity_bins(chart["rows"])
             parts.append(activity_svg(rows, say))
-            parts.append('<ul class="analytics-legend">'+''.join('<li><svg width="9" height="9" aria-hidden="true"><rect width="9" height="9" fill="'+COLORS[k]+'"/></svg>'+_e(say(v))+'</li>' for k, v in KINDS.items())+'</ul>')
+            parts.append('<ul class="analytics-legend">'+''.join('<li><svg width="9" height="9" aria-hidden="true"><rect width="9" height="9" fill="'+COLORS[k]+'"/></svg>'+_e(say(v))+'</li>'
+                                                                   for k, v in KINDS.items() if any(r["counts"].get(k) for r in rows))+'</ul>')
             parts.append(_table([say("Period (UTC)"), say("Observations"), say("Counts by category")],
                                [(r["period"], r["total"], '; '.join(say(KINDS[k])+': '+str(v) for k, v in r["counts"].items() if v)) for r in rows], say))
         parts.append('</figure>')
@@ -212,8 +218,8 @@ def html(data, say):
                                [(say(DAYS[d])+f' {hour:02d}:00', value) for d, row in enumerate(chart["rows"]) for hour, value in enumerate(row)], say))
         parts.append('</figure>')
     parts.append('<div class="analytics-pair">')
-    for key, title in (("participants", "Most observed participants"), ("chats", "Activity by chat")):
-        if chart := data.get(key):
+    for key, title in (("participants", "Participants by observation count"), ("chats", "Activity by chat")):
+        if (chart := data.get(key)) and not single(chart):
             parts.append('<figure class="analytics-figure chart-card chart-'+key+'"><figcaption>'+_e(say(title))+'</figcaption>')
             if key == 'participants':
                 parts.append('<p>'+_e(say(PEOPLE_NOTE))+'</p>')
@@ -337,8 +343,8 @@ def pdf(lay, data):
                 lay.grid([say("Hour (UTC)"), *[f'{hour:02d}' for hour in range(start,start+12)]],
                          [(say(DAYS[day]), *row[start:start+12]) for day,row in enumerate(rows)],
                          [24]+[76/12]*12)
-    for key, title in (("participants","Most observed participants"),("chats","Activity by chat")):
-        if not (chart := data.get(key)):
+    for key, title in (("participants","Participants by observation count"),("chats","Activity by chat")):
+        if not (chart := data.get(key)) or single(chart):
             continue
         lay.heading(say(title))
         if key == 'participants':

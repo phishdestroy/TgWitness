@@ -5426,7 +5426,6 @@
   "Method and sources": "विधि और स्रोत",
   "Method used": "उपयोग की गई विधि",
   "Monday": "सोमवार",
-  "Most observed participants": "अधिकांश देखे गए प्रतिभागी",
   "Neutral labels (Participant 01, 02…)": "तटस्थ लेबल (प्रतिभागी 01, 02…)",
   "New-message observations": "नए-संदेश अवलोकन",
   "No observations in this selection.": "इस चयन में कोई अवलोकन नहीं हैं।",
@@ -6246,7 +6245,6 @@
   "Last observed number before": "से पहले आखिरी देखी गई संख्या",
   "First observed number after": "के बाद पहला देखा गया नंबर",
   "Account-wide message numbering": "खाते-व्यापी संदेश क्रमांकन",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "पैरामीटर: {smallest} या उससे अधिक संदेश संख्याओं के अंतराल सूचीबद्ध हैं, प्रत्येक संख्यांकन के लिए अधिकतम {listed}।",
   "The account-wide numbering is measured where it applies.": "खाते-व्यापी क्रमांकन वहाँ मापा जाता है जहाँ यह लागू होता है।",
   "The account-wide numbering is not measured.": "खाते-व्यापी क्रमांकन मापा नहीं जाता।",
   "A service-message estimate is shown.": "एक सेवा-संदेश अनुमान दिखाया गया है।",
@@ -10973,5 +10971,9 @@
   "Export of the selected chats has ended.": "चयनित चैट्स का निर्यात समाप्त हो गया है।",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "प्रत्येक पंक्ति एक चैट है और प्रत्येक स्तंभ एक कालखंड (UTC); गहरा रंग अधिक देखे गए संदेशों को दर्शाता है। धराशायी स्तंभों में कोई कैप्चर पुष्टि नहीं थी: उस समय जो पोस्ट किया गया था वह अज्ञात है। एक देखे गए स्तंभ में फीका सेल होने का अर्थ है कि वहाँ कोई संदेश रिकॉर्ड नहीं हुआ।",
   "A stronger colour means more included observations. Maximum per cell: {n}": "गहरा रंग अधिक शामिल अवलोकनों का संकेत देता है। प्रत्येक सेल में अधिकतम: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "प्रत्येक वर्ग एक UTC दिन है; पंक्तियाँ सप्ताह के दिन हैं। गहरा रंग अधिक संदेशों को दर्शाता है। एक बिंदु उन अनुपस्थित संदेश संख्याओं को चिह्नित करता है जिनके पड़ोसी संदेश अधिकतम दो दिन दूर हैं; तालिकाएँ बाकी संदेशों को सूचीबद्ध करती हैं।"
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "प्रत्येक वर्ग एक UTC दिन है; पंक्तियाँ सप्ताह के दिन हैं। गहरा रंग अधिक संदेशों को दर्शाता है। एक बिंदु उन अनुपस्थित संदेश संख्याओं को चिह्नित करता है जिनके पड़ोसी संदेश अधिकतम दो दिन दूर हैं; तालिकाएँ बाकी संदेशों को सूचीबद्ध करती हैं।",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "निजी चैट, बॉट्स और सामान्य समूह एक ही खाते-व्यापी क्रमांकन साझा करते हैं। इसे केवल तब मापा जा सकता है जब पूरे खाते का संग्रह चालू हो; इस जर्नल में ऐसा कोई कालखंड नहीं है।",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "निजी चैट्स, बॉट्स, साधारण समूह और खाते के अपने संदेश एक ही अनुक्रम से संख्याएँ लेते हैं, इसलिए माप के दायरे में सभी को शामिल करना आवश्यक है, बिना किसी चैट को बाहर किए।",
+  "Participants by observation count": "निरीक्षण द्वारा प्रतिभागियों की गिनती",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "पैरामीटर: संदेश संख्याओं में सूचीबद्ध सबसे छोटा अंतराल {smallest} है; प्रत्येक क्रमांकन के लिए अधिकतम {listed} अंतराल सूचीबद्ध किए गए हैं।"
 }

@@ -37,7 +37,7 @@ html[data-template=editorial] .dossier{--dossier-navy:#382c2a;--dossier-gold:#e7
 .assessment-limit{font-size:13px}
 .assessment-limit strong,.assessment-review strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
 .evidence-conditions .assessment-review strong{font-size:12px;text-transform:none;letter-spacing:0;line-height:1.5}
-.assessment-references{font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;font-size:11px;overflow-wrap:anywhere;color:var(--muted)}
+.assessment-references{font-size:12px;overflow-wrap:anywhere;color:var(--muted)}
 .coverage-figure{margin:24px 0;padding:22px;border:1px solid var(--line);background:var(--bg2,var(--bg));break-inside:avoid}
 .coverage-figure figcaption{font-size:13px;font-weight:650;margin-bottom:18px}.coverage-track{display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;margin:8px 0;font-size:11px}
 .coverage-track svg{width:100%;height:24px;direction:ltr}.coverage-track-bg{fill:var(--line)}.coverage-span-0{fill:var(--accent)}.coverage-span-1{fill:#b77e31}
@@ -120,4 +120,6 @@ html[data-template=editorial] .dossier{--dossier-navy:#382c2a;--dossier-gold:#e7
 .records-pointer{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.records-pointer>span{flex:1 1 40ch;min-width:0}
 .bars td:has(>.meter){width:16%;min-width:80px}.meter{min-width:64px}
 .dossier section.card :is(.scroll,table)+p.lead{margin:12px 0 0;font-size:13px}
+.dossier .analytics-heading h2{font:550 25px/1.25 Georgia,'Times New Roman',serif;letter-spacing:-.025em;margin:8px 0 12px}
+.dossier .analytics-totals b{font:550 28px/1.2 system-ui,sans-serif;letter-spacing:-.03em}
 @media(max-width:600px){.heatmap-scroll:has(>.habits-table){-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}[dir=rtl] .heatmap-scroll:has(>.habits-table){-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 24px),transparent)}.habits-table{min-width:520px;margin-inline-end:24px}}

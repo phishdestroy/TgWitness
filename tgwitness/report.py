@@ -18,7 +18,7 @@ from . import report_chat_timeline, report_design, report_forwards, report_histo
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
-from .verify import (SEAL_CLOSE, SEAL_OPEN, coverage_lines, fingerprint, fingerprint_colors, ots_summary,
+from .verify import (SCOPE_REASONS, SEAL_CLOSE, SEAL_OPEN, coverage_lines, fingerprint, fingerprint_colors, ots_summary,
                      timestamp_reply_summary, timestamp_signature, verify_checkpoint)
 
 SEAL_FORMAT = "tgwitness-report-seal-v1"
@@ -139,7 +139,7 @@ def text_keys():
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
     return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media", "Sticker", RECEIVED_WHERE, RECEIVED_RENAMED]
-                              + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
+                              + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values()) + list(SCOPE_REASONS)
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
                               + list(FILES.values()) + list(WITHHELD.values()) + list(ROLE_NAMES.values())
@@ -205,14 +205,14 @@ def duration_text(say, seconds):
     return say("{n} min", n=rest // 60)
 
 
-def observed_text(say, coverage, window=None):
+def observed_text(say, coverage, window=None, short=False):
     periods = (coverage or {}).get("continuous")
     if window is not None and not all(window):
         return say("0 records selected") + (" · " + say("No observation period recorded") if periods == [] else "")
     if periods is None:
         return say("Not recorded in this export")
     if not periods:
-        return say("No observation period recorded")
+        return say("Not recorded" if short else "No observation period recorded")
     if window is None:
         seconds = [p.get("seconds") or 0 for p in periods]
     else:
@@ -2377,7 +2377,7 @@ def gap_overview(say, summary):
     measured, skipped, listed = [], [], []
     for name, item in sequences:
         if item.get("status") != "applicable":
-            skipped.append([name, item.get("reason") or "—"])
+            skipped.append([name, say(item["reason"]) if item.get("reason") else "—"])
             continue
         row = [name, str(item["observed_from"]) + " – " + str(item["observed_to"]), item["observed"], item["missing"],
                format(item["density"] * 100, ".2f") + "%", item["largest_gap"]]
@@ -2389,7 +2389,7 @@ def gap_overview(say, summary):
                            gap["after"]["message_id"], gap["after"]["observed_at"],
                            gap["before"]["message_id"], gap["before"]["observed_at"]])
     note = " ".join((
-        say("Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.",
+        say("Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.",
             smallest=settings["gap_cluster_min"], listed=settings["gap_clusters_listed"]),
         say("The account-wide numbering is measured where it applies.") if settings["gap_account_sequence"]
         else say("The account-wide numbering is not measured."),
@@ -2468,7 +2468,7 @@ def coverage_section(say, number, coverage):
     out = section(number, "coverage", say("Coverage"), say(coverage.get("meaning") or "Recorded observation intervals."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
-                                                                    if periods else "<p>—</p>")
+                                                                    if periods else '<p class="lead">' + e(say("No observation period recorded")) + "</p>")
     if gaps:
         out += "<h3>" + e(say("Gaps")) + "</h3>" + table([say("Interval start"), say("Interval end"), say("Reason")], gaps)
     if ids:
@@ -2720,7 +2720,7 @@ class EvidenceHTML:
                         (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
                          if self.anchors or self.archive else "—", "ok", "seal"),
                         (say("Observation period"), e(observed_text(say, self.coverage, (self.digest["first"], self.digest["last"])
-                                                                    if self.filtered else None)), "pink", "eye")])
+                                                                    if self.filtered else None, short=True)), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
     def render_summary(self):
@@ -2839,7 +2839,7 @@ class EvidenceHTML:
             steps.append((say("Checkpoints timestamped"), (when(latest.get("time")) + " · " + e(latest["service"]))
                           if latest else e(say("none in this export"))))
         steps += [(say("Journal verified and exported"), when(self.created)),
-                  (say("Report sealed"), when(self.created) + " · " + e(self.options.get("examiner") or ""))]
+                  (say("Report sealed"), when(self.created) + (" · " + e(self.options["examiner"]) if self.options.get("examiner") else ""))]
         yield custody_section(say, next(self.numbers), steps, [
             (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
             (say("Program build"), build_html(say, self.producer)),
@@ -3168,7 +3168,7 @@ class ChatHTML:
                  + e(initials(p["name"] or p["user_id"])) + "</span> <b>" + e(p["name"] or say("Unknown")) + "</b>"
                  + (' <span class="uname">@' + e(p["username"]) + "</span>" if p.get("username") else "")
                  + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat))
-                 + ("<br><small>" + e(say("Shown as {label} in the charts", label=p["chart_label"])) + "</small>"
+                 + ("<br><small>" + e(say("Shown as {label} in the charts", label=snapshot_analytics.display(p["chart_label"], say))) + "</small>"
                     if p.get("chart_label") else ""),
                  "<code>" + e(p["user_id"]) + "</code>", num(p["messages"]),
                  '<div class="meter"><i style="width:' + str(max(2, round(100 * p["messages"] / top))) + '%"></i></div>',

@@ -1252,7 +1252,7 @@
   "e.g. Partner server": "Например, сервер партнёра",
   "Create read-only token": "Создать токен только для чтения",
   "Copy this token now; it is shown only once.": "Скопируйте этот токен сейчас; он отображается только один раз.",
-  "Copy": "Копия",
+  "Copy": "Копировать",
   "A witness token opens only the signed journal head: record count and head hash. It cannot open this panel, read messages, change settings or reach the Telegram session.": "Токен свидетеля открывает только подписанную заголовочную часть журнала: количество записей и хеш заголовка. Он не может открыть эту панель, читать сообщения, изменять настройки или получить доступ к сеансу Telegram.",
   "Run a witness": "Запустить свидетеля",
   "You need a Telegram bot (create one with @BotFather) that is an administrator of a channel, and this panel's address reachable from the witness — over HTTPS outside a private network. Any Telegram account can watch the channel; its posts carry Telegram's own times.": "Вам потребуется бот в Telegram (создайте его с помощью @BotFather), являющийся администратором канала, а также адрес этой панели, доступный для свидетеля — через HTTPS за пределами частной сети. Любой аккаунт в Telegram может следить за каналом; в его сообщениях отображается собственное время Telegram.",
@@ -5708,7 +5708,6 @@
   "Method and sources": "Методика и источники",
   "Method used": "Использованный метод",
   "Monday": "Понедельник",
-  "Most observed participants": "Большинство наблюдаемых участников",
   "Neutral labels (Participant 01, 02…)": "Нейтральные обозначения (Участник 01, 02…)",
   "New-message observations": "Наблюдения за новыми сообщениями",
   "No observations in this selection.": "В данной подборке нет наблюдений.",
@@ -6614,7 +6613,6 @@
   "Last observed number before": "Последний наблюдённый номер перед пропуском",
   "First observed number after": "Первый наблюдённый номер после пропуска",
   "Account-wide message numbering": "Общая нумерация аккаунта",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Параметры: перечисляются пропуски от {smallest} номеров сообщений, не более {listed} для каждой нумерации.",
   "The account-wide numbering is measured where it applies.": "Общая нумерация аккаунта измеряется там, где это применимо.",
   "The account-wide numbering is not measured.": "Общая нумерация аккаунта не измеряется.",
   "A service-message estimate is shown.": "Оценка числа служебных сообщений показана.",
@@ -11060,5 +11058,9 @@
   "Export of the selected chats has ended.": "Экспорт выбранных чатов завершён.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Каждая строка — это чат, а каждый столбец — период времени (UTC); чем ярче цвет, тем больше зафиксированных сообщений. В заштрихованных столбцах подтверждение сбора данных отсутствовало: что было опубликовано в этот период, неизвестно. Бледная ячейка в столбце с зафиксированными данными означает, что в ней не было зафиксировано ни одного сообщения.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Чем ярче цвет, тем больше включенных наблюдений. Максимум на ячейку: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Каждый квадрат соответствует одному дню по UTC; строки обозначают дни недели. Чем ярче цвет, тем больше сообщений. Точка обозначает отсутствующие номера сообщений, соседние сообщения которых разделены не более чем двумя днями; остальные перечислены в таблицах."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Каждый квадрат соответствует одному дню по UTC; строки обозначают дни недели. Чем ярче цвет, тем больше сообщений. Точка обозначает отсутствующие номера сообщений, соседние сообщения которых разделены не более чем двумя днями; остальные перечислены в таблицах.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Личные чаты, боты и обычные группы имеют единую нумерацию в рамках всего аккаунта. Её можно измерить только при включенном сборе данных по всему аккаунту; в данном журнале такого периода нет.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Личные чаты, боты, обычные группы и собственные сообщения аккаунта получают номера из одной и той же последовательности, поэтому при измерении необходимо указать, что в него включены все эти элементы без исключения каких-либо чатов.",
+  "Participants by observation count": "Участники по количеству наблюдений",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметры: наименьший указанный разрыв в номерах сообщений равен {smallest}; для каждой нумерации указано не более {listed} разрывов."
 }

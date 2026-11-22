@@ -5399,7 +5399,6 @@
   "Method and sources": "Phương pháp và nguồn tham khảo",
   "Method used": "Phương pháp được sử dụng",
   "Monday": "Thứ Hai",
-  "Most observed participants": "Hầu hết các bên tham gia được quan sát",
   "Neutral labels (Participant 01, 02…)": "Các nhãn trung lập (Người tham gia 01, 02…)",
   "New-message observations": "Các quan sát về tin nhắn mới",
   "No observations in this selection.": "Không có quan sát nào trong phần lựa chọn này.",
@@ -6207,7 +6206,6 @@
   "Last observed number before": "Số lần quan sát cuối cùng trước",
   "First observed number after": "Số lần quan sát đầu tiên sau",
   "Account-wide message numbering": "Đánh số tin nhắn trên toàn tài khoản",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Tham số: các khoảng trống có số tin nhắn từ {smallest} trở lên được liệt kê, tối đa {listed} cho mỗi dãy số.",
   "The account-wide numbering is measured where it applies.": "Hệ thống đánh số chung cho toàn tài khoản được áp dụng ở những nơi phù hợp.",
   "The account-wide numbering is not measured.": "Hệ thống đánh số trên toàn tài khoản không được tính toán.",
   "A service-message estimate is shown.": "Một ước tính về tin nhắn dịch vụ được hiển thị.",
@@ -10922,5 +10920,9 @@
   "Export of the selected chats has ended.": "Việc xuất các cuộc trò chuyện đã chọn đã hoàn tất.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Mỗi hàng tương ứng với một cuộc trò chuyện và mỗi cột tương ứng với một khoảng thời gian (UTC); màu sắc đậm hơn cho thấy có nhiều tin nhắn được ghi nhận hơn. Các cột có nền chéo không có xác nhận ghi nhận nào cả: nội dung được đăng vào thời điểm đó là không rõ. Một ô màu nhạt trong cột có ghi nhận có nghĩa là không có tin nhắn nào được ghi lại tại đó.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Màu sắc đậm hơn có nghĩa là có nhiều quan sát được bao gồm hơn. Số lượng tối đa mỗi ô: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Mỗi ô vuông tương ứng với một ngày theo giờ UTC; các hàng tương ứng với các ngày trong tuần. Màu sắc đậm hơn cho thấy có nhiều tin nhắn hơn. Một chấm đánh dấu các số tin nhắn bị thiếu mà các tin nhắn liền kề có khoảng cách tối đa là hai ngày; các bảng liệt kê phần còn lại."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Mỗi ô vuông tương ứng với một ngày theo giờ UTC; các hàng tương ứng với các ngày trong tuần. Màu sắc đậm hơn cho thấy có nhiều tin nhắn hơn. Một chấm đánh dấu các số tin nhắn bị thiếu mà các tin nhắn liền kề có khoảng cách tối đa là hai ngày; các bảng liệt kê phần còn lại.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Các cuộc trò chuyện riêng tư, bot và nhóm thông thường đều sử dụng hệ thống đánh số chung cho toàn bộ tài khoản. Việc đo lường chỉ có thể thực hiện khi chế độ thu thập toàn bộ tài khoản đang hoạt động; nhật ký này không ghi nhận khoảng thời gian đó.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Các cuộc trò chuyện riêng tư, bot, nhóm thông thường và tin nhắn của chính tài khoản đều được đánh số theo cùng một dãy, do đó phạm vi đo lường cần được ghi nhận là bao gồm tất cả các mục này mà không loại trừ bất kỳ cuộc trò chuyện nào.",
+  "Participants by observation count": "Số lượng người tham gia theo số lần quan sát",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Các thông số: khoảng cách nhỏ nhất được liệt kê trong số thứ tự tin nhắn là {smallest}; tối đa {listed} khoảng cách được liệt kê cho mỗi dãy số."
 }

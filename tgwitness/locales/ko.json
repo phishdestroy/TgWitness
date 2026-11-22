@@ -5399,7 +5399,6 @@
   "Method and sources": "방법 및 출처",
   "Method used": "사용된 방법",
   "Monday": "월요일",
-  "Most observed participants": "대부분의 관찰된 참여자",
   "Neutral labels (Participant 01, 02…)": "중립적 라벨(참가자 01, 02…)",
   "New-message observations": "새 메시지 관찰 사항",
   "No observations in this selection.": "이 선택 항목에는 관찰 사항이 없습니다.",
@@ -6207,7 +6206,6 @@
   "Last observed number before": "마지막으로 관측된 번호:",
   "First observed number after": "다음 번호 이후 처음 관측된 번호",
   "Account-wide message numbering": "계정 전체 메시지 번호 매기기",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "매개변수: {smallest} 이상의 메시지 번호 간격이 나열되며, 각 번호 범주당 최대 {listed}개까지 나열됩니다.",
   "The account-wide numbering is measured where it applies.": "해당되는 경우 계정 전체에 적용되는 번호 체계가 반영됩니다.",
   "The account-wide numbering is not measured.": "계정 전체의 번호 매기기는 측정 대상이 아닙니다.",
   "A service-message estimate is shown.": "서비스 메시지 예상량이 표시됩니다.",
@@ -10922,5 +10920,9 @@
   "Export of the selected chats has ended.": "선택한 채팅의 내보내기가 완료되었습니다.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "각 행은 채팅을, 각 열은 기간(UTC)을 나타냅니다. 색상이 진할수록 해당 기간 동안 더 많은 메시지가 관찰되었음을 의미합니다. 음영 처리된 열은 캡처 확인이 전혀 이루어지지 않은 것으로, 해당 기간에 어떤 내용이 게시되었는지는 알 수 없습니다. 관찰된 열에서 색이 옅은 셀은 해당 위치에 메시지가 기록되지 않았음을 의미합니다.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "색상이 진할수록 포함된 관찰 사항이 더 많음을 의미합니다. 셀당 최대값: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "각 사각형은 UTC 기준 하루를 나타내며, 행은 요일을 나타냅니다. 색이 진할수록 메시지 수가 많습니다. 인접한 메시지 간 간격이 최대 2일인 경우, 해당 날짜의 메시지 수가 없을 때는 점으로 표시되며, 나머지 메시지는 표에 나열되어 있습니다."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "각 사각형은 UTC 기준 하루를 나타내며, 행은 요일을 나타냅니다. 색이 진할수록 메시지 수가 많습니다. 인접한 메시지 간 간격이 최대 2일인 경우, 해당 날짜의 메시지 수가 없을 때는 점으로 표시되며, 나머지 메시지는 표에 나열되어 있습니다.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "비공개 채팅, 봇 및 일반 그룹은 계정 전체에 걸쳐 하나의 번호 체계를 공유합니다. 이는 계정 전체 수집 기능이 활성화된 상태에서만 측정할 수 있으나, 본 기록에는 해당 기간이 포함되어 있지 않습니다.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "비공개 채팅, 봇, 일반 그룹 및 계정 소유자의 메시지는 모두 동일한 번호 체계에 따라 번호가 부여되므로, 측정 범위에는 제외된 채팅 없이 이 모든 항목이 포함된다는 점이 명시되어야 합니다.",
+  "Participants by observation count": "관찰 횟수별 참여자",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "매개변수: 메시지 번호 간에 나열된 가장 작은 간격은 {smallest}이며, 각 번호 체계에 대해 최대 {listed}개의 간격이 나열됩니다."
 }

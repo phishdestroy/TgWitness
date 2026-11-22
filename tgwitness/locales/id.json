@@ -5399,7 +5399,6 @@
   "Method and sources": "Metode dan sumber",
   "Method used": "Metode yang digunakan",
   "Monday": "Senin",
-  "Most observed participants": "Sebagian besar peserta yang diamati",
   "Neutral labels (Participant 01, 02…)": "Label netral (Peserta 01, 02…)",
   "New-message observations": "Pengamatan pesan baru",
   "No observations in this selection.": "Tidak ada pengamatan dalam pilihan ini.",
@@ -6207,7 +6206,6 @@
   "Last observed number before": "Nomor terakhir yang teramati sebelum",
   "First observed number after": "Nomor pertama yang teramati setelah",
   "Account-wide message numbering": "Penomoran pesan di seluruh akun",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Parameter: celah dengan jumlah pesan minimal {smallest} atau lebih dicantumkan, dengan jumlah maksimal {listed} untuk setiap penomoran.",
   "The account-wide numbering is measured where it applies.": "Penomoran di seluruh akun diterapkan di mana hal tersebut berlaku.",
   "The account-wide numbering is not measured.": "Penomoran di seluruh akun tidak diukur.",
   "A service-message estimate is shown.": "Tampilan perkiraan pesan layanan ditampilkan.",
@@ -10922,5 +10920,9 @@
   "Export of the selected chats has ended.": "Ekspor obrolan yang dipilih telah selesai.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Setiap baris mewakili satu obrolan dan setiap kolom mewakili periode waktu (UTC); warna yang lebih gelap menandakan jumlah pesan yang teramati lebih banyak. Kolom yang diarsir sama sekali tidak memiliki konfirmasi penangkapan: isi yang diposting pada periode tersebut tidak diketahui. Sel berwarna pucat pada kolom yang teramati berarti tidak ada pesan yang terekam di sana.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Warna yang lebih gelap menandakan lebih banyak pengamatan yang disertakan. Maksimum per sel: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap kotak mewakili satu hari UTC; baris-barisnya adalah hari kerja. Warna yang lebih gelap menandakan jumlah pesan yang lebih banyak. Sebuah titik menandai nomor pesan yang tidak ada, di mana pesan-pesan di sekitarnya memiliki selisih waktu paling lama dua hari; tabel-tabel tersebut mencantumkan sisanya."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Setiap kotak mewakili satu hari UTC; baris-barisnya adalah hari kerja. Warna yang lebih gelap menandakan jumlah pesan yang lebih banyak. Sebuah titik menandai nomor pesan yang tidak ada, di mana pesan-pesan di sekitarnya memiliki selisih waktu paling lama dua hari; tabel-tabel tersebut mencantumkan sisanya.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Percakapan pribadi, bot, dan grup biasa menggunakan sistem penomoran yang sama untuk seluruh akun. Hal ini hanya dapat diukur saat pengumpulan data seluruh akun diaktifkan; jurnal ini tidak memiliki periode seperti itu.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Percakapan pribadi, bot, grup biasa, dan pesan dari akun itu sendiri diberi nomor dari urutan yang sama, sehingga pengukuran perlu mencakup semuanya tanpa mengecualikan percakapan apa pun.",
+  "Participants by observation count": "Peserta berdasarkan jumlah pengamatan",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: selisih terkecil yang tercantum dalam nomor pesan adalah {smallest}; paling banyak {listed} selisih tercantum untuk setiap penomoran."
 }

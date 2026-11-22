@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from .account_report import chat_note, reason_text, state_note
+from .account_report import chat_note, reason_text, service_line, state_note
 from .report import Words
 from .telegram_export import DELETED_ACCOUNT, MEDIA_PATH, dates, entity_spans, message, name
 
@@ -285,13 +285,10 @@ class View:
             parts.append('<p class="forward">' + e(say('Forwarded from')) + ': <bdi>' + e(forward) + '</bdi></p>')
         parts.append(self.reply(row, chat))
         if service:
-            labels = {'create_group': 'created the group', 'create_channel': 'created the channel',
-                      'edit_group_title': 'changed the chat name', 'edit_group_photo': 'changed the chat photo',
-                      'pin_message': 'pinned a message'}
-            if value.get('action') == 'create_channel' and chat.get('kind') in ('group', 'supergroup'):
-                value = {**value, 'action': 'create_group'}
-            parts.append('<p class="service-label">' + e(say(labels.get(value.get('action'), 'Service message')))
-                         + (' · <bdi>' + e(value['title']) + '</bdi>' if value.get('title') else '') + '</p>')
+            line = service_line(row, say, chat.get('kind') in ('group', 'supergroup')) or say('Service message')
+            title = value.get('title')
+            parts.append('<p class="service-label">' + e(line)
+                         + (' · <bdi>' + e(title) + '</bdi>' if title and str(title) not in line else '') + '</p>')
         parts.append(self.attachments(row, value))
         if row.get('text'):
             parts.append('<div class="message-text" dir="auto">' + formatted(row['text'], row.get('entities'), self.emoji_pictures(row)) + '</div>')

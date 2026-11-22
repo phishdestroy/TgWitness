@@ -5426,7 +5426,6 @@
   "Method and sources": "Yöntem ve kaynaklar",
   "Method used": "Kullanılan yöntem",
   "Monday": "Pazartesi",
-  "Most observed participants": "Gözlemlenen katılımcıların çoğu",
   "Neutral labels (Participant 01, 02…)": "Tarafsız etiketler (Katılımcı 01, 02…)",
   "New-message observations": "Yeni mesaj gözlemleri",
   "No observations in this selection.": "Bu seçimde herhangi bir gözlem bulunmamaktadır.",
@@ -6246,7 +6245,6 @@
   "Last observed number before": "Son gözlemlenmeden önceki sayı",
   "First observed number after": "İlk gözlemlenen sayı:",
   "Account-wide message numbering": "Hesap genelinde mesaj numaralandırma",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Parametreler: {smallest} veya daha fazla mesaj numarasından oluşan boşluklar listelenir; her numaralandırma için en fazla {listed} kadar.",
   "The account-wide numbering is measured where it applies.": "Hesap genelinde numaralandırma, geçerli olduğu yerlerde uygulanır.",
   "The account-wide numbering is not measured.": "Hesap genelindeki numaralandırma ölçülmemektedir.",
   "A service-message estimate is shown.": "Bir hizmet mesajı tahmini gösterilmektedir.",
@@ -10973,5 +10971,9 @@
   "Export of the selected chats has ended.": "Seçilen sohbetlerin dışa aktarımı tamamlandı.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Her satır bir sohbeti, her sütun ise bir dönemi (UTC) temsil eder; rengin koyu olması, o dönemde daha fazla mesajın gözlemlendiği anlamına gelir. Çizgili sütunlarda yakalama onayı hiç bulunmamaktadır: o dönemde neyin yayınlandığı bilinmemektedir. Gözlemlenen bir sütundaki soluk renkli hücre, o yerde hiçbir mesajın kaydedilmediğini gösterir.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Renk ne kadar koyu olursa, o kadar fazla gözlem yer almaktadır. Hücre başına maksimum: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Her kare bir UTC gününü temsil eder; satırlar hafta günlerini gösterir. Rengin koyu olması, daha fazla mesaj olduğu anlamına gelir. Komşu mesajlar arasında en fazla iki gün fark olan, mevcut olmayan mesaj numaraları bir nokta ile işaretlenmiştir; tabloda geri kalanlar listelenmiştir."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Her kare bir UTC gününü temsil eder; satırlar hafta günlerini gösterir. Rengin koyu olması, daha fazla mesaj olduğu anlamına gelir. Komşu mesajlar arasında en fazla iki gün fark olan, mevcut olmayan mesaj numaraları bir nokta ile işaretlenmiştir; tabloda geri kalanlar listelenmiştir.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Özel sohbetler, botlar ve normal gruplar, hesap genelinde tek bir numaralandırma sistemini paylaşır. Bu, yalnızca hesap genelinde veri toplama özelliği açıkken ölçülebilir; bu kayıt defterinde böyle bir dönem bulunmamaktadır.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Özel sohbetler, botlar, normal gruplar ve hesabın kendi mesajları aynı sıra numarasını alır; bu nedenle ölçümde, hiçbir sohbetin hariç tutulmaması ve hepsinin dahil edildiği bir kapsam belirtilmelidir.",
+  "Participants by observation count": "Gözlem sayısına göre katılımcılar",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametreler: mesaj numaralarında listelenen en küçük aralık {smallest}'dir; her numaralandırma için en fazla {listed} aralık listelenir."
 }

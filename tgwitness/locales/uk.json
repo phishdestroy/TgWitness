@@ -5480,7 +5480,6 @@
   "Method and sources": "Метод та джерела",
   "Method used": "Використаний метод",
   "Monday": "Понеділок",
-  "Most observed participants": "Більшість учасників, яких було помічено",
   "Neutral labels (Participant 01, 02…)": "Нейтральні позначення (Учасник 01, 02…)",
   "New-message observations": "Спостереження щодо нових повідомлень",
   "No observations in this selection.": "У цій добірці немає спостережень.",
@@ -6324,7 +6323,6 @@
   "Last observed number before": "Останній спостережений номер перед пропуском",
   "First observed number after": "Перший спостережений номер після пропуску",
   "Account-wide message numbering": "Спільна нумерація акаунта",
-  "Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.": "Параметри: перелічуються пропуски від {smallest} номерів повідомлень, не більше ніж {listed} для кожної нумерації.",
   "The account-wide numbering is measured where it applies.": "Спільна нумерація акаунта вимірюється там, де це застосовно.",
   "The account-wide numbering is not measured.": "Спільна нумерація акаунта не вимірюється.",
   "A service-message estimate is shown.": "Оцінку кількості службових повідомлень показано.",
@@ -11075,5 +11073,9 @@
   "Export of the selected chats has ended.": "Експорт вибраних чатів завершено.",
   "Each row is a chat and each column a period (UTC); a stronger colour means more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "Кожен рядок — це чат, а кожен стовпець — період часу (UTC); чим яскравіший колір, тим більше повідомлень було зафіксовано. Штриховані стовпці взагалі не мали підтвердження збору даних: що було опубліковано в цей час, невідомо. Бліда комірка у стовпці з зафіксованими даними означає, що там не було записано жодного повідомлення.",
   "A stronger colour means more included observations. Maximum per cell: {n}": "Чим яскравіший колір, тим більше спостережень включено. Максимум на одну комірку: {n}",
-  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Кожен квадрат відповідає одному дню за UTC; рядки — дні тижня. Чим яскравіший колір, тим більше повідомлень. Крапкою позначено відсутні номери повідомлень, сусідні з якими розташовані з інтервалом не більше двох днів; решта наведена в таблицях."
+  "Each square is one UTC day; rows are weekdays. A stronger colour means more messages. A dot marks absent message numbers whose neighbouring messages are at most two days apart; the tables list the rest.": "Кожен квадрат відповідає одному дню за UTC; рядки — дні тижня. Чим яскравіший колір, тим більше повідомлень. Крапкою позначено відсутні номери повідомлень, сусідні з якими розташовані з інтервалом не більше двох днів; решта наведена в таблицях.",
+  "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Приватні чати, боти та звичайні групи мають єдину нумерацію для всього облікового запису. Її можна виміряти лише тоді, коли увімкнено збір даних з усього облікового запису; у цьому журналі такого періоду немає.",
+  "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Приватні чати, боти, звичайні групи та власні повідомлення облікового запису мають номери з однієї послідовності, тому в описі обсягу даних слід зазначити, що він охоплює всі ці елементи без виключення будь-яких чатів.",
+  "Participants by observation count": "Учасники за кількістю спостережень",
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметри: найменший зазначений розрив у номерах повідомлень становить {smallest}; для кожної нумерації вказано не більше {listed} розривів."
 }

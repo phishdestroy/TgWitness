@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 5fd8cb9b13131ec672b02c5caab558c8f3e0b66cd9654188f5f977554b62459d
+# TgWitness verifier sources SHA-256: 6be413ec5ee2d842e54eb420e9cd53b74a492b16cbcdffd8ec5879373461ce16
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -3396,12 +3396,14 @@ def wide(scope):
     return all(types.get(kind) is True for kind in WIDE_TYPES) and scope.get("own_actions") is True and not excluded
 
 
+SCOPE_REASONS = ("Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only "
+                 "while whole-account collection is on; this journal has no such period.",
+                 "Private chats, bots, ordinary groups and the account's own messages take numbers from the same "
+                 "sequence, so the measurement needs a scope recorded as including all of them without excluded chats.")
+
+
 def scope_reason(scope):
-    if not isinstance(scope, dict) or scope.get("mode") != "account":
-        return ("Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only "
-                "while whole-account collection is on; this journal has no such period.")
-    return ("Private chats, bots, ordinary groups and the account's own messages take numbers from the same "
-            "sequence, so the measurement needs a scope recorded as including all of them without excluded chats.")
+    return SCOPE_REASONS[0] if not isinstance(scope, dict) or scope.get("mode") != "account" else SCOPE_REASONS[1]
 
 
 class Sequences:

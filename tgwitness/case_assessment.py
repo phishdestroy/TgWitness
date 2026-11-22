@@ -1,5 +1,5 @@
 from html import escape
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 from . import jurisdiction_guidance
 
@@ -57,11 +57,14 @@ CSS = """
 .assessment-item{border:1px solid #8894a455;border-radius:12px;padding:18px;min-width:0;break-inside:avoid}
 .assessment-item h3{margin:0 0 8px;font-size:16px}.assessment-state{font-size:12px;font-weight:600}
 .assessment-item p{line-height:1.6;overflow-wrap:anywhere}.assessment-item dl{font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
-.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}
+.assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-variant-numeric:tabular-nums}
+.case-assessment .assessment-item dd.hash{grid-column:1/-1;max-width:40ch;text-align:start;font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace}.case-assessment .assessment-item dd.hash span{display:inline-block;margin-inline-end:1ch}
+.case-assessment .assessment-item dt:has(+dd.hash){grid-column:1/-1}.assessment-references code{font:inherit;font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,DejaVu Sans Mono,Liberation Mono,monospace;background:none;border:0;padding:0;color:inherit}
 .assessment-review{padding:12px;border-inline-start:3px solid #697d99;margin-top:14px}
 .evidence-conditions{margin:18px 0;overflow-x:auto}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
 .evidence-conditions table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .evidence-conditions th,.evidence-conditions td{border-top:1px solid #8894a455;padding:8px;text-align:start;vertical-align:top;overflow-wrap:break-word}
+.evidence-conditions thead th:nth-child(1){width:15%}.evidence-conditions thead th:nth-child(2){width:27%}.evidence-conditions thead th:nth-child(3){width:30%}.evidence-conditions thead th:nth-child(4){width:28%}
 .evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding-top:12px}
 .evidence-conditions tr[data-status="checked_locally"] strong{color:var(--ok,#08734a)}.evidence-conditions tr[data-status="not_included"] strong{color:var(--muted)}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
@@ -76,6 +79,7 @@ html[data-theme=dark] .case-assessment{--state-ok:#5dd39e;--state-warn:#f2b35b;-
 .case-assessment [data-status=not_included]{--state:var(--state-off)}
 .case-assessment .assessment-state{color:var(--state);align-self:flex-start;padding:3px 10px 3px 9px;border-radius:999px;background:color-mix(in srgb,var(--state) 10%,transparent);font-weight:600}
 .case-assessment .assessment-state::before{align-self:center}.evidence-conditions tr[data-status] td>strong{color:var(--state)}
+@media screen and (min-width:761px){.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd){grid-column:1/-1;columns:2;column-gap:48px}.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd)>*{break-inside:avoid}.case-assessment .assessment-grid>.assessment-item:last-child:nth-child(odd)>.assessment-heading{column-span:all}}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.evidence-conditions thead{display:none}
 .evidence-conditions tbody,.evidence-conditions tr,.evidence-conditions th,.evidence-conditions td{display:block}
@@ -348,7 +352,23 @@ def result_text(result, say):
 
 
 def fact_text(value, say):
-    return say("Yes" if value else "No") if isinstance(value, bool) else number_text(value, say) if value is not None else say("Not recorded")
+    if isinstance(value, bool):
+        return say("Yes" if value else "No")
+    if isinstance(value, str) and re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(Z|[+-]\d\d:\d\d)?", value):
+        try:
+            moment = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return value
+        if moment.tzinfo:
+            return moment.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S") + " UTC"
+        return moment.strftime("%Y-%m-%d %H:%M:%S")
+    return number_text(value, say) if value is not None else say("Not recorded")
+
+
+def fact_html(key, value, say, e):
+    if key == "fingerprint" and isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value):
+        return '<dd class="hash" dir="ltr">' + ''.join('<span>' + value[i:i + 4] + '</span>' for i in range(0, 64, 4)) + '</dd>'
+    return '<dd dir="auto">' + e(fact_text(value, say)) + '</dd>'
 
 
 def conditions_html(data, say, e):
@@ -385,11 +405,14 @@ def html(data, say):
                      + f'{number:02d}' + '</span><h3>' + e(say(item["title"])) + '</h3></div><div class="assessment-state">' + e(say(STATUSES[item["status"]]))
                      + '</div><p class="assessment-result">' + e(result_text(conclusion, say)) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p>')
         if item["facts"]:
-            parts.append('<dl>' + ''.join('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>'
+            parts.append('<dl>' + ''.join('<dt>' + e(say(LABELS.get(k, k))) + '</dt>' + fact_html(k, v, say, e)
                                           for k, v in item["facts"].items()) + '</dl>')
         parts.append('<p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
-            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(reference_text(item["references"])) + '</p>')
+            shown = item["references"][:REFERENCES_SHOWN]
+            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': '
+                         + ', '.join('<code dir="ltr">' + e(name) + '</code>' for name in shown)
+                         + (' … +' + str(len(item["references"]) - len(shown)) if len(item["references"]) > len(shown) else '') + '</p>')
         parts.append('</article>')
     return ''.join(parts) + '</div></section>' + jurisdiction_guidance.html(data.get("jurisdiction_guidance"))
 
@@ -411,7 +434,7 @@ def pdf(lay, data):
         lay.callout(say(conditions["minimum"]) + " " + say(conditions["outcome"]))
         lay.command(conditions["command"])
     lay.assessment_overview(data)
-    lay.pdf.add_page()
+    lay.gap(6)
     for number, item in enumerate(data["checks"], 1):
         lay.assessment_card(number, item)
     jurisdiction_guidance.pdf(lay, data.get("jurisdiction_guidance"))

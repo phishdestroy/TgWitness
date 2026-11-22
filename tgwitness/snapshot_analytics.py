@@ -2,6 +2,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 import html
 import math
+import re
 import statistics
 
 
@@ -192,6 +193,13 @@ def selected(options):
     return [(key, title) for key, title in CHARTS if options.get(CONTROLS[key], True)]
 
 
+def shown(data, options):
+    charts = [(key, title) for key, title in selected(options)
+              if key not in ("participants", "chats") or len(data.get(key, [])) > 1]
+    keys = [key for key, _ in charts]
+    return charts, next((key for key in ("chats", "participants", "heatmap", "activity") if key in keys), keys[-1] if keys else None)
+
+
 def alias_map(people):
     return {row["id"]: index for index, row in enumerate(sorted((row for row in people if row["id"] is not None),
                                                                 key=lambda row: str(row["id"])), 1)}
@@ -246,6 +254,9 @@ def e(value):
 
 def display(label, say):
     text = str(label)
+    alias = re.fullmatch(r"Participant (\d{2,})", text)
+    if alias:
+        return say("Participant {n}", n=alias.group(1))
     if text == DELETED or text.startswith(DELETED + " · "):
         return say("Deleted account") + text[len(DELETED):]
     return text
@@ -340,8 +351,7 @@ def html_section(data, options, say):
                          (data.get("sender_groups", len(data.get("participants", []))), "Listed sender identifiers"), (data["undated"], "Without a usable timestamp")):
         parts.append('<div><strong>' + str(grouped(say, value)) + '</strong><span>' + e(say(title)) + '</span></div>')
     parts.append('</div><div class="analytics-grid">')
-    charts = [(key, title) for key, title in selected(options) if key != "chats" or len(data.get("chats", [])) > 1]
-    habits_after = "chats" if any(key == "chats" for key, _ in charts) else "participants"
+    charts, habits_after = shown(data, options)
     for key, title in charts:
         parts.append('<article class="chart-card chart-' + key + '"><h3>' + e(say(title)) + '</h3>')
         if key == "heatmap":
@@ -382,9 +392,8 @@ def _pdf_section(lay, data, options):
     lay.section(say("Activity & participants"), say(data["method"]))
     lay.figures([(say("Records analysed"), grouped(say, data["records"])), (say("Message observations" if data["basis"] == "journal" else "Message rows"), grouped(say, data["messages"])),
                  (say("Without a usable timestamp"), grouped(say, data["undated"]))])
-    for key, title in selected(options):
-        if key == "chats" and len(data.get("chats", [])) < 2:
-            continue
+    charts, habits_after = shown(data, options)
+    for key, title in charts:
         if key in ("participants", "chats", "composition"):
             count = len(ranking(data, key, options.get("chart_limit", 10))) if key != "composition" else len(data[key])
             lay.need(min(pdf.eph - 15, 22 + count * 13))
@@ -438,7 +447,7 @@ def _pdf_section(lay, data, options):
                 lay.text(say("No included data for this chart."))
         if data.get("unlisted", {}).get(key):
             lay.text(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key]), size=8)
-        if key == "participants" and data.get("habits"):
+        if key == habits_after and data.get("habits"):
             titles, rows = habit_rows(data, say, options.get("chart_limit", 10))
             lay.need(22 + len(rows) * 13)
             lay.heading(say("Rhythm"))
