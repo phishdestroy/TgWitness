@@ -365,7 +365,7 @@ whole data directory with that folder. The next start records that the journal w
 from an older copy. That record compares the journal with the head kept in
 `TGWITNESS_STATE_DIR`, a folder outside the data directory: the `tgwitness-state` volume in
 Compose, `/var/lib/tgwitness-state` in the systemd units, and the user's local state folder
-otherwise. Without a writable state folder the restore is not detected and the log says so once.
+otherwise. The head is kept per data directory path: a restore to another path or another computer is not detected, so note the restore in your own records. Without a writable state folder the restore is not detected and the log says so once.
 
 Without the command, stop the process before copying the **entire data directory**, including vault.key,
 signing.enc, credentials.enc, SQLite database/WAL files, media, token, checkpoints,
