@@ -109,6 +109,8 @@ class Transport:
         self.client = None
         self.metadata = {}
         self.emoji = {}
+        # Photo lookups of this run by peer: a page retried after FLOOD_WAIT continues instead of asking again.
+        self.avatar_lookups = {}
         self.progress = None
 
     def report(self, stage, done, total=None, chat=None):
@@ -454,12 +456,16 @@ class Transport:
         rows = []
         for key in order[cursor:cursor + AVATAR_PAGE]:
             row = {"category": "avatars", "id": int(key), "peer_id": int(key), "messages_read": known[key][1]}
-            try:
-                photo = await self.current_photo(decode_peer(known[key][0]))
-            except AVATAR_STOPS:
-                raise
-            except errors.RPCError as exc:
-                rows.append(({**row, "photo": None, "unavailable": getattr(exc, "message", None) or type(exc).__name__}, None))
+            if key not in self.avatar_lookups:
+                try:
+                    self.avatar_lookups[key] = (await self.current_photo(decode_peer(known[key][0])), None)
+                except AVATAR_STOPS:
+                    raise
+                except errors.RPCError as exc:
+                    self.avatar_lookups[key] = (None, getattr(exc, "message", None) or type(exc).__name__)
+            photo, unavailable = self.avatar_lookups[key]
+            if unavailable:
+                rows.append(({**row, "photo": None, "unavailable": unavailable}, None))
                 continue
             if photo is None:
                 rows.append(({**row, "photo": None}, None))
