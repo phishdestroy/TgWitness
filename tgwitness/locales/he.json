@@ -5581,11 +5581,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "תצוגה מקדימה זו משתמשת בבחירותיך הנוכחיות. היא אינה שומרת אותן ואינה יוצרת ייצוא חתום.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "דוח זה בוחר {n} רשומות מתוך {chats} צ'אטים: {m} תצפיות על הודעות, {e} עריכות ו-{d} תצפיות על מחיקות.",
   "Too many choices to list. Enter the Telegram IDs below.": "יש יותר מדי אפשרויות מכדי לפרטן. הזינו את מזהי ה-Telegram להלן.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "מזהים שלא נצפו: {ids} בטווחי {ranges}.",
   "Unobserved message IDs": "מזהי הודעות שלא נצפו",
   "Use the complete workspace or focus on particular chats, authors and dates.": "השתמשו במרחב העבודה המלא או התמקדו בצ'אטים, מחברים ותאריכים ספציפיים.",
   "Whole workspace": "סביבת העבודה כולה",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} טווחים, {ids} מזהי הודעות שלא נצפו.",
   "After": "לאחר",
   "Before": "לפני",
   "Context outside the report filters": "הקשר מחוץ למסנני הדוח",
@@ -10875,7 +10873,6 @@
   "all chats of the account": "כל הצ'אטים של החשבון",
   "{selected} of {listed} chats in the list": "{selected} מתוך {listed} הצ'אטים ברשימה",
   "none · IDs {first}–{last}": "אין · מזהים {first}–{last}",
-  "{n} in {runs} ranges": "{n} בטווחי {runs}",
   "Signed records:": "תיעוד חתום:",
   "recorded in the journal": "נרשם ביומן",
   "All {n} selected chats were read to the end, with no failures.": "כל {n} הצ'אטים שנבחרו נקראו עד הסוף, ללא תקלות.",
@@ -11026,5 +11023,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "צ'אטים פרטיים, בוטים וקבוצות רגילות חולקים מערכת מספור אחידה לכל החשבון. ניתן למדוד זאת רק כאשר איסוף הנתונים של החשבון כולו מופעל; ביומן זה אין תקופה כזו.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "צ'אטים פרטיים, בוטים, קבוצות רגילות וההודעות של החשבון עצמו מקבלים מספרי סידורי מאותה רצף, ולכן יש לציין בהיקף המדידה כי הוא כולל את כולם, ללא צ'אטים שנכללו.",
   "Participants by observation count": "משתתפים לפי מספר התצפיות",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "פרמטרים: הפער הקטן ביותר המופיע ברשימה במספרי ההודעות הוא {smallest}; לכל היותר מופיעים {listed} פערים עבור כל מספור."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "פרמטרים: הפער הקטן ביותר המופיע ברשימה במספרי ההודעות הוא {smallest}; לכל היותר מופיעים {listed} פערים עבור כל מספור.",
+  "ranges: {n}": "טווחים: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "מזהים שלא נצפו: {ids}. טווחים: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ההיסטוריה של חלק מהצ'אטים הפרטיים, הבוטים או הקבוצות הרגילות לא נקראה עד הסוף"
 }

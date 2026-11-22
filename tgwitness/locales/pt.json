@@ -5554,11 +5554,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Esta pré-visualização utiliza suas opções atuais. Ela não as salva nem cria uma exportação assinada.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Este relatório seleciona {n} registros de {chats} conversas: {m} observações de mensagens, {e} edições e {d} observações de exclusão.",
   "Too many choices to list. Enter the Telegram IDs below.": "São muitas opções para listar. Insira os IDs do Telegram abaixo.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "IDs não observados: {ids} nos intervalos {ranges}.",
   "Unobserved message IDs": "IDs de mensagens não observadas",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Utilize toda a área de trabalho ou concentre-se em chats, autores e datas específicos.",
   "Whole workspace": "Espaço de trabalho completo",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges}: intervalos; {ids}: IDs de mensagens não observadas.",
   "After": "Após",
   "Before": "Antes",
   "Context outside the report filters": "Contexto fora dos filtros do relatório",
@@ -10834,7 +10832,6 @@
   "all chats of the account": "todas as conversas da conta",
   "{selected} of {listed} chats in the list": "{selected} das conversas {listed} na lista",
   "none · IDs {first}–{last}": "nenhum · IDs {first}–{last}",
-  "{n} in {runs} ranges": "{n} em intervalos de {runs}",
   "Signed records:": "Registros assinados:",
   "recorded in the journal": "registrado no diário",
   "All {n} selected chats were read to the end, with no failures.": "Todas as {n} conversas selecionadas foram lidas até o fim, sem falhas.",
@@ -10985,5 +10982,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Conversas privadas, bots e grupos comuns compartilham uma numeração única para toda a conta. Isso só pode ser medido enquanto a coleta de dados de toda a conta estiver ativada; este registro não abrange esse período.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Conversas privadas, bots, grupos comuns e as próprias mensagens da conta recebem números da mesma sequência; portanto, a medição deve abranger todos eles, sem excluir nenhuma conversa.",
   "Participants by observation count": "Participantes por número de observações",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parâmetros: a menor diferença listada nos números das mensagens é {smallest}; no máximo, {listed} diferenças são listadas para cada numeração."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parâmetros: a menor diferença listada nos números das mensagens é {smallest}; no máximo, {listed} diferenças são listadas para cada numeração.",
+  "ranges: {n}": "intervalos: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "IDs não observados: {ids}. Intervalos: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "o histórico de alguns chats privados, bots ou grupos comuns não foi lido até o fim"
 }

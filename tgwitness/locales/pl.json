@@ -5617,11 +5617,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Ten podgląd wykorzystuje Państwa aktualne ustawienia. Nie zapisuje ich ani nie tworzy podpisanego eksportu.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Niniejszy raport wybiera {n} rekordów z {chats} rozmów: {m} obserwacji wiadomości, {e} edycji oraz {d} obserwacji usunięć.",
   "Too many choices to list. Enter the Telegram IDs below.": "Wybór jest zbyt szeroki, by go tutaj wymienić. Proszę wprowadzić poniżej identyfikatory Telegrama.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "Niezarejestrowane identyfikatory: {ids} w przedziałach {ranges}.",
   "Unobserved message IDs": "ID wiadomości, których nie zaobserwowano",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Proszę korzystać z całego obszaru roboczego lub skupić się na konkretnych czatach, autorach i datach.",
   "Whole workspace": "Cały obszar roboczy",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} – zakresy, {ids} – identyfikatory wiadomości, których nie zaobserwowano.",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "Filtry autora dopasowują zarejestrowane identyfikatory nadawców. Powiadomienia o usunięciu bez podania nadawcy są wykluczane.",
   "Changes and deleted messages": "Zmiany i usunięte wiadomości",
   "Context outside the selected filters": "Kontekst poza wybranymi filtrami",
@@ -10926,7 +10924,6 @@
   "all chats of the account": "wszystkie czaty z tego konta",
   "{selected} of {listed} chats in the list": "{selected} z {listed} czatów z listy",
   "none · IDs {first}–{last}": "brak · identyfikatory {first}–{last}",
-  "{n} in {runs} ranges": "{n} w przedziałach {runs}",
   "Signed records:": "Podpisane zapisy:",
   "recorded in the journal": "zapisane w dzienniku",
   "All {n} selected chats were read to the end, with no failures.": "Wszystkie {n} wybrane czaty zostały przeczytane do końca, bez żadnych błędów.",
@@ -11077,5 +11074,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Czat prywatny, boty i zwykłe grupy mają wspólną numerację obejmującą całe konto. Można to zmierzyć tylko wtedy, gdy włączone jest gromadzenie danych z całego konta; w tym dzienniku nie ma takiego okresu.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Czat prywatny, boty, zwykłe grupy oraz wiadomości własne konta otrzymują numery z tej samej sekwencji, dlatego w zakresie pomiaru należy uwzględnić wszystkie te elementy, nie wykluczając żadnych czatów.",
   "Participants by observation count": "Uczestnicy według liczby obserwacji",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametry: najmniejsza wymieniona różnica w numerach wiadomości wynosi {smallest}; dla każdego numerowania wymieniono co najwyżej {listed} różnic."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametry: najmniejsza wymieniona różnica w numerach wiadomości wynosi {smallest}; dla każdego numerowania wymieniono co najwyżej {listed} różnic.",
+  "ranges: {n}": "zakresy: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Niezarejestrowane identyfikatory: {ids}. Zakresy: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "historia niektórych prywatnych czatów, botów lub zwykłych grup nie została odczytana do końca"
 }

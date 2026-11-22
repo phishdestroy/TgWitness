@@ -5527,11 +5527,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Pratinjau ini menggunakan pilihan Anda saat ini. Pratinjau ini tidak menyimpannya atau membuat ekspor yang ditandatangani.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Laporan ini memilih {n} catatan dari {chats} obrolan: {m} pengamatan pesan, {e} pengeditan, dan {d} pengamatan penghapusan.",
   "Too many choices to list. Enter the Telegram IDs below.": "Pilihan terlalu banyak untuk disebutkan satu per satu. Masukkan ID Telegram di bawah ini.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "ID yang tidak teramati: {ids} dalam rentang {ranges}.",
   "Unobserved message IDs": "ID pesan yang tidak teramati",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Gunakan ruang kerja lengkap atau fokus pada obrolan, pengirim, dan tanggal tertentu.",
   "Whole workspace": "Seluruh ruang kerja",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} rentang, {ids} ID pesan yang tidak teramati.",
   "After": "Setelah",
   "Before": "Sebelum",
   "Context outside the report filters": "Konteks di luar filter laporan",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "semua obrolan dari akun tersebut",
   "{selected} of {listed} chats in the list": "{selected} dari obrolan {listed} dalam daftar",
   "none · IDs {first}–{last}": "tidak ada · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n} dalam rentang {runs}",
   "Signed records:": "Catatan yang telah ditandatangani:",
   "recorded in the journal": "dicatat dalam jurnal",
   "All {n} selected chats were read to the end, with no failures.": "Semua {n} obrolan yang dipilih telah dibaca hingga akhir, tanpa ada kegagalan.",
@@ -10924,5 +10921,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Percakapan pribadi, bot, dan grup biasa menggunakan sistem penomoran yang sama untuk seluruh akun. Hal ini hanya dapat diukur saat pengumpulan data seluruh akun diaktifkan; jurnal ini tidak memiliki periode seperti itu.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Percakapan pribadi, bot, grup biasa, dan pesan dari akun itu sendiri diberi nomor dari urutan yang sama, sehingga pengukuran perlu mencakup semuanya tanpa mengecualikan percakapan apa pun.",
   "Participants by observation count": "Peserta berdasarkan jumlah pengamatan",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: selisih terkecil yang tercantum dalam nomor pesan adalah {smallest}; paling banyak {listed} selisih tercantum untuk setiap penomoran."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: selisih terkecil yang tercantum dalam nomor pesan adalah {smallest}; paling banyak {listed} selisih tercantum untuk setiap penomoran.",
+  "ranges: {n}": "rentang: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak terdeteksi: {ids}. Rentang: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "riwayat beberapa obrolan pribadi, bot, atau grup biasa tidak dibaca sampai akhir"
 }

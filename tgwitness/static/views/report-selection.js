@@ -290,7 +290,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       if(gaps.chats_shared_numbering)detail.append(make('p',tr('Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.',{n:count(gaps.chats_shared_numbering)}),'hint'));
       if(gaps.status==='not_compared')detail.append(make('p',tr('Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.'),'hint'));
       else{
-        detail.append(make('p',tr('{ranges} ranges, {ids} message IDs not observed.',{ranges:count(gaps.ranges_total),ids:count(gaps.ids_total)}),'hint'));
+        detail.append(make('p',tr('Unobserved IDs: {ids}. Ranges: {ranges}.',{ids:count(gaps.ids_total),ranges:count(gaps.ranges_total)}),'hint'));
         detail.append(table([tr('Chat'),tr('Missing IDs'),tr('Before the gap'),tr('After the gap')],(gaps.rows||[]).map(row=>[
           String(row.chat_id),String(row.start)+' – '+String(row.end)+' ('+count(row.count)+')',message(row.before),message(row.after)
         ]),'report-gap-table'));

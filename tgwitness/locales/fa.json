@@ -5563,11 +5563,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "این پیش‌نمایش از انتخاب‌های فعلی شما استفاده می‌کند. این پیش‌نمایش آن‌ها را ذخیره نمی‌کند و خروجی امضا شده‌ای ایجاد نمی‌کند.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "این گزارش {n} رکورد از {chats} چت‌ها را انتخاب می‌کند: مشاهدات پیام {m}، ویرایش‌ها {e} و مشاهدات حذف {d}.",
   "Too many choices to list. Enter the Telegram IDs below.": "گزینه‌ها بیش از حد برای فهرست کردن هستند. شناسه‌های Telegram را در زیر وارد کنید.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "شناسهٔ مشاهده‌نشده: {ids} در بازه‌های {ranges}.",
   "Unobserved message IDs": "شناسه پیام‌های مشاهده‌نشده",
   "Use the complete workspace or focus on particular chats, authors and dates.": "از فضای کاری کامل استفاده کنید یا بر چت‌ها، نویسندگان و تاریخ‌های خاص تمرکز کنید.",
   "Whole workspace": "فضای کاری کامل",
-  "{ranges} ranges, {ids} message IDs not observed.": "محدوده‌های {ranges} و شناسه‌های پیام {ids} مشاهده‌نشده.",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "فیلترهای نویسنده با شناسه‌های فرستنده ثبت‌شده مطابقت دارند. اعلان‌های حذف بدون فرستنده حذف می‌شوند.",
   "Changes and deleted messages": "تغییرات و پیام‌های حذف‌شده",
   "Context outside the selected filters": "زمینه خارج از فیلترهای انتخاب‌شده",
@@ -10824,7 +10822,6 @@
   "all chats of the account": "تمام چت‌های حساب کاربری",
   "{selected} of {listed} chats in the list": " {selected} از {listed} در فهرست",
   "none · IDs {first}–{last}": "هیچ · شناسه‌ها {first}–{last}",
-  "{n} in {runs} ranges": " {n} در بازه‌های {runs}",
   "Signed records:": "سوابق امضا شده:",
   "recorded in the journal": "ثبت‌شده در مجله",
   "All {n} selected chats were read to the end, with no failures.": "تمام چت‌های منتخب {n} تا انتها بدون هیچ‌گونه خطایی خوانده شدند.",
@@ -10975,5 +10972,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "گفت‌وگوهای خصوصی، ربات‌ها و گروه‌های عادی از شماره‌گذاری یکپارچه در سطح حساب استفاده می‌کنند. این شماره‌گذاری تنها زمانی قابل اندازه‌گیری است که جمع‌آوری کل حساب فعال باشد؛ این گزارش چنین دوره‌ای را ندارد.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "گفت‌وگوهای خصوصی، ربات‌ها، گروه‌های عادی و پیام‌های خودِ حساب از یک توالی یکسان شماره‌گذاری می‌شوند، بنابراین اندازه‌گیری نیازمند دامنه‌ای است که شامل همهٔ آن‌ها باشد بدون استثنای هیچ گفت‌وگویی.",
   "Participants by observation count": "شرکت‌کنندگان بر اساس شمارش مشاهده",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پارامترها: کوچک‌ترین شکاف فهرست‌شده در شماره‌های پیام {smallest} است؛ حداکثر {listed} شکاف برای هر شماره‌گذاری فهرست می‌شود."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پارامترها: کوچک‌ترین شکاف فهرست‌شده در شماره‌های پیام {smallest} است؛ حداکثر {listed} شکاف برای هر شماره‌گذاری فهرست می‌شود.",
+  "ranges: {n}": "بازه‌ها: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "شناسهٔ مشاهده‌نشده: {ids}. بازه‌ها: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "تاریخچه برخی چت‌های خصوصی، ربات‌ها یا گروه‌های عادی تا انتها خوانده نشد"
 }

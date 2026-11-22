@@ -5561,11 +5561,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Cet aperçu utilise vos choix actuels. Il ne les enregistre pas et ne crée pas d’exportation signée.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Ce rapport sélectionne {n} enregistrements issus de {chats} chats : {m} observations de messages, {e} modifications et {d} observations de suppression.",
   "Too many choices to list. Enter the Telegram IDs below.": "Il y a trop de choix pour les énumérer tous. Saisissez les identifiants Telegram ci-dessous.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "Identifiants non observés : {ids} dans les plages {ranges}.",
   "Unobserved message IDs": "Identifiants de messages non observés",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Utilisez l’espace de travail complet ou concentrez-vous sur des discussions, des auteurs et des dates spécifiques.",
   "Whole workspace": "Espace de travail complet",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} : plages ; {ids} : identifiants de messages non observés.",
   "Saved version {n}": "Version enregistrée {n}",
   "Selected changes with saved message history. Versions outside the filters are marked as context.": "Modifications sélectionnées avec l’historique des messages enregistrés. Les versions ne répondant pas aux critères de filtrage sont marquées comme « contexte ».",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "Les filtres d’auteur correspondent aux identifiants d’expéditeur enregistrés. Les notifications de suppression sans expéditeur sont exclues.",
@@ -10833,8 +10831,7 @@
   "Pages signed: {pages}, with {n} records": "Pages signées : {pages}, avec {n} enregistrements",
   "all chats of the account": "toutes les conversations du compte",
   "{selected} of {listed} chats in the list": "{selected} des discussions {listed} figurant dans la liste",
-  "none · IDs {first}–{last}": "aucun · Identifiants {first}–{last}",
-  "{n} in {runs} ranges": "{n} dans des plages de {runs}",
+  "none · IDs {first}–{last}": "aucun · identifiants {first}–{last}",
   "Signed records:": "Documents certifiés :",
   "recorded in the journal": "consigné dans le journal",
   "All {n} selected chats were read to the end, with no failures.": "Les n{n} discussions sélectionnées ont toutes été lues jusqu’au bout, sans aucune interruption.",
@@ -10985,5 +10982,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Les discussions privées, les bots et les groupes ordinaires partagent une numérotation commune à l'ensemble du compte. Elle ne peut être mesurée que lorsque la collecte de l'intégralité du compte est activée ; ce journal ne couvre pas cette période.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Les discussions privées, les bots, les groupes ordinaires et les messages propres au compte portent des numéros issus de la même séquence ; la mesure doit donc porter sur l’ensemble de ces éléments, sans exclure aucune discussion.",
   "Participants by observation count": "Nombre de participants par nombre d’observations",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Paramètres : l'écart le plus petit répertorié entre les numéros de messages est {smallest} ; au maximum {listed} écarts sont répertoriés pour chaque numérotation."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Paramètres : l'écart le plus petit répertorié entre les numéros de messages est {smallest} ; au maximum {listed} écarts sont répertoriés pour chaque numérotation.",
+  "ranges: {n}": "plages : {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Identifiants non observés : {ids}. Plages : {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "l'historique de certaines discussions privées, de certains bots ou de certains groupes ordinaires n'a pas été lu jusqu'au bout"
 }

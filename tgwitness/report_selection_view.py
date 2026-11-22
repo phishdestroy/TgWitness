@@ -24,7 +24,7 @@ def text_keys():
     return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, NOT_COMPARED, SHARED_NUMBERING, "Selected records", "Source journal records",
             "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types", "Selected messages",
             "Selected messages without a journal record",
-            "Unobserved message IDs", "Unobserved IDs: {ids} in {ranges} ranges.",
+            "Unobserved message IDs", "Unobserved IDs: {ids}. Ranges: {ranges}.",
             "Showing {shown} of {total} ranges.", "Missing ID range", "Saved before", "Saved after",
             "No unobserved message IDs were found between the saved boundaries.",
             "No saved message", "Message {id} · record #{seq}", "Text was not recorded",
@@ -95,12 +95,12 @@ def html(material, say):
         if shared:
             out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
         if gaps["ids_total"]:
-            out += '<p class="lead">' + e(result_text({"text": "Unobserved IDs: {ids} in {ranges} ranges.", "values": {
+            out += '<p class="lead">' + e(result_text({"text": "Unobserved IDs: {ids}. Ranges: {ranges}.", "values": {
                 "ids": gaps["ids_total"], "ranges": gaps["ranges_total"]}}, say)) + '</p>'
         rows = gaps.get("rows") or []
         if rows:
             out += table([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
-                         [[e(row["chat_id"]), e(str(row["start"]) + '–' + str(row["end"])),
+                         [['<span dir="ltr">' + e(row["chat_id"]) + '</span>', '<span dir="ltr">' + e(str(row["start"]) + '–' + str(row["end"])) + '</span>',
                            escape(neighbor_text(row.get("before"), say)).replace('\n', '<br>'),
                            escape(neighbor_text(row.get("after"), say)).replace('\n', '<br>')]
                           for row in rows])
@@ -134,7 +134,7 @@ def pdf(lay, material):
     if shared:
         lay.text(say(SHARED_NUMBERING, n=shared), size=9)
     if gaps["ids_total"]:
-        lay.text(result_text({"text": "Unobserved IDs: {ids} in {ranges} ranges.", "values": {
+        lay.text(result_text({"text": "Unobserved IDs: {ids}. Ranges: {ranges}.", "values": {
             "ids": gaps["ids_total"], "ranges": gaps["ranges_total"]}}, say))
     rows = gaps.get("rows") or []
     if rows:

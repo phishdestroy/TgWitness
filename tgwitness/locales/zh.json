@@ -5536,11 +5536,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "此预览基于您当前的选择。它不会保存这些选择，也不会生成经过签名的导出文件。",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "本报告从{chats}个聊天中筛选出{n}条记录：{m}条消息观察记录、{e}条编辑记录和{d}条删除观察记录。",
   "Too many choices to list. Enter the Telegram IDs below.": "选项过多，无法一一列举。请在下方输入Telegram ID。",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "未观察到的 ID：{ids} 位于 {ranges} 范围内。",
   "Unobserved message IDs": "未观察到的消息 ID",
   "Use the complete workspace or focus on particular chats, authors and dates.": "您可以使用完整的工作区，或重点关注特定的聊天、发件人和日期。",
   "Whole workspace": "整个工作区",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} 范围，{ids} 未被观察到的消息 ID。",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "发件人过滤器匹配记录中的发件人ID。未标明发件人的删除通知将被排除在外。",
   "Changes and deleted messages": "更改和已删除的消息",
   "Context outside the selected filters": "选定过滤器之外的上下文",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "该账户的所有聊天记录",
   "{selected} of {listed} chats in the list": "列表中{listed}的聊天记录中的{selected}",
   "none · IDs {first}–{last}": "无 · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n}在{runs}范围内",
   "Signed records:": "已签名的记录：",
   "recorded in the journal": "记录在案",
   "All {n} selected chats were read to the end, with no failures.": "所有{n}个选定的聊天记录均已完整阅读至结尾，未出现任何读取失败的情况。",
@@ -10924,5 +10921,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "私人聊天、机器人和普通群组共用一个账户级编号。该编号仅在开启“全账户数据采集”功能时才能被记录；本日志中未包含此类时间段。",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "私聊、机器人、普通群组以及该账户的自有消息均采用同一编号序列，因此测量范围需明确记录为包含所有内容，且不排除任何聊天记录。",
   "Participants by observation count": "按观察次数排序的参与者",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "参数：消息编号中列出的最小间隔为{smallest}；每个编号最多列出{listed}个间隔。"
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "参数：消息编号中列出的最小间隔为{smallest}；每个编号最多列出{listed}个间隔。",
+  "ranges: {n}": "范围：{n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "未观察到的 ID：{ids}。范围：{ranges}。",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私聊、机器人或普通群组的聊天记录未被读取至末尾"
 }

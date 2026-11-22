@@ -22,7 +22,8 @@ SCOPE_REASONS = {"chat_kinds": "some chat kinds were not selected", "chat_ids": 
                  "archived_excluded": "archived chats were excluded", "sender_filter": "a sender filter was applied",
                  "text_filter": "a text filter was applied", "own_messages_only": "only own messages were kept",
                  "unselected_chats": "some private chats or groups were not selected",
-                 "inventory_incomplete": "the chat list was incomplete"}
+                 "inventory_incomplete": "the chat list was incomplete",
+                 "shared_history_incomplete": "the history of some private chats, bots or ordinary groups was not read to the end"}
 CSS = """
 .activity-map{--map-accent:var(--chart-accent,var(--accent,#235dcc));--map-loss:#d9480f;--map-empty:var(--line,#dce2eb);--map-paper:var(--card,var(--paper,#fff))}
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}
@@ -421,7 +422,7 @@ def numbered_runs(gaps, titles, links, say):
         location = links.get(chat, {}).get((low, high))
         tag = 'a' if location else 'div'
         parts.append('<li><' + tag + ' class="map-run"' + (' href="' + e(location) + '"' if location else '') + '>'
-                     + '<strong>' + e(numbers) + '</strong><span>' + str(thousands(say, count)) + '</span><small dir="auto">'
+                     + '<strong><span dir="ltr">' + e(numbers) + '</span></strong><span>' + str(thousands(say, count)) + '</span><small dir="auto">'
                      + e(chat_title(chat, titles, say)) + '</small><small class="map-id" dir="ltr">' + (e(say("ID {id}", id=chat)) if type(chat) is int else '') + '</small><small>'
                      + e(say("Between {start} and {end}.", start=time_text(start), end=time_text(end))) + '</small>'
                      + ('<small>' + e(say("Open")) + ' →</small>' if location else '') + '</' + tag + '></li>')
@@ -468,7 +469,8 @@ def gap_details(gaps, titles, say):
                 badge = '<span class="map-badge ' + e(gap["confidence"]) + '">' + e(say(CONFIDENCE[gap["confidence"]])) + '</span>'
                 proven = ''.join('<br><small>' + e(say("No. {id}: chat {chat}, answered by message {source}", id=item[0],
                                  chat=chat_title(item[1], titles, say), source=item[3])) + '</small>' for item in gap["proven"][:5])
-                parts.append('<tr><td class="num">' + e(numbers) + '</td><td>' + e(time_text(gap["after"][2])) + '<br>' + e(time_text(gap["before"][2]))
+                parts.append('<tr><td class="num"><span dir="ltr">' + e(numbers) + '</span></td><td><span dir="ltr">' + e(time_text(gap["after"][2]))
+                             + '</span><br><span dir="ltr">' + e(time_text(gap["before"][2])) + '</span>'
                              + '</td><td dir="auto">' + e(neighbours) + '</td><td dir="auto">' + e(likely) + ' · ' + str(round(share * 100))
                              + '% ' + badge + proven + '</td></tr>')
             parts.append('</tbody></table></div>')
@@ -488,7 +490,7 @@ def gap_details(gaps, titles, say):
                      + '</th><th class="num">' + e(say("Gap runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
-                         + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(thousands(say, item["present"]))
+                         + '</a>' + chat_id_tag(item["chat"], say) + '</td><td class="num"><span dir="ltr">' + str(item["first"]) + "–" + str(item["last"]) + '</span></td><td class="num">' + str(thousands(say, item["present"]))
                          + '</td><td class="num">' + str(thousands(say, item["absent"])) + '</td><td class="num">' + str(thousands(say, len(item["ranges"]))) + '</td></tr>')
         parts.append('</tbody></table></div></div>')
     parts.append('<p class="map-note">' + e(say("Method: kernel bandwidth {minutes} minutes, up to {n} neighbouring messages on each side; message-gaps.json holds every run and verify.py recomputes it from the signed pages.",

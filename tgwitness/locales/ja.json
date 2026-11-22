@@ -5536,11 +5536,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "このプレビューは、現在の選択設定を使用しています。選択設定は保存されず、署名付きエクスポートも作成されません。",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "このレポートは、{chats}件のチャットから{n}件のレコードを選択します：{m}件のメッセージ観測、{e}件の編集、および{d}件の削除観測です。",
   "Too many choices to list. Enter the Telegram IDs below.": "選択肢が多すぎてすべてを列挙できません。以下のTelegram IDを入力してください。",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "未観測のID：{ranges}の範囲内の{ids}。",
   "Unobserved message IDs": "確認されていないメッセージID",
   "Use the complete workspace or focus on particular chats, authors and dates.": "ワークスペース全体を使用するか、特定のチャット、送信者、日付に焦点を当ててください。",
   "Whole workspace": "ワークスペース全体",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges}：範囲、{ids}：観測されていないメッセージID。",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "送信者フィルターは、記録された送信者IDと一致するものです。送信者が記載されていない削除通知は除外されます。",
   "Changes and deleted messages": "変更および削除されたメッセージ",
   "Context outside the selected filters": "選択されたフィルター外のコンテキスト",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "当該アカウントのすべてのチャット",
   "{selected} of {listed} chats in the list": "リスト内の{listed}チャットのうち{selected}",
   "none · IDs {first}–{last}": "なし · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n}～{runs}の範囲",
   "Signed records:": "署名付き記録：",
   "recorded in the journal": "記録簿に記載",
   "All {n} selected chats were read to the end, with no failures.": "選択された{n}件のチャットはすべて最後まで読み込まれ、失敗はなかった。",
@@ -10924,5 +10921,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "プライベートチャット、ボット、通常のグループは、アカウント全体で共通の番号体系を共有しています。これは、アカウント全体の収集機能が有効になっている間のみ測定可能ですが、本記録にはそのような期間が含まれていません。",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "プライベートチャット、ボット、通常のグループ、およびアカウント自身のメッセージは、すべて同じ番号の連番が割り当てられているため、測定の範囲には、除外されるチャットなくこれらすべてが含まれることを明記する必要がある。",
   "Participants by observation count": "観察回数別の参加者数",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "パラメータ：メッセージ番号にリストされている最小のギャップは{smallest}です。各番号付けについて、最大{listed}個のギャップがリストされています。"
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "パラメータ：メッセージ番号にリストされている最小のギャップは{smallest}です。各番号付けについて、最大{listed}個のギャップがリストされています。",
+  "ranges: {n}": "範囲：{n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "確認されなかったID：{ids}。範囲：{ranges}。",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "一部のプライベートチャット、ボット、または通常のグループの履歴が最後まで読み込まれていませんでした"
 }

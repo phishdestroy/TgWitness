@@ -5924,11 +5924,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "В данном предварительном просмотре используются Ваши текущие настройки. Они не сохраняются и не формируют подписанный экспорт.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "В отчёт отобрано записей: {n}, чатов: {chats}. Наблюдений сообщений — {m}, правок — {e}, наблюдений удалений — {d}.",
   "Too many choices to list. Enter the Telegram IDs below.": "Вариантов слишком много, чтобы перечислить их все. Введите ниже идентификаторы Telegram.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "Незафиксированные идентификаторы: {ids} в диапазонах {ranges}.",
   "Unobserved message IDs": "Идентификаторы ненаблюдаемых сообщений",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Используйте всю рабочую область или сосредоточьтесь на определённых чатах, авторах и датах.",
   "Whole workspace": "Вся рабочая область",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} — диапазоны, {ids} — идентификаторы сообщений, не подвергшихся наблюдению.",
   "After": "После",
   "Before": "До",
   "Context outside the report filters": "Контекст за пределами фильтров отчёта",
@@ -10901,7 +10899,6 @@
   "all chats of the account": "все чаты аккаунта",
   "{selected} of {listed} chats in the list": "{selected} из {listed} чатов в списке",
   "none · IDs {first}–{last}": "нет · номера {first}–{last}",
-  "{n} in {runs} ranges": "{n}, диапазонов: {runs}",
   "Signed records:": "Подписанные записи:",
   "recorded in the journal": "записан в журнале",
   "All {n} selected chats were read to the end, with no failures.": "Все выбранные чаты ({n}) прочитаны до конца, сбоев нет.",
@@ -11062,5 +11059,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Личные чаты, боты и обычные группы имеют единую нумерацию в рамках всего аккаунта. Её можно измерить только при включенном сборе данных по всему аккаунту; в данном журнале такого периода нет.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Личные чаты, боты, обычные группы и собственные сообщения аккаунта получают номера из одной и той же последовательности, поэтому при измерении необходимо указать, что в него включены все эти элементы без исключения каких-либо чатов.",
   "Participants by observation count": "Участники по количеству наблюдений",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметры: наименьший указанный разрыв в номерах сообщений равен {smallest}; для каждой нумерации указано не более {listed} разрывов."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметры: наименьший указанный разрыв в номерах сообщений равен {smallest}; для каждой нумерации указано не более {listed} разрывов.",
+  "ranges: {n}": "диапазоны: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Незафиксированные идентификаторы: {ids}. Диапазоны: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "история некоторых личных чатов, ботов или обычных групп не была прочитана до конца"
 }

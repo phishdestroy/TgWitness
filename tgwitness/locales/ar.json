@@ -5662,11 +5662,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "تستخدم هذه المعاينة اختياراتك الحالية. ولا تقوم بحفظها أو إنشاء تصدير موقّع.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "يختار هذا التقرير {n} سجلًا من {chats} محادثة: {m} ملاحظة رسالة، و{e} تعديل، و{d} ملاحظة حذف.",
   "Too many choices to list. Enter the Telegram IDs below.": "خيارات كثيرة جدًا بحيث يتعذر سردها جميعًا. أدخل معرّفات Telegram أدناه.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "معرّفات الرسائل غير المرصودة: {ids} في نطاقات {ranges}.",
   "Unobserved message IDs": "معرّفات الرسائل غير المراقبة",
   "Use the complete workspace or focus on particular chats, authors and dates.": "استخدم مساحة العمل الكاملة أو ركز على محادثات ومؤلفين وتواريخ معينة.",
   "Whole workspace": "مساحة العمل بأكملها",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} النطاقات، {ids} معرّفات الرسائل غير الملاحظة.",
   "After": "بعد",
   "Before": "قبل",
   "Context outside the report filters": "السياق خارج مرشحات التقرير",
@@ -11028,7 +11026,6 @@
   "all chats of the account": "جميع المحادثات الخاصة بالحساب",
   "{selected} of {listed} chats in the list": "{selected} من المحادثات {listed} الواردة في القائمة",
   "none · IDs {first}–{last}": "لا شيء · المعرّفات {first}–{last}",
-  "{n} in {runs} ranges": "{n} في نطاقات {runs}",
   "Signed records:": "السجلات الموقعة:",
   "recorded in the journal": "مسجلة في السجل",
   "All {n} selected chats were read to the end, with no failures.": "تمت قراءة جميع المحادثات المختارة {n} حتى النهاية، دون أي أخطاء.",
@@ -11179,5 +11176,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "تشترك المحادثات الخاصة والروبوتات والمجموعات العادية في نظام ترقيم واحد على مستوى الحساب بأكمله. ولا يمكن قياس ذلك إلا عندما يكون جمع البيانات من الحساب بأكمله قيد التشغيل؛ ولا تتضمن هذه السجلات أي فترة من هذا القبيل.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "تأخذ المحادثات الخاصة، والروبوتات، والمجموعات العادية، والرسائل الخاصة بالحساب أرقامًا من نفس التسلسل، لذا يجب أن يشمل نطاق القياس جميعها دون استثناء أي محادثة.",
   "Participants by observation count": "المشاركون حسب عدد الملاحظات",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "المعلمات: أصغر فجوة مدرجة في أرقام الرسائل هي {smallest}؛ ويتم إدراج ما لا يزيد عن {listed} فجوة لكل ترقيم."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "المعلمات: أصغر فجوة مدرجة في أرقام الرسائل هي {smallest}؛ ويتم إدراج ما لا يزيد عن {listed} فجوة لكل ترقيم.",
+  "ranges: {n}": "النطاقات: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "المعرفات غير الملحوظة: {ids}. النطاقات: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "لم يتم قراءة سجل بعض المحادثات الخاصة أو الروبوتات أو المجموعات العادية حتى النهاية"
 }

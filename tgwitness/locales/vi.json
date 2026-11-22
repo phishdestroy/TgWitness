@@ -5527,11 +5527,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Bản xem trước này sử dụng các tùy chọn hiện tại của quý vị. Nó không lưu lại các tùy chọn này cũng như không tạo tệp xuất có chữ ký.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Báo cáo này chọn ra {n} bản ghi từ {chats} cuộc trò chuyện: {m} lần quan sát tin nhắn, {e} lần chỉnh sửa và {d} lần quan sát xóa tin nhắn.",
   "Too many choices to list. Enter the Telegram IDs below.": "Có quá nhiều tùy chọn để liệt kê. Vui lòng nhập các ID Telegram vào bên dưới.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "Các ID không được quan sát: {ids} trong các khoảng {ranges}.",
   "Unobserved message IDs": "ID tin nhắn không được quan sát",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Quý vị có thể sử dụng toàn bộ không gian làm việc hoặc tập trung vào các cuộc trò chuyện, tác giả và ngày tháng cụ thể.",
   "Whole workspace": "Toàn bộ không gian làm việc",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges}: các khoảng thời gian; {ids}: các ID tin nhắn không được quan sát.",
   "After": "Sau khi",
   "Before": "Trước khi",
   "Context outside the report filters": "Bối cảnh bên ngoài các bộ lọc báo cáo",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "tất cả các cuộc trò chuyện của tài khoản",
   "{selected} of {listed} chats in the list": "{selected} trong số các cuộc trò chuyện {listed} trong danh sách",
   "none · IDs {first}–{last}": "không có · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n} trong các khoảng {runs}",
   "Signed records:": "Các bản ghi đã được ký xác nhận:",
   "recorded in the journal": "được ghi lại trong sổ ghi chép",
   "All {n} selected chats were read to the end, with no failures.": "Tất cả {n} cuộc trò chuyện được chọn đã được đọc đến hết, không có lỗi nào.",
@@ -10924,5 +10921,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Các cuộc trò chuyện riêng tư, bot và nhóm thông thường đều sử dụng hệ thống đánh số chung cho toàn bộ tài khoản. Việc đo lường chỉ có thể thực hiện khi chế độ thu thập toàn bộ tài khoản đang hoạt động; nhật ký này không ghi nhận khoảng thời gian đó.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Các cuộc trò chuyện riêng tư, bot, nhóm thông thường và tin nhắn của chính tài khoản đều được đánh số theo cùng một dãy, do đó phạm vi đo lường cần được ghi nhận là bao gồm tất cả các mục này mà không loại trừ bất kỳ cuộc trò chuyện nào.",
   "Participants by observation count": "Số lượng người tham gia theo số lần quan sát",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Các thông số: khoảng cách nhỏ nhất được liệt kê trong số thứ tự tin nhắn là {smallest}; tối đa {listed} khoảng cách được liệt kê cho mỗi dãy số."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Các thông số: khoảng cách nhỏ nhất được liệt kê trong số thứ tự tin nhắn là {smallest}; tối đa {listed} khoảng cách được liệt kê cho mỗi dãy số.",
+  "ranges: {n}": "khoảng: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID chưa được ghi nhận: {ids}. Khoảng ID: {ranges}.",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "lịch sử của một số cuộc trò chuyện riêng tư, bot hoặc nhóm thông thường chưa được đọc đến hết"
 }

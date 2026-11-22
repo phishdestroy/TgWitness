@@ -5554,11 +5554,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "এই প্রিভিউ আপনার বর্তমান পছন্দগুলো ব্যবহার করে। এটি সেগুলো সংরক্ষণ করে না বা স্বাক্ষরিত কোনো রপ্তানি তৈরি করে না।",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "এই রিপোর্টটি {chats} চ্যাট থেকে {n} রেকর্ড নির্বাচন করে: {m} বার্তা পর্যবেক্ষণ, {e} সম্পাদনা এবং {d} মুছে ফেলার পর্যবেক্ষণ।",
   "Too many choices to list. Enter the Telegram IDs below.": "তালিকা করার জন্য অনেকগুলো বিকল্প আছে। নিচের Telegram আইডিগুলো লিখুন।",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "অবলোকনহীন আইডি: {ids}, {ranges} পরিসরে।",
   "Unobserved message IDs": "অবলোকনহীন বার্তা আইডি",
   "Use the complete workspace or focus on particular chats, authors and dates.": "সম্পূর্ণ ওয়ার্কস্পেস ব্যবহার করুন অথবা নির্দিষ্ট চ্যাট, লেখক এবং তারিখগুলিতে ফোকাস করুন।",
   "Whole workspace": "সমগ্র কর্মস্থল",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} পরিসর, {ids} পর্যবেক্ষণ করা হয়নি এমন মেসেজ আইডি।",
   "After": "এরপর",
   "Before": "এর আগে",
   "Context outside the report filters": "রিপোর্ট ফিল্টারগুলির বাইরের প্রসঙ্গ",
@@ -10822,7 +10820,6 @@
   "Pages signed: {pages}, with {n} records": "স্বাক্ষরিত পৃষ্ঠা: {pages}, {n}টি রেকর্ডসহ",
   "all chats of the account": "অ্যাকাউন্টের সমস্ত চ্যাট",
   "none · IDs {first}–{last}": "কোনও নেই · আইডি {first}–{last}",
-  "{n} in {runs} ranges": "{n}-এ {runs} পরিসরে",
   "Signed records:": "স্বাক্ষরিত রেকর্ডসমূহ:",
   "recorded in the journal": "জার্নালে রেকর্ড করা হয়েছে",
   "All {n} selected chats were read to the end, with no failures.": "{n}টি নির্বাচিত সমস্ত চ্যাট কোনো ব্যর্থতা ছাড়াই শেষ পর্যন্ত পড়া হয়েছে।",
@@ -10975,5 +10972,8 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "ব্যক্তিগত চ্যাট, বট এবং সাধারণ গ্রুপগুলো একক অ্যাকাউন্ট-ব্যাপী একই নম্বর ব্যবহার করে। এটি শুধুমাত্র তখনই পরিমাপ করা যায় যখন পুরো অ্যাকাউন্ট সংগ্রহ চালু থাকে; এই জার্নালে এমন কোনো সময়কাল নেই।",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "ব্যক্তিগত চ্যাট, বট, সাধারণ গ্রুপ এবং অ্যাকাউন্টের নিজস্ব বার্তাগুলো একই ক্রমের নম্বর ব্যবহার করে, তাই পরিমাপের ক্ষেত্রে এমন একটি পরিসর রেকর্ড করতে হবে যা কোনো চ্যাট বাদ না দিয়ে সবকিছু অন্তর্ভুক্ত করে।",
   "Participants by observation count": "পর্যবেক্ষণ অনুযায়ী অংশগ্রহণকারীদের সংখ্যা",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "পরামিতি: বার্তা নম্বরগুলির তালিকায় সবচেয়ে ছোট ফাঁকটি {smallest}; প্রতিটি নম্বরীকরণের জন্য সর্বোচ্চ {listed}টি ফাঁক তালিকাভুক্ত করা হয়েছে।"
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "পরামিতি: বার্তা নম্বরগুলির তালিকায় সবচেয়ে ছোট ফাঁকটি {smallest}; প্রতিটি নম্বরীকরণের জন্য সর্বোচ্চ {listed}টি ফাঁক তালিকাভুক্ত করা হয়েছে।",
+  "ranges: {n}": "পরিসর: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "অবলোকিত আইডি: {ids}। পরিসর: {ranges}।",
+  "the history of some private chats, bots or ordinary groups was not read to the end": "কিছু ব্যক্তিগত চ্যাট, বট বা সাধারণ গ্রুপের ইতিহাস শেষ পর্যন্ত পড়া হয়নি"
 }
