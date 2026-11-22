@@ -5533,11 +5533,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "การดูตัวอย่างนี้ใช้ตัวเลือกปัจจุบันของคุณ แต่ไม่บันทึกตัวเลือกเหล่านั้นหรือสร้างไฟล์ส่งออกที่มีลายเซ็น",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "รายงานนี้เลือก{n} บันทึกจาก{chats} การสนทนา: {m} การสังเกตข้อความ, {e} การแก้ไข และ{d} การสังเกตการลบ",
   "Too many choices to list. Enter the Telegram IDs below.": "ตัวเลือกมีมากเกินไปที่จะระบุทั้งหมด กรุณาป้อน ID ของTelegram ด้านล่าง",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "ID ที่ไม่ถูกสังเกต: {ids} ในช่วง {ranges}.",
   "Unobserved message IDs": "ID ข้อความที่ไม่ได้สังเกตเห็น",
   "Use the complete workspace or focus on particular chats, authors and dates.": "ใช้พื้นที่ทำงานทั้งหมด หรือเน้นไปที่การสนทนา ผู้ส่ง และวันที่เฉพาะเจาะจง",
   "Whole workspace": "พื้นที่ทำงานทั้งหมด",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} ช่วง, {ids} ID ข้อความที่ไม่ได้สังเกตเห็น",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "ตัวกรองผู้ส่งจะจับคู่กับ ID ผู้ส่งที่บันทึกไว้ การแจ้งเตือนการลบที่ไม่มีผู้ส่งจะถูกยกเว้น",
   "Changes and deleted messages": "ข้อความที่เปลี่ยนแปลงและถูกลบ",
   "Context outside the selected filters": "บริบทนอกตัวกรองที่เลือก",
@@ -10764,7 +10762,6 @@
   "all chats of the account": "การสนทนาทั้งหมดของบัญชี",
   "{selected} of {listed} chats in the list": "{selected} ของ {listed} การสนทนาในรายการ",
   "none · IDs {first}–{last}": "ไม่มี · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n} ในช่วง {runs}",
   "Signed records:": "บันทึกที่ลงนาม:",
   "recorded in the journal": "บันทึกไว้ในสมุดบันทึก",
   "All {n} selected chats were read to the end, with no failures.": "{n} บทสนทนาที่เลือกทั้งหมดได้อ่านจนจบ โดยไม่มีความผิดพลาดใดๆ",
@@ -10924,5 +10921,7 @@
   "VS Code · Local harness": "VS Code · ชุดทดสอบในเครื่อง",
   "Cloudflare / reverse proxy": "Cloudflare หรือพร็อกซีแบบย้อนกลับ",
   "bot Telegram proof GitHub witness": "หลักฐานจากบอท Telegram และพยานจาก GitHub",
-  "{run} · attempt {attempt}": "{run} · หมายเลขการลอง {attempt}"
+  "{run} · attempt {attempt}": "{run} · หมายเลขการลอง {attempt}",
+  "ranges: {n}": "ช่วง: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID ที่ไม่ถูกตรวจพบ: {ids}. ช่วง: {ranges}."
 }

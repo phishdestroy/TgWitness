@@ -7,7 +7,7 @@ from datetime import datetime
 
 from . import activity_maps, case_assessment, i18n, message_details, report_layouts, sealed_index, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, media_name, media_text, reactions_text, utc_text
+from .report import DOSSIER_CSS, RECEIVED_RENAMED, RECEIVED_WHERE, Words, file_purpose, isolated, media_name, media_text, reactions_text, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
@@ -567,7 +567,7 @@ def forward_line(message, say):
     if text(origin.get('post_author')):
         source += ' · ' + text(origin['post_author'])
     if text(origin.get('date')):
-        source += ' · ' + utc_text(origin['date'])
+        source += ' · ' + isolated(say, utc_text(origin['date']))
     return say('Forwarded from {name}', name=source)
 
 
@@ -702,8 +702,8 @@ def account_chat_index(context, chat, counts, months):
     for page, (count, start, end) in enumerate(counts, 1):
         dates = ('—' if start is None else activity_maps.day_text(start) + ' — ' + activity_maps.day_text(end) + ' UTC')
         yield encoded('<li><a href="' + chat_page_name(stem, page) + '#messages"><strong>' + e(say('Page')) + ' ' + str(page)
-                      + '</strong><small>' + e(dates) + '</small><small>' + e(say('Records')) + ' ' + str(first) + '–'
-                      + str(first + count - 1) + '</small></a></li>')
+                      + '</strong><small><span dir="ltr">' + e(dates) + '</span></small><small>' + e(say('Records'))
+                      + ' <span dir="ltr">' + str(first) + '–' + str(first + count - 1) + '</span></small></a></li>')
         first += count
     yield encoded('</ul></section>')
     yield ending(say)
@@ -801,7 +801,7 @@ def page_navigation(context, say):
             previous = number
         parts.append('</span>')
     parts.append('<span>' + e(say('Page')) + ' ' + str(page['page']) + ' / ' + str(page['pages'])
-                 + ' · ' + e(say('Records')) + ' ' + str(page['first_record']) + '–' + str(page['last_record']) + '</span>')
+                 + ' · ' + e(say('Records')) + ' <span dir="ltr">' + str(page['first_record']) + '–' + str(page['last_record']) + '</span></span>')
     if page.get('next'):
         parts.append('<a rel="next" href="' + e(page['next']) + '#messages">' + e(say('Next page')) + ' →</a>')
     return ''.join(parts) + '</nav>'
@@ -909,8 +909,8 @@ def readme(context, files):
     counts, complete, rule = context.get('counts') or {}, context.get('complete_within_scope') is True, '-' * 64
     lines = ['TgWitness · ' + say('Account export'), '=' * 64,
              say('Archive reference') + ': ' + text(context.get('archive_reference')),
-             say('Collection requested') + ': ' + utc_text(context.get('requested_at')),
-             say('Signing key fingerprint') + ': ' + text(context.get('fingerprint')),
+             say('Collection requested') + ': ' + isolated(say, utc_text(context.get('requested_at'))),
+             say('Signing key fingerprint') + ': ' + isolated(say, text(context.get('fingerprint'))),
              say('Completed within selected scope') if complete else say('Partial acquisition')]
     if not complete and type(counts.get('chats_selected')) is int:
         lines.append(say('Chats exported in full: {done} of {total}. The report lists what is missing.',

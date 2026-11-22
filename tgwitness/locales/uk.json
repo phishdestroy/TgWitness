@@ -5608,11 +5608,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "Цей попередній перегляд використовує ваші поточні налаштування. Він не зберігає їх і не створює підписаного експорту.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "Цей звіт відбирає {n} записів із {chats} чатів: {m} спостережень за повідомленнями, {e} редагувань та {d} спостережень за видаленням.",
   "Too many choices to list. Enter the Telegram IDs below.": "Варіантів занадто багато, щоб перелічити їх усі. Введіть ідентифікатори Telegram нижче.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "Неспостережувані ідентифікатори: {ids} у діапазонах {ranges}.",
   "Unobserved message IDs": "Ідентифікатори непомічених повідомлень",
   "Use the complete workspace or focus on particular chats, authors and dates.": "Використовуйте весь робочий простір або зосередьтеся на конкретних чатах, авторах та датах.",
   "Whole workspace": "Весь робочий простір",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} — діапазони, {ids} — ідентифікатори повідомлень, які не спостерігалися.",
   "After": "Після",
   "Before": "Перед",
   "Context outside the report filters": "Контекст поза межами фільтрів звіту",
@@ -10925,8 +10923,7 @@
   "Pages signed: {pages}, with {n} records": "Підписані сторінки: {pages}, із {n} записами",
   "all chats of the account": "усі чати цього облікового запису",
   "{selected} of {listed} chats in the list": "{selected} із {listed} чатів у списку",
-  "none · IDs {first}–{last}": "немає · Ідентифікатори {first}–{last}",
-  "{n} in {runs} ranges": "{n} у діапазонах {runs}",
+  "none · IDs {first}–{last}": "немає · ідентифікатори {first}–{last}",
   "Signed records:": "Підписані записи:",
   "recorded in the journal": "зафіксовано в журналі",
   "All {n} selected chats were read to the end, with no failures.": "Усі {n} вибрані чати було прочитано до кінця, без жодних збоїв.",
@@ -11077,5 +11074,7 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "Приватні чати, боти та звичайні групи мають єдину нумерацію для всього облікового запису. Її можна виміряти лише тоді, коли увімкнено збір даних з усього облікового запису; у цьому журналі такого періоду немає.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "Приватні чати, боти, звичайні групи та власні повідомлення облікового запису мають номери з однієї послідовності, тому в описі обсягу даних слід зазначити, що він охоплює всі ці елементи без виключення будь-яких чатів.",
   "Participants by observation count": "Учасники за кількістю спостережень",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметри: найменший зазначений розрив у номерах повідомлень становить {smallest}; для кожної нумерації вказано не більше {listed} розривів."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметри: найменший зазначений розрив у номерах повідомлень становить {smallest}; для кожної нумерації вказано не більше {listed} розривів.",
+  "ranges: {n}": "діапазони: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "Невиявлені ідентифікатори: {ids}. Діапазони: {ranges}."
 }

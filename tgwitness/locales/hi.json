@@ -5563,11 +5563,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "यह पूर्वावलोकन आपके वर्तमान विकल्पों का उपयोग करता है। यह उन्हें सहेजता नहीं है या कोई हस्ताक्षरित निर्यात नहीं बनाता है।",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "यह रिपोर्ट {chats} चैट्स से {n} रिकॉर्ड चुनती है: {m} संदेश अवलोकन, {e} संपादन और {d} हटाने के अवलोकन।",
   "Too many choices to list. Enter the Telegram IDs below.": "सूचीबद्ध करने के लिए बहुत अधिक विकल्प हैं। नीचे Telegram आईडी दर्ज करें।",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "अनदेखे आईडी: {ids}, {ranges} श्रेणियों में।",
   "Unobserved message IDs": "अनदेखे संदेश आईडी",
   "Use the complete workspace or focus on particular chats, authors and dates.": "पूरे वर्कस्पेस का उपयोग करें या विशिष्ट चैट्स, लेखकों और तारीखों पर ध्यान केंद्रित करें।",
   "Whole workspace": "पूरा कार्यक्षेत्र",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} रेंज, {ids} संदेश आईडी जो देखे नहीं गए।",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "लेखक फ़िल्टर रिकॉर्ड किए गए प्रेषक आईडी से मेल खाते हैं। प्रेषक के बिना हटाने की सूचनाएं शामिल नहीं की जाती हैं।",
   "Changes and deleted messages": "बदलाव और हटाए गए संदेश",
   "Context outside the selected filters": "चयनित फ़िल्टर के बाहर का संदर्भ",
@@ -10823,7 +10821,6 @@
   "all chats of the account": "खाते की सभी चैट्स",
   "{selected} of {listed} chats in the list": "सूची में {listed} की गई चैट्स में से {selected}",
   "none · IDs {first}–{last}": "कोई नहीं · आईडी {first}–{last}",
-  "{n} in {runs} ranges": "{n} {runs} रेंज में",
   "Signed records:": "हस्ताक्षरित रिकॉर्ड:",
   "recorded in the journal": "जर्नल में दर्ज",
   "All {n} selected chats were read to the end, with no failures.": "{n} सभी चयनित चैट बिना किसी विफलता के अंत तक पढ़ी गईं।",
@@ -10975,5 +10972,7 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "निजी चैट, बॉट्स और सामान्य समूह एक ही खाते-व्यापी क्रमांकन साझा करते हैं। इसे केवल तब मापा जा सकता है जब पूरे खाते का संग्रह चालू हो; इस जर्नल में ऐसा कोई कालखंड नहीं है।",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "निजी चैट्स, बॉट्स, साधारण समूह और खाते के अपने संदेश एक ही अनुक्रम से संख्याएँ लेते हैं, इसलिए माप के दायरे में सभी को शामिल करना आवश्यक है, बिना किसी चैट को बाहर किए।",
   "Participants by observation count": "निरीक्षण द्वारा प्रतिभागियों की गिनती",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "पैरामीटर: संदेश संख्याओं में सूचीबद्ध सबसे छोटा अंतराल {smallest} है; प्रत्येक क्रमांकन के लिए अधिकतम {listed} अंतराल सूचीबद्ध किए गए हैं।"
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "पैरामीटर: संदेश संख्याओं में सूचीबद्ध सबसे छोटा अंतराल {smallest} है; प्रत्येक क्रमांकन के लिए अधिकतम {listed} अंतराल सूचीबद्ध किए गए हैं।",
+  "ranges: {n}": "श्रेणियाँ: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "अनदेखे आईडी: {ids}। श्रेणियाँ: {ranges}।"
 }

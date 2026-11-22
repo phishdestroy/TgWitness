@@ -5536,11 +5536,9 @@
   "This preview uses your current choices. It does not save them or create a signed export.": "이 미리보기는 사용자의 현재 선택 사항을 반영합니다. 선택 사항을 저장하거나 서명된 내보내기 파일을 생성하지는 않습니다.",
   "This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.": "이 보고서는 {chats}개의 채팅에서 {n}개의 기록을 선택합니다: {m}개의 메시지 관측, {e}개의 수정, {d}개의 삭제 관측.",
   "Too many choices to list. Enter the Telegram IDs below.": "선택 사항이 너무 많아 모두 나열할 수 없습니다. 아래에 Telegram ID를 입력하세요.",
-  "Unobserved IDs: {ids} in {ranges} ranges.": "관찰되지 않은 ID: {ranges} 범위 내의 {ids}.",
   "Unobserved message IDs": "관찰되지 않은 메시지 ID",
   "Use the complete workspace or focus on particular chats, authors and dates.": "전체 작업 공간을 사용하거나 특정 채팅, 작성자 및 날짜에 집중하십시오.",
   "Whole workspace": "전체 작업 공간",
-  "{ranges} ranges, {ids} message IDs not observed.": "{ranges} 범위, {ids} 관측되지 않은 메시지 ID.",
   "Author filters match recorded sender IDs. Deletion notices without a sender are excluded.": "발신자 필터는 기록된 발신자 ID와 일치합니다. 발신자가 명시되지 않은 삭제 알림은 제외됩니다.",
   "Changes and deleted messages": "변경 사항 및 삭제된 메시지",
   "Context outside the selected filters": "선택된 필터 외부의 맥락",
@@ -10773,7 +10771,6 @@
   "all chats of the account": "해당 계정의 모든 채팅",
   "{selected} of {listed} chats in the list": "목록에 {listed}된 채팅 중 {selected}개",
   "none · IDs {first}–{last}": "없음 · ID {first}–{last}",
-  "{n} in {runs} ranges": "{n}에서 {runs} 범위",
   "Signed records:": "서명된 기록:",
   "recorded in the journal": "조사 기록부에 기재됨",
   "All {n} selected chats were read to the end, with no failures.": "선택된 모든 {n} 채팅을 오류 없이 끝까지 읽었습니다.",
@@ -10924,5 +10921,7 @@
   "Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only while whole-account collection is on; this journal has no such period.": "비공개 채팅, 봇 및 일반 그룹은 계정 전체에 걸쳐 하나의 번호 체계를 공유합니다. 이는 계정 전체 수집 기능이 활성화된 상태에서만 측정할 수 있으나, 본 기록에는 해당 기간이 포함되어 있지 않습니다.",
   "Private chats, bots, ordinary groups and the account's own messages take numbers from the same sequence, so the measurement needs a scope recorded as including all of them without excluded chats.": "비공개 채팅, 봇, 일반 그룹 및 계정 소유자의 메시지는 모두 동일한 번호 체계에 따라 번호가 부여되므로, 측정 범위에는 제외된 채팅 없이 이 모든 항목이 포함된다는 점이 명시되어야 합니다.",
   "Participants by observation count": "관찰 횟수별 참여자",
-  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "매개변수: 메시지 번호 간에 나열된 가장 작은 간격은 {smallest}이며, 각 번호 체계에 대해 최대 {listed}개의 간격이 나열됩니다."
+  "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "매개변수: 메시지 번호 간에 나열된 가장 작은 간격은 {smallest}이며, 각 번호 체계에 대해 최대 {listed}개의 간격이 나열됩니다.",
+  "ranges: {n}": "범위: {n}",
+  "Unobserved IDs: {ids}. Ranges: {ranges}.": "확인되지 않은 ID: {ids}. 범위: {ranges}."
 }
