@@ -7847,7 +7847,7 @@
   "Skip file bytes": "Dosya baytlarını atla",
   "Slice not found.": "Dilim bulunamadı.",
   "Slice this person’s actions": "Bu kişinin eylemlerini inceleyin",
-  "Slice: {title}": "Slice: {title}",
+  "Slice: {title}": "Dilim: {title}",
   "Snapshot": "Anlık Görüntü",
   "Snapshot is stale": "Anlık görüntü güncel değil",
   "Socket": "Soket",

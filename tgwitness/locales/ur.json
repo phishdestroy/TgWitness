@@ -5198,7 +5198,7 @@
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>براہِ راست</strong><span>اس مشین کا IP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>میرا پروکسی</strong><span>سرور یا پروکسی یو آر ایل</span>",
   "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>پبلک MTProxy</strong><span>آٹومیٹک پول</span>",
-  "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>Import WireGuard</span>",
+  "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>وی پی این</strong><span>وائر گارڈ درآمد کریں</span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>مینجڈ لوکل ٹنل</span>",
   "Account group": "اکاؤنٹ گروپ",
   "All accounts": "تمام اکاؤنٹس",

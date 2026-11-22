@@ -678,6 +678,7 @@ class Collector:
         self.export_state = None
         self.export_path = None
         self.export_live = None
+        self.export_salvage = None
         self.message_batcher = MessageBatcher()
         self.media_library = None
         self.media_slots = {}
@@ -5103,6 +5104,7 @@ class Collector:
             record.update(phase="cancelled")
             if partial:
                 record["partial"] = await complete_in_thread(partial.retain, "cancelled")
+                await self.salvage_partial(partial, record, info, profile, observer, problems, clock, report_options)
             if live:
                 with suppress(Exception):
                     await live.close("stopped", "cancelled")
@@ -5561,6 +5563,29 @@ class Collector:
         if live is not None and live.chain.identity["export_id"] == found["id"]:
             found["live"] = live.public()
         return found
+
+    async def salvage_partial(self, partial, record, info, profile, observer, problems, clock, report_options):
+        target, self.export_salvage = self.export_salvage, None
+        if target is None or not (record.get("partial") or {}).get("retained"):
+            return
+        chat_id = record["chat_id"]
+        try:
+            meta = {"chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind"),
+                             "visibility": info.get("visibility"), "profile": profile,
+                             **({"profile_errors": problems} if problems else {})},
+                    "observer": observer, "recheck": None, "admin_log": None,
+                    "journal": await complete_in_thread(chat_export.journal_changes, self.store, chat_id, partial.directory),
+                    "account": self.store.get_setting("account", None), "client": self.client_identity(),
+                    "route": self.route_receipt(),
+                    "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),
+                                    "files": record.get("files") or "workspace_settings", "clock_at_start": clock}}
+            await complete_in_thread(partial.bundle, target, meta, self.param("export_max_gib") * 1024**3, report_options,
+                                     chat_export.archive_name(self.store, chat_id, info.get("title")))
+            record["salvaged"] = str(target)
+        except Exception as exc:
+            record["salvage_error"] = type(exc).__name__
+            with suppress(OSError):
+                Path(target).unlink(missing_ok=True)
 
     async def open_live(self, record, info, partial, options=None):
         self.export_live = None

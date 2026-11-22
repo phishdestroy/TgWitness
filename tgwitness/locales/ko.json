@@ -2003,7 +2003,7 @@
   "private or unlisted": "비공개 또는 비공개 목록",
   "proxy MTProxy SOCKS5 HTTP connection route": "프록시 MTProxy SOCKS5 HTTP 연결 경로",
   "proxy.example.org": "proxy.example.org",
-  "public username": "public username",
+  "public username": "공개 사용자 이름",
   "publishes": "게시합니다",
   "python start.py": "python start.py",
   "reactions": "반응",
