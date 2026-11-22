@@ -566,7 +566,7 @@
   "No account connected": "لا يوجد حساب متصل",
   "{n} workspace. Add as many as you need — each uses its own Telegram account.": "مساحة عمل {n}. أضف ما تحتاج إليه منها — حيث تستخدم كل واحدة حساب Telegram خاص بها.",
   "{n} workspaces. Add as many as you need — each uses its own Telegram account.": {
-    "one": "مساحة عمل واحدة {n}. أضف ما تحتاج إليه من المساحات — حيث تستخدم كل منها حساب Telegram خاص بها.",
+    "one": "مساحة عمل واحدة ({n}). أضف ما تريد من المساحات — كل منها تستخدم حساب Telegram خاص بها.",
     "few": "{n} مساحات عمل. أضف ما تحتاج إليه منها — حيث تستخدم كل مساحة حساب Telegram خاص بها.",
     "two": "{n} مساحات عمل. أضف ما تحتاج إليه منها — حيث تستخدم كل مساحة حساب Telegram خاص بها.",
     "many": "{n} مساحة عمل. أضف ما تحتاج إليه منها — حيث تستخدم كل مساحة حساب Telegram خاص بها.",
@@ -926,9 +926,9 @@
   "This is an ordinary group: message numbers differ between accounts, so only this account can download it.": "هذه مجموعة عادية: تختلف أرقام الرسائل بين الحسابات، لذا لا يمكن تنزيلها إلا من هذا الحساب.",
   "Estimated time with {n} account: {time}": "الوقت المقدر باستخدام حساب {n}: {time}",
   "Estimated time with {n} accounts: {time}": {
-    "one": "الوقت المقدر باستخدام حساب{n}: {time}",
+    "one": "الوقت المقدر لحساب واحد ({n}): {time}",
     "few": "الوقت المقدر باستخدام {n} حسابات: {time}",
-    "two": "الوقت المقدر باستخدام حساب{n}: {time}",
+    "two": "الوقت المقدر باستخدام حسابين ({n}): {time}",
     "many": "الوقت المقدر باستخدام {n} حسابًا: {time}",
     "other": "الوقت المقدر مع {n} حساب: {time}",
     "zero": "الوقت المقدر مع {n} حسابًا: {time}"
@@ -940,9 +940,9 @@
   "not possible for ordinary groups": "غير متاح للمجموعات العادية",
   "Export started with {n} account. Observation keeps running.": "بدأ التصدير باستخدام الحساب {n}. تستمر عملية المراقبة.",
   "Export started with {n} accounts. Observation keeps running.": {
-    "one": "بدأ التصدير بحساب{n}. ولا يزال التسجيل مستمرًا.",
+    "one": "بدأ التصدير بحساب واحد ({n}). ولا تزال عملية المراقبة مستمرة.",
     "few": "بدأ التصدير بـ {n} حسابات. ولا يزال الرصد مستمرًا.",
-    "two": "بدأ التصدير بـ{n} حسابين. ولا تزال عملية المراقبة مستمرة.",
+    "two": "بدأ التصدير بحسابين ({n}). ولا يزال التسجيل مستمرًا.",
     "many": "بدأ التصدير بـ {n} حسابًا. ولا تزال عملية المراقبة مستمرة.",
     "other": "بدأ التصدير بـ {n} حساب. ولا تزال عملية المراقبة مستمرة.",
     "zero": "بدأ التصدير بعدد {n} حساب. ولا تزال عملية المراقبة مستمرة."
@@ -3260,7 +3260,7 @@
   "Settings copied to {n} workspaces.": {
     "one": "تم نسخ الإعدادات إلى مساحة عمل واحدة ({n}).",
     "few": "تم نسخ الإعدادات إلى {n} مساحات عمل.",
-    "two": "تم نسخ الإعدادات إلى{n} مساحات عمل.",
+    "two": "تم نسخ الإعدادات إلى مساحتين عمل ({n}).",
     "many": "تم نسخ الإعدادات إلى {n} مساحة عمل.",
     "other": "تم نسخ الإعدادات إلى {n} مساحة عمل.",
     "zero": "تم نسخ الإعدادات إلى {n} مساحة عمل."
@@ -5197,7 +5197,7 @@
   "Manifest signature NOT valid.": "توقيع ملف البيان غير صالح.",
   "Invalid file inventory.": "قائمة الملفات غير الصالحة.",
   "This archive belongs to a different report or signing key.": "ينتمي هذا الأرشيف إلى تقرير أو مفتاح توقيع مختلف.",
-  "Checking files: {a} of {b}": "ملفات المراجعة: {a} و{b}",
+  "Checking files: {a} of {b}": "التحقق من الملفات: {a} من {b}",
   "All {n} files match the signed manifest.": "تتطابق جميع ملفات {n} مع قائمة البيانات الموقعة.",
   "The archive does not match its signed manifest.": "الأرشيف لا يتطابق مع قائمة المحتويات الموقعة الخاصة به.",
   "Manifest signature valid (Ed25519).": "توقيع الملف التعريفي صالح (Ed25519).",
@@ -5789,11 +5789,11 @@
   "own value": "القيمة الخاصة",
   "Change the group setting?": "هل تريد تغيير إعدادات المجموعة؟",
   "These accounts have a different value. Ticked ones take the group value:": "هذه الحسابات لها قيمة مختلفة. الحسابات التي تحمل علامة اختيار تأخذ قيمة المجموعة:",
-  "Applied to {n} account.": "تم تطبيقها على حساب{n}.",
+  "Applied to {n} account.": "تم تطبيقها على حساب واحد ({n}).",
   "Applied to {n} accounts.": {
     "zero": "تم تطبيقها على {n} حساب.",
-    "one": "تم تطبيقها على حساب{n}.",
-    "two": "يُطبق على{n} حسابين.",
+    "one": "تم تطبيقها على حساب واحد ({n}).",
+    "two": "تم تطبيقها على حسابين ({n}).",
     "few": "يُطبق على {n} حسابات.",
     "many": "تم تطبيقها على {n} حسابًا.",
     "other": "تم تطبيقها على {n} حساب."
@@ -6082,13 +6082,13 @@
   "{n} interruption in {days} days": "{n} مقاطعة خلال {days} يومًا",
   "Export with {n} accounts": {
     "zero": "التصدير مع {n} حساب",
-    "one": "التصدير باستخدام حساب{n}",
-    "two": "التصدير باستخدام حساب{n}",
+    "one": "التصدير باستخدام حساب واحد ({n})",
+    "two": "التصدير باستخدام حسابين ({n})",
     "few": "التصدير باستخدام {n} حسابات",
     "many": "التصدير مع {n} حسابًا",
     "other": "التصدير مع {n} حساب"
   },
-  "Export with {n} account": "التصدير باستخدام حساب{n}",
+  "Export with {n} account": "التصدير باستخدام حساب واحد ({n})",
   "Export the records of every account in the group {name}?": "هل تريد تصدير سجلات كل حساب في المجموعة {name}؟",
   "Group export saved: each account’s signed export and a signed list of them.": "تم حفظ تصدير المجموعة: التصدير الموقّع لكل حساب وقائمة موقّعة بها.",
   "Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "يتم تضمين التصدير الموقّع لكل حساب في ملف ZIP واحد، مع ملف بيان موقّع من قبل مساحة العمل الرئيسية.",
@@ -8406,7 +8406,7 @@
   "in use": "قيد الاستخدام",
   "investigation": "التحقيق",
   "last online {at}": "آخر ظهور على الإنترنت {at}",
-  "last {at}": "آخر تحديث {at}",
+  "last seen {at}": "آخر مرة تمت ملاحظتها: {at}",
   "listens on loopback": "يستمع على loopback",
   "listens on the network": "يستمع على الشبكة",
   "live · {n}s": "مباشر · {n} ث",
@@ -11024,7 +11024,7 @@
   "Signing pages and downloading files started": "بدء عملية توقيع الصفحات وتنزيل الملفات",
   "Pages signed: {pages}, with {n} records": "الصفحات الموقعة: {pages}، مع {n} سجلًا",
   "all chats of the account": "جميع المحادثات الخاصة بالحساب",
-  "{selected} of {listed} chats in the list": "{selected} من المحادثات {listed} الواردة في القائمة",
+  "{selected} of {listed} chats in the list": "المحادثات المختارة: {selected} من أصل {listed} في القائمة",
   "none · IDs {first}–{last}": "لا شيء · المعرّفات {first}–{last}",
   "Signed records:": "السجلات الموقعة:",
   "recorded in the journal": "مسجلة في السجل",
