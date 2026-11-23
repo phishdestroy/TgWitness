@@ -7,7 +7,7 @@
 <details>
 <summary>On this page</summary>
 
-- [Unreleased](#unreleased)
+- [1.0.1 · 23 November 2026](#101--23-november-2026)
 - [1.0.0 · 20 November 2026](#100--20-november-2026)
 - [0.9.3 preview · 11 November 2026](#093-preview--11-november-2026)
 - [0.9.2 preview · 10 November 2026](#092-preview--10-november-2026)
@@ -24,8 +24,9 @@
 
 </details>
 
-## Unreleased
+## 1.0.1 · 23 November 2026
 
+- Portable verifiers for Windows, Linux x86_64 and macOS (arm64) are published with each release, with checksums and a build-provenance attestation: unpack one and drop the archive onto its `VERIFY.cmd` or run its `VERIFY.sh`, without installing Python. The `VERIFY.sh` of an archive now uses such a runtime when it lies beside it, and when no runtime is found both launchers name the browser check and the portable verifier.
 - The browser verifier at /verify turns red when an ASiC-E container carries an entry in META-INF that its manifests do not list, like verify.py and the archive check in the report.
 - A browser page at `verify/` on the project site checks an evidence archive without installing anything: the manifest signature, the key fingerprint from the sender, the SHA-256 of every file, an ASiC-E container and the signed event chain, with nothing uploaded and nothing inside the archive trusted. It lists what it does not check and points to `verify.py` for the rest.
 - The archive check in the report viewer wraps the long key fingerprints of its verdict on phones instead of widening the page.
