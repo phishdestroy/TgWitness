@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code>은 백업 및 서명된 내보내기와 마찬가지로 umask와 관계없이 소유자만 읽을 수 있는 파일로 기록합니다.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code>은 열린 봉인 레코드를 umask와 관계없이 소유자만 읽을 수 있는 파일에 기록합니다.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "쓰기 방지된 미디어의 복사본처럼 읽기 전용인 데이터 디렉터리를 명령줄에서 읽을 때 오류 추적과 함께 멈추지 않고, 저널과 그 WAL 파일의 비공개 임시 복사본을 통해 읽습니다.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "읽기 전용 데이터 디렉터리에서 패널을 시작하면 권한 오류 추적으로 끝나지 않고, 그 사실을 알리며 읽기 전용 명령줄을 안내합니다."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "읽기 전용 데이터 디렉터리에서 패널을 시작하면 권한 오류 추적으로 끝나지 않고, 그 사실을 알리며 읽기 전용 명령줄을 안내합니다.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "읽기 전용 데이터 디렉터리에서 <code>tgwitness index rebuild</code>를 실행하면 잠금 파일에 대한 권한 오류를 출력하지 않고, 폴더가 읽기 전용이라고 알린 뒤 코드 2로 종료합니다."
  },
  "modes": {
   "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",

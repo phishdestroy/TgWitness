@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> scrive il file leggibile solo dal proprietario, qualunque sia la umask, come i backup e le esportazioni firmate.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> scrive i record sigillati aperti in un file leggibile solo dal proprietario, qualunque sia la umask.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "La lettura da riga di comando di una directory dei dati di sola lettura, come una copia su un supporto protetto da scrittura, avviene tramite una copia temporanea privata del registro e del suo write-ahead log (WAL), invece di interrompersi con una traccia di errore.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Avviare il pannello su una directory dei dati di sola lettura lo segnala e rimanda alla riga di comando in sola lettura, invece di terminare con una traccia di errore di permessi."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Avviare il pannello su una directory dei dati di sola lettura lo segnala e rimanda alla riga di comando in sola lettura, invece di terminare con una traccia di errore di permessi.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "<code>tgwitness index rebuild</code> su una directory dei dati di sola lettura segnala che la cartella è di sola lettura ed esce con codice 2, invece di stampare un errore di permessi su un file di blocco."
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

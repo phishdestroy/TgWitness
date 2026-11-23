@@ -8439,7 +8439,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> 写入的文件无论 umask 如何都只有所有者可读，与备份和签名导出一致。",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> 会把打开的密封记录写入一个无论 umask 如何都只有所有者可读的文件。",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "从命令行读取只读数据目录（例如写保护介质上的副本）时，会通过日志及其 WAL 文件的私有临时副本进行读取，而不是因错误跟踪而停止。",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在只读数据目录上启动面板时，会说明这一点并指向只读命令行，而不是以权限错误跟踪结束。"
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在只读数据目录上启动面板时，会说明这一点并指向只读命令行，而不是以权限错误跟踪结束。",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "在只读数据目录上运行 <code>tgwitness index rebuild</code> 时，会说明该文件夹为只读并以代码 2 退出，而不是输出锁文件的权限错误。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

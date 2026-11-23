@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> zapisuje plik czytelny tylko dla właściciela, niezależnie od umask, tak jak kopie zapasowe i podpisane eksporty.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> zapisuje otwarte zapieczętowane rekordy do pliku czytelnego tylko dla właściciela, niezależnie od umask.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "Odczyt katalogu danych tylko do odczytu z wiersza poleceń, na przykład kopii na nośniku chronionym przed zapisem, działa przez prywatną tymczasową kopię dziennika i jego pliku WAL, zamiast kończyć się śladem błędu.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Uruchomienie panelu na katalogu danych tylko do odczytu informuje o tym i wskazuje wiersz poleceń do odczytu, zamiast kończyć się śladem błędu uprawnień."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Uruchomienie panelu na katalogu danych tylko do odczytu informuje o tym i wskazuje wiersz poleceń do odczytu, zamiast kończyć się śladem błędu uprawnień.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "<code>tgwitness index rebuild</code> na katalogu danych tylko do odczytu informuje, że folder jest tylko do odczytu, i kończy działanie z kodem 2, zamiast wypisywać błąd uprawnień do pliku blokady."
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",
