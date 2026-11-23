@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Fixes from a second external code audit: if catching up on missed updates fails after Telegram reconnects, the failure is recorded and observation continues instead of stopping; webhook deliveries no longer hold up adding, removing or testing destinations; full-text search keeps words that genuinely mix Latin and Cyrillic as written, and the search index is rebuilt once after the update; at startup the journal is checked from the last signed checkpoint onwards, while exports and Verify still check the whole chain; `verify.py unseal-password` refuses an existing output file before decrypting and keeps only one copy on disk; the container image includes a Chinese, Japanese and Korean font for PDF reports.
 - Security and reliability fixes from an external code audit: the official-client gateway reaches IP addresses only in Telegram data centres; uploads larger than 512 KiB need a valid panel credential before their size limit applies; a truncated timestamp no longer stops `verify`; Mini App capture opens only http and https pages, with site isolation; secret chat lookups no longer hold the journal write lock; capture exports are removed after download.
 - `tgwitness index rebuild` on a read-only data directory says that the folder is read-only and exits with code 2, instead of printing a permission error for a lock file.
 - `tgwitness backup` into an existing folder names the hidden leftover of a killed backup and says to remove it, instead of only saying the folder is not empty.

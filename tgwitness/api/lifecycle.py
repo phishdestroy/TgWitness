@@ -86,7 +86,7 @@ class LifecycleOperations:
                 RECORDER.root = self.root
             RECORDER.watch(store, self.profile_id)
             meter(store)
-            await complete_in_thread(store.verify, vault.public_key)
+            await complete_in_thread(store.verify_since_checkpoint, vault.public_key)
             if self.demo:
                 if store.stats()["total"] and (not store.get_setting("demo", False)):
                     raise RuntimeError(

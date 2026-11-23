@@ -41,7 +41,8 @@ CJK_FONTS = ("msyh.ttc", "malgun.ttf", "msyh.ttf", "msjh.ttc", "YuGothR.ttc", "m
              "NotoSansCJK-Regular.ttc", "NotoSansCJKsc-Regular.otf", "NotoSansSC-Regular.ttf", "wqy-zenhei.ttc",
              "Arial Unicode.ttf", "Hiragino Sans GB.ttc")
 CJK_DIRS = ("C:/Windows/Fonts", "/usr/share/fonts/opentype/noto", "/usr/share/fonts/noto-cjk",
-            "/usr/share/fonts/truetype/wqy", "/usr/share/fonts/google-noto-cjk", "/Library/Fonts",
+            "/usr/share/fonts/truetype/wqy", "/usr/share/fonts/font-wqy-zenhei", "/usr/share/fonts/google-noto-cjk",
+            "/Library/Fonts",
             "/System/Library/Fonts", "/System/Library/Fonts/Supplemental")
 COMPLEX_SCRIPTS = re.compile("[\u0300-\u036f\u0590-\u08ff\u0900-\u0dff\u0e00-\u0fff\u1000-\u109f\u1780-\u18af"
                              "\u200c-\u200f\u202a-\u202e\u2066-\u2069\ufb1d-\ufdff\ufe70-\ufeff\U0001f3fb-\U0001f3ff]")

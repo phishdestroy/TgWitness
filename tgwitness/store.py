@@ -798,6 +798,22 @@ class Store:
                 verify_checkpoint(retained, public_key, result["events"], snapshot.hash_at)
             return result
 
+    def verify_since_checkpoint(self, public_key):
+        """Startup check: the signed retained checkpoint and every record after it are verified in full.
+        Records before the checkpoint are fixed by its signed head hash; exports and the Verify action
+        still recompute the whole chain before anything is packaged."""
+        retained = self.retained_checkpoint()
+        if not retained:
+            return self.verify(public_key)
+        from .verify import EventChain, verify_checkpoint
+        with self.snapshot() as snapshot:
+            verify_checkpoint(retained, public_key, snapshot.head["seq"] if snapshot.head else 0, snapshot.hash_at)
+            statement = retained["statement"]
+            chain = EventChain(public_key)
+            chain.count, chain.previous = statement["event_count"], statement["head_hash"]
+            rows = snapshot.connection.execute("SELECT * FROM events WHERE seq>? ORDER BY seq", (chain.count,))
+            return chain.run(self.decode(row) for row in rows)
+
     def retained_checkpoint(self):
         path = self.root / "checkpoints" / "latest.json"
         return json.loads(path.read_bytes()) if path.exists() else None
