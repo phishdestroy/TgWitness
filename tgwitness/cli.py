@@ -135,6 +135,10 @@ def index(args):
         return EXIT_FAILURE
     results = []
     for name, path in found:
+        if args.action == "rebuild" and not (os.access(path, os.W_OK) and os.access(path / "journal.sqlite3", os.W_OK)):
+            print(name + ": this folder is read-only, so the search index cannot be rebuilt here. Copy the data "
+                  "directory to a writable folder first.", file=sys.stderr)
+            return EXIT_USAGE
         try:
             results.append(stored_status(name, path) if args.action == "status" else rebuild(name, path))
         except RuntimeError as exc:
