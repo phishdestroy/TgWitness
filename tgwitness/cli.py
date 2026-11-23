@@ -470,7 +470,8 @@ def export(archive, args):
     partial = target.with_name(target.name + ".partial") if target else None
     if partial is not None and partial.exists():
         raise Failure("An interrupted export left " + str(partial) + ". Remove it or choose another name.", EXIT_USAGE)
-    stream = open(partial, "x", encoding="utf-8", newline="\n") if partial else sys.stdout
+    stream = (open(os.open(partial, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8", newline="\n")
+              if partial else sys.stdout)
     summary = None
     try:
         for line in archive.export(body):
