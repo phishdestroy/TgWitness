@@ -213,7 +213,7 @@ HTTPS-адресу колектора;
 шлях до репозиторію **малими літерами**, наприклад:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
 TGWITNESS_PORT=8787
 ```
 

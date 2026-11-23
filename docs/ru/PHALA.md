@@ -134,7 +134,7 @@ dstack шифрует диск машины, но хост может восст
 
 ```sh
 python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
-    --ref v1.0.0 --quick-tunnel --provider-token-file phala-key.txt
+    --ref v1.0.1 --quick-tunnel --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
     --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT \

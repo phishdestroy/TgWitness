@@ -207,7 +207,7 @@ Salin `deploy/env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang diter
 jalur repositori dalam **huruf kecil**, misalnya:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
 TGWITNESS_PORT=8787
 ```
 

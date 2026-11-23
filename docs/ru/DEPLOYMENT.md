@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 Скопируйте файл `deploy/env.example` в `.env`. Установите значение `TGWITNESS_IMAGE`, указав опубликованную версию с использованием пути к репозиторию **в нижнем регистре**, например:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
 TGWITNESS_PORT=8787
 ```
 
