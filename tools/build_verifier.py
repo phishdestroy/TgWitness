@@ -114,7 +114,7 @@ def package(stage, name, output_dir):
     if any(p.is_symlink() or getattr(p, "is_junction", lambda: False)() for p in stage.rglob("*")):
         raise SystemExit("Refusing linked files in portable verifier")
     (stage / "SHA256SUMS").write_text("".join(sha256(p) + "  " + p.relative_to(stage).as_posix() + "\n"
-                                              for p in shipped), encoding="utf-8")
+                                              for p in shipped), encoding="utf-8", newline="\n")
     shipped.append(stage / "SHA256SUMS")
     output_dir.mkdir(parents=True, exist_ok=True)
     output = output_dir / (name + ".zip")
@@ -123,7 +123,7 @@ def package(stage, name, output_dir):
         for path in shipped:
             archive.write(path, name + "/" + path.relative_to(stage).as_posix())
     checksum = output.with_name(output.name + ".sha256.part")
-    checksum.write_text(sha256(partial) + "  " + output.name + "\n", encoding="ascii")
+    checksum.write_text(sha256(partial) + "  " + output.name + "\n", encoding="ascii", newline="\n")
     output.with_suffix(".zip.sha256").unlink(missing_ok=True)
     partial.replace(output)
     checksum.replace(output.with_suffix(".zip.sha256"))
