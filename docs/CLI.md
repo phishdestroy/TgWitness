@@ -48,7 +48,8 @@ refused, so the token reaches only the address you give.
 full local access, without a token. Use it on a copy of a data directory or while
 collection is stopped. Signed records are never changed; like the panel, opening a
 workspace may bring its derived indexes up to date. When the panel has the workspace open, the command exits with
-code `3`; read through the panel instead. Without `--data-dir`, `TGWITNESS_DATA`,
+code `3`; read through the panel instead. A read-only folder, such as a copy on write-protected media, is read
+through a private temporary copy of its journal that is removed afterwards; the folder itself is not touched. Without `--data-dir`, `TGWITNESS_DATA`,
 `./data/live` or the data directory of the installation running the command is used.
 
 `--workspace ID` selects a workspace (default `default`). `tgwitness messages
