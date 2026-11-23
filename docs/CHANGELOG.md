@@ -52,6 +52,7 @@
 - GitHub Actions capture: a chat whose live archive could not start keeps the messages already read when the run stops, packaged as a partial snapshot.
 - Interface labels left in English in Thai, Uzbek, Hindi and several other languages are translated.
 - GitHub Actions capture: the time and size plan says when it covers only part of the chats; while messages are read the panel counts chat histories read; account export omissions name each unfinished chat once.
+- `python -m tgwitness.documentation_verify --reveal` writes the opened sealed records to a file readable by its owner only, whatever the umask.
 - Account export chat pages are three times smaller; each message links its signed source line.
 - Files a stop left undownloaded are counted as not reached, not as failures, and say why.
 - Deleted accounts are named "Deleted account · ID N" instead of a bare number.
