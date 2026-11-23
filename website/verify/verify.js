@@ -427,6 +427,7 @@
       result.others.push(target);
     }
     result.unknown = names.filter(n => (n === 'mimetype' || n.startsWith('META-INF/')) && !result.members.includes(n));
+    if (result.unknown.length) result.problems.push(T('Not in the manifest (not covered by the signature): {list}', {list: result.unknown.slice(0, 30).join(', ')}));
     return result;
   }
 
