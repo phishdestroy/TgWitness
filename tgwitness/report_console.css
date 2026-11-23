@@ -201,6 +201,7 @@ code{direction:ltr;unicode-bidi:isolate}
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.4}
 .c-fp .c-fp-error{color:var(--bad,#b42318);font-weight:600}
 .c-fp .c-fp-error:empty{display:none}
+#c-out .callout b,#c-out .callout li,#c-out .callout small{overflow-wrap:anywhere}
 .v-page .v-chips{margin-bottom:14px}
 .v-table{overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:var(--shadow-sm)}
 .v-table table{width:100%;border-collapse:collapse;font-size:13.5px}
