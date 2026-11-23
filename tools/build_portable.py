@@ -157,7 +157,7 @@ def write_release(stage, target):
         partial.unlink()
         raise SystemExit("Portable ZIP failed its content check: " + str(target.name))
     checksum = target.with_name(target.name + ".sha256.part")
-    checksum.write_text(sha256(partial) + "  " + target.name + "\n", encoding="ascii")
+    checksum.write_text(sha256(partial) + "  " + target.name + "\n", encoding="ascii", newline="\n")
     target.with_suffix(".zip.sha256").unlink(missing_ok=True)
     partial.replace(target)
     checksum.replace(target.with_suffix(".zip.sha256"))

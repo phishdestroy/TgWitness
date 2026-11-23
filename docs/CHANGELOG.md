@@ -7,6 +7,7 @@
 <details>
 <summary>On this page</summary>
 
+- [Unreleased](#unreleased)
 - [1.0.1 · 23 November 2026](#101--23-november-2026)
 - [1.0.0 · 20 November 2026](#100--20-november-2026)
 - [0.9.3 preview · 11 November 2026](#093-preview--11-november-2026)
@@ -23,6 +24,10 @@
 - [0.5.0 · 26 October 2026](#050--26-october-2026)
 
 </details>
+
+## Unreleased
+
+- The checksum files of the Windows portable package and the Windows verifier end with a plain line feed, so sha256sum -c accepts them on every system, including Git Bash.
 
 ## 1.0.1 · 23 November 2026
 
