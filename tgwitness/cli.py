@@ -416,7 +416,12 @@ def search(archive, args):
         body.update(before=args.before)
     else:
         body.update(ranked=True, offset=args.offset, match="any" if args.any else "all")
-    return archive.query(body), print_items
+    try:
+        return archive.query(body), print_items
+    except Failure as exc:
+        if not args.exact and str(exc).startswith("Enter words, a phrase"):
+            raise Failure(str(exc) + " To find emoji or symbols, add --exact.", exc.code) from None
+        raise
 
 
 def context(archive, args):
