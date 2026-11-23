@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> schreibt die Datei unabhängig von der umask nur für ihren Eigentümer lesbar, wie Sicherungen und signierte Exporte.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> schreibt die geöffneten versiegelten Datensätze unabhängig von der umask in eine Datei, die nur ihr Eigentümer lesen kann.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "Das Lesen eines schreibgeschützten Datenverzeichnisses über die Befehlszeile, etwa einer Kopie auf schreibgeschütztem Datenträger, funktioniert über eine private temporäre Kopie des Journals und seines Write-Ahead-Logs, statt mit einem Fehler-Trace abzubrechen.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Beim Start des Panels auf einem schreibgeschützten Datenverzeichnis wird dies gemeldet und auf die Befehlszeile zum Lesen verwiesen, statt mit einem Berechtigungsfehler-Trace zu enden."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Beim Start des Panels auf einem schreibgeschützten Datenverzeichnis wird dies gemeldet und auf die Befehlszeile zum Lesen verwiesen, statt mit einem Berechtigungsfehler-Trace zu enden.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "<code>tgwitness index rebuild</code> auf einem schreibgeschützten Datenverzeichnis meldet, dass der Ordner schreibgeschützt ist, und beendet sich mit Code 2, statt einen Berechtigungsfehler für eine Sperrdatei auszugeben."
  },
  "modes": {
   "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",

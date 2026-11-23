@@ -8439,7 +8439,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> grava o arquivo legível apenas pelo proprietário, seja qual for a umask, como os backups e as exportações assinadas.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> grava os registros selados abertos em um arquivo legível apenas pelo proprietário, seja qual for a umask.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "A leitura pela linha de comando de um diretório de dados somente leitura, como uma cópia em mídia protegida contra gravação, funciona por meio de uma cópia temporária privada do registro e do seu log de escrita antecipada (WAL), em vez de parar com um rastreamento de erro.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Iniciar o painel em um diretório de dados somente leitura informa isso e indica a linha de comando somente leitura, em vez de terminar com um rastreamento de erro de permissão."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Iniciar o painel em um diretório de dados somente leitura informa isso e indica a linha de comando somente leitura, em vez de terminar com um rastreamento de erro de permissão.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "<code>tgwitness index rebuild</code> em um diretório de dados somente leitura informa que a pasta é somente leitura e sai com o código 2, em vez de exibir um erro de permissão em um arquivo de bloqueio."
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

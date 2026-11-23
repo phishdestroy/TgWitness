@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> menulis fail yang boleh dibaca oleh pemiliknya sahaja, walau apa pun umask, seperti sandaran dan eksport bertandatangan.",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> menulis rekod termeterai yang dibuka ke dalam fail yang boleh dibaca oleh pemiliknya sahaja, walau apa pun umask.",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "Membaca direktori data baca sahaja dari baris perintah, seperti salinan pada media yang dilindungi tulis, berfungsi melalui salinan sementara peribadi jurnal dan fail WAL-nya, bukannya berhenti dengan surih ralat.",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Memulakan panel pada direktori data baca sahaja memberitahu perkara itu dan menunjuk ke baris perintah baca sahaja, bukannya berakhir dengan surih ralat kebenaran."
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "Memulakan panel pada direktori data baca sahaja memberitahu perkara itu dan menunjuk ke baris perintah baca sahaja, bukannya berakhir dengan surih ralat kebenaran.",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "<code>tgwitness index rebuild</code> pada direktori data baca sahaja memberitahu bahawa folder itu baca sahaja dan keluar dengan kod 2, bukannya mencetak ralat kebenaran untuk fail kunci."
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

@@ -8387,7 +8387,8 @@
   "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> 寫入的檔案無論 umask 為何都只有擁有者可讀，與備份和簽名匯出一致。",
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> 會將開啟的密封記錄寫入一個無論 umask 為何都只有擁有者可讀的檔案。",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "從命令列讀取唯讀資料目錄（例如防寫媒體上的副本）時，會透過日誌及其 WAL 檔案的私有暫存副本讀取，而不是因錯誤追蹤而停止。",
-  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在唯讀資料目錄上啟動控制面板時，會說明這一點並指向唯讀命令列，而不是以權限錯誤追蹤結束。"
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在唯讀資料目錄上啟動控制面板時，會說明這一點並指向唯讀命令列，而不是以權限錯誤追蹤結束。",
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "在唯讀資料目錄上執行 <code>tgwitness index rebuild</code> 時，會說明該資料夾為唯讀並以代碼 2 結束，而不是輸出鎖定檔的權限錯誤。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
