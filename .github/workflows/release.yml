@@ -113,10 +113,10 @@ jobs:
           VERSION: ${{ needs.version.outputs.version }}
         run: |
           sha256sum --check --strict ./*.zip.sha256
-          for label in windows-amd64 linux-x86_64 macos-arm64 macos-x86_64; do
+          for label in windows-amd64 linux-x86_64 macos-arm64; do
             test -f "TgWitness-verifier-$VERSION-$label-all.zip"
           done
-          test "$(ls ./*.zip | wc -l)" -eq 4
+          test "$(ls ./*.zip | wc -l)" -eq 3
       - name: Attest the build provenance of the verifiers
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
         with:
@@ -259,7 +259,7 @@ jobs:
                    f"TgWitness-{version}-windows-amd64-portable.zip",
                    f"tgwitness-{version}-py3-none-any.whl",
                    *(f"TgWitness-verifier-{version}-{label}-all.zip"
-                     for label in ("windows-amd64", "linux-x86_64", "macos-arm64", "macos-x86_64"))]
+                     for label in ("windows-amd64", "linux-x86_64", "macos-arm64"))]
           root = Path("dist")
           expected = set(names + [name + ".sha256" for name in names])
           if {path.name for path in root.iterdir()} != expected:

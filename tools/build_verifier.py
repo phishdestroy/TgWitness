@@ -27,9 +27,8 @@ STANDALONE = {
                           "8c59b9ac6bff2dc3934181d7bc82594f9f59a613afed8d72c9e89d7194e790ee"),
     ("darwin", "arm64"): ("macos-arm64", "aarch64-apple-darwin",
                           "0be1fe0b35a4d3c382141764ef16ed3b8cc2b4620b657f678daa7b7f8df39699"),
-    ("darwin", "x86_64"): ("macos-x86_64", "x86_64-apple-darwin",
-                           "ad3bef94b6054adcf8e0a47886e21b00dfc6a37f22eea229cf0f8725bd0e1023"),
 }
+# No Intel Mac bundle: the pinned cryptography release publishes macOS wheels for arm64 only.
 
 
 def sha256(path):
@@ -70,7 +69,7 @@ def write_launchers(stage, language, interpreter="python/python.exe", macos=Fals
 def standalone_runtime(cache, supplied=None):
     entry = STANDALONE.get((sys.platform, platform.machine()))
     if entry is None:
-        raise SystemExit("Portable verifiers are built on Windows, Linux x86_64 and macOS (arm64, x86_64).")
+        raise SystemExit("Portable verifiers are built on Windows, Linux x86_64 and macOS on Apple silicon (arm64).")
     label, triple, digest = entry
     name = "cpython-" + PYTHON + "+" + STANDALONE_RELEASE + "-" + triple + "-install_only_stripped.tar.gz"
     archive = Path(supplied) if supplied else cache / name

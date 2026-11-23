@@ -61,8 +61,11 @@ and [Windows launcher configuration](https://docs.python.org/3/using/windows.htm
 The standalone bundles contain the same `verify.py`, launchers, their own Python
 runtime, and the pinned cryptography dependencies and their licences: the
 official embeddable Python on Windows, and CPython from python-build-standalone
-on Linux x86_64 and macOS (arm64 and x86_64), each pinned by SHA-256. They do
-not include the panel or start a server. Use the bundle's own `VERIFY.cmd` or
+on Linux x86_64 and macOS on Apple silicon (arm64), each pinned by SHA-256. There
+is no bundle for Intel Macs: the pinned `cryptography` release publishes macOS
+packages for Apple silicon only. On an Intel Mac use the browser check or an
+installed `python3` with `cryptography`. The bundles do not include the panel or
+start a server. Use the bundle's own `VERIFY.cmd` or
 `VERIFY.sh` with any supported original ZIP, or copy its `python/` directory
 beside a bundled launcher. Each release publishes the bundles with SHA-256
 sidecars, `SHA256SUMS.txt` and a GitHub build-provenance attestation that
@@ -73,7 +76,8 @@ once, and macOS may refuse to start the runtime until the download quarantine is
 removed with `xattr -dr com.apple.quarantine FOLDER`. The build uses the
 repository's pinned Python runtime and `deploy/installer.lock`.
 
-Build on the target system with Python 3.12: Windows, Linux x86_64 or macOS. The
+Build on the target system with Python 3.12: Windows, Linux x86_64 or macOS on
+Apple silicon. The
 build host needs no preinstalled application dependencies: launcher generation
 runs inside the newly assembled runtime.
 
@@ -82,7 +86,7 @@ python tools/build_verifier.py
 ```
 
 This builds `dist/TgWitness-verifier-<version>-<platform>-all.zip`, where the
-platform is `windows-amd64`, `linux-x86_64`, `macos-arm64` or `macos-x86_64`, and
+platform is `windows-amd64`, `linux-x86_64` or `macos-arm64`, and
 a SHA-256 sidecar. `VERIFY.cmd` lists all language names and accepts a language
 number or code. Enter selects the detected system language. `--language de`,
 for example, builds with a fixed default; every build still contains all
@@ -91,7 +95,7 @@ The build checks the public fictional demo archive with the embedded runtime;
 `--validation-archive PATH` selects another retained archive. It runs the real
 `VERIFY.cmd` or `VERIFY.sh` against clean and tampered ZIPs, and then runs it in
 every language with no Python on PATH. Building does not publish a release; the
-release workflow builds the four bundles, checks them the same way and attaches
+release workflow builds the three bundles, checks them the same way and attaches
 them to the GitHub release.
 
 Launcher instructions, prompts, check labels, explanations, failure summaries,
