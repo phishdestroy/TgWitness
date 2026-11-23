@@ -8542,7 +8542,8 @@
   "e416a3d056af5ad3b3a953d4ab2a5e63df9dce7e4537ca5f89de631209d9b4fe": "见证记录",
   "9fd3ed14ea5a0cf3555c9447c9866b24173573bcb08c447afae6a73ebb9499a5": "如需进行完整验证，请在 <code>VERIFY.cmd</code> (Windows) 或 <code>VERIFY.sh</code> (macOS、Linux) 程序，或运行归档文件中随附的验证程序：",
   "f1e7a9eb68bfd3cd2ab8919171ace098e032457423bffcc2ada7acfbf60cd545": "如果没有 Python，请使用 <a href=\"https://github.com/phishdestroy/TgWitness/releases\">GitHub 上 TgWitness 发布</a>版本中的便携式验证器：它无需安装。",
-  "e8f450a672e07f236c4ae39031b593dd6aa964fa0bab93984d0231d849ddae37": "项目网站 <code>verify/</code> 处的浏览器页面无需安装任何软件即可检查证据存档：清单签名、发送方提供的密钥指纹、每个文件的 SHA-256、ASiC-E 容器以及已签名的事件链；不上传任何内容，也不信任存档内的任何内容。页面列出不检查的项目，其余部分请使用 <code>verify.py</code>。"
+  "e8f450a672e07f236c4ae39031b593dd6aa964fa0bab93984d0231d849ddae37": "项目网站 <code>verify/</code> 处的浏览器页面无需安装任何软件即可检查证据存档：清单签名、发送方提供的密钥指纹、每个文件的 SHA-256、ASiC-E 容器以及已签名的事件链；不上传任何内容，也不信任存档内的任何内容。页面列出不检查的项目，其余部分请使用 <code>verify.py</code>。",
+  "4534125d9efb7f88a9dd58bfa3f2fe53cd77adc6cb87033f268f2e40b003fd01": "每个版本都会发布适用于 Windows、Linux x86_64 和 macOS（arm64 与 x86_64）的便携验证器，并附带校验和与构建来源证明：解压其中一个，将存档拖到它的 <code>VERIFY.cmd</code> 上，或运行它的 <code>VERIFY.sh</code>，无需安装 Python。存档中的 <code>VERIFY.sh</code> 现在会使用放在旁边的这种运行时；如果找不到任何运行时，两个启动器都会指明浏览器检查和便携验证器。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
