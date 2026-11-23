@@ -11062,5 +11062,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Параметры: наименьший указанный разрыв в номерах сообщений равен {smallest}; для каждой нумерации указано не более {listed} разрывов.",
   "ranges: {n}": "диапазоны: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "Незафиксированные идентификаторы: {ids}. Диапазоны: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "история некоторых личных чатов, ботов или обычных групп не была прочитана до конца"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "история некоторых личных чатов, ботов или обычных групп не была прочитана до конца",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Отпечаток ключа от отправителя (SHA-256, 64 шестнадцатеричных символа)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Для проверки файлов не обязателен; нужен, чтобы подтвердить, чьим ключом они подписаны. Получите его от отправителя отдельно от архива, например по телефону или лично.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Отпечаток ключа — это 64 шестнадцатеричных символа (SHA-256). Пробелы, двоеточия и дефисы не учитываются.",
+  "Key fingerprint in the archive: {fp}": "Отпечаток ключа в архиве: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Архив подписан другим ключом, а не тем, чей отпечаток дал отправитель.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Все файлы ({n}) соответствуют подписанному манифесту, а его ключ совпадает с отпечатком от отправителя.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Все файлы ({n}) соответствуют подписанному манифесту внутри архива, но ключ не сверен с отпечатком от отправителя.",
+  "Fingerprint from the sender: {fp}": "Отпечаток от отправителя: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Ключ совпадает с введённым отпечатком: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Вставьте выше отпечаток от отправителя или проверьте архив независимым верификатором.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "В этом браузере проверены подпись манифеста и SHA-256 каждого файла. Здесь не проверялись цепочка событий в events.jsonl, метки времени RFC 3161, OpenTimestamps, записи свидетелей (Witness) и Intel TDX — их проверяет verify.py."
 }

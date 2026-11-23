@@ -10985,5 +10985,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parámetros: la diferencia más pequeña entre los números de los mensajes que figura en la lista es {smallest}; se indican como máximo {listed} diferencias para cada numeración.",
   "ranges: {n}": "rangos: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID no observados: {ids}. Rangos: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "El historial de algunos chats privados, bots o grupos normales no se ha leído hasta el final"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "El historial de algunos chats privados, bots o grupos normales no se ha leído hasta el final",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Huella de la clave facilitada por el remitente (SHA-256, 64 caracteres hexadecimales)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Opcional para comprobar los archivos; necesaria para confirmar qué clave los firmó. Pídasela al remitente por un canal distinto del archivo comprimido, por ejemplo por teléfono o en persona.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Una huella de clave tiene 64 caracteres hexadecimales (SHA-256). Se ignoran los espacios, los dos puntos y los guiones.",
+  "Key fingerprint in the archive: {fp}": "Huella de la clave en el archivo comprimido: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "El archivo comprimido está firmado con una clave distinta de aquella cuya huella indicó el remitente.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Los {n} archivos coinciden con el manifiesto firmado, y su clave coincide con la huella del remitente.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Los {n} archivos coinciden con el manifiesto firmado del archivo comprimido, pero la clave no se ha comparado con una huella del remitente.",
+  "Fingerprint from the sender: {fp}": "Huella del remitente: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "La clave coincide con la huella introducida: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Pegue arriba la huella del remitente o compruebe el archivo comprimido con un verificador independiente.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Comprobado en este navegador: la firma del manifiesto y el SHA-256 de cada archivo. No comprobado aquí: la cadena de eventos de events.jsonl, los sellos de tiempo RFC 3161, OpenTimestamps, los registros de Witness e Intel TDX; los comprueba verify.py."
 }

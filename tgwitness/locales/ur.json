@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پیرامیٹرز: پیغامات کے نمبروں میں درج سب سے چھوٹا وقفہ {smallest} ہے؛ ہر شمار کے لیے زیادہ سے زیادہ {listed} وقفے درج کیے گئے ہیں۔",
   "ranges: {n}": "حدود: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "غیر مشاہدہ شدہ آئی ڈیز: {ids}۔ حدود: {ranges}۔",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "کچھ نجی چیٹس، بوٹس یا عام گروپس کی تاریخ آخر تک نہیں پڑھی گئی"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "کچھ نجی چیٹس، بوٹس یا عام گروپس کی تاریخ آخر تک نہیں پڑھی گئی",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "بھیجنے والے سے ملا کلید کا فنگر پرنٹ (SHA-256، 64 ہیکساڈیسیمل حروف)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "فائلوں کی جانچ کے لیے اختیاری؛ یہ تصدیق کرنے کے لیے ضروری کہ ان پر کس کی کلید سے دستخط ہوئے۔ اسے بھیجنے والے سے آرکائیو سے الگ، مثلاً فون پر یا بالمشافہ، حاصل کریں۔",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "کلید کا فنگر پرنٹ 64 ہیکساڈیسیمل حروف پر مشتمل ہوتا ہے (SHA-256)۔ اسپیس، کولن اور ڈیش نظرانداز کیے جاتے ہیں۔",
+  "Key fingerprint in the archive: {fp}": "آرکائیو میں کلید کا فنگر پرنٹ: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "آرکائیو پر اُس کلید کے بجائے کسی اور کلید سے دستخط ہیں جس کا فنگر پرنٹ بھیجنے والے نے دیا۔",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "تمام {n} فائلیں دستخط شدہ مینفیسٹ سے مطابقت رکھتی ہیں، اور اس کی کلید بھیجنے والے کے فنگر پرنٹ سے مطابقت رکھتی ہے۔",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "تمام {n} فائلیں آرکائیو کے اندر دستخط شدہ مینفیسٹ سے مطابقت رکھتی ہیں، لیکن کلید کا موازنہ بھیجنے والے کے کسی فنگر پرنٹ سے نہیں کیا گیا۔",
+  "Fingerprint from the sender: {fp}": "بھیجنے والے کا فنگر پرنٹ: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "کلید آپ کے درج کردہ فنگر پرنٹ سے مطابقت رکھتی ہے: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "اوپر بھیجنے والے کا فنگر پرنٹ چسپاں کریں، یا آرکائیو کو کسی آزاد تصدیق کنندہ سے جانچیں۔",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "اس براؤزر میں جانچا گیا: مینفیسٹ کا دستخط اور ہر فائل کا SHA-256۔ یہاں نہیں جانچا گیا: events.jsonl میں واقعات کی زنجیر، RFC 3161 ٹائم اسٹیمپ، OpenTimestamps، Witness ریکارڈ اور Intel TDX؛ انہیں verify.py جانچتا ہے۔"
 }

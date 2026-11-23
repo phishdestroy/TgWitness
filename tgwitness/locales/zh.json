@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "参数：消息编号中列出的最小间隔为{smallest}；每个编号最多列出{listed}个间隔。",
   "ranges: {n}": "范围：{n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "未观察到的 ID：{ids}。范围：{ranges}。",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私聊、机器人或普通群组的聊天记录未被读取至末尾"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私聊、机器人或普通群组的聊天记录未被读取至末尾",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "发送方提供的密钥指纹（SHA-256，64 个十六进制字符）",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "仅校验文件时可不填；要确认文件由谁的密钥签名，则必须填写。请通过与存档不同的渠道（例如电话或当面）向发送方索取。",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "密钥指纹由 64 个十六进制字符组成（SHA-256）。空格、冒号和连字符会被忽略。",
+  "Key fingerprint in the archive: {fp}": "存档中密钥的指纹：{fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "该存档的签名密钥与发送方提供的指纹不符。",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "全部 {n} 个文件与已签名清单一致，且清单的密钥与发送方提供的指纹一致。",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "全部 {n} 个文件与存档内已签名的清单一致，但尚未将密钥与发送方提供的指纹核对。",
+  "Fingerprint from the sender: {fp}": "发送方提供的指纹：{fp}",
+  "The key matches the fingerprint you entered: {fp}": "密钥与您输入的指纹一致：{fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "请在上方粘贴发送方提供的指纹，或使用独立的验证工具检查该存档。",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "已在此浏览器中检查：清单签名和每个文件的 SHA-256。此处未检查：events.jsonl 中的事件链、RFC 3161 时间戳、OpenTimestamps、Witness 记录和 Intel TDX；这些由 verify.py 检查。"
 }

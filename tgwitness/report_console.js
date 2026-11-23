@@ -493,16 +493,29 @@ async function startViewer(meta){
         :missing.length?sayf("{n} data files were not found next to this page",{n:missing.length}):!sealOk?say("The seal signature could not be checked in this browser"):sayf("{n} data files match the signed seal",{n:V.files.ok}))
       +card("","file","blue",say("This page"),say("A browser does not give a page its own bytes. Check the whole archive below, or drop report.html into the seal check of the Report tab."))
       +'</div><h3>'+esc(say("Check every file of the archive"))+'</h3><p class="lead">'+esc(say("Choose the archive as it was handed over (ZIP) or its unpacked folder. The manifest's signature and the SHA-256 of every file are checked here; nothing is uploaded."))
-      +'</p><div class="d-actions"><button type="button" class="v-btn" id="c-zip-pick">'+ic("zip")+esc(say("Choose the ZIP"))+'</button><input type="file" id="c-zip" accept=".zip,.asice,application/zip,application/vnd.etsi.asic-e+zip" hidden>'
+      +'</p><div class="c-fp"><label for="c-fp">'+esc(say("Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)"))+'</label>'
+      +'<input type="text" id="c-fp" autocomplete="off" spellcheck="false" dir="ltr" value="'+esc(V.expected||"")+'">'
+      +'<small class="v-muted">'+esc(say("Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person."))+'</small>'
+      +'<small class="c-fp-error" id="c-fp-error" role="alert"></small></div>'
+      +'<div class="d-actions"><button type="button" class="v-btn" id="c-zip-pick">'+ic("zip")+esc(say("Choose the ZIP"))+'</button><input type="file" id="c-zip" accept=".zip,.asice,application/zip,application/vnd.etsi.asic-e+zip" hidden>'
       +'<button type="button" class="v-btn ghost" id="c-dir-pick">'+ic("files")+esc(say("Choose the folder"))+'</button><input type="file" id="c-dir" webkitdirectory multiple hidden></div><div id="c-out">'+(V.checked||"")+"</div>"
       +'<h3>'+esc(say("With verify.py"))+'</h3><pre class="cmd"><code>python verify.py '+esc(meta.archive?"../"+meta.archive:"ARCHIVE.zip")+" --fingerprint TRUSTED_SHA256</code></pre></div>";
     $("#c-zip").addEventListener("change",e=>e.target.files[0]&&fullCheck(zipSource(e.target.files[0]),e.target.files[0].name));
     $("#c-dir").addEventListener("change",e=>e.target.files.length&&fullCheck(folderSource(e.target.files),"folder"));
     $("#c-zip-pick").addEventListener("click",()=>$("#c-zip").click());
     $("#c-dir-pick").addEventListener("click",()=>$("#c-dir").click());
+    // A changed fingerprint re-judges the last result at once, so an earlier green verdict never outlives its input.
+    $("#c-fp").addEventListener("input",e=>{V.expected=e.target.value;const state=expectedFingerprint();
+      $("#c-fp-error").textContent=state.invalid?say("A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored."):"";
+      if(V.verdict&&!V.checking){$("#c-out").innerHTML=V.verdict();V.checked=$("#c-out").innerHTML;}});
     for(const t of tabs)if(t.dataset.view==="check")t.classList.toggle("bad",!!bad.length);}
+  function expectedFingerprint(){const value=String(V.expected||"").replace(/[\s:\-]/g,"").toLowerCase();
+    return {value,invalid:!!value&&!/^[a-f0-9]{64}$/.test(value)};}
   function card(state,glyph,tone,heading,text){return '<div class="v-card '+state+'"><span class="rec-icon tone-'+tone+'">'+ic(glyph)+"</span><div><b>"+esc(heading)+"</b><span>"+esc(text)+"</span></div></div>";}
-  async function fullCheck(source,name){if(V.checking)return;V.checking=true;V.archive=null;
+  async function fullCheck(source,name){if(V.checking)return;
+    if(expectedFingerprint().invalid){$("#c-fp-error").textContent=say("A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.");
+      $("#c-fp").focus();for(const input of $$("#c-zip,#c-dir"))input.value="";return;}
+    V.checking=true;V.archive=null;V.verdict=null;
     for(const input of $$("#c-zip,#c-dir"))input.disabled=true;
     const out=$("#c-out");out.setAttribute("role","status");out.innerHTML='<div class="callout info">'+esc(say("Checking…"))+"</div>";
     try{const manifestBytes=await source.bytes("manifest.json"),sigText=await source.text("manifest.sig");
@@ -514,7 +527,8 @@ async function startViewer(meta){
       const fp=await sha(bytes(manifest.public_key)),same=fp===meta.fingerprint;
       const names=Object.keys(manifest.files||{}),wrong=[],absent=[],hashes=new Map();let done=0;
       if(!names.length||names.some(n=>!safeName(n)||!/^([a-f0-9]{64})$/.test(manifest.files[n])))throw new Error(say("Invalid file inventory."));
-      if(!same||!manifest.report||manifest.report.id!==meta.report_id)throw new Error(say("This archive belongs to a different report or signing key."));
+      if(!same||!manifest.report||manifest.report.id!==meta.report_id)throw new Error(say("This archive belongs to a different report or signing key.")
+        +" "+sayf("Key fingerprint in the archive: {fp}",{fp}));
       for(const file of names){const data=await source.bytes(file);done++;if(done%5===0||done===names.length)
         out.innerHTML='<div class="callout info">'+esc(sayf("Checking files: {a} of {b}",{a:done,b:names.length}))+"</div>";
         if(!data){absent.push(file);continue;}const digest=await sha(data);hashes.set(file,digest);if(digest!==manifest.files[file])wrong.push(file);}
@@ -524,11 +538,22 @@ async function startViewer(meta){
       const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length&&!(asic&&asic.problem);
       V.archive={source,ok:new Set(names.filter(n=>hashes.get(n)===manifest.files[n]))};
       const sealed=signed&&same&&!wrong.length&&!absent.length&&extra.every(n=>n.startsWith("META-INF/"));
-      out.innerHTML='<div class="callout '+(good?"ok":"bad")+'"><b>'+esc(good?sayf("All {n} files match the signed manifest.",{n:names.length})
-        :asic&&sealed?sayf("All {n} files match the signed manifest, but the ASiC-E container is damaged.",{n:names.length})
-        :say("The archive does not match its signed manifest."))+"</b><ul>"
+      const at=new Date().toISOString();
+      // Files matching a manifest signed by the key the report itself names prove integrity, not authorship: a
+      // substitute archive carries its own report.html and key. Only the sender's fingerprint, obtained separately,
+      // turns the verdict green; a different fingerprint turns it red whatever the files say.
+      V.verdict=()=>{const expected=expectedFingerprint(),given=!!expected.value&&!expected.invalid;
+        const foreign=given&&expected.value!==fp,trusted=good&&given&&!foreign;
+        return '<div class="callout '+(!good||foreign?"bad":trusted?"ok":"warn")+'"><b>'+esc(!good?(asic&&sealed?sayf("All {n} files match the signed manifest, but the ASiC-E container is damaged.",{n:names.length})
+          :say("The archive does not match its signed manifest."))
+          :foreign?say("The archive is signed by a different key than the fingerprint from the sender.")
+          :trusted?sayf("All {n} files match the signed manifest, and its key matches the fingerprint from the sender.",{n:names.length})
+          :sayf("All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.",{n:names.length}))+"</b><ul>"
         +"<li>"+esc(signed?say("Manifest signature valid (Ed25519)."):say("Manifest signature NOT valid."))+"</li>"
         +"<li>"+esc(same?say("Signed by the key of this report."):sayf("Signed by a different key: {fp}",{fp}))+"</li>"
+        +(foreign?"<li>"+esc(sayf("Fingerprint from the sender: {fp}",{fp:expected.value}))+"</li><li>"+esc(sayf("Key fingerprint in the archive: {fp}",{fp}))+"</li>"
+          :given?"<li>"+esc(sayf("The key matches the fingerprint you entered: {fp}",{fp}))+"</li>"
+          :"<li>"+esc(sayf("Key fingerprint in the archive: {fp}",{fp}))+" "+esc(say("Paste the fingerprint from the sender above, or check the archive with an independent verifier."))+"</li>")
         +(asic?"<li>"+esc(asic.problem?sayf("ASiC-E container damaged: {reason}",{reason:asic.problem})
           :sayf("ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.",{n:asic.references}))+"</li>"
           +"<li>"+esc(say("The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser."))+"</li>"
@@ -536,8 +561,9 @@ async function startViewer(meta){
         +(wrong.length?"<li>"+esc(sayf("Changed: {list}",{list:wrong.slice(0,30).join(", ")}))+"</li>":"")
         +(absent.length?"<li>"+esc(sayf("Missing: {list}",{list:absent.slice(0,30).join(", ")}))+"</li>":"")
         +(extra.length?"<li>"+esc(sayf("Not in the manifest (not covered by the signature): {list}",{list:extra.slice(0,30).join(", ")}))+"</li>":"")
-        +"</ul><small>"+esc(sayf("Checked {name} in this browser at {time}.",{name,time:new Date().toISOString()}))+"</small></div>";
-      V.checked=out.innerHTML;
+        +"<li>"+esc(say("Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them."))+"</li>"
+        +"</ul><small>"+esc(sayf("Checked {name} in this browser at {time}.",{name,time:at}))+"</small></div>";};
+      out.innerHTML=V.verdict();V.checked=out.innerHTML;
       if(good&&V.files.missing.length){V.source=source.chunkText;const again=descriptor.files.filter(f=>V.files.missing.includes(f.file));V.files.missing=[];
         await loadAll(again);finish();}}
     catch(e){out.innerHTML='<div class="callout bad">'+esc(e&&e.message?e.message:String(e))+"</div>";V.checked=out.innerHTML;}

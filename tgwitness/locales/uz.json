@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametrlar: xabar raqamlaridagi ro'yxatda keltirilgan eng kichik bo'shliq: {smallest}. Har bir raqamlash bo'yicha eng ko'pi bilan {listed} bo'shliq ro'yxatga olinadi.",
   "ranges: {n}": "diapazonlar: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "Ko'rilmagan IDlar: {ids}. Diapazonlar: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "ba'zi shaxsiy suhbatlar, botlar yoki oddiy guruhlar tarixi oxirigacha o'qilmagan"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ba'zi shaxsiy suhbatlar, botlar yoki oddiy guruhlar tarixi oxirigacha o'qilmagan",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Yuboruvchidan olingan kalit barmoq izi (SHA-256, 64 ta o'n oltilik belgi)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Fayllarni tekshirish uchun shart emas; ularni kimning kaliti imzolaganini tasdiqlash uchun kerak. Uni yuboruvchidan arxivdan alohida, masalan, telefon orqali yoki yuzma-yuz oling.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Kalit barmoq izi 64 ta o'n oltilik belgidan iborat (SHA-256). Bo'shliqlar, ikki nuqtalar va chiziqchalar hisobga olinmaydi.",
+  "Key fingerprint in the archive: {fp}": "Arxivdagi kalit barmoq izi: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Arxiv yuboruvchi barmoq izini bergan kalitdan boshqa kalit bilan imzolangan.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Barcha {n} ta fayl imzolangan manifestga mos keladi va uning kaliti yuboruvchidan olingan barmoq iziga mos keladi.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Barcha {n} ta fayl arxiv ichidagi imzolangan manifestga mos keladi, ammo kalit yuboruvchidan olingan barmoq izi bilan solishtirilmagan.",
+  "Fingerprint from the sender: {fp}": "Yuboruvchidan olingan barmoq izi: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Kalit siz kiritgan barmoq iziga mos keladi: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Yuboruvchidan olingan barmoq izini yuqoriga joylashtiring yoki arxivni mustaqil tekshiruvchi bilan tekshiring.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Ushbu brauzerda tekshirildi: manifest imzosi va har bir faylning SHA-256 qiymati. Bu yerda tekshirilmadi: events.jsonl dagi hodisalar zanjiri, RFC 3161 vaqt tamg'alari, OpenTimestamps, Witness yozuvlari va Intel TDX; ularni verify.py tekshiradi."
 }

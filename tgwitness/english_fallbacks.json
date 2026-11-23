@@ -3719,5 +3719,16 @@
   "Observed chat",
   "Forward source",
   "The original source, identity map and private selection criteria are NOT included.",
-  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest."
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.",
+  "Key fingerprint in the archive: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.",
+  "Fingerprint from the sender: {fp}",
+  "The key matches the fingerprint you entered: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them."
 ]

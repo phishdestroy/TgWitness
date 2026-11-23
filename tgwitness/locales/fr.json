@@ -10985,5 +10985,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Paramètres : l'écart le plus petit répertorié entre les numéros de messages est {smallest} ; au maximum {listed} écarts sont répertoriés pour chaque numérotation.",
   "ranges: {n}": "plages : {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "Identifiants non observés : {ids}. Plages : {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "l'historique de certaines discussions privées, de certains bots ou de certains groupes ordinaires n'a pas été lu jusqu'au bout"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "l'historique de certaines discussions privées, de certains bots ou de certains groupes ordinaires n'a pas été lu jusqu'au bout",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Empreinte de la clé transmise par l’expéditeur (SHA-256, 64 caractères hexadécimaux)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Facultative pour vérifier les fichiers ; nécessaire pour confirmer quelle clé les a signés. Obtenez-la de l’expéditeur séparément de l’archive, par exemple par téléphone ou en personne.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Une empreinte de clé compte 64 caractères hexadécimaux (SHA-256). Les espaces, deux-points et tirets sont ignorés.",
+  "Key fingerprint in the archive: {fp}": "Empreinte de la clé dans l’archive : {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "L’archive est signée par une autre clé que celle dont l’expéditeur a donné l’empreinte.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Les {n} fichiers correspondent au manifeste signé, et sa clé correspond à l’empreinte de l’expéditeur.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Les {n} fichiers correspondent au manifeste signé contenu dans l’archive, mais la clé n’a pas été comparée à une empreinte de l’expéditeur.",
+  "Fingerprint from the sender: {fp}": "Empreinte de l’expéditeur : {fp}",
+  "The key matches the fingerprint you entered: {fp}": "La clé correspond à l’empreinte saisie : {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Collez ci-dessus l’empreinte de l’expéditeur, ou vérifiez l’archive avec un vérificateur indépendant.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Vérifiés dans ce navigateur : la signature du manifeste et le SHA-256 de chaque fichier. Non vérifiés ici : la chaîne d’événements de events.jsonl, les horodatages RFC 3161, OpenTimestamps, les enregistrements Witness et Intel TDX ; verify.py les vérifie."
 }

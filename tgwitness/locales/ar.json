@@ -11179,5 +11179,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "المعلمات: أصغر فجوة مدرجة في أرقام الرسائل هي {smallest}؛ ويتم إدراج ما لا يزيد عن {listed} فجوة لكل ترقيم.",
   "ranges: {n}": "النطاقات: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "المعرفات غير الملحوظة: {ids}. النطاقات: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "لم يتم قراءة سجل بعض المحادثات الخاصة أو الروبوتات أو المجموعات العادية حتى النهاية"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "لم يتم قراءة سجل بعض المحادثات الخاصة أو الروبوتات أو المجموعات العادية حتى النهاية",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "بصمة المفتاح من المرسِل (SHA-256، 64 حرفًا ست عشريًا)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "اختيارية للتحقق من الملفات، لكنها لازمة لتأكيد المفتاح الذي وقّعها. احصل عليها من المرسِل بمعزل عن الأرشيف، مثلًا عبر الهاتف أو شخصيًا.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "بصمة المفتاح 64 حرفًا ست عشريًا (SHA-256). تُتجاهَل المسافات والنقطتان والشرطات.",
+  "Key fingerprint in the archive: {fp}": "بصمة المفتاح في الأرشيف: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "الأرشيف موقّع بمفتاح غير المفتاح الذي أعطى المرسِل بصمته.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "تتطابق جميع الملفات ({n}) مع قائمة البيانات الموقّعة، ويتطابق مفتاحها مع البصمة الواردة من المرسِل.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "تتطابق جميع الملفات ({n}) مع قائمة البيانات الموقّعة داخل الأرشيف، لكن المفتاح لم يُطابَق مع بصمة واردة من المرسِل.",
+  "Fingerprint from the sender: {fp}": "البصمة الواردة من المرسِل: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "يتطابق المفتاح مع البصمة التي أدخلتها: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "الصق بصمة المرسِل في الحقل أعلاه، أو تحقّق من الأرشيف بأداة تحقق مستقلة.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ما جرى التحقق منه في هذا المتصفح: توقيع قائمة البيانات وقيمة SHA-256 لكل ملف. ما لم يُتحقق منه هنا: سلسلة الأحداث في events.jsonl، والطوابع الزمنية RFC 3161، وOpenTimestamps، وسجلات Witness، وIntel TDX؛ يتحقق منها verify.py."
 }
