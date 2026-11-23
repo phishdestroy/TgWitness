@@ -8491,7 +8491,10 @@
   "f1e7a9eb68bfd3cd2ab8919171ace098e032457423bffcc2ada7acfbf60cd545": "若無 Python 環境，請使用 <a href=\"https://github.com/phishdestroy/TgWitness/releases\">GitHub 上 TgWitness </a>發行版中的可攜式驗證器：無需安裝。",
   "e8f450a672e07f236c4ae39031b593dd6aa964fa0bab93984d0231d849ddae37": "專案網站 <code>verify/</code> 上的瀏覽器頁面無需安裝任何軟體即可檢查證據存檔：清單簽章、寄件者提供的金鑰指紋、每個檔案的 SHA-256、ASiC-E 容器以及已簽署的事件鏈；不上傳任何內容，也不信任存檔內的任何內容。頁面列出不檢查的項目，其餘部分請使用 <code>verify.py</code>。",
   "3b7d601b159d564e25ac6c2cfacbcf1bc1353642f2ef7475f282f7caa5000ffb": "每個版本都會發布適用於 Windows、Linux x86_64 與 macOS（arm64）的可攜式驗證器，並附上校驗和與建置來源證明：解壓其中一個，將存檔拖到它的 <code>VERIFY.cmd</code> 上，或執行它的 <code>VERIFY.sh</code>，無需安裝 Python。存檔中的 <code>VERIFY.sh</code> 現在會使用放在旁邊的這種執行環境；如果找不到任何執行環境，兩個啟動器都會指出瀏覽器檢查與可攜式驗證器。",
-  "146311251990755dd1a9e590bb1d6c4adf33d9326edee3eabed0dda28180d310": "在啟動預先準備好的環境之前，請執行 <code>python start.py --check</code>。若需進行機器可讀的檢查，請添加 <code>--json</code>\n，或傳入預設的 <code>--data-dir</code>、<code>--host</code> 及 <code>--port</code>。\n此指令會在無需登入 Telegram 或建立日誌的情況下，檢查先決條件。\n日誌驗證會在應用程式啟動時執行，從最後一個簽名檢查點開始（該檢查點之前的記錄由檢查點的簽名頭部雜湊值固定）；匯出與「驗證」功能仍會檢查整個鏈。擷取就緒狀態會顯示在控制面板上。若端口已被佔用，可能是因已有實例正在運行所致。"
+  "146311251990755dd1a9e590bb1d6c4adf33d9326edee3eabed0dda28180d310": "在啟動預先準備好的環境之前，請執行 <code>python start.py --check</code>。若需進行機器可讀的檢查，請添加 <code>--json</code>\n，或傳入預設的 <code>--data-dir</code>、<code>--host</code> 及 <code>--port</code>。\n此指令會在無需登入 Telegram 或建立日誌的情況下，檢查先決條件。\n日誌驗證會在應用程式啟動時執行，從最後一個簽名檢查點開始（該檢查點之前的記錄由檢查點的簽名頭部雜湊值固定）；匯出與「驗證」功能仍會檢查整個鏈。擷取就緒狀態會顯示在控制面板上。若端口已被佔用，可能是因已有實例正在運行所致。",
+  "8968c1570635a6210a5f3249fe08eae4b2bcbec0146924d6abc87c82f6db8622": "1.0.1 · 2026年11月23日",
+  "dcb4bd3539681009e6af9642d26121941201125a9914fc9472ff7f6fafec0d51": "<a href=\"#101--23-november-2026\">1.0.1 · 2026年11月23日</a>",
+  "381ec5e8a82a31114d9b0e9e2388f87fc990242dd6d01b6a3f3f24e7fa73b325": "報告檢視器中的封存檔檢查會在手機上將判定結果中較長的金鑰指紋換行顯示，而不是撐寬頁面。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",

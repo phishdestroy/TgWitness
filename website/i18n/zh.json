@@ -8543,7 +8543,10 @@
   "f1e7a9eb68bfd3cd2ab8919171ace098e032457423bffcc2ada7acfbf60cd545": "如果没有 Python，请使用 <a href=\"https://github.com/phishdestroy/TgWitness/releases\">GitHub 上 TgWitness 发布</a>版本中的便携式验证器：它无需安装。",
   "e8f450a672e07f236c4ae39031b593dd6aa964fa0bab93984d0231d849ddae37": "项目网站 <code>verify/</code> 处的浏览器页面无需安装任何软件即可检查证据存档：清单签名、发送方提供的密钥指纹、每个文件的 SHA-256、ASiC-E 容器以及已签名的事件链；不上传任何内容，也不信任存档内的任何内容。页面列出不检查的项目，其余部分请使用 <code>verify.py</code>。",
   "3b7d601b159d564e25ac6c2cfacbcf1bc1353642f2ef7475f282f7caa5000ffb": "每个版本都会发布适用于 Windows、Linux x86_64 和 macOS（arm64）的便携验证器，并附带校验和与构建来源证明：解压其中一个，将存档拖到它的 <code>VERIFY.cmd</code> 上，或运行它的 <code>VERIFY.sh</code>，无需安装 Python。存档中的 <code>VERIFY.sh</code> 现在会使用放在旁边的这种运行时；如果找不到任何运行时，两个启动器都会指明浏览器检查和便携验证器。",
-  "146311251990755dd1a9e590bb1d6c4adf33d9326edee3eabed0dda28180d310": "在启动预配置环境前，请运行 <code>python start.py --check</code>。若需进行机器可读的检查，请添加 <code>--json</code>\n参数，或传入预设的 <code>--data-dir</code>、<code>--host</code> 和 <code>--port</code> 参数。\n该命令会在无需登录 Telegram 或创建日志的情况下检查先决条件。\n日志验证在应用程序启动时从最后一个带签名的检查点开始运行（此前的记录由该检查点的带签名头部哈希固定）；导出和“验证”操作仍会检查整个链。捕获就绪状态会在面板中显示。端口已被占用可能仅仅是因为已有实例存在。"
+  "146311251990755dd1a9e590bb1d6c4adf33d9326edee3eabed0dda28180d310": "在启动预配置环境前，请运行 <code>python start.py --check</code>。若需进行机器可读的检查，请添加 <code>--json</code>\n参数，或传入预设的 <code>--data-dir</code>、<code>--host</code> 和 <code>--port</code> 参数。\n该命令会在无需登录 Telegram 或创建日志的情况下检查先决条件。\n日志验证在应用程序启动时从最后一个带签名的检查点开始运行（此前的记录由该检查点的带签名头部哈希固定）；导出和“验证”操作仍会检查整个链。捕获就绪状态会在面板中显示。端口已被占用可能仅仅是因为已有实例存在。",
+  "8968c1570635a6210a5f3249fe08eae4b2bcbec0146924d6abc87c82f6db8622": "1.0.1 · 2026年11月23日",
+  "dcb4bd3539681009e6af9642d26121941201125a9914fc9472ff7f6fafec0d51": "<a href=\"#101--23-november-2026\">1.0.1 · 2026年11月23日</a>",
+  "381ec5e8a82a31114d9b0e9e2388f87fc990242dd6d01b6a3f3f24e7fa73b325": "报告查看器中的归档检查功能会在手机端对长密钥指纹进行折行显示，以避免页面过宽。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
