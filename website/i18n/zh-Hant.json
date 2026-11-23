@@ -8378,7 +8378,16 @@
   "b77787999db9e78373ec2cd8a9d751eba609a641830b51becee3124b49fd0231": "網路與端點： <code>/api/assurance</code> 不再公開使用者資料文字、快速隧道（Quick Tunnel）的 ntfy.sh 主題或 Gateway DoH 子網域，僅提供雜湊值，且當有四項新挑戰的陳述尚待處理時，會回傳 HTTP 429 狀態碼。 除主要管理員以外的存取者僅可新增 HTTP(S) Apprise 服務及電子郵件。記錄器連線會拒絕內部位址，除非 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code> 並遵循工作區路由及「隱藏 IP」設定；MCP 檢查僅聯繫此控制面板自身的位址。網路客戶端會在連線前拒絕無效的方法、位址及標頭欄位，而瀏覽器記錄器則會限制分塊請求正文。",
   "1d5dd1ea11555db9be5639ddee26dedec24c16defb4508ace20d9172a582ae28": "該收集器的公開聲明中，未包含伺服器位址、登入來源、\n使用者資料的內容、接收快速隧道位址的 ntfy.sh 主題，以及\nGateway DoH 子網域。 該地址及登入來源仍保留於簽名日誌中；\n聲明僅提供用戶資料的 SHA-256 雜湊值。資料收集器會針對\n新的挑戰逐一準備聲明，並在已有四項此類請求\n待處理時，回傳 HTTP 429 狀態碼。",
   "e06d8bdad456ee8d045e00b66ef334f510c5373274df6ad745e7340fb90ce8f4": "在無網路連線的情況下， <code>verify.py</code> 會驗證每則報價的簽名、從處理器的\n憑證到 Intel 根憑證（固定於檔案中）的鏈路、確認該報價源自 Intel 的\n生產報價隔區、確認該機器無法被除錯或遷移，以及確認該報價涵蓋\n起始記錄或經簽名的聲明。 當 Intel 的擔保資料與引文一同儲存時，它還會\n計算記錄當下平台的安全等級。 若無擔保資料\n（即擷取引文時英特爾服務未回應），則不會檢查平台的 TCB 狀態、英特爾的\n撤銷清單、QE 身分識別及 TDX 模組：引文的狀態將\n<code>partial</code> 而非 <code>pass</code>，且條件行中亦有註明。實際執行的程式碼、\n提供者日誌以及 Intel 的當前評級仍會保留 <code>python -m tgwitness.cloud verify</code>，因此\n離線結果被標記為「部分」。",
-  "b43317b6d50769d872920d4a249de6b8c1ad2b12a6f00ea687215384e57be602": "<code>backup</code> 因按下 Ctrl+C 而中止：未將任何資料寫入目標位置"
+  "b43317b6d50769d872920d4a249de6b8c1ad2b12a6f00ea687215384e57be602": "<code>backup</code> 因按下 Ctrl+C 而中止：未將任何資料寫入目標位置",
+  "d3ef62dc321092a9c0d628230eb4805d473657d9f8bebdf8afccbff6dcf4be97": "<strong>直接從已停止的工作區（<code>--data-dir</code>）</strong>讀取<strong>。</strong>以\n完全本地存取權限讀取資料目錄，無需憑證。請在資料目錄的副本上使用，或於\n資料收集停止時使用。簽名記錄絕不會被更改；如同控制面板，開啟\n工作區可能會將其衍生的索引更新至最新狀態。當控制面板已開啟該工作區時，此指令會以\n代碼 <code>3</code>；請改透過面板進行讀取。唯讀資料夾（例如防寫媒體上的副本）會透過其日誌的私有暫存副本讀取，該副本隨後會被刪除；資料夾本身不會被變更。若未指定 <code>--data-dir</code>, <code>TGWITNESS_DATA</code>,\n<code>./data/live</code> ，則會使用執行該指令之安裝環境的資料目錄。",
+  "24435b553be5d989c9779b85bca027c3c5f9935cbb06484332383f447036c995": "在既有資料夾中執行 <code>tgwitness backup</code> 時，會指出被中斷的備份留下的隱藏殘留並提示將其刪除，而不只是說資料夾不是空的。",
+  "04d064b9af17341cfbaef12261375deb083398bf475534783cbcfcf3854f179c": "只用表情符號或符號執行 <code>tgwitness search</code> 時，會提示加上 <code>--exact</code>，而不只是要求輸入字詞。",
+  "db73e878fa7887f357964b1b2d0342e2ce56fc27322f32552ee932d1a3ad3c91": "在已開啟的資料目錄上啟動第二個控制面板時，會輸出一行清楚的提示並以代碼 3 結束，而不是在面板位址後顯示冗長的錯誤追蹤。",
+  "9aab89ae78bbca761317b0ef9a4320fec66fd0576faa5d84720cc12747c5100c": "命令列清單中，對於僅以 ID 顯示的傳送者（例如編輯後的版本），會附上同一清單中其他位置為該 ID 顯示的名稱。",
+  "69e757d921b4669e54c16ba5c124b28c73b59396b18c7eed9e6e8977848b129c": "<code>tgwitness export --output</code> 寫入的檔案無論 umask 為何都只有擁有者可讀，與備份和簽名匯出一致。",
+  "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> 會將開啟的密封記錄寫入一個無論 umask 為何都只有擁有者可讀的檔案。",
+  "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "從命令列讀取唯讀資料目錄（例如防寫媒體上的副本）時，會透過日誌及其 WAL 檔案的私有暫存副本讀取，而不是因錯誤追蹤而停止。",
+  "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在唯讀資料目錄上啟動控制面板時，會說明這一點並指向唯讀命令列，而不是以權限錯誤追蹤結束。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
