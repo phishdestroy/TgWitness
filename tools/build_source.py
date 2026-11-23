@@ -53,7 +53,7 @@ BUILD_FILES = {
         "lock_media_requirements.py", "lock_requirements.py", "ocr_advisories.py", "publication_guard.py",
         "release_source.py", "sbom_locks.py", "sealed_release.py", "site_account.py", "site_content.py",
         "site_context.py", "site_diagrams.py", "site_export_clinic.py", "site_i18n.py", "site_llms.py",
-        "site_modes.py", "site_seo.py", "site_typography.py", "site_validation.py", "site_wiki.py",
+        "site_modes.py", "site_seo.py", "site_typography.py", "site_validation.py", "site_verify.py", "site_wiki.py",
         "sync_notice.py", "sync_notice_translations.py", "sync_verifier_languages.py", "update_client_platforms.py",
     ),
     "scripts": (

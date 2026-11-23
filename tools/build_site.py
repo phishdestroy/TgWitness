@@ -15,7 +15,7 @@ from urllib.parse import urlsplit
 if __package__:
     from . import site_seo
     from .site_content import GROUPS, GUIDES, LABELS, NEXT, REDIRECTS, REFERENCE, REFERENCE_GROUPS, REFERENCE_PARENT
-    from . import site_diagrams, site_i18n, site_wiki, site_modes, site_account, site_llms, site_export_clinic, site_typography, site_validation, site_context
+    from . import site_diagrams, site_i18n, site_wiki, site_modes, site_account, site_llms, site_export_clinic, site_typography, site_validation, site_context, site_verify
 else:
     import site_seo
     from site_content import GROUPS, GUIDES, LABELS, NEXT, REDIRECTS, REFERENCE, REFERENCE_GROUPS, REFERENCE_PARENT
@@ -29,6 +29,7 @@ else:
     import site_typography
     import site_validation
     import site_context
+    import site_verify
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGS = tuple(site_i18n.LANGUAGES)
@@ -82,6 +83,9 @@ STATIC = {"style.css": "website/style.css", "home.css": "website/home.css", "sit
           "docs.css": "website/docs.css", "docs.js": "website/docs.js", "context.css": "website/context.css",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js",
           "workflows.css": "website/workflows.css", "workflows.js": "website/workflows.js", **ASSETS, **WIKI_ASSETS, **site_export_clinic.STATIC, **site_validation.STATIC}
+# One self-contained folder per language, so a saved copy of the verifier keeps working offline.
+STATIC.update({("" if lang == "en" else lang + "/") + site_verify.PATH + name: source
+               for lang in LANGS for name, source in site_verify.ASSETS.items()})
 SITE_SCRIPTS = ("website/learn.js", "website/docs.js", "website/site.js", "website/workflows.js", "website/export-clinic/export-clinic.js")
 CLINIC_LABELS = ("Controlled experiment", "EXPERIMENT", "Export Clinic: watch the controlled Desktop experiment",
                  "Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.")
@@ -344,6 +348,9 @@ def inventory(root=ROOT):
                  "capture-instructions": site_wiki.to_html(site_wiki.split_title(
                      (root / CAPTURE_DOCS["en"]).read_text(encoding="utf-8"))[1])[0]}
     strings += [site_export_clinic.DESCRIPTION, *CLINIC_LABELS]
+    verify_template = (root / site_verify.SOURCE).read_text(encoding="utf-8")
+    strings += site_verify.strings(verify_template, (root / site_verify.SCRIPT).read_text(encoding="utf-8"))
+    fragments["verify"] = site_verify.fragment(verify_template)
     for slug in GUIDES:
         if slug == "dedicated-account":
             continue
@@ -406,7 +413,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     output = Path(output).absolute() if output is not None else root / "dist/site"
 
 
-    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES,
+    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *site_verify.outputs(prefix(lang) for lang in LANGS),
                 *(prefix(lang) + old + "index.html" for lang in LANGS for old in REDIRECTS), *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
                 *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES, *LLM_FILES}
     if output.resolve() != output:
@@ -826,6 +833,13 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             page(site_export_clinic.PATH, site_export_clinic.TITLE, t(site_export_clinic.DESCRIPTION),
                  [(labels["home"], base), (labels["docs"], hub), (site_export_clinic.TITLE, base + site_export_clinic.PATH)],
                  content, headings(content), footer, notice(clinic_missing))
+        if full_site:
+            verify_html, _ = site_verify.page(
+                read_public(site_verify.SOURCE).decode("utf-8").replace("\r\n", "\n"),
+                read_public(site_verify.SCRIPT).decode("utf-8"), lang, data,
+                [(other, site_i18n.LANGUAGES[other][0], relative(base + site_verify.PATH, prefix(other) + site_verify.PATH))
+                 for other in LANGS])
+            write(base + site_verify.PATH + "index.html", verify_html)
         if lang in site_validation.LANGUAGES:
             words = validation_texts[lang]
             content = site_validation.content(read_public, render, guide_values(base + site_validation.PATH), lang)
