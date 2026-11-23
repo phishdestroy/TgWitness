@@ -631,6 +631,16 @@ class AccessControl:
         grant = self.grant(session["owner"])
         return Principal(False, grant["label"], grant, session["id"], self.group_of)
 
+    def recognizes(self, credential):
+        """True for the panel token or an unexpired session; no side effects, for pre-routing limits."""
+        if not credential:
+            return False
+        if secrets.compare_digest(digest(credential), digest(self.vault.token)):
+            return True
+        with self.lock:
+            session = self.sessions.get(digest(credential))
+            return session is not None and session["expires"] > time.time()
+
     def resolve(self, credential, address):
         if secrets.compare_digest(digest(credential), digest(self.vault.token)):
             return Principal(True, "Main administrator (panel token)")
@@ -737,12 +747,11 @@ class AccessControl:
             grant = self.grant(grant_id)
             if grant is None:
                 raise Refused("Unknown access.")
+            self.grants = [g for g in self.grants if g["id"] != grant_id]
+            self.save()
             sessions = [s["id"] for s in self.sessions.values() if s["owner"] == grant_id]
         for session_id in sessions:
             self.end(session_id, "access revoked")
-        with self.lock:
-            self.grants = [g for g in self.grants if g["id"] != grant_id]
-            self.save()
         self.store.append("access.revoked", {"access_id": grant_id})
         LOG.info("Access %s revoked", grant["label"])
 

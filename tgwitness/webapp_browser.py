@@ -407,6 +407,8 @@ class Session:
 
 async def capture(url, route, init_data=None, settle=SHOTS):
     """Open url once and return (facts, files). Files are (role, mime, bytes, label)."""
+    if urlsplit(url).scheme not in ("http", "https"):
+        raise Unavailable("Only http and https Mini App addresses can be opened")
     state = status()
     if not state["browser"]:
         raise Unavailable(state["reason"])
@@ -422,7 +424,7 @@ async def capture(url, route, init_data=None, settle=SHOTS):
                      "--no-first-run", "--no-default-browser-check", "--disable-extensions", "--disable-sync",
                      "--disable-background-networking", "--disable-component-update", "--disable-default-apps",
                      "--disable-dev-shm-usage", "--disable-gpu", "--mute-audio", "--hide-scrollbars",
-                     "--disable-features=Translate,MediaRouter,OptimizationHints,IsolateOrigins,site-per-process,"
+                     "--disable-features=Translate,MediaRouter,OptimizationHints,"
                      "AutofillServerCommunication,CertificateTransparencyComponentUpdater,InterestFeedContentSuggestions",
                      "--deny-permission-prompts", "--password-store=basic", "--use-mock-keychain",
                      "--disable-client-side-phishing-detection", "--disable-domain-reliability", "--no-pings",

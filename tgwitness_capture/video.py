@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import threading
 import uuid
 
 from .format import utcnow
@@ -18,6 +19,7 @@ class VideoCapture:
         self.log = None
         self.error = None
         self.timestamp_overlay = timestamp_overlay or overlay
+        self.lock = threading.RLock()
 
     @property
     def available(self):
@@ -59,6 +61,10 @@ class VideoCapture:
             raise
 
     def abort(self, reason=None):
+        with self.lock:
+            self._abort(reason)
+
+    def _abort(self, reason=None):
         if self.process is not None:
             if self.process.poll() is None:
                 self.error = "VideoAborted"
@@ -99,6 +105,10 @@ class VideoCapture:
                 path.unlink()
 
     def poll(self, final=False, reason=None):
+        with self.lock:
+            self._poll(final, reason)
+
+    def _poll(self, final=False, reason=None):
         if self.process is None:
             return
         result = self.process.poll()
@@ -126,6 +136,10 @@ class VideoCapture:
             self.process = self.log = None
 
     def stop(self):
+        with self.lock:
+            self._stop()
+
+    def _stop(self):
         if self.process is None:
             return
         process = self.process

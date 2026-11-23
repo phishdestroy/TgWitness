@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- Security and reliability fixes from an external code audit: the official-client gateway reaches IP addresses only in Telegram data centres; uploads larger than 512 KiB need a valid panel credential before their size limit applies; a truncated timestamp no longer stops `verify`; Mini App capture opens only http and https pages, with site isolation; secret chat lookups no longer hold the journal write lock; capture exports are removed after download.
 - `tgwitness index rebuild` on a read-only data directory says that the folder is read-only and exits with code 2, instead of printing a permission error for a lock file.
 - `tgwitness backup` into an existing folder names the hidden leftover of a killed backup and says to remove it, instead of only saying the folder is not empty.
 - Verification of PDF reports: `verify.py` accepts the CMS signature only in the form TgWitness writes it, with one certificate and one signer, detached content, no unexpected attributes and only zero padding after it; a signature time stamp is checked against the signature and its TSA, and its time is reported. An Intel TDX quote checked without Intel's collateral is `partial` instead of `pass` and says what was not checked. Every stored OCSP and CRL file of a time stamp is checked, a revocation in one outweighs a good answer in another, and a file that does not verify fails verification. A capture checked with `--sealed-attestation` is described by what the GitHub attestation shows.

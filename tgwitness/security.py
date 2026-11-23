@@ -149,8 +149,9 @@ class InstanceLock:
         owner_only(root)
         self.stream = (root / ".instance.lock").open("a+b")
         self.stream.seek(0)
-        self.stream.write(b"0")
-        self.stream.flush()
+        if not os.fstat(self.stream.fileno()).st_size:
+            self.stream.write(b"0")
+            self.stream.flush()
         self.stream.seek(0)
         try:
             if os.name == "nt":

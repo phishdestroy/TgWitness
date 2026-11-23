@@ -206,7 +206,7 @@ class SecretChats:
         self.file_worker = None
         self.file_wakeup = asyncio.Event()
         self.error = None
-        self.asked = set()
+        self.asked = {}
         self.early = {}
         self.open_at = {}
         self.heard = None
@@ -751,8 +751,8 @@ class SecretChats:
         if random_ids is not None:
             query += " AND json_extract(payload,'$.random_id') IN (" + ",".join("?" * len(random_ids)) + ")"
             values += list(random_ids)
-        with self.store.lock:
-            return self.store.db.execute(query + " GROUP BY 1 ORDER BY 2 DESC", values).fetchall()
+        with self.store.reading() as db:
+            return db.execute(query + " GROUP BY 1 ORDER BY 2 DESC", values).fetchall()
 
     def unopened(self, chat_id):
         from . import visibility
@@ -841,8 +841,10 @@ class SecretChats:
         entity = collector.people.get(user_id) or collector.dialog_cache.get(user_id, {}).get("entity")
         if entity is not None:
             return {"name": utils.get_display_name(entity) or None, "username": getattr(entity, "username", None)}
-        if user_id not in self.asked and self.client is not None and running():
-            self.asked.add(user_id)
+        if self.asked.get(user_id, 0) <= time.monotonic() and self.client is not None and running():
+            if len(self.asked) >= 4096:
+                self.asked.clear()
+            self.asked[user_id] = float("inf")
             self.spawn(self.learn(user_id))
         return None
 
@@ -850,6 +852,7 @@ class SecretChats:
         try:
             entity = await self.client.get_entity(types.PeerUser(user_id))
         except Exception:
+            self.asked[user_id] = time.monotonic() + 600
             return
         self.collector.people[utils.get_peer_id(entity)] = entity
 
