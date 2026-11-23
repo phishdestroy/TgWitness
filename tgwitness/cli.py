@@ -578,7 +578,12 @@ def backup(args):
         print("Choose a backup folder outside the data directory.", file=sys.stderr)
         return EXIT_USAGE
     if target.exists() and (not target.is_dir() or any(target.iterdir())):
-        print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
+        found = sorted(item.name for item in target.iterdir()) if target.is_dir() else []
+        if found and all(name.startswith(".tgwitness-backup-") or name == ".tgwitness-publish" for name in found):
+            print("An interrupted backup left " + ", ".join(found) + " in " + str(target)
+                  + ". Remove it or choose another folder.", file=sys.stderr)
+        else:
+            print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
         return EXIT_USAGE
     inside = target.is_dir()
     target.parent.mkdir(parents=True, exist_ok=True)
