@@ -47,6 +47,7 @@
 - Reports: hashes, IDs and commands use a real monospace font in every language, figures no longer look like letters, charts pair up without empty halves, trust statuses are coloured, and the chat view groups consecutive messages.
 - Reports: the chat view names every service event, participant aliases and the gap-scope reasons are translated, charts with a single row are left out, trust cards show dates and key fingerprints in readable form, and the PDF no longer leaves a blank page before them.
 - Evidence reports of a GitHub Actions run name the run as the attested collection run; pseudo-secret chat videos play inline.
+- `tgwitness export --output` writes the file readable by its owner only, whatever the umask, like backups and signed exports.
 - GitHub Actions capture: whole-account exports can leave out single chats only when the estimate saw every chat; the chat export cover counts selected chats that were never started; account export summaries show files not reached before the stop; the journal records where the pseudo-secret module came from; SVG files from a secret chat download instead of opening in the panel.
 - GitHub Actions capture: a chat whose live archive could not start keeps the messages already read when the run stops, packaged as a partial snapshot.
 - Interface labels left in English in Thai, Uzbek, Hindi and several other languages are translated.
