@@ -44,40 +44,59 @@ coverage or independent-time limitations remain visible.
 ## Runtime and language
 
 The Windows launcher tries an embedded interpreter in `python/`, then
-`verifier/python/`, then a compatible installed Python. The Python path must
-provide Python 3.11+ and `cryptography`. It does not install dependencies or
-download a runtime. Discovery disables Python launcher's automatic-install and
+`verifier/python/`, then a compatible installed Python. `VERIFY.sh` likewise
+tries `python/bin/python3`, then `verifier/python/bin/python3`, then an installed
+`python3`. The Python path must provide Python 3.11+ and `cryptography`. Neither
+launcher installs dependencies or downloads a runtime. When no runtime is found,
+both exit with status 2 and name two ways forward: the browser check at
+[phishdestroy.github.io/TgWitness/verify/](https://phishdestroy.github.io/TgWitness/verify/),
+which checks the signatures, every file and the event chain without installing
+anything, and the portable verifier from GitHub Releases for the full offline check. Discovery disables Python launcher's automatic-install and
 dry-run environment switches. Python runs with `-I -B -X utf8`: evidence-folder
 modules and user site packages are excluded from imports, bytecode is not
 written, and input/output is UTF-8. See the official
 [isolated-mode documentation](https://docs.python.org/3/using/cmdline.html#cmdoption-I)
 and [Windows launcher configuration](https://docs.python.org/3/using/windows.html#configuration).
 
-The standalone Windows bundle contains the same `verify.py`, launchers, an
-embedded official Python runtime, and the pinned cryptography dependencies and
-their licences. It does not include the panel or start a server. Use its own
-`VERIFY.cmd` with any supported original ZIP, or copy its `python/` directory
-beside a bundled launcher. Obtain the distribution and authenticate its checksum
-through a trusted channel, separate from the download itself. The build uses the repository's
-existing pinned Python runtime and `deploy/constraints.txt`.
+The standalone bundles contain the same `verify.py`, launchers, their own Python
+runtime, and the pinned cryptography dependencies and their licences: the
+official embeddable Python on Windows, and CPython from python-build-standalone
+on Linux x86_64 and macOS on Apple silicon (arm64), each pinned by SHA-256. There
+is no bundle for Intel Macs: the pinned `cryptography` release publishes macOS
+packages for Apple silicon only. On an Intel Mac use the browser check or an
+installed `python3` with `cryptography`. The bundles do not include the panel or
+start a server. Use the bundle's own `VERIFY.cmd` or
+`VERIFY.sh` with any supported original ZIP, or copy its `python/` directory
+beside a bundled launcher. Each release publishes the bundles with SHA-256
+sidecars, `SHA256SUMS.txt` and a GitHub build-provenance attestation that
+`gh attestation verify FILE --repo phishdestroy/TgWitness` checks. Still
+authenticate the checksum through a trusted channel, separate from the download
+itself. The bundles are not code-signed: Windows may show a SmartScreen warning
+once, and macOS may refuse to start the runtime until the download quarantine is
+removed with `xattr -dr com.apple.quarantine FOLDER`. The build uses the
+repository's pinned Python runtime and `deploy/installer.lock`.
 
-Build on Windows with Python 3.12. The build host needs no preinstalled application
-dependencies: launcher generation runs inside the newly assembled embedded runtime.
+Build on the target system with Python 3.12: Windows, Linux x86_64 or macOS on
+Apple silicon. The
+build host needs no preinstalled application dependencies: launcher generation
+runs inside the newly assembled runtime.
 
 ```powershell
 python tools/build_verifier.py
 ```
 
-This builds `dist/TgWitness-verifier-<version>-windows-<arch>-all.zip` and a
-SHA-256 sidecar. `VERIFY.cmd` lists all language names and accepts a language
+This builds `dist/TgWitness-verifier-<version>-<platform>-all.zip`, where the
+platform is `windows-amd64`, `linux-x86_64` or `macos-arm64`, and
+a SHA-256 sidecar. `VERIFY.cmd` lists all language names and accepts a language
 number or code. Enter selects the detected system language. `--language de`,
 for example, builds with a fixed default; every build still contains all
 languages. Localized instructions are also in `languages/START_HERE-<code>.txt`.
 The build checks the public fictional demo archive with the embedded runtime;
-`--validation-archive PATH` selects another retained archive. It runs the real bat
-launcher against clean and tampered ZIPs, and then runs it in every language
-with system Python absent from PATH. Building does not publish a release. Publishing at
-GitHub Releases or get.destroy.tools remains a separate release operation.
+`--validation-archive PATH` selects another retained archive. It runs the real
+`VERIFY.cmd` or `VERIFY.sh` against clean and tampered ZIPs, and then runs it in
+every language with no Python on PATH. Building does not publish a release; the
+release workflow builds the three bundles, checks them the same way and attaches
+them to the GitHub release.
 
 Launcher instructions, prompts, check labels, explanations, failure summaries,
 and saved transcripts support all 25 panel languages: English, Russian,
@@ -91,8 +110,8 @@ such as `pt-BR` and `zh-TW`. `--choose-language --interactive` opens the menu.
 File names, hashes, source records and original technical diagnostics are kept
 verbatim; translating them would change the evidence or obscure an error.
 Detailed CLI option descriptions remain technical documentation in English.
-No new GUI is required. The Windows runtime is not a macOS/Linux runtime;
-`VERIFY.sh` needs an already installed compatible `python3` and dependency.
+No new GUI is required. The Windows runtime is not a macOS/Linux runtime; on
+macOS and Linux use the bundle for that system or an installed `python3`.
 
 The readable source catalogue is `tgwitness/verifier_languages.json`. The
 existing panel translations supply established evidence terminology; recipient
@@ -118,7 +137,8 @@ python -I verify.py archive.zip --pretty --explain --fingerprint TRUSTED_SHA256 
 python -I verify.py archive.zip --pretty --explain --witness witness.zip --witness-fingerprint TRUSTED_WITNESS_SHA256 --require-witness
 ```
 
-Use `python/python.exe` in place of `python` for the embedded Windows runtime.
+Use `python/python.exe` in place of `python` for the embedded Windows runtime, or
+`python/bin/python3` in the Linux and macOS bundles.
 RFC 3161 verification needs the authority's trusted root (`--tsa-ca`); it does not
 need OpenSSL. OpenTimestamps Bitcoin authentication remains a separate check.
 The default maximum expanded ZIP size is 4 GiB; `--max-gib` explicitly changes
