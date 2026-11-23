@@ -273,7 +273,8 @@ for machine-readable checks or pass the intended `--data-dir`, `--host` and `--p
 The command checks prerequisites without Telegram login or creating a journal.
 Journal verification runs during application startup from the last signed checkpoint
 onwards (records before it are fixed by the checkpoint's signed head hash); exports and
-Verify still check the whole chain. Capture readiness shows in the panel. An occupied port may simply be an existing instance.
+Verify still check the whole chain. Capture readiness shows in the panel. An
+occupied port may simply be an existing instance.
 
 Browsers supporting the File System Access API save exports through a writable
 stream. Other browsers buffer at most 128 MiB. Use the streaming CLI for larger
