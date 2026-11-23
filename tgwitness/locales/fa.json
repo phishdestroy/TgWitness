@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "پارامترها: کوچک‌ترین شکاف فهرست‌شده در شماره‌های پیام {smallest} است؛ حداکثر {listed} شکاف برای هر شماره‌گذاری فهرست می‌شود.",
   "ranges: {n}": "بازه‌ها: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "شناسهٔ مشاهده‌نشده: {ids}. بازه‌ها: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "تاریخچه برخی چت‌های خصوصی، ربات‌ها یا گروه‌های عادی تا انتها خوانده نشد"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "تاریخچه برخی چت‌های خصوصی، ربات‌ها یا گروه‌های عادی تا انتها خوانده نشد",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "اثر انگشت کلید از فرستنده (SHA-256، 64 نویسهٔ هگزادسیمال)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "برای بررسی فایل‌ها اختیاری است؛ برای تأیید اینکه کلید چه کسی آن‌ها را امضا کرده لازم است. آن را جدا از آرشیو، مثلاً تلفنی یا حضوری، از فرستنده بگیرید.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "اثر انگشت کلید 64 نویسهٔ هگزادسیمال است (SHA-256). فاصله‌ها، دونقطه‌ها و خط‌تیره‌ها نادیده گرفته می‌شوند.",
+  "Key fingerprint in the archive: {fp}": "اثر انگشت کلید در آرشیو: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "آرشیو با کلیدی متفاوت از کلیدی که فرستنده اثر انگشتش را داده امضا شده است.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "همهٔ {n} فایل با مانیفست امضاشده مطابقت دارند و کلید آن با اثر انگشت فرستنده یکی است.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "همهٔ {n} فایل با مانیفست امضاشدهٔ درون آرشیو مطابقت دارند، اما کلید با اثر انگشتی از فرستنده مقایسه نشده است.",
+  "Fingerprint from the sender: {fp}": "اثر انگشت از فرستنده: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "کلید با اثر انگشتی که وارد کردید یکی است: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "اثر انگشت فرستنده را در کادر بالا بچسبانید یا آرشیو را با یک تأییدکنندهٔ مستقل بررسی کنید.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "در این مرورگر بررسی شد: امضای مانیفست و SHA-256 هر فایل. اینجا بررسی نشد: زنجیرهٔ رویدادها در events.jsonl، مهرهای زمانی RFC 3161، OpenTimestamps، سوابق Witness و Intel TDX؛ verify.py آن‌ها را بررسی می‌کند."
 }

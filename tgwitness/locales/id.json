@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: selisih terkecil yang tercantum dalam nomor pesan adalah {smallest}; paling banyak {listed} selisih tercantum untuk setiap penomoran.",
   "ranges: {n}": "rentang: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak terdeteksi: {ids}. Rentang: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "riwayat beberapa obrolan pribadi, bot, atau grup biasa tidak dibaca sampai akhir"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "riwayat beberapa obrolan pribadi, bot, atau grup biasa tidak dibaca sampai akhir",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Sidik jari kunci dari pengirim (SHA-256, 64 karakter heksadesimal)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Opsional untuk memeriksa berkas; diperlukan untuk memastikan kunci siapa yang menandatanganinya. Dapatkan dari pengirim secara terpisah dari arsip, misalnya lewat telepon atau secara langsung.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Sidik jari kunci terdiri atas 64 karakter heksadesimal (SHA-256). Spasi, titik dua, dan tanda hubung diabaikan.",
+  "Key fingerprint in the archive: {fp}": "Sidik jari kunci di dalam arsip: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Arsip ditandatangani dengan kunci yang berbeda dari kunci yang sidik jarinya diberikan pengirim.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Semua {n} berkas cocok dengan manifest bertanda tangan, dan kuncinya cocok dengan sidik jari dari pengirim.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Semua {n} berkas cocok dengan manifest bertanda tangan di dalam arsip, tetapi kuncinya belum dicocokkan dengan sidik jari dari pengirim.",
+  "Fingerprint from the sender: {fp}": "Sidik jari dari pengirim: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Kunci cocok dengan sidik jari yang Anda masukkan: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Tempelkan sidik jari dari pengirim di atas, atau periksa arsip dengan pemverifikasi independen.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Diperiksa di browser ini: tanda tangan manifest dan SHA-256 setiap berkas. Tidak diperiksa di sini: rantai peristiwa dalam events.jsonl, stempel waktu RFC 3161, OpenTimestamps, catatan Witness, dan Intel TDX; semuanya diperiksa oleh verify.py."
 }

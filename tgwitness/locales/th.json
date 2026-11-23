@@ -10924,5 +10924,16 @@
   "{run} · attempt {attempt}": "{run} · หมายเลขการลอง {attempt}",
   "ranges: {n}": "ช่วง: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID ที่ไม่ถูกตรวจพบ: {ids}. ช่วง: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "ประวัติการสนทนาของบางห้องสนทนาส่วนตัว บอท หรือกลุ่มทั่วไป ยังไม่ถูกอ่านจนจบ"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ประวัติการสนทนาของบางห้องสนทนาส่วนตัว บอท หรือกลุ่มทั่วไป ยังไม่ถูกอ่านจนจบ",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "ลายนิ้วมือกุญแจจากผู้ส่ง (SHA-256, อักขระเลขฐานสิบหก 64 ตัว)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "ไม่จำเป็นสำหรับการตรวจไฟล์ แต่จำเป็นเพื่อยืนยันว่ากุญแจของใครเป็นผู้ลงนาม ขอรับจากผู้ส่งแยกต่างหากจากอาร์ไคฟ์ เช่น ทางโทรศัพท์หรือพบกันโดยตรง",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "ลายนิ้วมือกุญแจคืออักขระเลขฐานสิบหก 64 ตัว (SHA-256) ระบบจะไม่นับช่องว่าง เครื่องหมายทวิภาค และขีดกลาง",
+  "Key fingerprint in the archive: {fp}": "ลายนิ้วมือกุญแจในอาร์ไคฟ์: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "อาร์ไคฟ์นี้ลงนามด้วยกุญแจที่ต่างจากกุญแจตามลายนิ้วมือที่ผู้ส่งให้มา",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "ไฟล์ทั้ง {n} ไฟล์ตรงกับ manifest ที่ลงนาม และกุญแจของ manifest ตรงกับลายนิ้วมือจากผู้ส่ง",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "ไฟล์ทั้ง {n} ไฟล์ตรงกับ manifest ที่ลงนามภายในอาร์ไคฟ์ แต่ยังไม่ได้เทียบกุญแจกับลายนิ้วมือจากผู้ส่ง",
+  "Fingerprint from the sender: {fp}": "ลายนิ้วมือจากผู้ส่ง: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "กุญแจตรงกับลายนิ้วมือที่คุณป้อน: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "วางลายนิ้วมือจากผู้ส่งในช่องด้านบน หรือตรวจอาร์ไคฟ์ด้วยเครื่องมือตรวจสอบอิสระ",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ตรวจในเบราว์เซอร์นี้แล้ว: ลายเซ็นของ manifest และ SHA-256 ของทุกไฟล์ ยังไม่ได้ตรวจที่นี่: ห่วงโซ่เหตุการณ์ใน events.jsonl, การประทับเวลา RFC 3161, OpenTimestamps, บันทึก Witness และ Intel TDX ซึ่ง verify.py เป็นผู้ตรวจ"
 }

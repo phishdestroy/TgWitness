@@ -195,6 +195,12 @@ code{direction:ltr;unicode-bidi:isolate}
 .v-page-head input{width:min(360px,100%);padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);
   font-family:inherit;font-weight:500;font-size:14px;line-height:1.4}
 .v-page .lead{margin:0 0 14px;color:var(--muted)}
+.c-fp{display:grid;gap:6px;max-width:760px;margin:0 0 6px}
+.c-fp label{color:var(--ink);font-weight:650;font-size:14px}
+.c-fp input{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.4}
+.c-fp .c-fp-error{color:var(--bad,#b42318);font-weight:600}
+.c-fp .c-fp-error:empty{display:none}
 .v-page .v-chips{margin-bottom:14px}
 .v-table{overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:var(--shadow-sm)}
 .v-table table{width:100%;border-collapse:collapse;font-size:13.5px}

@@ -11026,5 +11026,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "פרמטרים: הפער הקטן ביותר המופיע ברשימה במספרי ההודעות הוא {smallest}; לכל היותר מופיעים {listed} פערים עבור כל מספור.",
   "ranges: {n}": "טווחים: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "מזהים שלא נצפו: {ids}. טווחים: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "ההיסטוריה של חלק מהצ'אטים הפרטיים, הבוטים או הקבוצות הרגילות לא נקראה עד הסוף"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "ההיסטוריה של חלק מהצ'אטים הפרטיים, הבוטים או הקבוצות הרגילות לא נקראה עד הסוף",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "טביעת המפתח מהשולח (SHA-256, 64 תווים הקסדצימליים)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "לא חובה לבדיקת הקבצים; נדרשת כדי לאשר באיזה מפתח הם נחתמו. קבלו אותה מהשולח בנפרד מהארכיון, למשל בטלפון או פנים אל פנים.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "טביעת מפתח היא 64 תווים הקסדצימליים (SHA-256). רווחים, נקודתיים ומקפים אינם נלקחים בחשבון.",
+  "Key fingerprint in the archive: {fp}": "טביעת המפתח בארכיון: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "הארכיון חתום במפתח אחר מזה שהשולח מסר את טביעתו.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "כל {n} הקבצים תואמים למניפסט החתום, והמפתח שלו תואם לטביעה מהשולח.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "כל {n} הקבצים תואמים למניפסט החתום שבתוך הארכיון, אך המפתח לא הושווה לטביעה מהשולח.",
+  "Fingerprint from the sender: {fp}": "טביעה מהשולח: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "המפתח תואם לטביעה שהזנתם: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "הדביקו למעלה את הטביעה מהשולח, או בדקו את הארכיון בכלי אימות עצמאי.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "נבדקו בדפדפן זה: חתימת המניפסט וערך SHA-256 של כל קובץ. לא נבדקו כאן: שרשרת האירועים ב-events.jsonl, חותמות זמן RFC 3161, OpenTimestamps, רשומות Witness ו-Intel TDX; את אלה בודק verify.py."
 }

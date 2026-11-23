@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Các thông số: khoảng cách nhỏ nhất được liệt kê trong số thứ tự tin nhắn là {smallest}; tối đa {listed} khoảng cách được liệt kê cho mỗi dãy số.",
   "ranges: {n}": "khoảng: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID chưa được ghi nhận: {ids}. Khoảng ID: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "lịch sử của một số cuộc trò chuyện riêng tư, bot hoặc nhóm thông thường chưa được đọc đến hết"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "lịch sử của một số cuộc trò chuyện riêng tư, bot hoặc nhóm thông thường chưa được đọc đến hết",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Dấu vân tay khóa do người gửi cung cấp (SHA-256, 64 ký tự thập lục phân)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Không bắt buộc để kiểm tra tệp; cần thiết để xác nhận khóa của ai đã ký chúng. Hãy nhận dấu vân tay từ người gửi qua một kênh riêng, tách khỏi kho lưu trữ, chẳng hạn qua điện thoại hoặc gặp trực tiếp.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Dấu vân tay khóa gồm 64 ký tự thập lục phân (SHA-256). Dấu cách, dấu hai chấm và dấu gạch ngang được bỏ qua.",
+  "Key fingerprint in the archive: {fp}": "Dấu vân tay khóa trong kho lưu trữ: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Kho lưu trữ được ký bằng một khóa khác với khóa có dấu vân tay mà người gửi cung cấp.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Tất cả {n} tệp khớp với danh sách đã ký, và khóa của danh sách khớp với dấu vân tay từ người gửi.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Tất cả {n} tệp khớp với danh sách đã ký bên trong kho lưu trữ, nhưng khóa chưa được đối chiếu với dấu vân tay từ người gửi.",
+  "Fingerprint from the sender: {fp}": "Dấu vân tay từ người gửi: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Khóa khớp với dấu vân tay bạn đã nhập: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Hãy dán dấu vân tay từ người gửi vào ô phía trên, hoặc kiểm tra kho lưu trữ bằng một trình xác minh độc lập.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Đã kiểm tra trong trình duyệt này: chữ ký của danh sách (manifest) và SHA-256 của từng tệp. Chưa kiểm tra ở đây: chuỗi sự kiện trong events.jsonl, dấu thời gian RFC 3161, OpenTimestamps, bản ghi Witness và Intel TDX; verify.py sẽ kiểm tra các mục này."
 }

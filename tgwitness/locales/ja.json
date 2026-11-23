@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "パラメータ：メッセージ番号にリストされている最小のギャップは{smallest}です。各番号付けについて、最大{listed}個のギャップがリストされています。",
   "ranges: {n}": "範囲：{n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "確認されなかったID：{ids}。範囲：{ranges}。",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "一部のプライベートチャット、ボット、または通常のグループの履歴が最後まで読み込まれていませんでした"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "一部のプライベートチャット、ボット、または通常のグループの履歴が最後まで読み込まれていませんでした",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "送信者から受け取った鍵のフィンガープリント（SHA-256、16 進数 64 文字）",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "ファイルの検証だけなら不要ですが、どの鍵で署名されたかを確認するには必要です。アーカイブとは別の手段（電話や対面など）で送信者から受け取ってください。",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "鍵のフィンガープリントは 16 進数 64 文字（SHA-256）です。空白、コロン、ハイフンは無視されます。",
+  "Key fingerprint in the archive: {fp}": "アーカイブ内の鍵のフィンガープリント：{fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "アーカイブは、送信者が伝えたフィンガープリントとは別の鍵で署名されています。",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "{n} 個のファイルはすべて署名済みマニフェストと一致し、その鍵も送信者のフィンガープリントと一致します。",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "{n} 個のファイルはすべてアーカイブ内の署名済みマニフェストと一致しますが、鍵は送信者のフィンガープリントと照合されていません。",
+  "Fingerprint from the sender: {fp}": "送信者のフィンガープリント：{fp}",
+  "The key matches the fingerprint you entered: {fp}": "鍵は入力されたフィンガープリントと一致します：{fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "上の欄に送信者のフィンガープリントを貼り付けるか、独立した検証ツールでアーカイブを検証してください。",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "このブラウザーで検証した項目：マニフェストの署名と各ファイルの SHA-256。ここでは検証していない項目：events.jsonl のイベントチェーン、RFC 3161 タイムスタンプ、OpenTimestamps、Witness の記録、Intel TDX。これらは verify.py が検証します。"
 }

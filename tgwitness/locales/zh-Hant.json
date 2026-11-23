@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "參數：訊息編號中列出的最小間隔為 {smallest}；每組編號最多列出 {listed} 個間隔。",
   "ranges: {n}": "範圍：{n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "未觀察到的 ID：{ids}。範圍：{ranges}。",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私人聊天、機器人或一般群組的對話紀錄並未讀取至結尾"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "部分私人聊天、機器人或一般群組的對話紀錄並未讀取至結尾",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "寄件者提供的金鑰指紋（SHA-256，64 個十六進位字元）",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "僅檢查檔案時可不填；若要確認檔案由誰的金鑰簽署，則必須填寫。請透過與存檔不同的管道（例如電話或當面）向寄件者索取。",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "金鑰指紋由 64 個十六進位字元組成（SHA-256）。空格、冒號與連字號會被忽略。",
+  "Key fingerprint in the archive: {fp}": "存檔中金鑰的指紋：{fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "此存檔的簽署金鑰與寄件者提供的指紋不符。",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "全部 {n} 個檔案與已簽署的清單一致，且清單的金鑰與寄件者提供的指紋一致。",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "全部 {n} 個檔案與存檔內已簽署的清單一致，但尚未將金鑰與寄件者提供的指紋核對。",
+  "Fingerprint from the sender: {fp}": "寄件者提供的指紋：{fp}",
+  "The key matches the fingerprint you entered: {fp}": "金鑰與您輸入的指紋一致：{fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "請在上方貼上寄件者提供的指紋，或使用獨立的驗證工具檢查此存檔。",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "已在此瀏覽器中檢查：清單簽章與每個檔案的 SHA-256。此處未檢查：events.jsonl 中的事件鏈、RFC 3161 時間戳記、OpenTimestamps、Witness 紀錄與 Intel TDX；這些由 verify.py 檢查。"
 }

@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "पैरामीटर: संदेश संख्याओं में सूचीबद्ध सबसे छोटा अंतराल {smallest} है; प्रत्येक क्रमांकन के लिए अधिकतम {listed} अंतराल सूचीबद्ध किए गए हैं।",
   "ranges: {n}": "श्रेणियाँ: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "अनदेखे आईडी: {ids}। श्रेणियाँ: {ranges}।",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "कुछ निजी चैट, बॉट्स या सामान्य समूहों का इतिहास अंत तक नहीं पढ़ा गया था"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "कुछ निजी चैट, बॉट्स या सामान्य समूहों का इतिहास अंत तक नहीं पढ़ा गया था",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "प्रेषक से मिला कुंजी फिंगरप्रिंट (SHA-256, 64 हेक्साडेसिमल अक्षर)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "फ़ाइलों की जाँच के लिए वैकल्पिक; यह पुष्टि करने के लिए ज़रूरी कि उन पर किसकी कुंजी से हस्ताक्षर हुए। इसे प्रेषक से आर्काइव से अलग, जैसे फ़ोन पर या आमने-सामने, प्राप्त करें।",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "कुंजी फिंगरप्रिंट में 64 हेक्साडेसिमल अक्षर होते हैं (SHA-256)। स्पेस, कोलन और डैश अनदेखे किए जाते हैं।",
+  "Key fingerprint in the archive: {fp}": "आर्काइव में कुंजी का फिंगरप्रिंट: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "आर्काइव पर उस कुंजी से अलग कुंजी से हस्ताक्षर हैं जिसका फिंगरप्रिंट प्रेषक ने दिया।",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "सभी {n} फ़ाइलें हस्ताक्षरित मैनिफेस्ट से मेल खाती हैं, और उसकी कुंजी प्रेषक से मिले फिंगरप्रिंट से मेल खाती है।",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "सभी {n} फ़ाइलें आर्काइव के भीतर के हस्ताक्षरित मैनिफेस्ट से मेल खाती हैं, लेकिन कुंजी का मिलान प्रेषक से मिले फिंगरप्रिंट से नहीं किया गया है।",
+  "Fingerprint from the sender: {fp}": "प्रेषक से मिला फिंगरप्रिंट: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "कुंजी आपके दर्ज किए फिंगरप्रिंट से मेल खाती है: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "ऊपर प्रेषक से मिला फिंगरप्रिंट चिपकाएँ, या आर्काइव को किसी स्वतंत्र सत्यापक से जाँचें।",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "इस ब्राउज़र में जाँचा गया: मैनिफेस्ट का हस्ताक्षर और हर फ़ाइल का SHA-256। यहाँ नहीं जाँचा गया: events.jsonl में घटनाओं की शृंखला, RFC 3161 टाइमस्टैम्प, OpenTimestamps, Witness रिकॉर्ड और Intel TDX; इन्हें verify.py जाँचता है।"
 }

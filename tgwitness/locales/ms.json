@@ -10924,5 +10924,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: jurang terpendek yang disenaraikan dalam nombor mesej: {smallest}. Sebanyak maksimum {listed} jurang disenaraikan untuk setiap penomboran.",
   "ranges: {n}": "julat: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "ID yang tidak diperhatikan: {ids}. Julat: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "sejarah beberapa sembang peribadi, bot atau kumpulan biasa tidak dibaca sehingga habis"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "sejarah beberapa sembang peribadi, bot atau kumpulan biasa tidak dibaca sehingga habis",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Cap jari kunci daripada pengirim (SHA-256, 64 aksara perenambelasan)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Pilihan untuk menyemak fail; diperlukan untuk mengesahkan kunci siapa yang menandatanganinya. Dapatkannya daripada pengirim secara berasingan daripada arkib, contohnya melalui telefon atau secara bersemuka.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Cap jari kunci ialah 64 aksara perenambelasan (SHA-256). Ruang, titik bertindih dan sengkang diabaikan.",
+  "Key fingerprint in the archive: {fp}": "Cap jari kunci dalam arkib: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Arkib ditandatangani dengan kunci yang berbeza daripada kunci yang cap jarinya diberikan oleh pengirim.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Kesemua {n} fail sepadan dengan manifes bertandatangan, dan kuncinya sepadan dengan cap jari daripada pengirim.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Kesemua {n} fail sepadan dengan manifes bertandatangan di dalam arkib, tetapi kuncinya belum dibandingkan dengan cap jari daripada pengirim.",
+  "Fingerprint from the sender: {fp}": "Cap jari daripada pengirim: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Kunci sepadan dengan cap jari yang anda masukkan: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Tampal cap jari daripada pengirim di atas, atau semak arkib dengan pengesah bebas.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Disemak dalam pelayar ini: tandatangan manifes dan SHA-256 setiap fail. Tidak disemak di sini: rantaian peristiwa dalam events.jsonl, cap masa RFC 3161, OpenTimestamps, rekod Witness dan Intel TDX; verify.py menyemaknya."
 }

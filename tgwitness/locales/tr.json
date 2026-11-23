@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parametreler: mesaj numaralarında listelenen en küçük aralık {smallest}'dir; her numaralandırma için en fazla {listed} aralık listelenir.",
   "ranges: {n}": "aralıklar: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "Gözlemlenmemiş kimlikler: {ids}. Aralıklar: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "bazı özel sohbetlerin, botların veya normal grupların geçmişi sonuna kadar okunmamıştır"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "bazı özel sohbetlerin, botların veya normal grupların geçmişi sonuna kadar okunmamıştır",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Göndericiden alınan anahtar parmak izi (SHA-256, 64 onaltılık karakter)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Dosyaları denetlemek için isteğe bağlıdır; onları hangi anahtarın imzaladığını doğrulamak için gereklidir. Parmak izini göndericiden arşivden ayrı olarak, örneğin telefonla veya yüz yüze alın.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Bir anahtar parmak izi 64 onaltılık karakterden oluşur (SHA-256). Boşluklar, iki nokta üst üste ve tireler yok sayılır.",
+  "Key fingerprint in the archive: {fp}": "Arşivdeki anahtarın parmak izi: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Arşiv, göndericinin verdiği parmak izine ait anahtardan farklı bir anahtarla imzalanmış.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "{n} dosyanın tamamı imzalı manifestle eşleşiyor ve manifestin anahtarı göndericiden alınan parmak iziyle eşleşiyor.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "{n} dosyanın tamamı arşivdeki imzalı manifestle eşleşiyor, ancak anahtar göndericiden alınan bir parmak iziyle karşılaştırılmadı.",
+  "Fingerprint from the sender: {fp}": "Göndericiden alınan parmak izi: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Anahtar, girdiğiniz parmak iziyle eşleşiyor: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Göndericiden aldığınız parmak izini yukarıya yapıştırın veya arşivi bağımsız bir doğrulayıcıyla denetleyin.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Bu tarayıcıda denetlenenler: manifestin imzası ve her dosyanın SHA-256 değeri. Burada denetlenmeyenler: events.jsonl içindeki olay zinciri, RFC 3161 zaman damgaları, OpenTimestamps, Witness kayıtları ve Intel TDX; bunları verify.py denetler."
 }

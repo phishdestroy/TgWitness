@@ -10975,5 +10975,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parameter: Die kleinste aufgeführte Lücke in den Nachrichtennummern ist {smallest}; für jede Nummerierung werden höchstens {listed} Lücken aufgeführt.",
   "ranges: {n}": "Bereiche: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "Nicht beobachtete IDs: {ids}. Bereiche: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "Der Verlauf einiger privater Chats, Bots oder gewöhnlicher Gruppen wurde nicht bis zum Ende gelesen"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "Der Verlauf einiger privater Chats, Bots oder gewöhnlicher Gruppen wurde nicht bis zum Ende gelesen",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Schlüssel-Fingerabdruck vom Absender (SHA-256, 64 Hexadezimalzeichen)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Für die Prüfung der Dateien nicht nötig, aber erforderlich, um zu bestätigen, wessen Schlüssel sie signiert hat. Lassen Sie ihn sich vom Absender getrennt vom Archiv geben, etwa telefonisch oder persönlich.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Ein Schlüssel-Fingerabdruck besteht aus 64 Hexadezimalzeichen (SHA-256). Leerzeichen, Doppelpunkte und Bindestriche werden ignoriert.",
+  "Key fingerprint in the archive: {fp}": "Schlüssel-Fingerabdruck im Archiv: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "Das Archiv ist mit einem anderen Schlüssel signiert als dem, dessen Fingerabdruck der Absender angegeben hat.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Alle {n} Dateien stimmen mit dem signierten Manifest überein, und sein Schlüssel stimmt mit dem Fingerabdruck des Absenders überein.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Alle {n} Dateien stimmen mit dem signierten Manifest im Archiv überein, aber der Schlüssel wurde nicht mit einem Fingerabdruck des Absenders abgeglichen.",
+  "Fingerprint from the sender: {fp}": "Fingerabdruck vom Absender: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "Der Schlüssel stimmt mit dem eingegebenen Fingerabdruck überein: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Fügen Sie oben den Fingerabdruck des Absenders ein oder prüfen Sie das Archiv mit einem unabhängigen Prüfprogramm.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "In diesem Browser geprüft: die Signatur des Manifests und der SHA-256-Wert jeder Datei. Hier nicht geprüft: die Ereigniskette in events.jsonl, RFC-3161-Zeitstempel, OpenTimestamps, Witness-Einträge und Intel TDX; diese prüft verify.py."
 }

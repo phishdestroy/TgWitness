@@ -10985,5 +10985,16 @@
   "Parameters: the smallest listed gap in message numbers is {smallest}; at most {listed} gaps are listed for each numbering.": "Parâmetros: a menor diferença listada nos números das mensagens é {smallest}; no máximo, {listed} diferenças são listadas para cada numeração.",
   "ranges: {n}": "intervalos: {n}",
   "Unobserved IDs: {ids}. Ranges: {ranges}.": "IDs não observados: {ids}. Intervalos: {ranges}.",
-  "the history of some private chats, bots or ordinary groups was not read to the end": "o histórico de alguns chats privados, bots ou grupos comuns não foi lido até o fim"
+  "the history of some private chats, bots or ordinary groups was not read to the end": "o histórico de alguns chats privados, bots ou grupos comuns não foi lido até o fim",
+  "Key fingerprint from the sender (SHA-256, 64 hexadecimal characters)": "Impressão digital da chave enviada pelo remetente (SHA-256, 64 caracteres hexadecimais)",
+  "Optional for checking the files; needed to confirm whose key signed them. Get it from the sender separately from the archive, for example by phone or in person.": "Opcional para verificar os arquivos; necessária para confirmar qual chave os assinou. Obtenha-a com o remetente separadamente do arquivo compactado, por exemplo por telefone ou pessoalmente.",
+  "A key fingerprint is 64 hexadecimal characters (SHA-256). Spaces, colons and dashes are ignored.": "Uma impressão digital de chave tem 64 caracteres hexadecimais (SHA-256). Espaços, dois-pontos e hifens são ignorados.",
+  "Key fingerprint in the archive: {fp}": "Impressão digital da chave no arquivo compactado: {fp}",
+  "The archive is signed by a different key than the fingerprint from the sender.": "O arquivo compactado está assinado com uma chave diferente daquela cuja impressão digital o remetente informou.",
+  "All {n} files match the signed manifest, and its key matches the fingerprint from the sender.": "Todos os {n} arquivos correspondem ao manifesto assinado, e a chave dele corresponde à impressão digital do remetente.",
+  "All {n} files match the signed manifest inside the archive, but the key has not been compared with a fingerprint from the sender.": "Todos os {n} arquivos correspondem ao manifesto assinado contido no arquivo compactado, mas a chave não foi comparada com uma impressão digital do remetente.",
+  "Fingerprint from the sender: {fp}": "Impressão digital do remetente: {fp}",
+  "The key matches the fingerprint you entered: {fp}": "A chave corresponde à impressão digital informada: {fp}",
+  "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Cole acima a impressão digital do remetente ou verifique o arquivo compactado com um verificador independente.",
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Verificado neste navegador: a assinatura do manifesto e o SHA-256 de cada arquivo. Não verificado aqui: a cadeia de eventos em events.jsonl, os carimbos de tempo RFC 3161, o OpenTimestamps, os registros Witness e o Intel TDX; o verify.py os verifica."
 }
