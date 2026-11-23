@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
+from starlette.background import BackgroundTask
 
 from . import __version__
 from .adapters import BrowserCapture, sqlite_snapshot
@@ -488,9 +489,12 @@ def create_app(root, config=None):
             try:
                 await asyncio.to_thread(export_zip, recorder.journal, destination)
             except ExportLimit as exc:
+                destination.unlink(missing_ok=True)
                 raise HTTPException(409, str(exc)) from None
             except Exception:
+                destination.unlink(missing_ok=True)
                 raise HTTPException(503, "Export verification failed; no package was released") from None
-            return FileResponse(destination, media_type="application/zip", filename="capture-" + config.kind + ".zip")
+            return FileResponse(destination, media_type="application/zip", filename="capture-" + config.kind + ".zip",
+                                background=BackgroundTask(destination.unlink, missing_ok=True))
 
     return app

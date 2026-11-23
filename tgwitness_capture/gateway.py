@@ -10,6 +10,13 @@ import socketserver
 from pathlib import Path
 from urllib.parse import urlsplit
 
+# Same ranges as tgwitness/topology.py; this module stays standard-library only.
+TELEGRAM_NETWORKS = tuple(ipaddress.ip_network(value) for value in (
+    "91.105.192.0/23", "91.108.4.0/22", "91.108.8.0/22", "91.108.12.0/22", "91.108.16.0/22", "91.108.20.0/22",
+    "91.108.56.0/22", "95.161.64.0/20", "149.154.160.0/20", "185.76.151.0/24",
+    "2001:67c:4e8::/48", "2001:b28:f23c::/47", "2001:b28:f23f::/48", "2a0a:f280::/32"))
+NAT64 = ipaddress.ip_network("64:ff9b::/96")
+
 
 def configuration(raw):
     if not isinstance(raw, dict) or set(raw) - {"server", "username", "password"}:
@@ -35,16 +42,23 @@ def destination(authority):
         raise ValueError("Only HTTPS connections are permitted")
     host = parsed.hostname.lower()
     try:
-        if not ipaddress.ip_address(host).is_global:
-            raise ValueError("Private destination is prohibited")
-    except ValueError as exc:
-        if ":" in host or re.fullmatch(r"[0-9.]+", host):
-            raise ValueError("Invalid or private destination") from exc
-        if not (host in {"www.cloudflare.com", "api.cloudflare.com", "api.drand.sh"}
-                or host == "telegram.org" or host.endswith(".telegram.org")
-                or host == "t.me" or host.endswith(".t.me")
-                or host.endswith(".telegram-cdn.org")):
-            raise ValueError("Destination is outside the official-client allowlist") from None
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        ip = None
+    if ip is not None:
+        if ip.version == 6:
+            ip = ip.ipv4_mapped or ip.sixtofour or (
+                ipaddress.IPv4Address(int(ip) & 0xFFFFFFFF) if ip in NAT64 else None) or ip
+        if not any(ip in network for network in TELEGRAM_NETWORKS):
+            raise ValueError("Address destinations are limited to Telegram data centres")
+        return host, 443
+    if ":" in host or re.fullmatch(r"[0-9.]+", host):
+        raise ValueError("Invalid destination")
+    if not (host in {"www.cloudflare.com", "api.cloudflare.com", "api.drand.sh"}
+            or host == "telegram.org" or host.endswith(".telegram.org")
+            or host == "t.me" or host.endswith(".t.me")
+            or host.endswith(".telegram-cdn.org")):
+        raise ValueError("Destination is outside the official-client allowlist")
     return host, 443
 
 

@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 67e6cd46f8a9aad0c20ed29ed85b71fbd0444539a3feabfd1bc6688ce82eee81
+# TgWitness verifier sources SHA-256: 2908d90aced9ab56febb534dd986e590d1d747fda82c9021bf080da7fdb2f2ea
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -1247,11 +1247,15 @@ QC_STATEMENTS, QC_COMPLIANCE = "1.3.6.1.5.5.7.1.3", bytes.fromhex("0604008e46010
 
 
 def der(data, offset):
+    if offset < 0 or offset + 2 > len(data):
+        raise ValueError("Truncated DER")
     tag, length, start = data[offset], data[offset + 1], offset + 2
     if length & 0x80:
         count = length & 0x7F
         if not 1 <= count <= 4:
             raise ValueError("Unsupported DER length")
+        if start + count > len(data):
+            raise ValueError("Truncated DER")
         length, start = int.from_bytes(data[start:start + count], "big"), start + count
     if start + length > len(data):
         raise ValueError("Truncated DER")

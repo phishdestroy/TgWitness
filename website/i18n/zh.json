@@ -8440,7 +8440,8 @@
   "72f2aab16be313fe60abc2c40e0717db565f86d6f652bdb50af38b832f527af7": "<code>python -m tgwitness.documentation_verify --reveal</code> 会把打开的密封记录写入一个无论 umask 如何都只有所有者可读的文件。",
   "68c813c6b65f1f83ad709ba2e3fa09ac4f5daefa8059c2a0b19cd664e5a9a3fc": "从命令行读取只读数据目录（例如写保护介质上的副本）时，会通过日志及其 WAL 文件的私有临时副本进行读取，而不是因错误跟踪而停止。",
   "cc5b8cad6644555a9cd65aede99301bbdcf0aa2979ec9a92fb720a2bd5520b53": "在只读数据目录上启动面板时，会说明这一点并指向只读命令行，而不是以权限错误跟踪结束。",
-  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "在只读数据目录上运行 <code>tgwitness index rebuild</code> 时，会说明该文件夹为只读并以代码 2 退出，而不是输出锁文件的权限错误。"
+  "55ca2bd07ebb21340488a1db31c67da53cdb4f5ae1ac0adcf8c7b4f4ee02e983": "在只读数据目录上运行 <code>tgwitness index rebuild</code> 时，会说明该文件夹为只读并以代码 2 退出，而不是输出锁文件的权限错误。",
+  "3106a1f5778e6d8a4ad3ee7bc0285cf033c3ba8b1dd065873d39856247bc4375": "根据外部代码审计进行的安全与可靠性修复：官方客户端网关只连接 Telegram 数据中心内的 IP 地址；超过 512 KiB 的上传在适用其大小上限之前需要有效的面板凭据；被截断的时间戳不再导致 <code>verify</code> 中止；Mini App 捕获只打开 http 和 https 页面，并启用站点隔离；秘密聊天查询不再占用日志的写锁；捕获导出在下载后删除。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

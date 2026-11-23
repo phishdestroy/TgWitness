@@ -86,7 +86,7 @@ class RequestSecurity:
         if not any(address in net for net in self.trusted):
             return False
         values = [value for name, value in scope.get("headers", []) if name.lower() == b"x-forwarded-proto"]
-        return values == [b"https"]
+        return len(values) == 1 and values[0].strip().lower() == b"https"
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http" or scope.get("tgwitness.request_checked"):

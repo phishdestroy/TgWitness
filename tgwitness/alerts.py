@@ -277,7 +277,15 @@ def _install_guard():
     def smtp(original):
         def get_socket(self, host, port, timeout):
             addresses = _checked(host, port)
-            return original(self, addresses[0] if addresses else host, port, timeout)
+            if not addresses:
+                return original(self, host, port, timeout)
+            failure = OSError("No address for " + str(host))
+            for checked in addresses:
+                try:
+                    return original(self, checked, port, timeout)
+                except OSError as exc:
+                    failure = exc
+            raise failure
         return get_socket
     smtplib.SMTP._get_socket = smtp(smtplib.SMTP._get_socket)
     smtplib.SMTP_SSL._get_socket = smtp(smtplib.SMTP_SSL._get_socket)
