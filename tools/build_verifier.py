@@ -206,10 +206,11 @@ def build_unix(args):
         with tarfile.open(runtime) as archive:
             archive.extractall(stage, filter="data")
         python = stage / "python/bin/python3"
-        quiet = ["--disable-pip-version-check", "--no-warn-script-location"]
-        subprocess.run([str(python), "-I", "-m", "pip", "install", *quiet, "--only-binary=:all:", "--no-compile",
+        subprocess.run([str(python), "-I", "-m", "pip", "install", "--disable-pip-version-check",
+                        "--no-warn-script-location", "--only-binary=:all:", "--no-compile",
                         "--require-hashes", "-r", str(ROOT / "deploy/installer.lock")], check=True)
-        subprocess.run([str(python), "-I", "-m", "pip", "uninstall", "--yes", *quiet, "pip"], check=True)
+        subprocess.run([str(python), "-I", "-m", "pip", "uninstall", "--yes", "--disable-pip-version-check", "pip"],
+                       check=True)
         flatten_links(stage)
         shutil.copyfile(ROOT / "tgwitness/verify.py", stage / "verify.py")
         subprocess.run([str(python), "-I", "-B", "-X", "utf8", "-c",
