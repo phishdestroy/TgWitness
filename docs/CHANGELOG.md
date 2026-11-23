@@ -26,6 +26,7 @@
 
 ## Unreleased
 
+- The browser verifier page is readable in the dark theme, its language links and command block work with keyboard and screen readers, and long values in its result no longer widen the page on phones.
 - A browser page at `verify/` on the project site checks an evidence archive without installing anything: the manifest signature, the key fingerprint from the sender, the SHA-256 of every file, an ASiC-E container and the signed event chain, with nothing uploaded and nothing inside the archive trusted. It lists what it does not check and points to `verify.py` for the rest.
 - The archive check in the report viewer wraps the long key fingerprints of its verdict on phones instead of widening the page.
 - The Check tab of a report takes the key fingerprint from the sender: a different fingerprint turns the archive check red and shows both fingerprints; files that match without a fingerprint from the sender stay yellow instead of green; the result says that the event chain, time stamps, witness records and Intel TDX are left to `verify.py`.

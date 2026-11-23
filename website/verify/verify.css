@@ -1,10 +1,10 @@
-:root{color-scheme:light dark;--bg:#f6f7f9;--card:#fff;--ink:#14171c;--muted:#5b6472;--line:#d9dee6;--accent:#1f6feb;
+:root{color-scheme:light dark;--bg:#f6f7f9;--card:#fff;--ink:#14171c;--muted:#5b6472;--line:#d9dee6;--accent:#1f6feb;--link:#0a58ca;--on:#fff;
   --ok:#14713c;--ok-bg:#e8f6ee;--warn:#8a5a00;--warn-bg:#fff6e0;--bad:#b42318;--bad-bg:#fdecea}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a21;--ink:#e8ebf0;--muted:#a2abb8;--line:#2b313c;--accent:#58a6ff;
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a21;--ink:#e8ebf0;--muted:#a2abb8;--line:#2b313c;--accent:#58a6ff;--link:#58a6ff;--on:#0b1220;
   --ok:#4fd18b;--ok-bg:#12291d;--warn:#f2c14e;--warn-bg:#2d2412;--bad:#ff7b72;--bad-bg:#331716}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
-a{color:var(--accent)}
+a{color:var(--link)}
 code,pre,input#vf-fp,.vf-facts dd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
 .vf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;max-width:920px;margin:0 auto;padding:18px 20px 0}
 .vf-brand{font-weight:800;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
@@ -16,7 +16,7 @@ h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:18px 0 10px;letter-spa
 .vf-step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 16px}
 .vf-step h2{font-size:19px;margin:0 0 8px;display:flex;align-items:center;gap:10px}
 .vf-step h2+ul,.vf-step ul{margin:6px 0 12px;padding-inline-start:22px}
-.vf-number{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;flex:none}
+.vf-number{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on);font-size:14px;flex:none}
 label{display:block;font-weight:650;margin:10px 0 6px}
 input#vf-fp{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:14px}
 .vf-error{color:var(--bad);font-weight:600;margin:6px 0 0}.vf-error:empty{display:none}
@@ -24,7 +24,7 @@ input#vf-fp{width:100%;padding:11px 13px;border:1px solid var(--line);border-rad
 .vf-drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .vf-drop.busy{opacity:.6}
 .vf-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0 0}
-button{font:inherit;font-weight:650;padding:10px 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button{font:inherit;font-weight:650;padding:10px 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--on);cursor:pointer}
 button.secondary{background:transparent;color:var(--accent)}
 button:disabled{opacity:.5;cursor:default}
 .vf-status{margin:14px 0 0}.vf-status progress{width:100%;height:10px}
@@ -39,9 +39,9 @@ button:disabled{opacity:.5;cursor:default}
 .vf-checks{list-style:none;margin:0;padding:0}
 .vf-checks>li{display:flex;gap:10px;margin:0 0 10px}
 .vf-checks ul{margin:4px 0 0;padding-inline-start:18px;font-size:14px;overflow-wrap:anywhere}
-.vf-icon{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:800;margin-top:2px}
+.vf-icon{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;color:var(--on);font-size:13px;font-weight:800;margin-top:2px}
 .vf-checks .ok .vf-icon{background:var(--ok)}.vf-checks .warn .vf-icon{background:var(--warn)}.vf-checks .bad .vf-icon{background:var(--bad)}
-.vf-facts{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:12px 0;font-size:14px}
-.vf-facts dt{color:var(--muted)}.vf-facts dd{margin:0;overflow-wrap:anywhere}
+.vf-facts{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:4px 14px;margin:12px 0;font-size:14px}
+.vf-facts dt{color:var(--muted);overflow-wrap:anywhere}.vf-facts dd{margin:0;overflow-wrap:anywhere}
 .vf-limits,.vf-when{font-size:13px;color:var(--muted);margin:8px 0 0}
 pre{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow:auto}
