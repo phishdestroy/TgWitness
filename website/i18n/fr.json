@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Encadré n° {n} : « {name} » ({pct} de l’annexe 1). L’avocat a masqué 1 944 lignes de ce type à l’aide de rectangles noirs.",
   "Fair draw #{n} · 50 boxes": "Tirage au sort n° {n} · 50 cases",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Tirages au sort de 50 cases : {draws} · meilleur résultat : {best} sur 50",
-  "Draws of 50 boxes: 0 · best result: —": "Tirages de 50 cases : 0 · meilleur résultat : —"
+  "Draws of 50 boxes: 0 · best result: —": "Tirages de 50 cases : 0 · meilleur résultat : —",
+  "Taken on trust": "Pris pour argent comptant",
+  "What the file shows": "Ce que révèle le dossier",
+  "With the model": "Avec ce modèle"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Vous souhaitez simplement découvrir l&#x27;outil ? Double-cliquez sur <code>scripts\\Demo.cmd</code> pour accéder à une démo isolée. Aucune connexion à Telegram n&#x27;est nécessaire.",

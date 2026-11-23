@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Hộp số {n}: “{name}” (tương đương {pct}% của Phụ lục 1). Luật sư đã che đi 1.944 hàng như thế này bằng các hình chữ nhật màu đen.",
   "Fair draw #{n} · 50 boxes": "Lễ bốc thăm công bằng #{n} · 50 ô",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Kết quả rút thăm từ 50 ô: {draws} · kết quả tốt nhất: {best} trong số 50",
-  "Draws of 50 boxes: 0 · best result: —": "Kết quả rút thăm 50 ô: 0 · kết quả tốt nhất: —"
+  "Draws of 50 boxes: 0 · best result: —": "Kết quả rút thăm 50 ô: 0 · kết quả tốt nhất: —",
+  "Taken on trust": "Dựa trên sự tin tưởng",
+  "What the file shows": "Nội dung của tệp cho thấy",
+  "With the model": "Với mô hình"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chỉ đang tìm hiểu sơ qua? Vui lòng nhấp đúp vào <code>scripts\\Demo.cmd</code> để trải nghiệm bản demo độc lập. Không cần đăng nhập Telegram.",

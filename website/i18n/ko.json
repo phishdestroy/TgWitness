@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "박스 #{n}: “{name}”(부록 1의 {pct}). 변호인은 이와 같은 1,944개의 행을 검은색 사각형으로 가렸다.",
   "Fair draw #{n} · 50 boxes": "공정한 추첨 #{n} · 50개 박스",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50개의 상자 추첨: {draws} · 최우수 결과: 50개 중 {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50개의 상자에서 추출한 결과: 0 · 최상의 결과: —"
+  "Draws of 50 boxes: 0 · best result: —": "50개의 상자에서 추출한 결과: 0 · 최상의 결과: —",
+  "Taken on trust": "믿음을 바탕으로",
+  "What the file shows": "파일에 나타난 내용",
+  "With the model": "이 모델을 통해"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "그냥 둘러보고 계신가요? <code>scripts\\Demo.cmd</code>를 더블 클릭하면 독립형 데모를 체험할 수 있습니다. 텔레그램 로그인은 필요하지 않습니다.",

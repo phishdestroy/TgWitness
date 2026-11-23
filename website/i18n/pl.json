@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Ramka nr {n}: „{name}” ({pct} z załącznika 1). Pełnomocnik umieścił 1 944 wiersze tego typu pod czarnymi prostokątami.",
   "Fair draw #{n} · 50 boxes": "Losowanie nr {n} · 50 pól",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Losowanie 50 pól: {draws} · najlepszy wynik: {best} z 50",
-  "Draws of 50 boxes: 0 · best result: —": "Losowanie 50 pól: 0 · najlepszy wynik: —"
+  "Draws of 50 boxes: 0 · best result: —": "Losowanie 50 pól: 0 · najlepszy wynik: —",
+  "Taken on trust": "Na zaufaniu",
+  "What the file shows": "Co wynika z tego pliku",
+  "With the model": "W modelu"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chce Pan/Pani tylko zapoznać się z serwisem? Proszę dwukrotnie kliknąć <code>scripts\\Demo.cmd</code>, aby uruchomić izolowaną wersję demonstracyjną. Nie jest wymagane logowanie do serwisu Telegram.",

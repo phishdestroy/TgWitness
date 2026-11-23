@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Kutu #{n}: “{name}” (Ek 1’in {pct}’si). Avukat, siyah dikdörtgenlerin altına bu şekilde 1.944 satır yerleştirdi.",
   "Fair draw #{n} · 50 boxes": "Adil çekiliş #{n} · 50 kutu",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 kutudan oluşan çekilişler: {draws} · en iyi sonuç: 50'den {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50 kutunun çekilişi: 0 · en iyi sonuç: —"
+  "Draws of 50 boxes: 0 · best result: —": "50 kutunun çekilişi: 0 · en iyi sonuç: —",
+  "Taken on trust": "Güven üzerine",
+  "What the file shows": "Dosyada neler yer alıyor?",
+  "With the model": "Model ile"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sadece göz atıyor musunuz? <code>scripts\\Demo.cmd</code>&#x27;ye çift tıklayarak izole bir demoyu deneyin. Telegram ile giriş yapmanıza gerek yoktur.",

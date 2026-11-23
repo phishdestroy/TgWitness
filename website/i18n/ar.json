@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "المربع رقم {n}: «{name}» ({pct} من الملحق 1). وضع المحامي 1,944 صفًا مثل هذا تحت مستطيلات سوداء.",
   "Fair draw #{n} · 50 boxes": "السحب العادل رقم {n} · 50 صندوقًا",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 عملية سحب: {draws} · أفضل نتيجة: {best} من أصل 50",
-  "Draws of 50 boxes: 0 · best result: —": "سحب 50 صندوقًا: 0 · أفضل نتيجة: —"
+  "Draws of 50 boxes: 0 · best result: —": "سحب 50 صندوقًا: 0 · أفضل نتيجة: —",
+  "Taken on trust": "مأخوذ على أساس الثقة",
+  "What the file shows": "ما يظهر في الملف",
+  "With the model": "باستخدام النموذج"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "هل تريد الاستكشاف فقط؟ انقر نقرًا مزدوجًا على <code>scripts\\Demo.cmd</code> للحصول على نسخة تجريبية منفصلة. لا حاجة لتسجيل الدخول إلى Telegram.",

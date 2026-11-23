@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "ボックス#{n}：「{name}」（Anlage 1の{pct}）。弁護人は、このような1,944行を黒い四角で隠しました。",
   "Fair draw #{n} · 50 boxes": "フェア・ドロー #{n} · 50ボックス",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50個のボックスの抽選結果：{draws} · 最良の結果：50個中{best}",
-  "Draws of 50 boxes: 0 · best result: —": "50個のボックスの抽選結果：0 · 最高の結果：—"
+  "Draws of 50 boxes: 0 · best result: —": "50個のボックスの抽選結果：0 · 最高の結果：—",
+  "Taken on trust": "信頼して受け入れた",
+  "What the file shows": "そのファイルには何が示されているか",
+  "With the model": "このモデルを用いて"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "まずは試してみたいですか？「<code>scripts\\Demo.cmd</code>」をダブルクリックすると、独立したデモ環境をご利用いただけます。Telegramへのログインは不要です。",

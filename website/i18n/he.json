@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "תיבה מס' {n}: \"{name}\" ({pct} של נספח 1). עורכי הדין כיסו 1,944 שורות מסוג זה במלבנים שחורים.",
   "Fair draw #{n} · 50 boxes": "הגרלה הוגנת מס' {n} · 50 תיבות",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 ניסיונות: {draws} · התוצאה הטובה ביותר: {best} מתוך 50",
-  "Draws of 50 boxes: 0 · best result: —": "הגרלות של 50 תיבות: 0 · התוצאה הטובה ביותר: —"
+  "Draws of 50 boxes: 0 · best result: —": "הגרלות של 50 תיבות: 0 · התוצאה הטובה ביותר: —",
+  "Taken on trust": "נלקח על סמך אמון",
+  "What the file shows": "מה מופיע בקובץ",
+  "With the model": "בעזרת המודל"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "רק סקרנים? לחצו פעמיים על <code>scripts\\Demo.cmd</code> כדי לצפות בהדגמה מבודדת. אין צורך להתחבר ל-Telegram.",

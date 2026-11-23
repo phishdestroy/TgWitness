@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "جعبه شماره {n}: «{name}» ({pct} از Anlage 1). وکیل زیر مستطیل‌های سیاه، 1٬944 سطر مشابه این را قرار داد.",
   "Fair draw #{n} · 50 boxes": "قرعه‌کشی منصفانه شماره {n} · 50 جعبه",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "نمودار 50 جعبه: {draws} · بهترین نتیجه: {best} از 50",
-  "Draws of 50 boxes: 0 · best result: —": "نمودار 50 کادر: 0 · بهترین نتیجه: —"
+  "Draws of 50 boxes: 0 · best result: —": "نمودار 50 کادر: 0 · بهترین نتیجه: —",
+  "Taken on trust": "با اعتماد پذیرفته شده",
+  "What the file shows": "آنچه فایل نشان می‌دهد",
+  "With the model": "با مدل"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "فقط در حال کاوش هستید؟ برای یک دمو جداگانه روی <code>scripts\\Demo.cmd</code> دوبار کلیک کنید. نیازی به ورود به تلگرام نیست.",

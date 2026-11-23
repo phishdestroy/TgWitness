@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "বক্স #{n}: \"{name}\" (Anlage 1-এর {pct})। আইনজীবী কালো আয়তক্ষেত্রের নিচে এ ধরনের 1,944টি সারি রেখেছিলেন।",
   "Fair draw #{n} · 50 boxes": "ফেয়ার ড্র #{n} · 50টি বাক্স",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50টি বাক্সের ড্র: {draws} · সেরা ফলাফল: 50টির মধ্যে {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50টি বাক্সের ড্র: 0 · সেরা ফলাফল: —"
+  "Draws of 50 boxes: 0 · best result: —": "50টি বাক্সের ড্র: 0 · সেরা ফলাফল: —",
+  "Taken on trust": "বিশ্বাসের ওপর নেওয়া",
+  "What the file shows": "ফাইলটি যা দেখায়",
+  "With the model": "মডেলের সাথে"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "শুধুমাত্র অন্বেষণ করছেন? একটি বিচ্ছিন্ন ডেমোর জন্য <code>scripts\\Demo.cmd</code>-এ ডাবল-ক্লিক করুন। টেলিগ্রাম লগইন প্রয়োজন নেই।",

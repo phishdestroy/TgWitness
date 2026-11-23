@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Caixa nº {n}: “{name}” ({pct} do Anexo 1). Os advogados ocultaram 1.944 linhas como esta sob retângulos pretos.",
   "Fair draw #{n} · 50 boxes": "Sorteio justo nº {n} · 50 caixas",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Sorteios de 50 caixas: {draws} · melhor resultado: {best} de 50",
-  "Draws of 50 boxes: 0 · best result: —": "Sorteios de 50 caixas: 0 · melhor resultado: —"
+  "Draws of 50 boxes: 0 · best result: —": "Sorteios de 50 caixas: 0 · melhor resultado: —",
+  "Taken on trust": "Aceito com confiança",
+  "What the file shows": "O que o arquivo mostra",
+  "With the model": "Com o modelo"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Está apenas explorando? Clique duas vezes em <code>scripts\\Demo.cmd</code> para acessar uma demonstração isolada. Não é necessário fazer login no Telegram.",

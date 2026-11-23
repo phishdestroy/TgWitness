@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Quti #{n}: \"{name}\" (Anlage 1 ning {pct}i). Advokat qora to'g'ri burchak ichida shunga o'xshash 1 944 qatorni joylashtirdi.",
   "Fair draw #{n} · 50 boxes": "Adolatli tortish #{n} · 50 ta quti",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 ta qutining tortishlari: {draws} · eng yaxshi natija: 50 tadan {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50 ta qutining chizmalari: 0 · eng yaxshi natija: —"
+  "Draws of 50 boxes: 0 · best result: —": "50 ta qutining chizmalari: 0 · eng yaxshi natija: —",
+  "Taken on trust": "Ishonch asosida olingan",
+  "What the file shows": "Fayl nimani ko'rsatadi",
+  "With the model": "Modelli bilan"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Faqatgina o&#x27;rganmoqchimisiz? Ajratilgan demo uchun <code>scripts\\Demo.cmd</code> ustiga ikki marta bosing. Telegramga kirish shart emas.",
