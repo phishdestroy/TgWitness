@@ -1,6 +1,6 @@
 import getpass
 
-from .common import Path, os, shutil, tempfile
+from .common import Path, os, tempfile
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
@@ -81,38 +81,41 @@ def encrypt_password_file(source, destination, password, inner_name=None):
 
 def decrypt_password_file(source, destination, password):
     source, destination = Path(source), Path(destination)
-    with source.open("rb") as encrypted, tempfile.TemporaryFile(dir=destination.parent) as plain:
-        if _pw_read(encrypted, len(PW_MAGIC)) != PW_MAGIC:
-            raise ValueError("Not a TgWitness password-encrypted file")
-        salt, prefix = _pw_read(encrypted, 16), _pw_read(encrypted, 8)
-        cipher = AESGCM(_pw_key(password, salt))
-        name = cipher.decrypt(_pw_nonce(prefix, 0), _pw_record(encrypted, PW_NAME_LIMIT), PW_CONTEXT + b"name")
-        try:
-            _pw_name(name.decode("utf-8"))
-        except UnicodeDecodeError as exc:
-            raise ValueError("Invalid encrypted filename") from exc
-        counter = 1
-        while True:
-            record = _pw_record(encrypted, PW_CHUNK)
-            last = len(record) < PW_CHUNK + 16
-            aad = PW_CONTEXT + name + (b"|last" if last else b"|more")
-            data = cipher.decrypt(_pw_nonce(prefix, counter), record, aad)
-            plain.write(data)
-            if last:
-                if encrypted.read(1):
-                    raise ValueError("Trailing data after password-encrypted content")
-                break
-            counter += 1
-        plain.seek(0)
-        created = False
-        try:
-            with _pw_output(destination) as output:
-                created = True
-                shutil.copyfileobj(plain, output, PW_CHUNK)
-        except BaseException:
-            if created:
-                destination.unlink(missing_ok=True)
-            raise
+    # Claim the name first, so an existing file is refused before any work. Plaintext goes to a private
+    # file beside it and replaces the claim only after every record has authenticated: one copy on disk.
+    _pw_output(destination).close()
+    temporary = None
+    try:
+        with source.open("rb") as encrypted:
+            if _pw_read(encrypted, len(PW_MAGIC)) != PW_MAGIC:
+                raise ValueError("Not a TgWitness password-encrypted file")
+            salt, prefix = _pw_read(encrypted, 16), _pw_read(encrypted, 8)
+            cipher = AESGCM(_pw_key(password, salt))
+            name = cipher.decrypt(_pw_nonce(prefix, 0), _pw_record(encrypted, PW_NAME_LIMIT), PW_CONTEXT + b"name")
+            try:
+                _pw_name(name.decode("utf-8"))
+            except UnicodeDecodeError as exc:
+                raise ValueError("Invalid encrypted filename") from exc
+            handle, temporary = tempfile.mkstemp(dir=destination.parent, prefix=".tgwitness-", suffix=".part")
+            with os.fdopen(handle, "wb") as plain:
+                counter = 1
+                while True:
+                    record = _pw_record(encrypted, PW_CHUNK)
+                    last = len(record) < PW_CHUNK + 16
+                    aad = PW_CONTEXT + name + (b"|last" if last else b"|more")
+                    plain.write(cipher.decrypt(_pw_nonce(prefix, counter), record, aad))
+                    if last:
+                        if encrypted.read(1):
+                            raise ValueError("Trailing data after password-encrypted content")
+                        break
+                    counter += 1
+        os.replace(temporary, destination)
+        temporary = None
+    except BaseException:
+        if temporary is not None:
+            Path(temporary).unlink(missing_ok=True)
+        destination.unlink(missing_ok=True)
+        raise
     return destination
 
 

@@ -121,33 +121,44 @@ async def pump(store, vault, network, workspace):
                 break
             data["pending"] += [queued(hook, envelope(event, workspace, hook)) for hook in targets]
             data["cursor"] = event["seq"]
-        store.set_setting("webhook_delivery", data)
         destinations = {h["id"]: h for h in hooks}
-        due = [job for job in data["pending"] if job["next_attempt"] <= time.time()][:5]
-        for job in due:
+        due = []
+        for job in [job for job in data["pending"] if job["next_attempt"] <= time.time()][:5]:
             hook = destinations.get(job["destination"])
             if not hook:
                 data["pending"].remove(job)
                 continue
+            # The attempt is counted before sending, so a crash mid-delivery still backs off.
             job["attempts"] += 1
             job["next_attempt"] = time.time() + min(3600, 15 * 2 ** (job["attempts"] - 1))
-            store.set_setting("webhook_delivery", data)
-            error = None
-            try:
-                await send(hook, job["payload"], network)
-            except Exception as exc:
-                error = str(exc)[:300] if isinstance(exc, netclient.RouteError) else type(exc).__name__
-                if isinstance(exc, netclient.HTTPError):
-                    error = "HTTP " + str(exc.status)
+            due.append((hook, dict(job)))
+        store.set_setting("webhook_delivery", data)
+    # Deliveries run outside the lock: a slow receiver must not block editing or removing destinations.
+    results = []
+    for hook, job in due:
+        error = None
+        try:
+            await send(hook, job["payload"], network)
+        except Exception as exc:
+            error = str(exc)[:300] if isinstance(exc, netclient.RouteError) else type(exc).__name__
+            if isinstance(exc, netclient.HTTPError):
+                error = "HTTP " + str(exc.status)
+        results.append((job, error))
+    if not results:
+        return
+    async with lock(store):
+        data = state(store)
+        for job, error in results:
             final = error is None or job["attempts"] >= 8
             data["history"].append({"destination": job["destination"], "event_id": job["event_id"],
                 "timestamp": utcnow(), "attempt": job["attempts"], "status": "delivered" if error is None else
                 "exhausted" if final else "retrying", "error": error})
-            data["history"] = data["history"][-100:]
             data["last_error"] = error
             if final:
-                data["pending"].remove(job)
-            store.set_setting("webhook_delivery", data)
+                data["pending"] = [item for item in data["pending"] if not (
+                    item["destination"] == job["destination"] and item["event_id"] == job["event_id"])]
+        data["history"] = data["history"][-100:]
+        store.set_setting("webhook_delivery", data)
 
 
 async def enqueue_test(store, vault, workspace, ident):

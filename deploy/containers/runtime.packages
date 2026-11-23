@@ -1,2 +1,4 @@
 # Direct packages; resolve-packages.sh records the complete installed closure.
 python-3.12=3.12.16-r3
+# Chinese, Japanese and Korean glyphs for PDF reports (WenQuanYi Zen Hei, about 17 MB installed).
+font-wqy-zenhei=0.9.45-r7

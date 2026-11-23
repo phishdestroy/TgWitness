@@ -3842,7 +3842,13 @@ class Collector:
             self.reconnect_attempts, self.next_reconnect_at = 0, 0
             catch_up = getattr(self.client, "catch_up", None)
             if catch_up:
-                await catch_up()
+                try:
+                    await catch_up()
+                except Exception as exc:
+                    # The connection is back; a failed catch-up must not stop observation. The recheck below
+                    # re-reads recent history, and the gap is already recorded as coverage.gap.
+                    await self.failure(exc, "catch-up after reconnect", client=self.client,
+                                       details={"recovery": "recent history is rechecked"})
             self.recheck_wakeup.set()
 
     async def failure(self, exc, context, *, client=None, fatal=False, details=None):

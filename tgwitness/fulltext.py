@@ -14,7 +14,7 @@ from . import indicators, keyboard
 from .journal_index import TEXT_KINDS, search_text
 
 LOG = logging.getLogger("tgwitness.fulltext")
-VERSION = "fulltext-v2"
+VERSION = "fulltext-v3"
 SEARCH_KINDS = (*TEXT_KINDS, "secret_chat.message")
 MODES = ("disk", "memory", "off")
 SOURCES = ("messages", "ocr", "transcription")
@@ -78,10 +78,15 @@ def normalize(text):
 
 
 def unmix(word):
-    cyrillic, latin = len(CYRILLIC.findall(word)), len(LATIN.findall(word))
+    cyrillic, latin = CYRILLIC.findall(word), LATIN.findall(word)
     if not cyrillic or not latin:
         return word
-    return word.translate(TO_CYRILLIC if cyrillic >= latin else TO_LATIN)
+    # Only a disguise is folded: every letter of the minority script must be a lookalike. Genuinely mixed
+    # words such as "webсайта" or "githubовский" stay as written instead of turning into "wевсайта".
+    minority, lookalikes = (latin, LOOKALIKE_LATIN) if len(cyrillic) >= len(latin) else (cyrillic, LOOKALIKE_CYRILLIC)
+    if any(letter not in lookalikes for letter in minority):
+        return word
+    return word.translate(TO_CYRILLIC if len(cyrillic) >= len(latin) else TO_LATIN)
 
 
 @lru_cache(maxsize=None)
