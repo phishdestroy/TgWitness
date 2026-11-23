@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "第{n}号框：“{name}”（附件1的{pct}）。律师在黑色矩形下方列出了1,944行此类内容。",
   "Fair draw #{n} · 50 boxes": "公平抽签 #{n} · 50 个箱子",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50个方框的抽样结果：{draws} · 最佳结果：50个中的{best}",
-  "Draws of 50 boxes: 0 · best result: —": "50个方框的抽取结果：0 · 最佳结果：—"
+  "Draws of 50 boxes: 0 · best result: —": "50个方框的抽取结果：0 · 最佳结果：—",
+  "Taken on trust": "基于信任",
+  "What the file shows": "文件显示的内容",
+  "With the model": "使用该模型"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "只是想了解一下？双击 <code>scripts\\Demo.cmd</code> 即可体验独立演示。无需登录 Telegram。",

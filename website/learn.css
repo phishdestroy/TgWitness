@@ -969,6 +969,7 @@
 .signed-case .lb-quote { margin:16px 0; padding:14px 18px; background:var(--lb-surface); border:0; border-inline-start:3px solid var(--lb-border); border-radius:0 10px 10px 0; }
 .signed-case .lb-quote .de { font-style:italic; color:var(--lb-text); margin:0 0 6px; font-size:15px; }
 .signed-case .lb-quote .en { color:var(--lb-muted); font-size:14px; margin:0; }
+.signed-case p:empty { display:none; }
 .lb-table-wrap { margin:20px 0; overflow-x:auto; border:1px solid var(--lb-border-soft); border-radius:12px; background:var(--lb-surface); }
 .signed-case .lb-table { width:100%; border-collapse:collapse; margin:0; background:transparent; border:0; font-size:14px; }
 .signed-case .lb-table :is(th,td) { padding:12px 16px; text-align:start; border:0; border-bottom:1px solid var(--lb-border-soft); vertical-align:top; color:var(--lb-text); }

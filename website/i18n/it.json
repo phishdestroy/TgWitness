@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Riquadro n. {n}: «{name}» ({pct} dell’Allegato 1). Il legale ha nascosto sotto dei rettangoli neri 1.944 righe come questa.",
   "Fair draw #{n} · 50 boxes": "Estrazione equa n. {n} · 50 caselle",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Estrazioni di 50 caselle: {draws} · miglior risultato: {best} su 50",
-  "Draws of 50 boxes: 0 · best result: —": "Estrazione di 50 caselle: 0 · miglior risultato: —"
+  "Draws of 50 boxes: 0 · best result: —": "Estrazione di 50 caselle: 0 · miglior risultato: —",
+  "Taken on trust": "Accettato in buona fede",
+  "What the file shows": "Cosa mostra il file",
+  "With the model": "Con il modello"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sta solo dando un’occhiata? Faccia doppio clic su <code>scripts\\Demo.cmd</code> per una demo isolata. Non è necessario effettuare l’accesso a Telegram.",

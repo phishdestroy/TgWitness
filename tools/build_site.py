@@ -489,7 +489,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         data = translations[lang]
         labels = sum(1 for text in required_strings if not data["strings"].get(text, "").strip())
         blocks = {name: sum(1 for text in site_i18n.unit_texts(fragment)
-                            if not data["blocks"].get(site_i18n.digest(text), "").strip())
+                            if site_i18n.digest(text) not in data["blocks"])
                   for name, fragment in inventory_fragments.items() if name not in {"reference:license", "reference:notice"}}
         blocks = {name: count for name, count in blocks.items() if count}
         if labels or blocks:

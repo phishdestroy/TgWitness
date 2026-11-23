@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Kotak #{n}: “{name}” ({pct} dari Anlage 1). Pengacara menyembunyikan 1.944 baris seperti ini di balik persegi panjang hitam.",
   "Fair draw #{n} · 50 boxes": "Undian Adil #{n} · 50 kotak",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Pengundian 50 kotak: {draws} · hasil terbaik: {best} dari 50",
-  "Draws of 50 boxes: 0 · best result: —": "Gambar 50 kotak: 0 · hasil terbaik: —"
+  "Draws of 50 boxes: 0 · best result: —": "Gambar 50 kotak: 0 · hasil terbaik: —",
+  "Taken on trust": "Diambil atas dasar kepercayaan",
+  "What the file shows": "Apa yang ditunjukkan oleh berkas tersebut",
+  "With the model": "Dengan model tersebut"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Hanya ingin menjelajah? Klik dua kali <code>scripts\\Demo.cmd</code> untuk demo terisolasi. Tidak perlu login ke Telegram.",

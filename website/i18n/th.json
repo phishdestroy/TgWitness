@@ -1070,7 +1070,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "กล่อง #{n}: “{name}” ({pct} ของ Anlage 1). ทนายความได้ใส่ 1,944 แถวแบบนี้ไว้ใต้รูปสี่เหลี่ยมสีดำ",
   "Fair draw #{n} · 50 boxes": "การจับสลากแบบยุติธรรม #{n} · 50 กล่อง",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "การจับสลาก 50 กล่อง: {draws} · ผลที่ดีที่สุด: {best} จาก 50",
-  "Draws of 50 boxes: 0 · best result: —": "ผลการสุ่ม 50 กล่อง: 0 · ผลที่ดีที่สุด: —"
+  "Draws of 50 boxes: 0 · best result: —": "ผลการสุ่ม 50 กล่อง: 0 · ผลที่ดีที่สุด: —",
+  "Taken on trust": "เชื่อตามคำกล่าว",
+  "What the file shows": "เนื้อหาในไฟล์แสดงว่า",
+  "With the model": "ด้วยแบบจำลอง"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "กำลังสำรวจอยู่ใช่ไหม? คลิกสองครั้งที่ <code>scripts\\Demo.cmd</code> เพื่อดูเดโมแบบแยกส่วน ไม่จำเป็นต้องเข้าสู่ระบบ Telegram",

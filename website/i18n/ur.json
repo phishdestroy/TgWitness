@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "باکس نمبر {n}: \"{name}\" (Anlage 1 کا {pct}). وکیل نے سیاہ مستطیلوں کے نیچے اس طرح کے 1,944 قطار رکھے۔",
   "Fair draw #{n} · 50 boxes": "فیئر ڈرا #{n} · 50 باکس",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 باکسوں کے ڈرا: {draws} · بہترین نتیجہ: 50 میں سے {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50 باکسوں کے ڈرا: 0 · بہترین نتیجہ: —"
+  "Draws of 50 boxes: 0 · best result: —": "50 باکسوں کے ڈرا: 0 · بہترین نتیجہ: —",
+  "Taken on trust": "اعتماد پر لیا گیا",
+  "What the file shows": "فائل کیا دکھاتی ہے",
+  "With the model": "ماڈل کے ساتھ"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "صرف دریافت کر رہے ہیں؟ ایک الگ تھلگ ڈیمو کے لیے <code>scripts\\Demo.cmd</code> پر ڈبل کلک کریں۔ ٹیلیگرام لاگ ان کی ضرورت نہیں۔",

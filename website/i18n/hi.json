@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "बॉक्स #{n}: \"{name}\" (Anlage 1 का {pct})। वकील ने काले आयतों के नीचे इस तरह की 1,944 पंक्तियाँ रखीं।",
   "Fair draw #{n} · 50 boxes": "फेयर ड्रॉ #{n} · 50 बॉक्स",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "50 बॉक्स के ड्रॉ: {draws} · सर्वश्रेष्ठ परिणाम: 50 में से {best}",
-  "Draws of 50 boxes: 0 · best result: —": "50 बॉक्स के ड्रॉ: 0 · सर्वश्रेष्ठ परिणाम: —"
+  "Draws of 50 boxes: 0 · best result: —": "50 बॉक्स के ड्रॉ: 0 · सर्वश्रेष्ठ परिणाम: —",
+  "Taken on trust": "भरोसे पर लिया गया",
+  "What the file shows": "फ़ाइल में क्या दिखाया गया है",
+  "With the model": "मॉडल के साथ"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "सिर्फ़ देख रहे हैं? एक अलग डेमो के लिए <code>scripts\\Demo.cmd</code> पर डबल-क्लिक करें। टेलीग्राम लॉगिन की आवश्यकता नहीं है।",

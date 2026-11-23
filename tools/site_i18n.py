@@ -36,7 +36,7 @@ LANGUAGES = {
 
 
 ENGLISH_ONLY = set()
-ATTRIBUTES = ("aria-label", "title", "alt", "placeholder")
+ATTRIBUTES = ("aria-label", "title", "alt", "placeholder", "data-label")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
 INLINE = {"a", "abbr", "b", "br", "cite", "code", "em", "i", "img", "kbd", "mark", "q", "s", "span",

@@ -1122,7 +1122,10 @@
   "Box #{n}: “{name}” ({pct} of Anlage 1). Counsel put 1,944 rows like this under black rectangles.": "Recuadro n.º {n}: «{name}» ({pct} del anexo 1). La defensa ocultó 1.944 filas como esta tras rectángulos negros.",
   "Fair draw #{n} · 50 boxes": "Sorteo imparcial n.º {n} · 50 casillas",
   "Draws of 50 boxes: {draws} · best result: {best} of 50": "Sorteos de 50 casillas: {draws} · mejor resultado: {best} de 50",
-  "Draws of 50 boxes: 0 · best result: —": "Sorteos de 50 casillas: 0 · mejor resultado: —"
+  "Draws of 50 boxes: 0 · best result: —": "Sorteos de 50 casillas: 0 · mejor resultado: —",
+  "Taken on trust": "Tomado en confianza",
+  "What the file shows": "Lo que muestra el archivo",
+  "With the model": "Con el modelo"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "¿Solo está echando un vistazo? Haga doble clic en <code>scripts\\Demo.cmd</code> para acceder a una demostración aislada. No es necesario iniciar sesión en Telegram.",
