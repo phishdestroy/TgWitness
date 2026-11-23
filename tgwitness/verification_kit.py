@@ -19,8 +19,12 @@ python -I -c "import sys, cryptography; assert sys.version_info >= (3, 11)" >nul
 if not errorlevel 1 goto python
 echo @RUNTIME@
 echo @NOT_VERIFIED@
+echo.
+echo @BROWSER@
+echo.
+echo @DOWNLOAD@
+echo.
 echo @INSTRUCTIONS@
-echo https://github.com/phishdestroy/TgWitness/releases
 echo @PAUSE@
 if not defined TGWITNESS_VERIFY_NO_PAUSE pause >nul
 exit /b 2
@@ -43,8 +47,16 @@ exit /b %result%
 SH = '''#!/bin/sh
 # Run with: sh VERIFY.sh [original.zip]
 base=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 2
+# Never install a runtime or dependencies on the recipient's computer: use a portable runtime placed beside this
+# script (or in a verifier/ folder), otherwise an existing Python 3.11+ with cryptography.
+for runtime in "$base/python/bin/python3" "$base/verifier/python/bin/python3"; do
+    if [ -x "$runtime" ]; then
+        "$runtime" -I -B -X utf8 "$base/verify.py" --interactive --pause @LANG_ARGS@ "${1:-}"
+        exit $?
+    fi
+done
 if ! python3 -I -c 'import sys, cryptography; assert sys.version_info >= (3, 11)' >/dev/null 2>&1; then
-    printf '%s\\n' @SH_RUNTIME@ @SH_NOT_VERIFIED@ @SH_INSTRUCTIONS@
+    printf '%s\\n\\n' @SH_RUNTIME@ @SH_NOT_VERIFIED@ @SH_BROWSER@ @SH_DOWNLOAD@ @SH_INSTRUCTIONS@
     exit 2
 fi
 python3 -I -B -X utf8 "$base/verify.py" --interactive --pause @LANG_ARGS@ "${1:-}"
@@ -70,10 +82,9 @@ def quickstart(lang="en"):
                 + "\n\nVERIFY.cmd\n\n" + quickstart("en").decode("utf-8")).encode("utf-8")
     reader = VERIFIER_LANGUAGES[lang]["reader"]
     paragraphs = [VERIFIER_LANGUAGES[lang]["words"]["TgWitness verifier"]]
-    paragraphs += [reader[key] for key in ("launch", "keep_zip", "key_advice", "runtime", "standalone", "trust")]
+    paragraphs += [reader[key] for key in ("launch", "keep_zip", "key_advice", "runtime", "standalone", "browser", "download", "trust")]
     paragraphs += [reader["output"] + " " + reader["unsigned"]]
     paragraphs += [reader[key] for key in ("limits_exit", "limits", "advanced")]
-    paragraphs += ["https://github.com/phishdestroy/TgWitness/releases"]
     return ("\n\n".join(paragraphs) + "\n").encode("utf-8")
 
 
@@ -93,7 +104,7 @@ def files(lang="en"):
     cmd, sh = CMD, SH
     args = "--choose-language" if lang == "auto" else "--lang " + lang
     cmd, sh = cmd.replace("@LANG_ARGS@", args), sh.replace("@LANG_ARGS@", args)
-    for key in ("runtime", "not_verified", "instructions", "pause"):
+    for key in ("runtime", "not_verified", "instructions", "pause", "browser", "download"):
         value = reader_message(key, "en" if lang == "auto" else lang)
         cmd = cmd.replace("@" + key.upper() + "@", cmd_text(value))
         sh = sh.replace("@SH_" + key.upper() + "@", shell_text(value))

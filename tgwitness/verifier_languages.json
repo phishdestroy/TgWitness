@@ -287,7 +287,10 @@
       "key_advice": "Get the signer's key fingerprint from a trusted channel, not from this archive.",
       "keep_zip": "Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.",
       "limits": "This result describes this copy of the archive. The evidence conditions list which bindings were checked and how to add the missing ones.",
-      "time": "observed_at is the collector clock; retained checkpoints, witness records and RFC 3161 or OpenTimestamps receipts bind the journal to outside time."
+      "time": "observed_at is the collector clock; retained checkpoints, witness records and RFC 3161 or OpenTimestamps receipts bind the journal to outside time.",
+      "browser": "Without installing anything: open https://phishdestroy.github.io/TgWitness/verify/ in a browser and choose this ZIP. It checks the signatures, every file and the event chain; time stamps and the other proofs need this verifier.",
+      "download": "Full offline check, including time stamps, OpenTimestamps and Intel TDX, without installing Python: download the portable verifier from https://github.com/phishdestroy/TgWitness/releases, unpack it and drop the ZIP onto its VERIFY.cmd (Windows) or run its VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: if the system refuses to open the portable verifier because its developer cannot be verified, remove the download quarantine once in Terminal: xattr -dr com.apple.quarantine followed by the path of the unpacked folder."
     },
     "explain": {
       "Manifest signature": "The Ed25519 signature covers the manifest and, through its hashes, every file, with the collector key. Confirm that key with --fingerprint.",
@@ -592,7 +595,10 @@
       "key_advice": "Отримайте відбиток ключа підписанта довіреним каналом, а не з цього архіву.",
       "keep_zip": "Не змінюйте оригінальний ZIP-файл. Зберігайте виділені елементи та робочі нотатки поза розпакованою папкою.",
       "limits": "Цей результат описує саме цю копію архіву. У переліку умов доказів вказано, які зв’язки було перевірено та як додати ті, що відсутні.",
-      "time": "observed_at — це годинник колектора; збережені контрольні точки, записи свідків та квитанції за стандартом RFC 3161 або OpenTimestamps прив’язують журнал до зовнішнього часу."
+      "time": "observed_at — це годинник колектора; збережені контрольні точки, записи свідків та квитанції за стандартом RFC 3161 або OpenTimestamps прив’язують журнал до зовнішнього часу.",
+      "browser": "Без встановлення будь-чого: відкрийте https://phishdestroy.github.io/TgWitness/verify/ у браузері й виберіть цей ZIP. Сторінка перевірить підписи, кожен файл і ланцюжок подій; мітки часу та інші докази перевіряє цей верифікатор.",
+      "download": "Повна офлайн-перевірка, зокрема мітки часу, OpenTimestamps та Intel TDX, без встановлення Python: завантажте портативний верифікатор із https://github.com/phishdestroy/TgWitness/releases, розпакуйте його й перетягніть ZIP на його VERIFY.cmd (Windows) або запустіть його VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: якщо система відмовляється відкрити портативний верифікатор, бо не може перевірити розробника, один раз зніміть карантин завантаження в Терміналі: xattr -dr com.apple.quarantine і шлях до розпакованої теки."
     },
     "explain": {
       "Manifest signature": "Підпис Ed25519 охоплює маніфест і, через його хеші, кожен файл, за допомогою ключа збирача. Перевірте цей ключ за допомогою команди --fingerprint.",
@@ -897,7 +903,10 @@
       "key_advice": "Obtenga la huella de la clave del firmante por un canal de confianza, no de este archivo.",
       "keep_zip": "Mantén el archivo ZIP original sin modificaciones. Guarda las selecciones y las notas de trabajo fuera de la carpeta extraída.",
       "limits": "Este resultado describe esta copia del archivo. Las condiciones de las pruebas indican qué enlaces se han comprobado y cómo añadir los que faltan.",
-      "time": "observed_at es el reloj del recopilador; los puntos de control conservados, los registros de testigos y los recibos según RFC 3161 o OpenTimestamps vinculan el diario a la hora externa."
+      "time": "observed_at es el reloj del recopilador; los puntos de control conservados, los registros de testigos y los recibos según RFC 3161 o OpenTimestamps vinculan el diario a la hora externa.",
+      "browser": "Sin instalar nada: abra https://phishdestroy.github.io/TgWitness/verify/ en un navegador y seleccione este archivo ZIP. Comprueba las firmas, todos los archivos y la cadena de eventos; las marcas de tiempo y el resto de pruebas requieren este verificador.",
+      "download": "Comprobación completa sin conexión, incluyendo marcas de tiempo, OpenTimestamps e Intel TDX, sin necesidad de instalar Python: descargue el verificador portátil desde https://github.com/phishdestroy/TgWitness/releases, descomprímalo y arrastre el archivo ZIP sobre su VERIFY.cmd (Windows) o ejecute su VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: si el sistema se niega a abrir el verificador portátil porque no se puede verificar a su desarrollador, elimine la cuarentena de descargas una vez en Terminal: xattr -dr com.apple.quarantine seguido de la ruta de la carpeta descomprimida."
     },
     "explain": {
       "Manifest signature": "La firma Ed25519 abarca el manifiesto y, a través de sus hash, todos los archivos, con la clave del recopilador. Confirma esa clave con --fingerprint.",
@@ -1202,7 +1211,10 @@
       "key_advice": "Obtenha a impressão digital da chave do signatário por um canal confiável, não deste pacote.",
       "keep_zip": "Mantenha o arquivo ZIP original inalterado. Salve as seleções e as anotações de trabalho fora da pasta extraída.",
       "limits": "Este resultado descreve esta cópia do arquivo. As condições das evidências indicam quais ligações foram verificadas e como adicionar as que estão faltando.",
-      "time": "observed_at é o relógio do coletor; pontos de verificação retidos, registros de testemunho e recibos RFC 3161 ou OpenTimestamps vinculam o diário à hora externa."
+      "time": "observed_at é o relógio do coletor; pontos de verificação retidos, registros de testemunho e recibos RFC 3161 ou OpenTimestamps vinculam o diário à hora externa.",
+      "browser": "Sem instalar nada: abra https://phishdestroy.github.io/TgWitness/verify/ em um navegador e selecione este ZIP. Ele verifica as assinaturas, todos os arquivos e a cadeia de eventos; os carimbos de data e hora e as demais provas requerem este verificador.",
+      "download": "Verificação offline completa, incluindo carimbos de data/hora, OpenTimestamps e Intel TDX, sem instalar o Python: baixe o verificador portátil em https://github.com/phishdestroy/TgWitness/releases, descompacte-o e arraste o arquivo ZIP sobre o VERIFY.cmd (Windows) ou execute o VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: caso o sistema se recuse a abrir o verificador portátil porque o desenvolvedor não pode ser verificado, remova a quarentena de downloads no Terminal digitando: xattr -dr com.apple.quarantine seguido do caminho da pasta descompactada."
     },
     "explain": {
       "Manifest signature": "A assinatura Ed25519 abrange o manifesto e, por meio de seus hashes, todos os arquivos, com a chave do coletor. Confirme essa chave com --fingerprint.",
@@ -1507,7 +1519,10 @@
       "key_advice": "İmzalayanın anahtar parmak izini bu arşivden değil, güvenilir bir kanaldan alın.",
       "keep_zip": "Orijinal ZIP dosyasını değiştirmeden koruyun. Seçimleri ve çalışma notlarını, açılan klasörün dışına kaydedin.",
       "limits": "Bu sonuç, arşivin bu kopyasını açıklamaktadır. Kanıt koşulları listesi, hangi bağlamaların kontrol edildiğini ve eksik olanların nasıl ekleneceğini belirtir.",
-      "time": "observed_at, toplayıcının saatidir; saklanan kontrol noktaları, tanık kayıtları ve RFC 3161 veya OpenTimestamps makbuzları, günlüğü dış zamanla ilişkilendirir."
+      "time": "observed_at, toplayıcının saatidir; saklanan kontrol noktaları, tanık kayıtları ve RFC 3161 veya OpenTimestamps makbuzları, günlüğü dış zamanla ilişkilendirir.",
+      "browser": "Hiçbir şey yüklemeden: bir tarayıcıda https://phishdestroy.github.io/TgWitness/verify/ adresini açın ve bu ZIP dosyasını seçin. Program, imzaları, her dosyayı ve olay zincirini kontrol eder; zaman damgaları ve diğer kanıtlar için bu doğrulayıcı gereklidir.",
+      "download": "Python yüklemeden, zaman damgaları, OpenTimestamps ve Intel TDX dahil olmak üzere tam çevrimdışı kontrol: https://github.com/phishdestroy/TgWitness/releases adresinden taşınabilir doğrulayıcıyı indirin, paketi açın ve ZIP dosyasını VERIFY.cmd dosyasının üzerine sürükleyin (Windows) veya VERIFY.sh dosyasını çalıştırın (macOS, Linux).",
+      "macos": "macOS: Sistem, geliştiricisi doğrulanamadığı için taşınabilir doğrulayıcıyı açmayı reddederse, Terminal'de şu komutu kullanarak indirme karantinasını kaldırın: xattr -dr com.apple.quarantine, ardından açılmış klasörün yolunu girin."
     },
     "explain": {
       "Manifest signature": "Ed25519 imzası, toplama anahtarıyla birlikte manifestoyu ve hash değerleri aracılığıyla her bir dosyayı kapsar. Bu anahtarı --fingerprint komutuyla doğrulayın.",
@@ -1812,7 +1827,10 @@
       "key_advice": "احصل على بصمة مفتاح الموقّع عبر قناة موثوقة، لا من هذا الأرشيف.",
       "keep_zip": "الحفاظ على ملف ZIP الأصلي دون تغيير. حفظ التحديدات وملاحظات العمل خارج المجلد المستخرج.",
       "limits": "تصف هذه النتيجة هذه النسخة من الأرشيف. وتوضح قائمة شروط الأدلة الروابط التي تم التحقق منها وكيفية إضافة الروابط المفقودة.",
-      "time": "observed_at هي ساعة المجمع؛ وتربط نقاط التحقق المحتفظ بها، وسجلات الشهود، وإيصالات RFC 3161 أو OpenTimestamps، السجل بالوقت الخارجي."
+      "time": "observed_at هي ساعة المجمع؛ وتربط نقاط التحقق المحتفظ بها، وسجلات الشهود، وإيصالات RFC 3161 أو OpenTimestamps، السجل بالوقت الخارجي.",
+      "browser": "دون تثبيت أي شيء: افتح الرابط https://phishdestroy.github.io/TgWitness/verify/ في متصفح واختر ملف ZIP هذا. يقوم البرنامج بالتحقق من التوقيعات، وكل ملف، وسلسلة الأحداث؛ أما الطوابع الزمنية والأدلة الأخرى فتحتاج إلى أداة التحقق هذه.",
+      "download": "فحص كامل دون اتصال بالإنترنت، بما في ذلك الطوابع الزمنية و OpenTimestamps و Intel TDX، دون تثبيت Python: قم بتنزيل أداة التحقق المحمولة من https://github.com/phishdestroy/TgWitness/releases، وقم بفك ضغطها، ثم اسحب ملف ZIP إلى ملف VERIFY.cmd (نظام Windows) أو قم بتشغيل ملف VERIFY.sh (نظامي macOS وLinux).",
+      "macos": "نظام macOS: إذا رفض النظام فتح أداة التحقق المحمولة بسبب عدم إمكانية التحقق من مطورها، فقم بإزالة الحجر الصحي للتنزيل مرة واحدة في Terminal باستخدام الأمر: xattr -dr com.apple.quarantine متبوعًا بمسار المجلد الذي تم فك ضغطه."
     },
     "explain": {
       "Manifest signature": "يغطي التوقيع Ed25519 ملف البيان، ومن خلال تجزئاته، كل ملف، باستخدام مفتاح المجمع. تأكد من صحة هذا المفتاح باستخدام --fingerprint.",
@@ -2117,7 +2135,10 @@
       "key_advice": "اثر انگشت کلید امضاکننده را از راهی مطمئن بگیرید، نه از این بایگانی.",
       "keep_zip": "فایل ZIP اصلی را بدون تغییر نگه دارید. انتخاب‌ها و یادداشت‌های کاری را خارج از پوشه استخراج‌شده ذخیره کنید.",
       "limits": "این نتیجه، این نسخه از آرشیو را توصیف می‌کند. شرایط شواهد فهرست می‌کند که کدام بسته‌بندی‌ها بررسی شده‌اند و چگونه می‌توان موارد missing را اضافه کرد.",
-      "time": "observed_at ساعت گردآورنده است؛ نقاط کنترل نگهداری‌شده، سوابق شاهد و رسیدهای RFC 3161 یا OpenTimestamps دفترچه را به زمان بیرونی پیوند می‌دهند."
+      "time": "observed_at ساعت گردآورنده است؛ نقاط کنترل نگهداری‌شده، سوابق شاهد و رسیدهای RFC 3161 یا OpenTimestamps دفترچه را به زمان بیرونی پیوند می‌دهند.",
+      "browser": "بدون نصب هیچ‌چیز: https://phishdestroy.github.io/TgWitness/verify/ را در یک مرورگر باز کنید و این فایل ZIP را انتخاب کنید. این فایل، امضاها، هر فایل و زنجیره رویداد را بررسی می‌کند؛ مهرهای زمانی و سایر شواهد به این اعتبارسنج نیاز دارند.",
+      "download": "بررسی کامل آفلاین، شامل مهرهای زمانی، OpenTimestamps و Intel TDX، بدون نصب پایتون: برنامۀ راستی‌آزمایی قابل‌حمل را از https://github.com/phishdestroy/TgWitness/releases دانلود کرده، آن را از حالت فشرده خارج کنید و فایل ZIP را روی VERIFY.cmd (ویندوز) قرار دهید یا VERIFY.sh آن را اجرا کنید (macOS، لینوکس).",
+      "macos": "macOS: اگر سیستم از باز کردن اعتبارسنج قابل حمل خودداری می‌کند زیرا توسعه‌دهنده آن قابل تأیید نیست، یک‌بار در ترمینال دستور زیر را اجرا کنید: xattr -dr com.apple.quarantine به همراه مسیر پوشهٔ استخراج‌شده."
     },
     "explain": {
       "Manifest signature": "امضای Ed25519، مانیفست و از طریق هش‌هایش هر فایل را با کلید جمع‌آوری پوشش می‌دهد. آن کلید را با دستور --fingerprint تأیید کنید.",
@@ -2422,7 +2443,10 @@
       "key_advice": "دستخط کنندہ کی کلید کا فنگر پرنٹ کسی قابلِ اعتماد ذریعے سے لیں، اس آرکائیو سے نہیں۔",
       "keep_zip": "اصل ZIP کو بغیر تبدیل کے رکھیں۔ منتخب کردہ اشیاء اور کام کے نوٹس کو نکالی گئی فولڈر کے باہر محفوظ کریں۔",
       "limits": "یہ نتیجہ اس آرکائیو کی اس کاپی کی وضاحت کرتا ہے۔ شواہد کی شرائط میں بتایا گیا ہے کہ کون سی باندھتیں چیک کی گئیں اور غائب شدہ باندھتیں کیسے شامل کی جائیں۔",
-      "time": "observed_at کلیکٹر کی گھڑی ہے؛ برقرار رکھے گئے چیک پوائنٹس، گواہ ریکارڈز اور RFC 3161 یا OpenTimestamps رسیدیں جرنل کو بیرونی وقت سے منسلک کرتی ہیں۔"
+      "time": "observed_at کلیکٹر کی گھڑی ہے؛ برقرار رکھے گئے چیک پوائنٹس، گواہ ریکارڈز اور RFC 3161 یا OpenTimestamps رسیدیں جرنل کو بیرونی وقت سے منسلک کرتی ہیں۔",
+      "browser": "بغیر کچھ انسٹال کیے: ایک براؤزر میں https://phishdestroy.github.io/TgWitness/verify/ کھولیں اور اس ZIP کو منتخب کریں۔ یہ دستخط، ہر فائل اور ایونٹ چین کی جانچ کرتا ہے؛ ٹائم اسٹیمپ اور دیگر شواہد کے لیے اس ویریفائر کی ضرورت ہے۔",
+      "download": "مکمل آف لائن چیک، جس میں ٹائم اسٹیمپ، OpenTimestamps اور Intel TDX شامل ہیں، بغیر Python انسٹال کیے: https://github.com/phishdestroy/TgWitness/releases سے پورٹیبل ویریفائر ڈاؤن لوڈ کریں، اسے ان پیک کریں اور ZIP فائل کو VERIFY.cmd (Windows) پر ڈراپ کریں یا VERIFY.sh (macOS، Linux) چلائیں۔",
+      "macos": "macOS: اگر سسٹم پورٹیبل ویریفائر کھولنے سے انکار کرے کیونکہ اس کے ڈویلپر کی تصدیق نہیں ہو سکتی، تو ٹرمینل میں ایک بار ڈاؤن لوڈ قرنطینہ ہٹائیں: xattr -dr com.apple.quarantine کے بعد ان پیک شدہ فولڈر کا راستہ درج کریں۔"
     },
     "explain": {
       "Manifest signature": "Ed25519 دستخط مینیفیسٹ اور اپنی ہیشز کے ذریعے ہر فائل کو کلیکٹر کلید کے ساتھ کور کرتا ہے۔ اس کلید کی تصدیق --fingerprint کے ساتھ کریں۔",
@@ -2727,7 +2751,10 @@
       "key_advice": "हस्ताक्षरकर्ता की कुंजी फिंगरप्रिंट एक विश्वसनीय चैनल से प्राप्त करें, इस आर्काइव से नहीं।",
       "keep_zip": "मूल ZIP को अपरिवर्तित रखें। चयन और कार्य नोट्स को निकाले गए फ़ोल्डर के बाहर सहेजें।",
       "limits": "यह परिणाम इस आर्काइव की इस प्रति का वर्णन करता है। साक्ष्य शर्तों की सूची बताती है कि कौन-कौन सी बाइंडिंग्स जाँची गई थीं और अनुपस्थित बाइंडिंग्स को कैसे जोड़ा जाए।",
-      "time": "observed_at कलेक्टर घड़ी है; संरक्षित चेकपॉइंट्स, गवाह रिकॉर्ड और RFC 3161 या OpenTimestamps रसीदें जर्नल को बाहरी समय से जोड़ती हैं।"
+      "time": "observed_at कलेक्टर घड़ी है; संरक्षित चेकपॉइंट्स, गवाह रिकॉर्ड और RFC 3161 या OpenTimestamps रसीदें जर्नल को बाहरी समय से जोड़ती हैं।",
+      "browser": "कुछ भी इंस्टॉल किए बिना: एक ब्राउज़र में https://phishdestroy.github.io/TgWitness/verify/ खोलें और इस ZIP को चुनें। यह हस्ताक्षरों, प्रत्येक फ़ाइल और इवेंट चेन की जाँच करता है; टाइमस्टैम्प और अन्य प्रमाणों के लिए इस वेरिफ़ायर की आवश्यकता होती है।",
+      "download": "पाइथन इंस्टॉल किए बिना, टाइमस्टैम्प, ओपनटाइमस्टैम्प और इंटेल टीडीएक्स सहित पूर्ण ऑफ़लाइन जाँच: https://github.com/phishdestroy/TgWitness/releases से पोर्टेबल वेरिफायर डाउनलोड करें, इसे अनपैक करें और ZIP फ़ाइल को इसके VERIFY.cmd (Windows) पर ड्रॉप करें या इसका VERIFY.sh (macOS, Linux) चलाएँ।",
+      "macos": "macOS: यदि सिस्टम पोर्टेबल वेरिफायर को खोलने से इनकार करता है क्योंकि इसके डेवलपर को सत्यापित नहीं किया जा सकता है, तो टर्मिनल में एक बार डाउनलोड क्वारंटाइन हटाएँ: xattr -dr com.apple.quarantine के बाद अनपैक किए गए फ़ोल्डर का पथ लिखें।"
     },
     "explain": {
       "Manifest signature": "Ed25519 हस्ताक्षर मैनिफेस्ट को और अपनी हैश के माध्यम से प्रत्येक फ़ाइल को कलेक्टर कुंजी के साथ कवर करता है। उस कुंजी की पुष्टि --fingerprint कमांड से करें।",
@@ -3032,7 +3059,10 @@
       "key_advice": "Dapatkan sidik jari kunci penanda tangan melalui saluran tepercaya, bukan dari arsip ini.",
       "keep_zip": "Pertahankan file ZIP asli tanpa perubahan. Simpan pilihan dan catatan kerja di luar folder yang telah diekstrak.",
       "limits": "Hasil ini menjelaskan salinan arsip ini. Daftar kondisi bukti mencantumkan ikatan mana saja yang telah diperiksa dan cara menambahkan ikatan yang masih kurang.",
-      "time": "observed_at adalah waktu pengumpul; titik pemeriksaan yang disimpan, catatan saksi, serta tanda terima sesuai RFC 3161 atau OpenTimestamps mengaitkan jurnal tersebut dengan waktu eksternal."
+      "time": "observed_at adalah waktu pengumpul; titik pemeriksaan yang disimpan, catatan saksi, serta tanda terima sesuai RFC 3161 atau OpenTimestamps mengaitkan jurnal tersebut dengan waktu eksternal.",
+      "browser": "Tanpa menginstal apa pun: buka https://phishdestroy.github.io/TgWitness/verify/ di peramban dan pilih ZIP ini. Program ini memeriksa tanda tangan, setiap file, dan rantai peristiwa; cap waktu serta bukti-bukti lainnya memerlukan verifier ini.",
+      "download": "Pemeriksaan offline lengkap, termasuk cap waktu, OpenTimestamps, dan Intel TDX, tanpa menginstal Python: unduh verifier portabel dari https://github.com/phishdestroy/TgWitness/releases, ekstrak, lalu seret berkas ZIP ke atas VERIFY.cmd (Windows) atau jalankan VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: jika sistem menolak membuka verifier portabel karena pengembangnya tidak dapat diverifikasi, hapus karantina unduhan sekali di Terminal: xattr -dr com.apple.quarantine diikuti dengan jalur folder yang telah diekstrak."
     },
     "explain": {
       "Manifest signature": "Tanda tangan Ed25519 mencakup manifes dan, melalui hash-nya, setiap berkas, dengan kunci pengumpul. Pastikan kunci tersebut dengan opsi --fingerprint.",
@@ -3337,7 +3367,10 @@
       "key_advice": "Lấy dấu vân tay khóa của người ký qua kênh tin cậy, không lấy từ kho lưu trữ này.",
       "keep_zip": "Giữ nguyên tệp ZIP gốc. Lưu các lựa chọn và ghi chú làm việc bên ngoài thư mục đã giải nén.",
       "limits": "Kết quả này mô tả bản sao của tệp lưu trữ này. Danh sách điều kiện bằng chứng liệt kê các ràng buộc đã được kiểm tra và cách thêm các ràng buộc còn thiếu.",
-      "time": "observed_at là đồng hồ của trình thu thập; các điểm kiểm tra được lưu giữ, bản ghi chứng thực và biên nhận theo tiêu chuẩn RFC 3161 hoặc OpenTimestamps liên kết nhật ký với thời gian bên ngoài."
+      "time": "observed_at là đồng hồ của trình thu thập; các điểm kiểm tra được lưu giữ, bản ghi chứng thực và biên nhận theo tiêu chuẩn RFC 3161 hoặc OpenTimestamps liên kết nhật ký với thời gian bên ngoài.",
+      "browser": "Không cần cài đặt bất kỳ thứ gì: mở https://phishdestroy.github.io/TgWitness/verify/ trong trình duyệt và chọn tệp ZIP này. Công cụ này sẽ kiểm tra chữ ký, từng tệp và chuỗi sự kiện; dấu thời gian và các bằng chứng khác cần có trình xác minh này.",
+      "download": "Kiểm tra ngoại tuyến đầy đủ, bao gồm dấu thời gian, OpenTimestamps và Intel TDX, mà không cần cài đặt Python: tải xuống trình xác minh di động từ https://github.com/phishdestroy/TgWitness/releases, giải nén và kéo tệp ZIP vào tệp VERIFY.cmd (Windows) hoặc chạy tệp VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: nếu hệ thống từ chối mở trình xác minh di động vì không thể xác minh nhà phát triển của nó, hãy gỡ bỏ cách ly tệp tải xuống một lần trong Terminal: xattr -dr com.apple.quarantine, sau đó nhập đường dẫn đến thư mục đã giải nén."
     },
     "explain": {
       "Manifest signature": "Chữ ký Ed25519 bao phủ tệp manifest và, thông qua các giá trị băm của nó, mọi tệp, bằng khóa thu thập. Xác nhận khóa đó bằng lệnh --fingerprint.",
@@ -3642,7 +3675,10 @@
       "key_advice": "请通过可信渠道获取签名者的密钥指纹，不要从此存档中获取。",
       "keep_zip": "保持原始 ZIP 文件不变。将选定内容和工作笔记保存到解压文件夹之外。",
       "limits": "此结果描述了该归档文件的副本。证据条件列表中列出了已检查的绑定项，以及如何添加缺失的绑定项。",
-      "time": "observed_at 表示收集器的时钟；保留的检查点、见证记录以及 RFC 3161 或 OpenTimestamps 收据将日志与外部时间绑定。"
+      "time": "observed_at 表示收集器的时钟；保留的检查点、见证记录以及 RFC 3161 或 OpenTimestamps 收据将日志与外部时间绑定。",
+      "browser": "无需安装任何软件：在浏览器中打开 https://phishdestroy.github.io/TgWitness/verify/ 并选择此 ZIP 文件。该验证器会检查签名、每个文件以及事件链；时间戳和其他证明则需要使用此验证器。",
+      "download": "无需安装 Python 即可进行完整的离线检查，包括时间戳、OpenTimestamps 和 Intel TDX： 从 https://github.com/phishdestroy/TgWitness/releases 下载便携式验证器，解压后将 ZIP 文件拖放到其 VERIFY.cmd 上（Windows），或运行其 VERIFY.sh（macOS、Linux）。",
+      "macos": "macOS：如果系统因无法验证开发者身份而拒绝打开便携式验证器，请在终端中执行以下命令一次以移除下载隔离：xattr -dr com.apple.quarantine，随后输入解压后文件夹的路径。"
     },
     "explain": {
       "Manifest signature": "Ed25519签名覆盖了清单文件，并通过其哈希值覆盖了每个文件，所用密钥为收集器密钥。请使用--fingerprint命令确认该密钥。",
@@ -3947,7 +3983,10 @@
       "key_advice": "Obtenez l’empreinte de la clé du signataire par un canal de confiance, pas depuis cette archive.",
       "keep_zip": "Ne modifiez pas le fichier ZIP d'origine. Enregistrez les sélections et les notes de travail en dehors du dossier extrait.",
       "limits": "Ce résultat décrit cette copie de l'archive. Les conditions relatives aux preuves indiquent quelles liaisons ont été vérifiées et comment ajouter celles qui manquent.",
-      "time": "observed_at correspond à l'horloge du collecteur ; les points de contrôle conservés, les enregistrements de témoins et les reçus conformes à la norme RFC 3161 ou à OpenTimestamps relient le journal à une référence temporelle externe."
+      "time": "observed_at correspond à l'horloge du collecteur ; les points de contrôle conservés, les enregistrements de témoins et les reçus conformes à la norme RFC 3161 ou à OpenTimestamps relient le journal à une référence temporelle externe.",
+      "browser": "Sans rien installer : ouvrez https://phishdestroy.github.io/TgWitness/verify/ dans un navigateur et sélectionnez ce fichier ZIP. Il vérifie les signatures, chaque fichier et la chaîne d'événements ; les horodatages et les autres preuves nécessitent ce vérificateur.",
+      "download": "Vérification hors ligne complète, incluant les horodatages, OpenTimestamps et Intel TDX, sans installation de Python : téléchargez le vérificateur portable depuis https://github.com/phishdestroy/TgWitness/releases, décompressez-le et faites glisser le fichier ZIP sur le fichier VERIFY.cmd (Windows) ou exécutez le fichier VERIFY.sh (macOS, Linux).",
+      "macos": "macOS : si le système refuse d’ouvrir le vérificateur portable car son développeur ne peut être vérifié, supprimez la quarantaine de téléchargement une fois dans Terminal : xattr -dr com.apple.quarantine suivi du chemin d’accès au dossier décompressé."
     },
     "explain": {
       "Manifest signature": "La signature Ed25519 couvre le manifeste et, grâce à ses hachages, chaque fichier, à l'aide de la clé de collecte. Vérifiez cette clé à l'aide de l'option --fingerprint.",
@@ -4252,7 +4291,10 @@
       "key_advice": "Holen Sie den Schlüssel-Fingerabdruck des Signierenden über einen vertrauenswürdigen Kanal, nicht aus diesem Archiv.",
       "keep_zip": "Behalten Sie die ursprüngliche ZIP-Datei unverändert bei. Speichern Sie Auswahlen und Arbeitsnotizen außerhalb des extrahierten Ordners.",
       "limits": "Dieses Ergebnis beschreibt diese Kopie des Archivs. In den Bedingungen für die Beweismittel ist aufgeführt, welche Bindungen überprüft wurden und wie die fehlenden hinzugefügt werden können.",
-      "time": "observed_at ist die Uhr des Collectors; gespeicherte Checkpoints, Witness-Datensätze sowie RFC 3161- oder OpenTimestamps-Belegungen binden das Journal an die externe Zeit."
+      "time": "observed_at ist die Uhr des Collectors; gespeicherte Checkpoints, Witness-Datensätze sowie RFC 3161- oder OpenTimestamps-Belegungen binden das Journal an die externe Zeit.",
+      "browser": "Ohne Installation: Öffnen Sie https://phishdestroy.github.io/TgWitness/verify/ im Browser und wählen Sie diese ZIP-Datei. Die Seite prüft die Signaturen, jede Datei und die Ereigniskette; Zeitstempel und die übrigen Nachweise prüft dieses Prüfprogramm.",
+      "download": "Vollständige Offline-Prüfung einschließlich Zeitstempeln, OpenTimestamps und Intel TDX, ohne Python zu installieren: Laden Sie das portable Prüfprogramm von https://github.com/phishdestroy/TgWitness/releases herunter, entpacken Sie es und ziehen Sie die ZIP-Datei auf dessen VERIFY.cmd (Windows) oder starten Sie dessen VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: Wenn das System das portable Prüfprogramm nicht öffnet, weil der Entwickler nicht überprüft werden kann, entfernen Sie einmalig die Download-Quarantäne im Terminal: xattr -dr com.apple.quarantine, gefolgt vom Pfad des entpackten Ordners."
     },
     "explain": {
       "Manifest signature": "Die Ed25519-Signatur umfasst das Manifest und – über dessen Hashes – jede einzelne Datei mit dem Collector-Schlüssel. Überprüfen Sie diesen Schlüssel mit --fingerprint.",
@@ -4557,7 +4599,10 @@
       "key_advice": "Ottieni l’impronta della chiave del firmatario da un canale fidato, non da questo archivio.",
       "keep_zip": "Mantenere inalterato il file ZIP originale. Salvare le selezioni e le note di lavoro al di fuori della cartella estratta.",
       "limits": "Questo risultato descrive questa copia dell’archivio. Le condizioni delle prove elencano quali collegamenti sono stati verificati e come aggiungere quelli mancanti.",
-      "time": "observed_at è l'orologio del collettore; i checkpoint conservati, i record di testimonianza e le ricevute RFC 3161 o OpenTimestamps collegano il giornale al tempo esterno."
+      "time": "observed_at è l'orologio del collettore; i checkpoint conservati, i record di testimonianza e le ricevute RFC 3161 o OpenTimestamps collegano il giornale al tempo esterno.",
+      "browser": "Senza installare nulla: apra https://phishdestroy.github.io/TgWitness/verify/ in un browser e selezioni questo file ZIP. Il programma verifica le firme, ogni singolo file e la catena di eventi; i timestamp e le altre prove richiedono l’utilizzo di questo verificatore.",
+      "download": "Controllo offline completo, inclusi timestamp, OpenTimestamps e Intel TDX, senza installare Python: scarichi il verificatore portatile da https://github.com/phishdestroy/TgWitness/releases, lo decomprima e trascini il file ZIP sul file VERIFY.cmd (Windows) oppure esegua il file VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: se il sistema si rifiuta di aprire il verificatore portatile perché non è possibile verificare l’identità dello sviluppatore, rimuova la quarantena dei download una volta dal Terminale: xattr -dr com.apple.quarantine seguito dal percorso della cartella decompressa."
     },
     "explain": {
       "Manifest signature": "La firma Ed25519 copre il manifesto e, tramite i relativi hash, ogni singolo file, con la chiave del collettore. Verificare tale chiave con --fingerprint.",
@@ -4862,7 +4907,10 @@
       "key_advice": "Imzolovchi kalitining barmoq izini bu arxivdan emas, ishonchli kanal orqali oling.",
       "keep_zip": "Asl ZIP-ni o'zgarmas holda saqlang. Tanlovlar va ish yozuvlarini chiqarilgan papkadan tashqarida saqlang.",
       "limits": "Ushbu natija arxiv nusxasini tavsiflaydi. Dalillar shartlari tekshirilgan bog'lanishlarni va yetishmayotgan bog'lanishlarni qanday qo'shishni ko'rsatadi.",
-      "time": "observed_at – yig'uvchi soati; saqlangan tekshiruv nuqtalari, guvoh yozuvlari va RFC 3161 yoki OpenTimestamps kvitansiyalari jurnalni tashqi vaqtga bog'laydi."
+      "time": "observed_at – yig'uvchi soati; saqlangan tekshiruv nuqtalari, guvoh yozuvlari va RFC 3161 yoki OpenTimestamps kvitansiyalari jurnalni tashqi vaqtga bog'laydi.",
+      "browser": "Hech narsa o'rnatmasdan: brauzerda https://phishdestroy.github.io/TgWitness/verify/ manzilini oching va ushbu ZIP-ni tanlang. U imzo(lar)ni, har bir faylni va voqealar zanjirini tekshiradi; vaqt shtamplari va boshqa dalillar uchun aynan shu verifikator kerak.",
+      "download": "Pythonni o'rnatmasdan, vaqt shtamplari, OpenTimestamps va Intel TDXni o'z ichiga olgan to'liq oflayn tekshiruv: https://github.com/phishdestroy/TgWitness/releases saytidan portativ verifikatorni yuklab oling, uni arxivdan chiqarib, ZIP faylni VERIFY.cmd (Windows) ustiga torting yoki VERIFY.sh (macOS, Linux) skriptini ishga tushiring.",
+      "macos": "macOS: agar tizim portable verifikatorni uning ishlab chiquvchisi tasdiqlanmaganligi sababli ochishni rad etsa, Terminalda yuklab olish karantini bir marta olib tashlang: xattr -dr com.apple.quarantine so'ngra ochilgan papkaning yo'li."
     },
     "explain": {
       "Manifest signature": "Ed25519 imzosi manifestni va hashlari orqali har bir faylni collector kaliti bilan qoplaydi. Ushbu kalitni --fingerprint buyrug'i bilan tasdiqlang.",
@@ -5167,7 +5215,10 @@
       "key_advice": "서명자의 키 지문은 이 보관 파일이 아닌 신뢰할 수 있는 경로로 받으세요.",
       "keep_zip": "원본 ZIP 파일은 변경하지 마십시오. 선택한 내용과 작업 노트는 압축 해제된 폴더 외부에 저장하십시오.",
       "limits": "이 결과는 해당 아카이브 사본에 대한 설명입니다. 증거 조건 목록에는 어떤 바인딩이 확인되었는지, 그리고 누락된 바인딩을 추가하는 방법이 명시되어 있습니다.",
-      "time": "observed_at는 수집기 시계를 의미하며, 보존된 체크포인트, 위트니스 기록 및 RFC 3161 또는 OpenTimestamps 영수증은 저널을 외부 시간과 연동시킵니다."
+      "time": "observed_at는 수집기 시계를 의미하며, 보존된 체크포인트, 위트니스 기록 및 RFC 3161 또는 OpenTimestamps 영수증은 저널을 외부 시간과 연동시킵니다.",
+      "browser": "별도의 설치 없이: 브라우저에서 https://phishdestroy.github.io/TgWitness/verify/을 열고 이 ZIP 파일을 선택하십시오. 이 검증기는 서명, 모든 파일 및 이벤트 체인을 확인합니다. 타임스탬프와 기타 증거를 확인하려면 이 검증기가 필요합니다.",
+      "download": "Python을 설치하지 않고 타임스탬프, OpenTimestamps 및 Intel TDX를 포함한 완전한 오프라인 검사를 수행하려면: https://github.com/phishdestroy/TgWitness/releases에서 휴대용 검증기를 다운로드한 후 압축을 풀고, ZIP 파일을 VERIFY.cmd(Windows) 위에 드래그하거나 VERIFY.sh(macOS, Linux)를 실행하십시오.",
+      "macos": "macOS: 개발자를 확인할 수 없다는 이유로 시스템이 휴대용 검증기 실행을 거부하는 경우, 터미널에서 다음 명령을 한 번 실행하여 다운로드 격리 조치를 해제하십시오: xattr -dr com.apple.quarantine 뒤에 압축을 푼 폴더의 경로를 입력하십시오."
     },
     "explain": {
       "Manifest signature": "Ed25519 서명은 매니페스트와, 해시를 통해 모든 파일을 수집자 키로 포괄합니다. --fingerprint 명령어를 사용하여 해당 키를 확인하십시오.",
@@ -5472,7 +5523,10 @@
       "key_advice": "請透過可信管道取得簽署者的金鑰指紋，不要從此封存檔取得。",
       "keep_zip": "請保持原始 ZIP 檔案不變。將選取內容及工作筆記儲存於解壓縮資料夾之外。",
       "limits": "此結果描述了此份檔案的副本。證據條件清單列出了已檢查的綁定項目，以及如何補充缺失的綁定項目。",
-      "time": "observed_at 代表收集器的時間戳；保留的檢查點、見證記錄以及 RFC 3161 或 OpenTimestamps 收據，將日誌與外部時間綁定。"
+      "time": "observed_at 代表收集器的時間戳；保留的檢查點、見證記錄以及 RFC 3161 或 OpenTimestamps 收據，將日誌與外部時間綁定。",
+      "browser": "無需安裝任何軟體：在瀏覽器中開啟 https://phishdestroy.github.io/TgWitness/verify/，並選擇此 ZIP 檔案。該驗證器會檢查數位簽章、每個檔案以及事件鏈；至於時間戳記和其他證明，則需使用此驗證器進行驗證。",
+      "download": "無需安裝 Python 即可進行完整的離線檢查，包括時間戳記、OpenTimestamps 及 Intel TDX： 請從 https://github.com/phishdestroy/TgWitness/releases 下載可攜式驗證器，解壓縮後將 ZIP 檔案拖放至其 VERIFY.cmd 檔案上（Windows），或執行其 VERIFY.sh 腳本（macOS、Linux）。",
+      "macos": "macOS：若系統因無法驗證開發者身分而拒絕開啟「可攜式驗證器」，請在「終端機」中執行以下指令以移除下載隔離：xattr -dr com.apple.quarantine，並接續解壓縮資料夾的路徑。"
     },
     "explain": {
       "Manifest signature": "Ed25519 簽名涵蓋了清單檔案，並透過其雜湊值，以收集者金鑰對每個檔案進行簽名。請使用 --fingerprint 指令確認該金鑰。",
@@ -5777,7 +5831,10 @@
       "key_advice": "Dapatkan cap jari kunci penandatangan melalui saluran dipercayai, bukan daripada arkib ini.",
       "keep_zip": "Biarkan fail ZIP asal tidak berubah. Simpan pilihan dan nota kerja di luar folder yang diekstrak.",
       "limits": "Keputusan ini menerangkan salinan arkib ini. Senarai syarat bukti menunjukkan ikatan yang telah diperiksa dan cara menambah ikatan yang hilang.",
-      "time": "observed_at ialah jam pengumpul; checkpoint yang disimpan, rekod saksi dan resit RFC 3161 atau OpenTimestamps mengikat jurnal kepada masa luaran."
+      "time": "observed_at ialah jam pengumpul; checkpoint yang disimpan, rekod saksi dan resit RFC 3161 atau OpenTimestamps mengikat jurnal kepada masa luaran.",
+      "browser": "Tanpa memasang apa-apa: buka https://phishdestroy.github.io/TgWitness/verify/ dalam pelayar dan pilih ZIP ini. Ia memeriksa tandatangan, setiap fail dan rantaian peristiwa; cop masa dan bukti lain memerlukan pengesah ini.",
+      "download": "Semakan luar talian sepenuhnya, termasuk cap masa, OpenTimestamps dan Intel TDX, tanpa memasang Python: muat turun verifier mudah alih dari https://github.com/phishdestroy/TgWitness/releases, ekstrak dan letakkan fail ZIP ke atas VERIFY.cmd (Windows) atau jalankan VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: jika sistem enggan membuka pengesah mudah alih kerana pembangunnya tidak dapat disahkan, keluarkan kuarantin muat turun sekali sahaja di Terminal: xattr -dr com.apple.quarantine diikuti oleh laluan folder yang telah dibuka."
     },
     "explain": {
       "Manifest signature": "Tandatangan Ed25519 meliputi manifes dan, melalui hashnya, setiap fail, dengan kunci pengumpul. Sahkan kunci itu dengan --fingerprint.",
@@ -6082,7 +6139,10 @@
       "key_advice": "Odcisk klucza podpisującego pobierz zaufanym kanałem, nie z tego archiwum.",
       "keep_zip": "Nie zmieniaj oryginalnego pliku ZIP. Zapisuj zaznaczenia i notatki robocze poza folderem po rozpakowaniu.",
       "limits": "Ten wynik opisuje tę kopię archiwum. Warunki dowodowe zawierają listę sprawdzonych powiązań oraz instrukcje dotyczące dodawania brakujących.",
-      "time": "observed_at to zegar kolektora; zachowane punkty kontrolne, zapisy świadków oraz potwierdzenia zgodne ze standardem RFC 3161 lub OpenTimestamps powiązują dziennik z czasem zewnętrznym."
+      "time": "observed_at to zegar kolektora; zachowane punkty kontrolne, zapisy świadków oraz potwierdzenia zgodne ze standardem RFC 3161 lub OpenTimestamps powiązują dziennik z czasem zewnętrznym.",
+      "browser": "Bez instalowania czegokolwiek: proszę otworzyć stronę https://phishdestroy.github.io/TgWitness/verify/ w przeglądarce i wybrać ten plik ZIP. Program sprawdza podpisy, każdy plik oraz łańcuch zdarzeń; do weryfikacji znaczników czasu i pozostałych dowodów niezbędny jest ten weryfikator.",
+      "download": "Pełna weryfikacja w trybie offline, obejmująca sygnatury czasowe, OpenTimestamps oraz Intel TDX, bez konieczności instalowania języka Python: proszę pobrać przenośny weryfikator ze strony https://github.com/phishdestroy/TgWitness/releases, rozpakować go, a następnie przeciągnąć plik ZIP na plik VERIFY.cmd (Windows) lub uruchomić plik VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: jeśli system odmówi otwarcia weryfikatora przenośnego z powodu braku możliwości zweryfikowania jego twórcy, należy usunąć kwarantannę pobranych plików, wpisując w Terminalu polecenie: xattr -dr com.apple.quarantine, a następnie podając ścieżkę do rozpakowanego folderu."
     },
     "explain": {
       "Manifest signature": "Podpis Ed25519 obejmuje manifest oraz, poprzez jego skróty, każdy plik, przy użyciu klucza zbierającego. Sprawdź ten klucz za pomocą opcji --fingerprint.",
@@ -6387,7 +6447,10 @@
       "key_advice": "署名者の鍵フィンガープリントは、このアーカイブではなく信頼できる経路で入手してください。",
       "keep_zip": "元のZIPファイルは変更しないでください。選択内容や作業メモは、解凍されたフォルダの外に保存してください。",
       "limits": "この結果は、このアーカイブのコピーに関するものです。証拠条件には、どのバインディングがチェックされたか、および不足しているバインディングを追加する方法が記載されています。",
-      "time": "observed_atはコレクターの時刻です。保持されたチェックポイント、ウィットネスレコード、およびRFC 3161またはOpenTimestampsのレシートにより、ジャーナルは外部の時刻と紐付けられています。"
+      "time": "observed_atはコレクターの時刻です。保持されたチェックポイント、ウィットネスレコード、およびRFC 3161またはOpenTimestampsのレシートにより、ジャーナルは外部の時刻と紐付けられています。",
+      "browser": "何もインストールせずに：ブラウザで https://phishdestroy.github.io/TgWitness/verify/ を開き、この ZIP ファイルを選択してください。これにより、署名、すべてのファイル、およびイベントチェーンが検証されます。タイムスタンプやその他の証拠を確認するには、この検証ツールが必要です。",
+      "download": "Pythonをインストールせずに、タイムスタンプ、OpenTimestamps、Intel TDXを含む完全なオフラインチェックを行うには： https://github.com/phishdestroy/TgWitness/releases からポータブル検証ツールをダウンロードし、解凍した後、ZIPファイルをVERIFY.cmd（Windows）の上にドラッグするか、VERIFY.sh（macOS、Linux）を実行してください。",
+      "macos": "macOS：開発者が確認できないことを理由にシステムがポータブル検証ツールの起動を拒否する場合は、ターミナルで一度、ダウンロード隔離を解除してください。xattr -dr com.apple.quarantine の後に、解凍したフォルダのパスを指定して実行してください。"
     },
     "explain": {
       "Manifest signature": "Ed25519署名は、マニフェストおよび、そのハッシュを通じてすべてのファイルを、コレクターキーでカバーしています。--fingerprintオプションを使用して、そのキーを確認してください。",
@@ -6692,7 +6755,10 @@
       "key_advice": "รับลายนิ้วมือกุญแจของผู้ลงนามผ่านช่องทางที่เชื่อถือได้ ไม่ใช่จากคลังนี้",
       "keep_zip": "รักษาไฟล์ ZIP ต้นฉบับให้ไม่เปลี่ยนแปลง บันทึกการเลือกและบันทึกการทำงานไว้ภายนอกโฟลเดอร์ที่สกัดออกมา",
       "limits": "ผลลัพธ์นี้อธิบายถึงสำเนาของไฟล์เก็บข้อมูลนี้ รายการเงื่อนไขหลักฐานระบุว่าการผูกมัดใดได้รับการตรวจสอบแล้ว และวิธีเพิ่มการผูกมัดที่ขาดหายไป",
-      "time": "observed_at คือนาฬิกาของผู้เก็บข้อมูล; จุดตรวจสอบที่เก็บไว้, บันทึกพยาน และใบเสร็จรับเงินตาม RFC 3161 หรือ OpenTimestamps ช่วยผูกบันทึกกับเวลาภายนอก"
+      "time": "observed_at คือนาฬิกาของผู้เก็บข้อมูล; จุดตรวจสอบที่เก็บไว้, บันทึกพยาน และใบเสร็จรับเงินตาม RFC 3161 หรือ OpenTimestamps ช่วยผูกบันทึกกับเวลาภายนอก",
+      "browser": "โดยไม่ต้องติดตั้งอะไรทั้งสิ้น: เปิด https://phishdestroy.github.io/TgWitness/verify/ ในเบราว์เซอร์และเลือก ZIP นี้ มันจะตรวจสอบลายเซ็น ทุกไฟล์ และลำดับเหตุการณ์; เวลาประทับและหลักฐานอื่น ๆ จำเป็นต้องใช้ตัวตรวจสอบนี้",
+      "download": "การตรวจสอบแบบออฟไลน์อย่างครบถ้วน รวมถึงเวลาประทับ, OpenTimestamps และ Intel TDX โดยไม่ต้องติดตั้ง Python: ดาวน์โหลดตัวตรวจสอบแบบพกพาจาก https://github.com/phishdestroy/TgWitness/releases, แตกไฟล์ออก และลากไฟล์ ZIP ไปวางบนไฟล์ VERIFY.cmd (Windows) หรือเรียกใช้ไฟล์ VERIFY.sh (macOS, Linux)",
+      "macos": "macOS: หากระบบปฏิเสธที่จะเปิด verifier แบบพกพา เนื่องจากไม่สามารถยืนยันผู้พัฒนาได้ ให้ยกเลิกการกักกันไฟล์ที่ดาวน์โหลดมาใน Terminal โดยใช้คำสั่ง xattr -dr com.apple.quarantine ตามด้วยเส้นทางของโฟลเดอร์ที่แตกไฟล์แล้ว"
     },
     "explain": {
       "Manifest signature": "ลายเซ็นEd25519 ครอบคลุมไฟล์ manifest และผ่านค่าแฮชของมัน ครอบคลุมทุกไฟล์ ด้วยกุญแจผู้รวบรวม (collector key) โปรดยืนยันกุญแจดังกล่าวด้วยคำสั่ง --fingerprint",
@@ -6997,7 +7063,10 @@
       "key_advice": "קבלו את טביעת המפתח של החותם בערוץ מהימן, לא מהארכיון הזה.",
       "keep_zip": "שמרו על קובץ ה-ZIP המקורי ללא שינויים. שמרו את הבחירות והערות העבודה מחוץ לתיקייה שחולצה.",
       "limits": "תוצאה זו מתארת את העותק הזה של הארכיון. תנאי הראיות מפרטים אילו קישורים נבדקו וכיצד להוסיף את אלה החסרים.",
-      "time": "observed_at הוא שעון האספן; נקודות ביקורת שנשמרו, רשומות עדים וקבלות לפי RFC 3161 או OpenTimestamps מקשרות את היומן לזמן חיצוני."
+      "time": "observed_at הוא שעון האספן; נקודות ביקורת שנשמרו, רשומות עדים וקבלות לפי RFC 3161 או OpenTimestamps מקשרות את היומן לזמן חיצוני.",
+      "browser": "ללא התקנה: פתחו את https://phishdestroy.github.io/TgWitness/verify/ בדפדפן ובחרו בקובץ ZIP זה. התוכנה בודקת את החתימות, כל קובץ ואת שרשרת האירועים; חותמות הזמן וההוכחות האחרות דורשות את תוכנת האימות הזו.",
+      "download": "בדיקה מלאה במצב לא מקוון, כולל חותמות זמן, OpenTimestamps ו-Intel TDX, ללא התקנת Python: הורידו את ה-portable verifier מ-https://github.com/phishdestroy/TgWitness/releases, פתחו את הקובץ והניחו את קובץ ה-ZIP על קובץ ה-VERIFY.cmd (Windows) או הפעילו את קובץ ה-VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: אם המערכת מסרבת לפתוח את תוכנת האימות הניידת מכיוון שלא ניתן לאמת את זהות המפתח שלה, הסר את ההסגר על הקובץ שהורדת פעם אחת ב-Terminal: xattr -dr com.apple.quarantine ולאחר מכן ציין את הנתיב לתיקייה שנפרקה."
     },
     "explain": {
       "Manifest signature": "חתימת ה-Ed25519 מכסה את קובץ המניפסט, ובאמצעות חשישותיו – כל קובץ, באמצעות מפתח האספן. אמת את המפתח באמצעות הפקודה --fingerprint.",
@@ -7302,7 +7371,10 @@
       "key_advice": "স্বাক্ষরকারীর কী ফিঙ্গারপ্রিন্ট একটি বিশ্বস্ত চ্যানেল থেকে পান, এই আর্কাইভ থেকে নয়।",
       "keep_zip": "মূল ZIP ফাইলটি অপরিবর্তিত রাখুন। নির্বাচিত আইটেম এবং কাজের নোটগুলো বের করা ফোল্ডারের বাইরে সংরক্ষণ করুন।",
       "limits": "এই ফলাফলটি আর্কাইভের এই অনুলিপিকে বর্ণনা করে। প্রমাণ শর্তাবলী তালিকাভুক্ত করে কোন বাইন্ডিংগুলো যাচাই করা হয়েছে এবং অনুপস্থিতগুলো কীভাবে যোগ করতে হবে।",
-      "time": "observed_at হল সংগ্রহকারীর ঘড়ি; সংরক্ষিত চেকপয়েন্ট, সাক্ষী রেকর্ড এবং RFC 3161 বা OpenTimestamps রসিদ জার্নালকে বাহ্যিক সময়ের সাথে আবদ্ধ করে।"
+      "time": "observed_at হল সংগ্রহকারীর ঘড়ি; সংরক্ষিত চেকপয়েন্ট, সাক্ষী রেকর্ড এবং RFC 3161 বা OpenTimestamps রসিদ জার্নালকে বাহ্যিক সময়ের সাথে আবদ্ধ করে।",
+      "browser": "কিছুই ইনস্টল না করে: https://phishdestroy.github.io/TgWitness/verify/ ব্রাউজারে খুলে এই ZIP ফাইলটি নির্বাচন করুন। এটি স্বাক্ষর, প্রতিটি ফাইল এবং ইভেন্ট চেইন যাচাই করে; টাইমস্ট্যাম্প এবং অন্যান্য প্রমাণের জন্য এই ভেরিফায়ার প্রয়োজন।",
+      "download": "পূর্ণ অফলাইন যাচাই, টাইমস্ট্যাম্প, OpenTimestamps এবং Intel TDX সহ, Python ইনস্টল না করেই: https://github.com/phishdestroy/TgWitness/releases থেকে পোর্টেবল ভেরিফায়ার ডাউনলোড করুন, আনপ্যাক করুন এবং ZIP ফাইলটি VERIFY.cmd (Windows)-এর উপর ড্রপ করুন অথবা VERIFY.sh (macOS, Linux) চালান।",
+      "macos": "macOS: যদি সিস্টেম ডেভেলপার যাচাই করা যায় না বলে পোর্টেবল ভেরিফায়ার খুলতে অস্বীকার করে, তাহলে টার্মিনালে একবার ডাউনলোড কোয়ারেন্টাইন সরিয়ে ফেলুন: xattr -dr com.apple.quarantine এরপর আনপ্যাক করা ফোল্ডারের পথ দিন।"
     },
     "explain": {
       "Manifest signature": "Ed25519 স্বাক্ষর ম্যানিফেস্টকে এবং এর হ্যাশের মাধ্যমে প্রতিটি ফাইলকে কালেক্টর কী দিয়ে আবৃত করে। --fingerprint ব্যবহার করে সেই কীটি নিশ্চিত করুন।",
@@ -7607,7 +7679,10 @@
       "key_advice": "Получите отпечаток ключа подписавшего лица из надёжного источника, а не из данного архива.",
       "keep_zip": "Сохраните исходный ZIP без изменений. Выборки и рабочие заметки сохраняйте вне папки распакованного архива.",
       "limits": "Результат относится к этой копии архива. Условия доказательности показывают, какие привязки проверены и как добавить недостающие.",
-      "time": "observed_at — часы сборщика; сохранённые контрольные точки, записи свидетеля и квитанции RFC 3161 или OpenTimestamps привязывают журнал к внешнему времени."
+      "time": "observed_at — часы сборщика; сохранённые контрольные точки, записи свидетеля и квитанции RFC 3161 или OpenTimestamps привязывают журнал к внешнему времени.",
+      "browser": "Без установки чего-либо: откройте https://phishdestroy.github.io/TgWitness/verify/ в браузере и выберите этот ZIP. Страница проверит подписи, каждый файл и цепочку событий; метки времени и остальные доказательства проверяет этот верификатор.",
+      "download": "Полная офлайн-проверка, включая метки времени, OpenTimestamps и Intel TDX, без установки Python: скачайте портативный верификатор из https://github.com/phishdestroy/TgWitness/releases, распакуйте его и перетащите ZIP на его VERIFY.cmd (Windows) или запустите его VERIFY.sh (macOS, Linux).",
+      "macos": "macOS: если система отказывается открыть портативный верификатор, потому что не может проверить разработчика, один раз снимите карантин загрузки в Терминале: xattr -dr com.apple.quarantine и путь к распакованной папке."
     },
     "explain": {
       "Manifest signature": "Подпись Ed25519 ключом сборщика покрывает манифест, а через его хеши — каждый файл. Сверьте этот ключ с помощью --fingerprint.",

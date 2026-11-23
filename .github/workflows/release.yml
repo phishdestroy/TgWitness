@@ -90,6 +90,43 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: gh release upload "$RELEASE_TAG" dist/*-portable.zip dist/*-portable.zip.sha256
+  verifiers:
+    name: Publish portable verifiers
+    if: github.event_name == 'release'
+    needs: [version, checks, security, sealed]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write  # attach the portable verifiers to the release
+      id-token: write  # OIDC token for the Sigstore attestation
+      attestations: write  # store the build provenance of the verifiers
+    steps:
+      - name: Download the exact verifiers exercised by the release checks
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          pattern: tgwitness-verifier-*
+          merge-multiple: true
+          path: dist
+      - name: Verify the checksums and the platform set
+        working-directory: dist
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          sha256sum --check --strict ./*.zip.sha256
+          for label in windows-amd64 linux-x86_64 macos-arm64; do
+            test -f "TgWitness-verifier-$VERSION-$label-all.zip"
+          done
+          test "$(ls ./*.zip | wc -l)" -eq 3
+      - name: Attest the build provenance of the verifiers
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
+        with:
+          subject-path: dist/TgWitness-verifier-*.zip
+      - name: Attach the portable verifiers to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/TgWitness-verifier-*.zip dist/TgWitness-verifier-*.zip.sha256
   packages:
     name: Publish source and Python wheel
     if: github.event_name == 'release'
@@ -195,7 +232,7 @@ jobs:
   manifest:
     name: Verify published downloads and publish their checksums
     if: github.event_name == 'release'
-    needs: [version, portable, packages]
+    needs: [version, portable, verifiers, packages]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -208,7 +245,7 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: >-
           gh release download "$RELEASE_TAG" --dir dist
-          --pattern '*-portable.zip*' --pattern '*-source.zip*' --pattern '*.whl*'
+          --pattern '*-portable.zip*' --pattern '*-source.zip*' --pattern '*.whl*' --pattern 'TgWitness-verifier-*'
       - name: Verify downloaded bytes and bind the file list to the source revision
         env:
           VERSION: ${{ needs.version.outputs.version }}
@@ -220,7 +257,9 @@ jobs:
           version = os.environ["VERSION"]
           names = [f"TgWitness-{version}-source.zip",
                    f"TgWitness-{version}-windows-amd64-portable.zip",
-                   f"tgwitness-{version}-py3-none-any.whl"]
+                   f"tgwitness-{version}-py3-none-any.whl",
+                   *(f"TgWitness-verifier-{version}-{label}-all.zip"
+                     for label in ("windows-amd64", "linux-x86_64", "macos-arm64"))]
           root = Path("dist")
           expected = set(names + [name + ".sha256" for name in names])
           if {path.name for path in root.iterdir()} != expected:
