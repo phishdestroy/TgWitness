@@ -97,6 +97,13 @@ def main():
                         help="Do not open the panel in a browser (env TGWITNESS_NO_BROWSER)")
     args = parser.parse_args()
     root = (args.data_dir or Path(os.environ.get("TGWITNESS_DATA", "data/demo" if args.demo else "data/live"))).resolve()
+    journal = root / "journal.sqlite3"
+    writable = os.access(root, os.W_OK) and (not journal.exists() or os.access(journal, os.W_OK))
+    if not args.check and root.is_dir() and not writable:
+        print("This data directory is read-only: " + str(root) + "\nThe panel writes to it. Read it with "
+              "`tgwitness stats --data-dir DIR` or `tgwitness messages --data-dir DIR`, or copy it to a writable folder.",
+              file=sys.stderr)
+        raise SystemExit(3)
     if args.check:
         from .doctor import inspect_environment, print_report
         report = inspect_environment(root, args.host, args.port)
