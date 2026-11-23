@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Check a TgWitness archive</title>
+<meta name="description" content="Check a TgWitness evidence archive in your browser: the manifest signature, every file and the signed event chain. Nothing is uploaded.">
+<link rel="stylesheet" href="verify.css">
+<script type="application/json" id="site-dict">{}</script>
+<script defer src="verify.js"></script>
+</head>
+<body>
+<header class="vf-top"><a class="vf-brand" href="../">TgWitness</a><!--LANGUAGES--></header>
+<main class="vf">
+<h1>Check a TgWitness archive</h1>
+<p class="vf-lead">This page checks a TgWitness evidence archive in your browser. The archive is read from your disk and nothing is uploaded: the page is not allowed to open network connections. Nothing inside the archive is used to judge it, not even its own report.</p>
+
+<section class="vf-step">
+<h2><span class="vf-number">1</span>Key fingerprint from the sender</h2>
+<p>Ask the sender for the fingerprint of their signing key and get it separately from the archive, for example by phone, in person or in a signed letter. Without it, the page can confirm that the archive is intact, but not whose key signed it.</p>
+<label for="vf-fp">Key fingerprint (SHA-256, 64 hexadecimal characters)</label>
+<input id="vf-fp" type="text" autocomplete="off" spellcheck="false" dir="ltr">
+<p class="vf-error" id="vf-fp-error" role="alert"></p>
+</section>
+
+<section class="vf-step">
+<h2><span class="vf-number">2</span>The archive</h2>
+<div class="vf-drop" id="vf-drop">
+<p>Drop the archive here: the ZIP or ASiC-E file exactly as you received it, or its unpacked folder.</p>
+<p class="vf-buttons"><button type="button" id="vf-pick-file">Choose a ZIP or ASiC-E file</button><button type="button" id="vf-pick-dir" class="secondary">Choose an unpacked folder</button></p>
+<input type="file" id="vf-file" accept=".zip,.asice,.sce,application/zip,application/vnd.etsi.asic-e+zip" hidden>
+<input type="file" id="vf-dir" webkitdirectory multiple hidden>
+</div>
+<div class="vf-status" id="vf-status" hidden><progress id="vf-progress" max="1" value="0"></progress><p id="vf-progress-text" aria-live="polite"></p></div>
+<div id="vf-result" aria-live="polite"></div>
+</section>
+
+<section class="vf-step">
+<h2><span class="vf-number">3</span>What this page checks</h2>
+<ul>
+<li>The Ed25519 signature of the manifest, and the key fingerprint against the one from the sender.</li>
+<li>The SHA-256 of every file in the archive, including the reports and media; no file may be missing, changed or added.</li>
+<li>For an ASiC-E container: its structure and the SHA-256 values in its manifest.</li>
+<li>The event journal: the sequence, the hash chain, the hash and the signature of every event, and the count and last hash stated in the signed manifest.</li>
+</ul>
+<h2>What this page does not check</h2>
+<ul>
+<li>RFC 3161 time stamps, including qualified eIDAS time stamps</li>
+<li>OpenTimestamps proofs anchored in Bitcoin</li>
+<li>The CAdES signature of an ASiC-E container (META-INF/signature.p7s)</li>
+<li>The PAdES signature of report.pdf and the seal inside report.html</li>
+<li>Intel TDX attestation</li>
+<li>Witness records</li>
+</ul>
+<p>For the full check, start <code>VERIFY.cmd</code> (Windows) or <code>VERIFY.sh</code> (macOS, Linux) from the archive, or run the verifier that comes with it:</p>
+<pre><code>python verify.py ARCHIVE.zip --fingerprint SHA256_FROM_THE_SENDER</code></pre>
+<p>Without Python, use the portable verifier from <a href="https://github.com/phishdestroy/TgWitness/releases">TgWitness releases on GitHub</a>: it needs no installation.</p>
+</section>
+</main>
+</body>
+</html>
