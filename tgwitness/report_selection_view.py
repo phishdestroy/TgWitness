@@ -23,7 +23,8 @@ KINDS = {"message.new": "New message", "message.snapshot": "History snapshot",
 def text_keys():
     return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, NOT_COMPARED, SHARED_NUMBERING, "Selected records", "Source journal records",
             "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types", "Selected messages",
-            "Selected messages without a journal record",
+            "Selected messages without a journal record", "Context window", "Context records",
+            "-{before} / +{after} messages",
             "Unobserved message IDs", "Unobserved IDs: {ids}. Ranges: {ranges}.",
             "Showing {shown} of {total} ranges.", "Missing ID range", "Saved before", "Saved after",
             "No unobserved message IDs were found between the saved boundaries.",
@@ -56,12 +57,17 @@ def scope_rows(material, say):
     selection, counts, source = material["selection"], material["counts"], material["source"]
     picked = picked_messages(selection) if selection["enabled"] else ""
     absent = listed(material.get("messages_not_found") or []) if picked else ""
+    before = int(selection.get("context_before") or 0)
+    after = int(selection.get("context_after") or 0)
+    has_context = bool(selection["enabled"] and (before or after))
     return [(say("Selected records"), number_text(counts["selected_records"], say)),
+            *([(say("Context records"), number_text(counts.get("context_records", 0), say))] if has_context else []),
             (say("Source journal records"), number_text(source["records"], say)),
             (say("Chats"), ", ".join(part for part in [named(selection["chats"], chat_names), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))] if part)
              or ("—" if picked else say("All chats"))),
             *([(say("Selected messages"), picked)] if picked else []),
             *([(say("Selected messages without a journal record"), absent)] if absent else []),
+            *([(say("Context window"), say("-{before} / +{after} messages", before=before, after=after))] if has_context else []),
             (say("Selected authors"), named(selection["senders"], sender_names) or say("All authors")),
             (say("Observation dates (UTC)"), " — ".join((selection["date_from"] or "…", selection["date_to"] or "…"))
              if selection["date_from"] or selection["date_to"] else say("All dates")),

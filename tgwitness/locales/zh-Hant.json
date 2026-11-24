@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "寄件者提供的指紋：{fp}",
   "The key matches the fingerprint you entered: {fp}": "金鑰與您輸入的指紋一致：{fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "請在上方貼上寄件者提供的指紋，或使用獨立的驗證工具檢查此存檔。",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "已在此瀏覽器中檢查：清單簽章與每個檔案的 SHA-256。此處未檢查：events.jsonl 中的事件鏈、RFC 3161 時間戳記、OpenTimestamps、Witness 紀錄與 Intel TDX；這些由 verify.py 檢查。"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "已在此瀏覽器中檢查：清單簽章與每個檔案的 SHA-256。此處未檢查：events.jsonl 中的事件鏈、RFC 3161 時間戳記、OpenTimestamps、Witness 紀錄與 Intel TDX；這些由 verify.py 檢查。",
+  "Capture mode": "擷取模式",
+  "Enter a whole number from 0 to 50.": "請輸入 0 到 50 之間的整數。",
+  "Interactive (visible window, record each screen until closed)": "互動模式（可見視窗，關閉前記錄每個畫面）",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "本機 Whisper · 無需 Docker 即可轉錄 · OCR 需要 Linux 容器工作程式",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "正在可見瀏覽器視窗中開啟小程式。完成後請關閉視窗。",
+  "Passive (load, screenshots, MHTML, HAR)": "被動模式（載入、截圖、MHTML、HAR）",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "安全瀏覽（切換非破壞性分頁，攔截付款）",
+  "Context window": "上下文視窗",
+  "Context records": "上下文記錄",
+  "-{before} / +{after} messages": "-{before} / +{after} 則訊息",
+  "Context before (messages)": "前文上下文（訊息數）",
+  "Context after (messages)": "後文上下文（訊息數）",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "在每筆符合記錄前後納入相鄰訊息以保留對話上下文（每側 0 至 50 則訊息）。"
 }

@@ -11087,5 +11087,18 @@
   "Fingerprint from the sender: {fp}": "Відбиток від відправника: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Ключ збігається з введеним відбитком: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Вставте вище відбиток від відправника або перевірте архів незалежним верифікатором.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "У цьому браузері перевірено підпис маніфесту й SHA-256 кожного файлу. Тут не перевірялися ланцюжок подій у events.jsonl, мітки часу RFC 3161, OpenTimestamps, записи свідків (Witness) та Intel TDX — їх перевіряє verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "У цьому браузері перевірено підпис маніфесту й SHA-256 кожного файлу. Тут не перевірялися ланцюжок подій у events.jsonl, мітки часу RFC 3161, OpenTimestamps, записи свідків (Witness) та Intel TDX — їх перевіряє verify.py.",
+  "Capture mode": "Режим запису",
+  "Enter a whole number from 0 to 50.": "Введіть ціле число від 0 до 50.",
+  "Interactive (visible window, record each screen until closed)": "Інтерактивний (видиме вікно, запис кожного екрана до закриття)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Локальний Whisper · розшифрування без Docker · OCR потребує Linux-контейнера",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Мінізастосунок відкривається у видимому вікні браузера. Закрийте вікно після завершення.",
+  "Passive (load, screenshots, MHTML, HAR)": "Пасивний (завантаження, скриншоти, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Безпечний обхід (безпечні вкладки, блокування оплат)",
+  "Context window": "Вікно контексту",
+  "Context records": "Контекстні записи",
+  "-{before} / +{after} messages": "-{before} / +{after} повідомлень",
+  "Context before (messages)": "Контекст до (повідомлень)",
+  "Context after (messages)": "Контекст після (повідомлень)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Додавати сусідні повідомлення навколо кожного знайденого запису для збереження контексту розмови (від 0 до 50 повідомлень з кожного боку)."
 }

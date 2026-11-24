@@ -280,8 +280,9 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                                                               snapshot.through)
             selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
             report_events = snapshot.events
+            selection_matches = None
             if not compact and selection.enabled and fmt in ("html", "json", "pdf", "zip"):
-                selection_matches = report.report_selection.compile_selection(selection)
+                selection_matches = report.report_selection.resolve_selection(snapshot.events(), selection)
                 selected_messages = report.report_selection.selected_messages(snapshot.events(), selection_matches)
 
                 def selected_event(event):
@@ -307,7 +308,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 from . import report_secret
                 context["encrypted_chats"] = report_secret.collect(
                     snapshot.connection, snapshot.through, selection.secret_chats if selection.enabled else None, summary["titles"],
-                    allowed=report.report_selection.compile_selection(selection) if selection.enabled else None)
+                    allowed=selection_matches if selection.enabled else None)
                 context["media_root"] = str(store.root / "media")
                 context["encrypted_only"] = bool(selection.enabled and selection.secret_chats and not selection.chats
                                               and not selection.messages and context["encrypted_chats"])

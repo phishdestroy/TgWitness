@@ -11189,5 +11189,18 @@
   "Fingerprint from the sender: {fp}": "البصمة الواردة من المرسِل: {fp}",
   "The key matches the fingerprint you entered: {fp}": "يتطابق المفتاح مع البصمة التي أدخلتها: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "الصق بصمة المرسِل في الحقل أعلاه، أو تحقّق من الأرشيف بأداة تحقق مستقلة.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ما جرى التحقق منه في هذا المتصفح: توقيع قائمة البيانات وقيمة SHA-256 لكل ملف. ما لم يُتحقق منه هنا: سلسلة الأحداث في events.jsonl، والطوابع الزمنية RFC 3161، وOpenTimestamps، وسجلات Witness، وIntel TDX؛ يتحقق منها verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ما جرى التحقق منه في هذا المتصفح: توقيع قائمة البيانات وقيمة SHA-256 لكل ملف. ما لم يُتحقق منه هنا: سلسلة الأحداث في events.jsonl، والطوابع الزمنية RFC 3161، وOpenTimestamps، وسجلات Witness، وIntel TDX؛ يتحقق منها verify.py.",
+  "Capture mode": "وضع الالتقاط",
+  "Enter a whole number from 0 to 50.": "أدخل عدداً صحيحاً من 0 إلى 50.",
+  "Interactive (visible window, record each screen until closed)": "تفاعلي (نافذة مرئية، تسجيل كل شاشة حتى الإغلاق)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper المحلي · تفريغ صوتي بدون Docker · التعرف الضوئي يتطلب عامل حاوية Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "جارٍ فتح التطبيق المصغّر في نافذة متصفح مرئية. أغلق النافذة عند الانتهاء.",
+  "Passive (load, screenshots, MHTML, HAR)": "سلبي (تحميل، لقطات شاشة، MHTML، HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "تصفح آمن (التنقل بين التبويبات غير الضارة وحظر الدفع)",
+  "Context window": "نافذة السياق",
+  "Context records": "سجلات السياق",
+  "-{before} / +{after} messages": "-{before} / +{after} رسائل",
+  "Context before (messages)": "السياق قبل (رسائل)",
+  "Context after (messages)": "السياق بعد (رسائل)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "تضمين الرسائل المجاورة حول كل سجل مطابق للحفاظ على سياق المحادثة (من 0 إلى 50 رسالة من كل جانب)."
 }

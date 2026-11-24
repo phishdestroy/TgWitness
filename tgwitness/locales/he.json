@@ -11036,5 +11036,18 @@
   "Fingerprint from the sender: {fp}": "טביעה מהשולח: {fp}",
   "The key matches the fingerprint you entered: {fp}": "המפתח תואם לטביעה שהזנתם: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "הדביקו למעלה את הטביעה מהשולח, או בדקו את הארכיון בכלי אימות עצמאי.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "נבדקו בדפדפן זה: חתימת המניפסט וערך SHA-256 של כל קובץ. לא נבדקו כאן: שרשרת האירועים ב-events.jsonl, חותמות זמן RFC 3161, OpenTimestamps, רשומות Witness ו-Intel TDX; את אלה בודק verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "נבדקו בדפדפן זה: חתימת המניפסט וערך SHA-256 של כל קובץ. לא נבדקו כאן: שרשרת האירועים ב-events.jsonl, חותמות זמן RFC 3161, OpenTimestamps, רשומות Witness ו-Intel TDX; את אלה בודק verify.py.",
+  "Capture mode": "מצב לכידה",
+  "Enter a whole number from 0 to 50.": "הזן מספר שלם בין 0 ל-50.",
+  "Interactive (visible window, record each screen until closed)": "אינטראקטיבי (חלון גלוי, תיעוד כל מסך עד לסגירה)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper מקומי · תמלול ללא Docker · OCR דורש עובד קונטיינר Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "פותח את המיני-אפליקציה בחלון דפדפן גלוי. סגור את החלון בסיום.",
+  "Passive (load, screenshots, MHTML, HAR)": "פסיבי (טעינה, צילומי מסך, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "סריקה בטוחה (ניווט בכרטיסיות לא הרסניות וחסימת תשלומים)",
+  "Context window": "חלון הקשר",
+  "Context records": "רשומות הקשר",
+  "-{before} / +{after} messages": "-{before} / +{after} הודעות",
+  "Context before (messages)": "הקשר לפני (הודעות)",
+  "Context after (messages)": "הקשר אחרי (הודעות)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "כלול הודעות שכנות סביב כל רשומה תואמת כדי לשמור על הקשר השיחה (0 עד 50 הודעות מכל צד)."
 }

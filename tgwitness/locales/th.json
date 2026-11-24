@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "ลายนิ้วมือจากผู้ส่ง: {fp}",
   "The key matches the fingerprint you entered: {fp}": "กุญแจตรงกับลายนิ้วมือที่คุณป้อน: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "วางลายนิ้วมือจากผู้ส่งในช่องด้านบน หรือตรวจอาร์ไคฟ์ด้วยเครื่องมือตรวจสอบอิสระ",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ตรวจในเบราว์เซอร์นี้แล้ว: ลายเซ็นของ manifest และ SHA-256 ของทุกไฟล์ ยังไม่ได้ตรวจที่นี่: ห่วงโซ่เหตุการณ์ใน events.jsonl, การประทับเวลา RFC 3161, OpenTimestamps, บันทึก Witness และ Intel TDX ซึ่ง verify.py เป็นผู้ตรวจ"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "ตรวจในเบราว์เซอร์นี้แล้ว: ลายเซ็นของ manifest และ SHA-256 ของทุกไฟล์ ยังไม่ได้ตรวจที่นี่: ห่วงโซ่เหตุการณ์ใน events.jsonl, การประทับเวลา RFC 3161, OpenTimestamps, บันทึก Witness และ Intel TDX ซึ่ง verify.py เป็นผู้ตรวจ",
+  "Capture mode": "โหมดการบันทึก",
+  "Enter a whole number from 0 to 50.": "กรอกจำนวนเต็มตั้งแต่ 0 ถึง 50",
+  "Interactive (visible window, record each screen until closed)": "โต้ตอบ (หน้าต่างที่มองเห็น บันทึกทุกหน้าจอจนกว่าจะปิด)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper ในเครื่อง · ถอดเสียงโดยไม่ต้องใช้ Docker · OCR ต้องใช้คอนเทนเนอร์ Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "กำลังเปิดมินิแอปในหน้าต่างเบราว์เซอร์ที่มองเห็น ปิดหน้าต่างเมื่อเสร็จสิ้น",
+  "Passive (load, screenshots, MHTML, HAR)": "อัตโนมัติ (โหลด ภาพหน้าจอ MHTML HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "สำรวจอย่างปลอดภัย (เปิดแท็บปลอดภัย บล็อกการชำระเงิน)",
+  "Context window": "ช่วงบริบท",
+  "Context records": "รายการบริบท",
+  "-{before} / +{after} messages": "-{before} / +{after} ข้อความ",
+  "Context before (messages)": "บริบทก่อนหน้า (ข้อความ)",
+  "Context after (messages)": "บริบทถัดไป (ข้อความ)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "รวมข้อความข้างเคียงรอบแต่ละรายการที่ตรงกันเพื่อรักษาบริบทการสนทนา (0 ถึง 50 ข้อความในแต่ละฝั่ง)"
 }

@@ -13,7 +13,12 @@
     const data=await call("media?"+new URLSearchParams({query:$("media-search").value,kind:$("media-filter").value,offset}));
     if(!current(turn,workspace)||serial!==loadSerial)return;
     available=data.available;next=data.next_offset;$("media-next").disabled=next===null;$("media-previous").disabled=offset===0;$("media-start").disabled=!available||!selected;
-    $("media-worker-status").textContent=available?tr("Local worker · one CPU · 2 GiB RAM · no network"):tr("Local worker is not configured. See the media processing setup guide.");
+    const statusText=!available
+      ?tr("Local worker is not configured. See the media processing setup guide.")
+      :data.processing==="local-whisper"
+        ?tr("Local Whisper · transcription without Docker · OCR requires the Linux container worker")
+        :tr("Local worker · one CPU · 2 GiB RAM · no network");
+    $("media-worker-status").textContent=statusText;
     const box=$("media-jobs");box.replaceChildren();
     for(const job of data.jobs){
       const statuses={queued:tr("Queued"),running:tr("Running"),completed:tr("Completed"),failed:tr("Failed"),cancelled:tr("Cancelled"),interrupted:tr("Interrupted")};

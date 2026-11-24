@@ -199,6 +199,11 @@ async def status(request: Request, *, ctx=Depends(current_context)):
             and (not store.get_setting("demo", False)),
             "media_available": media_analysis.available()
             and (not store.get_setting("demo", False)),
+            "media_engines": (
+                media_analysis.capabilities()["engines"]
+                if not store.get_setting("demo", False)
+                else {"ocr": False, "transcription": False}
+            ),
         },
         "collector": collector_status,
         "stats": store.stats(allowed),

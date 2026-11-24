@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "प्रेषक से मिला फिंगरप्रिंट: {fp}",
   "The key matches the fingerprint you entered: {fp}": "कुंजी आपके दर्ज किए फिंगरप्रिंट से मेल खाती है: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "ऊपर प्रेषक से मिला फिंगरप्रिंट चिपकाएँ, या आर्काइव को किसी स्वतंत्र सत्यापक से जाँचें।",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "इस ब्राउज़र में जाँचा गया: मैनिफेस्ट का हस्ताक्षर और हर फ़ाइल का SHA-256। यहाँ नहीं जाँचा गया: events.jsonl में घटनाओं की शृंखला, RFC 3161 टाइमस्टैम्प, OpenTimestamps, Witness रिकॉर्ड और Intel TDX; इन्हें verify.py जाँचता है।"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "इस ब्राउज़र में जाँचा गया: मैनिफेस्ट का हस्ताक्षर और हर फ़ाइल का SHA-256। यहाँ नहीं जाँचा गया: events.jsonl में घटनाओं की शृंखला, RFC 3161 टाइमस्टैम्प, OpenTimestamps, Witness रिकॉर्ड और Intel TDX; इन्हें verify.py जाँचता है।",
+  "Capture mode": "कैप्चर मोड",
+  "Enter a whole number from 0 to 50.": "0 से 50 तक की एक पूर्ण संख्या दर्ज करें।",
+  "Interactive (visible window, record each screen until closed)": "इंटरैक्टिव (दृश्य विंडो, बंद होने तक हर स्क्रीन रिकॉर्ड करें)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "लोकल Whisper · बिना Docker के ट्रांसक्रिप्शन · OCR के लिए Linux कंटेनर वर्कर आवश्यक है",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "मिनी एप्लिकेशन को एक दृश्य ब्राउज़र विंडो में खोला जा रहा है। पूरा होने पर विंडो बंद करें।",
+  "Passive (load, screenshots, MHTML, HAR)": "पैसिव (लोड, स्क्रीनशॉट, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "सुरक्षित क्रॉल (गैर-विनाशकारी टैब नेविगेट करें, भुगतान ब्लॉक करें)",
+  "Context window": "संदर्भ विंडो",
+  "Context records": "संदर्भ रिकॉर्ड",
+  "-{before} / +{after} messages": "-{before} / +{after} संदेश",
+  "Context before (messages)": "पहले का संदर्भ (संदेश)",
+  "Context after (messages)": "बाद का संदर्भ (संदेश)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "बातचीत का संदर्भ बनाए रखने के लिए प्रत्येक मेल खाने वाले रिकॉर्ड के आस-पास के संदेश शामिल करें (प्रत्येक तरफ 0 से 50 संदेश)।"
 }

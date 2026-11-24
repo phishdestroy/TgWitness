@@ -84,8 +84,19 @@ class Vault:
         key_path = root / "vault.key"
         protected = [root / "credentials.enc", root / "signing.enc", root / "independent_login.enc"]
         external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
+        keyring_env = os.environ.get("TGWITNESS_VAULT_KEYRING", "").strip()
         marker = root / "vault.external.json"
-        self.key_mode = "external" if external or marker.exists() else "local"
+        keyring_marker = root / "vault.keyring.json"
+        if external and keyring_env:
+            raise RuntimeError("Choose either TGWITNESS_VAULT_KEY_FILE or TGWITNESS_VAULT_KEYRING, not both.")
+        if marker.exists() and keyring_marker.exists():
+            raise RuntimeError("Conflicting vault markers (vault.external.json and vault.keyring.json).")
+        if external or marker.exists():
+            self.key_mode = "external"
+        elif keyring_env or keyring_marker.exists():
+            self.key_mode = "keyring"
+        else:
+            self.key_mode = "local"
         if self.key_mode == "external":
             if not external:
                 raise RuntimeError("This vault requires TGWITNESS_VAULT_KEY_FILE. Refusing local key replacement.")
@@ -105,6 +116,23 @@ class Vault:
             if config["format"] not in (EXTERNAL_FORMAT, "tgwatch-external-vault-v1") or len(salt) != 32:
                 raise RuntimeError("Invalid external vault metadata; restore the original file.")
             self.fernet = external_fernet(master, salt)
+        elif self.key_mode == "keyring":
+            if key_path.exists() or (not keyring_marker.exists() and any(p.exists() for p in protected)):
+                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: python -m tgwitness.security migrate-to-keyring --data-dir DATA")
+            service, account, salt = _load_or_create_keyring_marker(root, keyring_marker, keyring_env)
+            store = KeyringStore(service)
+            stored = store.get(account)
+            if stored is None:
+                if any(p.exists() for p in protected):
+                    raise RuntimeError("Vault master key missing from OS keyring (" + service + " / " + account + "). Restore it; refusing key replacement.")
+                master = Fernet.generate_key()
+                store.set(account, master.decode("ascii"))
+                if store.get(account) != master.decode("ascii"):
+                    raise RuntimeError("OS keyring did not retain the stored vault master key.")
+            else:
+                master = stored.strip().encode("ascii")
+            Fernet(master)
+            self.fernet = keyring_fernet(master, salt)
         else:
             if not key_path.exists():
                 if any(p.exists() for p in protected):
@@ -230,12 +258,239 @@ class KeyLock:
 
 
 EXTERNAL_FORMAT = "tgwitness-external-vault-v1"
+KEYRING_FORMAT = "tgwitness-keyring-vault-v1"
+KEYRING_SERVICE_DEFAULT = "TgWitness"
+KEYRING_CHUNK = 1200
+_KEYRING_OVERRIDE = None
 
 
 def external_fernet(master, salt):
     key = HKDF(algorithm=hashes.SHA256(), length=32, salt=salt,
                info=b"TgWitness external vault v1").derive(base64.urlsafe_b64decode(master))
     return Fernet(base64.urlsafe_b64encode(key))
+
+
+def keyring_fernet(master, salt):
+    key = HKDF(algorithm=hashes.SHA256(), length=32, salt=salt,
+               info=b"TgWitness keyring vault v1").derive(base64.urlsafe_b64decode(master))
+    return Fernet(base64.urlsafe_b64encode(key))
+
+
+def set_keyring_backend(backend):
+    """Override the OS keyring backend (primarily for isolated tests)."""
+    global _KEYRING_OVERRIDE
+    _KEYRING_OVERRIDE = backend
+
+
+class _WindowsCredentialBackend:
+    """Zero-dependency Windows Credential Manager (DPAPI-protected) backend via advapi32."""
+
+    CRED_TYPE_GENERIC = 1
+    CRED_PERSIST_LOCAL_MACHINE = 2
+
+    def __init__(self):
+        import ctypes
+        from ctypes import wintypes
+
+        class FILETIME(ctypes.Structure):
+            _fields_ = [("dwLowDateTime", wintypes.DWORD), ("dwHighDateTime", wintypes.DWORD)]
+
+        class CREDENTIALW(ctypes.Structure):
+            _fields_ = [
+                ("Flags", wintypes.DWORD),
+                ("Type", wintypes.DWORD),
+                ("TargetName", wintypes.LPWSTR),
+                ("Comment", wintypes.LPWSTR),
+                ("LastWritten", FILETIME),
+                ("CredentialBlobSize", wintypes.DWORD),
+                ("CredentialBlob", ctypes.POINTER(ctypes.c_ubyte)),
+                ("Persist", wintypes.DWORD),
+                ("AttributeCount", wintypes.DWORD),
+                ("Attributes", ctypes.c_void_p),
+                ("TargetAlias", wintypes.LPWSTR),
+                ("UserName", wintypes.LPWSTR),
+            ]
+
+        advapi32 = ctypes.WinDLL("advapi32", use_last_error=True)
+        advapi32.CredWriteW.argtypes = [ctypes.POINTER(CREDENTIALW), wintypes.DWORD]
+        advapi32.CredWriteW.restype = wintypes.BOOL
+        advapi32.CredReadW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(ctypes.POINTER(CREDENTIALW))]
+        advapi32.CredReadW.restype = wintypes.BOOL
+        advapi32.CredDeleteW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD]
+        advapi32.CredDeleteW.restype = wintypes.BOOL
+        advapi32.CredFree.argtypes = [ctypes.c_void_p]
+        advapi32.CredFree.restype = None
+        self._ctypes = ctypes
+        self._CREDENTIALW = CREDENTIALW
+        self._advapi32 = advapi32
+
+    @staticmethod
+    def _target(service, key):
+        return service + ":" + key
+
+    def get_password(self, service, key):
+        ptr = self._ctypes.POINTER(self._CREDENTIALW)()
+        ok = self._advapi32.CredReadW(self._target(service, key), self.CRED_TYPE_GENERIC, 0, self._ctypes.byref(ptr))
+        if not ok:
+            err = self._ctypes.get_last_error()
+            if err == 1168:  # ERROR_NOT_FOUND
+                return None
+            raise RuntimeError("Windows Credential Manager read failed (error " + str(err) + ")")
+        try:
+            cred = ptr.contents
+            raw = bytes(cred.CredentialBlob[:cred.CredentialBlobSize])
+            return raw.decode("utf-16-le")
+        finally:
+            self._advapi32.CredFree(ptr)
+
+    def set_password(self, service, key, value):
+        blob = value.encode("utf-16-le")
+        buf = (self._ctypes.c_ubyte * len(blob)).from_buffer_copy(blob)
+        cred = self._CREDENTIALW()
+        cred.Type = self.CRED_TYPE_GENERIC
+        cred.TargetName = self._target(service, key)
+        cred.UserName = key
+        cred.CredentialBlobSize = len(blob)
+        cred.CredentialBlob = buf
+        cred.Persist = self.CRED_PERSIST_LOCAL_MACHINE
+        if not self._advapi32.CredWriteW(self._ctypes.byref(cred), 0):
+            err = self._ctypes.get_last_error()
+            raise RuntimeError("Windows Credential Manager write failed (error " + str(err) + ")")
+
+    def delete_password(self, service, key):
+        ok = self._advapi32.CredDeleteW(self._target(service, key), self.CRED_TYPE_GENERIC, 0)
+        if not ok:
+            err = self._ctypes.get_last_error()
+            if err != 1168:
+                raise RuntimeError("Windows Credential Manager delete failed (error " + str(err) + ")")
+
+
+def _resolve_keyring_backend():
+    if _KEYRING_OVERRIDE is not None:
+        return _KEYRING_OVERRIDE
+    try:
+        import keyring
+        backend = keyring.get_keyring()
+        name = type(backend).__name__.lower()
+        module = type(backend).__module__.lower()
+        if "fail" not in name and "null" not in name and "fail" not in module and "null" not in module:
+            return keyring
+    except Exception:
+        pass
+    if os.name == "nt":
+        return _WindowsCredentialBackend()
+    return None
+
+
+def keyring_available():
+    return _resolve_keyring_backend() is not None
+
+
+class KeyringStore:
+    """Chunked OS keyring wrapper (respects Windows Credential Manager ~2.5 KiB blob limit)."""
+
+    def __init__(self, service=KEYRING_SERVICE_DEFAULT, backend=None):
+        self.service = (service or KEYRING_SERVICE_DEFAULT).strip() or KEYRING_SERVICE_DEFAULT
+        self._backend = backend
+
+    def _require(self):
+        backend = self._backend or _resolve_keyring_backend()
+        if backend is None:
+            raise RuntimeError("No OS keyring backend is available. Install tgwitness[keyring] or use TGWITNESS_VAULT_KEY_FILE.")
+        return backend
+
+    def get(self, key):
+        backend = self._require()
+        try:
+            head = backend.get_password(self.service, key)
+        except Exception as exc:
+            raise RuntimeError("Could not read from OS keyring: " + str(exc)) from None
+        if head is None or not head.startswith("chunks:"):
+            return head
+        try:
+            count = int(head.split(":", 1)[1])
+        except ValueError:
+            raise RuntimeError("Corrupted chunked secret header in OS keyring.") from None
+        parts = []
+        for idx in range(count):
+            part = backend.get_password(self.service, key + "#" + str(idx))
+            if part is None:
+                raise RuntimeError("Incomplete chunked secret in OS keyring.")
+            parts.append(part)
+        return "".join(parts)
+
+    def set(self, key, value):
+        backend = self._require()
+        self.delete(key)
+        if len(value) <= KEYRING_CHUNK:
+            backend.set_password(self.service, key, value)
+            return
+        parts = [value[i:i + KEYRING_CHUNK] for i in range(0, len(value), KEYRING_CHUNK)]
+        for idx, part in enumerate(parts):
+            backend.set_password(self.service, key + "#" + str(idx), part)
+        backend.set_password(self.service, key, "chunks:" + str(len(parts)))
+
+    def delete(self, key):
+        backend = self._require()
+        try:
+            head = backend.get_password(self.service, key)
+        except Exception:
+            head = None
+        if head and head.startswith("chunks:"):
+            try:
+                count = int(head.split(":", 1)[1])
+            except ValueError:
+                count = 0
+            for idx in range(count):
+                try:
+                    backend.delete_password(self.service, key + "#" + str(idx))
+                except Exception:
+                    pass
+        try:
+            backend.delete_password(self.service, key)
+        except Exception:
+            pass
+
+
+def _keyring_service_name(env_value):
+    cleaned = (env_value or "").strip()
+    if cleaned.lower() in ("", "1", "true", "yes", "auto"):
+        return KEYRING_SERVICE_DEFAULT
+    return cleaned
+
+
+def _default_keyring_account(root: Path):
+    import hashlib
+    resolved = str(Path(root).resolve())
+    return "vault-" + hashlib.sha256(resolved.encode("utf-8")).hexdigest()[:16]
+
+
+def read_keyring_marker(marker: Path):
+    try:
+        config = json.loads(marker.read_bytes())
+        salt = base64.b64decode(config["salt"], validate=True)
+        service = str(config["service"]).strip()
+        account = str(config["account"]).strip()
+    except (OSError, ValueError, KeyError, TypeError):
+        raise RuntimeError("Invalid keyring vault metadata; restore the original file.") from None
+    if config.get("format") != KEYRING_FORMAT or len(salt) != 32 or not service or not account:
+        raise RuntimeError("Invalid keyring vault metadata; restore the original file.")
+    return service, account, salt
+
+
+def _load_or_create_keyring_marker(root: Path, marker: Path, env_value: str):
+    if marker.exists():
+        return read_keyring_marker(marker)
+    service = _keyring_service_name(env_value)
+    account = _default_keyring_account(root)
+    salt = os.urandom(32)
+    private_write(marker, json.dumps({
+        "format": KEYRING_FORMAT,
+        "service": service,
+        "account": account,
+        "salt": base64.b64encode(salt).decode(),
+    }).encode())
+    return service, account, salt
 
 
 def read_master(master_file, root):
@@ -327,16 +582,136 @@ def migrate_to_external(root, master_file):
     return moved
 
 
+def migrate_to_keyring(root, service=None, account=None, *, store=None):
+    root = Path(root).resolve()
+    service = _keyring_service_name(service)
+    account = (account or "").strip() or _default_keyring_account(root)
+    kr = store or KeyringStore(service)
+    existing = kr.get(account)
+    if existing is None:
+        master = Fernet.generate_key()
+        kr.set(account, master.decode("ascii"))
+        if kr.get(account) != master.decode("ascii"):
+            raise RuntimeError("OS keyring did not retain the stored vault master key.")
+    else:
+        master = existing.strip().encode("ascii")
+        Fernet(master)
+    folders = [root, *(sorted(p for p in (root / "profiles").iterdir() if p.is_dir()) if (root / "profiles").is_dir() else [])]
+    lock = InstanceLock(root)
+    moved = []
+    try:
+        for folder in folders:
+            key_path, marker = folder / "vault.key", folder / "vault.keyring.json"
+            if (folder / "vault.external.json").exists():
+                raise RuntimeError("Workspace already uses an external key file: " + str(folder))
+            if not key_path.exists():
+                for kept in vault_files(folder, ".enc.local"):
+                    kept.unlink()
+                continue
+            for kept in vault_files(folder, ".enc.local"):
+                os.replace(kept, kept.with_name(kept.name[:-6]))
+            local = Fernet(key_path.read_bytes())
+            if marker.exists():
+                m_service, m_account, salt = read_keyring_marker(marker)
+                if (m_service, m_account) != (service, account):
+                    raise RuntimeError("Existing vault.keyring.json points to a different keyring entry.")
+            else:
+                salt = os.urandom(32)
+            target = keyring_fernet(master, salt)
+            private_write(marker, json.dumps({
+                "format": KEYRING_FORMAT,
+                "service": service,
+                "account": account,
+                "salt": base64.b64encode(salt).decode(),
+            }).encode())
+            files = vault_files(folder)
+            plain = {path: local.decrypt(path.read_bytes()) for path in files}
+            for path, data in plain.items():
+                private_write(path.with_name(path.name + ".new"), target.encrypt(data))
+            for path in files:
+                os.replace(path, path.with_name(path.name + ".local"))
+                os.replace(path.with_name(path.name + ".new"), path)
+            peers = migrate_peers(folder, local, target)
+            for path, data in plain.items():
+                if target.decrypt(path.read_bytes()) != data:
+                    raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
+            key_path.unlink()
+            for path in files:
+                path.with_name(path.name + ".local").unlink()
+            moved.append({"workspace": str(folder.relative_to(root)) if folder != root else "default",
+                          "files": len(files), "peers": peers, "service": service, "account": account})
+    finally:
+        lock.close()
+    return moved
+
+
+def export_keyring_key(destination, *, data_dir=None, service=None, account=None, store=None):
+    destination = Path(destination)
+    if data_dir is not None:
+        marker = Path(data_dir).resolve() / "vault.keyring.json"
+        if marker.exists():
+            m_service, m_account, _ = read_keyring_marker(marker)
+            service = service or m_service
+            account = account or m_account
+        elif not account:
+            account = _default_keyring_account(Path(data_dir))
+    service = _keyring_service_name(service)
+    if not account:
+        raise ValueError("Provide --data-dir or --account to locate the keyring entry.")
+    kr = store or KeyringStore(service)
+    stored = kr.get(account)
+    if not stored:
+        raise RuntimeError("No vault master key found in OS keyring (" + service + " / " + account + ").")
+    master = stored.strip().encode("ascii")
+    Fernet(master)
+    fd = os.open(destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "wb") as output:
+        output.write(master)
+        output.flush()
+        os.fsync(output.fileno())
+    return {"service": service, "account": account, "path": str(destination.resolve())}
+
+
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Create an external vault master key without printing it.")
-    parser.add_argument("command", choices=["create-master-key", "migrate-to-external"])
-    parser.add_argument("path", type=Path, help="New master-key file, or with migrate-to-external the existing one")
-    parser.add_argument("--data-dir", type=Path, help="Data directory to migrate (the panel must be stopped)")
+    parser = argparse.ArgumentParser(description="Manage external and OS keyring vault master keys without printing secrets.")
+    parser.add_argument("command", choices=["create-master-key", "migrate-to-external", "migrate-to-keyring", "export-keyring-key"])
+    parser.add_argument("path", nargs="?", type=Path, help="Master-key file path (for create-master-key, migrate-to-external, export-keyring-key)")
+    parser.add_argument("--data-dir", type=Path, help="Data directory to migrate or inspect (the panel must be stopped)")
+    parser.add_argument("--service", default=None, help="OS keyring service name (default: TgWitness)")
+    parser.add_argument("--account", default=None, help="OS keyring account name (default: derived from --data-dir)")
     args = parser.parse_args()
-    if args.command == "migrate-to-external":
+    if args.command == "migrate-to-keyring":
         if args.data_dir is None:
             parser.exit(2, "Give the data directory with --data-dir.\n")
+        try:
+            moved = migrate_to_keyring(args.data_dir, service=args.service, account=args.account)
+        except InvalidToken:
+            parser.exit(1, "Migration stopped: a vault file does not open with the vault.key of its workspace. Restore "
+                           "it from a backup and run the command again; vault.key is removed only after every file "
+                           "of that workspace reads back.\n")
+        except (OSError, ValueError, RuntimeError, sqlite3.Error) as exc:
+            parser.exit(1, "Migration stopped: " + str(exc) + "\n")
+        for item in moved:
+            print("Workspace " + item["workspace"] + ": " + str(item["files"]) + " vault files and "
+                  + str(item["peers"]) + " saved profiling peers re-encrypted into OS keyring ("
+                  + item["service"] + " / " + item["account"] + "); vault.key removed.")
+        print("Back up the keyring master key offline with: python -m tgwitness.security export-keyring-key BACKUP.key --data-dir "
+              + str(Path(args.data_dir).resolve()))
+        return
+    if args.command == "export-keyring-key":
+        if args.path is None:
+            parser.exit(2, "Give the destination backup key file path.\n")
+        try:
+            info = export_keyring_key(args.path, data_dir=args.data_dir, service=args.service, account=args.account)
+        except (OSError, ValueError, RuntimeError) as exc:
+            parser.exit(1, "Could not export keyring master key: " + str(exc) + "\n")
+        print("Master key exported from OS keyring (" + info["service"] + " / " + info["account"]
+              + ") to " + info["path"] + ". Keep this backup separate from the data directory.")
+        return
+    if args.command == "migrate-to-external":
+        if args.data_dir is None or args.path is None:
+            parser.exit(2, "Give the master-key file path and --data-dir.\n")
         try:
             moved = migrate_to_external(args.data_dir, args.path)
         except InvalidToken:
@@ -351,6 +726,8 @@ def main():
         print("Start TgWitness with TGWITNESS_VAULT_KEY_FILE=" + str(Path(args.path).resolve()) + " from now on, "
               "and keep that key file and its backup apart from the data directory.")
         return
+    if args.path is None:
+        parser.exit(2, "Give the destination key file path.\n")
     try:
         fd = os.open(args.path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "wb") as output:

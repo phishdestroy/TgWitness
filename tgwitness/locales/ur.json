@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "بھیجنے والے کا فنگر پرنٹ: {fp}",
   "The key matches the fingerprint you entered: {fp}": "کلید آپ کے درج کردہ فنگر پرنٹ سے مطابقت رکھتی ہے: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "اوپر بھیجنے والے کا فنگر پرنٹ چسپاں کریں، یا آرکائیو کو کسی آزاد تصدیق کنندہ سے جانچیں۔",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "اس براؤزر میں جانچا گیا: مینفیسٹ کا دستخط اور ہر فائل کا SHA-256۔ یہاں نہیں جانچا گیا: events.jsonl میں واقعات کی زنجیر، RFC 3161 ٹائم اسٹیمپ، OpenTimestamps، Witness ریکارڈ اور Intel TDX؛ انہیں verify.py جانچتا ہے۔"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "اس براؤزر میں جانچا گیا: مینفیسٹ کا دستخط اور ہر فائل کا SHA-256۔ یہاں نہیں جانچا گیا: events.jsonl میں واقعات کی زنجیر، RFC 3161 ٹائم اسٹیمپ، OpenTimestamps، Witness ریکارڈ اور Intel TDX؛ انہیں verify.py جانچتا ہے۔",
+  "Capture mode": "کیپچر موڈ",
+  "Enter a whole number from 0 to 50.": "0 سے 50 تک کا مکمل عدد درج کریں۔",
+  "Interactive (visible window, record each screen until closed)": "انٹرایکٹو (ظاہر ونڈو، بند ہونے تک ہر اسکرین ریکارڈ کریں)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "مقامی Whisper · Docker کے بغیر ٹرانسکرپشن · OCR کے لیے Linux کنٹینر ورکر درکار ہے",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "منی ایپ کو ایک ظاہر براؤزر ونڈو میں کھولا جا رہا ہے۔ مکمل ہونے پر ونڈو بند کر دیں۔",
+  "Passive (load, screenshots, MHTML, HAR)": "پیسو (لوڈ، اسکرین شاٹس، MHTML، HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "محفوظ کرال (محفوظ ٹیبز کھولیں، ادائیگیاں بلاک کریں)",
+  "Context window": "سیاق و سباق کی حد",
+  "Context records": "سیاق و سباق کے ریکارڈز",
+  "-{before} / +{after} messages": "-{before} / +{after} پیغامات",
+  "Context before (messages)": "پہلے کا سیاق (پیغامات)",
+  "Context after (messages)": "بعد کا سیاق (پیغامات)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "گفتگو کا سیاق برقرار رکھنے کے لیے ہر مماثل ریکارڈ کے اردگرد کے پیغامات شامل کریں (ہر طرف 0 سے 50 پیغامات)۔"
 }

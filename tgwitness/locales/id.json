@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "Sidik jari dari pengirim: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Kunci cocok dengan sidik jari yang Anda masukkan: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Tempelkan sidik jari dari pengirim di atas, atau periksa arsip dengan pemverifikasi independen.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Diperiksa di browser ini: tanda tangan manifest dan SHA-256 setiap berkas. Tidak diperiksa di sini: rantai peristiwa dalam events.jsonl, stempel waktu RFC 3161, OpenTimestamps, catatan Witness, dan Intel TDX; semuanya diperiksa oleh verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Diperiksa di browser ini: tanda tangan manifest dan SHA-256 setiap berkas. Tidak diperiksa di sini: rantai peristiwa dalam events.jsonl, stempel waktu RFC 3161, OpenTimestamps, catatan Witness, dan Intel TDX; semuanya diperiksa oleh verify.py.",
+  "Capture mode": "Mode perekaman",
+  "Enter a whole number from 0 to 50.": "Masukkan bilangan bulat dari 0 hingga 50.",
+  "Interactive (visible window, record each screen until closed)": "Interaktif (jendela terlihat, rekam setiap layar hingga ditutup)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper lokal · transkripsi tanpa Docker · OCR memerlukan worker kontainer Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Membuka aplikasi mini di jendela browser yang terlihat. Tutup jendela setelah selesai.",
+  "Passive (load, screenshots, MHTML, HAR)": "Pasif (muat, tangkapan layar, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Penelusuran aman (buka tab aman, blokir pembayaran)",
+  "Context window": "Jendela konteks",
+  "Context records": "Catatan konteks",
+  "-{before} / +{after} messages": "-{before} / +{after} pesan",
+  "Context before (messages)": "Konteks sebelum (pesan)",
+  "Context after (messages)": "Konteks sesudah (pesan)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Sertakan pesan sekitar di tiap catatan yang cocok untuk menjaga konteks percakapan (0 hingga 50 pesan di setiap sisi)."
 }

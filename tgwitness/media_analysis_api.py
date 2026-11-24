@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, Request
 
 from .access import Refused
 from .archive import ArchiveQuery, ArchiveReader
-from .media_analysis import MediaJob, MediaQueue, authorize, available
+from .media_analysis import MediaJob, MediaQueue, authorize, capabilities
 from .workers import complete_in_thread
 
 
@@ -62,7 +62,10 @@ def register(app, authenticate):
                     "excerpt": artifact["text"][:300] if artifact else None})
             if query:
                 result.sort(key=lambda item: ranked.get(item["id"], len(ranked)))
-            return {"available": available(), "processing": "local-container", "jobs": result[offset:offset + 20],
+            caps = capabilities()
+            return {"available": caps["available"], "processing": caps["processing"] or "local-container",
+                    "backends": caps["backends"], "engines": caps["engines"],
+                    "jobs": result[offset:offset + 20],
                     "next_offset": offset + 20 if len(result) > offset + 20 else None}
         return await run(listed)
 
