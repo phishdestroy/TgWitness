@@ -5162,7 +5162,7 @@ function renderConnection(){
   if(state.view!=='connection')return;
   renderApiState();
   const c=state.status.collector,r=c.network||{kind:"mtproxy_auto"},p=state.status.protection||{};
-  const route=tr({direct:"Direct connection",socks5:"SOCKS5 proxy",http:"HTTP CONNECT proxy",mtproxy:"MTProxy · experimental",
+  const route=tr({direct:"Direct connection",socks5:"SOCKS5 proxy",http:"HTTP CONNECT proxy",mtproxy:"MTProxy",
     mtproxy_auto:"Public MTProxy"}[r.kind]);
   const auto=r.kind==="mtproxy_auto",now=auto&&r.current,pool=(auto&&r.pool)||{};
   $("route-summary").textContent=route;

@@ -208,7 +208,7 @@ to your actual network, not the name of the option.
 | Direct | Tunnel or VPN mode | Telethon uses the host's network route |
 | SOCKS5 | Host, port, optional username/password | python-socks, remote destination DNS enabled |
 | HTTP CONNECT | Host, port, optional username/password | Plain HTTP CONNECT; TLS to the proxy itself is not implemented |
-| MTProxy | Host, port, secret | Experimental Telethon transport; 32 hex digits or `dd` + 32 hex digits |
+| MTProxy | Host, port, secret | Telethon transport. The secret is 32 hex digits or `dd` + 32 hex digits |
 
 Fake TLS `ee` secrets are rejected. Telethon 1.45's normalization can strip a prefix
 and domain, but that does not implement Fake TLS. Paste `tg://proxy?server=…&port=…&secret=…`

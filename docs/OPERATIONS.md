@@ -253,9 +253,9 @@ Chromium layouts are tested.
 | Environment | Installation | Verification status |
 | --- | --- | --- |
 | Windows PC/server | Python 3.11+, scripts\Setup.cmd/Start.cmd, private data directory | Locally checked on Windows/Python 3.12 |
-| Linux server/VPS | Python venv, dedicated service user, HTTPS/SSH | Code, CI and systemd example provided; not executed on this host |
-| macOS | Python venv, foreground process or user agent | launchd example provided; separate installation check needed |
-| Docker/Compose | Persistent volume, one worker | Definition and CI runtime check provided; Docker unavailable locally |
+| Linux server/VPS | Python venv, dedicated service user, HTTPS/SSH | Ubuntu CI checks installation. Live Linux server runs are recorded in [Verification](VERIFICATION.md). |
+| macOS | Python venv, foreground process or user agent | The launchd example runs the Python installation. [v1.0.1](https://github.com/phishdestroy/TgWitness/releases/tag/v1.0.1) includes a portable arm64 verifier. |
+| Docker/Compose | Persistent volume, one worker | CI builds and runs the image and validates the Compose files used for server deployments. |
 | Phone browser | Connect to the protected panel on a running server | Narrow Chromium layout tested; collector does not run on iOS/Android |
 
 Portability means no mandatory cloud service or frontend build. Each target still

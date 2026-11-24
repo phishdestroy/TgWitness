@@ -30,7 +30,7 @@
 "modes.confirms": "Third party checks",
 "modes.connection.independence": "Two workspaces on one machine are not two independent witnesses.",
 "modes.connection.intro": "Each account has its own workspace, journal, signing key, route and queue.",
-"modes.connection.routes": "MTProxy is experimental; built-in public MTProxy lists are available. A failed proxy route does not fall back to a direct connection.",
+"modes.connection.routes": "Built-in public MTProxy lists are available. A failed proxy route does not fall back to a direct connection.",
 "modes.connection.title": "Use the authorization you have",
 "modes.continuity.coverage": "Read coverage.json",
 "modes.continuity.coverage.body": "Observation periods, gaps with reasons and unobserved IDs accompany the signed export. A missing-on-recheck record is not a deletion notice.",
