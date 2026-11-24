@@ -10995,5 +10995,18 @@
   "Fingerprint from the sender: {fp}": "Impressão digital do remetente: {fp}",
   "The key matches the fingerprint you entered: {fp}": "A chave corresponde à impressão digital informada: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Cole acima a impressão digital do remetente ou verifique o arquivo compactado com um verificador independente.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Verificado neste navegador: a assinatura do manifesto e o SHA-256 de cada arquivo. Não verificado aqui: a cadeia de eventos em events.jsonl, os carimbos de tempo RFC 3161, o OpenTimestamps, os registros Witness e o Intel TDX; o verify.py os verifica."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Verificado neste navegador: a assinatura do manifesto e o SHA-256 de cada arquivo. Não verificado aqui: a cadeia de eventos em events.jsonl, os carimbos de tempo RFC 3161, o OpenTimestamps, os registros Witness e o Intel TDX; o verify.py os verifica.",
+  "Capture mode": "Modo de captura",
+  "Enter a whole number from 0 to 50.": "Digite um número inteiro de 0 a 50.",
+  "Interactive (visible window, record each screen until closed)": "Interativo (janela visível, grava cada tela até fechar)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper local · transcrição sem Docker · OCR requer o worker em contêiner Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Abrindo o miniaplicativo em uma janela visível do navegador. Feche a janela ao terminar.",
+  "Passive (load, screenshots, MHTML, HAR)": "Passivo (carregamento, capturas de tela, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Navegação segura (abas não destrutivas, bloqueio de pagamentos)",
+  "Context window": "Janela de contexto",
+  "Context records": "Registros de contexto",
+  "-{before} / +{after} messages": "-{before} / +{after} mensagens",
+  "Context before (messages)": "Contexto antes (mensagens)",
+  "Context after (messages)": "Contexto depois (mensagens)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Inclua mensagens vizinhas ao redor de cada registro correspondente para preservar o contexto da conversa (0 a 50 mensagens de cada lado)."
 }

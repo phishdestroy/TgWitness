@@ -41,21 +41,33 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     field.setCustomValidity(valid?'':tr('Enter whole Telegram IDs separated by commas.'));
     return valid?[...new Set(chunks.map(Number))]:[];
   }
+  function contextNumber(id){
+    const input=find(id);
+    if(!input)return 0;
+    const raw=String(input.value||'').trim();
+    if(!raw){input.setCustomValidity('');return 0;}
+    const num=Number(raw);
+    const ok=Number.isInteger(num)&&num>=0&&num<=50;
+    input.setCustomValidity(ok?'':tr('Enter a whole number from 0 to 50.'));
+    return ok?num:0;
+  }
   function read(){
     const enabled=find('report-selection-chosen').checked,from=find('report-selection-from').value,to=find('report-selection-to').value;
     if(!enabled){
-      for(const field of [fields.chats,fields.senders,allChats,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
-      return {enabled:false,chats:[],secret_chats:[],senders:[],messages:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
+      for(const field of [fields.chats,fields.senders,allChats,find('report-selection-to'),kinds[0],find('report-selection-context-before'),find('report-selection-context-after')])field?.setCustomValidity('');
+      return {enabled:false,chats:[],secret_chats:[],senders:[],messages:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked,context_before:0,context_after:0};
     }
     find('report-selection-to').setCustomValidity(from&&to&&from>to?tr('The end date must not be earlier than the start date.'): '');
     const selected=kinds.filter(input=>input.checked).map(input=>input.dataset.reportKind);
     kinds[0].setCustomValidity(selected.length?'':tr('Choose at least one record type.'));
     const chats=ids(fields.chats);
     const secrets=ids(secretField);
+    const context_before=contextNumber('report-selection-context-before');
+    const context_after=contextNumber('report-selection-context-after');
     allChats.setCustomValidity(!allChats.checked&&!chats.length&&!secrets.length&&!picked.length?tr('Choose at least one chat.'):'');
     return {enabled,chats:allChats.checked?[]:chats,secret_chats:allChats.checked?[]:secrets,senders:ids(fields.senders),
       messages:allChats.checked?[]:picked.map(item=>({chat:item.chat,message:item.message})),
-      date_from:from,date_to:to,kinds:selected,id_gaps:find('report-selection-gaps').checked};
+      date_from:from,date_to:to,kinds:selected,id_gaps:find('report-selection-gaps').checked,context_before,context_after};
   }
   function controls(){
     find('report-selection-options').disabled=!find('report-selection-chosen').checked;
@@ -389,6 +401,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       picked=(selection.messages||[]).map(item=>({chat:Number(item.chat),message:Number(item.message)}));renderPicked();
       allChats.checked=!(selection.chats||[]).length&&!(selection.secret_chats||[]).length&&!picked.length;
       for(const [id,key] of [['report-selection-from','date_from'],['report-selection-to','date_to']])find(id).value=selection[key]||'';
+      for(const [id,key] of [['report-selection-context-before','context_before'],['report-selection-context-after','context_after']]){const el=find(id);if(el)el.value=String(Number(selection[key]||0));}
       const set=new Set(selection.kinds||kinds.map(input=>input.dataset.reportKind));for(const input of kinds)input.checked=set.has(input.dataset.reportKind);
       find('report-selection-gaps').checked=selection.id_gaps!==false;controls();renderCatalog('chats');renderCatalog('senders');
       if(stamp&&stamp!==JSON.stringify(options())){find('report-preview-stale').hidden=false;find('report-preview-result').dataset.stale='true';}

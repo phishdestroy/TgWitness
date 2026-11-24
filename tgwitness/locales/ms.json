@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "Cap jari daripada pengirim: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Kunci sepadan dengan cap jari yang anda masukkan: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Tampal cap jari daripada pengirim di atas, atau semak arkib dengan pengesah bebas.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Disemak dalam pelayar ini: tandatangan manifes dan SHA-256 setiap fail. Tidak disemak di sini: rantaian peristiwa dalam events.jsonl, cap masa RFC 3161, OpenTimestamps, rekod Witness dan Intel TDX; verify.py menyemaknya."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Disemak dalam pelayar ini: tandatangan manifes dan SHA-256 setiap fail. Tidak disemak di sini: rantaian peristiwa dalam events.jsonl, cap masa RFC 3161, OpenTimestamps, rekod Witness dan Intel TDX; verify.py menyemaknya.",
+  "Capture mode": "Mod tangkapan",
+  "Enter a whole number from 0 to 50.": "Masukkan nombor bulat dari 0 hingga 50.",
+  "Interactive (visible window, record each screen until closed)": "Interaktif (tetingkap kelihatan, rakam setiap skrin sehingga ditutup)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper tempatan · transkripsi tanpa Docker · OCR memerlukan pekerja bekas Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Membuka aplikasi mini dalam tetingkap pelayar yang kelihatan. Tutup tetingkap apabila selesai.",
+  "Passive (load, screenshots, MHTML, HAR)": "Pasif (muat, tangkapan skrin, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Imbasan selamat (navigasi tab selamat, sekat pembayaran)",
+  "Context window": "Tetingkap konteks",
+  "Context records": "Rekod konteks",
+  "-{before} / +{after} messages": "-{before} / +{after} mesej",
+  "Context before (messages)": "Konteks sebelum (mesej)",
+  "Context after (messages)": "Konteks selepas (mesej)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Sertakan mesej berdekatan di sekitar setiap rekod sepadan untuk mengekalkan konteks perbualan (0 hingga 50 mesej di setiap sisi)."
 }

@@ -13,6 +13,7 @@ from .verifier.coverage import numbered_per_chat
 
 FORMAT = "tgwitness-report-selection-v1"
 MAX_SELECTION_IDS = 1000
+MAX_CONTEXT_WINDOW = 50
 MAX_CATALOG_ROWS = 1000
 MAX_PREVIEW_ROWS = 100
 MAX_GAP_ROWS = 100
@@ -48,6 +49,8 @@ class Selection(BaseModel):
     date_to: str = Field(default="", strict=True, max_length=10, pattern=r"^(?:\d{4}-\d{2}-\d{2})?$")
     kinds: list[EventKind] = Field(default_factory=lambda: [*report_analytics.KINDS, *SECRET_KINDS], max_length=9)
     id_gaps: StrictBool = True
+    context_before: Annotated[int, Field(strict=True, ge=0, le=MAX_CONTEXT_WINDOW)] = 0
+    context_after: Annotated[int, Field(strict=True, ge=0, le=MAX_CONTEXT_WINDOW)] = 0
 
     @field_validator("chats", "secret_chats", "senders", "kinds")
     @classmethod
@@ -140,6 +143,159 @@ def compile_selection(selection):
 
 def matches(event, selection):
     return compile_selection(selection)(event)
+
+
+def merge_windows(intervals):
+    """Merge inclusive (start, end) index windows into sorted non-overlapping ranges."""
+    ordered = sorted((int(start), int(end)) for start, end in intervals if start <= end)
+    merged = []
+    for start, end in ordered:
+        if merged and start <= merged[-1][1] + 1:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return merged
+
+
+class ResolvedSelection:
+    """Selection matcher expanded with ±N neighboring context messages per chat."""
+
+    def __init__(self, base, *, context_before=0, context_after=0,
+                 target_messages=frozenset(), context_messages=frozenset(),
+                 target_secret_seqs=frozenset(), context_secret_seqs=frozenset()):
+        self.base = base
+        self.enabled = base.enabled
+        self.chats = base.chats
+        self.secret_chats = base.secret_chats
+        self.senders = base.senders
+        self.messages = base.messages
+        self.kinds = base.kinds
+        self.start = base.start
+        self.end = base.end
+        self.context_before = context_before
+        self.context_after = context_after
+        self.target_messages = frozenset(target_messages)
+        self.context_messages = frozenset(context_messages)
+        self.target_secret_seqs = frozenset(target_secret_seqs)
+        self.context_secret_seqs = frozenset(context_secret_seqs)
+
+    @property
+    def has_context(self):
+        return bool(self.context_messages or self.context_secret_seqs)
+
+    def chat(self, event):
+        return self.base.chat(event)
+
+    def whole_chat(self, event):
+        return self.base.whole_chat(event)
+
+    def time(self, event):
+        return self.base.time(event)
+
+    def role(self, event):
+        if self.base(event):
+            return "target"
+        if not self.enabled:
+            return None
+        kind = event.get("kind")
+        if not isinstance(kind, str):
+            return None
+        if kind in report_analytics.KINDS:
+            key = _message_key(event)
+            if key[0] is not None and key[1] is not None and key in self.context_messages:
+                return "context"
+        elif kind in SECRET_KINDS:
+            seq = report_analytics._sequence(event.get("seq"))
+            if seq is not None and seq in self.context_secret_seqs:
+                return "context"
+        return None
+
+    def __call__(self, event):
+        return self.role(event) is not None
+
+
+def resolve_selection(events, selection):
+    """Compile selection and expand ±N neighboring context messages when requested."""
+    selection = _selection(selection)
+    base = _Matcher(selection)
+    if not selection.enabled or (selection.context_before == 0 and selection.context_after == 0):
+        return base
+    per_chat_order = {}
+    per_chat_seen = {}
+    per_chat_targets = {}
+    secret_order = {}
+    secret_targets = {}
+    for event in events:
+        kind = event.get("kind")
+        if not isinstance(kind, str):
+            continue
+        is_target = base(event)
+        secret = report_analytics.secret_chat_id(event)
+        if secret is not None and kind in SECRET_KINDS:
+            seq = report_analytics._sequence(event.get("seq"))
+            if seq is None:
+                continue
+            secret_order.setdefault(secret, []).append(seq)
+            if is_target:
+                secret_targets.setdefault(secret, set()).add(seq)
+            continue
+        if kind in report_analytics.KINDS:
+            chat = report_analytics._identifier(event.get("chat_id"))
+            msg_id = _message_id(event.get("message_id"))
+            if chat is None or msg_id is None:
+                continue
+            seen = per_chat_seen.setdefault(chat, set())
+            if msg_id not in seen:
+                seen.add(msg_id)
+                per_chat_order.setdefault(chat, []).append(msg_id)
+            if is_target:
+                per_chat_targets.setdefault(chat, set()).add(msg_id)
+    target_messages, context_messages = set(), set()
+    for chat, timeline in per_chat_order.items():
+        targets = per_chat_targets.get(chat)
+        if not targets:
+            continue
+        if numbered_per_chat(chat):
+            timeline = sorted(timeline)
+        n = len(timeline)
+        intervals = []
+        for idx, msg_id in enumerate(timeline):
+            if msg_id in targets:
+                target_messages.add((chat, msg_id))
+                intervals.append((max(0, idx - selection.context_before),
+                                  min(n - 1, idx + selection.context_after)))
+        for start, end in merge_windows(intervals):
+            for idx in range(start, end + 1):
+                msg_id = timeline[idx]
+                if msg_id not in targets:
+                    context_messages.add((chat, msg_id))
+    target_secret_seqs, context_secret_seqs = set(), set()
+    for secret, timeline in secret_order.items():
+        targets = secret_targets.get(secret)
+        if not targets:
+            continue
+        timeline = sorted(set(timeline))
+        n = len(timeline)
+        intervals = []
+        for idx, seq in enumerate(timeline):
+            if seq in targets:
+                target_secret_seqs.add(seq)
+                intervals.append((max(0, idx - selection.context_before),
+                                  min(n - 1, idx + selection.context_after)))
+        for start, end in merge_windows(intervals):
+            for idx in range(start, end + 1):
+                seq = timeline[idx]
+                if seq not in targets:
+                    context_secret_seqs.add(seq)
+    return ResolvedSelection(
+        base,
+        context_before=selection.context_before,
+        context_after=selection.context_after,
+        target_messages=target_messages,
+        context_messages=context_messages,
+        target_secret_seqs=target_secret_seqs,
+        context_secret_seqs=context_secret_seqs,
+    )
 
 
 FILE_KINDS = frozenset(("media.saved",))
@@ -294,11 +450,12 @@ def _gaps(connection, predicate, enabled):
 
 def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
     selection = _selection(selection)
-    predicate = compile_selection(selection)
+    has_window = bool(selection.enabled and (selection.context_before or selection.context_after))
+    predicate = resolve_selection(snapshot.events(), selection) if has_window else compile_selection(selection)
     preview_limit = max(0, min(MAX_PREVIEW_ROWS, preview_limit)) if type(preview_limit) is int else 40
     aggregate = report_analytics.Analytics()
     messages = {"rows": [], "total": 0, "truncated": False}
-    records = selected_records = invalid_time_excluded = unknown_catalog_senders = 0
+    records = selected_records = context_records = invalid_time_excluded = unknown_catalog_senders = 0
     last_seq, journal_head = None, None
     if scratch_root is not None:
         Path(scratch_root).mkdir(mode=0o700, parents=True, exist_ok=True)
@@ -345,9 +502,12 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                                 connection.execute("INSERT INTO catalog_senders VALUES (?,1) ON CONFLICT(id) DO UPDATE SET count=count+1", (sender,))
                         elif report_analytics._time(event.get("observed_at")) is None:
                             invalid_time_excluded += 1
-                if not predicate(event):
+                role = predicate.role(event) if has_window else ("target" if predicate(event) else None)
+                if role is None:
                     continue
                 selected_records += 1
+                if role == "context":
+                    context_records += 1
                 aggregate.add(event)
                 if chat is not None:
                     connection.execute("INSERT OR IGNORE INTO selected_chats VALUES (?)", (chat,))
@@ -360,14 +520,24 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                     continue
                 messages["total"] += 1
                 if len(messages["rows"]) < preview_limit:
-                    messages["rows"].append(_preview(event))
+                    row_preview = _preview(event)
+                    if has_window:
+                        row_preview["context_role"] = role
+                        if role == "context":
+                            row_preview["context_only"] = True
+                    messages["rows"].append(row_preview)
                 if sender is not None:
                     connection.execute("INSERT OR IGNORE INTO selected_senders VALUES (?)", (sender,))
             raw = aggregate.result()
             chats, chats_total, chats_status = _catalog(connection, "catalog_chats", titles=True)
             secret_chats, secret_total, secret_status = _catalog(connection, "catalog_secret_chats")
             senders, senders_total, senders_status = _catalog(connection, "catalog_senders")
+            context_messages_count = (
+                len(predicate.context_messages) + len(predicate.context_secret_seqs)
+                if has_window else 0
+            )
             counts = {"selected_records": selected_records, "selected_message_records": messages["total"],
+                      "context_records": context_records, "context_messages": context_messages_count,
                       "message_observations": raw["message_observations"],
                       "participants": connection.execute("SELECT count(*) FROM selected_senders").fetchone()[0],
                       "chats": connection.execute("SELECT (SELECT count(*) FROM selected_chats) + (SELECT count(*) FROM selected_secret_chats)").fetchone()[0],

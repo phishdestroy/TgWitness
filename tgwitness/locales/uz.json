@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "Yuboruvchidan olingan barmoq izi: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Kalit siz kiritgan barmoq iziga mos keladi: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Yuboruvchidan olingan barmoq izini yuqoriga joylashtiring yoki arxivni mustaqil tekshiruvchi bilan tekshiring.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Ushbu brauzerda tekshirildi: manifest imzosi va har bir faylning SHA-256 qiymati. Bu yerda tekshirilmadi: events.jsonl dagi hodisalar zanjiri, RFC 3161 vaqt tamg'alari, OpenTimestamps, Witness yozuvlari va Intel TDX; ularni verify.py tekshiradi."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Ushbu brauzerda tekshirildi: manifest imzosi va har bir faylning SHA-256 qiymati. Bu yerda tekshirilmadi: events.jsonl dagi hodisalar zanjiri, RFC 3161 vaqt tamg'alari, OpenTimestamps, Witness yozuvlari va Intel TDX; ularni verify.py tekshiradi.",
+  "Capture mode": "Yozib olish rejimi",
+  "Enter a whole number from 0 to 50.": "0 dan 50 gacha butun son kiriting.",
+  "Interactive (visible window, record each screen until closed)": "Interaktiv (ko'rinadigan oyna, yopilguncha har bir ekranni yozish)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Mahalliy Whisper · Dockersiz transkripsiya · OCR uchun Linux konteyner ishchisi kerak",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Mini-ilova ko'rinadigan brauzer oynasida ochilmoqda. Tugatgach oynani yoping.",
+  "Passive (load, screenshots, MHTML, HAR)": "Passiv (yuklash, skrinshotlar, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Xavfsiz ko'rib chiqish (zararsiz yorliqlar, to'lovlarni bloklash)",
+  "Context window": "Kontekst oynasi",
+  "Context records": "Kontekst yozuvlari",
+  "-{before} / +{after} messages": "-{before} / +{after} ta xabar",
+  "Context before (messages)": "Oldingi kontekst (xabarlar)",
+  "Context after (messages)": "Keyingi kontekst (xabarlar)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Suhbat kontekstini saqlash uchun har bir mos yozuv atrofidagi qo'shni xabarlarni qo'shing (har tomondan 0 dan 50 tagacha xabar)."
 }

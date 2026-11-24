@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "Göndericiden alınan parmak izi: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Anahtar, girdiğiniz parmak iziyle eşleşiyor: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Göndericiden aldığınız parmak izini yukarıya yapıştırın veya arşivi bağımsız bir doğrulayıcıyla denetleyin.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Bu tarayıcıda denetlenenler: manifestin imzası ve her dosyanın SHA-256 değeri. Burada denetlenmeyenler: events.jsonl içindeki olay zinciri, RFC 3161 zaman damgaları, OpenTimestamps, Witness kayıtları ve Intel TDX; bunları verify.py denetler."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Bu tarayıcıda denetlenenler: manifestin imzası ve her dosyanın SHA-256 değeri. Burada denetlenmeyenler: events.jsonl içindeki olay zinciri, RFC 3161 zaman damgaları, OpenTimestamps, Witness kayıtları ve Intel TDX; bunları verify.py denetler.",
+  "Capture mode": "Yakalama modu",
+  "Enter a whole number from 0 to 50.": "0 ile 50 arasında bir tam sayı girin.",
+  "Interactive (visible window, record each screen until closed)": "Etkileşimli (görünür pencere, kapatılana kadar her ekranı kaydet)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Yerel Whisper · Docker olmadan transkripsiyon · OCR için Linux kapsayıcı çalışanı gerekir",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Mini uygulama görünür bir tarayıcı penceresinde açılıyor. İşiniz bittiğinde pencereyi kapatın.",
+  "Passive (load, screenshots, MHTML, HAR)": "Pasif (yükleme, ekran görüntüleri, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Güvenli tarama (zararsız sekmeleri gez, ödemeleri engelle)",
+  "Context window": "Bağlam penceresi",
+  "Context records": "Bağlam kayıtları",
+  "-{before} / +{after} messages": "-{before} / +{after} mesaj",
+  "Context before (messages)": "Önceki bağlam (mesaj)",
+  "Context after (messages)": "Sonraki bağlam (mesaj)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Sohbet bağlamını korumak için eşleşen her kaydın etrafındaki komşu mesajları dahil edin (her iki taraftan 0 ila 50 mesaj)."
 }

@@ -11087,5 +11087,18 @@
   "Fingerprint from the sender: {fp}": "Odcisk od nadawcy: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Klucz zgadza się z wpisanym odciskiem: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Wklej powyżej odcisk od nadawcy albo sprawdź archiwum niezależnym weryfikatorem.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Sprawdzono w tej przeglądarce: podpis manifestu i SHA-256 każdego pliku. Nie sprawdzono tutaj: łańcucha zdarzeń w events.jsonl, znaczników czasu RFC 3161, OpenTimestamps, wpisów Witness ani Intel TDX; sprawdza je verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Sprawdzono w tej przeglądarce: podpis manifestu i SHA-256 każdego pliku. Nie sprawdzono tutaj: łańcucha zdarzeń w events.jsonl, znaczników czasu RFC 3161, OpenTimestamps, wpisów Witness ani Intel TDX; sprawdza je verify.py.",
+  "Capture mode": "Tryb przechwytywania",
+  "Enter a whole number from 0 to 50.": "Wpisz liczbę całkowitą od 0 do 50.",
+  "Interactive (visible window, record each screen until closed)": "Interaktywny (widoczne okno, zapis każdego ekranu do zamknięcia)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Lokalny Whisper · transkrypcja bez Dockera · OCR wymaga kontenera Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Otwieranie miniaplikacji w widocznym oknie przeglądarki. Zamknij okno po zakończeniu.",
+  "Passive (load, screenshots, MHTML, HAR)": "Pasywny (ładowanie, zrzuty ekranu, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Bezpieczne przejście (nieinwazyjne zakładki, blokada płatności)",
+  "Context window": "Okno kontekstu",
+  "Context records": "Zapisy kontekstowe",
+  "-{before} / +{after} messages": "-{before} / +{after} wiadomości",
+  "Context before (messages)": "Kontekst przed (wiadomości)",
+  "Context after (messages)": "Kontekst po (wiadomości)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Dołącz sąsiednie wiadomości wokół każdego pasującego wpisu, aby zachować kontekst rozmowy (od 0 do 50 wiadomości z każdej strony)."
 }

@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "보낸 사람의 지문: {fp}",
   "The key matches the fingerprint you entered: {fp}": "키가 입력한 지문과 일치합니다: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "위 칸에 보낸 사람의 지문을 붙여 넣거나, 독립적인 검증 도구로 아카이브를 확인하십시오.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "이 브라우저에서 확인한 항목: 매니페스트 서명과 모든 파일의 SHA-256. 여기서 확인하지 않은 항목: events.jsonl의 이벤트 체인, RFC 3161 타임스탬프, OpenTimestamps, Witness 기록, Intel TDX. 이 항목은 verify.py가 확인합니다."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "이 브라우저에서 확인한 항목: 매니페스트 서명과 모든 파일의 SHA-256. 여기서 확인하지 않은 항목: events.jsonl의 이벤트 체인, RFC 3161 타임스탬프, OpenTimestamps, Witness 기록, Intel TDX. 이 항목은 verify.py가 확인합니다.",
+  "Capture mode": "캡처 모드",
+  "Enter a whole number from 0 to 50.": "0에서 50 사이의 정수를 입력하세요.",
+  "Interactive (visible window, record each screen until closed)": "대화형 (보이는 창에서 닫을 때까지 각 화면 기록)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "로컬 Whisper · Docker 없이 음성 전사 · OCR은 Linux 컨테이너 워커 필요",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "보이는 브라우저 창에서 미니 앱을 여는 중입니다. 완료되면 창을 닫으세요.",
+  "Passive (load, screenshots, MHTML, HAR)": "수동 (로드, 스크린샷, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "안전 탐색 (안전한 탭 이동, 결제 차단)",
+  "Context window": "문맥 범위",
+  "Context records": "문맥 기록",
+  "-{before} / +{after} messages": "-{before} / +{after}개 메시지",
+  "Context before (messages)": "이전 문맥 (메시지 수)",
+  "Context after (messages)": "이후 문맥 (메시지 수)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "대화 문맥을 유지하기 위해 일치하는 각 기록 주변의 메시지를 포함합니다(양쪽 각 0~50개)."
 }

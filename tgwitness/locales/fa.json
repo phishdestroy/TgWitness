@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "اثر انگشت از فرستنده: {fp}",
   "The key matches the fingerprint you entered: {fp}": "کلید با اثر انگشتی که وارد کردید یکی است: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "اثر انگشت فرستنده را در کادر بالا بچسبانید یا آرشیو را با یک تأییدکنندهٔ مستقل بررسی کنید.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "در این مرورگر بررسی شد: امضای مانیفست و SHA-256 هر فایل. اینجا بررسی نشد: زنجیرهٔ رویدادها در events.jsonl، مهرهای زمانی RFC 3161، OpenTimestamps، سوابق Witness و Intel TDX؛ verify.py آن‌ها را بررسی می‌کند."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "در این مرورگر بررسی شد: امضای مانیفست و SHA-256 هر فایل. اینجا بررسی نشد: زنجیرهٔ رویدادها در events.jsonl، مهرهای زمانی RFC 3161، OpenTimestamps، سوابق Witness و Intel TDX؛ verify.py آن‌ها را بررسی می‌کند.",
+  "Capture mode": "حالت ضبط",
+  "Enter a whole number from 0 to 50.": "یک عدد صحیح بین 0 تا 50 وارد کنید.",
+  "Interactive (visible window, record each screen until closed)": "تعاملی (پنجره قابل مشاهده، ثبت هر صفحه تا زمان بستن)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper محلی · رونویسی بدون Docker · OCR نیازمند کارگر کانتینر Linux است",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "در حال باز کردن مینی‌اپ در پنجره قابل مشاهده مرورگر. پس از پایان پنجره را ببندید.",
+  "Passive (load, screenshots, MHTML, HAR)": "غیرفعال (بارگذاری، اسکرین‌شات، MHTML، HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "پیمایش امن (باز کردن تب‌های غیرمخرب و مسدودسازی پرداخت‌ها)",
+  "Context window": "بازه زمینه",
+  "Context records": "رکوردهای زمینه",
+  "-{before} / +{after} messages": "-{before} / +{after} پیام",
+  "Context before (messages)": "زمینه قبل (پیام‌ها)",
+  "Context after (messages)": "زمینه بعد (پیام‌ها)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "پیام‌های مجاور اطراف هر رکورد منطبق را برای حفظ زمینه گفتگو شامل کنید (0 تا 50 پیام در هر طرف)."
 }

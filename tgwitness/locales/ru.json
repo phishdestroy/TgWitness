@@ -11072,5 +11072,18 @@
   "Fingerprint from the sender: {fp}": "Отпечаток от отправителя: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Ключ совпадает с введённым отпечатком: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Вставьте выше отпечаток от отправителя или проверьте архив независимым верификатором.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "В этом браузере проверены подпись манифеста и SHA-256 каждого файла. Здесь не проверялись цепочка событий в events.jsonl, метки времени RFC 3161, OpenTimestamps, записи свидетелей (Witness) и Intel TDX — их проверяет verify.py."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "В этом браузере проверены подпись манифеста и SHA-256 каждого файла. Здесь не проверялись цепочка событий в events.jsonl, метки времени RFC 3161, OpenTimestamps, записи свидетелей (Witness) и Intel TDX — их проверяет verify.py.",
+  "Capture mode": "Режим записи",
+  "Enter a whole number from 0 to 50.": "Введите целое число от 0 до 50.",
+  "Interactive (visible window, record each screen until closed)": "Интерактивный (видимое окно, запись каждого экрана до закрытия)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Локальный Whisper · расшифровка без Docker · OCR требует Linux-контейнер",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Мини-приложение открывается в видимом окне браузера. Закройте окно по завершении.",
+  "Passive (load, screenshots, MHTML, HAR)": "Пассивный (загрузка, скриншоты, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Безопасный обход (неразрушающие вкладки, блокировка оплат)",
+  "Context window": "Окно контекста",
+  "Context records": "Контекстные записи",
+  "-{before} / +{after} messages": "-{before} / +{after} сообщений",
+  "Context before (messages)": "Контекст до (сообщений)",
+  "Context after (messages)": "Контекст после (сообщений)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Включать соседние сообщения вокруг каждой найденной записи для сохранения контекста переписки (от 0 до 50 сообщений с каждой стороны)."
 }

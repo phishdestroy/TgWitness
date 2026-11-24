@@ -724,6 +724,8 @@
           <label class="check-label"><input id="report-kind-secret-action" data-report-kind="secret_chat.action" type="checkbox" checked> Pseudo-secret notice</label>
           <label class="check-label"><input id="report-kind-secret-file" data-report-kind="secret_chat.file" type="checkbox" checked> Pseudo-secret file preserved</label>
         </div></fieldset>
+        <div class="report-grid"><div><label for="report-selection-context-before">Context before (messages)</label><input type="number" id="report-selection-context-before" min="0" max="50" step="1" value="0"></div><div><label for="report-selection-context-after">Context after (messages)</label><input type="number" id="report-selection-context-after" min="0" max="50" step="1" value="0"></div></div>
+        <p class="hint">Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).</p>
       </fieldset>
       <label class="check-label"><input id="report-selection-gaps" type="checkbox" checked> Include missing message IDs and neighboring records</label>
       <p class="hint">Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices.</p>

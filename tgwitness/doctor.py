@@ -89,8 +89,12 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
             add("listen_address", "fail", "Use a local IP and available port; a running instance may already own it.")
 
     external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
+    keyring_env = os.environ.get("TGWITNESS_VAULT_KEYRING", "").strip()
     marker = root / "vault.external.json"
-    if external:
+    keyring_marker = root / "vault.keyring.json"
+    if external and keyring_env:
+        add("vault_mode", "fail", "Set either TGWITNESS_VAULT_KEY_FILE or TGWITNESS_VAULT_KEYRING, not both")
+    elif external:
         try:
             source = Path(external).resolve(strict=True)
             if source.is_relative_to(root) or source.stat().st_size > 128:
@@ -103,8 +107,26 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
             add("external_key", "fail", "Check the external key file and vault mode; no secret values were displayed")
     elif marker.exists():
         add("external_key", "fail", "This data directory requires TGWITNESS_VAULT_KEY_FILE")
+    elif keyring_marker.exists() or keyring_env:
+        try:
+            from .security import KeyringStore, keyring_available, read_keyring_marker
+            if not keyring_available():
+                raise RuntimeError("OS keyring backend is unavailable; install tgwitness[keyring] or use TGWITNESS_VAULT_KEY_FILE")
+            if (root / "vault.key").exists():
+                raise RuntimeError("Local vault.key still exists; run python -m tgwitness.security migrate-to-keyring --data-dir DATA")
+            if keyring_marker.exists():
+                service, account, _ = read_keyring_marker(keyring_marker)
+                stored = KeyringStore(service).get(account)
+                if not stored:
+                    raise RuntimeError("Master key not found in OS keyring (" + service + " / " + account + ")")
+                key = base64.b64decode(stored.strip().encode("ascii"), altchars=b"-_", validate=True)
+                if len(key) != 32:
+                    raise ValueError("Invalid key length in OS keyring")
+            add("keyring_key", "pass", "Master key is stored in the OS keyring and readable")
+        except (OSError, ValueError, RuntimeError) as exc:
+            add("keyring_key", "fail", str(exc))
     else:
-        add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. Move it out: python -m tgwitness.security create-master-key KEYFILE, stop TgWitness, python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA, then start with TGWITNESS_VAULT_KEY_FILE=KEYFILE")
+        add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. Move it to the OS keyring (python -m tgwitness.security migrate-to-keyring --data-dir DATA) or an external file (python -m tgwitness.security create-master-key KEYFILE && python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA)")
     if os.environ.get("TGWITNESS_TOKEN") and len(os.environ["TGWITNESS_TOKEN"]) < 24:
         add("panel_token", "fail", "TGWITNESS_TOKEN must contain at least 24 characters")
     return {"ready": not any(c["status"] == "fail" for c in checks), "platform": platform.platform(),

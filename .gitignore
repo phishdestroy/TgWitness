@@ -39,6 +39,7 @@ evidence.csv
 evidence.html
 panel-token.txt
 vault.external.json
+vault.keyring.json
 credentials.json
 account.json
 accounts.json

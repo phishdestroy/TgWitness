@@ -389,7 +389,7 @@ def asks_of(events):
     return found
 
 
-async def open_app(collector, chat_id, entry):
+async def open_app(collector, chat_id, entry, *, mode="passive", max_states=8):
     """Launch, load and record a mini application. Returns the capture record with its journal number."""
     store = collector.store
     route = route_of(collector)
@@ -400,7 +400,7 @@ async def open_app(collector, chat_id, entry):
     files, errors_ = [], []
     if state["browser"]:
         try:
-            facts, files = await webapp_browser.capture(address, route, secret)
+            facts, files = await webapp_browser.capture(address, route, secret, mode=mode, max_states=max_states)
             method = "browser"
         except webapp_browser.Unavailable as exc:
             errors_.append({"component": "browser", "error": str(exc)[:600]})
@@ -430,6 +430,8 @@ async def open_app(collector, chat_id, entry):
     asks = asks_of(facts.get("telegram_events"))
     payload = {
         "launch_seq": launched["seq"], "entry": entry["type"], "method": method,
+        "mode": facts.get("mode", mode) if method == "browser" else "static",
+        "states_captured": facts.get("states_captured", 1 if method == "browser" else 0),
         "bot": {"id": launched["payload"].get("bot_id"), "username": launched["payload"].get("bot_username"),
                 "name": launched["payload"].get("bot_name")},
         "address": webapp_browser.public_address(address), "final_url": facts.get("final_url"),
@@ -451,7 +453,9 @@ async def open_app(collector, chat_id, entry):
         "meaning": (CAPTURE_MEANING if method == "browser" else INSPECT_MEANING) + " " + ROUTE_MEANING}
     payload["summary"] = {"requests": len(requests), "hosts": len(hosts), "sockets": len(payload["sockets"]),
                           "asks": len(asks), "wallets": sum(1 for item in payload["indicators"] if item["kind"] == "wallet"),
-                          "screenshots": sum(1 for item in saved if item["role"] == "screenshot")}
+                          "screenshots": sum(1 for item in saved if item["role"] == "screenshot"),
+                          "mhtml": sum(1 for item in saved if item["role"] == "mhtml"),
+                          "har": sum(1 for item in saved if item["role"] == "har")}
     event = store.append("webapp.captured", payload, chat_id, message_id)
     return {"seq": event["seq"], "at": event["observed_at"], **payload}
 
@@ -477,6 +481,8 @@ def register(app, authenticate, require_live, visible_chats):
         model_config = ConfigDict(extra="forbid")
         chat_id: int
         entry: Entry
+        mode: Literal["passive", "crawl", "interactive"] = "passive"
+        max_states: int = Field(default=8, ge=1, le=20)
 
     def visible(request, chat_id):
         chats = visible_chats(request)
@@ -512,7 +518,8 @@ def register(app, authenticate, require_live, visible_chats):
             raise HTTPException(403, "Only the main administrator can open a mini application.")
         require_live()
         try:
-            return await open_app(app.state.collector, body.chat_id, body.entry.model_dump())
+            return await open_app(app.state.collector, body.chat_id, body.entry.model_dump(),
+                                  mode=body.mode, max_states=body.max_states)
         except netclient.RouteError as exc:
             raise HTTPException(409, str(exc)) from None
         except interactions.AccountRestricted as exc:

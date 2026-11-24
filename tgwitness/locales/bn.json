@@ -10985,5 +10985,18 @@
   "Fingerprint from the sender: {fp}": "প্রেরকের ফিঙ্গারপ্রিন্ট: {fp}",
   "The key matches the fingerprint you entered: {fp}": "কী-টি আপনার দেওয়া ফিঙ্গারপ্রিন্টের সঙ্গে মেলে: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "ওপরে প্রেরকের ফিঙ্গারপ্রিন্ট পেস্ট করুন, অথবা কোনো স্বাধীন যাচাইকারী দিয়ে আর্কাইভটি যাচাই করুন।",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "এই ব্রাউজারে যাচাই করা হয়েছে: ম্যানিফেস্টের স্বাক্ষর এবং প্রতিটি ফাইলের SHA-256। এখানে যাচাই করা হয়নি: events.jsonl-এর ইভেন্ট শৃঙ্খল, RFC 3161 টাইমস্ট্যাম্প, OpenTimestamps, Witness রেকর্ড এবং Intel TDX; এগুলো verify.py যাচাই করে।"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "এই ব্রাউজারে যাচাই করা হয়েছে: ম্যানিফেস্টের স্বাক্ষর এবং প্রতিটি ফাইলের SHA-256। এখানে যাচাই করা হয়নি: events.jsonl-এর ইভেন্ট শৃঙ্খল, RFC 3161 টাইমস্ট্যাম্প, OpenTimestamps, Witness রেকর্ড এবং Intel TDX; এগুলো verify.py যাচাই করে।",
+  "Capture mode": "ক্যাপচার মোড",
+  "Enter a whole number from 0 to 50.": "0 থেকে 50 এর মধ্যে একটি পূর্ণ সংখ্যা লিখুন।",
+  "Interactive (visible window, record each screen until closed)": "ইন্টারঅ্যাক্টিভ (দৃশ্যমান উইন্ডো, বন্ধ না করা পর্যন্ত প্রতিটি স্ক্রিন রেকর্ড)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "লোকাল Whisper · Docker ছাড়াই ট্রান্সক্রিপশন · OCR-এর জন্য Linux কনটেইনার ওয়ার্কার প্রয়োজন",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "একটি দৃশ্যমান ব্রাউজার উইন্ডোতে মিনি অ্যাপ্লিকেশন খোলা হচ্ছে। শেষ হলে উইন্ডোটি বন্ধ করুন।",
+  "Passive (load, screenshots, MHTML, HAR)": "প্যাসিভ (লোড, স্ক্রিনশট, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "নিরাপদ ক্রল (নিরাপদ ট্যাব নেভিগেট করুন, পেমেন্ট ব্লক করুন)",
+  "Context window": "প্রসঙ্গ উইন্ডো",
+  "Context records": "প্রসঙ্গ রেকর্ড",
+  "-{before} / +{after} messages": "-{before} / +{after} বার্তা",
+  "Context before (messages)": "আগের প্রসঙ্গ (বার্তা)",
+  "Context after (messages)": "পরের প্রসঙ্গ (বার্তা)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "কথোপকথনের প্রসঙ্গ বজায় রাখতে প্রতিটি মিলিত রেকর্ডের আশেপাশের বার্তা অন্তর্ভুক্ত করুন (প্রতি পাশে 0 থেকে 50টি বার্তা)।"
 }

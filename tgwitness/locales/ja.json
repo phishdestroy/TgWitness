@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "送信者のフィンガープリント：{fp}",
   "The key matches the fingerprint you entered: {fp}": "鍵は入力されたフィンガープリントと一致します：{fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "上の欄に送信者のフィンガープリントを貼り付けるか、独立した検証ツールでアーカイブを検証してください。",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "このブラウザーで検証した項目：マニフェストの署名と各ファイルの SHA-256。ここでは検証していない項目：events.jsonl のイベントチェーン、RFC 3161 タイムスタンプ、OpenTimestamps、Witness の記録、Intel TDX。これらは verify.py が検証します。"
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "このブラウザーで検証した項目：マニフェストの署名と各ファイルの SHA-256。ここでは検証していない項目：events.jsonl のイベントチェーン、RFC 3161 タイムスタンプ、OpenTimestamps、Witness の記録、Intel TDX。これらは verify.py が検証します。",
+  "Capture mode": "キャプチャモード",
+  "Enter a whole number from 0 to 50.": "0から50までの整数を入力してください。",
+  "Interactive (visible window, record each screen until closed)": "対話型（表示ウィンドウで閉じるまで各画面を記録）",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "ローカルWhisper · Dockerなしで文字起こし · OCRにはLinuxコンテナワーカーが必要",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "表示されるブラウザウィンドウでミニアプリを開いています。完了したらウィンドウを閉じてください。",
+  "Passive (load, screenshots, MHTML, HAR)": "パッシブ（読み込み、スクリーンショット、MHTML、HAR）",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "安全クロール（非破壊タブを巡回し決済をブロック）",
+  "Context window": "コンテキスト範囲",
+  "Context records": "コンテキスト記録",
+  "-{before} / +{after} messages": "-{before} / +{after} 件のメッセージ",
+  "Context before (messages)": "前のコンテキスト（メッセージ数）",
+  "Context after (messages)": "後のコンテキスト（メッセージ数）",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "会話の文脈を保つため、一致する各記録の前後のメッセージを含めます（前後各0〜50件）。"
 }

@@ -10934,5 +10934,18 @@
   "Fingerprint from the sender: {fp}": "Dấu vân tay từ người gửi: {fp}",
   "The key matches the fingerprint you entered: {fp}": "Khóa khớp với dấu vân tay bạn đã nhập: {fp}",
   "Paste the fingerprint from the sender above, or check the archive with an independent verifier.": "Hãy dán dấu vân tay từ người gửi vào ô phía trên, hoặc kiểm tra kho lưu trữ bằng một trình xác minh độc lập.",
-  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Đã kiểm tra trong trình duyệt này: chữ ký của danh sách (manifest) và SHA-256 của từng tệp. Chưa kiểm tra ở đây: chuỗi sự kiện trong events.jsonl, dấu thời gian RFC 3161, OpenTimestamps, bản ghi Witness và Intel TDX; verify.py sẽ kiểm tra các mục này."
+  "Checked in this browser: the manifest signature and the SHA-256 of every file. Not checked here: the event chain in events.jsonl, RFC 3161 time stamps, OpenTimestamps, witness records and Intel TDX; verify.py checks them.": "Đã kiểm tra trong trình duyệt này: chữ ký của danh sách (manifest) và SHA-256 của từng tệp. Chưa kiểm tra ở đây: chuỗi sự kiện trong events.jsonl, dấu thời gian RFC 3161, OpenTimestamps, bản ghi Witness và Intel TDX; verify.py sẽ kiểm tra các mục này.",
+  "Capture mode": "Chế độ ghi nhận",
+  "Enter a whole number from 0 to 50.": "Nhập số nguyên từ 0 đến 50.",
+  "Interactive (visible window, record each screen until closed)": "Tương tác (cửa sổ hiển thị, ghi lại từng màn hình cho đến khi đóng)",
+  "Local Whisper · transcription without Docker · OCR requires the Linux container worker": "Whisper cục bộ · chép lời không cần Docker · OCR cần worker container Linux",
+  "Opening the mini application in a visible browser window. Close the window when finished.": "Đang mở ứng dụng mini trong cửa sổ trình duyệt hiển thị. Đóng cửa sổ khi hoàn tất.",
+  "Passive (load, screenshots, MHTML, HAR)": "Thụ động (tải trang, ảnh chụp, MHTML, HAR)",
+  "Safe crawl (navigate non-destructive tabs, block payments)": "Duyệt an toàn (chuyển tab không phá hủy, chặn thanh toán)",
+  "Context window": "Cửa sổ ngữ cảnh",
+  "Context records": "Bản ghi ngữ cảnh",
+  "-{before} / +{after} messages": "-{before} / +{after} tin nhắn",
+  "Context before (messages)": "Ngữ cảnh trước (tin nhắn)",
+  "Context after (messages)": "Ngữ cảnh sau (tin nhắn)",
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Bao gồm các tin nhắn lân cận quanh mỗi bản ghi khớp để giữ ngữ cảnh hội thoại (0 đến 50 tin nhắn mỗi phía)."
 }

@@ -64,16 +64,20 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
       + (entry.type === "button" && entry.inline ? "\n\n" + tr("While it is open, the bot can post one message to this chat on this account's behalf.") : "");
   }
 
-  async function open(chat, entry, host) {
+  async function open(chat, entry, host, mode = "passive") {
     if (!(await confirm(confirmText(entry), {danger: true}))) return null;
     const {inline, ...body} = entry;
-    toast(tr("Opening the mini application… this takes up to a minute."));
-    const result = await json("webapp/open", {chat_id: chat, entry: body});
+    toast(mode === "interactive"
+      ? tr("Opening the mini application in a visible browser window. Close the window when finished.")
+      : tr("Opening the mini application… this takes up to a minute."));
+    const result = await json("webapp/open", {chat_id: chat, entry: body, mode});
     if (!current(chat)) return result;
     toast(tr("Mini application recorded: journal record #{n}.", {n: result.seq}));
     if (host) {shown = result.seq; await render(host, chat, result);}
     return result;
   }
+
+  let selectedMode = "passive";
 
   function entryRow(chat, item, host, browser) {
     const row = node("li", "mini-entry"), main = node("div", "mini-entry-main");
@@ -87,7 +91,7 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
       button.title = browser.browser ? tr("Opens it in the isolated browser and records it.") : tr(browser.reason || "");
       button.addEventListener("click", () => busy(button, () => open(chat, item.type === "link"
         ? {type: "link", url: item.url} : item.type === "button"
-          ? {type: "button", seq: item.seq, row: item.row, column: item.column, inline: item.inline} : {type: item.type}, host)));
+          ? {type: "button", seq: item.seq, row: item.row, column: item.column, inline: item.inline} : {type: item.type}, host, selectedMode)));
       row.append(button);
     }
     return row;
@@ -98,10 +102,11 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
     const s = item.summary || {};
     const head = node("div", "mini-capture-head");
     head.append(text("strong", "", item.title || item.final_url || item.address || tr("Mini application")),
-      text("small", "", [tr(ENTRY[item.entry] || item.entry || ""), fmtFull(item.at), "#" + item.seq,
+      text("small", "", [tr(ENTRY[item.entry] || item.entry || ""), item.mode && item.mode !== "passive" ? tr(item.mode) : "", fmtFull(item.at), "#" + item.seq,
         item.method === "static" ? tr("page and scripts only") : ""].filter(Boolean).join(" · ")));
     const chips = node("div", "mini-chips");
     chips.append(chip(tr("requests"), s.requests ?? 0), chip(tr("hosts"), s.hosts ?? 0),
+      ...(s.mhtml ? [chip("MHTML", s.mhtml)] : []), ...(s.har ? [chip("HAR", s.har)] : []),
       ...(item.third_party_hosts?.length ? [chip(tr("other hosts"), item.third_party_hosts.length, "warn")] : []),
       ...(s.sockets ? [chip(tr("WebSockets"), s.sockets)] : []), ...(s.asks ? [chip(tr("requests to Telegram"), s.asks, "warn")] : []),
       ...(s.wallets ? [chip(tr("wallets"), s.wallets, "danger")] : []));
@@ -233,6 +238,25 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
     const box = node("div", "mini-apps");
     box.append(text("p", "hint", tr("Mini applications are web pages a bot opens inside Telegram. Opening one here asks Telegram for its address as this account, loads it once in an isolated browser and records every request, Telegram call and screenshot in the signed journal.")));
     if (!data.browser.browser) box.append(text("p", "notice warning mini-note", tr(data.browser.reason) + " " + tr("Without a browser, only the page and its own scripts are fetched and parsed.")));
+    else if (isAdmin() && may("interact")) {
+      const modeWrap = node("div", "mini-mode-bar");
+      const modeLabel = node("label", "", tr("Capture mode"));
+      const modeSelect = node("select", "");
+      modeLabel.htmlFor = "mini-app-capture-mode";
+      modeSelect.id = "mini-app-capture-mode";
+      for (const [val, title] of [
+        ["passive", tr("Passive (load, screenshots, MHTML, HAR)")],
+        ["crawl", tr("Safe crawl (navigate non-destructive tabs, block payments)")],
+        ["interactive", tr("Interactive (visible window, record each screen until closed)")],
+      ]) {
+        const opt = document.createElement("option");
+        opt.value = val; opt.textContent = title; opt.selected = val === selectedMode;
+        modeSelect.append(opt);
+      }
+      modeSelect.addEventListener("change", () => { selectedMode = modeSelect.value; });
+      modeWrap.append(modeLabel, modeSelect);
+      box.append(modeWrap);
+    }
     const entries = data.entries || [];
     if (data.bot) entries.push({type: "menu"}, {type: "main"});
     box.append(section(tr("Where this chat opens mini applications"), entries.length
