@@ -243,6 +243,71 @@ def timestamp_certificate_reference(reply):
     return certificate_reference_details(algorithm)
 
 
+def pss_algorithm(data, item):
+    parts = children(data, *item[2:])
+    if item[0] != 0x30 or len(parts) not in (1, 2) or parts[0][0] != 0x06:
+        raise ValueError("Malformed timestamp AlgorithmIdentifier")
+    encoded = data[parts[0][2]:parts[0][3]]
+    if not encoded or encoded[-1] & 128 or any(b == 128 and (i == 0 or not encoded[i-1] & 128)
+                                               for i, b in enumerate(encoded)):
+        raise ValueError("Malformed timestamp algorithm OID")
+    return oid(data, *parts[0][2:]), parts[1] if len(parts) == 2 else None
+
+
+def timestamp_pss_parameters(data, params):
+    if params is None or params[0] != 0x30:
+        raise ValueError("Missing timestamp RSASSA-PSS parameters")
+    sha1 = "1.3.14.3.2.26"
+    digest_oid = mask_oid = sha1
+    salt, previous = 20, 0x9F
+    for tag, _, start, end in children(data, *params[2:]):
+        inner = children(data, start, end)
+        if not previous < tag <= 0xA3 or len(inner) != 1:
+            raise ValueError("Malformed timestamp RSASSA-PSS parameters")
+        previous = tag
+        if tag in (0xA0, 0xA1):
+            alg, param = pss_algorithm(data, inner[0])
+            if tag == 0xA1:
+                if alg != "1.2.840.113549.1.1.8" or param is None:
+                    raise ValueError("Unsupported timestamp RSASSA-PSS mask generation algorithm")
+                alg, param = pss_algorithm(data, param)
+            if param is not None and data[param[1]:param[3]] != b"\x05\x00":
+                raise ValueError("Malformed timestamp RSASSA-PSS hash parameters")
+            if tag == 0xA0:
+                digest_oid = alg
+            else:
+                mask_oid = alg
+        else:
+            value = data[inner[0][2]:inner[0][3]]
+            if (inner[0][0] != 0x02 or not value or value[0] & 128
+                    or len(value) > 1 and value[0] == 0 and value[1] < 128):
+                raise ValueError("Malformed timestamp RSASSA-PSS integer")
+            number = int.from_bytes(value, "big")
+            if tag == 0xA2:
+                salt = number
+            elif number != 1:
+                raise ValueError("Unsupported timestamp RSASSA-PSS trailer")
+    return digest_oid, mask_oid, salt
+
+
+def verify_timestamp_pss(reply, algorithm, signer, key, signature, signed, content_digest):
+    _, params = pss_algorithm(reply, algorithm)
+    digest_oid, mask_oid, salt = timestamp_pss_parameters(reply, params)
+    if digest_oid != content_digest or digest_oid not in DIGESTS or mask_oid not in DIGESTS:
+        raise ValueError("Unsupported or mismatched timestamp RSASSA-PSS hash")
+    spki = tbs_key(signer.tbs_certificate_bytes)
+    _, start, end = der(spki, 0)
+    key_oid, key_params = pss_algorithm(spki, children(spki, start, end)[0])
+    if key_oid == "1.2.840.113549.1.1.10" and key_params is not None:
+        required_hash, required_mask, minimum_salt = timestamp_pss_parameters(spki, key_params)
+        if (digest_oid, mask_oid) != (required_hash, required_mask) or salt < minimum_salt:
+            raise ValueError("Timestamp signature violates RSASSA-PSS public key restrictions")
+    algorithm_hash = DIGESTS[digest_oid]()
+    if salt > padding.calculate_max_pss_salt_length(key, algorithm_hash):
+        raise ValueError("Invalid timestamp RSASSA-PSS salt length")
+    key.verify(signature, signed, padding.PSS(padding.MGF1(DIGESTS[mask_oid]()), salt), algorithm_hash)
+
+
 def timestamp_signature(reply, roots, *, include_reference=False, intermediates=()):
     token = timestamp_token(reply)
     when = tst_info(token["tst"])["time"]
@@ -291,6 +356,8 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             if isinstance(key, rsa.RSAPublicKey) and method in RSA_SIGNATURES and (
                     RSA_SIGNATURES[method] or content_digest in DIGESTS):
                 key.verify(signature, signed, padding.PKCS1v15(), (RSA_SIGNATURES[method] or DIGESTS[content_digest])())
+            elif isinstance(key, rsa.RSAPublicKey) and method == "1.2.840.113549.1.1.10":
+                verify_timestamp_pss(reply, items[4], signer, key, signature, signed, content_digest)
             elif isinstance(key, ec.EllipticCurvePublicKey) and method in ECDSA_SIGNATURES:
                 key.verify(signature, signed, ec.ECDSA(ECDSA_SIGNATURES[method]()))
             else:
