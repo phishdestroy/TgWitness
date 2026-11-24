@@ -189,11 +189,20 @@ def retain_release(site, public, release_id, raw, signature, manifest):
 
     def read(name):
         local = release / name
+        expected = manifest["files"][name]["sha256"]
         if local.is_file() and not local.is_symlink():
             data = local.read_bytes()
-            if hashlib.sha256(data).hexdigest() == manifest["files"][name]["sha256"]:
+            if hashlib.sha256(data).hexdigest() == expected:
                 return data
-        return fetch(prefix + name)
+        path = prefix + name
+        data = fetch(path)
+        if hashlib.sha256(data).hexdigest() != expected:
+            data = fetch(path + "?sha256=" + expected)
+            actual = hashlib.sha256(data).hexdigest()
+            if actual != expected:
+                raise ValueError(f"Artifact checksum mismatch after retry: {path} "
+                                 f"(expected {expected}, received {actual}, {len(data)} bytes)")
+        return data
 
     files = verify_release(raw, release_id, read, public)
     files["manifest.json"] = raw
