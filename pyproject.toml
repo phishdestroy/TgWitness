@@ -12,7 +12,7 @@ license = "MIT AND OFL-1.1 AND Apache-2.0"
 authors = [{name = "PhishDestroy"}]
 keywords = ["telegram", "osint", "evidence", "forensics", "telethon", "anti-fraud"]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Environment :: Web Environment",
   "Framework :: FastAPI",
   "Intended Audience :: Information Technology",

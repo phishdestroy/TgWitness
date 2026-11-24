@@ -1,7 +1,7 @@
 import {createTopologyScene,mapIcon,mapServices} from './system-map-scene.js?v=3';
 const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-export function createSystemMap({root,json,tr,openSettings,getState,options,toast}){
+export function createSystemMap({root,json,tr,trn,openSettings,getState,options,toast}){
   const e=escapeHTML,t=v=>e(tr(v)),icon=mapIcon,q=k=>root.querySelector(`[data-map="${k}"]`);
   const names={direct:'Direct',mtproxy_auto:'Auto MTProxy',mtproxy:'MTProxy',socks5:'SOCKS5',http:'HTTP CONNECT',warp:'WARP',vpn:'WireGuard'};
   const chip=(value,tone='')=>`<span class="tm-chip ${tone}">${e(value)}</span>`;

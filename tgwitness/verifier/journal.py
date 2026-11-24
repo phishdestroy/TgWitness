@@ -59,10 +59,21 @@ class EventChain:
         if self.remember is not None and count in self.remember:
             self.remember[count] = digest
 
-    def run(self, events):
-        for event in events:
-            self.structure(event)
-            self.settle(event, self.content(event))
+    def run(self, events, checks=None):
+        try:
+            for event in events:
+                self.structure(event)
+                if checks is None:
+                    digest = self.content(event)
+                else:
+                    checks.add(self.count + 1, event)
+                    digest = event["hash"]
+                self.settle(event, digest)
+            if checks is not None:
+                checks.settle()
+        finally:
+            if checks is not None:
+                checks.abandon()
         return self.result()
 
     def run_lines(self, lines, take=None):

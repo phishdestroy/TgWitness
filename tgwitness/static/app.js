@@ -7780,7 +7780,7 @@ swarmReady.catch(error=>toast(error.message,true));
 let accessView=null,systemLogView=null;
 let systemMapView=null;
 const systemMapReady=import('./views/system-map.js?v=4').then(({createSystemMap})=>{
-  systemMapView=createSystemMap({root:$('view-system-map'),tr,json,getState:()=>state,
+  systemMapView=createSystemMap({root:$('view-system-map'),tr,trn,json,getState:()=>state,
     options:()=>viewOptions('system-map'),
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;

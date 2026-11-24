@@ -640,11 +640,13 @@ def dstu_curve(index):
 def dstu_verify(curve, key, digest_value, signature, order="little"):
     field, a, b, n, base = curve[:5]
     size = n.bit_length()
-    if len(signature) % 2 or 16 * len(signature) < 4 * size or not bin_on_curve(curve, key):
+    if len(signature) % 2 or 16 * len(signature) < 4 * size or key is None or not bin_on_curve(curve, key):
         return False
     whole, half = int.from_bytes(signature, order), 4 * len(signature)
     r, s = whole & ((1 << half) - 1), whole >> half
     if not (0 < r < n and 0 < s < n):
+        return False
+    if bin_combination(curve, n, key, 0, key) is not None:
         return False
     h = int.from_bytes(digest_value, "little") & ((1 << field[0]) - 1) or 1
     point = bin_combination(curve, s, base, r, key)

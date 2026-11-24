@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 15073fe1a3627f3ab23d96a533510bf8e436fdcc7a72c1be1467f838c6ee7949
+# TgWitness verifier sources SHA-256: 7410b671363d916868170cf572159bc81c18f4a50ff89503d132879cd80bd34f
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -1075,11 +1075,13 @@ def dstu_curve(index):
 def dstu_verify(curve, key, digest_value, signature, order="little"):
     field, a, b, n, base = curve[:5]
     size = n.bit_length()
-    if len(signature) % 2 or 16 * len(signature) < 4 * size or not bin_on_curve(curve, key):
+    if len(signature) % 2 or 16 * len(signature) < 4 * size or key is None or not bin_on_curve(curve, key):
         return False
     whole, half = int.from_bytes(signature, order), 4 * len(signature)
     r, s = whole & ((1 << half) - 1), whole >> half
     if not (0 < r < n and 0 < s < n):
+        return False
+    if bin_combination(curve, n, key, 0, key) is not None:
         return False
     h = int.from_bytes(digest_value, "little") & ((1 << field[0]) - 1) or 1
     point = bin_combination(curve, s, base, r, key)
@@ -1453,7 +1455,196 @@ def timestamp_certificate_reference(reply):
     return certificate_reference_details(algorithm)
 
 
+def pss_algorithm(data, item):
+    parts = children(data, *item[2:])
+    if item[0] != 0x30 or len(parts) not in (1, 2) or parts[0][0] != 0x06:
+        raise ValueError("Malformed timestamp AlgorithmIdentifier")
+    encoded = data[parts[0][2]:parts[0][3]]
+    if not encoded or encoded[-1] & 128 or any(b == 128 and (i == 0 or not encoded[i-1] & 128)
+                                               for i, b in enumerate(encoded)):
+        raise ValueError("Malformed timestamp algorithm OID")
+    return oid(data, *parts[0][2:]), parts[1] if len(parts) == 2 else None
+
+
+def timestamp_pss_parameters(data, params):
+    if params is None or params[0] != 0x30:
+        raise ValueError("Missing timestamp RSASSA-PSS parameters")
+    sha1 = "1.3.14.3.2.26"
+    digest_oid = mask_oid = sha1
+    salt, previous = 20, 0x9F
+    for tag, _, start, end in children(data, *params[2:]):
+        inner = children(data, start, end)
+        if not previous < tag <= 0xA3 or len(inner) != 1:
+            raise ValueError("Malformed timestamp RSASSA-PSS parameters")
+        previous = tag
+        if tag in (0xA0, 0xA1):
+            alg, param = pss_algorithm(data, inner[0])
+            if tag == 0xA1:
+                if alg != "1.2.840.113549.1.1.8" or param is None:
+                    raise ValueError("Unsupported timestamp RSASSA-PSS mask generation algorithm")
+                alg, param = pss_algorithm(data, param)
+            if param is not None and data[param[1]:param[3]] != b"\x05\x00":
+                raise ValueError("Malformed timestamp RSASSA-PSS hash parameters")
+            if tag == 0xA0:
+                digest_oid = alg
+            else:
+                mask_oid = alg
+        else:
+            value = data[inner[0][2]:inner[0][3]]
+            if (inner[0][0] != 0x02 or not value or value[0] & 128
+                    or len(value) > 1 and value[0] == 0 and value[1] < 128):
+                raise ValueError("Malformed timestamp RSASSA-PSS integer")
+            number = int.from_bytes(value, "big")
+            if tag == 0xA2:
+                salt = number
+            elif number != 1:
+                raise ValueError("Unsupported timestamp RSASSA-PSS trailer")
+    return digest_oid, mask_oid, salt
+
+
+def verify_timestamp_pss(reply, algorithm, signer, key, signature, signed, content_digest):
+    _, params = pss_algorithm(reply, algorithm)
+    digest_oid, mask_oid, salt = timestamp_pss_parameters(reply, params)
+    if digest_oid != content_digest or digest_oid not in DIGESTS or mask_oid not in DIGESTS:
+        raise ValueError("Unsupported or mismatched timestamp RSASSA-PSS hash")
+    spki = tbs_key(signer.tbs_certificate_bytes)
+    _, start, end = der(spki, 0)
+    key_oid, key_params = pss_algorithm(spki, children(spki, start, end)[0])
+    if key_oid == "1.2.840.113549.1.1.10" and key_params is not None:
+        required_hash, required_mask, minimum_salt = timestamp_pss_parameters(spki, key_params)
+        if (digest_oid, mask_oid) != (required_hash, required_mask) or salt < minimum_salt:
+            raise ValueError("Timestamp signature violates RSASSA-PSS public key restrictions")
+    algorithm_hash = DIGESTS[digest_oid]()
+    if salt > padding.calculate_max_pss_salt_length(key, algorithm_hash):
+        raise ValueError("Invalid timestamp RSASSA-PSS salt length")
+    key.verify(signature, signed, padding.PSS(padding.MGF1(DIGESTS[mask_oid]()), salt), algorithm_hash)
+
+
+def timestamp_dns_name(value):
+    labels = value.lower().split(".")
+    if len(value) > 253 or not all(re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", label)
+                                   for label in labels):
+        raise ValueError("Invalid DNS name in timestamp certificate path")
+    return ".".join(labels)
+
+
+def timestamp_rdn(rdn):
+    import stringprep
+    import unicodedata
+    case_ignore = {
+        x509.NameOID.COMMON_NAME, x509.NameOID.COUNTRY_NAME, x509.NameOID.LOCALITY_NAME,
+        x509.NameOID.STATE_OR_PROVINCE_NAME, x509.NameOID.STREET_ADDRESS, x509.NameOID.ORGANIZATION_NAME,
+        x509.NameOID.ORGANIZATIONAL_UNIT_NAME, x509.NameOID.SERIAL_NUMBER, x509.NameOID.SURNAME,
+        x509.NameOID.GIVEN_NAME, x509.NameOID.TITLE, x509.NameOID.PSEUDONYM, x509.NameOID.DOMAIN_COMPONENT,
+        x509.NameOID.EMAIL_ADDRESS, x509.NameOID.USER_ID, x509.NameOID.GENERATION_QUALIFIER,
+        x509.NameOID.DN_QUALIFIER, x509.NameOID.INITIALS,
+    }
+    def prepare(attr):
+        value = attr.value
+        if not isinstance(value, str) or attr.oid not in case_ignore:
+            raise ValueError("Unsupported directory attribute in timestamp name constraints")
+        mapped = "".join(" " if stringprep.in_table_c12(c) else c for c in value if not stringprep.in_table_b1(c))
+        folded = unicodedata.normalize("NFKC", mapped).casefold()
+        return attr.oid.dotted_string, " ".join(unicodedata.normalize("NFKC", folded).split())
+    return sorted(prepare(attr) for attr in rdn)
+
+
+def timestamp_subtree(name, constraint):
+    from ipaddress import ip_address, IPv4Address, IPv6Address, IPv4Network, IPv6Network
+    from urllib.parse import urlsplit
+    value, base = name.value, constraint.value
+    if isinstance(name, x509.DirectoryName):
+        return (len(value.rdns) >= len(base.rdns)
+                and all(a == b or timestamp_rdn(a) == timestamp_rdn(b) for a, b in zip(value.rdns, base.rdns)))
+    if isinstance(name, x509.IPAddress):
+        if not isinstance(value, (IPv4Address, IPv6Address)) or not isinstance(base, (IPv4Network, IPv6Network)):
+            raise ValueError("Invalid IP address in timestamp name constraints")
+        return value in base
+    if isinstance(name, x509.RFC822Name):
+        local, sep, value = value.rpartition("@")
+        if not sep or not local:
+            raise ValueError("Invalid mailbox in timestamp certificate")
+        if "@" in base:
+            expected, _, domain = base.rpartition("@")
+            return timestamp_dns_name(value) == timestamp_dns_name(domain) and local == expected
+    elif isinstance(name, x509.UniformResourceIdentifier):
+        uri = urlsplit(value)
+        if not uri.scheme or not uri.hostname:
+            raise ValueError("Timestamp URI name constraint requires a DNS host")
+        value = uri.hostname
+        try:
+            ip_address(value)
+        except ValueError:
+            pass
+        else:
+            raise ValueError("Timestamp URI name constraint requires a DNS host")
+    host = timestamp_dns_name(value)
+    if base.startswith("."):
+        return host.endswith("." + timestamp_dns_name(base[1:]))
+    domain = timestamp_dns_name(base)
+    return host == domain or isinstance(name, x509.DNSName) and host.endswith("." + domain)
+
+
+def timestamp_name_constraints(constraints, below):
+    from ipaddress import IPv4Network, IPv6Network
+    supported = (x509.DirectoryName, x509.DNSName, x509.IPAddress, x509.RFC822Name, x509.UniformResourceIdentifier)
+    permitted, excluded = constraints.permitted_subtrees or [], constraints.excluded_subtrees or []
+    if (not below or not (permitted or excluded) or constraints.permitted_subtrees == []
+            or constraints.excluded_subtrees == []):
+        raise ValueError("Invalid timestamp CA name constraints")
+    for base in [*permitted, *excluded]:
+        if not isinstance(base, supported):
+            raise ValueError("Unsupported general name in timestamp CA name constraints")
+        if isinstance(base, x509.IPAddress):
+            if not isinstance(base.value, (IPv4Network, IPv6Network)):
+                raise ValueError("Invalid timestamp CA IP subnet")
+        elif not isinstance(base, x509.DirectoryName):
+            domain = base.value
+            if isinstance(base, x509.RFC822Name) and "@" in domain:
+                local, _, domain = domain.rpartition("@")
+                if not local or domain.startswith("."):
+                    raise ValueError("Invalid mailbox in timestamp CA name constraints")
+            timestamp_dns_name(domain.removeprefix("."))
+    for index, cert in enumerate(below):
+        if index and cert.subject == cert.issuer:
+            continue
+        names = [x509.DirectoryName(cert.subject)] if cert.subject.rdns else []
+        try:
+            names.extend(cert.extensions.get_extension_for_class(x509.SubjectAlternativeName).value)
+        except x509.ExtensionNotFound:
+            names.extend(x509.RFC822Name(a.value) for a in cert.subject.get_attributes_for_oid(x509.NameOID.EMAIL_ADDRESS))
+        for name in names:
+            allowed = [base for base in permitted if type(base) is type(name)]
+            if (any(timestamp_subtree(name, base) for base in excluded if type(base) is type(name))
+                    or allowed and not any(timestamp_subtree(name, base) for base in allowed)):
+                raise ValueError("A timestamp certificate is outside its CA name constraints")
+
+
+def check_timestamp_extension_encoding(certificate, extension):
+    tbs = certificate.tbs_certificate_bytes
+    _, start, end = der(tbs, 0)
+    for tag, _, start, end in children(tbs, start, end):
+        if tag != 0xA3:
+            continue
+        sequence, = children(tbs, start, end)
+        for entry in children(tbs, *sequence[2:]):
+            fields = children(tbs, *entry[2:])
+            if oid(tbs, *fields[0][2:]) == extension.oid.dotted_string:
+                original = tbs[fields[-1][2]:fields[-1][3]]
+                if original != extension.value.public_bytes():
+                    raise ValueError("Unsupported parameters in timestamp certificate extension " + extension.oid.dotted_string)
+                return
+    raise ValueError("Missing timestamp certificate extension")
+
+
 def timestamp_signature(reply, roots, *, include_reference=False, intermediates=()):
+    try:
+        return checked_timestamp_signature(reply, roots, include_reference=include_reference, intermediates=intermediates)
+    except x509.UnsupportedGeneralNameType as exc:
+        raise ValueError("Unsupported general name in timestamp certificate") from exc
+
+
+def checked_timestamp_signature(reply, roots, *, include_reference, intermediates):
     token = timestamp_token(reply)
     when = tst_info(token["tst"])["time"]
     _, _, start, end = token["signer"]
@@ -1501,6 +1692,8 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             if isinstance(key, rsa.RSAPublicKey) and method in RSA_SIGNATURES and (
                     RSA_SIGNATURES[method] or content_digest in DIGESTS):
                 key.verify(signature, signed, padding.PKCS1v15(), (RSA_SIGNATURES[method] or DIGESTS[content_digest])())
+            elif isinstance(key, rsa.RSAPublicKey) and method == "1.2.840.113549.1.1.10":
+                verify_timestamp_pss(reply, items[4], signer, key, signature, signed, content_digest)
             elif isinstance(key, ec.EllipticCurvePublicKey) and method in ECDSA_SIGNATURES:
                 key.verify(signature, signed, ec.ECDSA(ECDSA_SIGNATURES[method]()))
             else:
@@ -1539,11 +1732,21 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             raise ValueError("A certificate in the timestamp chain is not a certificate authority")
         chain.append(issuer)
         current = issuer
-    for certificate in chain:
+    for index, certificate in enumerate(chain):
         if not utc_time(certificate, "not_valid_before") <= when <= utc_time(certificate, "not_valid_after"):
             raise ValueError("A certificate in the timestamp chain was not valid at the stamped time")
         for extension in certificate.extensions:
-            if extension.critical and not isinstance(extension.value, (
+            if isinstance(extension.value, x509.NameConstraints):
+                check_timestamp_extension_encoding(certificate, extension)
+                timestamp_name_constraints(extension.value, chain[:index])
+            elif extension.critical and isinstance(extension.value, x509.CertificatePolicies):
+                check_timestamp_extension_encoding(certificate, extension)
+                identifiers = [policy.policy_identifier for policy in extension.value]
+                if not identifiers or len(set(identifiers)) != len(identifiers):
+                    raise ValueError("Empty or duplicate timestamp certificate policies")
+                if any(policy.policy_qualifiers == [] for policy in extension.value):
+                    raise ValueError("Empty timestamp certificate policy qualifiers")
+            elif extension.critical and not isinstance(extension.value, (
                     x509.BasicConstraints, x509.KeyUsage, x509.ExtendedKeyUsage)):
                 raise ValueError("Unsupported critical timestamp certificate extension: " + extension.oid.dotted_string)
     for index, certificate in enumerate(chain[1:], 1):
@@ -2993,7 +3196,7 @@ def journal_batch(public_key, first, lines):
     key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True))
     for seq, line in enumerate(lines, first):
         try:
-            event = strict_json(line)
+            event = line if isinstance(line, dict) else strict_json(line)
             calculated = hashlib.sha256(canonical({k: event[k] for k in FIELDS})).hexdigest()
         except (ValueError, KeyError, TypeError):
             return seq, "content"
@@ -3014,9 +3217,10 @@ def journal_failure(found):
 
 
 class JournalChecks:
-    def __init__(self, public_key):
+    def __init__(self, public_key, pool=None, jobs=None):
         self.public_key, self.pending, self.first, self.lines = public_key, [], None, []
-        self.pool = parallel_pool()
+        self.pool = parallel_pool() if pool is None else pool
+        self.jobs = parallel_jobs() if jobs is None else jobs
 
     def add(self, seq, line):
         if not self.lines:
@@ -3029,7 +3233,7 @@ class JournalChecks:
         if self.lines:
             self.pending.append(self.pool.submit(journal_batch, self.public_key, self.first, self.lines))
             self.lines = []
-        while len(self.pending) > 3 * PARALLEL["jobs"]:
+        while len(self.pending) > 3 * self.jobs:
             found = self.pending.pop(0).result()
             if found:
                 self.abandon()
@@ -4211,10 +4415,21 @@ class EventChain:
         if self.remember is not None and count in self.remember:
             self.remember[count] = digest
 
-    def run(self, events):
-        for event in events:
-            self.structure(event)
-            self.settle(event, self.content(event))
+    def run(self, events, checks=None):
+        try:
+            for event in events:
+                self.structure(event)
+                if checks is None:
+                    digest = self.content(event)
+                else:
+                    checks.add(self.count + 1, event)
+                    digest = event["hash"]
+                self.settle(event, digest)
+            if checks is not None:
+                checks.settle()
+        finally:
+            if checks is not None:
+                checks.abandon()
         return self.result()
 
     def run_lines(self, lines, take=None):

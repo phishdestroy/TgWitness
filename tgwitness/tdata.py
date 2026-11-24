@@ -122,7 +122,7 @@ def read_tdata_zip(payload, passcode=""):
             if info.number() != 1:
                 raise ValueError("Import one TData account at a time. Use separate session files for a multi-account folder.")
             index = info.number()
-            if not 0 <= index < 3:
+            if not 0 <= index < 16:
                 raise ValueError("Unsupported TData account index.")
             data_name = "data" if index == 0 else "data#" + str(index + 1)
             part = "".join(f"{byte:02X}"[::-1] for byte in hashlib.md5(data_name.encode()).digest()[:8])
