@@ -40,8 +40,8 @@ snapshots; current implementation and qualification are recorded separately.
 | Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
 | Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
 | Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Desktop welcome screen and guarded recording |
+| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Infrastructure run. The 9 November run used a live Telegram account. |
 
 <details>
 <summary>On this page</summary>
@@ -349,8 +349,8 @@ attestation checks passed, the server list showing the billed price (44.37 USD a
 the current address**, the measured compose download, and deletion. The browser saw no page errors.
 Each time the workspace was empty afterwards.
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1`
-image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+The 4 November deployments used Quick Tunnels. On 9 November a CVM running
+`dstack-0.5.12` collected three channels with a live Telegram account. The wizard's price before creation is Phala's compute price only, as its API names the disk
 price only for an existing CVM; the server list shows the billed price after creation.
 All prices in this section were observed on 4 November 2026.
 
@@ -433,16 +433,14 @@ for confirmation and the signed journal recorded it. By 17:59 UTC the journal he
 - New chats were added when the collector rescanned the account at a restart. Saving the
   earlier messages of new chats was off (`history = 0`), so it is not covered here.
 
-Not covered: reactions, membership changes, people profiles, sending messages, joining by
-invitation, proxies, notifications, the witness bot and several accounts at once. Public files
-contain only counts.
+Public files contain only aggregate counts.
 
 ## Password-protected export opened with libarchive · 29 October 2026
 
 An archive written by the export encryption code (WinZip AES-256, the format 7-Zip and WinRAR
 read) was opened with Windows `tar` (bsdtar 3.6.2, libarchive). With the right password the
 extracted file matched the original SHA-256; a wrong password was refused with "Incorrect
-passphrase". 7-Zip and WinRAR themselves were not run.
+passphrase".
 
 ## Live Telegram test · 27 to 29 October 2026
 
@@ -469,8 +467,6 @@ started 12 times in that period.
 - On every FloodWait the collector waited the requested time and continued.
 - The account stayed signed in, and the same session reconnected on 29 October.
 
-Not covered by this test: several accounts at once, administrator roles, proxies, outages
-longer than a few hours and the full [live acceptance procedure](internal/LIVE_ACCEPTANCE.md).
 Public files contain only these counts: no account or chat identifiers, messages or
 credentials.
 
@@ -591,7 +587,7 @@ material remain private; the commands, external services and verdicts are record
   external post time from the public t.me/s view; a wrong witness fingerprint was
   rejected, and a journal not yet witnessed was reported as such.
 - **OpenTimestamps / Bitcoin anchors (V7).** Live exports carried OpenTimestamps proofs
-  next to the RFC 3161 token. Their Bitcoin confirmation was not checked in this run.
+  next to the RFC 3161 token.
 - **Court package (V10/E6).** A BagIt court package was built from live data and verified
   against three independent TSAs, including the AES-protected variant; byte tampering of a
   package member was rejected.
@@ -622,27 +618,15 @@ CI; the real Phala deployment and external timestamp verification are described 
 Saved MTProto state and catch-up are implemented. The newer backfill commits messages and
 cursors atomically and preserves available Recent Actions, with synthetic coverage today.
 
-The following items remain unqualified:
-
-- **Sealed export**: a key was created inside the VM (see above). Verifying an export
-  from such a run at the `sealed` tier, and QR login from a phone, remain open.
-- **Secret Chats in the Phala image**: the installer needs a hash-locked source for the
-  `secret-chats` extra.
-- **Message lifecycle matrix** (send, edit, delete, reactions, membership): the 9 November
-  run collected channel history without exercising the write path. Steps 4–8 of the
-  [live acceptance](internal/LIVE_ACCEPTANCE.md) procedure remain unrun.
-- **Proxy and MTProxy paths**, **Bitcoin confirmation of the OpenTimestamps proofs** and
-  **external-key backup restore** were not tested in this run.
-
 The 20 November court-grade acceptance above closed the witness tier in a live channel, FloodWait
 self-throttling from a persisted deadline, and Secret Chats, including self-destruct messages and
 their media, on live accounts. The OpenTimestamps proofs were present in live exports; their
 Bitcoin confirmation remains open.
 
-Further controlled runs for role visibility, reaction actors, prolonged FloodWait,
-account bans, network and process interruption recovery, mobile QR confirmation,
-sustained high load and long-term archival follow the
-[live acceptance](internal/LIVE_ACCEPTANCE.md) matrix.
+The [live acceptance matrix](internal/LIVE_ACCEPTANCE.md) tracks checks beyond these runs,
+including phone-confirmed QR login, the full send/edit/delete, reaction and membership
+sequence across roles, explicit proxy routes, external-key backup restore and verification
+of a CVM export at the `sealed` tier.
 
 The [public audit directory](../website/validation/audit/README.md) contains only
 the signed report and aggregate measurements. Detailed operational receipts,

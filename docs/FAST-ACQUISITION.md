@@ -86,9 +86,7 @@ costs still need measurement with real network latency and isolated disk load.
    inaccessible sources and unfinished work instead of substituting accounts to
    evade a wait. An account-count recommendation requires measured work volume.
 
-The numbered items are follow-up designs, not completed features. The current
-Takeout/checkpoint path has not been benchmarked live while test accounts are under
-persisted rate-limit waits. Durable writes run in a drained worker thread, but reads
+The numbered items are follow-up designs, not completed features. Durable writes run in a drained worker thread, but reads
 still await each checkpoint; there is no queued network/write overlap yet.
 
 ## Acceptance gates

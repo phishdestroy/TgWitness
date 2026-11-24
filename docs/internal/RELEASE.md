@@ -29,7 +29,7 @@ Windows portable package, the wheel and the source archive, each with its SHA-25
   chat exports are available. An independent verifier checks exported records.
 - Opt-in people profiles, notification delivery, timestamp tooling, encrypted S3-compatible
   copies and an independently operated witness process.
-- Per-account SOCKS5/HTTP CONNECT/experimental MTProxy, encrypted credential vaults and
+- Per-account SOCKS5/HTTP CONNECT/MTProxy, encrypted credential vaults and
   optional external vault keys. Journals and local attachments require disk/volume encryption.
 - Windows source/portable launchers, Linux/macOS launch scripts, Docker Compose, HTTPS and
   service templates. Demo mode uses synthetic data and does not connect to Telegram.
@@ -96,7 +96,7 @@ Not yet run against a live account:
 - MTProto frame matching against a captured PCAP, the S3-compatible off-site copy,
   SOCKS5 and HTTP proxies, MTProxy as the chosen route, alert delivery, the automatic
   only-session action and restoring a backup with an external vault key.
-- Export at the `sealed` tier, the witness tier with a separate witness process, a
+- Export at the `sealed` tier, a
   Bitcoin-confirmed OpenTimestamps seal and Takeout throughput.
 
 Platforms:

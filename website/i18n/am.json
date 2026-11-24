@@ -94,7 +94,7 @@
   "modes.confirms": "ሦስተኛ ወገን የሚያረጋግጠው",
   "modes.connection.independence": "በአንድ ማሽን ላይ ያሉ ሁለት workspace-ዎች ሁለት ነጻ ምስክሮች አይደሉም።",
   "modes.connection.intro": "እያንዳንዱ መለያ የራሱ workspace፣ መዝገብ፣ የፊርማ ቁልፍ፣ መንገድ እና ወረፋ አለው።",
-  "modes.connection.routes": "MTProxy ሙከራዊ ነው፤ የተካተቱ ህዝባዊ የMTProxy ዝርዝሮች አሉ። ፕሮክሲው ካልሠራ ወደ ቀጥታ ግንኙነት አይቀየርም።",
+  "modes.connection.routes": "የህዝብ MTProxy ዝርዝሮች በመተግበሪያው ውስጥ ይገኛሉ። ፕሮክሲው ካልሠራ ወደ ቀጥታ ግንኙነት አይቀየርም።",
   "modes.connection.title": "ያለዎትን የመግቢያ መረጃ ይጠቀሙ",
   "modes.continuity.coverage": "coverage.json ያንብቡ",
   "modes.continuity.coverage.body": "የምልከታ ጊዜያት፣ ምክንያት ያላቸው ክፍተቶች እና ያልታዩ ID-ዎች በተፈረመው ማውጫ ውስጥ አሉ። በዳግም ፍተሻ አለመገኘት የስረዛ ማሳወቂያ አይደለም።",

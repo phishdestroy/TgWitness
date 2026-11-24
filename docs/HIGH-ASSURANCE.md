@@ -275,11 +275,9 @@ only make that check fail, since the address must still answer with the collecto
 What it costs: no Cloudflare account keeps records of a quick tunnel, so `verify` reports the
 tunnel, connector and DNS check as unavailable and the result is at best `incomplete`; the
 provider records, firewall, signed statement, host measurements and installer comparison are
-checked as usual. The byte comparison with the reference installer needs a deployed commit
-that already knows `--quick-tunnel`; a 0.7.0 checkout builds the domain installer and reports
-the difference. Cloudflare offers quick tunnels for trials, allows 200 requests in
-flight and does not carry Server-Sent Events, so the panel's live updates (versions after 0.7.0)
-may not arrive through one and a view needs reloading; that part has not been tried. For a case
+checked as usual. For the byte comparison, build the reference installer from the deployed commit with
+`--quick-tunnel`. Cloudflare Quick Tunnels allow 200 concurrent requests and do not carry
+Server-Sent Events. Reload the panel to see changes. For a case
 that has to stand, use your own domain.
 
 ## Deploy

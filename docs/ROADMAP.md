@@ -119,7 +119,7 @@ and the [witness](WITNESS.md) publishes checkpoints. Next, in order:
 3. Qualify the existing draft-release and guided GitHub capture workflows on each release candidate.
 4. GitHub as extra storage for hourly signed checkpoint blocks, no force-push.
 5. Several witnesses run by different people, visible key rotation.
-6. Live tests of restarts, lost connectivity, old backups and changed builds.
+6. Test extended outages, restoration from old backups and changes to the deployed build. [Live runs](VERIFICATION.md) cover CVM restarts, session reconnection and export recovery after a process crash.
 
 Not done yet either: threshold signing (FROST), a GitLab mirror, Nostr anchoring, co-signers.
 

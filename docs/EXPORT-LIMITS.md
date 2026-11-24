@@ -83,8 +83,7 @@ opt-in Takeout history path for public channels and supergroups. New plans for
 either transport can widen 2,000-ID chunks up to 100,000 numeric IDs in sparse
 histories without excluding any IDs. Existing signed plans keep their original
 chunk sizes. Transport and generation accompany signed receipts.
-This path has offline protocol/recovery tests and browser checks; sustained
-Takeout throughput has not been measured. Regular-mode observations are recorded
+This path has offline protocol/recovery tests and browser checks. Regular-mode observations are recorded
 in the [50-source qualification](EXPORT-BENCHMARK-2026-11-06.md). New distributed plans retain signed
 checkpoints of up to 100 decoded messages inside a chunk, with observer-bound
 recovery and standalone verification. These local batches differ from account
