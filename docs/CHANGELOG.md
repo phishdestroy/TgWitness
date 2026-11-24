@@ -27,6 +27,7 @@
 
 ## Unreleased
 
+- The browser verifier page is readable in the dark theme, its language links and command block work with keyboard and screen readers, and long values in its result no longer widen the page on phones.
 - The checksum files of the Windows portable package and the Windows verifier end with a plain line feed, so sha256sum -c accepts them on every system, including Git Bash.
 
 ## 1.0.1 · 23 November 2026
