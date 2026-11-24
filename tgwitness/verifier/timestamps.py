@@ -308,7 +308,131 @@ def verify_timestamp_pss(reply, algorithm, signer, key, signature, signed, conte
     key.verify(signature, signed, padding.PSS(padding.MGF1(DIGESTS[mask_oid]()), salt), algorithm_hash)
 
 
+def timestamp_dns_name(value):
+    labels = value.lower().split(".")
+    if len(value) > 253 or not all(re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", label)
+                                   for label in labels):
+        raise ValueError("Invalid DNS name in timestamp certificate path")
+    return ".".join(labels)
+
+
+def timestamp_rdn(rdn):
+    import stringprep
+    import unicodedata
+    case_ignore = {
+        x509.NameOID.COMMON_NAME, x509.NameOID.COUNTRY_NAME, x509.NameOID.LOCALITY_NAME,
+        x509.NameOID.STATE_OR_PROVINCE_NAME, x509.NameOID.STREET_ADDRESS, x509.NameOID.ORGANIZATION_NAME,
+        x509.NameOID.ORGANIZATIONAL_UNIT_NAME, x509.NameOID.SERIAL_NUMBER, x509.NameOID.SURNAME,
+        x509.NameOID.GIVEN_NAME, x509.NameOID.TITLE, x509.NameOID.PSEUDONYM, x509.NameOID.DOMAIN_COMPONENT,
+        x509.NameOID.EMAIL_ADDRESS, x509.NameOID.USER_ID, x509.NameOID.GENERATION_QUALIFIER,
+        x509.NameOID.DN_QUALIFIER, x509.NameOID.INITIALS,
+    }
+    def prepare(attr):
+        value = attr.value
+        if not isinstance(value, str) or attr.oid not in case_ignore:
+            raise ValueError("Unsupported directory attribute in timestamp name constraints")
+        mapped = "".join(" " if stringprep.in_table_c12(c) else c for c in value if not stringprep.in_table_b1(c))
+        folded = unicodedata.normalize("NFKC", mapped).casefold()
+        return attr.oid.dotted_string, " ".join(unicodedata.normalize("NFKC", folded).split())
+    return sorted(prepare(attr) for attr in rdn)
+
+
+def timestamp_subtree(name, constraint):
+    from ipaddress import ip_address, IPv4Address, IPv6Address, IPv4Network, IPv6Network
+    from urllib.parse import urlsplit
+    value, base = name.value, constraint.value
+    if isinstance(name, x509.DirectoryName):
+        return (len(value.rdns) >= len(base.rdns)
+                and all(a == b or timestamp_rdn(a) == timestamp_rdn(b) for a, b in zip(value.rdns, base.rdns)))
+    if isinstance(name, x509.IPAddress):
+        if not isinstance(value, (IPv4Address, IPv6Address)) or not isinstance(base, (IPv4Network, IPv6Network)):
+            raise ValueError("Invalid IP address in timestamp name constraints")
+        return value in base
+    if isinstance(name, x509.RFC822Name):
+        local, sep, value = value.rpartition("@")
+        if not sep or not local:
+            raise ValueError("Invalid mailbox in timestamp certificate")
+        if "@" in base:
+            expected, _, domain = base.rpartition("@")
+            return timestamp_dns_name(value) == timestamp_dns_name(domain) and local == expected
+    elif isinstance(name, x509.UniformResourceIdentifier):
+        uri = urlsplit(value)
+        if not uri.scheme or not uri.hostname:
+            raise ValueError("Timestamp URI name constraint requires a DNS host")
+        value = uri.hostname
+        try:
+            ip_address(value)
+        except ValueError:
+            pass
+        else:
+            raise ValueError("Timestamp URI name constraint requires a DNS host")
+    host = timestamp_dns_name(value)
+    if base.startswith("."):
+        return host.endswith("." + timestamp_dns_name(base[1:]))
+    domain = timestamp_dns_name(base)
+    return host == domain or isinstance(name, x509.DNSName) and host.endswith("." + domain)
+
+
+def timestamp_name_constraints(constraints, below):
+    from ipaddress import IPv4Network, IPv6Network
+    supported = (x509.DirectoryName, x509.DNSName, x509.IPAddress, x509.RFC822Name, x509.UniformResourceIdentifier)
+    permitted, excluded = constraints.permitted_subtrees or [], constraints.excluded_subtrees or []
+    if (not below or not (permitted or excluded) or constraints.permitted_subtrees == []
+            or constraints.excluded_subtrees == []):
+        raise ValueError("Invalid timestamp CA name constraints")
+    for base in [*permitted, *excluded]:
+        if not isinstance(base, supported):
+            raise ValueError("Unsupported general name in timestamp CA name constraints")
+        if isinstance(base, x509.IPAddress):
+            if not isinstance(base.value, (IPv4Network, IPv6Network)):
+                raise ValueError("Invalid timestamp CA IP subnet")
+        elif not isinstance(base, x509.DirectoryName):
+            domain = base.value
+            if isinstance(base, x509.RFC822Name) and "@" in domain:
+                local, _, domain = domain.rpartition("@")
+                if not local or domain.startswith("."):
+                    raise ValueError("Invalid mailbox in timestamp CA name constraints")
+            timestamp_dns_name(domain.removeprefix("."))
+    for index, cert in enumerate(below):
+        if index and cert.subject == cert.issuer:
+            continue
+        names = [x509.DirectoryName(cert.subject)] if cert.subject.rdns else []
+        try:
+            names.extend(cert.extensions.get_extension_for_class(x509.SubjectAlternativeName).value)
+        except x509.ExtensionNotFound:
+            names.extend(x509.RFC822Name(a.value) for a in cert.subject.get_attributes_for_oid(x509.NameOID.EMAIL_ADDRESS))
+        for name in names:
+            allowed = [base for base in permitted if type(base) is type(name)]
+            if (any(timestamp_subtree(name, base) for base in excluded if type(base) is type(name))
+                    or allowed and not any(timestamp_subtree(name, base) for base in allowed)):
+                raise ValueError("A timestamp certificate is outside its CA name constraints")
+
+
+def check_timestamp_extension_encoding(certificate, extension):
+    tbs = certificate.tbs_certificate_bytes
+    _, start, end = der(tbs, 0)
+    for tag, _, start, end in children(tbs, start, end):
+        if tag != 0xA3:
+            continue
+        sequence, = children(tbs, start, end)
+        for entry in children(tbs, *sequence[2:]):
+            fields = children(tbs, *entry[2:])
+            if oid(tbs, *fields[0][2:]) == extension.oid.dotted_string:
+                original = tbs[fields[-1][2]:fields[-1][3]]
+                if original != extension.value.public_bytes():
+                    raise ValueError("Unsupported parameters in timestamp certificate extension " + extension.oid.dotted_string)
+                return
+    raise ValueError("Missing timestamp certificate extension")
+
+
 def timestamp_signature(reply, roots, *, include_reference=False, intermediates=()):
+    try:
+        return checked_timestamp_signature(reply, roots, include_reference=include_reference, intermediates=intermediates)
+    except x509.UnsupportedGeneralNameType as exc:
+        raise ValueError("Unsupported general name in timestamp certificate") from exc
+
+
+def checked_timestamp_signature(reply, roots, *, include_reference, intermediates):
     token = timestamp_token(reply)
     when = tst_info(token["tst"])["time"]
     _, _, start, end = token["signer"]
@@ -396,11 +520,21 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             raise ValueError("A certificate in the timestamp chain is not a certificate authority")
         chain.append(issuer)
         current = issuer
-    for certificate in chain:
+    for index, certificate in enumerate(chain):
         if not utc_time(certificate, "not_valid_before") <= when <= utc_time(certificate, "not_valid_after"):
             raise ValueError("A certificate in the timestamp chain was not valid at the stamped time")
         for extension in certificate.extensions:
-            if extension.critical and not isinstance(extension.value, (
+            if isinstance(extension.value, x509.NameConstraints):
+                check_timestamp_extension_encoding(certificate, extension)
+                timestamp_name_constraints(extension.value, chain[:index])
+            elif extension.critical and isinstance(extension.value, x509.CertificatePolicies):
+                check_timestamp_extension_encoding(certificate, extension)
+                identifiers = [policy.policy_identifier for policy in extension.value]
+                if not identifiers or len(set(identifiers)) != len(identifiers):
+                    raise ValueError("Empty or duplicate timestamp certificate policies")
+                if any(policy.policy_qualifiers == [] for policy in extension.value):
+                    raise ValueError("Empty timestamp certificate policy qualifiers")
+            elif extension.critical and not isinstance(extension.value, (
                     x509.BasicConstraints, x509.KeyUsage, x509.ExtendedKeyUsage)):
                 raise ValueError("Unsupported critical timestamp certificate extension: " + extension.oid.dotted_string)
     for index, certificate in enumerate(chain[1:], 1):

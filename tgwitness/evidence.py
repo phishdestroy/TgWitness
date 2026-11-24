@@ -11,6 +11,7 @@ import tempfile
 import threading
 import uuid
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -25,6 +26,8 @@ from . import verification_kit
 from . import viewer
 from .store import ZERO, canonical, utcnow
 from .verify import Coverage, fingerprint, verify_events, verify_checkpoint
+from .verifier.journal import EventChain
+from .verifier.parallel import JournalChecks, PARALLEL_EVENTS_AFTER
 from .security import private_write
 
 CHECKPOINT_LOCKS, CHECKPOINT_GUARD = {}, threading.Lock()
@@ -43,6 +46,15 @@ LIMITS = [
 ]
 SET_ASIDE = re.compile(r"-?[0-9]+\.set-aside-([0-9]{8}T[0-9]{12})")
 SET_ASIDE_DAYS = 7
+
+
+def verify_export_events(events, public_key, count):
+    workers = min(os.cpu_count() or 1, 4)
+    if count <= PARALLEL_EVENTS_AFTER or workers == 1:
+        return verify_events(events, public_key)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        checks = JournalChecks(public_key, pool, workers)
+        return EventChain(public_key).run(events, checks)
 
 
 def producer():
@@ -243,7 +255,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                         digest.add(event)
                     journal_bytes.update(canonical(event) + b"\n")
                     yield event
-            result = verify_events(measured(snapshot.events()), vault.public_key)
+            count = snapshot.head["seq"] if snapshot.head else 0
+            result = verify_export_events(measured(snapshot.events()), vault.public_key, count)
             if retained:
                 verify_checkpoint(retained, vault.public_key, result["events"], snapshot.hash_at)
             coverage = observed.result(COVERAGE_RANGES)

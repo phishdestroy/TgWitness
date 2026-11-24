@@ -114,7 +114,10 @@ def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
     lifetimes = [item["lifetime"] for item in removed if item["lifetime"] is not None]
     waves = []
     for item in removed:
-        if waves and (seconds(item["at"], waves[-1]["end"]) or 0) <= BURST_SECONDS:
+        if moment(item["at"]) is None:
+            continue
+        gap = seconds(item["at"], waves[-1]["end"]) if waves else None
+        if gap is not None and 0 <= gap <= BURST_SECONDS:
             wave = waves[-1]
             wave.update(end=item["at"], count=wave["count"] + 1, last_id=max(wave["last_id"], item["message_id"]),
                         first_id=min(wave["first_id"], item["message_id"]))
@@ -134,7 +137,7 @@ def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
         if index:
             wave["since_previous_wave"] = seconds(wave["start"], waves[index - 1]["end"])
         del wave["start_seq"]
-    per_day = Counter((item["at"] or "")[:10] for item in removed if item["at"])
+    per_day = Counter(item["at"][:10] for item in removed if moment(item["at"]) is not None)
     return {"format": FORMAT, "chat_id": chat_id, "offset_minutes": offset_minutes,
             "counts": {"messages": len(ordered), "incoming": sum(not m["outgoing"] for m in ordered),
                        "outgoing": sum(m["outgoing"] for m in ordered), "deletions": len(removed),

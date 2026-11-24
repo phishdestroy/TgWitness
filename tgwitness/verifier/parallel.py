@@ -47,7 +47,7 @@ def journal_batch(public_key, first, lines):
     key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True))
     for seq, line in enumerate(lines, first):
         try:
-            event = strict_json(line)
+            event = line if isinstance(line, dict) else strict_json(line)
             calculated = hashlib.sha256(canonical({k: event[k] for k in FIELDS})).hexdigest()
         except (ValueError, KeyError, TypeError):
             return seq, "content"
@@ -68,9 +68,10 @@ def journal_failure(found):
 
 
 class JournalChecks:
-    def __init__(self, public_key):
+    def __init__(self, public_key, pool=None, jobs=None):
         self.public_key, self.pending, self.first, self.lines = public_key, [], None, []
-        self.pool = parallel_pool()
+        self.pool = parallel_pool() if pool is None else pool
+        self.jobs = parallel_jobs() if jobs is None else jobs
 
     def add(self, seq, line):
         if not self.lines:
@@ -83,7 +84,7 @@ class JournalChecks:
         if self.lines:
             self.pending.append(self.pool.submit(journal_batch, self.public_key, self.first, self.lines))
             self.lines = []
-        while len(self.pending) > 3 * PARALLEL["jobs"]:
+        while len(self.pending) > 3 * self.jobs:
             found = self.pending.pop(0).result()
             if found:
                 self.abandon()
