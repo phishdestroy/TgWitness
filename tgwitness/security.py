@@ -1,5 +1,6 @@
 import base64
 import csv
+import hashlib
 import json
 import logging
 import os
@@ -191,9 +192,39 @@ class InstanceLock:
         except OSError:
             self.stream.close()
             raise RuntimeError("This data directory is already open. Use one worker.") from None
+        try:
+            self.stream.truncate(1)
+            self.stream.write(b" " + str(os.getpid()).encode())
+            self.stream.flush()
+        except OSError:
+            pass
 
     def close(self):
         self.stream.close()
+
+
+def instance_holder(root: Path):
+    try:
+        stream = (root / ".instance.lock").open("rb")
+    except OSError:
+        return None
+    with stream:
+        try:
+            if os.name == "nt":
+                import msvcrt
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                stream.seek(0)
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(stream, fcntl.LOCK_SH | fcntl.LOCK_NB)
+                fcntl.flock(stream, fcntl.LOCK_UN)
+            return None
+        except OSError:
+            pass
+        stream.seek(1)
+        text = stream.read(24).strip()
+        return int(text) if text.isdigit() else 0
 
 
 class KeyInUse(ValueError):
@@ -523,22 +554,46 @@ def migrate_peers(folder, local, external):
     try:
         if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='profiling_users'").fetchone() is None:
             return 0
-        rows = db.execute("SELECT run_id, user_id, peer FROM profiling_users WHERE peer IS NOT NULL").fetchall()
+        count, after = 0, None
         with db:
-            for run_id, user_id, token in rows:
-                try:
-                    external.decrypt(token)
-                    continue
-                except InvalidToken:
-                    pass
-                try:
-                    value = external.encrypt(local.decrypt(token))
-                except InvalidToken:
-                    value = None
-                db.execute("UPDATE profiling_users SET peer=? WHERE run_id=? AND user_id=?", (value, run_id, user_id))
-        return len(rows)
+            while True:
+                rows = db.execute("SELECT run_id, user_id, peer FROM profiling_users WHERE peer IS NOT NULL"
+                                  + (" AND (run_id, user_id) > (?, ?)" if after else "")
+                                  + " ORDER BY run_id, user_id LIMIT 500", after or ()).fetchall()
+                if not rows:
+                    return count
+                count += len(rows)
+                after = rows[-1][:2]
+                for run_id, user_id, token in rows:
+                    try:
+                        external.decrypt(token)
+                        continue
+                    except InvalidToken:
+                        pass
+                    try:
+                        value = external.encrypt(local.decrypt(token))
+                    except InvalidToken:
+                        value = None
+                    db.execute("UPDATE profiling_users SET peer=? WHERE run_id=? AND user_id=?", (value, run_id, user_id))
     finally:
         db.close()
+
+
+def reencrypt(folder, local, target):
+    files, digests = vault_files(folder), {}
+    for path in files:
+        data = local.decrypt(path.read_bytes())
+        digests[path] = hashlib.sha256(data).digest()
+        private_write(path.with_name(path.name + ".new"), target.encrypt(data))
+        del data
+    for path in files:
+        os.replace(path, path.with_name(path.name + ".local"))
+        os.replace(path.with_name(path.name + ".new"), path)
+    peers = migrate_peers(folder, local, target)
+    for path in files:
+        if hashlib.sha256(target.decrypt(path.read_bytes())).digest() != digests[path]:
+            raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
+    return files, peers
 
 
 def migrate_to_external(root, master_file):
@@ -561,17 +616,7 @@ def migrate_to_external(root, master_file):
             external = external_fernet(master, salt)
             private_write(marker, json.dumps({"format": EXTERNAL_FORMAT,
                                               "salt": base64.b64encode(salt).decode()}).encode())
-            files = vault_files(folder)
-            plain = {path: local.decrypt(path.read_bytes()) for path in files}
-            for path, data in plain.items():
-                private_write(path.with_name(path.name + ".new"), external.encrypt(data))
-            for path in files:
-                os.replace(path, path.with_name(path.name + ".local"))
-                os.replace(path.with_name(path.name + ".new"), path)
-            peers = migrate_peers(folder, local, external)
-            for path, data in plain.items():
-                if external.decrypt(path.read_bytes()) != data:
-                    raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
+            files, peers = reencrypt(folder, local, external)
             key_path.unlink()
             for path in files:
                 path.with_name(path.name + ".local").unlink()
@@ -624,17 +669,7 @@ def migrate_to_keyring(root, service=None, account=None, *, store=None):
                 "account": account,
                 "salt": base64.b64encode(salt).decode(),
             }).encode())
-            files = vault_files(folder)
-            plain = {path: local.decrypt(path.read_bytes()) for path in files}
-            for path, data in plain.items():
-                private_write(path.with_name(path.name + ".new"), target.encrypt(data))
-            for path in files:
-                os.replace(path, path.with_name(path.name + ".local"))
-                os.replace(path.with_name(path.name + ".new"), path)
-            peers = migrate_peers(folder, local, target)
-            for path, data in plain.items():
-                if target.decrypt(path.read_bytes()) != data:
-                    raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
+            files, peers = reencrypt(folder, local, target)
             key_path.unlink()
             for path in files:
                 path.with_name(path.name + ".local").unlink()
