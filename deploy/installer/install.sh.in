@@ -109,12 +109,64 @@ cleanup() {
         rm -rf -- "$VERSION_DIR"
     fi
     if [[ "${LOCKED:-0}" == 1 ]]; then
+        rm -f -- "$INSTALL_ROOT/.install.lock/owner"
         rmdir -- "$INSTALL_ROOT/.install.lock" 2>/dev/null
     fi
     if [[ "$status" != 0 ]]; then
         printf 'Installation did not complete. Any previous launcher and data were kept.\n' >&2
     fi
     return "$status"
+}
+
+process_start() {
+    local stat fields
+    if [[ -r "/proc/$1/stat" ]]; then
+        stat=$(cat -- "/proc/$1/stat" 2>/dev/null) || return 0
+        read -r -a fields <<< "${stat##*) }"
+        printf '%s\n' "${fields[19]:-}"
+    else
+        ps -o lstart= -p "$1" 2>/dev/null || true
+    fi
+}
+
+boot_id() {
+    if [[ -r /proc/sys/kernel/random/boot_id ]]; then
+        cat /proc/sys/kernel/random/boot_id
+    else
+        sysctl -n kern.boottime 2>/dev/null || true
+    fi
+}
+
+lock_owner() {
+    printf '%s\n%s\n%s\n%s\n' "$$" "$(process_start "$$")" "$(boot_id)" "$(uname -n)"
+}
+
+lock_is_stale() {
+    local pid= start= boot= host=
+    { read -r pid; read -r start; read -r boot; read -r host; } <<< "$1" || true
+    [[ "$pid" =~ ^[0-9]+$ && -n "$start" && -n "$boot" && "$host" == "$(uname -n)" ]] || return 1
+    [[ "$boot" != "$(boot_id)" || "$(process_start "$pid")" != "$start" ]]
+}
+
+acquire_lock() {
+    local lock="$INSTALL_ROOT/.install.lock" guard="$INSTALL_ROOT/.install-lock-recovery" owner
+    local busy="Another installation may be running. Lock: $lock. If interrupted, confirm it has stopped before removing this lock."
+    if ! mkdir -m 700 -- "$lock" 2>/dev/null; then
+        owner=$(cat -- "$lock/owner" 2>/dev/null) || owner=
+        [[ -n "$owner" ]] && lock_is_stale "$owner" && mkdir -m 700 -- "$guard" 2>/dev/null || fail "$busy"
+        if [[ "$(cat -- "$lock/owner" 2>/dev/null)" == "$owner" ]]; then
+            rm -f -- "$lock/owner"
+            rmdir -- "$lock" 2>/dev/null
+        fi
+        if ! mkdir -m 700 -- "$lock" 2>/dev/null; then
+            rmdir -- "$guard"
+            fail "$busy"
+        fi
+        rmdir -- "$guard"
+        printf 'Released the lock of an earlier installation that stopped without finishing.\n' >&2
+    fi
+    LOCKED=1
+    lock_owner > "$lock/owner"
 }
 
 prepare_root() {
@@ -136,10 +188,7 @@ prepare_root() {
     trap 'exit 130' INT
     trap 'exit 143' TERM
     trap 'exit 129' HUP
-    if ! mkdir -m 700 -- "$INSTALL_ROOT/.install.lock" 2>/dev/null; then
-        fail "Another installation may be running. Lock: $INSTALL_ROOT/.install.lock. If interrupted, confirm it has stopped before removing this lock."
-    fi
-    LOCKED=1
+    acquire_lock
     managed_directory "$INSTALL_ROOT/bin"
     managed_directory "$INSTALL_ROOT/tools"
     managed_directory "$INSTALL_ROOT/tools/cache"
