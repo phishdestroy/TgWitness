@@ -2805,7 +2805,9 @@ function renderExportState(x){
   if(!x||x.phase==="unknown"){prog.textContent="";return;}
   const resumed=x.resumed?" ("+tr("resumed")+")":"";
   const counts={title:(x.title||tr("chat"))+resumed,captured:(x.captured||0).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
-  if(running&&x.stage==="recheck")prog.textContent=tr("Exporting {title}: ",counts)+tr("rechecking absent message numbers")+"…";
+  if(running&&x.stage==="recheck")prog.textContent=tr("Exporting {title}: ",counts)+tr("rechecking absent message numbers")+
+    (x.recheck_total?" "+(x.recheck_done||0).toLocaleString(LANG)+"/"+x.recheck_total.toLocaleString(LANG):"")+
+    (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
   else if(running&&x.stage==="packaging")prog.textContent=tr("Exporting {title}: ",counts)+tr("packaging and signing the archive")+"…";
   else if(running&&x.stage==="files")prog.textContent=tr("Exporting {title}: ",counts)+tr("{captured} messages saved; files: {done}/{total}",{captured:counts.captured,done:(x.files_done||0).toLocaleString(LANG),total:(x.files_total||0).toLocaleString(LANG)})+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";

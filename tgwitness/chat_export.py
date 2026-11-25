@@ -65,6 +65,7 @@ MAX_BUNDLE_BYTES = 4 * 1024**3
 PARTIAL_FORMAT = "tgwitness-chat-partial-v1"
 CHECKPOINT_MESSAGES = 5000
 HISTORY_FILE = re.compile(r"history-[A-Za-z0-9_-]{1,64}\.jsonl")
+NO_FILE = "media-without-file.txt"
 FILE_FIELDS = ("file", "file_sha256", "file_size", "file_kind", "file_status", "file_error", "server_hashes",
                "file_hash_sha256", "file_reused")
 PARTIAL_MEANING = ("Messages read before this export stopped. They stay in the workspace under a statement signed with "
@@ -77,6 +78,9 @@ SESSIONS_LIMIT = ("This export continued an earlier stopped export of the same c
                   "Telegram returned during that session.")
 PARTIAL_LIMIT = ("This export stopped before it finished and holds only the messages read until then; partial names "
                  "the range read and the reason it stopped.")
+EDGE_LIMIT = ("Telegram's history listing stopped while older messages still existed: numbers just below its oldest "
+              "message returned messages when requested by number; those are included and marked found_on_recheck "
+              "(recheck.edge_found). History older than the checked numbers may exist and was not read.")
 REUSED_MEANING = ("file_reused marks an attachment whose bytes were not downloaded again: Telegram serves a file under a "
                   "fixed identifier, and the bytes saved earlier for the same identifier and size, in this export or in "
                   "the workspace journal (media_event), were hashed again before reuse.")
@@ -167,6 +171,8 @@ def export_limits(meta):
         limits.append(SESSIONS_LIMIT)
     if meta.get("partial"):
         limits.append(PARTIAL_LIMIT)
+    if type((meta.get("recheck") or {}).get("edge_found")) is int and meta["recheck"]["edge_found"] > 0:
+        limits.append(EDGE_LIMIT)
     return limits
 
 
@@ -605,6 +611,20 @@ class PartialExport:
         self.media.mkdir(mode=0o700, exist_ok=True)
         if self.previous is None:
             forget_files(self.media)
+            (self.directory / NO_FILE).unlink(missing_ok=True)
+
+    def no_file_ids(self):
+        path = self.directory / NO_FILE
+        if linked(path) or not path.is_file():
+            return set()
+        with path.open(encoding="utf-8") as stream:
+            return {int(line) for line in stream if line.strip().isdigit()}
+
+    def note_no_file(self, numbers):
+        path = self.directory / NO_FILE
+        if numbers and not linked(path):
+            with path.open("a", encoding="utf-8") as stream:
+                stream.write("".join(str(number) + "\n" for number in numbers))
 
     def load(self):
         path = self.directory / "partial.json"

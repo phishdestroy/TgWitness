@@ -11008,5 +11008,6 @@
   "-{before} / +{after} messages": "-{before} / +{after} messaggi",
   "Context before (messages)": "Contesto prima (messaggi)",
   "Context after (messages)": "Contesto dopo (messaggi)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Includi i messaggi vicini attorno a ciascun record corrispondente per preservare il contesto della conversazione (da 0 a 50 messaggi per lato)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Includi i messaggi vicini attorno a ciascun record corrispondente per preservare il contesto della conversazione (da 0 a 50 messaggi per lato).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "L’elenco della cronologia di Telegram si è interrotto mentre esistevano messaggi più vecchi: i numeri subito sotto il suo messaggio più vecchio hanno restituito messaggi se richiesti per numero; sono inclusi e contrassegnati con found_on_recheck (recheck.edge_found). Può esistere una cronologia più vecchia dei numeri controllati che non è stata letta."
 }

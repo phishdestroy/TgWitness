@@ -11100,5 +11100,6 @@
   "-{before} / +{after} messages": "-{before} / +{after} wiadomości",
   "Context before (messages)": "Kontekst przed (wiadomości)",
   "Context after (messages)": "Kontekst po (wiadomości)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Dołącz sąsiednie wiadomości wokół każdego pasującego wpisu, aby zachować kontekst rozmowy (od 0 do 50 wiadomości z każdej strony)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Dołącz sąsiednie wiadomości wokół każdego pasującego wpisu, aby zachować kontekst rozmowy (od 0 do 50 wiadomości z każdej strony).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Lista historii Telegrama urwała się, choć istniały starsze wiadomości: numery tuż pod jej najstarszą wiadomością zwróciły wiadomości przy zapytaniu po numerze; są dołączone i oznaczone found_on_recheck (recheck.edge_found). Historia starsza niż sprawdzone numery może istnieć i nie została odczytana."
 }

@@ -10947,5 +10947,6 @@
   "-{before} / +{after} messages": "-{before} / +{after} ข้อความ",
   "Context before (messages)": "บริบทก่อนหน้า (ข้อความ)",
   "Context after (messages)": "บริบทถัดไป (ข้อความ)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "รวมข้อความข้างเคียงรอบแต่ละรายการที่ตรงกันเพื่อรักษาบริบทการสนทนา (0 ถึง 50 ข้อความในแต่ละฝั่ง)"
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "รวมข้อความข้างเคียงรอบแต่ละรายการที่ตรงกันเพื่อรักษาบริบทการสนทนา (0 ถึง 50 ข้อความในแต่ละฝั่ง)",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "รายการประวัติของ Telegram หยุดลงทั้งที่ยังมีข้อความเก่ากว่าอยู่: หมายเลขที่อยู่ถัดลงไปจากข้อความเก่าที่สุดในรายการคืนข้อความเมื่อขอตามหมายเลข ข้อความเหล่านั้นรวมอยู่และทำเครื่องหมาย found_on_recheck (recheck.edge_found) อาจมีประวัติที่เก่ากว่าหมายเลขที่ตรวจซึ่งยังไม่ได้อ่าน"
 }
