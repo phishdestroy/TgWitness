@@ -114,12 +114,14 @@ async def probe(entries, target, allowed):
             break
         reason, _ = availability(entry, None, False)
         if reason not in (None, "observing"):
+            failures.append((entry.get("label") or profile_id) + ": " + reason)
             continue
         c = entry["app"].state.collector
         owner = None
         if not c.running:
             owner = "plan:" + secrets.token_hex(16)
             if not c.reserve_export(owner):
+                failures.append((entry.get("label") or profile_id) + ": busy")
                 continue
         try:
             attempts += 1

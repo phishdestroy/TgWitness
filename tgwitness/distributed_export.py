@@ -24,7 +24,7 @@ from telethon.tl import types
 from . import chat_export, message_details, replica, report, tuning
 from .account_export import durable_write, linked, read_json
 from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
-from .telegram_client import in_lane
+from .telegram_client import FLOOD_ERRORS, in_lane
 from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
 from .disk_space import DISK_SHORT, disk_check
@@ -132,6 +132,8 @@ class DistributedExport:
                     raise ValueError(label + ": Telegram requests are paused. Check the saved rate-limit deadline in connection details.")
                 if not collector.reserve_export(owner):
                     label = self.profiles.entries[profile].get("label", profile)
+                    if collector.observation_starting:
+                        raise ValueError(label + ": the account is still connecting. Try again in a minute.")
                     raise ValueError(label + ": account is busy. Pause its current task explicitly or deselect it.")
                 self.reserved[profile] = (owner, collector)
         except BaseException:
@@ -638,14 +640,19 @@ class Run:
         found = {}
         for start in range(0, len(numbers), 100):
             batch = numbers[start:start + 100]
-            try:
-                answer = await collector.client.get_messages(self.entities[profile], ids=batch)
-            except TypeNotFoundError:
-                if len(batch) == 1:
-                    raise
-                answer = []
-                for number in batch:
-                    answer.append(await collector.client.get_messages(self.entities[profile], ids=number))
+            while True:
+                try:
+                    answer = await collector.client.get_messages(self.entities[profile], ids=batch)
+                    break
+                except FLOOD_ERRORS as exc:
+                    await asyncio.sleep(exc.seconds + 1)
+                except TypeNotFoundError:
+                    if len(batch) == 1:
+                        raise
+                    answer = []
+                    for number in batch:
+                        answer.append(await collector.client.get_messages(self.entities[profile], ids=number))
+                    break
             found.update(zip(batch, answer))
         return found
 
