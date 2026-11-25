@@ -53,6 +53,7 @@ MAX_UNCOMPRESSED_GIB = 4
 
 
 MAX_MEMBERS = 500_000
+MAX_DIRECTORY_BYTES = 256 * 1024**2
 MAX_MANIFEST_BYTES = 64 * 1024**2
 MAX_SMALL_MEMBER_BYTES = 16 * 1024**2
 MAX_RECORD_BYTES = 64 * 1024**2
@@ -209,10 +210,69 @@ def contiguous(archive, infos):
         handle.seek(start)
 
 
+def directory_preflight(path):
+    with open(path, "rb") as handle:
+        size = handle.seek(0, 2)
+        if size < 22:
+            raise zipfile.BadZipFile("File is not a zip file")
+        handle.seek(size - 22)
+        end = handle.read(22)
+        if end[:4] != b"PK\x05\x06":
+            tail_start = handle.seek(max(0, size - 22 - 65535))
+            tail = handle.read()
+            at = tail.rfind(b"PK\x05\x06")
+            if at < 0 or len(tail) - at < 22:
+                raise zipfile.BadZipFile("File is not a zip file")
+            if tail_start + at + 22 + struct.unpack("<H", tail[at + 20:at + 22])[0] == size:
+                raise ValueError("Archive carries bytes in its trailing comment")
+            raise ValueError("Archive has data after its central directory")
+        disk, first_disk, on_disk, entries, directory_size, directory_offset, _ = struct.unpack("<HHHHIIH", end[4:])
+        directory_end = size - 22
+        if size >= 42:
+            handle.seek(size - 42)
+            locator = handle.read(20)
+            if locator[:4] == b"PK\x06\x07":
+                _, record_disk, _, disks = struct.unpack("<4sIQI", locator)
+                directory_end = size - 42 - 56
+                if record_disk or disks > 1 or directory_end < 0:
+                    raise ValueError("Damaged or multi-disk ZIP64 end record")
+                handle.seek(directory_end)
+                record = handle.read(56)
+                if record[:4] != b"PK\x06\x06":
+                    raise ValueError("Damaged ZIP64 end record")
+                (_, _, _, _, disk, first_disk, on_disk, entries, directory_size,
+                 directory_offset) = struct.unpack("<4sQHHIIQQQQ", record)
+        if disk or first_disk or on_disk != entries:
+            raise ValueError("Multi-disk ZIP archives are not supported")
+        if entries > MAX_MEMBERS:
+            raise ValueError("Archive has more members than the verifier accepts")
+        if directory_size > MAX_DIRECTORY_BYTES:
+            raise ValueError("Archive directory exceeds the verifier's size limit")
+        if directory_offset + directory_size != directory_end:
+            raise ValueError("Archive has data before its first member")
+        handle.seek(directory_offset)
+        remaining, counted = directory_size, 0
+        while remaining:
+            header = handle.read(46)
+            if remaining < 46 or len(header) != 46 or header[:4] != b"PK\x01\x02":
+                raise zipfile.BadZipFile("Bad magic number for central directory")
+            counted += 1
+            if counted > MAX_MEMBERS:
+                raise ValueError("Archive has more members than the verifier accepts")
+            step = 46 + sum(struct.unpack("<HHH", header[28:34]))
+            if step > remaining:
+                raise zipfile.BadZipFile("Truncated central directory")
+            handle.seek(step - 46, 1)
+            remaining -= step
+        if counted != entries:
+            raise ValueError("Archive member count differs from its end record")
+
+
 def open_archive(path, max_gib=None):
     limit = MAX_UNCOMPRESSED_GIB if max_gib is None else max_gib
     if type(limit) not in (int, float) or not math.isfinite(limit) or limit <= 0:
         raise ValueError("Archive size limit must be a positive finite number of GiB")
+    directory_preflight(path)
     archive = zipfile.ZipFile(path)
     try:
         infos = archive.infolist()

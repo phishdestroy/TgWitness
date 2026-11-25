@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 7410b671363d916868170cf572159bc81c18f4a50ff89503d132879cd80bd34f
+# TgWitness verifier sources SHA-256: 6cf77e4103fa9729c68e19534fda556c868bb30fdea550a8b419101601b6153c
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -54,6 +54,7 @@ MAX_UNCOMPRESSED_GIB = 4
 
 
 MAX_MEMBERS = 500_000
+MAX_DIRECTORY_BYTES = 256 * 1024**2
 MAX_MANIFEST_BYTES = 64 * 1024**2
 MAX_SMALL_MEMBER_BYTES = 16 * 1024**2
 MAX_RECORD_BYTES = 64 * 1024**2
@@ -209,10 +210,69 @@ def contiguous(archive, infos):
         handle.seek(start)
 
 
+def directory_preflight(path):
+    with open(path, "rb") as handle:
+        size = handle.seek(0, 2)
+        if size < 22:
+            raise zipfile.BadZipFile("File is not a zip file")
+        handle.seek(size - 22)
+        end = handle.read(22)
+        if end[:4] != b"PK\x05\x06":
+            tail_start = handle.seek(max(0, size - 22 - 65535))
+            tail = handle.read()
+            at = tail.rfind(b"PK\x05\x06")
+            if at < 0 or len(tail) - at < 22:
+                raise zipfile.BadZipFile("File is not a zip file")
+            if tail_start + at + 22 + struct.unpack("<H", tail[at + 20:at + 22])[0] == size:
+                raise ValueError("Archive carries bytes in its trailing comment")
+            raise ValueError("Archive has data after its central directory")
+        disk, first_disk, on_disk, entries, directory_size, directory_offset, _ = struct.unpack("<HHHHIIH", end[4:])
+        directory_end = size - 22
+        if size >= 42:
+            handle.seek(size - 42)
+            locator = handle.read(20)
+            if locator[:4] == b"PK\x06\x07":
+                _, record_disk, _, disks = struct.unpack("<4sIQI", locator)
+                directory_end = size - 42 - 56
+                if record_disk or disks > 1 or directory_end < 0:
+                    raise ValueError("Damaged or multi-disk ZIP64 end record")
+                handle.seek(directory_end)
+                record = handle.read(56)
+                if record[:4] != b"PK\x06\x06":
+                    raise ValueError("Damaged ZIP64 end record")
+                (_, _, _, _, disk, first_disk, on_disk, entries, directory_size,
+                 directory_offset) = struct.unpack("<4sQHHIIQQQQ", record)
+        if disk or first_disk or on_disk != entries:
+            raise ValueError("Multi-disk ZIP archives are not supported")
+        if entries > MAX_MEMBERS:
+            raise ValueError("Archive has more members than the verifier accepts")
+        if directory_size > MAX_DIRECTORY_BYTES:
+            raise ValueError("Archive directory exceeds the verifier's size limit")
+        if directory_offset + directory_size != directory_end:
+            raise ValueError("Archive has data before its first member")
+        handle.seek(directory_offset)
+        remaining, counted = directory_size, 0
+        while remaining:
+            header = handle.read(46)
+            if remaining < 46 or len(header) != 46 or header[:4] != b"PK\x01\x02":
+                raise zipfile.BadZipFile("Bad magic number for central directory")
+            counted += 1
+            if counted > MAX_MEMBERS:
+                raise ValueError("Archive has more members than the verifier accepts")
+            step = 46 + sum(struct.unpack("<HHH", header[28:34]))
+            if step > remaining:
+                raise zipfile.BadZipFile("Truncated central directory")
+            handle.seek(step - 46, 1)
+            remaining -= step
+        if counted != entries:
+            raise ValueError("Archive member count differs from its end record")
+
+
 def open_archive(path, max_gib=None):
     limit = MAX_UNCOMPRESSED_GIB if max_gib is None else max_gib
     if type(limit) not in (int, float) or not math.isfinite(limit) or limit <= 0:
         raise ValueError("Archive size limit must be a positive finite number of GiB")
+    directory_preflight(path)
     archive = zipfile.ZipFile(path)
     try:
         infos = archive.infolist()
@@ -5860,16 +5920,28 @@ class LiveSalvage:
         start, packed, plain, method, crc = self.members[name]
         if plain > limit:
             raise ValueError(name + " exceeds the verifier's size limit for this member")
+        if method not in (0, 8):
+            raise ValueError("Unsupported compression in archive member: " + name)
+        if method == 0 and packed != plain:
+            raise ValueError("Damaged archive member: " + name)
+        inflater = zlib.decompressobj(-15) if method == 8 else None
+        parts, produced, left = [], 0, packed
         with open(self.path, "rb") as handle:
             handle.seek(start)
-            data = handle.read(packed)
-        if method == 8:
-            inflater = zlib.decompressobj(-15)
-            data = inflater.decompress(data, plain + 1)
-            if not inflater.eof:
-                raise ValueError("Damaged archive member: " + name)
-        elif method != 0:
-            raise ValueError("Unsupported compression in archive member: " + name)
+            while left and produced <= plain:
+                chunk = handle.read(min(left, 1024 * 1024))
+                if not chunk:
+                    break
+                left -= len(chunk)
+                if inflater is not None:
+                    chunk = inflater.decompress(chunk, plain + 1 - produced)
+                parts.append(chunk)
+                produced += len(chunk)
+                if inflater is not None and (inflater.eof or inflater.unconsumed_tail):
+                    break
+        data = b"".join(parts)
+        if inflater is not None and not inflater.eof:
+            raise ValueError("Damaged archive member: " + name)
         if len(data) != plain or zlib.crc32(data) != crc:
             raise ValueError("Damaged archive member: " + name)
         return data
@@ -5922,7 +5994,7 @@ def verify_live_export(path, expected_fingerprint=None, max_gib=None):
     try:
         archive = open_archive(path, max_gib)
     except (zipfile.BadZipFile, ValueError, OSError, EOFError, struct.error) as exc:
-        if "size limit" in str(exc):
+        if "size limit" in str(exc) or "more members" in str(exc):
             raise
         salvage, reason = LiveSalvage(path), type(exc).__name__ + ": " + str(exc)
     try:
@@ -11657,10 +11729,10 @@ def interactive_verify(args):
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
-                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
+                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo", "range"):
         value = getattr(args, name)
         for item in value if isinstance(value, list) else [value] if value else ():
-            command += ["--" + name.replace("_", "-"), str(item)]
+            command.append("--" + name.replace("_", "-") + "=" + str(item))
     for name in ("require_witness", "check_drand", "check_bitcoin", "strict", "board", "no_color"):
         if getattr(args, name):
             command.append("--" + name.replace("_", "-"))
@@ -11811,11 +11883,11 @@ def verification_interactive(args, parser):
     raise SystemExit(code)
 
 
-def archive_kind(path):
+def archive_kind(path, max_gib=None):
     try:
-        with zipfile.ZipFile(path) as archive:
-            manifest = json.loads(archive.read("manifest.json"))
-    except (OSError, KeyError, ValueError, zipfile.BadZipFile):
+        with open_archive(path, max_gib) as archive:
+            manifest = json.loads(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    except (OSError, KeyError, ValueError, RuntimeError, EOFError, zipfile.BadZipFile):
         return None
     value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
     if is_format(value, "chat-export-v1"):
@@ -11832,13 +11904,13 @@ def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
                     "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require", "require_tier", "sealed_attestation",
-                    "board")
+                    "board", "range")
                    if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
     try:
         for path in (args.bundle, args.compare):
-            kind = archive_kind(path)
+            kind = archive_kind(path, args.max_gib)
             if kind and kind != "chat":
                 raise ValueError("--compare compares two chat exports; " + str(path) + " is not one (" + kind + " archive)"
                                  + ". Verify each archive on its own")

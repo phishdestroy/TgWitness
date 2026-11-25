@@ -158,10 +158,10 @@ def interactive_verify(args):
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
-                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
+                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo", "range"):
         value = getattr(args, name)
         for item in value if isinstance(value, list) else [value] if value else ():
-            command += ["--" + name.replace("_", "-"), str(item)]
+            command.append("--" + name.replace("_", "-") + "=" + str(item))
     for name in ("require_witness", "check_drand", "check_bitcoin", "strict", "board", "no_color"):
         if getattr(args, name):
             command.append("--" + name.replace("_", "-"))
@@ -312,11 +312,11 @@ def verification_interactive(args, parser):
     raise SystemExit(code)
 
 
-def archive_kind(path):
+def archive_kind(path, max_gib=None):
     try:
-        with zipfile.ZipFile(path) as archive:
-            manifest = json.loads(archive.read("manifest.json"))
-    except (OSError, KeyError, ValueError, zipfile.BadZipFile):
+        with open_archive(path, max_gib) as archive:
+            manifest = json.loads(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    except (OSError, KeyError, ValueError, RuntimeError, EOFError, zipfile.BadZipFile):
         return None
     value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
     if is_format(value, "chat-export-v1"):
@@ -333,13 +333,13 @@ def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
                     "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require", "require_tier", "sealed_attestation",
-                    "board")
+                    "board", "range")
                    if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
     try:
         for path in (args.bundle, args.compare):
-            kind = archive_kind(path)
+            kind = archive_kind(path, args.max_gib)
             if kind and kind != "chat":
                 raise ValueError("--compare compares two chat exports; " + str(path) + " is not one (" + kind + " archive)"
                                  + ". Verify each archive on its own")
