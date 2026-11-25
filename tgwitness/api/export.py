@@ -1057,7 +1057,7 @@ class ExportOperations:
             from ..webhooks import export_completed
 
             await export_completed(
-                self.app.state.store, self.app.state.vault, self.profile_id
+                self.app.state.store, self.app.state.vault, self.profile_id, receipt.get("id")
             )
             self.app.state.alert_wakeup.set()
             await self.recheck_export_scope(request, None)

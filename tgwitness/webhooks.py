@@ -19,6 +19,7 @@ EVENTS = {"collector.error": "collector", "coverage.gap": "collector", "connecti
           "message.new": "changes", "message.edited": "changes", "message.deleted": "changes",
           "message.missing_on_recheck": "changes", "message.recovered": "changes"}
 MAX_PENDING = 1000
+MAX_DEFERRED = 100
 
 
 class HookSettings(BaseModel):
@@ -54,6 +55,28 @@ def state(store):
 
 def public(entry):
     return {k: v for k, v in entry.items() if k != "secret"}
+
+
+def lost_completions(data):
+    count = data.get("lost_completions", 0)
+    return (str(count) + " export completion notice(s) were never queued because the delivery queue was full."
+            if count else None)
+
+
+def completion_jobs(hooks, workspace, completion):
+    jobs = []
+    for hook in hooks:
+        event = {"event_id": hashlib.sha256((workspace + ":" + hook["id"] + ":export.completed:"
+                                             + completion["id"]).encode()).hexdigest(),
+                 "kind": "export.completed", "observed_at": completion["observed_at"], "payload": {}}
+        jobs.append(queued(hook, envelope(event, workspace, hook)))
+    return jobs
+
+
+def release_deferred(data, hooks, workspace):
+    targets = [hook for hook in hooks if "export" in hook["events"]]
+    while data.get("deferred") and len(data["pending"]) + len(targets) <= MAX_PENDING:
+        data["pending"] += completion_jobs(targets, workspace, data["deferred"].pop(0))
 
 
 def create(store, vault, body):
@@ -110,8 +133,10 @@ async def pump(store, vault, network, workspace):
         if not hooks:
             data["cursor"] = (store.stats()["head"] or {}).get("seq", 0)
             data["pending"] = []
+            data["deferred"] = []
             store.set_setting("webhook_delivery", data)
             return
+        release_deferred(data, hooks, workspace)
         for event in store.events_after(data["cursor"], 200):
             targets = [hook for hook in hooks if event["seq"] > hook["start_seq"]
                        and EVENTS.get(event["kind"]) in hook["events"]
@@ -153,7 +178,7 @@ async def pump(store, vault, network, workspace):
             data["history"].append({"destination": job["destination"], "event_id": job["event_id"],
                 "timestamp": utcnow(), "attempt": job["attempts"], "status": "delivered" if error is None else
                 "exhausted" if final else "retrying", "error": error})
-            data["last_error"] = error
+            data["last_error"] = error or lost_completions(data)
             if final:
                 data["pending"] = [item for item in data["pending"] if not (
                     item["destination"] == job["destination"] and item["event_id"] == job["event_id"])]
@@ -176,16 +201,20 @@ async def enqueue_test(store, vault, workspace, ident):
         return {"queued": True, "event_id": payload["event_id"], "synthetic": True}
 
 
-async def export_completed(store, vault, workspace):
+async def export_completed(store, vault, workspace, export_id=None):
     async with lock(store):
         hooks = [h for h in vault.read("webhooks").get("entries", []) if "export" in h["events"]]
         if not hooks:
             return
         data = state(store)
-        if len(data["pending"]) + len(hooks) > MAX_PENDING:
-            data["last_error"] = "The delivery queue is full; export completion could not be queued."
+        completion = {"id": export_id or secrets.token_hex(16), "observed_at": utcnow()}
+        data.setdefault("deferred", [])
+        if not data["deferred"] and len(data["pending"]) + len(hooks) <= MAX_PENDING:
+            data["pending"] += completion_jobs(hooks, workspace, completion)
+        elif len(data["deferred"]) < MAX_DEFERRED:
+            data["deferred"].append(completion)
+            data["last_error"] = "The delivery queue is full; export completion will be sent when it drains."
         else:
-            for hook in hooks:
-                event = {"event_id": secrets.token_hex(32), "kind": "export.completed", "observed_at": utcnow(), "payload": {}}
-                data["pending"].append(queued(hook, envelope(event, workspace, hook)))
+            data["lost_completions"] = data.get("lost_completions", 0) + 1
+            data["last_error"] = lost_completions(data)
         store.set_setting("webhook_delivery", data)
