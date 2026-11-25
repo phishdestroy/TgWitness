@@ -11203,5 +11203,7 @@
   "Context before (messages)": "السياق قبل (رسائل)",
   "Context after (messages)": "السياق بعد (رسائل)",
   "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "تضمين الرسائل المجاورة حول كل سجل مطابق للحفاظ على سياق المحادثة (من 0 إلى 50 رسالة من كل جانب).",
-  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "توقفت قائمة سجل Telegram رغم وجود رسائل أقدم: أعادت الأرقام التي تلي أقدم رسالة في القائمة مباشرة رسائلَ عند طلبها بالرقم، وهي مضمّنة ومعلّمة بـ found_on_recheck (recheck.edge_found). قد يوجد سجل أقدم من الأرقام المفحوصة لم تتم قراءته."
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "توقفت قائمة سجل Telegram رغم وجود رسائل أقدم: أعادت الأرقام التي تلي أقدم رسالة في القائمة مباشرة رسائلَ عند طلبها بالرقم، وهي مضمّنة ومعلّمة بـ found_on_recheck (recheck.edge_found). قد يوجد سجل أقدم من الأرقام المفحوصة لم تتم قراءته.",
+  "The account is still connecting to Telegram. Try again in a minute.": "الحساب لا يزال يتصل بـ Telegram. حاول مرة أخرى بعد دقيقة.",
+  "Another transfer is not finished. Resume or cancel it first.": "هناك نقل آخر لم يكتمل. استأنفه أو ألغه أولًا."
 }

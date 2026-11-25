@@ -11050,5 +11050,7 @@
   "Context before (messages)": "הקשר לפני (הודעות)",
   "Context after (messages)": "הקשר אחרי (הודעות)",
   "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "כלול הודעות שכנות סביב כל רשומה תואמת כדי לשמור על הקשר השיחה (0 עד 50 הודעות מכל צד).",
-  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "רשימת ההיסטוריה של Telegram נעצרה אף שהיו הודעות ישנות יותר: מספרים שמתחת להודעה הישנה ביותר ברשימה החזירו הודעות כשנתבקשו לפי מספר; הן כלולות ומסומנות found_on_recheck (recheck.edge_found). ייתכן שקיימת היסטוריה ישנה יותר מהמספרים שנבדקו, והיא לא נקראה."
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "רשימת ההיסטוריה של Telegram נעצרה אף שהיו הודעות ישנות יותר: מספרים שמתחת להודעה הישנה ביותר ברשימה החזירו הודעות כשנתבקשו לפי מספר; הן כלולות ומסומנות found_on_recheck (recheck.edge_found). ייתכן שקיימת היסטוריה ישנה יותר מהמספרים שנבדקו, והיא לא נקראה.",
+  "The account is still connecting to Telegram. Try again in a minute.": "החשבון עדיין מתחבר ל־Telegram. יש לנסות שוב בעוד דקה.",
+  "Another transfer is not finished. Resume or cancel it first.": "העברה אחרת עדיין לא הסתיימה. יש לחדש או לבטל אותה קודם."
 }
