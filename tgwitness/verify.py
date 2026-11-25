@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6cf77e4103fa9729c68e19534fda556c868bb30fdea550a8b419101601b6153c
+# TgWitness verifier sources SHA-256: 4e6192b3224712d3c04ce8e459a0b58baff59805fefb627e8d467e4c0c5971aa
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -6219,6 +6219,16 @@ def row_content(row):
     return canonical(row)
 
 
+def own_numbers(a, b, peer):
+    left, right = dict(a), dict(b)
+    left.pop("id", None)
+    right.pop("id", None)
+    reply = left.get("reply_to_message_id")
+    if reply is not None and peer.get(reply) == right.get("reply_to_message_id"):
+        left["reply_to_message_id"] = right["reply_to_message_id"]
+    return left, right
+
+
 def compare_chat_exports(first, second, first_fingerprint=None, second_fingerprint=None, max_gib=None):
     checked = [verify_chat_export(first, first_fingerprint, max_gib),
                verify_chat_export(second, second_fingerprint, max_gib)]
@@ -6268,13 +6278,18 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
                 candidates.remove(match)
                 pairs.append((row, match))
         only_second.extend(row for rows in waiting.values() for row in rows)
+    chat_id = (first_manifest.get("chat") or {}).get("id")
+    shared = same_chat and (same_account or type(chat_id) is int and chat_id <= -1000000000000)
+    peer = {} if shared else {a.get("id"): b.get("id") for a, b in pairs}
     changed = []
     for a, b in pairs:
-        if row_content(a) != row_content(b):
-            fields = sorted(k for k in a.keys() | b.keys()
-                            if (k in a) != (k in b) or canonical(a.get(k)) != canonical(b.get(k)))
+        left, right = (a, b) if shared else own_numbers(a, b, peer)
+        if row_content(left) != row_content(right):
+            fields = sorted(k for k in left.keys() | right.keys()
+                            if (k in left) != (k in right) or canonical(left.get(k)) != canonical(right.get(k)))
             changed.append({"first": row_brief(a), "second": row_brief(b), "changed_fields": fields})
     return {"format": "tgwitness-chat-comparison-v1", "method": method, "meaning": COMPARE_MEANING[method],
+            "numbers_compared": shared,
             "first": {"file": str(first), "fingerprint": checked[0]["fingerprint"], "exported_at": first_manifest.get("exported_at"),
                       "chat_id": (first_manifest.get("chat") or {}).get("id"), "messages": len(first_rows),
                       "key_pinned": checked[0]["key_pinned"]},

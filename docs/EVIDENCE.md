@@ -164,6 +164,12 @@ including in content mode. With `--json`, `matched` counts candidate pairs and
 existing `changed_fields` and integer `unchanged` output remain compatible with
 earlier comparison results. Archive format and signature verification are unchanged.
 
+Channels and supergroups number messages once for every member. Private chats and basic
+groups number them separately for each account, so both sides of one conversation carry
+different message IDs. In that case the message ID is not counted as a difference, and a
+reply target counts as equal when it points to the paired message. `numbers_compared` in
+`--json` shows whether message IDs were compared.
+
 ## Investigation handoff
 
 1. Record the case reference, operator, numeric Telegram account ID, selected
