@@ -22,7 +22,7 @@ from .store import utcnow
 
 LOG = logging.getLogger("tgwitness.media")
 MAX_FILE = 50 * 1024 * 1024
-MAX_SECONDS = 86400
+MAX_SECONDS = 1800
 _WHISPER_MODELS = {}
 _WHISPER_LOCK = threading.Lock()
 
