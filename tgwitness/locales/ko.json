@@ -10950,5 +10950,8 @@
   "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "대화 문맥을 유지하기 위해 일치하는 각 기록 주변의 메시지를 포함합니다(양쪽 각 0~50개).",
   "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Telegram 기록 목록은 더 오래된 메시지가 있는데도 중단되었습니다. 목록의 가장 오래된 메시지 바로 아래 번호들은 번호로 요청했을 때 메시지를 반환했으며, 이 메시지들은 포함되어 found_on_recheck로 표시됩니다(recheck.edge_found). 확인한 번호보다 오래된 기록이 있을 수 있으며 읽지 않았습니다.",
   "The account is still connecting to Telegram. Try again in a minute.": "계정이 아직 Telegram에 연결 중입니다. 1분 후에 다시 시도하세요.",
-  "Another transfer is not finished. Resume or cancel it first.": "다른 전송이 아직 끝나지 않았습니다. 먼저 재개하거나 취소하세요."
+  "Another transfer is not finished. Resume or cancel it first.": "다른 전송이 아직 끝나지 않았습니다. 먼저 재개하거나 취소하세요.",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram은 이 채팅에서 Takeout을 통해 일반 요청보다 적은 메시지를 보고합니다. 일부 플랫폼에서 제한된 채팅에서 이런 일이 발생합니다. 기록은 Takeout 없이 읽습니다.",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram은 일부 플랫폼에서 이 채팅을 제한하며 Takeout을 통해 기록을 반환하지 않습니다. Takeout 없이 내보내세요.",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram은 일부 플랫폼에서 이 채팅들을 제한하며 Takeout을 통해 기록을 반환하지 않으므로, 기록은 Takeout 없이 읽습니다."
 }

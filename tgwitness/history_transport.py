@@ -2,7 +2,7 @@ import json
 
 from telethon.tl import functions as f
 
-from .account_export_transport import Transport, WrappedClient
+from .account_export_transport import TAKEOUT_RESTRICTED, Transport, WrappedClient, restrictions
 from .monitoring import capture_settings
 from .scope import kind_of
 
@@ -35,7 +35,10 @@ class HistoryTransport:
                 ids = [r[0] for r in db.execute(
                     "SELECT chat_id FROM history_sources WHERE run_id=?", (self.run["id"],))]
             for cid in ids:
-                kind = kind_of(await network(lambda: self.collector.resolve_target(cid)))
+                entity = await network(lambda: self.collector.resolve_target(cid))
+                if restrictions(entity):
+                    raise ValueError(TAKEOUT_RESTRICTED)
+                kind = kind_of(entity)
                 if not kind:
                     raise ValueError("Cannot identify the selected source's Takeout scope.")
                 kinds.add(kind)

@@ -144,7 +144,10 @@ TAKEOUT_SKIPPED_MEANING = {
                            "unknown. History is read without Takeout, as for a session that signed in less than 24 "
                            "hours ago.",
     "takeout_approval_wait": "Telegram asked to wait before the next Takeout request, so history is read without "
-                             "Takeout until then."}
+                             "Takeout until then.",
+    "takeout_hides_messages": "Telegram reports fewer messages in this chat through Takeout than through ordinary "
+                              "requests. It does this for chats it restricts on some platforms. History is read "
+                              "without Takeout."}
 AUTO_ONLY_SESSION_EVERY = 300
 AUTO_ONLY_SESSION_MEANING = ("Setting of this workspace: end every other session of the account automatically once "
                              "Telegram allows it, 24 hours after the session key created here signed in. Telegram "
@@ -5290,11 +5293,27 @@ class Collector:
             return
         from .account_export_transport import WrappedClient
         reader = WrappedClient(self.client, session.id)
+        hidden = await self.takeout_hides(entity, reader)
+        if hidden:
+            with suppress(Exception):
+                await reader(functions.account.FinishTakeoutSessionRequest(success=True))
+            self.note("telegram.takeout_unavailable", {"reason": "takeout_hides_messages", **hidden,
+                                                       "meaning": TAKEOUT_SKIPPED_MEANING["takeout_hides_messages"]})
+            yield self.client, self.regular_history_wait()
+            return
         try:
             yield reader, 0
         finally:
             with suppress(Exception):
                 await reader(functions.account.FinishTakeoutSessionRequest(success=True))
+
+    async def takeout_hides(self, entity, reader):
+        try:
+            regular = (await self.client.get_messages(entity, limit=0)).total or 0
+            takeout = (await reader.get_messages(entity, limit=0)).total or 0
+        except (RPCError, OSError, ConnectionError, TimeoutError):
+            return None
+        return {"regular_count": regular, "takeout_count": takeout} if takeout < regular else None
 
     async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None,
                               page_timeout=None, attempts=8, client=None, wait_time=None, history_client=None):

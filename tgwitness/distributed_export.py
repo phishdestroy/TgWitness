@@ -23,6 +23,7 @@ from telethon.tl import types
 
 from . import chat_export, message_details, replica, report, tuning
 from .account_export import durable_write, linked, read_json
+from .account_export_transport import TAKEOUT_RESTRICTED, restrictions
 from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
 from .telegram_client import FLOOD_ERRORS, in_lane
 from .export_timing import ExportTiming
@@ -160,6 +161,8 @@ class DistributedExport:
             entity = await lead.resolve_for_export(chat_id, username)
             if transport == "takeout" and (not isinstance(entity, types.Channel) or not public_username(entity)):
                 raise ValueError("Distributed Takeout currently supports public channels and supergroups only.")
+            if transport == "takeout" and restrictions(entity):
+                raise ValueError(TAKEOUT_RESTRICTED)
             if len(chosen) > 1 and not isinstance(entity, types.Channel):
                 raise ValueError("Only one account can export an ordinary group or private chat.")
             now = utc(utcnow())

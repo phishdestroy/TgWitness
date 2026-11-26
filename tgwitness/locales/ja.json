@@ -10950,5 +10950,8 @@
   "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "会話の文脈を保つため、一致する各記録の前後のメッセージを含めます（前後各0〜50件）。",
   "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Telegram の履歴一覧は、より古いメッセージが存在するのに途中で終わりました。一覧の最も古いメッセージのすぐ下の番号は、番号指定で要求するとメッセージを返しました。それらは含まれ、found_on_recheck と記録されています（recheck.edge_found）。確認した番号より古い履歴が存在する可能性があり、読まれていません。",
   "The account is still connecting to Telegram. Try again in a minute.": "アカウントはまだTelegramに接続中です。1分後にもう一度お試しください。",
-  "Another transfer is not finished. Resume or cancel it first.": "別の転送が完了していません。先に再開するかキャンセルしてください。"
+  "Another transfer is not finished. Resume or cancel it first.": "別の転送が完了していません。先に再開するかキャンセルしてください。",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "このチャットでは、Takeout経由のメッセージ数が通常のリクエストより少なく報告されます。一部のプラットフォームで制限されたチャットで起こります。履歴はTakeoutを使用せずに読み取ります。",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegramはこのチャットを一部のプラットフォームで制限しており、Takeout経由では履歴を返しません。Takeoutを使用せずにエクスポートしてください。",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegramはこれらのチャットを一部のプラットフォームで制限しており、Takeout経由では履歴を返さないため、履歴はTakeoutを使用せずに読み取ります。"
 }
