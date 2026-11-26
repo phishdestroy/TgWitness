@@ -174,7 +174,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const body = node('span', 'chat-item-body'), top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
     top.append(node('span', 'chat-item-title', title));
     if (result.verified) top.append(icon('check'));
-    const facts = [tr(kindWords[result.kind] || 'Channel'), result.username ? '@' + result.username : '',
+    const facts = [tr(kindWords[result.kind] || 'Channel'), result.forum ? tr('Forum topics') : '', result.username ? '@' + result.username : '',
       result.participants_count != null ? tr('Members') + ': '
         + Number(result.participants_count).toLocaleString(document.documentElement.lang || undefined) : '',
       result.scam ? 'SCAM' : result.fake ? 'FAKE' : ''].filter(Boolean);
