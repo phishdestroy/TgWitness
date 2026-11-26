@@ -2,11 +2,13 @@ import asyncio
 import hashlib
 import importlib.metadata
 import importlib.util
+import json
 import os
 from pathlib import Path
 import re
 import secrets
 import shutil
+import sys
 import tempfile
 import threading
 from typing import Literal
@@ -18,6 +20,7 @@ from .archive import ArchiveQuery
 from .store import utcnow
 
 MAX_FILE = 50 * 1024 * 1024
+MAX_SECONDS = 1800
 _WHISPER_MODELS = {}
 _WHISPER_LOCK = threading.Lock()
 
@@ -34,8 +37,8 @@ class MediaJob(BaseModel):
 
 class Segment(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    start: float = Field(ge=0, le=1800)
-    end: float = Field(ge=0, le=1800)
+    start: float = Field(ge=0, le=MAX_SECONDS)
+    end: float = Field(ge=0, le=MAX_SECONDS)
     text: str = Field(max_length=100000)
 
     @model_validator(mode="after")
@@ -65,6 +68,15 @@ def whisper_available():
     if os.environ.get("TGWITNESS_WHISPER_LOCAL", "1").strip().lower() in ("0", "false", "no", "off"):
         return False
     return importlib.util.find_spec("faster_whisper") is not None
+
+
+def whisper_downloads(state):
+    enabled = ("1", "true", "yes")
+    if (os.environ.get("TGWITNESS_WHISPER_ALLOW_DOWNLOAD", "").strip().lower() not in enabled
+            or os.environ.get("TGWITNESS_WHISPER_OFFLINE", "").strip().lower() in enabled
+            or os.environ.get("TGWITNESS_WHISPER_MODEL_DIR", "").strip()):
+        return False
+    return state.collector.outside_route().kind == "direct"
 
 
 def backend_for(engine):
@@ -157,14 +169,25 @@ def _load_whisper_model(model_name, device, compute_type, model_dir, local_only)
             return cached
         from faster_whisper import WhisperModel
         kwargs = {"device": device, "compute_type": compute_type, "local_files_only": local_only}
-        if model_dir:
+        source = model_name
+        if model_dir and (Path(model_dir) / "model.bin").is_file():
+            source = model_dir
+        elif model_dir:
             kwargs["download_root"] = model_dir
-        model = WhisperModel(model_name, **kwargs)
+        try:
+            model = WhisperModel(source, **kwargs)
+        except OSError:
+            if not local_only:
+                raise
+            raise ValueError("The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin "
+                             "to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; "
+                             "TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a "
+                             "direct route.") from None
         _WHISPER_MODELS[key] = model
         return model
 
 
-def _transcribe_sync(path, job):
+def _transcribe_sync(path, job, download=False):
     with path.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     if digest != job.digest:
@@ -173,7 +196,7 @@ def _transcribe_sync(path, job):
     model_dir = os.environ.get("TGWITNESS_WHISPER_MODEL_DIR", "").strip()
     device = os.environ.get("TGWITNESS_WHISPER_DEVICE", "cpu").strip() or "cpu"
     compute_type = os.environ.get("TGWITNESS_WHISPER_COMPUTE", "int8").strip() or "int8"
-    local_only = os.environ.get("TGWITNESS_WHISPER_OFFLINE", "").strip().lower() in ("1", "true", "yes") or bool(model_dir)
+    local_only = not download
     model = _load_whisper_model(model_name, device, compute_type, model_dir, local_only)
     kwargs = {"beam_size": 5, "vad_filter": True}
     if job.language:
@@ -182,19 +205,20 @@ def _transcribe_sync(path, job):
     segments = []
     parts = []
     total_chars = 0
+    truncated = False
     for seg in raw_segments:
-        if len(segments) >= 3000:
-            break
-        start = max(0.0, min(1800.0, float(getattr(seg, "start", 0.0))))
-        end = max(start, min(1800.0, float(getattr(seg, "end", start))))
         text = str(getattr(seg, "text", "") or "").strip()
         if not text:
             continue
+        start = max(0.0, float(getattr(seg, "start", 0.0)))
+        end = max(start, float(getattr(seg, "end", start)))
         remaining = 100000 - total_chars
-        if remaining <= 0:
+        if len(segments) >= 3000 or remaining <= 0 or end > MAX_SECONDS:
+            truncated = True
             break
         if len(text) > remaining:
             text = text[:remaining]
+            truncated = True
         segments.append({"start": round(start, 3), "end": round(end, 3), "text": text})
         parts.append(text)
         total_chars += len(text) + 1
@@ -211,16 +235,43 @@ def _transcribe_sync(path, job):
         "model_version": model_name[:256],
         "language": detected_lang,
         "segments": segments,
-        "parameters": {"device": device, "compute_type": compute_type, "vad_filter": True, "local_files_only": local_only},
+        "parameters": {"device": device, "compute_type": compute_type, "vad_filter": True, "local_files_only": local_only,
+                       "truncated": truncated},
     }
     return Recognition.model_validate(payload).model_dump()
 
 
-async def run_local_whisper(path, job):
+async def run_local_whisper(path, job, download=False):
     if not whisper_available():
         raise ValueError("Local Whisper transcription requires faster-whisper. Install tgwitness[whisper].")
-    async with asyncio.timeout(300):
-        return await asyncio.to_thread(_transcribe_sync, path, job)
+    env = dict(os.environ)
+    if not download:
+        env.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
+    process = await asyncio.create_subprocess_exec(
+        sys.executable, "-I", "-m", "tgwitness.media_analysis", str(path), job.model_dump_json(),
+        "download" if download else "offline", stdin=asyncio.subprocess.DEVNULL,
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL, env=env)
+    try:
+        async with asyncio.timeout(300):
+            output = await bounded(process.stdout, 4 * 1024 * 1024)
+            code = await process.wait()
+    finally:
+        if process.returncode is None:
+            process.kill()
+            await process.wait()
+    if code == 3:
+        try:
+            message = str(json.loads(output)["error"])[:300]
+        except (ValueError, KeyError, TypeError):
+            message = ""
+        if message:
+            raise ValueError(message)
+    if code != 0:
+        raise ValueError("Local Whisper transcription failed. Check the file format and the local model.")
+    try:
+        return Recognition.model_validate_json(output).model_dump()
+    except ValueError:
+        raise ValueError("The media worker returned an invalid result.") from None
 
 
 async def run_container(path, job, ident):
@@ -306,7 +357,7 @@ class MediaQueue:
                     authorize(reader, job)
                     self.update(state, ident, status="running")
                     if backend == "local-whisper":
-                        result = await run_local_whisper(path, job)
+                        result = await run_local_whisper(path, job, whisper_downloads(state))
                         limits = {"timeout_seconds": 300}
                     else:
                         result = await run_container(path, job, ident)
@@ -342,3 +393,21 @@ class MediaQueue:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
         self.tasks.clear()
+
+
+def main(argv):
+    output = os.fdopen(os.dup(1), "w", encoding="utf-8")
+    os.dup2(2, 1)
+    try:
+        result = _transcribe_sync(Path(argv[0]), MediaJob.model_validate_json(argv[1]), argv[2] == "download")
+    except ValueError as exc:
+        output.write(json.dumps({"error": str(exc)}))
+        output.close()
+        return 3
+    output.write(json.dumps(result, ensure_ascii=False))
+    output.close()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
