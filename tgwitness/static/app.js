@@ -5863,7 +5863,7 @@ async function openSecretChat(id,start=false){
   if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
   if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
 }
-const chatListReady=import('./views/chat-list.js?v=telegram6').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=telegram7').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
     adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),

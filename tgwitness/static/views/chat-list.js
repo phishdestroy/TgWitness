@@ -160,7 +160,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     } finally {if (button.isConnected) button.disabled = false;}
   }
   function globalRow(result) {
-    const card = !!result.username && !!adds.canOpenLink?.(), row = node('div', 'chat-item chat-item-new');
+    const card = !!result.username && !!adds.canOpenLink?.(), row = node('div', 'chat-item chat-item-new chat-item-global');
     const open = card ? node('button', 'chat-choice') : node('span', 'chat-choice chat-choice-static');
     const title = result.title || (result.username ? '@' + result.username : tr('Chat {id}', {id: result.chat_id}));
     const joinable = !result.member && !!result.username && ['channel', 'supergroup', 'group'].includes(result.kind);

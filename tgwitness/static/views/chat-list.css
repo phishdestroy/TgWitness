@@ -101,6 +101,10 @@
 .chat-list-section { margin: 14px 12px 4px; color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .chat-list-searching { margin: 6px 12px; }
 .chats-sidebar .chat-item-new .chat-watch { flex: none; align-self: center; height: 32px; min-height: 32px; margin-inline-end: 10px; padding: 0 14px; border-radius: 999px; font-size: 13px; }
+.chats-sidebar .chat-item-global { flex-wrap: wrap; }
+.chats-sidebar .chat-item-global .chat-choice { flex: 1 1 100%; padding-bottom: 6px; }
+.chats-sidebar .chat-item-global :is(.chat-item-title, .chat-item-preview) { white-space: normal; overflow-wrap: anywhere; }
+.chats-sidebar .chat-item-global .chat-watch { --indent: clamp(10px, calc(100% - 230px), 54px); align-self: flex-start; max-width: calc(100% - 10px - var(--indent)); height: auto; min-height: 30px; margin-block: 0 10px; margin-inline: var(--indent) 10px; padding: 5px 14px; line-height: 1.2; white-space: normal; overflow-wrap: break-word; text-align: start; }
 .chat-search-link { display: flex; align-items: center; gap: 10px; width: calc(100% - 16px); min-height: 44px; margin: 8px; padding: 8px 12px; border: 1px dashed var(--accent-border); border-radius: var(--radius); background: var(--accent-soft); color: var(--accent-text); font-weight: 600; text-align: start; overflow-wrap: anywhere; }
 .chat-search-link .icon { flex: none; width: 18px; height: 18px; }
 .chat-search-link:focus-visible, .chat-item-new .chat-watch:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
