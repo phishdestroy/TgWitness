@@ -7508,6 +7508,7 @@ function renderLinkPlan(){
   if(p.takeout_available)select.append(new Option(tr("Telegram Takeout session"),"takeout"));
   label.append(select);box.append(label);
   if(p.takeout_available)box.append(node("p","hint",tr("Takeout can accelerate public channel and supergroup history. Telegram may require export approval. Server-requested waits still apply.")));
+  else if(p.restricted?.length)box.append(node("p","hint",tr("Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.")));
   const accounts=node("fieldset","export-accounts");
   accounts.append(node("legend","",tr(p.single_account?"Account that downloads it":"Accounts that download it")));
   for(const a of p.accounts){
