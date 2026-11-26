@@ -383,8 +383,8 @@ async def preview_report(body: report.ReportOptions, *, ctx=Depends(current_cont
                 report.report_history.preview(
                     snapshot.events(),
                     keys,
-                    predicate=report.report_selection.resolve_selection(
-                        snapshot.events(), body.selection
+                    predicate=report.report_selection.compile_selection(
+                        body.selection
                     ),
                 )
                 if keys

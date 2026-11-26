@@ -23,7 +23,7 @@ from .security import private_write
 from .store import canonical, utcnow
 from .tsa_roots import QUALIFIED_TSA, trusted_roots
 from .verify import (DRAND_CHAIN, DRAND_GENESIS, DRAND_PERIOD, DRAND_RELAYS, OTS_BITCOIN, OTS_MAGIC, OTS_PENDING,
-                     drand_beacon, drand_time, ots_summary, revocation_status, revocation_subject,
+                     drand_beacon, drand_time, ots_hash, ots_summary, revocation_status, revocation_subject,
                      timestamp_reply_summary, timestamp_signature)
 
 
@@ -114,7 +114,7 @@ class OTSReader:
                 elif tag == 0xf3:
                     result = message.hex().encode("ascii")
                 elif tag in (0x02, 0x03, 0x08):
-                    result = hashlib.new({0x02: "sha1", 0x03: "ripemd160", 0x08: "sha256"}[tag], message).digest()
+                    result = ots_hash(tag, message)
                 else:
                     raise ValueError("Unsupported OpenTimestamps upgrade operation")
                 node["ops"][operation] = self.tree(result, depth + 1)

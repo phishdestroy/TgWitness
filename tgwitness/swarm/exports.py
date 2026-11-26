@@ -301,7 +301,8 @@ class SwarmExports:
             while True:
                 state = collector.poll_export(export_id)
                 task.progress.update({key: state.get(key) for key in ("captured", "total", "eta_seconds", "stage",
-                                                                      "files_done", "files_total")})
+                                                                      "files_done", "files_total", "recheck_done",
+                                                                      "recheck_total")})
                 left = self.wait_left(collector)
                 task.waiting = "telegram_wait" if left > WAIT_FLOOR else None
                 task.progress["wait_seconds"] = round(left) if task.waiting else None
@@ -339,6 +340,7 @@ class SwarmExports:
             else:
                 self.scheduler.fail(task, error)
         finally:
+            task.progress["wait_seconds"] = None
             if export_id is None and collector.export_task is not previous_export:
                 export_id = (collector.export_state or {}).get("id")
             if export_id is not None:

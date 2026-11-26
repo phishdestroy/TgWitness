@@ -456,7 +456,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const loading = collector.chat_loading || {};
     if (loading.running || loading.pending) card.append(node('p', 'home-note', tr('Chat loading: {running} active · {pending} pending', {running: loading.running || 0, pending: loading.pending || 0})));
     if (loading.retrying) {
-      card.append(node('p', 'home-note', tr('Retry') + ': ' + loading.retrying + (collector.running && loading.next_retry_at
+      card.append(node('p', 'home-note', tr('Retry') + ': ' + loading.retrying + (collector.running && loading.next_retry_at * 1000 > Date.now()
         ? ' · ' + tr('Next attempt: {time}', {time: formatTime(new Date(loading.next_retry_at * 1000).toISOString())}) : '')));
     }
     if (collector.has_session) card.append(node('p', 'home-note', tr('Files: {running} downloading · {pending} queued · {failed} failed', {running: jobs.running || 0, pending: (jobs.queued || 0) + (jobs.retry || 0), failed: jobs.failed || 0})));
@@ -499,7 +499,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     for (const profile of items) {
       for (const kind of profile.collector.activity.tasks || [profile.collector.activity.task]) {
       const activity = {...profile.collector.activity, task: kind}, info = taskInfo(activity), item = node('li');
-      const percent = progressOf(activity);
+      const percent = kind === 'chat_export' ? progressOf(activity) : null;
       item.append(node('strong', '', profile.label), node('span', '', ' · ' + (activity.task === 'chat_export' && activity.detail
         ? tr('Exporting {chat}', {chat: activity.detail.title || ('#' + activity.detail.chat_id)}) : tr(info.label))));
       if (percent !== null) {

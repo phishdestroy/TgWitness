@@ -1294,7 +1294,7 @@ def group_number(say, n):
     return format(n, ",").replace(",", "," if getattr(say, "language", "en") == "en" else "\u202f")
 
 
-def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
+def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False, context=0):
     cats, latest = digest["categories"], latest_stamp(anchors)
     summary = say("The journal holds {records}: {messages}, {edits}, {deletions} and {files}.",
                   records=counted(say, "{n} records", count), messages=counted(say, "{n} messages", cats["message"]),
@@ -1303,6 +1303,9 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
+        if context:
+            summary += " " + say("It also shows {n} neighboring context records, marked as context and not counted here.",
+                                 n=context)
         if not count:
             summary += " " + say("No record of the journal matches the selection.")
     elif digest.get("telegram_observations") and digest["chats"] and account_text:
@@ -1752,7 +1755,7 @@ def reactions_text(found):
 IOC_KINDS = {"url": "Link", "domain": "Domain", "wallet": "Wallet", "telegram": "Telegram username",
              "telegram-invite": "Telegram invite link", "email": "E-mail address", "phone": "Phone number",
              "image": "Image (SHA-256)"}
-IOC_SOURCES = {"text": "text", "hidden link": "hidden link", "button": "button", "link preview": "link preview",
+IOC_SOURCES = {"text": "message text", "hidden link": "hidden link", "button": "button", "link preview": "link preview",
                "chat description": "chat description", "attachment": "attachment"}
 IOC_CHECKSUMS = {"valid": "checksum valid", "none": "no checksum", "not checked": "checksum not checked"}
 IOC_SHOWN = 1000
@@ -1856,16 +1859,20 @@ def secret_record_lines(say, payload):
     return lines
 
 
-def record_html(event, say, titles, options, archive, base=""):
+def record_html(event, say, titles, options, archive, base="", role=None):
     kind, payload, chat, seq = event["kind"], event["payload"], report_analytics.chat_key(event), event["seq"]
     cat = category(kind)
     parts = ['<article class="rec cat-' + cat + '" id="r' + str(seq) + '" data-cat="' + cat + '" data-chat="'
-             + e("" if chat is None else chat) + '"><header><a class="seq" href="#r' + str(seq) + '">#' + str(seq) + "</a>"
+             + e("" if chat is None else chat) + '"' + (' data-role="' + e(role) + '"' if role else "")
+             + '><header><a class="seq" href="#r' + str(seq) + '">#' + str(seq) + "</a>"
              '<span class="k">' + e(kind_label(say, kind)) + "</span>"]
     if chat is not None:
         parts.append("<span>" + e(titles.get(chat) or say("Chat {id}", id=chat))
                      + (" · " + e(say("message {id}", id=event["message_id"])) if event["message_id"] is not None else "")
                      + "</span>")
+    if role:
+        parts.append('<span class="pill' + (' grey">' + e(say("Context message")) if role == "context"
+                                           else '">' + e(say("Matches export filters"))) + "</span>")
     parts.append('<span class="at">' + e(say("Observed")) + " " + when(event["observed_at"]) + "</span></header>")
     sender = payload.get("sender_observation") if isinstance(payload.get("sender_observation"), dict) else {}
     sender_id = report_analytics.sender_id(event)
@@ -1938,7 +1945,7 @@ def record_html(event, say, titles, options, archive, base=""):
     return "".join(parts) + "</article>"
 
 
-def record_items(events, say, titles, options, archive, base=""):
+def record_items(events, say, titles, options, archive, base="", record_role=None):
     group, run = options.get("group_heartbeats", True), None
     for event in events:
         if group and event["kind"] == "collector.heartbeat":
@@ -1948,9 +1955,17 @@ def record_items(events, say, titles, options, archive, base=""):
         if run:
             yield heartbeats_html(say, *run)
             run = None
-        yield record_html(event, say, titles, options, archive, base)
+        yield record_html(event, say, titles, options, archive, base, record_role(event) if record_role else None)
     if run:
         yield heartbeats_html(say, *run)
+
+
+def journal_viewer_item(event, raw_records=False, record_role=None):
+    item = viewer.journal_item(event, raw_records)
+    role = record_role(event) if record_role else None
+    if role:
+        item["selection"] = {"role": role}
+    return item
 
 
 def heartbeats_html(say, first, last, count):
@@ -2007,13 +2022,15 @@ def report_data(events_again, coverage, context):
     anchors, changed = context.get("anchors", []), digest.get("changed") or set()
     histories = history_context(context, events_again, changed, JSON_HISTORY_LIMIT)
     subject = report_subject(context)
+    shown_context = ((context.get("selection") or {}).get("counts") or {}).get("context_records") or 0
     data = {
         "kind": subject["kind"], "report_id": context.get("report_id"), "created_at": context.get("created_at"),
         "language": say.language, "producer": context.get("producer"), "case": case_of(options),
         "subject": {**subject, "public_key": context.get("public_key"), "fingerprint": context.get("fingerprint")},
         "summary": {"categories": digest["categories"], "chats": len(digest["chats"]), "files": len(digest["media"]),
                     "senders": digest["senders"], "first_record_at": digest["first"], "last_record_at": digest["last"],
-                    "timestamps": len([a for a in anchors if a.get("kind") != "unreadable"])},
+                    "timestamps": len([a for a in anchors if a.get("kind") != "unreadable"]),
+                    **({"context_records": shown_context} if shown_context else {})},
         "chats": [{"chat_id": chat, "title": digest["titles"].get(chat), "records": count}
                   for chat, count in sorted(digest["chats"].items(), key=lambda item: -item[1])],
         "changes": {"messages_changed": len(changed), "listed": len(histories),
@@ -2645,9 +2662,11 @@ class EvidenceHTML:
         self.handover = self.context.get("handover")
         self.material = with_observed(report_material(self.context), self.coverage)
         self.filtered = self.context.get("report_digest") is not None
-        self.label, self.shown_count = say("Evidence report"), self.count
+        self.label, self.shown_count, self.context_count = say("Evidence report"), self.count, 0
         if self.context.get("selection"):
-            self.shown_count = self.context["selection"]["counts"]["selected_records"]
+            counts = self.context["selection"]["counts"]
+            self.context_count = counts.get("context_records", 0)
+            self.shown_count = counts["selected_records"] + self.context_count
         if self.handover:
             self.label = say("Handover extract")
             self.title = self.options.get("case_title") or say("Handover extract")
@@ -2741,8 +2760,9 @@ class EvidenceHTML:
         self.account_text = account_label(account)
         self.numbers = iter(range(1, 100))
         links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
-        yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
-                                                 self.handover, self.filtered)).encode("utf-8")
+        yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count - self.context_count if self.context_count else self.shown_count, self.anchors,
+                                                 self.coverage, self.account_text, self.handover, self.filtered,
+                                                 self.context_count)).encode("utf-8")
         yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
         if self.context.get("encrypted_chats"):
             yield report_secret.html(self.context["encrypted_chats"], say, next(self.numbers), utc_text, size_text,
@@ -2880,7 +2900,8 @@ class EvidenceHTML:
         if self.data_kind:
             if self.inline is not None:
                 for event in self.events_again():
-                    self.inline.add(viewer.journal_item(event, self.options.get("raw_records", True)))
+                    self.inline.add(journal_viewer_item(event, self.options.get("raw_records", True),
+                                                        self.context.get("record_role")))
                 data = self.inline.html(None, self.digest.get("indicators"))
                 self.statement["subject"]["viewer"] = self.inline.descriptor()
             if self.statement["subject"]["viewer"].get("files"):
@@ -3278,8 +3299,12 @@ CHAT_KINDS = {"supergroup": "Supergroup", "channel": "Channel", "group": "Basic 
 VISIBILITIES = {"public": "Public link", "private": "No public link"}
 ROLE_NAMES = {"creator": "creator", "admin": "administrator", "member": "member", "restricted": "restricted member",
               "left": "not a member"}
-ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined",
-                 "ParticipantLeave": "Left", "ParticipantInvite": "Invited a member",
+ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined the chat",
+                 "ParticipantJoinByInvite": "Joined by invite link", "ParticipantJoinByRequest": "Joined after approval",
+                 "ParticipantLeave": "Left the chat", "ParticipantInvite": "Invited a member",
+                 "ToggleSlowMode": "Changed slow mode", "TogglePreHistoryHidden": "Changed history visibility for new members",
+                 "DefaultBannedRights": "Changed default member permissions", "StopPoll": "Stopped a poll",
+                 "ExportedInviteRevoke": "Revoked an invite link", "ToggleInvites": "Changed who can invite members",
                  "ParticipantToggleBan": "Banned or restricted a member", "ParticipantToggleAdmin": "Changed admin rights",
                  "ChangeTitle": "Changed the title", "ChangeAbout": "Changed the description",
                  "ChangeUsername": "Changed the username", "ChangePhoto": "Changed the photo",

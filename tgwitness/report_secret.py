@@ -76,7 +76,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         chat_id = payload.get("secret_chat_id")
         if type(chat_id) is not int or wanted is not None and chat_id not in wanted:
             continue
-        shown = True
+        shown, context = True, False
         if allowed is not None:
             record = {"seq": seq, "kind": kind, "observed_at": at, "payload": payload}
             if kind == "secret_chat.file":
@@ -85,6 +85,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             elif kind in ("secret_chat.message", "secret_chat.action"):
                 if not allowed(record):
                     continue
+                context = hasattr(allowed, "role") and allowed.role(record) == "context"
                 if kind == "secret_chat.message":
                     picked.add((chat_id, str(payload.get("random_id"))))
             else:
@@ -92,7 +93,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         chat = found.setdefault(chat_id, {"id": chat_id, "peer": {}, "items": [], "state": "pending", "started": None,
                                           "ended": None, "key": None, "truncated": False, "messages": {}, "shown": 0,
                                           "counts": {"received": 0, "sent": 0, "files": 0, "deleted": 0,
-                                                     "screenshots": 0, "read": 0}})
+                                                     "screenshots": 0, "read": 0, "context": 0}})
         peer = payload.get("peer_user_id")
         if type(peer) is int:
             chat["peer"]["id"] = peer
@@ -100,7 +101,8 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             if isinstance(payload.get(field), str) and payload[field]:
                 chat["peer"][target] = payload[field]
         name = kind[len("secret_chat."):]
-        event = lambda text, **extra: shown and chat["items"].append({"type": "event", "seq": seq, "at": at, "text": text, **extra})
+        event = lambda text, **extra: shown and chat["items"].append({"type": "event", "seq": seq, "at": at, "text": text,
+                                                                      **({"context": True} if context else {}), **extra})
         if name == "requested":
             chat["started"] = {"at": at, "seq": seq, "direction": payload.get("direction")}
             event("Request from the other side" if payload.get("direction") == "in" else "Requested by this account")
@@ -119,7 +121,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                   else "Ended", reason=None if payload.get("history_deleted_by_peer") else payload.get("reason"))
         elif name == "message":
             out = payload.get("direction") == "out"
-            chat["counts"]["sent" if out else "received"] += 1
+            chat["counts"]["context" if context else "sent" if out else "received"] += 1
             if chat["shown"] >= limit:
                 chat["truncated"] = True
                 continue
@@ -131,7 +133,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
                        "reply_to": str(payload["reply_to_random_id"]) if payload.get("reply_to_random_id") else None,
                        "file": None, "deleted": None, "read_by_peer": None, "opened_by_peer": None,
                        "shown_read": None, "opened_for_peer": None,
-                       "sent_from": sent_from(payload, at) if out else None}
+                       "sent_from": sent_from(payload, at) if out else None, "context": context}
             chat["items"].append(message)
             chat["messages"][message["random_id"]] = message
         elif name == "file":
@@ -146,20 +148,20 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             action = payload.get("action")
             ids = [str(value) for value in details.get("random_ids") or payload.get("random_ids") or []]
             if action == "DeleteMessages":
-                chat["counts"]["deleted"] += len(ids)
+                chat["counts"]["deleted"] += 0 if context else len(ids)
                 for random_id in ids:
                     if random_id in chat["messages"]:
                         chat["messages"][random_id]["deleted"] = {"seq": seq, "at": at}
                 event("deleted", n=len(ids))
             elif action in ("ScreenshotMessages", "Screenshot"):
-                chat["counts"]["screenshots"] += 1
+                chat["counts"]["screenshots"] += 0 if context else 1
                 event("The other side took a screenshot.")
             elif action == "SetMessageTTL":
                 event("Timer set to {n} s", n=details.get("ttl_seconds") or 0)
             elif action == "FlushHistory":
                 event("The other side cleared the history; TgWitness keeps it.")
             elif action == "ReadMessages":
-                chat["counts"]["read"] += len(ids)
+                chat["counts"]["read"] += 0 if context else len(ids)
                 for random_id in ids:
                     target = chat["messages"].get(random_id)
                     if target is not None and target["direction"] == "out" and target["opened_by_peer"] is None:
@@ -275,10 +277,11 @@ def event_text(say, item, when):
 
 
 def event_line(say, item, when):
+    mark = " · " + say("Context") if item.get("context") else ""
     if item["text"] in ("The other side was typing", "This account showed typing"):
         end = item.get("end") if isinstance(item.get("end"), str) and str(item["end"])[:19] != str(item["start"])[:19] else None
-        return when(item["start"]) + (" – " + when(end) if end else "") + " · " + say(item["text"])
-    return when(item["at"]) + " · " + event_text(say, item, when)
+        return when(item["start"]) + (" – " + when(end) if end else "") + " · " + say(item["text"]) + mark
+    return when(item["at"]) + " · " + event_text(say, item, when) + mark
 
 
 def facts(say, chat, when):
@@ -296,7 +299,8 @@ def facts(say, chat, when):
 def counts(say, chat):
     c = chat["counts"]
     return [(say("Received"), c["received"]), (say("Sent"), c["sent"]), (say("Files"), c["files"]),
-            (say("Deleted"), c["deleted"]), (say("Screenshots"), c["screenshots"]), (say("Read"), c["read"])]
+            (say("Deleted"), c["deleted"]), (say("Screenshots"), c["screenshots"]), (say("Read"), c["read"]),
+            *([(say("Context records"), c["context"])] if c.get("context") else [])]
 
 
 def media_line(say, media, size_text):
@@ -336,6 +340,7 @@ CSS = """
 .secret-bubble .file,.secret-bubble .meta{color:var(--muted);font-size:12px}.secret-bubble .meta{justify-self:end}
 .secret-bubble .badge{justify-self:start;padding:1px 8px;border-radius:999px;background:var(--bad);color:#fff;font-size:11px;font-weight:650}
 .secret-bubble .badge.timer{background:var(--warn)}
+.secret-bubble .badge.context{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
 .secret-bubble .badge.seen{background:transparent;color:var(--accent-text,var(--accent,#1d4ed8));box-shadow:inset 0 0 0 1px var(--accent,#2563eb)}
 .secret-chat .limited{margin:0;padding:10px 18px;background:var(--warntint);color:var(--warn);font-size:13px}
 [dir=rtl] .secret-bubble{align-self:flex-end;border-radius:16px 16px 6px 16px}[dir=rtl] .secret-bubble.out{align-self:flex-start;border-radius:16px 16px 16px 6px}
@@ -369,6 +374,8 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
                 continue
             classes = "secret-bubble" + (" out" if item["direction"] == "out" else "") + (" deleted" if item["deleted"] else "")
             parts.append('<div class="' + classes + '" id="secret-record-' + e(item["seq"]) + '">')
+            if item.get("context"):
+                parts.append('<span class="badge context">' + e(say("Context message")) + "</span>")
             if item["deleted"]:
                 parts.append('<span class="badge">' + e(say("deleted by the other side; kept here")) + "</span>")
             if item["ttl"]:
@@ -430,7 +437,7 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 continue
             out = item["direction"] == "out"
             inner = bubble - 8
-            blocks = []
+            blocks = [("badge", say("Context message"), muted)] if item.get("context") else []
             if item["deleted"]:
                 blocks.append(("badge", say("deleted by the other side; kept here"), bad))
             if item["ttl"]:

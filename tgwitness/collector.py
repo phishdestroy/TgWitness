@@ -1106,8 +1106,15 @@ class Collector:
         if allowed is not None:
             pending.intersection_update(allowed)
             active.intersection_update(allowed)
+        rows, lost = self.intake_progress.retries(), self.lost_sources()
+        waits = [(row["chat_id"], self.waits_for_access(row["chat_id"], row.get("error_type"), lost)) for row in rows
+                 if row["chat_id"] in pending]
+        waiting = {chat_id for chat_id, wait in waits if wait} - {chat_id for chat_id, wait in waits if not wait}
+        pending -= waiting
         result = {"running": len(active), "pending": len(pending - active), "workers": 3}
-        retries = [row for row in self.intake_progress.retries() if row["chat_id"] in pending - active]
+        if waiting:
+            result["waiting_for_access"] = len(waiting)
+        retries = [row for row in rows if row["chat_id"] in pending - active]
         if retries:
             result.update(retrying=len({row["chat_id"] for row in retries}),
                 next_retry_at=max(min(row["retry_at"] for row in retries), self.store.get_setting("rpc_backoff_until", 0)))
@@ -1160,8 +1167,12 @@ class Collector:
         jobs.extend((chat_id, None, False) for chat_id in self.store.get_setting("new_chat_intake_pending", []))
         jobs.extend((chat_id, None, True) for chat_id in self.store.get_setting("baseline_pending", []))
         self.intake_waiting.clear()
+        lost = self.lost_sources()
         for job in jobs:
-            if self.intake_progress.get(job[0], job[2]).get("retry_at", 0) <= time.time():
+            progress = self.intake_progress.get(job[0], job[2])
+            if self.waits_for_access(job[0], progress.get("error_type"), lost):
+                continue
+            if progress.get("retry_at", 0) <= time.time():
                 self.queue_intake(*job)
         locks = {}
         workers = [asyncio.create_task(self.intake_next(locks)) for _ in range(3)]
@@ -1174,11 +1185,22 @@ class Collector:
                 worker.cancel()
             await asyncio.gather(*workers, return_exceptions=True)
 
+    def lost_sources(self):
+        return self.store.get_setting("lost_sources", {}) or {}
+
+    def waits_for_access(self, chat_id, error_type, lost=None):
+        if error_type != "ValueError":
+            return False
+        if str(chat_id) not in (self.lost_sources() if lost is None else lost) or not self.selected(chat_id):
+            return False
+        seen = (self.source_status.get(str(chat_id)) or {}).get("state") == "receiving_updates"
+        return chat_id not in self.dialog_cache and not seen
+
     async def intake_retries(self):
         while self.running:
-            lost = self.store.get_setting("lost_sources", {}) or {}
+            lost = self.lost_sources()
             for row in self.intake_progress.retries():
-                if str(row["chat_id"]) in lost and row.get("error_type") == "ValueError" and self.selected(row["chat_id"]):
+                if self.waits_for_access(row["chat_id"], row.get("error_type"), lost):
                     continue
                 if row["retry_at"] <= time.time() or not self.selected(row["chat_id"]):
                     self.queue_intake(row["chat_id"], baseline=bool(row["baseline"]))

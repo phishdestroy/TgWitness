@@ -403,6 +403,11 @@ def account_loss_line(cause, words):
     if cause == "session_duplicated":
         return tr(words, "Telegram ended this session because it was used in two places at once. "
                          "Sign in again with a new session.")
+    reason = {"session_revoked": "The session was ended from another device or by Telegram.",
+              "session_expired": "Telegram let the session expire.",
+              "session_ended": "Telegram no longer recognises this session: it was ended or the account was removed."}.get(cause)
+    if reason:
+        return tr(words, reason) + " " + tr(words, "Sign in again to observe or export.")
     return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
 
 

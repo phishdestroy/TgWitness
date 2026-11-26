@@ -1,5 +1,6 @@
 const KINDS = "coverage.gap,connection.restored,process.started,process.stopped,observation.started,observation.stopped";
 const INTERRUPTIONS = {transport_disconnected: "Connection to Telegram lost", authorization_required: "Telegram signed this account out", resume_failed: ""};
+const CAUSE = "cause:";
 const STOPS = {shutdown: "TgWitness was shut down", operator: "Observation paused"};
 const MOMENTS = {"updates delivered while observation was paused": "Updates arrived while observation was paused",
   "startup buffer full": "Too many updates arrived during startup", source_access_lost: "The account lost access to a source",
@@ -24,7 +25,8 @@ export function intervals(events, chat) {
     const at = Date.parse(event.observed_at), payload = event.payload || {};
     if (!Number.isFinite(at)) continue;
     if (event.kind === "coverage.gap") {
-      if (account && Object.hasOwn(INTERRUPTIONS, payload.reason)) start(at, INTERRUPTIONS[payload.reason], true);
+      if (account && Object.hasOwn(INTERRUPTIONS, payload.reason)) start(at, payload.reason === "authorization_required"
+        && typeof payload.cause === "string" && payload.cause ? CAUSE + payload.cause : INTERRUPTIONS[payload.reason], true);
       else found.push({from: at, to: at, reasons: MOMENTS[payload.reason] ? [MOMENTS[payload.reason]] : []});
     } else if (event.kind === "observation.stopped") {
       observed = true;
@@ -55,7 +57,9 @@ export function intervals(events, chat) {
   return merged;
 }
 
-export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal, fmtDay = null, dayKey = null}) {
+export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal, fmtDay = null, dayKey = null, lossText = null}) {
+  const reasonText = reason => !reason.startsWith(CAUSE) ? tr(reason)
+    : lossText ? lossText(reason.slice(CAUSE.length)) : tr(INTERRUPTIONS.authorization_required);
   let numbers = new Map(), offlineWindows = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
   const cache = new Map(), answers = new Map();
 
@@ -121,7 +125,7 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     return marker("coverage", list.map(item => item.from + "-" + item.to).join(",") + "|" + windows.length + ":" + unattributed, box => {
       const ongoing = list.some(item => item.to === null);
       const seconds = list.reduce((sum, item) => sum + (item.to === null ? 0 : (item.to - item.from) / 1000), 0);
-      const reasons = [...new Set(list.flatMap(item => item.reasons))].map(reason => tr(reason));
+      const reasons = [...new Set(list.flatMap(item => item.reasons))].map(reasonText);
       const summary = [list.length > 1 ? tr("Pauses: {n}", {n: list.length.toLocaleString(document.documentElement.lang || undefined)}) : "",
         span(list[0].from, ongoing ? null : Math.max(...list.map(item => item.to))), seconds >= 1 ? length(seconds) : "",
         list.length === 1 ? reasons.join(" · ") : ""].filter(Boolean).join(" · ");
@@ -134,7 +138,7 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
       const details = node("details", "chat-gap-details"), all = node("span", "chat-gap-all");
       details.append(node("summary", "", tr("Details")), all);
       for (const item of list) {
-        const why = item.reasons.map(reason => tr(reason)).join(" · ");
+        const why = item.reasons.map(reasonText).join(" · ");
         const from = fmtTime(new Date(item.from).toISOString()), to = item.to === null ? "…" : fmtTime(new Date(item.to).toISOString());
         all.append(node("span", "", (from === to ? from : from + " – " + to) + (why ? " · " + why : "")));
       }

@@ -22,6 +22,11 @@ INDEX = "documentation.sessions"
 PREFIX = "documentation.session."
 MAX_SESSIONS = 200
 MAX_MARKS = 2000
+def ioc_kind(say, kind):
+    from .report import IOC_KINDS
+    return say(IOC_KINDS.get(kind, kind))
+
+
 LABELS = ("important", "conclusion", "question", "decision", "adult", "obscene", "violence", "personal")
 HIDING = {"adult": "18+", "obscene": "obscene language", "violence": "violence", "personal": "personal data"}
 LABEL_NAMES = {"important": "Important", "conclusion": "Conclusion", "question": "Open question",
@@ -443,7 +448,7 @@ def step_item(step, episode, number, say, clock, appearance, images, reference="
     if appearance.detail == "full" and not slim and not hidden:
         chips = ["<span class=\"chip\">" + icon("image", "icon s") + e(say("Saved file")) + ' <span class="mono">'
                  + e(shown_hash(item["sha256"], appearance)) + "</span></span>" for item in step.get("files") or []]
-        chips += ['<span class="chip ioc"><span class="kind k-' + e(item["kind"]) + '">' + e(say(item["kind"]))
+        chips += ['<span class="chip ioc"><span class="kind k-' + e(item["kind"]) + '">' + e(ioc_kind(say, item["kind"]))
                   + "</span><span class=\"mono\">" + e(item["value"]) + "</span></span>"
                   for item in step.get("indicators") or []]
         content += '<div class="extras">' + "".join(chips) + "</div>" if chips else ""
@@ -1077,7 +1082,7 @@ def render_html(model, say=action_protocol.plain_say, fixed=None, images=None, a
                       + e(say("Strings found in the messages above.")) + "</p>"
                       "<table><tr><th>" + e(say("Kind")) + "</th><th>" + e(say("Value")) + "</th><th>" + e(say("Steps"))
                       + "</th></tr>" + "".join(
-                          '<tr><td><span class="kind k-' + e(item["kind"]) + '">' + e(say(item["kind"])) + "</span>"
+                          '<tr><td><span class="kind k-' + e(item["kind"]) + '">' + e(ioc_kind(say, item["kind"])) + "</span>"
                           + (" " + e(item["chain"]) if item.get("chain") else "") + '</td><td><span class="mono">'
                           + e(item["value"]) + "</span></td><td>" + ", ".join(
                               '<a href="#s' + str(n) + '">' + str(n) + "</a>"
@@ -1346,7 +1351,7 @@ def render_slides(model, say=action_protocol.plain_say, fixed=None, images=None,
     found = indicator_items(model) if appearance.found else []
     if found:
         slide(say("Found in messages"), say("Wallets, links, domains and accounts"), "<table>" + "".join(
-            '<tr><td><span class="kind k-' + e(item["kind"]) + '">' + e(say(item["kind"])) + "</span>"
+            '<tr><td><span class="kind k-' + e(item["kind"]) + '">' + e(ioc_kind(say, item["kind"])) + "</span>"
             + (" " + e(item["chain"]) if item.get("chain") else "") + '</td><td><span class="mono">' + e(item["value"])
             + "</span></td></tr>" for item in found[:12]) + "</table>"
               + ('<p class="more">' + e(say("{n} more in the full report.", n=len(found) - 12)) + "</p>"

@@ -2,6 +2,7 @@
   "use strict";
   let selected=null,offset=0,next=null,available=false,generation=0,loadSerial=0;
   const enabled=()=>!!state.me&&!!state.status?.analysis?.media_available&&!state.status?.demo;
+  const starts=()=>may("export");
   const current=(turn,workspace)=>turn===generation&&workspace===state.profile&&enabled();
   const scoped=path=>path+(path.includes("?")?"&":"?")+"workspace_id="+encodeURIComponent(state.profile);
   const call=(path,body)=>json("analysis/"+scoped(path),body,{root:true});
@@ -12,7 +13,7 @@
     const turn=generation,workspace=state.profile,serial=++loadSerial;
     const data=await call("media?"+new URLSearchParams({query:$("media-search").value,kind:$("media-filter").value,offset}));
     if(!current(turn,workspace)||serial!==loadSerial)return;
-    available=data.available;next=data.next_offset;$("media-next").disabled=next===null;$("media-previous").disabled=offset===0;$("media-start").disabled=!available||!selected;
+    available=data.available;next=data.next_offset;$("media-next").disabled=next===null;$("media-previous").disabled=offset===0;$("media-start").disabled=!available||!selected||!starts();show("media-analysis-form",starts());
     const statusText=!available
       ?tr("Local worker is not configured. See the media processing setup guide.")
       :data.processing==="local-whisper"
@@ -31,15 +32,15 @@
         const source=node("button","text-link",tr("Compare with source"));source.type="button";source.addEventListener("click",()=>openRecord(result.source.event_seq));box.append(source,node("p","detail-hash","SHA-256 · "+result.media_sha256));
       }));actions.append(view);}
       const action=["queued","running"].includes(job.status)?"cancel":["failed","interrupted","cancelled"].includes(job.status)?"retry":null;
-      if(action){const button=node("button",action==="cancel"?"quiet":"secondary",action==="cancel"?tr("Cancel"):tr("Retry"));button.type="button";button.addEventListener("click",()=>busy(button,async()=>{await call("media/"+job.id+"/"+action,{});await load();}));actions.append(button);}
+      if(action&&starts()){const button=node("button",action==="cancel"?"quiet":"secondary",action==="cancel"?tr("Cancel"):tr("Retry"));button.type="button";button.addEventListener("click",()=>busy(button,async()=>{await call("media/"+job.id+"/"+action,{});await load();}));actions.append(button);}
       row.append(actions);box.append(row);
     }
     if(!data.jobs.length)box.append(viewState("empty",tr("No matching recognition results"),tr("Start with a saved attachment, or change the recognition filter.")));
   }
-  $("media-analysis-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{if(!selected||!enabled()||!available)return;await call("media",{...selected,engine:$("media-engine").value,language:$("media-language").value});await load();});});
+  $("media-analysis-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{if(!selected||!enabled()||!available||!starts())return;await call("media",{...selected,engine:$("media-engine").value,language:$("media-language").value});await load();});});
   $("media-search-form").addEventListener("submit",event=>{event.preventDefault();offset=0;busy(event.submitter,load);});
   $("media-next").addEventListener("click",event=>busy(event.currentTarget,async()=>{offset=next??offset;await load();}));
   $("media-previous").addEventListener("click",event=>busy(event.currentTarget,async()=>{offset=Math.max(0,offset-20);await load();}));
   $("media-refresh").addEventListener("click",event=>busy(event.currentTarget,load));
-  window.TgWitnessMedia={clear,load,select:record=>{if(!enabled()||record.workspace!==state.profile)return;closeDetail();navigate("analysis");selected=record;$("media-analysis-target").textContent=tr("Selected source")+" #"+record.event_seq+" · "+record.digest;$("media-start").disabled=!available;$("media-analysis-section").scrollIntoView({block:"start"});}};
+  window.TgWitnessMedia={clear,load,select:record=>{if(!enabled()||!starts()||record.workspace!==state.profile)return;closeDetail();navigate("analysis");selected=record;$("media-analysis-target").textContent=tr("Selected source")+" #"+record.event_seq+" · "+record.digest;$("media-start").disabled=!available;$("media-analysis-section").scrollIntoView({block:"start"});}};
 })();

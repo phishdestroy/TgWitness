@@ -3,10 +3,6 @@ import {createSwarmExport} from './swarm-export.js?v=1';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const STATES={busy:'Busy',idle:'Idle',waiting:'Telegram wait',blocked:'Blocked',offline:'Not connected',unavailable:'Unavailable'};
 const ORDER={blocked:0,waiting:1,busy:2,idle:3,offline:4,unavailable:5};
-const LOSSES={session_duplicated:'Telegram ended this session because it was used in two places at once. Sign in again with a new session.',
-  account_banned:'Telegram banned this account. Observation stopped; the journal is kept.',
-  account_frozen:'Telegram froze this account and refuses most requests. Observation stopped; the account can appeal through @SpamBot.',
-  account_deleted:'The Telegram account was deleted. Observation stopped; the journal is kept.'};
 const REASONS={sign_in:'Sign in again',route_down:'The route to Telegram is down',flood_wait:'Telegram asked this account to wait'};
 const FILTERS=[['all','All'],['busy','Busy'],['idle','Idle'],['waiting','Telegram wait'],['blocked','Blocked'],['offline','Not connected']];
 const PROBLEMS={'coverage.gap':'Coverage gap','collector.error':'Collector error','network.connection_failed':'Connection failed',
@@ -22,7 +18,7 @@ const CODES={started:'Observation started',stopped:'Observation paused',already_
   not_running:'Not observing',no_session:'Sign in to Telegram first',no_warp:'Not on WARP',timeout:'Took too long',
   unavailable:'This workspace is unavailable.',cancelled:'Cancelled'};
 
-export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount,taskLabel,download}){
+export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount,taskLabel,download,lossText}){
   const t=value=>esc(tr(value));
   const icon=(name,cls='icon')=>`<svg class="${cls}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
   const listeners=new AbortController();
@@ -116,7 +112,7 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
         :share!==null?Math.round(100*share)+'%':'';
       return tr('Exporting {chat}',{chat:d.title||('#'+d.chat_id)})+(stage?' · '+stage:'');
     }
-    if(row.task==='sign_in_required'&&LOSSES[row.loss_cause])return tr(LOSSES[row.loss_cause]);
+    if(row.account_loss||row.task==='sign_in_required')return row.loss_cause&&lossText?lossText(row.loss_cause):tr('Telegram signed this account out');
     const info=row.task?taskLabel?.({task:row.task}):null;
     if(info)return tr(info.label);
     if(row.downloads?.active)return tr('Downloading files');

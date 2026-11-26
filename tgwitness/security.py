@@ -126,10 +126,7 @@ class Vault:
             if stored is None:
                 if any(p.exists() for p in protected):
                     raise RuntimeError("Vault master key missing from OS keyring (" + service + " / " + account + "). Restore it; refusing key replacement.")
-                master = Fernet.generate_key()
-                store.set(account, master.decode("ascii"))
-                if store.get(account) != master.decode("ascii"):
-                    raise RuntimeError("OS keyring did not retain the stored vault master key.")
+                master = _store_new_master(store, account).encode("ascii")
             else:
                 master = stored.strip().encode("ascii")
             Fernet(master)
@@ -450,33 +447,41 @@ class KeyringStore:
             parts.append(part)
         return "".join(parts)
 
+    def _chunk_count(self, backend, key):
+        try:
+            head = backend.get_password(self.service, key)
+        except Exception:
+            return 0
+        if not head or not head.startswith("chunks:"):
+            return 0
+        try:
+            return int(head.split(":", 1)[1])
+        except ValueError:
+            return 0
+
+    def _drop_chunks(self, backend, key, start, stop):
+        for idx in range(start, stop):
+            try:
+                backend.delete_password(self.service, key + "#" + str(idx))
+            except Exception:
+                pass
+
     def set(self, key, value):
         backend = self._require()
-        self.delete(key)
+        old_count = self._chunk_count(backend, key)
         if len(value) <= KEYRING_CHUNK:
             backend.set_password(self.service, key, value)
+            self._drop_chunks(backend, key, 0, old_count)
             return
         parts = [value[i:i + KEYRING_CHUNK] for i in range(0, len(value), KEYRING_CHUNK)]
         for idx, part in enumerate(parts):
             backend.set_password(self.service, key + "#" + str(idx), part)
         backend.set_password(self.service, key, "chunks:" + str(len(parts)))
+        self._drop_chunks(backend, key, len(parts), old_count)
 
     def delete(self, key):
         backend = self._require()
-        try:
-            head = backend.get_password(self.service, key)
-        except Exception:
-            head = None
-        if head and head.startswith("chunks:"):
-            try:
-                count = int(head.split(":", 1)[1])
-            except ValueError:
-                count = 0
-            for idx in range(count):
-                try:
-                    backend.delete_password(self.service, key + "#" + str(idx))
-                except Exception:
-                    pass
+        self._drop_chunks(backend, key, 0, self._chunk_count(backend, key))
         try:
             backend.delete_password(self.service, key)
         except Exception:
@@ -509,18 +514,41 @@ def read_keyring_marker(marker: Path):
     return service, account, salt
 
 
+def _store_new_master(store, account):
+    master = Fernet.generate_key().decode("ascii")
+    store.set(account, master)
+    if store.get(account) != master:
+        raise RuntimeError("OS keyring did not retain the stored vault master key.")
+    return master
+
+
 def _load_or_create_keyring_marker(root: Path, marker: Path, env_value: str):
     if marker.exists():
         return read_keyring_marker(marker)
     service = _keyring_service_name(env_value)
     account = _default_keyring_account(root)
-    salt = os.urandom(32)
-    private_write(marker, json.dumps({
-        "format": KEYRING_FORMAT,
-        "service": service,
-        "account": account,
-        "salt": base64.b64encode(salt).decode(),
-    }).encode())
+    store = KeyringStore(service)
+    stored = store.get(account)
+    created = stored is None
+    try:
+        if created:
+            _store_new_master(store, account)
+        else:
+            Fernet(stored.strip().encode("ascii"))
+        salt = os.urandom(32)
+        private_write(marker, json.dumps({
+            "format": KEYRING_FORMAT,
+            "service": service,
+            "account": account,
+            "salt": base64.b64encode(salt).decode(),
+        }).encode())
+    except BaseException:
+        if created:
+            try:
+                store.delete(account)
+            except Exception:
+                pass
+        raise
     return service, account, salt
 
 

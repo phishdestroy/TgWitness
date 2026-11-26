@@ -48,9 +48,10 @@ def register(app, authenticate):
                     ranked = {ident: rank for rank, ident in enumerate(found)}
                 except ValueError:
                     ranked = {}
+            scoped = reader(request)
             for entry in queue.recover(state):
                 try:
-                    visible(request, state, entry["id"])
+                    authorize(scoped, MediaJob(**entry["request"]))
                 except (Refused, ValueError):
                     continue
                 if kind and entry["request"]["engine"] != kind:

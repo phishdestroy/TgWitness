@@ -748,10 +748,10 @@ def create_app(root, output, config, client_factory=WitnessClient):
                 return JSONResponse({"detail": "Origin denied"}, status_code=403)
         response = await call_next(request)
         response.headers.update({"Cache-Control": "no-store", "Referrer-Policy": "no-referrer",
-            "X-Content-Type-Options": "nosniff", "X-Frame-Options": "DENY",
-            "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; "
-                "connect-src 'self'; img-src 'self' data: blob:; media-src blob:; frame-ancestors 'none'; base-uri 'none'; "
-                "form-action 'none'"})
+            "X-Content-Type-Options": "nosniff", "X-Frame-Options": "DENY"})
+        response.headers.setdefault("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; "
+            "connect-src 'self'; img-src 'self' data: blob:; media-src blob:; frame-ancestors 'none'; base-uri 'none'; "
+            "form-action 'none'")
         return response
 
     @app.exception_handler(RequestValidationError)
@@ -954,11 +954,15 @@ def create_app(root, output, config, client_factory=WitnessClient):
         session = app.state.session
         if not session.secret_mode or not re.fullmatch(r"[0-9a-f]{64}", digest):
             raise HTTPException(404, "No such file")
-        mime = session.secret_media_type(digest)
         path = session.store.root / "media" / digest
-        if mime is None or path.is_symlink() or not path.is_file():
+        if session.secret_media_type(digest) is None or path.is_symlink() or not path.is_file():
             raise HTTPException(404, "No such file")
-        return FileResponse(path, media_type=mime, headers={"Content-Disposition": "inline"})
+        from .media_preview import content_type
+        mime = await asyncio.to_thread(content_type, path)
+        return FileResponse(path, media_type=mime, filename=digest,
+                            content_disposition_type="inline" if mime != "application/octet-stream" else "attachment",
+                            headers={"Content-Security-Policy": "default-src 'none'; media-src 'self'; img-src 'self'; "
+                                     "style-src 'unsafe-inline'; sandbox"})
 
     @app.post("/api/cancel")
     async def cancel():

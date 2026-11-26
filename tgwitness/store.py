@@ -95,6 +95,21 @@ def reply_chat(payload, chat_id):
     return None
 
 
+def preview_media(raw):
+    media = raw.get("media") if isinstance(raw, dict) and isinstance(raw.get("media"), dict) else None
+    info = message_details.media_info(media) or {}
+    document = media.get("document") if media and isinstance(media.get("document"), dict) else {}
+    attributes = [item for item in document.get("attributes") or [] if isinstance(item, dict)]
+    names = {item.get("_") for item in attributes}
+    if info.get("sticker_emoji") or "DocumentAttributeSticker" in names:
+        return "sticker", info
+    if any(item.get("_") == "DocumentAttributeAudio" and item.get("voice") for item in attributes):
+        return "voice", info
+    if "DocumentAttributeVideo" in names:
+        return "video", info
+    return info.get("kind"), info
+
+
 class Store:
     def __init__(self, root: Path):
         self.root = root
@@ -307,6 +322,9 @@ class Store:
             for row in rows:
                 payload = json.loads(row["payload"]) if row["payload"] is not None else {}
                 sender = payload.get("sender_observation") or {}
+                kind, media = preview_media(payload.get("raw"))
+                caption = ((media.get("poll") or {}).get("question") or (media.get("location") or {}).get("title")
+                           or media.get("file_name") or media.get("title"))
                 result[row["chat_id"]] = {
                     "messages": row["messages"], "edited": row["edited"], "deleted": row["deleted"],
                     "missing": row["missing"], "saved": row["saved"], "deleted_saved": row["deleted_saved"],
@@ -314,6 +332,10 @@ class Store:
                     "last_observed_at": row["last_observed_at"],
                     "last_text": payload.get("text"),
                     "last_sender": sender.get("display_name"),
+                    "last_media": kind,
+                    "last_quiz": bool((media.get("poll") or {}).get("quiz")),
+                    "last_caption": caption if isinstance(caption, str) else None,
+                    "last_service": bool(payload.get("service_action")),
                 }
         return result
 

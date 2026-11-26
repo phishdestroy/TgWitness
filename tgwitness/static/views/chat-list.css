@@ -66,7 +66,6 @@
 .chat-priority.on { color: var(--accent-text); }
 .chat-priority.on .icon { fill: currentColor; }
 .chat-item:has(.chat-priority) .chat-item-priority { display: none; }
-.chats-sidebar .chat-item.active .chat-priority { color: #fff; }
 .chat-auto { display: inline-flex; align-items: center; color: var(--muted); }
 .chat-auto .icon, .chat-item-badges .pill .icon { width: 12px; height: 12px; }
 .chat-item-badges .pill { gap: 4px; font-variant-numeric: tabular-nums; }
@@ -97,6 +96,7 @@
 @media (hover: none) {
   .chats-sidebar .chat-item:is(:hover, :focus-within) .chat-item-time { margin-inline-end: 0; }
   .chats-sidebar .chat-priority { position: static; flex-basis: 44px; width: 44px; height: auto; min-height: 44px; background: none; box-shadow: none; opacity: 1; margin-inline-end: 0; }
+  .chats-sidebar .chat-item.active .chat-priority { color: #fff; }
 }
 .chat-list-section { margin: 14px 12px 4px; color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .chat-list-searching { margin: 6px 12px; }
