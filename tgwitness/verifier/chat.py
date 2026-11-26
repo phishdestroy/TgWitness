@@ -110,12 +110,14 @@ def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
 
 
 COMPARE_MEANING = {
-    "number": "Both archives record the same chat and account, so messages are matched by their number. "
-              "Unchanged means equality of the complete saved message record. A difference shows that the saved "
-              "records differ, in content or in observation metadata.",
-    "content": "The archives come from different chats or accounts (for example both sides of a private chat), "
-               "or their scope identity is missing. Possible matches use time, sender, full text and file hash. "
-               "Unchanged counts identical saved records among these pairs; differences describe the paired records.",
+    "number": "Both archives record the same chat, and its message numbers are the same for both sides (one account, "
+              "or a channel or supergroup, which numbers messages once for every member), so messages are matched by "
+              "their number. Unchanged means equality of the complete saved message record. A difference shows that "
+              "the saved records differ, in content or in observation metadata.",
+    "content": "The archives come from different chats, from different accounts in a private chat or basic group "
+               "(for example both sides of one conversation), or their scope identity is missing. Possible matches use "
+               "time, sender, full text and file hash. Unchanged counts identical saved records among these pairs; "
+               "differences describe the paired records.",
 }
 
 
@@ -176,7 +178,9 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
         other = (second_manifest.get(name) or {}).get("id")
         return type(value) is int and type(other) is int and value != 0 and value == other
     same_chat, same_account = same_identity("chat"), same_identity("account")
-    method = "number" if same_chat and same_account else "content"
+    chat_id = (first_manifest.get("chat") or {}).get("id")
+    shared = same_chat and (same_account or type(chat_id) is int and chat_id <= -1000000000000)
+    method = "number" if shared else "content"
     order = lambda rows: sorted(rows, key=lambda row: (str(row.get("date")), str(row.get("id"))))
     if method == "number":
         def by_number(rows):
@@ -216,8 +220,6 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
                 candidates.remove(match)
                 pairs.append((row, match))
         only_second.extend(row for rows in waiting.values() for row in rows)
-    chat_id = (first_manifest.get("chat") or {}).get("id")
-    shared = same_chat and (same_account or type(chat_id) is int and chat_id <= -1000000000000)
     peer = {} if shared else {a.get("id"): b.get("id") for a, b in pairs}
     changed = []
     for a, b in pairs:

@@ -142,8 +142,10 @@ python -m tgwitness.verify first.zip --compare second.zip \
 `--require` and `--require-tier` are refused together with `--compare`; check the required
 profile of each archive with its own verification.
 
-When both archives record the same numeric account and chat IDs, records are paired
-by message ID. **Unchanged** means equality of the complete saved JSON record:
+When both archives record the same numeric chat ID and their message IDs are shared,
+records are paired by message ID. Message IDs are shared when both archives come from
+the same account, and in channels and supergroups, which number messages once for every
+member. **Unchanged** means equality of the complete saved JSON record:
 full text, author, dates, reply target, nested metadata and unknown fields are all
 included. JSON object key order does not matter; absent fields, nulls, value types
 and array order do. The 300-character preview is only for display. Changed entries
@@ -155,7 +157,8 @@ other observation metadata. Telegram edits appear as their own edit events, and 
 archive's verification shows whether that archive is intact. Unparsed records remain
 in the comparison and are compared by their saved representation.
 
-For different or missing account/chat identities, the tool finds candidate
+For different chats, for two accounts in a private chat or basic group, and for missing
+account/chat identities, the tool finds candidate
 correspondences using sender, complete text, file hash, media type and a five-second
 time tolerance, and reports them as **Matched** rather than **Unchanged**. Unparsed
 records remain unmatched. Differences in paired records are listed in `changed`,
