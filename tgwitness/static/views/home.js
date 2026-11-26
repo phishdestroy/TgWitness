@@ -499,7 +499,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     for (const profile of items) {
       for (const kind of profile.collector.activity.tasks || [profile.collector.activity.task]) {
       const activity = {...profile.collector.activity, task: kind}, info = taskInfo(activity), item = node('li');
-      const percent = progressOf(activity);
+      const percent = kind === 'chat_export' ? progressOf(activity) : null;
       item.append(node('strong', '', profile.label), node('span', '', ' · ' + (activity.task === 'chat_export' && activity.detail
         ? tr('Exporting {chat}', {chat: activity.detail.title || ('#' + activity.detail.chat_id)}) : tr(info.label))));
       if (percent !== null) {
