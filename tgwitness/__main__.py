@@ -54,6 +54,24 @@ def open_when_ready(url, host, port, token_file=None, timeout=60):
     return True
 
 
+def raise_open_files(limit=65536):
+    try:
+        import resource
+    except ImportError:
+        return None
+    soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    ceiling = limit if hard == resource.RLIM_INFINITY else min(hard, limit)
+    if soft == resource.RLIM_INFINITY or soft >= ceiling:
+        return soft
+    for wanted in (ceiling, min(ceiling, 10240)):
+        try:
+            resource.setrlimit(resource.RLIMIT_NOFILE, (wanted, hard))
+            return wanted
+        except (ValueError, OSError):
+            continue
+    return soft
+
+
 def banner(demo, stream=None):
     from . import __version__
     stream = stream or sys.stdout
@@ -121,6 +139,7 @@ def main():
             raise SystemExit(3)
         except OSError:
             pass
+    raise_open_files()
     import uvicorn
     from .app import create_app
     from .logging_config import server_logging
