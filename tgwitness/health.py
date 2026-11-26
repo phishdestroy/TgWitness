@@ -301,7 +301,8 @@ def finding(cause, confidence, action, **detail):
 def verdict(parts, c, now, gap_at=None):
     link, feed, chats = parts["connection"], parts["intake"], parts["sources"]
     if link["reason"] == "signed_out" or feed["reason"] == "session_revoked":
-        return finding("signed_out", "high", "sign_in", detail=link.get("cause"))
+        return finding("signed_out", "high", "sign_in",
+                       detail=link.get("cause") or ("session_revoked" if feed["reason"] == "session_revoked" else None))
     if feed["reason"] in ("updates_diverted", "probe_ack_missed_live"):
         return finding("second_session", "high" if feed["reason"] == "probe_ack_missed_live" else "medium", "one_client",
                        since=(c.get("probe_missed") or c.get("updates_diverted") or {}).get("since"))
