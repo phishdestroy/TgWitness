@@ -30,7 +30,8 @@ def document(name, text):
     payload = json.dumps({"file": name, "text": text}, ensure_ascii=True).replace("<", "\\u003c")
     return ('<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" '
             'content="default-src \'none\'; script-src \'sha256-' + digest + '\'; base-uri \'none\'">'
-            '<title>TgWitness viewer data</title><script type="application/json" id="data">' + payload
+            '<title>TgWitness viewer data</title><p>This file holds data for the report. Open the report HTML file '
+            'in the top folder of the archive.</p><script type="application/json" id="data">' + payload
             + '</script><script>' + loader + '</script>').encode("utf-8")
 
 
