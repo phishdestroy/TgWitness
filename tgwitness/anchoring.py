@@ -114,7 +114,13 @@ class OTSReader:
                 elif tag == 0xf3:
                     result = message.hex().encode("ascii")
                 elif tag in (0x02, 0x03, 0x08):
-                    result = hashlib.new({0x02: "sha1", 0x03: "ripemd160", 0x08: "sha256"}[tag], message).digest()
+                    try:
+                        result = hashlib.new({0x02: "sha1", 0x03: "ripemd160", 0x08: "sha256"}[tag], message).digest()
+                    except ValueError:
+                        if tag != 0x03:
+                            raise
+                        from .verify import ripemd160
+                        result = ripemd160(message)
                 else:
                     raise ValueError("Unsupported OpenTimestamps upgrade operation")
                 node["ops"][operation] = self.tree(result, depth + 1)
