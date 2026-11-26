@@ -7378,7 +7378,7 @@ function renderMulti(){
   box.replaceChildren();show("export-box",true);
   const head=node("div","export-head");
   const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
-  head.append(node("b","",running?tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts)+
+  head.append(node("b","",running?tr("Exporting {title}: ",counts)+(percent===null&&x.phase!=="running"&&x.phase!=="preparing"?EXPORT_PHASES[x.phase]||x.phase:tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts))+
     (x.eta_seconds?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):""):x.phase==="done"?tr(x.ready?"Export ready: {captured} messages, signed.":"Export saved: {captured} messages, signed.",counts):
     x.phase==="failed"?tr("Export failed: {error}",{error:x.error||tr("unknown error")}):x.phase==="paused"?tr("Export paused; saved chunks are retained."):tr("Export cancelled.")));
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>work(b));head.append(b);};
@@ -7407,7 +7407,7 @@ function renderMulti(){
     examined:x.counts.examined,matched:x.counts.matched,context:x.counts.context,uncertain:x.counts.uncertain_language||0})));
   if(x.counts?.context_limit_reached)box.append(node("p","hint",tr("Context cap reached; additional context may be omitted.")));
   if(x.phase==="done")box.append(node("p","hint",tr("The messages are in the archive (chat.json, chat.html, authors.csv). This chat view shows what observation and “Load history” saved in the journal.")));
-  if(running&&percent!==null){const bar=node("progress","export-bar");bar.max=100;bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
+  if(running){const bar=node("progress","export-bar");bar.max=100;if(percent!==null)bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
   const workers=node("ul","export-workers");
   for(const w of x.workers){
     const wait=w.state==="waiting"&&w.wait_until?tr("Telegram asked to pause {n} s",{n:Math.max(0,Math.round(w.wait_until-Date.now()/1000))}):null;
@@ -7551,6 +7551,7 @@ async function startLinkExport(){
   toast(tr("Export started with {n} accounts reserved exclusively for this task.",{n:profiles.length}));
 }
 function exportPercent(x,running){
+  if(running&&["selecting","packaging"].includes(x.phase))return null;
   // One long range would stay at 0% until it ends; the message count moves while it is read.
   const shares=[x.ranges_total?x.ranges_done/x.ranges_total:null,x.total?(x.captured||0)/x.total:null].filter(share=>share!==null);
   return shares.length?Math.min(running?99:100,Math.floor(Math.max(...shares)*100)):null;
@@ -7559,10 +7560,10 @@ function renderLinkJob(){
   const x=linkJob,box=$("link-export-plan");box.replaceChildren();show("link-export-plan",true);
   const running=multiActive(x),percent=exportPercent(x,running);
   const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
-  box.append(node("b","",running?tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts):
+  box.append(node("b","",running?tr("Exporting {title}: ",counts)+(percent===null&&x.phase!=="running"&&x.phase!=="preparing"?EXPORT_PHASES[x.phase]||x.phase:tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts)):
     x.phase==="done"?tr(x.ready?"Export ready: {captured} messages, signed.":"Export saved: {captured} messages, signed.",counts):
     x.phase==="failed"?tr("Export failed: {error}",{error:x.error||tr("unknown error")}):x.phase==="paused"?tr("Export paused; saved chunks are retained."):tr("Export cancelled.")));
-  if(running&&percent!==null){const bar=node("progress","export-bar");bar.max=100;bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
+  if(running){const bar=node("progress","export-bar");bar.max=100;if(percent!==null)bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
   box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+(EXPORT_PHASES[x.phase]||x.phase)));
   if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
   if(x.performance)box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
