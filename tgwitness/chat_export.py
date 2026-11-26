@@ -7,6 +7,7 @@ import json
 import os
 import re
 import shutil
+import time
 import unicodedata
 import uuid
 import zipfile
@@ -66,6 +67,11 @@ PARTIAL_FORMAT = "tgwitness-chat-partial-v1"
 CHECKPOINT_MESSAGES = 5000
 HISTORY_FILE = re.compile(r"history-[A-Za-z0-9_-]{1,64}\.jsonl")
 NO_FILE = "media-without-file.txt"
+FILE_RESULTS = "file-results.jsonl"
+FILE_STATEMENT = "file-results.json"
+FILE_RESULTS_FORMAT = "tgwitness-chat-file-results-v1"
+FILE_RESULTS_CHECKPOINT = 200
+FILE_RESULTS_SECONDS = 30
 FILE_FIELDS = ("file", "file_sha256", "file_size", "file_kind", "file_status", "file_error", "server_hashes",
                "file_hash_sha256", "file_reused")
 PARTIAL_MEANING = ("Messages read before this export stopped. They stay in the workspace under a statement signed with "
@@ -587,6 +593,45 @@ class HistoryWriter:
         self.partial.carried = True
 
 
+class FileResults:
+    def __init__(self, partial, mode):
+        self.partial, self.mode = partial, mode
+        self.found, self.digest, self.size = partial.saved_file_results(mode)
+        self.count, self.unsigned, self.signed_at = len(self.found), 0, time.monotonic()
+        self.stream = (partial.directory / FILE_RESULTS).open("ab")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *failure):
+        try:
+            self.sign()
+        finally:
+            self.stream.close()
+
+    def add(self, number, stable, result):
+        line = (json.dumps({"id": number, "stable": stable, "result": result}, ensure_ascii=False, sort_keys=True)
+                + "\n").encode("utf-8")
+        self.stream.write(line)
+        self.digest.update(line)
+        self.size, self.count, self.unsigned = self.size + len(line), self.count + 1, self.unsigned + 1
+        if self.unsigned >= FILE_RESULTS_CHECKPOINT or time.monotonic() - self.signed_at >= FILE_RESULTS_SECONDS:
+            self.sign()
+
+    def sign(self):
+        if not self.unsigned:
+            return
+        self.stream.flush()
+        os.fsync(self.stream.fileno())
+        partial = self.partial
+        statement = {"format": FILE_RESULTS_FORMAT, "chat_id": partial.chat_id, "account_id": partial.account_id,
+                     "mode": self.mode, "bytes": self.size, "sha256": self.digest.hexdigest(), "results": self.count,
+                     "saved_at": utcnow()}
+        private_write(partial.directory / FILE_STATEMENT, canonical({"statement": statement, "public_key": partial.vault.public_key,
+                                                                    "signature": partial.vault.sign(canonical(statement))}))
+        self.unsigned, self.signed_at = 0, time.monotonic()
+
+
 class PartialExport:
     def __init__(self, store, vault, chat_id, account_id):
         self.store, self.vault, self.chat_id, self.account_id = store, vault, chat_id, account_id
@@ -611,7 +656,8 @@ class PartialExport:
         self.media.mkdir(mode=0o700, exist_ok=True)
         if self.previous is None:
             forget_files(self.media)
-            (self.directory / NO_FILE).unlink(missing_ok=True)
+            for name in (NO_FILE, FILE_RESULTS, FILE_STATEMENT):
+                (self.directory / name).unlink(missing_ok=True)
 
     def no_file_ids(self):
         path = self.directory / NO_FILE
@@ -705,6 +751,44 @@ class PartialExport:
                     if entry.get("file") is not None and not self.has_file(entry):
                         entry = {k: v for k, v in entry.items() if k not in FILE_FIELDS}
                     yield entry
+
+    def file_results(self, mode):
+        return FileResults(self, mode)
+
+    def saved_file_results(self, mode):
+        path, signed = self.directory / FILE_RESULTS, self.directory / FILE_STATEMENT
+        found, digest, size = {}, hashlib.sha256(), 0
+        try:
+            if self.previous is None or linked(path) or linked(signed) or not path.is_file() or not signed.is_file():
+                raise ValueError("No saved file results.")
+            envelope = json.loads(signed.read_bytes())
+            statement = envelope["statement"]
+            if envelope["public_key"] != self.vault.public_key:
+                raise ValueError("File results were signed with a different collector key.")
+            Ed25519PublicKey.from_public_bytes(base64.b64decode(envelope["public_key"], validate=True)).verify(
+                base64.b64decode(envelope["signature"], validate=True), canonical(statement))
+            if (statement["format"] != FILE_RESULTS_FORMAT or statement["chat_id"] != self.chat_id
+                    or statement["account_id"] != self.account_id or statement["mode"] != mode):
+                raise ValueError("File results belong to another chat, account or file mode.")
+            with path.open("rb") as stream:
+                for line in stream:
+                    if size + len(line) > statement["bytes"]:
+                        break
+                    row = json.loads(line)
+                    digest.update(line)
+                    size += len(line)
+                    found[row["id"]] = row
+            if size != statement["bytes"] or digest.hexdigest() != statement["sha256"]:
+                raise ValueError("File results differ from their signed statement.")
+        except Exception:
+            found, digest, size = {}, hashlib.sha256(), 0
+        if not linked(path):
+            with path.open("a+b") as stream:
+                stream.truncate(size)
+        return found, digest, size
+
+    def usable_file_result(self, result):
+        return isinstance(result, dict) and ("file" not in result or self.has_file(result))
 
     def has_file(self, entry):
         digest = entry.get("file_sha256")

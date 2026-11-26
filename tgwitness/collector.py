@@ -9,7 +9,7 @@ import time
 import secrets
 import warnings
 import weakref
-from contextlib import asynccontextmanager, suppress
+from contextlib import ExitStack, asynccontextmanager, suppress
 from contextvars import ContextVar
 from datetime import datetime, timedelta, timezone
 from functools import wraps
@@ -5122,6 +5122,7 @@ class Collector:
                     "client": self.client_identity(), "route": self.route_receipt(),
                     "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),
                                     "files": files or "workspace_settings",
+                                    **({"files_carried": record["files_carried"]} if record.get("files_carried") else {}),
                                     "clock_at_start": clock, "clock_at_end": await self.telegram_clock()}}
             meta["acquisition"]["sessions"] = partial.sessions(meta["acquisition"]["finished_at"])
             names = await complete_in_thread(chat_export.journal_names, self.store, chat_id, scratch)
@@ -5524,34 +5525,65 @@ class Collector:
                 if partial:
                     partial.note_no_file(no_file)
         if attached:
-            await self.export_files(entity, scratch, record, media_dir, attached, files)
+            await self.export_files(entity, scratch, record, media_dir, attached, files, partial)
         return count
 
-    async def export_files(self, entity, scratch, record, media_dir, ids, files=None):
+    async def export_files(self, entity, scratch, record, media_dir, ids, files=None, partial=None):
         record.update(stage="files", files_total=len(ids), files_done=0, eta_seconds=None)
         found, started = {}, time.monotonic()
         expected = {}
-        if files == "skip":
-            found = {number: {"file_status": "skipped_by_export_option"} for number in ids}
-            ids = []
-        else:
-            wanted = set(ids)
-            with scratch.open(encoding="utf-8") as source:
-                for line in source:
-                    entry = json.loads(line)
-                    if entry.get("id") in wanted:
-                        expected[entry["id"]] = hashlib.sha256(canonical(message_details.stable(entry))).digest()
-        slots = asyncio.Semaphore(self.param("media_workers"))
+        with ExitStack() as stack:
+            results = None
+            if files == "skip":
+                found = {number: {"file_status": "skipped_by_export_option"} for number in ids}
+                ids = []
+            else:
+                wanted = set(ids)
+                with scratch.open(encoding="utf-8") as source:
+                    for line in source:
+                        entry = json.loads(line)
+                        if entry.get("id") in wanted:
+                            expected[entry["id"]] = hashlib.sha256(canonical(message_details.stable(entry))).digest()
+                if partial is not None:
+                    mode = {"files": files, "settings": None if files else hashlib.sha256(
+                        canonical(capture_settings(self.store))).hexdigest()}
+                    results = stack.enter_context(partial.file_results(mode))
+                    for number, row in results.found.items():
+                        if (number in expected and row.get("stable") == expected[number].hex()
+                                and partial.usable_file_result(row.get("result"))):
+                            found[number] = row["result"]
+                    if found:
+                        ids = [number for number in ids if number not in found]
+                        record.update(files_done=len(found), files_carried=len(found))
+            slots = asyncio.Semaphore(self.param("media_workers"))
+            base = record["files_done"]
 
-        def advance():
-            record["files_done"] += 1
-            elapsed = time.monotonic() - started
-            record["eta_seconds"] = round((len(ids) - record["files_done"]) * elapsed / record["files_done"])
+            def advance():
+                record["files_done"] += 1
+                elapsed = time.monotonic() - started
+                record["eta_seconds"] = round((record["files_total"] - record["files_done"]) * elapsed
+                                              / (record["files_done"] - base))
 
-        async def attach(message):
-            async with slots:
-                found[message.id] = await self.export_attachment(message, media_dir, files)
-            advance()
+            async def attach(message):
+                async with slots:
+                    found[message.id] = await self.export_attachment(message, media_dir, files)
+                if results is not None:
+                    results.add(message.id, expected[message.id].hex(), found[message.id])
+                advance()
+            await self.read_files(entity, ids, found, expected, attach, advance)
+        for missing in set(ids) - set(found):
+            found[missing] = {"file_status": "message_unavailable_at_file_read"}
+        merged = scratch.with_suffix(".files")
+        with scratch.open(encoding="utf-8") as source, merged.open("w", encoding="utf-8") as target:
+            for line in source:
+                entry = json.loads(line)
+                if entry.get("id") in found and entry.get("type") != "unparsed":
+                    entry.update(found[entry["id"]])
+                target.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        merged.replace(scratch)
+        record["stage"] = None
+
+    async def read_files(self, entity, ids, found, expected, attach, advance):
         for low in range(0, len(ids), 100):
             batch, pending, failures = ids[low:low + 100], [], 0
             while True:
@@ -5587,17 +5619,6 @@ class Collector:
                     task.cancel()
                 await asyncio.gather(*pending, return_exceptions=True)
                 raise
-        for missing in set(ids) - set(found):
-            found[missing] = {"file_status": "message_unavailable_at_file_read"}
-        merged = scratch.with_suffix(".files")
-        with scratch.open(encoding="utf-8") as source, merged.open("w", encoding="utf-8") as target:
-            for line in source:
-                entry = json.loads(line)
-                if entry.get("id") in found and entry.get("type") != "unparsed":
-                    entry.update(found[entry["id"]])
-                target.write(json.dumps(entry, ensure_ascii=False) + "\n")
-        merged.replace(scratch)
-        record["stage"] = None
 
     async def resolve_for_export(self, chat_id, username=None):
         await self.restore()
