@@ -8510,7 +8510,8 @@
   "f2848231619d4634def1ac2e58bbc8c16b3ffd28d8d041f42a6d8ee53cb9e7bd": "僅在匯出完成後才會發送匯出 webhook。管理員日誌動作、指標類型與來源、校驗和、聊天類型，以及法院、案件檔案和協議標籤，均會在報告和控制面板中進行轉換。",
   "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "當 ASiC-E 容器中的 META-INF 包含其清單中未列出的項目（例如 verify.py 以及報告中的檔案檢查）時，位於 /verify 的瀏覽器驗證器會轉為紅色。",
   "4daffb62b322cee985f0d403a45d2c6c1373b4c02523c6e35016ea9f9f66ebdd": "PDF 報告中會顯示 Telegram 名稱中常見的風格化字母（例如 𝐍𝐚𝐦𝐞 或 🅻），以及奧加姆文字、方框圖形和箭頭；系統會透過內建的 Noto Sans Math、Noto Sans Symbols 和 Noto Sans Ogham 字型來呈現這些內容，而非省略並附上註解。",
-  "5e23782bed9e0dde03443e3f39ee208f4290f2c2040a5d9b7cc0f924e8596a70": "媒體分析：本地版 Whisper 除非 <code>TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1</code> 允許透過直接路徑進行一次下載。本機版 Whisper 接受一個模型資料夾，其中 <code>model.bin</code>，並在子程序中運行；該子程序會在時間限制屆滿時停止，並將被截斷的 30 分鐘對話記錄標記為「不完整」。 啟動、取消及重試辨識功能均需具備匯出權限。秘密聊天媒體會根據其偵測到的類型在沙盒中處理，且可辨識 WebM、WAV、FLAC、AVIF、HEIC 以及多種 MP4 變體。"
+  "5e23782bed9e0dde03443e3f39ee208f4290f2c2040a5d9b7cc0f924e8596a70": "媒體分析：本地版 Whisper 除非 <code>TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1</code> 允許透過直接路徑進行一次下載。本機版 Whisper 接受一個模型資料夾，其中 <code>model.bin</code>，並在子程序中運行；該子程序會在時間限制屆滿時停止，並將被截斷的 30 分鐘對話記錄標記為「不完整」。 啟動、取消及重試辨識功能均需具備匯出權限。秘密聊天媒體會根據其偵測到的類型在沙盒中處理，且可辨識 WebM、WAV、FLAC、AVIF、HEIC 以及多種 MP4 變體。",
+  "f73aae7c8a824a1366ca29c1adf8a6d6ffd31f2f321eac9abb16eeba702bfebd": "Telegram 在聊天清單中的搜尋結果會顯示完整的聊天名稱、類型、論壇主題、使用者名稱、成員人數以及SCAM或FAKE標記，並在下方顯示「加入」按鈕；而非僅在寬大的按鈕旁顯示名稱中的一個字母。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
