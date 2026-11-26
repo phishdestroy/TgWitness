@@ -11,11 +11,22 @@ def content_type(path):
         return "image/webp"
     if head.startswith(b"OggS"):
         return "audio/ogg"
+    if head.startswith(b"RIFF") and head[8:12] == b"WAVE":
+        return "audio/wav"
+    if head.startswith(b"fLaC"):
+        return "audio/flac"
+    if head.startswith(b"\x1aE\xdf\xa3"):
+        return "video/webm" if b"webm" in head[:64] else "video/x-matroska"
     if head.startswith(b"ID3") or head[:2] in (b"\xff\xfb", b"\xff\xf3", b"\xff\xf2"):
         return "audio/mpeg"
+    if head[4:8] == b"ftyp" and head[8:12] in (b"avif", b"avis"):
+        return "image/avif"
+    if head[4:8] == b"ftyp" and head[8:12] in (b"heic", b"heix", b"mif1", b"msf1"):
+        return "image/heic"
     if head[4:8] == b"ftyp" and head[8:12] in (
-            b"isom", b"iso2", b"mp41", b"mp42", b"avc1", b"M4V ", b"M4A ", b"qt  "):
-        return "audio/mp4" if head[8:12] == b"M4A " else "video/mp4"
+            b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"avc1", b"dash", b"mp4v", b"MSNV",
+            b"3gp4", b"3gp5", b"3gp6", b"3g2a", b"f4v ", b"M4V ", b"M4A ", b"M4B ", b"qt  "):
+        return "audio/mp4" if head[8:12] in (b"M4A ", b"M4B ") else "video/mp4"
     if head.startswith(b"%PDF-"):
         return "application/pdf"
     return "application/octet-stream"
