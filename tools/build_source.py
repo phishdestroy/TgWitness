@@ -73,7 +73,7 @@ FILES.extend("tgwitness/fonts/" + name for name in (
     "NotoSerif-Regular.ttf", "NotoSerif-Bold.ttf",
     "NotoSansArabic-Regular.ttf", "NotoSansHebrew-Regular.ttf", "NotoSansDevanagari-Regular.ttf",
     "NotoSansBengali-Regular.ttf", "NotoSansThai-Regular.ttf", "NotoSansSymbols2-Regular.ttf",
-    "NotoEmoji-Regular.ttf",
+    "NotoEmoji-Regular.ttf", "NotoSansMath-Regular.ttf", "NotoSansSymbols-Regular.ttf", "NotoSansOgham-Regular.ttf",
 ))
 FILES.extend("website/demo/downloads/" + name for name in (
     "tgwitness-demo.zip", "tgwitness-demo.jsonl", "tgwitness-demo.csv", "tgwitness-demo.html",

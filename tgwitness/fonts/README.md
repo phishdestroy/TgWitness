@@ -15,9 +15,10 @@ Keep the font files and their licences together when packaging the application.
 | Family | Use |
 | --- | --- |
 | Noto Sans and Noto Serif, regular and bold | Report text and headings |
-| Noto Sans Mono | Monospaced text |
+| Noto Sans Mono | Monospaced text, and box drawing and blocks in recorded text |
 | Arabic, Hebrew, Devanagari, Bengali and Thai families | Script-specific glyph coverage |
 | Noto Sans Symbols 2 and Noto Emoji | Symbols and emoji |
+| Noto Sans Math, Noto Sans Symbols and Noto Sans Ogham | Styled letters such as 𝐀 and 🅰, enclosed letters and Ogham, common in Telegram names |
 
 Licences: [Noto families](OFL.txt) · [Noto Serif](NotoSerif-OFL.txt).
 The source archive's font inventory is maintained in

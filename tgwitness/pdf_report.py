@@ -36,7 +36,8 @@ GOLD, WHITE = (198, 158, 91), (255, 255, 255)
 OK, BAD, WARN = (23, 102, 58), (161, 25, 31), (138, 75, 0)
 FALLBACKS = ("NotoSansArabic-Regular.ttf", "NotoSansHebrew-Regular.ttf", "NotoSansDevanagari-Regular.ttf",
              "NotoSansBengali-Regular.ttf", "NotoSansThai-Regular.ttf", "NotoSansSymbols2-Regular.ttf",
-             "NotoEmoji-Regular.ttf")
+             "NotoEmoji-Regular.ttf", "NotoSansMath-Regular.ttf", "NotoSansSymbols-Regular.ttf",
+             "NotoSansOgham-Regular.ttf", "NotoSansMono-Regular.ttf")
 CJK_FONTS = ("msyh.ttc", "malgun.ttf", "msyh.ttf", "msjh.ttc", "YuGothR.ttc", "meiryo.ttc", "simsun.ttc",
              "NotoSansCJK-Regular.ttc", "NotoSansCJKsc-Regular.otf", "NotoSansSC-Regular.ttf", "wqy-zenhei.ttc",
              "Arial Unicode.ttf", "Hiragino Sans GB.ttc")
