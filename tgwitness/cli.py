@@ -3,6 +3,7 @@ import errno
 import hashlib
 import json
 import os
+import re
 import shutil
 import sqlite3
 import sys
@@ -548,25 +549,27 @@ def file_sha256(path):
     return digest.hexdigest()
 
 
-def copy_backup(root, target):
-    files, checkpoints, databases, others = [], [], [], []
+def backup_sources(root):
     for folder, directories, names in os.walk(root):
         directories[:] = [d for d in directories if d not in BACKUP_SKIP_DIRS]
         for name in names:
             path = Path(folder) / name
             if name in BACKUP_SKIP_NAMES or name.endswith(BACKUP_SKIP_SUFFIXES) or not path.is_file():
                 continue
-            if is_sqlite(path):
-                databases.append(path)
-            elif "checkpoints" in path.relative_to(root).parts:
-                checkpoints.append(path)
-            else:
-                others.append(path)
-    for path in checkpoints + databases + others:
+            yield path
+
+
+def copy_backup(root, target):
+    files, databases, vanished, copies = [], [], [], {}
+    kinds = {path: "database" if is_sqlite(path) else "checkpoint" if "checkpoints" in path.relative_to(root).parts
+             else "file" for path in backup_sources(root)}
+
+    def place(path, kind):
         relative = path.relative_to(root)
         copy = target / relative
         copy.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-        if path in databases:
+        digest = None
+        if kind == "database":
             source = sqlite3.connect(path.as_uri() + "?mode=ro", uri=True)
             destination = sqlite3.connect(copy)
             try:
@@ -574,15 +577,72 @@ def copy_backup(root, target):
             finally:
                 destination.close()
                 source.close()
+            databases.append(path)
         else:
             try:
-                shutil.copy2(path, copy)
+                info = path.stat()
+                identity = (info.st_dev, info.st_ino) if info.st_nlink > 1 else None
+                earlier = copies.get(identity)
+                if earlier:
+                    try:
+                        os.link(earlier[0], copy)
+                        digest = earlier[1]
+                    except OSError:
+                        earlier = None
+                if not earlier:
+                    shutil.copy2(path, copy)
             except FileNotFoundError:
-                continue
+                vanished.append(relative.as_posix())
+                return
         os.chmod(copy, 0o600)
-        files.append({"path": relative.as_posix(), "bytes": copy.stat().st_size, "sha256": file_sha256(copy)})
+        digest = digest or file_sha256(copy)
+        if kind != "database" and identity:
+            copies.setdefault(identity, (copy, digest))
+        files.append({"path": relative.as_posix(), "bytes": copy.stat().st_size, "sha256": digest})
+
+    for wanted in ("checkpoint", "database"):
+        for path, kind in kinds.items():
+            if kind == wanted:
+                place(path, kind)
+    later = set()
+    for path in backup_sources(root):
+        kind = kinds.get(path) or ("database" if is_sqlite(path) else "checkpoint"
+                                   if "checkpoints" in path.relative_to(root).parts else "file")
+        later.add(path)
+        if kind == "file" or kind == "database" and path not in kinds:
+            place(path, kind)
+    vanished += [path.relative_to(root).as_posix() for path, kind in kinds.items() if kind == "file" and path not in later]
     heads = journal_heads(target)
-    return files, databases, heads
+    return files, databases, heads, sorted(vanished)
+
+
+def uncommitted_pages(root):
+    problems = []
+    for name, workspace in workspaces(root, "all"):
+        connection = sqlite3.connect((workspace / "journal.sqlite3").as_uri() + "?mode=ro&immutable=1", uri=True)
+        try:
+            rows = connection.execute(
+                "SELECT json_extract(payload,'$.job_id'), json_extract(payload,'$.seq'), json_extract(payload,'$.page_sha256') "
+                "FROM events WHERE seq IN (SELECT MAX(seq) FROM events WHERE kind='account_export.history_page' "
+                "GROUP BY json_extract(payload,'$.job_id'))").fetchall()
+        finally:
+            connection.close()
+        for job, last, digest in rows:
+            if not isinstance(job, str) or not re.fullmatch(r"[a-f0-9]{32}", job) or type(last) is not int:
+                problems.append(name + ": unreadable account export page record")
+                continue
+            folder = workspace / "account-exports" / job
+            if not folder.is_dir():
+                continue
+            missing = next((number for number in range(1, last + 1)
+                            if not (folder / "history-pages" / f"{number:08d}.json").is_file()
+                            or not (folder / "attachment-queue" / f"{number:08d}.enc").is_file()), None)
+            if missing is None and file_sha256(folder / "history-pages" / f"{last:08d}.json") != digest:
+                missing = last
+            if missing is not None:
+                problems.append(name + ": account export " + job + " lacks history page " + str(missing)
+                                + " that its journal records as saved")
+    return problems
 
 
 def publish_into(staging, target):
@@ -629,10 +689,12 @@ def backup(args):
     target.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=".tgwitness-backup-", dir=target if inside else target.parent))
     try:
-        files, databases, heads = copy_backup(root, staging)
+        files, databases, heads, vanished = copy_backup(root, staging)
+        incomplete = uncommitted_pages(staging)
         from . import __version__
         manifest = {"format": "tgwitness-backup-v1", "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                     "source": str(root), "version": __version__, "journal_heads": heads, "files": files,
+                    "complete": not incomplete, "incomplete": incomplete, "vanished": vanished,
                     "restore": "Stop TgWitness, replace the whole data directory with this folder (without this manifest), "
                                "then start. The journal records that it was restored from an older copy."}
         (staging / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
@@ -659,11 +721,18 @@ def backup(args):
     finally:
         shutil.rmtree(staging, ignore_errors=True)
     summary = {"backup": str(target), "files": len(files), "databases": len(databases),
-               "bytes": sum(item["bytes"] for item in files), "journal_heads": heads}
+               "bytes": sum(item["bytes"] for item in files), "journal_heads": heads,
+               "complete": not incomplete, "incomplete": incomplete, "vanished": vanished}
     print(json.dumps(summary, ensure_ascii=False) if args.json else
           "Backed up " + str(len(files)) + " files (" + str(len(databases)) + " databases) to " + str(target)
           + "\nJournal heads: " + ", ".join(k + " #" + str((v or {}).get("seq")) for k, v in heads.items())
+          + ("\n" + str(len(vanished)) + " file(s) were removed by TgWitness while the backup ran and are not in it."
+             if vanished else "")
           + "\nKeep this folder as private as the data directory: it holds the Telegram session and signing keys.")
+    if incomplete:
+        print("The backup is incomplete and cannot resume these exports:\n" + "\n".join("  " + item for item in incomplete)
+              + "\nStop TgWitness and run the backup again for a consistent copy.", file=sys.stderr)
+        return EXIT_FAILURE
     return 0
 
 
@@ -713,6 +782,7 @@ def verify_backup(args):
         try:
             if journal_heads(folder) != manifest.get("journal_heads"):
                 problems.append("Journal heads differ from the manifest")
+            problems += uncommitted_pages(folder)
         except sqlite3.Error:
             problems.append("A journal in the backup cannot be read")
     result = {"folder": str(folder), "verified": not problems, "files": len(listed), "problems": problems}

@@ -500,7 +500,8 @@ class SystemOperations:
             "Content-Security-Policy",
             "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'",
         )
-        response.headers["Cache-Control"] = "no-store"
+        if response.headers.get("Cache-Control") != "no-cache":
+            response.headers["Cache-Control"] = "no-store"
         return response
 
     async def unexpected_error(self, request, exc):

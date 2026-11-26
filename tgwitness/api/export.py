@@ -256,8 +256,50 @@ async def chat_export_start_over(
     return await begin_chat_export(ctx, request, body, True)
 
 
+async def keep_finished_chat_export(ctx):
+    from .. import export_history
+
+    collector = ctx.app.state.collector
+    state = collector.export_public() or {}
+    old = state.get("id")
+    path = collector.export_result_path(old) if old else None
+    if not path or old in ctx.kept_chat_exports or path.stat().st_size > export_history.MAX_CACHE_BYTES:
+        return
+    entry = ctx.prepared_chat_exports.get(old) or await asyncio.to_thread(
+        export_history.prepared,
+        ctx.app.state.store,
+        path,
+        "zip",
+        False,
+        owner=ctx.chat_export_owners.get(old),
+        workspace=ctx.profile_id,
+        required_permissions=["view", "export"],
+        chat_ids=[state.get("chat_id")],
+    )
+    if entry.get("cache_warning"):
+        return
+    ctx.kept_chat_exports[old] = {
+        "state": {key: value for key, value in state.items() if key != "live"},
+        "entry": entry,
+    }
+    while len(ctx.kept_chat_exports) > export_history.LIMIT:
+        ctx.kept_chat_exports.pop(next(iter(ctx.kept_chat_exports)))
+
+
+def kept_chat_export(ctx, request, export_id):
+    from .. import export_history
+
+    kept = ctx.kept_chat_exports.get(export_id)
+    if kept and export_history.permitted(
+        kept["entry"], request.state.principal, ctx.profile_id
+    ):
+        return kept
+    return None
+
+
 async def begin_chat_export(ctx, request, body, fresh):
     ctx.require_chat(request, body.chat_id)
+    await keep_finished_chat_export(ctx)
     record = await ctx.operation(
         ctx.app.state.collector.start_export,
         body.chat_id,
@@ -367,11 +409,12 @@ async def preview_report(body: report.ReportOptions, *, ctx=Depends(current_cont
 async def chat_export_poll(
     request: Request, export_id: str, *, ctx=Depends(current_context)
 ):
-    return (
-        ctx.app.state.collector.poll_export(export_id)
-        if ctx.export_visible(request, export_id)
-        else {"phase": "unknown"}
-    )
+    if ctx.export_visible(request, export_id):
+        found = ctx.app.state.collector.poll_export(export_id)
+        if found.get("phase") != "unknown":
+            return found
+    kept = kept_chat_export(ctx, request, export_id)
+    return {**kept["state"], "kept": True} if kept else {"phase": "unknown"}
 
 
 async def chat_export_cancel(
@@ -439,7 +482,22 @@ async def chat_export_download(
         else None
     )
     if not path:
-        raise HTTPException(404, "No finished chat export is available to download.")
+        kept = kept_chat_export(ctx, request, export_id)
+        if not kept:
+            raise HTTPException(404, "No finished chat export is available to download.")
+        await ctx.recheck_export_scope(request, kept["entry"].get("chat_ids"))
+        try:
+            copy = await build_file(
+                lambda: export_history.download_copy(ctx.app.state.store, kept["entry"]["id"])[0]
+            )
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        return TemporaryDownload(
+            copy,
+            filename=kept["state"].get("filename"),
+            media_type="application/zip",
+            headers=export_history.headers(kept["entry"]),
+        )
     filename = collector.export_state["filename"]
     checked = collector.export_state.get("chat_id")
     entry = ctx.prepared_chat_exports.get(export_id)
@@ -1057,7 +1115,7 @@ class ExportOperations:
             from ..webhooks import export_completed
 
             await export_completed(
-                self.app.state.store, self.app.state.vault, self.profile_id
+                self.app.state.store, self.app.state.vault, self.profile_id, receipt.get("id")
             )
             self.app.state.alert_wakeup.set()
             await self.recheck_export_scope(request, None)

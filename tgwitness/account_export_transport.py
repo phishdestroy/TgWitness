@@ -19,6 +19,14 @@ DISCOVERY_PROBES = 4
 AVATAR_PAGE = 20
 AVATAR_STOPS = (errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError, errors.TakeoutInvalidError,
                 errors.UnauthorizedError)
+TAKEOUT_RESTRICTED = ("Telegram restricts this chat on some platforms and returns no history for it through Takeout. "
+                      "Export it without Takeout.")
+TAKEOUT_RESTRICTED_READ = ("Telegram restricts these chats on some platforms and returns no history for them through "
+                           "Takeout, so their history is read without Takeout.")
+
+
+def restrictions(entity):
+    return [str(item.platform) + ":" + str(item.reason) for item in getattr(entity, "restriction_reason", None) or []]
 
 
 def decode_peer(encoded):
@@ -158,6 +166,8 @@ class Transport:
         self.save()
 
     def ranged(self, task):
+        if task.get("transport") == "regular":
+            return WrappedClient(self.collector.client)
         return WrappedClient(self.collector.client, self.secret.get("takeout_id"), task.get("telegram_range"))
 
     async def selected_chats(self):
@@ -212,6 +222,8 @@ class Transport:
                 if index not in row["ranges"]:
                     row["ranges"].append(index)
                 row["archived"] = getattr(dialog, "folder_id", None) == 1
+                if restrictions(entity):
+                    row["restricted"] = restrictions(entity)
                 self.report("chats", len(chats))
         if self.options["transport"] == "takeout" and {"group", "supergroup", "channel"} & set(self.options["chat_kinds"]):
             offset = 0
@@ -220,10 +232,12 @@ class Transport:
                 for entity in result.chats:
                     cid = utils.get_peer_id(entity)
                     self.peers[cid] = utils.get_input_peer(entity)
-                    chats.setdefault(cid, {"id": cid, "title": getattr(entity, "title", str(cid)),
+                    row = chats.setdefault(cid, {"id": cid, "title": getattr(entity, "title", str(cid)),
                         "username": getattr(entity, "username", None),
                         "kind": kind_of(entity) or "channel", "archived": False, "left": True,
                         "ranges": [len(ranges) - 1]})
+                    if restrictions(entity):
+                        row["restricted"] = restrictions(entity)
                 offset += len(result.chats)
                 self.report("left_chats", len(chats))
                 if not result.chats or isinstance(result, t.messages.Chats):
@@ -241,7 +255,12 @@ class Transport:
             for index in chat["ranges"]:
                 tasks.append({"id": "messages:" + str(chat["id"]) + ":" + str(index), "category": "messages",
                     "chat_id": chat["id"], "telegram_range": ranges[index],
-                    "own_only": own_only_for(self.options, chat["kind"], chat.get("username"))})
+                    "own_only": own_only_for(self.options, chat["kind"], chat.get("username")),
+                    **({"transport": "regular"} if self.options["transport"] == "takeout" and chat.get("restricted") else {})})
+        regular = sorted({task["chat_id"] for task in tasks if task.get("transport") == "regular"})
+        if regular:
+            self.collector.store.append("account_export.transport", {"job_id": self.job_id, "transport": "regular",
+                "reason": "restricted_chats", "chat_ids": regular, "meaning": TAKEOUT_RESTRICTED_READ})
         titles, checked, slots = {chat["id"]: chat["title"] for chat in chats.values()}, 0, asyncio.Semaphore(DISCOVERY_PROBES)
         self.report("checking", 0, len(tasks))
 

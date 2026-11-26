@@ -10947,5 +10947,14 @@
   "-{before} / +{after} messages": "-{before} / +{after} mesej",
   "Context before (messages)": "Konteks sebelum (mesej)",
   "Context after (messages)": "Konteks selepas (mesej)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Sertakan mesej berdekatan di sekitar setiap rekod sepadan untuk mengekalkan konteks perbualan (0 hingga 50 mesej di setiap sisi)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Sertakan mesej berdekatan di sekitar setiap rekod sepadan untuk mengekalkan konteks perbualan (0 hingga 50 mesej di setiap sisi).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Senarai sejarah Telegram berhenti walaupun mesej yang lebih lama masih wujud: nombor tepat di bawah mesej tertuanya memulangkan mesej apabila diminta mengikut nombor; mesej itu disertakan dan ditanda found_on_recheck (recheck.edge_found). Sejarah yang lebih lama daripada nombor yang disemak mungkin wujud dan tidak dibaca.",
+  "The account is still connecting to Telegram. Try again in a minute.": "Akaun masih menyambung ke Telegram. Cuba lagi dalam seminit.",
+  "Another transfer is not finished. Resume or cancel it first.": "Pemindahan lain belum selesai. Sambung semula atau batalkannya dahulu.",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram melaporkan lebih sedikit mesej dalam sembang ini melalui Takeout berbanding permintaan biasa. Ini berlaku bagi sembang yang disekatnya pada sesetengah platform. Sejarah dibaca tanpa Takeout.",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram menyekat sembang ini pada sesetengah platform dan tidak memulangkan sejarahnya melalui Takeout. Eksportnya tanpa Takeout.",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram menyekat sembang ini pada sesetengah platform dan tidak memulangkan sejarahnya melalui Takeout, jadi sejarahnya dibaca tanpa Takeout.",
+  "Read without Takeout": "Dibaca tanpa Takeout",
+  "under a spoiler": "disembunyikan sebagai spoiler",
+  "files: {done} of {total}": "fail: {done} daripada {total}"
 }

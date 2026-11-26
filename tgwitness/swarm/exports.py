@@ -20,6 +20,7 @@ JOBS_KEPT = 20
 POLL = 1.0
 BUSY_RETRY = 5
 WAIT_FLOOR = 3
+CONNECTION_ATTEMPTS = 10
 PACED = ("messages.getHistory", "contacts.resolveUsername", "channels.getMessages", "messages.getMessages",
          "channels.getFullChannel", "messages.checkChatInvite")
 FILES = (None, "download", "hashes", "skip")
@@ -141,7 +142,8 @@ class SwarmExports:
             account = collector.store.get_setting("account", None) or {}
             delay = self.availability(profile)
             state = ("unavailable" if delay is None else "free" if delay == 0 else
-                     "waiting" if delay > BUSY_RETRY or self.wait_left(collector) > WAIT_FLOOR else "busy")
+                     "waiting" if delay > BUSY_RETRY or self.wait_left(collector) > WAIT_FLOOR else
+                     "observing" if collector.running else "busy")
             rows.append({"id": profile, "label": entry.get("label") or profile, "account_id": account.get("id"),
                          "username": account.get("username"), "state": state,
                          "wait_seconds": round(delay) if state == "waiting" else None,
@@ -271,6 +273,13 @@ class SwarmExports:
             return
         except Fatal as exc:
             self.scheduler.fail(task, str(exc))
+            return
+        except OSError as exc:
+            if task.attempts >= CONNECTION_ATTEMPTS:
+                self.scheduler.fail(task, type(exc).__name__)
+                return
+            self.cooldown[profile] = self.clock() + BUSY_RETRY
+            self.scheduler.requeue(task)
             return
         chat_id = utils.get_peer_id(entity)
         task.progress.update(chat_id=chat_id, title=utils.get_display_name(entity) or None)

@@ -8,7 +8,8 @@ def register(app, authenticate, workspace_id):
     async def overview():
         data = webhooks.state(app.state.store)
         return {"connections": [webhooks.public(h) for h in app.state.vault.read("webhooks").get("entries", [])],
-                "pending": len(data["pending"]), "history": data["history"], "last_error": data["last_error"]}
+                "pending": len(data["pending"]) + len(data.get("deferred", [])), "history": data["history"],
+                "last_error": data["last_error"] or webhooks.lost_completions(data)}
 
     @app.post("/api/integrations/webhooks", dependencies=[Depends(authenticate)])
     async def create(body: webhooks.HookSettings):

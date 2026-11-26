@@ -6,6 +6,7 @@ SETTING = "rpc_bulk_pacing"
 WARMUP = "account_warmup"
 DEFAULT_GAP_MS = 1000
 MIN_GAP_MS = 500
+TAKEOUT_MIN_GAP_MS = 250
 MAX_GAP_MS = 10000
 GLOBAL_GAP_MS = 250
 SUCCESS_STEP = 20
@@ -18,6 +19,10 @@ def clean_number(value, default, low, high):
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
         return default
     return max(low, min(high, value))
+
+
+def floor_ms(name):
+    return TAKEOUT_MIN_GAP_MS if str(name).startswith("invokeWithTakeout/") else MIN_GAP_MS
 
 
 class FloodWaitLearner:
@@ -48,7 +53,7 @@ class FloodWaitLearner:
         found = methods.get(name) if isinstance(methods.get(name), dict) else {}
         base = self.seed(value)
         count = lambda key: max(0, found.get(key, 0)) if type(found.get(key, 0)) is int else 0
-        return {"gap_ms": round(clean_number(found.get("gap_ms"), base, MIN_GAP_MS, MAX_GAP_MS)),
+        return {"gap_ms": round(clean_number(found.get("gap_ms"), base, floor_ms(name), MAX_GAP_MS)),
                 "ema_wait_s": clean_number(found.get("ema_wait_s"), None, 0, 86400) if found.get("ema_wait_s") is not None else None,
                 "floods": count("floods"), "successes": count("successes"), "streak": min(SUCCESS_STEP - 1, count("streak")),
                 "last_flood_at": found.get("last_flood_at") if isinstance(found.get("last_flood_at"), (int, float)) else None}
@@ -104,7 +109,7 @@ class FloodWaitLearner:
         method["successes"] += 1
         method["streak"] += 1
         if method["streak"] >= SUCCESS_STEP:
-            method["gap_ms"] = max(MIN_GAP_MS, round(method["gap_ms"] * RELAX))
+            method["gap_ms"] = max(floor_ms(name), round(method["gap_ms"] * RELAX))
             method["streak"] = 0
         self.save(name, method)
 

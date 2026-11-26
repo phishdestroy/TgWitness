@@ -96,7 +96,7 @@
 #view-swarm .se-pick { display: inline-flex; align-items: center; gap: 7px; min-height: 0; height: 30px; padding: 0 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text-2); font: 500 12px/1 var(--font); cursor: pointer; }
 #view-swarm .se-pick i { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
 #view-swarm .se-pick[data-state="free"] i { background: var(--success); }
-#view-swarm .se-pick[data-state="busy"] i, #view-swarm .se-pick[data-state="waiting"] i { background: var(--warning); }
+#view-swarm .se-pick[data-state="busy"] i, #view-swarm .se-pick[data-state="observing"] i, #view-swarm .se-pick[data-state="waiting"] i { background: var(--warning); }
 #view-swarm .se-pick small { color: var(--muted); font: 400 11px/1 var(--mono); }
 #view-swarm .se-pick[aria-pressed="true"] { border-color: var(--accent-border); background: var(--accent-soft); color: var(--accent-text); }
 #view-swarm .se-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }

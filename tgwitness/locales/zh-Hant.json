@@ -10947,5 +10947,14 @@
   "-{before} / +{after} messages": "-{before} / +{after} 則訊息",
   "Context before (messages)": "前文上下文（訊息數）",
   "Context after (messages)": "後文上下文（訊息數）",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "在每筆符合記錄前後納入相鄰訊息以保留對話上下文（每側 0 至 50 則訊息）。"
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "在每筆符合記錄前後納入相鄰訊息以保留對話上下文（每側 0 至 50 則訊息）。",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Telegram 的歷史列表在仍有更早訊息時就停止了：按編號請求時，列表最早訊息下方緊鄰的編號傳回了訊息；這些訊息已包含並標記為 found_on_recheck（recheck.edge_found）。可能存在早於所檢查編號的歷史，未被讀取。",
+  "The account is still connecting to Telegram. Try again in a minute.": "此帳戶仍在連線至 Telegram。請一分鐘後再試。",
+  "Another transfer is not finished. Resume or cancel it first.": "另一次移轉尚未完成。請先繼續或取消它。",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "透過 Takeout，Telegram 回報的此聊天訊息數少於一般請求。在某些平台受限的聊天會發生這種情況。將不透過 Takeout 讀取聊天紀錄。",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram 在某些平台上限制了此聊天，且不透過 Takeout 傳回其聊天紀錄。請不使用 Takeout 匯出。",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram 在某些平台上限制了這些聊天，且不透過 Takeout 傳回其聊天紀錄，因此將不透過 Takeout 讀取。",
+  "Read without Takeout": "未透過 Takeout 讀取",
+  "under a spoiler": "以劇透遮罩隱藏",
+  "files: {done} of {total}": "檔案：{done}/{total}"
 }

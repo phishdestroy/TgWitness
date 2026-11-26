@@ -10998,5 +10998,14 @@
   "-{before} / +{after} messages": "-{before} / +{after} پیام",
   "Context before (messages)": "زمینه قبل (پیام‌ها)",
   "Context after (messages)": "زمینه بعد (پیام‌ها)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "پیام‌های مجاور اطراف هر رکورد منطبق را برای حفظ زمینه گفتگو شامل کنید (0 تا 50 پیام در هر طرف)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "پیام‌های مجاور اطراف هر رکورد منطبق را برای حفظ زمینه گفتگو شامل کنید (0 تا 50 پیام در هر طرف).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "فهرست تاریخچهٔ Telegram متوقف شد در حالی که پیام‌های قدیمی‌تری وجود داشت: شماره‌های درست زیر قدیمی‌ترین پیام فهرست هنگام درخواست با شماره پیام برگرداندند؛ این پیام‌ها گنجانده شده و با found_on_recheck علامت خورده‌اند (recheck.edge_found). ممکن است تاریخچه‌ای قدیمی‌تر از شماره‌های بررسی‌شده وجود داشته باشد که خوانده نشده است.",
+  "The account is still connecting to Telegram. Try again in a minute.": "حساب هنوز در حال اتصال به Telegram است. یک دقیقه دیگر دوباره تلاش کنید.",
+  "Another transfer is not finished. Resume or cancel it first.": "انتقال دیگری هنوز تمام نشده است. ابتدا آن را ادامه دهید یا لغو کنید.",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram برای این گفتگو از طریق Takeout پیام‌های کمتری نسبت به درخواست‌های عادی گزارش می‌کند. این برای گفتگوهایی رخ می‌دهد که در برخی پلتفرم‌ها محدود شده‌اند. تاریخچه بدون Takeout خوانده می‌شود.",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram این گفتگو را در برخی پلتفرم‌ها محدود کرده و از طریق Takeout هیچ تاریخچه‌ای برای آن برنمی‌گرداند. آن را بدون Takeout برون‌بری کنید.",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram این گفتگوها را در برخی پلتفرم‌ها محدود کرده و از طریق Takeout تاریخچه‌ای برای آن‌ها برنمی‌گرداند، بنابراین تاریخچهٔ آن‌ها بدون Takeout خوانده می‌شود.",
+  "Read without Takeout": "خوانده‌شده بدون Takeout",
+  "under a spoiler": "پنهان زیر اسپویلر",
+  "files: {done} of {total}": "فایل‌ها: {done} از {total}"
 }

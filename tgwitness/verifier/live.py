@@ -85,16 +85,28 @@ class LiveSalvage:
         start, packed, plain, method, crc = self.members[name]
         if plain > limit:
             raise ValueError(name + " exceeds the verifier's size limit for this member")
+        if method not in (0, 8):
+            raise ValueError("Unsupported compression in archive member: " + name)
+        if method == 0 and packed != plain:
+            raise ValueError("Damaged archive member: " + name)
+        inflater = zlib.decompressobj(-15) if method == 8 else None
+        parts, produced, left = [], 0, packed
         with open(self.path, "rb") as handle:
             handle.seek(start)
-            data = handle.read(packed)
-        if method == 8:
-            inflater = zlib.decompressobj(-15)
-            data = inflater.decompress(data, plain + 1)
-            if not inflater.eof:
-                raise ValueError("Damaged archive member: " + name)
-        elif method != 0:
-            raise ValueError("Unsupported compression in archive member: " + name)
+            while left and produced <= plain:
+                chunk = handle.read(min(left, 1024 * 1024))
+                if not chunk:
+                    break
+                left -= len(chunk)
+                if inflater is not None:
+                    chunk = inflater.decompress(chunk, plain + 1 - produced)
+                parts.append(chunk)
+                produced += len(chunk)
+                if inflater is not None and (inflater.eof or inflater.unconsumed_tail):
+                    break
+        data = b"".join(parts)
+        if inflater is not None and not inflater.eof:
+            raise ValueError("Damaged archive member: " + name)
         if len(data) != plain or zlib.crc32(data) != crc:
             raise ValueError("Damaged archive member: " + name)
         return data
@@ -147,7 +159,7 @@ def verify_live_export(path, expected_fingerprint=None, max_gib=None):
     try:
         archive = open_archive(path, max_gib)
     except (zipfile.BadZipFile, ValueError, OSError, EOFError, struct.error) as exc:
-        if "size limit" in str(exc):
+        if "size limit" in str(exc) or "more members" in str(exc):
             raise
         salvage, reason = LiveSalvage(path), type(exc).__name__ + ": " + str(exc)
     try:

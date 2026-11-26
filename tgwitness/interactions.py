@@ -314,6 +314,9 @@ async def preview(collector, body):
               "history_visible": None,
               "request_needed": bool(getattr(entity, "request_needed", False)
                                      or (not member and getattr(entity, "join_request", False))),
+              "forum": bool(getattr(chat, "forum", False)),
+              "telegram_restrictions": [{"platform": item.platform, "reason": item.reason, "text": item.text}
+                                        for item in getattr(chat, "restriction_reason", None) or []],
               "expires_at": time.time() + 600,
               "account_id": (collector.store.get_setting("account", {}) or {}).get("id"),
               "raw": plain(entity), **facts}

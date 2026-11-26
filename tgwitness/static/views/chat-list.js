@@ -340,6 +340,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       if (state === 'lost') pill.title = lostHint(chat);
       progress.append(pill);
     }
+    if (chat.forum) progress.append(node('span', 'pill pill-state', tr('Forum topics')));
     if (restrictions(chat).length) {
       const restricted = node('span', 'pill pill-state pill-blocked', tr('Restricted'));
       restricted.title = restrictions(chat).map(item => [item.platform, item.text || item.reason].filter(Boolean).join(': ')).filter(Boolean).join('\n') || tr('Blocked by Telegram');

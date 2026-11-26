@@ -16,6 +16,7 @@ POLICY = ("default-src 'self'; script-src 'self'{script_hash}; style-src 'self';
 REFERENCE = re.compile(r'''["']([^"'\s<>]+\.js(?:\?[^"'\s<>]*)?)["']''')
 TAG = re.compile(r'<(?:script|link)\b[^>]*>', re.I)
 URL = re.compile(r'''\b(?:src|href)=["']([^"']+)["']''', re.I)
+REVALIDATED = ('.js', '.css', '.svg')
 
 
 def integrity(data):
@@ -67,4 +68,7 @@ class PanelFiles(StaticFiles):
             if scope['method'] == 'HEAD':
                 response.body = b''
             return response
-        return await super().get_response(path, scope)
+        response = await super().get_response(path, scope)
+        if response.status_code in (200, 304) and Path(path).suffix in REVALIDATED:
+            response.headers['Cache-Control'] = 'no-cache'
+        return response

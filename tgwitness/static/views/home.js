@@ -368,8 +368,18 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   const chip = (kind, text) => node('span', 'home-chip home-chip-' + kind, text);
   const progressOf = activity => {
     const d = activity?.detail;
-    if (!d || !d.total || d.captured == null) return null;
-    return Math.max(0, Math.min(100, Math.round(d.captured / d.total * 100)));
+    if (!d) return null;
+    const [done, total] = d.stage === 'files' ? [d.files_done, d.files_total]
+      : d.stage === 'recheck' ? [d.recheck_done, d.recheck_total] : [d.captured, d.total];
+    if (!total || done == null) return null;
+    return Math.max(0, Math.min(100, Math.round(done / total * 100)));
+  };
+  const exportStep = d => {
+    const n = value => (value || 0).toLocaleString(document.documentElement.lang || undefined);
+    if (d.stage === 'files' && d.files_total) return tr('{captured} messages saved; files: {done}/{total}', {captured: n(d.captured), done: n(d.files_done), total: n(d.files_total)});
+    if (d.stage === 'recheck') return tr('rechecking absent message numbers') + (d.recheck_total ? ' ' + n(d.recheck_done) + '/' + n(d.recheck_total) : '');
+    if (d.stage === 'packaging') return tr('packaging and signing the archive');
+    return tr('{done} of {total} messages', {done: n(d.captured), total: n(d.total)});
   };
 
   function activityLine(profile) {
@@ -389,7 +399,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       if (percent !== null) {
         const bar = node('div', 'home-progress'), fill = node('span');
         fill.style.width = percent + '%'; bar.append(fill);
-        wrap.append(bar, node('small', '', tr('{done} of {total} messages', {done: d.captured.toLocaleString(document.documentElement.lang||undefined), total: d.total.toLocaleString(document.documentElement.lang||undefined)})
+        wrap.append(bar, node('small', '', exportStep(d)
           + (d.eta_seconds ? ' · ' + tr('about {minutes} min left', {minutes: Math.max(1, Math.round(d.eta_seconds / 60))}) : '')));
       }
     }

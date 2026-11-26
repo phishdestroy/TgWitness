@@ -413,6 +413,11 @@ def request_method(request):
     return {"method": names[-1], "wrappers": names[:-1]}
 
 
+def pace_name(request):
+    info = request_method(request)
+    return ("invokeWithTakeout/" if "invokeWithTakeout" in info["wrappers"] else "") + info["method"]
+
+
 class WitnessClient(TelegramClient):
 
     def __init__(self, *args, **kwargs):
@@ -578,7 +583,7 @@ class WitnessClient(TelegramClient):
             return
         for item in items:
             if bulk_request(item):
-                await pacer.before(request_method(item)["method"])
+                await pacer.before(pace_name(item))
 
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
         if utils.is_list_like(request):
@@ -644,7 +649,7 @@ class WitnessClient(TelegramClient):
         try:
             result = await super()._call(sender, request, ordered, flood_sleep_threshold)
             if paced:
-                pacer.success(info["method"])
+                pacer.success(pace_name(request))
             counts["ok"] += 1
             if (isinstance(result, _OWN_UPDATES) or getattr(result, "SUBCLASS_OF_ID", None) == types.Updates.SUBCLASS_OF_ID) \
                     and (listener := getattr(self, "updates_listener", None)):
@@ -659,8 +664,8 @@ class WitnessClient(TelegramClient):
                 if isinstance(request, functions.updates.GetChannelDifferenceRequest) and hasattr(
                         box := getattr(self, "_message_box", None), "hold_poll"):
                     box.hold_poll(getattr(request.channel, "channel_id", None), exc.seconds)
-                if pacer is not None:
-                    pacer.flooded(exc.seconds, info["method"])
+                if paced:
+                    pacer.flooded(exc.seconds, pace_name(request))
                 counts["flood_waits"] += 1
                 if file_request(request):
                     getattr(self, "_flood_waited_requests", {}).pop(request.CONSTRUCTOR_ID, None)

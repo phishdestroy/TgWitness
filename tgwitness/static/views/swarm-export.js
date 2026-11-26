@@ -2,7 +2,7 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
 const FILES=[['','As set in each workspace'],['skip','Skip attachments (fastest)'],['hashes','Server hashes only'],['download','Download attachments']];
 const PRIORITY=[[0,'Urgent'],[1,'High'],[2,'Normal'],[3,'Low']];
 const TASKS={queued:'Waiting',running:'Exporting',done:'Ready',failed:'Failed',cancelled:'Cancelled'};
-const ACCOUNTS={free:'Free',busy:'Busy',waiting:'Telegram wait',unavailable:'Unavailable'};
+const ACCOUNTS={free:'Free',busy:'Busy',observing:'Observing',waiting:'Telegram wait',unavailable:'Unavailable'};
 const WAITING={telegram_wait:'Telegram asked the account to wait',account_busy:'The account became busy',moved_by_operator:'Moved by the operator'};
 const ACTIVE=new Set(['queued','running']);
 

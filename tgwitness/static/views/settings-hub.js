@@ -179,7 +179,7 @@ export function createSettingsHub(ctx) {
     const loadedSettings=await shared(who,'settings');
     if(draftVersion!==draftSequence){scheduleStatus();return;}
     data=loadedSettings;draft={...data.wizard};
-    if(openFirstRun&&location.href===initialRoute&&!draft.completed&&!draft.skipped)await navigate('first-run');
+    if(openFirstRun&&location.href===initialRoute&&!draft.completed&&!draft.skipped&&!state.status?.collector?.has_session)await navigate('first-run');
     requireOwner(who);
     scheduleStatus();
   }

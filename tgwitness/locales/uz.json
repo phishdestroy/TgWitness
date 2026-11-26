@@ -10998,5 +10998,14 @@
   "-{before} / +{after} messages": "-{before} / +{after} ta xabar",
   "Context before (messages)": "Oldingi kontekst (xabarlar)",
   "Context after (messages)": "Keyingi kontekst (xabarlar)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Suhbat kontekstini saqlash uchun har bir mos yozuv atrofidagi qo'shni xabarlarni qo'shing (har tomondan 0 dan 50 tagacha xabar)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Suhbat kontekstini saqlash uchun har bir mos yozuv atrofidagi qo'shni xabarlarni qo'shing (har tomondan 0 dan 50 tagacha xabar).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Telegram tarix roʻyxati eskiroq xabarlar mavjud boʻlsa ham toʻxtadi: uning eng eski xabari ostidagi raqamlar raqam boʻyicha soʻralganda xabar qaytardi; ular kiritilgan va found_on_recheck bilan belgilangan (recheck.edge_found). Tekshirilgan raqamlardan eskiroq tarix boʻlishi mumkin va u oʻqilmagan.",
+  "The account is still connecting to Telegram. Try again in a minute.": "Hisob hali Telegramga ulanmoqda. Bir daqiqadan so‘ng qayta urinib ko‘ring.",
+  "Another transfer is not finished. Resume or cancel it first.": "Boshqa ko‘chirish tugallanmagan. Avval uni davom ettiring yoki bekor qiling.",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram bu chatda Takeout orqali oddiy so‘rovlarga qaraganda kamroq xabar ko‘rsatadi. Bu ba’zi platformalarda cheklangan chatlarda yuz beradi. Tarix Takeoutsiz o‘qiladi.",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram bu chatni ba’zi platformalarda cheklaydi va Takeout orqali uning tarixini qaytarmaydi. Uni Takeoutsiz eksport qiling.",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram bu chatlarni ba’zi platformalarda cheklaydi va Takeout orqali ularning tarixini qaytarmaydi, shuning uchun tarix Takeoutsiz o‘qiladi.",
+  "Read without Takeout": "Takeoutsiz o‘qildi",
+  "under a spoiler": "spoyler ostida",
+  "files: {done} of {total}": "fayllar: {done}/{total}"
 }

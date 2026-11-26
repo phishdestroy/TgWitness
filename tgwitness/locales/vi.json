@@ -10947,5 +10947,14 @@
   "-{before} / +{after} messages": "-{before} / +{after} tin nhắn",
   "Context before (messages)": "Ngữ cảnh trước (tin nhắn)",
   "Context after (messages)": "Ngữ cảnh sau (tin nhắn)",
-  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Bao gồm các tin nhắn lân cận quanh mỗi bản ghi khớp để giữ ngữ cảnh hội thoại (0 đến 50 tin nhắn mỗi phía)."
+  "Include neighboring messages around each matching record to preserve conversation context (0 to 50 messages on each side).": "Bao gồm các tin nhắn lân cận quanh mỗi bản ghi khớp để giữ ngữ cảnh hội thoại (0 đến 50 tin nhắn mỗi phía).",
+  "Telegram's history listing stopped while older messages still existed: numbers just below its oldest message returned messages when requested by number; those are included and marked found_on_recheck (recheck.edge_found). History older than the checked numbers may exist and was not read.": "Danh sách lịch sử của Telegram dừng lại dù vẫn còn tin nhắn cũ hơn: các số ngay dưới tin nhắn cũ nhất của danh sách đã trả về tin nhắn khi yêu cầu theo số; chúng được đưa vào và đánh dấu found_on_recheck (recheck.edge_found). Có thể còn lịch sử cũ hơn các số đã kiểm tra và chưa được đọc.",
+  "The account is still connecting to Telegram. Try again in a minute.": "Tài khoản vẫn đang kết nối với Telegram. Hãy thử lại sau một phút.",
+  "Another transfer is not finished. Resume or cancel it first.": "Một lần chuyển khác chưa hoàn tất. Hãy tiếp tục hoặc hủy nó trước.",
+  "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram báo cáo ít tin nhắn trong cuộc trò chuyện này qua Takeout hơn so với yêu cầu thông thường. Điều này xảy ra với các cuộc trò chuyện bị hạn chế trên một số nền tảng. Lịch sử được đọc mà không dùng Takeout.",
+  "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram hạn chế cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout. Hãy xuất mà không dùng Takeout.",
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram hạn chế các cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout, nên lịch sử được đọc mà không dùng Takeout.",
+  "Read without Takeout": "Đã đọc không dùng Takeout",
+  "under a spoiler": "ẩn dưới lớp spoiler",
+  "files: {done} of {total}": "tệp: {done} trên {total}"
 }

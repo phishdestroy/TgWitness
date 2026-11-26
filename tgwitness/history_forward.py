@@ -16,6 +16,8 @@ from .telegram_client import FLOOD_ERRORS
 JOB = 'history_forward.job'
 PLAN = 'history_forward.plan'
 BUSY = 'This account is busy. Pause its current task before another Telegram operation.'
+CONNECTING = 'The account is still connecting to Telegram. Try again in a minute.'
+UNFINISHED = 'Another transfer is not finished. Resume or cancel it first.'
 UNCERTAIN_CREATE = 'Creation outcome unknown. Check Telegram before starting another transfer.'
 UNCERTAIN_SEND = 'Message outcome unknown. Review the destination before resuming.'
 PROTECTED = 'Forwarding is restricted in this chat.'
@@ -27,8 +29,15 @@ ITEM_ERRORS = {'MessageIdInvalidError', 'MsgIdInvalidError', 'MediaEmptyError', 
 def estimate(count, seconds, hourly):
     if not isinstance(count, int) or count <= 0:
         return None
-    each = max(seconds or 0, 3600 / hourly if hourly else 0)
-    return round(count * each)
+    gap = seconds or 0
+    if not hourly or hourly * gap >= 3600:
+        return round((count - 1) * gap)
+    hours, rest = divmod(count - 1, hourly)
+    return round(hours * 3600 + rest * gap)
+
+
+def busy(collector):
+    return CONNECTING if collector.observation_starting or collector.connection_change_task is not None else BUSY
 
 
 class ForwardPlan(BaseModel):
@@ -122,7 +131,7 @@ class HistoryForward:
         interactions.permitted(self.collector)
         owner = 'forward-preview:' + secrets.token_hex(16)
         if not self.collector.reserve_export(owner):
-            raise ValueError(BUSY)
+            raise ValueError(busy(self.collector))
         try:
             await self.collector.restore()
             account = self.account()
@@ -152,7 +161,7 @@ class HistoryForward:
                 raise ValueError('This request ID belongs to another action.')
             return self.status()
         if self.job and self.job['state'] not in TERMINAL:
-            raise ValueError(BUSY)
+            raise ValueError(UNFINISHED)
         plan = self.store.get_setting(PLAN, None)
         if not plan or plan['id'] != body.plan_id or plan['expires_at'] < time.time() or plan['account_id'] != self.account():
             raise ValueError('This preview expired. Preview the transfer again.')
@@ -161,7 +170,7 @@ class HistoryForward:
         authorized()
         interactions.permitted(self.collector)
         if not self.collector.reserve_export('forward:' + body.request_id):
-            raise ValueError(BUSY)
+            raise ValueError(busy(self.collector))
         try:
             self.job = {**plan, 'id': body.request_id, 'request': body.model_dump(), 'cursor': 0,
                 'state': 'running', 'forwarded': 0, 'skipped': 0, 'pending': {}, 'creating': False,
@@ -200,7 +209,7 @@ class HistoryForward:
             if self.account() != self.job['account_id']:
                 raise ValueError('The Telegram account changed. Start a new transfer.')
             if not self.collector.reserve_export('forward:' + self.job['id']):
-                raise ValueError(BUSY)
+                raise ValueError(busy(self.collector))
             owner = 'forward:' + self.job['id']
             try:
                 self.job.update(state='running', error=None)

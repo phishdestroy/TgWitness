@@ -745,6 +745,7 @@ def register(app, ctx):
         routes_export.preview_report
     )
     ctx.chat_export_owners = {}
+    ctx.kept_chat_exports = {}
     router.get("/api/chat-export/{export_id}", dependencies=[Depends(authenticate)])(
         routes_export.chat_export_poll
     )

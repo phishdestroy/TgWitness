@@ -6,9 +6,29 @@ import os
 import platform
 import shutil
 import socket
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+
+def port_holder(root, port):
+    from .security import instance_holder
+    holder = instance_holder(root)
+    if holder is None:
+        return "fail", "Use a local IP and available port; a running instance may already own it."
+    try:
+        from .panelctl import listening_pid
+        listener = listening_pid(port)
+    except (OSError, ValueError, subprocess.SubprocessError):
+        listener = None
+    if holder and listener == holder:
+        return "pass", "The panel of this data directory (process " + str(holder) + ") holds the port"
+    if holder and listener:
+        return "fail", ("Process " + str(listener) + " holds the port, not the panel of this data directory (process "
+                        + str(holder) + "). Choose another port; nothing was stopped.")
+    return "warning", ("The port is in use and this data directory is open in a running process; "
+                       "the check could not confirm that this panel holds the port.")
 
 
 def inspect_environment(root, host="127.0.0.1", port=8787):
@@ -62,31 +82,21 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
                 "at startup where the file system allows; keep it on NTFS or a Unix file system.")
     except OSError as exc:
         add("storage", "fail", "Data path is not writable: " + type(exc).__name__)
+    import ipaddress
     try:
         if not 1 <= port <= 65535:
             raise ValueError()
-
-        import ipaddress
-        if host == "localhost":
-            host = "127.0.0.1"
-        address = ipaddress.ip_address(host)
-        with socket.socket(socket.AF_INET6 if address.version == 6 else socket.AF_INET) as probe:
-            probe.bind((host, port))
-        add("listen_address", "pass", "Address and port available at check time")
-    except (OSError, ValueError):
-        running = False
-        if root.exists():
-            from .security import InstanceLock
-            try:
-                InstanceLock(root).close()
-            except RuntimeError:
-                running = True
-            except OSError:
-                pass
-        if running:
-            add("listen_address", "pass", "The panel of this data directory is running and holds the port")
-        else:
-            add("listen_address", "fail", "Use a local IP and available port; a running instance may already own it.")
+        address = ipaddress.ip_address("127.0.0.1" if host == "localhost" else host)
+    except ValueError:
+        address = None
+        add("listen_address", "fail", "Use a local IP address and a port from 1 to 65535.")
+    if address is not None:
+        try:
+            with socket.socket(socket.AF_INET6 if address.version == 6 else socket.AF_INET) as probe:
+                probe.bind((str(address), port))
+            add("listen_address", "pass", "Address and port available at check time")
+        except OSError:
+            add("listen_address", *port_holder(root, port))
 
     external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
     keyring_env = os.environ.get("TGWITNESS_VAULT_KEYRING", "").strip()
