@@ -11015,5 +11015,6 @@
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram informa de menos mensajes en este chat a través de Takeout que con solicitudes normales. Lo hace con chats que restringe en algunas plataformas. El historial se lee sin Takeout.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram restringe este chat en algunas plataformas y no devuelve su historial a través de Takeout. Expórtalo sin Takeout.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram restringe estos chats en algunas plataformas y no devuelve su historial a través de Takeout, así que su historial se lee sin Takeout.",
-  "Read without Takeout": "Leídos sin Takeout"
+  "Read without Takeout": "Leídos sin Takeout",
+  "under a spoiler": "oculto como spoiler"
 }

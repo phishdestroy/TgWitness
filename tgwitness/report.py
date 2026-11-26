@@ -1835,7 +1835,8 @@ def media_text(say, info):
     return " · ".join(isolated(say, x) for x in (info.get("sticker_emoji"), content_text(say, info), info.get("file_name"),
                                                  info.get("mime_type"), size_text(info["size"]) if type(info.get("size")) is int else "",
                                                  size, say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
-                                                 info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
+                                                 info.get("url"), ephemeral.label(say, info.get("ephemeral_media")),
+                                                 say("under a spoiler") if info.get("spoiler") is True else "") if x)
 
 
 def secret_record_lines(say, payload):

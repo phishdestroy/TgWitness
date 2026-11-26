@@ -11107,5 +11107,6 @@
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Через Takeout Telegram повідомляє про меншу кількість повідомлень у цьому чаті, ніж за звичайних запитів. Так буває з чатами, які він обмежує на деяких платформах. Історія читається без Takeout.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram обмежує цей чат на деяких платформах і не повертає його історію через Takeout. Вивантажте його без Takeout.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram обмежує ці чати на деяких платформах і не повертає їхню історію через Takeout, тому їхня історія читається без Takeout.",
-  "Read without Takeout": "Прочитані без Takeout"
+  "Read without Takeout": "Прочитані без Takeout",
+  "under a spoiler": "під спойлером"
 }

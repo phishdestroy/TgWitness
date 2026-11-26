@@ -10954,5 +10954,6 @@
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram รายงานจำนวนข้อความในแชทนี้ผ่าน Takeout น้อยกว่าคำขอปกติ ซึ่งเกิดกับแชทที่ถูกจำกัดในบางแพลตฟอร์ม ประวัติจะถูกอ่านโดยไม่ใช้ Takeout",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram จำกัดแชทนี้ในบางแพลตฟอร์มและไม่ส่งประวัติผ่าน Takeout โปรดส่งออกโดยไม่ใช้ Takeout",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram จำกัดแชทเหล่านี้ในบางแพลตฟอร์มและไม่ส่งประวัติผ่าน Takeout จึงอ่านประวัติโดยไม่ใช้ Takeout",
-  "Read without Takeout": "อ่านโดยไม่ใช้ Takeout"
+  "Read without Takeout": "อ่านโดยไม่ใช้ Takeout",
+  "under a spoiler": "ซ่อนเป็นสปอยเลอร์"
 }
