@@ -6,6 +6,7 @@ import time
 from telethon import errors, functions, types, utils
 
 from . import interactions, report
+from .account_export_transport import restrictions
 from .disk_space import disk_check
 from .distributed_export import CHUNK, RECHECK_EDGE, RECHECK_PER_ACCOUNT
 from .scope import kind_of, public_username
@@ -102,6 +103,7 @@ async def read_facts(c, target, allowed):
     visible = getattr(latest, "total", None)
     return {"chat_id": chat_id, "title": utils.get_display_name(entity), "kind": kind,
             "username": public_username(entity), "readable": True, "last_id": last,
+            "forum": bool(getattr(entity, "forum", False)), "restricted": restrictions(entity),
             "visible": visible if type(visible) is int else None,
             "missing": max(0, last - visible) if type(visible) is int else None, **facts}
 
@@ -174,7 +176,7 @@ async def plan(registry, exports, link, allowed):
                                      row["label"]))
     measured = measured_rates(exports, allowed)
     rates = {**DEFAULT_RATES, **measured}
-    takeout = facts["kind"] in ("channel", "supergroup") and bool(facts.get("username"))
+    takeout = facts["kind"] in ("channel", "supergroup") and bool(facts.get("username")) and not facts.get("restricted")
     numbered = chat_id < -1000000000000
     visible = facts["visible"] if facts["visible"] is not None else facts["last_id"]
     largest = max(len(usable), AUTO_ACCOUNTS) if not basic else 1

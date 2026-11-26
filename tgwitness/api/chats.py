@@ -494,6 +494,7 @@ async def chats(request: Request, *, ctx=Depends(current_context)):
             chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),
                         intake_error_type=retry["error_type"], intake_error_seq=retry["error_seq"])
         entity = collector.dialog_cache.get(chat_id, {}).get("entity")
+        chat["forum"] = bool(getattr(entity, "forum", False))
         chat["telegram_restrictions"] = [
             {"platform": item.platform, "reason": item.reason, "text": item.text}
             for item in getattr(entity, "restriction_reason", None) or []

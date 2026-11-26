@@ -7132,10 +7132,11 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   const box=$("chat-link-preview"),open=node("button","primary",tr(request?"Send join request":"Join / open"));open.type="button";
   box.append(node("strong","",preview.title),node("code","target",preview.link));
   if(preview.about)box.append(node("p","",preview.about));
-  const facts=[preview.participants_count!=null?tr("Members")+": "+preview.participants_count:"",
+  const facts=[preview.forum?tr("Forum topics"):"",preview.participants_count!=null?tr("Members")+": "+preview.participants_count:"",
     preview.history_visible===true?tr("New members see earlier messages"):
     preview.history_visible===false?tr("New members do not see earlier messages"):""].filter(Boolean);
   if(facts.length)box.append(node("p","hint",facts.join(" · ")));
+  if(preview.telegram_restrictions?.length)box.append(node("p","hint",tr("Restricted")+": "+preview.telegram_restrictions.map(item=>[item.platform,item.text||item.reason].filter(Boolean).join(": ")).join("; ")));
   if(request)box.append(node("p","hint",tr("Joining needs administrator approval: Telegram sends a join request.")));
   if(preview.already_member)box.append(node("p","hint",tr("This account is already a member of the chat.")));
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
@@ -7497,6 +7498,7 @@ function renderLinkPlan(){
     tr("last message number {n}",{n:p.last_id.toLocaleString(LANG)})];
   if(p.visible!==null)facts.push(tr("{n} visible messages",{n:p.visible.toLocaleString(LANG)}));
   if(p.participants_count)facts.push(tr("{n} members",{n:p.participants_count.toLocaleString(LANG)}));
+  if(p.forum)facts.push(tr("Forum topics"));
   head.append(node("span","hint",facts.join(" · ")));
   if(p.missing)box.append(node("p","hint",document.documentElement.dataset.uiLevel==="simple"?tr("Unavailable messages (deleted or hidden): {n}",{n:p.missing.toLocaleString(LANG)}):
     tr("Difference between last message number and visible count: {n}. This is a planning estimate.",{n:p.missing.toLocaleString(LANG)})));
