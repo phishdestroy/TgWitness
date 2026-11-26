@@ -208,7 +208,9 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   function message(row){
     if(!row)return make('span',tr('Not available'));
     const block=make('div','','report-preview-message');
-    block.append(make('small','#'+row.seq+' · '+tr('Message {id}',{id:row.message_id??'—'})+' · '+String(row.observed_at||'')),make('p',mask(row.text)));
+    block.append(make('small','#'+row.seq+' · '+tr('Message {id}',{id:row.message_id??'—'})+' · '+String(row.observed_at||'')));
+    if(row.context_only)block.append(make('span',tr('Context message'),'report-change-context'));
+    block.append(make('p',mask(row.text)));
     return block;
   }
   function changeVersion(row,label){
