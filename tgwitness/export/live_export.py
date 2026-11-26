@@ -186,6 +186,15 @@ class LiveExport:
         elif len(self.lines) >= PAGE_MESSAGES or self.bytes >= PAGE_BYTES:
             self.wake.set()
 
+    def behind(self):
+        return (len(self.lines) >= BACKLOG_PAGES // 2 * PAGE_MESSAGES
+                or self.bytes >= BACKLOG_PAGES // 2 * PAGE_BYTES)
+
+    async def drain(self):
+        while self.behind() and not self.error and self.task is not None and not self.task.done():
+            self.wake.set()
+            await asyncio.sleep(0.05)
+
     def due(self):
         return bool(self.lines) and (self.closing or len(self.lines) >= PAGE_MESSAGES or self.bytes >= PAGE_BYTES
                                      or time.monotonic() - self.page_started >= PAGE_SECONDS)

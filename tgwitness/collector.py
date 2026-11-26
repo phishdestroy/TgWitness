@@ -5135,6 +5135,8 @@ class Collector:
                         merge_history(scratch, found)
                         for entry in found if live else ():
                             live.add(json.dumps(entry, ensure_ascii=False) + "\n")
+                            if live.behind():
+                                await live.drain()
                     count += len(missed)
             if live:
                 await live.close("complete")
@@ -5535,6 +5537,8 @@ class Collector:
                 handle.write(line)
                 if live:
                     live.add(line)
+                    if live.behind():
+                        await live.drain()
                 count += 1
                 record["captured"] = count
                 if count % 100 == 0:
