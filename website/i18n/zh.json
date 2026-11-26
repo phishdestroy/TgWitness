@@ -8563,7 +8563,8 @@
   "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "当 ASiC-E 容器中的 META-INF 目录包含未在清单中列出的条目（例如 verify.py 以及报告中的归档文件检查）时，位于 /verify 路径下的浏览器验证器会变为红色。",
   "4daffb62b322cee985f0d403a45d2c6c1373b4c02523c6e35016ea9f9f66ebdd": "PDF 报告中会显示 Telegram 用户名中常见的样式化字母（如 𝐍𝐚𝐦𝐞 或 🅻），以及奥加姆文字、方框和箭头符号。这些内容通过内置的 Noto Sans Math、Noto Sans Symbols 和 Noto Sans Ogham 字体进行呈现，而非通过注释将其省略。",
   "5e23782bed9e0dde03443e3f39ee208f4290f2c2040a5d9b7cc0f924e8596a70": "媒体分析：本地版Whisper除非 <code>TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1</code> 允许通过直连路径下载一次。本地版Whisper接受一个模型文件夹，其中 <code>model.bin</code>，在子进程中运行，该进程会在时间限制到期时停止，并将超过30分钟的聊天记录标记为截断。 启动、取消和重试识别功能需要导出权限。秘密聊天中的媒体文件将根据其检测到的类型在沙盒中处理，且支持识别 WebM、WAV、FLAC、AVIF、HEIC 以及多种 MP4 变体。",
-  "f73aae7c8a824a1366ca29c1adf8a6d6ffd31f2f321eac9abb16eeba702bfebd": "Telegram 聊天列表中的搜索结果会显示完整的聊天名称、类型、论坛主题、用户名、成员数量以及SCAM或FAKE标记，并在其下方显示“加入”按钮，而不是像以前那样仅在宽大的按钮旁显示名称的一个字母。"
+  "f73aae7c8a824a1366ca29c1adf8a6d6ffd31f2f321eac9abb16eeba702bfebd": "Telegram 聊天列表中的搜索结果会显示完整的聊天名称、类型、论坛主题、用户名、成员数量以及SCAM或FAKE标记，并在其下方显示“加入”按钮，而不是像以前那样仅在宽大的按钮旁显示名称的一个字母。",
+  "067f01525409e1029961f54186841f6eed04f0f17cbf03db5c617520b8bfbc32": "Telegram 有时会以旧版 API（第 222 层）的格式发送用户和频道信息，TgWitness 现已支持读取此类数据。此前，Telethon 会跳过所有包含此类用户或频道的实时更新批次。如果某个频道的遗漏更新中包含此类用户或频道，Telethon 也会断开该账户的连接，直到 TgWitness 重新连接为止。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
