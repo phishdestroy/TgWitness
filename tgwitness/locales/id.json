@@ -10988,5 +10988,10 @@
   "chat description": "deskripsi obrolan",
   "attachment": "lampiran",
   "no checksum": "tanpa checksum",
-  "checksum not checked": "checksum tidak diperiksa"
+  "checksum not checked": "checksum tidak diperiksa",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Model Whisper lokal belum terpasang. Salin folder model faster-whisper yang berisi model.bin ke server ini dan arahkan TGWITNESS_WHISPER_MODEL_DIR ke folder itu. Unduhan dimatikan; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 hanya mengizinkan satu unduhan saat permintaan di luar Telegram memakai rute langsung.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "Transkripsi Whisper lokal gagal. Periksa format berkas dan model lokal.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Mode interaktif memerlukan sesi desktop, dan sistem ini tidak punya layar: DISPLAY maupun WAYLAND_DISPLAY tidak diatur. Pilih mode pasif atau penjelajahan aman.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Terlalu banyak aplikasi mini yang sedang direkam sekaligus. Tunggu salah satunya selesai, lalu coba lagi.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Juga menampilkan {n} catatan konteks di sekitarnya, ditandai sebagai konteks dan tidak dihitung di sini."
 }

@@ -11126,5 +11126,10 @@
   "chat description": "описание чата",
   "attachment": "вложение",
   "no checksum": "без контрольной суммы",
-  "checksum not checked": "контрольная сумма не проверялась"
+  "checksum not checked": "контрольная сумма не проверялась",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Локальная модель Whisper не установлена. Скопируйте на этот сервер папку модели faster-whisper с model.bin и укажите её в TGWITNESS_WHISPER_MODEL_DIR. Загрузки выключены; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 разрешает загрузку, только когда запросы вне Telegram идут напрямую.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "Локальная расшифровка Whisper не удалась. Проверьте формат файла и локальную модель.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Интерактивному режиму нужен рабочий стол, а у этой системы нет дисплея: не задан ни DISPLAY, ни WAYLAND_DISPLAY. Выберите пассивный режим или безопасный обход.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Сейчас записывается слишком много мини-приложений. Дождитесь окончания одной записи и повторите.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Также показано соседних записей контекста: {n}; они помечены как контекст и здесь не учитываются."
 }

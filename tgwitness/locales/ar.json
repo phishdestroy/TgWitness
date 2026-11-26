@@ -11243,5 +11243,10 @@
   "chat description": "وصف الدردشة",
   "attachment": "مرفق",
   "no checksum": "بلا مجموع تحقق",
-  "checksum not checked": "لم يُفحص مجموع التحقق"
+  "checksum not checked": "لم يُفحص مجموع التحقق",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "نموذج Whisper المحلي غير مثبّت. انسخ مجلد نموذج faster-whisper يحتوي على model.bin إلى هذا الخادم واضبط TGWITNESS_WHISPER_MODEL_DIR عليه. التنزيلات معطّلة؛ يسمح TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 بتنزيل واحد فقط عندما تستخدم الطلبات خارج Telegram مسارًا مباشرًا.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "فشل النسخ المحلي باستخدام Whisper. تحقّق من صيغة الملف ومن النموذج المحلي.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "يحتاج الوضع التفاعلي إلى جلسة سطح مكتب، وهذا النظام بلا شاشة: لم يُضبط DISPLAY ولا WAYLAND_DISPLAY. اختر الوضع السلبي أو الاستكشاف الآمن.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "يُسجَّل عدد كبير جدًا من التطبيقات المصغّرة في الوقت نفسه. انتظر حتى ينتهي أحدها ثم أعد المحاولة.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "ويعرض أيضًا {n} من سجلات السياق المجاورة، مُعلَّمة بوصفها سياقًا وغير محسوبة هنا."
 }

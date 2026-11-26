@@ -10988,5 +10988,10 @@
   "chat description": "聊天简介",
   "attachment": "附件",
   "no checksum": "无校验和",
-  "checksum not checked": "未检查校验和"
+  "checksum not checked": "未检查校验和",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "未安装本地 Whisper 模型。请将包含 model.bin 的 faster-whisper 模型文件夹复制到此服务器，并将 TGWITNESS_WHISPER_MODEL_DIR 指向它。下载已关闭；仅当 Telegram 之外的请求使用直连路由时，TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 才允许下载一次。",
+  "Local Whisper transcription failed. Check the file format and the local model.": "本地 Whisper 转写失败。请检查文件格式和本地模型。",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "交互模式需要桌面会话，但此系统没有显示器：DISPLAY 和 WAYLAND_DISPLAY 都未设置。请选择被动模式或安全浏览。",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "同时录制的小程序过多。请等待其中一个完成后再试。",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "还显示了 {n} 条相邻的上下文记录，它们标记为上下文，不计入此处。"
 }

@@ -11039,5 +11039,10 @@
   "chat description": "চ্যাটের বিবরণ",
   "attachment": "সংযুক্তি",
   "no checksum": "কোনো চেকসাম নেই",
-  "checksum not checked": "চেকসাম যাচাই করা হয়নি"
+  "checksum not checked": "চেকসাম যাচাই করা হয়নি",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "স্থানীয় Whisper মডেল ইনস্টল করা নেই। model.bin সহ একটি faster-whisper মডেল ফোল্ডার এই সার্ভারে কপি করুন এবং TGWITNESS_WHISPER_MODEL_DIR সেটিতে নির্দেশ করুন। ডাউনলোড বন্ধ; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 কেবল তখনই একটি ডাউনলোডের অনুমতি দেয় যখন Telegram-এর বাইরের অনুরোধ সরাসরি পথে যায়।",
+  "Local Whisper transcription failed. Check the file format and the local model.": "স্থানীয় Whisper ট্রান্সক্রিপশন ব্যর্থ হয়েছে। ফাইলের ফরম্যাট ও স্থানীয় মডেল যাচাই করুন।",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "ইন্টারঅ্যাক্টিভ মোডের জন্য ডেস্কটপ সেশন দরকার, কিন্তু এই সিস্টেমে কোনো ডিসপ্লে নেই: DISPLAY বা WAYLAND_DISPLAY কোনোটিই সেট করা নেই। প্যাসিভ মোড বা নিরাপদ ক্রল বেছে নিন।",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "একসঙ্গে অনেক বেশি মিনি অ্যাপ রেকর্ড হচ্ছে। একটি শেষ হওয়া পর্যন্ত অপেক্ষা করে আবার চেষ্টা করুন।",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "এটি {n}টি পাশের প্রসঙ্গ রেকর্ডও দেখায়, যেগুলো প্রসঙ্গ হিসেবে চিহ্নিত এবং এখানে গোনা হয়নি।"
 }

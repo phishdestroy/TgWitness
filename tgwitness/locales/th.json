@@ -10988,5 +10988,10 @@
   "chat description": "คำอธิบายแชท",
   "attachment": "ไฟล์แนบ",
   "no checksum": "ไม่มีเช็กซัม",
-  "checksum not checked": "ยังไม่ได้ตรวจเช็กซัม"
+  "checksum not checked": "ยังไม่ได้ตรวจเช็กซัม",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "ยังไม่ได้ติดตั้งโมเดล Whisper ในเครื่อง คัดลอกโฟลเดอร์โมเดล faster-whisper ที่มี model.bin มายังเซิร์ฟเวอร์นี้ แล้วตั้ง TGWITNESS_WHISPER_MODEL_DIR ให้ชี้ไปที่โฟลเดอร์นั้น การดาวน์โหลดปิดอยู่ TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 อนุญาตให้ดาวน์โหลดได้หนึ่งครั้งเฉพาะเมื่อคำขอนอก Telegram ใช้เส้นทางตรง",
+  "Local Whisper transcription failed. Check the file format and the local model.": "การถอดเสียงด้วย Whisper ในเครื่องล้มเหลว ตรวจสอบรูปแบบไฟล์และโมเดลในเครื่อง",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "โหมดโต้ตอบต้องใช้เซสชันเดสก์ท็อป แต่ระบบนี้ไม่มีจอแสดงผล: ไม่ได้ตั้งค่าทั้ง DISPLAY และ WAYLAND_DISPLAY เลือกโหมดพาสซีฟหรือการสำรวจแบบปลอดภัย",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "กำลังบันทึกมินิแอปพร้อมกันมากเกินไป รอให้รายการหนึ่งเสร็จก่อนแล้วลองอีกครั้ง",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "แสดงระเบียนบริบทที่อยู่ใกล้เคียงอีก {n} รายการ ซึ่งทำเครื่องหมายเป็นบริบทและไม่นับรวมที่นี่"
 }

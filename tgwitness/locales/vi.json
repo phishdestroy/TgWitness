@@ -10988,5 +10988,10 @@
   "chat description": "mô tả cuộc trò chuyện",
   "attachment": "tệp đính kèm",
   "no checksum": "không có tổng kiểm tra",
-  "checksum not checked": "chưa kiểm tra tổng kiểm tra"
+  "checksum not checked": "chưa kiểm tra tổng kiểm tra",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Mô hình Whisper cục bộ chưa được cài đặt. Hãy sao chép thư mục mô hình faster-whisper có model.bin vào máy chủ này và đặt TGWITNESS_WHISPER_MODEL_DIR trỏ tới thư mục đó. Tải xuống đang tắt; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 chỉ cho phép một lần tải khi các yêu cầu ngoài Telegram đi qua tuyến trực tiếp.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "Phiên âm Whisper cục bộ thất bại. Hãy kiểm tra định dạng tệp và mô hình cục bộ.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Chế độ tương tác cần một phiên màn hình nền, nhưng hệ thống này không có màn hình: chưa đặt DISPLAY hay WAYLAND_DISPLAY. Hãy chọn chế độ thụ động hoặc duyệt an toàn.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Đang ghi quá nhiều ứng dụng mini cùng lúc. Hãy đợi một ứng dụng hoàn tất rồi thử lại.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Cũng hiển thị {n} bản ghi ngữ cảnh lân cận, được đánh dấu là ngữ cảnh và không tính ở đây."
 }

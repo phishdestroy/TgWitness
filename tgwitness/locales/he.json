@@ -11090,5 +11090,10 @@
   "chat description": "תיאור הצ׳אט",
   "attachment": "קובץ מצורף",
   "no checksum": "ללא סכום ביקורת",
-  "checksum not checked": "סכום הביקורת לא נבדק"
+  "checksum not checked": "סכום הביקורת לא נבדק",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "מודל Whisper המקומי אינו מותקן. העתיקו לשרת זה תיקיית מודל של faster-whisper עם model.bin והגדירו אליה את TGWITNESS_WHISPER_MODEL_DIR. ההורדות כבויות; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 מתיר הורדה אחת רק כשבקשות מחוץ ל-Telegram עוברות בנתיב ישיר.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "התמלול המקומי ב-Whisper נכשל. בדקו את תבנית הקובץ ואת המודל המקומי.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "מצב אינטראקטיבי דורש הפעלת שולחן עבודה, ולמערכת זו אין תצוגה: לא מוגדרים DISPLAY וגם לא WAYLAND_DISPLAY. בחרו מצב פסיבי או סריקה בטוחה.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "מוקלטות כרגע יותר מדי מיני-אפליקציות בבת אחת. המתינו שאחת תסתיים ונסו שוב.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "מוצגות גם {n} רשומות הקשר סמוכות, המסומנות כהקשר ואינן נספרות כאן."
 }

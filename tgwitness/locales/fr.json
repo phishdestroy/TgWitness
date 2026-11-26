@@ -11049,5 +11049,10 @@
   "chat description": "description du chat",
   "attachment": "pièce jointe",
   "no checksum": "pas de somme de contrôle",
-  "checksum not checked": "somme de contrôle non vérifiée"
+  "checksum not checked": "somme de contrôle non vérifiée",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Le modèle Whisper local n’est pas installé. Copiez sur ce serveur un dossier de modèle faster-whisper contenant model.bin et indiquez-le dans TGWITNESS_WHISPER_MODEL_DIR. Les téléchargements sont désactivés ; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 n’en autorise un que si les requêtes hors Telegram passent par une route directe.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "La transcription Whisper locale a échoué. Vérifiez le format du fichier et le modèle local.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Le mode interactif nécessite une session de bureau, et ce système n’a pas d’affichage : ni DISPLAY ni WAYLAND_DISPLAY n’est défini. Choisissez le mode passif ou le parcours sûr.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Trop de mini-applications sont enregistrées en même temps. Attendez qu’un enregistrement se termine, puis réessayez.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Il montre aussi {n} enregistrements de contexte voisins, marqués comme contexte et non comptés ici."
 }

@@ -10988,5 +10988,10 @@
   "chat description": "채팅 설명",
   "attachment": "첨부 파일",
   "no checksum": "체크섬 없음",
-  "checksum not checked": "체크섬 확인 안 함"
+  "checksum not checked": "체크섬 확인 안 함",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "로컬 Whisper 모델이 설치되어 있지 않습니다. model.bin이 들어 있는 faster-whisper 모델 폴더를 이 서버에 복사하고 TGWITNESS_WHISPER_MODEL_DIR을 그 폴더로 설정하세요. 다운로드는 꺼져 있으며, TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1은 Telegram 외부 요청이 직접 경로를 사용할 때만 한 번의 다운로드를 허용합니다.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "로컬 Whisper 전사에 실패했습니다. 파일 형식과 로컬 모델을 확인하세요.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "대화형 모드에는 데스크톱 세션이 필요하지만 이 시스템에는 디스플레이가 없습니다. DISPLAY와 WAYLAND_DISPLAY가 모두 설정되어 있지 않습니다. 수동 모드나 안전한 탐색을 선택하세요.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "동시에 기록 중인 미니 앱이 너무 많습니다. 하나가 끝날 때까지 기다린 후 다시 시도하세요.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "주변 맥락 기록 {n}개도 표시되며, 맥락으로 표시되고 여기에는 포함되지 않습니다."
 }

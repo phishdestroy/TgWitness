@@ -11039,5 +11039,10 @@
   "chat description": "sohbet açıklaması",
   "attachment": "ek",
   "no checksum": "sağlama toplamı yok",
-  "checksum not checked": "sağlama toplamı kontrol edilmedi"
+  "checksum not checked": "sağlama toplamı kontrol edilmedi",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Yerel Whisper modeli kurulu değil. model.bin içeren bir faster-whisper model klasörünü bu sunucuya kopyalayın ve TGWITNESS_WHISPER_MODEL_DIR değişkenini ona ayarlayın. İndirmeler kapalı; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 yalnızca Telegram dışı istekler doğrudan bir yol kullanırken bir indirmeye izin verir.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "Yerel Whisper dökümü başarısız oldu. Dosya biçimini ve yerel modeli kontrol edin.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Etkileşimli mod bir masaüstü oturumu gerektirir ve bu sistemin ekranı yok: ne DISPLAY ne de WAYLAND_DISPLAY ayarlı. Pasif modu veya güvenli taramayı seçin.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Aynı anda çok fazla mini uygulama kaydediliyor. Birinin bitmesini bekleyip yeniden deneyin.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Ayrıca bağlam olarak işaretlenmiş ve burada sayılmayan {n} komşu bağlam kaydını da gösterir."
 }

@@ -11039,5 +11039,10 @@
   "chat description": "chat tavsifi",
   "attachment": "ilova",
   "no checksum": "nazorat yig‘indisi yo‘q",
-  "checksum not checked": "nazorat yig‘indisi tekshirilmagan"
+  "checksum not checked": "nazorat yig‘indisi tekshirilmagan",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "Mahalliy Whisper modeli o‘rnatilmagan. model.bin bor faster-whisper model papkasini shu serverga nusxalang va TGWITNESS_WHISPER_MODEL_DIR ni unga sozlang. Yuklab olish o‘chirilgan; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 faqat Telegramdan tashqari so‘rovlar to‘g‘ridan-to‘g‘ri yo‘ldan borganda bitta yuklab olishga ruxsat beradi.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "Mahalliy Whisper transkripsiyasi bajarilmadi. Fayl formati va mahalliy modelni tekshiring.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "Interaktiv rejim uchun ish stoli seansi kerak, bu tizimda esa displey yo‘q: DISPLAY ham, WAYLAND_DISPLAY ham sozlanmagan. Passiv rejimni yoki xavfsiz aylanishni tanlang.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "Bir vaqtda juda ko‘p mini ilovalar yozib olinmoqda. Bittasi tugashini kuting va qayta urinib ko‘ring.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "Shuningdek, kontekst sifatida belgilangan va bu yerda hisoblanmaydigan {n} ta qo‘shni kontekst yozuvi ko‘rsatiladi."
 }

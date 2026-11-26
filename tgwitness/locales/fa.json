@@ -11039,5 +11039,10 @@
   "chat description": "توضیحات گفتگو",
   "attachment": "پیوست",
   "no checksum": "بدون جمع آزما",
-  "checksum not checked": "جمع آزما بررسی نشد"
+  "checksum not checked": "جمع آزما بررسی نشد",
+  "The local Whisper model is not installed. Copy a faster-whisper model folder with model.bin to this server and set TGWITNESS_WHISPER_MODEL_DIR to it. Downloads are off; TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 allows one only when requests outside Telegram use a direct route.": "مدل محلی Whisper نصب نشده است. پوشهٔ مدل faster-whisper دارای model.bin را به این سرور کپی کنید و TGWITNESS_WHISPER_MODEL_DIR را روی آن تنظیم کنید. بارگیری خاموش است؛ TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1 فقط وقتی اجازهٔ یک بارگیری می‌دهد که درخواست‌های بیرون از Telegram از مسیر مستقیم بروند.",
+  "Local Whisper transcription failed. Check the file format and the local model.": "رونویسی محلی Whisper ناموفق بود. قالب فایل و مدل محلی را بررسی کنید.",
+  "Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.": "حالت تعاملی به نشست دسکتاپ نیاز دارد و این سیستم نمایشگر ندارد: نه DISPLAY تنظیم شده و نه WAYLAND_DISPLAY. حالت غیرفعال یا پیمایش امن را انتخاب کنید.",
+  "Too many mini applications are being recorded at once. Wait for one to finish, then try again.": "هم‌اکنون تعداد زیادی مینی‌اپ در حال ضبط است. صبر کنید یکی تمام شود و دوباره تلاش کنید.",
+  "It also shows {n} neighboring context records, marked as context and not counted here.": "همچنین {n} رکورد زمینهٔ مجاور را نشان می‌دهد که با برچسب زمینه مشخص شده‌اند و اینجا شمرده نمی‌شوند."
 }
