@@ -52,7 +52,7 @@ export function createHistoryForward({json, tr, confirm, choose}) {
       ['Sent', job.forwarded + (job.message_count ? ' / ' + job.message_count : '')], ['Skipped', job.skipped],
       ...(active() && job.message_count && job.estimated_seconds ? [['Time left', duration(Math.max(0, job.estimated_seconds *
         (1 - (job.forwarded + job.skipped) / job.message_count)))]] : []),
-      ...(job.wait_until ? [['Resume', new Date(job.wait_until * 1000).toLocaleString()]] : [])]);
+      ...(job.state === 'waiting' && job.wait_until * 1000 > Date.now() ? [['Resume', new Date(job.wait_until * 1000).toLocaleString()]] : [])]);
     if (job.error) summary.append(make('p', tr(job.error), 'notice warning'));
     if (job.recent_skips?.length) {
       const skipped = make('details'), label = make('summary', tr('Skipped'));skipped.append(label);
