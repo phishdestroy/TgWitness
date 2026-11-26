@@ -350,6 +350,7 @@ async def search_telegram(collector, query):
                 member = not getattr(entity, "left", False) and not getattr(entity, "deactivated", False)
             results.append({"chat_id": chat_id, "title": utils.get_display_name(entity) or None,
                             "kind": kind_of(entity), "username": public_username(entity),
+                            "forum": bool(getattr(entity, "forum", False)),
                             "participants_count": getattr(entity, "participants_count", None),
                             "member": member, "verified": bool(getattr(entity, "verified", False)),
                             "scam": bool(getattr(entity, "scam", False)), "fake": bool(getattr(entity, "fake", False))})
