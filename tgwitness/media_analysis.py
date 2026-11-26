@@ -3,6 +3,7 @@ import hashlib
 import importlib.metadata
 import importlib.util
 import json
+import logging
 import os
 from pathlib import Path
 import re
@@ -19,6 +20,7 @@ from .access import Refused
 from .archive import ArchiveQuery
 from .store import utcnow
 
+LOG = logging.getLogger("tgwitness.media")
 MAX_FILE = 50 * 1024 * 1024
 MAX_SECONDS = 1800
 _WHISPER_MODELS = {}
@@ -151,6 +153,13 @@ def container_command(name, media, job):
     return command + [image, job.engine, job.language]
 
 
+async def tail(stream, limit):
+    kept = b""
+    while chunk := await stream.read(16384):
+        kept = (kept + chunk)[-limit:]
+    return kept
+
+
 async def bounded(stream, limit):
     chunks, total = [], 0
     while chunk := await stream.read(16384):
@@ -247,18 +256,22 @@ async def run_local_whisper(path, job, download=False):
     env = dict(os.environ)
     if not download:
         env.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
+    package_root = str(Path(__file__).resolve().parents[1])
+    env["PYTHONPATH"] = os.pathsep.join(filter(None, (package_root, env.get("PYTHONPATH"))))
     process = await asyncio.create_subprocess_exec(
-        sys.executable, "-I", "-m", "tgwitness.media_analysis", str(path), job.model_dump_json(),
+        sys.executable, "-P", "-m", "tgwitness.media_analysis", str(path), job.model_dump_json(),
         "download" if download else "offline", stdin=asyncio.subprocess.DEVNULL,
-        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL, env=env)
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, env=env, cwd=package_root)
     try:
         async with asyncio.timeout(300):
-            output = await bounded(process.stdout, 4 * 1024 * 1024)
+            output, errors = await asyncio.gather(bounded(process.stdout, 4 * 1024 * 1024), tail(process.stderr, 4096))
             code = await process.wait()
     finally:
         if process.returncode is None:
             process.kill()
             await process.wait()
+    if code not in (0, 3) and errors:
+        LOG.warning("Local Whisper worker exited with %s: %s", code, errors.decode("utf-8", "replace").strip()[-1000:])
     if code == 3:
         try:
             message = str(json.loads(output)["error"])[:300]
