@@ -2760,7 +2760,7 @@ class EvidenceHTML:
         self.account_text = account_label(account)
         self.numbers = iter(range(1, 100))
         links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
-        yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count - self.context_count, self.anchors,
+        yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count - self.context_count if self.context_count else self.shown_count, self.anchors,
                                                  self.coverage, self.account_text, self.handover, self.filtered,
                                                  self.context_count)).encode("utf-8")
         yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")

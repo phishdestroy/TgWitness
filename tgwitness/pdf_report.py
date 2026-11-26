@@ -1007,7 +1007,7 @@ class EvidencePDF:
 
     def render_brief(self):
         say = self.say
-        self.lay.brief(*report.evidence_brief(say, self.digest, self.records_total - self.context_count, self.data["timestamps"],
+        self.lay.brief(*report.evidence_brief(say, self.digest, self.records_total - self.context_count if self.context_count else self.records_total, self.data["timestamps"],
                                               self.coverage, self.account_text, self.handover, self.filtered,
                                               self.context_count))
 
