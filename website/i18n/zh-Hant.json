@@ -8509,7 +8509,8 @@
   "70723699db06744438123dd8753ca5827625dcdcf3cd586510b1be484523bc09": "金庫、備份與安裝：僅在金鑰儲存後才會寫入作業系統金鑰環標記，且在金鑰環中替換金鑰時，不再會先刪除舊金鑰。 在 TgWitness 運行期間建立的備份具有一致性並保留硬連結；將金庫金鑰移至外部檔案時，會分段重新加密金庫，而非將其保留在記憶體中， <code>tgwitness doctor --check</code> 不再為面板佔用另一個進程；已停止安裝所遺留的安裝程式鎖定狀態已恢復；且圖片編寫檔案會傳遞 <code>TGWITNESS_FULLTEXT</code> 傳遞至控制面板。",
   "a9e4fcc889a5bed1daa2436082dbe0abdcb8ed6abcc16bf9cbaff8513e4a5ce9": "驗證功能：擷取檔案的檢查會統計解壓縮後的位元組數並驗證檔案結構；使用 Keccak-256 的 OpenTimestamps 分支會被標記為「未檢查」，而非靜默跳過；即使 OpenSSL 已不再提供 RIPEMD-160，系統仍會計算該值；而互動式驗證會保持 <code>--range</code>。",
   "f2848231619d4634def1ac2e58bbc8c16b3ffd28d8d041f42a6d8ee53cb9e7bd": "僅在匯出完成後才會發送匯出 webhook。管理員日誌動作、指標類型與來源、校驗和、聊天類型，以及法院、案件檔案和協議標籤，均會在報告和控制面板中進行轉換。",
-  "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "當 ASiC-E 容器中的 META-INF 包含其清單中未列出的項目（例如 verify.py 以及報告中的檔案檢查）時，位於 /verify 的瀏覽器驗證器會轉為紅色。"
+  "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "當 ASiC-E 容器中的 META-INF 包含其清單中未列出的項目（例如 verify.py 以及報告中的檔案檢查）時，位於 /verify 的瀏覽器驗證器會轉為紅色。",
+  "4daffb62b322cee985f0d403a45d2c6c1373b4c02523c6e35016ea9f9f66ebdd": "PDF 報告中會顯示 Telegram 名稱中常見的風格化字母（例如 𝐍𝐚𝐦𝐞 或 🅻），以及奧加姆文字、方框圖形和箭頭；系統會透過內建的 Noto Sans Math、Noto Sans Symbols 和 Noto Sans Ogham 字型來呈現這些內容，而非省略並附上註解。"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",

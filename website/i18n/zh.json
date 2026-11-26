@@ -8561,7 +8561,8 @@
   "70723699db06744438123dd8753ca5827625dcdcf3cd586510b1be484523bc09": "保险库、备份和安装：操作系统密钥环标记仅在密钥存储后写入，且在密钥环中替换密钥时，不再先删除旧密钥。 在 TgWitness 运行期间创建的备份是一致且保留硬链接的；将保险库密钥移动到外部文件时，会分段重新加密保险库，而非将其保存在内存中， <code>tgwitness doctor --check</code> 不再在面板端口上为面板占用另一个进程，已停止安装留下的安装程序锁定状态已被恢复，且图像编辑文件会传递 <code>TGWITNESS_FULLTEXT</code> 传递给面板。",
   "a9e4fcc889a5bed1daa2436082dbe0abdcb8ed6abcc16bf9cbaff8513e4a5ce9": "验证：捕获的归档文件检查会统计解压后的字节数并验证归档布局；使用 Keccak-256 的 OpenTimestamps 分支会被报告为“未验证”，而非被静默跳过；即使 OpenSSL 不再提供 RIPEMD-160，系统仍会计算该值；交互式验证会保持 <code>--range</code>。",
   "f2848231619d4634def1ac2e58bbc8c16b3ffd28d8d041f42a6d8ee53cb9e7bd": "导出 webhook 仅在导出完成后发送。管理员日志操作、指标类型和来源、校验和、聊天类型，以及法院、案件卷宗和协议标签，均会在报告和控制面板中进行翻译。",
-  "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "当 ASiC-E 容器中的 META-INF 目录包含未在清单中列出的条目（例如 verify.py 以及报告中的归档文件检查）时，位于 /verify 路径下的浏览器验证器会变为红色。"
+  "476dcf9bf3a97b802770c54e392577adef53838de1e0b8dbfb642fb06f66b7bd": "当 ASiC-E 容器中的 META-INF 目录包含未在清单中列出的条目（例如 verify.py 以及报告中的归档文件检查）时，位于 /verify 路径下的浏览器验证器会变为红色。",
+  "4daffb62b322cee985f0d403a45d2c6c1373b4c02523c6e35016ea9f9f66ebdd": "PDF 报告中会显示 Telegram 用户名中常见的样式化字母（如 𝐍𝐚𝐦𝐞 或 🅻），以及奥加姆文字、方框和箭头符号。这些内容通过内置的 Noto Sans Math、Noto Sans Symbols 和 Noto Sans Ogham 字体进行呈现，而非通过注释将其省略。"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
