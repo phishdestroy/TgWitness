@@ -5317,6 +5317,8 @@ class Collector:
         try:
             regular = (await self.client.get_messages(entity, limit=0)).total or 0
             takeout = (await reader.get_messages(entity, limit=0)).total or 0
+            if takeout < regular:
+                regular = min(regular, (await self.client.get_messages(entity, limit=0)).total or 0)
         except (RPCError, OSError, ConnectionError, TimeoutError):
             return None
         return {"regular_count": regular, "takeout_count": takeout} if takeout < regular else None
