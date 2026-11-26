@@ -10955,5 +10955,6 @@
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram hạn chế cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout. Hãy xuất mà không dùng Takeout.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram hạn chế các cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout, nên lịch sử được đọc mà không dùng Takeout.",
   "Read without Takeout": "Đã đọc không dùng Takeout",
-  "under a spoiler": "ẩn dưới lớp spoiler"
+  "under a spoiler": "ẩn dưới lớp spoiler",
+  "files: {done} of {total}": "tệp: {done} trên {total}"
 }

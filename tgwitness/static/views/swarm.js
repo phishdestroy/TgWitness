@@ -3,6 +3,10 @@ import {createSwarmExport} from './swarm-export.js?v=1';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const STATES={busy:'Busy',idle:'Idle',waiting:'Telegram wait',blocked:'Blocked',offline:'Not connected',unavailable:'Unavailable'};
 const ORDER={blocked:0,waiting:1,busy:2,idle:3,offline:4,unavailable:5};
+const LOSSES={session_duplicated:'Telegram ended this session because it was used in two places at once. Sign in again with a new session.',
+  account_banned:'Telegram banned this account. Observation stopped; the journal is kept.',
+  account_frozen:'Telegram froze this account and refuses most requests. Observation stopped; the account can appeal through @SpamBot.',
+  account_deleted:'The Telegram account was deleted. Observation stopped; the journal is kept.'};
 const REASONS={sign_in:'Sign in again',route_down:'The route to Telegram is down',flood_wait:'Telegram asked this account to wait'};
 const FILTERS=[['all','All'],['busy','Busy'],['idle','Idle'],['waiting','Telegram wait'],['blocked','Blocked'],['offline','Not connected']];
 const PROBLEMS={'coverage.gap':'Coverage gap','collector.error':'Collector error','network.connection_failed':'Connection failed',
@@ -90,7 +94,7 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
       <div class="sw-user" data-k="user"></div>
       <div class="sw-task"><span data-k="task"></span><span class="sw-bar-track" data-k="track" hidden><i data-k="fill"></i></span></div>
       <dl class="sw-metrics">
-        <div><dt>${t('Records/s')}</dt><dd data-k="rate"></dd></div>
+        <div><dt>${t('Records')}</dt><dd data-k="rate"></dd></div>
         <div><dt>${t('Files queued')}</dt><dd data-k="queue"></dd></div>
         <div><dt>${t('File connections')}</dt><dd data-k="conn"></dd></div>
       </dl>
@@ -106,9 +110,13 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
       return tr('Loading full history · {done} of {total} sources',{done:number(row.history.finished),total:number(row.history.sources)});
     }
     if(row.task==='chat_export'&&row.detail){
-      const percent=row.detail.total?Math.min(100,Math.round(100*(row.detail.captured||0)/row.detail.total)):null;
-      return tr('Exporting {chat}',{chat:row.detail.title||('#'+row.detail.chat_id)})+(percent!==null?' · '+percent+'%':'');
+      const d=row.detail,share=exportShare(d);
+      const stage=d.stage==='files'&&d.files_total?tr('files: {done} of {total}',{done:number(d.files_done||0),total:number(d.files_total)})
+        :d.stage==='recheck'?tr('rechecking absent message numbers'):d.stage==='packaging'?tr('packaging and signing the archive')
+        :share!==null?Math.round(100*share)+'%':'';
+      return tr('Exporting {chat}',{chat:d.title||('#'+d.chat_id)})+(stage?' · '+stage:'');
     }
+    if(row.task==='sign_in_required'&&LOSSES[row.loss_cause])return tr(LOSSES[row.loss_cause]);
     const info=row.task?taskLabel?.({task:row.task}):null;
     if(info)return tr(info.label);
     if(row.downloads?.active)return tr('Downloading files');
@@ -116,9 +124,14 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
     return row.state==='offline'?tr('Not connected to Telegram'):tr('Idle, ready for a task');
   }
 
+  function exportShare(d){
+    const [done,total]=d.stage==='files'?[d.files_done,d.files_total]:d.stage==='recheck'?[d.recheck_done,d.recheck_total]:[d.captured,d.total];
+    return total?Math.min(1,(done||0)/total):null;
+  }
+
   function progress(row){
     if(row.task==='history'&&row.history?.sources)return row.history.finished/row.history.sources;
-    if(row.task==='chat_export'&&row.detail?.total)return Math.min(1,(row.detail.captured||0)/row.detail.total);
+    if(row.task==='chat_export'&&row.detail)return exportShare(row.detail);
     return null;
   }
 
@@ -133,7 +146,7 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
     const share=progress(row);
     parts.track.hidden=share===null;
     if(share!==null){const width=Math.round(share*100)+'%';if(parts.fill.style.width!==width)parts.fill.style.width=width;}
-    put(parts.rate,row.rates?number(row.rates.records):'—');
+    put(parts.rate,row.rates?number(row.rates.records)+'/s':'—');
     put(parts.queue,row.queue?number(row.queue.queued+row.queue.running):'—');
     const d=row.downloads;
     put(parts.conn,d?(d.connections?number(d.connections)+(d.busy?' · '+tr('{n} busy',{n:number(d.busy)}):''):'0'):'—');

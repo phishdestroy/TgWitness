@@ -11210,5 +11210,6 @@
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "يقيّد Telegram هذه الدردشة على بعض المنصات ولا يعيد سجلها عبر Takeout. صدّرها دون Takeout.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "يقيّد Telegram هذه الدردشات على بعض المنصات ولا يعيد سجلها عبر Takeout، لذلك يُقرأ سجلها دون Takeout.",
   "Read without Takeout": "قُرئت دون Takeout",
-  "under a spoiler": "تحت إخفاء المحتوى"
+  "under a spoiler": "تحت إخفاء المحتوى",
+  "files: {done} of {total}": "الملفات: {done} من {total}"
 }

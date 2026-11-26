@@ -4915,7 +4915,8 @@ class Collector:
         elif self.export_busy() or self.export_state and claim == self.export_state.get("id"):
             task = "chat_export"
             detail = {key: self.export_state.get(key) for key in ("id", "chat_id", "title", "phase", "captured", "total",
-                                                                  "eta_seconds", "stage")} if self.export_state else None
+                                                                  "eta_seconds", "stage", "files_done", "files_total",
+                                                                  "recheck_done", "recheck_total")} if self.export_state else None
         elif claim and not brief:
             task = "export"
         elif self.running:

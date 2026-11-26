@@ -11093,5 +11093,6 @@
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram ограничивает этот чат на некоторых платформах и не отдаёт его историю через Takeout. Выгрузите его без Takeout.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram ограничивает эти чаты на некоторых платформах и не отдаёт их историю через Takeout, поэтому их история читается без Takeout.",
   "Read without Takeout": "Прочитаны без Takeout",
-  "under a spoiler": "под спойлером"
+  "under a spoiler": "под спойлером",
+  "files: {done} of {total}": "файлы: {done} из {total}"
 }

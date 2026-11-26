@@ -71,8 +71,10 @@ def slow_facts(state, task):
         session = bool(state.vault.read("credentials").get("session"))
     except Exception:
         session = bool(account.get("id"))
+    loss = store.get_setting("account_loss", None)
     facts = {"account": {"id": account.get("id"), "username": account.get("username")} if account.get("id") else None,
-             "has_session": session, "account_loss": bool(store.get_setting("account_loss", None)),
+             "has_session": session, "account_loss": bool(loss),
+             "loss_cause": loss.get("cause") if isinstance(loss, dict) and isinstance(loss.get("cause"), str) else None,
              "media": {"queued": media.get("queued", 0) + media.get("retry", 0), "running": media.get("running", 0),
                        "failed": media.get("failed", 0)},
              "route": {"kind": route.get("kind"), "managed": route.get("managed"),
@@ -127,6 +129,7 @@ def account_row(identifier, entry, registry, groups, cache, now, wall):
         "account": slow["account"], "phase": collector.phase, "observing": bool(collector.running),
         "connected": bool(client and client.is_connected()), "has_session": slow["has_session"],
         "authorization_required": bool(collector.authorization_required), "account_loss": slow["account_loss"],
+        "loss_cause": slow["loss_cause"],
         "task": task, "detail": activity.get("detail"), "history": slow["history"],
         "rates": meter(store).rates(),
         "flood": {"method": flood[0], "remaining": round(flood[1] - wall), "methods": len(floods)} if flood else None,

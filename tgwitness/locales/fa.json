@@ -11006,5 +11006,6 @@
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram این گفتگو را در برخی پلتفرم‌ها محدود کرده و از طریق Takeout هیچ تاریخچه‌ای برای آن برنمی‌گرداند. آن را بدون Takeout برون‌بری کنید.",
   "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram این گفتگوها را در برخی پلتفرم‌ها محدود کرده و از طریق Takeout تاریخچه‌ای برای آن‌ها برنمی‌گرداند، بنابراین تاریخچهٔ آن‌ها بدون Takeout خوانده می‌شود.",
   "Read without Takeout": "خوانده‌شده بدون Takeout",
-  "under a spoiler": "پنهان زیر اسپویلر"
+  "under a spoiler": "پنهان زیر اسپویلر",
+  "files: {done} of {total}": "فایل‌ها: {done} از {total}"
 }
