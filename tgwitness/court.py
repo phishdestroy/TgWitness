@@ -6,6 +6,8 @@ from . import action_protocol
 from .evidence import safe_cell
 
 PREFIX = "EX-"
+COURT_KINDS = {"user": "Private chat", "private": "Private chat", "bot": "Bot", "group": "Basic group",
+               "megagroup": "Supergroup", "supergroup": "Supergroup", "channel": "Channel", "chat": "Chat"}
 STYLE = ("body{font:11pt/1.5 'Segoe UI',system-ui,Arial,sans-serif;color:#141a22;max-width:900px;margin:28px auto;padding:0 20px}"
          "h1{font-size:19pt;margin:0 0 4px}h2{font-size:12.5pt;margin:22px 0 6px;padding-bottom:3px;border-bottom:1px solid #d5dbe3}"
          ".lead{color:#4a5565}.note{border-left:4px solid #c27c0e;background:#fdf6ea;padding:8px 12px;margin:10px 0}"
@@ -234,7 +236,7 @@ def annex_csv(data):
 
 def annex_html(data, title, say):
     chats = "".join(
-        "<tr><td>" + e(chat["title"] or "—") + '</td><td class="mono">' + e(chat["chat_id"]) + "</td><td>" + e(say(chat["kind"] or "chat"))
+        "<tr><td>" + e(chat["title"] or "—") + '</td><td class="mono">' + e(chat["chat_id"]) + "</td><td>" + e(say(COURT_KINDS.get(chat["kind"] or "chat", chat["kind"] or "chat")))
         + "</td><td>" + e(" ".join("@" + u for u in chat["usernames"]) or "—") + "</td><td>" + e(" ".join(chat["labels"]).upper() or "—")
         + "</td><td>" + e(len(chat["messages"])) + "</td></tr>" for chat in data["chats"])
     people = "".join(

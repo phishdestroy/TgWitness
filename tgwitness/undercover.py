@@ -183,6 +183,8 @@ def record(model, gap_hours=GAP_HOURS):
             "definitions": [text.replace("{hours}", str(gap_hours)) for text in DEFINITIONS]}
 
 
+CHANGE_NAMES = {"profile": "Profile changed", "privacy": "Privacy settings changed", "options": "Account options changed",
+                "photo_set": "Profile photo set", "photo_removed": "Profile photo removed"}
 FLAG_NAMES = {"outside_authorisation": "Messages outside the validity or scope of every recorded authorisation",
               "operator_unknown": "Messages without a recorded operator (for example sent from another app)",
               "no_authorisation_recorded": "No authorisation is recorded in the workspace"}
@@ -229,9 +231,9 @@ def render_html(data, title, say):
                                     "Flags")) + "</th></tr>" + chats + "</table>" if chats else "<p>" + e(say("No outgoing messages.")) + "</p>")
             + "<h2>" + e(say("Every outgoing message")) + "</h2>" + (messages or "<p>—</p>")
             + "<h2>" + e(say("Persona changes during the period")) + "</h2>" + ("<ul>" + "".join(
-                "<li>" + e(a["at"]) + " — " + e(say(a["change"] or "")) + " (" + e(say("step {n}", n=a["step"])) + ")</li>"
+                "<li>" + e(a["at"]) + " — " + e(say(CHANGE_NAMES.get(a["change"], a["change"] or ""))) + " (" + e(say("step {n}", n=a["step"])) + ")</li>"
                 for a in data["account_changes"]) + "</ul>" if data["account_changes"] else "<p>" + e(say("None.")) + "</p>")
-            + "<h2>" + e(say("Definitions")) + "</h2><ul>" + "".join("<li>" + e(say(d)) + "</li>" for d in data["definitions"])
+            + "<h2>" + e(say("Definitions")) + "</h2><ul>" + "".join("<li>" + e(say(d, hours=data["gap_hours"])) + "</li>" for d in DEFINITIONS)
             + "</ul>")
     return page(say("Undercover activity record"), body, getattr(say, "language", "en"))
 
