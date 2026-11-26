@@ -189,7 +189,7 @@ def server_keys():
             texts = []
             if isinstance(node, ast.Call):
                 func = getattr(node.func, "id", None) or getattr(node.func, "attr", "")
-                if func in ("HTTPException", "ValueError", "RouteError", "Refused", "WizardError"):
+                if func in ("HTTPException", "ValueError", "RouteError", "Refused", "WizardError", "refused"):
                     texts = node.args
                 elif name == "disclosure.py" and func == "append" and isinstance(node.func.value, ast.Name) \
                         and node.func.value.id == "warnings":
