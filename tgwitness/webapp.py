@@ -19,6 +19,8 @@ MAX_SCRIPTS = 12
 MAX_LINKS = 200
 MAX_INDICATORS = 400
 PLATFORM = "android"
+OPEN_LIMIT = 2
+OPEN_BUSY = "Too many mini applications are being recorded at once. Wait for one to finish, then try again."
 SOURCE = "mini app"
 FILE_KIND = "webapp.file"
 LAUNCH_MEANING = ("Telegram returned the address this mini application is opened at. Asking for it is an account "
@@ -392,11 +394,13 @@ def asks_of(events):
 async def open_app(collector, chat_id, entry, *, mode="passive", max_states=8):
     """Launch, load and record a mini application. Returns the capture record with its journal number."""
     store = collector.store
+    state = webapp_browser.status()
+    if state["browser"] and mode not in state.get("modes", ()):
+        raise ValueError(webapp_browser.NO_WINDOW)
     route = route_of(collector)
     launched, address = await launch(collector, chat_id, entry)
     message_id, at = launched.get("message_id"), launched.get("observed_at")
     secret = init_data_of(address)
-    state = webapp_browser.status()
     files, errors_ = [], []
     if state["browser"]:
         try:
@@ -484,6 +488,8 @@ def register(app, authenticate, require_live, visible_chats):
         mode: Literal["passive", "crawl", "interactive"] = "passive"
         max_states: int = Field(default=8, ge=1, le=20)
 
+    opening = asyncio.Semaphore(OPEN_LIMIT)
+
     def visible(request, chat_id):
         chats = visible_chats(request)
         if chats is not None and chat_id not in chats:
@@ -517,21 +523,24 @@ def register(app, authenticate, require_live, visible_chats):
         if not request.state.principal.admin:
             raise HTTPException(403, "Only the main administrator can open a mini application.")
         require_live()
-        try:
-            return await open_app(app.state.collector, body.chat_id, body.entry.model_dump(),
-                                  mode=body.mode, max_states=body.max_states)
-        except netclient.RouteError as exc:
-            raise HTTPException(409, str(exc)) from None
-        except interactions.AccountRestricted as exc:
-            raise HTTPException(409, str(exc)) from None
-        except FLOOD_ERRORS as exc:
-            raise HTTPException(429, {"message": "Telegram asked to wait before the next account action.",
-                                      "retry_after": exc.seconds}) from None
-        except errors.RPCError:
-            raise HTTPException(409, "Telegram refused to open this mini application. The journal records its "
-                                     "answer.") from None
-        except (ValueError, OSError) as exc:
-            raise HTTPException(422, str(exc)) from None
+        if opening.locked():
+            raise HTTPException(409, OPEN_BUSY)
+        async with opening:
+            try:
+                return await open_app(app.state.collector, body.chat_id, body.entry.model_dump(),
+                                      mode=body.mode, max_states=body.max_states)
+            except netclient.RouteError as exc:
+                raise HTTPException(409, str(exc)) from None
+            except interactions.AccountRestricted as exc:
+                raise HTTPException(409, str(exc)) from None
+            except FLOOD_ERRORS as exc:
+                raise HTTPException(429, {"message": "Telegram asked to wait before the next account action.",
+                                          "retry_after": exc.seconds}) from None
+            except errors.RPCError:
+                raise HTTPException(409, "Telegram refused to open this mini application. The journal records its "
+                                         "answer.") from None
+            except (ValueError, OSError) as exc:
+                raise HTTPException(422, str(exc)) from None
 
     @app.post("/api/webapp/inspect", dependencies=[Depends(authenticate)])
     async def inspect_address(body: Address, request: Request):

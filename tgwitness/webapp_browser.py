@@ -16,6 +16,7 @@ import re
 import secrets
 import shutil
 import struct
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -48,6 +49,8 @@ MAX_PAGE_BYTES = 4 * 1024**2
 MAX_MHTML_BYTES = 12 * 1024**2
 MAX_TEXT_CHARS = 200_000
 MAX_TRAFFIC = 256 * 1024**2
+MAX_CLICKS = 40
+CLICK_SETTLE = 1.5
 REMOVED = "[removed]"
 DANGEROUS_CLICK = re.compile(
     r"pay|buy|purchase|checkout|order|confirm|approve|withdraw|transfer|send|delete|remove|donate|tip|subscribe|"
@@ -66,6 +69,8 @@ ROOT = ("Chromium cannot use its sandbox when TgWitness runs as root. Run TgWitn
 MISSING = ("No Chromium was found for opening mini applications. Install Chromium/Chrome/Edge, or set "
            "TGWITNESS_CHROMIUM to the browser's path, then try again.")
 PLATFORM = "Opening mini applications in a browser is not supported on this platform; this system gets a page and script analysis."
+NO_WINDOW = ("Interactive mode needs a desktop session, and this system has no display: neither DISPLAY nor "
+             "WAYLAND_DISPLAY is set. Choose passive or safe crawl mode.")
 SHIM = """(() => {
   const send = (type, data) => {
     try { window.%s(JSON.stringify({type: String(type), data: data === undefined || data === null ? null : String(data),
@@ -106,10 +111,32 @@ CLICKABLES_JS = """(() => {
     if (!text && !href) continue;
     if (seen.has(key)) continue;
     seen.add(key);
-    items.push({index: i, text, href, x: Math.round(rect.left + rect.width / 2), y: Math.round(rect.top + rect.height / 2)});
+    const words = [el.getAttribute('aria-label'), el.getAttribute('title'), el.getAttribute('role'), el.value]
+      .map(value => String(value || '').replace(/\\s+/g, ' ').trim()).filter(Boolean).join(' ').slice(0, 400);
+    items.push({index: i, text, href, words, x: Math.round(rect.left + rect.width / 2), y: Math.round(rect.top + rect.height / 2)});
   }
   return JSON.stringify(items);
 })()"""
+ELEMENT_AT_JS = """((x, y) => {
+  const targets = 'a[href], button, [role="tab"], [role="button"], nav li';
+  const clean = value => String(value || '').replace(/\\s+/g, ' ').trim();
+  const hit = document.elementFromPoint(x, y);
+  const el = hit && hit.closest(targets);
+  if (!el) return null;
+  const words = [el.innerText, el.value, hit.getAttribute('aria-label'), hit.getAttribute('title')];
+  const hrefs = [];
+  for (let node = el; node; node = node.parentElement && node.parentElement.closest(targets)) {
+    words.push(node.getAttribute('aria-label'), node.getAttribute('title'), node.getAttribute('role'));
+    if (node.hasAttribute('href')) hrefs.push(node.getAttribute('href') || '');
+  }
+  return {
+    text: clean(el.innerText || el.getAttribute('aria-label') || el.getAttribute('title')).slice(0, 120),
+    href: el.getAttribute('href') || '',
+    words: words.map(clean).filter(Boolean).join(' ').slice(0, 4000),
+    hrefs: hrefs.slice(0, 20),
+    disabled: !!(el.disabled || el.getAttribute('aria-disabled') === 'true')
+  };
+})(%d, %d)"""
 
 
 class Unavailable(RuntimeError):
@@ -128,6 +155,22 @@ def is_safe_click_label(text, href=""):
     if target and DANGEROUS_CLICK.search(target):
         return False
     return bool(label or target)
+
+
+def is_safe_click_target(found):
+    label = " ".join(str(found.get(key) or "") for key in ("text", "words")).strip()
+    links = {str(found.get("href") or "")} | {str(link or "") for link in found.get("hrefs") or []}
+    return all(is_safe_click_label(label, link) for link in links)
+
+
+def click_verdict(found, text, href):
+    if not isinstance(found, dict) or not isinstance(found.get("hrefs") or [], list):
+        return "unknown"
+    if not is_safe_click_target(found):
+        return "unsafe"
+    if found.get("disabled") or (str(found.get("text") or ""), str(found.get("href") or "")) != (text, href):
+        return "moved"
+    return "click"
 
 
 def build_har(requests_list, final_url, title, started_wall, redact):
@@ -243,7 +286,10 @@ def status():
     is_root = os.name == "posix" and hasattr(os, "geteuid") and os.geteuid() == 0
     if is_root and os.environ.get("TGWITNESS_BROWSER_NO_SANDBOX") != "1":
         return {"browser": False, "reason": ROOT, "path": path}
-    return {"browser": True, "path": path, "sandbox": not is_root, "modes": ["passive", "crawl", "interactive"]}
+    window = os.name == "nt" or sys.platform == "darwin" or bool(
+        os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY"))
+    modes = ["passive", "crawl"] + (["interactive"] if window else [])
+    return {"browser": True, "path": path, "sandbox": not is_root, "modes": modes}
 
 
 class Redactor:
@@ -733,6 +779,103 @@ async def _state_digest(call):
     return None
 
 
+def _click_key(item):
+    return str(item.get("text") or ""), str(item.get("href") or "")
+
+
+def _click_point(item):
+    try:
+        x, y = int(item.get("x") or 0), int(item.get("y") or 0)
+    except (TypeError, ValueError):
+        return None
+    return (x, y) if x > 0 and y > 0 else None
+
+
+def _note_blocked(blocked, redact, text, href):
+    item = {"text": redact(text)[:80], "href": redact(href)[:120]}
+    if (text or href) and len(blocked) < 50 and item not in blocked:
+        blocked.append(item)
+
+
+def _merge_clicks(fresh, queue, tried):
+    merged, keys = [], set(tried)
+    for item in fresh + queue:
+        key = _click_key(item)
+        if key not in keys:
+            keys.add(key)
+            merged.append(item)
+    return merged
+
+
+async def _clickables(call):
+    try:
+        found = await call("Runtime.evaluate", {"expression": CLICKABLES_JS, "returnByValue": True}, timeout=10)
+        items = json.loads((found.get("result") or {}).get("value") or "[]")
+    except Exception:
+        return []
+    return [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
+
+
+async def _element_at(call, x, y):
+    try:
+        found = await call("Runtime.evaluate", {"expression": ELEMENT_AT_JS % (x, y), "returnByValue": True},
+                           timeout=10)
+    except Exception:
+        return None
+    if not isinstance(found, dict) or found.get("exceptionDetails"):
+        return None
+    value = (found.get("result") or {}).get("value")
+    return value if isinstance(value, dict) else None
+
+
+async def _crawl(call, redact, files, max_states, deadline, blocked):
+    seen = set()
+    current = await _state_digest(call)
+    if current:
+        seen.add(current)
+    captured = 1 if await _capture_state(call, redact, files, "State 1 · initial") else 0
+    queue, tried, clicks = await _clickables(call), set(), 0
+    while queue and captured < max_states and clicks < MAX_CLICKS and time.monotonic() <= deadline:
+        candidate = queue.pop(0)
+        key = _click_key(candidate)
+        if key in tried:
+            continue
+        text_label, href_val = key
+        if not is_safe_click_label(" ".join((text_label, str(candidate.get("words") or ""))).strip(), href_val):
+            tried.add(key)
+            _note_blocked(blocked, redact, text_label, href_val)
+            continue
+        point = _click_point(candidate)
+        if point is None:
+            tried.add(key)
+            continue
+        found = await _element_at(call, *point)
+        verdict = click_verdict(found, text_label, href_val)
+        if verdict == "unsafe":
+            _note_blocked(blocked, redact, *_click_key(found))
+        if verdict != "click":
+            continue
+        tried.add(key)
+        clicks += 1
+        try:
+            for kind in ("mousePressed", "mouseReleased"):
+                await call("Input.dispatchMouseEvent", {"type": kind, "x": point[0], "y": point[1], "button": "left",
+                                                        "clickCount": 1}, timeout=10)
+        except Exception:
+            continue
+        await asyncio.sleep(CLICK_SETTLE)
+        sig = await _state_digest(call)
+        if sig and sig not in seen:
+            seen.add(sig)
+            captured += 1
+            short = redact(text_label)[:40] or "step"
+            await _capture_state(call, redact, files, f"State {captured} · {short}")
+        if sig is None or sig != current:
+            queue = _merge_clicks(await _clickables(call), queue, tried)
+        current = sig
+    return captured
+
+
 async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", max_states=8):
     """Open url and return (facts, files). Files are (role, mime, bytes, label).
 
@@ -750,12 +893,14 @@ async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", m
     state = status()
     if not state["browser"]:
         raise Unavailable(state["reason"])
+    if mode not in state.get("modes", ()):
+        raise Unavailable(NO_WINDOW)
     max_states = max(1, min(20, int(max_states or 8)))
     redact = Redactor(init_data)
     gate, quiet = Gate(route), Gate(route, refuse=True)
     session_state = Session(redact)
     folder = tempfile.mkdtemp(prefix="tgwitness-webapp-")
-    process = pipe = None
+    process = pipe = transport = None
     files, errors, facts, version = [], [], {}, ""
     started, started_wall = time.monotonic(), time.time()
     states_captured = 0
@@ -798,33 +943,50 @@ async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", m
             ws_port, ws_path = await _wait_devtools_port(folder, process, timeout=15)
             pipe = await WebSocketPipe.connect(ws_port, ws_path, session_state.handle, timeout=15)
         else:
-            to_child, from_parent = os.pipe()
-            from_child, to_parent = os.pipe()
-            to_child, to_parent = high(to_child), high(to_parent)
+            loose = []
+            try:
+                loose.extend(os.pipe())
+                loose.extend(os.pipe())
+                to_child, from_parent, from_child, to_parent = loose
+                to_child = loose[0] = high(to_child)
+                to_parent = loose[3] = high(to_parent)
 
-            for fd in (3, 4):
+                for fd in (3, 4):
+                    try:
+                        os.fstat(fd)
+                    except OSError:
+                        filler = os.open(os.devnull, os.O_RDONLY)
+                        if filler != fd:
+                            os.dup2(filler, fd)
+                            os.close(filler)
+
+                def wire():
+                    os.dup2(to_child, 3)
+                    os.dup2(to_parent, 4)
+
+                with open(os.path.join(folder, "browser.log"), "wb") as log:
+                    process = await asyncio.create_subprocess_exec(
+                        *arguments, stdin=asyncio.subprocess.DEVNULL, stdout=log, stderr=log,
+                        pass_fds=(3, 4), preexec_fn=wire, start_new_session=True)
+                for fd in (to_child, to_parent):
+                    loose.remove(fd)
+                    os.close(fd)
+                reader = asyncio.StreamReader(limit=64 * 1024 * 1024)
+                loop = asyncio.get_running_loop()
+                child_out = os.fdopen(from_child, "rb", 0)
+                loose.remove(from_child)
                 try:
-                    os.fstat(fd)
-                except OSError:
-                    filler = os.open(os.devnull, os.O_RDONLY)
-                    if filler != fd:
-                        os.dup2(filler, fd)
-                        os.close(filler)
-
-            def wire():
-                os.dup2(to_child, 3)
-                os.dup2(to_parent, 4)
-
-            with open(os.path.join(folder, "browser.log"), "wb") as log:
-                process = await asyncio.create_subprocess_exec(
-                    *arguments, stdin=asyncio.subprocess.DEVNULL, stdout=log, stderr=log,
-                    pass_fds=(3, 4), preexec_fn=wire, start_new_session=True)
-            os.close(to_child)
-            os.close(to_parent)
-            reader = asyncio.StreamReader(limit=64 * 1024 * 1024)
-            loop = asyncio.get_running_loop()
-            await loop.connect_read_pipe(lambda: asyncio.StreamReaderProtocol(reader), os.fdopen(from_child, "rb", 0))
-            pipe = Pipe(reader, from_parent, session_state.handle)
+                    transport, _ = await loop.connect_read_pipe(lambda: asyncio.StreamReaderProtocol(reader), child_out)
+                except BaseException:
+                    child_out.close()
+                    raise
+                pipe = Pipe(reader, from_parent, session_state.handle)
+                loose.remove(from_parent)
+            except BaseException:
+                for fd in loose:
+                    with contextlib.suppress(OSError):
+                        os.close(fd)
+                raise
 
         version = (await pipe.send("Browser.getVersion", timeout=30)).get("product", "")
         with contextlib.suppress(Exception):
@@ -902,38 +1064,7 @@ async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", m
                 states_captured = 1
             elif mode == "crawl":
                 await asyncio.sleep(min(2, settle[0]) if settle else 1)
-                seen_states = set()
-                sig = await _state_digest(call)
-                if sig:
-                    seen_states.add(sig)
-                if await _capture_state(call, redact, files, "State 1 · initial"):
-                    states_captured = 1
-                raw_items = []
-                with contextlib.suppress(Exception):
-                    found_clicks = await call("Runtime.evaluate", {"expression": CLICKABLES_JS, "returnByValue": True}, timeout=10)
-                    raw_items = json.loads((found_clicks.get("result") or {}).get("value") or "[]")
-                for candidate in raw_items:
-                    if states_captured >= max_states or time.monotonic() - started > TOTAL_TIMEOUT:
-                        break
-                    text_label = str(candidate.get("text") or "")
-                    href_val = str(candidate.get("href") or "")
-                    if not is_safe_click_label(text_label, href_val):
-                        if len(blocked_clicks) < 50:
-                            blocked_clicks.append({"text": redact(text_label)[:80], "href": redact(href_val)[:120]})
-                        continue
-                    x, y = int(candidate.get("x") or 0), int(candidate.get("y") or 0)
-                    if x <= 0 or y <= 0:
-                        continue
-                    with contextlib.suppress(Exception):
-                        await call("Input.dispatchMouseEvent", {"type": "mousePressed", "x": x, "y": y, "button": "left", "clickCount": 1}, timeout=10)
-                        await call("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": x, "y": y, "button": "left", "clickCount": 1}, timeout=10)
-                        await asyncio.sleep(1.5)
-                        sig = await _state_digest(call)
-                        if sig and sig not in seen_states:
-                            seen_states.add(sig)
-                            states_captured += 1
-                            short = redact(text_label)[:40] or "step"
-                            await _capture_state(call, redact, files, f"State {states_captured} · {short}")
+                states_captured = await _crawl(call, redact, files, max_states, started + TOTAL_TIMEOUT, blocked_clicks)
             else:  # interactive
                 await asyncio.sleep(1.5)
                 seen_states = set()
@@ -993,6 +1124,8 @@ async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", m
                 await asyncio.wait_for(process.wait(), 10)
         if pipe:
             await pipe.close()
+        if transport:
+            transport.close()
         await gate.close()
         await quiet.close()
         shutil.rmtree(folder, ignore_errors=True)
