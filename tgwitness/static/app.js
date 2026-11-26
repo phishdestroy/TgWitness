@@ -7775,7 +7775,7 @@ let swarmView=null;
 const swarmReady=Promise.all([import('./views/swarm.js?v=3'),homeReady]).then(([{createSwarm}])=>{
   swarmView=createSwarm({root:$('view-swarm'),tr,trn,json,getState:()=>state,options:()=>viewOptions('swarm'),toast,
     download:(path,filename,stream,root)=>download(path,filename,stream,root),
-    taskLabel:activity=>homeTask?.(activity),
+    taskLabel:activity=>homeTask?.(activity),lossText:accountLossText,
     openAccount:async profile=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
       await navigate('start');
