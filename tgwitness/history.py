@@ -112,7 +112,7 @@ class History:
             raise ValueError("Resume or cancel the existing history run before starting another.")
         run_id, now = secrets.token_hex(16), utcnow()
         if not self.collector.reserve_export("history:" + run_id, alongside_observation=True):
-            raise ValueError("This account is busy. Pause its current acquisition task before loading history.")
+            raise ValueError(self.collector.refused("This account is busy. Pause its current acquisition task before loading history."))
         try:
             await self.collector.restore()
             if options.observe_during and not self.collector.running:
@@ -188,7 +188,7 @@ class History:
             raise ValueError("This history run belongs to a different Telegram account.")
         owner = "history:" + run["id"]
         if not self.collector.reserve_export(owner, alongside_observation=True):
-            raise ValueError("This account is busy. Pause its current acquisition task before resuming history.")
+            raise ValueError(self.collector.refused("This account is busy. Pause its current acquisition task before resuming history."))
         try:
             await complete_in_thread(history_cursor.verify, self.store, self.collector.vault, run)
             await self.collector.restore()

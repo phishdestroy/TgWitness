@@ -423,7 +423,7 @@ class AccountExport:
             raise ValueError("Connect a Telegram account before exporting it.")
         job_id = secrets.token_hex(16)
         if not self.collector.reserve_export(job_id):
-            raise ValueError("This account is busy. Pause its current acquisition task before exporting.")
+            raise ValueError(self.collector.refused("This account is busy. Pause its current acquisition task before exporting."))
         try:
             directory = self.directory(job_id)
             directory.mkdir(mode=0o700)
@@ -574,7 +574,8 @@ class AccountExport:
         if sha(canonical(job["options"])) != job["options_sha256"]:
             raise ValueError("The saved export options have changed.")
         if not self.collector.reserve_export(job_id):
-            raise ValueError("This account is busy. Pause its current acquisition task before resuming the export.")
+            raise ValueError(self.collector.refused(
+                "This account is busy. Pause its current acquisition task before resuming the export."))
         recovering = False
         try:
             self.current = self.public(job_id)

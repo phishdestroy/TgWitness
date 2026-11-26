@@ -137,6 +137,7 @@ INTERRUPTED_MEANING = ("Sessions are ended one at a time here. Telegram refused 
                        "(interrupted_by); sessions_ended counts those ended before it.")
 AUTO_ONLY_SESSION_AFTER = 24 * 3600
 TAKEOUT_FRESH_SECONDS = 24 * 3600
+CONNECTING = "The account is still connecting to Telegram. Try again in a minute."
 TAKEOUT_SKIPPED_MEANING = {
     "fresh_session": "This session signed in less than 24 hours ago. Telegram answers a Takeout request from such a "
                      "session with a data export warning to the account, so history is read without Takeout.",
@@ -4824,7 +4825,7 @@ class Collector:
         if operator and not self.running and not shared:
             owner = "snapshot:" + secrets.token_hex(16)
             if not self.reserve_export(owner, alongside_observation=True):
-                raise ValueError("This account is busy. Pause its current acquisition task before loading history.")
+                raise ValueError(self.refused("This account is busy. Pause its current acquisition task before loading history."))
         try:
             if operator:
                 return await in_lane("operator", lambda: self._snapshot(chat_id, limit, entity, origin, before_id))
@@ -4947,6 +4948,10 @@ class Collector:
         self.observation_compatible_owner = owner if alongside_observation else None
         return True
 
+    def refused(self, busy):
+        occupied = self.history.busy or self.export_busy() or self.export_claim
+        return CONNECTING if not occupied and (self.observation_starting or self.connection_change_task is not None) else busy
+
     def release_export(self, owner):
         if self.export_claim == owner:
             self.export_claim = None
@@ -4995,7 +5000,7 @@ class Collector:
     async def chat_scale(self, chat_id):
         owner = "scale:" + secrets.token_hex(16)
         if not self.reserve_export(owner):
-            raise ValueError("This account is busy. Pause its current task before preparing an export.")
+            raise ValueError(self.refused("This account is busy. Pause its current task before preparing an export."))
         try:
             return await self._chat_scale(chat_id)
         finally:
@@ -5032,7 +5037,7 @@ class Collector:
 
         export_id = secrets.token_urlsafe(18)
         if not self.reserve_export(export_id):
-            raise ValueError("This account is busy. Pause observation or its current task before exporting.")
+            raise ValueError(self.refused("This account is busy. Pause observation or its current task before exporting."))
         try:
             await self.restore()
             entity = await self.resolve_target(chat_id)
