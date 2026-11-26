@@ -1107,8 +1107,9 @@ class Collector:
             pending.intersection_update(allowed)
             active.intersection_update(allowed)
         rows = self.intake_progress.retries()
-        waiting = {row["chat_id"] for row in rows
-                   if row["chat_id"] in pending and self.waits_for_access(row["chat_id"], row.get("error_type"))}
+        waits = [(row["chat_id"], self.waits_for_access(row["chat_id"], row.get("error_type"))) for row in rows
+                 if row["chat_id"] in pending]
+        waiting = {chat_id for chat_id, wait in waits if wait} - {chat_id for chat_id, wait in waits if not wait}
         pending -= waiting
         result = {"running": len(active), "pending": len(pending - active), "workers": 3}
         if waiting:
@@ -1185,7 +1186,10 @@ class Collector:
 
     def waits_for_access(self, chat_id, error_type):
         lost = self.store.get_setting("lost_sources", {}) or {}
-        return str(chat_id) in lost and error_type == "ValueError" and self.selected(chat_id)
+        if str(chat_id) not in lost or error_type != "ValueError" or not self.selected(chat_id):
+            return False
+        seen = (self.source_status.get(str(chat_id)) or {}).get("state") == "receiving_updates"
+        return chat_id not in self.dialog_cache and not seen
 
     async def intake_retries(self):
         while self.running:
