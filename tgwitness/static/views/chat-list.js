@@ -1,5 +1,10 @@
 import {priorityHint} from "../components/priority.js?v=1";
 
+const MEDIA_NAMES = {MessageMediaPhoto: 'Photo', MessageMediaDocument: 'File', MessageMediaWebPage: 'Link preview',
+  MessageMediaGeo: 'Location', MessageMediaGeoLive: 'Location', MessageMediaVenue: 'Location', MessageMediaContact: 'Contact',
+  MessageMediaPoll: 'Poll', MessageMediaDice: 'Dice', MessageMediaGame: 'Game', MessageMediaInvoice: 'Invoice',
+  MessageMediaStory: 'Story', sticker: 'Sticker', video: 'Video', voice: 'Voice message'};
+
 export function createChatList({root, tr, node, icon, avatarNode, timeNode, getState, getSession,
   may, json, refreshStatus, openChat, toast, viewState, reload, adds = {}, secret = null, observation = null, startObservation = null}) {
   const find = id => root.querySelector('#' + id), search = find('chat-search'), list = find('chats-list');
@@ -325,8 +330,10 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (chat.origin === 'scope') top.append(node('span', 'visually-hidden', ' · ' + tr('Auto-discovered')));
     if (chat.priority) {const mark = icon('star'); mark.classList.add('chat-item-priority'); top.append(mark);}
     top.append(timeNode(chat.last_message_at || chat.last_observed_at, 'chat-item-time', 'list'));
+    const media = MEDIA_NAMES[chat.last_media] ? tr(chat.last_quiz ? 'Quiz' : MEDIA_NAMES[chat.last_media])
+      + (chat.last_caption ? ': ' + window.TgWitnessPrivacy.preview(chat.last_caption) : '') : chat.last_service ? tr('Service message') : '';
     bottom.append(node('span', 'chat-item-preview', chat.last_text ? (chat.last_sender ? chat.last_sender + ': ' : '') + window.TgWitnessPrivacy.preview(chat.last_text)
-      : tr(chat.messages ? 'Media or service message' : 'No messages saved yet')), badges);
+      : media ? (chat.last_sender ? chat.last_sender + ': ' : '') + media : tr(chat.messages ? 'Media or service message' : 'No messages saved yet')), badges);
     const deleted = typeof chat.deleted_saved === 'number' ? [chat.deleted_saved ? tr('{n} deleted, text kept', {n: chat.deleted_saved}) : '',
       chat.deleted_unsaved ? tr('{n} deleted before saving', {n: chat.deleted_unsaved}) : ''].filter(Boolean).join(', ') : tr('{n} deleted', {n: chat.deleted});
     if (chat.deleted) badges.append(badge('pill-deleted', deleted, chat.deleted, 'trash'));

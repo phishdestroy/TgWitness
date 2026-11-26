@@ -307,6 +307,9 @@ class Store:
             for row in rows:
                 payload = json.loads(row["payload"]) if row["payload"] is not None else {}
                 sender = payload.get("sender_observation") or {}
+                media = payload.get("media_info") if isinstance(payload.get("media_info"), dict) else {}
+                caption = ((media.get("poll") or {}).get("question") or (media.get("location") or {}).get("title")
+                           or media.get("file_name") or media.get("title"))
                 result[row["chat_id"]] = {
                     "messages": row["messages"], "edited": row["edited"], "deleted": row["deleted"],
                     "missing": row["missing"], "saved": row["saved"], "deleted_saved": row["deleted_saved"],
@@ -314,6 +317,11 @@ class Store:
                     "last_observed_at": row["last_observed_at"],
                     "last_text": payload.get("text"),
                     "last_sender": sender.get("display_name"),
+                    "last_media": "sticker" if media.get("sticker_emoji") else "video" if str(media.get("mime_type")).startswith("video/")
+                    else "voice" if media.get("mime_type") == "audio/ogg" else payload.get("media_type") or media.get("kind"),
+                    "last_quiz": bool((media.get("poll") or {}).get("quiz")),
+                    "last_caption": caption if isinstance(caption, str) else None,
+                    "last_service": bool(payload.get("action")),
                 }
         return result
 
