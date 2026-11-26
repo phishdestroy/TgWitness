@@ -21,7 +21,7 @@ from collections import deque
 from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, InvalidBufferError, RPCError
 from telethon.errors import ChannelInvalidError, ChannelPrivateError, FileReferenceExpiredError, TakeoutInvalidError
-from telethon.errors import TakeoutInitDelayError, TypeNotFoundError
+from telethon.errors import ServerError, TakeoutInitDelayError, TypeNotFoundError
 from telethon.errors import FreshResetAuthorisationForbiddenError, PasswordHashInvalidError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
@@ -5393,6 +5393,18 @@ class Collector:
                 await asyncio.sleep(min(60, 5 * failures))
                 if not self.client.is_connected():
                     await self.restore()
+            except (ServerError, ValueError) as exc:
+                if writing or not (isinstance(exc, ServerError) or str(exc).startswith("Request was unsuccessful")):
+                    raise
+                failures += 1
+                if failures > attempts:
+                    raise ServerError(None, "Telegram kept failing to return this chat's history") from exc
+                wait = min(300, 15 * 2 ** (failures - 1))
+                self.store.append("telegram.backoff", {"seconds": wait, "context": "chat_export",
+                                                       "error_type": type(exc).__name__})
+                if on_wait:
+                    on_wait(wait)
+                await asyncio.sleep(wait)
             finally:
                 with suppress(Exception):
                     await pages.aclose()
