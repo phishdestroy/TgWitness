@@ -55,7 +55,7 @@ WORLD = "tgwitness-crawl"
 REMOVED = "[removed]"
 DANGEROUS_CLICK = re.compile(
     r"pay|buy|purchase|checkout|order|confirm|approve|withdraw|transfer|send|delete|remove|donate|tip|subscribe|"
-    r"invoice|stars?\b|⭐|💎|ton\b|wallet|connect|sign|claim|stake|swap|deposit|bet|"
+    r"invoice|stars?\b|⭐|💎|\bton\b|wallet|connect|sign|claim|stake|swap|deposit|bet|"
     r"\bok\b|\byes\b|accept|agree|upgrade|premium|join|vote|gift|mint|spin|allow|share|invite|"
     r"купи|оплат|подтвер|підтвер|удал|видал|отправ|надісл|вывест|вивест|перевод|переказ|подпис|підпис|"
     r"кошел|гаманец|ставк|\bда\b|\bтак\b|соглас|згод|подел|поділ|пригла|запрос",
@@ -112,7 +112,7 @@ CLICKABLES_JS = """(() => {
     if (!text && !href) continue;
     if (seen.has(key)) continue;
     seen.add(key);
-    const words = [el.getAttribute('aria-label'), el.getAttribute('title'), el.getAttribute('role'), el.value]
+    const words = [el.getAttribute('aria-label'), el.getAttribute('title'), el.value]
       .map(value => String(value || '').replace(/\\s+/g, ' ').trim()).filter(Boolean).join(' ').slice(0, 400);
     items.push({index: i, text, href, words, x: Math.round(rect.left + rect.width / 2), y: Math.round(rect.top + rect.height / 2)});
   }
@@ -127,7 +127,7 @@ ELEMENT_AT_JS = """((x, y) => {
   const words = [el.innerText, el.value, hit.getAttribute('aria-label'), hit.getAttribute('title')];
   const hrefs = [];
   for (let node = el; node; node = node.parentElement && node.parentElement.closest(targets)) {
-    words.push(node.getAttribute('aria-label'), node.getAttribute('title'), node.getAttribute('role'));
+    words.push(node.getAttribute('aria-label'), node.getAttribute('title'));
     if (node.hasAttribute('href')) hrefs.push(node.getAttribute('href') || '');
   }
   return {
@@ -808,33 +808,40 @@ def _merge_clicks(fresh, queue, tried):
     return merged
 
 
-async def _isolated(call, expression):
+async def _isolated(call, expression, worlds=None):
+    worlds = {} if worlds is None else worlds
     try:
         tree = await call("Page.getFrameTree", timeout=10)
-        frame = tree["frameTree"]["frame"]["id"]
-        world = await call("Page.createIsolatedWorld", {"frameId": frame, "worldName": WORLD}, timeout=10)
-        context = world["executionContextId"]
-        if not isinstance(context, int) or isinstance(context, bool):
-            return None
+        frame = tree["frameTree"]["frame"]
+        key = (frame["id"], frame.get("loaderId"))
+        context = worlds.get(key)
+        if context is None:
+            world = await call("Page.createIsolatedWorld", {"frameId": frame["id"], "worldName": WORLD}, timeout=10)
+            context = world["executionContextId"]
+            if not isinstance(context, int) or isinstance(context, bool):
+                return None
+            worlds.clear()
+            worlds[key] = context
         found = await call("Runtime.evaluate", {"expression": expression, "contextId": context,
                                                 "returnByValue": True}, timeout=10)
     except Exception:
+        worlds.clear()
         return None
     if not isinstance(found, dict) or found.get("exceptionDetails"):
         return None
     return (found.get("result") or {}).get("value")
 
 
-async def _clickables(call):
+async def _clickables(call, worlds=None):
     try:
-        items = json.loads(await _isolated(call, CLICKABLES_JS) or "[]")
+        items = json.loads(await _isolated(call, CLICKABLES_JS, worlds) or "[]")
     except (TypeError, ValueError):
         return []
     return [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
 
 
-async def _element_at(call, x, y):
-    value = await _isolated(call, ELEMENT_AT_JS % (x, y))
+async def _element_at(call, x, y, worlds=None):
+    value = await _isolated(call, ELEMENT_AT_JS % (x, y), worlds)
     return value if isinstance(value, dict) else None
 
 
@@ -844,7 +851,8 @@ async def _crawl(call, redact, files, max_states, deadline, blocked):
     if current:
         seen.add(current)
     captured = 1 if await _capture_state(call, redact, files, "State 1 · initial") else 0
-    queue, tried, clicks = await _clickables(call), set(), 0
+    worlds = {}
+    queue, tried, clicks = await _clickables(call, worlds), set(), 0
     while queue and captured < max_states and clicks < MAX_CLICKS and time.monotonic() <= deadline:
         candidate = queue.pop(0)
         key = _click_key(candidate)
@@ -859,7 +867,7 @@ async def _crawl(call, redact, files, max_states, deadline, blocked):
         if point is None:
             tried.add(key)
             continue
-        found = await _element_at(call, *point)
+        found = await _element_at(call, *point, worlds)
         verdict = click_verdict(found, text_label, href_val)
         if verdict == "unsafe":
             _note_blocked(blocked, redact, *_click_key(found))
@@ -881,7 +889,7 @@ async def _crawl(call, redact, files, max_states, deadline, blocked):
             short = redact(text_label)[:40] or "step"
             await _capture_state(call, redact, files, f"State {captured} · {short}")
         if sig is None or sig != current:
-            queue = _merge_clicks(await _clickables(call), queue, tried)
+            queue = _merge_clicks(await _clickables(call, worlds), queue, tried)
         current = sig
     return captured
 
