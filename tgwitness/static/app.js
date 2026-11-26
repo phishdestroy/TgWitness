@@ -1547,7 +1547,7 @@ function sourceLines(p,c){
     return [tr("No source is selected.")];
 }
 function mediaLines(p,c){
-  const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",c),
+  const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",{...c,pending:Math.max(0,(c.pending||0)-(c.retry||0))}),
     p.oldest_pending_at&&tr("Oldest pending attachment")+": "+fmtFull(p.oldest_pending_at),
     p.disk_free_bytes!=null&&tr("Free disk")+": "+humanSize(p.disk_free_bytes)];
   if(p.reason==="ok")return [tr("Attachments are being saved."),...facts];
