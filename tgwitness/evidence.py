@@ -281,19 +281,24 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
             report_events = snapshot.events
             selection_matches = None
+            record_role = None
             if not compact and selection.enabled and fmt in ("html", "json", "pdf", "zip"):
                 selection_matches = report.report_selection.resolve_selection(snapshot.events(), selection)
                 selected_messages = report.report_selection.selected_messages(snapshot.events(), selection_matches)
 
-                def selected_event(event):
-                    return selection_matches(event) or report.report_selection.saved_file_of(event, selected_messages)
+                def selected_role(event):
+                    return report.report_selection.report_role(event, selection_matches, selected_messages)
 
                 def report_events():
-                    return (event for event in snapshot.events() if selected_event(event))
+                    return (event for event in snapshot.events() if selected_role(event) is not None)
 
                 selected_digest = report.Digest(*metric_options)
-                for event in report_events():
-                    selected_digest.add(event)
+                for event in snapshot.events():
+                    if selected_role(event) == "target":
+                        selected_digest.add(event)
+                if selection_matches.has_context:
+                    record_role = selected_role
+                    context["record_role"] = record_role
                 selected_digest.hash_images(store.root / "media")
                 selected_summary = selected_digest.result()
                 selected_summary["titles"] = {chat: summary["titles"].get(chat, "")
@@ -456,7 +461,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                                                          indent=1).encode("utf-8")])
                 if not compact and options.get("timeline"):
                     context["viewer"] = write_viewer(write_member, "journal",
-                        (viewer.journal_item(event, options.get("raw_records", True)) for event in report_events()),
+                        (report.journal_viewer_item(event, options.get("raw_records", True), record_role)
+                         for event in report_events()),
                         None, (context.get("report_digest") or summary).get("indicators"), options)
                 context["files"] = dict(hashes)
                 if compact:
@@ -596,6 +602,8 @@ def report_entry(context, options, file="report.html"):
     if context.get("selection"):
         entry["selection"] = context["selection"]["selection"]
         entry["selected_records"] = context["selection"]["counts"]["selected_records"]
+        if context["selection"]["counts"].get("context_records"):
+            entry["context_records"] = context["selection"]["counts"]["context_records"]
     if "report.json" in context.get("files", {}):
         entry["json"] = "report.json"
     for pdf in ("report.pdf", "chat.pdf"):

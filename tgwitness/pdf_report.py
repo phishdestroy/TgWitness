@@ -683,7 +683,7 @@ def changes(lay, say, changed, titles):
                      n=changed["messages_changed"] - changed["listed"]), size=8.5, color=MUTED)
 
 
-def records(lay, say, events, titles, options):
+def records(lay, say, events, titles, options, record_role=None):
     group, run = options.get("group_heartbeats", True), None
 
     def flush():
@@ -705,6 +705,9 @@ def records(lay, say, events, titles, options):
         if chat is not None:
             head += " · " + (titles.get(chat) or titles.get(str(chat)) or say("Chat {id}", id=chat)) \
                 + (" · " + say("message {id}", id=event["message_id"]) if event["message_id"] is not None else "")
+        role = record_role(event) if record_role else None
+        if role:
+            head += " · " + (say("Context message") if role == "context" else say("Matches export filters"))
         report_composition_pdf.record_heading(lay, head)
         times = message_time_line(say, payload, event.get("source_at"))
         if times:
@@ -919,8 +922,11 @@ class EvidencePDF:
                 self.lay.callout(notice)
             self.records_total = (self.handover["counts"]["unchanged"] + self.handover["counts"]["minimised"]) if self.handover \
                 else self.data["subject"].get("event_count")
+            self.context_count = 0
             if self.data.get("selection"):
-                self.records_total = self.data["selection"]["counts"]["selected_records"]
+                counts = self.data["selection"]["counts"]
+                self.context_count = counts.get("context_records", 0)
+                self.records_total = counts["selected_records"] + self.context_count
             self.directory_index = None
             if report_composition_pdf.active(self.lay):
                 self.events, self.directory_index = report_composition_pdf.indexed_events(self.events, self.records_total or 0)
@@ -1001,8 +1007,9 @@ class EvidencePDF:
 
     def render_brief(self):
         say = self.say
-        self.lay.brief(*report.evidence_brief(say, self.digest, self.records_total, self.data["timestamps"], self.coverage, self.account_text,
-                                         self.handover, self.filtered))
+        self.lay.brief(*report.evidence_brief(say, self.digest, self.records_total - self.context_count, self.data["timestamps"],
+                                              self.coverage, self.account_text, self.handover, self.filtered,
+                                              self.context_count))
 
     def render_selection(self):
         report.report_selection_view.pdf(self.lay, self.data.get("selection"))
@@ -1269,7 +1276,7 @@ class EvidencePDF:
                         if not self.handover else say("Every record in this extract, in journal order. Minimised records name "
                                                  "what was withheld."))
             records(self.lay, say, self.events, {**self.titles, **{int(k): v for k, v in self.titles.items() if k.lstrip("-").isdigit()}},
-                    self.options)
+                    self.options, self.context.get("record_role"))
         elif self.options.get("timeline") and self.records_total:
             self.lay.section(say("Records"))
             self.lay.callout(say("This journal has {n} records, exceeding the PDF transcript limit of {limit}. "

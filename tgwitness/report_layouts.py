@@ -200,7 +200,8 @@ def journal_replacements(event_factory, context, say, options, total=None, viewe
         if not rows:
             yield '<p>' + escape(say("No records fit this reading copy. Open the source records or the viewer.")) + '</p>'
         digest = context.get("report_digest") or context.get("digest") or {}
-        yield from report.record_items(rows, say, digest.get("titles") or {}, options, context.get("archive", False))
+        yield from report.record_items(rows, say, digest.get("titles") or {}, options, context.get("archive", False),
+                                       record_role=context.get("record_role"))
         yield '</section>'
 
     def directory():
