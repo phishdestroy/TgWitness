@@ -203,6 +203,8 @@ def media_info(media, unread=None):
     webpage = media.get("webpage") if isinstance(media.get("webpage"), dict) else None
     if webpage and webpage.get("url"):
         info.update(url=webpage.get("url"), site_name=webpage.get("site_name"), title=webpage.get("title"))
+    if media.get("spoiler"):
+        info["spoiler"] = True
     if media.get("ttl_seconds") and media["ttl_seconds"] != ephemeral.VIEW_ONCE:
         info["self_destruct_seconds"] = media["ttl_seconds"]
     if facts := ephemeral.describe(media, unread):
