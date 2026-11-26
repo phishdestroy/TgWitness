@@ -10953,5 +10953,6 @@
   "Another transfer is not finished. Resume or cancel it first.": "다른 전송이 아직 끝나지 않았습니다. 먼저 재개하거나 취소하세요.",
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram은 이 채팅에서 Takeout을 통해 일반 요청보다 적은 메시지를 보고합니다. 일부 플랫폼에서 제한된 채팅에서 이런 일이 발생합니다. 기록은 Takeout 없이 읽습니다.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram은 일부 플랫폼에서 이 채팅을 제한하며 Takeout을 통해 기록을 반환하지 않습니다. Takeout 없이 내보내세요.",
-  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram은 일부 플랫폼에서 이 채팅들을 제한하며 Takeout을 통해 기록을 반환하지 않으므로, 기록은 Takeout 없이 읽습니다."
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram은 일부 플랫폼에서 이 채팅들을 제한하며 Takeout을 통해 기록을 반환하지 않으므로, 기록은 Takeout 없이 읽습니다.",
+  "Read without Takeout": "Takeout 없이 읽음"
 }

@@ -229,6 +229,8 @@ def run_log(facts, say):
             rows.append((at, say("Selection fixed and signed") + " · " + say(MODE_NAMES.get(payload.get("mode") or "chat", "Capture"))))
         elif kind == "account_export.started":
             rows.append((at, say("Account export started")))
+        elif kind == "account_export.transport" and isinstance(payload.get("chat_ids"), list):
+            rows.append((at, say("Read without Takeout") + " · " + _counted(say, "{n} chats", len(payload["chat_ids"]))))
         elif kind == "account_export.transport":
             rows.append((at, say("Reading method: {method}", method=say(METHOD_NAMES.get(payload.get("transport"), str(payload.get("transport")))))))
         elif kind == "sealed.chat_export":
@@ -330,8 +332,10 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
     options = selection.get("account_options") or {}
     requested = (options.get("transport") if mode == "account" else "chat export" if mode == "chats"
                  else "chat event journal")
-    used = transports[-1].get("transport") if transports else (requested if requested != "auto" else None)
-    used_reason = transports[-1].get("meaning") if transports else None
+    whole = [item for item in transports if not isinstance(item.get("chat_ids"), list)]
+    partly = [item for item in transports if isinstance(item.get("chat_ids"), list)]
+    used = whole[-1].get("transport") if whole else (requested if requested != "auto" else None)
+    used_reason = whole[-1].get("meaning") if whole else None
     method = lambda value: say(METHOD_NAMES.get(value, str(value)))  # noqa: E731
     counts = dict(exported.get("counts") or {})
     if mode == "account":
@@ -351,6 +355,8 @@ def page(facts, events, fingerprint=None, head_hash=None, language="en"):
                       ("Method requested", _e(method(requested))),
                       ("Method used", _e(method(used)) if used else _e(say("recorded in the journal"))),
                       ("Why", _e(say(used_reason)) if used_reason and not limits_of(facts) else None),
+                      ("Read without Takeout", _e(_counted(say, "{n} chats", len(partly[-1]["chat_ids"])) + " · "
+                                                  + say(partly[-1].get("meaning") or "")) if partly else None),
                       ("Date range (UTC)", _e(" → ".join(str(x or "…") for x in (options.get("from_utc"), options.get("to_utc"))))
                        if options.get("from_utc") or options.get("to_utc") else None),
                       ("Media budget", _e(str(options.get("max_total_gib")) + " GiB") if options.get("max_total_gib") else None),
@@ -505,7 +511,8 @@ def text_keys():
     keys += list(STATE_LABELS.values())
     from .collector import TAKEOUT_SKIPPED_MEANING
     from .account_report import LIMIT_TEXTS
-    recorded = [*TAKEOUT_SKIPPED_MEANING.values(), *LIMIT_TEXTS, "visible to this account during the recorded acquisition intervals",
+    from .account_export_transport import TAKEOUT_RESTRICTED_READ
+    recorded = [*TAKEOUT_SKIPPED_MEANING.values(), *LIMIT_TEXTS, TAKEOUT_RESTRICTED_READ, "visible to this account during the recorded acquisition intervals",
                 "Collection or full packaging failed. This archive is the compact signed journal of everything recorded "
                 "before the failure; it is incomplete within the selected scope."]
     return list(dict.fromkeys(keys + [text for _, text in REASONS.values()] + list(CATEGORY_NAMES.values())
@@ -514,7 +521,7 @@ def text_keys():
 
 
 ROW_LABELS = [(label, None) for label in (
-    "Mode", "Scope", "Method requested", "Method used", "Why", "Date range (UTC)", "Media budget", "Report language",
+    "Mode", "Scope", "Method requested", "Method used", "Why", "Read without Takeout", "Date range (UTC)", "Media budget", "Report language",
     "Selection SHA-256", "Complete within scope", "Chat list read completely", "Export steps finished",
     "Failed pages and files", "Not reached before the stop", "Known limits", "Coverage", "Repository", "Workflow run",
     "Collector commit", "GitHub attestation", "Recipient key SHA-256", "Journal signing key", "Journal records", "Journal head",

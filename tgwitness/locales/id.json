@@ -10953,5 +10953,6 @@
   "Another transfer is not finished. Resume or cancel it first.": "Pemindahan lain belum selesai. Lanjutkan atau batalkan terlebih dahulu.",
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram melaporkan lebih sedikit pesan di obrolan ini melalui Takeout dibanding permintaan biasa. Ini terjadi pada obrolan yang dibatasinya di beberapa platform. Riwayat dibaca tanpa Takeout.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram membatasi obrolan ini di beberapa platform dan tidak mengembalikan riwayatnya melalui Takeout. Ekspor tanpa Takeout.",
-  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram membatasi obrolan ini di beberapa platform dan tidak mengembalikan riwayatnya melalui Takeout, sehingga riwayatnya dibaca tanpa Takeout."
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram membatasi obrolan ini di beberapa platform dan tidak mengembalikan riwayatnya melalui Takeout, sehingga riwayatnya dibaca tanpa Takeout.",
+  "Read without Takeout": "Dibaca tanpa Takeout"
 }

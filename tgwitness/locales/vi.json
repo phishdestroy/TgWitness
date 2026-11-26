@@ -10953,5 +10953,6 @@
   "Another transfer is not finished. Resume or cancel it first.": "Một lần chuyển khác chưa hoàn tất. Hãy tiếp tục hoặc hủy nó trước.",
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram báo cáo ít tin nhắn trong cuộc trò chuyện này qua Takeout hơn so với yêu cầu thông thường. Điều này xảy ra với các cuộc trò chuyện bị hạn chế trên một số nền tảng. Lịch sử được đọc mà không dùng Takeout.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram hạn chế cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout. Hãy xuất mà không dùng Takeout.",
-  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram hạn chế các cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout, nên lịch sử được đọc mà không dùng Takeout."
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram hạn chế các cuộc trò chuyện này trên một số nền tảng và không trả về lịch sử qua Takeout, nên lịch sử được đọc mà không dùng Takeout.",
+  "Read without Takeout": "Đã đọc không dùng Takeout"
 }

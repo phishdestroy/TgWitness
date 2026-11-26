@@ -11106,5 +11106,6 @@
   "Another transfer is not finished. Resume or cancel it first.": "Inne przeniesienie nie zostało ukończone. Najpierw je wznów lub anuluj.",
   "Telegram reports fewer messages in this chat through Takeout than through ordinary requests. It does this for chats it restricts on some platforms. History is read without Takeout.": "Telegram zgłasza przez Takeout mniej wiadomości w tym czacie niż przez zwykłe zapytania. Dzieje się tak w czatach, które ogranicza na niektórych platformach. Historia jest odczytywana bez Takeout.",
   "Telegram restricts this chat on some platforms and returns no history for it through Takeout. Export it without Takeout.": "Telegram ogranicza ten czat na niektórych platformach i nie zwraca przez Takeout jego historii. Wyeksportuj go bez Takeout.",
-  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram ogranicza te czaty na niektórych platformach i nie zwraca przez Takeout ich historii, dlatego jest ona odczytywana bez Takeout."
+  "Telegram restricts these chats on some platforms and returns no history for them through Takeout, so their history is read without Takeout.": "Telegram ogranicza te czaty na niektórych platformach i nie zwraca przez Takeout ich historii, dlatego jest ona odczytywana bez Takeout.",
+  "Read without Takeout": "Odczytane bez Takeout"
 }
