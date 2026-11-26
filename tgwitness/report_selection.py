@@ -97,6 +97,10 @@ def sender_id(event):
 
 
 class _Matcher:
+    has_context = False
+    context_messages = frozenset()
+    context_secret_seqs = frozenset()
+
     def __init__(self, selection):
         self.enabled = selection.enabled
         self.chats = frozenset(selection.chats)
@@ -135,6 +139,9 @@ class _Matcher:
         kind = event.get("kind")
         return isinstance(kind, str) and kind in self.kinds and self.chat(event) and self.time(event) \
             and (not self.senders or sender_id(event) in self.senders)
+
+    def role(self, event):
+        return "target" if self(event) else None
 
 
 def compile_selection(selection):
@@ -220,8 +227,7 @@ def resolve_selection(events, selection):
     base = _Matcher(selection)
     if not selection.enabled or (selection.context_before == 0 and selection.context_after == 0):
         return base
-    per_chat_order = {}
-    per_chat_seen = {}
+    per_chat_ids = {}
     per_chat_targets = {}
     secret_order = {}
     secret_targets = {}
@@ -244,19 +250,15 @@ def resolve_selection(events, selection):
             msg_id = _message_id(event.get("message_id"))
             if chat is None or msg_id is None:
                 continue
-            seen = per_chat_seen.setdefault(chat, set())
-            if msg_id not in seen:
-                seen.add(msg_id)
-                per_chat_order.setdefault(chat, []).append(msg_id)
+            per_chat_ids.setdefault(chat, set()).add(msg_id)
             if is_target:
                 per_chat_targets.setdefault(chat, set()).add(msg_id)
     target_messages, context_messages = set(), set()
-    for chat, timeline in per_chat_order.items():
+    for chat, ids in per_chat_ids.items():
         targets = per_chat_targets.get(chat)
         if not targets:
             continue
-        if numbered_per_chat(chat):
-            timeline = sorted(timeline)
+        timeline = sorted(ids)
         n = len(timeline)
         intervals = []
         for idx, msg_id in enumerate(timeline):
@@ -311,6 +313,13 @@ def selected_messages(events, predicate):
 
 def saved_file_of(event, messages):
     return event.get("kind") in FILE_KINDS and _message_key(event) in messages
+
+
+def report_role(event, predicate, messages):
+    role = predicate.role(event)
+    if role is None and saved_file_of(event, messages):
+        return "context" if _message_key(event) in predicate.context_messages else "target"
+    return role
 
 
 def _preview(event):
@@ -418,7 +427,8 @@ def _known(connection, event, predicate):
 def _neighbor(row, predicate):
     result = {"seq": row["seq"], "chat_id": row["chat"], "message_id": row["message"],
               "kind": row["kind"], "observed_at": row["observed_at"], "sender_id": row["sender"], "text": row["text"]}
-    result.update(context_only=True, matches_selection=predicate({**result, "payload": {"sender_id": row["sender"]}}))
+    result.update(context_only=True, matches_selection=predicate.role(
+        {**result, "payload": {"sender_id": row["sender"]}}) == "target")
     return result
 
 
@@ -456,6 +466,7 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
     aggregate = report_analytics.Analytics()
     messages = {"rows": [], "total": 0, "truncated": False}
     records = selected_records = context_records = invalid_time_excluded = unknown_catalog_senders = 0
+    target_message_records = 0
     last_seq, journal_head = None, None
     if scratch_root is not None:
         Path(scratch_root).mkdir(mode=0o700, parents=True, exist_ok=True)
@@ -502,23 +513,26 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                                 connection.execute("INSERT INTO catalog_senders VALUES (?,1) ON CONFLICT(id) DO UPDATE SET count=count+1", (sender,))
                         elif report_analytics._time(event.get("observed_at")) is None:
                             invalid_time_excluded += 1
-                role = predicate.role(event) if has_window else ("target" if predicate(event) else None)
+                role = predicate.role(event)
                 if role is None:
                     continue
-                selected_records += 1
                 if role == "context":
                     context_records += 1
-                aggregate.add(event)
-                if chat is not None:
-                    connection.execute("INSERT OR IGNORE INTO selected_chats VALUES (?)", (chat,))
-                if secret is not None:
-                    connection.execute("INSERT OR IGNORE INTO selected_secret_chats VALUES (?)", (secret,))
-                if kind in ("message.edited", "message.deleted", "message.missing_on_recheck") and chat is not None \
-                        and type(event.get("message_id")) is int:
-                    connection.execute("INSERT OR IGNORE INTO selected_changed VALUES (?,?)", (chat, event["message_id"]))
+                else:
+                    selected_records += 1
+                    aggregate.add(event)
+                    if chat is not None:
+                        connection.execute("INSERT OR IGNORE INTO selected_chats VALUES (?)", (chat,))
+                    if secret is not None:
+                        connection.execute("INSERT OR IGNORE INTO selected_secret_chats VALUES (?)", (secret,))
+                    if kind in ("message.edited", "message.deleted", "message.missing_on_recheck") and chat is not None \
+                            and type(event.get("message_id")) is int:
+                        connection.execute("INSERT OR IGNORE INTO selected_changed VALUES (?,?)", (chat, event["message_id"]))
                 if not message_kind:
                     continue
                 messages["total"] += 1
+                if role == "target":
+                    target_message_records += 1
                 if len(messages["rows"]) < preview_limit:
                     row_preview = _preview(event)
                     if has_window:
@@ -526,7 +540,7 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                         if role == "context":
                             row_preview["context_only"] = True
                     messages["rows"].append(row_preview)
-                if sender is not None:
+                if role == "target" and sender is not None:
                     connection.execute("INSERT OR IGNORE INTO selected_senders VALUES (?)", (sender,))
             raw = aggregate.result()
             chats, chats_total, chats_status = _catalog(connection, "catalog_chats", titles=True)
@@ -536,8 +550,9 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                 len(predicate.context_messages) + len(predicate.context_secret_seqs)
                 if has_window else 0
             )
-            counts = {"selected_records": selected_records, "selected_message_records": messages["total"],
+            counts = {"selected_records": selected_records, "selected_message_records": target_message_records,
                       "context_records": context_records, "context_messages": context_messages_count,
+                      "report_records": selected_records + context_records,
                       "message_observations": raw["message_observations"],
                       "participants": connection.execute("SELECT count(*) FROM selected_senders").fetchone()[0],
                       "chats": connection.execute("SELECT (SELECT count(*) FROM selected_chats) + (SELECT count(*) FROM selected_secret_chats)").fetchone()[0],
