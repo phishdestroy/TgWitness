@@ -244,11 +244,14 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
       const modeSelect = node("select", "");
       modeLabel.htmlFor = "mini-app-capture-mode";
       modeSelect.id = "mini-app-capture-mode";
-      for (const [val, title] of [
+      const offered = new Set(Array.isArray(data.browser.modes) && data.browser.modes.length ? data.browser.modes : ["passive"]);
+      const modes = [
         ["passive", tr("Passive (load, screenshots, MHTML, HAR)")],
         ["crawl", tr("Safe crawl (navigate non-destructive tabs, block payments)")],
         ["interactive", tr("Interactive (visible window, record each screen until closed)")],
-      ]) {
+      ].filter(([val]) => offered.has(val));
+      if (!modes.some(([val]) => val === selectedMode)) selectedMode = modes.length ? modes[0][0] : "passive";
+      for (const [val, title] of modes) {
         const opt = document.createElement("option");
         opt.value = val; opt.textContent = title; opt.selected = val === selectedMode;
         modeSelect.append(opt);

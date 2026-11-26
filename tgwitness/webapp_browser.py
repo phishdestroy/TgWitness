@@ -51,6 +51,7 @@ MAX_TEXT_CHARS = 200_000
 MAX_TRAFFIC = 256 * 1024**2
 MAX_CLICKS = 40
 CLICK_SETTLE = 1.5
+WORLD = "tgwitness-crawl"
 REMOVED = "[removed]"
 DANGEROUS_CLICK = re.compile(
     r"pay|buy|purchase|checkout|order|confirm|approve|withdraw|transfer|send|delete|remove|donate|tip|subscribe|"
@@ -807,24 +808,33 @@ def _merge_clicks(fresh, queue, tried):
     return merged
 
 
+async def _isolated(call, expression):
+    try:
+        tree = await call("Page.getFrameTree", timeout=10)
+        frame = tree["frameTree"]["frame"]["id"]
+        world = await call("Page.createIsolatedWorld", {"frameId": frame, "worldName": WORLD}, timeout=10)
+        context = world["executionContextId"]
+        if not isinstance(context, int) or isinstance(context, bool):
+            return None
+        found = await call("Runtime.evaluate", {"expression": expression, "contextId": context,
+                                                "returnByValue": True}, timeout=10)
+    except Exception:
+        return None
+    if not isinstance(found, dict) or found.get("exceptionDetails"):
+        return None
+    return (found.get("result") or {}).get("value")
+
+
 async def _clickables(call):
     try:
-        found = await call("Runtime.evaluate", {"expression": CLICKABLES_JS, "returnByValue": True}, timeout=10)
-        items = json.loads((found.get("result") or {}).get("value") or "[]")
-    except Exception:
+        items = json.loads(await _isolated(call, CLICKABLES_JS) or "[]")
+    except (TypeError, ValueError):
         return []
     return [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
 
 
 async def _element_at(call, x, y):
-    try:
-        found = await call("Runtime.evaluate", {"expression": ELEMENT_AT_JS % (x, y), "returnByValue": True},
-                           timeout=10)
-    except Exception:
-        return None
-    if not isinstance(found, dict) or found.get("exceptionDetails"):
-        return None
-    value = (found.get("result") or {}).get("value")
+    value = await _isolated(call, ELEMENT_AT_JS % (x, y))
     return value if isinstance(value, dict) else None
 
 
