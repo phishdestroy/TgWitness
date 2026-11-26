@@ -29,8 +29,11 @@ ITEM_ERRORS = {'MessageIdInvalidError', 'MsgIdInvalidError', 'MediaEmptyError', 
 def estimate(count, seconds, hourly):
     if not isinstance(count, int) or count <= 0:
         return None
-    each = max(seconds or 0, 3600 / hourly if hourly else 0)
-    return round(count * each)
+    gap = seconds or 0
+    if not hourly or hourly * gap >= 3600:
+        return round((count - 1) * gap)
+    hours, rest = divmod(count - 1, hourly)
+    return round(hours * 3600 + rest * gap)
 
 
 def busy(collector):
