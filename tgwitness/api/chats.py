@@ -485,13 +485,13 @@ async def chats(request: Request, *, ctx=Depends(current_context)):
     for row in collector.intake_progress.retries():
         if row["chat_id"] not in retries or row["retry_at"] < retries[row["chat_id"]]["retry_at"]:
             retries[row["chat_id"]] = row
-    backoff = store.get_setting("rpc_backoff_until", 0)
+    backoff, lost = store.get_setting("rpc_backoff_until", 0), collector.lost_sources()
     for chat in listed:
         chat_id = chat["chat_id"]
         chat["intake_state"] = "running" if chat_id in collector.intake_active else "queued" if chat_id in pending else None
         if chat["intake_state"] == "queued" and chat_id in retries:
             retry = retries[chat_id]
-            if collector.waits_for_access(chat_id, retry["error_type"]):
+            if collector.waits_for_access(chat_id, retry["error_type"], lost):
                 chat["intake_state"] = None
             else:
                 chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),

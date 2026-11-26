@@ -1106,8 +1106,8 @@ class Collector:
         if allowed is not None:
             pending.intersection_update(allowed)
             active.intersection_update(allowed)
-        rows = self.intake_progress.retries()
-        waits = [(row["chat_id"], self.waits_for_access(row["chat_id"], row.get("error_type"))) for row in rows
+        rows, lost = self.intake_progress.retries(), self.lost_sources()
+        waits = [(row["chat_id"], self.waits_for_access(row["chat_id"], row.get("error_type"), lost)) for row in rows
                  if row["chat_id"] in pending]
         waiting = {chat_id for chat_id, wait in waits if wait} - {chat_id for chat_id, wait in waits if not wait}
         pending -= waiting
@@ -1167,9 +1167,10 @@ class Collector:
         jobs.extend((chat_id, None, False) for chat_id in self.store.get_setting("new_chat_intake_pending", []))
         jobs.extend((chat_id, None, True) for chat_id in self.store.get_setting("baseline_pending", []))
         self.intake_waiting.clear()
+        lost = self.lost_sources()
         for job in jobs:
             progress = self.intake_progress.get(job[0], job[2])
-            if self.waits_for_access(job[0], progress.get("error_type")):
+            if self.waits_for_access(job[0], progress.get("error_type"), lost):
                 continue
             if progress.get("retry_at", 0) <= time.time():
                 self.queue_intake(*job)
@@ -1184,17 +1185,22 @@ class Collector:
                 worker.cancel()
             await asyncio.gather(*workers, return_exceptions=True)
 
-    def waits_for_access(self, chat_id, error_type):
-        lost = self.store.get_setting("lost_sources", {}) or {}
-        if str(chat_id) not in lost or error_type != "ValueError" or not self.selected(chat_id):
+    def lost_sources(self):
+        return self.store.get_setting("lost_sources", {}) or {}
+
+    def waits_for_access(self, chat_id, error_type, lost=None):
+        if error_type != "ValueError":
+            return False
+        if str(chat_id) not in (self.lost_sources() if lost is None else lost) or not self.selected(chat_id):
             return False
         seen = (self.source_status.get(str(chat_id)) or {}).get("state") == "receiving_updates"
         return chat_id not in self.dialog_cache and not seen
 
     async def intake_retries(self):
         while self.running:
+            lost = self.lost_sources()
             for row in self.intake_progress.retries():
-                if self.waits_for_access(row["chat_id"], row.get("error_type")):
+                if self.waits_for_access(row["chat_id"], row.get("error_type"), lost):
                     continue
                 if row["retry_at"] <= time.time() or not self.selected(row["chat_id"]):
                     self.queue_intake(row["chat_id"], baseline=bool(row["baseline"]))
