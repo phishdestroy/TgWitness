@@ -1475,6 +1475,7 @@ function sessionLossReason(cause){
   return {session_revoked:tr("The session was ended from another device or by Telegram."),session_expired:tr("Telegram let the session expire."),
     session_ended:tr("Telegram no longer recognises this session: it was ended or the account was removed.")}[cause]||"";
 }
+function upcoming(time){if(!time)return false;const ms=typeof time==="number"?(time<1e12?time*1000:time):new Date(time).getTime();return ms>Date.now();}
 function accountLossText(cause){
   const reason=sessionLossReason(cause);
   if(reason)return reason+" "+tr("Sign in again to observe or export.");
@@ -1502,7 +1503,7 @@ function collectorLines(name,p){
     const paused=p.telegram_pause_until&&new Date(p.telegram_pause_until).getTime()>Date.now();
     if(p.reason==="connected")return [tr("Connected to Telegram.")];
     if(p.reason==="reconnecting")return [tr("Connection lost; reconnecting (attempt {n}).",{n:p.attempts}),
-      p.next_reconnect_at&&tr("Next attempt: {time}",{time:fmtFull(p.next_reconnect_at)}),p.error&&tr("Last error: {error}",{error:p.error})];
+      upcoming(p.next_reconnect_at)&&tr("Next attempt: {time}",{time:fmtFull(p.next_reconnect_at)}),p.error&&tr("Last error: {error}",{error:p.error})];
     if(p.reason==="telegram_pause")return [telegramPauseText(p),tr("Observation waits and resumes on its own.")];
     if(p.reason==="signed_out")return [accountLossText(p.cause)];
     if(p.reason==="collector_error")return [tr("Observation stopped after an error: {error}",{error:p.error?errorName(p.error)||p.error:"?"})];
@@ -3178,9 +3179,9 @@ function renderAccountExportJobs(){
     const current=job.current_chat;
     if(current)card.append(node("p","account-export-job-note",tr("Current chat: {name}",
       {name:typeof current==="object"?(current.title||current.id||current.chat_id||tr("Unknown")):current})));
-    if(job.wait_until)card.append(node("p","account-export-job-note warning",tr("Telegram asked this job to wait until {time}.",
+    if(accountExportWaiting(job))card.append(node("p","account-export-job-note warning",tr("Telegram asked this job to wait until {time}.",
       {time:accountExportTime(job.wait_until)})));
-    else if(job.delay_seconds)card.append(node("p","account-export-job-note warning",tr("Telegram delay: {n} seconds.",{n:job.delay_seconds})));
+    else if(job.delay_seconds&&!job.wait_until&&job.active!==false)card.append(node("p","account-export-job-note warning",tr("Telegram delay: {n} seconds.",{n:job.delay_seconds})));
     if(coverage.inventory_complete===false)card.append(node("p","account-export-job-note warning",
       tr("Chat inventory is still being read or was interrupted; this is not a complete account inventory.")));
     if(coverage.scope)card.append(node("p","account-export-job-note",tr("Coverage: {scope}",{scope:tr(coverage.scope)})));
@@ -3944,7 +3945,7 @@ function timestampsFacts(e,h){
   facts.push(tr("Last verified timestamp: {time}",{time:when(h.last_verified_at)}));
   if(h.last_failure)facts.push(tr("Last failure, {time}: {list}",{time:fmtFull(h.last_failure.at),
     list:h.last_failure.errors.map(r=>hostOf(r.service)+" — "+r.error).join("; ")}));
-  if(h.next_attempt_at)facts.push(tr("Next attempt: {time}",{time:fmtFull(h.next_attempt_at)}));
+  if(upcoming(h.next_attempt_at))facts.push(tr("Next attempt: {time}",{time:fmtFull(h.next_attempt_at)}));
   return facts.concat(witnessFacts(e));
 }
 function witnessFacts(e){
@@ -4040,7 +4041,7 @@ function replicaFacts(r,h){
       size:humanSize(l.bytes),seq:(l.journal_seq||0).toLocaleString(LANG)}),
     tr("Last successful copy: {time}",{time:when(h.last_success_at)}),
     h.lag_records!=null&&tr("Journal records not yet copied: {lag} of {head}.",{lag:h.lag_records.toLocaleString(LANG),head:(h.head_seq||0).toLocaleString(LANG)}),
-    h.next_attempt_at&&tr("Next attempt: {time}",{time:fmtFull(h.next_attempt_at)}),
+    upcoming(h.next_attempt_at)&&tr("Next attempt: {time}",{time:fmtFull(h.next_attempt_at)}),
     l?.object_lock&&lockText(l.object_lock)];
 }
 
