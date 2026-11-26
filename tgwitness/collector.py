@@ -5429,13 +5429,18 @@ class Collector:
         if action == "exclude":
             return {"file_status": "excluded_by_policy", "file_kind": kind}
         if action == "hashes_only":
-            try:
-                hashes = await self.attachment_hashes(message)
-                digest = hashlib.sha256(canonical(hashes)).hexdigest()
-                return {"file_status": "hashes_only" if hashes["status"] == "complete" else "incomplete_hashes",
-                        "file_kind": kind, "server_hashes": hashes, "file_hash_sha256": digest}
-            except (RPCError, OSError, TimeoutError, ValueError) as exc:
-                return {"file_status": "hashes_unavailable", "file_kind": kind, "file_error": type(exc).__name__}
+            for attempt in range(3):
+                try:
+                    hashes = await self.attachment_hashes(message)
+                    digest = hashlib.sha256(canonical(hashes)).hexdigest()
+                    return {"file_status": "hashes_only" if hashes["status"] == "complete" else "incomplete_hashes",
+                            "file_kind": kind, "server_hashes": hashes, "file_hash_sha256": digest}
+                except FLOOD_ERRORS as exc:
+                    if attempt == 2:
+                        return {"file_status": "hashes_unavailable", "file_kind": kind, "file_error": type(exc).__name__}
+                    await asyncio.sleep(min(exc.seconds + 1, 600))
+                except (RPCError, OSError, TimeoutError, ValueError) as exc:
+                    return {"file_status": "hashes_unavailable", "file_kind": kind, "file_error": type(exc).__name__}
         limit = rule["max_mb"] * 1024**2
         if size is None or size > limit:
             return {"file_status": "above_limit" if size else "unknown_size", "file_kind": kind,
