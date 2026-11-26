@@ -46,8 +46,12 @@ export function createSwarmExport({root,json,tr,trn,toast,download}){
   function progressCell(task){
     const p=task.progress||{};
     if(task.state==='running'){
-      const share=p.total?Math.min(1,(p.captured||0)/p.total):null;
-      const text=p.total?tr('{done} of {total} messages',{done:number(p.captured),total:number(p.total)}):trn('{n} message','{n} messages',p.captured||0);
+      const [done,total]=p.stage==='files'?[p.files_done,p.files_total]:p.stage==='recheck'?[p.recheck_done,p.recheck_total]:[p.captured,p.total];
+      const share=p.stage==='packaging'?null:total?Math.min(1,(done||0)/total):null;
+      const text=p.stage==='files'&&p.files_total?tr('{captured} messages saved; files: {done}/{total}',{captured:number(p.captured||0),done:number(p.files_done||0),total:number(p.files_total)})
+        :p.stage==='recheck'?tr('rechecking absent message numbers')+(p.recheck_total?' '+number(p.recheck_done||0)+'/'+number(p.recheck_total):'')
+        :p.stage==='packaging'?tr('packaging and signing the archive')
+        :p.total?tr('{done} of {total} messages',{done:number(p.captured),total:number(p.total)}):trn('{n} message','{n} messages',p.captured||0);
       const eta=p.eta_seconds?' · '+tr('about {time} left',{time:p.eta_seconds<120?tr('{n} s',{n:Math.round(p.eta_seconds)}):tr('{n} min',{n:Math.ceil(p.eta_seconds/60)})}):'';
       return `<div class="se-progress">${share!==null?`<span class="se-track"><i data-se-share="${Math.round(share*100)}"></i></span>`:''}<small>${esc(text+eta)}</small></div>`;
     }
@@ -81,7 +85,7 @@ export function createSwarmExport({root,json,tr,trn,toast,download}){
     if(task.result)actions.push(`<button type="button" class="se-text" data-se-act="download" data-job="${job.id}" data-task="${task.id}" data-name="${esc(task.result.filename||'')}">${icon('download')}${t(task.result.partial?'Download partial':'Download')}</button>`);
     const excluded=Object.entries(task.excluded||{}).map(([id,why])=>accountName(id)+': '+tr(why));
     const notes=[task.error?tr(task.error):'',...excluded].filter(Boolean);
-    const wait=p.wait_seconds?`<span class="se-wait">${esc(tr('Wait {time}',{time:tr('{n} s',{n:Math.round(p.wait_seconds)})}))}</span>`:'';
+    const wait=task.state==='running'&&p.wait_seconds?`<span class="se-wait">${esc(tr('Wait {time}',{time:tr('{n} s',{n:Math.round(p.wait_seconds)})}))}</span>`:'';
     return `<tr data-state="${task.state}">
       <td class="se-chat"><div><b>${esc(title)}</b>${peer.input&&peer.input!==title?`<small>${esc(peer.input)}</small>`:''}${notes.length?`<small class="se-notes">${esc(notes.join(' · '))}</small>`:''}</div></td>
       <td>${esc(task.account?accountName(task.account):task.pinned?accountName(task.pinned):'—')}</td>
