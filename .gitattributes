@@ -20,3 +20,4 @@ website/demo/report/report.html binary
 website/demo/report/*.zip binary
 website/export-clinic/media/** -text
 website/validation/audit/* -text -whitespace
+validation/*.7z binary

@@ -32,7 +32,7 @@ else:
     spec.loader.exec_module(inventory)
     all_script_keys = inventory.all_script_keys
 
-BINARY = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".mp4", ".bin", ".tsq", ".tsr", ".ttf"}
+BINARY = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".mp4", ".bin", ".tsq", ".tsr", ".ttf", ".7z"}
 DEEPL_UUID = r"[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}"
 PATTERNS = {
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----"),

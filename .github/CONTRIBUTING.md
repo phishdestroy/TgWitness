@@ -35,6 +35,8 @@ Regression tests, fixtures and validation runners are maintained privately and a
 excluded from the public repository and source archive. Preserve the local validation
 workspace when preparing a release. Record the revision and checks actually completed;
 public source alone does not include the private validation harness.
+An encrypted copy of the tests and of the run for a revision, with its SHA-256, is kept in
+[validation](../validation/README.md).
 Use an authorized test host and synthetic accounts; live-service checks require explicit scope.
 
 ## Public project website

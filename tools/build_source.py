@@ -98,6 +98,7 @@ EXPORT_CLINIC_ASSETS = (
 )
 FILES.extend("website/export-clinic/media/" + name for name in EXPORT_CLINIC_ASSETS)
 FILES.append("website/case-study/signed-export-statistics.json")
+FILES.extend("validation/" + name for name in ("README.md", "SHA256SUMS.txt", "private-tests-4e43cf8.7z"))
 FILES.extend("addons/capture/" + name for name in (
     "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml", "compose.official.yaml",
     "config/browser.example.json", "config/ayugram.example.json", "config/official.example.json", "config/official-upstream.example.json",
