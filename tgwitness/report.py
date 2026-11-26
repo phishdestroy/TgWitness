@@ -1752,7 +1752,7 @@ def reactions_text(found):
 IOC_KINDS = {"url": "Link", "domain": "Domain", "wallet": "Wallet", "telegram": "Telegram username",
              "telegram-invite": "Telegram invite link", "email": "E-mail address", "phone": "Phone number",
              "image": "Image (SHA-256)"}
-IOC_SOURCES = {"text": "text", "hidden link": "hidden link", "button": "button", "link preview": "link preview",
+IOC_SOURCES = {"text": "message text", "hidden link": "hidden link", "button": "button", "link preview": "link preview",
                "chat description": "chat description", "attachment": "attachment"}
 IOC_CHECKSUMS = {"valid": "checksum valid", "none": "no checksum", "not checked": "checksum not checked"}
 IOC_SHOWN = 1000
@@ -3278,8 +3278,12 @@ CHAT_KINDS = {"supergroup": "Supergroup", "channel": "Channel", "group": "Basic 
 VISIBILITIES = {"public": "Public link", "private": "No public link"}
 ROLE_NAMES = {"creator": "creator", "admin": "administrator", "member": "member", "restricted": "restricted member",
               "left": "not a member"}
-ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined",
-                 "ParticipantLeave": "Left", "ParticipantInvite": "Invited a member",
+ADMIN_ACTIONS = {"DeleteMessage": "Deleted a message", "EditMessage": "Edited a message", "ParticipantJoin": "Joined the chat",
+                 "ParticipantJoinByInvite": "Joined by invite link", "ParticipantJoinByRequest": "Joined after approval",
+                 "ParticipantLeave": "Left the chat", "ParticipantInvite": "Invited a member",
+                 "ToggleSlowMode": "Changed slow mode", "TogglePreHistoryHidden": "Changed history visibility for new members",
+                 "DefaultBannedRights": "Changed default member permissions", "StopPoll": "Stopped a poll",
+                 "ExportedInviteRevoke": "Revoked an invite link", "ToggleInvites": "Changed who can invite members",
                  "ParticipantToggleBan": "Banned or restricted a member", "ParticipantToggleAdmin": "Changed admin rights",
                  "ChangeTitle": "Changed the title", "ChangeAbout": "Changed the description",
                  "ChangeUsername": "Changed the username", "ChangePhoto": "Changed the photo",
