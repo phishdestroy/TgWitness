@@ -4,10 +4,10 @@ import io
 
 from . import action_protocol
 from .evidence import safe_cell
+from .report import CHAT_KINDS
 
 PREFIX = "EX-"
-COURT_KINDS = {"user": "Private chat", "private": "Private chat", "bot": "Bot", "group": "Basic group",
-               "megagroup": "Supergroup", "supergroup": "Supergroup", "channel": "Channel", "chat": "Chat"}
+COURT_KINDS = {**CHAT_KINDS, "user": CHAT_KINDS["private"], "megagroup": CHAT_KINDS["supergroup"], "chat": "Chat"}
 STYLE = ("body{font:11pt/1.5 'Segoe UI',system-ui,Arial,sans-serif;color:#141a22;max-width:900px;margin:28px auto;padding:0 20px}"
          "h1{font-size:19pt;margin:0 0 4px}h2{font-size:12.5pt;margin:22px 0 6px;padding-bottom:3px;border-bottom:1px solid #d5dbe3}"
          ".lead{color:#4a5565}.note{border-left:4px solid #c27c0e;background:#fdf6ea;padding:8px 12px;margin:10px 0}"

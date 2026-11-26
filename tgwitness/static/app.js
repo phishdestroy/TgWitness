@@ -1109,8 +1109,8 @@ function renderWorkflowControls(){
 }
 import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
-import("./views/chat-gaps.js?v=7").then(({createChatGaps})=>{
-  chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations'),
+import("./views/chat-gaps.js?v=8").then(({createChatGaps})=>{
+  chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations'),lossText:accountLossText,
     fmtDay:value=>panelTime?.day(value),dayKey:value=>panelTime?.dayKey(value)});
   if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
 }).catch(error=>toast(error.message,true));
@@ -1475,7 +1475,7 @@ function sessionLossReason(cause){
   return {session_revoked:tr("The session was ended from another device or by Telegram."),session_expired:tr("Telegram let the session expire."),
     session_ended:tr("Telegram no longer recognises this session: it was ended or the account was removed.")}[cause]||"";
 }
-function upcoming(time){if(!time)return false;const ms=typeof time==="number"?(time<1e12?time*1000:time):new Date(time).getTime();return ms>Date.now();}
+function upcoming(time){if(!time)return false;const ms=typeof time==="number"?accountExportEpochMs(time):new Date(time).getTime();return ms>Date.now();}
 function accountLossText(cause){
   const reason=sessionLossReason(cause);
   if(reason)return reason+" "+tr("Sign in again to observe or export.");

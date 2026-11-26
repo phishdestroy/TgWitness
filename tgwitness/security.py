@@ -126,10 +126,7 @@ class Vault:
             if stored is None:
                 if any(p.exists() for p in protected):
                     raise RuntimeError("Vault master key missing from OS keyring (" + service + " / " + account + "). Restore it; refusing key replacement.")
-                master = Fernet.generate_key()
-                store.set(account, master.decode("ascii"))
-                if store.get(account) != master.decode("ascii"):
-                    raise RuntimeError("OS keyring did not retain the stored vault master key.")
+                master = _store_new_master(store, account).encode("ascii")
             else:
                 master = stored.strip().encode("ascii")
             Fernet(master)
@@ -517,6 +514,14 @@ def read_keyring_marker(marker: Path):
     return service, account, salt
 
 
+def _store_new_master(store, account):
+    master = Fernet.generate_key().decode("ascii")
+    store.set(account, master)
+    if store.get(account) != master:
+        raise RuntimeError("OS keyring did not retain the stored vault master key.")
+    return master
+
+
 def _load_or_create_keyring_marker(root: Path, marker: Path, env_value: str):
     if marker.exists():
         return read_keyring_marker(marker)
@@ -527,10 +532,7 @@ def _load_or_create_keyring_marker(root: Path, marker: Path, env_value: str):
     created = stored is None
     try:
         if created:
-            master = Fernet.generate_key().decode("ascii")
-            store.set(account, master)
-            if store.get(account) != master:
-                raise RuntimeError("OS keyring did not retain the stored vault master key.")
+            _store_new_master(store, account)
         else:
             Fernet(stored.strip().encode("ascii"))
         salt = os.urandom(32)
