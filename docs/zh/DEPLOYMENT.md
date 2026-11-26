@@ -213,7 +213,7 @@ docker compose logs witness                     # witness key fingerprint
 **小写**的仓库路径，例如：
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.2
 TGWITNESS_PORT=8787
 ```
 

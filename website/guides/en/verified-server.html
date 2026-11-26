@@ -163,7 +163,7 @@
 <h4>Deploy and verify</h4>
 <p>In the panel on your own computer open <strong>More tools → Extras → Server 24/7</strong>, paste a Hetzner token (Read &amp; Write) and confirm. The wizard shows the server type, the price including VAT for your account and the version first, and creates nothing before you confirm. From a terminal:</p>
 <pre><code>python -m tgwitness.cloud deploy --provider hetzner --name case-1 --server-type cpx22 \
-    --ref v1.0.1 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+    --ref v1.0.2 --quick-tunnel --provider-token-file hetzner.token</code></pre>
 <div class="table-wrap" tabindex="0"><table><tbody>
 <tr><th scope="row">To deploy</th><td>API token with Read &amp; Write permission of a dedicated project (HCLOUD_TOKEN)</td></tr>
 <tr><th scope="row">For the verifier</th><td>API token with Read permission of the same project</td></tr>
@@ -205,7 +205,7 @@
 <h4>Deploy and verify</h4>
 <p>Amazon EC2 runs from a terminal; the panel wizard covers Hetzner only.</p>
 <pre><code>python -m tgwitness.cloud deploy --provider aws --name case-1 --server-type t3.small \
-    --location eu-central-1 --ref v1.0.1 --quick-tunnel --provider-token-file aws.credentials</code></pre>
+    --location eu-central-1 --ref v1.0.2 --quick-tunnel --provider-token-file aws.credentials</code></pre>
 <div class="table-wrap" tabindex="0"><table><tbody>
 <tr><th scope="row">To deploy</th><td>IAM credentials allowed ec2:DescribeVpcs, DescribeImages, CreateSecurityGroup, AuthorizeSecurityGroupIngress, RunInstances, CreateTags, DescribeInstances, DescribeSecurityGroupRules and RevokeSecurityGroupIngress</td></tr>
 <tr><th scope="row">For the verifier</th><td>IAM credentials allowed only ec2:DescribeInstances, ec2:DescribeSecurityGroups and cloudtrail:LookupEvents</td></tr>
@@ -247,7 +247,7 @@
 <h4>Deploy and verify</h4>
 <p>Akamai (Linode) runs from a terminal; the panel wizard covers Hetzner only.</p>
 <pre><code>python -m tgwitness.cloud deploy --provider linode --name case-1 --server-type g6-standard-1 \
-    --ref v1.0.1 --quick-tunnel --provider-token-file linode.token</code></pre>
+    --ref v1.0.2 --quick-tunnel --provider-token-file linode.token</code></pre>
 <div class="table-wrap" tabindex="0"><table><tbody>
 <tr><th scope="row">To deploy</th><td>personal access token with linodes, firewall and events read/write scopes</td></tr>
 <tr><th scope="row">For the verifier</th><td>personal access token with linodes, firewall and events read-only scopes</td></tr>
@@ -289,7 +289,7 @@
 <h4>Deploy and verify</h4>
 <p>DigitalOcean runs from a terminal; the panel wizard covers Hetzner only.</p>
 <pre><code>python -m tgwitness.cloud deploy --provider digitalocean --name case-1 --server-type s-1vcpu-2gb \
-    --ref v1.0.1 --quick-tunnel --provider-token-file digitalocean.token</code></pre>
+    --ref v1.0.2 --quick-tunnel --provider-token-file digitalocean.token</code></pre>
 <div class="table-wrap" tabindex="0"><table><tbody>
 <tr><th scope="row">To deploy</th><td>personal access token with write access of a dedicated team</td></tr>
 <tr><th scope="row">For the verifier</th><td>read-only personal access token of the same team</td></tr>
@@ -331,7 +331,7 @@
 <h4>Deploy and verify</h4>
 <p>Vultr runs from a terminal; the panel wizard covers Hetzner only.</p>
 <pre><code>python -m tgwitness.cloud deploy --provider vultr --name case-1 --server-type vc2-1c-2gb \
-    --ref v1.0.1 --quick-tunnel --provider-token-file vultr.token</code></pre>
+    --ref v1.0.2 --quick-tunnel --provider-token-file vultr.token</code></pre>
 <div class="table-wrap" tabindex="0"><table><tbody>
 <tr><th scope="row">To deploy</th><td>API key of a dedicated account or sub-account</td></tr>
 <tr><th scope="row">For the verifier</th><td>API key of a user with read access and the activity_logs permission</td></tr>
@@ -342,8 +342,8 @@
 
 <h2 id="start">Start</h2>
 <p>In the panel on your own computer open <strong>More tools → Extras → Server 24/7</strong>, choose Hetzner and paste a token. The wizard shows the server type, the price and the version, and creates nothing before you confirm. The other providers run from a terminal:</p>
-<pre><code>python -m tgwitness.cloud plan   --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.1 --quick-tunnel
-python -m tgwitness.cloud deploy --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.1 --quick-tunnel \
+<pre><code>python -m tgwitness.cloud plan   --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.2 --quick-tunnel
+python -m tgwitness.cloud deploy --provider hetzner --name case-1 --server-type cpx22 --ref v1.0.2 --quick-tunnel \
     --provider-token-file hetzner.token
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file read-only.token --report report.md</code></pre>

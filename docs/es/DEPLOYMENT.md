@@ -213,7 +213,7 @@ Copie `deploy/env.example` en `.env`. Establezca `TGWITNESS_IMAGE` en la versió
 la ruta del repositorio en **minúsculas**, por ejemplo:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.2
 TGWITNESS_PORT=8787
 ```
 

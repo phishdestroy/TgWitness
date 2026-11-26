@@ -213,7 +213,7 @@ Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phi�
 đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:1.0.2
 TGWITNESS_PORT=8787
 ```
 
