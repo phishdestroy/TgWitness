@@ -72,6 +72,7 @@ FILE_STATEMENT = "file-results.json"
 FILE_RESULTS_FORMAT = "tgwitness-chat-file-results-v1"
 FILE_RESULTS_CHECKPOINT = 200
 FILE_RESULTS_SECONDS = 30
+RETRY_FILE_STATUSES = ("rate_limited", "unavailable", "hashes_unavailable")
 FILE_FIELDS = ("file", "file_sha256", "file_size", "file_kind", "file_status", "file_error", "server_hashes",
                "file_hash_sha256", "file_reused")
 PARTIAL_MEANING = ("Messages read before this export stopped. They stay in the workspace under a statement signed with "
@@ -782,13 +783,16 @@ class PartialExport:
                 raise ValueError("File results differ from their signed statement.")
         except Exception:
             found, digest, size = {}, hashlib.sha256(), 0
-        if not linked(path):
+        if linked(path):
+            path.unlink()
+        else:
             with path.open("a+b") as stream:
                 stream.truncate(size)
         return found, digest, size
 
     def usable_file_result(self, result):
-        return isinstance(result, dict) and ("file" not in result or self.has_file(result))
+        return (isinstance(result, dict) and result.get("file_status") not in RETRY_FILE_STATUSES
+                and ("file" not in result or self.has_file(result)))
 
     def has_file(self, entry):
         digest = entry.get("file_sha256")
