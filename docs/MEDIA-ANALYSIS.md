@@ -51,6 +51,15 @@ No model is fetched while processing. Build/download setup may use the network;
 each actual recognition container has networking disabled. Install the image
 before enabling it; runtime uses `--pull=never`.
 
+Local transcription with the optional `faster-whisper` package runs in a child
+process that is stopped when the five-minute limit is reached. It is offline by
+default: `TGWITNESS_WHISPER_MODEL_DIR` may point to a model folder containing
+`model.bin` or to a model cache. A missing model is reported with installation
+instructions instead of being downloaded. `TGWITNESS_WHISPER_ALLOW_DOWNLOAD=1`
+allows one download only while requests outside Telegram use a direct route;
+with a proxy, WARP or outside requests turned off, nothing is fetched.
+Transcripts stop at 30 minutes of audio and are marked as truncated.
+
 ## Bounds and recovery
 
 The container runs as an unprivileged user with a read-only root, dropped
