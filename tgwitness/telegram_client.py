@@ -13,6 +13,7 @@ from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKe
 from telethon.network.connection import ConnectionTcpObfuscated
 from telethon.network.connection.tcpmtproxy import TcpMTProxy
 from telethon.tl import functions, types
+from telethon.tl.alltlobjects import tlobjects
 from telethon.tl.tlobject import TLRequest
 
 from .rpc_pacing import bulk_request
@@ -28,6 +29,16 @@ SHORT_POLL_SECONDS = 10
 SHORT_POLL_FLOOR = 2
 SHORT_POLL_CEILING = 120
 LOG = logging.getLogger("tgwitness.telegram_client")
+LEGACY_LAYOUTS = ((0x31774388, types.User, 0xB1B8CC83), (0x1C32B11C, types.Channel, 0xD49F34C6))
+
+
+def accept_legacy_layouts():
+    for legacy, current, reviewed in LEGACY_LAYOUTS:
+        if current.CONSTRUCTOR_ID == reviewed:
+            tlobjects.setdefault(legacy, current)
+
+
+accept_legacy_layouts()
 
 
 @contextmanager

@@ -43,6 +43,7 @@
 - Verification: capture archive checks count decompressed bytes and check the archive layout, OpenTimestamps branches that use Keccak-256 are reported as not checked instead of being skipped silently, RIPEMD-160 is computed even where OpenSSL no longer provides it, and interactive verification keeps `--range`.
 - Telegram search results in the chat list show the whole chat name, its kind, forum topics, username, member count and SCAM or FAKE marks, with the join button below them, instead of leaving one letter of the name beside a wide button.
 - PDF reports show styled letters that are common in Telegram names, such as 𝐍𝐚𝐦𝐞 or 🅻, as well as Ogham, box drawing and arrows, with the bundled Noto Sans Math, Noto Sans Symbols and Noto Sans Ogham fonts, instead of leaving them out with a note.
+- Telegram sometimes sends users and channels in the format of an older API version (layer 222), and TgWitness now reads them. Before, Telethon dropped every batch of live updates that contained such a user or channel. If the missed updates of a channel contained one, Telethon also disconnected the account until TgWitness reconnected it.
 - Export webhooks are sent only after an export completes. Admin log actions, indicator kinds and sources, checksums, chat kinds, and court, case package and protocol labels are translated in reports and the panel.
 
 ## 1.0.1 · 23 November 2026
