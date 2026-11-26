@@ -2536,7 +2536,7 @@ async function openDetail(e,options={}) {
   content.append(node("p","detail-caption",window.TgWitnessPrivacy.preview(excerpt(e))));
   if(e.payload.media_sha256) {
     content.append(window.TgWitnessReview.attachment(e.payload,{api,download,busy,tr}));
-    if(state.status?.analysis?.media_available){
+    if(state.status?.analysis?.media_available&&may("export")){
       const recognize=node("button","quiet",tr("Recognize attachment"));recognize.type="button";
       recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
     }
