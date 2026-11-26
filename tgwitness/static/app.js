@@ -6604,7 +6604,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
   if(file==="saved")mark("span","pill-file","clip",tr("File saved"),tr("The attachment file is saved in this workspace."));
   else if(file==="queued"||file==="retry")mark("span","pill-file pill-file-waiting","clock",tr("Queued"),tr("The attachment file is waiting to be downloaded."));
-  else if(file){const reason=excerpt({kind:m.file.kind,payload:{reason:m.file.reason,error_type:m.file.error_type}})||tr("Attachment file not saved");
+  else if(file&&!String(m.file.reason||"").startsWith("metadata-only")){const reason=excerpt({kind:m.file.kind,payload:{reason:m.file.reason,error_type:m.file.error_type}})||tr("Attachment file not saved");
     mark("span","pill-file pill-file-missing","clip",reason,tr("Attachment file not saved")+": "+reason);}
   if(m.deleted&&m.auto_deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)}));
