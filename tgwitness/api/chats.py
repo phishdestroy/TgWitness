@@ -491,8 +491,11 @@ async def chats(request: Request, *, ctx=Depends(current_context)):
         chat["intake_state"] = "running" if chat_id in collector.intake_active else "queued" if chat_id in pending else None
         if chat["intake_state"] == "queued" and chat_id in retries:
             retry = retries[chat_id]
-            chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),
-                        intake_error_type=retry["error_type"], intake_error_seq=retry["error_seq"])
+            if collector.waits_for_access(chat_id, retry["error_type"]):
+                chat["intake_state"] = None
+            else:
+                chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),
+                            intake_error_type=retry["error_type"], intake_error_seq=retry["error_seq"])
         entity = collector.dialog_cache.get(chat_id, {}).get("entity")
         chat["forum"] = bool(getattr(entity, "forum", False))
         chat["telegram_restrictions"] = [
