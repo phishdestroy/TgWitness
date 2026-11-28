@@ -7149,7 +7149,14 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
   if(state.status?.actions?.goal_off){open.disabled=true;box.append(node("p","hint",tr("Telegram actions from the panel are off for the Evidence for a case goal.")));}
-  else if(state.status?.actions?.read_only){open.disabled=true;box.append(node("p","hint",tr("This account is read-only. Turn it off on the account page.")));}
+  else if(state.status?.actions?.read_only){open.disabled=true;const note=node("p","hint",tr("This account is read-only. Turn it off on the account page."));box.append(note);
+    if(may("account")){const off=node("button","secondary",tr("Turn off Read-only"));off.type="button";box.append(off);
+      off.addEventListener("click",()=>busy(off,async()=>{
+        if(!await askConfirm(tr("Turn off Read-only for this account? The panel can then send, join and press bot buttons from it."))||revision!==state.workspaceRevision)return;
+        await json("interactions/read-only",{enabled:false},{profile});await refreshStatus().catch(()=>{});
+        if(revision!==state.workspaceRevision||linkPreview!==preview)return;
+        if(!state.status?.actions?.read_only&&!state.status?.actions?.goal_off){open.disabled=false;note.remove();off.remove();}
+      }));}}
   open.addEventListener("click",()=>busy(open,async()=>{
     if(revision!==state.workspaceRevision||linkPreview!==preview)return;
     const result=await panelAction({action:"open",preview_id:preview.preview_id,observe:observe.checked},{profile,revision});
