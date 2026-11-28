@@ -200,8 +200,11 @@ The build manifest shows which commit is currently available; the version number
 alone may stay the same between preview updates.
 
 Use the same installation folder and OS user as before. Back up the complete data
-directory with collection stopped; `tgwitness paths` identifies it. A signed export
-is not a complete installation backup.
+directory first: `tgwitness backup NEW-FOLDER` copies it while the panel keeps
+running, and `tgwitness verify-backup NEW-FOLDER` checks the copy; `tgwitness paths`
+identifies the data directory. Keep the folder private: it holds sessions and signing
+keys. After an update an older version refuses to open the journal, so this backup is
+the way back. A signed export is not a complete installation backup.
 
 **Ubuntu root installation at `/opt/tgwitness`:**
 

@@ -203,7 +203,7 @@ class LifecycleOperations:
                 raise RuntimeError(
                     "This journal was last opened by TgWitness " + last_version + ", newer than this "
                     + __version__ + ". Start " + last_version + " or newer. To go back on purpose, restore the "
-                    "backup made before the update, or set TGWITNESS_ALLOW_DOWNGRADE=1 for this start.")
+                    "backup made before the update (tgwitness backup), or set TGWITNESS_ALLOW_DOWNGRADE=1 for this start.")
             from .. import rollback
 
             rolled_back = await asyncio.to_thread(rollback.check, store, vault.public_key)
