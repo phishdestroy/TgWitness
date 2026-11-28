@@ -540,8 +540,8 @@ def export(root, out):
               "Witness times come from the witness computer's clock; Telegram post dates in the channel are an\n"
               "independent clock. A witness shows what the collector reported at those times.\n"
               "Produced by TgWitness (PhishDestroy, https://phishdestroy.io).\n").encode()
-    files = {"events.jsonl": data, "verify.py": verifier, **verification_kit.files(),
-             "README.txt": verification_kit.quickstart() + b"\n" + readme}
+    files = {"events.jsonl": data, "verify.py": verifier, **verification_kit.files(browser=False),
+             "README.txt": verification_kit.quickstart(browser=False) + b"\n" + readme}
     for path in sorted((root / "anchors").glob("daily-*")):
         if path.is_file() and not path.is_symlink() and path.suffix in (".ots", ".json"):
             files["anchors/" + path.name] = path.read_bytes()

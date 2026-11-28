@@ -535,7 +535,7 @@ class Disclosures:
                         write(name, iter(lambda: stream.read(1024**2), b''))
                 write('verify.py', [Path(__file__).with_name('verify.py').read_bytes()])
                 verification_kit.write(write, policy.report_language)
-                write('README.txt', [verification_kit.quickstart(policy.report_language), b'\n',
+                write('README.txt', [verification_kit.quickstart(policy.report_language, browser=False), b'\n',
                                      account_report.sharing_readme(report_context).encode()])
                 write('SHA256SUMS', [''.join(f'{v}  {k}\n' for k, v in sorted(hashes.items())).encode()])
                 manifest = dict(format='tgwitness-account-disclosure-v2', public_key=self.vault.public_key,

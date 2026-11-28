@@ -165,7 +165,7 @@ class LiveExport:
         self.sweep(self.directory)
         statics = [("README.txt", self.readme()),
                    ("verify.py", Path(report.__file__).with_name("verify.py").read_bytes()),
-                   *verification_kit.files(self.language).items()]
+                   *verification_kit.files(self.language, browser=False).items()]
         start = self.chain.start({name: digest(data) for name, data in statics}, utcnow())
         self.zip.append([(START_FILE, start), *statics], lambda _: self.chain.manifest(self.state))
 

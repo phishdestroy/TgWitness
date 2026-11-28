@@ -519,7 +519,10 @@
       if (manifest.t !== 'o') fail(T('manifest.json is not a signed bundle manifest.'));
       const format = textOf(field(manifest, 'format'));
       if (format !== 'tgwitness-evidence-v1' && format !== 'tgwatch-evidence-v1') {
-        fail(T('This page checks evidence archives only; this archive has the format {format}. Use verify.py.', {format: format || '?'}));
+        const other = T('This page checks evidence archives only; this archive has the format {format}. Use verify.py.', {format: format || '?'});
+        if (!/^(tgwitness|tgwatch)-[a-z0-9-]+-v[0-9]+$/.test(format || '')) fail(other);
+        result.unsupported = other;
+        return;
       }
       const publicKey = base64(textOf(field(manifest, 'public_key')), 32);
       if (!publicKey) fail(T('manifest.json is not a signed bundle manifest.'));
@@ -640,6 +643,11 @@
   function render() {
     const result = state.result;
     if (!result) return;
+    const when = '<p class="vf-when">' + esc(T('Checked {name} in this browser at {time}. Nothing was uploaded.', {name: result.label, time: result.at})) + '</p>';
+    if (result.unsupported) {
+      $('#vf-result').innerHTML = '<div class="vf-verdict warn"><h2>' + esc(result.unsupported) + '</h2>' + when + '</div>';
+      return;
+    }
     const wanted = normalized(), given = !!wanted.value && !wanted.invalid;
     const integrity = result.checks.length > 0 && result.checks.every(check => check.status === 'ok') && !!result.fingerprint;
     const foreign = given && result.fingerprint && wanted.value !== result.fingerprint;
@@ -664,7 +672,7 @@
         + '</div></li>').join('') + '</ul>'
       + (result.facts.length ? '<dl class="vf-facts">' + result.facts.map(([title, value]) => '<dt>' + esc(title) + '</dt><dd><code>' + esc(value) + '</code></dd>').join('') + '</dl>' : '')
       + '<p class="vf-limits">' + esc(T('Checked on this page: the manifest signature, the SHA-256 of every file and the signed event chain. Time stamps, OpenTimestamps, container and PDF signatures, Intel TDX and witness records are not checked here; see below.')) + '</p>'
-      + '<p class="vf-when">' + esc(T('Checked {name} in this browser at {time}. Nothing was uploaded.', {name: result.label, time: result.at})) + '</p></div>';
+      + when + '</div>';
   }
 
   async function filesFromDrop(items) {
