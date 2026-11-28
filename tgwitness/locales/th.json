@@ -11095,5 +11095,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "ปิด \"อ่านเท่านั้น\" สำหรับบัญชีนี้หรือไม่ หลังจากนั้นแผงควบคุมจะส่งข้อความ เข้าร่วม และกดปุ่มของบอทจากบัญชีนี้ได้",
   "Complete the earlier steps first.": "ทำขั้นตอนก่อนหน้าให้เสร็จก่อน",
   "Transaction hash": "แฮชธุรกรรม",
-  "Payment link": "ลิงก์ชำระเงิน"
+  "Payment link": "ลิงก์ชำระเงิน",
+  "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้"
 }

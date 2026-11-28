@@ -11197,5 +11197,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "לכבות את \"לקריאה בלבד\" בחשבון הזה? לאחר מכן הלוח יוכל לשלוח, להצטרף וללחוץ על כפתורי בוטים מהחשבון.",
   "Complete the earlier steps first.": "השלם קודם את השלבים הקודמים.",
   "Transaction hash": "גיבוב עסקה",
-  "Payment link": "קישור תשלום"
+  "Payment link": "קישור תשלום",
+  "An update could not be processed and was not saved": "עדכון לא עובד ולא נשמר"
 }

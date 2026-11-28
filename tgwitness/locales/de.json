@@ -11146,5 +11146,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Schreibschutz für dieses Konto deaktivieren? Das Panel kann dann von diesem Konto aus senden, beitreten und Bot-Schaltflächen drücken.",
   "Complete the earlier steps first.": "Schließen Sie zuerst die vorherigen Schritte ab.",
   "Transaction hash": "Transaktions-Hash",
-  "Payment link": "Zahlungslink"
+  "Payment link": "Zahlungslink",
+  "An update could not be processed and was not saved": "Ein Update konnte nicht verarbeitet werden und wurde nicht gespeichert"
 }

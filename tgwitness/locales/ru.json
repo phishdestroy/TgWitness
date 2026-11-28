@@ -11233,5 +11233,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Выключить «Только чтение» для этого аккаунта? После этого панель сможет отправлять сообщения, вступать в чаты и нажимать кнопки ботов от его имени.",
   "Complete the earlier steps first.": "Сначала завершите предыдущие шаги.",
   "Transaction hash": "Хеш транзакции",
-  "Payment link": "Платёжная ссылка"
+  "Payment link": "Платёжная ссылка",
+  "An update could not be processed and was not saved": "Обновление не удалось обработать, оно не сохранено"
 }

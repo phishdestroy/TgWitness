@@ -11146,5 +11146,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "इस खाते के लिए केवल-पठनीय बंद करें? इसके बाद पैनल इस खाते से संदेश भेज सकेगा, जुड़ सकेगा और बॉट के बटन दबा सकेगा।",
   "Complete the earlier steps first.": "पहले पिछले चरण पूरे करें।",
   "Transaction hash": "लेनदेन हैश",
-  "Payment link": "भुगतान लिंक"
+  "Payment link": "भुगतान लिंक",
+  "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया"
 }

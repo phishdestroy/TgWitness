@@ -11095,5 +11095,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Nonaktifkan Hanya Baca untuk akun ini? Panel lalu dapat mengirim, bergabung, dan menekan tombol bot dari akun ini.",
   "Complete the earlier steps first.": "Selesaikan langkah sebelumnya terlebih dahulu.",
   "Transaction hash": "Hash transaksi",
-  "Payment link": "Tautan pembayaran"
+  "Payment link": "Tautan pembayaran",
+  "An update could not be processed and was not saved": "Sebuah pembaruan tidak dapat diproses dan tidak disimpan"
 }

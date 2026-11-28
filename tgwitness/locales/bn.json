@@ -11146,5 +11146,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "এই অ্যাকাউন্টের শুধুমাত্র-পঠন বন্ধ করবেন? তখন প্যানেল এই অ্যাকাউন্ট থেকে বার্তা পাঠাতে, যোগ দিতে এবং বটের বোতাম চাপতে পারবে।",
   "Complete the earlier steps first.": "আগে আগের ধাপগুলো সম্পন্ন করুন।",
   "Transaction hash": "লেনদেনের হ্যাশ",
-  "Payment link": "পেমেন্ট লিংক"
+  "Payment link": "পেমেন্ট লিংক",
+  "An update could not be processed and was not saved": "একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি"
 }

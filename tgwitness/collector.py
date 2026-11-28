@@ -1573,8 +1573,17 @@ class Collector:
                     if handler == self.on_raw:
                         self.paused_drops += 1
                     raise
-                except Exception:
+                except Exception as exc:
                     LOG.exception("Handling a Telegram update failed")
+                    with suppress(Exception):
+                        numbers = update_message_ids(update)
+                        self.note("coverage.gap", {
+                            "reason": "handler_failed", "handler": getattr(handler, "__name__", "handler"),
+                            "update": type(update).__name__, "error_type": type(exc).__name__,
+                            **({"first_message_id": min(numbers), "last_message_id": max(numbers)} if numbers else {}),
+                            "meaning": "An update reached this collector but could not be processed and was not "
+                                       "saved. Records it would have produced may be missing; a later recheck can "
+                                       "find them."}, update_chat(update))
                 finally:
                     queue.popleft()
                     self.dispatch_barriers.discard(order)

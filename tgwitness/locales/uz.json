@@ -11146,5 +11146,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Bu hisob uchun Faqat o'qish rejimi o'chirilsinmi? Shundan so'ng panel ushbu hisobdan xabar yuborishi, qo'shilishi va bot tugmalarini bosishi mumkin bo'ladi.",
   "Complete the earlier steps first.": "Avval oldingi qadamlarni yakunlang.",
   "Transaction hash": "Tranzaksiya xeshi",
-  "Payment link": "To'lov havolasi"
+  "Payment link": "To'lov havolasi",
+  "An update could not be processed and was not saved": "Yangilanishni qayta ishlab bo'lmadi va u saqlanmadi"
 }
