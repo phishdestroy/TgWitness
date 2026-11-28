@@ -11115,5 +11115,6 @@
   "Observation stopped while the disk was full": "การสังเกตการณ์หยุดลงระหว่างที่ดิสก์เต็ม",
   "Attachment not saved": "ไม่ได้บันทึกไฟล์แนบ",
   "On the Case Board": "บนกระดานคดี",
-  "This access does not open this section.": "สิทธิ์การเข้าถึงนี้เปิดส่วนนี้ไม่ได้"
+  "This access does not open this section.": "สิทธิ์การเข้าถึงนี้เปิดส่วนนี้ไม่ได้",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "บัญชีนี้ยังไม่ได้เป็นสมาชิกของแชทนี้ หลังตั้งค่าเสร็จ ให้เข้าร่วมจากแชทด้วยลิงก์นี้"
 }

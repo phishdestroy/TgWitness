@@ -11166,5 +11166,6 @@
   "Observation stopped while the disk was full": "مشاهده در زمانی که دیسک پر بود متوقف شد",
   "Attachment not saved": "پیوست ذخیره نشد",
   "On the Case Board": "در تخته پرونده",
-  "This access does not open this section.": "این دسترسی این بخش را باز نمی‌کند."
+  "This access does not open this section.": "این دسترسی این بخش را باز نمی‌کند.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "این حساب هنوز عضو این گفتگو نیست. پس از راه‌اندازی، از بخش گفتگوها با این پیوند به آن بپیوندید."
 }

@@ -11115,5 +11115,6 @@
   "Observation stopped while the disk was full": "ディスクが満杯の間、観測が停止していました",
   "Attachment not saved": "添付ファイルは保存されていません",
   "On the Case Board": "ケースボード上",
-  "This access does not open this section.": "このアクセスではこのセクションを開けません。"
+  "This access does not open this section.": "このアクセスではこのセクションを開けません。",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "このアカウントはまだこのチャットのメンバーではありません。設定後、チャットからこのリンクで参加してください。"
 }

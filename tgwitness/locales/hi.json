@@ -11166,5 +11166,6 @@
   "Observation stopped while the disk was full": "डिस्क भरी होने के दौरान अवलोकन रुका रहा",
   "Attachment not saved": "अटैचमेंट सहेजा नहीं गया",
   "On the Case Board": "केस बोर्ड पर",
-  "This access does not open this section.": "यह एक्सेस इस अनुभाग को नहीं खोलता।"
+  "This access does not open this section.": "यह एक्सेस इस अनुभाग को नहीं खोलता।",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "यह खाता अभी इस चैट का सदस्य नहीं है। सेटअप के बाद इस लिंक से चैट्स में जाकर इसमें शामिल हों।"
 }

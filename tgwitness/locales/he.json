@@ -11217,5 +11217,6 @@
   "Observation stopped while the disk was full": "התצפית נעצרה בזמן שהדיסק היה מלא",
   "Attachment not saved": "הקובץ המצורף לא נשמר",
   "On the Case Board": "בלוח התיק",
-  "This access does not open this section.": "גישה זו אינה פותחת את המדור הזה."
+  "This access does not open this section.": "גישה זו אינה פותחת את המדור הזה.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "החשבון הזה עדיין אינו חבר בצ'אט הזה. לאחר ההגדרה, הצטרפו אליו מצ'אטים באמצעות הקישור הזה."
 }

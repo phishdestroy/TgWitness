@@ -11166,5 +11166,6 @@
   "Observation stopped while the disk was full": "Disk to'la bo'lgan paytda kuzatuv to'xtagan edi",
   "Attachment not saved": "Ilova saqlanmadi",
   "On the Case Board": "Holat doskasida",
-  "This access does not open this section.": "Bu kirish ushbu bo'limni ochmaydi."
+  "This access does not open this section.": "Bu kirish ushbu bo'limni ochmaydi.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hisob hali bu suhbat a'zosi emas. Sozlashdan so'ng ushbu havola orqali Suhbatlar bo'limidan qo'shiling."
 }

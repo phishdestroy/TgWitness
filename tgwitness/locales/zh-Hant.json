@@ -11115,5 +11115,6 @@
   "Observation stopped while the disk was full": "磁碟已滿期間觀察曾停止",
   "Attachment not saved": "附件未儲存",
   "On the Case Board": "在案件看板上",
-  "This access does not open this section.": "此存取權無法開啟這個區段。"
+  "This access does not open this section.": "此存取權無法開啟這個區段。",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "此帳號尚未加入這個聊天。完成設定後，請在「聊天」中使用此連結加入。"
 }

@@ -11115,5 +11115,6 @@
   "Observation stopped while the disk was full": "디스크가 가득 찬 동안 관찰이 중지되었습니다",
   "Attachment not saved": "첨부 파일이 저장되지 않음",
   "On the Case Board": "사건 보드에 있음",
-  "This access does not open this section.": "이 접근 권한으로는 이 섹션을 열 수 없습니다."
+  "This access does not open this section.": "이 접근 권한으로는 이 섹션을 열 수 없습니다.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "이 계정은 아직 이 채팅의 멤버가 아닙니다. 설정 후 채팅에서 이 링크로 참여하세요."
 }
