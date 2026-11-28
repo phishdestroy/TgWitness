@@ -499,11 +499,11 @@ class Store:
             rows = db.execute(
                 "SELECT seq, hash, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
-                " ORDER BY seq", (chat_id, *ids, *CHAT_KINDS)).fetchall()
+                " ORDER BY +seq", (chat_id, *ids, *CHAT_KINDS)).fetchall()
             slots = ",".join("?" * len(ids))
             outcomes = {r["message_id"]: (r["kind"], json.loads(r["payload"])) for r in db.execute(
                 "SELECT message_id, kind, payload FROM events WHERE chat_id=? AND message_id IN (" + slots + ")"
-                " AND kind IN ('media.skipped','media.failed','media.retry') ORDER BY seq", (chat_id, *ids))}
+                " AND kind IN ('media.skipped','media.failed','media.retry') ORDER BY +seq", (chat_id, *ids))}
             queued = {r[0] for r in db.execute(
                 "SELECT message_id FROM media_jobs WHERE chat_id=? AND message_id IN (" + slots + ")"
                 " AND state IN ('queued','retry')", (chat_id, *ids))}
