@@ -11088,5 +11088,6 @@
   "Full name": "ชื่อ-นามสกุล",
   "Title and organisation": "ตำแหน่งและหน่วยงาน",
   "Qualifications": "คุณวุฒิ",
-  "Date": "วันที่"
+  "Date": "วันที่",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram หยุดตอบกลับผ่านเส้นทางปัจจุบัน กำลังรีเซ็ตการเชื่อมต่อ"
 }

@@ -11088,5 +11088,6 @@
   "Full name": "성명",
   "Title and organisation": "직위 및 소속 기관",
   "Qualifications": "자격",
-  "Date": "일자"
+  "Date": "일자",
+  "Telegram stopped answering on the current route; the connection is being reset.": "현재 경로에서 Telegram이 응답하지 않습니다. 연결을 재설정하는 중입니다."
 }

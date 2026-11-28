@@ -101,6 +101,8 @@ class ExportRefused(ValueError):
 SESSIONS_EVERY = 15 * 60
 SESSIONS_OBSERVING_EVERY = 120
 SECURITY_LOG_EVERY = 60
+LIVENESS_PROBE_SECONDS = 15
+LIVENESS_TIMEOUT_SECONDS = 10
 SECURITY_LOG_USER = 777000
 SECURITY_EVENT_MEANING = ("Security notice from Telegram (user 777000). "
                           "login_code: an SMS code was requested for this account. "
@@ -747,6 +749,9 @@ class Collector:
         self.probe_worker = None
         self.probe_pending = None
         self.probe_missed = None
+        self.stalled = None
+        self.liveness_at = 0.0
+        self.last_response_at = None
         self.probe_tasks = set()
         self.probe_answered = deque(maxlen=200)
         self.probe_skipped = {}
@@ -855,6 +860,8 @@ class Collector:
             "last_update_at": self.last_update_at,
             "updates_diverted": self.updates_diverted if self.running else None,
             "probe_missed": self.probe_missed if self.running else None,
+            "stalled": self.stalled if self.running else None,
+            "last_response_at": self.last_response_at,
             "short_poll": getattr(self, "short_poll_state", None) if self.running else None,
             "session_revoked": self.session_revoked if self.running else None,
             "max_handler_ms": round(self.max_handler_ms, 2),
@@ -3837,6 +3844,9 @@ class Collector:
                 checkpoint_at = now
                 await self.refresh_drand()
                 retain_checkpoint(self.store, self.vault)
+            if self.running and self.client.is_connected() and now - self.liveness_at >= LIVENESS_PROBE_SECONDS:
+                self.liveness_at = now
+                await self.probe_liveness()
             if self.running and self.client.is_connected():
                 await self.watch_updates()
                 await self.follow_channels()
@@ -3867,6 +3877,29 @@ class Collector:
             with suppress(NoProxyAvailable):
                 await self.rotate_route(self.client, "repeated_disconnect")
 
+    async def probe_liveness(self):
+        client, started = self.client, time.monotonic()
+        try:
+            await asyncio.wait_for(client(functions.PingRequest(ping_id=secrets.randbits(63))), LIVENESS_TIMEOUT_SECONDS)
+        except asyncio.TimeoutError:
+            pass
+        except Exception:
+            return
+        else:
+            self.last_response_at, self.stalled = utcnow(), None
+            return
+        if client is not self.client or not client.is_connected():
+            return
+        self.stalled = {"since": self.last_response_at, "detected_at": utcnow()}
+        self.store.append("connection.stalled", {
+            "last_response_at": self.last_response_at, "probe": "MTProto ping",
+            "timeout_seconds": LIVENESS_TIMEOUT_SECONDS, "waited_seconds": round(time.monotonic() - started, 1),
+            "run_id": self.run_id,
+            "meaning": "Telegram did not answer a ping on the current route. Observation ends at the last answer; "
+                       "the connection is reset and missed updates are requested after it reconnects."})
+        with suppress(Exception):
+            await asyncio.wait_for(client.disconnect(), LIVENESS_TIMEOUT_SECONDS)
+
     async def reconnect(self):
         now = time.time()
         if now < self.next_reconnect_at:
@@ -3890,7 +3923,7 @@ class Collector:
                 "attempt": self.reconnect_attempts, "error_type": type(exc).__name__,
                 "retry_at_unix": self.next_reconnect_at})
         else:
-            self.phase, self.last_error = "observing", None
+            self.phase, self.last_error, self.stalled = "observing", None, None
             self.reconnect_attempts, self.next_reconnect_at = 0, 0
             catch_up = getattr(self.client, "catch_up", None)
             if catch_up:

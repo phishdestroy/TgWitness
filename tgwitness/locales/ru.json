@@ -11226,5 +11226,6 @@
   "Full name": "Фамилия, имя, отчество",
   "Title and organisation": "Должность и организация",
   "Qualifications": "Квалификация",
-  "Date": "Дата"
+  "Date": "Дата",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram перестал отвечать по текущему маршруту; соединение сбрасывается."
 }

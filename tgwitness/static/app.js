@@ -1504,6 +1504,7 @@ function collectorLines(name,p){
     if(p.reason==="connected")return [tr("Connected to Telegram.")];
     if(p.reason==="reconnecting")return [tr("Connection lost; reconnecting (attempt {n}).",{n:p.attempts}),
       upcoming(p.next_reconnect_at)&&tr("Next attempt: {time}",{time:fmtFull(p.next_reconnect_at)}),p.error&&tr("Last error: {error}",{error:p.error})];
+    if(p.reason==="no_response")return [tr("Telegram stopped answering on the current route; the connection is being reset.")];
     if(p.reason==="telegram_pause")return [telegramPauseText(p),tr("Observation waits and resumes on its own.")];
     if(p.reason==="signed_out")return [accountLossText(p.cause)];
     if(p.reason==="collector_error")return [tr("Observation stopped after an error: {error}",{error:p.error?errorName(p.error)||p.error:"?"})];

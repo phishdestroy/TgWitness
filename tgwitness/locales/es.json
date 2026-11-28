@@ -11149,5 +11149,6 @@
   "Full name": "Nombre completo",
   "Title and organisation": "Cargo y organización",
   "Qualifications": "Cualificaciones",
-  "Date": "Fecha"
+  "Date": "Fecha",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram dejó de responder por la ruta actual; se está restableciendo la conexión."
 }

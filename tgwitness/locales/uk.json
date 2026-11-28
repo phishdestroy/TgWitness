@@ -11241,5 +11241,6 @@
   "Full name": "Прізвище, ім’я, по батькові",
   "Title and organisation": "Посада та організація",
   "Qualifications": "Кваліфікація",
-  "Date": "Дата"
+  "Date": "Дата",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram перестав відповідати поточним маршрутом; з'єднання скидається."
 }

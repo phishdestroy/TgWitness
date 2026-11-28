@@ -11088,5 +11088,6 @@
   "Full name": "姓名",
   "Title and organisation": "职务及单位",
   "Qualifications": "资质",
-  "Date": "日期"
+  "Date": "日期",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram 在当前路由上已停止响应；正在重置连接。"
 }

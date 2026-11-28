@@ -197,6 +197,8 @@ def connection(c, now):
         return part("off", "paused", **detail)
     if not c.get("connected"):
         return part("degraded", "reconnecting", **detail)
+    if c.get("stalled"):
+        return part("degraded", "no_response", last_response_at=c["stalled"].get("since"), **detail)
     pause = parse(c.get("rpc_backoff_until"))
     if pause and pause > now:
         return part("degraded", "telegram_pause", **detail)

@@ -11088,5 +11088,6 @@
   "Full name": "氏名",
   "Title and organisation": "役職および所属組織",
   "Qualifications": "資格",
-  "Date": "日付"
+  "Date": "日付",
+  "Telegram stopped answering on the current route; the connection is being reset.": "現在の経路で Telegram が応答しなくなりました。接続をリセットしています。"
 }
