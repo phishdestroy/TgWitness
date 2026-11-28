@@ -154,7 +154,7 @@ def evaluate(version, advisories):
                 if not isinstance(vulnerability, dict):
                     raise AdvisoryError("Invalid vulnerability entry")
                 package = vulnerability.get("package")
-                if (not isinstance(package, dict) or package.get("name") != "tesseract" or
+                if (not isinstance(package, dict) or package.get("name") not in ("tesseract", "tesseract-ocr/tesseract") or
                         package.get("ecosystem") not in ("", "other")):
                     raise AdvisoryError("Unexpected upstream package identity")
                 version_range = vulnerability.get("vulnerable_version_range")
