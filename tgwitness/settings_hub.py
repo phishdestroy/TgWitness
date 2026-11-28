@@ -300,7 +300,7 @@ async def check_drand(network):
 def notification_check(store, vault, network):
     urls = vault.read("alerts").get("urls", [])
     if not urls:
-        return {"state": "failed", "reason": "no_destination"}
+        return {"state": "off", "reason": "no_destination"}
     problem = alerts.route_problem(urls, network)
     if problem:
         return {"state": "failed", "reason": "route", "error": problem, "destinations": len(urls)}
