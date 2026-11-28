@@ -16,7 +16,7 @@ export function createSettingsHub(ctx) {
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
   let autoTried=false, routeDirty=false, checkFailure=null;
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
-  let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false;
+  let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false, scopeOpen=null;
   let groupScope=null, scopeDirty=false, history=null, historyFor=null, historyLoading=null, undo=null, undoTimer=null, proxyField=null;
   let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null, historyFocus=false;
   const formSection=id=>id==='evidence-form'?'protection':'notifications';
@@ -125,7 +125,63 @@ export function createSettingsHub(ctx) {
     box.append(group);
     const chosen=goals.find(([key])=>key===value);if(!chosen)return;
     const details=node('div','goal-details');details.id='goal-details';
-    details.append(node('strong','',tr('Chosen: {goal}',{goal:tr(chosen[2])})),node('p','hint',tr(chosen[3])));box.append(details);
+    const scope=node('details','goal-scope');scope.dataset.goal=value;scope.open=scopeOpen??matchMedia('(min-width:601px)').matches;scope.ontoggle=()=>{scopeOpen=scope.open;};
+    scope.append(node('summary','',tr('What is captured and what is not')),captureLists(value));
+    details.append(node('strong','',tr('Chosen: {goal}',{goal:tr(chosen[2])})),node('p','hint',tr(chosen[3])),scope);box.append(details);
+  }
+  const presetFiles={copy:'photos',watch:'short_media',evidence:'all'};
+  const fileCaptured={photos:'Photos up to 20 MB; other files only if turned on under Collection and files',short_media:'Photos and videos up to 60 seconds and 20 MB',
+    all:'Every file up to 1 GB',custom:'Files as set under Collection and files'};
+  const fileMissed={photos:'Videos, voice messages and documents',short_media:'Longer or larger videos, voice messages and documents',all:'Files larger than 1 GB'};
+  function captureLists(goal,values=null,scope=null){
+    const files=values?.files||presetFiles[goal]||'custom',once=goal==='copy';
+    const timestamps=values?values.timestamps:true,drand=values?values.drand:goal==='evidence';
+    const captured=once?['History the account can read now, as it is at export time']:['New messages, edits and deletion notices from the moment observation starts'];
+    if(!once&&(scope===null||scope==='selected'))captured.push('For chats chosen one by one: their latest messages once, when each is turned on (500 by default)');
+    captured.push(fileCaptured[files]||fileCaptured.custom);
+    if(once)captured.push('One signed archive that verify.py checks');
+    if(timestamps)captured.push(once?'An independent timestamp of the last record, when a timestamp service answers':'Independent timestamps of journal checkpoints');
+    if(drand)captured.push('drand randomness beacon');
+    const missed=once?['New messages, edits and deletions after the export','Earlier versions of edited messages and messages deleted before the export','Secret chats']
+      :['Older history, unless you run Load history','Text deleted before it was captured; usually also who deleted it','Versions replaced by a later edit while TgWitness was stopped',
+        'Updates Telegram no longer returns after a long outage; the period is recorded as a coverage gap'];
+    if(fileMissed[files])missed.push(fileMissed[files]);
+    const box=node('div','goal-scope-lists');
+    for(const [kind,title,lines] of [['captured','Captured',captured],['missed','Not captured',missed]]){
+      const part=node('div','goal-scope-part');part.dataset.scope=kind;const list=node('ul');
+      for(const line of lines)list.append(node('li','',tr(line)));
+      part.append(node('h3','',tr(title)),list);box.append(part);
+    }
+    return box;
+  }
+  function preflight(body){
+    const rows=[],values=data.values||{},collector=state.status?.collector||{};
+    const go=step=>async()=>{draft.step=step;await saveDraft();await renderWizard();};
+    const session=signedIn();
+    rows.push([session?'working':'failed','Telegram account',session?'Signed in.':'Not signed in. Nothing can be recorded until you connect.',session?null:['Connect Telegram',go(5)]]);
+    const checked=draftChecked();
+    rows.push([checked?'working':'degraded','Connection',checked?'Telegram answered through this connection.':'Not checked. Starting can fail.',checked?null:['Check connection',go(4)]]);
+    if(values.timestamps||values.drand||values.notifications){
+      if(!values.outside)rows.push(['degraded','Requests outside Telegram','Off: timestamps and notifications will not be sent.',['Change connection',go(4)]]);
+      else if(data.outside_problem)rows.push(['degraded','Requests outside Telegram',data.outside_problem,['Change connection',go(4)]]);
+      else rows.push(['configured','Requests outside Telegram','Allowed. Each service gets a test request right after Start.',null]);
+    }
+    if(typeof collector.disk_free_bytes==='number'){
+      const low=collector.disk_free_bytes<(collector.media_min_free_bytes||0);
+      rows.push([low?'failed':'working','Free disk space',low?tr('{free} free, below the {min} reserve: files will wait until space is freed.',{free:ctx.size(collector.disk_free_bytes),min:ctx.size(collector.media_min_free_bytes)})
+        :tr('{free} free.',{free:ctx.size(collector.disk_free_bytes)}),null]);
+    }
+    const list=node('div','first-run-live first-run-preflight');
+    rows.forEach(([status,title,text,action])=>{
+      const row=node('div','first-run-check');row.dataset.state=status;row.dataset.check=title;
+      const line=node('span','hint',tr(text));if(action)line.append(' ',button(action[0],action[1],'text-link'));
+      row.append(ctx.stateBadge(status),node('strong','',tr(title)),line);list.append(row);
+    });
+    body.append(node('h2','',tr('Before you start')),message('These checks use what the panel already knows and send no requests.'),list);
+  }
+  function coverage(body){
+    body.append(node('h2','',tr('Expected coverage')));
+    const box=captureLists(draft.goal,data.values,draft.scope);box.classList.add('goal-scope-review');body.append(box);
   }
   function heading(){const box=node('div','hub-heading'),title=node('h1','',tr('Settings'));title.tabIndex=-1;box.append(title);return box;}
   function closed(text){
@@ -839,10 +895,10 @@ export function createSettingsHub(ctx) {
     }
     if(draft.step===6)await chatsForm(body,who,false);
     if(draft.step===7){
-      const summary=node('dl','setup-summary');for(const [key,value,go,more] of [['Goal',label(draft.goal),1,false],['Which chats?',label(draft.scope)+(draft.scope==='selected'?' · '+draft.chat_ids.length.toLocaleString(document.documentElement.lang||undefined):''),6,false],['Telegram account',(account=>account?(account.username?'@'+account.username+' · ':'')+'ID '+account.id:tr('Connected'))(state.status?.collector?.account),5,false],['Connection',label(draft.route),4,false],['Interface level',label(prefs.level),1,true],['Language',ctx.languages[prefs.language]||prefs.language,1,false],['Time zone',prefs.timezone,1,true]]){
+      const summary=node('dl','setup-summary');for(const [key,value,go,more] of [['Goal',label(draft.goal),1,false],['Which chats?',label(draft.scope)+(draft.scope==='selected'?' · '+draft.chat_ids.length.toLocaleString(document.documentElement.lang||undefined):''),6,false],['Telegram account',(account=>account?(account.username?'@'+account.username+' · ':'')+'ID '+account.id:tr(signedIn()?'Connected':'Not connected'))(state.status?.collector?.account),5,false],['Connection',label(draft.route),4,false],['Interface level',label(prefs.level),1,true],['Language',ctx.languages[prefs.language]||prefs.language,1,false],['Time zone',prefs.timezone,1,true]]){
         summary.append(node('dt','',tr(key)));const dd=node('dd','',value);dd.append(button('Edit',async()=>{draft.step=go;if(more)moreOpen=true;await saveDraft();await renderWizard();},'text-link'));summary.append(dd);
       }body.append(summary);
-      if(draft.unchecked)body.append(message('Connection was not checked. Starting can fail.','notice warning'));
+      coverage(body);preflight(body);
       if(data.needs_notification_destination)body.append(message('Add a notification destination later in Settings.'));
     }
     page.append(message('Everything can be changed later in Settings.','setup-reassurance'));
@@ -972,9 +1028,14 @@ export function createSettingsHub(ctx) {
     });
     live.shown=true;page.append(list);
     if(live.services!==undefined)renderServices(page);
-    if(live.timedOut)page.append(button('Check again',async()=>{
-      live.started=Date.now();live.timedOut=false;await renderWizard();watchLive();
-    },'primary'));
+    if(live.timedOut){
+      page.append(message('Your choices are saved. Fix the part marked above, then check again.','notice'));
+      const actions=node('div','first-run-next-actions');
+      actions.append(button('Check again',async()=>{
+        live.started=Date.now();live.timedOut=false;await renderWizard();watchLive();
+      },'primary'),button('Change connection',async()=>{live=null;clearTimeout(liveTimer);await navigate('settings');if(state.view==='settings')openSection('connection');},'secondary'));
+      page.append(actions);
+    }
     if(live.done){
       page.append(node('h2','wizard-done'+(live.celebrated?'':' wizard-appear'),tr('Done! What next:')));live.celebrated=true;
       const actions=node('div','first-run-next-actions');
@@ -1078,7 +1139,7 @@ export function createSettingsHub(ctx) {
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);clearTimeout(undoTimer);history=historyFor=historyLoading=undo=proxyField=null;paintUndo();section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue.close(ctx.staleView());draftQueue.close(ctx.staleView());preferencesQueue=createSaveQueue();draftQueue=createSaveQueue();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);clearTimeout(undoTimer);history=historyFor=historyLoading=undo=proxyField=null;paintUndo();section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;scopeOpen=null;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue.close(ctx.staleView());draftQueue.close(ctx.staleView());preferencesQueue=createSaveQueue();draftQueue=createSaveQueue();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }
