@@ -884,7 +884,7 @@ async function unlock(prefetched=null,languageChoice=null) {
   if(!state.opened&&(!requested.explicit||requested.error)){
     state.view=state.status.demo||state.status.collector?.has_session&&viewAllowed('chats')?'chats':viewAllowed('start')?'start':'chats';
   }
-  if(!viewAllowed(state.view))state.view="chats";
+  if(!viewAllowed(state.view)){analysisOff(state.view);state.view="chats";}
   state.opened=true;
   sessionStorage.setItem("tgwitness-token", state.token);
   show("gate",false); show("workspace",true); $("panel-token").value="";
@@ -996,8 +996,11 @@ function syncLive(){
     }else if(state.view==="observations")await refreshEvents();}
   });
 }
+function analysisOff(view){
+  if(view==="analysis"&&state.me&&!state.status?.demo)toast(tr("AI is off for this workspace. The main administrator can connect a model in Settings → AI."));
+}
 function navigate(view,options={}) {
-  if(!viewAllowed(view))view="chats";
+  if(!viewAllowed(view)){analysisOff(view);view="chats";}
   if(view!==state.view)window.TgWitnessJournal?.leave();
   if(view!==state.view&&$("toast").classList.contains("error")){clearTimeout(toastTimer);show("toast",false);}
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
