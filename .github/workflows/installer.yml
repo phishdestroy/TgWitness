@@ -53,7 +53,7 @@ jobs:
   acceptance:
     name: Qualify the signed installer on Linux and Windows
     needs: build
-    uses: $/.github/workflows/installer-acceptance.yml
+    uses: ./.github/workflows/installer-acceptance.yml
     with:
       artifact: tgwitness-installer-site
   qualify:
@@ -118,14 +118,19 @@ jobs:
           else
             echo 'Main has advanced. Leave the published installer unchanged.'
           fi
+      - name: Install Wrangler from its integrity-checked lock
+        if: steps.current.outputs.publish == 'true'
+        working-directory: deploy/wrangler
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish the checked static files
         if: steps.current.outputs.publish == 'true'
+        working-directory: deploy/wrangler
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" && test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo 'Configure Cloudflare CI credentials before enabling publication.'; exit 1; }
-          npx --yes wrangler@4.156.1 deploy --config deploy/installer/wrangler.toml
+          npx --no-install wrangler deploy --config ../installer/wrangler.toml
       - name: Check the public downloads after deployment
         if: steps.current.outputs.publish == 'true'
         run: python tools/installer_publication.py verify-public

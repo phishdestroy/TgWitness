@@ -28,6 +28,7 @@ FILES = [
     "deploy/installer/install.sh.in", "deploy/installer/install.ps1.in", "deploy/installer/install.cmd.in",
     "deploy/installer/release-signing.pub",
     "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
+    "deploy/wrangler/package.json", "deploy/wrangler/package-lock.json",
     "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
     ".clusterfuzzlite/project.yaml", ".clusterfuzzlite/Dockerfile", ".clusterfuzzlite/build.sh",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
