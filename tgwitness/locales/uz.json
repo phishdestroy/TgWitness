@@ -11151,5 +11151,16 @@
   "Download unsigned network snapshot": "Imzolanmagan tarmoq suratini yuklab olish",
   "Journal failed its integrity check": "Jurnal yaxlitlik tekshiruvidan o'tmadi",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Imzolangan jurnaldagi yozuv endi o'z xeshi, imzosi yoki imzolangan nazorat nuqtasiga mos kelmaydi. Ma'lumotlar papkasi TgWitness tashqarisida o'zgartirilgan. Uni o'z holicha qoldiring va eksportdan oldin tekshiring.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "Imzolangan jurnal yaxlitlik tekshiruvidan o'tmadi. Ma'lumotlar papkasini o'z holicha qoldiring."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Imzolangan jurnal yaxlitlik tekshiruvidan o'tmadi. Ma'lumotlar papkasini o'z holicha qoldiring.",
+  "What this journal proves": "Bu jurnal nimani tasdiqlaydi",
+  "Completeness": "To'liqlik",
+  "All {n} records match their hashes and signatures.": "Barcha {n} ta yozuv xeshi va imzosiga mos keladi.",
+  "Full check {time}": "To'liq tekshiruv {time}",
+  "Not checked yet.": "Hali tekshirilmagan.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Barmoq izi {fingerprint}. Qabul qiluvchi uni alohida kanal orqali solishtiradi; busiz imzo faqat qaysi kalit bilan imzolanganini ko'rsatadi.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 {total} ta yozuvdan {through} tasini qamraydi · javob {time}",
+  "Missing: {items}": "Yetishmaydi: {items}",
+  "No observation gaps in the last 24 hours.": "So'nggi 24 soatda kuzatuvda uzilish yo'q.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "So'nggi 24 soatdagi kuzatuv uzilishlari: {n}. Oxirgisi {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "{time} da muvaffaqiyatsiz tugadi; yozuv imzolangan jurnalda qoladi."
 }

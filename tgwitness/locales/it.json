@@ -11161,5 +11161,16 @@
   "Download unsigned network snapshot": "Scarica l'istantanea di rete non firmata",
   "Journal failed its integrity check": "Il giornale non ha superato il controllo di integrità",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Un record del giornale firmato non corrisponde più al suo hash, alla sua firma o al checkpoint firmato. La cartella dei dati è stata modificata al di fuori di TgWitness. Lasciala com'è e controllala prima di esportare.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "Il giornale firmato non ha superato il controllo di integrità. Lascia la cartella dei dati com'è."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Il giornale firmato non ha superato il controllo di integrità. Lascia la cartella dei dati com'è.",
+  "What this journal proves": "Cosa dimostra questo giornale",
+  "Completeness": "Completezza",
+  "All {n} records match their hashes and signatures.": "Tutti i {n} record corrispondono ai loro hash e firme.",
+  "Full check {time}": "Controllo completo {time}",
+  "Not checked yet.": "Non ancora controllato.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Impronta {fingerprint}. Il destinatario la confronta tramite un canale separato; senza questo la firma indica solo quale chiave ha firmato.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 copre {through} di {total} record · risposta {time}",
+  "Missing: {items}": "Manca: {items}",
+  "No observation gaps in the last 24 hours.": "Nessuna lacuna di osservazione nelle ultime 24 ore.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lacune di osservazione nelle ultime 24 ore: {n}. L'ultima {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Non riuscito il {time}; il record resta nel giornale firmato."
 }

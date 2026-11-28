@@ -216,6 +216,20 @@ button.home-summary-item:focus-visible { outline: 2px solid var(--focus); outlin
 .home-summary-item[data-tone=warn] .home-summary-dot { background: var(--warning); }
 .home-summary-item[data-tone=bad] { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
 .home-summary-item[data-tone=bad] .home-summary-dot { background: var(--danger); }
+.home-trust { margin: 0 0 14px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.home-trust-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.home-trust-head h2 { margin: 0; font-size: 15px; }
+.home-trust-head button { min-height: 44px; }
+.home-trust-rows { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; margin: 0 0 8px; }
+.home-trust-rows dt { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.home-trust-rows dd { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; overflow-wrap: anywhere; }
+.home-trust-rows dd .text-link { min-height: 44px; }
+.home-trust-mark { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 13px; }
+.home-trust-rows dt[data-state=ok] .home-trust-mark { background: var(--success-soft); color: var(--success); }
+.home-trust-rows dt[data-state=warn] .home-trust-mark { background: var(--warning-soft); color: var(--warning, #b45309); }
+.home-trust-rows dt[data-state=fail] .home-trust-mark { background: var(--danger-soft, #fde8e8); color: var(--danger, #b91c1c); }
+.home-trust-rows dt[data-state=none] .home-trust-mark { background: var(--surface-2, #eef0f3); color: var(--text-2); }
+@media (max-width: 560px) { .home-trust-rows { grid-template-columns: minmax(0, 1fr); gap: 2px; } .home-trust-rows dd { margin-bottom: 8px; } }
 .home-court { display: none; margin: 0 0 14px; padding: 10px 14px; border: 1px solid var(--border); border-inline-start-width: 4px; border-radius: 10px; background: var(--surface); }
 html[data-ui-level=simple] .home-court { display: grid; gap: 4px; }
 .home-court[data-ready=true] { border-color: var(--success); }

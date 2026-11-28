@@ -11100,5 +11100,16 @@
   "Download unsigned network snapshot": "署名なしのネットワークスナップショットをダウンロード",
   "Journal failed its integrity check": "ジャーナルが整合性チェックに失敗しました",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "署名済みジャーナルのレコードが、そのハッシュ、署名、または署名済みチェックポイントと一致しなくなりました。データフォルダーが TgWitness の外部で変更されています。そのままの状態で保持し、エクスポートの前に確認してください。",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "署名済みジャーナルが整合性チェックに失敗しました。データフォルダーはそのままにしてください。"
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "署名済みジャーナルが整合性チェックに失敗しました。データフォルダーはそのままにしてください。",
+  "What this journal proves": "このジャーナルが証明すること",
+  "Completeness": "網羅性",
+  "All {n} records match their hashes and signatures.": "{n} 件すべてのレコードがハッシュと署名に一致しています。",
+  "Full check {time}": "完全チェック {time}",
+  "Not checked yet.": "まだチェックされていません。",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "フィンガープリント {fingerprint}。受信者は別の経路で照合します。照合しなければ、署名はどの鍵で署名されたかを示すだけです。",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 が {total} 件中 {through} 件をカバー · 応答 {time}",
+  "Missing: {items}": "不足: {items}",
+  "No observation gaps in the last 24 hours.": "過去 24 時間に観測の欠落はありません。",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "過去 24 時間の観測の欠落: {n}。最後は {time}。",
+  "Failed on {time}; the record stays in the signed journal.": "{time} に失敗しました。この記録は署名済みジャーナルに残ります。"
 }

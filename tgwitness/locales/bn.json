@@ -11151,5 +11151,16 @@
   "Download unsigned network snapshot": "স্বাক্ষরবিহীন নেটওয়ার্ক স্ন্যাপশট ডাউনলোড করুন",
   "Journal failed its integrity check": "জার্নাল অখণ্ডতা যাচাইয়ে ব্যর্থ হয়েছে",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "স্বাক্ষরিত জার্নালের একটি রেকর্ড আর তার হ্যাশ, স্বাক্ষর বা স্বাক্ষরিত চেকপয়েন্টের সাথে মেলে না। ডেটা ফোল্ডারটি TgWitness-এর বাইরে পরিবর্তন করা হয়েছে। এটি যেমন আছে তেমন রাখুন এবং এক্সপোর্টের আগে যাচাই করুন।",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "স্বাক্ষরিত জার্নাল অখণ্ডতা যাচাইয়ে ব্যর্থ হয়েছে। ডেটা ফোল্ডারটি যেমন আছে তেমন রাখুন।"
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "স্বাক্ষরিত জার্নাল অখণ্ডতা যাচাইয়ে ব্যর্থ হয়েছে। ডেটা ফোল্ডারটি যেমন আছে তেমন রাখুন।",
+  "What this journal proves": "এই জার্নাল কী প্রমাণ করে",
+  "Completeness": "সম্পূর্ণতা",
+  "All {n} records match their hashes and signatures.": "সব {n}টি রেকর্ড তাদের হ্যাশ ও স্বাক্ষরের সাথে মেলে।",
+  "Full check {time}": "পূর্ণ যাচাই {time}",
+  "Not checked yet.": "এখনও যাচাই করা হয়নি।",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "ফিঙ্গারপ্রিন্ট {fingerprint}। প্রাপক এটি আলাদা চ্যানেলে মিলিয়ে দেখেন; তা না হলে স্বাক্ষর কেবল দেখায় কোন কী দিয়ে স্বাক্ষর করা হয়েছে।",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 মোট {total}টির মধ্যে {through}টি রেকর্ড কভার করে · উত্তর {time}",
+  "Missing: {items}": "নেই: {items}",
+  "No observation gaps in the last 24 hours.": "গত ২৪ ঘণ্টায় পর্যবেক্ষণে কোনো ফাঁক নেই।",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "গত ২৪ ঘণ্টায় পর্যবেক্ষণের ফাঁক: {n}। সর্বশেষটি {time}।",
+  "Failed on {time}; the record stays in the signed journal.": "{time}-এ ব্যর্থ হয়েছিল; রেকর্ডটি স্বাক্ষরিত জার্নালে থেকে যায়।"
 }

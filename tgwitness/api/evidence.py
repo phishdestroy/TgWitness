@@ -21,7 +21,7 @@ from ..app import GatewayLog
 from ..app import ModeChange
 from ..app import ReplicaUpdate
 from ..app import SourceCheck
-from ..evidence import checkpoint, note_integrity_failure
+from ..evidence import checkpoint, note_integrity_failure, note_integrity_ok
 from ..failures import describe
 from ..monitoring import Capture
 from ..monitoring import capture_settings
@@ -533,6 +533,7 @@ async def verify(*, ctx=Depends(current_context)):
             409,
             "Journal integrity verification failed. Preserve the directory for inspection.",
         ) from None
+    await asyncio.to_thread(note_integrity_ok, ctx.app.state.store, checked.get("events"))
     conditions = evidence_status(ctx.app.state.store, ctx.app.state.vault, getattr(ctx.app.state, "run_receipt", None))
     stamping = ctx.timestamps_health(ctx.outside_state())
     conditions["timestamp_state"] = {"state": stamping["state"], "reason": stamping["reason"]}

@@ -11355,5 +11355,16 @@
   "Download unsigned network snapshot": "تنزيل لقطة الشبكة غير الموقّعة",
   "Journal failed its integrity check": "فشل السجل في فحص السلامة",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "لم يعد أحد السجلات في السجل الموقّع يطابق التجزئة أو التوقيع أو نقطة التحقق الموقّعة. تم تغيير مجلد البيانات خارج TgWitness. اتركه كما هو وافحصه قبل التصدير.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "فشل السجل الموقّع في فحص السلامة. اترك مجلد البيانات كما هو."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "فشل السجل الموقّع في فحص السلامة. اترك مجلد البيانات كما هو.",
+  "What this journal proves": "ما الذي يثبته هذا السجل",
+  "Completeness": "الاكتمال",
+  "All {n} records match their hashes and signatures.": "جميع السجلات ({n}) تطابق تجزئاتها وتواقيعها.",
+  "Full check {time}": "فحص كامل {time}",
+  "Not checked yet.": "لم يُفحص بعد.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "البصمة {fingerprint}. يقارنها المستلم عبر قناة منفصلة؛ وبدون ذلك يُظهر التوقيع فقط أي مفتاح وقّع.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "يغطي RFC 3161 عدد {through} من {total} سجلًا · الرد {time}",
+  "Missing: {items}": "ينقص: {items}",
+  "No observation gaps in the last 24 hours.": "لا فجوات في المراقبة خلال آخر 24 ساعة.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "فجوات المراقبة خلال آخر 24 ساعة: {n}. آخرها {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "فشل في {time}؛ ويبقى هذا السجل في السجل الموقّع."
 }

@@ -11100,5 +11100,16 @@
   "Download unsigned network snapshot": "Unduh cuplikan jaringan tanpa tanda tangan",
   "Journal failed its integrity check": "Jurnal gagal dalam pemeriksaan integritas",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Sebuah catatan di jurnal bertanda tangan tidak lagi cocok dengan hash, tanda tangan, atau titik periksa bertanda tangannya. Folder data diubah di luar TgWitness. Biarkan apa adanya dan periksa sebelum mengekspor.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "Jurnal bertanda tangan gagal dalam pemeriksaan integritas. Biarkan folder data apa adanya."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Jurnal bertanda tangan gagal dalam pemeriksaan integritas. Biarkan folder data apa adanya.",
+  "What this journal proves": "Apa yang dibuktikan jurnal ini",
+  "Completeness": "Kelengkapan",
+  "All {n} records match their hashes and signatures.": "Semua {n} catatan cocok dengan hash dan tanda tangannya.",
+  "Full check {time}": "Pemeriksaan penuh {time}",
+  "Not checked yet.": "Belum diperiksa.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Sidik jari {fingerprint}. Penerima membandingkannya melalui saluran terpisah; tanpa itu tanda tangan hanya menunjukkan kunci mana yang menandatangani.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 mencakup {through} dari {total} catatan · jawaban {time}",
+  "Missing: {items}": "Kurang: {items}",
+  "No observation gaps in the last 24 hours.": "Tidak ada celah pengamatan dalam 24 jam terakhir.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Celah pengamatan dalam 24 jam terakhir: {n}. Terakhir {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Gagal pada {time}; catatannya tetap ada di jurnal bertanda tangan."
 }

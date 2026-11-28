@@ -11253,5 +11253,16 @@
   "Download unsigned network snapshot": "Pobierz niepodpisaną migawkę sieci",
   "Journal failed its integrity check": "Dziennik nie przeszedł kontroli integralności",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Rekord w podpisanym dzienniku nie zgadza się już ze swoim hashem, podpisem ani podpisanym punktem kontrolnym. Folder danych został zmieniony poza TgWitness. Pozostaw go bez zmian i sprawdź przed eksportem.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "Podpisany dziennik nie przeszedł kontroli integralności. Pozostaw folder danych bez zmian."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Podpisany dziennik nie przeszedł kontroli integralności. Pozostaw folder danych bez zmian.",
+  "What this journal proves": "Co potwierdza ten dziennik",
+  "Completeness": "Kompletność",
+  "All {n} records match their hashes and signatures.": "Wszystkie rekordy ({n}) zgadzają się ze swoimi hashami i podpisami.",
+  "Full check {time}": "Pełna kontrola {time}",
+  "Not checked yet.": "Jeszcze nie sprawdzono.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Odcisk {fingerprint}. Odbiorca porównuje go innym kanałem; bez tego podpis pokazuje tylko, który klucz podpisał.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 obejmuje {through} z {total} rekordów · odpowiedź {time}",
+  "Missing: {items}": "Brakuje: {items}",
+  "No observation gaps in the last 24 hours.": "Brak przerw w obserwacji w ostatnich 24 godzinach.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Przerwy w obserwacji w ostatnich 24 godzinach: {n}. Ostatnia {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Niepowodzenie {time}; wpis pozostaje w podpisanym dzienniku."
 }

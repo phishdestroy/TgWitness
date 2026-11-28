@@ -11161,5 +11161,16 @@
   "Download unsigned network snapshot": "Baixar instantâneo de rede não assinado",
   "Journal failed its integrity check": "O diário falhou na verificação de integridade",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Um registro do diário assinado não corresponde mais ao seu hash, à sua assinatura ou ao ponto de verificação assinado. A pasta de dados foi alterada fora do TgWitness. Mantenha-a como está e verifique antes de exportar.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "O diário assinado falhou na verificação de integridade. Mantenha a pasta de dados como está."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "O diário assinado falhou na verificação de integridade. Mantenha a pasta de dados como está.",
+  "What this journal proves": "O que este diário comprova",
+  "Completeness": "Completude",
+  "All {n} records match their hashes and signatures.": "Todos os {n} registros correspondem aos seus hashes e assinaturas.",
+  "Full check {time}": "Verificação completa {time}",
+  "Not checked yet.": "Ainda não verificado.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Impressão digital {fingerprint}. O destinatário a compara por um canal separado; sem isso, a assinatura mostra apenas qual chave assinou.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 cobre {through} de {total} registros · resposta {time}",
+  "Missing: {items}": "Falta: {items}",
+  "No observation gaps in the last 24 hours.": "Nenhuma lacuna de observação nas últimas 24 horas.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lacunas de observação nas últimas 24 horas: {n}. A última {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Falhou em {time}; o registro permanece no diário assinado."
 }

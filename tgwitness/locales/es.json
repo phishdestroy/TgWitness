@@ -11161,5 +11161,16 @@
   "Download unsigned network snapshot": "Descargar instantánea de red sin firmar",
   "Journal failed its integrity check": "El diario no superó la comprobación de integridad",
   "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Un registro del diario firmado ya no coincide con su hash, su firma o el punto de control firmado. La carpeta de datos se modificó fuera de TgWitness. Déjala como está y revísala antes de exportar.",
-  "The signed journal failed its integrity check. Keep the data folder as it is.": "El diario firmado no superó la comprobación de integridad. Deja la carpeta de datos como está."
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "El diario firmado no superó la comprobación de integridad. Deja la carpeta de datos como está.",
+  "What this journal proves": "Qué demuestra este diario",
+  "Completeness": "Integridad de la cobertura",
+  "All {n} records match their hashes and signatures.": "Los {n} registros coinciden con sus hashes y firmas.",
+  "Full check {time}": "Comprobación completa {time}",
+  "Not checked yet.": "Aún no se ha comprobado.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Huella {fingerprint}. El destinatario la compara por un canal aparte; sin eso, la firma solo muestra qué clave firmó.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 cubre {through} de {total} registros · respuesta {time}",
+  "Missing: {items}": "Falta: {items}",
+  "No observation gaps in the last 24 hours.": "Sin huecos de observación en las últimas 24 horas.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Huecos de observación en las últimas 24 horas: {n}. El último {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Falló el {time}; el registro permanece en el diario firmado."
 }

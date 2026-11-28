@@ -136,8 +136,15 @@ def check_journal(store, vault):
         result = store.verify(vault.public_key)
     except Exception as exc:
         return note_integrity_failure(store, type(exc).__name__)
-    store.set_setting("journal_integrity", {"state": "ok", "checked_at": utcnow(), "events": result.get("events")})
+    note_integrity_ok(store, result.get("events"))
     return None
+
+
+def note_integrity_ok(store, events):
+    known = store.get_setting("journal_integrity", None) or {}
+    previous = known.get("previous_failure") if known.get("state") == "ok" else known.get("detected_at")
+    store.set_setting("journal_integrity", {"state": "ok", "checked_at": utcnow(), "events": events,
+                                            **({"previous_failure": previous} if previous else {})})
 
 
 def note_integrity_failure(store, error_type):
