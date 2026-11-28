@@ -62,6 +62,16 @@ server, use an SSH forward from your computer (`ssh -L 8787:127.0.0.1:8787 user@
 and open `http://127.0.0.1:8787`. On macOS and Windows, the local panel opens in your
 browser; keep its terminal running.
 
+Without a terminal (cloud-init, CI, `ssh host 'curl … | bash'`), the installer cannot ask. Choose the access
+in advance with `TGWITNESS_SETUP_MODE=local`, `quick` or `domain` (with `TGWITNESS_SETUP_DOMAIN=panel.example.org`):
+
+```sh
+curl -fsSL https://get.destroy.tools/install.sh | TGWITNESS_SETUP_MODE=quick bash
+```
+
+After an installation without a choice, run `tgwitness setup --mode local` (or `quick`, or
+`domain --domain panel.example.org`).
+
 Sign in to Telegram in the panel and choose what to collect. Installation alone
 does not start Telegram collection.
 
