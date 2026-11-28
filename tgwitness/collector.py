@@ -4006,6 +4006,7 @@ class Collector:
                                    "this interval. Updates Telegram still holds are fetched when observation "
                                    "resumes; edits and deletions in between can be missing."})
                     LOG.info("Free disk space is back; resuming observation")
+                    self.journal_write_failures = 0
                     await restart()
                 return
         finally:
