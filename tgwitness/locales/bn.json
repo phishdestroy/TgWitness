@@ -11204,5 +11204,10 @@
   "Telegram names the original sender but not the original message.": "Telegram মূল প্রেরকের নাম দেয়, মূল বার্তা নয়।",
   "The original chat is not open to this access.": "মূল চ্যাট এই অ্যাক্সেসের জন্য খোলা নয়।",
   "The original chat is not collected in this workspace.": "মূল চ্যাট এই ওয়ার্কস্পেসে সংগ্রহ করা হয় না।",
-  "The original message is not saved in this workspace.": "মূল বার্তা এই ওয়ার্কস্পেসে সংরক্ষিত নয়।"
+  "The original message is not saved in this workspace.": "মূল বার্তা এই ওয়ার্কস্পেসে সংরক্ষিত নয়।",
+  "Build report from these cards": "এই কার্ডগুলো থেকে রিপোর্ট তৈরি করুন",
+  "Choose cards that point to messages.": "বার্তার দিকে নির্দেশ করে এমন কার্ড বেছে নিন।",
+  "Choose at most 1,000 messages.": "সর্বোচ্চ ১,০০০টি বার্তা বেছে নিন।",
+  "Journal text": "জার্নালের লেখা",
+  "Team note": "দলের নোট"
 }

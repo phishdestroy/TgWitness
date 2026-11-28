@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram ระบุผู้ส่งต้นทาง แต่ไม่ระบุข้อความต้นฉบับ",
   "The original chat is not open to this access.": "แชทต้นฉบับไม่ได้เปิดให้สิทธิ์นี้",
   "The original chat is not collected in this workspace.": "แชทต้นฉบับไม่ได้ถูกเก็บในพื้นที่ทำงานนี้",
-  "The original message is not saved in this workspace.": "ข้อความต้นฉบับไม่ได้บันทึกในพื้นที่ทำงานนี้"
+  "The original message is not saved in this workspace.": "ข้อความต้นฉบับไม่ได้บันทึกในพื้นที่ทำงานนี้",
+  "Build report from these cards": "สร้างรายงานจากการ์ดเหล่านี้",
+  "Choose cards that point to messages.": "เลือกการ์ดที่ชี้ไปยังข้อความ",
+  "Choose at most 1,000 messages.": "เลือกได้ไม่เกิน 1,000 ข้อความ",
+  "Journal text": "ข้อความในบันทึก",
+  "Team note": "บันทึกของทีม"
 }

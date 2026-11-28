@@ -37,8 +37,9 @@ const workspaceSafetyReady=import('./core/workspace-safety.js?v=3').then(({creat
 });
 let accountState,accountActivity;
 let boardView;
-const boardReady=import('./views/board.js?v=7').then(({createCaseBoard})=>{
+const boardReady=import('./views/board.js?v=8').then(({createCaseBoard})=>{
   boardView=createCaseBoard({root:$('view-board'),state,json,tr,trn,node,toast,may,download,media:mediaNode,
+    report:refs=>reportFor(null,null,null,refs),canReport:()=>viewAllowed('evidence'),
     openEvidence:async(event,range)=>{
       const revision=state.workspaceRevision;
       state.boardSlice=null;state.boardAdded=false;state.filter='';state.source='';state.search='';state.eventSince='';state.eventUntil='';state.eventSystem=true;
@@ -3721,7 +3722,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=11').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=12').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
@@ -3776,15 +3777,16 @@ function resetReportSettings(){
   reportConfigurations?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
-async function reportFor(chat,sender,messages=null){
-  if(chat===null||!viewAllowed('evidence'))return;
+async function reportFor(chat,sender,messages=null,refs=null){
+  if(chat===null&&!refs?.length||!viewAllowed('evidence'))return;
   const revision=state.workspaceRevision,profile=state.profile;
   await navigate('evidence');
   if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence')return;
   selectExportTask('journal');
   await loadReportSettings();
   if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
-  if(messages?.length)reportSelection.selectMessages(chat,messages);
+  if(refs?.length){reportSelection.selectRefs(refs);if($("report-case-board").value==="off")$("report-case-board").value="bookmarks";}
+  else if(messages?.length)reportSelection.selectMessages(chat,messages);
   else reportSelection.selectChats([chat],sender===null||sender===undefined?[]:[sender]);
   $("exports-tab-settings").click();
   $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));

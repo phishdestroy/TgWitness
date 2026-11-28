@@ -11408,5 +11408,10 @@
   "Telegram names the original sender but not the original message.": "يذكر تيليجرام المرسل الأصلي لكن ليس الرسالة الأصلية.",
   "The original chat is not open to this access.": "الدردشة الأصلية غير مفتوحة لهذا الوصول.",
   "The original chat is not collected in this workspace.": "الدردشة الأصلية لا تُجمع في مساحة العمل هذه.",
-  "The original message is not saved in this workspace.": "الرسالة الأصلية غير محفوظة في مساحة العمل هذه."
+  "The original message is not saved in this workspace.": "الرسالة الأصلية غير محفوظة في مساحة العمل هذه.",
+  "Build report from these cards": "إنشاء تقرير من هذه البطاقات",
+  "Choose cards that point to messages.": "اختر بطاقات تشير إلى رسائل.",
+  "Choose at most 1,000 messages.": "اختر 1000 رسالة على الأكثر.",
+  "Journal text": "نص السجل",
+  "Team note": "ملاحظة الفريق"
 }

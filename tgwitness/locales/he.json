@@ -11255,5 +11255,10 @@
   "Telegram names the original sender but not the original message.": "טלגרם מציין את השולח המקורי אך לא את ההודעה המקורית.",
   "The original chat is not open to this access.": "הצ׳אט המקורי אינו פתוח לגישה זו.",
   "The original chat is not collected in this workspace.": "הצ׳אט המקורי אינו נאסף בסביבת עבודה זו.",
-  "The original message is not saved in this workspace.": "ההודעה המקורית אינה שמורה בסביבת עבודה זו."
+  "The original message is not saved in this workspace.": "ההודעה המקורית אינה שמורה בסביבת עבודה זו.",
+  "Build report from these cards": "יצירת דוח מהכרטיסים האלה",
+  "Choose cards that point to messages.": "בחרו כרטיסים שמפנים להודעות.",
+  "Choose at most 1,000 messages.": "בחרו עד 1,000 הודעות.",
+  "Journal text": "הטקסט ביומן",
+  "Team note": "הערת הצוות"
 }

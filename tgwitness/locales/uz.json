@@ -11204,5 +11204,10 @@
   "Telegram names the original sender but not the original message.": "Telegram asl yuboruvchini ko‘rsatadi, asl xabarni emas.",
   "The original chat is not open to this access.": "Asl suhbat bu kirish uchun ochiq emas.",
   "The original chat is not collected in this workspace.": "Asl suhbat bu ish maydonida yig‘ilmaydi.",
-  "The original message is not saved in this workspace.": "Asl xabar bu ish maydonida saqlanmagan."
+  "The original message is not saved in this workspace.": "Asl xabar bu ish maydonida saqlanmagan.",
+  "Build report from these cards": "Ushbu kartalardan hisobot tuzish",
+  "Choose cards that point to messages.": "Xabarlarga ishora qiluvchi kartalarni tanlang.",
+  "Choose at most 1,000 messages.": "Ko‘pi bilan 1 000 ta xabar tanlang.",
+  "Journal text": "Jurnaldagi matn",
+  "Team note": "Jamoa izohi"
 }

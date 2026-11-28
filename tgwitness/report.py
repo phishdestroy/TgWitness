@@ -2784,7 +2784,7 @@ class EvidenceHTML:
             yield minimisation_section(say, next(self.numbers), self.handover, self.count).encode("utf-8")
         if self.context.get("case_board"):
             from . import board_report
-            yield board_report.html(self.context["case_board"], say).encode("utf-8")
+            yield board_report.html(self.context["case_board"], say, self.digest.get("titles")).encode("utf-8")
         if self.changed and self.events_again and self.options.get("show_changes", True):
             yield changes_section(say, next(self.numbers), history_context(self.context, self.events_again, self.changed), len(self.changed),
                                   self.digest["titles"], links, self.filtered).encode("utf-8")

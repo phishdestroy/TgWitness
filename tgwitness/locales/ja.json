@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram は元の送信者を示しますが、元のメッセージは示しません。",
   "The original chat is not open to this access.": "元のチャットはこのアクセスに開かれていません。",
   "The original chat is not collected in this workspace.": "元のチャットはこのワークスペースで収集されていません。",
-  "The original message is not saved in this workspace.": "元のメッセージはこのワークスペースに保存されていません。"
+  "The original message is not saved in this workspace.": "元のメッセージはこのワークスペースに保存されていません。",
+  "Build report from these cards": "これらのカードからレポートを作成",
+  "Choose cards that point to messages.": "メッセージを指すカードを選んでください。",
+  "Choose at most 1,000 messages.": "選べるメッセージは最大 1,000 件です。",
+  "Journal text": "ジャーナルの本文",
+  "Team note": "チームのメモ"
 }

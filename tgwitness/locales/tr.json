@@ -11204,5 +11204,10 @@
   "Telegram names the original sender but not the original message.": "Telegram orijinal göndereni belirtir ama orijinal mesajı belirtmez.",
   "The original chat is not open to this access.": "Orijinal sohbet bu erişime açık değil.",
   "The original chat is not collected in this workspace.": "Orijinal sohbet bu çalışma alanında toplanmıyor.",
-  "The original message is not saved in this workspace.": "Orijinal mesaj bu çalışma alanında kayıtlı değil."
+  "The original message is not saved in this workspace.": "Orijinal mesaj bu çalışma alanında kayıtlı değil.",
+  "Build report from these cards": "Bu kartlardan rapor oluştur",
+  "Choose cards that point to messages.": "Mesajlara işaret eden kartları seçin.",
+  "Choose at most 1,000 messages.": "En fazla 1.000 mesaj seçin.",
+  "Journal text": "Günlükteki metin",
+  "Team note": "Ekip notu"
 }

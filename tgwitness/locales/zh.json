@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram 提供原始发送者，但未提供原始消息。",
   "The original chat is not open to this access.": "原始聊天未对此访问权限开放。",
   "The original chat is not collected in this workspace.": "此工作区未收集原始聊天。",
-  "The original message is not saved in this workspace.": "原始消息未保存在此工作区。"
+  "The original message is not saved in this workspace.": "原始消息未保存在此工作区。",
+  "Build report from these cards": "用这些卡片生成报告",
+  "Choose cards that point to messages.": "请选择指向消息的卡片。",
+  "Choose at most 1,000 messages.": "最多选择 1,000 条消息。",
+  "Journal text": "日志中的文本",
+  "Team note": "团队备注"
 }

@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram menyebut pengirim asal tetapi bukan mesej asal.",
   "The original chat is not open to this access.": "Sembang asal tidak dibuka untuk akses ini.",
   "The original chat is not collected in this workspace.": "Sembang asal tidak dikumpul dalam ruang kerja ini.",
-  "The original message is not saved in this workspace.": "Mesej asal tidak disimpan dalam ruang kerja ini."
+  "The original message is not saved in this workspace.": "Mesej asal tidak disimpan dalam ruang kerja ini.",
+  "Build report from these cards": "Bina laporan daripada kad ini",
+  "Choose cards that point to messages.": "Pilih kad yang merujuk kepada mesej.",
+  "Choose at most 1,000 messages.": "Pilih paling banyak 1,000 mesej.",
+  "Journal text": "Teks jurnal",
+  "Team note": "Nota pasukan"
 }

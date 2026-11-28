@@ -11306,5 +11306,10 @@
   "Telegram names the original sender but not the original message.": "Telegram називає початкового відправника, але не вихідне повідомлення.",
   "The original chat is not open to this access.": "Вихідний чат не відкрито цьому доступу.",
   "The original chat is not collected in this workspace.": "Вихідний чат не збирається в цьому робочому просторі.",
-  "The original message is not saved in this workspace.": "Вихідне повідомлення не збережено в цьому робочому просторі."
+  "The original message is not saved in this workspace.": "Вихідне повідомлення не збережено в цьому робочому просторі.",
+  "Build report from these cards": "Зібрати звіт із цих карток",
+  "Choose cards that point to messages.": "Виберіть картки, що вказують на повідомлення.",
+  "Choose at most 1,000 messages.": "Виберіть не більше 1000 повідомлень.",
+  "Journal text": "Текст із журналу",
+  "Team note": "Нотатка команди"
 }
