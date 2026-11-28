@@ -154,8 +154,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   };
 
   function courtLine() {
-    const c = resources.live.value?.court_readiness;
-    if (!c) return null;
+    const c = resources.live.value?.court_readiness, collector = getState().status?.collector || {};
+    if (!c || !collector.has_session && !collector.account) return null;
     const number = value => value.toLocaleString(document.documentElement.lang || undefined);
     const box = node('section', 'home-court');
     box.dataset.ready = String(!!c.ready);
@@ -560,7 +560,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       const add = node('button', 'quiet', tr('Add account'));
       add.type = 'button';
       add.addEventListener('click', () => navigate('accounts'));
-      heading.append(add);
+      if (profiles.some(profile => profile.collector?.has_session)) heading.append(add);
       accounts.append(heading);
       const grid = node('div', 'home-account-grid');
       for (const profile of profiles) grid.append(accountCard(profile, state));
