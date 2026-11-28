@@ -11167,5 +11167,18 @@
   "Attachment not saved": "Ek kaydedilmedi",
   "On the Case Board": "Vaka Panosunda",
   "This access does not open this section.": "Bu erişim bu bölümü açmaz.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hesap henüz bu sohbetin üyesi değil. Kurulumdan sonra bu bağlantıyla Sohbetler bölümünden katılın."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hesap henüz bu sohbetin üyesi değil. Kurulumdan sonra bu bağlantıyla Sohbetler bölümünden katılın.",
+  "All saved records": "Tüm kayıtlı kayıtlar",
+  "Recorded gaps: {n}": "Kaydedilen boşluklar: {n}",
+  "Attachments not saved: {n}": "Kaydedilmeyen ekler: {n}",
+  "Attachments still downloading: {n}": "Hâlâ indirilen ekler: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Kaydedilmiş boşluk yok; bu seçimdeki tüm ekler kaydedildi.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Özet bu boşlukları ve eksik dosyaları listeler; eksiksiz olduğunu iddia etmez.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py, VERIFY.cmd ve VERIFY.sh içeren imzalı teslim özeti (ZIP). Amaç ve kurallar içinde imzalıdır.",
+  "Encrypted: send the password through a separate channel.": "Şifreli: parolayı ayrı bir kanaldan gönderin.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Bu parmak izini ayrı bir kanaldan (telefon, mektup, başka bir mesajlaşma uygulaması) gönderin, asla arşivin içinde değil.",
+  "Independent check": "Bağımsız doğrulama",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Alıcı ZIP'i açar ve bu parmak iziyle VERIFY.cmd (Windows) veya sh VERIFY.sh çalıştırır. Olmadan sonuç, imzalayan anahtarının doğrulanmadığını söyler; farklı bir parmak izi başarısız olur.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Doğrulama kimin imzaladığını ve hiçbir şeyin değişmediğini kanıtlar. İçeriğin doğru olduğunu veya mahkemenin kabul edeceğini kanıtlamaz.",
+  "Before you hand over": "Teslim etmeden önce"
 }

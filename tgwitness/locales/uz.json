@@ -11167,5 +11167,18 @@
   "Attachment not saved": "Ilova saqlanmadi",
   "On the Case Board": "Holat doskasida",
   "This access does not open this section.": "Bu kirish ushbu bo'limni ochmaydi.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hisob hali bu suhbat a'zosi emas. Sozlashdan so'ng ushbu havola orqali Suhbatlar bo'limidan qo'shiling."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hisob hali bu suhbat a'zosi emas. Sozlashdan so'ng ushbu havola orqali Suhbatlar bo'limidan qo'shiling.",
+  "All saved records": "Barcha saqlangan yozuvlar",
+  "Recorded gaps: {n}": "Qayd etilgan uzilishlar: {n}",
+  "Attachments not saved: {n}": "Saqlanmagan ilovalar: {n}",
+  "Attachments still downloading: {n}": "Hali yuklanayotgan ilovalar: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Qayd etilgan uzilish yo'q, bu tanlovdagi barcha ilovalar saqlangan.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Ko'chirma bu uzilishlar va yo'q fayllarni ko'rsatadi; to'liq deb da'vo qilmaydi.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py, VERIFY.cmd va VERIFY.sh bilan imzolangan topshirish ko'chirmasi (ZIP). Maqsad va qoidalar unga imzolangan.",
+  "Encrypted: send the password through a separate channel.": "Shifrlangan: parolni alohida kanal orqali yuboring.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Bu barmoq izini alohida kanal orqali yuboring (telefon, xat, boshqa messenjer), hech qachon arxiv ichida emas.",
+  "Independent check": "Mustaqil tekshiruv",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Qabul qiluvchi ZIP'ni ochib, shu barmoq izi bilan VERIFY.cmd (Windows) yoki sh VERIFY.sh ni ishga tushiradi. Usiz natija imzolovchi kaliti tasdiqlanmaganini aytadi; boshqa barmoq izi rad etiladi.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Tekshiruv kim imzolaganini va hech narsa o'zgarmaganini isbotlaydi. Mazmun to'g'ri ekanini yoki sud uni qabul qilishini isbotlamaydi.",
+  "Before you hand over": "Topshirishdan oldin"
 }

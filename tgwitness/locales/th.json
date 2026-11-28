@@ -11116,5 +11116,18 @@
   "Attachment not saved": "ไม่ได้บันทึกไฟล์แนบ",
   "On the Case Board": "บนกระดานคดี",
   "This access does not open this section.": "สิทธิ์การเข้าถึงนี้เปิดส่วนนี้ไม่ได้",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "บัญชีนี้ยังไม่ได้เป็นสมาชิกของแชทนี้ หลังตั้งค่าเสร็จ ให้เข้าร่วมจากแชทด้วยลิงก์นี้"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "บัญชีนี้ยังไม่ได้เป็นสมาชิกของแชทนี้ หลังตั้งค่าเสร็จ ให้เข้าร่วมจากแชทด้วยลิงก์นี้",
+  "All saved records": "บันทึกที่บันทึกไว้ทั้งหมด",
+  "Recorded gaps: {n}": "ช่องว่างที่บันทึกไว้: {n}",
+  "Attachments not saved: {n}": "ไฟล์แนบที่ไม่ได้บันทึก: {n}",
+  "Attachments still downloading: {n}": "ไฟล์แนบที่ยังดาวน์โหลดอยู่: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "ไม่มีช่องว่างที่บันทึกไว้ และไฟล์แนบทั้งหมดในส่วนที่เลือกถูกบันทึกแล้ว",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "ข้อมูลที่ส่งมอบระบุช่องว่างและไฟล์ที่ขาดไว้ และไม่อ้างว่าครบถ้วน",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "ข้อมูลส่งมอบที่ลงนาม (ZIP) พร้อม verify.py, VERIFY.cmd และ VERIFY.sh วัตถุประสงค์และกฎถูกลงนามไว้ด้วย",
+  "Encrypted: send the password through a separate channel.": "เข้ารหัสแล้ว: ส่งรหัสผ่านผ่านช่องทางแยก",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "ส่งลายนิ้วมือนี้ผ่านช่องทางแยก (โทรศัพท์ จดหมาย แอปแชทอื่น) ห้ามใส่ไว้ในไฟล์เก็บถาวร",
+  "Independent check": "การตรวจสอบอิสระ",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "ผู้รับแตกไฟล์ ZIP แล้วรัน VERIFY.cmd (Windows) หรือ sh VERIFY.sh พร้อมลายนิ้วมือนี้ หากไม่มี ผลจะระบุว่ากุญแจผู้ลงนามยังไม่ได้รับการยืนยัน ลายนิ้วมือที่ต่างกันจะไม่ผ่าน",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "การตรวจสอบพิสูจน์ว่าใครลงนามและไม่มีสิ่งใดถูกเปลี่ยน แต่ไม่ได้พิสูจน์ว่าเนื้อหาเป็นความจริงหรือศาลจะยอมรับ",
+  "Before you hand over": "ก่อนส่งมอบ"
 }

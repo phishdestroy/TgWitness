@@ -11167,5 +11167,18 @@
   "Attachment not saved": "সংযুক্তি সংরক্ষিত হয়নি",
   "On the Case Board": "কেস বোর্ডে",
   "This access does not open this section.": "এই অ্যাক্সেস এই বিভাগটি খোলে না।",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "এই অ্যাকাউন্টটি এখনও এই চ্যাটের সদস্য নয়। সেটআপের পরে এই লিঙ্ক দিয়ে চ্যাটস থেকে যোগ দিন।"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "এই অ্যাকাউন্টটি এখনও এই চ্যাটের সদস্য নয়। সেটআপের পরে এই লিঙ্ক দিয়ে চ্যাটস থেকে যোগ দিন।",
+  "All saved records": "সব সংরক্ষিত রেকর্ড",
+  "Recorded gaps: {n}": "নথিভুক্ত ফাঁক: {n}",
+  "Attachments not saved: {n}": "সংরক্ষিত হয়নি এমন সংযুক্তি: {n}",
+  "Attachments still downloading: {n}": "এখনও ডাউনলোড হচ্ছে: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "কোনো নথিভুক্ত ফাঁক নেই, এবং এই নির্বাচনের সব সংযুক্তি সংরক্ষিত।",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "নির্যাসে এই ফাঁক ও অনুপস্থিত ফাইলগুলো তালিকাভুক্ত থাকে; এটি সম্পূর্ণ বলে দাবি করে না।",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py, VERIFY.cmd ও VERIFY.sh সহ স্বাক্ষরিত হস্তান্তর নির্যাস (ZIP)। উদ্দেশ্য ও নিয়ম এতে স্বাক্ষরিত।",
+  "Encrypted: send the password through a separate channel.": "এনক্রিপ্ট করা: পাসওয়ার্ড আলাদা চ্যানেলে পাঠান।",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "এই ফিঙ্গারপ্রিন্ট আলাদা চ্যানেলে পাঠান (ফোন, চিঠি, অন্য মেসেঞ্জার), কখনো আর্কাইভের ভেতরে নয়।",
+  "Independent check": "স্বাধীন যাচাই",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "প্রাপক ZIP খুলে এই ফিঙ্গারপ্রিন্ট দিয়ে VERIFY.cmd (Windows) বা sh VERIFY.sh চালান। এটি ছাড়া ফলাফলে স্বাক্ষরকারীর কী নিশ্চিত নয় বলা হয়; ভিন্ন ফিঙ্গারপ্রিন্টে যাচাই ব্যর্থ হয়।",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "যাচাই প্রমাণ করে কে স্বাক্ষর করেছে এবং কিছু বদলায়নি। এটি বিষয়বস্তু সত্য বা আদালত গ্রহণ করবে তা প্রমাণ করে না।",
+  "Before you hand over": "হস্তান্তরের আগে"
 }

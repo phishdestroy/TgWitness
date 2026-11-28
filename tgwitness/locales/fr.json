@@ -11177,5 +11177,18 @@
   "Attachment not saved": "Pièce jointe non enregistrée",
   "On the Case Board": "Sur le tableau de l'affaire",
   "This access does not open this section.": "Cet accès n'ouvre pas cette section.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Ce compte n'est pas encore membre de ce chat. Après la configuration, rejoignez-le depuis Chats avec ce lien."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Ce compte n'est pas encore membre de ce chat. Après la configuration, rejoignez-le depuis Chats avec ce lien.",
+  "All saved records": "Tous les enregistrements",
+  "Recorded gaps: {n}": "Lacunes enregistrées : {n}",
+  "Attachments not saved: {n}": "Pièces jointes non enregistrées : {n}",
+  "Attachments still downloading: {n}": "Pièces jointes en cours de téléchargement : {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Aucune lacune enregistrée ; toutes les pièces jointes de cette sélection sont enregistrées.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "L'extrait liste ces lacunes et fichiers manquants ; il ne se dit pas complet.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Extrait de remise signé (ZIP) avec verify.py, VERIFY.cmd et VERIFY.sh. L'objet et les règles y sont signés.",
+  "Encrypted: send the password through a separate channel.": "Chiffré : envoyez le mot de passe par un autre canal.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Envoyez cette empreinte par un autre canal (téléphone, courrier, autre messagerie), jamais dans l'archive.",
+  "Independent check": "Vérification indépendante",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Le destinataire extrait le ZIP et lance VERIFY.cmd (Windows) ou sh VERIFY.sh avec cette empreinte. Sans elle, le résultat indique que la clé du signataire n'est pas confirmée ; une autre empreinte échoue.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "La vérification prouve qui a signé et que rien n'a changé. Elle ne prouve pas que le contenu est vrai ni qu'un tribunal l'acceptera.",
+  "Before you hand over": "Avant la remise"
 }

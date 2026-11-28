@@ -11218,5 +11218,18 @@
   "Attachment not saved": "הקובץ המצורף לא נשמר",
   "On the Case Board": "בלוח התיק",
   "This access does not open this section.": "גישה זו אינה פותחת את המדור הזה.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "החשבון הזה עדיין אינו חבר בצ'אט הזה. לאחר ההגדרה, הצטרפו אליו מצ'אטים באמצעות הקישור הזה."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "החשבון הזה עדיין אינו חבר בצ'אט הזה. לאחר ההגדרה, הצטרפו אליו מצ'אטים באמצעות הקישור הזה.",
+  "All saved records": "כל הרשומות השמורות",
+  "Recorded gaps: {n}": "פערים מתועדים: {n}",
+  "Attachments not saved: {n}": "קבצים מצורפים שלא נשמרו: {n}",
+  "Attachments still downloading: {n}": "קבצים מצורפים שעדיין יורדים: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "אין פערים מתועדים, וכל הקבצים המצורפים בבחירה זו נשמרו.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "התמצית מפרטת את הפערים והקבצים החסרים האלה; היא אינה טוענת שהיא שלמה.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "תמצית מסירה חתומה (ZIP) עם verify.py, ‏VERIFY.cmd ו-VERIFY.sh. המטרה והכללים חתומים בתוכה.",
+  "Encrypted: send the password through a separate channel.": "מוצפן: שלחו את הסיסמה בערוץ נפרד.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "שלחו את טביעת האצבע בערוץ נפרד (טלפון, מכתב, מסנג'ר אחר), לעולם לא בתוך הארכיון.",
+  "Independent check": "בדיקה עצמאית",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "הנמען מחלץ את ה-ZIP ומריץ VERIFY.cmd (Windows) או sh VERIFY.sh עם טביעת האצבע. בלעדיה התוצאה מציינת שמפתח החותם לא אומת; טביעת אצבע אחרת נכשלת.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "הבדיקה מוכיחה מי חתם ושדבר לא השתנה. היא אינה מוכיחה שהתוכן נכון או שבית משפט יקבל אותו.",
+  "Before you hand over": "לפני המסירה"
 }

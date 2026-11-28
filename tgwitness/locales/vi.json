@@ -11116,5 +11116,18 @@
   "Attachment not saved": "Tệp đính kèm chưa được lưu",
   "On the Case Board": "Trên bảng vụ án",
   "This access does not open this section.": "Quyền truy cập này không mở được mục này.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Tài khoản này chưa là thành viên của cuộc trò chuyện. Sau khi thiết lập, hãy tham gia từ mục Trò chuyện bằng liên kết này."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Tài khoản này chưa là thành viên của cuộc trò chuyện. Sau khi thiết lập, hãy tham gia từ mục Trò chuyện bằng liên kết này.",
+  "All saved records": "Tất cả bản ghi đã lưu",
+  "Recorded gaps: {n}": "Khoảng trống đã ghi: {n}",
+  "Attachments not saved: {n}": "Tệp đính kèm chưa lưu: {n}",
+  "Attachments still downloading: {n}": "Tệp đính kèm đang tải: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Không có khoảng trống đã ghi, mọi tệp đính kèm trong lựa chọn này đã được lưu.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Bản trích liệt kê các khoảng trống và tệp thiếu này; không tự nhận là đầy đủ.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Bản trích bàn giao đã ký (ZIP) kèm verify.py, VERIFY.cmd và VERIFY.sh. Mục đích và quy tắc được ký trong đó.",
+  "Encrypted: send the password through a separate channel.": "Đã mã hóa: gửi mật khẩu qua kênh riêng.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Gửi dấu vân tay này qua kênh riêng (điện thoại, thư, ứng dụng nhắn tin khác), không bao giờ để trong tệp lưu trữ.",
+  "Independent check": "Kiểm tra độc lập",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Người nhận giải nén ZIP và chạy VERIFY.cmd (Windows) hoặc sh VERIFY.sh với dấu vân tay này. Không có nó, kết quả báo khóa người ký chưa được xác nhận; dấu vân tay khác sẽ thất bại.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Việc kiểm tra chứng minh ai đã ký và không có gì thay đổi. Nó không chứng minh nội dung là thật hay tòa án sẽ chấp nhận.",
+  "Before you hand over": "Trước khi bàn giao"
 }

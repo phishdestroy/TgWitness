@@ -11116,5 +11116,18 @@
   "Attachment not saved": "添付ファイルは保存されていません",
   "On the Case Board": "ケースボード上",
   "This access does not open this section.": "このアクセスではこのセクションを開けません。",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "このアカウントはまだこのチャットのメンバーではありません。設定後、チャットからこのリンクで参加してください。"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "このアカウントはまだこのチャットのメンバーではありません。設定後、チャットからこのリンクで参加してください。",
+  "All saved records": "保存済みのすべての記録",
+  "Recorded gaps: {n}": "記録された欠落: {n}",
+  "Attachments not saved: {n}": "保存されていない添付ファイル: {n}",
+  "Attachments still downloading: {n}": "ダウンロード中の添付ファイル: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "記録された欠落はなく、この選択の添付ファイルはすべて保存済みです。",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "抽出にはこれらの欠落と不足ファイルが記載され、完全であるとは主張しません。",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py、VERIFY.cmd、VERIFY.sh 付きの署名済み引き渡し抽出（ZIP）。目的とルールも署名されます。",
+  "Encrypted: send the password through a separate channel.": "暗号化済み: パスワードは別の経路で送ってください。",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "このフィンガープリントは別の経路（電話、郵便、別のメッセンジャー）で送り、アーカイブに入れないでください。",
+  "Independent check": "独立した検証",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "受信者は ZIP を展開し、このフィンガープリントで VERIFY.cmd（Windows）または sh VERIFY.sh を実行します。指定しないと署名者の鍵は未確認と表示され、異なるフィンガープリントでは失敗します。",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "検証で証明されるのは署名者と改変がないことです。内容が真実であることや裁判所が採用することは証明しません。",
+  "Before you hand over": "引き渡しの前に"
 }

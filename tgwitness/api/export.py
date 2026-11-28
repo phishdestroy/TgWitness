@@ -708,6 +708,57 @@ async def prepared_exports(request: Request, *, ctx=Depends(current_context)):
     )
 
 
+UNSAVED_MEDIA = ("media.failed", "media.skipped", "media.missing_after_restart")
+
+
+async def handover_checklist(request: Request, chats: str = "", since: str = "", until: str = "", *,
+                             ctx=Depends(current_context)):
+    from datetime import datetime, timezone
+
+    from ..verify import fingerprint
+    from .system import GAP_KINDS
+
+    try:
+        chosen = sorted({int(item) for item in chats.split(",") if item.strip()})[:500]
+        start, end = (datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc) if value else None
+                      for value in (since, until))
+    except ValueError:
+        raise HTTPException(422, "Use chat IDs separated by commas and ISO dates.") from None
+    allowed = ctx.visible_chats(request)
+    if allowed is not None:
+        chosen = [chat for chat in chosen if chat in allowed] if chosen else sorted(allowed)
+        if not chosen:
+            raise HTTPException(403, "This chat is not open to this access.")
+    store = ctx.app.state.store
+
+    def read():
+        where, values = [], []
+        if start:
+            where.append("e.observed_at>=?"), values.append(start.isoformat(timespec="milliseconds"))
+        if end:
+            where.append("e.observed_at<?"), values.append(end.isoformat(timespec="milliseconds"))
+        inside = "e.chat_id IN (" + ",".join("?" * len(chosen)) + ")" if chosen else "1"
+        period = " AND ".join(where) or "1"
+        with store.reading() as db:
+            gaps = db.execute("SELECT coalesce(json_extract(e.payload,'$.reason'),e.kind),count(*) FROM events e WHERE e.kind IN ("
+                              + ",".join("?" * len(GAP_KINDS)) + ") AND (e.chat_id IS NULL OR " + inside + ") AND "
+                              + period + " GROUP BY 1 ORDER BY 2 DESC", (*GAP_KINDS, *chosen, *values)).fetchall()
+            unsaved = db.execute("SELECT count(DISTINCT e.chat_id||':'||e.message_id) FROM events e WHERE e.kind IN ("
+                                 + ",".join("?" * len(UNSAVED_MEDIA)) + ") AND " + inside + " AND " + period
+                                 + " AND NOT EXISTS (SELECT 1 FROM events s WHERE s.kind='media.saved' AND "
+                                 "s.chat_id=e.chat_id AND s.message_id=e.message_id AND s.seq>e.seq)",
+                                 (*UNSAVED_MEDIA, *chosen, *values)).fetchone()[0]
+            waiting = db.execute("SELECT count(*) FROM media_jobs j JOIN events e ON e.seq=j.message_event WHERE "
+                                 "j.state IN ('queued','retry','running') AND " + inside + " AND " + period,
+                                 (*chosen, *values)).fetchone()[0]
+        return [{"reason": reason, "count": count} for reason, count in gaps], unsaved, waiting
+
+    gaps, unsaved, waiting = await complete_in_thread(read)
+    return {"chats": len(chosen) if chosen else None, "gaps": sum(item["count"] for item in gaps), "gap_reasons": gaps[:6],
+            "attachments_not_saved": unsaved, "attachments_waiting": waiting,
+            "fingerprint": fingerprint(ctx.app.state.vault.public_key)}
+
+
 async def export_ticket(
     export_id: str, request: Request, *, ctx=Depends(current_context)
 ):

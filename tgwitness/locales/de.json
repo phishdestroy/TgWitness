@@ -11167,5 +11167,18 @@
   "Attachment not saved": "Anhang nicht gespeichert",
   "On the Case Board": "In der Fallübersicht",
   "This access does not open this section.": "Dieser Zugang öffnet diesen Bereich nicht.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Dieses Konto ist noch kein Mitglied dieses Chats. Tritt ihm nach der Einrichtung unter Chats mit diesem Link bei."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Dieses Konto ist noch kein Mitglied dieses Chats. Tritt ihm nach der Einrichtung unter Chats mit diesem Link bei.",
+  "All saved records": "Alle gespeicherten Einträge",
+  "Recorded gaps: {n}": "Erfasste Lücken: {n}",
+  "Attachments not saved: {n}": "Nicht gespeicherte Anhänge: {n}",
+  "Attachments still downloading: {n}": "Anhänge noch im Download: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Keine erfassten Lücken, alle Anhänge dieser Auswahl sind gespeichert.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Der Auszug nennt diese Lücken und fehlenden Dateien; er gibt sich nicht als vollständig aus.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Signierter Übergabeauszug (ZIP) mit verify.py, VERIFY.cmd und VERIFY.sh. Zweck und Regeln sind mitsigniert.",
+  "Encrypted: send the password through a separate channel.": "Verschlüsselt: Passwort über einen getrennten Kanal senden.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Fingerabdruck über einen getrennten Kanal senden (Telefon, Brief, anderer Messenger), nie im Archiv.",
+  "Independent check": "Unabhängige Prüfung",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Der Empfänger entpackt das ZIP und startet VERIFY.cmd (Windows) oder sh VERIFY.sh mit diesem Fingerabdruck. Ohne ihn gilt der Signaturschlüssel als nicht bestätigt; ein anderer Fingerabdruck schlägt fehl.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Die Prüfung zeigt, wer signiert hat und dass nichts verändert wurde. Sie beweist nicht, dass der Inhalt wahr ist oder ein Gericht ihn anerkennt.",
+  "Before you hand over": "Vor der Übergabe"
 }

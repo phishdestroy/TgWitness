@@ -11269,5 +11269,18 @@
   "Attachment not saved": "Załącznik nie został zapisany",
   "On the Case Board": "Na tablicy sprawy",
   "This access does not open this section.": "Ten dostęp nie otwiera tej sekcji.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "To konto nie jest jeszcze członkiem tego czatu. Po konfiguracji dołącz do niego w Czatach za pomocą tego linku."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "To konto nie jest jeszcze członkiem tego czatu. Po konfiguracji dołącz do niego w Czatach za pomocą tego linku.",
+  "All saved records": "Wszystkie zapisane rekordy",
+  "Recorded gaps: {n}": "Zapisane luki: {n}",
+  "Attachments not saved: {n}": "Niezapisane załączniki: {n}",
+  "Attachments still downloading: {n}": "Załączniki wciąż pobierane: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Brak zapisanych luk, wszystkie załączniki w tym wyborze są zapisane.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Wyciąg wymienia te luki i brakujące pliki; nie twierdzi, że jest kompletny.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Podpisany wyciąg do przekazania (ZIP) z verify.py, VERIFY.cmd i VERIFY.sh. Cel i zasady są w nim podpisane.",
+  "Encrypted: send the password through a separate channel.": "Zaszyfrowane: wyślij hasło osobnym kanałem.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Wyślij ten odcisk osobnym kanałem (telefon, list, inny komunikator), nigdy w archiwum.",
+  "Independent check": "Niezależna weryfikacja",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Odbiorca rozpakowuje ZIP i uruchamia VERIFY.cmd (Windows) lub sh VERIFY.sh z tym odciskiem. Bez niego wynik podaje, że klucz podpisującego nie jest potwierdzony; inny odcisk kończy się błędem.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Weryfikacja dowodzi, kto podpisał i że nic się nie zmieniło. Nie dowodzi, że treść jest prawdziwa ani że sąd ją przyjmie.",
+  "Before you hand over": "Przed przekazaniem"
 }

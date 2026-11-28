@@ -197,6 +197,7 @@ POLICY = {
     "GET /api/account/loss-report": ("export", None),
     "POST /api/verify": ("view", None),
     "GET /api/exports/history": ("export", None),
+    "GET /api/exports/handover": ("export", "filter"),
     "GET /api/export/{fmt}": ("export", None),
     "POST /api/export/{fmt}": ("export", None),
     "POST /api/handover": ("export", "body"),

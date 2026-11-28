@@ -11177,5 +11177,18 @@
   "Attachment not saved": "Anexo não salvo",
   "On the Case Board": "No Quadro do Caso",
   "This access does not open this section.": "Este acesso não abre esta seção.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Esta conta ainda não é membro deste chat. Após a configuração, entre pelo Chats com este link."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Esta conta ainda não é membro deste chat. Após a configuração, entre pelo Chats com este link.",
+  "All saved records": "Todos os registros salvos",
+  "Recorded gaps: {n}": "Lacunas registradas: {n}",
+  "Attachments not saved: {n}": "Anexos não salvos: {n}",
+  "Attachments still downloading: {n}": "Anexos ainda baixando: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Sem lacunas registradas; todos os anexos desta seleção estão salvos.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "O extrato lista essas lacunas e arquivos ausentes; não afirma estar completo.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Extrato de entrega assinado (ZIP) com verify.py, VERIFY.cmd e VERIFY.sh. Finalidade e regras são assinadas nele.",
+  "Encrypted: send the password through a separate channel.": "Criptografado: envie a senha por um canal separado.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Envie esta impressão digital por um canal separado (telefone, carta, outro mensageiro), nunca dentro do arquivo.",
+  "Independent check": "Verificação independente",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "O destinatário extrai o ZIP e executa VERIFY.cmd (Windows) ou sh VERIFY.sh com esta impressão digital. Sem ela, o resultado diz que a chave do signatário não foi confirmada; uma impressão diferente falha.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "A verificação prova quem assinou e que nada mudou. Não prova que o conteúdo é verdadeiro nem que um tribunal o aceitará.",
+  "Before you hand over": "Antes de entregar"
 }

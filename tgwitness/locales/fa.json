@@ -11167,5 +11167,18 @@
   "Attachment not saved": "پیوست ذخیره نشد",
   "On the Case Board": "در تخته پرونده",
   "This access does not open this section.": "این دسترسی این بخش را باز نمی‌کند.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "این حساب هنوز عضو این گفتگو نیست. پس از راه‌اندازی، از بخش گفتگوها با این پیوند به آن بپیوندید."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "این حساب هنوز عضو این گفتگو نیست. پس از راه‌اندازی، از بخش گفتگوها با این پیوند به آن بپیوندید.",
+  "All saved records": "همه سوابق ذخیره‌شده",
+  "Recorded gaps: {n}": "شکاف‌های ثبت‌شده: {n}",
+  "Attachments not saved: {n}": "پیوست‌های ذخیره‌نشده: {n}",
+  "Attachments still downloading: {n}": "پیوست‌های در حال دانلود: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "شکاف ثبت‌شده‌ای نیست و همه پیوست‌های این انتخاب ذخیره شده‌اند.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "این استخراج شکاف‌ها و فایل‌های گم‌شده را فهرست می‌کند و ادعای کامل بودن ندارد.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "استخراج تحویل امضاشده (ZIP) با verify.py، VERIFY.cmd و VERIFY.sh. هدف و قواعد در آن امضا شده‌اند.",
+  "Encrypted: send the password through a separate channel.": "رمزگذاری‌شده: گذرواژه را از کانالی جداگانه بفرستید.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "این اثرانگشت را از کانالی جداگانه بفرستید (تلفن، نامه، پیام‌رسان دیگر)، هرگز داخل بایگانی.",
+  "Independent check": "بررسی مستقل",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "گیرنده ZIP را باز می‌کند و VERIFY.cmd (ویندوز) یا sh VERIFY.sh را با این اثرانگشت اجرا می‌کند. بدون آن نتیجه می‌گوید کلید امضاکننده تأیید نشده است؛ اثرانگشت متفاوت رد می‌شود.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "این بررسی نشان می‌دهد چه کسی امضا کرده و چیزی تغییر نکرده است. درستی محتوا یا پذیرش آن در دادگاه را ثابت نمی‌کند.",
+  "Before you hand over": "پیش از تحویل"
 }

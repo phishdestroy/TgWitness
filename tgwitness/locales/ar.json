@@ -11371,5 +11371,18 @@
   "Attachment not saved": "لم يُحفظ المرفق",
   "On the Case Board": "على لوحة القضية",
   "This access does not open this section.": "هذا الوصول لا يفتح هذا القسم.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "هذا الحساب ليس عضوًا في هذه الدردشة بعد. بعد الإعداد، انضم إليها من الدردشات بهذا الرابط."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "هذا الحساب ليس عضوًا في هذه الدردشة بعد. بعد الإعداد، انضم إليها من الدردشات بهذا الرابط.",
+  "All saved records": "كل السجلات المحفوظة",
+  "Recorded gaps: {n}": "الفجوات المسجلة: {n}",
+  "Attachments not saved: {n}": "مرفقات غير محفوظة: {n}",
+  "Attachments still downloading: {n}": "مرفقات قيد التنزيل: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "لا فجوات مسجلة، وكل المرفقات في هذا التحديد محفوظة.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "يسرد المستخرج هذه الفجوات والملفات الناقصة؛ ولا يدّعي أنه كامل.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "مستخرج تسليم موقّع (ZIP) مع verify.py وVERIFY.cmd وVERIFY.sh. الغرض والقواعد موقّعة داخله.",
+  "Encrypted: send the password through a separate channel.": "مشفّر: أرسل كلمة المرور عبر قناة منفصلة.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "أرسل هذه البصمة عبر قناة منفصلة (هاتف، رسالة، تطبيق مراسلة آخر)، وليس داخل الأرشيف أبدًا.",
+  "Independent check": "تحقق مستقل",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "يستخرج المستلم ملف ZIP ويشغّل VERIFY.cmd (ويندوز) أو sh VERIFY.sh بهذه البصمة. بدونها تقول النتيجة إن مفتاح الموقّع غير مؤكد؛ والبصمة المختلفة تفشل.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "يثبت التحقق من وقّع وأن شيئًا لم يتغير. ولا يثبت صحة المحتوى أو قبول المحكمة له.",
+  "Before you hand over": "قبل التسليم"
 }
