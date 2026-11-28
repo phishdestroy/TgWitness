@@ -11150,5 +11150,9 @@
   "Title and organisation": "Ruolo e organizzazione",
   "Qualifications": "Qualifiche",
   "Date": "Data",
-  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram ha smesso di rispondere con il percorso attuale; la connessione viene reimpostata."
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram ha smesso di rispondere con il percorso attuale; la connessione viene reimpostata.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Questo account non ha cartelle Telegram. Creane una nell'app Telegram oppure seleziona qui le chat.",
+  "Turn off Read-only": "Disattiva \"Sola lettura\"",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Disattivare \"Sola lettura\" per questo account? Il pannello potrà quindi inviare messaggi, unirsi alle chat e premere i pulsanti dei bot da questo account.",
+  "Complete the earlier steps first.": "Completa prima i passaggi precedenti."
 }

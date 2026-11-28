@@ -11140,5 +11140,9 @@
   "Title and organisation": "পদবি ও প্রতিষ্ঠান",
   "Qualifications": "যোগ্যতা",
   "Date": "তারিখ",
-  "Telegram stopped answering on the current route; the connection is being reset.": "বর্তমান রুটে Telegram সাড়া দেওয়া বন্ধ করেছে; সংযোগ নতুন করে শুরু করা হচ্ছে।"
+  "Telegram stopped answering on the current route; the connection is being reset.": "বর্তমান রুটে Telegram সাড়া দেওয়া বন্ধ করেছে; সংযোগ নতুন করে শুরু করা হচ্ছে।",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "এই অ্যাকাউন্টে কোনো টেলিগ্রাম ফোল্ডার নেই। টেলিগ্রাম অ্যাপে একটি ফোল্ডার তৈরি করুন, অথবা এখানে চ্যাটগুলো নির্বাচন করুন।",
+  "Turn off Read-only": "শুধুমাত্র-পঠন বন্ধ করুন",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "এই অ্যাকাউন্টের শুধুমাত্র-পঠন বন্ধ করবেন? তখন প্যানেল এই অ্যাকাউন্ট থেকে বার্তা পাঠাতে, যোগ দিতে এবং বটের বোতাম চাপতে পারবে।",
+  "Complete the earlier steps first.": "আগে আগের ধাপগুলো সম্পন্ন করুন।"
 }

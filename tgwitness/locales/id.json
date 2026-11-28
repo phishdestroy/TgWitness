@@ -11089,5 +11089,9 @@
   "Title and organisation": "Jabatan dan organisasi",
   "Qualifications": "Kualifikasi",
   "Date": "Tanggal",
-  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram berhenti merespons lewat rute saat ini; koneksi sedang diatur ulang."
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram berhenti merespons lewat rute saat ini; koneksi sedang diatur ulang.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Akun ini tidak memiliki folder Telegram. Buat folder di aplikasi Telegram, atau pilih obrolan di sini.",
+  "Turn off Read-only": "Nonaktifkan Hanya Baca",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Nonaktifkan Hanya Baca untuk akun ini? Panel lalu dapat mengirim, bergabung, dan menekan tombol bot dari akun ini.",
+  "Complete the earlier steps first.": "Selesaikan langkah sebelumnya terlebih dahulu."
 }

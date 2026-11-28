@@ -11089,5 +11089,9 @@
   "Title and organisation": "ตำแหน่งและหน่วยงาน",
   "Qualifications": "คุณวุฒิ",
   "Date": "วันที่",
-  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram หยุดตอบกลับผ่านเส้นทางปัจจุบัน กำลังรีเซ็ตการเชื่อมต่อ"
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram หยุดตอบกลับผ่านเส้นทางปัจจุบัน กำลังรีเซ็ตการเชื่อมต่อ",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "บัญชีนี้ไม่มีโฟลเดอร์ Telegram สร้างโฟลเดอร์ในแอป Telegram หรือเลือกการสนทนาที่นี่",
+  "Turn off Read-only": "ปิด \"อ่านเท่านั้น\"",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "ปิด \"อ่านเท่านั้น\" สำหรับบัญชีนี้หรือไม่ หลังจากนั้นแผงควบคุมจะส่งข้อความ เข้าร่วม และกดปุ่มของบอทจากบัญชีนี้ได้",
+  "Complete the earlier steps first.": "ทำขั้นตอนก่อนหน้าให้เสร็จก่อน"
 }
