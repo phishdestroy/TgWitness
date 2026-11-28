@@ -894,7 +894,10 @@ export function createSettingsHub(ctx) {
       body.append(message('Only chosen chats can be recorded on a main account.','notice warning'));
     }
     if(!dialogs&&!signedIn())body.append(message('Connect a Telegram account first.','notice warning'));
-    else if(!dialogs){const loading=message('Loading chats…');body.append(loading);try{dialogs=await request(who,'dialogs');loading.remove();}catch(e){loading.remove();if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
+    else if(!dialogs){const loading=message('Loading chats…');body.append(loading);const until=Date.now()+90000;
+      for(;;){try{dialogs=await request(who,'dialogs');loading.remove();break;}catch(e){if(e.name==='StaleView'){loading.remove();throw e;}
+        if(String(e.detail||'').startsWith('This account is busy')&&Date.now()<until&&body.isConnected){await new Promise(done=>setTimeout(done,3000));requireOwner(who);if(body.isConnected)continue;}
+        loading.remove();body.append(message(e.message,'notice warning'));break;}}}
     requireOwner(who);
     if(!body.isConnected)return;
     if(dialogs){
