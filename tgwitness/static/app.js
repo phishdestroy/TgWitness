@@ -2125,13 +2125,13 @@ $("profile-select").addEventListener("change",()=>busy(null,()=>switchProfile($(
 $("profile-create-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const profile=await json("profiles",{label:$("profile-label").value.trim()},{root:true});
-    $("profile-label").value="";await switchProfile(profile.id);navigate("connection");
+    $("profile-label").value="";await switchProfile(profile.id);navigate("first-run");
   });
 });
 $("account-add-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const profile=await json("profiles",{label:$("account-add-label").value.trim(),group:$("account-add-group").value||null},{root:true});
-    $("account-add-label").value="";await switchProfile(profile.id);navigate("connection");
+    $("account-add-label").value="";await switchProfile(profile.id);navigate("first-run");
     toast(tr("Workspace created. Connect a Telegram account to start."));
   });
 });
