@@ -1,4 +1,5 @@
 import argparse
+import base64
 import errno
 import hashlib
 import json
@@ -697,6 +698,7 @@ def backup(args):
                     "complete": not incomplete, "incomplete": incomplete, "vanished": vanished,
                     "restore": "Stop TgWitness, replace the whole data directory with this folder (without this manifest), "
                                "then start. The journal records that it was restored from an older copy."}
+        unsigned = sign_manifest(root, manifest)
         (staging / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
         os.chmod(staging / "backup-manifest.json", 0o600)
         try:
@@ -722,18 +724,60 @@ def backup(args):
         shutil.rmtree(staging, ignore_errors=True)
     summary = {"backup": str(target), "files": len(files), "databases": len(databases),
                "bytes": sum(item["bytes"] for item in files), "journal_heads": heads,
-               "complete": not incomplete, "incomplete": incomplete, "vanished": vanished}
+               "complete": not incomplete, "incomplete": incomplete, "vanished": vanished,
+               "signed": not unsigned, "fingerprint": (manifest.get("signature") or {}).get("fingerprint")}
     print(json.dumps(summary, ensure_ascii=False) if args.json else
           "Backed up " + str(len(files)) + " files (" + str(len(databases)) + " databases) to " + str(target)
           + "\nJournal heads: " + ", ".join(k + " #" + str((v or {}).get("seq")) for k, v in heads.items())
           + ("\n" + str(len(vanished)) + " file(s) were removed by TgWitness while the backup ran and are not in it."
              if vanished else "")
+          + ("\nManifest signed with key fingerprint " + summary["fingerprint"] if not unsigned else "")
           + "\nKeep this folder as private as the data directory: it holds the Telegram session and signing keys.")
+    if unsigned:
+        print("The manifest is not signed (" + unsigned + "). verify-backup can only check that the files match it.",
+              file=sys.stderr)
     if incomplete:
         print("The backup is incomplete and cannot resume these exports:\n" + "\n".join("  " + item for item in incomplete)
               + "\nStop TgWitness and run the backup again for a consistent copy.", file=sys.stderr)
         return EXIT_FAILURE
     return 0
+
+
+def sign_manifest(root, manifest):
+    if not (root / "signing.enc").is_file():
+        return "the data directory has no signing key"
+    try:
+        from .security import Vault
+        from .verify import canonical, fingerprint
+        vault = Vault(root)
+        manifest["signature"] = {"algorithm": "Ed25519", "public_key": vault.public_key,
+                                 "fingerprint": fingerprint(vault.public_key), "value": vault.sign(canonical(manifest))}
+    except Exception as exc:
+        manifest.pop("signature", None)
+        return "the signing key cannot be opened: " + (str(exc) or type(exc).__name__)
+    return None
+
+
+def manifest_signer(manifest):
+    from cryptography.exceptions import InvalidSignature
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    from .verify import canonical, fingerprint
+    signature = manifest["signature"]
+    try:
+        key = fingerprint(signature["public_key"])
+        if signature.get("algorithm") != "Ed25519" or signature.get("fingerprint") != key:
+            return None
+        Ed25519PublicKey.from_public_bytes(base64.b64decode(signature["public_key"], validate=True)).verify(
+            base64.b64decode(signature["value"], validate=True),
+            canonical({name: value for name, value in manifest.items() if name != "signature"}))
+        return key
+    except (InvalidSignature, AttributeError, KeyError, TypeError, ValueError):
+        return None
+
+
+def fingerprint_option(value):
+    from .verify import fingerprint_argument
+    return fingerprint_argument(value)
 
 
 def journal_heads(root):
@@ -761,6 +805,16 @@ def verify_backup(args):
     except (OSError, ValueError):
         problems.append("backup-manifest.json is missing or unreadable")
         manifest = {}
+    signed = "signature" in manifest
+    signer = manifest_signer(manifest) if signed else None
+    if signed and not signer:
+        problems.append("The manifest signature is invalid: the manifest was changed after the backup was made")
+    if manifest and args.fingerprint:
+        if not signed:
+            problems.append("The manifest is not signed, so --fingerprint cannot be checked; "
+                            "without --fingerprint only self-consistency is checked")
+        elif signer and signer != args.fingerprint:
+            problems.append("The manifest is signed by key " + signer + ", not by the --fingerprint key")
     for item in manifest.get("files", []):
         try:
             relative, size, digest = item["path"], item["bytes"], item["sha256"]
@@ -785,13 +839,20 @@ def verify_backup(args):
             problems += uncommitted_pages(folder)
         except sqlite3.Error:
             problems.append("A journal in the backup cannot be read")
-    result = {"folder": str(folder), "verified": not problems, "files": len(listed), "problems": problems}
+    result = {"folder": str(folder), "verified": not problems, "files": len(listed), "problems": problems,
+              "level": "signed" if signer else "self-consistency", "fingerprint": signer,
+              "key_pinned": bool(signer and signer == args.fingerprint)}
     if args.json:
         print(json.dumps(result, ensure_ascii=False))
     elif problems:
-        print("Backup does not match its manifest:\n" + "\n".join("  " + item for item in problems), file=sys.stderr)
+        print("Backup verification failed:\n" + "\n".join("  " + item for item in problems), file=sys.stderr)
+    elif signer:
+        print("Backup verified: " + str(len(listed)) + " files match the manifest.\nManifest signature valid, key fingerprint "
+              + signer + (" (matches --fingerprint)." if result["key_pinned"]
+                          else ". Not compared with a fingerprint kept elsewhere: add --fingerprint."))
     else:
-        print("Backup verified: " + str(len(listed)) + " files match the manifest.")
+        print("Self-consistency only: " + str(len(listed)) + " files match the local manifest.\nThe manifest is not signed, "
+              "so this does not show that the manifest itself is unchanged; --fingerprint needs a signed backup.")
     return 0 if not problems else EXIT_FAILURE
 
 
@@ -908,6 +969,8 @@ def main(argv=None):
     saved.add_argument("--json", action="store_true", help="Print one JSON document on stdout")
     checked = commands.add_parser("verify-backup", help="Check a backup folder against its manifest without changing it")
     checked.add_argument("folder", type=Path, help="Backup folder made by tgwitness backup")
+    checked.add_argument("--fingerprint", type=fingerprint_option,
+                         help="Collector key fingerprint retained independently; fail unless the manifest is signed by it")
     checked.add_argument("--json", action="store_true", help="Print one JSON document on stdout")
     args = parser.parse_args(argv)
     if args.command == "verify-backup":
