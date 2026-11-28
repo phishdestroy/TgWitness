@@ -996,6 +996,7 @@ function syncLive(){
   window.TgWitnessLive?.start({key:owner.revision+":"+owner.profile+":"+owner.token,head:state.status.stats.head?.seq,tr,
     api:(path,body,options={})=>{if(!owner.current())throw new StaleView();return api(path,body,{...options,profile:owner.profile,token:owner.token});},
     accessEnded:()=>{if(owner.current())lock();},
+    onEvents:events=>{if(owner.current()&&state.view==="chats"&&events.some(event=>["source.discovered","target.changed"].includes(event.kind)))refreshChats(true,null,false).catch(()=>{});},
     hosts:[viewQuery(state.view,state.view==='chats'?'#chat-live':'.journal .card-heading')].filter(Boolean),
     canRefresh:()=>{
       if(!owner.current()||!['observations','chats'].includes(state.view))return false;
@@ -1004,8 +1005,10 @@ function syncLive(){
       return state.eventBefore===null&&state.events.length<=200&&window.scrollY<120&&window.TgWitnessJournal?.canRefresh()!==false;
     },
     refresh:async({force=false}={})=>{if(!owner.current())throw new StaleView();await refreshStatus();if(!owner.current())throw new StaleView();if(state.view==="chats"){
-      const result=force&&state.chatView==='messages'?await loadChatMessages('latest'):await refreshChats(true);
+      const result=force&&state.chatView==='messages'&&state.chat!==null?await loadChatMessages('latest'):await refreshChats(true);
       if(result===false)throw new Error('Chat refresh failed');
+      const listed=new Set(state.chats.map(chat=>chat.chat_id));
+      if(owner.current()&&state.view==="chats"&&(state.status?.targets||[]).some(target=>!listed.has(target.chat_id)))await refreshChats(true);
     }else if(state.view==="observations")await refreshEvents();}
   });
 }

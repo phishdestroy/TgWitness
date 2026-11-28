@@ -33,6 +33,7 @@
     }}
   }
   function changed(events){
+    try{context?.onEvents?.(events);}catch{}
     pending+=events.length;render();clearTimeout(flushTimer);flushTimer=setTimeout(()=>flush(),200);
   }
   async function connect(rev){
