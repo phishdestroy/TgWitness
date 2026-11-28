@@ -3985,10 +3985,10 @@ class Collector:
                                                               "run_id": self.run_id})
                 except Exception:
                     self.phase = "storage_error"
-            if self.client and not (self.export_busy() or self.export_claim):
-                await self.client.disconnect()
             if (disk_full(exc) or self.phase == "storage_error") and not getattr(self, "disk_watch", None):
                 self.disk_watch = asyncio.create_task(self.resume_when_disk_frees(utcnow()))
+            if self.client and not (self.export_busy() or self.export_claim):
+                await self.client.disconnect()
 
     async def resume_when_disk_frees(self, stopped_at):
         try:
