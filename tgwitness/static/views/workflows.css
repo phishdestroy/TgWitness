@@ -223,7 +223,7 @@ button.home-summary-item:focus-visible { outline: 2px solid var(--focus); outlin
 .home-trust-rows { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; margin: 0 0 8px; }
 .home-trust-rows dt { display: flex; align-items: center; gap: 8px; font-weight: 600; }
 .home-trust-rows dd { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; overflow-wrap: anywhere; }
-.home-trust-rows dd .text-link { min-height: 44px; }
+.home-trust-rows dd .text-link { min-height: 44px; min-width: 44px; justify-content: center; }
 .home-trust-mark { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 13px; }
 .home-trust-rows dt[data-state=ok] .home-trust-mark { background: var(--success-soft); color: var(--success); }
 .home-trust-rows dt[data-state=warn] .home-trust-mark { background: var(--warning-soft); color: var(--warning, #b45309); }

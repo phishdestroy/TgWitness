@@ -195,7 +195,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       catch { toast(trust.fingerprint); }
     });
     row('warn', tr('Signing key'), node('span', '', tr('Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.',
-      {fingerprint: (trust.fingerprint || '').match(/.{1,4}/g)?.slice(0, 8).join(' ') + ' …'})), copy);
+      {fingerprint: (trust.fingerprint || '').match(/.{1,4}/g)?.join(' ') || '—'})), copy);
     const items = (c.missing || []).map(key => (COURT_MISSING[key] || (() => key))(c)).join('; ');
     if (c.ready)
       row('ok', tr('External time'), node('span', '', tr('RFC 3161 covers {through} of {total} records · answer {time}',
