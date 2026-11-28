@@ -293,7 +293,7 @@ html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
 #profile-select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 @media (pointer: coarse) {
   .tip-toggle { position: relative; }
-  .tip-toggle::after { content: ""; position: absolute; inset: -12px; }
+  .tip-toggle::after { content: ""; position: absolute; inset: -13px; }
   summary { min-height: 44px; }
   .check-label { padding-block: 6px; }
   .board-save { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; }
@@ -314,6 +314,8 @@ html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
   .msg-number-copy::after, .sender-details > summary::after, .chat-metric::after { content: ""; position: absolute; top: 50%; left: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
   .chat-tools-menu[open] > summary { position: relative; z-index: 66; }
   #view-accounts .account-card button { min-height: 44px; }
+  button.secondary, .quiet.small, .secondary.small, .journal-type-filters .filter, [role="tab"] { min-height: 44px; }
+  .mobile-nav-toggle { flex-basis: 44px; width: 44px; min-height: 44px; }
   .hint > a:only-child, .sidebar-help { display: inline-flex; align-items: center; min-height: 32px; }
 }
 .notice.demo { padding: 10px 12px 10px 18px; gap: 8px 20px; }
