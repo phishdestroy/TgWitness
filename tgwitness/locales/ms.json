@@ -11097,5 +11097,8 @@
   "Transaction hash": "Cincangan transaksi",
   "Payment link": "Pautan pembayaran",
   "An update could not be processed and was not saved": "Satu kemas kini tidak dapat diproses dan tidak disimpan",
-  "Download unsigned network snapshot": "Muat turun petikan rangkaian tanpa tandatangan"
+  "Download unsigned network snapshot": "Muat turun petikan rangkaian tanpa tandatangan",
+  "Journal failed its integrity check": "Jurnal gagal dalam semakan integriti",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Satu rekod dalam jurnal bertandatangan tidak lagi sepadan dengan cincangan, tandatangan atau titik semak bertandatangannya. Folder data telah diubah di luar TgWitness. Biarkan seperti sedia ada dan semak sebelum mengeksport.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Jurnal bertandatangan gagal dalam semakan integriti. Biarkan folder data seperti sedia ada."
 }

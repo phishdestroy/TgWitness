@@ -25,7 +25,8 @@ CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.mi
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
                  "anchor.completed", "profile.unavailable", "host.state", "storage.completed", "account.security_event",
-                 "session.exclusive_ended", "account.sessions", "session.takeover_risk", "journal.rolled_back")
+                 "session.exclusive_ended", "account.sessions", "session.takeover_risk", "journal.rolled_back",
+                 "journal.verification_failed")
 COMPLETION_KINDS = ("account_export.completed", "chat_export.completed", "snapshot.completed", "storage.completed")
 
 CHANGE_SCAN = 5000
@@ -472,6 +473,8 @@ def problem_line(event, titles, words):
             return tr(words, "Telegram reported a new sign-in to this account during observation.")
     if kind == "session.takeover_risk" and p.get("risks"):
         return tr(words, "Someone else may still sign in to this account: {risks}.", risks=takeover_risks(p["risks"], words))
+    if kind == "journal.verification_failed":
+        return tr(words, "The signed journal failed its integrity check. Keep the data folder as it is.")
     if kind == "journal.rolled_back":
         seen, head = (p.get("remembered") or {}).get("seq"), (p.get("journal_head") or {}).get("seq")
         if p.get("reason") == "shorter":
@@ -644,7 +647,7 @@ def notice_destination(event, level):
         "profile.unavailable": ("accounts", "accounts"), "host.state": ("server", "server"),
         "account.security_event": ("connection", "connection"), "session.exclusive_ended": ("connection", "connection"),
         "account.sessions": ("connection", "connection"), "session.takeover_risk": ("connection", "connection"),
-        "journal.rolled_back": ("collection", None),
+        "journal.rolled_back": ("collection", None), "journal.verification_failed": ("collection", None),
     }.get(kind, ("collection", None))
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
         category, part = "connection", "connection"
@@ -654,7 +657,7 @@ def notice_destination(event, level):
     if level == "ok":
         severity = "success"
     elif kind in ("collector.error", "export.failed", "chat_export.interrupted", "profile.unavailable", "replica.completed",
-                  "journal.rolled_back") \
+                  "journal.rolled_back", "journal.verification_failed") \
             or category == "connection" and p.get("reason") == "authorization_required":
         severity = "error"
     action = {"type": "diagnostics", "part": part} if part else {"type": "record"}

@@ -11097,5 +11097,8 @@
   "Transaction hash": "แฮชธุรกรรม",
   "Payment link": "ลิงก์ชำระเงิน",
   "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้",
-  "Download unsigned network snapshot": "ดาวน์โหลดสแนปช็อตเครือข่ายที่ไม่ได้ลงนาม"
+  "Download unsigned network snapshot": "ดาวน์โหลดสแนปช็อตเครือข่ายที่ไม่ได้ลงนาม",
+  "Journal failed its integrity check": "บันทึกไม่ผ่านการตรวจสอบความสมบูรณ์",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "ระเบียนในบันทึกที่ลงนามไม่ตรงกับแฮช ลายเซ็น หรือจุดตรวจสอบที่ลงนามอีกต่อไป โฟลเดอร์ข้อมูลถูกเปลี่ยนจากภายนอก TgWitness ให้คงไว้ตามเดิมและตรวจสอบก่อนส่งออก",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "บันทึกที่ลงนามไม่ผ่านการตรวจสอบความสมบูรณ์ ให้คงโฟลเดอร์ข้อมูลไว้ตามเดิม"
 }

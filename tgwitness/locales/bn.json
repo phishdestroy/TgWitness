@@ -11148,5 +11148,8 @@
   "Transaction hash": "লেনদেনের হ্যাশ",
   "Payment link": "পেমেন্ট লিংক",
   "An update could not be processed and was not saved": "একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি",
-  "Download unsigned network snapshot": "স্বাক্ষরবিহীন নেটওয়ার্ক স্ন্যাপশট ডাউনলোড করুন"
+  "Download unsigned network snapshot": "স্বাক্ষরবিহীন নেটওয়ার্ক স্ন্যাপশট ডাউনলোড করুন",
+  "Journal failed its integrity check": "জার্নাল অখণ্ডতা যাচাইয়ে ব্যর্থ হয়েছে",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "স্বাক্ষরিত জার্নালের একটি রেকর্ড আর তার হ্যাশ, স্বাক্ষর বা স্বাক্ষরিত চেকপয়েন্টের সাথে মেলে না। ডেটা ফোল্ডারটি TgWitness-এর বাইরে পরিবর্তন করা হয়েছে। এটি যেমন আছে তেমন রাখুন এবং এক্সপোর্টের আগে যাচাই করুন।",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "স্বাক্ষরিত জার্নাল অখণ্ডতা যাচাইয়ে ব্যর্থ হয়েছে। ডেটা ফোল্ডারটি যেমন আছে তেমন রাখুন।"
 }

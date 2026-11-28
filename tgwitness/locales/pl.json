@@ -11250,5 +11250,8 @@
   "Transaction hash": "Hash transakcji",
   "Payment link": "Link do płatności",
   "An update could not be processed and was not saved": "Nie udało się przetworzyć aktualizacji i nie została zapisana",
-  "Download unsigned network snapshot": "Pobierz niepodpisaną migawkę sieci"
+  "Download unsigned network snapshot": "Pobierz niepodpisaną migawkę sieci",
+  "Journal failed its integrity check": "Dziennik nie przeszedł kontroli integralności",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Rekord w podpisanym dzienniku nie zgadza się już ze swoim hashem, podpisem ani podpisanym punktem kontrolnym. Folder danych został zmieniony poza TgWitness. Pozostaw go bez zmian i sprawdź przed eksportem.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Podpisany dziennik nie przeszedł kontroli integralności. Pozostaw folder danych bez zmian."
 }

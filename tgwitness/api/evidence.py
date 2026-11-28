@@ -21,7 +21,7 @@ from ..app import GatewayLog
 from ..app import ModeChange
 from ..app import ReplicaUpdate
 from ..app import SourceCheck
-from ..evidence import checkpoint
+from ..evidence import checkpoint, note_integrity_failure
 from ..failures import describe
 from ..monitoring import Capture
 from ..monitoring import capture_settings
@@ -527,7 +527,8 @@ async def verify(*, ctx=Depends(current_context)):
         checked = await asyncio.to_thread(
             ctx.app.state.store.verify, ctx.app.state.vault.public_key
         )
-    except Exception:
+    except Exception as exc:
+        await asyncio.to_thread(note_integrity_failure, ctx.app.state.store, type(exc).__name__)
         raise HTTPException(
             409,
             "Journal integrity verification failed. Preserve the directory for inspection.",

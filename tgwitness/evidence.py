@@ -127,6 +127,29 @@ def note_rollback(store, vault):
     return rolled_back
 
 
+INTEGRITY_MEANING = ("A record in the signed journal no longer matches its hash, signature or the signed checkpoint. "
+                     "The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.")
+
+
+def check_journal(store, vault):
+    try:
+        result = store.verify(vault.public_key)
+    except Exception as exc:
+        return note_integrity_failure(store, type(exc).__name__)
+    store.set_setting("journal_integrity", {"state": "ok", "checked_at": utcnow(), "events": result.get("events")})
+    return None
+
+
+def note_integrity_failure(store, error_type):
+    known = store.get_setting("journal_integrity", None) or {}
+    if known.get("state") == "failed":
+        return known
+    event = store.append("journal.verification_failed", {"error_type": error_type, "meaning": INTEGRITY_MEANING})
+    record = {"state": "failed", "detected_at": event["observed_at"], "seq": event["seq"], "error_type": error_type}
+    store.set_setting("journal_integrity", record)
+    return record
+
+
 def retain_checkpoint(store, vault):
     note_rollback(store, vault)
     directory = store.root / "checkpoints"

@@ -11199,5 +11199,8 @@
   "Transaction hash": "גיבוב עסקה",
   "Payment link": "קישור תשלום",
   "An update could not be processed and was not saved": "עדכון לא עובד ולא נשמר",
-  "Download unsigned network snapshot": "הורדת תמונת מצב רשת לא חתומה"
+  "Download unsigned network snapshot": "הורדת תמונת מצב רשת לא חתומה",
+  "Journal failed its integrity check": "היומן נכשל בבדיקת השלמות",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "רשומה ביומן החתום כבר אינה תואמת לגיבוב, לחתימה או לנקודת הביקורת החתומה. תיקיית הנתונים שונתה מחוץ ל־TgWitness. השאר אותה כפי שהיא ובדוק אותה לפני הייצוא.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "היומן החתום נכשל בבדיקת השלמות. השאר את תיקיית הנתונים כפי שהיא."
 }

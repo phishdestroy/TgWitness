@@ -2,12 +2,12 @@ const HIDDEN_KEY = "tgwitness-takeover-hidden-v1:";
 
 export function createSessionWarnings({host, node, icon, tr, fmtFull, riskNames, may, askConfirm, json, refreshStatus, toast,
   openJournal, canJournal, openSessions, canSessions}) {
-  const takeover = node("section", "session-warning"), rollback = node("section", "session-warning");
-  takeover.dataset.tone = "warning"; rollback.dataset.tone = "danger";
-  takeover.hidden = rollback.hidden = true;
-  takeover.setAttribute("role", "status"); rollback.setAttribute("role", "alert");
-  host.append(rollback, takeover);
-  let scope = "", takeoverKey = "", rollbackKey = "", full = true;
+  const takeover = node("section", "session-warning"), rollback = node("section", "session-warning"), integrity = node("section", "session-warning");
+  takeover.dataset.tone = "warning"; rollback.dataset.tone = integrity.dataset.tone = "danger";
+  takeover.hidden = rollback.hidden = integrity.hidden = true;
+  takeover.setAttribute("role", "status"); rollback.setAttribute("role", "alert"); integrity.setAttribute("role", "alert");
+  host.append(integrity, rollback, takeover);
+  let scope = "", takeoverKey = "", rollbackKey = "", integrityKey = "", full = true;
   const expanded = new Set();
 
   const button = (label, className, action) => {
@@ -17,7 +17,7 @@ export function createSessionWarnings({host, node, icon, tr, fmtFull, riskNames,
     return b;
   };
   const compact = () => {
-    for (const card of [takeover, rollback]) card.dataset.compact = String(!full && !expanded.has(card));
+    for (const card of [takeover, rollback, integrity]) card.dataset.compact = String(!full && !expanded.has(card));
   };
   const head = (card, symbol, title, meta) => {
     const box = node("div", "session-warning-head"), text = node("div", "session-warning-title");
@@ -74,6 +74,20 @@ export function createSessionWarnings({host, node, icon, tr, fmtFull, riskNames,
     takeover.hidden = false;
   }
 
+  function renderIntegrity(record, demo) {
+    if (demo || record?.state !== "failed") { integrity.hidden = true; integrityKey = ""; return; }
+    const key = String(record.detected_at) + ":" + String(record.seq);
+    if (key === integrityKey) { integrity.hidden = false; return; }
+    integrityKey = key;
+    const actions = node("div", "session-warning-actions");
+    if (canJournal()) actions.append(button(tr("Show in the journal"), "secondary", () => openJournal("journal.verification_failed")));
+    integrity.replaceChildren(
+      head(integrity, "alert", tr("Journal failed its integrity check"), record.detected_at ? tr("Detected {time}", {time: fmtFull(record.detected_at)}) : ""),
+      node("p", "", tr("A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.")),
+      actions);
+    integrity.hidden = false;
+  }
+
   function renderRollback(record, demo) {
     if (demo || !record?.remembered) { rollback.hidden = true; rollbackKey = ""; return; }
     const seen = record.remembered.seq, last = record.journal_head?.seq ?? 0, key = [record.detected_at, seen, last].join(":");
@@ -109,13 +123,14 @@ export function createSessionWarnings({host, node, icon, tr, fmtFull, riskNames,
 
   return {
     update(status, workspace, home = true) {
-      if (workspace !== scope) { scope = workspace; takeoverKey = rollbackKey = ""; expanded.clear(); }
+      if (workspace !== scope) { scope = workspace; takeoverKey = rollbackKey = integrityKey = ""; expanded.clear(); }
       if (home !== full) { full = home; expanded.clear(); }
       const collector = status?.collector || {};
+      renderIntegrity(collector.journal_integrity, !!status?.demo);
       renderRollback(collector.journal_rollback, !!status?.demo);
       renderTakeover(collector.takeover_risk, !!status?.demo);
       compact();
-      host.hidden = takeover.hidden && rollback.hidden;
+      host.hidden = takeover.hidden && rollback.hidden && integrity.hidden;
     },
   };
 }

@@ -11097,5 +11097,8 @@
   "Transaction hash": "트랜잭션 해시",
   "Payment link": "결제 링크",
   "An update could not be processed and was not saved": "업데이트를 처리하지 못해 저장되지 않았습니다",
-  "Download unsigned network snapshot": "서명되지 않은 네트워크 스냅샷 다운로드"
+  "Download unsigned network snapshot": "서명되지 않은 네트워크 스냅샷 다운로드",
+  "Journal failed its integrity check": "저널이 무결성 검사에 실패했습니다",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "서명된 저널의 레코드가 더 이상 해시, 서명 또는 서명된 체크포인트와 일치하지 않습니다. 데이터 폴더가 TgWitness 외부에서 변경되었습니다. 그대로 두고 내보내기 전에 확인하세요.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "서명된 저널이 무결성 검사에 실패했습니다. 데이터 폴더를 그대로 두세요."
 }

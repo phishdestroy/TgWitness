@@ -11097,5 +11097,8 @@
   "Transaction hash": "交易雜湊",
   "Payment link": "付款連結",
   "An update could not be processed and was not saved": "有一則更新無法處理，且未儲存",
-  "Download unsigned network snapshot": "下載未簽署的網路快照"
+  "Download unsigned network snapshot": "下載未簽署的網路快照",
+  "Journal failed its integrity check": "日誌未通過完整性檢查",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "已簽署日誌中的一筆記錄不再與其雜湊、簽章或已簽署的檢查點相符。資料夾在 TgWitness 之外遭到變更。請保持原狀，並在匯出前加以檢查。",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "已簽署日誌未通過完整性檢查。請保持資料夾原狀。"
 }

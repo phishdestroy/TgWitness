@@ -11250,5 +11250,8 @@
   "Transaction hash": "Хеш транзакції",
   "Payment link": "Платіжне посилання",
   "An update could not be processed and was not saved": "Оновлення не вдалося обробити, його не збережено",
-  "Download unsigned network snapshot": "Завантажити непідписаний знімок мережі"
+  "Download unsigned network snapshot": "Завантажити непідписаний знімок мережі",
+  "Journal failed its integrity check": "Журнал не пройшов перевірку цілісності",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Запис у підписаному журналі більше не збігається зі своїм хешем, підписом або підписаною контрольною точкою. Теку даних змінено поза TgWitness. Не змінюйте її та перевірте перед експортом.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Підписаний журнал не пройшов перевірку цілісності. Не змінюйте теку даних."
 }

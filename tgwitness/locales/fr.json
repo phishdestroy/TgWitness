@@ -11158,5 +11158,8 @@
   "Transaction hash": "Hachage de transaction",
   "Payment link": "Lien de paiement",
   "An update could not be processed and was not saved": "Une mise à jour n'a pas pu être traitée et n'a pas été enregistrée",
-  "Download unsigned network snapshot": "Télécharger l'instantané réseau non signé"
+  "Download unsigned network snapshot": "Télécharger l'instantané réseau non signé",
+  "Journal failed its integrity check": "Le journal a échoué à la vérification d'intégrité",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Un enregistrement du journal signé ne correspond plus à son hachage, à sa signature ou au point de contrôle signé. Le dossier de données a été modifié en dehors de TgWitness. Laissez-le tel quel et vérifiez-le avant d'exporter.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Le journal signé a échoué à la vérification d'intégrité. Laissez le dossier de données tel quel."
 }

@@ -11148,5 +11148,8 @@
   "Transaction hash": "İşlem karması",
   "Payment link": "Ödeme bağlantısı",
   "An update could not be processed and was not saved": "Bir güncelleme işlenemedi ve kaydedilmedi",
-  "Download unsigned network snapshot": "İmzasız ağ anlık görüntüsünü indir"
+  "Download unsigned network snapshot": "İmzasız ağ anlık görüntüsünü indir",
+  "Journal failed its integrity check": "Günlük bütünlük denetiminden geçemedi",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "İmzalı günlükteki bir kayıt artık karmasıyla, imzasıyla veya imzalı denetim noktasıyla eşleşmiyor. Veri klasörü TgWitness dışında değiştirildi. Olduğu gibi bırakın ve dışa aktarmadan önce denetleyin.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "İmzalı günlük bütünlük denetiminden geçemedi. Veri klasörünü olduğu gibi bırakın."
 }

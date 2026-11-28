@@ -11097,5 +11097,8 @@
   "Transaction hash": "Hash transaksi",
   "Payment link": "Tautan pembayaran",
   "An update could not be processed and was not saved": "Sebuah pembaruan tidak dapat diproses dan tidak disimpan",
-  "Download unsigned network snapshot": "Unduh cuplikan jaringan tanpa tanda tangan"
+  "Download unsigned network snapshot": "Unduh cuplikan jaringan tanpa tanda tangan",
+  "Journal failed its integrity check": "Jurnal gagal dalam pemeriksaan integritas",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Sebuah catatan di jurnal bertanda tangan tidak lagi cocok dengan hash, tanda tangan, atau titik periksa bertanda tangannya. Folder data diubah di luar TgWitness. Biarkan apa adanya dan periksa sebelum mengekspor.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Jurnal bertanda tangan gagal dalam pemeriksaan integritas. Biarkan folder data apa adanya."
 }

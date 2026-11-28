@@ -11148,5 +11148,8 @@
   "Transaction hash": "Tranzaksiya xeshi",
   "Payment link": "To'lov havolasi",
   "An update could not be processed and was not saved": "Yangilanishni qayta ishlab bo'lmadi va u saqlanmadi",
-  "Download unsigned network snapshot": "Imzolanmagan tarmoq suratini yuklab olish"
+  "Download unsigned network snapshot": "Imzolanmagan tarmoq suratini yuklab olish",
+  "Journal failed its integrity check": "Jurnal yaxlitlik tekshiruvidan o'tmadi",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Imzolangan jurnaldagi yozuv endi o'z xeshi, imzosi yoki imzolangan nazorat nuqtasiga mos kelmaydi. Ma'lumotlar papkasi TgWitness tashqarisida o'zgartirilgan. Uni o'z holicha qoldiring va eksportdan oldin tekshiring.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Imzolangan jurnal yaxlitlik tekshiruvidan o'tmadi. Ma'lumotlar papkasini o'z holicha qoldiring."
 }

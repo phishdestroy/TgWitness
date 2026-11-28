@@ -11097,5 +11097,8 @@
   "Transaction hash": "Mã băm giao dịch",
   "Payment link": "Liên kết thanh toán",
   "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu",
-  "Download unsigned network snapshot": "Tải xuống ảnh chụp mạng chưa ký"
+  "Download unsigned network snapshot": "Tải xuống ảnh chụp mạng chưa ký",
+  "Journal failed its integrity check": "Nhật ký không vượt qua kiểm tra toàn vẹn",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Một bản ghi trong nhật ký đã ký không còn khớp với mã băm, chữ ký hoặc điểm kiểm tra đã ký. Thư mục dữ liệu đã bị thay đổi bên ngoài TgWitness. Hãy giữ nguyên và kiểm tra trước khi xuất.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Nhật ký đã ký không vượt qua kiểm tra toàn vẹn. Hãy giữ nguyên thư mục dữ liệu."
 }

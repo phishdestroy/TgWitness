@@ -11148,5 +11148,8 @@
   "Transaction hash": "लेनदेन हैश",
   "Payment link": "भुगतान लिंक",
   "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया",
-  "Download unsigned network snapshot": "बिना हस्ताक्षर वाला नेटवर्क स्नैपशॉट डाउनलोड करें"
+  "Download unsigned network snapshot": "बिना हस्ताक्षर वाला नेटवर्क स्नैपशॉट डाउनलोड करें",
+  "Journal failed its integrity check": "जर्नल अखंडता जाँच में विफल रहा",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "हस्ताक्षरित जर्नल का एक रिकॉर्ड अब अपने हैश, हस्ताक्षर या हस्ताक्षरित चेकपॉइंट से मेल नहीं खाता। डेटा फ़ोल्डर को TgWitness के बाहर बदला गया है। इसे जैसा है वैसा रखें और एक्सपोर्ट से पहले जाँच करें।",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "हस्ताक्षरित जर्नल अखंडता जाँच में विफल रहा। डेटा फ़ोल्डर को जैसा है वैसा रखें।"
 }

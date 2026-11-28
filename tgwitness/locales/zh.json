@@ -11097,5 +11097,8 @@
   "Transaction hash": "交易哈希",
   "Payment link": "付款链接",
   "An update could not be processed and was not saved": "有一条更新无法处理，且未保存",
-  "Download unsigned network snapshot": "下载未签名的网络快照"
+  "Download unsigned network snapshot": "下载未签名的网络快照",
+  "Journal failed its integrity check": "日志未通过完整性检查",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "已签名日志中的一条记录不再与其哈希、签名或已签名的检查点相符。数据文件夹在 TgWitness 之外被更改。请保持原状，并在导出前加以检查。",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "已签名日志未通过完整性检查。请保持数据文件夹原状。"
 }

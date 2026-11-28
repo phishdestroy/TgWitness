@@ -11352,5 +11352,8 @@
   "Transaction hash": "تجزئة المعاملة",
   "Payment link": "رابط دفع",
   "An update could not be processed and was not saved": "تعذّرت معالجة تحديث ولم يُحفظ",
-  "Download unsigned network snapshot": "تنزيل لقطة الشبكة غير الموقّعة"
+  "Download unsigned network snapshot": "تنزيل لقطة الشبكة غير الموقّعة",
+  "Journal failed its integrity check": "فشل السجل في فحص السلامة",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "لم يعد أحد السجلات في السجل الموقّع يطابق التجزئة أو التوقيع أو نقطة التحقق الموقّعة. تم تغيير مجلد البيانات خارج TgWitness. اتركه كما هو وافحصه قبل التصدير.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "فشل السجل الموقّع في فحص السلامة. اترك مجلد البيانات كما هو."
 }

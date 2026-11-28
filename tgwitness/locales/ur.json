@@ -11148,5 +11148,8 @@
   "Transaction hash": "ٹرانزیکشن ہیش",
   "Payment link": "ادائیگی کا لنک",
   "An update could not be processed and was not saved": "ایک اپ ڈیٹ پر کارروائی نہیں ہو سکی اور وہ محفوظ نہیں ہوئی",
-  "Download unsigned network snapshot": "غیر دستخط شدہ نیٹ ورک اسنیپ شاٹ ڈاؤن لوڈ کریں"
+  "Download unsigned network snapshot": "غیر دستخط شدہ نیٹ ورک اسنیپ شاٹ ڈاؤن لوڈ کریں",
+  "Journal failed its integrity check": "جرنل سالمیت کی جانچ میں ناکام رہا",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "دستخط شدہ جرنل کا ایک ریکارڈ اب اپنے ہیش، دستخط یا دستخط شدہ چیک پوائنٹ سے مطابقت نہیں رکھتا۔ ڈیٹا فولڈر کو TgWitness کے باہر تبدیل کیا گیا ہے۔ اسے جیسا ہے ویسا رکھیں اور ایکسپورٹ سے پہلے جانچ لیں۔",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "دستخط شدہ جرنل سالمیت کی جانچ میں ناکام رہا۔ ڈیٹا فولڈر کو جیسا ہے ویسا رکھیں۔"
 }

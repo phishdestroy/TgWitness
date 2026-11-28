@@ -19,7 +19,7 @@ from ..distributed_export import DistributedExport
 from ..swarm.bulk_actions import BulkActions
 from ..swarm.exports import SwarmExports
 from ..evidence import cleanup_exports
-from ..evidence import retain_checkpoint
+from ..evidence import check_journal, retain_checkpoint
 from ..export.live_export import repair as repair_live_exports
 from ..media.cas import MediaLibrary
 from ..obs.flight_recorder import RECORDER
@@ -45,6 +45,20 @@ import threading
 LOG = logging.getLogger("tgwitness.lifecycle")
 
 
+
+JOURNAL_CHECK_DELAY = 600
+JOURNAL_CHECK_SECONDS = 6 * 3600
+
+
+async def journal_check_loop(store, vault):
+    await asyncio.sleep(JOURNAL_CHECK_DELAY)
+    while True:
+        try:
+            await asyncio.to_thread(check_journal, store, vault)
+        except Exception:
+            LOG.exception("Background journal check could not run")
+        await asyncio.sleep(JOURNAL_CHECK_SECONDS)
+
 class LifecycleOperations:
     @asynccontextmanager
     async def lifespan(self, app):
@@ -58,6 +72,7 @@ class LifecycleOperations:
         replica_task = None
         storage_task = operator_bot_task = None
         alert_task = None
+        integrity_task = None
         host_task = address_task = None
         pool_task = None
         collector = None
@@ -244,6 +259,7 @@ class LifecycleOperations:
                         self.profile_id,
                     )
                 )
+                integrity_task = asyncio.create_task(journal_check_loop(store, vault))
                 anchor_task = asyncio.create_task(
                     anchor_loop(
                         store,
@@ -368,6 +384,7 @@ class LifecycleOperations:
                     anchor_task,
                     replica_task,
                     alert_task,
+                    integrity_task,
                     host_task,
                     address_task,
                     pool_task,

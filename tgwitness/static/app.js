@@ -361,6 +361,7 @@ const labels = {
   "session.concurrent_at_start": [tr("Other sessions at start"), "users", "system"],
   "session.takeover_risk": [tr("Account takeover check"), "shield", "system"],
   "journal.rolled_back": [tr("Journal restored from an older copy"), "alert", "coverage"],
+  "journal.verification_failed": [tr("Journal failed its integrity check"), "alert", "coverage"],
   "journal.rollback_acknowledged": [tr("Journal restore confirmed"), "check", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
