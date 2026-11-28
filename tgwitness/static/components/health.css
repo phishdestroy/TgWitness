@@ -58,3 +58,7 @@
   .health-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 8px; }
   .health-chip { min-height: 44px; justify-content: flex-start; }
 }
+.health-outcome { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 10px 0 0; }
+.health-outcome dt { font-weight: 600; }
+.health-outcome dd { margin: 0; color: var(--text-2); overflow-wrap: anywhere; }
+@media (max-width: 480px) { .health-outcome { grid-template-columns: 1fr; } .health-outcome dd { margin-bottom: 6px; } }

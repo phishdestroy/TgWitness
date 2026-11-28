@@ -11129,5 +11129,20 @@
   "Independent check": "독립 검증",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "수신자는 ZIP을 풀고 이 지문으로 VERIFY.cmd(Windows) 또는 sh VERIFY.sh를 실행합니다. 지문이 없으면 서명자 키가 확인되지 않았다고 나오고, 다른 지문이면 실패합니다.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "검증은 누가 서명했고 아무것도 바뀌지 않았음을 증명합니다. 내용이 사실이거나 법원이 받아들인다는 것은 증명하지 않습니다.",
-  "Before you hand over": "인계하기 전에"
+  "Before you hand over": "인계하기 전에",
+  "Kept": "보존",
+  "Resumes on its own when the wait ends.": "대기가 끝나면 자동으로 다시 시작합니다.",
+  "Records saved so far stay in the signed journal.": "지금까지 저장된 기록은 서명된 저널에 남습니다.",
+  "If updates are missed during the wait, the collector records a signed gap.": "대기 중 업데이트를 놓치면 수집기가 서명된 공백을 기록합니다.",
+  "Not retried until space is freed.": "공간이 확보될 때까지 다시 시도하지 않습니다.",
+  "Records saved before the stop stay signed.": "중지 전에 저장된 기록은 서명된 상태로 남습니다.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "중지된 동안에는 기록되지 않습니다. 관찰이 재개되면 해당 기간의 서명된 disk_full 공백이 기록됩니다.",
+  "Not retried automatically.": "자동으로 다시 시도하지 않습니다.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "관찰이 다시 시작될 때까지 기록되지 않습니다. 중지는 서명된 저널에 있습니다.",
+  "Resumes on its own within 30 seconds after space is freed.": "공간이 확보되면 30초 안에 자동으로 다시 시작합니다.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "누락된 각 파일에는 서명된 media.failed 기록이 있고 내보내기에도 표시됩니다. 실패한 다운로드는 다시 시도하지 않습니다.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time}의 업데이트를 처리하지 못해 저장되지 않았습니다. 서명된 공백이 이를 표시하며, 다음 최근 기록 재확인에서 메시지를 찾을 수 있습니다.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "디스크가 가득 차 {from}부터 {to}까지 관찰이 중지되었습니다. 서명된 공백이 이 기간을 표시하며 관찰은 자동으로 재개되었습니다.",
+  "Show attachments not saved": "저장되지 않은 첨부 파일 보기",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "변경된 것은 없습니다. 작업 공간 관리자에게 이 접근 권한을 넓혀 달라고 요청하세요."
 }

@@ -11129,5 +11129,20 @@
   "Independent check": "Kiểm tra độc lập",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Người nhận giải nén ZIP và chạy VERIFY.cmd (Windows) hoặc sh VERIFY.sh với dấu vân tay này. Không có nó, kết quả báo khóa người ký chưa được xác nhận; dấu vân tay khác sẽ thất bại.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Việc kiểm tra chứng minh ai đã ký và không có gì thay đổi. Nó không chứng minh nội dung là thật hay tòa án sẽ chấp nhận.",
-  "Before you hand over": "Trước khi bàn giao"
+  "Before you hand over": "Trước khi bàn giao",
+  "Kept": "Giữ lại",
+  "Resumes on its own when the wait ends.": "Tự tiếp tục khi hết thời gian chờ.",
+  "Records saved so far stay in the signed journal.": "Các bản ghi đã lưu vẫn nằm trong nhật ký đã ký.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Nếu bỏ lỡ cập nhật trong lúc chờ, bộ thu ghi một khoảng trống có chữ ký.",
+  "Not retried until space is freed.": "Không thử lại cho đến khi giải phóng dung lượng.",
+  "Records saved before the stop stay signed.": "Các bản ghi lưu trước khi dừng vẫn được ký.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Không ghi gì khi đang dừng. Khi theo dõi tiếp tục, một khoảng trống disk_full có chữ ký cho khoảng thời gian đó được ghi.",
+  "Not retried automatically.": "Không tự động thử lại.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Không ghi gì cho đến khi theo dõi bắt đầu lại; việc dừng có trong nhật ký đã ký.",
+  "Resumes on its own within 30 seconds after space is freed.": "Tự tiếp tục trong vòng 30 giây sau khi giải phóng dung lượng.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Mỗi tệp thiếu có một bản ghi media.failed có chữ ký, và bản xuất liệt kê nó. Tải xuống thất bại không được thử lại.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Một cập nhật lúc {time} không xử lý được và chưa được lưu. Một khoảng trống có chữ ký đánh dấu nó; lần kiểm tra lại lịch sử gần đây tiếp theo có thể tìm thấy tin nhắn.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Theo dõi đã dừng khi đĩa đầy, từ {from} đến {to}. Một khoảng trống có chữ ký đánh dấu khoảng này; theo dõi đã tự tiếp tục.",
+  "Show attachments not saved": "Hiện tệp đính kèm chưa lưu",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Không có gì bị thay đổi. Hãy nhờ quản trị viên không gian làm việc mở rộng quyền truy cập này."
 }

@@ -11180,5 +11180,20 @@
   "Independent check": "Bağımsız doğrulama",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Alıcı ZIP'i açar ve bu parmak iziyle VERIFY.cmd (Windows) veya sh VERIFY.sh çalıştırır. Olmadan sonuç, imzalayan anahtarının doğrulanmadığını söyler; farklı bir parmak izi başarısız olur.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Doğrulama kimin imzaladığını ve hiçbir şeyin değişmediğini kanıtlar. İçeriğin doğru olduğunu veya mahkemenin kabul edeceğini kanıtlamaz.",
-  "Before you hand over": "Teslim etmeden önce"
+  "Before you hand over": "Teslim etmeden önce",
+  "Kept": "Korunan",
+  "Resumes on its own when the wait ends.": "Bekleme bitince kendiliğinden devam eder.",
+  "Records saved so far stay in the signed journal.": "Şimdiye kadar kaydedilenler imzalı günlükte kalır.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Bekleme sırasında güncellemeler kaçarsa toplayıcı imzalı bir boşluk kaydeder.",
+  "Not retried until space is freed.": "Yer açılana kadar yeniden denenmez.",
+  "Records saved before the stop stay signed.": "Durmadan önce kaydedilenler imzalı kalır.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Durduğu sürece hiçbir şey kaydedilmez. Gözlem sürünce aralığı kapsayan imzalı disk_full boşluğu yazılır.",
+  "Not retried automatically.": "Otomatik olarak yeniden denenmez.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Gözlem yeniden başlayana kadar hiçbir şey kaydedilmez; durma imzalı günlükte yer alır.",
+  "Resumes on its own within 30 seconds after space is freed.": "Yer açıldıktan sonra 30 saniye içinde kendiliğinden devam eder.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Her eksik dosyanın imzalı bir media.failed kaydı vardır ve dışa aktarımlar bunu listeler. Başarısız indirmeler yeniden denenmez.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} zamanındaki bir güncelleme işlenemedi ve kaydedilmedi. İmzalı bir boşluk bunu işaretler; yakın geçmişin bir sonraki yeniden denetimi mesajı bulabilir.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Disk doluyken gözlem durdu, {from} ile {to} arası. İmzalı bir boşluk bu aralığı işaretler; gözlem kendiliğinden sürdü.",
+  "Show attachments not saved": "Kaydedilmeyen ekleri göster",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hiçbir şey değiştirilmedi. Çalışma alanı yöneticisinden bu erişimi genişletmesini isteyin."
 }

@@ -11129,5 +11129,20 @@
   "Independent check": "獨立驗證",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "收件人解壓 ZIP，並以此指紋執行 VERIFY.cmd（Windows）或 sh VERIFY.sh。未提供指紋時，結果會顯示簽署者金鑰未確認；指紋不同則驗證失敗。",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "驗證可證明由誰簽署且內容未被更改，但不能證明內容屬實或法院會採納。",
-  "Before you hand over": "移交之前"
+  "Before you hand over": "移交之前",
+  "Kept": "保留",
+  "Resumes on its own when the wait ends.": "等待結束後會自動繼續。",
+  "Records saved so far stay in the signed journal.": "目前已儲存的記錄會保留在已簽署的日誌中。",
+  "If updates are missed during the wait, the collector records a signed gap.": "若等待期間遺漏更新，收集器會記錄已簽署的缺口。",
+  "Not retried until space is freed.": "釋出空間前不會重試。",
+  "Records saved before the stop stay signed.": "停止前儲存的記錄仍保持簽署。",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "停止期間不會記錄任何內容。恢復觀察時會寫入涵蓋該期間的已簽署 disk_full 缺口。",
+  "Not retried automatically.": "不會自動重試。",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "重新開始觀察前不會記錄任何內容；停止已記入已簽署的日誌。",
+  "Resumes on its own within 30 seconds after space is freed.": "釋出空間後 30 秒內會自動繼續。",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "每個缺少的檔案都有已簽署的 media.failed 記錄，匯出也會列出。下載失敗不會重試。",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} 的一則更新無法處理，未被儲存。已簽署的缺口標記了它；下次重新檢查近期歷史時可能找到該訊息。",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "磁碟已滿時觀察停止，從 {from} 到 {to}。已簽署的缺口標記了這段期間；觀察已自動恢復。",
+  "Show attachments not saved": "顯示未儲存的附件",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "未做任何變更。請工作區管理員擴大此存取權限。"
 }

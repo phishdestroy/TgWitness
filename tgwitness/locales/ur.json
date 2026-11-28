@@ -11180,5 +11180,20 @@
   "Independent check": "آزاد جانچ",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "وصول کنندہ ZIP نکال کر اس فنگرپرنٹ کے ساتھ VERIFY.cmd (Windows) یا sh VERIFY.sh چلاتا ہے۔ اس کے بغیر نتیجہ بتاتا ہے کہ دستخط کنندہ کی کلید تصدیق شدہ نہیں؛ مختلف فنگرپرنٹ ناکام ہوتا ہے۔",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "جانچ ثابت کرتی ہے کہ کس نے دستخط کیے اور کچھ نہیں بدلا۔ یہ ثابت نہیں کرتی کہ مواد سچ ہے یا عدالت اسے قبول کرے گی۔",
-  "Before you hand over": "حوالگی سے پہلے"
+  "Before you hand over": "حوالگی سے پہلے",
+  "Kept": "محفوظ",
+  "Resumes on its own when the wait ends.": "انتظار ختم ہونے پر خود دوبارہ شروع ہوگا۔",
+  "Records saved so far stay in the signed journal.": "اب تک محفوظ ریکارڈ دستخط شدہ جرنل میں رہتے ہیں۔",
+  "If updates are missed during the wait, the collector records a signed gap.": "انتظار کے دوران اپ ڈیٹس چھوٹ جائیں تو کلیکٹر دستخط شدہ خلا درج کرتا ہے۔",
+  "Not retried until space is freed.": "جگہ خالی ہونے تک دوبارہ کوشش نہیں ہوگی۔",
+  "Records saved before the stop stay signed.": "رکنے سے پہلے محفوظ ریکارڈ دستخط شدہ رہتے ہیں۔",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "رکنے کے دوران کچھ درج نہیں ہوتا۔ نگرانی دوبارہ شروع ہونے پر اس وقفے کا دستخط شدہ disk_full خلا لکھا جاتا ہے۔",
+  "Not retried automatically.": "خودکار دوبارہ کوشش نہیں ہوتی۔",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "نگرانی دوبارہ شروع ہونے تک کچھ درج نہیں ہوتا؛ رکنا دستخط شدہ جرنل میں ہے۔",
+  "Resumes on its own within 30 seconds after space is freed.": "جگہ خالی ہونے کے 30 سیکنڈ میں خود دوبارہ شروع ہوگا۔",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "ہر غائب فائل کا دستخط شدہ media.failed ریکارڈ ہے، اور ایکسپورٹ اسے درج کرتے ہیں۔ ناکام ڈاؤن لوڈ دوبارہ نہیں کیے جاتے۔",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} پر ایک اپ ڈیٹ پروسیس نہیں ہو سکی اور محفوظ نہیں ہوئی۔ دستخط شدہ خلا اسے نشان زد کرتا ہے؛ حالیہ تاریخ کی اگلی دوبارہ جانچ پیغام ڈھونڈ سکتی ہے۔",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ڈسک بھری ہونے پر نگرانی رکی رہی، {from} سے {to} تک۔ دستخط شدہ خلا اس وقفے کو نشان زد کرتا ہے؛ نگرانی خود دوبارہ شروع ہوئی۔",
+  "Show attachments not saved": "غیر محفوظ منسلکات دکھائیں",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "کچھ تبدیل نہیں ہوا۔ ورک اسپیس منتظم سے یہ رسائی بڑھانے کو کہیں۔"
 }

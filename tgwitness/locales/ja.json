@@ -11129,5 +11129,20 @@
   "Independent check": "独立した検証",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "受信者は ZIP を展開し、このフィンガープリントで VERIFY.cmd（Windows）または sh VERIFY.sh を実行します。指定しないと署名者の鍵は未確認と表示され、異なるフィンガープリントでは失敗します。",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "検証で証明されるのは署名者と改変がないことです。内容が真実であることや裁判所が採用することは証明しません。",
-  "Before you hand over": "引き渡しの前に"
+  "Before you hand over": "引き渡しの前に",
+  "Kept": "保持",
+  "Resumes on its own when the wait ends.": "待機が終わると自動で再開します。",
+  "Records saved so far stay in the signed journal.": "これまでに保存した記録は署名済みジャーナルに残ります。",
+  "If updates are missed during the wait, the collector records a signed gap.": "待機中に更新を取り逃した場合、コレクターは署名付きの欠落を記録します。",
+  "Not retried until space is freed.": "空き容量ができるまで再試行しません。",
+  "Records saved before the stop stay signed.": "停止前に保存した記録は署名されたまま残ります。",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "停止中は何も記録されません。監視再開時に、その期間を示す署名付き disk_full の欠落が書かれます。",
+  "Not retried automatically.": "自動では再試行しません。",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "監視を再開するまで何も記録されません。停止は署名済みジャーナルにあります。",
+  "Resumes on its own within 30 seconds after space is freed.": "空きができてから 30 秒以内に自動で再開します。",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "欠けた各ファイルには署名済みの media.failed 記録があり、エクスポートにも記載されます。失敗したダウンロードは再試行しません。",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} の更新を処理できず、保存されませんでした。署名付きの欠落が記録されています。次回の最近の履歴の再確認でメッセージが見つかる可能性があります。",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ディスクが満杯のため {from} から {to} まで監視が停止しました。署名付きの欠落がこの期間を示します。監視は自動で再開しました。",
+  "Show attachments not saved": "保存されていない添付ファイルを表示",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "何も変更されていません。ワークスペース管理者にこのアクセスの拡大を依頼してください。"
 }

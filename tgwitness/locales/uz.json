@@ -11180,5 +11180,20 @@
   "Independent check": "Mustaqil tekshiruv",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Qabul qiluvchi ZIP'ni ochib, shu barmoq izi bilan VERIFY.cmd (Windows) yoki sh VERIFY.sh ni ishga tushiradi. Usiz natija imzolovchi kaliti tasdiqlanmaganini aytadi; boshqa barmoq izi rad etiladi.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Tekshiruv kim imzolaganini va hech narsa o'zgarmaganini isbotlaydi. Mazmun to'g'ri ekanini yoki sud uni qabul qilishini isbotlamaydi.",
-  "Before you hand over": "Topshirishdan oldin"
+  "Before you hand over": "Topshirishdan oldin",
+  "Kept": "Saqlangan",
+  "Resumes on its own when the wait ends.": "Kutish tugagach o'zi davom etadi.",
+  "Records saved so far stay in the signed journal.": "Hozirgacha saqlangan yozuvlar imzolangan jurnalda qoladi.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Kutish paytida yangilanishlar o'tkazib yuborilsa, yig'uvchi imzolangan uzilish yozadi.",
+  "Not retried until space is freed.": "Joy bo'shamaguncha qayta urinilmaydi.",
+  "Records saved before the stop stay signed.": "To'xtashdan oldin saqlangan yozuvlar imzolangan qoladi.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "To'xtagan paytda hech narsa yozilmaydi. Kuzatuv davom etganda shu oraliq uchun imzolangan disk_full uzilishi yoziladi.",
+  "Not retried automatically.": "Avtomatik qayta urinilmaydi.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Kuzatuv qayta boshlanmaguncha hech narsa yozilmaydi; to'xtash imzolangan jurnalda bor.",
+  "Resumes on its own within 30 seconds after space is freed.": "Joy bo'shagach 30 soniya ichida o'zi davom etadi.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Har bir yo'q faylning imzolangan media.failed yozuvi bor va eksportlar uni ko'rsatadi. Muvaffaqiyatsiz yuklashlar qayta urinilmaydi.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} dagi yangilanishni qayta ishlab bo'lmadi va u saqlanmadi. Uni imzolangan uzilish belgilaydi; yaqin tarixni keyingi qayta tekshirish xabarni topishi mumkin.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Disk to'lgani sababli kuzatuv {from} dan {to} gacha to'xtadi. Bu oraliqni imzolangan uzilish belgilaydi; kuzatuv o'zi davom etdi.",
+  "Show attachments not saved": "Saqlanmagan ilovalarni ko'rsatish",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hech narsa o'zgarmadi. Ish maydoni administratoridan bu kirishni kengaytirishni so'rang."
 }

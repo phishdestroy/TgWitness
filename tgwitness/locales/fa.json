@@ -11180,5 +11180,20 @@
   "Independent check": "بررسی مستقل",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "گیرنده ZIP را باز می‌کند و VERIFY.cmd (ویندوز) یا sh VERIFY.sh را با این اثرانگشت اجرا می‌کند. بدون آن نتیجه می‌گوید کلید امضاکننده تأیید نشده است؛ اثرانگشت متفاوت رد می‌شود.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "این بررسی نشان می‌دهد چه کسی امضا کرده و چیزی تغییر نکرده است. درستی محتوا یا پذیرش آن در دادگاه را ثابت نمی‌کند.",
-  "Before you hand over": "پیش از تحویل"
+  "Before you hand over": "پیش از تحویل",
+  "Kept": "حفظ‌شده",
+  "Resumes on its own when the wait ends.": "پس از پایان انتظار خودکار ادامه می‌یابد.",
+  "Records saved so far stay in the signed journal.": "سوابق ذخیره‌شده تا اکنون در دفتر امضاشده می‌مانند.",
+  "If updates are missed during the wait, the collector records a signed gap.": "اگر در زمان انتظار به‌روزرسانی‌ها از دست بروند، گردآورنده شکافی امضاشده ثبت می‌کند.",
+  "Not retried until space is freed.": "تا آزاد شدن فضا دوباره تلاش نمی‌شود.",
+  "Records saved before the stop stay signed.": "سوابق ذخیره‌شده پیش از توقف امضاشده باقی می‌مانند.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "در زمان توقف چیزی ثبت نمی‌شود. با ادامه مشاهده، شکاف امضاشده disk_full برای آن بازه نوشته می‌شود.",
+  "Not retried automatically.": "به‌طور خودکار دوباره تلاش نمی‌شود.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "تا شروع دوباره مشاهده چیزی ثبت نمی‌شود؛ توقف در دفتر امضاشده آمده است.",
+  "Resumes on its own within 30 seconds after space is freed.": "ظرف ۳۰ ثانیه پس از آزاد شدن فضا خودکار ادامه می‌یابد.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "هر فایل گم‌شده یک سابقه امضاشده media.failed دارد و خروجی‌ها آن را فهرست می‌کنند. دانلودهای ناموفق دوباره تلاش نمی‌شوند.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "یک به‌روزرسانی در {time} پردازش نشد و ذخیره نشد. شکافی امضاشده آن را نشان می‌دهد؛ بازبینی بعدی تاریخچه اخیر ممکن است پیام را پیدا کند.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "مشاهده هنگام پر بودن دیسک متوقف شد، از {from} تا {to}. شکافی امضاشده این بازه را نشان می‌دهد؛ مشاهده خودکار ادامه یافت.",
+  "Show attachments not saved": "نمایش پیوست‌های ذخیره‌نشده",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "چیزی تغییر نکرد. از مدیر فضای کار بخواهید این دسترسی را گسترش دهد."
 }
