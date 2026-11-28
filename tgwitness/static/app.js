@@ -285,6 +285,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="analysis")await window.TgWitnessAnalysis?.load();
   else if(view==="evidence"){
     renderChatExportTools();
+    void renderExportsTrust();
     await Promise.all([loadReportSettings(),loadExports(),loadAccountExport().catch(accountExportError)]);
     if(current()){
       exportsView.select(route.tab||'downloads',false,{history:false});
@@ -1645,6 +1646,13 @@ const modesReady=import("./components/modes.js?v=4").then(({createModes})=>{
 modesReady.catch(error=>toast(error.message,true));
 const takeoverRiskNames={login_email:tr("Login email"),recovery_email:tr("Recovery email"),two_step_password:tr("Two-step password"),
   app_id_mismatch:tr("Session key made by another app")};
+const trustCardReady=import("./components/trust-card.js?v=1").then(({createTrustCard})=>createTrustCard({tr,node,json,busy,toast,formatTime,openJournal:kind=>openJournalFilter(kind)}));
+async function renderExportsTrust(){
+  const host=$("exports-trust"),profile=state.profile,revision=state.workspaceRevision,card=await trustCardReady;let live=null;
+  try{live=state.status?.demo?null:await json("overview/live");}catch{}
+  if(profile!==state.profile||revision!==state.workspaceRevision||state.view!=="evidence")return;
+  host.replaceChildren(...[live&&card(live,renderExportsTrust)].filter(Boolean));
+}
 const warningScope=()=>state.profile+":"+(state.status?.fingerprint||"");
 let sessionWarnings=null;
 const sessionWarningsReady=import("./components/session-warnings.js?v=1").then(({createSessionWarnings})=>{
@@ -4977,7 +4985,8 @@ function renderVerification(){
 }
 $("verify-journal").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const profile=state.profile,revision=state.workspaceRevision;clearVerification();
-  const r=await json("verify",{},{profile});
+  let r;
+  try{r=await json("verify",{},{profile});}finally{if(revision===state.workspaceRevision)void renderExportsTrust();}
   if(revision!==state.workspaceRevision)return;
   state.verification={...r,profile};renderVerification();
   toast(tr("Journal integrity check passed."));
