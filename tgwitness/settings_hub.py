@@ -575,13 +575,14 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             counts, sizes = [], []
             from .monitoring import media_kind, duration_allowed
             capture = capture_settings(app.state.store)
+            limit = None if body.goal == "copy" else c.param("snapshot_max")
             for cid in ids[:3]:
                 entity = await c.resolve_target(cid)
                 batch = await asyncio.wait_for(c.client.get_messages(entity, limit=20), 15)
                 total = getattr(batch, "total", None)
                 if total is None:
                     continue
-                counts.append(total)
+                counts.append(total if limit is None else min(total, limit))
                 for msg in batch:
                     size = len((getattr(msg, "message", "") or "").encode()) + 512
                     rule = capture["types"][media_kind(msg)]
