@@ -1,0 +1,7 @@
+{
+  "name": "tgwitness-installer-deploy",
+  "private": true,
+  "dependencies": {
+    "wrangler": "4.156.1"
+  }
+}
