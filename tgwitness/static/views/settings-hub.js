@@ -196,7 +196,8 @@ export function createSettingsHub(ctx) {
     if(!prefs){const result=await shared(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
     data=await shared(who,'settings');draft={...data.wizard};
     visited=Math.max(visited,draft.step);
-    if(state.view==='first-run'&&wanted&&wanted!==draft.step&&wanted<=visited&&!live){
+    if(state.view==='first-run'&&wanted&&wanted>visited&&!live&&!(wanted<4&&visited<4))toast(tr('Complete the earlier steps first.'));
+    if(state.view==='first-run'&&wanted&&wanted!==draft.step&&!(wanted<4&&draft.step<4)&&wanted<=visited&&!live){
       recordedStep=wanted;
       try{await saveDraft({step:wanted},who);}catch(error){if(error.name==='StaleView')throw error;toast(error.message,true);recordedStep=null;}
     }
@@ -902,6 +903,7 @@ export function createSettingsHub(ctx) {
     if(!body.isConnected)return;
     if(dialogs){
       if(draft.scope==='folder')body.append(select('Telegram folder',[['','Choose a folder'],...dialogs.folders.map(f=>[String(f.id),f.title])],String(draft.folder_id??''),async id=>{draft.folder_id=id===''?null:Number(id);await changed();}));
+      if(draft.scope==='folder'&&!dialogs.folders.length)body.append(message('This account has no Telegram folders. Create one in the Telegram app, or choose chats here.','notice warning'));
       if(draft.scope==='selected'){
         const filter=node('input');filter.type='search';filter.placeholder=tr('Search by name or ID');body.append(filter);
         const chosen=node('p','hint wizard-chosen');body.append(chosen);
