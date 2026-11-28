@@ -10,7 +10,6 @@ from ..collector import AUTHORIZATION_ERRORS
 from ..collector import ProtectedSession
 from ..collector import loss_text
 from ..evidence import LIMITS
-from ..verify import fingerprint
 from ..failures import describe, unexpected
 from ..middleware import request_limit
 from ..monitoring import Monitoring
