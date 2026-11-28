@@ -2549,8 +2549,12 @@ button.primary[aria-busy=true]::after { color: #fff; }
 @media (max-width: 480px) { .history-forward-dialog { padding: 14px; }.forward-details { grid-template-columns: 1fr; gap: 4px; }.forward-details dd { margin-bottom: 8px; } }
 .people-table th:first-child, .people-table td:first-child { min-width: 11rem; }
 .people-table .person b { overflow-wrap: break-word; }
-.fwd-origin { display: flex; align-items: center; gap: 6px; margin: 2px 0 4px; color: var(--accent-text); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+.fwd-origin { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; margin: 2px 0 4px; color: var(--accent-text); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
 .fwd-origin .icon { width: 14px; height: 14px; flex: none; }
+.fwd-origin-label { min-width: 0; }
+.fwd-origin-open, .fwd-origin-unknown { font-size: 12px; }
+.fwd-origin-unknown { color: var(--text-2); font-weight: 500; text-decoration: underline dotted; text-underline-offset: 3px; }
+.fwd-origin-why { margin: 0 0 4px; color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
 .bubble-reactions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; }
 .reaction-chip { padding: 1px 8px; border: 1px solid var(--accent-border); border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); font-size: 13px; }
 .views-count { margin-inline-start: auto; color: var(--text-2); font-size: 12px; }

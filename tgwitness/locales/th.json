@@ -11144,5 +11144,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "การอัปเดตเมื่อ {time} ประมวลผลไม่ได้และไม่ได้บันทึก มีช่องว่างที่ลงนามระบุไว้ การตรวจประวัติล่าสุดครั้งถัดไปอาจพบข้อความนั้น",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "การสังเกตการณ์หยุดขณะดิสก์เต็ม ตั้งแต่ {from} ถึง {to} มีช่องว่างที่ลงนามระบุช่วงนั้น การสังเกตการณ์กลับมาเอง",
   "Show attachments not saved": "แสดงไฟล์แนบที่ไม่ได้บันทึก",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "ไม่มีการเปลี่ยนแปลง ขอให้ผู้ดูแลพื้นที่ทำงานขยายสิทธิ์นี้"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "ไม่มีการเปลี่ยนแปลง ขอให้ผู้ดูแลพื้นที่ทำงานขยายสิทธิ์นี้",
+  "Open original": "เปิดต้นฉบับ",
+  "Origin not observed": "ไม่พบต้นฉบับในการสังเกต",
+  "Forwarded from {name}, {time}": "ส่งต่อจาก {name}, {time}",
+  "The sender hides their account in forwards.": "ผู้ส่งซ่อนบัญชีของตนในข้อความที่ส่งต่อ",
+  "Imported from another app; Telegram has no original message.": "นำเข้าจากแอปอื่น Telegram ไม่มีข้อความต้นฉบับ",
+  "Telegram names the original sender but not the original message.": "Telegram ระบุผู้ส่งต้นทาง แต่ไม่ระบุข้อความต้นฉบับ",
+  "The original chat is not open to this access.": "แชทต้นฉบับไม่ได้เปิดให้สิทธิ์นี้",
+  "The original chat is not collected in this workspace.": "แชทต้นฉบับไม่ได้ถูกเก็บในพื้นที่ทำงานนี้",
+  "The original message is not saved in this workspace.": "ข้อความต้นฉบับไม่ได้บันทึกในพื้นที่ทำงานนี้"
 }

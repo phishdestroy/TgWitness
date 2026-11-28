@@ -11195,5 +11195,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} पर एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया। एक हस्ताक्षरित अंतराल इसे चिह्नित करता है; हाल के इतिहास की अगली पुनर्जाँच संदेश ढूँढ सकती है।",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "डिस्क भरी होने पर निगरानी रुकी रही, {from} से {to} तक। एक हस्ताक्षरित अंतराल इस अवधि को चिह्नित करता है; निगरानी अपने आप फिर शुरू हुई।",
   "Show attachments not saved": "सहेजे नहीं गए अटैचमेंट दिखाएँ",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "कुछ नहीं बदला। वर्कस्पेस व्यवस्थापक से यह पहुँच बढ़ाने को कहें।"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "कुछ नहीं बदला। वर्कस्पेस व्यवस्थापक से यह पहुँच बढ़ाने को कहें।",
+  "Open original": "मूल खोलें",
+  "Origin not observed": "मूल देखा नहीं गया",
+  "Forwarded from {name}, {time}": "{name} से अग्रेषित, {time}",
+  "The sender hides their account in forwards.": "प्रेषक अग्रेषण में अपना खाता छिपाता है।",
+  "Imported from another app; Telegram has no original message.": "दूसरे ऐप से आयातित; Telegram में मूल संदेश नहीं है।",
+  "Telegram names the original sender but not the original message.": "Telegram मूल प्रेषक बताता है, मूल संदेश नहीं।",
+  "The original chat is not open to this access.": "मूल चैट इस पहुँच के लिए खुली नहीं है।",
+  "The original chat is not collected in this workspace.": "मूल चैट इस वर्कस्पेस में एकत्र नहीं होती।",
+  "The original message is not saved in this workspace.": "मूल संदेश इस वर्कस्पेस में सहेजा नहीं गया है।"
 }

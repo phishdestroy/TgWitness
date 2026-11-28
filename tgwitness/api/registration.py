@@ -600,6 +600,9 @@ def register(app, ctx):
     router.get("/api/chats/{chat_id}/messages", dependencies=[Depends(authenticate)])(
         routes_chats.chat_messages
     )
+    router.get("/api/chats/{chat_id}/messages/{message_id}/origin", dependencies=[Depends(authenticate)])(
+        routes_chats.message_origin
+    )
     router.get("/api/chats/{chat_id}/pinned", dependencies=[Depends(authenticate)])(
         routes_chats.chat_pinned
     )

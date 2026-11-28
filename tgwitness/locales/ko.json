@@ -11144,5 +11144,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time}의 업데이트를 처리하지 못해 저장되지 않았습니다. 서명된 공백이 이를 표시하며, 다음 최근 기록 재확인에서 메시지를 찾을 수 있습니다.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "디스크가 가득 차 {from}부터 {to}까지 관찰이 중지되었습니다. 서명된 공백이 이 기간을 표시하며 관찰은 자동으로 재개되었습니다.",
   "Show attachments not saved": "저장되지 않은 첨부 파일 보기",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "변경된 것은 없습니다. 작업 공간 관리자에게 이 접근 권한을 넓혀 달라고 요청하세요."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "변경된 것은 없습니다. 작업 공간 관리자에게 이 접근 권한을 넓혀 달라고 요청하세요.",
+  "Open original": "원본 열기",
+  "Origin not observed": "원본이 관찰되지 않음",
+  "Forwarded from {name}, {time}": "{name}에서 전달됨, {time}",
+  "The sender hides their account in forwards.": "보낸 사람이 전달 시 계정을 숨깁니다.",
+  "Imported from another app; Telegram has no original message.": "다른 앱에서 가져옴. Telegram에 원본 메시지가 없습니다.",
+  "Telegram names the original sender but not the original message.": "Telegram은 원래 보낸 사람은 알려 주지만 원본 메시지는 알려 주지 않습니다.",
+  "The original chat is not open to this access.": "원래 채팅은 이 접근 권한에 열려 있지 않습니다.",
+  "The original chat is not collected in this workspace.": "원래 채팅은 이 작업 공간에서 수집되지 않습니다.",
+  "The original message is not saved in this workspace.": "원본 메시지가 이 작업 공간에 저장되어 있지 않습니다."
 }

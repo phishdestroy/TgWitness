@@ -11195,5 +11195,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} zamanındaki bir güncelleme işlenemedi ve kaydedilmedi. İmzalı bir boşluk bunu işaretler; yakın geçmişin bir sonraki yeniden denetimi mesajı bulabilir.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Disk doluyken gözlem durdu, {from} ile {to} arası. İmzalı bir boşluk bu aralığı işaretler; gözlem kendiliğinden sürdü.",
   "Show attachments not saved": "Kaydedilmeyen ekleri göster",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hiçbir şey değiştirilmedi. Çalışma alanı yöneticisinden bu erişimi genişletmesini isteyin."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hiçbir şey değiştirilmedi. Çalışma alanı yöneticisinden bu erişimi genişletmesini isteyin.",
+  "Open original": "Orijinali aç",
+  "Origin not observed": "Orijinal gözlenmedi",
+  "Forwarded from {name}, {time}": "{name} kaynağından iletildi, {time}",
+  "The sender hides their account in forwards.": "Gönderen iletilenlerde hesabını gizliyor.",
+  "Imported from another app; Telegram has no original message.": "Başka bir uygulamadan içe aktarıldı; Telegram’da orijinal mesaj yok.",
+  "Telegram names the original sender but not the original message.": "Telegram orijinal göndereni belirtir ama orijinal mesajı belirtmez.",
+  "The original chat is not open to this access.": "Orijinal sohbet bu erişime açık değil.",
+  "The original chat is not collected in this workspace.": "Orijinal sohbet bu çalışma alanında toplanmıyor.",
+  "The original message is not saved in this workspace.": "Orijinal mesaj bu çalışma alanında kayıtlı değil."
 }

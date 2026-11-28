@@ -11144,5 +11144,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} の更新を処理できず、保存されませんでした。署名付きの欠落が記録されています。次回の最近の履歴の再確認でメッセージが見つかる可能性があります。",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ディスクが満杯のため {from} から {to} まで監視が停止しました。署名付きの欠落がこの期間を示します。監視は自動で再開しました。",
   "Show attachments not saved": "保存されていない添付ファイルを表示",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "何も変更されていません。ワークスペース管理者にこのアクセスの拡大を依頼してください。"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "何も変更されていません。ワークスペース管理者にこのアクセスの拡大を依頼してください。",
+  "Open original": "元のメッセージを開く",
+  "Origin not observed": "元は未観測",
+  "Forwarded from {name}, {time}": "{name} から転送、{time}",
+  "The sender hides their account in forwards.": "送信者は転送時にアカウントを隠しています。",
+  "Imported from another app; Telegram has no original message.": "別のアプリから取り込み。Telegram に元のメッセージはありません。",
+  "Telegram names the original sender but not the original message.": "Telegram は元の送信者を示しますが、元のメッセージは示しません。",
+  "The original chat is not open to this access.": "元のチャットはこのアクセスに開かれていません。",
+  "The original chat is not collected in this workspace.": "元のチャットはこのワークスペースで収集されていません。",
+  "The original message is not saved in this workspace.": "元のメッセージはこのワークスペースに保存されていません。"
 }

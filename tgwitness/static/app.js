@@ -6124,6 +6124,19 @@ async function jumpToReply(m){
   }
   if(chat===state.chat)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:m.reply_to}),true);
 }
+function forwardReason(reason){
+  return {hidden:tr("The sender hides their account in forwards."),imported:tr("Imported from another app; Telegram has no original message."),
+    no_message_id:tr("Telegram names the original sender but not the original message."),not_allowed:tr("The original chat is not open to this access."),
+    not_collected:tr("The original chat is not collected in this workspace.")}[reason]||tr("The original message is not saved in this workspace.");
+}
+function forwardChatTitle(found){return found.title||state.chats.find(chat=>chat.chat_id===found.chat_id)?.title||chatTitle(found.chat_id);}
+async function openForwardOrigin(found){
+  const revision=state.workspaceRevision,profile=state.profile;
+  if(found.chat_id!==state.chat&&!await openChat(found.chat_id))return;
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.chat!==found.chat_id)return;
+  if(await showChatMessage(found.message_id)){const bubble=$("msg-"+found.message_id)?.querySelector(".bubble");bubble?.setAttribute("tabindex","-1");bubble?.focus({preventScroll:true});return;}
+  if(state.chat===found.chat_id)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:found.message_id}),true);
+}
 $("chat-back-reply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const back=replyReturn;replyReturn=null;show("chat-back-reply",false);
   if(!back||back.chat!==state.chat||back.profile!==state.profile)return;
@@ -6684,9 +6697,19 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     bubble.append(quote);
   }
   const origin=m.details?.forwarded_from;
-  if(origin){const who=origin.from_name||(origin.from_id!==undefined?"ID "+origin.from_id:"");
-    const tag=node("div","fwd-origin");tag.append(icon("share"),node("span","",who?tr("Forwarded from {name}",{name:who}):tr("Forwarded message")));
+  if(origin){const found=m.forward_origin,seen=found?.status==="observed";
+    const who=origin.from_name||(seen&&found.via==="origin"&&forwardChatTitle(found))||(origin.from_id!==undefined?"ID "+origin.from_id:"");
+    const when=origin.date||(seen&&found.via==="origin"?found.sent_at:null);
+    const tag=node("div","fwd-origin");tag.append(icon("share"),node("span","fwd-origin-label",who?(when?tr("Forwarded from {name}, {time}",{name:who,time:fmtTime(when)}):tr("Forwarded from {name}",{name:who})):tr("Forwarded message")));
     if(origin.date)tag.title=tr("Original message sent {time}",{time:fmtFull(origin.date)});
+    if(seen){const open=node("button","text-link fwd-origin-open",tr("Open original"));open.type="button";
+      const place=forwardChatTitle(found)+" · #"+found.message_id+(found.sent_at?" · "+fmtFull(found.sent_at):"");open.title=place;open.setAttribute("aria-label",tr("Open original")+": "+place);
+      open.addEventListener("click",()=>busy(open,()=>openForwardOrigin(found)));tag.append(open);}
+    else if(found?.status==="unknown"){const note=node("button","text-link fwd-origin-unknown",tr("Origin not observed")),why=forwardReason(found.reason);
+      note.type="button";note.title=why;note.setAttribute("aria-expanded","false");
+      note.addEventListener("click",()=>{const open=note.getAttribute("aria-expanded")!=="true";note.setAttribute("aria-expanded",String(open));hideTooltip();
+        let text=bubble.querySelector(".fwd-origin-why");if(!text){text=node("p","fwd-origin-why",why);tag.after(text);}text.hidden=!open;});
+      tag.append(note);}
     bubble.insertBefore(tag,bubble.querySelector(".reply-quote")?.nextSibling||bubble.querySelector(".bubble-head")?.nextSibling||bubble.firstChild);}
   if(m.captured){if(m.text){const body=messageText(m.text,m);highlightMatches(body,state.chatSearch);if(onlyEmoji(m.text))body.classList.add("big-emoji");bubble.append(body);}if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
