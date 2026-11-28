@@ -15,7 +15,7 @@
       actions.append(test,remove);row.append(info,actions);box.append(row);
     }
     if(!data.connections.length)box.append(viewState("empty",tr("No webhook destinations"),tr("Add a receiver to deliver structured notifications.")));
-    const statuses={delivered:tr("Delivered"),retrying:tr("Retrying"),exhausted:tr("Retries exhausted")};
+    const statuses={delivered:tr("Delivered"),retrying:tr("Retrying"),exhausted:tr("Retries exhausted"),rejected:tr("Rejected")};
     const history=$("webhook-history");history.replaceChildren();for(const item of [...data.history].reverse()){history.append(node("p","hint",fmtFull(item.timestamp)+" · "+(statuses[item.status]||item.status)+" · "+item.attempt+" · "+item.event_id.slice(0,12)+(item.error?" · "+tr(item.error):"")));}
   }
   $("webhook-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{

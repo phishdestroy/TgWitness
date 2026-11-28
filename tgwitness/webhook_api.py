@@ -14,9 +14,10 @@ def register(app, authenticate, workspace_id):
     @app.post("/api/integrations/webhooks", dependencies=[Depends(authenticate)])
     async def create(body: webhooks.HookSettings):
         try:
+            await webhooks.check_destination(body.url, app.state.collector.outside_route())
             async with webhooks.lock(app.state.store):
                 return webhooks.create(app.state.store, app.state.vault, body)
-        except ValueError as exc:
+        except (ValueError, webhooks.netclient.InternalDestination) as exc:
             raise HTTPException(422, str(exc)) from None
 
     @app.delete("/api/integrations/webhooks/{hook_id}", dependencies=[Depends(authenticate)])
@@ -32,8 +33,11 @@ def register(app, authenticate, workspace_id):
     @app.post("/api/integrations/webhooks/{hook_id}/test", dependencies=[Depends(authenticate)])
     async def test(request: Request, hook_id: str):
         try:
+            hook = next((h for h in app.state.vault.read("webhooks").get("entries", []) if h["id"] == hook_id), None)
+            if hook:
+                await webhooks.check_destination(hook["url"], app.state.collector.outside_route())
             result = await webhooks.enqueue_test(app.state.store, app.state.vault, workspace_id, hook_id)
             app.state.alert_wakeup.set()
             return result
-        except ValueError as exc:
+        except (ValueError, webhooks.netclient.InternalDestination) as exc:
             raise HTTPException(422, str(exc)) from None

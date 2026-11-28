@@ -30,6 +30,10 @@ class RouteError(Exception):
     pass
 
 
+class InternalDestination(RouteError):
+    pass
+
+
 class HTTPError(ValueError):
     def __init__(self, status, body=b"", headers=None):
         super().__init__("HTTP " + str(status))
@@ -52,7 +56,7 @@ def internal(address):
 def refuse_internal(host, addresses):
     blocked = [a for a in addresses if internal(a)]
     if blocked:
-        raise RouteError(host + " resolves to " + str(blocked[0]) + ", inside this machine or its network. Panel "
+        raise InternalDestination(host + " resolves to " + str(blocked[0]) + ", inside this machine or its network. Panel "
                          "requests go only to public internet addresses; for storage or services in your own network "
                          "set " + PRIVATE_OPT_IN + "=1 on the server.")
 

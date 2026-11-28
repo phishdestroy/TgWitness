@@ -91,6 +91,27 @@ def create(store, vault, body):
     return {"connection": public(item), "secret": item["secret"]}
 
 
+async def check_destination(url, network):
+    host = urlsplit(url).hostname
+    if netclient.private_allowed():
+        return
+    if address := netclient.literal(host):
+        netclient.refuse_internal(host, [address])
+        return
+    if network.kind == "none" or network.telegram_only:
+        return
+    try:
+        if network.kind == "direct":
+            addresses = await asyncio.wait_for(netclient.resolve(host, 443), 10)
+        else:
+            addresses = await netclient.public_proxy_addresses(host, network, 10)
+    except netclient.InternalDestination:
+        raise
+    except Exception:
+        return
+    netclient.refuse_internal(host, addresses)
+
+
 def envelope(event, workspace, hook):
     kind = event["kind"]
     payload = {"schema": "tgwitness.webhook/1", "event_id": event.get("event_id") or hashlib.sha256(
@@ -161,23 +182,24 @@ async def pump(store, vault, network, workspace):
     # Deliveries run outside the lock: a slow receiver must not block editing or removing destinations.
     results = []
     for hook, job in due:
-        error = None
+        error, rejected = None, False
         try:
             await send(hook, job["payload"], network)
         except Exception as exc:
             error = str(exc)[:300] if isinstance(exc, netclient.RouteError) else type(exc).__name__
+            rejected = isinstance(exc, netclient.InternalDestination)
             if isinstance(exc, netclient.HTTPError):
                 error = "HTTP " + str(exc.status)
-        results.append((job, error))
+        results.append((job, error, rejected))
     if not results:
         return
     async with lock(store):
         data = state(store)
-        for job, error in results:
-            final = error is None or job["attempts"] >= 8
+        for job, error, rejected in results:
+            final = error is None or rejected or job["attempts"] >= 8
             data["history"].append({"destination": job["destination"], "event_id": job["event_id"],
                 "timestamp": utcnow(), "attempt": job["attempts"], "status": "delivered" if error is None else
-                "exhausted" if final else "retrying", "error": error})
+                "rejected" if rejected else "exhausted" if final else "retrying", "error": error})
             data["last_error"] = error or lost_completions(data)
             if final:
                 data["pending"] = [item for item in data["pending"] if not (
