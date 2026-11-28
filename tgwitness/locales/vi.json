@@ -11112,5 +11112,7 @@
   "No observation gaps in the last 24 hours.": "Không có khoảng trống quan sát trong 24 giờ qua.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Khoảng trống quan sát trong 24 giờ qua: {n}. Lần gần nhất {time}.",
   "Failed on {time}; the record stays in the signed journal.": "Thất bại lúc {time}; bản ghi vẫn nằm trong nhật ký đã ký.",
-  "Observation stopped while the disk was full": "Việc quan sát đã dừng trong lúc ổ đĩa đầy"
+  "Observation stopped while the disk was full": "Việc quan sát đã dừng trong lúc ổ đĩa đầy",
+  "Attachment not saved": "Tệp đính kèm chưa được lưu",
+  "On the Case Board": "Trên bảng vụ án"
 }

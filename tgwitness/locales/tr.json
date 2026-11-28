@@ -11163,5 +11163,7 @@
   "No observation gaps in the last 24 hours.": "Son 24 saatte gözlem boşluğu yok.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Son 24 saatteki gözlem boşlukları: {n}. Sonuncusu {time}.",
   "Failed on {time}; the record stays in the signed journal.": "{time} tarihinde başarısız oldu; kayıt imzalı günlükte kalır.",
-  "Observation stopped while the disk was full": "Disk doluyken gözlem durdu"
+  "Observation stopped while the disk was full": "Disk doluyken gözlem durdu",
+  "Attachment not saved": "Ek kaydedilmedi",
+  "On the Case Board": "Vaka Panosunda"
 }

@@ -255,7 +255,7 @@ export function createCaseBoard(ctx){
       const old=element.querySelector('.board-highlight-action');old?.remove();const action=btn('Highlight → board',()=>highlight(event,{field:'text',start,length,quote}),'secondary small board-highlight-action');actions.append(action);
     });
   }
-  return {load,reset,cursor:()=>liveCursor,attach,bookmark,sliceDialog,explore:sliceRecords,
+  return {load,reset,cursor:()=>liveCursor,attach,bookmark,bookmarkOptions,sliceDialog,explore:sliceRecords,
     live(notes){liveCursor=Math.max(liveCursor,...notes.map(item=>item.seq));if(state.view==='board'){clearTimeout(timer);timer=setTimeout(()=>load().catch(error=>toast(error.message,true)),180);}else{unread+=notes.length;badge();}},
     leave(){request++;threadTicket++;closeDialog();}};
 }

@@ -11367,5 +11367,7 @@
   "No observation gaps in the last 24 hours.": "لا فجوات في المراقبة خلال آخر 24 ساعة.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "فجوات المراقبة خلال آخر 24 ساعة: {n}. آخرها {time}.",
   "Failed on {time}; the record stays in the signed journal.": "فشل في {time}؛ ويبقى هذا السجل في السجل الموقّع.",
-  "Observation stopped while the disk was full": "توقفت المراقبة بينما كان القرص ممتلئًا"
+  "Observation stopped while the disk was full": "توقفت المراقبة بينما كان القرص ممتلئًا",
+  "Attachment not saved": "لم يُحفظ المرفق",
+  "On the Case Board": "على لوحة القضية"
 }

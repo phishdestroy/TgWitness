@@ -2472,9 +2472,9 @@ const journalReady=import('./components/journal.js?v=layout7').then(({createJour
       await navigate("chats",{load:false});
       if(revision!==state.workspaceRevision||state.view!=="chats")return;
       await refreshChats();if(revision!==state.workspaceRevision||state.view!=="chats")return;
-      if(await openChat(event.chat_id)){
-        const message=$("msg-"+event.message_id);
-        if(message){message.scrollIntoView({block:"center"});replay(message,"flash",1500);}
+      if(await openChat(event.chat_id)&&event.message_id!==null&&event.message_id!==undefined){
+        if(await showChatMessage(event.message_id)){const bubble=$("msg-"+event.message_id)?.querySelector(".bubble");bubble?.setAttribute("tabindex","-1");bubble?.focus({preventScroll:true});}
+        else if(revision===state.workspaceRevision&&state.chat===event.chat_id)toast(tr("Message #{id} is not saved in this workspace. Load older history from Telegram to look for it.",{id:event.message_id}),true);
       }
     }});
   return window.TgWitnessJournal;
@@ -2546,13 +2546,19 @@ async function openDetail(e,options={}) {
   ]) { const box=node("div");box.append(node("small","",label),node("strong","",String(value)));meta.append(box); }
   content.append(meta);
   const copies=node("div","review-tabs");
-  for(const [label,value] of [["SHA-256",e.hash],["Message ID",e.message_id],["Sender ID",sender],
+  for(const [label,value] of [["SHA-256",e.hash],["Chat ID",e.chat_id],["Message ID",e.message_id],["Sender ID",sender],
     ["Link to this record",window.TgWitnessRouter?.href({view:"observations",seq:e.seq})||location.origin+"/?"+new URLSearchParams({event:e.seq,workspace:state.profile})+"#journal"]]){
     if(value===null||value===undefined)continue;
     const copy=node("button","quiet small",tr(label));copy.type="button";copy.title=String(value);
     copy.addEventListener("click",()=>busy(copy,async()=>{await navigator.clipboard.writeText(String(value));toast(tr("Copied"));}));copies.append(copy);
   }
   content.append(copies);
+  const tools=node("div","detail-actions"),message=e.chat_id!==null&&e.message_id!==null;
+  if(may("board.write")&&boardView?.bookmarkOptions){const mark=node("button","secondary small",tr("Add to board"));mark.type="button";
+    mark.addEventListener("click",()=>busy(mark,()=>boardView.bookmarkOptions(e)));tools.append(mark);}
+  if(message&&viewAllowed("evidence")){const report=node("button","secondary small",tr("Build report"));report.type="button";
+    report.addEventListener("click",()=>busy(report,async()=>{const chat=e.chat_id,id=e.message_id;closeDetail({history:false});await reportFor(chat,null,[id]);}));tools.append(report);}
+  if(tools.childElementCount)content.append(tools);
   const versions=node("div");content.append(versions);
   if("text" in e.payload)versions.append(detailBlock(tr("Captured version"),e.payload.text));
   content.append(node("p","detail-caption",window.TgWitnessPrivacy.preview(excerpt(e))));
@@ -2563,8 +2569,10 @@ async function openDetail(e,options={}) {
       recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
     }
   }
+  const mediaState=node("div");content.append(mediaState);
   content.append(window.TgWitnessJournal.signedRecord(e));
   content.append(node("p","detail-hash","SHA-256 · "+e.hash));
+  const boardLinks=node("div","detail-board");content.append(boardLinks);
   const lineage=node("div","lineage");content.append(lineage);
   show("drawer-backdrop",true);show("detail-drawer",true);$("close-detail").focus();
   window.TgWitnessJournal.openDetail(e);
@@ -2583,6 +2591,19 @@ async function openDetail(e,options={}) {
         versions.append(previous ? detailBlock(tr("Last captured content before this notice"),previous.payload.text)
           : detailBlock(tr("Content unavailable"),tr("The journal has no earlier content version in the loaded records. This notice cannot recover it.")));
       }
+      if(!e.payload.media_sha256&&["message.new","message.edited","message.snapshot","message.recovered"].includes(e.kind)){
+        const own=x=>x.payload?.message_event===e.seq,later=result.events.filter(x=>x.seq>e.seq&&x.kind.startsWith("media."));
+        const saved=later.find(x=>x.kind==="media.saved"&&own(x))||later.find(x=>x.kind==="media.saved"),lost=later.find(x=>x.kind!=="media.saved"&&own(x))||later.find(x=>x.kind!=="media.saved");
+        if(saved?.payload?.media_sha256)mediaState.append(window.TgWitnessReview.attachment({...saved.payload,size:saved.payload.size??saved.payload.attachment?.bytes},{api,download,busy,tr}));
+        else if(lost)mediaState.append(detailBlock(tr("Attachment not saved"),lost.payload?.reason||lost.payload?.meaning||lost.payload?.error_type||eventLabel(lost)[0]));
+      }
+      if(may("board.read"))json("board?"+new URLSearchParams({chat:e.chat_id,limit:"200"})).then(board=>{
+        if(state.drawerSeq!==e.seq)return;const seqs=new Set(result.events.map(x=>x.seq));
+        const linked=(board.cards||[]).filter(card=>!card.removed&&(seqs.has(card.target?.seq)||card.snapshot&&card.snapshot.first_seq<=e.seq&&e.seq<=card.snapshot.last_seq));
+        if(!linked.length)return;const states={open:"Open",review:"Under review",confirmed:"Confirmed",dismissed:"Dismissed"};
+        boardLinks.replaceChildren(node("h3","",tr("On the Case Board")));
+        for(const card of linked)boardLinks.append(node("p","hint",[card.title||tr(card.snapshot?"Range slice":"Bookmark"),states[card.state]?tr(states[card.state]):"",(card.labels||[]).join(", ")].filter(Boolean).join(" · ")));
+      }).catch(()=>{});
       lineage.append(node("h3","",tr("Message observation history")));
       result.events.forEach(other=>{
         const b=node("button","",(other.seq===e.seq ? "● " : "")+"#"+other.seq+" · "+eventLabel(other)[0]+" · "+formatTime(other.observed_at));
