@@ -851,7 +851,12 @@ export function createSettingsHub(ctx) {
       const action=owner();
       if(draft.step===7){
         const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);
-        if(result.action==='export'){await navigate('evidence');return;}
+        if(result.action==='export'){
+          await navigate('evidence');document.getElementById('export-task-account')?.click();
+          await new Promise(resolve=>requestAnimationFrame(()=>resolve()));
+          const card=document.getElementById('account-export-card');if(card&&!card.hidden)card.scrollIntoView({block:'start'});
+          return;
+        }
         if(result.action==='existing'){
           toast(tr('Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.'));
           if(state.view==='first-run')await navigate(draft.goal==='copy'?'evidence':'start');return;
