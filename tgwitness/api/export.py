@@ -549,6 +549,10 @@ async def export(
     *,
     ctx=Depends(current_context),
 ):
+    unknown = sorted(set(request.query_params) - {"language"})
+    if unknown:
+        raise HTTPException(400, "Unknown export parameter: " + ", ".join(unknown)
+                            + ". Choose records with options.selection in the request body or with tgwitness export --chat.")
     path, headers = await ctx.build_export(fmt, request, language=language)
     name = (
         "tgwitness-report." + fmt
