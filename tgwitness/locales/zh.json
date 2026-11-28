@@ -11095,5 +11095,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "要关闭此账号的“只读”吗？关闭后，面板即可通过此账号发送消息、加入聊天并按下机器人按钮。",
   "Complete the earlier steps first.": "请先完成前面的步骤。",
   "Transaction hash": "交易哈希",
-  "Payment link": "付款链接"
+  "Payment link": "付款链接",
+  "An update could not be processed and was not saved": "有一条更新无法处理，且未保存"
 }

@@ -11156,5 +11156,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Desativar “Somente leitura” nesta conta? O painel poderá então enviar mensagens, entrar em conversas e tocar em botões de bots a partir dela.",
   "Complete the earlier steps first.": "Conclua primeiro as etapas anteriores.",
   "Transaction hash": "Hash da transação",
-  "Payment link": "Link de pagamento"
+  "Payment link": "Link de pagamento",
+  "An update could not be processed and was not saved": "Uma atualização não pôde ser processada e não foi salva"
 }

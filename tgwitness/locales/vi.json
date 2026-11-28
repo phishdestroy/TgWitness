@@ -11095,5 +11095,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Tắt chế độ Chỉ đọc cho tài khoản này? Sau đó bảng điều khiển có thể gửi tin nhắn, tham gia và bấm nút bot từ tài khoản này.",
   "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước.",
   "Transaction hash": "Mã băm giao dịch",
-  "Payment link": "Liên kết thanh toán"
+  "Payment link": "Liên kết thanh toán",
+  "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu"
 }

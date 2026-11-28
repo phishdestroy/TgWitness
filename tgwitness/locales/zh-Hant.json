@@ -11095,5 +11095,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "要關閉此帳號的「唯讀」嗎？關閉後，面板即可透過此帳號傳送訊息、加入聊天並按下機器人按鈕。",
   "Complete the earlier steps first.": "請先完成前面的步驟。",
   "Transaction hash": "交易雜湊",
-  "Payment link": "付款連結"
+  "Payment link": "付款連結",
+  "An update could not be processed and was not saved": "有一則更新無法處理，且未儲存"
 }

@@ -11146,5 +11146,6 @@
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "حالت فقط خواندنی برای این حساب غیرفعال شود؟ پس از آن پنل می‌تواند از این حساب پیام بفرستد، عضو شود و دکمه‌های ربات را بزند.",
   "Complete the earlier steps first.": "ابتدا مراحل قبلی را کامل کنید.",
   "Transaction hash": "هش تراکنش",
-  "Payment link": "پیوند پرداخت"
+  "Payment link": "پیوند پرداخت",
+  "An update could not be processed and was not saved": "یک به‌روزرسانی پردازش نشد و ذخیره نشد"
 }
