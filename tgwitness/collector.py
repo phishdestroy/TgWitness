@@ -2585,10 +2585,11 @@ class Collector:
         return {"step": "cancelled"}
 
     async def send_code(self, phone):
-        if not self.login_client or self.phase != "login_required":
+        if not self.login_client or self.phase not in ("login_required", "code_required"):
             raise ValueError("Configure API credentials first.")
         result = await self.login_client.send_code_request(phone)
         self.pending_phone, self.phone_hash = phone, result.phone_code_hash
+        self.phase = "code_required"
         return {"step": "code"}
 
     async def confirm_code(self, code):

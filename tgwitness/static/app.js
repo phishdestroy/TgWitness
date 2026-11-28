@@ -891,7 +891,7 @@ async function unlock(prefetched=null,languageChoice=null) {
   bootstrapProfiles={profiles:state.profiles};
   try{
     await navigate(state.view,{history:false,...(requested.explicit&&!requested.error?{load:async()=>{}}:{})});
-    renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
+    renderStatus(); setAuthStep(restingAuthStep());
     if(requested.view==='connection')restoreLanguageChoice();
     loadNotifications().catch(()=>{});
     await router.start();
@@ -2113,7 +2113,7 @@ async function switchProfile(id,options={}){
   await navigate(state.view,{history:false});
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
-  setAuthStep(accountSignedIn()?"authorized":"credentials");
+  setAuthStep(restingAuthStep());
   syncLive();
   workspaceSafety?.sync();
   if(options.history!==false)window.TgWitnessRouter?.record({}, {replace:true});
@@ -5007,6 +5007,7 @@ function restoreAuthLanguageChoice(raw){
   setAuthMethod(choice.method);
   if(signedIn)setAuthStep('credentials');
 }
+function restingAuthStep(){const phase=state.status?.collector?.phase;return accountSignedIn()?"authorized":phase==="code_required"?"code":phase==="password_required"?"password":"credentials";}
 function setAuthStep(step){
   const demo=!!state.status?.demo;
   if(step==="credentials"&&state.status&&accountSignedIn()&&!window.TgWitnessAccountImport?.isEditing())step="authorized";
@@ -5337,7 +5338,7 @@ async function loadProxyCatalog(refresh=false){
 }
 $("proxy-catalog-refresh").addEventListener("click",e=>busy(e.currentTarget,()=>loadProxyCatalog(true)));
 async function routeSaved(){
-  clearSecrets();networkLoadedFor=null;await refreshStatus();setAuthStep(accountSignedIn()?"authorized":"credentials");
+  clearSecrets();networkLoadedFor=null;await refreshStatus();setAuthStep(restingAuthStep());
   $("network-result").textContent=tr("Route saved. Pending login cancelled. Start observation when ready.");
   toast(tr("Telegram connection route saved."));
 }
