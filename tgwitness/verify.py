@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: c4010c47116948169328cb18810e3da77e0ffa2b3709318fedc45b11da137b7e
+# TgWitness verifier sources SHA-256: 8afebe82cc123b8c738760d4f293db934391468d646d9a6e78826c9c075ada97
 """Standalone verifier"""
 import argparse
 import base64 as _base64
@@ -1870,11 +1870,44 @@ def ripemd160(data):
     return struct.pack("<5I", *state)
 
 
+KECCAK_ROUNDS = (0x0000000000000001, 0x0000000000008082, 0x800000000000808A, 0x8000000080008000, 0x000000000000808B,
+                 0x0000000080000001, 0x8000000080008081, 0x8000000000008009, 0x000000000000008A, 0x0000000000000088,
+                 0x0000000080008009, 0x000000008000000A, 0x000000008000808B, 0x800000000000008B, 0x8000000000008089,
+                 0x8000000000008003, 0x8000000000008002, 0x8000000000000080, 0x000000000000800A, 0x800000008000000A,
+                 0x8000000080008081, 0x8000000000008080, 0x0000000080000001, 0x8000000080008008)
+KECCAK_ROTATIONS = (0, 1, 62, 28, 27, 36, 44, 6, 55, 20, 3, 10, 43, 25, 39, 41, 45, 15, 21, 8, 18, 2, 61, 56, 14)
+
+
+def keccak256(data):
+    mask, rate = (1 << 64) - 1, 136
+
+    def rotate(value, count):
+        return ((value << count) | (value >> (64 - count))) & mask if count else value
+
+    padded = bytearray(data) + b"\x01" + b"\0" * ((rate - len(data) - 1) % rate)
+    padded[-1] |= 0x80
+    lanes = [0] * 25
+    for offset in range(0, len(padded), rate):
+        for index in range(rate // 8):
+            lanes[index] ^= int.from_bytes(padded[offset + 8 * index:offset + 8 * index + 8], "little")
+        for constant in KECCAK_ROUNDS:
+            columns = [lanes[x] ^ lanes[x + 5] ^ lanes[x + 10] ^ lanes[x + 15] ^ lanes[x + 20] for x in range(5)]
+            mixed = [columns[(x - 1) % 5] ^ rotate(columns[(x + 1) % 5], 1) for x in range(5)]
+            lanes = [lanes[i] ^ mixed[i % 5] for i in range(25)]
+            moved = [0] * 25
+            for x in range(5):
+                for y in range(5):
+                    moved[y + 5 * ((2 * x + 3 * y) % 5)] = rotate(lanes[x + 5 * y], KECCAK_ROTATIONS[x + 5 * y])
+            lanes = [moved[i] ^ (~moved[(i + 1) % 5 + i - i % 5] & moved[(i + 2) % 5 + i - i % 5]) for i in range(25)]
+            lanes[0] ^= constant
+    return b"".join(lane.to_bytes(8, "little") for lane in lanes[:4])
+
+
 def ots_hash(tag, message):
     try:
         return hashlib.new(OTS_HASHES[tag], message).digest()
     except ValueError:
-        return ripemd160(message) if tag == 0x03 else None
+        return ripemd160(message) if tag == 0x03 else keccak256(message) if tag == 0x67 else None
 
 
 def ots_summary(proof, digest, *, commitments=False):
@@ -3533,6 +3566,14 @@ class Coverage:
                 self.active = False
         elif kind == "connection.closed" and payload.get("role") in (None, "current"):
             self.close(at, "connection to Telegram closed")
+        elif kind == "connection.stalled":
+            end = at
+            try:
+                if self.observing and parse_time(self.start) <= parse_time(payload.get("last_response_at")) <= parse_time(at):
+                    end = payload["last_response_at"]
+            except (AttributeError, TypeError, ValueError):
+                pass
+            self.close(end, "Telegram stopped answering on the current route")
         elif kind == "connection.restored" and payload.get("reason") == "updates_resumed":
             self.release("updates_diverted", at, resume=True)
         elif kind == "connection.restored" and payload.get("reason") == "probe_ack_live":

@@ -11139,5 +11139,10 @@
   "Full name": "Vollständiger Name",
   "Title and organisation": "Funktion und Organisation",
   "Qualifications": "Qualifikationen",
-  "Date": "Datum"
+  "Date": "Datum",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram antwortet über die aktuelle Route nicht mehr; die Verbindung wird zurückgesetzt.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Dieses Konto hat keine Telegram-Ordner. Legen Sie einen in der Telegram-App an oder wählen Sie hier Chats aus.",
+  "Turn off Read-only": "Schreibschutz deaktivieren",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Schreibschutz für dieses Konto deaktivieren? Das Panel kann dann von diesem Konto aus senden, beitreten und Bot-Schaltflächen drücken.",
+  "Complete the earlier steps first.": "Schließen Sie zuerst die vorherigen Schritte ab."
 }

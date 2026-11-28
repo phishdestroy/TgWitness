@@ -128,6 +128,14 @@ class Coverage:
                 self.active = False
         elif kind == "connection.closed" and payload.get("role") in (None, "current"):
             self.close(at, "connection to Telegram closed")
+        elif kind == "connection.stalled":
+            end = at
+            try:
+                if self.observing and parse_time(self.start) <= parse_time(payload.get("last_response_at")) <= parse_time(at):
+                    end = payload["last_response_at"]
+            except (AttributeError, TypeError, ValueError):
+                pass
+            self.close(end, "Telegram stopped answering on the current route")
         elif kind == "connection.restored" and payload.get("reason") == "updates_resumed":
             self.release("updates_diverted", at, resume=True)
         elif kind == "connection.restored" and payload.get("reason") == "probe_ack_live":

@@ -11088,5 +11088,10 @@
   "Full name": "Họ và tên",
   "Title and organisation": "Chức danh và tổ chức",
   "Qualifications": "Trình độ chuyên môn",
-  "Date": "Ngày"
+  "Date": "Ngày",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram đã ngừng phản hồi qua tuyến hiện tại; đang đặt lại kết nối.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Tài khoản này không có thư mục Telegram nào. Hãy tạo một thư mục trong ứng dụng Telegram hoặc chọn các cuộc trò chuyện tại đây.",
+  "Turn off Read-only": "Tắt chế độ Chỉ đọc",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Tắt chế độ Chỉ đọc cho tài khoản này? Sau đó bảng điều khiển có thể gửi tin nhắn, tham gia và bấm nút bot từ tài khoản này.",
+  "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước."
 }

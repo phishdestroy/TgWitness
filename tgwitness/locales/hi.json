@@ -11139,5 +11139,10 @@
   "Full name": "पूरा नाम",
   "Title and organisation": "पद और संगठन",
   "Qualifications": "योग्यताएं",
-  "Date": "दिनांक"
+  "Date": "दिनांक",
+  "Telegram stopped answering on the current route; the connection is being reset.": "मौजूदा रूट पर Telegram ने जवाब देना बंद कर दिया है; कनेक्शन रीसेट किया जा रहा है।",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "इस खाते में कोई टेलीग्राम फ़ोल्डर नहीं है। टेलीग्राम ऐप में एक फ़ोल्डर बनाएँ, या यहीं चैट्स चुनें।",
+  "Turn off Read-only": "केवल-पठनीय बंद करें",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "इस खाते के लिए केवल-पठनीय बंद करें? इसके बाद पैनल इस खाते से संदेश भेज सकेगा, जुड़ सकेगा और बॉट के बटन दबा सकेगा।",
+  "Complete the earlier steps first.": "पहले पिछले चरण पूरे करें।"
 }

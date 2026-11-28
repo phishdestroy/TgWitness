@@ -11139,5 +11139,10 @@
   "Full name": "پورا نام",
   "Title and organisation": "عہدہ اور ادارہ",
   "Qualifications": "اہلیت",
-  "Date": "تاریخ"
+  "Date": "تاریخ",
+  "Telegram stopped answering on the current route; the connection is being reset.": "موجودہ راستے پر ٹیلیگرام نے جواب دینا بند کر دیا ہے؛ کنکشن دوبارہ ترتیب دیا جا رہا ہے۔",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "اس اکاؤنٹ میں کوئی ٹیلیگرام فولڈر نہیں ہے۔ ٹیلیگرام ایپ میں فولڈر بنائیں، یا یہیں چیٹس منتخب کریں۔",
+  "Turn off Read-only": "صرف پڑھنے کا موڈ بند کریں",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "اس اکاؤنٹ کے لیے صرف پڑھنے کا موڈ بند کریں؟ اس کے بعد پینل اس اکاؤنٹ سے پیغام بھیج سکے گا، شامل ہو سکے گا اور بوٹ کے بٹن دبا سکے گا۔",
+  "Complete the earlier steps first.": "پہلے پچھلے مراحل مکمل کریں۔"
 }

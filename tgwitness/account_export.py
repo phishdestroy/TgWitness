@@ -1312,7 +1312,7 @@ class AccountExport:
                                 write(name, content)
                     finally:
                         desktop.close()
-                verification_kit.write(write, report_context["report_language"])
+                verification_kit.write(write, report_context["report_language"], browser=False)
                 write("verify.py", chunks(Path(__file__).with_name("verify.py")))
                 write("README.txt", [account_report.readme(report_context, {
                     *hashes, "README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"})])

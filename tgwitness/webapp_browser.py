@@ -50,6 +50,9 @@ MAX_MHTML_BYTES = 12 * 1024**2
 MAX_TEXT_CHARS = 200_000
 MAX_TRAFFIC = 256 * 1024**2
 MAX_CLICKS = 40
+MAX_BROWSERS = 2
+BROWSER_WAIT = 60
+_browsers = asyncio.Semaphore(MAX_BROWSERS)
 CLICK_SETTLE = 1.5
 WORLD = "tgwitness-crawl"
 REMOVED = "[removed]"
@@ -913,6 +916,18 @@ async def capture(url, route, init_data=None, settle=SHOTS, *, mode="passive", m
         raise Unavailable(state["reason"])
     if mode not in state.get("modes", ()):
         raise Unavailable(NO_WINDOW)
+    try:
+        await asyncio.wait_for(_browsers.acquire(), BROWSER_WAIT)
+    except TimeoutError:
+        raise Unavailable("Other Mini App captures are still running on this server. "
+                          "Try again when they finish.") from None
+    try:
+        return await _capture(url, route, init_data, settle, state, mode, max_states)
+    finally:
+        _browsers.release()
+
+
+async def _capture(url, route, init_data, settle, state, mode, max_states):
     max_states = max(1, min(20, int(max_states or 8)))
     redact = Redactor(init_data)
     gate, quiet = Gate(route), Gate(route, refuse=True)

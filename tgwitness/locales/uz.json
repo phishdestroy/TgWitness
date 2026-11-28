@@ -11139,5 +11139,10 @@
   "Full name": "Familiyasi, ismi, otasining ismi",
   "Title and organisation": "Lavozimi va tashkiloti",
   "Qualifications": "Malakasi",
-  "Date": "Sana"
+  "Date": "Sana",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Joriy yo'nalish orqali Telegram javob bermay qo'ydi; ulanish qayta o'rnatilmoqda.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Bu hisobda Telegram papkalari yo'q. Telegram ilovasida papka yarating yoki suhbatlarni shu yerda tanlang.",
+  "Turn off Read-only": "Faqat o'qish rejimini o'chirish",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Bu hisob uchun Faqat o'qish rejimi o'chirilsinmi? Shundan so'ng panel ushbu hisobdan xabar yuborishi, qo'shilishi va bot tugmalarini bosishi mumkin bo'ladi.",
+  "Complete the earlier steps first.": "Avval oldingi qadamlarni yakunlang."
 }

@@ -11088,5 +11088,10 @@
   "Full name": "Nama penuh",
   "Title and organisation": "Jawatan dan organisasi",
   "Qualifications": "Kelayakan",
-  "Date": "Tarikh"
+  "Date": "Tarikh",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram berhenti menjawab melalui laluan semasa; sambungan sedang ditetapkan semula.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Akaun ini tiada folder Telegram. Cipta folder dalam aplikasi Telegram, atau pilih sembang di sini.",
+  "Turn off Read-only": "Matikan Hanya Baca",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Matikan Hanya Baca untuk akaun ini? Panel kemudian boleh menghantar, menyertai dan menekan butang bot daripada akaun ini.",
+  "Complete the earlier steps first.": "Lengkapkan langkah sebelumnya dahulu."
 }

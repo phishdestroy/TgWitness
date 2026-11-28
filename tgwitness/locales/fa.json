@@ -11139,5 +11139,10 @@
   "Full name": "نام کامل",
   "Title and organisation": "سمت و سازمان",
   "Qualifications": "صلاحیت‌ها",
-  "Date": "تاریخ"
+  "Date": "تاریخ",
+  "Telegram stopped answering on the current route; the connection is being reset.": "تلگرام از مسیر فعلی دیگر پاسخ نمی‌دهد؛ اتصال در حال بازنشانی است.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "این حساب هیچ پوشه تلگرامی ندارد. یک پوشه در برنامه تلگرام بسازید یا چت‌ها را همین‌جا انتخاب کنید.",
+  "Turn off Read-only": "غیرفعال کردن حالت فقط خواندنی",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "حالت فقط خواندنی برای این حساب غیرفعال شود؟ پس از آن پنل می‌تواند از این حساب پیام بفرستد، عضو شود و دکمه‌های ربات را بزند.",
+  "Complete the earlier steps first.": "ابتدا مراحل قبلی را کامل کنید."
 }

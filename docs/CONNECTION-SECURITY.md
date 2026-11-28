@@ -173,6 +173,8 @@ tunnels. None replaces account authentication.
 
 Save the route for each workspace in **More tools → Account → Settings → Connection settings → Change connection route** before
 signing in. New workspaces default to **Automatic MTProxy · public lists** with **Hide the address**.
+If no route was saved, the sign-in form asks under **Connection for this account** and recommends
+**WARP**; the choice is applied to that account when it connects.
 Existing workspaces that explicitly used Direct retain a mode permitting it.
 
 Files are read over separate connections from the one that reads messages, as the official

@@ -473,10 +473,11 @@ def release_note(root, config):
     return "Version " + __version__ + (" (release " + installed + ")" if installed else "")
 
 
-def show(root, credentials=False, wait=0):
+def show(root, credentials=False, wait=0, link_patience=None):
     config = read_config(root)
     data = Path(config["data"])
     deadline = time.monotonic() + wait
+    local_since = None
     while True:
         active = running(root, config)
         stopped = not active and config["manager"] == "process"
@@ -486,10 +487,17 @@ def show(root, credentials=False, wait=0):
             state = {}
         url = state.get("url")
         identity = state.get("id", "")
-        ready = (active and url and re.fullmatch(r"[0-9a-f]{64}", identity)
-                 and reachable(url.rstrip("/") + "/_tgwitness/ready", identity))
+        valid = active and re.fullmatch(r"[0-9a-f]{64}", identity)
+        ready = valid and url and reachable(url.rstrip("/") + "/_tgwitness/ready", identity)
+        if (not ready and link_patience and config["mode"] == "quick" and valid and local_since is None
+                and reachable("http://127.0.0.1:" + str(config["port"]) + "/_tgwitness/ready", identity)):
+            local_since = time.monotonic()
         if ready or stopped or time.monotonic() >= deadline:
             break
+        if local_since is not None and time.monotonic() - local_since >= link_patience:
+            print("\nThe panel and collection are running on this server.\n"
+                  "The temporary HTTPS link is still starting; show it in a minute with: tgwitness open")
+            return
         time.sleep(1)
     if not ready:
         print("The panel is not running. Start it with: tgwitness start\nIf it does not stay running, see: tgwitness logs" if stopped
@@ -728,7 +736,7 @@ def main():
                     refresh_unit(root, config)
                 systemctl(config, args.action, config["service"])
             if args.action != "stop":
-                show(root, wait=90)
+                show(root, wait=90, link_patience=15)
             else:
                 print("Panel stopped. Your data is kept. Start again: tgwitness start")
         elif args.action == "logs":

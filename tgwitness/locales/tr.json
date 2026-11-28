@@ -11139,5 +11139,10 @@
   "Full name": "Adı soyadı",
   "Title and organisation": "Unvan ve kurum",
   "Qualifications": "Nitelikler",
-  "Date": "Tarih"
+  "Date": "Tarih",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram mevcut rota üzerinden yanıt vermeyi bıraktı; bağlantı sıfırlanıyor.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Bu hesapta Telegram klasörü yok. Telegram uygulamasında bir klasör oluşturun veya sohbetleri burada seçin.",
+  "Turn off Read-only": "\"Salt Okunur\"u kapat",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Bu hesap için \"Salt Okunur\" kapatılsın mı? Panel bundan sonra bu hesaptan mesaj gönderebilir, katılabilir ve bot düğmelerine basabilir.",
+  "Complete the earlier steps first.": "Önce önceki adımları tamamlayın."
 }

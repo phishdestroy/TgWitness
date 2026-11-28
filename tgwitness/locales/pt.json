@@ -11149,5 +11149,10 @@
   "Full name": "Nome completo",
   "Title and organisation": "Cargo e organização",
   "Qualifications": "Qualificações",
-  "Date": "Data"
+  "Date": "Data",
+  "Telegram stopped answering on the current route; the connection is being reset.": "O Telegram parou de responder pela rota atual; a conexão está sendo reiniciada.",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Esta conta não tem pastas do Telegram. Crie uma no aplicativo do Telegram ou escolha as conversas aqui.",
+  "Turn off Read-only": "Desativar “Somente leitura”",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Desativar “Somente leitura” nesta conta? O painel poderá então enviar mensagens, entrar em conversas e tocar em botões de bots a partir dela.",
+  "Complete the earlier steps first.": "Conclua primeiro as etapas anteriores."
 }

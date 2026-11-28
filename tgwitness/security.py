@@ -20,6 +20,11 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 LOG = logging.getLogger("tgwitness.security")
 
 
+def security_command(arguments):
+    interpreter = sys.executable if " " not in sys.executable else '"' + sys.executable + '"'
+    return interpreter + " -m tgwitness.security " + arguments
+
+
 def windows_sid():
     row = subprocess.run(["whoami", "/user", "/fo", "csv", "/nh"], capture_output=True, text=True,
                          check=True, timeout=30).stdout
@@ -102,7 +107,8 @@ class Vault:
             if not external:
                 raise RuntimeError("This vault requires TGWITNESS_VAULT_KEY_FILE. Refusing local key replacement.")
             if key_path.exists() or (not marker.exists() and any(p.exists() for p in protected)):
-                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA")
+                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: "
+                                   + security_command("migrate-to-external KEYFILE --data-dir " + str(root)))
             source = Path(external).resolve(strict=True)
             if source.is_relative_to(root.resolve()) or source.stat().st_size > 128:
                 raise RuntimeError("Provide a small master-key file outside the data directory.")
@@ -119,7 +125,8 @@ class Vault:
             self.fernet = external_fernet(master, salt)
         elif self.key_mode == "keyring":
             if key_path.exists() or (not keyring_marker.exists() and any(p.exists() for p in protected)):
-                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: python -m tgwitness.security migrate-to-keyring --data-dir DATA")
+                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: "
+                                   + security_command("migrate-to-keyring --data-dir " + str(root)))
             service, account, salt = _load_or_create_keyring_marker(root, keyring_marker, keyring_env)
             store = KeyringStore(service)
             stored = store.get(account)
@@ -759,8 +766,8 @@ def main():
             print("Workspace " + item["workspace"] + ": " + str(item["files"]) + " vault files and "
                   + str(item["peers"]) + " saved profiling peers re-encrypted into OS keyring ("
                   + item["service"] + " / " + item["account"] + "); vault.key removed.")
-        print("Back up the keyring master key offline with: python -m tgwitness.security export-keyring-key BACKUP.key --data-dir "
-              + str(Path(args.data_dir).resolve()))
+        print("Back up the keyring master key offline with: "
+              + security_command("export-keyring-key BACKUP.key --data-dir " + str(Path(args.data_dir).resolve())))
         return
     if args.command == "export-keyring-key":
         if args.path is None:

@@ -196,7 +196,8 @@ export function createSettingsHub(ctx) {
     if(!prefs){const result=await shared(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
     data=await shared(who,'settings');draft={...data.wizard};
     visited=Math.max(visited,draft.step);
-    if(state.view==='first-run'&&wanted&&wanted!==draft.step&&wanted<=visited&&!live){
+    if(state.view==='first-run'&&wanted&&wanted>visited&&!live&&!(wanted<4&&visited<4))toast(tr('Complete the earlier steps first.'));
+    if(state.view==='first-run'&&wanted&&wanted!==draft.step&&!(wanted<4&&draft.step<4)&&wanted<=visited&&!live){
       recordedStep=wanted;
       try{await saveDraft({step:wanted},who);}catch(error){if(error.name==='StaleView')throw error;toast(error.message,true);recordedStep=null;}
     }
@@ -831,8 +832,10 @@ export function createSettingsHub(ctx) {
       shownSession=signedIn();
       accountQuestion(body);
       if(shownSession)body.append(message('Telegram is connected.','notice success'));
-      move(ctx.authCard(),body);
-      if(!shownSession&&!methodShown){methodShown=true;ctx.authMethod(draft.account_kind==='main'?'qr':'files');}
+      if(shownSession||draft.goal==='copy'||draft.account_kind){
+        move(ctx.authCard(),body);
+        if(!shownSession&&!methodShown){methodShown=true;ctx.authMethod(draft.account_kind==='main'?'qr':'files');}
+      }
     }
     if(draft.step===6)await chatsForm(body,who,false);
     if(draft.step===7){
@@ -849,7 +852,12 @@ export function createSettingsHub(ctx) {
       const action=owner();
       if(draft.step===7){
         const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);
-        if(result.action==='export'){await navigate('evidence');return;}
+        if(result.action==='export'){
+          await navigate('evidence');document.getElementById('export-task-account')?.click();
+          await new Promise(resolve=>requestAnimationFrame(()=>resolve()));
+          const card=document.getElementById('account-export-card');if(card&&!card.hidden)card.scrollIntoView({block:'start'});
+          return;
+        }
         if(result.action==='existing'){
           toast(tr('Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.'));
           if(state.view==='first-run')await navigate(draft.goal==='copy'?'evidence':'start');return;
@@ -887,11 +895,15 @@ export function createSettingsHub(ctx) {
       body.append(message('Only chosen chats can be recorded on a main account.','notice warning'));
     }
     if(!dialogs&&!signedIn())body.append(message('Connect a Telegram account first.','notice warning'));
-    else if(!dialogs){const loading=message('Loading chats…');body.append(loading);try{dialogs=await request(who,'dialogs');loading.remove();}catch(e){loading.remove();if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
+    else if(!dialogs){const loading=message('Loading chats…');body.append(loading);const until=Date.now()+90000;
+      for(;;){try{dialogs=await request(who,'dialogs');loading.remove();break;}catch(e){if(e.name==='StaleView'){loading.remove();throw e;}
+        if(String(e.detail||'').startsWith('This account is busy')&&Date.now()<until&&body.isConnected){await new Promise(done=>setTimeout(done,3000));requireOwner(who);if(body.isConnected)continue;}
+        loading.remove();body.append(message(e.message,'notice warning'));break;}}}
     requireOwner(who);
     if(!body.isConnected)return;
     if(dialogs){
       if(draft.scope==='folder')body.append(select('Telegram folder',[['','Choose a folder'],...dialogs.folders.map(f=>[String(f.id),f.title])],String(draft.folder_id??''),async id=>{draft.folder_id=id===''?null:Number(id);await changed();}));
+      if(draft.scope==='folder'&&!dialogs.folders.length)body.append(message('This account has no Telegram folders. Create one in the Telegram app, or choose chats here.','notice warning'));
       if(draft.scope==='selected'){
         const filter=node('input');filter.type='search';filter.placeholder=tr('Search by name or ID');body.append(filter);
         const chosen=node('p','hint wizard-chosen');body.append(chosen);

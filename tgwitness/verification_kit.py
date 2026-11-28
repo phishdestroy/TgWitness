@@ -74,15 +74,16 @@ def language(value):
     return selected
 
 
-def quickstart(lang="en"):
+def quickstart(lang="en", browser=True):
     lang = language(lang)
     if lang == "auto":
         return ("TgWitness\n\n" + "\n".join(entry["name"] + " [" + code + "]: languages/START_HERE-" + code + ".txt"
                                             for code, entry in VERIFIER_LANGUAGES.items())
-                + "\n\nVERIFY.cmd\n\n" + quickstart("en").decode("utf-8")).encode("utf-8")
+                + "\n\nVERIFY.cmd\n\n" + quickstart("en", browser).decode("utf-8")).encode("utf-8")
     reader = VERIFIER_LANGUAGES[lang]["reader"]
     paragraphs = [VERIFIER_LANGUAGES[lang]["words"]["TgWitness verifier"]]
-    paragraphs += [reader[key] for key in ("launch", "keep_zip", "key_advice", "runtime", "standalone", "browser", "download", "trust")]
+    paragraphs += [reader[key] for key in ("launch", "keep_zip", "key_advice", "runtime", "standalone", "browser", "download", "trust")
+                   if browser or key != "browser"]
     paragraphs += [reader["output"] + " " + reader["unsigned"]]
     paragraphs += [reader[key] for key in ("limits_exit", "limits", "advanced")]
     return ("\n\n".join(paragraphs) + "\n").encode("utf-8")
@@ -99,9 +100,11 @@ def shell_text(value):
     return "'" + value.replace("'", "'\"'\"'") + "'"
 
 
-def files(lang="en"):
+def files(lang="en", browser=True):
     lang = language(lang)
     cmd, sh = CMD, SH
+    if not browser:
+        cmd, sh = cmd.replace("echo @BROWSER@\necho.\n", ""), sh.replace(" @SH_BROWSER@", "")
     args = "--choose-language" if lang == "auto" else "--lang " + lang
     cmd, sh = cmd.replace("@LANG_ARGS@", args), sh.replace("@LANG_ARGS@", args)
     for key in ("runtime", "not_verified", "instructions", "pause", "browser", "download"):
@@ -109,9 +112,9 @@ def files(lang="en"):
         cmd = cmd.replace("@" + key.upper() + "@", cmd_text(value))
         sh = sh.replace("@SH_" + key.upper() + "@", shell_text(value))
     return {"VERIFY.cmd": cmd.replace("\n", "\r\n").encode("utf-8"),
-            "VERIFY.sh": sh.encode("utf-8"), "START_HERE.txt": quickstart(lang)}
+            "VERIFY.sh": sh.encode("utf-8"), "START_HERE.txt": quickstart(lang, browser)}
 
 
-def write(write_member, lang="en"):
-    for name, body in files(lang).items():
+def write(write_member, lang="en", browser=True):
+    for name, body in files(lang, browser).items():
         write_member(name, [body])

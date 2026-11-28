@@ -884,14 +884,14 @@ async function unlock(prefetched=null,languageChoice=null) {
   if(!state.opened&&(!requested.explicit||requested.error)){
     state.view=state.status.demo||state.status.collector?.has_session&&viewAllowed('chats')?'chats':viewAllowed('start')?'start':'chats';
   }
-  if(!viewAllowed(state.view))state.view="chats";
+  if(!viewAllowed(state.view)){analysisOff(state.view);state.view="chats";}
   state.opened=true;
   sessionStorage.setItem("tgwitness-token", state.token);
   show("gate",false); show("workspace",true); $("panel-token").value="";
   bootstrapProfiles={profiles:state.profiles};
   try{
     await navigate(state.view,{history:false,...(requested.explicit&&!requested.error?{load:async()=>{}}:{})});
-    renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
+    renderStatus(); setAuthStep(restingAuthStep());
     if(requested.view==='connection')restoreLanguageChoice();
     loadNotifications().catch(()=>{});
     await router.start();
@@ -996,8 +996,11 @@ function syncLive(){
     }else if(state.view==="observations")await refreshEvents();}
   });
 }
+function analysisOff(view){
+  if(view==="analysis"&&state.me&&!state.status?.demo)toast(tr("AI is off for this workspace. The main administrator can connect a model in Settings → AI."));
+}
 function navigate(view,options={}) {
-  if(!viewAllowed(view))view="chats";
+  if(!viewAllowed(view)){analysisOff(view);view="chats";}
   if(view!==state.view)window.TgWitnessJournal?.leave();
   if(view!==state.view&&$("toast").classList.contains("error")){clearTimeout(toastTimer);show("toast",false);}
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
@@ -1504,6 +1507,7 @@ function collectorLines(name,p){
     if(p.reason==="connected")return [tr("Connected to Telegram.")];
     if(p.reason==="reconnecting")return [tr("Connection lost; reconnecting (attempt {n}).",{n:p.attempts}),
       upcoming(p.next_reconnect_at)&&tr("Next attempt: {time}",{time:fmtFull(p.next_reconnect_at)}),p.error&&tr("Last error: {error}",{error:p.error})];
+    if(p.reason==="no_response")return [tr("Telegram stopped answering on the current route; the connection is being reset.")];
     if(p.reason==="telegram_pause")return [telegramPauseText(p),tr("Observation waits and resumes on its own.")];
     if(p.reason==="signed_out")return [accountLossText(p.cause)];
     if(p.reason==="collector_error")return [tr("Observation stopped after an error: {error}",{error:p.error?errorName(p.error)||p.error:"?"})];
@@ -2112,7 +2116,7 @@ async function switchProfile(id,options={}){
   await navigate(state.view,{history:false});
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
-  setAuthStep(accountSignedIn()?"authorized":"credentials");
+  setAuthStep(restingAuthStep());
   syncLive();
   workspaceSafety?.sync();
   if(options.history!==false)window.TgWitnessRouter?.record({}, {replace:true});
@@ -2124,13 +2128,13 @@ $("profile-select").addEventListener("change",()=>busy(null,()=>switchProfile($(
 $("profile-create-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const profile=await json("profiles",{label:$("profile-label").value.trim()},{root:true});
-    $("profile-label").value="";await switchProfile(profile.id);navigate("connection");
+    $("profile-label").value="";await switchProfile(profile.id);navigate("first-run");
   });
 });
 $("account-add-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const profile=await json("profiles",{label:$("account-add-label").value.trim(),group:$("account-add-group").value||null},{root:true});
-    $("account-add-label").value="";await switchProfile(profile.id);navigate("connection");
+    $("account-add-label").value="";await switchProfile(profile.id);navigate("first-run");
     toast(tr("Workspace created. Connect a Telegram account to start."));
   });
 });
@@ -5006,6 +5010,7 @@ function restoreAuthLanguageChoice(raw){
   setAuthMethod(choice.method);
   if(signedIn)setAuthStep('credentials');
 }
+function restingAuthStep(){const phase=state.status?.collector?.phase;return accountSignedIn()?"authorized":phase==="code_required"?"code":phase==="password_required"?"password":"credentials";}
 function setAuthStep(step){
   const demo=!!state.status?.demo;
   if(step==="credentials"&&state.status&&accountSignedIn()&&!window.TgWitnessAccountImport?.isEditing())step="authorized";
@@ -5336,7 +5341,7 @@ async function loadProxyCatalog(refresh=false){
 }
 $("proxy-catalog-refresh").addEventListener("click",e=>busy(e.currentTarget,()=>loadProxyCatalog(true)));
 async function routeSaved(){
-  clearSecrets();networkLoadedFor=null;await refreshStatus();setAuthStep(accountSignedIn()?"authorized":"credentials");
+  clearSecrets();networkLoadedFor=null;await refreshStatus();setAuthStep(restingAuthStep());
   $("network-result").textContent=tr("Route saved. Pending login cancelled. Start observation when ready.");
   toast(tr("Telegram connection route saved."));
 }
@@ -7143,7 +7148,15 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
-  if(state.status?.actions?.read_only){open.disabled=true;box.append(node("p","hint",tr("This account is read-only. Turn it off on the account page.")));}
+  if(state.status?.actions?.goal_off){open.disabled=true;box.append(node("p","hint",tr("Telegram actions from the panel are off for the Evidence for a case goal.")));}
+  else if(state.status?.actions?.read_only){open.disabled=true;const note=node("p","hint",tr("This account is read-only. Turn it off on the account page."));box.append(note);
+    if(may("account")){const off=node("button","secondary",tr("Turn off Read-only"));off.type="button";box.append(off);
+      off.addEventListener("click",()=>busy(off,async()=>{
+        if(!await askConfirm(tr("Turn off Read-only for this account? The panel can then send, join and press bot buttons from it."))||revision!==state.workspaceRevision)return;
+        await json("interactions/read-only",{enabled:false},{profile});await refreshStatus().catch(()=>{});
+        if(revision!==state.workspaceRevision||linkPreview!==preview)return;
+        if(!state.status?.actions?.read_only&&!state.status?.actions?.goal_off){open.disabled=false;note.remove();off.remove();}
+      }));}}
   open.addEventListener("click",()=>busy(open,async()=>{
     if(revision!==state.workspaceRevision||linkPreview!==preview)return;
     const result=await panelAction({action:"open",preview_id:preview.preview_id,observe:observe.checked},{profile,revision});

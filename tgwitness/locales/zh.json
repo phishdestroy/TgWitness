@@ -11088,5 +11088,10 @@
   "Full name": "姓名",
   "Title and organisation": "职务及单位",
   "Qualifications": "资质",
-  "Date": "日期"
+  "Date": "日期",
+  "Telegram stopped answering on the current route; the connection is being reset.": "Telegram 在当前路由上已停止响应；正在重置连接。",
+  "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "此账号没有 Telegram 文件夹。请在 Telegram 应用中创建文件夹，或在此选择聊天。",
+  "Turn off Read-only": "关闭“只读”",
+  "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "要关闭此账号的“只读”吗？关闭后，面板即可通过此账号发送消息、加入聊天并按下机器人按钮。",
+  "Complete the earlier steps first.": "请先完成前面的步骤。"
 }
