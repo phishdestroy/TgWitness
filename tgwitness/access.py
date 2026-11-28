@@ -499,6 +499,8 @@ class Console(logging.Handler):
             logging.getLogger().removeHandler(self.stderr)
 
 
+SESSION_SAVE_SECONDS = 600
+
 class AccessControl:
     def __init__(self, vault, store, console=None):
         from .live_stream import StreamSlots
@@ -667,6 +669,9 @@ class AccessControl:
                 minutes = grant["session_minutes"]
             session["last_seen"], session["expires"] = now, now + minutes * 60
             session["requests"] += 1
+            if now - session.get("saved_at", 0) >= SESSION_SAVE_SECONDS:
+                session["saved_at"] = now
+                self.save()
             return self.principal(session)
 
     def current(self, wanted, address):
