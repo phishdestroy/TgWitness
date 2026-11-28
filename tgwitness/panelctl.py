@@ -373,11 +373,16 @@ def setup(root, mode=None, domain=None, port=8787):
         print("After installing a new program version, apply it with: tgwitness restart")
         return
     linux = sys.platform == "linux"
-    if mode is None:
-        terminal = open_terminal()
-        if terminal is None:
-            print("Installed. Run tgwitness setup from a terminal to choose how to open the panel.")
+    terminal = open_terminal() if mode is None else None
+    if mode is None and terminal is None:
+        mode = os.environ.get("TGWITNESS_SETUP_MODE", "").strip().lower() or None
+        domain = domain or os.environ.get("TGWITNESS_SETUP_DOMAIN", "").strip() or None
+        if mode is None:
+            print("Installed. Choose how to open the panel: tgwitness setup --mode local, --mode quick, or "
+                  "--mode domain --domain panel.example.org. For an installation without a terminal, set "
+                  "TGWITNESS_SETUP_MODE (and TGWITNESS_SETUP_DOMAIN for domain) before running the installer.")
             return
+    if mode is None:
         with terminal:
             print("\nWhere would you like to open your panel?\n"
                   "  1  On this computer only\n" +

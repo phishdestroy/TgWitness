@@ -47,6 +47,14 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 В Ubuntu выберите **Этот компьютер**, **Временная ссылка HTTPS** или **Собственный домен**. Установщик выведет адрес панели и ключ доступа. Для временной ссылки откройте указанный HTTPS-адрес в браузере и введите ключ. При локальном доступе к удалённому серверу воспользуйтесь перенаправлением SSH с вашего компьютера (`ssh -L 8787:127.0.0.1:8787 user@server`) и откройте `http://127.0.0.1:8787`. В macOS и Windows локальная панель открывается в браузере; оставьте терминал работающим.
 
+Без терминала (cloud-init, CI, `ssh host 'curl … | bash'`) установщик не может задать вопрос. Выберите доступ заранее: `TGWITNESS_SETUP_MODE=local`, `quick` или `domain` (вместе с `TGWITNESS_SETUP_DOMAIN=panel.example.org`):
+
+```sh
+curl -fsSL https://get.destroy.tools/install.sh | TGWITNESS_SETUP_MODE=quick bash
+```
+
+Если установка прошла без выбора, выполните `tgwitness setup --mode local` (или `quick`, или `domain --domain panel.example.org`).
+
 Войдите в Telegram через панель и выберите, какие данные собирать. Сама по себе установка не запускает сбор данных Telegram.
 
 <a id="where-everything-runs"></a>
