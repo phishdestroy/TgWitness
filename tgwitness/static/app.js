@@ -74,7 +74,7 @@ const boardReady=import('./views/board.js?v=8').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout20').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout21').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -92,7 +92,7 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout20').then(({creat
     language:LANG,languages:LANGUAGES,authCard:()=>authCard,authMethod:setAuthMethod,catalog,
     loadSettingsForm:id=>({'alerts-form':loadAlerts,'replica-form':loadReplica,'evidence-form':loadEvidence}[id])(),
     openExtra:async id=>{await loadExtras();selectExtra(id);},changeLanguage:setLanguage,
-    stateBadge,healthLines:collectorLines,healthNames:healthPartNames,record:options=>window.TgWitnessRouter?.record({},options||{}),trn,
+    stateBadge,size:humanSize,healthLines:collectorLines,healthNames:healthPartNames,record:options=>window.TgWitnessRouter?.record({},options||{}),trn,
     openConnection:async preset=>{await navigate('connection');await connectionViewReady;connectionView.preset(preset);},
     applyPreferences:p=>{
       for(const el of panelQueries('[data-mode-locked]'))el.removeAttribute('data-mode-locked');
