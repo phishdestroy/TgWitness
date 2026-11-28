@@ -23,6 +23,15 @@
 .sidebar .sidebar-caption { font-size: 11px; margin: 0 8px 24px; color: var(--rail-muted); }
 .sidebar .quick-open { border: 1px solid var(--rail-border); background: var(--surface); color: var(--muted); min-height: 38px; margin-bottom: 22px; font-size: 12px; }
 .sidebar nav { gap: 4px; }
+html[data-goal=copy] .sidebar nav [data-view=evidence] { order: -3; }
+html[data-goal=copy] .sidebar nav [data-view=chats] { order: -2; }
+html[data-goal=watch] .sidebar nav [data-view=chats] { order: -3; }
+html[data-goal=watch] .sidebar nav [data-view=observations] { order: -2; }
+html[data-goal=evidence] .sidebar nav [data-view=start] { order: -5; }
+html[data-goal=evidence] .sidebar nav [data-view=chats] { order: -4; }
+html[data-goal=evidence] .sidebar nav [data-view=observations] { order: -3; }
+html[data-goal=evidence] .sidebar nav [data-view=board] { order: -2; }
+html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
 .sidebar .nav { padding: 10px 12px; min-height: 42px; border-radius: 8px; font-size: 13px; font-weight: 500; gap: 11px; color: var(--rail-text); }
 .sidebar .nav.active { color: var(--accent-text); background: var(--rail-active); font-weight: 650; box-shadow: none; }
 .sidebar .nav.active::before { display: none; }
