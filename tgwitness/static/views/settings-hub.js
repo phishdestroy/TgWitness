@@ -831,8 +831,10 @@ export function createSettingsHub(ctx) {
       shownSession=signedIn();
       accountQuestion(body);
       if(shownSession)body.append(message('Telegram is connected.','notice success'));
-      move(ctx.authCard(),body);
-      if(!shownSession&&!methodShown){methodShown=true;ctx.authMethod(draft.account_kind==='main'?'qr':'files');}
+      if(shownSession||draft.goal==='copy'||draft.account_kind){
+        move(ctx.authCard(),body);
+        if(!shownSession&&!methodShown){methodShown=true;ctx.authMethod(draft.account_kind==='main'?'qr':'files');}
+      }
     }
     if(draft.step===6)await chatsForm(body,who,false);
     if(draft.step===7){
