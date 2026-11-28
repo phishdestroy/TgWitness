@@ -119,11 +119,11 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
         add("external_key", "fail", "This data directory requires TGWITNESS_VAULT_KEY_FILE")
     elif keyring_marker.exists() or keyring_env:
         try:
-            from .security import KeyringStore, keyring_available, read_keyring_marker
+            from .security import KeyringStore, keyring_available, read_keyring_marker, security_command
             if not keyring_available():
                 raise RuntimeError("OS keyring backend is unavailable; install tgwitness[keyring] or use TGWITNESS_VAULT_KEY_FILE")
             if (root / "vault.key").exists():
-                raise RuntimeError("Local vault.key still exists; run python -m tgwitness.security migrate-to-keyring --data-dir DATA")
+                raise RuntimeError("Local vault.key still exists; run " + security_command("migrate-to-keyring --data-dir " + str(root)))
             if keyring_marker.exists():
                 service, account, _ = read_keyring_marker(keyring_marker)
                 stored = KeyringStore(service).get(account)
@@ -136,7 +136,10 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
         except (OSError, ValueError, RuntimeError) as exc:
             add("keyring_key", "fail", str(exc))
     else:
-        add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. Move it to the OS keyring (python -m tgwitness.security migrate-to-keyring --data-dir DATA) or an external file (python -m tgwitness.security create-master-key KEYFILE && python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA)")
+        from .security import security_command
+        add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. "
+            "Move it to the OS keyring (" + security_command("migrate-to-keyring --data-dir " + str(root)) + ") or an external file ("
+            + security_command("create-master-key KEYFILE") + " && " + security_command("migrate-to-external KEYFILE --data-dir " + str(root)) + ")")
     if os.environ.get("TGWITNESS_TOKEN") and len(os.environ["TGWITNESS_TOKEN"]) < 24:
         add("panel_token", "fail", "TGWITNESS_TOKEN must contain at least 24 characters")
     return {"ready": not any(c["status"] == "fail" for c in checks), "platform": platform.platform(),
@@ -148,10 +151,9 @@ def print_report(report, as_json=False):
     if as_json:
         print(json.dumps(report, indent=2))
     else:
-        print("TgWitness deployment check")
+        print("TgWitness deployment check · " + report["scope"])
         print("Python:", report["interpreter"])
         print("Data:", report["data_directory"])
         for item in report["checks"]:
             print("[" + item["status"].upper() + "] " + item["name"] + ": " + item["detail"])
         print("Ready to attempt startup." if report["ready"] else "Resolve failed checks before starting.")
-        print(report["scope"])
