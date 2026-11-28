@@ -116,7 +116,19 @@ def checkpoint_lock(directory):
         return CHECKPOINT_LOCKS.setdefault(str(Path(directory).resolve()), threading.Lock())
 
 
+def note_rollback(store, vault):
+    from . import rollback
+    rolled_back = rollback.check(store, vault.public_key)
+    known = store.get_setting("journal_rollback", None) or {}
+    if rolled_back and known.get("remembered") != rolled_back["remembered"]:
+        with store.transaction():
+            event = store.append("journal.rolled_back", rolled_back)
+            store.set_setting("journal_rollback", {**rolled_back, "detected_at": event["observed_at"]})
+    return rolled_back
+
+
 def retain_checkpoint(store, vault):
+    note_rollback(store, vault)
     directory = store.root / "checkpoints"
     directory.mkdir(exist_ok=True, mode=0o700)
     with checkpoint_lock(directory):
