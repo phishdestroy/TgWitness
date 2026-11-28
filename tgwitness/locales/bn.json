@@ -11166,5 +11166,6 @@
   "Observation stopped while the disk was full": "ডিস্ক পূর্ণ থাকায় পর্যবেক্ষণ বন্ধ ছিল",
   "Attachment not saved": "সংযুক্তি সংরক্ষিত হয়নি",
   "On the Case Board": "কেস বোর্ডে",
-  "This access does not open this section.": "এই অ্যাক্সেস এই বিভাগটি খোলে না।"
+  "This access does not open this section.": "এই অ্যাক্সেস এই বিভাগটি খোলে না।",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "এই অ্যাকাউন্টটি এখনও এই চ্যাটের সদস্য নয়। সেটআপের পরে এই লিঙ্ক দিয়ে চ্যাটস থেকে যোগ দিন।"
 }

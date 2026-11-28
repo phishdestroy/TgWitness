@@ -11176,5 +11176,6 @@
   "Observation stopped while the disk was full": "L'observation s'est arrêtée pendant que le disque était plein",
   "Attachment not saved": "Pièce jointe non enregistrée",
   "On the Case Board": "Sur le tableau de l'affaire",
-  "This access does not open this section.": "Cet accès n'ouvre pas cette section."
+  "This access does not open this section.": "Cet accès n'ouvre pas cette section.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Ce compte n'est pas encore membre de ce chat. Après la configuration, rejoignez-le depuis Chats avec ce lien."
 }

@@ -312,6 +312,7 @@ async def preview(collector, body):
     about = facts.pop("about", None)
     result = {"preview_id": secrets.token_hex(16), "link": body.link.strip(), "target": target,
               "title": title, "kind": kind, "already_member": member,
+              "chat_id": utils.get_peer_id(chat) if chat is not None and not isinstance(chat, types.ChatInvite) else None,
               "about": getattr(entity, "about", None) or about,
               "participants_count": getattr(entity, "participants_count", None)
                                     or getattr(chat, "participants_count", None),

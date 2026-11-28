@@ -11370,5 +11370,6 @@
   "Observation stopped while the disk was full": "توقفت المراقبة بينما كان القرص ممتلئًا",
   "Attachment not saved": "لم يُحفظ المرفق",
   "On the Case Board": "على لوحة القضية",
-  "This access does not open this section.": "هذا الوصول لا يفتح هذا القسم."
+  "This access does not open this section.": "هذا الوصول لا يفتح هذا القسم.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "هذا الحساب ليس عضوًا في هذه الدردشة بعد. بعد الإعداد، انضم إليها من الدردشات بهذا الرابط."
 }

@@ -11166,5 +11166,6 @@
   "Observation stopped while the disk was full": "Disk doluyken gözlem durdu",
   "Attachment not saved": "Ek kaydedilmedi",
   "On the Case Board": "Vaka Panosunda",
-  "This access does not open this section.": "Bu erişim bu bölümü açmaz."
+  "This access does not open this section.": "Bu erişim bu bölümü açmaz.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Bu hesap henüz bu sohbetin üyesi değil. Kurulumdan sonra bu bağlantıyla Sohbetler bölümünden katılın."
 }

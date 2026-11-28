@@ -909,11 +909,23 @@ export function createSettingsHub(ctx) {
         const chosen=node('p','hint wizard-chosen');body.append(chosen);
         const count=()=>{chosen.textContent=tr('{n} selected',{n:draft.chat_ids.length});};count();
         const kinds={private:tr('Private chat'),bot:tr('Bot'),group:tr('Group'),supergroup:tr('Supergroup'),channel:tr('Channel')};
-        const list=node('div','wizard-chats');body.append(list);
-        for(const chat of dialogs.dialogs){const row=node('label','check-label'), check=node('input');check.type='checkbox';check.checked=draft.chat_ids.includes(chat.chat_id);
+        const list=node('div','wizard-chats');
+        const finder=node('form','wizard-link'),linkLabel=node('label','hub-label',tr('Username or invite link')),link=node('input'),found=node('p','hint');
+        link.type='text';link.maxLength=512;link.placeholder='https://t.me/…';link.autocomplete='off';linkLabel.append(link);
+        const add=node('button','secondary',tr('Add'));add.type='submit';finder.append(linkLabel,add,found);body.append(finder,list);
+        finder.onsubmit=event=>{event.preventDefault();if(!link.value.trim())return;run(async()=>{
+          found.textContent='';const preview=await request(who,'interactions/preview',{link:link.value.trim()});
+          if(!preview.already_member||preview.chat_id==null){found.textContent=tr('This account is not a member of this chat yet. After setup, join it from Chats with this link.');return;}
+          let row=[...list.children].find(item=>item.dataset.chat===String(preview.chat_id));
+          if(!row){row=addRow({chat_id:preview.chat_id,title:preview.title||String(preview.chat_id),kind:preview.kind});list.prepend(row);}
+          const check=row.querySelector('input');row.hidden=false;if(!check.checked){check.checked=true;check.onchange();}
+          found.textContent=tr('This account is already a member of the chat.')+' '+(preview.title||'');link.value='';row.scrollIntoView({block:'nearest'});
+        },add);};
+        const addRow=chat=>{const row=node('label','check-label'), check=node('input');check.type='checkbox';check.checked=draft.chat_ids.includes(chat.chat_id);
           check.onchange=()=>run(async()=>{draft.chat_ids=check.checked?[...new Set([...draft.chat_ids,chat.chat_id])]:draft.chat_ids.filter(id=>id!==chat.chat_id);count();await changed();});
           const name=node('span','wizard-chat-name',chat.title),about=node('span','wizard-chat-kind',[kinds[chat.kind],'ID '+chat.chat_id].filter(Boolean).join(' · '));
-          name.dir='auto';row.dataset.title=(chat.title+' '+chat.chat_id).toLocaleLowerCase();row.append(check,name,about);list.append(row);}
+          name.dir='auto';row.dataset.title=(chat.title+' '+chat.chat_id).toLocaleLowerCase();row.dataset.chat=String(chat.chat_id);row.append(check,name,about);return row;};
+        for(const chat of dialogs.dialogs)list.append(addRow(chat));
         filter.oninput=()=>{for(const row of list.children)row.hidden=!row.dataset.title.includes(filter.value.toLocaleLowerCase());};
       }
       body.append(message(tr('{n} chats loaded. File size and duration are estimates.',{n:dialogs.dialogs.length})));

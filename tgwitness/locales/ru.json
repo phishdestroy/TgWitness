@@ -11253,5 +11253,6 @@
   "Observation stopped while the disk was full": "Наблюдение стояло, пока диск был заполнен",
   "Attachment not saved": "Вложение не сохранено",
   "On the Case Board": "На доске дела",
-  "This access does not open this section.": "Этот доступ не открывает этот раздел."
+  "This access does not open this section.": "Этот доступ не открывает этот раздел.",
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Этот аккаунт пока не состоит в чате. После настройки вступите в него из раздела «Чаты» по этой ссылке."
 }
