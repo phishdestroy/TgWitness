@@ -257,7 +257,7 @@ html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
   .chat-actions #chat-export-start { width: 34px; padding: 8px; }
   .chat-actions #chat-export-start .label { display: none; }
   .chat-tools-menu > summary { width: 34px; }
-  .chat-tools-menu .action-menu-panel { position: fixed; top: 142px; inset-inline: 12px; width: auto; max-width: none; max-height: calc(100dvh - 165px); }
+  .chat-tools-menu .action-menu-panel { position: fixed; top: var(--chat-menu-top, 142px); inset-inline: 12px; width: auto; max-width: none; max-height: calc(100dvh - var(--chat-menu-top, 142px) - 16px); }
   .workspace[data-current-view="chats"] .chat-status { padding: 0 14px; }
   .chat-view-bar { min-height: 48px; gap: 8px; }
   .chat-view-tabs { gap: 16px; flex: 1; }
@@ -312,7 +312,6 @@ html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
   .chat-actions #chat-export-start, .chat-tools-menu > summary { width: 44px; min-height: 44px; }
   .msg-number-copy, .sender-details > summary, .chat-metric { position: relative; }
   .msg-number-copy::after, .sender-details > summary::after, .chat-metric::after { content: ""; position: absolute; top: 50%; left: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
-  .chat-tools-menu[open] > summary { position: relative; z-index: 66; }
   #view-accounts .account-card button { min-height: 44px; }
   button.secondary, .quiet.small, .secondary.small, .journal-type-filters .filter, [role="tab"] { min-height: 44px; }
   .mobile-nav-toggle { flex-basis: 44px; width: 44px; min-height: 44px; }

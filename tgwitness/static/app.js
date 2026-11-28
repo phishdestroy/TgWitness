@@ -2133,6 +2133,7 @@ async function switchProfile(id,options={}){
   }catch(error){if(revision===state.workspaceRevision)unlockFailed(error);throw error;}
   finally{if(revision===state.workspaceRevision)$("workspace").inert=false;}
 }
+$("chat-tools-menu").addEventListener("toggle",event=>{const menu=event.currentTarget;if(menu.open)menu.style.setProperty("--chat-menu-top",Math.round(menu.querySelector("summary").getBoundingClientRect().bottom+8)+"px");});
 $("profile-select").addEventListener("change",()=>busy(null,()=>switchProfile($("profile-select").value)));
 $("profile-create-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
