@@ -8,7 +8,7 @@ const legacy={start:"start",account:"connection",connection:"connection",journal
 const aliases={"network-topology":"topology",fleet:"swarm","swarm-dashboard":"swarm","case-board":"board",home:"start",dashboard:"start",overview:"start",map:"system-map",logs:"system-log",log:"system-log"};
 const cards=new Set(["setup","alerts","evidence","cloud","bot","github","storage","capture"]);
 const hubSections=new Set(["appearance","level","goal","connection","telegram","chats","collection","protection","notifications","group"]);
-const firstRunStep=value=>/^[1-7]$/.test(value||"")?Number(value):null;
+const firstRunStep=value=>/^[1-5]$/.test(value||"")?(value==="1"?1:Number(value)+2):null;
 const workspacePattern=/^(?:default|[a-f0-9]{32})$/;
 const groupPattern=/^[a-f0-9]{32}$/;
 const integer=value=>/^-?\d+$/.test(value||"")&&Number.isSafeInteger(Number(value))&&Number(value)!==0?Number(value):null;
@@ -62,7 +62,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==undefined)path+="/"+route.chatId;
   if(route.view==="observations"&&route.seq)path+="/event/"+route.seq;
   if(route.view==="witness"&&route.extra)path+="/"+encodeURIComponent(route.extra);
-  if(route.view==="first-run"&&route.step)path+="/"+route.step;
+  if(route.view==="first-run"&&route.step)path+="/"+(route.step<4?1:route.step-2);
   if(route.view==="group"&&route.group)path+="/"+route.group;
   if(route.view==="settings"&&route.hub&&hubSections.has(route.hub))path+="/"+route.hub;
   if(staticDemo)query.set("route",path);else url.pathname=path;
