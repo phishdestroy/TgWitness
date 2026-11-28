@@ -11147,5 +11147,20 @@
   "Complete the earlier steps first.": "ابتدا مراحل قبلی را کامل کنید.",
   "Transaction hash": "هش تراکنش",
   "Payment link": "پیوند پرداخت",
-  "An update could not be processed and was not saved": "یک به‌روزرسانی پردازش نشد و ذخیره نشد"
+  "An update could not be processed and was not saved": "یک به‌روزرسانی پردازش نشد و ذخیره نشد",
+  "Download unsigned network snapshot": "دانلود نمای شبکهٔ امضانشده",
+  "Journal failed its integrity check": "دفتر رویدادها از بررسی یکپارچگی رد شد",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "یکی از رکوردهای دفتر امضاشده دیگر با هش، امضا یا نقطهٔ بازبینی امضاشده مطابقت ندارد. پوشهٔ داده بیرون از TgWitness تغییر کرده است. آن را همان‌طور نگه دارید و پیش از خروجی گرفتن بررسی کنید.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "دفتر امضاشده از بررسی یکپارچگی رد شد. پوشهٔ داده را همان‌طور نگه دارید.",
+  "What this journal proves": "این دفتر چه چیزی را ثابت می‌کند",
+  "Completeness": "کامل‌بودن",
+  "All {n} records match their hashes and signatures.": "همهٔ {n} رکورد با هش و امضای خود مطابقت دارند.",
+  "Full check {time}": "بررسی کامل {time}",
+  "Not checked yet.": "هنوز بررسی نشده است.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "اثر انگشت {fingerprint}. گیرنده آن را از کانالی جداگانه مقایسه می‌کند؛ بدون آن، امضا فقط نشان می‌دهد کدام کلید امضا کرده است.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 تعداد {through} از {total} رکورد را پوشش می‌دهد · پاسخ {time}",
+  "Missing: {items}": "کم است: {items}",
+  "No observation gaps in the last 24 hours.": "در ۲۴ ساعت گذشته هیچ شکافی در مشاهده نبوده است.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "شکاف‌های مشاهده در ۲۴ ساعت گذشته: {n}. آخرین مورد {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "در {time} ناموفق بود؛ این رکورد در دفتر امضاشده باقی می‌ماند."
 }

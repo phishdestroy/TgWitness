@@ -361,6 +361,7 @@ const labels = {
   "session.concurrent_at_start": [tr("Other sessions at start"), "users", "system"],
   "session.takeover_risk": [tr("Account takeover check"), "shield", "system"],
   "journal.rolled_back": [tr("Journal restored from an older copy"), "alert", "coverage"],
+  "journal.verification_failed": [tr("Journal failed its integrity check"), "alert", "coverage"],
   "journal.rollback_acknowledged": [tr("Journal restore confirmed"), "check", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
@@ -882,7 +883,8 @@ async function unlock(prefetched=null,languageChoice=null) {
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
   if(!state.opened&&(!requested.explicit||requested.error)){
-    state.view=state.status.demo||state.status.collector?.has_session&&viewAllowed('chats')?'chats':viewAllowed('start')?'start':'chats';
+    const first={copy:'evidence',watch:'chats',evidence:'start'}[state.status.setup_goal];
+    state.view=state.status.demo?'chats':state.status.collector?.has_session&&first&&viewAllowed(first)?first:state.status.collector?.has_session&&viewAllowed('chats')?'chats':viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view)){analysisOff(state.view);state.view="chats";}
   state.opened=true;
@@ -922,8 +924,14 @@ function viewAllowed(view){
     access:!!state.me?.admin,"system-log":!!state.me?.admin,integrations:!!state.me?.admin,
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
+function applyGoalNav(){
+  const goal=state.status?.demo?"":state.status?.setup_goal||"",board=document.querySelector('.sidebar [data-view="board"]'),more=$("nav-more");
+  document.documentElement.dataset.goal=goal;
+  if(goal==="evidence"&&board.parentElement===more)more.before(board);
+  else if(goal!=="evidence"&&board.parentElement!==more)more.querySelector("summary").after(board);
+}
 function applyAccess(){
-  const stamp=JSON.stringify([state.workspaceRevision,state.me,state.status?.chats_limited,state.status?.demo,state.status?.analysis]);
+  const stamp=JSON.stringify([state.workspaceRevision,state.me,state.status?.chats_limited,state.status?.demo,state.status?.analysis,state.status?.setup_goal]);
   if(stamp===state.permissionsStamp)return;state.permissionsStamp=stamp;
   boardReady.then(()=>{for(const id of ['chat-to-slice','journal-to-slice'])$(id).hidden=!may('board.write');});
   window.TgWitnessAnalysis?.syncStatus?.(state.status);
@@ -933,6 +941,7 @@ function applyAccess(){
   if(analysisText)analysisText.textContent=" "+analysisTitle;
   $("view-analysis").querySelector("h1").textContent=analysisTitle;
   document.querySelectorAll(".sidebar .nav[data-view]").forEach(n=>n.hidden=!viewAllowed(n.dataset.view));
+  applyGoalNav();
   $('nav-more').hidden=![...$('nav-more').querySelectorAll('[data-view]')].some(button=>!button.hidden);syncHiddenNav();
   document.querySelectorAll(".nav-section").forEach(heading=>{
     let next=heading.nextElementSibling,visible=false;
@@ -2124,6 +2133,7 @@ async function switchProfile(id,options={}){
   }catch(error){if(revision===state.workspaceRevision)unlockFailed(error);throw error;}
   finally{if(revision===state.workspaceRevision)$("workspace").inert=false;}
 }
+$("chat-tools-menu").addEventListener("toggle",event=>{const menu=event.currentTarget;if(menu.open)menu.style.setProperty("--chat-menu-top",Math.round(menu.querySelector("summary").getBoundingClientRect().bottom+8)+"px");});
 $("profile-select").addEventListener("change",()=>busy(null,()=>switchProfile($("profile-select").value)));
 $("profile-create-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{

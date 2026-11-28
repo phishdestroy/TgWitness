@@ -271,6 +271,8 @@ export function createJournal(context){
     syncIndex();
     const values=selected();
     for(const b of types.children){const on=b.dataset.filter?values.has(b.dataset.filter):!values.size;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));}
+    const shown=[...types.children].find(b=>b.dataset.filter&&b.classList.contains("active"));
+    if(shown&&types.scrollWidth>types.clientWidth){const r=shown.getBoundingClientRect(),box=types.getBoundingClientRect();if(r.left<box.left||r.right>box.right)types.scrollBy({left:r.left<box.left?r.left-box.left-8:r.right-box.right+8});}
     if(document.activeElement!==search)search.value=state.search;
     const title=state.source?(state.status?.targets||[]).find(t=>String(t.chat_id)===state.source)?.title||state.source:tr("All sources");
     source.replaceChildren(node("span","",title),icon("chevron"));source.title=title;

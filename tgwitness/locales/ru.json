@@ -11234,5 +11234,20 @@
   "Complete the earlier steps first.": "Сначала завершите предыдущие шаги.",
   "Transaction hash": "Хеш транзакции",
   "Payment link": "Платёжная ссылка",
-  "An update could not be processed and was not saved": "Обновление не удалось обработать, оно не сохранено"
+  "An update could not be processed and was not saved": "Обновление не удалось обработать, оно не сохранено",
+  "Download unsigned network snapshot": "Скачать неподписанный снимок сети",
+  "Journal failed its integrity check": "Журнал не прошёл проверку целостности",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Запись в подписанном журнале больше не совпадает со своим хешем, подписью или подписанной контрольной точкой. Папку данных изменили вне TgWitness. Не трогайте её и проверьте перед экспортом.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Подписанный журнал не прошёл проверку целостности. Не трогайте папку данных.",
+  "What this journal proves": "Что подтверждает этот журнал",
+  "Completeness": "Полнота",
+  "All {n} records match their hashes and signatures.": "Все записи ({n}) совпадают со своими хешами и подписями.",
+  "Full check {time}": "Полная проверка {time}",
+  "Not checked yet.": "Ещё не проверялся.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Отпечаток {fingerprint}. Получатель сверяет его по отдельному каналу; без этого подпись показывает только, каким ключом подписано.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 покрывает {through} из {total} записей · ответ {time}",
+  "Missing: {items}": "Не хватает: {items}",
+  "No observation gaps in the last 24 hours.": "За последние 24 часа пропусков наблюдения нет.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Пропусков наблюдения за последние 24 часа: {n}. Последний {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Не прошёл {time}; запись об этом остаётся в подписанном журнале."
 }

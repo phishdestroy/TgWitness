@@ -11096,5 +11096,20 @@
   "Complete the earlier steps first.": "Lengkapkan langkah sebelumnya dahulu.",
   "Transaction hash": "Cincangan transaksi",
   "Payment link": "Pautan pembayaran",
-  "An update could not be processed and was not saved": "Satu kemas kini tidak dapat diproses dan tidak disimpan"
+  "An update could not be processed and was not saved": "Satu kemas kini tidak dapat diproses dan tidak disimpan",
+  "Download unsigned network snapshot": "Muat turun petikan rangkaian tanpa tandatangan",
+  "Journal failed its integrity check": "Jurnal gagal dalam semakan integriti",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Satu rekod dalam jurnal bertandatangan tidak lagi sepadan dengan cincangan, tandatangan atau titik semak bertandatangannya. Folder data telah diubah di luar TgWitness. Biarkan seperti sedia ada dan semak sebelum mengeksport.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Jurnal bertandatangan gagal dalam semakan integriti. Biarkan folder data seperti sedia ada.",
+  "What this journal proves": "Apa yang dibuktikan oleh jurnal ini",
+  "Completeness": "Kelengkapan",
+  "All {n} records match their hashes and signatures.": "Kesemua {n} rekod sepadan dengan cincangan dan tandatangannya.",
+  "Full check {time}": "Semakan penuh {time}",
+  "Not checked yet.": "Belum disemak.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Cap jari {fingerprint}. Penerima membandingkannya melalui saluran berasingan; tanpanya tandatangan hanya menunjukkan kunci mana yang menandatangani.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 meliputi {through} daripada {total} rekod · jawapan {time}",
+  "Missing: {items}": "Tiada: {items}",
+  "No observation gaps in the last 24 hours.": "Tiada lompang pemerhatian dalam 24 jam terakhir.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lompang pemerhatian dalam 24 jam terakhir: {n}. Terakhir {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Gagal pada {time}; rekod itu kekal dalam jurnal bertandatangan."
 }

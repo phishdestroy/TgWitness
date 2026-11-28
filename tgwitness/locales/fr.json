@@ -11157,5 +11157,20 @@
   "Complete the earlier steps first.": "Terminez d'abord les étapes précédentes.",
   "Transaction hash": "Hachage de transaction",
   "Payment link": "Lien de paiement",
-  "An update could not be processed and was not saved": "Une mise à jour n'a pas pu être traitée et n'a pas été enregistrée"
+  "An update could not be processed and was not saved": "Une mise à jour n'a pas pu être traitée et n'a pas été enregistrée",
+  "Download unsigned network snapshot": "Télécharger l'instantané réseau non signé",
+  "Journal failed its integrity check": "Le journal a échoué à la vérification d'intégrité",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Un enregistrement du journal signé ne correspond plus à son hachage, à sa signature ou au point de contrôle signé. Le dossier de données a été modifié en dehors de TgWitness. Laissez-le tel quel et vérifiez-le avant d'exporter.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Le journal signé a échoué à la vérification d'intégrité. Laissez le dossier de données tel quel.",
+  "What this journal proves": "Ce que prouve ce journal",
+  "Completeness": "Complétude",
+  "All {n} records match their hashes and signatures.": "Les {n} enregistrements correspondent à leurs hachages et signatures.",
+  "Full check {time}": "Vérification complète {time}",
+  "Not checked yet.": "Pas encore vérifié.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Empreinte {fingerprint}. Le destinataire la compare par un canal distinct ; sans cela, la signature indique seulement quelle clé a signé.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 couvre {through} sur {total} enregistrements · réponse {time}",
+  "Missing: {items}": "Manque : {items}",
+  "No observation gaps in the last 24 hours.": "Aucune interruption d'observation au cours des dernières 24 heures.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Interruptions d'observation au cours des dernières 24 heures : {n}. Dernière {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Échec le {time} ; l'enregistrement reste dans le journal signé."
 }

@@ -11249,5 +11249,20 @@
   "Complete the earlier steps first.": "Спершу завершіть попередні кроки.",
   "Transaction hash": "Хеш транзакції",
   "Payment link": "Платіжне посилання",
-  "An update could not be processed and was not saved": "Оновлення не вдалося обробити, його не збережено"
+  "An update could not be processed and was not saved": "Оновлення не вдалося обробити, його не збережено",
+  "Download unsigned network snapshot": "Завантажити непідписаний знімок мережі",
+  "Journal failed its integrity check": "Журнал не пройшов перевірку цілісності",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Запис у підписаному журналі більше не збігається зі своїм хешем, підписом або підписаною контрольною точкою. Теку даних змінено поза TgWitness. Не змінюйте її та перевірте перед експортом.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Підписаний журнал не пройшов перевірку цілісності. Не змінюйте теку даних.",
+  "What this journal proves": "Що підтверджує цей журнал",
+  "Completeness": "Повнота",
+  "All {n} records match their hashes and signatures.": "Усі записи ({n}) збігаються зі своїми хешами й підписами.",
+  "Full check {time}": "Повна перевірка {time}",
+  "Not checked yet.": "Ще не перевірявся.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Відбиток {fingerprint}. Отримувач звіряє його окремим каналом; без цього підпис показує лише, яким ключем підписано.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 покриває {through} з {total} записів · відповідь {time}",
+  "Missing: {items}": "Бракує: {items}",
+  "No observation gaps in the last 24 hours.": "За останні 24 години пропусків спостереження немає.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Пропусків спостереження за останні 24 години: {n}. Останній {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Не пройшов {time}; запис про це лишається в підписаному журналі."
 }

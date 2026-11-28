@@ -11096,5 +11096,20 @@
   "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước.",
   "Transaction hash": "Mã băm giao dịch",
   "Payment link": "Liên kết thanh toán",
-  "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu"
+  "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu",
+  "Download unsigned network snapshot": "Tải xuống ảnh chụp mạng chưa ký",
+  "Journal failed its integrity check": "Nhật ký không vượt qua kiểm tra toàn vẹn",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "Một bản ghi trong nhật ký đã ký không còn khớp với mã băm, chữ ký hoặc điểm kiểm tra đã ký. Thư mục dữ liệu đã bị thay đổi bên ngoài TgWitness. Hãy giữ nguyên và kiểm tra trước khi xuất.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "Nhật ký đã ký không vượt qua kiểm tra toàn vẹn. Hãy giữ nguyên thư mục dữ liệu.",
+  "What this journal proves": "Nhật ký này chứng minh điều gì",
+  "Completeness": "Độ đầy đủ",
+  "All {n} records match their hashes and signatures.": "Toàn bộ {n} bản ghi khớp với mã băm và chữ ký.",
+  "Full check {time}": "Kiểm tra đầy đủ {time}",
+  "Not checked yet.": "Chưa được kiểm tra.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Dấu vân tay {fingerprint}. Người nhận đối chiếu qua một kênh riêng; nếu không, chữ ký chỉ cho biết khóa nào đã ký.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 bao phủ {through} trên {total} bản ghi · phản hồi {time}",
+  "Missing: {items}": "Còn thiếu: {items}",
+  "No observation gaps in the last 24 hours.": "Không có khoảng trống quan sát trong 24 giờ qua.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Khoảng trống quan sát trong 24 giờ qua: {n}. Lần gần nhất {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "Thất bại lúc {time}; bản ghi vẫn nằm trong nhật ký đã ký."
 }

@@ -11096,5 +11096,20 @@
   "Complete the earlier steps first.": "ทำขั้นตอนก่อนหน้าให้เสร็จก่อน",
   "Transaction hash": "แฮชธุรกรรม",
   "Payment link": "ลิงก์ชำระเงิน",
-  "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้"
+  "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้",
+  "Download unsigned network snapshot": "ดาวน์โหลดสแนปช็อตเครือข่ายที่ไม่ได้ลงนาม",
+  "Journal failed its integrity check": "บันทึกไม่ผ่านการตรวจสอบความสมบูรณ์",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "ระเบียนในบันทึกที่ลงนามไม่ตรงกับแฮช ลายเซ็น หรือจุดตรวจสอบที่ลงนามอีกต่อไป โฟลเดอร์ข้อมูลถูกเปลี่ยนจากภายนอก TgWitness ให้คงไว้ตามเดิมและตรวจสอบก่อนส่งออก",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "บันทึกที่ลงนามไม่ผ่านการตรวจสอบความสมบูรณ์ ให้คงโฟลเดอร์ข้อมูลไว้ตามเดิม",
+  "What this journal proves": "สิ่งที่บันทึกนี้พิสูจน์",
+  "Completeness": "ความครบถ้วน",
+  "All {n} records match their hashes and signatures.": "ระเบียนทั้งหมด {n} รายการตรงกับแฮชและลายเซ็น",
+  "Full check {time}": "ตรวจสอบทั้งหมด {time}",
+  "Not checked yet.": "ยังไม่ได้ตรวจสอบ",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "ลายนิ้วมือ {fingerprint} ผู้รับเปรียบเทียบผ่านช่องทางแยกต่างหาก หากไม่ทำเช่นนั้น ลายเซ็นจะแสดงเพียงว่าคีย์ใดเป็นผู้ลงนาม",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 ครอบคลุม {through} จาก {total} ระเบียน · คำตอบ {time}",
+  "Missing: {items}": "ขาด: {items}",
+  "No observation gaps in the last 24 hours.": "ไม่มีช่องว่างในการสังเกตการณ์ใน 24 ชั่วโมงที่ผ่านมา",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "ช่องว่างในการสังเกตการณ์ใน 24 ชั่วโมงที่ผ่านมา: {n} ครั้งล่าสุด {time}",
+  "Failed on {time}; the record stays in the signed journal.": "ล้มเหลวเมื่อ {time} ระเบียนนี้ยังคงอยู่ในบันทึกที่ลงนาม"
 }

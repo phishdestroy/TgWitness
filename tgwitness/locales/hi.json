@@ -11147,5 +11147,20 @@
   "Complete the earlier steps first.": "पहले पिछले चरण पूरे करें।",
   "Transaction hash": "लेनदेन हैश",
   "Payment link": "भुगतान लिंक",
-  "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया"
+  "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया",
+  "Download unsigned network snapshot": "बिना हस्ताक्षर वाला नेटवर्क स्नैपशॉट डाउनलोड करें",
+  "Journal failed its integrity check": "जर्नल अखंडता जाँच में विफल रहा",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "हस्ताक्षरित जर्नल का एक रिकॉर्ड अब अपने हैश, हस्ताक्षर या हस्ताक्षरित चेकपॉइंट से मेल नहीं खाता। डेटा फ़ोल्डर को TgWitness के बाहर बदला गया है। इसे जैसा है वैसा रखें और एक्सपोर्ट से पहले जाँच करें।",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "हस्ताक्षरित जर्नल अखंडता जाँच में विफल रहा। डेटा फ़ोल्डर को जैसा है वैसा रखें।",
+  "What this journal proves": "यह जर्नल क्या साबित करता है",
+  "Completeness": "पूर्णता",
+  "All {n} records match their hashes and signatures.": "सभी {n} रिकॉर्ड अपने हैश और हस्ताक्षर से मेल खाते हैं।",
+  "Full check {time}": "पूरी जाँच {time}",
+  "Not checked yet.": "अभी तक जाँच नहीं हुई।",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "फ़िंगरप्रिंट {fingerprint}। प्राप्तकर्ता इसे अलग चैनल से मिलाता है; इसके बिना हस्ताक्षर केवल यह दिखाता है कि किस कुंजी ने हस्ताक्षर किया।",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 कुल {total} में से {through} रिकॉर्ड को कवर करता है · उत्तर {time}",
+  "Missing: {items}": "कमी: {items}",
+  "No observation gaps in the last 24 hours.": "पिछले 24 घंटों में अवलोकन में कोई अंतराल नहीं।",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "पिछले 24 घंटों में अवलोकन अंतराल: {n}। अंतिम {time}।",
+  "Failed on {time}; the record stays in the signed journal.": "{time} को विफल हुआ; रिकॉर्ड हस्ताक्षरित जर्नल में रहता है।"
 }

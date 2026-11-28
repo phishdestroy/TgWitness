@@ -11147,5 +11147,20 @@
   "Complete the earlier steps first.": "Önce önceki adımları tamamlayın.",
   "Transaction hash": "İşlem karması",
   "Payment link": "Ödeme bağlantısı",
-  "An update could not be processed and was not saved": "Bir güncelleme işlenemedi ve kaydedilmedi"
+  "An update could not be processed and was not saved": "Bir güncelleme işlenemedi ve kaydedilmedi",
+  "Download unsigned network snapshot": "İmzasız ağ anlık görüntüsünü indir",
+  "Journal failed its integrity check": "Günlük bütünlük denetiminden geçemedi",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "İmzalı günlükteki bir kayıt artık karmasıyla, imzasıyla veya imzalı denetim noktasıyla eşleşmiyor. Veri klasörü TgWitness dışında değiştirildi. Olduğu gibi bırakın ve dışa aktarmadan önce denetleyin.",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "İmzalı günlük bütünlük denetiminden geçemedi. Veri klasörünü olduğu gibi bırakın.",
+  "What this journal proves": "Bu günlük neyi kanıtlıyor",
+  "Completeness": "Eksiksizlik",
+  "All {n} records match their hashes and signatures.": "{n} kaydın tamamı karmaları ve imzalarıyla eşleşiyor.",
+  "Full check {time}": "Tam denetim {time}",
+  "Not checked yet.": "Henüz denetlenmedi.",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "Parmak izi {fingerprint}. Alıcı bunu ayrı bir kanaldan karşılaştırır; aksi halde imza yalnızca hangi anahtarın imzaladığını gösterir.",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161, {total} kaydın {through} tanesini kapsıyor · yanıt {time}",
+  "Missing: {items}": "Eksik: {items}",
+  "No observation gaps in the last 24 hours.": "Son 24 saatte gözlem boşluğu yok.",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Son 24 saatteki gözlem boşlukları: {n}. Sonuncusu {time}.",
+  "Failed on {time}; the record stays in the signed journal.": "{time} tarihinde başarısız oldu; kayıt imzalı günlükte kalır."
 }

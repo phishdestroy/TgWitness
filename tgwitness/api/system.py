@@ -97,6 +97,9 @@ LIVE_MESSAGES = ("message.new", "message.edited", "message.deleted")
 OBSERVATION_KINDS = ("observation.started", "observation.stopped", "process.started", "process.stopped")
 
 
+GAP_KINDS = ("coverage.gap", "connection.stalled", "journal.rolled_back", "journal.verification_failed")
+
+
 async def overview_live(*, ctx=Depends(current_context)):
     from datetime import timedelta
     from .. import court_readiness
@@ -132,9 +135,14 @@ async def overview_live(*, ctx=Depends(current_context)):
                 "ORDER BY last IS NOT NULL, last LIMIT 5").fetchall()
             anchor = db.execute("SELECT seq,observed_at,payload FROM events WHERE kind='anchor.completed' "
                                 "ORDER BY seq DESC LIMIT 1").fetchone()
-        return last_change, messages, media, waited, latest, active, quiet, anchor
+            gap_marks = ",".join("?" * len(GAP_KINDS))
+            gaps = db.execute("SELECT count(*) FROM events WHERE observed_at>=? AND kind IN (" + gap_marks + ")",
+                              (day, *GAP_KINDS)).fetchone()[0]
+            last_gap = db.execute("SELECT seq,kind,observed_at,json_extract(payload,'$.reason') FROM events WHERE kind IN ("
+                                  + gap_marks + ") ORDER BY seq DESC LIMIT 1", GAP_KINDS).fetchone()
+        return last_change, messages, media, waited, latest, active, quiet, anchor, gaps, last_gap
 
-    last_change, messages, media, waited, latest, active, quiet, anchor = await complete_in_thread(read)
+    last_change, messages, media, waited, latest, active, quiet, anchor, gaps, last_gap = await complete_in_thread(read)
     status = collector.status()
     court = await complete_in_thread(lambda: court_readiness.assess(store, evidence_settings(store)))
     witnesses = None
@@ -155,6 +163,10 @@ async def overview_live(*, ctx=Depends(current_context)):
         "active_chats": [{"chat_id": row[0], "events": row[1], "title": row[2]} for row in active],
         "quiet_chats": [{"chat_id": row[0], "title": row[1], "last_at": row[2]} for row in quiet],
         "court_readiness": court,
+        "trust": {"integrity": store.get_setting("journal_integrity", None),
+                  "fingerprint": fingerprint(ctx.app.state.vault.public_key), "gaps_24h": gaps,
+                  "last_gap": {"seq": last_gap[0], "kind": last_gap[1], "at": last_gap[2], "reason": last_gap[3]}
+                  if last_gap else None},
         "witnesses": witnesses, "evidence_enabled": bool(evidence_settings(store)["enabled"]),
         "generated_at": stamp(now),
     }
@@ -225,7 +237,7 @@ async def status(request: Request, *, ctx=Depends(current_context)):
             c for c in dossier.enabled_chats(store) if allowed is None or c in allowed
         ],
         "setup_answered": store.get_setting("setup", None) is not None,
-        "setup_goal": (store.get_setting("setup", None) or {}).get("goal"),
+        "setup_goal": (store.get_setting("goal_preset", None) or store.get_setting("setup", None) or {}).get("goal"),
         "actions": interactions.pace_status(store),
         "fingerprint": fingerprint(vault.public_key),
         "limitations": LIMITS,

@@ -843,6 +843,7 @@ class Collector:
             "account_loss": self.store.get_setting("account_loss", None),
             "takeover_risk": self.store.get_setting("takeover_risk", None),
             "journal_rollback": self.store.get_setting("journal_rollback", None),
+            "journal_integrity": self.store.get_setting("journal_integrity", None),
             "account_restriction": self.store.get_setting("account_restriction", None),
             "client": self.client_identity(credentials=credentials),
             "client_checks": self.store.get_setting("client_checks", None),

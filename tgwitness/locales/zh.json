@@ -11096,5 +11096,20 @@
   "Complete the earlier steps first.": "请先完成前面的步骤。",
   "Transaction hash": "交易哈希",
   "Payment link": "付款链接",
-  "An update could not be processed and was not saved": "有一条更新无法处理，且未保存"
+  "An update could not be processed and was not saved": "有一条更新无法处理，且未保存",
+  "Download unsigned network snapshot": "下载未签名的网络快照",
+  "Journal failed its integrity check": "日志未通过完整性检查",
+  "A record in the signed journal no longer matches its hash, signature or the signed checkpoint. The data folder was changed outside TgWitness. Keep it as it is and check it before exporting.": "已签名日志中的一条记录不再与其哈希、签名或已签名的检查点相符。数据文件夹在 TgWitness 之外被更改。请保持原状，并在导出前加以检查。",
+  "The signed journal failed its integrity check. Keep the data folder as it is.": "已签名日志未通过完整性检查。请保持数据文件夹原状。",
+  "What this journal proves": "此日志能证明什么",
+  "Completeness": "完整度",
+  "All {n} records match their hashes and signatures.": "全部 {n} 条记录都与其哈希和签名相符。",
+  "Full check {time}": "完整检查 {time}",
+  "Not checked yet.": "尚未检查。",
+  "Fingerprint {fingerprint}. The recipient compares it through a separate channel; without that the signature shows only which key signed.": "指纹 {fingerprint}。收件人须通过另一渠道核对；否则签名只能说明是哪把密钥签署的。",
+  "RFC 3161 covers {through} of {total} records · answer {time}": "RFC 3161 覆盖 {total} 条中的 {through} 条记录 · 响应 {time}",
+  "Missing: {items}": "缺少：{items}",
+  "No observation gaps in the last 24 hours.": "过去 24 小时没有观察缺口。",
+  "Observation gaps in the last 24 hours: {n}. Last one {time}.": "过去 24 小时的观察缺口：{n}。最近一次 {time}。",
+  "Failed on {time}; the record stays in the signed journal.": "于 {time} 未通过；该记录仍保留在已签名日志中。"
 }
