@@ -13,6 +13,23 @@ MAX_PENDING_BODY_BYTES = 64 * 1024 * 1024
 MAX_PENDING_BODIES_PER_CLIENT = 4
 UNSIGNED_BODY_LIMIT = 512 * 1024
 
+CONTENT_SECURITY_POLICY = (
+    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; "
+    "media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; "
+    "form-action 'self'; object-src 'none'"
+)
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "X-Frame-Options": "DENY",
+}
+
+
+def refusal(content, status_code, headers=None):
+    return JSONResponse(content, status_code=status_code, headers={
+        **SECURITY_HEADERS, "Content-Security-Policy": CONTENT_SECURITY_POLICY,
+        "Cache-Control": "no-store", **(headers or {})})
+
 
 def request_limit(path, default=16384):
     if "/api/account-export" in path or path.endswith("/image-attestation"):
@@ -105,17 +122,17 @@ class RequestLimit:
             limit, timeout = min(limit, UNSIGNED_BODY_LIMIT), min(timeout, PUBLIC_BODY_TIMEOUT)
         declared = declared_length(scope)
         if declared is not None and declared > limit:
-            return await JSONResponse({"detail": "Request body too large"}, status_code=413)(scope, receive, send)
+            return await refusal({"detail": "Request body too large"}, 413)(scope, receive, send)
         limit = limit if declared is None else declared
         address = (scope.get("client") or ("unknown", 0))[0]
         pending = self.pending_clients.get(address, 0)
         if pending >= MAX_PENDING_BODIES_PER_CLIENT:
-            return await JSONResponse({"detail": "Too many pending request bodies from this address. Try again shortly."},
-                status_code=429, headers={"Cache-Control": "no-store", "Retry-After": "1"})(scope, receive, send)
+            return await refusal({"detail": "Too many pending request bodies from this address. Try again shortly."},
+                429, {"Retry-After": "1"})(scope, receive, send)
         if (self.pending_bodies >= MAX_PENDING_BODIES or self.pending_bytes + limit > MAX_PENDING_BODY_BYTES
                 or not signed and self.unsigned_bodies >= MAX_PENDING_BODIES // 2):
-            return await JSONResponse({"detail": "Too many pending request bodies. Try again shortly."},
-                status_code=503, headers={"Cache-Control": "no-store", "Retry-After": "1"})(scope, receive, send)
+            return await refusal({"detail": "Too many pending request bodies. Try again shortly."},
+                503, {"Retry-After": "1"})(scope, receive, send)
         self.pending_bodies += 1
         self.pending_bytes += limit
         self.unsigned_bodies += not signed
@@ -138,8 +155,7 @@ class RequestLimit:
                         break
         except TimeoutError:
             detail = "MCP request body timed out" if mcp_body(route) else "Request body timed out"
-            return await JSONResponse({"detail": detail}, status_code=408,
-                                      headers={"Cache-Control": "no-store"})(scope, receive, send)
+            return await refusal({"detail": detail}, 408)(scope, receive, send)
         finally:
             self.pending_bodies -= 1
             self.pending_bytes -= limit
@@ -150,7 +166,7 @@ class RequestLimit:
             else:
                 del self.pending_clients[address]
         if too_large:
-            return await JSONResponse({"detail": "Request body too large"}, status_code=413)(scope, receive, send)
+            return await refusal({"detail": "Request body too large"}, 413)(scope, receive, send)
         sent = False
         async def replay():
             nonlocal sent

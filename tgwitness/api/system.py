@@ -11,6 +11,9 @@ from ..collector import ProtectedSession
 from ..collector import loss_text
 from ..evidence import LIMITS
 from ..failures import describe, unexpected
+from ..middleware import CONTENT_SECURITY_POLICY
+from ..middleware import SECURITY_HEADERS
+from ..middleware import refusal
 from ..middleware import request_limit
 from ..monitoring import Monitoring
 from ..monitoring import capture_settings
@@ -470,13 +473,11 @@ class SystemOperations:
             )
             selected = workspace_path[1] if workspace_path else self.profile_id
             if request.query_params.getlist("ws") != [selected]:
-                return JSONResponse(
-                    {"detail": "Unknown workspace selector."}, status_code=404
-                )
+                return refusal({"detail": "Unknown workspace selector."}, 404)
         if request.headers.get("content-length", "").isdigit() and int(
             request.headers["content-length"]
         ) > request_limit(request.url.path):
-            return JSONResponse({"detail": "Request body too large"}, status_code=413)
+            return refusal({"detail": "Request body too large"}, 413)
         response = await traced(request, call_next, self.profile_id)
         audit = getattr(request.state, "audit", None)
         if audit and audit[0] is self.app:
@@ -505,20 +506,14 @@ class SystemOperations:
                     response.status_code,
                     request.client.host if request.client else "unknown",
                 )
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["Referrer-Policy"] = "no-referrer"
-        response.headers["X-Frame-Options"] = "DENY"
-        response.headers.setdefault(
-            "Content-Security-Policy",
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'",
-        )
+        response.headers.update(SECURITY_HEADERS)
+        response.headers.setdefault("Content-Security-Policy", CONTENT_SECURITY_POLICY)
         if response.headers.get("Cache-Control") != "no-cache":
             response.headers["Cache-Control"] = "no-store"
         return response
 
     async def unexpected_error(self, request, exc):
-        return JSONResponse(status_code=500, content={"detail": unexpected(exc, request.url.path)},
-                            headers={"Cache-Control": "no-store"})
+        return refusal({"detail": unexpected(exc, request.url.path)}, 500)
 
     async def validation_error(self, request, exc):
         return JSONResponse(
