@@ -2436,7 +2436,8 @@ async function refreshEvents(direction=false) {
   await journalReady;
   window.TgWitnessJournal.sync();
   if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request,direction);return;}
-  const request=++state.request,params=new URLSearchParams({limit:"200",include_count:"true"});
+  const paging=[true,"older","newer"].includes(direction);
+  const request=++state.request,params=new URLSearchParams({limit:"200",include_count:String(!paging)});
   const after=direction==="newer"?state.eventAfter:null;
   const before=direction==="latest"?null:direction===true||direction==="older"?state.cursor:state.eventBefore;
   if(direction==="newer"&&after===null||[true,"older"].includes(direction)&&before===null)return;
@@ -2451,7 +2452,7 @@ async function refreshEvents(direction=false) {
   const result=await json("events?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
   state.events=result.events.slice(0,200);state.cursor=result.next_before??null;state.eventAfter=result.next_after??null;
-  state.eventMatched=result.count_exact?result.matched:null;
+  if(!paging)state.eventMatched=result.count_exact?result.matched:null;
   state.eventBefore=after!==null?(state.eventAfter!==null&&result.events.length?result.events[0].seq+1:null):before;
   renderEvents();
   if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
