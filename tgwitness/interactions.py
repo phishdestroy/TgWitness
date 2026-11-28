@@ -186,18 +186,22 @@ def set_read_only(store, enabled):
 def pace_status(store):
     pending = [store.get_setting(ACTION + r, None) or {} for r in store.get_setting(QUEUE, None) or []]
     times = [p["queued_until"] for p in pending if p.get("queued_until") and not p.get("result")]
-    return {"read_only": read_only(store), "queued": len(times), "next_at": min(times, default=None)}
+    return {"read_only": read_only(store), "goal_off": goal_off(store), "queued": len(times),
+            "next_at": min(times, default=None)}
 
 
 GOAL_OFF = "Telegram actions from the panel are off for the Evidence for a case goal."
+
+
+def goal_off(store):
+    return (store.get_setting("goal_preset", None) or store.get_setting("setup", None) or {}).get("goal") == "evidence"
 
 
 def permitted(collector, conversation=False):
     store = collector.store
     check_pause(collector)
     check_restriction(store, conversation)
-    goal = (store.get_setting("goal_preset", None) or store.get_setting("setup", None) or {}).get("goal")
-    if goal == "evidence":
+    if goal_off(store):
         raise ValueError(GOAL_OFF)
     if read_only(store):
         raise AccountRestricted(READ_ONLY)

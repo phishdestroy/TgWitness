@@ -7144,7 +7144,8 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
-  if(state.status?.actions?.read_only){open.disabled=true;box.append(node("p","hint",tr("This account is read-only. Turn it off on the account page.")));}
+  if(state.status?.actions?.goal_off){open.disabled=true;box.append(node("p","hint",tr("Telegram actions from the panel are off for the Evidence for a case goal.")));}
+  else if(state.status?.actions?.read_only){open.disabled=true;box.append(node("p","hint",tr("This account is read-only. Turn it off on the account page.")));}
   open.addEventListener("click",()=>busy(open,async()=>{
     if(revision!==state.workspaceRevision||linkPreview!==preview)return;
     const result=await panelAction({action:"open",preview_id:preview.preview_id,observe:observe.checked},{profile,revision});
