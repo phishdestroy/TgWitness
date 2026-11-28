@@ -11116,5 +11116,18 @@
   "Attachment not saved": "첨부 파일이 저장되지 않음",
   "On the Case Board": "사건 보드에 있음",
   "This access does not open this section.": "이 접근 권한으로는 이 섹션을 열 수 없습니다.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "이 계정은 아직 이 채팅의 멤버가 아닙니다. 설정 후 채팅에서 이 링크로 참여하세요."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "이 계정은 아직 이 채팅의 멤버가 아닙니다. 설정 후 채팅에서 이 링크로 참여하세요.",
+  "All saved records": "저장된 모든 기록",
+  "Recorded gaps: {n}": "기록된 공백: {n}",
+  "Attachments not saved: {n}": "저장되지 않은 첨부 파일: {n}",
+  "Attachments still downloading: {n}": "다운로드 중인 첨부 파일: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "기록된 공백이 없고 이 선택의 모든 첨부 파일이 저장되었습니다.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "추출본에는 이 공백과 누락 파일이 나열되며 완전하다고 주장하지 않습니다.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py, VERIFY.cmd, VERIFY.sh가 포함된 서명된 인계 추출본(ZIP). 목적과 규칙이 함께 서명됩니다.",
+  "Encrypted: send the password through a separate channel.": "암호화됨: 비밀번호는 별도 채널로 보내세요.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "이 지문은 별도 채널(전화, 우편, 다른 메신저)로 보내고 아카이브 안에 넣지 마세요.",
+  "Independent check": "독립 검증",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "수신자는 ZIP을 풀고 이 지문으로 VERIFY.cmd(Windows) 또는 sh VERIFY.sh를 실행합니다. 지문이 없으면 서명자 키가 확인되지 않았다고 나오고, 다른 지문이면 실패합니다.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "검증은 누가 서명했고 아무것도 바뀌지 않았음을 증명합니다. 내용이 사실이거나 법원이 받아들인다는 것은 증명하지 않습니다.",
+  "Before you hand over": "인계하기 전에"
 }

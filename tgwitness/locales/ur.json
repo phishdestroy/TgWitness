@@ -11167,5 +11167,18 @@
   "Attachment not saved": "منسلکہ محفوظ نہیں ہوا",
   "On the Case Board": "کیس بورڈ پر",
   "This access does not open this section.": "یہ رسائی اس حصے کو نہیں کھولتی۔",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "یہ اکاؤنٹ ابھی اس چیٹ کا رکن نہیں ہے۔ سیٹ اپ کے بعد اس لنک کے ذریعے چیٹس سے شامل ہوں۔"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "یہ اکاؤنٹ ابھی اس چیٹ کا رکن نہیں ہے۔ سیٹ اپ کے بعد اس لنک کے ذریعے چیٹس سے شامل ہوں۔",
+  "All saved records": "تمام محفوظ ریکارڈ",
+  "Recorded gaps: {n}": "درج خلا: {n}",
+  "Attachments not saved: {n}": "غیر محفوظ منسلکات: {n}",
+  "Attachments still downloading: {n}": "ابھی ڈاؤن لوڈ ہو رہے منسلکات: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "کوئی درج خلا نہیں، اور اس انتخاب کے تمام منسلکات محفوظ ہیں۔",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "اقتباس ان خلاؤں اور غائب فائلوں کی فہرست دیتا ہے؛ یہ مکمل ہونے کا دعویٰ نہیں کرتا۔",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py، VERIFY.cmd اور VERIFY.sh کے ساتھ دستخط شدہ حوالگی اقتباس (ZIP)۔ مقصد اور قواعد اس میں دستخط شدہ ہیں۔",
+  "Encrypted: send the password through a separate channel.": "خفیہ کردہ: پاس ورڈ الگ چینل سے بھیجیں۔",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "یہ فنگرپرنٹ الگ چینل (فون، خط، دوسرا میسنجر) سے بھیجیں، کبھی آرکائیو کے اندر نہیں۔",
+  "Independent check": "آزاد جانچ",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "وصول کنندہ ZIP نکال کر اس فنگرپرنٹ کے ساتھ VERIFY.cmd (Windows) یا sh VERIFY.sh چلاتا ہے۔ اس کے بغیر نتیجہ بتاتا ہے کہ دستخط کنندہ کی کلید تصدیق شدہ نہیں؛ مختلف فنگرپرنٹ ناکام ہوتا ہے۔",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "جانچ ثابت کرتی ہے کہ کس نے دستخط کیے اور کچھ نہیں بدلا۔ یہ ثابت نہیں کرتی کہ مواد سچ ہے یا عدالت اسے قبول کرے گی۔",
+  "Before you hand over": "حوالگی سے پہلے"
 }

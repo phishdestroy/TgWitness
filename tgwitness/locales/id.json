@@ -11116,5 +11116,18 @@
   "Attachment not saved": "Lampiran tidak disimpan",
   "On the Case Board": "Di Papan Kasus",
   "This access does not open this section.": "Akses ini tidak membuka bagian ini.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Akun ini belum menjadi anggota obrolan ini. Setelah penyiapan, bergabunglah dari Obrolan dengan tautan ini."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Akun ini belum menjadi anggota obrolan ini. Setelah penyiapan, bergabunglah dari Obrolan dengan tautan ini.",
+  "All saved records": "Semua catatan tersimpan",
+  "Recorded gaps: {n}": "Celah tercatat: {n}",
+  "Attachments not saved: {n}": "Lampiran tidak tersimpan: {n}",
+  "Attachments still downloading: {n}": "Lampiran masih diunduh: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Tidak ada celah tercatat, dan semua lampiran dalam pilihan ini tersimpan.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Ekstrak mencantumkan celah dan berkas yang hilang ini; tidak mengklaim lengkap.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Ekstrak serah terima bertanda tangan (ZIP) dengan verify.py, VERIFY.cmd, dan VERIFY.sh. Tujuan dan aturan ditandatangani di dalamnya.",
+  "Encrypted: send the password through a separate channel.": "Terenkripsi: kirim kata sandi melalui saluran terpisah.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Kirim sidik jari ini melalui saluran terpisah (telepon, surat, aplikasi pesan lain), jangan di dalam arsip.",
+  "Independent check": "Pemeriksaan independen",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Penerima mengekstrak ZIP dan menjalankan VERIFY.cmd (Windows) atau sh VERIFY.sh dengan sidik jari ini. Tanpanya, hasil menyatakan kunci penanda tangan belum dikonfirmasi; sidik jari berbeda gagal.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Pemeriksaan membuktikan siapa yang menandatangani dan tidak ada yang berubah. Ini tidak membuktikan isinya benar atau akan diterima pengadilan.",
+  "Before you hand over": "Sebelum menyerahkan"
 }

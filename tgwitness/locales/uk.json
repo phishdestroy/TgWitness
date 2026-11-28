@@ -11269,5 +11269,18 @@
   "Attachment not saved": "Вкладення не збережено",
   "On the Case Board": "На дошці справи",
   "This access does not open this section.": "Цей доступ не відкриває цей розділ.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Цей акаунт ще не є учасником чату. Після налаштування приєднайтеся до нього з розділу «Чати» за цим посиланням."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Цей акаунт ще не є учасником чату. Після налаштування приєднайтеся до нього з розділу «Чати» за цим посиланням.",
+  "All saved records": "Усі збережені записи",
+  "Recorded gaps: {n}": "Записані пропуски: {n}",
+  "Attachments not saved: {n}": "Незбережені вкладення: {n}",
+  "Attachments still downloading: {n}": "Вкладення ще завантажуються: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Записаних пропусків немає, усі вкладення в цій вибірці збережено.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Витяг перелічує ці пропуски та відсутні файли й не видає себе за повний.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Підписаний витяг для передачі (ZIP) з verify.py, VERIFY.cmd і VERIFY.sh. Мету й правила підписано в ньому.",
+  "Encrypted: send the password through a separate channel.": "Зашифровано: пароль передайте окремим каналом.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Передайте цей відбиток окремим каналом (телефон, лист, інший месенджер), ніколи всередині архіву.",
+  "Independent check": "Незалежна перевірка",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Отримувач розпаковує ZIP і запускає VERIFY.cmd (Windows) або sh VERIFY.sh з цим відбитком. Без нього результат повідомляє, що ключ підписувача не підтверджено; інший відбиток дає відмову.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Перевірка доводить, хто підписав і що нічого не змінено. Вона не доводить, що вміст правдивий або що суд його прийме.",
+  "Before you hand over": "Перед передаванням"
 }

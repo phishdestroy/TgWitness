@@ -11167,5 +11167,18 @@
   "Attachment not saved": "अटैचमेंट सहेजा नहीं गया",
   "On the Case Board": "केस बोर्ड पर",
   "This access does not open this section.": "यह एक्सेस इस अनुभाग को नहीं खोलता।",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "यह खाता अभी इस चैट का सदस्य नहीं है। सेटअप के बाद इस लिंक से चैट्स में जाकर इसमें शामिल हों।"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "यह खाता अभी इस चैट का सदस्य नहीं है। सेटअप के बाद इस लिंक से चैट्स में जाकर इसमें शामिल हों।",
+  "All saved records": "सभी सहेजे गए रिकॉर्ड",
+  "Recorded gaps: {n}": "दर्ज अंतराल: {n}",
+  "Attachments not saved: {n}": "सहेजे नहीं गए अटैचमेंट: {n}",
+  "Attachments still downloading: {n}": "अभी डाउनलोड हो रहे अटैचमेंट: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "कोई दर्ज अंतराल नहीं, और इस चयन के सभी अटैचमेंट सहेजे गए हैं।",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "एक्सट्रैक्ट इन अंतरालों और गायब फ़ाइलों को सूचीबद्ध करता है; यह पूर्ण होने का दावा नहीं करता।",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "verify.py, VERIFY.cmd और VERIFY.sh के साथ हस्ताक्षरित हैंडओवर एक्सट्रैक्ट (ZIP)। उद्देश्य और नियम इसमें हस्ताक्षरित हैं।",
+  "Encrypted: send the password through a separate channel.": "एन्क्रिप्टेड: पासवर्ड अलग चैनल से भेजें।",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "यह फ़िंगरप्रिंट अलग चैनल (फ़ोन, पत्र, दूसरा मैसेंजर) से भेजें, कभी आर्काइव के अंदर नहीं।",
+  "Independent check": "स्वतंत्र जाँच",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "प्राप्तकर्ता ZIP निकालकर इस फ़िंगरप्रिंट के साथ VERIFY.cmd (Windows) या sh VERIFY.sh चलाता है। इसके बिना परिणाम बताता है कि हस्ताक्षरकर्ता की कुंजी पुष्ट नहीं है; अलग फ़िंगरप्रिंट विफल होता है।",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "जाँच यह साबित करती है कि किसने हस्ताक्षर किए और कुछ नहीं बदला। यह साबित नहीं करती कि सामग्री सच है या अदालत इसे स्वीकार करेगी।",
+  "Before you hand over": "सौंपने से पहले"
 }

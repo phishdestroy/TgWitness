@@ -2777,7 +2777,44 @@ function renderHandoverChats(){
     label.append(input,document.createTextNode(" "+(target.title||String(target.chat_id))));return label;
   }));
   if(!targets.length)box.append(node("p","hint",tr("No sources yet: choose chats under Sources first.")));
+  renderHandoverChecklist();
 }
+let handoverCheck=0,handoverTimer=null;
+async function renderHandoverChecklist(){
+  const host=$("handover-checklist");if(!host||!may("export"))return;
+  const serial=++handoverCheck,chats=handoverChats(),moment=id=>$(id).value?$(id).value+":00Z":"";
+  const since=moment("handover-since"),until=moment("handover-until");
+  let facts;
+  try{facts=await json("exports/handover?"+new URLSearchParams({chats:chats.join(","),since,until}));}catch(error){facts={error:error.message};}
+  if(serial!==handoverCheck)return;
+  const list=node("ol","handover-steps"),number=value=>Number(value||0).toLocaleString(LANG);
+  const step=(state,title,...content)=>{const item=node("li");item.dataset.state=state;item.append(node("strong","",title),...content.filter(Boolean));list.append(item);};
+  const when=value=>value.slice(0,16).replace("T"," ");
+  step(chats.length?"ok":"todo",tr("Select"),node("p","",chats.length?trn("{n} chat","{n} chats",chats.length)+" · "
+    +(since||until?(since?when(since):"…")+" – "+(until?when(until):"…")+" UTC":tr("All saved records")):tr("Choose at least one chat.")));
+  if(facts.error)step("todo",tr("Completeness"),node("p","",facts.error));
+  else{
+    const lines=[];
+    if(facts.gaps)lines.push(tr("Recorded gaps: {n}",{n:number(facts.gaps)})+" ("+facts.gap_reasons.map(item=>item.reason+" "+number(item.count)).join(", ")+")");
+    if(facts.attachments_not_saved)lines.push(tr("Attachments not saved: {n}",{n:number(facts.attachments_not_saved)}));
+    if(facts.attachments_waiting)lines.push(tr("Attachments still downloading: {n}",{n:number(facts.attachments_waiting)}));
+    const clean=!lines.length,show=facts.gaps&&viewAllowed("observations")?node("button","text-link",tr("Show in the journal")):null;
+    if(show){show.type="button";show.onclick=()=>openJournalFilter("coverage.gap");}
+    step(clean?"ok":"warn",tr("Completeness"),node("p","",clean?tr("No recorded gaps, and every attachment in this selection is saved."):lines.join(" · ")),
+      clean?null:node("p","hint",tr("The extract lists these gaps and missing files; it does not claim to be complete.")),show);
+  }
+  step("ok",tr("Package"),node("p","",tr("Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.")),
+    $("export-encrypt-on").checked?node("p","hint",tr("Encrypted: send the password through a separate channel.")):null);
+  const key=facts.fingerprint||state.status?.fingerprint||"",copy=node("button","text-link",tr("Copy"));
+  copy.type="button";copy.onclick=async()=>{try{await navigator.clipboard.writeText(key);toast(tr("Copied."));}catch{toast(key);}};
+  const code=node("code","fingerprint",(key.match(/.{1,4}/g)||[]).join(" "));code.dataset.noTranslate="";
+  step(key?"ok":"todo",tr("Signing key"),code,copy,node("p","hint",tr("Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.")));
+  step("ok",tr("Independent check"),node("p","",tr("The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.")),
+    node("p","hint",tr("The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.")));
+  host.replaceChildren(node("h3","",tr("Before you hand over")),list);
+}
+const queueHandoverChecklist=()=>{clearTimeout(handoverTimer);handoverTimer=setTimeout(renderHandoverChecklist,350);};
+for(const id of ["handover-chats","handover-since","handover-until","export-encrypt-on"])$(id).addEventListener("change",queueHandoverChecklist);
 $("handover-load-people").addEventListener("click",event=>busy(event.currentTarget,async()=>{
   const chats=handoverChats();
   if(!chats.length)throw new Error(tr("Choose at least one chat."));

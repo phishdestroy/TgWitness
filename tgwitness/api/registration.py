@@ -788,6 +788,9 @@ def register(app, ctx):
     router.get("/api/exports/history", dependencies=[Depends(authenticate)])(
         routes_export.prepared_exports
     )
+    router.get("/api/exports/handover", dependencies=[Depends(authenticate)])(
+        routes_export.handover_checklist
+    )
     ctx.prepared_tickets = {}
     router.post(
         "/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)]

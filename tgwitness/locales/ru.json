@@ -11254,5 +11254,18 @@
   "Attachment not saved": "Вложение не сохранено",
   "On the Case Board": "На доске дела",
   "This access does not open this section.": "Этот доступ не открывает этот раздел.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Этот аккаунт пока не состоит в чате. После настройки вступите в него из раздела «Чаты» по этой ссылке."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Этот аккаунт пока не состоит в чате. После настройки вступите в него из раздела «Чаты» по этой ссылке.",
+  "All saved records": "Все сохранённые записи",
+  "Recorded gaps: {n}": "Записанные пропуски: {n}",
+  "Attachments not saved: {n}": "Несохранённые вложения: {n}",
+  "Attachments still downloading: {n}": "Вложения ещё загружаются: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Записанных пропусков нет, все вложения в этой выборке сохранены.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Выдержка перечисляет эти пропуски и отсутствующие файлы и не выдаёт себя за полную.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Подписанная выдержка для передачи (ZIP) с verify.py, VERIFY.cmd и VERIFY.sh. Цель и правила подписаны в ней.",
+  "Encrypted: send the password through a separate channel.": "Зашифровано: пароль передайте по отдельному каналу.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Передайте этот отпечаток по отдельному каналу (телефон, письмо, другой мессенджер), никогда внутри архива.",
+  "Independent check": "Независимая проверка",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Получатель распаковывает ZIP и запускает VERIFY.cmd (Windows) или sh VERIFY.sh с этим отпечатком. Без него результат сообщает, что ключ подписавшего не подтверждён; чужой отпечаток даёт отказ.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Проверка доказывает, кто подписал и что ничего не изменено. Она не доказывает, что содержимое правдиво или что суд его примет.",
+  "Before you hand over": "Перед передачей"
 }

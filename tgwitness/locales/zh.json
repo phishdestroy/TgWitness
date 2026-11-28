@@ -11116,5 +11116,18 @@
   "Attachment not saved": "附件未保存",
   "On the Case Board": "在案件看板上",
   "This access does not open this section.": "此访问权限无法打开此部分。",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "此账号尚未加入这个聊天。完成设置后，请在“聊天”中使用此链接加入。"
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "此账号尚未加入这个聊天。完成设置后，请在“聊天”中使用此链接加入。",
+  "All saved records": "所有已保存的记录",
+  "Recorded gaps: {n}": "已记录的缺口：{n}",
+  "Attachments not saved: {n}": "未保存的附件：{n}",
+  "Attachments still downloading: {n}": "仍在下载的附件：{n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "没有已记录的缺口，此选择中的附件均已保存。",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "摘录会列出这些缺口和缺失的文件，不声称完整。",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "已签名的移交摘录（ZIP），附 verify.py、VERIFY.cmd 和 VERIFY.sh。用途和规则已一并签名。",
+  "Encrypted: send the password through a separate channel.": "已加密：请通过另一个渠道发送密码。",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "请通过另一个渠道（电话、信件、其他通讯软件）发送此指纹，切勿放在归档内。",
+  "Independent check": "独立验证",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "收件人解压 ZIP，并用此指纹运行 VERIFY.cmd（Windows）或 sh VERIFY.sh。未提供指纹时，结果显示签名者密钥未确认；指纹不同则验证失败。",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "验证可证明由谁签名且内容未被更改，但不能证明内容属实或法院会采纳。",
+  "Before you hand over": "移交之前"
 }

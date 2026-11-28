@@ -34,3 +34,11 @@
 #view-evidence .exports-more { display: none; }
 html[data-ui-level=simple] #view-evidence:not(.exports-expanded) :is(#collection-methods, .export-preferences, #export-more-formats, #sealed-capture-option, #handover-card, #export-chat-tools, label[for=export-container], #export-container, #export-container-hint) { display: none; }
 html[data-ui-level=simple] #view-evidence:not(.exports-expanded) .exports-more { display: inline-flex; justify-self: start; margin: 4px 0 12px; }
+.handover-checklist h3 { margin: 12px 0 6px; font-size: 1rem; }
+.handover-steps { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+.handover-steps > li { border-left: 3px solid var(--line, #d0d5dd); padding: 2px 0 2px 10px; overflow-wrap: anywhere; }
+.handover-steps > li[data-state=ok] { border-left-color: var(--success); }
+.handover-steps > li[data-state=warn] { border-left-color: var(--warning, #b45309); }
+.handover-steps > li > strong { display: block; }
+.handover-steps > li p { margin: 2px 0; }
+.handover-steps code.fingerprint { display: inline-block; margin: 2px 8px 2px 0; word-break: break-all; }

@@ -11116,5 +11116,18 @@
   "Attachment not saved": "Lampiran tidak disimpan",
   "On the Case Board": "Di Papan Kes",
   "This access does not open this section.": "Akses ini tidak membuka bahagian ini.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Akaun ini belum menjadi ahli sembang ini. Selepas persediaan, sertai daripada Sembang dengan pautan ini."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Akaun ini belum menjadi ahli sembang ini. Selepas persediaan, sertai daripada Sembang dengan pautan ini.",
+  "All saved records": "Semua rekod tersimpan",
+  "Recorded gaps: {n}": "Jurang direkodkan: {n}",
+  "Attachments not saved: {n}": "Lampiran tidak disimpan: {n}",
+  "Attachments still downloading: {n}": "Lampiran masih dimuat turun: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Tiada jurang direkodkan, dan semua lampiran dalam pilihan ini disimpan.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "Ekstrak menyenaraikan jurang dan fail yang hilang ini; ia tidak mendakwa lengkap.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Ekstrak serahan bertandatangan (ZIP) dengan verify.py, VERIFY.cmd dan VERIFY.sh. Tujuan dan peraturan ditandatangani di dalamnya.",
+  "Encrypted: send the password through a separate channel.": "Disulitkan: hantar kata laluan melalui saluran berasingan.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Hantar cap jari ini melalui saluran berasingan (telefon, surat, aplikasi lain), jangan dalam arkib.",
+  "Independent check": "Semakan bebas",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Penerima mengekstrak ZIP dan menjalankan VERIFY.cmd (Windows) atau sh VERIFY.sh dengan cap jari ini. Tanpanya, keputusan menyatakan kunci penandatangan belum disahkan; cap jari berbeza gagal.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Semakan membuktikan siapa yang menandatangani dan tiada yang berubah. Ia tidak membuktikan kandungan benar atau mahkamah akan menerimanya.",
+  "Before you hand over": "Sebelum menyerahkan"
 }

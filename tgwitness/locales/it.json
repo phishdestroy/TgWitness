@@ -11177,5 +11177,18 @@
   "Attachment not saved": "Allegato non salvato",
   "On the Case Board": "Nella bacheca del caso",
   "This access does not open this section.": "Questo accesso non apre questa sezione.",
-  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Questo account non è ancora membro di questa chat. Dopo la configurazione, unisciti da Chat con questo link."
+  "This account is not a member of this chat yet. After setup, join it from Chats with this link.": "Questo account non è ancora membro di questa chat. Dopo la configurazione, unisciti da Chat con questo link.",
+  "All saved records": "Tutti i record salvati",
+  "Recorded gaps: {n}": "Lacune registrate: {n}",
+  "Attachments not saved: {n}": "Allegati non salvati: {n}",
+  "Attachments still downloading: {n}": "Allegati ancora in download: {n}",
+  "No recorded gaps, and every attachment in this selection is saved.": "Nessuna lacuna registrata; tutti gli allegati di questa selezione sono salvati.",
+  "The extract lists these gaps and missing files; it does not claim to be complete.": "L'estratto elenca queste lacune e i file mancanti; non si dichiara completo.",
+  "Signed handover extract (ZIP) with verify.py, VERIFY.cmd and VERIFY.sh. Purpose and rules are signed into it.": "Estratto di consegna firmato (ZIP) con verify.py, VERIFY.cmd e VERIFY.sh. Scopo e regole sono firmati al suo interno.",
+  "Encrypted: send the password through a separate channel.": "Cifrato: invia la password tramite un canale separato.",
+  "Send this fingerprint through a separate channel (phone, letter, another messenger), never inside the archive.": "Invia questa impronta tramite un canale separato (telefono, lettera, altra app), mai dentro l'archivio.",
+  "Independent check": "Verifica indipendente",
+  "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Il destinatario estrae lo ZIP ed esegue VERIFY.cmd (Windows) o sh VERIFY.sh con questa impronta. Senza, il risultato indica che la chiave del firmatario non è confermata; un'impronta diversa fallisce.",
+  "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "La verifica prova chi ha firmato e che nulla è cambiato. Non prova che il contenuto sia vero né che un tribunale lo accetti.",
+  "Before you hand over": "Prima della consegna"
 }
