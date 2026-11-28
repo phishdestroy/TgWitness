@@ -45,7 +45,7 @@ def rewrite(source, target, change):
             changed.writestr(*extra)
 
 
-with tempfile.TemporaryDirectory() as folder:
+with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as folder:
     root = Path(folder) / "workspace"
     root.mkdir()
     vault = Vault(root)
@@ -105,11 +105,17 @@ with tempfile.TemporaryDirectory() as folder:
         database.execute("DROP TRIGGER IF EXISTS immutable_update")
         database.execute("UPDATE events SET payload=replace(payload, 'message 3', 'message 8') WHERE seq=3")
     database.close()
+    store.close()
+    changed = None
     try:
-        Store(root).verify(vault.public_key)
+        changed = Store(root)
+        changed.verify(vault.public_key)
         refused = False
     except Exception:
         refused = True
+    finally:
+        if changed is not None:
+            changed.close()
     check("a record changed in the journal file is refused", refused)
 
 if failures:
