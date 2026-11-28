@@ -11162,5 +11162,6 @@
   "Missing: {items}": "নেই: {items}",
   "No observation gaps in the last 24 hours.": "গত ২৪ ঘণ্টায় পর্যবেক্ষণে কোনো ফাঁক নেই।",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "গত ২৪ ঘণ্টায় পর্যবেক্ষণের ফাঁক: {n}। সর্বশেষটি {time}।",
-  "Failed on {time}; the record stays in the signed journal.": "{time}-এ ব্যর্থ হয়েছিল; রেকর্ডটি স্বাক্ষরিত জার্নালে থেকে যায়।"
+  "Failed on {time}; the record stays in the signed journal.": "{time}-এ ব্যর্থ হয়েছিল; রেকর্ডটি স্বাক্ষরিত জার্নালে থেকে যায়।",
+  "Observation stopped while the disk was full": "ডিস্ক পূর্ণ থাকায় পর্যবেক্ষণ বন্ধ ছিল"
 }

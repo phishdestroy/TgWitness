@@ -11162,5 +11162,6 @@
   "Missing: {items}": "کم است: {items}",
   "No observation gaps in the last 24 hours.": "در ۲۴ ساعت گذشته هیچ شکافی در مشاهده نبوده است.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "شکاف‌های مشاهده در ۲۴ ساعت گذشته: {n}. آخرین مورد {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "در {time} ناموفق بود؛ این رکورد در دفتر امضاشده باقی می‌ماند."
+  "Failed on {time}; the record stays in the signed journal.": "در {time} ناموفق بود؛ این رکورد در دفتر امضاشده باقی می‌ماند.",
+  "Observation stopped while the disk was full": "مشاهده در زمانی که دیسک پر بود متوقف شد"
 }

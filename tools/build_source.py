@@ -49,7 +49,7 @@ BUILD_FILES = {
         "README.md", "audit_signed_export.py", "bench_fulltext.py", "build_board_schemas.py", "build_dossier_example.py",
         "build_installer.py", "build_portable.py", "build_report_styles.py", "build_site.py",
         "build_source.py", "build_standalone_verifier.py", "build_verifier.py", "build_wiki.py",
-        "container_publication.py", "i18n_keys.py", "installer_checks.py", "installer_publication.py",
+        "container_publication.py", "evidence_roundtrip.py", "i18n_keys.py", "installer_checks.py", "installer_publication.py",
         "lock_media_requirements.py", "lock_requirements.py", "ocr_advisories.py", "publication_guard.py",
         "release_source.py", "sbom_locks.py", "sealed_release.py", "site_account.py", "site_content.py",
         "site_context.py", "site_diagrams.py", "site_export_clinic.py", "site_i18n.py", "site_llms.py",

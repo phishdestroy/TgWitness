@@ -17,7 +17,8 @@ GitHub fork instead of a local installation.
 ## Install and start
 
 The guided installer includes its own Python and checks package hashes and release
-signatures before installing. Running it again updates an existing installation.
+signatures before installing. Running it again updates an existing installation; a running panel switches to the
+new version after `tgwitness restart`.
 
 **Linux / macOS:**
 

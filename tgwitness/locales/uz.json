@@ -11162,5 +11162,6 @@
   "Missing: {items}": "Yetishmaydi: {items}",
   "No observation gaps in the last 24 hours.": "So'nggi 24 soatda kuzatuvda uzilish yo'q.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "So'nggi 24 soatdagi kuzatuv uzilishlari: {n}. Oxirgisi {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "{time} da muvaffaqiyatsiz tugadi; yozuv imzolangan jurnalda qoladi."
+  "Failed on {time}; the record stays in the signed journal.": "{time} da muvaffaqiyatsiz tugadi; yozuv imzolangan jurnalda qoladi.",
+  "Observation stopped while the disk was full": "Disk to'la bo'lgan paytda kuzatuv to'xtagan edi"
 }

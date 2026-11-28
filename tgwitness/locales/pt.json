@@ -11172,5 +11172,6 @@
   "Missing: {items}": "Falta: {items}",
   "No observation gaps in the last 24 hours.": "Nenhuma lacuna de observação nas últimas 24 horas.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lacunas de observação nas últimas 24 horas: {n}. A última {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "Falhou em {time}; o registro permanece no diário assinado."
+  "Failed on {time}; the record stays in the signed journal.": "Falhou em {time}; o registro permanece no diário assinado.",
+  "Observation stopped while the disk was full": "A observação parou enquanto o disco estava cheio"
 }

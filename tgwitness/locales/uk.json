@@ -11264,5 +11264,6 @@
   "Missing: {items}": "Бракує: {items}",
   "No observation gaps in the last 24 hours.": "За останні 24 години пропусків спостереження немає.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Пропусків спостереження за останні 24 години: {n}. Останній {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "Не пройшов {time}; запис про це лишається в підписаному журналі."
+  "Failed on {time}; the record stays in the signed journal.": "Не пройшов {time}; запис про це лишається в підписаному журналі.",
+  "Observation stopped while the disk was full": "Спостереження стояло, поки диск був заповнений"
 }

@@ -1,10 +1,12 @@
 import asyncio
 import base64
+import errno
 import hashlib
 import json
 import logging
 import re
 import shutil
+import sqlite3
 import time
 import secrets
 import warnings
@@ -676,6 +678,16 @@ class _JournalAppend:
 
     def append(self, kind, payload):
         return self.store.append(kind, payload)
+
+
+DISK_RESUME_SECONDS = 30
+DISK_RESUME_MB = 64
+
+
+def disk_full(exc):
+    if isinstance(exc, sqlite3.OperationalError):
+        return "full" in str(exc).lower()
+    return isinstance(exc, OSError) and exc.errno in (errno.ENOSPC, errno.EDQUOT)
 
 
 class Collector:
@@ -3973,8 +3985,32 @@ class Collector:
                                                               "run_id": self.run_id})
                 except Exception:
                     self.phase = "storage_error"
+            if (disk_full(exc) or self.phase == "storage_error") and not getattr(self, "disk_watch", None):
+                self.disk_watch = asyncio.create_task(self.resume_when_disk_frees(utcnow()))
             if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
+
+    async def resume_when_disk_frees(self, stopped_at):
+        try:
+            while True:
+                await asyncio.sleep(DISK_RESUME_SECONDS)
+                if self.running or self.phase not in ("collector_error", "storage_error"):
+                    return
+                if shutil.disk_usage(self.store.root).free < DISK_RESUME_MB * 1024**2:
+                    continue
+                restart = getattr(self, "restart_observation", None)
+                if restart:
+                    self.note("coverage.gap", {
+                        "reason": "disk_full", "from": stopped_at, "to": utcnow(),
+                        "meaning": "The disk was full, so observation stopped and nothing could be recorded in "
+                                   "this interval. Updates Telegram still holds are fetched when observation "
+                                   "resumes; edits and deletions in between can be missing."})
+                    LOG.info("Free disk space is back; resuming observation")
+                    self.journal_write_failures = 0
+                    await restart()
+                return
+        finally:
+            self.disk_watch = None
 
     async def live_failure(self, exc, context, client, chat_ids, update=None):
         await self.failure(exc, context, client=client, details=update_details(update, chat_ids))

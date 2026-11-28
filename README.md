@@ -41,7 +41,7 @@
 
 ## Install
 
-Python is included. Run the same command again to update.
+Python is included. Run the same command again to update, then `tgwitness restart` to switch a running panel to the new version.
 
 **Linux / macOS**
 

@@ -6,7 +6,7 @@
 
 # TgWitness verification
 
-**Updated 10 November 2026.** Results are tied to the revision, environment and
+**Updated 28 November 2026.** Results are tied to the revision, environment and
 workload recorded for each run. [Current capabilities](STATUS.md) describes the
 available workflows; this page records what has actually been checked.
 
@@ -31,6 +31,7 @@ snapshots; current implementation and qualification are recorded separately.
 
 | Latest evidence | Result | Scope |
 | --- | --- | --- |
+| [1.0.2 after the 28 November audit](#102-after-the-28-november-audit--28-november-2026) · 28 Nov | Live end-to-end path, tamper, kill, full-disk and backup checks passed; release and nightly audit green again | RunPod CPU server, two live accounts; PRs #862–#866 |
 | Large public-group scale run · 20 Nov | 15,000 real public-group messages collected by two accounts into signed journals; three TSAs each; standalone verifier integrity confirmed | Two large public megagroups; evidence export + offline verify |
 | Court-grade live acceptance · 20 Nov | RFC 3161, checkpoint/truncation, witness channel with external time, court package against three TSAs, OTS/Bitcoin anchors, FloodWait, secret-chat self-destruct and media; where an artifact can be altered, a tampered or truncated copy was rejected | Live accounts and a real channel; public TSAs and Telegram Bot API |
 | Account security and exports · 10 Nov | Witness probe caught a second client on the same key; killed chat exports resumed; TDX quote checked offline | RunPod pod, three test accounts; revisions `6c7171228` to `196a5bcd1` |
@@ -46,6 +47,7 @@ snapshots; current implementation and qualification are recorded separately.
 <details>
 <summary>On this page</summary>
 
+- [1.0.2 after the 28 November audit · 28 November 2026](#102-after-the-28-november-audit--28-november-2026)
 - [Release audit and fresh exports · 6 November 2026](#release-audit-and-fresh-exports--6-november-2026)
 - [Trusted Live CPU Ubuntu and WARP · 5 November 2026](#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
 - [Live Phala Cloud deployment · 4 November 2026](#live-phala-cloud-deployment--4-november-2026)
@@ -64,6 +66,29 @@ snapshots; current implementation and qualification are recorded separately.
 - [Qualification status](#qualification-status)
 
 </details>
+
+## 1.0.2 after the 28 November audit · 28 November 2026
+
+Revision: `main` after [#866](https://github.com/phishdestroy/TgWitness/pull/866), which includes the fixes from
+[#862](https://github.com/phishdestroy/TgWitness/pull/862) to #866. Live checks ran on a RunPod CPU server (`cpu3c`,
+Ubuntu, WARP route) with the installed 1.0.2 package and these fixes applied, two Telegram accounts dedicated to the
+test, and the panel in quick mode. Each pull request passed the repository checks, including the installer and installed
+panel on Ubuntu and Windows.
+
+| Check | Result |
+| --- | --- |
+| End-to-end path, run twice | Account A posted, edited, deleted, replied and sent photos in a group and a channel; the observing workspace saved every action in 0.08–0.54 s; the panel showed the edit and the deletion; a 40 s route freeze produced a signed `connection.stalled` that appears in the exported `coverage.json`; the exported ZIP verified with the fingerprint received separately; a different fingerprint and one changed byte were both refused |
+| Journal changed on disk | With the append-only triggers removed: a changed text, a deleted record, a cut tail and a changed time were each refused by Verify and by export. A journal replaced by an older copy while the panel ran is recorded as `journal.rolled_back` at the next checkpoint |
+| Background journal check | A full check runs ten minutes after start and every six hours; a changed record produced one signed `journal.verification_failed` and the warning on the overview |
+| Process killed with SIGKILL during 30 messages | Journal verified; 30 of 30 messages saved, 9 of them fetched after restart through update recovery |
+| Disk filled to zero during collection | Observation stopped, resumed by itself when space returned, recorded the lost interval as `coverage.gap` `disk_full`; messages from the interval were fetched by update recovery or recheck; journal verified |
+| Backup while the panel runs, restore into a clean folder | `verify-backup` matched 5,438 files; all nine workspaces verified after restore and their heads matched the live journals |
+| Synthetic round trip | `tools/evidence_roundtrip.py` exports a synthetic journal, verifies it with its fingerprint and refuses a changed record, an added file, a removed file, another fingerprint and a record changed in the journal file |
+| OCR advisories | Tesseract 5.5.5; [nightly security audit](https://github.com/phishdestroy/TgWitness/actions/runs/46119519224) and [checks with the media worker build](https://github.com/phishdestroy/TgWitness/actions/runs/46119517031) passed |
+
+Not checked in this round: Sealed collector, storage on S3 Object Lock, upgrade from 1.0.1, Swarm and replica, domain and
+local panel modes, clock changes, history of several hundred thousand messages, the security checks planned for the
+panel's request handling, and verification on a clean Windows machine outside CI.
 
 ## Phala Cloud with live Telegram account · 9 November 2026
 
