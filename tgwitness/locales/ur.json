@@ -11162,5 +11162,6 @@
   "Missing: {items}": "کمی: {items}",
   "No observation gaps in the last 24 hours.": "گزشتہ 24 گھنٹوں میں مشاہدے میں کوئی خلا نہیں۔",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "گزشتہ 24 گھنٹوں میں مشاہدے کے خلا: {n}۔ آخری {time}۔",
-  "Failed on {time}; the record stays in the signed journal.": "{time} کو ناکام ہوا؛ یہ ریکارڈ دستخط شدہ جرنل میں رہتا ہے۔"
+  "Failed on {time}; the record stays in the signed journal.": "{time} کو ناکام ہوا؛ یہ ریکارڈ دستخط شدہ جرنل میں رہتا ہے۔",
+  "Observation stopped while the disk was full": "ڈسک بھری ہونے کے دوران مشاہدہ رکا رہا"
 }

@@ -3988,9 +3988,9 @@ class Collector:
             if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
             if (disk_full(exc) or self.phase == "storage_error") and not getattr(self, "disk_watch", None):
-                self.disk_watch = asyncio.create_task(self.resume_when_disk_frees())
+                self.disk_watch = asyncio.create_task(self.resume_when_disk_frees(utcnow()))
 
-    async def resume_when_disk_frees(self):
+    async def resume_when_disk_frees(self, stopped_at):
         try:
             while True:
                 await asyncio.sleep(DISK_RESUME_SECONDS)
@@ -4000,6 +4000,11 @@ class Collector:
                     continue
                 restart = getattr(self, "restart_observation", None)
                 if restart:
+                    self.note("coverage.gap", {
+                        "reason": "disk_full", "from": stopped_at, "to": utcnow(),
+                        "meaning": "The disk was full, so observation stopped and nothing could be recorded in "
+                                   "this interval. Updates Telegram still holds are fetched when observation "
+                                   "resumes; edits and deletions in between can be missing."})
                     LOG.info("Free disk space is back; resuming observation")
                     await restart()
                 return

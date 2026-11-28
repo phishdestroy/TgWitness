@@ -11111,5 +11111,6 @@
   "Missing: {items}": "ขาด: {items}",
   "No observation gaps in the last 24 hours.": "ไม่มีช่องว่างในการสังเกตการณ์ใน 24 ชั่วโมงที่ผ่านมา",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "ช่องว่างในการสังเกตการณ์ใน 24 ชั่วโมงที่ผ่านมา: {n} ครั้งล่าสุด {time}",
-  "Failed on {time}; the record stays in the signed journal.": "ล้มเหลวเมื่อ {time} ระเบียนนี้ยังคงอยู่ในบันทึกที่ลงนาม"
+  "Failed on {time}; the record stays in the signed journal.": "ล้มเหลวเมื่อ {time} ระเบียนนี้ยังคงอยู่ในบันทึกที่ลงนาม",
+  "Observation stopped while the disk was full": "การสังเกตการณ์หยุดลงระหว่างที่ดิสก์เต็ม"
 }

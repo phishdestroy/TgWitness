@@ -11213,5 +11213,6 @@
   "Missing: {items}": "חסר: {items}",
   "No observation gaps in the last 24 hours.": "אין פערים בתצפית ב־24 השעות האחרונות.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "פערי תצפית ב־24 השעות האחרונות: {n}. האחרון {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "נכשל ב־{time}; הרשומה נשארת ביומן החתום."
+  "Failed on {time}; the record stays in the signed journal.": "נכשל ב־{time}; הרשומה נשארת ביומן החתום.",
+  "Observation stopped while the disk was full": "התצפית נעצרה בזמן שהדיסק היה מלא"
 }

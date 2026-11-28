@@ -11111,5 +11111,6 @@
   "Missing: {items}": "Tiada: {items}",
   "No observation gaps in the last 24 hours.": "Tiada lompang pemerhatian dalam 24 jam terakhir.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lompang pemerhatian dalam 24 jam terakhir: {n}. Terakhir {time}.",
-  "Failed on {time}; the record stays in the signed journal.": "Gagal pada {time}; rekod itu kekal dalam jurnal bertandatangan."
+  "Failed on {time}; the record stays in the signed journal.": "Gagal pada {time}; rekod itu kekal dalam jurnal bertandatangan.",
+  "Observation stopped while the disk was full": "Pemerhatian terhenti semasa cakera penuh"
 }
