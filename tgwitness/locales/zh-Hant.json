@@ -11093,5 +11093,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "此帳號沒有 Telegram 資料夾。請在 Telegram 應用程式中建立資料夾，或在此選擇聊天室。",
   "Turn off Read-only": "關閉「唯讀」",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "要關閉此帳號的「唯讀」嗎？關閉後，面板即可透過此帳號傳送訊息、加入聊天並按下機器人按鈕。",
-  "Complete the earlier steps first.": "請先完成前面的步驟。"
+  "Complete the earlier steps first.": "請先完成前面的步驟。",
+  "Transaction hash": "交易雜湊",
+  "Payment link": "付款連結"
 }

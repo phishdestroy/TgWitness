@@ -11246,5 +11246,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "To konto nie ma folderów Telegram. Utwórz folder w aplikacji Telegram albo wybierz czaty tutaj.",
   "Turn off Read-only": "Wyłącz „Tylko do odczytu”",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Wyłączyć „Tylko do odczytu” dla tego konta? Panel będzie mógł wtedy wysyłać wiadomości, dołączać do czatów i naciskać przyciski botów z tego konta.",
-  "Complete the earlier steps first.": "Najpierw ukończ poprzednie kroki."
+  "Complete the earlier steps first.": "Najpierw ukończ poprzednie kroki.",
+  "Transaction hash": "Hash transakcji",
+  "Payment link": "Link do płatności"
 }

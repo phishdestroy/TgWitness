@@ -11093,5 +11093,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Tài khoản này không có thư mục Telegram nào. Hãy tạo một thư mục trong ứng dụng Telegram hoặc chọn các cuộc trò chuyện tại đây.",
   "Turn off Read-only": "Tắt chế độ Chỉ đọc",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Tắt chế độ Chỉ đọc cho tài khoản này? Sau đó bảng điều khiển có thể gửi tin nhắn, tham gia và bấm nút bot từ tài khoản này.",
-  "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước."
+  "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước.",
+  "Transaction hash": "Mã băm giao dịch",
+  "Payment link": "Liên kết thanh toán"
 }

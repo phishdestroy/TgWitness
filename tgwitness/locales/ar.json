@@ -11348,5 +11348,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "لا توجد مجلدات Telegram في هذا الحساب. أنشئ مجلدًا في تطبيق Telegram، أو اختر المحادثات هنا.",
   "Turn off Read-only": "إيقاف وضع «للقراءة فقط»",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "هل تريد إيقاف وضع «للقراءة فقط» لهذا الحساب؟ ستتمكن اللوحة بعدها من الإرسال والانضمام والضغط على أزرار البوتات باسمه.",
-  "Complete the earlier steps first.": "أكمل الخطوات السابقة أولًا."
+  "Complete the earlier steps first.": "أكمل الخطوات السابقة أولًا.",
+  "Transaction hash": "تجزئة المعاملة",
+  "Payment link": "رابط دفع"
 }

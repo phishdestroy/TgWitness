@@ -11093,5 +11093,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "このアカウントには Telegram フォルダがありません。Telegram アプリでフォルダを作成するか、ここでチャットを選択してください。",
   "Turn off Read-only": "「読み取り専用」をオフにする",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "このアカウントの「読み取り専用」をオフにしますか？オフにすると、パネルはこのアカウントから送信、参加、ボットのボタン操作ができるようになります。",
-  "Complete the earlier steps first.": "先に前の手順を完了してください。"
+  "Complete the earlier steps first.": "先に前の手順を完了してください。",
+  "Transaction hash": "トランザクションハッシュ",
+  "Payment link": "支払いリンク"
 }
