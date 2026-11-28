@@ -4,7 +4,7 @@ cd /build
 python3.12 /build/ocr/fetch-sources.py
 mkdir source
 tar -xzf downloads/tesseract.tar.gz --strip-components=1 -C source
-test "$(cat source/VERSION)" = '5.5.4'
+test "$(cat source/VERSION)" = '5.5.5'
 cmake -S source -B tesseract-build \
     -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib \
     -DPKG_CONFIG_ARGN=--static \

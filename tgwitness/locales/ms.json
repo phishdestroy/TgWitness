@@ -11093,5 +11093,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "Akaun ini tiada folder Telegram. Cipta folder dalam aplikasi Telegram, atau pilih sembang di sini.",
   "Turn off Read-only": "Matikan Hanya Baca",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Matikan Hanya Baca untuk akaun ini? Panel kemudian boleh menghantar, menyertai dan menekan butang bot daripada akaun ini.",
-  "Complete the earlier steps first.": "Lengkapkan langkah sebelumnya dahulu."
+  "Complete the earlier steps first.": "Lengkapkan langkah sebelumnya dahulu.",
+  "Transaction hash": "Cincangan transaksi",
+  "Payment link": "Pautan pembayaran"
 }

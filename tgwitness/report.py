@@ -1754,7 +1754,7 @@ def reactions_text(found):
 
 IOC_KINDS = {"url": "Link", "domain": "Domain", "wallet": "Wallet", "telegram": "Telegram username",
              "telegram-invite": "Telegram invite link", "email": "E-mail address", "phone": "Phone number",
-             "image": "Image (SHA-256)"}
+             "image": "Image (SHA-256)", "transaction": "Transaction hash", "payment-uri": "Payment link"}
 IOC_SOURCES = {"text": "message text", "hidden link": "hidden link", "button": "button", "link preview": "link preview",
                "chat description": "chat description", "attachment": "attachment"}
 IOC_CHECKSUMS = {"valid": "checksum valid", "none": "no checksum", "not checked": "checksum not checked"}
@@ -1763,7 +1763,7 @@ IOC_SHOWN = 1000
 
 def ioc_rows(say, found):
     for item in found["items"][:IOC_SHOWN]:
-        kind = say(IOC_KINDS[item["kind"]])
+        kind = say(IOC_KINDS.get(item["kind"], item["kind"]))
         if item["kind"] == "wallet":
             kind += " · " + str(item.get("chain")) + " · " + say(IOC_CHECKSUMS.get(item.get("checksum"), "checksum not checked"))
         value = ioc.defang(item["kind"], item["value"]) + (" (" + item["punycode"] + ")" if item.get("punycode") else "") \

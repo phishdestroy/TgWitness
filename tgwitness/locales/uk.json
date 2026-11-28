@@ -11246,5 +11246,7 @@
   "This account has no Telegram folders. Create one in the Telegram app, or choose chats here.": "У цього облікового запису немає папок Telegram. Створіть папку в застосунку Telegram або виберіть чати тут.",
   "Turn off Read-only": "Вимкнути «Тільки для читання»",
   "Turn off Read-only for this account? The panel can then send, join and press bot buttons from it.": "Вимкнути «Тільки для читання» для цього облікового запису? Після цього панель зможе надсилати повідомлення, вступати в чати й натискати кнопки ботів від його імені.",
-  "Complete the earlier steps first.": "Спершу завершіть попередні кроки."
+  "Complete the earlier steps first.": "Спершу завершіть попередні кроки.",
+  "Transaction hash": "Хеш транзакції",
+  "Payment link": "Платіжне посилання"
 }
