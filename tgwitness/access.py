@@ -168,6 +168,7 @@ POLICY = {
     "GET /api/chats": ("view", "filter"),
     "GET /api/notifications": ("view", "filter"),
     "GET /api/chats/{chat_id}/messages": ("view", "path"),
+    "GET /api/chats/{chat_id}/messages/{message_id}/origin": ("view", "path"),
     "GET /api/chats/{chat_id}/authors": ("view", "path"),
     "GET /api/chats/{chat_id}/pinned": ("view", "path"),
     "GET /api/chats/{chat_id}/media-list": ("view", "path"),

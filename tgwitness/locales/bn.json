@@ -11195,5 +11195,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time}-এ একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি। একটি স্বাক্ষরিত ফাঁক তা চিহ্নিত করে; সাম্প্রতিক ইতিহাসের পরবর্তী পুনঃপরীক্ষায় বার্তাটি পাওয়া যেতে পারে।",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ডিস্ক পূর্ণ থাকায় পর্যবেক্ষণ থেমেছিল, {from} থেকে {to}। একটি স্বাক্ষরিত ফাঁক সময়কাল চিহ্নিত করে; পর্যবেক্ষণ নিজে থেকে আবার চলেছে।",
   "Show attachments not saved": "সংরক্ষিত হয়নি এমন সংযুক্তি দেখান",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "কিছু বদলায়নি। এই অ্যাক্সেস বাড়াতে ওয়ার্কস্পেস প্রশাসককে বলুন।"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "কিছু বদলায়নি। এই অ্যাক্সেস বাড়াতে ওয়ার্কস্পেস প্রশাসককে বলুন।",
+  "Open original": "মূল বার্তা খুলুন",
+  "Origin not observed": "মূল পর্যবেক্ষিত হয়নি",
+  "Forwarded from {name}, {time}": "{name} থেকে ফরোয়ার্ড, {time}",
+  "The sender hides their account in forwards.": "প্রেরক ফরোয়ার্ডে নিজের অ্যাকাউন্ট লুকিয়ে রাখেন।",
+  "Imported from another app; Telegram has no original message.": "অন্য অ্যাপ থেকে আমদানি; Telegram-এ মূল বার্তা নেই।",
+  "Telegram names the original sender but not the original message.": "Telegram মূল প্রেরকের নাম দেয়, মূল বার্তা নয়।",
+  "The original chat is not open to this access.": "মূল চ্যাট এই অ্যাক্সেসের জন্য খোলা নয়।",
+  "The original chat is not collected in this workspace.": "মূল চ্যাট এই ওয়ার্কস্পেসে সংগ্রহ করা হয় না।",
+  "The original message is not saved in this workspace.": "মূল বার্তা এই ওয়ার্কস্পেসে সংরক্ষিত নয়।"
 }

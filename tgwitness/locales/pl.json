@@ -11297,5 +11297,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Aktualizacji z {time} nie udało się przetworzyć i nie została zapisana. Oznacza ją podpisana luka; kolejne sprawdzenie najnowszej historii może odnaleźć wiadomość.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Obserwacja stała przy pełnym dysku, od {from} do {to}. Okres oznacza podpisana luka; obserwacja wznowiła się sama.",
   "Show attachments not saved": "Pokaż niezapisane załączniki",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nic nie zmieniono. Poproś administratora obszaru roboczego o rozszerzenie tego dostępu."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nic nie zmieniono. Poproś administratora obszaru roboczego o rozszerzenie tego dostępu.",
+  "Open original": "Otwórz oryginał",
+  "Origin not observed": "Oryginał niezaobserwowany",
+  "Forwarded from {name}, {time}": "Przekazano od {name}, {time}",
+  "The sender hides their account in forwards.": "Nadawca ukrywa swoje konto w przekazaniach.",
+  "Imported from another app; Telegram has no original message.": "Zaimportowano z innej aplikacji; Telegram nie ma oryginalnej wiadomości.",
+  "Telegram names the original sender but not the original message.": "Telegram podaje pierwotnego nadawcę, ale nie oryginalną wiadomość.",
+  "The original chat is not open to this access.": "Pierwotny czat nie jest otwarty dla tego dostępu.",
+  "The original chat is not collected in this workspace.": "Pierwotny czat nie jest zbierany w tym obszarze roboczym.",
+  "The original message is not saved in this workspace.": "Oryginalna wiadomość nie jest zapisana w tym obszarze roboczym."
 }

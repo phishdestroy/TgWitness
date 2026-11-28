@@ -11144,5 +11144,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} 的一条更新无法处理，未被保存。已签名的缺口标记了它；下次重新检查近期历史时可能找到该消息。",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "磁盘已满时观察停止，从 {from} 到 {to}。已签名的缺口标记了这段期间；观察已自动恢复。",
   "Show attachments not saved": "显示未保存的附件",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "未做任何更改。请工作区管理员扩大此访问权限。"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "未做任何更改。请工作区管理员扩大此访问权限。",
+  "Open original": "打开原始消息",
+  "Origin not observed": "未观察到原始消息",
+  "Forwarded from {name}, {time}": "转发自 {name}，{time}",
+  "The sender hides their account in forwards.": "发送者在转发中隐藏了其账号。",
+  "Imported from another app; Telegram has no original message.": "从其他应用导入；Telegram 没有原始消息。",
+  "Telegram names the original sender but not the original message.": "Telegram 提供原始发送者，但未提供原始消息。",
+  "The original chat is not open to this access.": "原始聊天未对此访问权限开放。",
+  "The original chat is not collected in this workspace.": "此工作区未收集原始聊天。",
+  "The original message is not saved in this workspace.": "原始消息未保存在此工作区。"
 }

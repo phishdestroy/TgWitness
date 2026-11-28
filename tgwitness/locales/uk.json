@@ -11297,5 +11297,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Оновлення о {time} не вдалося обробити, його не збережено. Його позначає підписаний пропуск; наступна перевірка недавньої історії може знайти повідомлення.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Спостереження стояло через заповнений диск з {from} до {to}. Інтервал позначено підписаним пропуском; спостереження відновилося саме.",
   "Show attachments not saved": "Показати незбережені вкладення",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Нічого не змінено. Попросіть адміністратора робочого простору розширити цей доступ."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Нічого не змінено. Попросіть адміністратора робочого простору розширити цей доступ.",
+  "Open original": "Відкрити оригінал",
+  "Origin not observed": "Оригінал не спостерігався",
+  "Forwarded from {name}, {time}": "Переслано від {name}, {time}",
+  "The sender hides their account in forwards.": "Відправник приховує свій акаунт у пересиланнях.",
+  "Imported from another app; Telegram has no original message.": "Імпортовано з іншого застосунку; вихідного повідомлення в Telegram немає.",
+  "Telegram names the original sender but not the original message.": "Telegram називає початкового відправника, але не вихідне повідомлення.",
+  "The original chat is not open to this access.": "Вихідний чат не відкрито цьому доступу.",
+  "The original chat is not collected in this workspace.": "Вихідний чат не збирається в цьому робочому просторі.",
+  "The original message is not saved in this workspace.": "Вихідне повідомлення не збережено в цьому робочому просторі."
 }

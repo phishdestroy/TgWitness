@@ -11195,5 +11195,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} پر ایک اپ ڈیٹ پروسیس نہیں ہو سکی اور محفوظ نہیں ہوئی۔ دستخط شدہ خلا اسے نشان زد کرتا ہے؛ حالیہ تاریخ کی اگلی دوبارہ جانچ پیغام ڈھونڈ سکتی ہے۔",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ڈسک بھری ہونے پر نگرانی رکی رہی، {from} سے {to} تک۔ دستخط شدہ خلا اس وقفے کو نشان زد کرتا ہے؛ نگرانی خود دوبارہ شروع ہوئی۔",
   "Show attachments not saved": "غیر محفوظ منسلکات دکھائیں",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "کچھ تبدیل نہیں ہوا۔ ورک اسپیس منتظم سے یہ رسائی بڑھانے کو کہیں۔"
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "کچھ تبدیل نہیں ہوا۔ ورک اسپیس منتظم سے یہ رسائی بڑھانے کو کہیں۔",
+  "Open original": "اصل کھولیں",
+  "Origin not observed": "اصل مشاہدہ نہیں ہوا",
+  "Forwarded from {name}, {time}": "{name} سے آگے بھیجا گیا، {time}",
+  "The sender hides their account in forwards.": "بھیجنے والا آگے بھیجے گئے پیغامات میں اپنا اکاؤنٹ چھپاتا ہے۔",
+  "Imported from another app; Telegram has no original message.": "دوسری ایپ سے درآمد شدہ؛ ٹیلیگرام میں اصل پیغام نہیں۔",
+  "Telegram names the original sender but not the original message.": "ٹیلیگرام اصل بھیجنے والے کا نام دیتا ہے، اصل پیغام کا نہیں۔",
+  "The original chat is not open to this access.": "اصل چیٹ اس رسائی کے لیے کھلی نہیں۔",
+  "The original chat is not collected in this workspace.": "اصل چیٹ اس ورک اسپیس میں جمع نہیں کی جاتی۔",
+  "The original message is not saved in this workspace.": "اصل پیغام اس ورک اسپیس میں محفوظ نہیں۔"
 }

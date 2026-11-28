@@ -11205,5 +11205,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Uma atualização às {time} não pôde ser processada e não foi salva. Uma lacuna assinada a marca; a próxima reverificação do histórico recente pode encontrar a mensagem.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "A observação parou com o disco cheio, de {from} a {to}. Uma lacuna assinada marca o intervalo; a observação retomou sozinha.",
   "Show attachments not saved": "Mostrar anexos não salvos",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nada foi alterado. Peça ao administrador do espaço de trabalho para ampliar este acesso."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nada foi alterado. Peça ao administrador do espaço de trabalho para ampliar este acesso.",
+  "Open original": "Abrir original",
+  "Origin not observed": "Original não observado",
+  "Forwarded from {name}, {time}": "Encaminhado de {name}, {time}",
+  "The sender hides their account in forwards.": "O remetente oculta a conta nos encaminhamentos.",
+  "Imported from another app; Telegram has no original message.": "Importado de outro app; o Telegram não tem a mensagem original.",
+  "Telegram names the original sender but not the original message.": "O Telegram indica o remetente original, mas não a mensagem original.",
+  "The original chat is not open to this access.": "O chat original não está aberto para este acesso.",
+  "The original chat is not collected in this workspace.": "O chat original não é coletado neste espaço de trabalho.",
+  "The original message is not saved in this workspace.": "A mensagem original não está salva neste espaço de trabalho."
 }

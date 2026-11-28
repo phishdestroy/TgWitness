@@ -3,6 +3,7 @@ from .. import dossier
 from .. import extensions
 from .. import i18n
 from .. import interactions
+from .. import message_details
 from .. import people
 from .. import recording
 from .. import rhythm
@@ -612,6 +613,7 @@ async def image_qr(body: QrText, *, ctx=Depends(current_context)):
 
 
 async def chat_messages(
+    request: Request,
     chat_id: ChatId,
     before_id: MessageCursor = None,
     limit: int = 60,
@@ -627,15 +629,86 @@ async def chat_messages(
     if before_id is not None and after_id is not None:
         raise HTTPException(422, "Choose one message cursor.")
     return await asyncio.to_thread(
-        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id, filter, q, author_id
+        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id, filter, q, author_id,
+        ctx.visible_chats(request)
     )
 
 
-def message_page(store, chat_id, before_id, limit, after_id, mode="all", search="", author_id=None):
+def forward_places(header):
+    places = []
+    if type(header.get("from_id")) is int and header["from_id"] < -1000000000000 and type(header.get("channel_post")) is int:
+        places.append(("origin", header["from_id"], header["channel_post"]))
+    if type(header.get("saved_from_id")) is int and type(header.get("saved_from_message_id")) is int:
+        places.append(("saved_from", header["saved_from_id"], header["saved_from_message_id"]))
+    return places
+
+
+def forward_origin(db, header, allowed):
+    if not isinstance(header, dict) or not header:
+        return None
+    places = forward_places(header)
+    if not places:
+        return {"status": "unknown", "reason": "imported" if header.get("imported") else
+                "hidden" if header.get("from_id") is None else "no_message_id"}
+    unknown = None
+    for via, chat, message in places:
+        place = {"via": via, "chat_id": chat, "message_id": message}
+        if allowed is not None and chat not in allowed:
+            unknown = unknown or {"status": "unknown", "reason": "not_allowed", **place}
+            continue
+        row = db.execute("SELECT m.text_seq, m.deleted, m.missing, e.payload, e.source_at FROM message_state_index m"
+                         " LEFT JOIN events e ON e.seq=m.text_seq WHERE m.chat_id=? AND m.message_id=?",
+                         (chat, message)).fetchone()
+        if row is None:
+            collected = db.execute("SELECT 1 FROM message_state_index WHERE chat_id=? LIMIT 1", (chat,)).fetchone() \
+                or db.execute("SELECT 1 FROM targets WHERE chat_id=?", (chat,)).fetchone()
+            unknown = unknown or {"status": "unknown", "reason": "not_observed" if collected else "not_collected", **place}
+            continue
+        payload = json.loads(row[3]) if row[3] is not None else {}
+        seq = row[0] if row[0] is not None else db.execute(
+            "SELECT min(seq) FROM events WHERE chat_id=? AND message_id=?", (chat, message)).fetchone()[0]
+        title = db.execute("SELECT title FROM targets WHERE chat_id=?", (chat,)).fetchone()
+        raw = payload.get("raw") if isinstance(payload.get("raw"), dict) else {}
+        return {"status": "observed", **place, "title": title[0] if title and title[0] else None,
+                "sent_at": payload.get("sent_at") or row[4], "seq": seq, "captured": row[0] is not None,
+                "deleted": bool(row[1]), "missing": bool(row[2]),
+                "forwarded": bool(message_details.forward(raw.get("fwd_from")))}
+    return unknown
+
+
+def page_origins(store, messages, allowed):
+    forwarded = [m for m in messages if isinstance(m.get("details"), dict) and m["details"].get("forwarded_from")]
+    if not forwarded:
+        return
+    with store.reading() as db:
+        for message in forwarded:
+            message["forward_origin"] = forward_origin(db, message["details"]["forwarded_from"], allowed)
+
+
+def origin_lookup(store, chat_id, message_id, allowed):
+    found = store.chat_messages(chat_id, message_id + 1, 1)["messages"]
+    message = found[0] if found and found[0]["message_id"] == message_id else None
+    if message is None:
+        raise HTTPException(404, "This message is not saved in this workspace.")
+    header = (message.get("details") or {}).get("forwarded_from")
+    if not header:
+        return {"chat_id": chat_id, "message_id": message_id, "forwarded_from": None, "origin": None}
+    with store.reading() as db:
+        origin = forward_origin(db, header, allowed)
+    return {"chat_id": chat_id, "message_id": message_id, "forwarded_from": header, "origin": origin}
+
+
+async def message_origin(request: Request, chat_id: ChatId, message_id: Annotated[int, ApiPath(ge=1, le=2**63 - 2)], *,
+                         ctx=Depends(current_context)):
+    return await asyncio.to_thread(origin_lookup, ctx.app.state.store, chat_id, message_id, ctx.visible_chats(request))
+
+
+def message_page(store, chat_id, before_id, limit, after_id, mode="all", search="", author_id=None, allowed=None):
     from ..gap_analysis import offline_windows, page_gaps
 
     result = store.chat_messages(chat_id, before_id, limit, after_id=after_id,
                                  mode=mode, search=search, author_id=author_id)
+    page_origins(store, result["messages"], allowed)
     if mode != "all" or search or author_id is not None:
         result["gaps"] = []
         return result

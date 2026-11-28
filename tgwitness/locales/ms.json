@@ -11144,5 +11144,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Satu kemas kini pada {time} tidak dapat diproses dan tidak disimpan. Jurang bertandatangan menandakannya; semakan semula sejarah terkini seterusnya boleh menemui mesej itu.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Pemerhatian berhenti semasa cakera penuh, {from} hingga {to}. Jurang bertandatangan menandakan tempoh itu; pemerhatian bersambung sendiri.",
   "Show attachments not saved": "Tunjukkan lampiran tidak disimpan",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Tiada apa yang diubah. Minta pentadbir ruang kerja meluaskan akses ini."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Tiada apa yang diubah. Minta pentadbir ruang kerja meluaskan akses ini.",
+  "Open original": "Buka asal",
+  "Origin not observed": "Asal tidak diperhatikan",
+  "Forwarded from {name}, {time}": "Dimajukan daripada {name}, {time}",
+  "The sender hides their account in forwards.": "Pengirim menyembunyikan akaunnya dalam pemajuan.",
+  "Imported from another app; Telegram has no original message.": "Diimport daripada aplikasi lain; Telegram tiada mesej asal.",
+  "Telegram names the original sender but not the original message.": "Telegram menyebut pengirim asal tetapi bukan mesej asal.",
+  "The original chat is not open to this access.": "Sembang asal tidak dibuka untuk akses ini.",
+  "The original chat is not collected in this workspace.": "Sembang asal tidak dikumpul dalam ruang kerja ini.",
+  "The original message is not saved in this workspace.": "Mesej asal tidak disimpan dalam ruang kerja ini."
 }

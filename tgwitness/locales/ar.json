@@ -11399,5 +11399,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "تعذّرت معالجة تحديث في {time} ولم يُحفظ. تشير إليه فجوة موقّعة؛ وقد تجد إعادة الفحص التالية للسجل الحديث الرسالة.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "توقفت المراقبة أثناء امتلاء القرص من {from} إلى {to}. تشير فجوة موقّعة إلى الفترة؛ واستؤنفت المراقبة تلقائيًا.",
   "Show attachments not saved": "عرض المرفقات غير المحفوظة",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "لم يتغير شيء. اطلب من مسؤول مساحة العمل توسيع هذا الوصول."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "لم يتغير شيء. اطلب من مسؤول مساحة العمل توسيع هذا الوصول.",
+  "Open original": "فتح الأصل",
+  "Origin not observed": "الأصل غير مرصود",
+  "Forwarded from {name}, {time}": "أُعيد توجيهه من {name}، {time}",
+  "The sender hides their account in forwards.": "يخفي المرسل حسابه في الرسائل المعاد توجيهها.",
+  "Imported from another app; Telegram has no original message.": "مستورد من تطبيق آخر؛ لا توجد رسالة أصلية في تيليجرام.",
+  "Telegram names the original sender but not the original message.": "يذكر تيليجرام المرسل الأصلي لكن ليس الرسالة الأصلية.",
+  "The original chat is not open to this access.": "الدردشة الأصلية غير مفتوحة لهذا الوصول.",
+  "The original chat is not collected in this workspace.": "الدردشة الأصلية لا تُجمع في مساحة العمل هذه.",
+  "The original message is not saved in this workspace.": "الرسالة الأصلية غير محفوظة في مساحة العمل هذه."
 }

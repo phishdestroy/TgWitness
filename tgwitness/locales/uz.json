@@ -11195,5 +11195,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} dagi yangilanishni qayta ishlab bo'lmadi va u saqlanmadi. Uni imzolangan uzilish belgilaydi; yaqin tarixni keyingi qayta tekshirish xabarni topishi mumkin.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Disk to'lgani sababli kuzatuv {from} dan {to} gacha to'xtadi. Bu oraliqni imzolangan uzilish belgilaydi; kuzatuv o'zi davom etdi.",
   "Show attachments not saved": "Saqlanmagan ilovalarni ko'rsatish",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hech narsa o'zgarmadi. Ish maydoni administratoridan bu kirishni kengaytirishni so'rang."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Hech narsa o'zgarmadi. Ish maydoni administratoridan bu kirishni kengaytirishni so'rang.",
+  "Open original": "Asl xabarni ochish",
+  "Origin not observed": "Asl kuzatilmagan",
+  "Forwarded from {name}, {time}": "{name} dan uzatilgan, {time}",
+  "The sender hides their account in forwards.": "Yuboruvchi uzatishlarda hisobini yashiradi.",
+  "Imported from another app; Telegram has no original message.": "Boshqa ilovadan import qilingan; Telegram’da asl xabar yo‘q.",
+  "Telegram names the original sender but not the original message.": "Telegram asl yuboruvchini ko‘rsatadi, asl xabarni emas.",
+  "The original chat is not open to this access.": "Asl suhbat bu kirish uchun ochiq emas.",
+  "The original chat is not collected in this workspace.": "Asl suhbat bu ish maydonida yig‘ilmaydi.",
+  "The original message is not saved in this workspace.": "Asl xabar bu ish maydonida saqlanmagan."
 }

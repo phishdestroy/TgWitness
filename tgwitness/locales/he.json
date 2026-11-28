@@ -11246,5 +11246,14 @@
   "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "עדכון ב-{time} לא עובד ולא נשמר. פער חתום מסמן אותו; הבדיקה החוזרת הבאה של ההיסטוריה האחרונה יכולה למצוא את ההודעה.",
   "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "המעקב נעצר כשהדיסק היה מלא, מ-{from} עד {to}. פער חתום מסמן את התקופה; המעקב חזר מעצמו.",
   "Show attachments not saved": "הצגת קבצים מצורפים שלא נשמרו",
-  "Nothing was changed. Ask the workspace administrator to widen this access.": "דבר לא שונה. בקשו ממנהל סביבת העבודה להרחיב את הגישה."
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "דבר לא שונה. בקשו ממנהל סביבת העבודה להרחיב את הגישה.",
+  "Open original": "פתיחת המקור",
+  "Origin not observed": "המקור לא נצפה",
+  "Forwarded from {name}, {time}": "הועבר מ-{name}, {time}",
+  "The sender hides their account in forwards.": "השולח מסתיר את חשבונו בהעברות.",
+  "Imported from another app; Telegram has no original message.": "יובא מאפליקציה אחרת; לטלגרם אין הודעה מקורית.",
+  "Telegram names the original sender but not the original message.": "טלגרם מציין את השולח המקורי אך לא את ההודעה המקורית.",
+  "The original chat is not open to this access.": "הצ׳אט המקורי אינו פתוח לגישה זו.",
+  "The original chat is not collected in this workspace.": "הצ׳אט המקורי אינו נאסף בסביבת עבודה זו.",
+  "The original message is not saved in this workspace.": "ההודעה המקורית אינה שמורה בסביבת עבודה זו."
 }
