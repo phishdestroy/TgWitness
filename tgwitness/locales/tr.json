@@ -11147,5 +11147,6 @@
   "Complete the earlier steps first.": "Önce önceki adımları tamamlayın.",
   "Transaction hash": "İşlem karması",
   "Payment link": "Ödeme bağlantısı",
-  "An update could not be processed and was not saved": "Bir güncelleme işlenemedi ve kaydedilmedi"
+  "An update could not be processed and was not saved": "Bir güncelleme işlenemedi ve kaydedilmedi",
+  "Download unsigned network snapshot": "İmzasız ağ anlık görüntüsünü indir"
 }

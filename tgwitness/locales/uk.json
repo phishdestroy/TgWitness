@@ -11249,5 +11249,6 @@
   "Complete the earlier steps first.": "Спершу завершіть попередні кроки.",
   "Transaction hash": "Хеш транзакції",
   "Payment link": "Платіжне посилання",
-  "An update could not be processed and was not saved": "Оновлення не вдалося обробити, його не збережено"
+  "An update could not be processed and was not saved": "Оновлення не вдалося обробити, його не збережено",
+  "Download unsigned network snapshot": "Завантажити непідписаний знімок мережі"
 }

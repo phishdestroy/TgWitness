@@ -11157,5 +11157,6 @@
   "Complete the earlier steps first.": "Completa primero los pasos anteriores.",
   "Transaction hash": "Hash de transacción",
   "Payment link": "Enlace de pago",
-  "An update could not be processed and was not saved": "No se pudo procesar una actualización y no se guardó"
+  "An update could not be processed and was not saved": "No se pudo procesar una actualización y no se guardó",
+  "Download unsigned network snapshot": "Descargar instantánea de red sin firmar"
 }

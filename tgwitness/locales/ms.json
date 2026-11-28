@@ -11096,5 +11096,6 @@
   "Complete the earlier steps first.": "Lengkapkan langkah sebelumnya dahulu.",
   "Transaction hash": "Cincangan transaksi",
   "Payment link": "Pautan pembayaran",
-  "An update could not be processed and was not saved": "Satu kemas kini tidak dapat diproses dan tidak disimpan"
+  "An update could not be processed and was not saved": "Satu kemas kini tidak dapat diproses dan tidak disimpan",
+  "Download unsigned network snapshot": "Muat turun petikan rangkaian tanpa tandatangan"
 }

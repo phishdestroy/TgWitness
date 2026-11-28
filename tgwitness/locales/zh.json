@@ -11096,5 +11096,6 @@
   "Complete the earlier steps first.": "请先完成前面的步骤。",
   "Transaction hash": "交易哈希",
   "Payment link": "付款链接",
-  "An update could not be processed and was not saved": "有一条更新无法处理，且未保存"
+  "An update could not be processed and was not saved": "有一条更新无法处理，且未保存",
+  "Download unsigned network snapshot": "下载未签名的网络快照"
 }

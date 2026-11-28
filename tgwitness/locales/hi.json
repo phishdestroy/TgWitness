@@ -11147,5 +11147,6 @@
   "Complete the earlier steps first.": "पहले पिछले चरण पूरे करें।",
   "Transaction hash": "लेनदेन हैश",
   "Payment link": "भुगतान लिंक",
-  "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया"
+  "An update could not be processed and was not saved": "एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया",
+  "Download unsigned network snapshot": "बिना हस्ताक्षर वाला नेटवर्क स्नैपशॉट डाउनलोड करें"
 }

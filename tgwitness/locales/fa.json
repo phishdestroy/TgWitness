@@ -11147,5 +11147,6 @@
   "Complete the earlier steps first.": "ابتدا مراحل قبلی را کامل کنید.",
   "Transaction hash": "هش تراکنش",
   "Payment link": "پیوند پرداخت",
-  "An update could not be processed and was not saved": "یک به‌روزرسانی پردازش نشد و ذخیره نشد"
+  "An update could not be processed and was not saved": "یک به‌روزرسانی پردازش نشد و ذخیره نشد",
+  "Download unsigned network snapshot": "دانلود نمای شبکهٔ امضانشده"
 }

@@ -11351,5 +11351,6 @@
   "Complete the earlier steps first.": "أكمل الخطوات السابقة أولًا.",
   "Transaction hash": "تجزئة المعاملة",
   "Payment link": "رابط دفع",
-  "An update could not be processed and was not saved": "تعذّرت معالجة تحديث ولم يُحفظ"
+  "An update could not be processed and was not saved": "تعذّرت معالجة تحديث ولم يُحفظ",
+  "Download unsigned network snapshot": "تنزيل لقطة الشبكة غير الموقّعة"
 }

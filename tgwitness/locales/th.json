@@ -11096,5 +11096,6 @@
   "Complete the earlier steps first.": "ทำขั้นตอนก่อนหน้าให้เสร็จก่อน",
   "Transaction hash": "แฮชธุรกรรม",
   "Payment link": "ลิงก์ชำระเงิน",
-  "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้"
+  "An update could not be processed and was not saved": "ประมวลผลการอัปเดตไม่ได้และไม่ได้บันทึกไว้",
+  "Download unsigned network snapshot": "ดาวน์โหลดสแนปช็อตเครือข่ายที่ไม่ได้ลงนาม"
 }

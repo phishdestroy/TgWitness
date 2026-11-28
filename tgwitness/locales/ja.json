@@ -11096,5 +11096,6 @@
   "Complete the earlier steps first.": "先に前の手順を完了してください。",
   "Transaction hash": "トランザクションハッシュ",
   "Payment link": "支払いリンク",
-  "An update could not be processed and was not saved": "更新を処理できず、保存されませんでした"
+  "An update could not be processed and was not saved": "更新を処理できず、保存されませんでした",
+  "Download unsigned network snapshot": "署名なしのネットワークスナップショットをダウンロード"
 }

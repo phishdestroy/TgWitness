@@ -11096,5 +11096,6 @@
   "Complete the earlier steps first.": "Hãy hoàn tất các bước trước đó trước.",
   "Transaction hash": "Mã băm giao dịch",
   "Payment link": "Liên kết thanh toán",
-  "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu"
+  "An update could not be processed and was not saved": "Không thể xử lý một bản cập nhật và bản cập nhật chưa được lưu",
+  "Download unsigned network snapshot": "Tải xuống ảnh chụp mạng chưa ký"
 }

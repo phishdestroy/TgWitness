@@ -11147,5 +11147,6 @@
   "Complete the earlier steps first.": "আগে আগের ধাপগুলো সম্পন্ন করুন।",
   "Transaction hash": "লেনদেনের হ্যাশ",
   "Payment link": "পেমেন্ট লিংক",
-  "An update could not be processed and was not saved": "একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি"
+  "An update could not be processed and was not saved": "একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি",
+  "Download unsigned network snapshot": "স্বাক্ষরবিহীন নেটওয়ার্ক স্ন্যাপশট ডাউনলোড করুন"
 }

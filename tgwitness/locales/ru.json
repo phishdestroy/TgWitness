@@ -11234,5 +11234,6 @@
   "Complete the earlier steps first.": "Сначала завершите предыдущие шаги.",
   "Transaction hash": "Хеш транзакции",
   "Payment link": "Платёжная ссылка",
-  "An update could not be processed and was not saved": "Обновление не удалось обработать, оно не сохранено"
+  "An update could not be processed and was not saved": "Обновление не удалось обработать, оно не сохранено",
+  "Download unsigned network snapshot": "Скачать неподписанный снимок сети"
 }
