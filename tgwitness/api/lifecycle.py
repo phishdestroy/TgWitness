@@ -321,6 +321,7 @@ class LifecycleOperations:
                         {"reason": "resume_failed", "error_type": type(exc).__name__},
                     )
 
+            collector.restart_observation = resume
             if store.get_setting("resume", False) and (
                 not store.get_setting("demo", False)
             ):
