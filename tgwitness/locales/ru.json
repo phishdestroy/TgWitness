@@ -11252,5 +11252,6 @@
   "Failed on {time}; the record stays in the signed journal.": "Не прошёл {time}; запись об этом остаётся в подписанном журнале.",
   "Observation stopped while the disk was full": "Наблюдение стояло, пока диск был заполнен",
   "Attachment not saved": "Вложение не сохранено",
-  "On the Case Board": "На доске дела"
+  "On the Case Board": "На доске дела",
+  "This access does not open this section.": "Этот доступ не открывает этот раздел."
 }

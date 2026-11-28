@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "於 {time} 未通過；該記錄仍保留在已簽署日誌中。",
   "Observation stopped while the disk was full": "磁碟已滿期間觀察曾停止",
   "Attachment not saved": "附件未儲存",
-  "On the Case Board": "在案件看板上"
+  "On the Case Board": "在案件看板上",
+  "This access does not open this section.": "此存取權無法開啟這個區段。"
 }

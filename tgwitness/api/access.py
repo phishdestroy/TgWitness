@@ -39,6 +39,12 @@ async def identify(
             except Refused as exc:
                 raise HTTPException(403, str(exc)) from None
     if principal is None:
+        if credential and ctx.app.state.access.match(credential.credentials):
+            ctx.reject_access(
+                request,
+                "This is an access token for signing in. Sign in with it in the panel, or exchange it "
+                "with POST /api/access/login and send the returned session as the Bearer token.",
+            )
         ctx.reject_access(
             request,
             "Enter the panel access token from panel-token.txt in your data directory.",

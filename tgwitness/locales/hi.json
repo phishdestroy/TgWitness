@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time} को विफल हुआ; रिकॉर्ड हस्ताक्षरित जर्नल में रहता है।",
   "Observation stopped while the disk was full": "डिस्क भरी होने के दौरान अवलोकन रुका रहा",
   "Attachment not saved": "अटैचमेंट सहेजा नहीं गया",
-  "On the Case Board": "केस बोर्ड पर"
+  "On the Case Board": "केस बोर्ड पर",
+  "This access does not open this section.": "यह एक्सेस इस अनुभाग को नहीं खोलता।"
 }

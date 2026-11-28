@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time} da muvaffaqiyatsiz tugadi; yozuv imzolangan jurnalda qoladi.",
   "Observation stopped while the disk was full": "Disk to'la bo'lgan paytda kuzatuv to'xtagan edi",
   "Attachment not saved": "Ilova saqlanmadi",
-  "On the Case Board": "Holat doskasida"
+  "On the Case Board": "Holat doskasida",
+  "This access does not open this section.": "Bu kirish ushbu bo'limni ochmaydi."
 }

@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "Gagal pada {time}; catatannya tetap ada di jurnal bertanda tangan.",
   "Observation stopped while the disk was full": "Pengamatan berhenti selama disk penuh",
   "Attachment not saved": "Lampiran tidak disimpan",
-  "On the Case Board": "Di Papan Kasus"
+  "On the Case Board": "Di Papan Kasus",
+  "This access does not open this section.": "Akses ini tidak membuka bagian ini."
 }

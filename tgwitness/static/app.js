@@ -254,6 +254,7 @@ async function applyRouteToPanel(route,current){
   state.eventBefore=route.before??null;
   $("event-search").value=state.search;fillSourceSelect("source-filter",state.source,true);
   viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
+  if(route.explicit&&route.view&&route.view!=="analysis"&&state.me&&!state.me.admin&&!viewAllowed(route.view))toast(tr("This access does not open this section."),true);
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==state.chat)beginChat(route.chatId);
   if(route.view==="group")state.groupId=route.group;
   await navigate(route.view,{history:false,load:async()=>{
@@ -266,6 +267,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="chats"){
     await refreshChats(false,route.chatId);
     if(current())chatListView?.restore(route);
+    if(current()&&route.chatId!==null&&state.status?.chats_limited&&!state.chats.some(chat=>chat.chat_id===route.chatId))toast(tr("This chat is not open to this access."),true);
     if(current()&&route.chatId!==null){
       if(state.chat!==route.chatId)await openChat(route.chatId,{history:false});
       else loadChatProfile().catch(()=>{});

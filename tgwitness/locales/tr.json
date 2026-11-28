@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time} tarihinde başarısız oldu; kayıt imzalı günlükte kalır.",
   "Observation stopped while the disk was full": "Disk doluyken gözlem durdu",
   "Attachment not saved": "Ek kaydedilmedi",
-  "On the Case Board": "Vaka Panosunda"
+  "On the Case Board": "Vaka Panosunda",
+  "This access does not open this section.": "Bu erişim bu bölümü açmaz."
 }

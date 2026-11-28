@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "Thất bại lúc {time}; bản ghi vẫn nằm trong nhật ký đã ký.",
   "Observation stopped while the disk was full": "Việc quan sát đã dừng trong lúc ổ đĩa đầy",
   "Attachment not saved": "Tệp đính kèm chưa được lưu",
-  "On the Case Board": "Trên bảng vụ án"
+  "On the Case Board": "Trên bảng vụ án",
+  "This access does not open this section.": "Quyền truy cập này không mở được mục này."
 }

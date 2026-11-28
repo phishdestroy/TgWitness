@@ -11369,5 +11369,6 @@
   "Failed on {time}; the record stays in the signed journal.": "فشل في {time}؛ ويبقى هذا السجل في السجل الموقّع.",
   "Observation stopped while the disk was full": "توقفت المراقبة بينما كان القرص ممتلئًا",
   "Attachment not saved": "لم يُحفظ المرفق",
-  "On the Case Board": "على لوحة القضية"
+  "On the Case Board": "على لوحة القضية",
+  "This access does not open this section.": "هذا الوصول لا يفتح هذا القسم."
 }
