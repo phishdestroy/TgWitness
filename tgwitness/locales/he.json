@@ -11231,5 +11231,20 @@
   "Independent check": "בדיקה עצמאית",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "הנמען מחלץ את ה-ZIP ומריץ VERIFY.cmd (Windows) או sh VERIFY.sh עם טביעת האצבע. בלעדיה התוצאה מציינת שמפתח החותם לא אומת; טביעת אצבע אחרת נכשלת.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "הבדיקה מוכיחה מי חתם ושדבר לא השתנה. היא אינה מוכיחה שהתוכן נכון או שבית משפט יקבל אותו.",
-  "Before you hand over": "לפני המסירה"
+  "Before you hand over": "לפני המסירה",
+  "Kept": "נשמר",
+  "Resumes on its own when the wait ends.": "ממשיך מעצמו כשההמתנה מסתיימת.",
+  "Records saved so far stay in the signed journal.": "הרשומות שנשמרו עד כה נשארות ביומן החתום.",
+  "If updates are missed during the wait, the collector records a signed gap.": "אם עדכונים מוחמצים בזמן ההמתנה, האוסף רושם פער חתום.",
+  "Not retried until space is freed.": "אין ניסיון חוזר עד שיתפנה מקום.",
+  "Records saved before the stop stay signed.": "רשומות שנשמרו לפני העצירה נשארות חתומות.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "דבר אינו נרשם בזמן העצירה. כשהמעקב ממשיך, נרשם פער disk_full חתום לתקופה.",
+  "Not retried automatically.": "אין ניסיון חוזר אוטומטי.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "דבר אינו נרשם עד שהמעקב יתחיל שוב; העצירה מופיעה ביומן החתום.",
+  "Resumes on its own within 30 seconds after space is freed.": "ממשיך מעצמו תוך 30 שניות אחרי פינוי מקום.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "לכל קובץ חסר יש רשומת media.failed חתומה, והייצואים מציינים אותו. הורדות שנכשלו אינן מנוסות שוב.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "עדכון ב-{time} לא עובד ולא נשמר. פער חתום מסמן אותו; הבדיקה החוזרת הבאה של ההיסטוריה האחרונה יכולה למצוא את ההודעה.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "המעקב נעצר כשהדיסק היה מלא, מ-{from} עד {to}. פער חתום מסמן את התקופה; המעקב חזר מעצמו.",
+  "Show attachments not saved": "הצגת קבצים מצורפים שלא נשמרו",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "דבר לא שונה. בקשו ממנהל סביבת העבודה להרחיב את הגישה."
 }

@@ -11180,5 +11180,20 @@
   "Independent check": "स्वतंत्र जाँच",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "प्राप्तकर्ता ZIP निकालकर इस फ़िंगरप्रिंट के साथ VERIFY.cmd (Windows) या sh VERIFY.sh चलाता है। इसके बिना परिणाम बताता है कि हस्ताक्षरकर्ता की कुंजी पुष्ट नहीं है; अलग फ़िंगरप्रिंट विफल होता है।",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "जाँच यह साबित करती है कि किसने हस्ताक्षर किए और कुछ नहीं बदला। यह साबित नहीं करती कि सामग्री सच है या अदालत इसे स्वीकार करेगी।",
-  "Before you hand over": "सौंपने से पहले"
+  "Before you hand over": "सौंपने से पहले",
+  "Kept": "सुरक्षित",
+  "Resumes on its own when the wait ends.": "प्रतीक्षा खत्म होने पर अपने आप फिर शुरू होगा।",
+  "Records saved so far stay in the signed journal.": "अब तक सहेजे गए रिकॉर्ड हस्ताक्षरित जर्नल में रहते हैं।",
+  "If updates are missed during the wait, the collector records a signed gap.": "प्रतीक्षा के दौरान अपडेट छूटें तो कलेक्टर हस्ताक्षरित अंतराल दर्ज करता है।",
+  "Not retried until space is freed.": "जगह खाली होने तक दोबारा कोशिश नहीं होगी।",
+  "Records saved before the stop stay signed.": "रुकने से पहले सहेजे गए रिकॉर्ड हस्ताक्षरित रहते हैं।",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "रुके रहने पर कुछ दर्ज नहीं होता। निगरानी फिर शुरू होने पर उस अवधि का हस्ताक्षरित disk_full अंतराल लिखा जाता है।",
+  "Not retried automatically.": "अपने आप दोबारा कोशिश नहीं होती।",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "निगरानी फिर शुरू होने तक कुछ दर्ज नहीं होता; रुकना हस्ताक्षरित जर्नल में है।",
+  "Resumes on its own within 30 seconds after space is freed.": "जगह खाली होने के 30 सेकंड में अपने आप फिर शुरू होगा।",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "हर गायब फ़ाइल का हस्ताक्षरित media.failed रिकॉर्ड है, और एक्सपोर्ट उसे सूचीबद्ध करते हैं। विफल डाउनलोड दोबारा नहीं आज़माए जाते।",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} पर एक अपडेट संसाधित नहीं हो सका और सहेजा नहीं गया। एक हस्ताक्षरित अंतराल इसे चिह्नित करता है; हाल के इतिहास की अगली पुनर्जाँच संदेश ढूँढ सकती है।",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "डिस्क भरी होने पर निगरानी रुकी रही, {from} से {to} तक। एक हस्ताक्षरित अंतराल इस अवधि को चिह्नित करता है; निगरानी अपने आप फिर शुरू हुई।",
+  "Show attachments not saved": "सहेजे नहीं गए अटैचमेंट दिखाएँ",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "कुछ नहीं बदला। वर्कस्पेस व्यवस्थापक से यह पहुँच बढ़ाने को कहें।"
 }

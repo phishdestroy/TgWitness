@@ -1,4 +1,4 @@
-import {createHealthActions} from "./health-actions.js";
+import {createHealthActions} from "./health-actions.js?v=2";
 export function createHealthBar({node, icon, tr, stateNames, partNames, lines, verdict, diagnose, canDiagnose, workspace, actionContext}) {
   const names = ["connection", "intake", "sources", "media"];
   const labels = {connection: tr("Telegram"), intake: tr("Intake"), sources: tr("Sources"), media: tr("Attachments")};
@@ -10,8 +10,8 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, v
   const tabs = node("div", "health-part-tabs"); tabs.setAttribute("role", "tablist"); tabs.setAttribute("aria-label", tr("Collector health"));
   const content = node("div", "health-part-body"); content.id = "health-strip";
   const card = node("section", "health-verdict"), cardTitle = node("h3"), cardLevel = node("span", "health-verdict-level");
-  const cardAction = node("p", "health-verdict-action"), cardFacts = node("div", "health-facts");
-  card.setAttribute("aria-label", tr("Why nothing arrives")); card.append(node("p", "eyebrow", tr("Why nothing arrives")), cardTitle, cardLevel, cardAction, cardFacts);
+  const cardAction = node("p", "health-verdict-action"), cardFacts = node("div", "health-facts"), cardOutcome = node("dl", "health-outcome");
+  card.setAttribute("aria-label", tr("Why nothing arrives")); card.append(node("p", "eyebrow", tr("Why nothing arrives")), cardTitle, cardLevel, cardAction, cardOutcome, cardFacts);
   card.hidden = true; dialog.append(head, card, tabs, content); document.body.append(dialog);
   const verdictChip = node("button", "health-verdict-chip"); verdictChip.type = "button"; verdictChip.hidden = true;
   verdictChip.setAttribute("aria-haspopup", "dialog"); verdictChip.setAttribute("aria-controls", dialog.id);
@@ -109,6 +109,8 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, v
       verdictPart = found.part; card.dataset.confidence = found.confidence; verdictChip.dataset.state = found.state;
       cardTitle.textContent = found.title; cardLevel.textContent = found.level; cardAction.textContent = found.action;
       cardFacts.replaceChildren(...found.facts.filter(Boolean).map(text => node("p", "", text)));
+      cardOutcome.hidden = !found.outcome;
+      cardOutcome.replaceChildren(...(found.outcome || []).flatMap(([term, text]) => [node("dt", "", term), node("dd", "", text)]));
       verdictChip.textContent = found.title; verdictChip.title = found.title + " · " + found.level + "\n" + found.action;
     }
     actions?.update();

@@ -749,7 +749,8 @@ async function api(path, body, options={}) {
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
-    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;error.detail=String(detail);if(parameter)error.parameter=parameter;
+    const refused=response.status===403&&typeof detail==="string"&&/^(This access|This chat is not open|Only the main administrator)/.test(detail);
+    const error=new Error((busyExplanation(detail,profile)||tr(detail))+(refused?" "+tr("Nothing was changed. Ask the workspace administrator to widen this access."):""));error.status=response.status;error.detail=String(detail);if(parameter)error.parameter=parameter;
     const retryAfter=response.headers.get('Retry-After');
     if(retryAfter){const seconds=Number(retryAfter),delay=Number.isFinite(seconds)?seconds*1000:Date.parse(retryAfter)-Date.now();
       if(Number.isFinite(delay))error.retryAfterMs=Math.max(0,delay);}
@@ -1533,7 +1534,9 @@ function collectorLines(name,p){
     return [tr("No Telegram account is connected.")];
   }
   if(name==="intake"){
-    const facts=[tr("Collector heartbeat: {time}",{time:when(p.last_heartbeat)}),tr("Last event received: {time}",{time:when(p.last_event_at)})];
+    const fault=p.last_gap,facts=[fault?.reason==="handler_failed"&&tr("An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.",{time:when(fault.at)}),
+      fault?.reason==="disk_full"&&tr("Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.",{from:when(fault.from),to:when(fault.to)}),
+      tr("Collector heartbeat: {time}",{time:when(p.last_heartbeat)}),tr("Last event received: {time}",{time:when(p.last_event_at)})];
     if(p.reason==="journal_write_failures")return [p.error,...facts];
     if(p.reason==="live")return [tr("Events arrive. A quiet chat without new messages is not a fault."),...facts];
     if(p.reason==="session_revoked")return [tr("The session was ended from another device or by Telegram."),...facts];
@@ -1573,7 +1576,8 @@ function mediaLines(p,c){
   if(p.reason==="ok")return [tr("Attachments are being saved."),...facts];
   if(p.reason==="disk_low")return [tr("Disk almost full: downloads are paused until space is free."),...facts];
   if(p.reason==="paused")return [tr("Downloads continue when observation resumes."),...facts];
-  if(p.reason==="failed_items")return [tr("Some attachments could not be saved; their messages are recorded."),...facts];
+  if(p.reason==="failed_items")return [tr("Some attachments could not be saved; their messages are recorded."),
+    tr("Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried."),...facts];
   if(p.reason==="queue_waiting")return [tr("Attachments have been waiting for more than an hour."),...facts];
   return [tr("Attachment downloads are off."),...facts];
 }
@@ -1592,6 +1596,10 @@ const VERDICT_ACTIONS={sign_in:"Sign in again",one_client:"Close the other clien
   resume:"Resume observation.",check_chats:"Check that the account is still in the selected chats.",
   read_history:"Read the missed history of the affected chats.",nothing:"Nothing to do: new messages are recorded when they arrive.",
   diagnose:"Open Diagnostics."};
+const VERDICT_OUTCOMES={
+  wait:["Resumes on its own when the wait ends.","Records saved so far stay in the signed journal.","If updates are missed during the wait, the collector records a signed gap."],
+  free_disk:["Not retried until space is freed.","Records saved before the stop stay signed.","Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes."],
+  restart:["Not retried automatically.","Records saved before the stop stay signed.","Nothing is recorded until observation starts again; the stop is in the signed journal."]};
 const VERDICT_LEVELS={high:"Confidence: high",medium:"Confidence: medium",low:"Confidence: low"};
 const VERDICT_ALARMS=["second_session","flood_wait","stopped","restricted","not_responding","chat_access","update_gap"];
 function healthVerdict(v){
@@ -1600,8 +1608,11 @@ function healthVerdict(v){
   const facts=[v.until&&telegramPauseText({telegram_pause_until:v.until,telegram_pause_method:v.method}),
     v.cause==="signed_out"&&v.detail&&accountLossText(v.detail),v.cause!=="signed_out"&&v.detail&&tr("Last error: {error}",{error:errorName(v.detail)||v.detail}),
     v.last_event_at&&tr("Last event received: {time}",{time:when(v.last_event_at)})];
+  const outcome=VERDICT_OUTCOMES[v.action]?.map(tr);
+  if(outcome&&v.action==="free_disk"&&v.resumes)outcome[0]=tr("Resumes on its own within 30 seconds after space is freed.");
   return {title:tr(title),part,state,confidence,quiet:v.cause==="quiet",level:tr(VERDICT_LEVELS[confidence]),
-    action:tr(VERDICT_ACTIONS[v.action]||VERDICT_ACTIONS.diagnose),facts};
+    action:tr(VERDICT_ACTIONS[v.action]||VERDICT_ACTIONS.diagnose),facts,
+    outcome:outcome&&[[tr("Retry"),outcome[0]],[tr("Kept"),outcome[1]],[tr("Evidence"),outcome[2]]]};
 }
 function chatSilence(s,chat){
   const source=s.collector?.source_status?.[String(chat)]?.state,check=tr(VERDICT_ACTIONS.check_chats);
@@ -1611,9 +1622,9 @@ function chatSilence(s,chat){
   return v?{title:v.title,action:v.action,part:v.part}:null;
 }
 let healthUI=null;
-const healthReady=import("./components/health.js?v=verdict1").then(({createHealthBar})=>{
+const healthReady=import("./components/health.js?v=verdict2").then(({createHealthBar})=>{
   healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,verdict:healthVerdict,
-    actionContext:{getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate,saveBlob},
+    actionContext:{openJournal:openJournalFilter,getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate,saveBlob},
     diagnose:openDiagnostics,canDiagnose:name=>viewAllowed(healthDiagnostics[name]?.view),workspace:$("workspace")});
   if(state.status)renderCollectorHealth(state.status.health);
   return healthUI;

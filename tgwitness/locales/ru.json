@@ -11267,5 +11267,20 @@
   "Independent check": "Независимая проверка",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Получатель распаковывает ZIP и запускает VERIFY.cmd (Windows) или sh VERIFY.sh с этим отпечатком. Без него результат сообщает, что ключ подписавшего не подтверждён; чужой отпечаток даёт отказ.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Проверка доказывает, кто подписал и что ничего не изменено. Она не доказывает, что содержимое правдиво или что суд его примет.",
-  "Before you hand over": "Перед передачей"
+  "Before you hand over": "Перед передачей",
+  "Kept": "Сохранено",
+  "Resumes on its own when the wait ends.": "Возобновится сам после окончания ожидания.",
+  "Records saved so far stay in the signed journal.": "Уже сохранённые записи остаются в подписанном журнале.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Если за время ожидания обновления пропадут, сборщик запишет подписанный пропуск.",
+  "Not retried until space is freed.": "Повтора нет, пока не освободится место.",
+  "Records saved before the stop stay signed.": "Записи, сохранённые до остановки, остаются подписанными.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Пока сбор стоит, ничего не записывается. При возобновлении пишется подписанный пропуск disk_full на этот интервал.",
+  "Not retried automatically.": "Автоматического повтора нет.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "До нового запуска наблюдения ничего не записывается; остановка есть в подписанном журнале.",
+  "Resumes on its own within 30 seconds after space is freed.": "Возобновится сам в течение 30 секунд после освобождения места.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "У каждого отсутствующего файла есть подписанная запись media.failed, экспорт её показывает. Неудачные загрузки не повторяются.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Обновление в {time} не удалось обработать, оно не сохранено. Его отмечает подписанный пропуск; следующая перепроверка недавней истории может найти сообщение.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Наблюдение стояло из-за заполненного диска с {from} до {to}. Интервал отмечен подписанным пропуском; наблюдение возобновилось само.",
+  "Show attachments not saved": "Показать несохранённые вложения",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Ничего не изменено. Попросите администратора рабочего пространства расширить этот доступ."
 }

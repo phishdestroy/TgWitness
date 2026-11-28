@@ -11129,5 +11129,20 @@
   "Independent check": "独立验证",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "收件人解压 ZIP，并用此指纹运行 VERIFY.cmd（Windows）或 sh VERIFY.sh。未提供指纹时，结果显示签名者密钥未确认；指纹不同则验证失败。",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "验证可证明由谁签名且内容未被更改，但不能证明内容属实或法院会采纳。",
-  "Before you hand over": "移交之前"
+  "Before you hand over": "移交之前",
+  "Kept": "保留",
+  "Resumes on its own when the wait ends.": "等待结束后会自动继续。",
+  "Records saved so far stay in the signed journal.": "目前已保存的记录会保留在已签名的日志中。",
+  "If updates are missed during the wait, the collector records a signed gap.": "若等待期间遗漏更新，收集器会记录已签名的缺口。",
+  "Not retried until space is freed.": "释放空间前不会重试。",
+  "Records saved before the stop stay signed.": "停止前保存的记录仍保持签名。",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "停止期间不会记录任何内容。恢复观察时会写入覆盖该期间的已签名 disk_full 缺口。",
+  "Not retried automatically.": "不会自动重试。",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "重新开始观察前不会记录任何内容；停止已记入已签名的日志。",
+  "Resumes on its own within 30 seconds after space is freed.": "释放空间后 30 秒内会自动继续。",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "每个缺失的文件都有已签名的 media.failed 记录，导出也会列出。下载失败不会重试。",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time} 的一条更新无法处理，未被保存。已签名的缺口标记了它；下次重新检查近期历史时可能找到该消息。",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "磁盘已满时观察停止，从 {from} 到 {to}。已签名的缺口标记了这段期间；观察已自动恢复。",
+  "Show attachments not saved": "显示未保存的附件",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "未做任何更改。请工作区管理员扩大此访问权限。"
 }

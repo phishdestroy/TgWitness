@@ -11180,5 +11180,20 @@
   "Independent check": "স্বাধীন যাচাই",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "প্রাপক ZIP খুলে এই ফিঙ্গারপ্রিন্ট দিয়ে VERIFY.cmd (Windows) বা sh VERIFY.sh চালান। এটি ছাড়া ফলাফলে স্বাক্ষরকারীর কী নিশ্চিত নয় বলা হয়; ভিন্ন ফিঙ্গারপ্রিন্টে যাচাই ব্যর্থ হয়।",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "যাচাই প্রমাণ করে কে স্বাক্ষর করেছে এবং কিছু বদলায়নি। এটি বিষয়বস্তু সত্য বা আদালত গ্রহণ করবে তা প্রমাণ করে না।",
-  "Before you hand over": "হস্তান্তরের আগে"
+  "Before you hand over": "হস্তান্তরের আগে",
+  "Kept": "রাখা হয়েছে",
+  "Resumes on its own when the wait ends.": "অপেক্ষা শেষ হলে নিজে থেকে আবার চলবে।",
+  "Records saved so far stay in the signed journal.": "এখন পর্যন্ত সংরক্ষিত রেকর্ড স্বাক্ষরিত জার্নালে থাকে।",
+  "If updates are missed during the wait, the collector records a signed gap.": "অপেক্ষার সময় আপডেট হারালে সংগ্রাহক একটি স্বাক্ষরিত ফাঁক লেখে।",
+  "Not retried until space is freed.": "জায়গা খালি না হওয়া পর্যন্ত আবার চেষ্টা হবে না।",
+  "Records saved before the stop stay signed.": "থামার আগে সংরক্ষিত রেকর্ড স্বাক্ষরিত থাকে।",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "থামা অবস্থায় কিছু রেকর্ড হয় না। পর্যবেক্ষণ আবার শুরু হলে সময়কাল জুড়ে স্বাক্ষরিত disk_full ফাঁক লেখা হয়।",
+  "Not retried automatically.": "স্বয়ংক্রিয়ভাবে আবার চেষ্টা হয় না।",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "পর্যবেক্ষণ আবার শুরু না হওয়া পর্যন্ত কিছু রেকর্ড হয় না; থামা স্বাক্ষরিত জার্নালে আছে।",
+  "Resumes on its own within 30 seconds after space is freed.": "জায়গা খালি হওয়ার ৩০ সেকেন্ডের মধ্যে নিজে থেকে আবার চলবে।",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "প্রতিটি অনুপস্থিত ফাইলের স্বাক্ষরিত media.failed রেকর্ড আছে, এক্সপোর্টে তা তালিকাভুক্ত। ব্যর্থ ডাউনলোড আবার চেষ্টা হয় না।",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "{time}-এ একটি আপডেট প্রক্রিয়া করা যায়নি এবং সংরক্ষিত হয়নি। একটি স্বাক্ষরিত ফাঁক তা চিহ্নিত করে; সাম্প্রতিক ইতিহাসের পরবর্তী পুনঃপরীক্ষায় বার্তাটি পাওয়া যেতে পারে।",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "ডিস্ক পূর্ণ থাকায় পর্যবেক্ষণ থেমেছিল, {from} থেকে {to}। একটি স্বাক্ষরিত ফাঁক সময়কাল চিহ্নিত করে; পর্যবেক্ষণ নিজে থেকে আবার চলেছে।",
+  "Show attachments not saved": "সংরক্ষিত হয়নি এমন সংযুক্তি দেখান",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "কিছু বদলায়নি। এই অ্যাক্সেস বাড়াতে ওয়ার্কস্পেস প্রশাসককে বলুন।"
 }

@@ -864,6 +864,7 @@ class Collector:
             "pending_only_session_password": bool(self.only_session_password),
             "last_error": self.last_error, "last_heartbeat": self.last_heartbeat,
             "journal_write_failures": getattr(self, "journal_write_failures", 0),
+            "disk_resume": bool(getattr(self, "disk_watch", None)),
             "media_pending": sum(n for s, n in self.store.media_stats().items()
                                  if s in ("queued", "running", "retry")),
             "media_jobs": self.store.media_stats(),

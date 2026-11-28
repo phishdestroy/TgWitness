@@ -11384,5 +11384,20 @@
   "Independent check": "تحقق مستقل",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "يستخرج المستلم ملف ZIP ويشغّل VERIFY.cmd (ويندوز) أو sh VERIFY.sh بهذه البصمة. بدونها تقول النتيجة إن مفتاح الموقّع غير مؤكد؛ والبصمة المختلفة تفشل.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "يثبت التحقق من وقّع وأن شيئًا لم يتغير. ولا يثبت صحة المحتوى أو قبول المحكمة له.",
-  "Before you hand over": "قبل التسليم"
+  "Before you hand over": "قبل التسليم",
+  "Kept": "محفوظ",
+  "Resumes on its own when the wait ends.": "يُستأنف تلقائيًا عند انتهاء الانتظار.",
+  "Records saved so far stay in the signed journal.": "تبقى السجلات المحفوظة حتى الآن في السجل الموقّع.",
+  "If updates are missed during the wait, the collector records a signed gap.": "إذا فاتت تحديثات أثناء الانتظار، يسجّل المجمّع فجوة موقّعة.",
+  "Not retried until space is freed.": "لا إعادة محاولة حتى تُحرَّر المساحة.",
+  "Records saved before the stop stay signed.": "تبقى السجلات المحفوظة قبل التوقف موقّعة.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "لا يُسجَّل شيء أثناء التوقف. تُكتب فجوة disk_full موقّعة تغطي الفترة عند استئناف المراقبة.",
+  "Not retried automatically.": "لا تُعاد المحاولة تلقائيًا.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "لا يُسجَّل شيء حتى تبدأ المراقبة مجددًا؛ والتوقف مسجّل في السجل الموقّع.",
+  "Resumes on its own within 30 seconds after space is freed.": "يُستأنف تلقائيًا خلال 30 ثانية بعد تحرير المساحة.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "لكل ملف ناقص سجل media.failed موقّع، وتذكره عمليات التصدير. لا تُعاد محاولة التنزيلات الفاشلة.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "تعذّرت معالجة تحديث في {time} ولم يُحفظ. تشير إليه فجوة موقّعة؛ وقد تجد إعادة الفحص التالية للسجل الحديث الرسالة.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "توقفت المراقبة أثناء امتلاء القرص من {from} إلى {to}. تشير فجوة موقّعة إلى الفترة؛ واستؤنفت المراقبة تلقائيًا.",
+  "Show attachments not saved": "عرض المرفقات غير المحفوظة",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "لم يتغير شيء. اطلب من مسؤول مساحة العمل توسيع هذا الوصول."
 }

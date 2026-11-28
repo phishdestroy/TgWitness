@@ -11190,5 +11190,20 @@
   "Independent check": "Verificação independente",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "O destinatário extrai o ZIP e executa VERIFY.cmd (Windows) ou sh VERIFY.sh com esta impressão digital. Sem ela, o resultado diz que a chave do signatário não foi confirmada; uma impressão diferente falha.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "A verificação prova quem assinou e que nada mudou. Não prova que o conteúdo é verdadeiro nem que um tribunal o aceitará.",
-  "Before you hand over": "Antes de entregar"
+  "Before you hand over": "Antes de entregar",
+  "Kept": "Mantido",
+  "Resumes on its own when the wait ends.": "Retoma sozinho quando a espera terminar.",
+  "Records saved so far stay in the signed journal.": "Os registros salvos até agora permanecem no diário assinado.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Se atualizações forem perdidas durante a espera, o coletor registra uma lacuna assinada.",
+  "Not retried until space is freed.": "Não tenta de novo até liberar espaço.",
+  "Records saved before the stop stay signed.": "Os registros salvos antes da parada continuam assinados.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Nada é registrado enquanto parado. Ao retomar, é escrita uma lacuna disk_full assinada cobrindo o intervalo.",
+  "Not retried automatically.": "Não é repetido automaticamente.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Nada é registrado até a observação recomeçar; a parada consta no diário assinado.",
+  "Resumes on its own within 30 seconds after space is freed.": "Retoma sozinho em até 30 segundos após liberar espaço.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Cada arquivo ausente tem um registro media.failed assinado, e as exportações o listam. Downloads com falha não são repetidos.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Uma atualização às {time} não pôde ser processada e não foi salva. Uma lacuna assinada a marca; a próxima reverificação do histórico recente pode encontrar a mensagem.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "A observação parou com o disco cheio, de {from} a {to}. Uma lacuna assinada marca o intervalo; a observação retomou sozinha.",
+  "Show attachments not saved": "Mostrar anexos não salvos",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nada foi alterado. Peça ao administrador do espaço de trabalho para ampliar este acesso."
 }

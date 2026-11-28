@@ -11129,5 +11129,20 @@
   "Independent check": "การตรวจสอบอิสระ",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "ผู้รับแตกไฟล์ ZIP แล้วรัน VERIFY.cmd (Windows) หรือ sh VERIFY.sh พร้อมลายนิ้วมือนี้ หากไม่มี ผลจะระบุว่ากุญแจผู้ลงนามยังไม่ได้รับการยืนยัน ลายนิ้วมือที่ต่างกันจะไม่ผ่าน",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "การตรวจสอบพิสูจน์ว่าใครลงนามและไม่มีสิ่งใดถูกเปลี่ยน แต่ไม่ได้พิสูจน์ว่าเนื้อหาเป็นความจริงหรือศาลจะยอมรับ",
-  "Before you hand over": "ก่อนส่งมอบ"
+  "Before you hand over": "ก่อนส่งมอบ",
+  "Kept": "เก็บไว้",
+  "Resumes on its own when the wait ends.": "จะทำงานต่อเองเมื่อสิ้นสุดการรอ",
+  "Records saved so far stay in the signed journal.": "บันทึกที่บันทึกไว้แล้วยังอยู่ในบันทึกที่ลงนาม",
+  "If updates are missed during the wait, the collector records a signed gap.": "หากพลาดการอัปเดตระหว่างรอ ตัวเก็บข้อมูลจะบันทึกช่องว่างที่ลงนาม",
+  "Not retried until space is freed.": "จะไม่ลองใหม่จนกว่าจะมีพื้นที่ว่าง",
+  "Records saved before the stop stay signed.": "บันทึกที่บันทึกก่อนหยุดยังคงลงนามอยู่",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "ไม่มีการบันทึกขณะหยุด เมื่อกลับมาสังเกตการณ์ จะเขียนช่องว่าง disk_full ที่ลงนามครอบคลุมช่วงนั้น",
+  "Not retried automatically.": "จะไม่ลองใหม่โดยอัตโนมัติ",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "จะไม่มีการบันทึกจนกว่าจะเริ่มสังเกตการณ์อีกครั้ง การหยุดอยู่ในบันทึกที่ลงนาม",
+  "Resumes on its own within 30 seconds after space is freed.": "จะทำงานต่อเองภายใน 30 วินาทีหลังมีพื้นที่ว่าง",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "ไฟล์ที่ขาดแต่ละไฟล์มีบันทึก media.failed ที่ลงนาม และการส่งออกจะระบุไว้ การดาวน์โหลดที่ล้มเหลวจะไม่ลองใหม่",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "การอัปเดตเมื่อ {time} ประมวลผลไม่ได้และไม่ได้บันทึก มีช่องว่างที่ลงนามระบุไว้ การตรวจประวัติล่าสุดครั้งถัดไปอาจพบข้อความนั้น",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "การสังเกตการณ์หยุดขณะดิสก์เต็ม ตั้งแต่ {from} ถึง {to} มีช่องว่างที่ลงนามระบุช่วงนั้น การสังเกตการณ์กลับมาเอง",
+  "Show attachments not saved": "แสดงไฟล์แนบที่ไม่ได้บันทึก",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "ไม่มีการเปลี่ยนแปลง ขอให้ผู้ดูแลพื้นที่ทำงานขยายสิทธิ์นี้"
 }

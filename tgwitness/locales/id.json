@@ -11129,5 +11129,20 @@
   "Independent check": "Pemeriksaan independen",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Penerima mengekstrak ZIP dan menjalankan VERIFY.cmd (Windows) atau sh VERIFY.sh dengan sidik jari ini. Tanpanya, hasil menyatakan kunci penanda tangan belum dikonfirmasi; sidik jari berbeda gagal.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Pemeriksaan membuktikan siapa yang menandatangani dan tidak ada yang berubah. Ini tidak membuktikan isinya benar atau akan diterima pengadilan.",
-  "Before you hand over": "Sebelum menyerahkan"
+  "Before you hand over": "Sebelum menyerahkan",
+  "Kept": "Disimpan",
+  "Resumes on its own when the wait ends.": "Berlanjut sendiri saat masa tunggu berakhir.",
+  "Records saved so far stay in the signed journal.": "Catatan yang sudah tersimpan tetap ada di jurnal bertanda tangan.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Jika pembaruan terlewat selama menunggu, kolektor mencatat celah bertanda tangan.",
+  "Not retried until space is freed.": "Tidak dicoba lagi sampai ruang dikosongkan.",
+  "Records saved before the stop stay signed.": "Catatan yang tersimpan sebelum berhenti tetap bertanda tangan.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Tidak ada yang tercatat saat berhenti. Celah disk_full bertanda tangan untuk rentang itu ditulis saat pemantauan berlanjut.",
+  "Not retried automatically.": "Tidak dicoba ulang secara otomatis.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Tidak ada yang tercatat sampai pemantauan dimulai lagi; penghentian ada di jurnal bertanda tangan.",
+  "Resumes on its own within 30 seconds after space is freed.": "Berlanjut sendiri dalam 30 detik setelah ruang dikosongkan.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Setiap berkas yang hilang punya catatan media.failed bertanda tangan, dan ekspor mencantumkannya. Unduhan gagal tidak dicoba ulang.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Sebuah pembaruan pada {time} tidak dapat diproses dan tidak tersimpan. Celah bertanda tangan menandainya; pemeriksaan ulang riwayat terbaru berikutnya dapat menemukan pesannya.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Pemantauan berhenti saat disk penuh, {from} sampai {to}. Celah bertanda tangan menandai rentang itu; pemantauan berlanjut sendiri.",
+  "Show attachments not saved": "Tampilkan lampiran yang tidak tersimpan",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Tidak ada yang diubah. Minta administrator ruang kerja memperluas akses ini."
 }

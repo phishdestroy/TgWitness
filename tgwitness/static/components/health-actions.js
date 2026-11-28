@@ -1,5 +1,5 @@
 export function createHealthActions({node, tr, health, close, context}) {
-  const {getState, getSession, may, json, refreshStatus, toast, getSources, navigate, saveBlob} = context;
+  const {getState, getSession, may, json, refreshStatus, toast, getSources, navigate, saveBlob, openJournal} = context;
   let pending = null;
   const buttons = new Map();
   function add(part, key, label, action) {
@@ -68,6 +68,8 @@ export function createHealthActions({node, tr, health, close, context}) {
       ? "New download-disabled notices will be recorded."
       : "New download-disabled notices are suppressed. Existing records stay in the journal."));
   });
+  add("media", "show-failed-media", "Show attachments not saved", async () => { close(); openJournal("media.failed"); });
+  add("intake", "show-fault-gap", "Show in the journal", async () => { close(); openJournal("coverage.gap"); });
   function update() {
     const status = getState().status;
     if (!status) return;
@@ -85,6 +87,8 @@ export function createHealthActions({node, tr, health, close, context}) {
     const counts = status.health?.media?.counts || {};
     buttons.get("clear-queue").hidden = !canMedia || !(counts.pending || counts.retry);
     buttons.get("disabled-receipts").hidden = !canMedia || status.capture.download_media;
+    buttons.get("show-failed-media").hidden = !openJournal || status.demo || !(counts.failed > 0);
+    buttons.get("show-fault-gap").hidden = !openJournal || status.demo || !status.health?.intake?.last_gap;
     buttons.get("disabled-receipts").textContent = tr(status.capture.record_disabled_media === false
       ? "Record download-disabled notices" : "Skip download-disabled notices");
   }

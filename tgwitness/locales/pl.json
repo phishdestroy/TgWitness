@@ -11282,5 +11282,20 @@
   "Independent check": "Niezależna weryfikacja",
   "The recipient extracts the ZIP and runs VERIFY.cmd (Windows) or sh VERIFY.sh with this fingerprint. Without it the result says the signer key is not confirmed; a different fingerprint fails.": "Odbiorca rozpakowuje ZIP i uruchamia VERIFY.cmd (Windows) lub sh VERIFY.sh z tym odciskiem. Bez niego wynik podaje, że klucz podpisującego nie jest potwierdzony; inny odcisk kończy się błędem.",
   "The check covers who signed and whether anything changed, not whether the content is true or a court will accept it.": "Weryfikacja dowodzi, kto podpisał i że nic się nie zmieniło. Nie dowodzi, że treść jest prawdziwa ani że sąd ją przyjmie.",
-  "Before you hand over": "Przed przekazaniem"
+  "Before you hand over": "Przed przekazaniem",
+  "Kept": "Zachowane",
+  "Resumes on its own when the wait ends.": "Wznowi się samo po zakończeniu oczekiwania.",
+  "Records saved so far stay in the signed journal.": "Dotąd zapisane rekordy zostają w podpisanym dzienniku.",
+  "If updates are missed during the wait, the collector records a signed gap.": "Jeśli w trakcie oczekiwania aktualizacje przepadną, kolektor zapisze podpisaną lukę.",
+  "Not retried until space is freed.": "Bez ponowienia, dopóki nie zwolni się miejsce.",
+  "Records saved before the stop stay signed.": "Rekordy zapisane przed zatrzymaniem pozostają podpisane.",
+  "Nothing is recorded while stopped. A signed disk_full gap covering the interval is written when observation resumes.": "Podczas zatrzymania nic nie jest zapisywane. Po wznowieniu powstaje podpisana luka disk_full obejmująca ten okres.",
+  "Not retried automatically.": "Bez automatycznego ponowienia.",
+  "Nothing is recorded until observation starts again; the stop is in the signed journal.": "Do ponownego startu obserwacji nic nie jest zapisywane; zatrzymanie jest w podpisanym dzienniku.",
+  "Resumes on its own within 30 seconds after space is freed.": "Wznowi się samo w ciągu 30 sekund po zwolnieniu miejsca.",
+  "Each missing file has a signed media.failed record, and exports list it. Failed downloads are not retried.": "Każdy brakujący plik ma podpisany rekord media.failed, a eksporty go wymieniają. Nieudane pobrania nie są ponawiane.",
+  "An update could not be processed at {time} and was not saved. A signed gap marks it; the next recheck of recent history can find the message.": "Aktualizacji z {time} nie udało się przetworzyć i nie została zapisana. Oznacza ją podpisana luka; kolejne sprawdzenie najnowszej historii może odnaleźć wiadomość.",
+  "Observation stopped while the disk was full, {from} to {to}. A signed gap marks the interval; observation resumed on its own.": "Obserwacja stała przy pełnym dysku, od {from} do {to}. Okres oznacza podpisana luka; obserwacja wznowiła się sama.",
+  "Show attachments not saved": "Pokaż niezapisane załączniki",
+  "Nothing was changed. Ask the workspace administrator to widen this access.": "Nic nie zmieniono. Poproś administratora obszaru roboczego o rozszerzenie tego dostępu."
 }

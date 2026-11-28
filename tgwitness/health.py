@@ -188,7 +188,7 @@ def connection(c, now):
     if c.get("phase") in FAILED_PHASES:
         if c["phase"] == "authorization_required":
             detail["cause"] = (c.get("account_loss") or {}).get("cause")
-        return part("failed", FAILED_PHASES[c["phase"]], **detail)
+        return part("failed", FAILED_PHASES[c["phase"]], **detail, **({"disk_resume": True} if c.get("disk_resume") else {}))
     if not c.get("has_session"):
         return part("configured" if c.get("phase") in SIGN_IN_PHASES else "off", "no_account", **detail)
     if c.get("account_loss") and not c.get("running"):
@@ -310,8 +310,8 @@ def verdict(parts, c, now, gap_at=None):
                        since=(c.get("probe_missed") or c.get("updates_diverted") or {}).get("since"))
     if link["reason"] == "telegram_pause":
         return finding("flood_wait", "high", "wait", until=link.get("telegram_pause_until"), method=link.get("telegram_pause_method"))
-    if feed["reason"] == "journal_write_failures" or link["reason"] == "storage_error":
-        return finding("stopped", "high", "free_disk")
+    if feed["reason"] == "journal_write_failures" or link["reason"] == "storage_error" or link.get("disk_resume"):
+        return finding("stopped", "high", "free_disk", resumes=bool(link.get("disk_resume")) or None)
     if link["reason"] in ("collector_error", "resume_failed"):
         return finding("stopped", "high", "restart", detail=link.get("error"))
     if (c.get("account_restriction") or {}).get("kind") == "frozen":
@@ -336,9 +336,12 @@ def verdict(parts, c, now, gap_at=None):
     return finding("unknown", "low", "diagnose")
 
 
-def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None, recheck=None):
+def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None, recheck=None, fault_gap=None):
     parts = {"connection": connection(c, now), "intake": intake(c, heartbeat_seconds, now),
              "sources": sources(c, enabled_sources, recheck), "media": media(c, capture, now)}
+    recent = age((fault_gap or {}).get("at"), now)
+    if recent is not None and recent <= GAP_RECENT_SECONDS:
+        parts["intake"]["last_gap"] = fault_gap
     return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"])),
             "verdict": verdict(parts, c, now, gap_at)}
 
@@ -351,6 +354,21 @@ def last_gap(store):
     return row[0] if row else None
 
 
+FAULT_GAPS = ("handler_failed", "disk_full")
+
+
+def fault_gap(store):
+    with store.reading() as db:
+        row = db.execute("SELECT seq, observed_at, chat_id, json_extract(payload,'$.reason'), json_extract(payload,'$.from'), "
+                         "json_extract(payload,'$.to'), json_extract(payload,'$.error_type') FROM (SELECT seq, observed_at, chat_id, payload FROM events "
+                         "WHERE kind='coverage.gap' ORDER BY seq DESC LIMIT 200) "
+                         "WHERE json_extract(payload,'$.reason') IN (?,?) ORDER BY seq DESC LIMIT 1", FAULT_GAPS).fetchone()
+    if not row:
+        return None
+    seq, at, chat_id, reason, start, end, error_type = row
+    return {"reason": reason, "seq": seq, "at": at, "chat_id": chat_id, "from": start, "to": end, "error_type": error_type}
+
+
 def collector_of(app_state, status=None, now=None, *, enabled_sources=None):
     from .monitoring import capture_settings
     from .scope import recheck_settings
@@ -359,7 +377,7 @@ def collector_of(app_state, status=None, now=None, *, enabled_sources=None):
     return collector(status or app_state.collector.status(), capture_settings(store),
                      tuning.value(store, "heartbeat_seconds"),
                      len(store.targets(True)) if enabled_sources is None else enabled_sources, now or now_utc(),
-                     last_gap(store), recheck_settings(store))
+                     last_gap(store), recheck_settings(store), fault_gap(store))
 
 
 def next_at(seconds, now=None):
