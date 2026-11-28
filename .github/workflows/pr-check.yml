@@ -66,6 +66,8 @@ jobs:
         run: |
           python -I -c "import tgwitness.app, tgwitness.verify, tgwitness_capture.service"
           python -I -m tgwitness --check --json --data-dir "$RUNNER_TEMP/readiness"
+      - name: Export a synthetic journal, verify it and refuse changed copies
+        run: python -I tools/evidence_roundtrip.py
   dependencies:
     name: Locked dependency audit
     runs-on: ubuntu-24.04
