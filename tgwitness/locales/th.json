@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "ล้มเหลวเมื่อ {time} ระเบียนนี้ยังคงอยู่ในบันทึกที่ลงนาม",
   "Observation stopped while the disk was full": "การสังเกตการณ์หยุดลงระหว่างที่ดิสก์เต็ม",
   "Attachment not saved": "ไม่ได้บันทึกไฟล์แนบ",
-  "On the Case Board": "บนกระดานคดี"
+  "On the Case Board": "บนกระดานคดี",
+  "This access does not open this section.": "สิทธิ์การเข้าถึงนี้เปิดส่วนนี้ไม่ได้"
 }

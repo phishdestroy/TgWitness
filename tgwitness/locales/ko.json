@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time}에 실패했습니다. 이 기록은 서명된 저널에 남습니다.",
   "Observation stopped while the disk was full": "디스크가 가득 찬 동안 관찰이 중지되었습니다",
   "Attachment not saved": "첨부 파일이 저장되지 않음",
-  "On the Case Board": "사건 보드에 있음"
+  "On the Case Board": "사건 보드에 있음",
+  "This access does not open this section.": "이 접근 권한으로는 이 섹션을 열 수 없습니다."
 }

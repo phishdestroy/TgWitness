@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "در {time} ناموفق بود؛ این رکورد در دفتر امضاشده باقی می‌ماند.",
   "Observation stopped while the disk was full": "مشاهده در زمانی که دیسک پر بود متوقف شد",
   "Attachment not saved": "پیوست ذخیره نشد",
-  "On the Case Board": "در تخته پرونده"
+  "On the Case Board": "در تخته پرونده",
+  "This access does not open this section.": "این دسترسی این بخش را باز نمی‌کند."
 }

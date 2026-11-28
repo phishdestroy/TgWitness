@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time}-এ ব্যর্থ হয়েছিল; রেকর্ডটি স্বাক্ষরিত জার্নালে থেকে যায়।",
   "Observation stopped while the disk was full": "ডিস্ক পূর্ণ থাকায় পর্যবেক্ষণ বন্ধ ছিল",
   "Attachment not saved": "সংযুক্তি সংরক্ষিত হয়নি",
-  "On the Case Board": "কেস বোর্ডে"
+  "On the Case Board": "কেস বোর্ডে",
+  "This access does not open this section.": "এই অ্যাক্সেস এই বিভাগটি খোলে না।"
 }

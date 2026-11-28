@@ -11165,5 +11165,6 @@
   "Failed on {time}; the record stays in the signed journal.": "Fehlgeschlagen am {time}; der Eintrag bleibt im signierten Journal.",
   "Observation stopped while the disk was full": "Die Beobachtung stand still, während der Datenträger voll war",
   "Attachment not saved": "Anhang nicht gespeichert",
-  "On the Case Board": "In der Fallübersicht"
+  "On the Case Board": "In der Fallübersicht",
+  "This access does not open this section.": "Dieser Zugang öffnet diesen Bereich nicht."
 }

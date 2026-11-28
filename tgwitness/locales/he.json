@@ -11216,5 +11216,6 @@
   "Failed on {time}; the record stays in the signed journal.": "נכשל ב־{time}; הרשומה נשארת ביומן החתום.",
   "Observation stopped while the disk was full": "התצפית נעצרה בזמן שהדיסק היה מלא",
   "Attachment not saved": "הקובץ המצורף לא נשמר",
-  "On the Case Board": "בלוח התיק"
+  "On the Case Board": "בלוח התיק",
+  "This access does not open this section.": "גישה זו אינה פותחת את המדור הזה."
 }

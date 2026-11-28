@@ -11267,5 +11267,6 @@
   "Failed on {time}; the record stays in the signed journal.": "Не пройшов {time}; запис про це лишається в підписаному журналі.",
   "Observation stopped while the disk was full": "Спостереження стояло, поки диск був заповнений",
   "Attachment not saved": "Вкладення не збережено",
-  "On the Case Board": "На дошці справи"
+  "On the Case Board": "На дошці справи",
+  "This access does not open this section.": "Цей доступ не відкриває цей розділ."
 }

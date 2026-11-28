@@ -11114,5 +11114,6 @@
   "Failed on {time}; the record stays in the signed journal.": "{time} に失敗しました。この記録は署名済みジャーナルに残ります。",
   "Observation stopped while the disk was full": "ディスクが満杯の間、観測が停止していました",
   "Attachment not saved": "添付ファイルは保存されていません",
-  "On the Case Board": "ケースボード上"
+  "On the Case Board": "ケースボード上",
+  "This access does not open this section.": "このアクセスではこのセクションを開けません。"
 }
