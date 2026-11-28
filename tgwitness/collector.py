@@ -2936,6 +2936,10 @@ class Collector:
         self.prune_untracked()
         await self.load_folders()
         self.dialog_cache = dialogs
+        for target in self.store.targets():
+            entry = dialogs.get(target["chat_id"])
+            if entry:
+                self.store.rename_target(target["chat_id"], entry["title"])
         self.dialogs_truncated = limit is not None and count >= limit
         self.refresh_source_visibility()
         return {"dialogs": [{k: v for k, v in d.items() if k != "entity"}
@@ -4147,6 +4151,8 @@ class Collector:
                     "message_event": event["seq"], "action": plain(message.action),
                     "attribution": "service-message sender; meaning depends on the action type"
                 }, chat_id, message.id, message.sender_id, date_string(message.date))
+                if kind == "message.new" and isinstance(message.action, types.MessageActionChatEditTitle):
+                    self.store.rename_target(chat_id, message.action.title)
             if media_skip:
                 status = "unavailable" if media_skip == "ephemeral_attachment_unavailable_at_observation" else "not_saved"
                 self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip,
