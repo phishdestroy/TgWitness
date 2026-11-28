@@ -360,7 +360,9 @@ Media recovery is separate from Telegram update recovery and cannot recreate van
 `tgwitness backup FOLDER` copies the data directory while the panel keeps running:
 checkpoints first, then SQLite files through the online backup API, then keys, media and
 profiles, so no copied checkpoint is newer than the copied journal. `backup-manifest.json`
-lists every file's SHA-256 and the journal heads. To restore, stop TgWitness and replace the
+lists every file's SHA-256 and the journal heads and is signed with the default workspace's
+collector key; `tgwitness verify-backup FOLDER --fingerprint HEX` checks the files and that
+signature. To restore, stop TgWitness and replace the
 whole data directory with that folder. The next start records that the journal was restored
 from an older copy. That record compares the journal with the head kept in
 `TGWITNESS_STATE_DIR`, a folder outside the data directory: the `tgwitness-state` volume in

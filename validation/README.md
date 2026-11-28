@@ -14,6 +14,19 @@ so the result can be confirmed later without publishing the tests.
 The archive holds the 44 test modules, the full pytest log of the run and a report of
 the audit fixes and live tests (in Russian) with their coverage maps. The maintainer holds the password.
 
+## What this receipt covers
+
+The result above applies only to revision `4e43cf89cdde6e14839897207b9e121408064ce7`
+(26 November 2026). Commits made after it, including the current `main`, are not covered by
+this receipt: no run of these tests on a later revision is recorded here. Until a new archive
+and result are added, the public check anyone can run on any revision is the synthetic
+round trip, which exports a synthetic journal, verifies it with its fingerprint and refuses
+changed, added and removed files and another fingerprint:
+
+```sh
+python tools/evidence_roundtrip.py
+```
+
 Check that the archive is the one listed here:
 
 ```sh
