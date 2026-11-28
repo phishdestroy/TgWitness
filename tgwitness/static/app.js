@@ -227,12 +227,12 @@ function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":stat
   ...chatListView?.snapshot(),
   tab:state.view==='sources'?sourcesView?.tab:state.view==='evidence'?exportsView?.tab:null,
   slice:state.boardSlice||null,added:!!state.boardAdded,
-  chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
+  chatId:state.view==="chats"?state.chat:null,find:state.view==="chats"&&state.chat!==null?state.chatSearch||"":"",seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
   since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
   step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null,
   hub:state.view==="settings"?settingsHub?.section||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=12").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=13").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),notice:path=>toast(tr("There is no page at {path}. Opened {page} instead.",
         {path,page:document.querySelector('.sidebar [data-view="'+CSS.escape(state.view)+'"]')?.textContent.trim()||state.view})),
@@ -269,6 +269,7 @@ async function applyRouteToPanel(route,current){
     if(current()&&route.chatId!==null){
       if(state.chat!==route.chatId)await openChat(route.chatId,{history:false});
       else loadChatProfile().catch(()=>{});
+      if(current()&&state.chat===route.chatId&&(route.find||"")!==(state.chatSearch||""))await setChatQuery({chatSearch:route.find||""},{history:false});
     }
   }
   else if(view==="observations"){await refreshEvents();if(current()&&route.seq)await openRecord(route.seq,{history:false});}
@@ -2469,7 +2470,7 @@ const journalReady=import('./components/journal.js?v=layout7').then(({createJour
         if(revision===state.workspaceRevision&&state.view==='secret-chats')await secretChatsView?.selectChat(event.payload.secret_chat_id);
         return;
       }
-      await navigate("chats",{load:false});
+      await navigate("chats",{load:false,history:false});
       if(revision!==state.workspaceRevision||state.view!=="chats")return;
       await refreshChats();if(revision!==state.workspaceRevision||state.view!=="chats")return;
       if(await openChat(event.chat_id)&&event.message_id!==null&&event.message_id!==undefined){
@@ -5958,9 +5959,10 @@ function beginChat(id){
   state.chatView="messages";
   renderComposer();renderChat();renderChatsList();
 }
-function setChatQuery(changes){
+function setChatQuery(changes,options={}){
   clearTimeout(chatSearchTimer);
   Object.assign(state,{chatSearch:$("chat-message-search").value},changes);
+  if(options.history!==false)window.TgWitnessRouter?.record({},{replace:true});
   $("chat-message-search").value=state.chatSearch;state.chatView="messages";
   state.chatMessages=[];state.chatNextBefore=null;state.chatNextAfter=null;chatReady=false;
   renderChatStatus();renderChatFeed();renderComposer();

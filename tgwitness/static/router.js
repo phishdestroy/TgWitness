@@ -26,7 +26,7 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const unknown=parts.length>0&&parts[0]!=="index.html"&&!Object.hasOwn(views,parts[0])&&!query.has("event");
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
-    chatFilter:query.get('filter')||'',chatSort:query.get('sort')||'activity',chatKind:query.get('type')||'',chatQuery:query.get('q')||'',
+    chatFilter:query.get('filter')||'',chatSort:query.get('sort')||'activity',chatKind:query.get('type')||'',chatQuery:query.get('q')||'',find:query.get('find')||'',
     since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",slice:query.get('slice')||null,added:query.get('added')==='1',
     before:query.has("before")?integer(query.get("before")):null,extra:null,section:null,step:null,group:null,hub:null,tab:query.get('tab')||null,explicit};
   const tabs={sources:['scope','chats','recording'],evidence:['downloads','settings']};
@@ -70,6 +70,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   if(['sources','evidence'].includes(route.view)&&route.tab)query.set('tab',route.tab);
   if(current.searchParams.has("lang"))query.set("lang",current.searchParams.get("lang"));
   if(route.view==='chats')for(const [key,value] of [['filter',route.chatFilter],['sort',route.chatSort==='activity'?'':route.chatSort],['type',route.chatKind],['q',route.chatQuery]])if(value)query.set(key,value);
+  if(route.view==='chats'&&route.chatId!==null&&route.chatId!==undefined&&route.find)query.set('find',route.find);
   if(route.view==="observations")for(const key of ["kind","source","q","since","until"])if(route[key])query.set(key,route[key]);
   if(route.view==="observations"&&route.system)query.set("system","1");
   if(route.view==='observations'&&route.slice){query.set('slice',route.slice);if(route.added)query.set('added','1');}
