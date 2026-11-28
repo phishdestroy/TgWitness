@@ -95,3 +95,4 @@
 
 html:not([data-theme=dark]) .tm-chip.tm-amber{color:#8f5214}
 html:not([data-theme=dark]) .tm-chip.tm-purple,html:not([data-theme=dark]) .tm-signing-label,html:not([data-theme=dark]) .tm-checkpoint-label{color:#6c45b8}
+@media(pointer:coarse){.tm-tools>button,.tm-zoom button,.tm-dock-actions>button{min-width:44px;min-height:44px}.tm-tools>button{width:44px;height:44px}}
