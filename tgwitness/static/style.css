@@ -1421,6 +1421,8 @@ button.pill { cursor: pointer; font-family: inherit; }
 }
 .detail-meta small { display: block; color: var(--muted); font-size: 13px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
 .detail-meta strong { display: block; margin-top: 3px; font-size: 14px; font-weight: 550; overflow-wrap: anywhere; }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 6px; }
+.detail-board { margin-top: 14px; }
 .detail-block { margin: 12px 0; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
 .detail-block > small { color: var(--muted); font-size: 13px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
 .detail-block.before { background: var(--danger-soft); border-color: var(--danger-border); }

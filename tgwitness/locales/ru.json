@@ -11250,5 +11250,7 @@
   "No observation gaps in the last 24 hours.": "За последние 24 часа пропусков наблюдения нет.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Пропусков наблюдения за последние 24 часа: {n}. Последний {time}.",
   "Failed on {time}; the record stays in the signed journal.": "Не прошёл {time}; запись об этом остаётся в подписанном журнале.",
-  "Observation stopped while the disk was full": "Наблюдение стояло, пока диск был заполнен"
+  "Observation stopped while the disk was full": "Наблюдение стояло, пока диск был заполнен",
+  "Attachment not saved": "Вложение не сохранено",
+  "On the Case Board": "На доске дела"
 }

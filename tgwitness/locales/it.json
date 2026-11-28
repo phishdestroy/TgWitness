@@ -11173,5 +11173,7 @@
   "No observation gaps in the last 24 hours.": "Nessuna lacuna di osservazione nelle ultime 24 ore.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "Lacune di osservazione nelle ultime 24 ore: {n}. L'ultima {time}.",
   "Failed on {time}; the record stays in the signed journal.": "Non riuscito il {time}; il record resta nel giornale firmato.",
-  "Observation stopped while the disk was full": "L'osservazione si è fermata mentre il disco era pieno"
+  "Observation stopped while the disk was full": "L'osservazione si è fermata mentre il disco era pieno",
+  "Attachment not saved": "Allegato non salvato",
+  "On the Case Board": "Nella bacheca del caso"
 }

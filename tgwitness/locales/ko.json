@@ -11112,5 +11112,7 @@
   "No observation gaps in the last 24 hours.": "최근 24시간 동안 관찰 공백이 없습니다.",
   "Observation gaps in the last 24 hours: {n}. Last one {time}.": "최근 24시간 관찰 공백: {n}. 마지막 {time}.",
   "Failed on {time}; the record stays in the signed journal.": "{time}에 실패했습니다. 이 기록은 서명된 저널에 남습니다.",
-  "Observation stopped while the disk was full": "디스크가 가득 찬 동안 관찰이 중지되었습니다"
+  "Observation stopped while the disk was full": "디스크가 가득 찬 동안 관찰이 중지되었습니다",
+  "Attachment not saved": "첨부 파일이 저장되지 않음",
+  "On the Case Board": "사건 보드에 있음"
 }
