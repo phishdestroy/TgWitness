@@ -1,8 +1,8 @@
 export function createCaseBoard(ctx){
-  const {root,state,json,tr,trn,node,toast,may,openEvidence,openSlice,download}=ctx;
+  const {root,state,json,tr,trn,node,toast,may,openEvidence,openSlice,download,report:buildReport,canReport}=ctx;
   const n=(tag,cls='',text='')=>node(tag,cls,text), t=value=>tr(value);
   let data=null,selected=null,revision=0,request=0,liveCursor=0,unread=0,offset=0,anchor=null,dialog=null,timer=null;
-  const drafts=new Map();let threadTicket=0;
+  const drafts=new Map(),picked=new Map();let threadTicket=0;
   const key=()=>state.workspaceRevision+':'+state.profile;
   const valid=(stamp,rev)=>stamp===key()&&rev===revision&&!!state.me;
   const btn=(text,fn,cls='quiet small')=>{const b=n('button',cls,t(text));b.type='button';b.addEventListener('click',async event=>{
@@ -51,20 +51,20 @@ export function createCaseBoard(ctx){
   label.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(apply,350);});
   let collection='';
   const stats=n('div','board-feed-heading'),count=n('span'),live=n('span','board-live',t('Signed team notes'));
-  stats.append(count,live);const feed=n('div','board-feed');feed.setAttribute('aria-label',t('Case feed'));
+  const reportBar=n('div','board-report-actions'),pickedCount=n('span','board-picked');reportBar.append(pickedCount,btn('Build report from these cards',()=>reportFromCards(),'secondary small'));
+  stats.append(count,live,reportBar);const feed=n('div','board-feed');feed.setAttribute('aria-label',t('Case feed'));
   const more=btn('Load more',()=>load(true),'secondary board-more');more.hidden=true;
   main.append(stats,feed,more);layout.append(left,main,right);root.append(heading,privacy,admin,layout);
   search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>load().catch(error=>toast(error.message,true)),350);});
   order.addEventListener('change',()=>render());
 
-  function reset(){revision++;request++;threadTicket++;drafts.clear();data=null;selected=null;liveCursor=0;unread=0;anchor=null;collection='';offset=0;feed.replaceChildren();right.replaceChildren();right.hidden=true;collections.replaceChildren();closeDialog();badge();}
+  function reset(){revision++;request++;threadTicket++;drafts.clear();picked.clear();data=null;selected=null;liveCursor=0;unread=0;anchor=null;collection='';offset=0;feed.replaceChildren();right.replaceChildren();right.hidden=true;collections.replaceChildren();closeDialog();badge();}
   function badge(){const el=document.getElementById('board-unread');if(el){el.hidden=!unread;el.textContent=String(unread);}}
   async function load(append=false){
     if(!may('board.read')){reset();return;}
     const stamp=key(),rev=revision,ticket=++request;
     const params=new URLSearchParams({limit:'50',offset:String(append?offset:0),order:'newest'});
-    for(const [key,value] of Object.entries({collection,author:author.value,chat:chat.value,label:label.value,state:status.value,kind:kind.value,q:search.value,
-      from:since.value?since.value+':00Z':'',to:until.value?until.value+':00Z':'',comments:onlyComments.checked?'true':''}))if(value)params.set(key,value);
+    for(const [key,value] of Object.entries(narrowing()))if(value)params.set(key,value);
     live.textContent=t('Loading…');let result;
     try{result=await json('board?'+params);}catch(error){if(valid(stamp,rev)&&ticket===request)live.textContent=t('Could not load data');throw error;}
     if(!valid(stamp,rev)||ticket!==request)return;
@@ -72,10 +72,22 @@ export function createCaseBoard(ctx){
     liveCursor=Math.max(liveCursor,result.cursor);unread=0;badge();render();
     if(selected){const id=selected.card.id;await choose(id,true);}
   }
+  function narrowing(){return {collection,author:author.value,chat:chat.value,label:label.value,state:status.value,kind:kind.value,q:search.value,
+    from:since.value?since.value+':00Z':'',to:until.value?until.value+':00Z':'',comments:onlyComments.checked?'true':''};}
+  function marked(){pickedCount.textContent=picked.size?tr('{n} selected',{n:picked.size}):'';}
+  async function reportFromCards(){
+    const stamp=key(),rev=revision,cards=[...picked.values()];
+    if(!cards.length){let next=0;do{const params=new URLSearchParams({limit:'200',offset:String(next),order:'oldest'});for(const [key,value] of Object.entries(narrowing()))if(value)params.set(key,value);
+      const result=await json('board?'+params);if(!valid(stamp,rev))return;cards.push(...result.cards);next=result.next_offset;}while(next!==null);}
+    const refs=[...new Map(cards.filter(card=>card.target?.chat_id!=null&&card.target.message_id!=null).map(card=>[card.target.chat_id+':'+card.target.message_id,{chat:card.target.chat_id,message:card.target.message_id}])).values()];
+    if(!refs.length)throw new Error(t('Choose cards that point to messages.'));
+    if(refs.length>1000)throw new Error(t('Choose at most 1,000 messages.'));
+    picked.clear();marked();await buildReport(refs);
+  }
   function options(input,items){const old=input.value;input.replaceChildren(...items.map(([value,label])=>new Option(label,value)));if([...input.options].some(option=>option.value===old))input.value=old;}
   function render(){
     if(!data)return;admin.hidden=!state.me?.admin;
-    topActions.children[0].hidden=!may('board.write');topActions.children[2].hidden=!may('export');
+    topActions.children[0].hidden=!may('board.write');topActions.children[2].hidden=!may('export');reportBar.hidden=!canReport?.();marked();
     collectionHead.lastElementChild.hidden=!may('board.manage');
     count.textContent=trn('{n} cards','{n} cards',data.total);live.textContent=t('Signed team notes');
     if(Object.values(data.limits).some(value=>value.exceeded))live.textContent=t('Soft limit reached. Existing cards remain available.');
@@ -118,7 +130,10 @@ export function createCaseBoard(ctx){
     const tags=n('div','board-tags');for(const label of card.labels||[])tags.append(n('span','board-tag',label));
     tags.append(n('span','board-state board-state-'+card.state,t({open:'Open',review:'Under review',confirmed:'Confirmed',dismissed:'Dismissed'}[card.state])));article.append(tags);
     if(card.dangling)article.append(n('p','board-warning',t('Dangling reference: the source observation is missing.')));
-    if(!presentation){const actions=n('div','board-card-actions');actions.append(btn('Open',()=>openCard(card)),btn('Comment',()=>choose(card.id)),btn('Copy ref',()=>navigator.clipboard.writeText(card.target?'tgw://'+(state.status?.fingerprint||'').slice(0,8)+'/'+card.target.seq:'Case Board '+card.id)));
+    if(!presentation){const actions=n('div','board-card-actions');
+      if(canReport?.()&&card.target?.chat_id!=null&&card.target.message_id!=null){const pick=n('label','board-pick'),box=n('input');box.type='checkbox';box.checked=picked.has(card.id);
+        box.setAttribute('aria-label',t('Select')+': '+(card.title||typeLabel(card.kind)));box.addEventListener('change',()=>{if(box.checked)picked.set(card.id,card);else picked.delete(card.id);marked();});pick.append(box,n('span','',t('Select')));actions.append(pick);}
+      actions.append(btn('Open',()=>openCard(card)),btn('Comment',()=>choose(card.id)),btn('Copy ref',()=>navigator.clipboard.writeText(card.target?'tgw://'+(state.status?.fingerprint||'').slice(0,8)+'/'+card.target.seq:'Case Board '+card.id)));
       if(may('board.write'))actions.append(btn('Edit',()=>editDialog(card)),btn('Move',()=>moveDialog(card)),btn('Status',()=>statusDialog(card)),btn('Remove',()=>removeCard(card)));
       actions.append(n('span','board-comment-count',trn('{n} comments','{n} comments',card.comment_count||0)));article.append(actions);}
     return article;

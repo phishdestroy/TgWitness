@@ -365,7 +365,7 @@ async def report_preview(
     if options["language"] == "auto":
         options["language"] = panel_language(request)
     async with ctx.export_lock:
-        return await complete_in_thread(preview, ctx.app.state.store, options)
+        return await complete_in_thread(preview, ctx.app.state.store, options, request.state.principal.may("board.read"))
 
 
 async def preview_report(body: report.ReportOptions, *, ctx=Depends(current_context)):

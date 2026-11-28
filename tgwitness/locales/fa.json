@@ -11204,5 +11204,10 @@
   "Telegram names the original sender but not the original message.": "تلگرام فرستنده اصلی را نام می‌برد اما پیام اصلی را نه.",
   "The original chat is not open to this access.": "گفتگوی اصلی برای این دسترسی باز نیست.",
   "The original chat is not collected in this workspace.": "گفتگوی اصلی در این فضای کار گردآوری نمی‌شود.",
-  "The original message is not saved in this workspace.": "پیام اصلی در این فضای کار ذخیره نشده است."
+  "The original message is not saved in this workspace.": "پیام اصلی در این فضای کار ذخیره نشده است.",
+  "Build report from these cards": "ساخت گزارش از این کارت‌ها",
+  "Choose cards that point to messages.": "کارت‌هایی را انتخاب کنید که به پیام اشاره دارند.",
+  "Choose at most 1,000 messages.": "حداکثر ۱٬۰۰۰ پیام انتخاب کنید.",
+  "Journal text": "متن دفتر ثبت",
+  "Team note": "یادداشت تیم"
 }

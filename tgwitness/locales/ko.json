@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram은 원래 보낸 사람은 알려 주지만 원본 메시지는 알려 주지 않습니다.",
   "The original chat is not open to this access.": "원래 채팅은 이 접근 권한에 열려 있지 않습니다.",
   "The original chat is not collected in this workspace.": "원래 채팅은 이 작업 공간에서 수집되지 않습니다.",
-  "The original message is not saved in this workspace.": "원본 메시지가 이 작업 공간에 저장되어 있지 않습니다."
+  "The original message is not saved in this workspace.": "원본 메시지가 이 작업 공간에 저장되어 있지 않습니다.",
+  "Build report from these cards": "이 카드로 보고서 만들기",
+  "Choose cards that point to messages.": "메시지를 가리키는 카드를 선택하세요.",
+  "Choose at most 1,000 messages.": "메시지는 최대 1,000개까지 선택하세요.",
+  "Journal text": "저널 원문",
+  "Team note": "팀 메모"
 }

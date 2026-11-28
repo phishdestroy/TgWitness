@@ -1,9 +1,56 @@
 import copy
 import html as escaping
+import json
 
 from . import board
 
 MEANING = "Team notes and bookmarks"
+
+
+def version(connection, target, through=None):
+    from .report import VERSION_KINDS
+    if target is None or target["chat_id"] is None or target["message_id"] is None:
+        return None
+    number = count = 0
+    last = None
+    rows = connection.execute("SELECT seq,kind,payload FROM events WHERE chat_id=? AND message_id=? AND kind IN (?,?,?,?)"
+                              + ("" if through is None else " AND seq<=?") + " ORDER BY seq",
+                              (target["chat_id"], target["message_id"], *VERSION_KINDS, *(() if through is None else (through,))))
+    for seq, kind, payload in rows:
+        text = json.loads(payload).get("text")
+        if kind == "message.edited" or not count or text != last:
+            count, last = count + 1, text
+        if seq <= target["seq"]:
+            number = count
+    return {"number": number, "count": count} if number else None
+
+
+def journal_quote(card):
+    payload = (card.get("observation") or {}).get("payload") or {}
+    if card["kind"] != "board.highlight":
+        return payload.get("text") if isinstance(payload.get("text"), str) else None
+    text, selection = payload.get(card["range"]["field"]), card["range"]
+    if not isinstance(text, str) or not isinstance(selection.get("start"), int) or not isinstance(selection.get("length"), int):
+        return None
+    return text[selection["start"]:selection["start"]+selection["length"]]
+
+
+def provenance(card, say, titles=None):
+    target, titles = card["target"], titles or {}
+    chat = target.get("chat_id")
+    title = titles.get(chat) or titles.get(str(chat))
+    parts = [say("Chat") + ": " + (title + " (" + str(chat) + ")" if title else str(chat))] if chat is not None else []
+    if target.get("message_id") is not None:
+        parts.append(say("Message ID") + ": " + str(target["message_id"]))
+    if card.get("version"):
+        parts.append(say("Version") + ": " + say("{a} of {b}", a=card["version"]["number"], b=card["version"]["count"]))
+    return " · ".join([*parts, say("Record #{n}", n=target["seq"]), target["kind"]])
+
+
+def quote_of(card):
+    if "quote" in card:
+        return card["quote"]
+    return card.get("range", {}).get("quote") if card["kind"] == "board.highlight" else (card.get("observation") or {}).get("payload", {}).get("text")
 
 
 def material(connection, statement, options, through=None):
@@ -18,6 +65,8 @@ def material(connection, statement, options, through=None):
             target = board.event_by_hash(connection, item["target"]["event_hash"], through)
             item["observation"] = target
             item["dangling"] = target is None
+            item["quote"] = journal_quote(item)
+            item["version"] = version(connection, target, through)
         else:
             item["current"] = board.board_slice_summary(connection, item["query"], through)
             item["diff"] = {"added": item["current"]["record_count"]-item["snapshot"]["record_count"], "removed": 0}
@@ -52,7 +101,7 @@ def groups(data):
             yield collection, cards
 
 
-def html(data, say):
+def html(data, say, titles=None):
     if not data or not data["cards"]:
         return ""
     e = lambda value: escaping.escape(str(value if value is not None else ""))
@@ -62,10 +111,10 @@ def html(data, say):
         for card in cards:
             out += '<article class="board-report-card"><div class="board-report-meta">' + e(card["access_label"]) + ' · ' + e(card["at"]) + ' · ' + e(card["state"]) + '</div><h4>' + e(card.get("title") or card["kind"]) + '</h4>'
             if target := card.get("target"):
-                out += '<p><code>#' + e(target["seq"]) + '</code> · ' + e(target.get("chat_id")) + ' · ' + e(target["kind"]) + '</p><code class="board-report-hash">' + e(target["event_hash"]) + '</code>'
-                quote = card.get("range", {}).get("quote") if card["kind"] == "board.highlight" else (card.get("observation") or {}).get("payload", {}).get("text")
+                out += '<p class="board-report-provenance">' + e(provenance(card, say, titles)) + '</p><code class="board-report-hash">' + e(target["event_hash"]) + '</code>'
+                quote = quote_of(card)
                 if quote:
-                    out += '<blockquote class="board-report-quote">' + e(quote) + '</blockquote>'
+                    out += '<p class="board-report-label"><b>' + e(say("Journal text")) + '</b></p><blockquote class="board-report-quote">' + e(quote) + '</blockquote>'
                 if card["kind"] == "board.highlight":
                     out += '<p class="lead">' + e(say("Highlight is tied to this saved version.")) + '</p>'
                 if card.get("dangling"):
@@ -80,14 +129,16 @@ def html(data, say):
                 else:
                     out += '<p><code>board/slices/' + e(card["id"]) + '.json</code></p>'
             if card.get("note"):
-                out += '<p class="board-report-note">' + e(card["note"]) + '</p>'
+                out += '<div class="board-report-note"><b>' + e(say("Team note")) + '</b><p>' + e(card["note"]) + '</p></div>'
+            if card["comments"]:
+                out += '<p class="board-report-label"><b>' + e(say("Team comments")) + '</b></p>'
             for comment in card["comments"]:
                 out += '<div class="board-report-comment"><small>' + e(comment["access_label"]) + ' · ' + e(comment["at"]) + '</small><p>' + e(comment["text"]) + '</p></div>'
             out += '</article>'
     return out + '</section>'
 
 
-def pdf(lay, data):
+def pdf(lay, data, titles=None):
     if not data or not data["cards"]:
         return
     say = lay.say
@@ -102,11 +153,12 @@ def pdf(lay, data):
             lay.text(card.get("title") or card["kind"], size=12, style="B")
             lay.gap(2)
             lay.text(card["access_label"] + " · " + card["at"] + " · " + card["state"], size=8)
-            if target := card.get("target"):
-                lay.text("#" + str(target["seq"]) + " · " + target["kind"] + " · " + str(target.get("chat_id")), size=9)
-                quote = card.get("range", {}).get("quote") if card["kind"] == "board.highlight" else (card.get("observation") or {}).get("payload", {}).get("text")
+            if card.get("target"):
+                lay.text(provenance(card, say, titles), size=9)
+                quote = quote_of(card)
                 if quote:
                     lay.gap(2)
+                    lay.text(say("Journal text"), size=8, style="B")
                     if len(quote) <= 800:
                         lay.need(45)
                         lay.callout(quote, color=(175,146,90))
@@ -121,7 +173,11 @@ def pdf(lay, data):
                 lay.grid([say("Kind"), say("Records")], [[kind, str(count)] for kind, count in card["current"]["counts"].items()], (75, 25))
             if card.get("note"):
                 lay.gap(2)
+                lay.text(say("Team note"), size=8, style="B")
                 lay.text(card["note"], size=9)
+            if card["comments"]:
+                lay.gap(2)
+                lay.text(say("Team comments"), size=8, style="B")
             for comment in card["comments"]:
                 lay.gap(2)
                 lay.text(comment["access_label"] + " · " + comment["at"], size=8)

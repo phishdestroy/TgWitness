@@ -392,6 +392,10 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
         :{enabled:true,messages:fresh,id_gaps:false,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
     },
+    selectRefs(refs){
+      this.load({enabled:true,messages:refs,id_gaps:false,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
+      selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+    },
     selectChats(chatIds,senders=[]){
       this.load({enabled:true,chats:chatIds,senders,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));

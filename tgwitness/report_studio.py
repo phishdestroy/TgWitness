@@ -1,6 +1,6 @@
 from itertools import islice
 
-from . import report, report_analytics, report_secret, jurisdiction_guidance
+from . import board, board_report, report, report_analytics, report_secret, jurisdiction_guidance
 from .store import utcnow
 
 PREVIEW_LIMIT = 50000
@@ -13,7 +13,7 @@ def presentation(options, *, include_guidance=True):
     return report_analytics.Presentation.model_validate({key: values[key] for key in report_analytics.Presentation.model_fields if key in values})
 
 
-def preview(store, options):
+def preview(store, options, include_board=False):
     say = report.Words(options["language"])
     analytics = report_analytics.Analytics()
     count = 0
@@ -28,11 +28,16 @@ def preview(store, options):
         sampled = next(rows, None) is not None
         conversations = report_secret.collect(snapshot.connection, None, selection.secret_chats,
                                               {t["chat_id"]: t["title"] for t in store.targets()}, allowed=includes)             if selection.enabled and selection.secret_chats else []
+        case_board = None
+        if include_board and options.get("case_board", "bookmarks") != "off" and store.signer and board.head(snapshot.connection)["seq"]:
+            state = board.board_replay(board.records(snapshot.connection), store.signer.public_key)
+            case_board = board_report.material(snapshot.connection, {"state": state}, options)
     material = report.report_material({"kind": "evidence", "options": options, "digest": {"analytics": analytics.result()}, "event_count": count})
     sections = [report.report_charts.examination_html(material.get("examination"), say),
                 report.report_charts.html(material.get("analytics"), say)]
     if options.get("template") == "activity":
         sections.reverse()
+    sections.append(board_report.html(case_board, say, {t["chat_id"]: t["title"] for t in store.targets()}))
     sections.append(jurisdiction_guidance.html(jurisdiction_guidance.build(options.get("jurisdiction_guidance"))))
     if conversations:
         sections.insert(0, report_secret.html(conversations, say, 2, report.utc_text, report.size_text, store.root / "media"))

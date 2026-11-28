@@ -11204,5 +11204,10 @@
   "Telegram names the original sender but not the original message.": "ٹیلیگرام اصل بھیجنے والے کا نام دیتا ہے، اصل پیغام کا نہیں۔",
   "The original chat is not open to this access.": "اصل چیٹ اس رسائی کے لیے کھلی نہیں۔",
   "The original chat is not collected in this workspace.": "اصل چیٹ اس ورک اسپیس میں جمع نہیں کی جاتی۔",
-  "The original message is not saved in this workspace.": "اصل پیغام اس ورک اسپیس میں محفوظ نہیں۔"
+  "The original message is not saved in this workspace.": "اصل پیغام اس ورک اسپیس میں محفوظ نہیں۔",
+  "Build report from these cards": "ان کارڈز سے رپورٹ بنائیں",
+  "Choose cards that point to messages.": "ایسے کارڈز منتخب کریں جو پیغامات کی طرف اشارہ کرتے ہوں۔",
+  "Choose at most 1,000 messages.": "زیادہ سے زیادہ 1,000 پیغامات منتخب کریں۔",
+  "Journal text": "جرنل کا متن",
+  "Team note": "ٹیم کا نوٹ"
 }

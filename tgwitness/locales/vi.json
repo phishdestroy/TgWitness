@@ -11153,5 +11153,10 @@
   "Telegram names the original sender but not the original message.": "Telegram cho biết người gửi gốc nhưng không cho biết tin nhắn gốc.",
   "The original chat is not open to this access.": "Cuộc trò chuyện gốc không mở cho quyền truy cập này.",
   "The original chat is not collected in this workspace.": "Cuộc trò chuyện gốc không được thu thập trong không gian làm việc này.",
-  "The original message is not saved in this workspace.": "Tin nhắn gốc không được lưu trong không gian làm việc này."
+  "The original message is not saved in this workspace.": "Tin nhắn gốc không được lưu trong không gian làm việc này.",
+  "Build report from these cards": "Tạo báo cáo từ các thẻ này",
+  "Choose cards that point to messages.": "Hãy chọn các thẻ trỏ đến tin nhắn.",
+  "Choose at most 1,000 messages.": "Chọn tối đa 1.000 tin nhắn.",
+  "Journal text": "Văn bản trong nhật ký",
+  "Team note": "Ghi chú của nhóm"
 }

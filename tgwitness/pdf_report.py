@@ -1290,7 +1290,7 @@ class EvidencePDF:
     def render_case_board(self):
         if self.data.get("case_board"):
             from . import board_report
-            board_report.pdf(self.lay, self.data["case_board"])
+            board_report.pdf(self.lay, self.data["case_board"], getattr(self, "titles", None))
 
     def render_analytics(self):
         report.report_charts.pdf(self.lay, self.data.get("analytics"))

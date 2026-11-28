@@ -11306,5 +11306,10 @@
   "Telegram names the original sender but not the original message.": "Telegram podaje pierwotnego nadawcę, ale nie oryginalną wiadomość.",
   "The original chat is not open to this access.": "Pierwotny czat nie jest otwarty dla tego dostępu.",
   "The original chat is not collected in this workspace.": "Pierwotny czat nie jest zbierany w tym obszarze roboczym.",
-  "The original message is not saved in this workspace.": "Oryginalna wiadomość nie jest zapisana w tym obszarze roboczym."
+  "The original message is not saved in this workspace.": "Oryginalna wiadomość nie jest zapisana w tym obszarze roboczym.",
+  "Build report from these cards": "Utwórz raport z tych kart",
+  "Choose cards that point to messages.": "Wybierz karty wskazujące wiadomości.",
+  "Choose at most 1,000 messages.": "Wybierz najwyżej 1000 wiadomości.",
+  "Journal text": "Tekst z dziennika",
+  "Team note": "Notatka zespołu"
 }
