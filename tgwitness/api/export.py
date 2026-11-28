@@ -542,6 +542,19 @@ async def chat_export_download(
     )
 
 
+def export_failure(store, fmt, exc):
+    from ..failures import UNEXPECTED, describe, unexpected
+
+    reason = describe(exc)
+    if reason == UNEXPECTED:
+        detail = unexpected(exc, "export " + fmt)
+    else:
+        detail = {"message": reason}
+    store.append("export.failed", {"format": fmt, "error_type": type(exc).__name__,
+                                   **({"error_id": detail["error_id"]} if "error_id" in detail else {})})
+    return HTTPException(409, detail)
+
+
 async def export(
     request: Request,
     fmt: Literal["zip", "asice", "jsonl", "csv", "html", "json", "pdf"],
@@ -657,14 +670,7 @@ async def export_handover(
         except handover.EmptySelection as exc:
             raise HTTPException(422, str(exc)) from None
         except Exception as exc:
-            ctx.app.state.store.append(
-                "export.failed",
-                {"format": "handover", "error_type": type(exc).__name__},
-            )
-            raise HTTPException(
-                409,
-                "Export failed integrity, size, or file checks. Inspect local data and limits.",
-            ) from None
+            raise export_failure(ctx.app.state.store, "handover", exc) from None
     try:
         await ctx.recheck_export_scope(request, set(body.chats))
         ctx.require_prepared_access(request, receipt)
@@ -1108,13 +1114,7 @@ class ExportOperations:
             except (pdf_report.MissingFont, EmptyReport) as exc:
                 raise HTTPException(409, str(exc)) from None
             except Exception as exc:
-                self.app.state.store.append(
-                    "export.failed", {"format": fmt, "error_type": type(exc).__name__}
-                )
-                raise HTTPException(
-                    409,
-                    "Export failed integrity, size, or file checks. Inspect local data and limits.",
-                ) from None
+                raise export_failure(self.app.state.store, fmt, exc) from None
         try:
             from ..webhooks import export_completed
 
