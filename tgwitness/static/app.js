@@ -7397,6 +7397,8 @@ $("export-period").addEventListener("change",()=>{
   $("export-from").disabled=$("export-to").disabled=!custom;
 });
 $("export-from").disabled=$("export-to").disabled=true;
+function hiddenExports(){try{return JSON.parse(localStorage.getItem("tgwitness-hidden-exports")||"[]");}catch{return [];}}
+function hideExport(id){try{localStorage.setItem("tgwitness-hidden-exports",JSON.stringify([id,...hiddenExports().filter(item=>item!==id)].slice(0,20)));}catch{}}
 function renderMulti(){
   if(state.view!=='chats')return;
   if(state.chat!==null&&state.multiChecked!==state.chat)void resumeMulti();
@@ -7406,7 +7408,7 @@ function renderMulti(){
   const percent=known?exportPercent(x,running):null;
   $("chat-export-label").textContent=running&&mine?tr("Exporting")+(percent!==null?" "+percent+"%":"…"):tr("Export chat");
   show("chat-export-get",!!(mine&&x.phase==="done"&&x.ready));
-  if(!mine||(!running&&state.multiHidden===x.id)){show("export-box",false);return;}
+  if(!mine||(!running&&(state.multiHidden===x.id||hiddenExports().includes(x.id)))){show("export-box",false);return;}
   box.replaceChildren();show("export-box",true);
   const head=node("div","export-head");
   const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
@@ -7417,28 +7419,30 @@ function renderMulti(){
   if(running)action("quiet",tr("Pause"),b=>busy(b,async()=>{await json("multi-export/"+encodeURIComponent(x.id)+"/pause",{},{root:true});await pollMulti(x.id);}));
   if(["paused","failed","cancelled"].includes(x.phase))action("primary",tr("Resume saved chunks"),b=>busy(b,async()=>{await json("multi-export/"+encodeURIComponent(x.id)+"/resume",{},{root:true});await pollMulti(x.id);}));
   if(x.phase==="done"&&x.ready)action("primary",tr("Save signed export"),b=>saveMulti(b));
-  if(!running)action("quiet",tr("Hide"),()=>{state.multiHidden=x.id;renderMulti();});
+  if(!running)action("quiet",tr("Hide"),()=>{state.multiHidden=x.id;hideExport(x.id);renderMulti();});
   box.append(head);
-  box.append(node("p","hint",tr(x.transport==="takeout"?"Telegram Takeout session":"Regular session")));
+  const info=running?box:node("details","export-details");
+  if(!running){info.append(node("summary","",tr("Details")));if(x.phase==="done")box.append(node("p","hint",tr("The messages are in the archive (chat.json, chat.html, authors.csv). This chat view shows what observation and “Load history” saved in the journal.")));}
+  info.append(node("p","hint",tr(x.transport==="takeout"?"Telegram Takeout session":"Regular session")));
   if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
   if(x.wait_until&&x.phase==="paused")box.append(node("p","hint",tr("Requests paused until")+": "+formatTime(new Date(x.wait_until*1000).toISOString())));
-  if(Object.keys(x.transport_close_errors||{}).length)box.append(node("p","hint",tr("Takeout finalization is pending. The saved archive remains verifiable.")));
-  box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+(EXPORT_PHASES[x.phase]||x.phase)));
+  if(Object.keys(x.transport_close_errors||{}).length)info.append(node("p","hint",tr("Takeout finalization is pending. The saved archive remains verifiable.")));
+  info.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+(EXPORT_PHASES[x.phase]||x.phase)));
   if(x.performance){
     const p=x.performance,s=p.phase_seconds,seconds=value=>tr("{n} s",{
       n:value.toLocaleString(undefined,{maximumFractionDigits:1})});
-    box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
+    info.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
       messages:p.new_messages.toLocaleString(LANG),time:seconds(p.elapsed_seconds)})+
       (p.messages_per_second!==null?" "+tr("Acquisition: {rate} messages/s (including waits).",{
         rate:p.messages_per_second.toLocaleString(undefined,{maximumFractionDigits:1})}):"")));
-    box.append(node("p","hint",tr("Preparation: {preparing}. Acquisition: {running}. Selection and attachments: {selecting}. Packaging and verification: {packaging}.",{
+    info.append(node("p","hint",tr("Preparation: {preparing}. Acquisition: {running}. Selection and attachments: {selecting}. Packaging and verification: {packaging}.",{
       preparing:seconds(s.preparing),running:seconds(s.running),selecting:seconds(s.selecting),packaging:seconds(s.packaging)})));
   }
-  if(running&&x.disk)box.append(node("p","hint",tr("Disk space estimated at start: {needed} needed, {free} free.",{needed:humanSize(x.disk.needed_bytes),free:humanSize(x.disk.free_bytes)})));
-  if(x.counts?.selected!==undefined)box.append(node("p","hint",tr("Examined: {examined}. Matches: {matched}. Context: {context}. Uncertain language: {uncertain}.",{
+  if(running&&x.disk)info.append(node("p","hint",tr("Disk space estimated at start: {needed} needed, {free} free.",{needed:humanSize(x.disk.needed_bytes),free:humanSize(x.disk.free_bytes)})));
+  if(x.counts?.selected!==undefined)info.append(node("p","hint",tr("Examined: {examined}. Matches: {matched}. Context: {context}. Uncertain language: {uncertain}.",{
     examined:x.counts.examined,matched:x.counts.matched,context:x.counts.context,uncertain:x.counts.uncertain_language||0})));
-  if(x.counts?.context_limit_reached)box.append(node("p","hint",tr("Context cap reached; additional context may be omitted.")));
-  if(x.phase==="done")box.append(node("p","hint",tr("The messages are in the archive (chat.json, chat.html, authors.csv). This chat view shows what observation and “Load history” saved in the journal.")));
+  if(x.counts?.context_limit_reached)info.append(node("p","hint",tr("Context cap reached; additional context may be omitted.")));
+  if(!running)box.append(info);
   if(running){const bar=node("progress","export-bar");bar.max=100;if(percent!==null)bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
   const workers=node("ul","export-workers");
   for(const w of x.workers){
@@ -7449,7 +7453,7 @@ function renderMulti(){
     if(w.handovers)li.append(node("span","hint",tr("Ranges handed to other accounts: {n}",{n:w.handovers})));
     workers.append(li);
   }
-  box.append(workers);
+  (running?box:info).append(workers);
 }
 async function pollMulti(id,attempt=0){
   if(!state.token||$("workspace").hidden||(state.multi?.id&&state.multi.id!==id))return;
