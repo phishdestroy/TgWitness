@@ -315,6 +315,7 @@ html[data-goal=evidence] .sidebar nav [data-view=evidence] { order: -1; }
   #view-accounts .account-card button { min-height: 44px; }
   button.secondary, .quiet.small, .secondary.small, .journal-type-filters .filter, [role="tab"] { min-height: 44px; }
   .topbar .quiet { min-width: 44px; min-height: 44px; }
+  button.primary, select { min-height: 44px; }
   .mobile-nav-toggle { flex-basis: 44px; width: 44px; }
   .hint > a:only-child, .sidebar-help { display: inline-flex; align-items: center; min-height: 32px; }
 }
