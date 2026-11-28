@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import importlib
 import importlib.metadata
 import json
@@ -29,6 +30,26 @@ def port_holder(root, port):
                         + str(holder) + "). Choose another port; nothing was stopped.")
     return "warning", ("The port is in use and this data directory is open in a running process; "
                        "the check could not confirm that this panel holds the port.")
+
+
+def changed_program_files():
+    try:
+        files = importlib.metadata.distribution("tgwitness").files or []
+    except importlib.metadata.PackageNotFoundError:
+        return []
+    changed = []
+    for item in files:
+        name = str(item)
+        if not item.hash or not name.startswith("tgwitness/"):
+            continue
+        try:
+            digest = hashlib.new(item.hash.mode, item.locate().read_bytes()).digest()
+        except (OSError, ValueError):
+            changed.append(name)
+            continue
+        if base64.urlsafe_b64encode(digest).rstrip(b"=").decode("ascii") != item.hash.value:
+            changed.append(name)
+    return changed
 
 
 def inspect_environment(root, host="127.0.0.1", port=8787):
@@ -140,6 +161,11 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
         add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. "
             "Move it to the OS keyring (" + security_command("migrate-to-keyring --data-dir " + str(root)) + ") or an external file ("
             + security_command("create-master-key KEYFILE") + " && " + security_command("migrate-to-external KEYFILE --data-dir " + str(root)) + ")")
+    changed = changed_program_files()
+    add("program_files", "warning" if changed else "pass",
+        str(len(changed)) + " program files differ from the installed release: " + ", ".join(changed[:5])
+        + (" and " + str(len(changed) - 5) + " more" if len(changed) > 5 else "") + ". Reinstall the release."
+        if changed else "Program files match the installed release")
     if os.environ.get("TGWITNESS_TOKEN") and len(os.environ["TGWITNESS_TOKEN"]) < 24:
         add("panel_token", "fail", "TGWITNESS_TOKEN must contain at least 24 characters")
     return {"ready": not any(c["status"] == "fail" for c in checks), "platform": platform.platform(),

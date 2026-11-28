@@ -127,7 +127,7 @@ function Invoke-Checked([string]$Program, [string[]]$Arguments) {
 function Check-Python([string]$Python) {
     if (-not (Test-Path -LiteralPath $Python -PathType Leaf)) { throw 'The installed Python is missing.' }
     Assert-OrdinaryPath $Python
-    $Code = "import sys, importlib.metadata as m; import tgwitness, tgwitness.app, tgwitness.mcp_server, mcp; assert sys.version_info[:2] == (3,12); assert m.version('tgwitness') == '$Version'"
+    $Code = "import sys, importlib.metadata as m; import tgwitness, tgwitness.app, tgwitness.mcp_server, mcp; assert sys.version_info[:2] == (3,12); assert m.version('tgwitness') == '$Version'; from tgwitness.doctor import changed_program_files; assert not changed_program_files()"
     Invoke-Checked $Python @('-I', '-c', $Code)
 }
 

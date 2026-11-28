@@ -259,7 +259,7 @@ unpack_uv() {
 
 probe() {
     [[ -x "$PYTHON" ]] || fail 'The private Python environment is missing.'
-    "$PYTHON" -I -B - "$VERSION" <<'PY'
+    "$PYTHON" -I -B - "$VERSION" "$VERSION_DIR" <<'PY'
 import importlib.metadata
 import sqlite3
 import sys
@@ -280,6 +280,12 @@ package = Path(tgwitness.__file__).resolve().parent
 for asset in ("static/index.html", "static/app.js", "static/style.css", "locales/ru.json"):
     if not (package / asset).is_file():
         raise SystemExit("The package is incomplete: " + asset)
+from tgwitness.doctor import changed_program_files
+changed = changed_program_files()
+if changed:
+    raise SystemExit("Installed program files differ from this release: " + ", ".join(changed[:5])
+                     + (" and " + str(len(changed) - 5) + " more" if len(changed) > 5 else "")
+                     + ". Stop TgWitness, remove " + sys.argv[2] + " and run this installer again.")
 key = Ed25519PrivateKey.generate()
 key.public_key().verify(key.sign(b"TgWitness readiness"), b"TgWitness readiness")
 with sqlite3.connect(":memory:") as database:
