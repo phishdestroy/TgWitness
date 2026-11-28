@@ -13,6 +13,14 @@ export function createCaseBoard(ctx){
   const field=(form,label,type='text',value='')=>{const wrap=n('label','board-field',t(label)),input=n(type==='textarea'?'textarea':'input');
     if(type!=='textarea')input.type=type;input.value=value;wrap.append(input);form.append(wrap);return input;};
   const select=(form,label,options)=>{const wrap=n('label','board-field',t(label)),input=n('select');for(const [value,text] of options)input.add(new Option(t(text),value));wrap.append(input);form.append(wrap);return input;};
+  const chatChoices=(form,input)=>{const targets=state.status?.targets||[];if(!targets.length)return;
+    const box=n('fieldset','board-kind-options board-chat-options');box.append(n('legend','',t('Chats')));form.insertBefore(box,input.parentElement);
+    const read=()=>new Set(input.value.split(',').map(x=>x.trim()).filter(Boolean));
+    const checks=targets.map(item=>{const wrap=n('label','board-field'),check=n('input');check.type='checkbox';check.value=String(item.chat_id);
+      wrap.append(check,n('span','',item.title||String(item.chat_id)));box.append(wrap);
+      check.addEventListener('change',()=>{const chosen=read();if(check.checked)chosen.add(check.value);else chosen.delete(check.value);
+        input.value=[...chosen].join(',');input.dispatchEvent(new Event('input',{bubbles:true}));});return check;});
+    const sync=()=>{const chosen=read();for(const check of checks)check.checked=chosen.has(check.value);};input.addEventListener('input',sync);sync();};
   const time=value=>value?new Date(value).toLocaleString(undefined,{timeZone:'UTC',dateStyle:'medium',timeStyle:'short'})+' UTC':'—';
   const source=chat=>state.status?.targets?.find(item=>item.chat_id===chat)?.title||String(chat??t('Unknown chat'));
   const preview=value=>window.TgWitnessPrivacy?.render(value||'',{className:'board-evidence-text',tr})||n('p','board-evidence-text',value||'');
@@ -175,7 +183,7 @@ export function createCaseBoard(ctx){
   }
   async function sliceDialog(initial={}){
     const body=modal('Save a range slice');body.append(n('p','hint',t('Includes every observed action by default. Times below are observation times in UTC.')));
-    const title=field(body,'Title'),chats=field(body,'Chat IDs, separated by commas','text',(initial.chat_ids||[initial.chat_id??state.chat??state.source]).filter(Boolean).join(','));
+    const title=field(body,'Title'),chats=field(body,'Chat IDs, separated by commas','text',(initial.chat_ids||[initial.chat_id??state.chat??state.source]).filter(Boolean).join(','));chatChoices(body,chats);
     const from=field(body,'From (UTC)','datetime-local',initial.from?initial.from.slice(0,16):''),to=field(body,'Until (UTC)','datetime-local',initial.to?initial.to.slice(0,16):'');
     const start=field(body,'First message ID','number',initial.from_message_id||''),end=field(body,'Last message ID','number',initial.to_message_id||'');
     const actors=field(body,'Actor IDs, separated by commas','text',(initial.actors||[]).join(','));
@@ -200,8 +208,8 @@ export function createCaseBoard(ctx){
       summary.replaceChildren(n('strong','',trn('{n} records','{n} records',result.record_count)));for(const [kind,count] of Object.entries(result.counts))summary.append(n('span','board-tag',kind+' · '+count));checked=JSON.stringify(q);add.disabled=false;},'secondary'),add);
     body.addEventListener('input',()=>{add.disabled=true;});
   }
-  async function collectionDialog(item=null){const body=modal(item?'Edit collection':'New collection'),title=field(body,'Title','text',item?.title||''),description=field(body,'Description','textarea',item?.description||''),chats=field(body,'Chat IDs (empty means whole workspace)','text',(item?.chat_ids||[]).join(',')),order=field(body,'Order','number',item?.order||0);
-    body.append(btn('Save collection',async()=>{await post('collection',{...(item?{id:item.id,supersedes:item.annotation_hash}:{}),title:title.value,description:description.value,chat_ids:chats.value?chats.value.split(',').map(Number):[],card_ids:[],order:Number(order.value)});closeDialog(body.closest('dialog'));},'primary'));}
+  async function collectionDialog(item=null){const body=modal(item?'Edit collection':'New collection'),title=field(body,'Title','text',item?.title||''),description=field(body,'Description','textarea',item?.description||''),chats=field(body,'Chat IDs (empty means whole workspace)','text',(item?.chat_ids||[]).join(',')),order=field(body,'Order','number',item?.order||0);chatChoices(body,chats);
+    body.append(btn('Save collection',async()=>{await post('collection',{...(item?{id:item.id,supersedes:item.annotation_hash}:{}),title:title.value,description:description.value,chat_ids:chats.value?chats.value.split(',').map(x=>x.trim()).filter(Boolean).map(Number):[],card_ids:[],order:Number(order.value)});closeDialog(body.closest('dialog'));},'primary'));}
   async function moveDialog(card){if(!data)data=await json('board');const body=modal('Move card'),choice=select(body,'Collection',[['','Inbox'],...data.collections.map(item=>[item.id,item.title])]);choice.value=card.collection_id||'';
     body.append(btn('Move',async()=>{await post('move',{card_id:card.id,collection_id:choice.value||null});closeDialog(body.closest('dialog'));},'primary'));}
   async function statusDialog(card){const body=modal('Change status'),options=[['open','Open'],['review','Under review']];if(may('board.manage'))options.push(['confirmed','Confirmed'],['dismissed','Dismissed']);
