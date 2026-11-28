@@ -1070,6 +1070,16 @@ class Store:
                  1 if priority is None else int(priority)))
             self.targets_revision += 1
 
+    def rename_target(self, chat_id, title):
+        if not isinstance(title, str) or not title.strip():
+            return False
+        with self.transaction():
+            changed = self.db.execute("UPDATE targets SET title=? WHERE chat_id=? AND title IS NOT ?",
+                                      (title, chat_id, title)).rowcount
+            if changed:
+                self.targets_revision += 1
+        return bool(changed)
+
     def remove_target(self, chat_id):
         with self.transaction():
             removed = self.db.execute("DELETE FROM targets WHERE chat_id=?", (chat_id,)).rowcount
