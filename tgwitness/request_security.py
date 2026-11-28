@@ -4,7 +4,7 @@ import math
 import os
 import time
 
-from starlette.responses import JSONResponse
+from .middleware import refusal
 
 
 def networks(value):
@@ -95,8 +95,7 @@ class RequestSecurity:
         try:
             address = self.client(scope)
         except ValueError:
-            return await JSONResponse({"detail": "Invalid forwarded client address."}, status_code=400,
-                                      headers={"Cache-Control": "no-store"})(scope, receive, send)
+            return await refusal({"detail": "Invalid forwarded client address."}, 400)(scope, receive, send)
         if self.forwarded_https(scope):
             scope["scheme"] = "https"
         scope["client"] = (address, (scope.get("client") or (None, 0))[1])
@@ -106,8 +105,7 @@ class RequestSecurity:
             except ValueError:
                 permitted = False
             if not permitted:
-                return await JSONResponse({"detail": "This address is not allowed."}, status_code=403,
-                                          headers={"Cache-Control": "no-store"})(scope, receive, send)
+                return await refusal({"detail": "This address is not allowed."}, 403)(scope, receive, send)
         path = scope.get("path", "")
         token_family = family(path)
         if "/api/" not in path and token_family != "archive":
@@ -128,8 +126,8 @@ class RequestSecurity:
         if len(row["requests"]) >= 600:
             wait = max(wait, row["requests"][0] + 60 - now)
         if wait:
-            return await JSONResponse({"detail": "Too many requests. Wait before trying again."}, status_code=429,
-                                      headers={"Retry-After": str(max(1, math.ceil(wait))), "Cache-Control": "no-store"})(scope, receive, send)
+            return await refusal({"detail": "Too many requests. Wait before trying again."}, 429,
+                                 {"Retry-After": str(max(1, math.ceil(wait)))})(scope, receive, send)
         row["requests"].append(now)
         headers = scope.get("headers") or []
         kinds = [value.split(b";")[0].strip().lower() for name, value in headers if name.lower() == b"content-type"]
